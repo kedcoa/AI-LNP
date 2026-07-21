@@ -34,3 +34,27 @@ cell/source combinations.
 - Manifest version: `1.0.0`
 - Retrieval cap per cell per source: `100`
 - Detailed counts and provenance: `data/raw/searches/YYYY-MM-DD/run_TIMESTAMP/run_metadata.json`
+
+
+## Query-version1 and 2 comparison
+
+| Source | Cell | V1 matches | V2 matches | V2 first-page quality | Decision |
+|---|---|---:|---:|---|---|
+| PubMed | Hepatocyte |290|292|Keep|
+| PubMed | Kupffer |39||42|Keep|
+| PubMed | LSEC |12|16|Keep|
+| PubMed | HSC |53|45|?????|Revert back to original|
+| Europe PMC | Hepatocyte |287|289|Keep|
+| Europe PMC | Kupffer |41|44|Keep|
+| Europe PMC | LSEC |12|16|Keep|
+| Europe PMC | HSC |57|46|Revert back to original|
+
+## Version 2 official run
+
+- Manifest version: `2.0.0`
+- Previous version: `1.0.0`
+- Reason for revision: sparse retrieval in one or more cell categories
+- Run ID: run_20260721T160000+0800
+- Run status: Completed
+- Version 1 results preserved: yes
+- Version 2 manifest snapshot verified: yes

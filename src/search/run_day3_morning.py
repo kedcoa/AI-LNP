@@ -21,7 +21,7 @@ MANIFEST_PATH = (
     PROJECT_ROOT
     / "docs"
     / "search"
-    / "query_manifest_v1.yaml"
+    / "query_manifest_v2.yaml"
 )
 
 RAW_SEARCH_ROOT = (

@@ -1,0 +1,286 @@
+manifest_version: "2.0.0"
+created_date: "2026-07-21"
+description: >-
+  Expanded balanced PubMed and Europe PMC discovery for four liver cell types
+
+revision:
+  previous_version: "1.0.0"
+  reason: >-
+    Version 1 produced sparse results for one or more target cell types.
+    Version 2 adds controlled LNP and cell-name synonyms to improve recall
+    without removing the target-cell requirement.
+  changes:
+    - "Added ionizable lipid nanoparticle terminology"
+    - "Added nucleic acid lipid particle and SNALP terminology"
+    - "Added lipid-based and lipid-like nanoparticle terminology"
+    - "Added selected cell-name synonyms"
+    - "Qualified ambiguous HSC abbreviations with a liver term"
+
+retrieval_policy:
+  retrieval_cap_per_cell_per_source: 100
+  pubmed_page_size: 100
+  europe_pmc_page_size: 100
+  discovery_sources:
+    - pubmed
+    - europe_pmc
+  full_text_is_not_a_discovery_source: true
+
+cell_types:
+  hepatocyte:
+    display_name: "Hepatocyte"
+    aliases:
+      - "hepatocyte"
+      - "hepatocytes"
+      - "hepatic parenchymal cell"
+      - "hepatic parenchymal cells"
+      - "liver parenchymal cell"
+      - "liver parenchymal cells"
+
+  kupffer:
+    display_name: "Kupffer cell"
+    aliases:
+      - "Kupffer cell"
+      - "Kupffer cells"
+      - "Kupffer macrophage"
+      - "Kupffer macrophages"
+      - "liver macrophage"
+      - "liver macrophages"
+      - "hepatic macrophage"
+      - "hepatic macrophages"
+      - "liver resident macrophage"
+      - "liver resident macrophages"
+
+  lsec:
+    display_name: "Liver sinusoidal endothelial cell"
+    aliases:
+      - "liver sinusoidal endothelial cell"
+      - "liver sinusoidal endothelial cells"
+      - "hepatic sinusoidal endothelial cell"
+      - "hepatic sinusoidal endothelial cells"
+      - "sinusoidal endothelial cell"
+      - "sinusoidal endothelial cells"
+      - "liver endothelial cell"
+      - "liver endothelial cells"
+      - "hepatic endothelial cell"
+      - "hepatic endothelial cells"
+      - "LSEC"
+      - "LSECs"
+
+  hsc:
+    display_name: "Hepatic stellate cell"
+    aliases:
+      - "hepatic stellate cell"
+      - "hepatic stellate cells"
+      - "liver stellate cell"
+      - "liver stellate cells"
+      - "Ito cell"
+      - "Ito cells"
+      - "perisinusoidal cell"
+      - "perisinusoidal cells"
+      - "fat-storing cell"
+      - "fat-storing cells"
+      - "HSC with liver context"
+      - "HSCs with liver context"
+
+queries:
+  pubmed:
+    hepatocyte: >-
+      ("lipid nanoparticle"[Title/Abstract]
+      OR "lipid nanoparticles"[Title/Abstract]
+      OR "ionizable lipid nanoparticle"[Title/Abstract]
+      OR "ionizable lipid nanoparticles"[Title/Abstract]
+      OR "lipid-based nanoparticle"[Title/Abstract]
+      OR "lipid-based nanoparticles"[Title/Abstract]
+      OR "lipid-like nanoparticle"[Title/Abstract]
+      OR "lipid-like nanoparticles"[Title/Abstract]
+      OR "nucleic acid lipid particle"[Title/Abstract]
+      OR "nucleic acid lipid particles"[Title/Abstract]
+      OR "stable nucleic acid lipid particle"[Title/Abstract]
+      OR "stable nucleic acid lipid particles"[Title/Abstract]
+      OR SNALP[Title/Abstract]
+      OR SNALPs[Title/Abstract]
+      OR LNP[Title/Abstract]
+      OR LNPs[Title/Abstract])
+      AND
+      (hepatocyte[Title/Abstract]
+      OR hepatocytes[Title/Abstract]
+      OR "hepatic parenchymal cell"[Title/Abstract]
+      OR "hepatic parenchymal cells"[Title/Abstract]
+      OR "liver parenchymal cell"[Title/Abstract]
+      OR "liver parenchymal cells"[Title/Abstract])
+
+    kupffer: >-
+      ("lipid nanoparticle"[Title/Abstract]
+      OR "lipid nanoparticles"[Title/Abstract]
+      OR "ionizable lipid nanoparticle"[Title/Abstract]
+      OR "ionizable lipid nanoparticles"[Title/Abstract]
+      OR "lipid-based nanoparticle"[Title/Abstract]
+      OR "lipid-based nanoparticles"[Title/Abstract]
+      OR "lipid-like nanoparticle"[Title/Abstract]
+      OR "lipid-like nanoparticles"[Title/Abstract]
+      OR "nucleic acid lipid particle"[Title/Abstract]
+      OR "nucleic acid lipid particles"[Title/Abstract]
+      OR "stable nucleic acid lipid particle"[Title/Abstract]
+      OR "stable nucleic acid lipid particles"[Title/Abstract]
+      OR SNALP[Title/Abstract]
+      OR SNALPs[Title/Abstract]
+      OR LNP[Title/Abstract]
+      OR LNPs[Title/Abstract])
+      AND
+      ("Kupffer cell"[Title/Abstract]
+      OR "Kupffer cells"[Title/Abstract]
+      OR "Kupffer macrophage"[Title/Abstract]
+      OR "Kupffer macrophages"[Title/Abstract]
+      OR "liver macrophage"[Title/Abstract]
+      OR "liver macrophages"[Title/Abstract]
+      OR "hepatic macrophage"[Title/Abstract]
+      OR "hepatic macrophages"[Title/Abstract]
+      OR "liver resident macrophage"[Title/Abstract]
+      OR "liver resident macrophages"[Title/Abstract])
+
+    lsec: >-
+      ("lipid nanoparticle"[Title/Abstract]
+      OR "lipid nanoparticles"[Title/Abstract]
+      OR "ionizable lipid nanoparticle"[Title/Abstract]
+      OR "ionizable lipid nanoparticles"[Title/Abstract]
+      OR "lipid-based nanoparticle"[Title/Abstract]
+      OR "lipid-based nanoparticles"[Title/Abstract]
+      OR "lipid-like nanoparticle"[Title/Abstract]
+      OR "lipid-like nanoparticles"[Title/Abstract]
+      OR "nucleic acid lipid particle"[Title/Abstract]
+      OR "nucleic acid lipid particles"[Title/Abstract]
+      OR "stable nucleic acid lipid particle"[Title/Abstract]
+      OR "stable nucleic acid lipid particles"[Title/Abstract]
+      OR SNALP[Title/Abstract]
+      OR SNALPs[Title/Abstract]
+      OR LNP[Title/Abstract]
+      OR LNPs[Title/Abstract])
+      AND
+      ("liver sinusoidal endothelial cell"[Title/Abstract]
+      OR "liver sinusoidal endothelial cells"[Title/Abstract]
+      OR "hepatic sinusoidal endothelial cell"[Title/Abstract]
+      OR "hepatic sinusoidal endothelial cells"[Title/Abstract]
+      OR "sinusoidal endothelial cell"[Title/Abstract]
+      OR "sinusoidal endothelial cells"[Title/Abstract]
+      OR "liver endothelial cell"[Title/Abstract]
+      OR "liver endothelial cells"[Title/Abstract]
+      OR "hepatic endothelial cell"[Title/Abstract]
+      OR "hepatic endothelial cells"[Title/Abstract]
+      OR LSEC[Title/Abstract]
+      OR LSECs[Title/Abstract])
+
+    hsc: >-
+      ("lipid nanoparticle"[Title/Abstract]
+      OR "lipid nanoparticles"[Title/Abstract]
+      OR LNP[Title/Abstract]
+      OR LNPs[Title/Abstract])
+      AND
+      ("hepatic stellate cell"[Title/Abstract]
+      OR "hepatic stellate cells"[Title/Abstract]
+      OR "liver stellate cell"[Title/Abstract]
+      OR "liver stellate cells"[Title/Abstract]
+      OR "Ito cell"[Title/Abstract]
+      OR "Ito cells"[Title/Abstract]
+      OR HSC[Title/Abstract]
+      OR HSCs[Title/Abstract])
+
+  europe_pmc:
+    hepatocyte: >-
+      (TITLE_ABS:"lipid nanoparticle"
+      OR TITLE_ABS:"lipid nanoparticles"
+      OR TITLE_ABS:"ionizable lipid nanoparticle"
+      OR TITLE_ABS:"ionizable lipid nanoparticles"
+      OR TITLE_ABS:"lipid-based nanoparticle"
+      OR TITLE_ABS:"lipid-based nanoparticles"
+      OR TITLE_ABS:"lipid-like nanoparticle"
+      OR TITLE_ABS:"lipid-like nanoparticles"
+      OR TITLE_ABS:"nucleic acid lipid particle"
+      OR TITLE_ABS:"nucleic acid lipid particles"
+      OR TITLE_ABS:"stable nucleic acid lipid particle"
+      OR TITLE_ABS:"stable nucleic acid lipid particles"
+      OR TITLE_ABS:SNALP
+      OR TITLE_ABS:SNALPs
+      OR TITLE_ABS:LNP
+      OR TITLE_ABS:LNPs)
+      AND
+      (TITLE_ABS:hepatocyte
+      OR TITLE_ABS:hepatocytes
+      OR TITLE_ABS:"hepatic parenchymal cell"
+      OR TITLE_ABS:"hepatic parenchymal cells"
+      OR TITLE_ABS:"liver parenchymal cell"
+      OR TITLE_ABS:"liver parenchymal cells")
+
+    kupffer: >-
+      (TITLE_ABS:"lipid nanoparticle"
+      OR TITLE_ABS:"lipid nanoparticles"
+      OR TITLE_ABS:"ionizable lipid nanoparticle"
+      OR TITLE_ABS:"ionizable lipid nanoparticles"
+      OR TITLE_ABS:"lipid-based nanoparticle"
+      OR TITLE_ABS:"lipid-based nanoparticles"
+      OR TITLE_ABS:"lipid-like nanoparticle"
+      OR TITLE_ABS:"lipid-like nanoparticles"
+      OR TITLE_ABS:"nucleic acid lipid particle"
+      OR TITLE_ABS:"nucleic acid lipid particles"
+      OR TITLE_ABS:"stable nucleic acid lipid particle"
+      OR TITLE_ABS:"stable nucleic acid lipid particles"
+      OR TITLE_ABS:SNALP
+      OR TITLE_ABS:SNALPs
+      OR TITLE_ABS:LNP
+      OR TITLE_ABS:LNPs)
+      AND
+      (TITLE_ABS:"Kupffer cell"
+      OR TITLE_ABS:"Kupffer cells"
+      OR TITLE_ABS:"Kupffer macrophage"
+      OR TITLE_ABS:"Kupffer macrophages"
+      OR TITLE_ABS:"liver macrophage"
+      OR TITLE_ABS:"liver macrophages"
+      OR TITLE_ABS:"hepatic macrophage"
+      OR TITLE_ABS:"hepatic macrophages"
+      OR TITLE_ABS:"liver resident macrophage"
+      OR TITLE_ABS:"liver resident macrophages")
+
+    lsec: >-
+      (TITLE_ABS:"lipid nanoparticle"
+      OR TITLE_ABS:"lipid nanoparticles"
+      OR TITLE_ABS:"ionizable lipid nanoparticle"
+      OR TITLE_ABS:"ionizable lipid nanoparticles"
+      OR TITLE_ABS:"lipid-based nanoparticle"
+      OR TITLE_ABS:"lipid-based nanoparticles"
+      OR TITLE_ABS:"lipid-like nanoparticle"
+      OR TITLE_ABS:"lipid-like nanoparticles"
+      OR TITLE_ABS:"nucleic acid lipid particle"
+      OR TITLE_ABS:"nucleic acid lipid particles"
+      OR TITLE_ABS:"stable nucleic acid lipid particle"
+      OR TITLE_ABS:"stable nucleic acid lipid particles"
+      OR TITLE_ABS:SNALP
+      OR TITLE_ABS:SNALPs
+      OR TITLE_ABS:LNP
+      OR TITLE_ABS:LNPs)
+      AND
+      (TITLE_ABS:"liver sinusoidal endothelial cell"
+      OR TITLE_ABS:"liver sinusoidal endothelial cells"
+      OR TITLE_ABS:"hepatic sinusoidal endothelial cell"
+      OR TITLE_ABS:"hepatic sinusoidal endothelial cells"
+      OR TITLE_ABS:"sinusoidal endothelial cell"
+      OR TITLE_ABS:"sinusoidal endothelial cells"
+      OR TITLE_ABS:"liver endothelial cell"
+      OR TITLE_ABS:"liver endothelial cells"
+      OR TITLE_ABS:"hepatic endothelial cell"
+      OR TITLE_ABS:"hepatic endothelial cells"
+      OR TITLE_ABS:LSEC
+      OR TITLE_ABS:LSECs)
+
+    hsc: >-
+      (TITLE_ABS:"lipid nanoparticle"
+      OR TITLE_ABS:"lipid nanoparticles"
+      OR TITLE_ABS:LNP
+      OR TITLE_ABS:LNPs)
+      AND
+      (TITLE_ABS:"hepatic stellate cell"
+      OR TITLE_ABS:"hepatic stellate cells"
+      OR TITLE_ABS:"liver stellate cell"
+      OR TITLE_ABS:"liver stellate cells"
+      OR TITLE_ABS:"Ito cell"
+      OR TITLE_ABS:"Ito cells"
+      OR TITLE_ABS:HSC
+      OR TITLE_ABS:HSCs)
