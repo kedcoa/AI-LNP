@@ -1,0 +1,120 @@
+manifest_version: "1.0.0"
+created_at: "2026-07-21T09:00:00+08:00"
+project: "LNP liver-cell evidence tool"
+purpose: "Balanced discovery for four liver cell types"
+
+retrieval_policy:
+  retrieval_cap_per_cell_per_source: 100
+  page_size: 25
+  sources:
+    - pubmed
+    - europe_pmc
+  discovery_sources_only: true
+  full_text_discovery_source: false
+
+date_policy:
+  freeze_end_date: "2026-07-21"
+  explanation: >
+    The upper publication-date bound is frozen so later reruns can distinguish
+    query behavior from newly published literature.
+
+lnp_terms:
+  - "lipid nanoparticle"
+  - "lipid nanoparticles"
+  - "LNP"
+  - "LNPs"
+
+cell_types:
+  hepatocyte:
+    canonical_name: "hepatocyte"
+    aliases:
+      - "hepatocyte"
+      - "hepatocytes"
+      - "hepatic parenchymal cell"
+      - "hepatic parenchymal cells"
+
+  kupffer:
+    canonical_name: "Kupffer cell"
+    aliases:
+      - "Kupffer cell"
+      - "Kupffer cells"
+      - "liver macrophage"
+      - "liver macrophages"
+
+  lsec:
+    canonical_name: "liver sinusoidal endothelial cell"
+    aliases:
+      - "liver sinusoidal endothelial cell"
+      - "liver sinusoidal endothelial cells"
+      - "hepatic sinusoidal endothelial cell"
+      - "hepatic sinusoidal endothelial cells"
+      - "LSEC"
+      - "LSECs"
+
+  hsc:
+    canonical_name: "hepatic stellate cell"
+    aliases:
+      - "hepatic stellate cell"
+      - "hepatic stellate cells"
+      - "liver stellate cell"
+      - "liver stellate cells"
+      - "Ito cell"
+      - "Ito cells"
+      - "HSC"
+      - "HSCs"
+
+queries:
+  pubmed:
+    hepatocyte: >
+      ("lipid nanoparticle"[Title/Abstract] OR
+       "lipid nanoparticles"[Title/Abstract] OR
+       LNP[Title/Abstract] OR LNPs[Title/Abstract])
+      AND
+      (hepatocyte[Title/Abstract] OR hepatocytes[Title/Abstract] OR
+       "hepatic parenchymal cell"[Title/Abstract] OR
+       "hepatic parenchymal cells"[Title/Abstract])
+
+    kupffer: >
+      ("lipid nanoparticle"[Title/Abstract] OR
+       "lipid nanoparticles"[Title/Abstract] OR
+       LNP[Title/Abstract] OR LNPs[Title/Abstract])
+      AND
+      ("Kupffer cell"[Title/Abstract] OR
+       "Kupffer cells"[Title/Abstract] OR
+       "liver macrophage"[Title/Abstract] OR
+       "liver macrophages"[Title/Abstract])
+
+    lsec: >
+      ("lipid nanoparticle"[Title/Abstract] OR
+       "lipid nanoparticles"[Title/Abstract] OR
+       LNP[Title/Abstract] OR LNPs[Title/Abstract])
+      AND
+      ("liver sinusoidal endothelial cell"[Title/Abstract] OR
+       "liver sinusoidal endothelial cells"[Title/Abstract] OR
+       "hepatic sinusoidal endothelial cell"[Title/Abstract] OR
+       "hepatic sinusoidal endothelial cells"[Title/Abstract] OR
+       LSEC[Title/Abstract] OR LSECs[Title/Abstract])
+
+    hsc: >
+      ("lipid nanoparticle"[Title/Abstract] OR
+       "lipid nanoparticles"[Title/Abstract] OR
+       LNP[Title/Abstract] OR LNPs[Title/Abstract])
+      AND
+      ("hepatic stellate cell"[Title/Abstract] OR
+       "hepatic stellate cells"[Title/Abstract] OR
+       "liver stellate cell"[Title/Abstract] OR
+       "liver stellate cells"[Title/Abstract] OR
+       "Ito cell"[Title/Abstract] OR
+       "Ito cells"[Title/Abstract] OR
+       HSC[Title/Abstract] OR HSCs[Title/Abstract])
+
+  europe_pmc:
+    hepatocyte: >
+      (TITLE_ABS:"lipid nanoparticle" OR TITLE_ABS:"lipid nanoparticles"
+       OR TITLE_ABS:LNP OR TITLE_ABS:LNPs)
+      AND
+      (TITLE_ABS:hepatocyte OR TITLE_ABS:hepatocytes
+       OR TITLE_ABS:"hepatic parenchymal cell"
+       OR TITLE_ABS:"hepatic parenchymal cells")
+
+    # Add kupffer, lsec, and hsc using the same aliases as above.
