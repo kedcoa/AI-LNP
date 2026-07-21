@@ -83,15 +83,19 @@ A model generates `y_hat`, not `y`.
 Only reported literature measurements or quality-controlled wet-lab
 measurements may be treated as `y`.
 
-## Literature sources
+## Literature discovery
 
-- PubMed for citation and abstract retrieval.
-- Europe PMC for additional metadata and open-access identification.
-- PubMed Central for targeted full-text retrieval.
+The project uses a versioned search manifest covering hepatocytes, Kupffer
+cells, liver sinusoidal endothelial cells, and hepatic stellate cells.
 
-Abstracts will be used for initial screening. Full text, tables, figures, and
-supplementary materials will be retrieved only when relevant fields cannot be
-resolved from the abstract.
+PubMed and Europe PMC are the discovery sources. Every cell type receives the
+same retrieval cap. Exact query text, request parameters, timestamps,
+pagination state, raw responses, and checksums are preserved for each run.
+
+PMC and other open-full-text services are used later for targeted full-text
+retrieval. They are not counted as additional discovery sources.
+
+Current search manifest: `docs/search/query_manifest_v1.yaml`
 
 ## LLM provider
 
