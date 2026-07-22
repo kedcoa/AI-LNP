@@ -1,0 +1,424 @@
+schema_version: "1.0.0"
+rules_version: "1.0.0"
+created_date: "2026-07-22"
+
+description: >-
+  Configurable paper-level screening rules for identifying publications that
+  may contain usable LNP formulation-experiment-outcome records for the four
+  supported liver cell types.
+
+screening_unit: "paper_cell_task"
+
+source_artifacts:
+  discovery_manifest: "docs/search/query_manifest_v2_1.yaml"
+  candidate_records: "data/staging/searches/deduplicated_papers.jsonl"
+  data_dictionary: "docs/data_dictionary.md"
+
+modeling_priority:
+  first_cell_type: "hepatocyte"
+  model_family: "COMET"
+  training_is_conditional: true
+
+cell_types:
+  hepatocyte:
+    display_name: "Hepatocyte"
+    discovery_key: "hepatocyte"
+    database_value: "hepatocyte"
+
+  kupffer_cell:
+    display_name: "Kupffer cell"
+    discovery_key: "kupffer"
+    database_value: "kupffer_cell"
+
+  lsec:
+    display_name: "Liver sinusoidal endothelial cell"
+    discovery_key: "lsec"
+    database_value: "lsec"
+
+  hsc:
+    display_name: "Hepatic stellate cell"
+    discovery_key: "hsc"
+    database_value: "hsc"
+
+
+decisions:
+  include:
+    description: >-
+      Available evidence supports every mandatory screening criterion.
+
+  exclude:
+    description: >-
+      Available evidence clearly demonstrates that at least one mandatory
+      screening criterion fails.
+
+  manual_review:
+    description: >-
+      The publication may be eligible, but at least one mandatory criterion
+      is unresolved, ambiguous, contradictory, or requires additional source
+      material.
+
+mandatory_criteria:
+  original_experiment:
+    required: true
+    description: >-
+      The publication reports original experimental results rather than only
+      reviewing, commenting on, or proposing work performed elsewhere.
+
+  identifiable_lnp:
+    required: true
+    description: >-
+      The tested delivery system can be identified as a lipid nanoparticle
+      relevant to the project scope.
+
+  supported_payload:
+    required: true
+    description: >-
+      The tested payload belongs to a payload category supported by the
+      configured screening task.
+
+  target_cell_evidence:
+    required: true
+    description: >-
+      The publication contains experimental evidence relevant to the
+      configured liver cell type. A keyword mention alone is insufficient.
+
+  usable_formulation_outcome_linkage:
+    required: true
+    description: >-
+      At least one identifiable formulation can plausibly be linked to a
+      reported experimental context and outcome.
+
+decision_precedence:
+  - condition: "publication_is_invalid_or_retracted"
+    decision: "exclude"
+
+  - condition: "mandatory_criterion_clearly_fails"
+    decision: "exclude"
+
+  - condition: "mandatory_criterion_is_unresolved"
+    decision: "manual_review"
+
+  - condition: "all_mandatory_criteria_are_supported"
+    decision: "include"
+
+
+reason_codes:
+  inclusion:
+    ORIGINAL_EXPERIMENT:
+      criterion: "original_experiment"
+      description: "The publication reports original experimental results."
+
+    IDENTIFIABLE_LNP:
+      criterion: "identifiable_lnp"
+      description: "An eligible lipid nanoparticle is tested."
+
+    SUPPORTED_PAYLOAD:
+      criterion: "supported_payload"
+      description: "The payload is supported by the configured task."
+
+    TARGET_CELL_EVIDENCE:
+      criterion: "target_cell_evidence"
+      description: "Eligible experimental evidence exists for the configured cell."
+
+    USABLE_FORMULATION_OUTCOME_LINKAGE:
+      criterion: "usable_formulation_outcome_linkage"
+      description: >-
+        A tested formulation can be linked to an experimental context and
+        outcome.
+
+  exclusion:
+    NOT_ORIGINAL_RESEARCH:
+      criterion: "original_experiment"
+      description: >-
+        The publication is a review, commentary, editorial, protocol without
+        eligible results, or another non-original report.
+
+    NOT_ELIGIBLE_LNP:
+      criterion: "identifiable_lnp"
+      description: >-
+        The tested delivery system is clearly not an eligible lipid
+        nanoparticle.
+
+    UNSUPPORTED_PAYLOAD:
+      criterion: "supported_payload"
+      description: >-
+        The tested payload is clearly outside the configured task scope.
+
+    NO_TARGET_CELL_EVIDENCE:
+      criterion: "target_cell_evidence"
+      description: >-
+        The configured cell is not supported by eligible experimental
+        evidence.
+
+    NO_FORMULATION_OUTCOME_LINKAGE:
+      criterion: "usable_formulation_outcome_linkage"
+      description: >-
+        No tested formulation can be linked to a relevant experimental
+        outcome.
+
+    DUPLICATE_SCIENTIFIC_REPORT:
+      criterion: null
+      description: >-
+        The publication reports the same experiment already represented by a
+        more complete or primary publication.
+
+    RETRACTED_OR_INVALID:
+      criterion: null
+      description: >-
+        The publication is retracted or otherwise invalid for curated use.
+
+  manual_review:
+    FULL_TEXT_REQUIRED:
+      criterion: null
+      description: >-
+        Metadata and abstract information are insufficient to make the
+        screening decision.
+
+    PUBLICATION_TYPE_AMBIGUOUS:
+      criterion: "original_experiment"
+      description: >-
+        It is unclear whether the publication reports original experiments.
+
+    LNP_IDENTITY_AMBIGUOUS:
+      criterion: "identifiable_lnp"
+      description: >-
+        The delivery system may be an LNP, but its identity is unresolved.
+
+    PAYLOAD_AMBIGUOUS:
+      criterion: "supported_payload"
+      description: "The payload or payload category is unresolved."
+
+    TARGET_CELL_AMBIGUOUS:
+      criterion: "target_cell_evidence"
+      description: >-
+        The configured cell is mentioned, but its experimental relevance is
+        unresolved.
+
+    FORMULATION_INCOMPLETE:
+      criterion: "usable_formulation_outcome_linkage"
+      description: >-
+        A formulation is reported, but critical composition information may
+        be incomplete.
+
+    OUTCOME_LINKAGE_AMBIGUOUS:
+      criterion: "usable_formulation_outcome_linkage"
+      description: >-
+        Multiple formulations or outcomes cannot be linked confidently.
+
+    CHEMISTRY_AMBIGUOUS:
+      criterion: "identifiable_lnp"
+      description: >-
+        A component identity, abbreviation, structure, or chemical role is
+        unresolved.
+
+
+payload_categories:
+  mrna:
+    display_name: "mRNA"
+    eligible_for_evidence_screening: true
+
+  sirna:
+    display_name: "siRNA"
+    eligible_for_evidence_screening: true
+
+  sarna:
+    display_name: "saRNA"
+    eligible_for_evidence_screening: true
+
+  circrna:
+    display_name: "circRNA"
+    eligible_for_evidence_screening: true
+
+tasks:
+  liver_cell_lnp_evidence:
+    display_name: "Liver-cell LNP evidence screening"
+    status: "active"
+    supported_cell_types:
+      - "hepatocyte"
+      - "kupffer_cell"
+      - "lsec"
+      - "hsc"
+    supported_payload_categories:
+      - "mrna"
+      - "sirna"
+      - "sarna"
+      - "circrna"
+    supported_study_contexts:
+      - "in_vitro"
+      - "ex_vivo"
+      - "in_vivo"
+    eligible_endpoint_families:
+      - "uptake"
+      - "functional_expression"
+      - "transfection"
+      - "gene_knockdown"
+      - "cre_recombination"
+      - "viability"
+      - "toxicity"
+      - "biodistribution"
+      - "therapeutic_effect"
+      - "other"
+    uptake_only_may_enter_evidence_product: true
+    toxicity_only_may_enter_evidence_product: true
+    direct_cell_evidence_required: true
+    purpose: >-
+      Broad evidence screening for the four-cell literature product. Inclusion
+      in this task does not imply suitability for COMET training.
+
+  hepatocyte_comet_readiness:
+    display_name: "Hepatocyte COMET readiness audit"
+    status: "conditional"
+    supported_cell_types:
+      - "hepatocyte"
+    inherits_candidate_papers_from: "liver_cell_lnp_evidence"
+    training_threshold_description: >-
+      Approximately 150 to 250 compatible, validated formulation-experiment-
+      outcome examples are required for one preregistered hepatocyte task.
+    payload_compatibility: "requires_readiness_audit"
+    endpoint_compatibility: "requires_preregistration"
+    uptake_only_qualifies_for_training: false
+    toxicity_only_qualifies_for_training: false
+    paper_inclusion_implies_training_eligibility: false
+    training_enabled_by_screening: false
+
+publication_types:
+  normally_eligible:
+    - "journal_article"
+    - "research_article"
+    - "preprint_with_original_results"
+
+  normally_excluded:
+    - "review"
+    - "systematic_review"
+    - "meta_analysis_without_original_experiments"
+    - "editorial"
+    - "commentary"
+    - "news"
+    - "correspondence_without_original_results"
+
+  manual_review:
+    - "conference_abstract"
+    - "protocol"
+    - "methods_paper"
+    - "correction"
+    - "publication_type_unknown"
+
+screening_record_contract:
+  required_fields:
+    - "screening_id"
+    - "candidate_id"
+    - "screening_cell_type"
+    - "task_id"
+    - "decision"
+    - "primary_reason_code"
+    - "rules_version"
+    - "reviewer"
+    - "reviewed_at"
+
+  conditionally_required_fields:
+    decision_evidence:
+      required_for:
+        - "include"
+        - "exclude"
+        - "manual_review"
+      fields:
+        - "evidence_text"
+        - "evidence_location_type"
+        - "source_identifier"
+
+  optional_fields:
+    - "secondary_reason_codes"
+    - "notes"
+    - "full_text_required"
+    - "adjudication_status"
+    - "adjudication_notes"
+
+gold_set_selection:
+  candidate_pool_target:
+    minimum: 12
+    maximum: 16
+
+  final_gold_set_target:
+    minimum: 8
+    maximum: 12
+
+  required_cell_coverage:
+    hepatocyte:
+      minimum_candidates: 3
+    kupffer_cell:
+      minimum_candidates: 2
+    lsec:
+      minimum_candidates: 2
+    hsc:
+      minimum_candidates: 2
+
+  required_case_coverage:
+    likely_include:
+      minimum: 3
+    likely_exclude:
+      minimum: 2
+    likely_manual_review:
+      minimum: 3
+    structured_table:
+      minimum: 2
+    pdf_table_or_figure:
+      minimum: 2
+    incomplete_formulation:
+      minimum: 2
+    irrelevant_keyword_hit:
+      minimum: 2
+    ambiguous_chemistry:
+      minimum: 1
+
+  selection_principles:
+    - "Represent all four supported cell types."
+    - "Include both straightforward and difficult screening cases."
+    - "Include multiple reporting styles."
+    - "Do not select only open-access or easily extracted papers."
+    - "Do not treat a paper as a training example."
+    - "Do not weaken evidence rules for hepatocyte COMET readiness."
+    - "Record replacements rather than silently changing the gold set."
+
+controlled_values:
+  anticipated_decisions:
+    - "include"
+    - "exclude"
+    - "manual_review"
+    - "unknown"
+
+  anticipated_difficulty:
+    - "low"
+    - "medium"
+    - "high"
+
+  reporting_styles:
+    - "abstract_only"
+    - "structured_xml"
+    - "html_text"
+    - "html_table"
+    - "pdf_text"
+    - "pdf_table"
+    - "figure"
+    - "supplement"
+    - "mixed"
+    - "unknown"
+
+  full_text_statuses:
+    - "available"
+    - "partial"
+    - "unavailable"
+    - "unknown"
+
+  coverage_tags:
+    - "likely_include"
+    - "likely_exclude"
+    - "likely_manual_review"
+    - "structured_table"
+    - "pdf_table"
+    - "figure_only"
+    - "incomplete_formulation"
+    - "irrelevant_keyword_hit"
+    - "ambiguous_chemistry"
+    - "multi_formulation"
+    - "multi_cell"
+    - "outcome_linkage_ambiguous"

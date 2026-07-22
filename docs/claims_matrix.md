@@ -47,10 +47,13 @@ Allowed wording:
 - "Suggested for testing"
 - "Requires chemical and experimental review"
 
-## Future model prediction
+## COMET research prediction
 
-Disabled in the Track A application.
+Disabled by default and enabled only for a cell/task registered as having
+passed the Track B readiness and model-value gates.
 
-It may be enabled only after an appropriate labeled dataset, grouped
-validation, baseline comparison, calibration, uncertainty evaluation, and
-release review.
+Every prediction must be labelled `model_prediction`, stored as y-hat, and
+shown separately from reported or prospectively measured y. Required gates
+include an appropriate labeled dataset, grouped validation, baseline
+comparison, calibration or uncertainty evaluation, OOD handling, and release
+review.

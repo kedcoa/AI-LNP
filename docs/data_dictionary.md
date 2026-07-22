@@ -175,7 +175,8 @@ Stores the exact evidence supporting an extracted field or outcome.
 - viability_unit: use outcome_unit
 - outcome_direction: not stored for ordinary numeric outcomes
 - protocol_version: use the optional protocol_reference
-- COMET prediction fields: deferred until the optional GPU gate passes
+- COMET prediction fields: kept in a separate model-output schema and enabled
+  only for a registered cell/task that passes the Track B model gates
 
 ## Viability representation
 
