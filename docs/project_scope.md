@@ -9,10 +9,12 @@
 
 ## Track
 
-This project follows Track A. It does not assume that a paired four-cell
-training dataset or new wet-lab data are available.
+This project follows the eight-week Track B plan. It combines a complete
+four-cell literature-evidence product with conditional hepatocyte-first COMET
+adaptation and prospective validation. COMET proceeds only if the selected
+task passes data-readiness and model-value gates.
 
-## Five-week deliverable
+## Eight-week deliverable
 
 A public, read-only Streamlit application that:
 
@@ -21,23 +23,28 @@ A public, read-only Streamlit application that:
 - distinguishes comparable from non-comparable outcomes;
 - retrieves similar reported formulations;
 - displays out-of-distribution warnings;
-- produces constrained DOE experimental suggestions; and
+- optionally produces constrained DOE experimental suggestions;
+- exposes a separately gated COMET research mode when validation passes; and
 - preserves citations and evidence for every material result.
 
-## Outside the five-week commitment
+The application remains fully usable in literature-only mode if COMET is not
+trained or does not pass evaluation.
 
-- Prospective wet-lab validation
+## Outside the commitment
+
 - Four-cell predictive-model training
-- A validated COMET liver-cell model
+- Predictions for Kupffer cells, LSECs, or HSCs before their own gates pass
 - Claims that a formulation is universally best
 - Claims of in-vivo liver-cell targeting
 - Public experiment submission
 
-## Optional stretch work
+## Conditional COMET and prospective work
 
-A neocloud GPU may be used on Day 25 to test whether the COMET environment
-and a known checkpoint can be reproduced. This is not required for Track A
-completion.
+Weeks 3-4 audit data readiness, reproduce COMET, compare baselines, and run
+grouped evaluation. Weeks 5-8 design the UI, integrate only an approved model,
+and conduct a preregistered prospective hepatocyte test when the preceding
+gates pass. A failed gate disables the dependent model or experiment work; it
+does not block the literature-evidence application.
 
 ## Data identity boundary
 

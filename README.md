@@ -12,16 +12,19 @@ The initial payload categories are mRNA, siRNA, saRNA, and circRNA.
 
 ## Project track
 
-This project follows **Track A**.
+This project follows the new **eight-week Track B plan**. It combines an
+evidence-first four-cell literature application with a conditional,
+hepatocyte-first COMET adaptation and prospective validation workflow.
 
-The five-week deliverable is a literature-grounded evidence and
-experimental-design application. It does not assume that a paired four-cell
-training dataset, new wet-lab data, or local GPU access is available.
+COMET training is gated rather than assumed. The literature evidence and
+similarity modes remain complete products if the curated hepatocyte dataset is
+too small, too heterogeneous, or fails grouped evaluation. Kupffer-cell, LSEC,
+and HSC predictions remain disabled until each cell passes the same readiness
+and model-value gates.
 
-Optional neocloud/COMET work may be attempted at the end of the project, but
-it is not required for completing the Track A application.
+Full plan: `LNP_Liver_Tool_8_Week_Timeline_v4_COMET_Hepatocyte_First.md`
 
-## Intended Week 5 deliverable
+## Intended eight-week deliverable
 
 A public, read-only Streamlit application that:
 
@@ -30,12 +33,17 @@ A public, read-only Streamlit application that:
 - distinguishes comparable from non-comparable outcomes;
 - retrieves similar reported formulations;
 - displays out-of-distribution warnings;
-- produces constrained DOE experimental suggestions; and
+- optionally produces constrained DOE experimental suggestions;
+- exposes a separately gated COMET research mode when validation passes; and
 - preserves citations and evidence for every material result.
 
-## Claims not made by the MVP
+The interface is designed explicitly during **Day 21**, implemented and wired
+to provenance-safe application services during **Day 24**, and usability- and
+mode-tested during **Day 25**.
 
-The Week 5 application will not claim:
+## Claims not made by the application
+
+The application will not claim:
 
 - prospective biological validation;
 - reliable prediction for an unseen cell type;
@@ -64,9 +72,21 @@ The application separates five output categories:
    Untested candidates selected to improve experimental-space coverage while
    satisfying programmed constraints. These require expert review.
 
-5. **Future model prediction**  
-   Disabled for the Track A MVP. It may be enabled only after suitable labeled
-   data and validation become available.
+5. **COMET model prediction**
+   A separately labelled `y_hat` available only in research mode after the
+   selected cell/task passes readiness, baseline, grouped-holdout, stability,
+   and out-of-domain gates. It never replaces reported evidence.
+
+## Eight-week roadmap
+
+- **Week 1:** discovery, screening rules, and a field-level gold answer set.
+- **Week 2:** full-text/table/figure extraction and scientific normalization.
+- **Week 3:** per-cell readiness audits and conditional literature expansion.
+- **Week 4:** COMET reproduction, baselines, grouped splits, and adaptation.
+- **Week 5:** UI/UX design, candidate scoring, integration, and product tests.
+- **Week 6:** prospective experiment design, feasibility review, and preregistration.
+- **Week 7:** formulation, physical QC, and the frozen hepatocyte experiment.
+- **Week 8:** prospective analysis, honest application updates, and next-version planning.
 
 ## Data identity boundary
 
