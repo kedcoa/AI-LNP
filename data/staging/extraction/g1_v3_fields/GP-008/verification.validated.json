@@ -1,0 +1,27 @@
+{
+  "contract_version": "3.1.0",
+  "paper_id": "GP-008",
+  "source_read_again": true,
+  "issues": [
+    {
+      "experiment_id": "GP-008-E01",
+      "field_name": "therapeutic_target_cell_entity_ids",
+      "issue_type": "omitted_fact",
+      "severity": "review",
+      "explanation": "The experiment boundary mentions 'FAP (fibroblast activation protein) on activated HSCs' as the therapeutic target, but no cell entity is created for activated HSCs (hepatic stellate cells) and therapeutic_target_cell_entity_ids is empty.",
+      "supporting_or_corrective_sentence_id": "S05",
+      "supporting_or_corrective_quote": "FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA"
+    },
+    {
+      "experiment_id": "GP-008-E01",
+      "field_name": "payload_molecular_target_reported",
+      "issue_type": "evidence_mismatch",
+      "severity": "review",
+      "explanation": "The evidence quote for payload_molecular_target_reported is 'FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA', which describes the payload, not the molecular target. The molecular target is FAP, but the evidence quote should better reflect the target context.",
+      "supporting_or_corrective_sentence_id": "S05",
+      "supporting_or_corrective_quote": "FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA"
+    }
+  ],
+  "completeness_assessment": "incomplete",
+  "verifier_summary": "The extraction captures the core LNP formulation, payload, targeting ligand, and recipient cell correctly. However, the therapeutic target cells (activated HSCs) are mentioned in the experiment boundary but omitted from cell_entities and therapeutic_target_cell_entity_ids. Additionally, the evidence quote for payload_molecular_target_reported is the same as the payload description rather than specifically supporting the molecular target. All other fields are appropriately marked as missing where no information is available in the approved sentences."
+}

@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"3.0.0\",\n  \"paper_id\": \"GP-005\",\n  \"reader_id\": \"reader_b\",\n  \"original_experiments_present\": true,\n  \"experiments\": [\n    {\n      \"reader_experiment_key\": \"GP-005_reader_b_exp1\",\n      \"experiment_label\": \"mRNA-LNP in vivo\",\n      \"evidence_sentence_ids\": [\"S02\", \"S03\"],\n      \"experiment_anchor_quote\": \"the translation of Egfp mRNA occurs exclusively in hepatocytes during intravital imaging.\",\n      \"formulation_or_delivery_system_mention\": \"lipid nanoparticles (LNP)\",\n      \"payload_or_treatment_mention\": \"mRNA encoding enhanced green fluorescent protein (Egfp)\",\n      \"biological_model_mention\": \"liver in vivo\",\n      \"recipient_cell_mention\": \"Kupffer cells (KC) and hepatocytes\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Payload is Egfp mRNA; translation outcome reported.\"\n    },\n    {\n      \"reader_experiment_key\": \"GP-005_reader_b_exp2\",\n      \"experiment_label\": \"siRNA-LNP in vivo\",\n      \"evidence_sentence_ids\": [\"S02\", \"S03\"],\n      \"experiment_anchor_quote\": \"both KC and hepatocytes demonstrate comparable high and rapid uptake of mRNA-LNP and siRNA-LNP in vivo\",\n      \"formulation_or_delivery_system_mention\": \"lipid nanoparticles (LNP)\",\n      \"payload_or_treatment_mention\": \"siRNA\",\n      \"biological_model_mention\": \"liver in vivo\",\n      \"recipient_cell_mention\": \"Kupffer cells (KC) and hepatocytes\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Payload is siRNA; uptake outcome reported.\"\n    },\n    {\n      \"reader_experiment_key\": \"GP-005_reader_b_exp3\",\n      \"experiment_label\": \"RNase inhibition attempt\",\n      \"evidence_sentence_ids\": [\"S04\"],\n      \"experiment_anchor_quote\": \"inhibiting intracellular ribonuclease\",\n      \"formulation_or_delivery_system_mention\": null,\n      \"payload_or_treatment_mention\": \"inhibiting intracellular ribonuclease\",\n      \"biological_model_mention\": null,\n      \"recipient_cell_mention\": \"NPC\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different treatment: inhibiting intracellular ribonuclease.\"\n    },\n    {\n      \"reader_experiment_key\": \"GP-005_reader_b_exp4\",\n      \"experiment_label\": \"Pseudouridine substitution attempt\",\n      \"evidence_sentence_ids\": [\"S04\"],\n      \"experiment_anchor_quote\": \"substituting uridine bases in mRNA with pseudouridine\",\n      \"formulation_or_delivery_system_mention\": null,\n      \"payload_or_treatment_mention\": \"substituting uridine bases in mRNA with pseudouridine\",\n      \"biological_model_mention\": null,\n      \"recipient_cell_mention\": \"NPC\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different payload modification: pseudouridine substitution.\"\n    },\n    {\n      \"reader_experiment_key\": \"GP-005_reader_b_exp5\",\n      \"experiment_label\": \"Different ionizable lipid attempt\",\n      \"evidence_sentence_ids\": [\"S04\"],\n      \"experiment_anchor_quote\": \"using a different ionizable lipid in the LNP mixture\",\n      \"formulation_or_delivery_system_mention\": \"LNP mixture\",\n      \"payload_or_treatment_mention\": \"different ionizable lipid\",\n      \"biological_model_mention\": null,\n      \"recipient_cell_mention\": \"NPC\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different formulation: different ionizable lipid in LNP.\"\n    }\n  ]\n}",
+  "usage": {
+    "completion_tokens": 6179,
+    "prompt_tokens": 1173,
+    "total_tokens": 7352,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 5316,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

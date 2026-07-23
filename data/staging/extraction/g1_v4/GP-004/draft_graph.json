@@ -1,0 +1,1403 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-004",
+  "source_scope": "abstract_only",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "E_LNP",
+      "entity_type": "lnp_formulation",
+      "reported_name": "mRNA-LNP",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "nucleoside-modified, lipid-nanoparticle-encapsulated mRNA (mRNA-LNP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_PL_FLuc",
+      "entity_type": "payload",
+      "reported_name": "firefly luciferase encoding mRNA",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "firefly luciferase encoding mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_PL_HGF",
+      "entity_type": "payload",
+      "reported_name": "HGF mRNA",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "HGF mRNA-LNP"
+        },
+        {
+          "clause_id": "C002",
+          "quote": "hepatocyte-growth-factor (HGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_PL_EGF",
+      "entity_type": "payload",
+      "reported_name": "EGF mRNA",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "EGF mRNA-LNP"
+        },
+        {
+          "clause_id": "C002",
+          "quote": "epidermal-growth-factor (EGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_EP_FLuc",
+      "entity_type": "encoded_product",
+      "reported_name": "firefly luciferase",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "firefly luciferase"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_EP_HGF",
+      "entity_type": "encoded_product",
+      "reported_name": "hepatocyte-growth-factor (HGF)",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "hepatocyte-growth-factor (HGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_EP_EGF",
+      "entity_type": "encoded_product",
+      "reported_name": "epidermal-growth-factor (EGF)",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "epidermal-growth-factor (EGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_C_Hep",
+      "entity_type": "cell",
+      "reported_name": "hepatocytes",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_C_End",
+      "entity_type": "cell",
+      "reported_name": "endothelial cells",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "endothelial"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_C_Kup",
+      "entity_type": "cell",
+      "reported_name": "Kupffer cells",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "Kupffer cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_T_Liver",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "liver"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_S_Mice",
+      "entity_type": "species",
+      "reported_name": "mice",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_D_NAFLD",
+      "entity_type": "disease",
+      "reported_name": "non-alcoholic fatty liver disease",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "non-alcoholic fatty liver disease"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_D_Acet",
+      "entity_type": "disease",
+      "reported_name": "acetaminophen-induced acute liver injury",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "acetaminophen-induced acute liver injury"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_PS_Homeo",
+      "entity_type": "physiological_state",
+      "reported_name": "homeostasis",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "homeostasis"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_BM_ChronicNAFLD",
+      "entity_type": "biological_model",
+      "reported_name": "chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_BM_Acute",
+      "entity_type": "biological_model",
+      "reported_name": "acetaminophen-induced acute liver injury",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "acetaminophen-induced acute liver injury"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_R_IV",
+      "entity_type": "route",
+      "reported_name": "intravenous injection",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "intravenous injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_TP_3days",
+      "entity_type": "timepoint",
+      "reported_name": "3 days",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "about 3 days"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_Hepatotropism",
+      "entity_type": "endpoint",
+      "reported_name": "hepatotropism",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "specific hepatotropism"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_ProteinExpr",
+      "entity_type": "endpoint",
+      "reported_name": "protein expression",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "protein expression lasting about 3 days"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_HepTransf",
+      "entity_type": "endpoint",
+      "reported_name": "hepatocyte transfection",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "virtually all hepatocytes are transfected"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_EndTransf",
+      "entity_type": "endpoint",
+      "reported_name": "endothelial cell transfection",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation of endothelial and Kupffer cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_KupTransf",
+      "entity_type": "endpoint",
+      "reported_name": "Kupffer cell transfection",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation of endothelial and Kupffer cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_HepProlif",
+      "entity_type": "endpoint",
+      "reported_name": "hepatocyte proliferation",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "induce hepatocyte proliferation"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_SteatosisRev",
+      "entity_type": "endpoint",
+      "reported_name": "steatosis reversal",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "reverse steatosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_LiverFuncRest",
+      "entity_type": "endpoint",
+      "reported_name": "liver function restoration",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "accelerate restoration of liver function"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_LiverRegen",
+      "entity_type": "endpoint",
+      "reported_name": "liver regeneration acceleration",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "accelerate liver regeneration"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_End_ALTnorm",
+      "entity_type": "endpoint",
+      "reported_name": "ALT return to baseline",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "rapid return to baseline ALT levels"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_Specific",
+      "entity_type": "outcome_value",
+      "reported_name": "specific",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "specific hepatotropism"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_3days",
+      "entity_type": "outcome_value",
+      "reported_name": "lasting about 3 days",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "lasting about 3 days"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_VirtAll",
+      "entity_type": "outcome_value",
+      "reported_name": "virtually all",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "virtually all"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_Subpop",
+      "entity_type": "outcome_value",
+      "reported_name": "a subpopulation",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_EfficientInduce",
+      "entity_type": "outcome_value",
+      "reported_name": "efficiently induce",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently induce"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_SharpRev",
+      "entity_type": "outcome_value",
+      "reported_name": "sharply reverse",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "sharply reverse"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_AccelRest",
+      "entity_type": "outcome_value",
+      "reported_name": "accelerate restoration",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "accelerate restoration"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_Accel",
+      "entity_type": "outcome_value",
+      "reported_name": "accelerate",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "accelerate"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_OV_RapidReturn",
+      "entity_type": "outcome_value",
+      "reported_name": "rapid return to baseline",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "rapid return to baseline"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_Int_FLucLNP",
+      "entity_type": "intervention",
+      "reported_name": "firefly luciferase encoding mRNA-LNP intravenous injection",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "firefly luciferase encoding mRNA-LNP"
+        },
+        {
+          "clause_id": "C003",
+          "quote": "intravenous injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_Int_HGFLNP",
+      "entity_type": "intervention",
+      "reported_name": "HGF mRNA-LNP",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "HGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "entity_type": "intervention",
+      "reported_name": "HGF and EGF mRNA-LNP",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "entity_type": "intervention",
+      "reported_name": "HGF and EGF mRNA-LNP",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C_001",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_formulation",
+      "object_entity_id": "E_LNP",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "firefly luciferase encoding mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_002",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "carries_payload",
+      "object_entity_id": "E_PL_FLuc",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "firefly luciferase encoding mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_003",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_PL_FLuc",
+      "predicate": "encodes_product",
+      "object_entity_id": "E_EP_FLuc",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "firefly luciferase encoding mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_004",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_route",
+      "object_entity_id": "E_R_IV",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "intravenous injection"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_005",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_species",
+      "object_entity_id": "E_S_Mice",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_006",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E_T_Liver",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "In the liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_007",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E_C_Hep",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "virtually all hepatocytes are transfected"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_008",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E_C_End",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation of endothelial and Kupffer cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_009",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E_C_Kup",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation of endothelial and Kupffer cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_010",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_Hepatotropism",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "specific hepatotropism"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_011",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_Specific",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "specific hepatotropism"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_012",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_ProteinExpr",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "protein expression lasting about 3 days"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_013",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_3days",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "lasting about 3 days"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_014",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_HepTransf",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "virtually all hepatocytes are transfected"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_015",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_VirtAll",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "virtually all"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_016",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_EndTransf",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation of endothelial and Kupffer cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_017",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_Subpop",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_018",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_KupTransf",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation of endothelial and Kupffer cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_019",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_Subpop",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a subpopulation"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_020",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E_Int_FLucLNP",
+      "predicate": "has_timepoint",
+      "object_entity_id": "E_TP_3days",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "about 3 days"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_021",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_Int_HGFLNP",
+      "predicate": "has_formulation",
+      "object_entity_id": "E_LNP",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "HGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_022",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_Int_HGFLNP",
+      "predicate": "carries_payload",
+      "object_entity_id": "E_PL_HGF",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "HGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_023",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_PL_HGF",
+      "predicate": "encodes_product",
+      "object_entity_id": "E_EP_HGF",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "hepatocyte-growth-factor (HGF)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_024",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_Int_HGFLNP",
+      "predicate": "has_species",
+      "object_entity_id": "E_S_Mice",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_025",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_Int_HGFLNP",
+      "predicate": "has_physiological_context",
+      "object_entity_id": "E_PS_Homeo",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "In homeostasis"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_026",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_Int_HGFLNP",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E_C_Hep",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_027",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_Int_HGFLNP",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_HepProlif",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "induce hepatocyte proliferation"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_028",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E_Int_HGFLNP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_EfficientInduce",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently induce"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_029",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "has_formulation",
+      "object_entity_id": "E_LNP",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_030",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "carries_payload",
+      "object_entity_id": "E_PL_HGF",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_031",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "carries_payload",
+      "object_entity_id": "E_PL_EGF",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_032",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_PL_HGF",
+      "predicate": "encodes_product",
+      "object_entity_id": "E_EP_HGF",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "hepatocyte-growth-factor (HGF)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_033",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_PL_EGF",
+      "predicate": "encodes_product",
+      "object_entity_id": "E_EP_EGF",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "epidermal-growth-factor (EGF)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_034",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "has_species",
+      "object_entity_id": "E_S_Mice",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_035",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E_D_NAFLD",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "non-alcoholic fatty liver disease"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_036",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "has_biological_model",
+      "object_entity_id": "E_BM_ChronicNAFLD",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_037",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E_C_Hep",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_038",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E_T_Liver",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "liver function"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_039",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_SteatosisRev",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "reverse steatosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_040",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_SharpRev",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "sharply reverse"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_041",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_LiverFuncRest",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "accelerate restoration of liver function"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_042",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_NAFLD",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_AccelRest",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "accelerate restoration"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_043",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "has_formulation",
+      "object_entity_id": "E_LNP",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_044",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "carries_payload",
+      "object_entity_id": "E_PL_HGF",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_045",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "carries_payload",
+      "object_entity_id": "E_PL_EGF",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_046",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_PL_HGF",
+      "predicate": "encodes_product",
+      "object_entity_id": "E_EP_HGF",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "hepatocyte-growth-factor (HGF)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_047",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_PL_EGF",
+      "predicate": "encodes_product",
+      "object_entity_id": "E_EP_EGF",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "epidermal-growth-factor (EGF)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_048",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "has_species",
+      "object_entity_id": "E_S_Mice",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_049",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E_D_Acet",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "acetaminophen-induced acute liver injury"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_050",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "has_biological_model",
+      "object_entity_id": "E_BM_Acute",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "acetaminophen-induced acute liver injury"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_051",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E_C_Hep",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "in hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_052",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E_T_Liver",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "liver regeneration"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_053",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_LiverRegen",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "accelerate liver regeneration"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_054",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_Accel",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "accelerate"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_055",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E_End_ALTnorm",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "rapid return to baseline ALT levels"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_056",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E_Int_HGFEGF_LNP_Acet",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E_OV_RapidReturn",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "rapid return to baseline"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP1",
+      "label": "Firefly luciferase mRNA-LNP IV in mice",
+      "claim_ids": [
+        "C_001",
+        "C_002",
+        "C_003",
+        "C_004",
+        "C_005",
+        "C_006",
+        "C_007",
+        "C_008",
+        "C_009",
+        "C_010",
+        "C_011",
+        "C_012",
+        "C_013",
+        "C_014",
+        "C_015",
+        "C_016",
+        "C_017",
+        "C_018",
+        "C_019",
+        "C_020"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "C003",
+        "C004"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Experiment defined by clauses C003 and C004: injection of luciferase mRNA-LNP and observation of hepatotropism and cell transfection."
+    },
+    {
+      "experiment_id": "EXP2",
+      "label": "HGF mRNA-LNP in homeostasis",
+      "claim_ids": [
+        "C_021",
+        "C_022",
+        "C_023",
+        "C_024",
+        "C_025",
+        "C_026",
+        "C_027",
+        "C_028"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "C005"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Experiment defined by clause C005: HGF mRNA-LNP in homeostasis inducing hepatocyte proliferation."
+    },
+    {
+      "experiment_id": "EXP3",
+      "label": "HGF and EGF mRNA-LNP in chronic liver injury (NAFLD) model",
+      "claim_ids": [
+        "C_029",
+        "C_030",
+        "C_031",
+        "C_032",
+        "C_033",
+        "C_034",
+        "C_035",
+        "C_036",
+        "C_037",
+        "C_038",
+        "C_039",
+        "C_040",
+        "C_041",
+        "C_042"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "C006"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Experiment defined by clause C006: injections of HGF and EGF mRNA-LNP in NAFLD model, reversing steatosis and restoring liver function."
+    },
+    {
+      "experiment_id": "EXP4",
+      "label": "HGF and EGF mRNA-LNP in acetaminophen-induced acute liver injury",
+      "claim_ids": [
+        "C_043",
+        "C_044",
+        "C_045",
+        "C_046",
+        "C_047",
+        "C_048",
+        "C_049",
+        "C_050",
+        "C_051",
+        "C_052",
+        "C_053",
+        "C_054",
+        "C_055",
+        "C_056"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "C007"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Experiment defined by clause C007: HGF and EGF mRNA-LNP after acetaminophen-induced acute liver injury, accelerating regeneration and ALT normalization."
+    }
+  ]
+}

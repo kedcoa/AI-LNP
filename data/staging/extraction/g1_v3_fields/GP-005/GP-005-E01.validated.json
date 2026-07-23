@@ -1,0 +1,295 @@
+{
+  "contract_version": "3.1.0",
+  "paper_id": "GP-005",
+  "lnp_experiment_id": "GP-005-E01",
+  "experiment_label": "Intravital imaging of mRNA-LNP and siRNA-LNP spatio-temporal distribution in liver in vivo",
+  "is_lnp_experiment": true,
+  "lnp_formulation_name_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No specific formulation name reported."
+  },
+  "lnp_formulation_description_reported": {
+    "value": "lipid nanoparticles (LNP)",
+    "status": "reported",
+    "evidence_sentence_id": "S02",
+    "evidence_quote": "lipid nanoparticles (LNP)",
+    "missing_reason": null
+  },
+  "lnp_composition_raw_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No explicit material list or ratio provided."
+  },
+  "lnp_components": [],
+  "payload_type_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Multiple payload types (mRNA and siRNA) present; schema expects a single value."
+  },
+  "payload_name_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Multiple payloads present; cannot assign a single name."
+  },
+  "payload_encoded_product_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Multiple payloads; encoded product only for mRNA (Egfp), not for siRNA."
+  },
+  "payload_molecular_target_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No molecular target reported."
+  },
+  "targeting_ligand_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No targeting ligand mentioned."
+  },
+  "cell_entities": [
+    {
+      "cell_entity_id": "C1",
+      "cell_name_reported": {
+        "value": "KC",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "KC",
+        "missing_reason": null
+      },
+      "cell_type_normalized": {
+        "value": "kupffer_cell",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "KC",
+        "missing_reason": null
+      }
+    },
+    {
+      "cell_entity_id": "C2",
+      "cell_name_reported": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "hepatocytes",
+        "missing_reason": null
+      },
+      "cell_type_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "hepatocytes",
+        "missing_reason": null
+      }
+    }
+  ],
+  "delivery_recipient_cell_entity_ids": [
+    "C1",
+    "C2"
+  ],
+  "therapeutic_target_cell_entity_ids": [],
+  "tissue_or_organ_reported": {
+    "value": "liver",
+    "status": "reported",
+    "evidence_sentence_id": "S02",
+    "evidence_quote": "in the liver",
+    "missing_reason": null
+  },
+  "disease_context_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No disease context mentioned."
+  },
+  "species_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Species not explicitly stated in approved sentences."
+  },
+  "experimental_context_reported": {
+    "value": "in_vivo",
+    "status": "reported",
+    "evidence_sentence_id": "S02",
+    "evidence_quote": "in the liver in vivo",
+    "missing_reason": null
+  },
+  "biological_model_reported": {
+    "value": "liver in vivo",
+    "status": "reported",
+    "evidence_sentence_id": "S02",
+    "evidence_quote": "in the liver in vivo",
+    "missing_reason": null
+  },
+  "dose_value_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No dose information provided."
+  },
+  "dose_unit_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No dose unit provided."
+  },
+  "administration_route_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Administration route not specified."
+  },
+  "assay_reported": {
+    "value": "real-time intravital imaging",
+    "status": "reported",
+    "evidence_sentence_id": "S02",
+    "evidence_quote": "using real-time intravital imaging",
+    "missing_reason": null
+  },
+  "comparator_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No explicit comparator reported."
+  },
+  "lnp_outcomes": [
+    {
+      "lnp_outcome_id": "O1",
+      "endpoint_family": {
+        "value": "uptake",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "comparable high and rapid uptake of mRNA-LNP and siRNA-LNP",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "uptake of mRNA-LNP and siRNA-LNP",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "comparable high and rapid uptake of mRNA-LNP and siRNA-LNP",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No numeric value provided."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No unit provided."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "comparable high and rapid uptake",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "comparable high and rapid uptake of mRNA-LNP and siRNA-LNP",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": "KC and hepatocytes comparable",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "comparable high and rapid uptake",
+        "missing_reason": null
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint specified."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint unit."
+      }
+    },
+    {
+      "lnp_outcome_id": "O2",
+      "endpoint_family": {
+        "value": "functional_expression",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "translation of Egfp mRNA",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "translation of Egfp mRNA",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "translation of Egfp mRNA",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No numeric value provided."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No unit provided."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "occurs exclusively in hepatocytes",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "translation of Egfp mRNA occurs exclusively in hepatocytes",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": "hepatocytes vs KC (exclusive)",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "exclusively in hepatocytes",
+        "missing_reason": null
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint specified."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint unit."
+      }
+    }
+  ]
+}

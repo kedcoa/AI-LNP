@@ -1,0 +1,216 @@
+{
+  "$defs": {
+    "EvidenceBoundValue_Literal__uptake____functional_expression____transfection____gene_knockdown____cre_recombination____viability____toxicity____biodistribution____therapeutic_effect____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "uptake",
+                "functional_expression",
+                "transfection",
+                "gene_knockdown",
+                "cre_recombination",
+                "viability",
+                "toxicity",
+                "biodistribution",
+                "therapeutic_effect",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['uptake', 'functional_expression', 'transfection', 'gene_knockdown', 'cre_recombination', 'viability', 'toxicity', 'biodistribution', 'therapeutic_effect', 'other']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_float_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[float]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_str_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[str]",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "comparator": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "endpoint_family": {
+      "$ref": "#/$defs/EvidenceBoundValue_Literal__uptake____functional_expression____transfection____gene_knockdown____cre_recombination____viability____toxicity____biodistribution____therapeutic_effect____other___"
+    },
+    "endpoint_name": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "experiment_id": {
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "normalization_basis": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "outcome_id": {
+      "title": "Outcome Id",
+      "type": "string"
+    },
+    "outcome_unit": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "outcome_value": {
+      "$ref": "#/$defs/EvidenceBoundValue_float_"
+    },
+    "qualitative_outcome": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "uncertainty_type": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "uncertainty_value": {
+      "$ref": "#/$defs/EvidenceBoundValue_float_"
+    }
+  },
+  "required": [
+    "outcome_id",
+    "experiment_id",
+    "endpoint_family",
+    "endpoint_name",
+    "outcome_value",
+    "outcome_unit",
+    "normalization_basis",
+    "uncertainty_value",
+    "uncertainty_type",
+    "qualitative_outcome",
+    "comparator"
+  ],
+  "title": "OutcomeExtraction",
+  "type": "object"
+}

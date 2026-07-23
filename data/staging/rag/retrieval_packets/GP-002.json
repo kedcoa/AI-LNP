@@ -1,0 +1,1334 @@
+{
+  "paper_id": "GP-002",
+  "packets": {
+    "lnp_composition_raw": {
+      "query": {
+        "query_id": "GP-002-01-lnp_composition_raw",
+        "paper_id": "GP-002",
+        "question": "What exact LNP lipid components, chemical names, molar ratios, and preparation conditions are reported?",
+        "field_group": "formulation",
+        "required_entity_types": [
+          "lnp",
+          "lipid_or_material"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-042d08bd3cd5968ef1fc",
+          "paper_id": "GP-002",
+          "text": "In this study, we investigated the distribution and intensity of reporter gene expression in multiple mouse models of liver disease and cancer following intravenous administration of mRNA-LNPs based on the ionizable lipid SM-102 (molar ratios: 50 SM-102/10 DSPC/38.5 cholesterol/1.5 DMG-PEG2000; see materials and methods). SM-102 is among the most extensively characterized ionizable lipids in the preclinical mRNA literature,35 facilitating direct comparison with existing and future studies, and also has FDA approval for clinical use. SM-86, a close structural analog of SM-102, has been used in human clinical trials, targeting the liver by intravenous infusion.33",
+          "section_path": "Introduction",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0040",
+          "lexical_score": 13.01644957571642,
+          "vector_score": 0.5732990503311157,
+          "fused_score": 0.03278688524590164,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-375803caa3350f9b98f3",
+          "paper_id": "GP-002",
+          "text": "Many nanoparticle-based carrier systems have been developed for the delivery of mRNA in vivo, with mRNA-LNPs being the most widely used. mRNA-LNPs are manufactured using four lipid components: an ionizable lipid, a phospholipid, cholesterol, and a PEG-lipid, each of which can be substituted to alter the properties of the nanoparticle.44,45 The ionizable lipid is the most consequential component, influencing mRNA encapsulation efficiency, endosomal escape, tissue tropism, and immunostimulatory profile.44,45 A small number of ionizable lipids are used in RNA-LNP products that have received regulatory approval for clinical use (including DLin-MC3-DMA, ALC-0315, and SM-102), with others currently in clinical development (notably including SM-86, used for a hepatocyte-targeted gene replacement therapy currently in clinical trials33). In this study, we used SM-102, which is among the most extensively characterized ionizable lipids in the preclinical mRNA literature, facilitating direct comparison with existing and future studies. Importantly, while DLin-MC3-DMA was developed for targeted delivery of small interfering RNAs (siRNAs) to hepatocytes, SM-102 outperformed it for expression of an mRNA reporter gene.46,47 It should be noted that delivery efficiency, biodistribution, and immunostimulatory profile can vary across ionizable lipid formulations,38 and the findings of this study may not generalize to other LNP formulations; evaluation of alternative formulations represents a valuable direction for future work. Additionally, we tested a single dosage of mRNA-LNPs in this study, using a reporter gene only; future studies should also evaluate the effect of mRNA-LNP dosage on the distribution and intensity of transgene expression across disease models, as the relative expression between liver and tumor cells may be dose dependent.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0185",
+          "lexical_score": 9.95144059270707,
+          "vector_score": 0.5534404516220093,
+          "fused_score": 0.031754032258064516,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-0b5472c89fbd2512b317",
+          "paper_id": "GP-002",
+          "text": "mRNA-LNPs were produced according to a method published previously.71,72 Briefly, a synthetic gene encoding eGFP was obtained from a custom DNA synthesis provider (Integrated DNA Technologies, Singapore). DNA was amplified using 2X Q5 PCR master mix (New England Biolabs M0494L) with a forward primer containing a T7 promoter and a reverse primer encoding a 126-nt poly(A) tail. The PCR product was purified and used as a template for in vitro transcription of mRNA using T7 RNA polymerase (New England Biolabs M0251L), with 100% substitution of uridine residues by N1-methylpseudouridine (BOC Sciences 1429803-59-6.) The synthesized mRNA was purified, integrity verified by capillary electrophoresis, and function verified by transfection into mammalian cell culture. mRNA-LNPs were produced with the following lipid molar ratios: 50 ionizable (SM-102)/10 DSPC/38.5 cholesterol/1.5 DMG-PEG2000. Formulation was conducted on the Nanoassemblr Ignite with an N/P ratio of 6.8, a total flow rate of 12 mL/min, and an aqueous:organic flow rate ratio of 3:1. Following formulation, mRNA-LNPs were buffer-exchanged into Tris-buffered saline (TBS) by dialysis and concentrated by centrifugation on a size-exclusion column. A sample of concentrated mRNA-LNPs underwent quality control assessment using the Zetasizer to confirm that size, charge, and polydispersity were within the expected range (Figure S26). Remaining concentrated mRNA-LNPs were adjusted to a final sucrose concentration of 10% (w/v) as a cryoprotectant and stored at \u221230\u00b0C in single-use aliquots at an mRNA concentration of 700\u20131,100 ng/\u03bcL.",
+          "section_path": "Materials and methods > Production of mRNA-LNP",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0305",
+          "lexical_score": 8.967022087426589,
+          "vector_score": 0.5314075350761414,
+          "fused_score": 0.03125763125763126,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-8a4568dfdc5e5ff75cf5",
+          "paper_id": "GP-002",
+          "text": "In this study, we demonstrate the successful delivery of systemically administered mRNA-LNPs to the diseased and cancerous mouse liver. We observed mRNA expression in healthy, fibrotic, and cirrhotic mouse liver tissue; spontaneous HCC in situ; and xenograft models of HCC and secondary liver cancer. Using a custom machine learning approach, we quantified the ubiquitous distribution of mRNA expression in hepatocytes in healthy liver, while showing that in the presence of fibrosis, cirrhosis, and cancer, reporter expression varies both within and between samples. These findings demonstrate that intravenous administration of mRNA-LNP therapeutics can be a viable therapeutic strategy for liver disease and cancer and suggest future directions for research to improve delivery of mRNA drugs.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0180",
+          "lexical_score": 2.4466062960722565,
+          "vector_score": 0.362160325050354,
+          "fused_score": 0.03087395365455288,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-efe0ff4f99466ee70981",
+          "paper_id": "GP-002",
+          "text": "When mRNA-LNPs are injected intravenously, they rapidly adsorb a protein corona that prominently includes the serum lipid transport protein ApoE,49 which can act as a ligand for the low-density lipoprotein receptor (LDLR). This receptor is expressed on the surface of many cell types and is particularly abundant on hepatocytes, which are the primary site for low-density lipoprotein (LDL) clearance from the blood.50 Interaction of ApoE-coated LNPs with LDLR is one mechanism promoting LNP uptake by hepatocytes; however, the relative importance of this mechanism depends on the LNP formulation, and LNPs remain hepatotropic in LDLR knockout mice.51 The protein corona of mRNA-LNPs is complex, and in addition to ApoE, also includes albumin, other apolipoproteins, and complement factors; its composition is also influenced by the LNP formulation and route of administration.52 Corona composition affects cellular tropism and the pathways by which LNPs are internalized, trafficked, and processed by cells.53",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0195",
+          "lexical_score": 3.010072100970019,
+          "vector_score": 0.4398050904273987,
+          "fused_score": 0.029273504273504274,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-599ae64a87b45decb213",
+          "paper_id": "GP-002",
+          "text": "Given the known role of LDLR in uptake of LNPs by healthy liver tissue, we performed IHC for LDLR on sections containing both liver and tumor tissue from 3 representative mice and found that, qualitatively, expression of LDLR was comparable between the liver and tumor tissue (Figure S20). We also considered the potential impact on tissue architecture, and specifically tumor cell density, on the extravasation of LNPs and subsequent reporter delivery after observing that the xenografts consisted of small, tightly packed cells. We manually counted nuclei from one 500 \u00d7 500 pixel field of view and compared the nuclei count (a proxy for cell density) between healthy liver, cirrhotic liver, tumors of Mdr2\u2212/\u2212 mice, and xenografted tumors (Figure S21A). Unlike either cirrhotic liver or spontaneous HCCs of the Mdr2\u2212/\u2212 mice, tumors derived from HuH-7 xenografts contained significantly more nuclei per unit area than healthy liver tissue (Dunnett\u2019s T3 multiple comparisons test, n = 3, adjusted p = 0.0021), indicating dense packing of cells within the xenograft that is expected to have negatively impacted LNP extravasation and reporter expression. Qualitatively, the blood vessel density of HuH-7 xenograft tumors was comparable to that of healthy liver tissue (Figure S21B).",
+          "section_path": "Results > Delivery of mRNA-LNPs to a xenograft model of primary liver cancer",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0140",
+          "lexical_score": 2.7436610164309987,
+          "vector_score": 0.4318791627883911,
+          "fused_score": 0.028484848484848488,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-796432c5805e43f8dc48",
+          "paper_id": "GP-002",
+          "text": "Our study also systematically investigated mRNA-LNP delivery to liver cancer. Mdr2\u2212/\u2212 mice develop HCCs with age, and we therefore examined reporter expression in spontaneous HCCs in situ. While a small number of reports previously described the use of mRNA-LNP-based therapies to treat liver cancer in animal models,58,59,60,61 the encoded therapeutic proteins act through non-cell-autonomous mechanisms of action, and delivery of mRNA-LNPs to tumor cells was unclear. We found that GFP was expressed in HCCs with a similar distribution and intensity to its expression in the liver tissue from the same animal. Cellular heterogeneity is a common feature of HCCs,62 and this may explain our observation that several HCCs contained tracts of cells that did not express GFP. It would be valuable for future work to explore sequential delivery of multiple reporter mRNA-LNPs in order to determine whether repeated dosing of mRNA-LNPs would target the same or different cell populations. Interestingly, we found one steatotic HCC among the Mdr2\u2212/\u2212 tumors, and GFP expression was virtually absent from this tumor. However, robust GFP expression was observed in small steatotic regions within liver and tumor sections from other animals in this cohort. This finding warrants further investigation to determine whether steatotic livers or steatotic HCCs are especially poor targets for mRNA-LNP delivery.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0215",
+          "lexical_score": 3.9825768272174544,
+          "vector_score": 0.4029830992221832,
+          "fused_score": 0.028370221327967807,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-f659f6d97abbe32b119f",
+          "paper_id": "GP-002",
+          "text": "Nanoparticle composition for targeted mRNA delivery is an area of active research.38,44,45 For instance, mRNA-LNPs with substituted lipid components enable selective targeting of the liver, lung, and spleen28; other publications have described nanoparticle formulations that are optimized for RNA delivery to different types of liver cells66 or for co-delivery of siRNA, single-guide RNA (sgRNA), and mRNA in a single LNP.58 Excitingly, several technologies are in development that may improve the ratio of protein expression in tumor cells relative to liver cells, enabling therapeutic benefit with reduced mRNA-LNP dosage and reduced side effects related to expression of the mRNA in healthy hepatocytes. Cell-selective targeting including to extra-hepatic tumors can be achieved using bispecific antibodies that recognize a tumor cell-surface marker and a component of the LNP,66,67 and other studies have shown enhanced mRNA penetration into tumors when co-delivered with a therapeutic siRNA to reduce tumor rigidity,58 as well as improved specificity of mRNA for tumors over hepatocytes by including binding sites for hepatocyte-specific miRNAs in the mRNA design.68 It is also important to note that many emerging RNA-based treatments for solid tumors do not require direct transfection of tumor cells. For instance, most cancer vaccines are administered by the subcutaneous or intramuscular route and rely on transfection of antigen-presenting cells to produce an adaptive immune response against the tumor.69,70 Other therapeutic approaches target stromal cells, endothelial cells, or tumor-associated macrophages, and these approaches also do not require transfection of the tumor cells themselves69; however, improved targeting of mRNA therapeutics to tumor-associated cell types will enhance the efficacy of these emerging therapeutic modalities. Another area of active research is delivery of other nucleic acid modalities such as siRNAs and antisense oligonucleotides, which differ substantially in size, structure, and pharmacology from the mRNA used in this study and are often delivered using different nanoparticle formulations.69",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0230",
+          "lexical_score": 8.558717082105385,
+          "vector_score": 0.363993763923645,
+          "fused_score": 0.02813852813852814,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-6a950065b91fc88dca99",
+          "paper_id": "GP-002",
+          "text": "An important consideration for the safety and efficacy of mRNA-LNP therapeutics delivered via the intravenous route is the induction of an immune response, and potentially other off-target gene expression, in the liver. To determine whether the mRNA-LNP platform impacts on liver gene expression, we sequenced RNA from liver tissue of healthy mice injected with eGFP mRNA-LNPs (n = 5) and saline-injected controls (n = 5) 24 h after injection. We detected abundant eGFP transcripts (averaging 1,661 counts) in the livers of mRNA-injected mice, with negligible background (average 1 count in uninjected mice), demonstrating that mRNA can persist in liver tissue for at least a day after injection (Figure 1H); the difference was significant (Mann-Whitney test, n = 5, p = 0.0079). Consistent with the known immunogenicity of mRNA-LNPs, particularly those formulated with SM-102,37 intense upregulation of genes involved in innate immunity was observed in the liver tissue of mRNA-injected mice relative to uninjected controls, including Irf7/Irf9, Stat1, and IfitmFITM3. In total, 295 genes were significantly upregulated and 323 genes significantly downregulated (Figure 1I; Table S1; Figure S6). Notably, PD-L1 (Cd274) was significantly upregulated in liver cells following mRNA-LNP treatment (Welch\u2019s t test, n = 5, p < 0.0001), substantiating recent reports that mRNA-LNP administration can increase checkpoint ligand expression. The widespread immune response is consistent with previous reports describing inflammatory responses to mRNA-LNP delivery,37,38 underscoring the importance of carefully controlling for platform effects when evaluating candidate therapeutics.",
+          "section_path": "Results > Efficient delivery of mRNA-LNPs to the healthy mouse liver",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0065",
+          "lexical_score": 2.582758279371789,
+          "vector_score": 0.37851348519325256,
+          "fused_score": 0.02651914295749912,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-01-lnp_composition_raw",
+          "block_id": "GP-002-B-6e94e637a0d4b354d4ab",
+          "paper_id": "GP-002",
+          "text": "The eGFP expression measured in this study reflects the combined efficiency of LNP accumulation, cellular uptake, endosomal escape, and mRNA translation, and the relative contribution of each step may differ between healthy tissue, fibrotic liver, and tumors. Previous studies have tracked the biodistribution and intracellular fate of mRNA-LNPs using fluorescent labeling of both LNPs and mRNA cargo48 and have characterized the pharmacokinetics and tissue distribution of mRNA-LNPs formulated with SM-102 and other clinically relevant ionizable lipids.46 In the present study, we measured protein expression as the functional endpoint most relevant to therapeutic applications, as it integrates all upstream delivery steps into a single readout of productive transfection.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0190",
+          "lexical_score": null,
+          "vector_score": 0.42763668298721313,
+          "fused_score": 0.025690838928623557,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "FaissSentenceTransformerBackend"
+      ],
+      "warnings": []
+    },
+    "payload": {
+      "query": {
+        "query_id": "GP-002-02-payload",
+        "paper_id": "GP-002",
+        "question": "What exact molecular cargo is encapsulated, and what does it encode or target?",
+        "field_group": "payload",
+        "required_entity_types": [
+          "lnp",
+          "payload"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-6de95d411f9f3c2b2ffd",
+          "paper_id": "GP-002",
+          "text": "Like most nanoparticles in the 50\u2013250 nm size range,26 intravenously injected mRNA-LNPs accumulate predominantly in the liver following intravenous injection, and the mRNA-encoded protein is expressed by hepatocytes for several days27; some LNP formulations show preferential expression in other organs.28 Hepatic mRNA uptake encompasses virtually all hepatocytes and subpopulations of endothelial and Kupffer cells.29 The natural tissue tropism of LNPs for hepatocytes has enabled experimental mRNA-based treatments of genetic metabolic disorders including methylmalonic acidemia,30 acute intermittent porphyria,31 and Fabry disease32 in animal models, and a systemically administered mRNA-LNP treatment for propionic acidemia has shown promise in early human trials.33 Importantly, these studies have demonstrated the safety and efficacy of repeated mRNA-LNP administration, which is critical if mRNA drugs are to be used for ongoing treatment of liver disease.",
+          "section_path": "Introduction",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0030",
+          "lexical_score": 2.7048746204427876,
+          "vector_score": 0.33938920497894287,
+          "fused_score": 0.034679523033724735,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-d9880232921706699d9e",
+          "paper_id": "GP-002",
+          "text": "The rapid development of SARS-CoV-2 vaccines powerfully demonstrated the safety and efficacy of synthetic messenger RNA (mRNA) medicines. Synthetic mRNAs comprise a coding sequence that can encode any therapeutic protein, flanked by 5\u2032 and 3\u2032 untranslated regions from highly expressed and stable mammalian mRNAs, and a poly(A) tail. To attenuate the innate response to foreign RNA,24 mRNA drugs are depleted of secondary structures and uridine residues, and the remaining uridines are substituted with the uridine analog N1-methylpseudouridine. Formulation of mRNA into lipid nanoparticles (LNPs) protects the mRNA and enables delivery to cells via endocytosis. A small percentage of the delivered mRNA escapes the endosome into the cytoplasm, where it is then translated by cytoplasmic ribosomes to produce the target protein. As of 2023, over 13 billion doses of mRNA vaccines had been administered globally with an adverse-event rate comparable to other vaccines,25 demonstrating the fundamental effectiveness and safety of this drug modality.",
+          "section_path": "Introduction",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0025",
+          "lexical_score": 3.2392466935043602,
+          "vector_score": 0.3645077049732208,
+          "fused_score": 0.03149801587301587,
+          "entity_types": [
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-0b5472c89fbd2512b317",
+          "paper_id": "GP-002",
+          "text": "mRNA-LNPs were produced according to a method published previously.71,72 Briefly, a synthetic gene encoding eGFP was obtained from a custom DNA synthesis provider (Integrated DNA Technologies, Singapore). DNA was amplified using 2X Q5 PCR master mix (New England Biolabs M0494L) with a forward primer containing a T7 promoter and a reverse primer encoding a 126-nt poly(A) tail. The PCR product was purified and used as a template for in vitro transcription of mRNA using T7 RNA polymerase (New England Biolabs M0251L), with 100% substitution of uridine residues by N1-methylpseudouridine (BOC Sciences 1429803-59-6.) The synthesized mRNA was purified, integrity verified by capillary electrophoresis, and function verified by transfection into mammalian cell culture. mRNA-LNPs were produced with the following lipid molar ratios: 50 ionizable (SM-102)/10 DSPC/38.5 cholesterol/1.5 DMG-PEG2000. Formulation was conducted on the Nanoassemblr Ignite with an N/P ratio of 6.8, a total flow rate of 12 mL/min, and an aqueous:organic flow rate ratio of 3:1. Following formulation, mRNA-LNPs were buffer-exchanged into Tris-buffered saline (TBS) by dialysis and concentrated by centrifugation on a size-exclusion column. A sample of concentrated mRNA-LNPs underwent quality control assessment using the Zetasizer to confirm that size, charge, and polydispersity were within the expected range (Figure S26). Remaining concentrated mRNA-LNPs were adjusted to a final sucrose concentration of 10% (w/v) as a cryoprotectant and stored at \u221230\u00b0C in single-use aliquots at an mRNA concentration of 700\u20131,100 ng/\u03bcL.",
+          "section_path": "Materials and methods > Production of mRNA-LNP",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0305",
+          "lexical_score": 2.9810446379243842,
+          "vector_score": 0.3581407070159912,
+          "fused_score": 0.030090497737556562,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-4982d3da78156fe06ef2",
+          "paper_id": "GP-002",
+          "text": "The mouse liver RNA-seq dataset generated during this study is available through the NCBI Gene Expression Omnibus (GEO): GSE331154 (\u201cBulk RNA sequencing from liver of mice injected with saline or mRNA-LNPs encoding eGFP, 10 \u03bcg dose, 24 h time point, intravenous route.\u201d) All other data supporting the findings of this study are available from the corresponding author upon reasonable request.",
+          "section_path": "Data and code availability",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0405",
+          "lexical_score": 3.2770383003152315,
+          "vector_score": 0.28771108388900757,
+          "fused_score": 0.029571646010002173,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-f659f6d97abbe32b119f",
+          "paper_id": "GP-002",
+          "text": "Nanoparticle composition for targeted mRNA delivery is an area of active research.38,44,45 For instance, mRNA-LNPs with substituted lipid components enable selective targeting of the liver, lung, and spleen28; other publications have described nanoparticle formulations that are optimized for RNA delivery to different types of liver cells66 or for co-delivery of siRNA, single-guide RNA (sgRNA), and mRNA in a single LNP.58 Excitingly, several technologies are in development that may improve the ratio of protein expression in tumor cells relative to liver cells, enabling therapeutic benefit with reduced mRNA-LNP dosage and reduced side effects related to expression of the mRNA in healthy hepatocytes. Cell-selective targeting including to extra-hepatic tumors can be achieved using bispecific antibodies that recognize a tumor cell-surface marker and a component of the LNP,66,67 and other studies have shown enhanced mRNA penetration into tumors when co-delivered with a therapeutic siRNA to reduce tumor rigidity,58 as well as improved specificity of mRNA for tumors over hepatocytes by including binding sites for hepatocyte-specific miRNAs in the mRNA design.68 It is also important to note that many emerging RNA-based treatments for solid tumors do not require direct transfection of tumor cells. For instance, most cancer vaccines are administered by the subcutaneous or intramuscular route and rely on transfection of antigen-presenting cells to produce an adaptive immune response against the tumor.69,70 Other therapeutic approaches target stromal cells, endothelial cells, or tumor-associated macrophages, and these approaches also do not require transfection of the tumor cells themselves69; however, improved targeting of mRNA therapeutics to tumor-associated cell types will enhance the efficacy of these emerging therapeutic modalities. Another area of active research is delivery of other nucleic acid modalities such as siRNAs and antisense oligonucleotides, which differ substantially in size, structure, and pharmacology from the mRNA used in this study and are often delivered using different nanoparticle formulations.69",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0230",
+          "lexical_score": 0.9680869851798055,
+          "vector_score": 0.43910449743270874,
+          "fused_score": 0.029551337359792925,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-375803caa3350f9b98f3",
+          "paper_id": "GP-002",
+          "text": "Many nanoparticle-based carrier systems have been developed for the delivery of mRNA in vivo, with mRNA-LNPs being the most widely used. mRNA-LNPs are manufactured using four lipid components: an ionizable lipid, a phospholipid, cholesterol, and a PEG-lipid, each of which can be substituted to alter the properties of the nanoparticle.44,45 The ionizable lipid is the most consequential component, influencing mRNA encapsulation efficiency, endosomal escape, tissue tropism, and immunostimulatory profile.44,45 A small number of ionizable lipids are used in RNA-LNP products that have received regulatory approval for clinical use (including DLin-MC3-DMA, ALC-0315, and SM-102), with others currently in clinical development (notably including SM-86, used for a hepatocyte-targeted gene replacement therapy currently in clinical trials33). In this study, we used SM-102, which is among the most extensively characterized ionizable lipids in the preclinical mRNA literature, facilitating direct comparison with existing and future studies. Importantly, while DLin-MC3-DMA was developed for targeted delivery of small interfering RNAs (siRNAs) to hepatocytes, SM-102 outperformed it for expression of an mRNA reporter gene.46,47 It should be noted that delivery efficiency, biodistribution, and immunostimulatory profile can vary across ionizable lipid formulations,38 and the findings of this study may not generalize to other LNP formulations; evaluation of alternative formulations represents a valuable direction for future work. Additionally, we tested a single dosage of mRNA-LNPs in this study, using a reporter gene only; future studies should also evaluate the effect of mRNA-LNP dosage on the distribution and intensity of transgene expression across disease models, as the relative expression between liver and tumor cells may be dose dependent.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0185",
+          "lexical_score": 2.6709258079015705,
+          "vector_score": 0.35927823185920715,
+          "fused_score": 0.0293236301369863,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-bbd3c3c0e8c364b157f1",
+          "paper_id": "GP-002",
+          "text": "We initially set out to establish a baseline for mRNA-LNP delivery to and expression in the mouse liver. We selected a formulation for mRNA-LNPs based on the ionizable lipid SM-102, which is approved for clinical use. To assess the delivery of mRNA to the liver, we intravenously injected adult male mice (n = 5) with mRNA-LNPs encoding enhanced green fluorescent protein (eGFP) (Figure 1A). Strong and specific eGFP fluorescence was observed in the liver after 24 h via ex vivo fluorescence imaging, with measured fluorescence values around 10-fold higher than background (tissue autofluorescence) (Figures 1B and 1C). Background-subtracted fluorescence (radiant efficiency) of whole livers was significantly different between mRNA-injected and uninjected mice (Student\u2019s t test, n = 4\u20135, p < 0.0001) (Figure 1D). Western blotting detected eGFP protein strongly from the liver tissue of these mice (Figure 1E), and in one healthy mouse from which additional organs were blotted, eGFP was also detected in the spleen (Figure S1). Notably, green fluorescent signal in the digestive tract likely arises from gut contents36 and does not indicate the presence of eGFP (Figure S1). eGFP was not detected in serum from any of 6 injected mice tested (Figure S2), confirming that eGFP is not secreted into the bloodstream and that no spurious signal is expected to arise from blood.Figure 1Efficient delivery of mRNA-LNPs to the healthy mouse liver(A) We injected 5 healthy mice with 10 \u03bcg eGFP mRNA-LNPs via the tail vein and investigated reporter expression after 24 h. (B) Strong eGFP fluorescence was visualized in all injected livers (bottom row). (C) Ex vivo fluorescence imaging of organs from injected and uninjected mice shows specificity of eGFP expression in the liver. Fluorescence scales were set to eliminate autofluorescent signal in the uninjected liver; autofluorescent signal is visualized in the colon and duodenum of both the injected and uninjected mouse. (D) Quantitation of background-subtracted eGFP fluorescence confirms the strong and specific detection of eGFP in the livers of eGFP-injected mice (Welch\u2019s t test, n = 4\u20135, t = 20.25(4.117), p < 0.0001). Error bars represent mean \u00b1 SEM. (E) Western blotting detects a strong band corresponding to eGFP in the livers of mice injected with eGFP mRNA-LNPs; no band is detected in liver tissue of uninjected mice. (F) Immunohistochemistry for eGFP in liver tissue sections from injected mice shows strong eGFP staining in virtually all hepatocytes. There is moderate variation in staining intensity between hepatocytes. (G) Quantification of GFP-positive surface area for IHC sections in GFP-injected mice shows extremely high coverage of liver tissue, with very low background in uninjected mice (Welch\u2019s t test, n = 5, t = 84.81(4.204), p < 0.0001). Error bars represent mean \u00b1 SEM. (H) eGFP transcripts were readily detected in mouse liver tissue 24 h after injection, with mapped transcript counts between approximately 1,000 and 2,300; this was significantly different from control with an average of one count (Mann-Whitney test, n = 5, U = 0, p = 0.0079). Error bars represent mean \u00b1 SEM. (I) 624 genes were differentially expressed in the liver between mRNA-LNP-injected and saline-injected mice, with the significance threshold of 5 \u2217 \u2212log10 FDR. These included interferon response factors (Irf7, Irf9, Ifitm3, and Isg15) and the cytokine-responsive transcription factor Stat1. (J) Gene networks induced in the liver by mRNA-LNP injection; upregulated genes cluster into antigen-processing and interferon-response networks. Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/y17kh8g.",
+          "section_path": "Results > Efficient delivery of mRNA-LNPs to the healthy mouse liver",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0050",
+          "lexical_score": 3.151114077876515,
+          "vector_score": 0.29743069410324097,
+          "fused_score": 0.02904040404040404,
+          "entity_types": [
+            "cell",
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-ec759093d6e5170e2322",
+          "paper_id": "GP-002",
+          "text": "These findings demonstrate that intravenous delivery of mRNA-LNPs results in specific expression within most hepatocytes and many cells within spontaneously occurring HCCs in situ, with minimal delivery to other organs and tissues, likely including other cancers. This restricted delivery pattern suggests that mRNA-LNP therapeutics for HCC could be administered systemically with limited extrahepatic off-target activity.",
+          "section_path": "Results > Delivery of mRNA-LNPs to spontaneous HCCs in situ",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0120",
+          "lexical_score": 0.8163889248897409,
+          "vector_score": 0.3324986696243286,
+          "fused_score": 0.027479766610201392,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-05df5fdb613f928b5e73",
+          "paper_id": "GP-002",
+          "text": "Here, we show that following intravenous administration, mRNA-LNPs enable efficient protein expression not only in healthy liver but also in fibrotic and cirrhotic liver, spontaneous HCCs in situ, and xenograft models of primary and secondary liver cancer in mice. These findings suggest that intravenous injection of mRNA-LNPs without a specific targeting moiety can achieve widespread transgene expression, supporting the further development of mRNA-LNP therapeutics for liver disease and cancer.",
+          "section_path": "Introduction",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0045",
+          "lexical_score": 0.8050992892882414,
+          "vector_score": 0.2842421531677246,
+          "fused_score": 0.026153846153846153,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-02-payload",
+          "block_id": "GP-002-B-87bc66c620c50eff1f30",
+          "paper_id": "GP-002",
+          "text": "We next investigated delivery of mRNA-LNPs in a physiologically relevant mouse model of progressive liver injury. Mdr2 knockout mice are unable to secrete phospholipids into the bile, resulting in the development of sclerosing cholangitis with severe liver fibrosis by early adulthood and spontaneous HCC by 1 year of age.39,40 We used the Mdr2 knockout model to evaluate mRNA-LNP delivery to the liver in the context of liver fibrosis and cirrhosis (Figure 2A). We injected eGFP mRNA-LNPs intravenously into 4 male Mdr2 knockout mice at 11 months of age, and 14 h post-injection, we observed fluorescent signal 3- to 4-fold above background in the liver tissue, albeit attenuated 2-fold relative to healthy controls (Figure 2B). Biodistribution of eGFP fluorescence in Mdr2 knockout mice was comparable to that observed in healthy BALB/c mice (Figures 2C, S1, and S2), indicating that off-target expression of the mRNA in other organs and tissues is not increased in the presence of liver injury.Figure 2Delivery of mRNA-LNPs in liver fibrosis and cirrhosis(A) We injected Mdr2\u2212/\u2212 mice with 10 \u03bcg eGFP mRNA-LNPs via the tail vein and investigated reporter expression. (B) Moderately strong eGFP fluorescence was evident in all injected livers; the fluorescence intensity was reduced compared to a healthy control injected with the same mRNA-LNPs at the same time. (C) Ex vivo fluorescence imaging of organs from a GFP-injected Mdr2\u2212/\u2212 mouse shows that attenuation of mRNA-LNP delivery to the liver does not result in broadly altered biodistribution of eGFP protein expression. Autofluorescent signal was detected from the brain and gut tissues of all mice including healthy and uninjected controls. (D) Western blotting detects eGFP from the liver tissue of 17 Mdr2\u2212/\u2212 mice, with substantial variation between individuals in the quantity of eGFP protein and reduced protein abundance relative to healthy BALB/c mice. (E) Quantification of eGFP protein expression from western blotting showing greater variability in protein expression for Mdr2\u2212/\u2212 mice with a fibrosis score of F4 (cirrhosis) relative to F3 (severe fibrosis). The total protein abundance in F4 mice trended higher, but this difference was not statistically significant (Welch\u2019s t test, n = 6\u201311, t = 2.162(10.58), p = 0.0545). Error bars represent mean \u00b1 SEM. (F) Representative immunohistochemistry results from Mdr2\u2212/\u2212 mice show the range of possible outcomes for eGFP expression. (G) Analysis of IHC images with StainDetectAI found that mice with severe fibrosis (F3) had detectable eGFP staining across a higher surface area compared to mice with cirrhosis (F4) (Mann-Whitney test, n = 6\u201311, U = 12, p = 0.0365). Error bars represent mean \u00b1 SEM. Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/kbvlul3.",
+          "section_path": "Results > Delivery of mRNA-LNPs in liver fibrosis and cirrhosis",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0070",
+          "lexical_score": 2.578666935814792,
+          "vector_score": 0.27483123540878296,
+          "fused_score": 0.026013513513513515,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "FaissSentenceTransformerBackend"
+      ],
+      "warnings": []
+    },
+    "experiment_boundary": {
+      "query": {
+        "query_id": "GP-002-03-experiment_boundary",
+        "paper_id": "GP-002",
+        "question": "List each distinct intervention experiment with formulation, payload, model, dose, route, timepoint, assay, and control kept together.",
+        "field_group": "experiment_boundary",
+        "required_entity_types": [
+          "lnp"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-3ae23f896d4e5158e8b9",
+          "paper_id": "GP-002",
+          "text": "Beginning 7 days postoperatively, mice underwent twice weekly bioluminescent imaging for monitoring of tumor size. Briefly, mice were injected subcutaneously with 100 mg/kg D-luciferin (Vivo-Glo, Promega 1042) and then imaged 15 min later using the IVIS Lumina X5 under light isoflurane anesthesia. mRNA-LNPs encoding eGFP (10 \u03bcg in 100 \u03bcL of TBS) were injected via tail vein on each imaging day. Mice were euthanized 24 h after mRNA-LNP injection when the estimated tumor size reached 1 cc or on day 15 post-xenograft. The 8 animals included in data analysis were therefore euthanized on day 12 (n = 1) or day 15 (n = 7). One animal required euthanasia for welfare criteria at day 7 (prior to mRNA injection) and was therefore excluded from the study.",
+          "section_path": "Materials and methods > mRNA delivery in an orthotopic xenograft model of human liver cancer",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0325",
+          "lexical_score": 4.148910229656519,
+          "vector_score": 0.25429463386535645,
+          "fused_score": 0.03380355679923792,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-dcef18f45b2e14db5ec0",
+          "paper_id": "GP-002",
+          "text": "Male BALB/c nude mice were used for this experiment. No TAA treatment was performed. Mice underwent surgery for cancer cell engraftment according to the procedure described for the HuH-7 xenograft experiment. Mice received either 1 \u00d7 106 A549-mCherry cells (n = 9) or 2 \u00d7 106 HCT116-mCherry cells (n = 9). 13\u201314 days postoperatively, mRNA-LNPs encoding eGFP (10 \u03bcg in 100 \u03bcL of TBS) were injected via tail vein. Mice were euthanized approximately 24 h later, and their organs were removed for fluorescence imaging. One mouse in the HCT116 group required euthanasia for welfare criteria prior to mRNA injection and was therefore excluded from the study.",
+          "section_path": "Materials and methods > mRNA delivery in xenograft models of secondary liver cancer",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0330",
+          "lexical_score": 4.735490665759372,
+          "vector_score": 0.21798059344291687,
+          "fused_score": 0.03288300785901405,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-f659f6d97abbe32b119f",
+          "paper_id": "GP-002",
+          "text": "Nanoparticle composition for targeted mRNA delivery is an area of active research.38,44,45 For instance, mRNA-LNPs with substituted lipid components enable selective targeting of the liver, lung, and spleen28; other publications have described nanoparticle formulations that are optimized for RNA delivery to different types of liver cells66 or for co-delivery of siRNA, single-guide RNA (sgRNA), and mRNA in a single LNP.58 Excitingly, several technologies are in development that may improve the ratio of protein expression in tumor cells relative to liver cells, enabling therapeutic benefit with reduced mRNA-LNP dosage and reduced side effects related to expression of the mRNA in healthy hepatocytes. Cell-selective targeting including to extra-hepatic tumors can be achieved using bispecific antibodies that recognize a tumor cell-surface marker and a component of the LNP,66,67 and other studies have shown enhanced mRNA penetration into tumors when co-delivered with a therapeutic siRNA to reduce tumor rigidity,58 as well as improved specificity of mRNA for tumors over hepatocytes by including binding sites for hepatocyte-specific miRNAs in the mRNA design.68 It is also important to note that many emerging RNA-based treatments for solid tumors do not require direct transfection of tumor cells. For instance, most cancer vaccines are administered by the subcutaneous or intramuscular route and rely on transfection of antigen-presenting cells to produce an adaptive immune response against the tumor.69,70 Other therapeutic approaches target stromal cells, endothelial cells, or tumor-associated macrophages, and these approaches also do not require transfection of the tumor cells themselves69; however, improved targeting of mRNA therapeutics to tumor-associated cell types will enhance the efficacy of these emerging therapeutic modalities. Another area of active research is delivery of other nucleic acid modalities such as siRNAs and antisense oligonucleotides, which differ substantially in size, structure, and pharmacology from the mRNA used in this study and are often delivered using different nanoparticle formulations.69",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0230",
+          "lexical_score": 6.112251992774531,
+          "vector_score": 0.20691774785518646,
+          "fused_score": 0.028991596638655463,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-f3d1aa5b48d7d848368f",
+          "paper_id": "GP-002",
+          "text": "Animals bearing tumor xenografts derived from human cancer cell lines are a commonly used model system for testing new anti-cancer therapeutics. To determine whether mRNA-LNPs are delivered to liver tumor xenografts as in spontaneously occurring HCCs, we established an orthotopic xenograft model using HuH-7 human HCC cells modified to constitutively express mCherry and firefly luciferase (Figure S16). Cells were engrafted into the livers of thioacetamide (TAA)-treated BALB/c nude mice by single direct injection. Due to the aggressive growth of the HuH-7 tumors, mice were injected with eGFP mRNA-LNPs every third day beginning after a 1-week tumor establishment period, and when estimated tumor size reached 1cc, mice were euthanized 24 h after the most recent eGFP mRNA-LNP injection (Figure 4A). Mice received either 2 or 3 injections in total; as eGFP protein has a half-life of approximately 24 h,43 the detected signal predominantly reflects expression from the final dose.Figure 4Delivery of mRNA-LNPs to a xenograft model of primary liver cancer(A) We surgically engrafted HuH-7 human HCC cells, which constitutively express mCherry, into the livers of BALB/c nude mice. Tissues were analyzed approximately 24 h after an injection of 10 \u03bcg eGFP mRNA-LNPs via the tail vein. (B) Ex vivo fluorescent imaging of entire livers with xenograft-derived tumors shows strong eGFP fluorescence in the liver tissue and also the tumors, marked by expression of mCherry. (C) Quantitation of eGFP fluorescence confirms broadly comparable signal between tumors and non-tumor liver tissue, with no significant difference found between liver and tumor (Wilcoxon matched-pairs signed-rank test, n = 8, W = 10.00, p = 0.5469). (D) Western blotting detects eGFP from all livers and tumors, with noticeably higher signal in the liver tissue and some bands from tumor detected very faintly. (E) Quantitation of eGFP protein expression determined by western blotting, showing lower signal in liver than tumor of each animal (paired t test, n = 8, t = 3.168(7), p = 0.0158). (F) Representative immunohistochemistry images of liver and tumor tissue from 3 different animals show clear GFP staining in HuH-7-derived tumors (T) and staining of a higher intensity in adjacent liver tissue (L). An image of HuH-7-derived tumor and adjacent liver tissue from a mouse not injected with eGFP and stained with anti-GFP antibody is provided for comparison. Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/9ywif1v.",
+          "section_path": "Results > Delivery of mRNA-LNPs to a xenograft model of primary liver cancer",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0125",
+          "lexical_score": 5.266168050242286,
+          "vector_score": 0.20482799410820007,
+          "fused_score": 0.027777777777777776,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-d9880232921706699d9e",
+          "paper_id": "GP-002",
+          "text": "The rapid development of SARS-CoV-2 vaccines powerfully demonstrated the safety and efficacy of synthetic messenger RNA (mRNA) medicines. Synthetic mRNAs comprise a coding sequence that can encode any therapeutic protein, flanked by 5\u2032 and 3\u2032 untranslated regions from highly expressed and stable mammalian mRNAs, and a poly(A) tail. To attenuate the innate response to foreign RNA,24 mRNA drugs are depleted of secondary structures and uridine residues, and the remaining uridines are substituted with the uridine analog N1-methylpseudouridine. Formulation of mRNA into lipid nanoparticles (LNPs) protects the mRNA and enables delivery to cells via endocytosis. A small percentage of the delivered mRNA escapes the endosome into the cytoplasm, where it is then translated by cytoplasmic ribosomes to produce the target protein. As of 2023, over 13 billion doses of mRNA vaccines had been administered globally with an adverse-event rate comparable to other vaccines,25 demonstrating the fundamental effectiveness and safety of this drug modality.",
+          "section_path": "Introduction",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0025",
+          "lexical_score": 4.97544719969577,
+          "vector_score": 0.20565888285636902,
+          "fused_score": 0.027598020555767037,
+          "entity_types": [
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-6e94e637a0d4b354d4ab",
+          "paper_id": "GP-002",
+          "text": "The eGFP expression measured in this study reflects the combined efficiency of LNP accumulation, cellular uptake, endosomal escape, and mRNA translation, and the relative contribution of each step may differ between healthy tissue, fibrotic liver, and tumors. Previous studies have tracked the biodistribution and intracellular fate of mRNA-LNPs using fluorescent labeling of both LNPs and mRNA cargo48 and have characterized the pharmacokinetics and tissue distribution of mRNA-LNPs formulated with SM-102 and other clinically relevant ionizable lipids.46 In the present study, we measured protein expression as the functional endpoint most relevant to therapeutic applications, as it integrates all upstream delivery steps into a single readout of productive transfection.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0190",
+          "lexical_score": 5.266036192068275,
+          "vector_score": 0.19716480374336243,
+          "fused_score": 0.026856524873828405,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-085570ab2750aac74c32",
+          "paper_id": "GP-002",
+          "text": "Another noteworthy finding of our study is the immune response, including PD-L1 elevation, in the liver 24 h after injection of mRNA-LNPs. Exogenous mRNA is immunostimulatory through interactions with Toll-like receptors and cytosolic RNA sensors, and components of the mRNA-LNP (notably, the SM-102 ionizable lipid used in this study) are also immunostimulatory.38 Our findings are consistent with previous reports of immune activation after mRNA-LNP administration. Importantly, one study reported that the inflammatory response in the liver was attenuated by reducing the dosage of mRNA-LNPs.34 This highlights the importance of ongoing improvements to the design of mRNA medicines to enable reduction in mRNA dosage while still achieving therapeutic levels of protein expression.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0235",
+          "lexical_score": null,
+          "vector_score": 0.20464465022087097,
+          "fused_score": 0.018917117531944284,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-4982d3da78156fe06ef2",
+          "paper_id": "GP-002",
+          "text": "The mouse liver RNA-seq dataset generated during this study is available through the NCBI Gene Expression Omnibus (GEO): GSE331154 (\u201cBulk RNA sequencing from liver of mice injected with saline or mRNA-LNPs encoding eGFP, 10 \u03bcg dose, 24 h time point, intravenous route.\u201d) All other data supporting the findings of this study are available from the corresponding author upon reasonable request.",
+          "section_path": "Data and code availability",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0405",
+          "lexical_score": 9.20989843472969,
+          "vector_score": null,
+          "fused_score": 0.016129032258064516,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-375803caa3350f9b98f3",
+          "paper_id": "GP-002",
+          "text": "Many nanoparticle-based carrier systems have been developed for the delivery of mRNA in vivo, with mRNA-LNPs being the most widely used. mRNA-LNPs are manufactured using four lipid components: an ionizable lipid, a phospholipid, cholesterol, and a PEG-lipid, each of which can be substituted to alter the properties of the nanoparticle.44,45 The ionizable lipid is the most consequential component, influencing mRNA encapsulation efficiency, endosomal escape, tissue tropism, and immunostimulatory profile.44,45 A small number of ionizable lipids are used in RNA-LNP products that have received regulatory approval for clinical use (including DLin-MC3-DMA, ALC-0315, and SM-102), with others currently in clinical development (notably including SM-86, used for a hepatocyte-targeted gene replacement therapy currently in clinical trials33). In this study, we used SM-102, which is among the most extensively characterized ionizable lipids in the preclinical mRNA literature, facilitating direct comparison with existing and future studies. Importantly, while DLin-MC3-DMA was developed for targeted delivery of small interfering RNAs (siRNAs) to hepatocytes, SM-102 outperformed it for expression of an mRNA reporter gene.46,47 It should be noted that delivery efficiency, biodistribution, and immunostimulatory profile can vary across ionizable lipid formulations,38 and the findings of this study may not generalize to other LNP formulations; evaluation of alternative formulations represents a valuable direction for future work. Additionally, we tested a single dosage of mRNA-LNPs in this study, using a reporter gene only; future studies should also evaluate the effect of mRNA-LNP dosage on the distribution and intensity of transgene expression across disease models, as the relative expression between liver and tumor cells may be dose dependent.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0185",
+          "lexical_score": 8.380405521683722,
+          "vector_score": null,
+          "fused_score": 0.015873015873015872,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-03-experiment_boundary",
+          "block_id": "GP-002-B-f56abdba975455879c84",
+          "paper_id": "GP-002",
+          "text": "Data analysis was performed using LivingImage 4.7.4 (PerkinElmer). To obtain numerical data for fluorescence of organs and tissues, a region of interest (ROI) was drawn around each tissue or organ and the fluorescence (average radiant efficiency) was recorded. Background fluorescent signal (arising from tissue autofluorescence) was estimated for each organ by averaging the fluorescent signal obtained from that organ from 2 to 6 uninjected mice. For mice injected with eGFP mRNA-LNPs, eGFP fluorescence for each organ was determined by subtracting the average background fluorescence from the same organ.",
+          "section_path": "Materials and methods > Fluorescent imaging of mouse organs",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0345",
+          "lexical_score": null,
+          "vector_score": 0.27182239294052124,
+          "fused_score": 0.015873015873015872,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "FaissSentenceTransformerBackend"
+      ],
+      "warnings": []
+    },
+    "delivery_recipient_cell_reported": {
+      "query": {
+        "query_id": "GP-002-04-delivery_recipient_cell_reported",
+        "paper_id": "GP-002",
+        "question": "Which cells physically receive the LNP or express its payload in each experiment?",
+        "field_group": "recipient_cell",
+        "required_entity_types": [
+          "lnp",
+          "cell"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-6e94e637a0d4b354d4ab",
+          "paper_id": "GP-002",
+          "text": "The eGFP expression measured in this study reflects the combined efficiency of LNP accumulation, cellular uptake, endosomal escape, and mRNA translation, and the relative contribution of each step may differ between healthy tissue, fibrotic liver, and tumors. Previous studies have tracked the biodistribution and intracellular fate of mRNA-LNPs using fluorescent labeling of both LNPs and mRNA cargo48 and have characterized the pharmacokinetics and tissue distribution of mRNA-LNPs formulated with SM-102 and other clinically relevant ionizable lipids.46 In the present study, we measured protein expression as the functional endpoint most relevant to therapeutic applications, as it integrates all upstream delivery steps into a single readout of productive transfection.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0190",
+          "lexical_score": 4.817199399300731,
+          "vector_score": 0.5217694640159607,
+          "fused_score": 0.04374829005583051,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-375803caa3350f9b98f3",
+          "paper_id": "GP-002",
+          "text": "Many nanoparticle-based carrier systems have been developed for the delivery of mRNA in vivo, with mRNA-LNPs being the most widely used. mRNA-LNPs are manufactured using four lipid components: an ionizable lipid, a phospholipid, cholesterol, and a PEG-lipid, each of which can be substituted to alter the properties of the nanoparticle.44,45 The ionizable lipid is the most consequential component, influencing mRNA encapsulation efficiency, endosomal escape, tissue tropism, and immunostimulatory profile.44,45 A small number of ionizable lipids are used in RNA-LNP products that have received regulatory approval for clinical use (including DLin-MC3-DMA, ALC-0315, and SM-102), with others currently in clinical development (notably including SM-86, used for a hepatocyte-targeted gene replacement therapy currently in clinical trials33). In this study, we used SM-102, which is among the most extensively characterized ionizable lipids in the preclinical mRNA literature, facilitating direct comparison with existing and future studies. Importantly, while DLin-MC3-DMA was developed for targeted delivery of small interfering RNAs (siRNAs) to hepatocytes, SM-102 outperformed it for expression of an mRNA reporter gene.46,47 It should be noted that delivery efficiency, biodistribution, and immunostimulatory profile can vary across ionizable lipid formulations,38 and the findings of this study may not generalize to other LNP formulations; evaluation of alternative formulations represents a valuable direction for future work. Additionally, we tested a single dosage of mRNA-LNPs in this study, using a reporter gene only; future studies should also evaluate the effect of mRNA-LNP dosage on the distribution and intensity of transgene expression across disease models, as the relative expression between liver and tumor cells may be dose dependent.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0185",
+          "lexical_score": 8.206400196571721,
+          "vector_score": 0.5045004487037659,
+          "fused_score": 0.03868633869765877,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-efe0ff4f99466ee70981",
+          "paper_id": "GP-002",
+          "text": "When mRNA-LNPs are injected intravenously, they rapidly adsorb a protein corona that prominently includes the serum lipid transport protein ApoE,49 which can act as a ligand for the low-density lipoprotein receptor (LDLR). This receptor is expressed on the surface of many cell types and is particularly abundant on hepatocytes, which are the primary site for low-density lipoprotein (LDL) clearance from the blood.50 Interaction of ApoE-coated LNPs with LDLR is one mechanism promoting LNP uptake by hepatocytes; however, the relative importance of this mechanism depends on the LNP formulation, and LNPs remain hepatotropic in LDLR knockout mice.51 The protein corona of mRNA-LNPs is complex, and in addition to ApoE, also includes albumin, other apolipoproteins, and complement factors; its composition is also influenced by the LNP formulation and route of administration.52 Corona composition affects cellular tropism and the pathways by which LNPs are internalized, trafficked, and processed by cells.53",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0195",
+          "lexical_score": 3.824453268652148,
+          "vector_score": 0.5086206793785095,
+          "fused_score": 0.03724679430066499,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-f3d1aa5b48d7d848368f",
+          "paper_id": "GP-002",
+          "text": "Animals bearing tumor xenografts derived from human cancer cell lines are a commonly used model system for testing new anti-cancer therapeutics. To determine whether mRNA-LNPs are delivered to liver tumor xenografts as in spontaneously occurring HCCs, we established an orthotopic xenograft model using HuH-7 human HCC cells modified to constitutively express mCherry and firefly luciferase (Figure S16). Cells were engrafted into the livers of thioacetamide (TAA)-treated BALB/c nude mice by single direct injection. Due to the aggressive growth of the HuH-7 tumors, mice were injected with eGFP mRNA-LNPs every third day beginning after a 1-week tumor establishment period, and when estimated tumor size reached 1cc, mice were euthanized 24 h after the most recent eGFP mRNA-LNP injection (Figure 4A). Mice received either 2 or 3 injections in total; as eGFP protein has a half-life of approximately 24 h,43 the detected signal predominantly reflects expression from the final dose.Figure 4Delivery of mRNA-LNPs to a xenograft model of primary liver cancer(A) We surgically engrafted HuH-7 human HCC cells, which constitutively express mCherry, into the livers of BALB/c nude mice. Tissues were analyzed approximately 24 h after an injection of 10 \u03bcg eGFP mRNA-LNPs via the tail vein. (B) Ex vivo fluorescent imaging of entire livers with xenograft-derived tumors shows strong eGFP fluorescence in the liver tissue and also the tumors, marked by expression of mCherry. (C) Quantitation of eGFP fluorescence confirms broadly comparable signal between tumors and non-tumor liver tissue, with no significant difference found between liver and tumor (Wilcoxon matched-pairs signed-rank test, n = 8, W = 10.00, p = 0.5469). (D) Western blotting detects eGFP from all livers and tumors, with noticeably higher signal in the liver tissue and some bands from tumor detected very faintly. (E) Quantitation of eGFP protein expression determined by western blotting, showing lower signal in liver than tumor of each animal (paired t test, n = 8, t = 3.168(7), p = 0.0158). (F) Representative immunohistochemistry images of liver and tumor tissue from 3 different animals show clear GFP staining in HuH-7-derived tumors (T) and staining of a higher intensity in adjacent liver tissue (L). An image of HuH-7-derived tumor and adjacent liver tissue from a mouse not injected with eGFP and stained with anti-GFP antibody is provided for comparison. Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/9ywif1v.",
+          "section_path": "Results > Delivery of mRNA-LNPs to a xenograft model of primary liver cancer",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0125",
+          "lexical_score": 5.270205879707674,
+          "vector_score": 0.45545196533203125,
+          "fused_score": 0.029910714285714284,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-796432c5805e43f8dc48",
+          "paper_id": "GP-002",
+          "text": "Our study also systematically investigated mRNA-LNP delivery to liver cancer. Mdr2\u2212/\u2212 mice develop HCCs with age, and we therefore examined reporter expression in spontaneous HCCs in situ. While a small number of reports previously described the use of mRNA-LNP-based therapies to treat liver cancer in animal models,58,59,60,61 the encoded therapeutic proteins act through non-cell-autonomous mechanisms of action, and delivery of mRNA-LNPs to tumor cells was unclear. We found that GFP was expressed in HCCs with a similar distribution and intensity to its expression in the liver tissue from the same animal. Cellular heterogeneity is a common feature of HCCs,62 and this may explain our observation that several HCCs contained tracts of cells that did not express GFP. It would be valuable for future work to explore sequential delivery of multiple reporter mRNA-LNPs in order to determine whether repeated dosing of mRNA-LNPs would target the same or different cell populations. Interestingly, we found one steatotic HCC among the Mdr2\u2212/\u2212 tumors, and GFP expression was virtually absent from this tumor. However, robust GFP expression was observed in small steatotic regions within liver and tumor sections from other animals in this cohort. This finding warrants further investigation to determine whether steatotic livers or steatotic HCCs are especially poor targets for mRNA-LNP delivery.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0215",
+          "lexical_score": 2.545265005586854,
+          "vector_score": 0.45291778445243835,
+          "fused_score": 0.026709401709401708,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-f659f6d97abbe32b119f",
+          "paper_id": "GP-002",
+          "text": "Nanoparticle composition for targeted mRNA delivery is an area of active research.38,44,45 For instance, mRNA-LNPs with substituted lipid components enable selective targeting of the liver, lung, and spleen28; other publications have described nanoparticle formulations that are optimized for RNA delivery to different types of liver cells66 or for co-delivery of siRNA, single-guide RNA (sgRNA), and mRNA in a single LNP.58 Excitingly, several technologies are in development that may improve the ratio of protein expression in tumor cells relative to liver cells, enabling therapeutic benefit with reduced mRNA-LNP dosage and reduced side effects related to expression of the mRNA in healthy hepatocytes. Cell-selective targeting including to extra-hepatic tumors can be achieved using bispecific antibodies that recognize a tumor cell-surface marker and a component of the LNP,66,67 and other studies have shown enhanced mRNA penetration into tumors when co-delivered with a therapeutic siRNA to reduce tumor rigidity,58 as well as improved specificity of mRNA for tumors over hepatocytes by including binding sites for hepatocyte-specific miRNAs in the mRNA design.68 It is also important to note that many emerging RNA-based treatments for solid tumors do not require direct transfection of tumor cells. For instance, most cancer vaccines are administered by the subcutaneous or intramuscular route and rely on transfection of antigen-presenting cells to produce an adaptive immune response against the tumor.69,70 Other therapeutic approaches target stromal cells, endothelial cells, or tumor-associated macrophages, and these approaches also do not require transfection of the tumor cells themselves69; however, improved targeting of mRNA therapeutics to tumor-associated cell types will enhance the efficacy of these emerging therapeutic modalities. Another area of active research is delivery of other nucleic acid modalities such as siRNAs and antisense oligonucleotides, which differ substantially in size, structure, and pharmacology from the mRNA used in this study and are often delivered using different nanoparticle formulations.69",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0230",
+          "lexical_score": 2.502773610467052,
+          "vector_score": 0.43341177701950073,
+          "fused_score": 0.025478740668614087,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-ec759093d6e5170e2322",
+          "paper_id": "GP-002",
+          "text": "These findings demonstrate that intravenous delivery of mRNA-LNPs results in specific expression within most hepatocytes and many cells within spontaneously occurring HCCs in situ, with minimal delivery to other organs and tissues, likely including other cancers. This restricted delivery pattern suggests that mRNA-LNP therapeutics for HCC could be administered systemically with limited extrahepatic off-target activity.",
+          "section_path": "Results > Delivery of mRNA-LNPs to spontaneous HCCs in situ",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0120",
+          "lexical_score": null,
+          "vector_score": 0.538578987121582,
+          "fused_score": 0.02177737119437939,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-8a4568dfdc5e5ff75cf5",
+          "paper_id": "GP-002",
+          "text": "In this study, we demonstrate the successful delivery of systemically administered mRNA-LNPs to the diseased and cancerous mouse liver. We observed mRNA expression in healthy, fibrotic, and cirrhotic mouse liver tissue; spontaneous HCC in situ; and xenograft models of HCC and secondary liver cancer. Using a custom machine learning approach, we quantified the ubiquitous distribution of mRNA expression in hepatocytes in healthy liver, while showing that in the presence of fibrosis, cirrhosis, and cancer, reporter expression varies both within and between samples. These findings demonstrate that intravenous administration of mRNA-LNP therapeutics can be a viable therapeutic strategy for liver disease and cancer and suggest future directions for research to improve delivery of mRNA drugs.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0180",
+          "lexical_score": null,
+          "vector_score": 0.46608832478523254,
+          "fused_score": 0.020256073295319553,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-071143ea5a0465fc4f3c",
+          "paper_id": "GP-002",
+          "text": "LNP uptake by hepatocytes is also facilitated by the fenestrated epithelium of the liver, which allows selective permeability of large particles into liver tissue, which would be excluded from entry into other tissue types by the endothelial barrier.50 Accumulation of nanoparticle drug carriers, particularly lipid-based carriers, in the liver is a well-documented phenomenon,26,50,54 and many prior publications have shown that systemically administered mRNA-LNPs are predominantly and abundantly expressed in the healthy liver, specifically by hepatocytes.27,28,29 Delivery of mRNA to hepatocytes is a viable treatment option for several diseases, including genetic metabolic disorders where protein replacement within hepatocytes, or secretion of the protein from hepatocytes into the bloodstream, is adequate to treat the disease. A notable example is mRNA-3927, a drug in clinical trials for treatment of propionic acidemia.33",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0200",
+          "lexical_score": null,
+          "vector_score": 0.44749048352241516,
+          "fused_score": 0.020217936487633214,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-04-delivery_recipient_cell_reported",
+          "block_id": "GP-002-B-a3249c7541eb45ff6a84",
+          "paper_id": "GP-002",
+          "text": "To investigate the delivery of mRNA-LNPs to the tumors, we first used ex vivo fluorescent imaging of the eGFP reporter. Fluorescent signal well above background level was observed in the livers (range 36.4\u2013179.1, average 97.9 \u00d7 106 photons/s/cm2/sr) and liver tumors (range 54.6\u2013408.7, average 135.4 \u00d7 106 photons/s/cm2/sr) of all mice (n = 8) (Figures 4B and 4C). There was no significant difference in fluorescent signal between liver tissue and tumors (paired t test, n = 8, p = 0.3496). We considered the possibility that residual healthy liver tissue overlying the tumors might take up mRNA-LNPs and express eGFP, resulting in high tumor-surface fluorescence values that may not represent the uptake and expression of mRNA within the tumor interior. Therefore, to investigate penetration of mRNA-LNPs into the tumor interior, we performed fluorescence imaging on cross-sections of several tumors and observed mostly uniform fluorescence intensity within the tumors (Figure S17). We also expected that mRNA-LNP penetration might be better in small tumors than in large tumors, but we found that there was no correlation between tumor size (measured by area of the region of interest drawn around the tumor) and fluorescence intensity (simple linear regression, R2 = 0.0002) (Figure S18A). Surprisingly, there was also no correlation between the fluorescence intensity measured from the liver and tumor from the same animal (simple linear regression, R2 = 0.1620) (Figure S18B).",
+          "section_path": "Results > Delivery of mRNA-LNPs to a xenograft model of primary liver cancer",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0130",
+          "lexical_score": null,
+          "vector_score": 0.43762895464897156,
+          "fused_score": 0.018541823308270675,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "FaissSentenceTransformerBackend"
+      ],
+      "warnings": []
+    },
+    "therapeutic_target_cell_reported": {
+      "query": {
+        "query_id": "GP-002-05-therapeutic_target_cell_reported",
+        "paper_id": "GP-002",
+        "question": "Which cells are acted upon for the therapeutic effect in each experiment, distinguishing them from delivery recipient cells?",
+        "field_group": "therapeutic_target",
+        "required_entity_types": [
+          "cell"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-f659f6d97abbe32b119f",
+          "paper_id": "GP-002",
+          "text": "Nanoparticle composition for targeted mRNA delivery is an area of active research.38,44,45 For instance, mRNA-LNPs with substituted lipid components enable selective targeting of the liver, lung, and spleen28; other publications have described nanoparticle formulations that are optimized for RNA delivery to different types of liver cells66 or for co-delivery of siRNA, single-guide RNA (sgRNA), and mRNA in a single LNP.58 Excitingly, several technologies are in development that may improve the ratio of protein expression in tumor cells relative to liver cells, enabling therapeutic benefit with reduced mRNA-LNP dosage and reduced side effects related to expression of the mRNA in healthy hepatocytes. Cell-selective targeting including to extra-hepatic tumors can be achieved using bispecific antibodies that recognize a tumor cell-surface marker and a component of the LNP,66,67 and other studies have shown enhanced mRNA penetration into tumors when co-delivered with a therapeutic siRNA to reduce tumor rigidity,58 as well as improved specificity of mRNA for tumors over hepatocytes by including binding sites for hepatocyte-specific miRNAs in the mRNA design.68 It is also important to note that many emerging RNA-based treatments for solid tumors do not require direct transfection of tumor cells. For instance, most cancer vaccines are administered by the subcutaneous or intramuscular route and rely on transfection of antigen-presenting cells to produce an adaptive immune response against the tumor.69,70 Other therapeutic approaches target stromal cells, endothelial cells, or tumor-associated macrophages, and these approaches also do not require transfection of the tumor cells themselves69; however, improved targeting of mRNA therapeutics to tumor-associated cell types will enhance the efficacy of these emerging therapeutic modalities. Another area of active research is delivery of other nucleic acid modalities such as siRNAs and antisense oligonucleotides, which differ substantially in size, structure, and pharmacology from the mRNA used in this study and are often delivered using different nanoparticle formulations.69",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0230",
+          "lexical_score": 7.5255388234326075,
+          "vector_score": 0.4649965465068817,
+          "fused_score": 0.03252247488101534,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-375803caa3350f9b98f3",
+          "paper_id": "GP-002",
+          "text": "Many nanoparticle-based carrier systems have been developed for the delivery of mRNA in vivo, with mRNA-LNPs being the most widely used. mRNA-LNPs are manufactured using four lipid components: an ionizable lipid, a phospholipid, cholesterol, and a PEG-lipid, each of which can be substituted to alter the properties of the nanoparticle.44,45 The ionizable lipid is the most consequential component, influencing mRNA encapsulation efficiency, endosomal escape, tissue tropism, and immunostimulatory profile.44,45 A small number of ionizable lipids are used in RNA-LNP products that have received regulatory approval for clinical use (including DLin-MC3-DMA, ALC-0315, and SM-102), with others currently in clinical development (notably including SM-86, used for a hepatocyte-targeted gene replacement therapy currently in clinical trials33). In this study, we used SM-102, which is among the most extensively characterized ionizable lipids in the preclinical mRNA literature, facilitating direct comparison with existing and future studies. Importantly, while DLin-MC3-DMA was developed for targeted delivery of small interfering RNAs (siRNAs) to hepatocytes, SM-102 outperformed it for expression of an mRNA reporter gene.46,47 It should be noted that delivery efficiency, biodistribution, and immunostimulatory profile can vary across ionizable lipid formulations,38 and the findings of this study may not generalize to other LNP formulations; evaluation of alternative formulations represents a valuable direction for future work. Additionally, we tested a single dosage of mRNA-LNPs in this study, using a reporter gene only; future studies should also evaluate the effect of mRNA-LNP dosage on the distribution and intensity of transgene expression across disease models, as the relative expression between liver and tumor cells may be dose dependent.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0185",
+          "lexical_score": 7.021528673641021,
+          "vector_score": 0.4137226343154907,
+          "fused_score": 0.03125,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-efe0ff4f99466ee70981",
+          "paper_id": "GP-002",
+          "text": "When mRNA-LNPs are injected intravenously, they rapidly adsorb a protein corona that prominently includes the serum lipid transport protein ApoE,49 which can act as a ligand for the low-density lipoprotein receptor (LDLR). This receptor is expressed on the surface of many cell types and is particularly abundant on hepatocytes, which are the primary site for low-density lipoprotein (LDL) clearance from the blood.50 Interaction of ApoE-coated LNPs with LDLR is one mechanism promoting LNP uptake by hepatocytes; however, the relative importance of this mechanism depends on the LNP formulation, and LNPs remain hepatotropic in LDLR knockout mice.51 The protein corona of mRNA-LNPs is complex, and in addition to ApoE, also includes albumin, other apolipoproteins, and complement factors; its composition is also influenced by the LNP formulation and route of administration.52 Corona composition affects cellular tropism and the pathways by which LNPs are internalized, trafficked, and processed by cells.53",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0195",
+          "lexical_score": 6.614093795393135,
+          "vector_score": 0.3402429223060608,
+          "fused_score": 0.02804284323271665,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-071143ea5a0465fc4f3c",
+          "paper_id": "GP-002",
+          "text": "LNP uptake by hepatocytes is also facilitated by the fenestrated epithelium of the liver, which allows selective permeability of large particles into liver tissue, which would be excluded from entry into other tissue types by the endothelial barrier.50 Accumulation of nanoparticle drug carriers, particularly lipid-based carriers, in the liver is a well-documented phenomenon,26,50,54 and many prior publications have shown that systemically administered mRNA-LNPs are predominantly and abundantly expressed in the healthy liver, specifically by hepatocytes.27,28,29 Delivery of mRNA to hepatocytes is a viable treatment option for several diseases, including genetic metabolic disorders where protein replacement within hepatocytes, or secretion of the protein from hepatocytes into the bloodstream, is adequate to treat the disease. A notable example is mRNA-3927, a drug in clinical trials for treatment of propionic acidemia.33",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0200",
+          "lexical_score": 4.740686571665266,
+          "vector_score": 0.3360438644886017,
+          "fused_score": 0.02548701298701299,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-ec759093d6e5170e2322",
+          "paper_id": "GP-002",
+          "text": "These findings demonstrate that intravenous delivery of mRNA-LNPs results in specific expression within most hepatocytes and many cells within spontaneously occurring HCCs in situ, with minimal delivery to other organs and tissues, likely including other cancers. This restricted delivery pattern suggests that mRNA-LNP therapeutics for HCC could be administered systemically with limited extrahepatic off-target activity.",
+          "section_path": "Results > Delivery of mRNA-LNPs to spontaneous HCCs in situ",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0120",
+          "lexical_score": null,
+          "vector_score": 0.44185706973075867,
+          "fused_score": 0.021059583037194976,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-8a4568dfdc5e5ff75cf5",
+          "paper_id": "GP-002",
+          "text": "In this study, we demonstrate the successful delivery of systemically administered mRNA-LNPs to the diseased and cancerous mouse liver. We observed mRNA expression in healthy, fibrotic, and cirrhotic mouse liver tissue; spontaneous HCC in situ; and xenograft models of HCC and secondary liver cancer. Using a custom machine learning approach, we quantified the ubiquitous distribution of mRNA expression in hepatocytes in healthy liver, while showing that in the presence of fibrosis, cirrhosis, and cancer, reporter expression varies both within and between samples. These findings demonstrate that intravenous administration of mRNA-LNP therapeutics can be a viable therapeutic strategy for liver disease and cancer and suggest future directions for research to improve delivery of mRNA drugs.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0180",
+          "lexical_score": null,
+          "vector_score": 0.3427811563014984,
+          "fused_score": 0.01844551282051282,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-1652af9d6f1a5b2b078f",
+          "paper_id": "GP-002",
+          "text": "To investigate the impact of severe liver fibrosis or cirrhosis on mRNA-LNP delivery, we used the Mdr2 knockout mouse, which develops progressive fibrosis and cirrhosis due to bile leakage.39,40 Imaging of whole livers from Mdr2\u2212/\u2212 mice injected with eGFP mRNA-LNPs revealed significant eGFP fluorescence in the liver tissue, with both hypointense and hyperintense tumors evident. eGFP IHC performed on liver tissue sections from these animals showed considerable heterogeneity both within and between samples. Scattered hepatocytes with strong eGFP expression were a feature of virtually all sections, although their density varied considerably. Notably, we observed marginal to undetectable eGFP expression within fibrotic tissue tracts, consist mainly of extracellular matrix and fibroblasts rather than hepatocytes. Our finding that the surface area of tissue sections with any reporter delivery was negatively correlated with the severity of fibrosis suggests that severe liver damage does impair delivery of mRNA-LNPs; however, moderately effective delivery was achieved even in mice with cirrhosis. Therefore, severe liver disease is unlikely to be a contraindication to the usage of mRNA drugs targeting the liver, although the dosage or frequency of administration may need to be adjusted to ensure adequate delivery in this patient population. Furthermore, mRNA therapies show promise for the direct treatment of liver injury and chronic liver disease. Hnf4a mRNA inhibits the development of liver fibrosis in several animal models,34 and expression of growth factors using mRNA-LNPs can reverse liver pathology and support engraftment of healthy hepatocytes to treat liver disease.29,57",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0210",
+          "lexical_score": 4.6234380213089885,
+          "vector_score": null,
+          "fused_score": 0.017883791757875703,
+          "entity_types": [
+            "cell",
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-bbd3c3c0e8c364b157f1",
+          "paper_id": "GP-002",
+          "text": "We initially set out to establish a baseline for mRNA-LNP delivery to and expression in the mouse liver. We selected a formulation for mRNA-LNPs based on the ionizable lipid SM-102, which is approved for clinical use. To assess the delivery of mRNA to the liver, we intravenously injected adult male mice (n = 5) with mRNA-LNPs encoding enhanced green fluorescent protein (eGFP) (Figure 1A). Strong and specific eGFP fluorescence was observed in the liver after 24 h via ex vivo fluorescence imaging, with measured fluorescence values around 10-fold higher than background (tissue autofluorescence) (Figures 1B and 1C). Background-subtracted fluorescence (radiant efficiency) of whole livers was significantly different between mRNA-injected and uninjected mice (Student\u2019s t test, n = 4\u20135, p < 0.0001) (Figure 1D). Western blotting detected eGFP protein strongly from the liver tissue of these mice (Figure 1E), and in one healthy mouse from which additional organs were blotted, eGFP was also detected in the spleen (Figure S1). Notably, green fluorescent signal in the digestive tract likely arises from gut contents36 and does not indicate the presence of eGFP (Figure S1). eGFP was not detected in serum from any of 6 injected mice tested (Figure S2), confirming that eGFP is not secreted into the bloodstream and that no spurious signal is expected to arise from blood.Figure 1Efficient delivery of mRNA-LNPs to the healthy mouse liver(A) We injected 5 healthy mice with 10 \u03bcg eGFP mRNA-LNPs via the tail vein and investigated reporter expression after 24 h. (B) Strong eGFP fluorescence was visualized in all injected livers (bottom row). (C) Ex vivo fluorescence imaging of organs from injected and uninjected mice shows specificity of eGFP expression in the liver. Fluorescence scales were set to eliminate autofluorescent signal in the uninjected liver; autofluorescent signal is visualized in the colon and duodenum of both the injected and uninjected mouse. (D) Quantitation of background-subtracted eGFP fluorescence confirms the strong and specific detection of eGFP in the livers of eGFP-injected mice (Welch\u2019s t test, n = 4\u20135, t = 20.25(4.117), p < 0.0001). Error bars represent mean \u00b1 SEM. (E) Western blotting detects a strong band corresponding to eGFP in the livers of mice injected with eGFP mRNA-LNPs; no band is detected in liver tissue of uninjected mice. (F) Immunohistochemistry for eGFP in liver tissue sections from injected mice shows strong eGFP staining in virtually all hepatocytes. There is moderate variation in staining intensity between hepatocytes. (G) Quantification of GFP-positive surface area for IHC sections in GFP-injected mice shows extremely high coverage of liver tissue, with very low background in uninjected mice (Welch\u2019s t test, n = 5, t = 84.81(4.204), p < 0.0001). Error bars represent mean \u00b1 SEM. (H) eGFP transcripts were readily detected in mouse liver tissue 24 h after injection, with mapped transcript counts between approximately 1,000 and 2,300; this was significantly different from control with an average of one count (Mann-Whitney test, n = 5, U = 0, p = 0.0079). Error bars represent mean \u00b1 SEM. (I) 624 genes were differentially expressed in the liver between mRNA-LNP-injected and saline-injected mice, with the significance threshold of 5 \u2217 \u2212log10 FDR. These included interferon response factors (Irf7, Irf9, Ifitm3, and Isg15) and the cytokine-responsive transcription factor Stat1. (J) Gene networks induced in the liver by mRNA-LNP injection; upregulated genes cluster into antigen-processing and interferon-response networks. Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/y17kh8g.",
+          "section_path": "Results > Efficient delivery of mRNA-LNPs to the healthy mouse liver",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0050",
+          "lexical_score": null,
+          "vector_score": 0.44238629937171936,
+          "fused_score": 0.016129032258064516,
+          "entity_types": [
+            "cell",
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-21371321ad04e0c321bf",
+          "paper_id": "GP-002",
+          "text": "Several studies have shown that intravenously injected mRNA-LNPs based on clinically used ionizable lipids acquire a coating of apolipoprotein E (ApoE), which acts as a ligand for the low-density lipoprotein receptor (LDLR), and this is one pathway by which mRNA-LNPs are taken up by hepatocytes. To determine whether differential expression of LDLR could explain differential uptake of mRNA-LNPs between healthy and diseased liver tissue, we performed IHC for LDLR in healthy mice and Mdr2\u2212/\u2212 mice. Qualitatively, we observed a similar staining pattern and intensity between 3 healthy and 3 Mdr2\u2212/\u2212 livers, although notably, LDLR staining was absent from fibrotic bands (Figures S9A and S9B). To investigate the copy number of LDLR in healthy and diseased liver tissue, we drew on publicly available transcript abundance data from the GepLiver database41 (gepliver.org, accessed March 2026). In mice, Ldlr transcripts were significantly downregulated in fibrosis/cirrhosis compared to healthy liver (Kruskal-Wallis test with Dunn\u2019s post hoc, n = 29\u2013112, p = 0.0041.) However, in human data, LDLR copy number was increased in fibrotic liver (Kruskal-Wallis test with Dunn\u2019s post hoc, n = 20\u2013362, p < 0.0001) but unchanged in cirrhosis (Kruskal-Wallis test with Dunn\u2019s post hoc, n = 73\u2013262, p > 0.9999) (Figures S9C and S9D). These inconsistent findings suggest that any relationship between LDLR abundance and disease severity is likely to be species or context specific.",
+          "section_path": "Results > Delivery of mRNA-LNPs in liver fibrosis and cirrhosis",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0085",
+          "lexical_score": 6.270273921158283,
+          "vector_score": null,
+          "fused_score": 0.015151515151515152,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-05-therapeutic_target_cell_reported",
+          "block_id": "GP-002-B-cdc80fca12a242b7dd7d",
+          "paper_id": "GP-002",
+          "text": "The efficient delivery of mRNA-LNPs to healthy livers raises the possibility of using mRNA therapeutics for the treatment of liver disease and cancer. Primary liver cancer typically arises on a background of chronic liver disease and hepatic fibrogenesis. One study reported good expression of mRNA-LNPs (formulated using an ionizable lipid proprietary to Acuitas) in hepatocytes in several mouse models of fibrosis and cirrhosis and a therapeutic effect of Hnf4a mRNA against fibrosis.34 However, the extent of transgene expression in liver tumors after systemic mRNA-LNP administration has never been rigorously assessed.",
+          "section_path": "Introduction",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0035",
+          "lexical_score": 5.108679707369845,
+          "vector_score": null,
+          "fused_score": 0.013513513513513514,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "FaissSentenceTransformerBackend"
+      ],
+      "warnings": []
+    },
+    "outcomes": {
+      "query": {
+        "query_id": "GP-002-06-outcomes",
+        "paper_id": "GP-002",
+        "question": "What distinct measured endpoint names and observed outcomes are reported for each experiment?",
+        "field_group": "outcome",
+        "required_entity_types": [
+          "outcome"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-6e94e637a0d4b354d4ab",
+          "paper_id": "GP-002",
+          "text": "The eGFP expression measured in this study reflects the combined efficiency of LNP accumulation, cellular uptake, endosomal escape, and mRNA translation, and the relative contribution of each step may differ between healthy tissue, fibrotic liver, and tumors. Previous studies have tracked the biodistribution and intracellular fate of mRNA-LNPs using fluorescent labeling of both LNPs and mRNA cargo48 and have characterized the pharmacokinetics and tissue distribution of mRNA-LNPs formulated with SM-102 and other clinically relevant ionizable lipids.46 In the present study, we measured protein expression as the functional endpoint most relevant to therapeutic applications, as it integrates all upstream delivery steps into a single readout of productive transfection.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0190",
+          "lexical_score": 11.533245346985922,
+          "vector_score": 0.3019252121448517,
+          "fused_score": 0.03252247488101534,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-f56abdba975455879c84",
+          "paper_id": "GP-002",
+          "text": "Data analysis was performed using LivingImage 4.7.4 (PerkinElmer). To obtain numerical data for fluorescence of organs and tissues, a region of interest (ROI) was drawn around each tissue or organ and the fluorescence (average radiant efficiency) was recorded. Background fluorescent signal (arising from tissue autofluorescence) was estimated for each organ by averaging the fluorescent signal obtained from that organ from 2 to 6 uninjected mice. For mice injected with eGFP mRNA-LNPs, eGFP fluorescence for each organ was determined by subtracting the average background fluorescence from the same organ.",
+          "section_path": "Materials and methods > Fluorescent imaging of mouse organs",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0345",
+          "lexical_score": 3.62441829755989,
+          "vector_score": 0.3203742206096649,
+          "fused_score": 0.029726775956284153,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-87bc66c620c50eff1f30",
+          "paper_id": "GP-002",
+          "text": "We next investigated delivery of mRNA-LNPs in a physiologically relevant mouse model of progressive liver injury. Mdr2 knockout mice are unable to secrete phospholipids into the bile, resulting in the development of sclerosing cholangitis with severe liver fibrosis by early adulthood and spontaneous HCC by 1 year of age.39,40 We used the Mdr2 knockout model to evaluate mRNA-LNP delivery to the liver in the context of liver fibrosis and cirrhosis (Figure 2A). We injected eGFP mRNA-LNPs intravenously into 4 male Mdr2 knockout mice at 11 months of age, and 14 h post-injection, we observed fluorescent signal 3- to 4-fold above background in the liver tissue, albeit attenuated 2-fold relative to healthy controls (Figure 2B). Biodistribution of eGFP fluorescence in Mdr2 knockout mice was comparable to that observed in healthy BALB/c mice (Figures 2C, S1, and S2), indicating that off-target expression of the mRNA in other organs and tissues is not increased in the presence of liver injury.Figure 2Delivery of mRNA-LNPs in liver fibrosis and cirrhosis(A) We injected Mdr2\u2212/\u2212 mice with 10 \u03bcg eGFP mRNA-LNPs via the tail vein and investigated reporter expression. (B) Moderately strong eGFP fluorescence was evident in all injected livers; the fluorescence intensity was reduced compared to a healthy control injected with the same mRNA-LNPs at the same time. (C) Ex vivo fluorescence imaging of organs from a GFP-injected Mdr2\u2212/\u2212 mouse shows that attenuation of mRNA-LNP delivery to the liver does not result in broadly altered biodistribution of eGFP protein expression. Autofluorescent signal was detected from the brain and gut tissues of all mice including healthy and uninjected controls. (D) Western blotting detects eGFP from the liver tissue of 17 Mdr2\u2212/\u2212 mice, with substantial variation between individuals in the quantity of eGFP protein and reduced protein abundance relative to healthy BALB/c mice. (E) Quantification of eGFP protein expression from western blotting showing greater variability in protein expression for Mdr2\u2212/\u2212 mice with a fibrosis score of F4 (cirrhosis) relative to F3 (severe fibrosis). The total protein abundance in F4 mice trended higher, but this difference was not statistically significant (Welch\u2019s t test, n = 6\u201311, t = 2.162(10.58), p = 0.0545). Error bars represent mean \u00b1 SEM. (F) Representative immunohistochemistry results from Mdr2\u2212/\u2212 mice show the range of possible outcomes for eGFP expression. (G) Analysis of IHC images with StainDetectAI found that mice with severe fibrosis (F3) had detectable eGFP staining across a higher surface area compared to mice with cirrhosis (F4) (Mann-Whitney test, n = 6\u201311, U = 12, p = 0.0365). Error bars represent mean \u00b1 SEM. Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/kbvlul3.",
+          "section_path": "Results > Delivery of mRNA-LNPs in liver fibrosis and cirrhosis",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0070",
+          "lexical_score": 5.744350500910189,
+          "vector_score": 0.2188035547733307,
+          "fused_score": 0.028283227848101264,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-bbd3c3c0e8c364b157f1",
+          "paper_id": "GP-002",
+          "text": "We initially set out to establish a baseline for mRNA-LNP delivery to and expression in the mouse liver. We selected a formulation for mRNA-LNPs based on the ionizable lipid SM-102, which is approved for clinical use. To assess the delivery of mRNA to the liver, we intravenously injected adult male mice (n = 5) with mRNA-LNPs encoding enhanced green fluorescent protein (eGFP) (Figure 1A). Strong and specific eGFP fluorescence was observed in the liver after 24 h via ex vivo fluorescence imaging, with measured fluorescence values around 10-fold higher than background (tissue autofluorescence) (Figures 1B and 1C). Background-subtracted fluorescence (radiant efficiency) of whole livers was significantly different between mRNA-injected and uninjected mice (Student\u2019s t test, n = 4\u20135, p < 0.0001) (Figure 1D). Western blotting detected eGFP protein strongly from the liver tissue of these mice (Figure 1E), and in one healthy mouse from which additional organs were blotted, eGFP was also detected in the spleen (Figure S1). Notably, green fluorescent signal in the digestive tract likely arises from gut contents36 and does not indicate the presence of eGFP (Figure S1). eGFP was not detected in serum from any of 6 injected mice tested (Figure S2), confirming that eGFP is not secreted into the bloodstream and that no spurious signal is expected to arise from blood.Figure 1Efficient delivery of mRNA-LNPs to the healthy mouse liver(A) We injected 5 healthy mice with 10 \u03bcg eGFP mRNA-LNPs via the tail vein and investigated reporter expression after 24 h. (B) Strong eGFP fluorescence was visualized in all injected livers (bottom row). (C) Ex vivo fluorescence imaging of organs from injected and uninjected mice shows specificity of eGFP expression in the liver. Fluorescence scales were set to eliminate autofluorescent signal in the uninjected liver; autofluorescent signal is visualized in the colon and duodenum of both the injected and uninjected mouse. (D) Quantitation of background-subtracted eGFP fluorescence confirms the strong and specific detection of eGFP in the livers of eGFP-injected mice (Welch\u2019s t test, n = 4\u20135, t = 20.25(4.117), p < 0.0001). Error bars represent mean \u00b1 SEM. (E) Western blotting detects a strong band corresponding to eGFP in the livers of mice injected with eGFP mRNA-LNPs; no band is detected in liver tissue of uninjected mice. (F) Immunohistochemistry for eGFP in liver tissue sections from injected mice shows strong eGFP staining in virtually all hepatocytes. There is moderate variation in staining intensity between hepatocytes. (G) Quantification of GFP-positive surface area for IHC sections in GFP-injected mice shows extremely high coverage of liver tissue, with very low background in uninjected mice (Welch\u2019s t test, n = 5, t = 84.81(4.204), p < 0.0001). Error bars represent mean \u00b1 SEM. (H) eGFP transcripts were readily detected in mouse liver tissue 24 h after injection, with mapped transcript counts between approximately 1,000 and 2,300; this was significantly different from control with an average of one count (Mann-Whitney test, n = 5, U = 0, p = 0.0079). Error bars represent mean \u00b1 SEM. (I) 624 genes were differentially expressed in the liver between mRNA-LNP-injected and saline-injected mice, with the significance threshold of 5 \u2217 \u2212log10 FDR. These included interferon response factors (Irf7, Irf9, Ifitm3, and Isg15) and the cytokine-responsive transcription factor Stat1. (J) Gene networks induced in the liver by mRNA-LNP injection; upregulated genes cluster into antigen-processing and interferon-response networks. Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/y17kh8g.",
+          "section_path": "Results > Efficient delivery of mRNA-LNPs to the healthy mouse liver",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0050",
+          "lexical_score": 3.2356714581469443,
+          "vector_score": 0.28466561436653137,
+          "fused_score": 0.028283227848101264,
+          "entity_types": [
+            "cell",
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-fee7ddfbe7697e3e9743",
+          "paper_id": "GP-002",
+          "text": "To investigate the efficacy of mRNA-LNP delivery in a physiologically relevant HCC model, we first compared eGFP expression between liver tissue and liver tumors of 11-month-old male Mdr2\u2212/\u2212 mice using ex vivo fluorescence imaging. Notably, many liver tumors were evident on the external surfaces of the livers (Figure S10), including several large tumors with increased fluorescence relative to the surrounding liver tissue (Figures 2B and 3A). The average fluorescence of the tumors (262.6 \u00d7 106 photons/s/cm2/sr) was not significantly different from that of the liver tissue (97.1 \u00d7 106 photons/s/cm2/sr) (Mann-Whitney test, n = 4\u201377, p = 0.8738) (Figures 3B and S11). There was no correlation between tumor size and fluorescence intensity (simple linear regression, R2 = 0.0661) (Figure 3C).Figure 3Delivery of mRNA-LNPs to spontaneous hepatocellular carcinomas in situ(A) Fluorescence image showing large HCCs on the livers of Mdr2\u2212/\u2212 mice. (B) Plot of fluorescence intensity of whole livers (n = 4) and individual tumors visible on the external surfaces of the same livers (n = 77). There was no significant difference in fluorescence intensity between livers and tumors (Mann-Whitney test, n = 4\u201377, U = 146, p = 0.8738). Error bars represent mean \u00b1 SEM. (C) There is no correlation between the external surface area of liver tumors and the fluorescence intensity (simple linear regression, F(1,75) = 5.308, p = 0.0240, R2 = 0.06609). (D) Western blotting detects eGFP from livers and tumors of 4 Mdr2\u2212/\u2212 mice 11 months of age. The quantity of eGFP protein detected from tumors is broadly comparable to that detected from livers and also shows variation. (E) Quantitation of eGFP protein expression determined by western blotting, showing greater variability in protein expression in tumors (n = 21) than in liver tissue (n = 4). The abundance of eGFP protein in tumors was not significantly different from liver tissue (Welch\u2019s t test, n = 4\u201321, t = 1.519(21.99), p = 0.1430). Error bars represent mean \u00b1 SEM. (F) Quantitation of eGFP protein separated by animal; the red point in each column represents the eGFP abundance in liver tissue, and the black points represent the tumors from the same animal. Error bars represent mean \u00b1 SEM. (G) Representative IHC images show a range of possible outcomes for eGFP expression in tumor tissue, including broadly good delivery, variability in staining intensity between adjacent cells and between different regions of the image, and borders between stained and unstained regions of the tumor, which are otherwise similar in appearance. (H) Analysis of IHC images with StainDetectAI shows that the surface area of tissue sections with detectable IHC staining is not significantly different between liver tissue and tumors (Mann-Whitney test, n = 8\u201325, U = 60, p = 0.1580). Error bars represent mean \u00b1 SEM. (I) Quantification of IHC surface area positive for eGFP separated by animal; the red point in each column represents the stained surface area in liver tissue, and the black points represent the tumors from the same animal. Note poor delivery to a lung adenocarcinoma (blue; eGFP not detected above background level) and a steatotic HCC (green; eGFP detection marginal.) Figure partially created in BioRender. Leighton, L. (2026) https://BioRender.com/hxslnmy.",
+          "section_path": "Results > Delivery of mRNA-LNPs to spontaneous HCCs in situ",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0100",
+          "lexical_score": 4.355432565563725,
+          "vector_score": 0.22548983991146088,
+          "fused_score": 0.027106227106227107,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-375803caa3350f9b98f3",
+          "paper_id": "GP-002",
+          "text": "Many nanoparticle-based carrier systems have been developed for the delivery of mRNA in vivo, with mRNA-LNPs being the most widely used. mRNA-LNPs are manufactured using four lipid components: an ionizable lipid, a phospholipid, cholesterol, and a PEG-lipid, each of which can be substituted to alter the properties of the nanoparticle.44,45 The ionizable lipid is the most consequential component, influencing mRNA encapsulation efficiency, endosomal escape, tissue tropism, and immunostimulatory profile.44,45 A small number of ionizable lipids are used in RNA-LNP products that have received regulatory approval for clinical use (including DLin-MC3-DMA, ALC-0315, and SM-102), with others currently in clinical development (notably including SM-86, used for a hepatocyte-targeted gene replacement therapy currently in clinical trials33). In this study, we used SM-102, which is among the most extensively characterized ionizable lipids in the preclinical mRNA literature, facilitating direct comparison with existing and future studies. Importantly, while DLin-MC3-DMA was developed for targeted delivery of small interfering RNAs (siRNAs) to hepatocytes, SM-102 outperformed it for expression of an mRNA reporter gene.46,47 It should be noted that delivery efficiency, biodistribution, and immunostimulatory profile can vary across ionizable lipid formulations,38 and the findings of this study may not generalize to other LNP formulations; evaluation of alternative formulations represents a valuable direction for future work. Additionally, we tested a single dosage of mRNA-LNPs in this study, using a reporter gene only; future studies should also evaluate the effect of mRNA-LNP dosage on the distribution and intensity of transgene expression across disease models, as the relative expression between liver and tumor cells may be dose dependent.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0185",
+          "lexical_score": 5.265406284609171,
+          "vector_score": null,
+          "fused_score": 0.021238660863198144,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-6a950065b91fc88dca99",
+          "paper_id": "GP-002",
+          "text": "An important consideration for the safety and efficacy of mRNA-LNP therapeutics delivered via the intravenous route is the induction of an immune response, and potentially other off-target gene expression, in the liver. To determine whether the mRNA-LNP platform impacts on liver gene expression, we sequenced RNA from liver tissue of healthy mice injected with eGFP mRNA-LNPs (n = 5) and saline-injected controls (n = 5) 24 h after injection. We detected abundant eGFP transcripts (averaging 1,661 counts) in the livers of mRNA-injected mice, with negligible background (average 1 count in uninjected mice), demonstrating that mRNA can persist in liver tissue for at least a day after injection (Figure 1H); the difference was significant (Mann-Whitney test, n = 5, p = 0.0079). Consistent with the known immunogenicity of mRNA-LNPs, particularly those formulated with SM-102,37 intense upregulation of genes involved in innate immunity was observed in the liver tissue of mRNA-injected mice relative to uninjected controls, including Irf7/Irf9, Stat1, and IfitmFITM3. In total, 295 genes were significantly upregulated and 323 genes significantly downregulated (Figure 1I; Table S1; Figure S6). Notably, PD-L1 (Cd274) was significantly upregulated in liver cells following mRNA-LNP treatment (Welch\u2019s t test, n = 5, p < 0.0001), substantiating recent reports that mRNA-LNP administration can increase checkpoint ligand expression. The widespread immune response is consistent with previous reports describing inflammatory responses to mRNA-LNP delivery,37,38 underscoring the importance of carefully controlling for platform effects when evaluating candidate therapeutics.",
+          "section_path": "Results > Efficient delivery of mRNA-LNPs to the healthy mouse liver",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0065",
+          "lexical_score": 3.9761030275634823,
+          "vector_score": null,
+          "fused_score": 0.018979869901547115,
+          "entity_types": [
+            "gene_or_protein",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-a3249c7541eb45ff6a84",
+          "paper_id": "GP-002",
+          "text": "To investigate the delivery of mRNA-LNPs to the tumors, we first used ex vivo fluorescent imaging of the eGFP reporter. Fluorescent signal well above background level was observed in the livers (range 36.4\u2013179.1, average 97.9 \u00d7 106 photons/s/cm2/sr) and liver tumors (range 54.6\u2013408.7, average 135.4 \u00d7 106 photons/s/cm2/sr) of all mice (n = 8) (Figures 4B and 4C). There was no significant difference in fluorescent signal between liver tissue and tumors (paired t test, n = 8, p = 0.3496). We considered the possibility that residual healthy liver tissue overlying the tumors might take up mRNA-LNPs and express eGFP, resulting in high tumor-surface fluorescence values that may not represent the uptake and expression of mRNA within the tumor interior. Therefore, to investigate penetration of mRNA-LNPs into the tumor interior, we performed fluorescence imaging on cross-sections of several tumors and observed mostly uniform fluorescence intensity within the tumors (Figure S17). We also expected that mRNA-LNP penetration might be better in small tumors than in large tumors, but we found that there was no correlation between tumor size (measured by area of the region of interest drawn around the tumor) and fluorescence intensity (simple linear regression, R2 = 0.0002) (Figure S18A). Surprisingly, there was also no correlation between the fluorescence intensity measured from the liver and tumor from the same animal (simple linear regression, R2 = 0.1620) (Figure S18B).",
+          "section_path": "Results > Delivery of mRNA-LNPs to a xenograft model of primary liver cancer",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0130",
+          "lexical_score": 6.796274691218501,
+          "vector_score": null,
+          "fused_score": 0.016129032258064516,
+          "entity_types": [
+            "gene_or_protein",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-796432c5805e43f8dc48",
+          "paper_id": "GP-002",
+          "text": "Our study also systematically investigated mRNA-LNP delivery to liver cancer. Mdr2\u2212/\u2212 mice develop HCCs with age, and we therefore examined reporter expression in spontaneous HCCs in situ. While a small number of reports previously described the use of mRNA-LNP-based therapies to treat liver cancer in animal models,58,59,60,61 the encoded therapeutic proteins act through non-cell-autonomous mechanisms of action, and delivery of mRNA-LNPs to tumor cells was unclear. We found that GFP was expressed in HCCs with a similar distribution and intensity to its expression in the liver tissue from the same animal. Cellular heterogeneity is a common feature of HCCs,62 and this may explain our observation that several HCCs contained tracts of cells that did not express GFP. It would be valuable for future work to explore sequential delivery of multiple reporter mRNA-LNPs in order to determine whether repeated dosing of mRNA-LNPs would target the same or different cell populations. Interestingly, we found one steatotic HCC among the Mdr2\u2212/\u2212 tumors, and GFP expression was virtually absent from this tumor. However, robust GFP expression was observed in small steatotic regions within liver and tumor sections from other animals in this cohort. This finding warrants further investigation to determine whether steatotic livers or steatotic HCCs are especially poor targets for mRNA-LNP delivery.",
+          "section_path": "Discussion",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": "p0215",
+          "lexical_score": 6.168980064633329,
+          "vector_score": null,
+          "fused_score": 0.015873015873015872,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "GP-002-06-outcomes",
+          "block_id": "GP-002-B-c901b1424d4bdb7f4fcc",
+          "paper_id": "GP-002",
+          "text": "Primary liver cancer is the sixth most prevalent cancer globally and is often diagnosed late, when treatment options are limited. Secondary liver cancer, arising from metastasis of other cancers to the liver, is a common complication of advanced solid cancers and a significant cause of cancer-related morbidity and mortality. Existing treatment options for advanced primary and secondary liver tumors have limited efficacy, and new treatment modalities have the potential to improve patient outcomes. Messenger RNA (mRNA) therapeutics are readily delivered to the healthy liver after systemic administration, but their uptake and expression within liver tumors are unclear. Here, we show that intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver and also many cells of spontaneous hepatocellular carcinomas in situ. Delivery of mRNA is also possible in xenograft models of both primary and secondary liver cancer, albeit with attenuated protein expression relative to the normal liver. These findings demonstrate the potential for systemically delivered mRNA-LNP therapies for liver disease and cancer.",
+          "section_path": "Abstract",
+          "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+          "page_number": null,
+          "xml_element_id": null,
+          "lexical_score": 4.949114039832497,
+          "vector_score": null,
+          "fused_score": 0.015151515151515152,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "route"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "FaissSentenceTransformerBackend"
+      ],
+      "warnings": []
+    }
+  },
+  "blocked_fields": {},
+  "ready_for_extraction": true,
+  "important": "These are source evidence packets, not extracted answers. Experiment-scoped LLM extraction may run only for unblocked fields."
+}

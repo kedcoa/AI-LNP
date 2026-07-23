@@ -1,0 +1,713 @@
+{
+  "backend": "sentence-transformers",
+  "k": 8,
+  "queries": 31,
+  "hits": 28,
+  "recall_at_k": 0.9032258064516129,
+  "per_paper": {
+    "GP-001": {
+      "queries": 1,
+      "hits": 1,
+      "recall_at_k": 1.0
+    },
+    "GP-002": {
+      "queries": 3,
+      "hits": 3,
+      "recall_at_k": 1.0
+    },
+    "GP-003": {
+      "queries": 1,
+      "hits": 1,
+      "recall_at_k": 1.0
+    },
+    "GP-004": {
+      "queries": 3,
+      "hits": 3,
+      "recall_at_k": 1.0
+    },
+    "GP-005": {
+      "queries": 5,
+      "hits": 5,
+      "recall_at_k": 1.0
+    },
+    "GP-006": {
+      "queries": 7,
+      "hits": 7,
+      "recall_at_k": 1.0
+    },
+    "GP-007": {
+      "queries": 4,
+      "hits": 4,
+      "recall_at_k": 1.0
+    },
+    "GP-008": {
+      "queries": 6,
+      "hits": 3,
+      "recall_at_k": 0.5
+    },
+    "GP-009": {
+      "queries": 1,
+      "hits": 1,
+      "recall_at_k": 1.0
+    }
+  },
+  "results": [
+    {
+      "evidence_id": "EVID-001",
+      "paper_id": "GP-001",
+      "field_name": "payload_type",
+      "question": "What payload is encapsulated or carried by the formulation?",
+      "gold_source": "candidate_00001_PMC13244520.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-001-B-f9b9a2178f2012943141",
+        "GP-001-B-b6ca4f8cf0611a9ff29c",
+        "GP-001-B-74f1ea164aa1e6b1ed81",
+        "GP-001-B-d50f7ecc8f25d21069b1",
+        "GP-001-B-dbdb067c75636e36d75f",
+        "GP-001-B-7913faaea41e54332a44",
+        "GP-001-B-130b2bcfcc075443bf45",
+        "GP-001-B-0baa8f837c1c223fa89f"
+      ]
+    },
+    {
+      "evidence_id": "EVID-002",
+      "paper_id": "GP-004",
+      "field_name": "composition_and_preparation",
+      "question": "What is the LNP composition and how was it prepared?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml",
+      "gold_xml_element_id": "Par18",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 3,
+      "retrieved_block_ids": [
+        "GP-004-B-0a472f25b7cb9a08b6a6",
+        "GP-004-B-47cf3fcd1a29ea837fc0",
+        "GP-004-B-6e6c5970c8283ab141bc",
+        "GP-004-B-2853135bd6095605c550",
+        "GP-004-B-f0c72b035adf015788cd",
+        "GP-004-B-b6a6922a2671a3ec7fc3",
+        "GP-004-B-a0ca7836b1ad2b69711a",
+        "GP-004-B-4bf34c7fb4de8b1b8851"
+      ]
+    },
+    {
+      "evidence_id": "EVID-003",
+      "paper_id": "GP-004",
+      "field_name": "kupffer_cell_transfection_experiment",
+      "question": "What does the paper report for the experiment field 'kupffer cell transfection experiment'?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml",
+      "gold_xml_element_id": "Par7",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 7,
+      "retrieved_block_ids": [
+        "GP-004-B-e6bd4cfa9da29ad607e7",
+        "GP-004-B-769c76630fad2a00f2c5",
+        "GP-004-B-47d98dca42394190ba9c",
+        "GP-004-B-2b7f6a3d6d337ffa0ffe",
+        "GP-004-B-820ec9bc1844d690f6d8",
+        "GP-004-B-cbf7926ae781394facc2",
+        "GP-004-B-8f8ebc21885e5f499049",
+        "GP-004-B-dc9e1713f6412df7f7bd"
+      ]
+    },
+    {
+      "evidence_id": "EVID-004",
+      "paper_id": "GP-004",
+      "field_name": "percent_egfp_positive_cd11b_cells",
+      "question": "What does the paper report for the outcome field 'percent egfp positive cd11b cells'?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml",
+      "gold_xml_element_id": "Par8",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 2,
+      "retrieved_block_ids": [
+        "GP-004-B-8f8ebc21885e5f499049",
+        "GP-004-B-47d98dca42394190ba9c",
+        "GP-004-B-820ec9bc1844d690f6d8",
+        "GP-004-B-2853135bd6095605c550",
+        "GP-004-B-2b7f6a3d6d337ffa0ffe",
+        "GP-004-B-47cf3fcd1a29ea837fc0",
+        "GP-004-B-e90d0d497ec324d45632",
+        "GP-004-B-e22e906363c78f7922f9"
+      ]
+    },
+    {
+      "evidence_id": "EVID-005",
+      "paper_id": "GP-006",
+      "field_name": "composition_and_manufacturing",
+      "question": "What is the LNP composition and manufacturing method?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00168_PMC11617921.xml",
+      "gold_xml_element_id": "p0105",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 5,
+      "retrieved_block_ids": [
+        "GP-006-B-9d5e2e6933f0aed4d1ad",
+        "GP-006-B-095ced2cd9dc64e219ed",
+        "GP-006-B-995a4cc839ac2b5ecedb",
+        "GP-006-B-81a3b4f8013b209873c5",
+        "GP-006-B-d5b5e287cef77c39eede",
+        "GP-006-B-b22c93a44f96496dc912",
+        "GP-006-B-00af019d2da526ad44ed",
+        "GP-006-B-2db2a90d45b03cd3bc89"
+      ]
+    },
+    {
+      "evidence_id": "EVID-006",
+      "paper_id": "GP-006",
+      "field_name": "np_ratio_and_particle_size",
+      "question": "What does the paper report for the formulation field 'np ratio and particle size'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00168_PMC11617921.xml",
+      "gold_xml_element_id": "p0035",
+      "gold_page": "2",
+      "hit": true,
+      "first_gold_rank": 4,
+      "retrieved_block_ids": [
+        "GP-006-B-995a4cc839ac2b5ecedb",
+        "GP-006-B-b22c93a44f96496dc912",
+        "GP-006-B-d5b5e287cef77c39eede",
+        "GP-006-B-9d5e2e6933f0aed4d1ad",
+        "GP-006-B-4b5bade2f506bde72c41",
+        "GP-006-B-2db2a90d45b03cd3bc89",
+        "GP-006-B-095ced2cd9dc64e219ed",
+        "GP-006-B-81a3b4f8013b209873c5"
+      ]
+    },
+    {
+      "evidence_id": "EVID-007",
+      "paper_id": "GP-006",
+      "field_name": "gfp_delivery_to_lsecs",
+      "question": "What does the paper report for the experiment field 'gfp delivery to lsecs'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00168_PMC11617921.xml",
+      "gold_xml_element_id": "p0040",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 2,
+      "retrieved_block_ids": [
+        "GP-006-B-b8f56b23486fb7cf8f56",
+        "GP-006-B-54069c643760155aee58",
+        "GP-006-B-ef79d80010295650edbf",
+        "GP-006-B-4b5bade2f506bde72c41",
+        "GP-006-B-7df84450abc737a647af",
+        "GP-006-B-4a80b29ae76f0b984241",
+        "GP-006-B-02d27c7a988c0c74cdcd",
+        "GP-006-B-f6951c550b1424056b6a"
+      ]
+    },
+    {
+      "evidence_id": "EVID-008",
+      "paper_id": "GP-006",
+      "field_name": "cas9_sgrna_lnp_treatment",
+      "question": "What does the paper report for the experiment field 'cas9 sgrna lnp treatment'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00168_PMC11617921.xml",
+      "gold_xml_element_id": "p0055",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 6,
+      "retrieved_block_ids": [
+        "GP-006-B-02d27c7a988c0c74cdcd",
+        "GP-006-B-27c2d0f121c05f0f7744",
+        "GP-006-B-879835a91135e4abd857",
+        "GP-006-B-ef79d80010295650edbf",
+        "GP-006-B-4a80b29ae76f0b984241",
+        "GP-006-B-ce8f6ea751317cd70397",
+        "GP-006-B-0568482e779fdf6e1718",
+        "GP-006-B-b8f56b23486fb7cf8f56"
+      ]
+    },
+    {
+      "evidence_id": "EVID-009",
+      "paper_id": "GP-006",
+      "field_name": "total_deletion_frequency",
+      "question": "What does the paper report for the outcome field 'total deletion frequency'?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC11617921/mmc1.pdf",
+      "gold_xml_element_id": "",
+      "gold_page": "2",
+      "hit": true,
+      "first_gold_rank": 5,
+      "retrieved_block_ids": [
+        "GP-006-B-27c2d0f121c05f0f7744",
+        "GP-006-B-02d27c7a988c0c74cdcd",
+        "GP-006-B-4b5bade2f506bde72c41",
+        "GP-006-B-4d6fabdcf8eb04151f9c",
+        "GP-006-B-4a80b29ae76f0b984241",
+        "GP-006-B-7d71bd9cc9908ace1486",
+        "GP-006-B-0568482e779fdf6e1718",
+        "GP-006-B-81a3b4f8013b209873c5"
+      ]
+    },
+    {
+      "evidence_id": "EVID-010",
+      "paper_id": "GP-006",
+      "field_name": "total_insertion_frequency",
+      "question": "What does the paper report for the outcome field 'total insertion frequency'?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC11617921/mmc1.pdf",
+      "gold_xml_element_id": "",
+      "gold_page": "2",
+      "hit": true,
+      "first_gold_rank": 4,
+      "retrieved_block_ids": [
+        "GP-006-B-4b5bade2f506bde72c41",
+        "GP-006-B-4d6fabdcf8eb04151f9c",
+        "GP-006-B-27c2d0f121c05f0f7744",
+        "GP-006-B-4a80b29ae76f0b984241",
+        "GP-006-B-0568482e779fdf6e1718",
+        "GP-006-B-02d27c7a988c0c74cdcd",
+        "GP-006-B-7d71bd9cc9908ace1486",
+        "GP-006-B-81a3b4f8013b209873c5"
+      ]
+    },
+    {
+      "evidence_id": "EVID-011",
+      "paper_id": "GP-006",
+      "field_name": "fviii_activity",
+      "question": "What does the paper report for the outcome field 'fviii activity'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00168_PMC11617921.xml",
+      "gold_xml_element_id": "p0055",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 8,
+      "retrieved_block_ids": [
+        "GP-006-B-b22c93a44f96496dc912",
+        "GP-006-B-b8f56b23486fb7cf8f56",
+        "GP-006-B-d3873a80140434b91efd",
+        "GP-006-B-ba39c3db77c3777644c9",
+        "GP-006-B-81a3b4f8013b209873c5",
+        "GP-006-B-2db2a90d45b03cd3bc89",
+        "GP-006-B-05e5ba5ccaf3e666a5d7",
+        "GP-006-B-ce8f6ea751317cd70397"
+      ]
+    },
+    {
+      "evidence_id": "EVID-012",
+      "paper_id": "GP-002",
+      "field_name": "composition",
+      "question": "What lipids and molar ratios comprise the LNP formulation?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+      "gold_xml_element_id": "p0040",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 4,
+      "retrieved_block_ids": [
+        "GP-002-B-6e94e637a0d4b354d4ab",
+        "GP-002-B-071143ea5a0465fc4f3c",
+        "GP-002-B-0b5472c89fbd2512b317",
+        "GP-002-B-042d08bd3cd5968ef1fc",
+        "GP-002-B-375803caa3350f9b98f3",
+        "GP-002-B-efe0ff4f99466ee70981",
+        "GP-002-B-143c0a1d451533350129",
+        "GP-002-B-6de95d411f9f3c2b2ffd"
+      ]
+    },
+    {
+      "evidence_id": "EVID-013",
+      "paper_id": "GP-002",
+      "field_name": "hepatocyte_reporter_delivery",
+      "question": "What does the paper report for the experiment field 'hepatocyte reporter delivery'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+      "gold_xml_element_id": "p0050",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-002-B-bbd3c3c0e8c364b157f1",
+        "GP-002-B-8a4568dfdc5e5ff75cf5",
+        "GP-002-B-ad57d5c98b7a00eb5c6b",
+        "GP-002-B-95fdcbb0341423d334b2",
+        "GP-002-B-87bc66c620c50eff1f30",
+        "GP-002-B-796432c5805e43f8dc48",
+        "GP-002-B-375803caa3350f9b98f3",
+        "GP-002-B-7d2ecb2cf51a17b56330"
+      ]
+    },
+    {
+      "evidence_id": "EVID-014",
+      "paper_id": "GP-002",
+      "field_name": "hepatocyte_expression",
+      "question": "What does the paper report for the outcome field 'hepatocyte expression'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00003_PMC13334401.xml",
+      "gold_xml_element_id": "p0050",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-002-B-bbd3c3c0e8c364b157f1",
+        "GP-002-B-87bc66c620c50eff1f30",
+        "GP-002-B-47d59f63ebd1a6478989",
+        "GP-002-B-4aa9c6af146dbc5cc12c",
+        "GP-002-B-7d2ecb2cf51a17b56330",
+        "GP-002-B-9515af61499a75ee72ec",
+        "GP-002-B-046d75816b57a47103a1",
+        "GP-002-B-ad57d5c98b7a00eb5c6b"
+      ]
+    },
+    {
+      "evidence_id": "EVID-015",
+      "paper_id": "GP-003",
+      "field_name": "original_experiment_status",
+      "question": "Does this paper report an original tested LNP experiment?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-003-B-d7aa478894cdcbd89193",
+        "GP-003-B-3bdf4f32a7c7f941c64e",
+        "GP-003-B-63c361f8cdbc9191bc6b",
+        "GP-003-B-c1890c90984caa44e786",
+        "GP-003-B-5494ce522a832528d866",
+        "GP-003-B-a8422aee6677823ff055",
+        "GP-003-B-f67f1f4131ac7996de50",
+        "GP-003-B-5ded4750b5674d89656d"
+      ]
+    },
+    {
+      "evidence_id": "EVID-016",
+      "paper_id": "GP-005",
+      "field_name": "composition",
+      "question": "What lipids and molar ratios comprise the LNP formulation?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00082_PMC11884593.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-005-B-3612bd762736ba00f738",
+        "GP-005-B-49567bcd8cbbfb1ac41c",
+        "GP-005-B-b968ea93d9feb275a0e7",
+        "GP-005-B-d9ff18193f8900288a77",
+        "GP-005-B-fb6e9d819107ce0e6eed",
+        "GP-005-B-8667a338a9728d952648",
+        "GP-005-B-48eeea13b2ca8265aa0d",
+        "GP-005-B-799d453b51f13ce55cad"
+      ]
+    },
+    {
+      "evidence_id": "EVID-017",
+      "paper_id": "GP-005",
+      "field_name": "structured_characterization",
+      "question": "What does the paper report for the formulation field 'structured characterization'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00082_PMC11884593.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-005-B-b968ea93d9feb275a0e7",
+        "GP-005-B-d9ff18193f8900288a77",
+        "GP-005-B-799d453b51f13ce55cad",
+        "GP-005-B-4c0f3841541692e8fa4a",
+        "GP-005-B-49c4d774214395d771c7",
+        "GP-005-B-5192d930bde8537fbf67",
+        "GP-005-B-3612bd762736ba00f738",
+        "GP-005-B-3e65419f6f50db756b06"
+      ]
+    },
+    {
+      "evidence_id": "EVID-018",
+      "paper_id": "GP-005",
+      "field_name": "kupffer_uptake_and_translation",
+      "question": "What does the paper report for the experiment field 'kupffer uptake and translation'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00082_PMC11884593.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-005-B-49c4d774214395d771c7",
+        "GP-005-B-418442e7beee78805f03",
+        "GP-005-B-0a6c37b2f3a3bc147c1c",
+        "GP-005-B-accca80c23ae5265b44f",
+        "GP-005-B-6caa057a3680410c344d",
+        "GP-005-B-2a2217f099c2da8808c9",
+        "GP-005-B-30a200fda7cf20d47986",
+        "GP-005-B-fb6e9d819107ce0e6eed"
+      ]
+    },
+    {
+      "evidence_id": "EVID-019",
+      "paper_id": "GP-005",
+      "field_name": "kupffer_uptake",
+      "question": "What does the paper report for the outcome field 'kupffer uptake'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00082_PMC11884593.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-005-B-30a200fda7cf20d47986",
+        "GP-005-B-49c4d774214395d771c7",
+        "GP-005-B-e938978be5f329e5c1ce",
+        "GP-005-B-0a6c37b2f3a3bc147c1c",
+        "GP-005-B-418442e7beee78805f03",
+        "GP-005-B-accca80c23ae5265b44f",
+        "GP-005-B-2cc40a37a44d9d685e3c",
+        "GP-005-B-99c375cd97aebc65d7b6"
+      ]
+    },
+    {
+      "evidence_id": "EVID-020",
+      "paper_id": "GP-005",
+      "field_name": "kupffer_translation",
+      "question": "What does the paper report for the outcome field 'kupffer translation'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00082_PMC11884593.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-005-B-accca80c23ae5265b44f",
+        "GP-005-B-779939b03e03b4be942b",
+        "GP-005-B-e7e0606f3572e1614d3d",
+        "GP-005-B-6caa057a3680410c344d",
+        "GP-005-B-3e65419f6f50db756b06",
+        "GP-005-B-bbbb1394cc17f8061e63",
+        "GP-005-B-2cc40a37a44d9d685e3c",
+        "GP-005-B-67c0b2615c8202dfc752"
+      ]
+    },
+    {
+      "evidence_id": "EVID-021",
+      "paper_id": "GP-007",
+      "field_name": "partial_composition",
+      "question": "What does the paper report for the formulation field 'partial composition'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-007-B-6f947db85ba1914f793e",
+        "GP-007-B-cb78ce4c4a520e3e9b0b",
+        "GP-007-B-8e151567facdad21b261",
+        "GP-007-B-afe3c2418e4a7b10bbd3",
+        "GP-007-B-40156ce4aa965335e1d5",
+        "GP-007-B-9dc9a2157bafc30f4d2e",
+        "GP-007-B-8cc31509b2f206c4e878",
+        "GP-007-B-557a21771c30385f48ee"
+      ]
+    },
+    {
+      "evidence_id": "EVID-022",
+      "paper_id": "GP-007",
+      "field_name": "particle_characterization",
+      "question": "What does the paper report for the formulation field 'particle characterization'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-007-B-afe3c2418e4a7b10bbd3",
+        "GP-007-B-6f947db85ba1914f793e",
+        "GP-007-B-cb78ce4c4a520e3e9b0b",
+        "GP-007-B-40156ce4aa965335e1d5",
+        "GP-007-B-8e151567facdad21b261",
+        "GP-007-B-0d8059dddf0ed25edfc0",
+        "GP-007-B-ff9010436de48d02f4d1",
+        "GP-007-B-557a21771c30385f48ee"
+      ]
+    },
+    {
+      "evidence_id": "EVID-023",
+      "paper_id": "GP-007",
+      "field_name": "lsec_treatment",
+      "question": "What does the paper report for the experiment field 'lsec treatment'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-007-B-8cc31509b2f206c4e878",
+        "GP-007-B-cb78ce4c4a520e3e9b0b",
+        "GP-007-B-65a1a1f25898312d9e3d",
+        "GP-007-B-8e151567facdad21b261",
+        "GP-007-B-5ec35e24e75ea3a7a5fe",
+        "GP-007-B-03ae63be25e363d8a232",
+        "GP-007-B-40156ce4aa965335e1d5",
+        "GP-007-B-afe3c2418e4a7b10bbd3"
+      ]
+    },
+    {
+      "evidence_id": "EVID-024",
+      "paper_id": "GP-007",
+      "field_name": "lsec_protection",
+      "question": "What does the paper report for the outcome field 'lsec protection'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-007-B-7ef36aee0f638302754d",
+        "GP-007-B-cb78ce4c4a520e3e9b0b",
+        "GP-007-B-40156ce4aa965335e1d5",
+        "GP-007-B-65a1a1f25898312d9e3d",
+        "GP-007-B-1c16a141343b8a13add7",
+        "GP-007-B-631d8164f58b691ffe60",
+        "GP-007-B-8cc31509b2f206c4e878",
+        "GP-007-B-8599e83c4522d99b0e4c"
+      ]
+    },
+    {
+      "evidence_id": "EVID-025",
+      "paper_id": "GP-008",
+      "field_name": "composition_and_manufacturing",
+      "question": "What is the LNP composition and manufacturing method?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+      "gold_xml_element_id": "",
+      "gold_page": "4",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-008-B-66cffb0f019e5d839388",
+        "GP-008-B-19ad99a2f9780fc83d7a",
+        "GP-008-B-152bad1f863349afad63",
+        "GP-008-B-308a9b925b83c22a3042",
+        "GP-008-B-a29f2cdc7b2e63b5550d",
+        "GP-008-B-f0e09d286befc21c043a",
+        "GP-008-B-71a4424c5da61cf6dfd3",
+        "GP-008-B-6bff0f7b7ff94acdc625"
+      ]
+    },
+    {
+      "evidence_id": "EVID-026",
+      "paper_id": "GP-008",
+      "field_name": "targeting_conjugation",
+      "question": "What does the paper report for the formulation field 'targeting conjugation'?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+      "gold_xml_element_id": "",
+      "gold_page": "4",
+      "hit": true,
+      "first_gold_rank": 6,
+      "retrieved_block_ids": [
+        "GP-008-B-19ad99a2f9780fc83d7a",
+        "GP-008-B-71a4424c5da61cf6dfd3",
+        "GP-008-B-e7588facf11267d4eba3",
+        "GP-008-B-4b3600864611f75d97be",
+        "GP-008-B-83e9d3966dc6ce0d68d6",
+        "GP-008-B-66cffb0f019e5d839388",
+        "GP-008-B-ce0eb8f9c9b8af6032ef",
+        "GP-008-B-a1039647f11cd7636a6a"
+      ]
+    },
+    {
+      "evidence_id": "EVID-027",
+      "paper_id": "GP-008",
+      "field_name": "pdf_table_characterization",
+      "question": "What does the paper report for the formulation field 'pdf table characterization'?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+      "gold_xml_element_id": "",
+      "gold_page": "27",
+      "hit": true,
+      "first_gold_rank": 3,
+      "retrieved_block_ids": [
+        "GP-008-B-4b9fa6982be8677a2bb3",
+        "GP-008-B-6bff0f7b7ff94acdc625",
+        "GP-008-B-308a9b925b83c22a3042",
+        "GP-008-B-19ad99a2f9780fc83d7a",
+        "GP-008-B-71a4424c5da61cf6dfd3",
+        "GP-008-B-66cffb0f019e5d839388",
+        "GP-008-B-152bad1f863349afad63",
+        "GP-008-B-ce0eb8f9c9b8af6032ef"
+      ]
+    },
+    {
+      "evidence_id": "EVID-028",
+      "paper_id": "GP-008",
+      "field_name": "macrophage_delivery",
+      "question": "What does the paper report for the experiment field 'macrophage delivery'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00132_PMC13229182.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": false,
+      "first_gold_rank": null,
+      "retrieved_block_ids": [
+        "GP-008-B-6bff0f7b7ff94acdc625",
+        "GP-008-B-1975f5ff6da903e683ef",
+        "GP-008-B-e7588facf11267d4eba3",
+        "GP-008-B-38623fa37c885ca13409",
+        "GP-008-B-299ee7f65b6fa4b59702",
+        "GP-008-B-dfdcd078c18dfc6d5d74",
+        "GP-008-B-c41fbfbb6821d78cebfa",
+        "GP-008-B-a1039647f11cd7636a6a"
+      ]
+    },
+    {
+      "evidence_id": "EVID-029",
+      "paper_id": "GP-008",
+      "field_name": "hsc_therapeutic_effect",
+      "question": "What does the paper report for the experiment field 'hsc therapeutic effect'?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00132_PMC13229182.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": false,
+      "first_gold_rank": null,
+      "retrieved_block_ids": [
+        "GP-008-B-b3fbd2fea7aeab5647f6",
+        "GP-008-B-b3e41311085e67d39a05",
+        "GP-008-B-c41fbfbb6821d78cebfa",
+        "GP-008-B-4b3600864611f75d97be",
+        "GP-008-B-e7588facf11267d4eba3",
+        "GP-008-B-a1039647f11cd7636a6a",
+        "GP-008-B-fce8a78129355edc3eab",
+        "GP-008-B-437cb36d9263dacb355d"
+      ]
+    },
+    {
+      "evidence_id": "EVID-030",
+      "paper_id": "GP-008",
+      "field_name": "recipient_cell_specificity",
+      "question": "What does the paper report for the outcome field 'recipient cell specificity'?",
+      "gold_source": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+      "gold_xml_element_id": "",
+      "gold_page": "18",
+      "hit": false,
+      "first_gold_rank": null,
+      "retrieved_block_ids": [
+        "GP-008-B-1975f5ff6da903e683ef",
+        "GP-008-B-e45da78b16b92eca502d",
+        "GP-008-B-0a4e38c21cf39e3a3252",
+        "GP-008-B-fcaea0d2ca972f3077a0",
+        "GP-008-B-9897e0cf7a360b3816c9",
+        "GP-008-B-6bff0f7b7ff94acdc625",
+        "GP-008-B-a29f2cdc7b2e63b5550d",
+        "GP-008-B-c1caba9ac0cc95b477b3"
+      ]
+    },
+    {
+      "evidence_id": "EVID-031",
+      "paper_id": "GP-009",
+      "field_name": "target_cell_identity",
+      "question": "Which specific cell type does HSC mean in this paper?",
+      "gold_source": "data/raw/fulltext/gold_v1/xml/candidate_00186_PMC12265960.xml",
+      "gold_xml_element_id": "",
+      "gold_page": "",
+      "hit": true,
+      "first_gold_rank": 1,
+      "retrieved_block_ids": [
+        "GP-009-B-f4a46f2c1d7faff82f2d",
+        "GP-009-B-10b694f33e93ecdd8e3a",
+        "GP-009-B-76247166d37edda0041b",
+        "GP-009-B-fc1a20e7a1209a6590b4",
+        "GP-009-B-49ee87833158afb1a13c",
+        "GP-009-B-2bfa3008d66d034eabeb",
+        "GP-009-B-1e1c3e5d3965ea5b3201",
+        "GP-009-B-84eb14e581c14ad1f1c0"
+      ]
+    }
+  ],
+  "limitations": [
+    "Retrieval recall is not scientific correctness.",
+    "A gold location hit does not prove that the answer uses the correct experiment.",
+    "PDF page extraction can miss image-based tables and requires human visual review.",
+    "Missing retrieval evidence must produce abstention, not an inferred value."
+  ]
+}

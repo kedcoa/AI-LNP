@@ -1,0 +1,49 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-005",
+  "source_read_again": true,
+  "issues": [
+    {
+      "issue_type": "wrong_entity",
+      "entity_id": "GP-005-001-kupffer",
+      "field_name": "therapeutic_target_cell_normalized",
+      "severity": "review",
+      "explanation": "The therapeutic target cell for the Kupffer cell experiment is set to 'hepatocyte', but the abstract aims to achieve expression in non-parenchymal cells (NPC) such as Kupffer cells. The correct target should be 'kupffer_cell' or left missing.",
+      "supporting_or_corrective_quote": "the reasons behind the suboptimal performance of synthetic mRNA in non-parenchymal cells (NPC) such as Kupffer cells (KC) remain unclear"
+    },
+    {
+      "issue_type": "omitted_fact",
+      "entity_id": "GP-005-001",
+      "field_name": "lnp_experiments",
+      "severity": "review",
+      "explanation": "The abstract mentions siRNA as a payload co-encapsulated with mRNA in LNP, but the first pass only includes experiments with mRNA payload. Experiments for siRNA alone or co-encapsulation are omitted.",
+      "supporting_or_corrective_quote": "mRNA encoding enhanced green fluorescent protein (Egfp), siRNA, or both co-encapsulated into lipid nanoparticles (LNP)"
+    },
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-005-001-hepatocyte-uptake-1",
+      "field_name": "endpoint_name_reported",
+      "severity": "review",
+      "explanation": "The outcome name specifies 'Uptake of mRNA-LNP by hepatocytes', but the evidence quote reports uptake of both mRNA-LNP and siRNA-LNP. The name should reflect both payloads or be more general.",
+      "supporting_or_corrective_quote": "comparable high and rapid uptake of mRNA-LNP and siRNA-LNP in vivo"
+    },
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-005-001-kupffer-uptake-1",
+      "field_name": "endpoint_name_reported",
+      "severity": "review",
+      "explanation": "The outcome name specifies 'Uptake of mRNA-LNP by Kupffer cells', but the evidence quote reports uptake of both mRNA-LNP and siRNA-LNP. The name should reflect both payloads or be more general.",
+      "supporting_or_corrective_quote": "comparable high and rapid uptake of mRNA-LNP and siRNA-LNP in vivo"
+    },
+    {
+      "issue_type": "omitted_fact",
+      "entity_id": "GP-005-001-kupffer",
+      "field_name": "payload_type_reported",
+      "severity": "review",
+      "explanation": "The experiment for Kupffer cells only lists payload_type as 'mRNA', but the abstract also describes siRNA uptake in these cells. The payload types should include both mRNA and siRNA, or separate experiments should be created.",
+      "supporting_or_corrective_quote": "both KC and hepatocytes demonstrate comparable high and rapid uptake of mRNA-LNP and siRNA-LNP in vivo"
+    }
+  ],
+  "completeness_assessment": "incomplete",
+  "verifier_summary": "The first pass extraction captures the main findings about mRNA translation in hepatocytes vs. Kupffer cells, but it omits the siRNA payload experiments and incorrectly sets the therapeutic target for Kupffer cells to hepatocytes. Additionally, evidence quotes for uptake outcomes are mismatched with the specific endpoints. These issues reduce the completeness of the extraction."
+}

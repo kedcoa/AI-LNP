@@ -1,0 +1,220 @@
+{
+  "summary": {
+    "correct": 6,
+    "missing": 25,
+    "missing_predictions": 3
+  },
+  "per_paper": [
+    {
+      "paper_id": "GP-001",
+      "zero_record_expectation": "correct"
+    },
+    {
+      "paper_id": "GP-002",
+      "checks": [
+        {
+          "entity": "formulations",
+          "field": "formulation_name",
+          "expected": "SM-102 eGFP mRNA-LNP",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "SM-102",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "DSPC",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "cholesterol",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "DMG-PEG2000",
+          "result": "missing"
+        },
+        {
+          "entity": "experiments",
+          "field": "payload_name",
+          "expected": "eGFP mRNA",
+          "result": "correct"
+        },
+        {
+          "entity": "outcomes",
+          "field": "endpoint_name",
+          "expected": "hepatocyte_eGFP_expression",
+          "result": "missing"
+        }
+      ],
+      "low_confidence_evidence_ids": []
+    },
+    {
+      "paper_id": "GP-003",
+      "zero_record_expectation": "correct"
+    },
+    {
+      "paper_id": "GP-004",
+      "checks": [
+        {
+          "entity": "formulations",
+          "field": "formulation_name",
+          "expected": "Acuitas hepatotropic nucleoside-modified mRNA-LNP",
+          "result": "correct"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "ionizable cationic lipid proprietary to Acuitas Therapeutics",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "phosphatidylcholine",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "cholesterol",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "PEG-lipid",
+          "result": "missing"
+        },
+        {
+          "entity": "experiments",
+          "field": "payload_name",
+          "expected": "eGFP mRNA",
+          "result": "missing"
+        },
+        {
+          "entity": "outcomes",
+          "field": "endpoint_name",
+          "expected": "eGFP_positive_CD11b_positive_cells",
+          "result": "missing"
+        },
+        {
+          "entity": "outcomes",
+          "field": "endpoint_name",
+          "expected": "eGFP_expression_in_F4_80_positive_cells",
+          "result": "missing"
+        }
+      ],
+      "low_confidence_evidence_ids": []
+    },
+    {
+      "paper_id": "GP-005",
+      "status": "missing_prediction"
+    },
+    {
+      "paper_id": "GP-006",
+      "status": "missing_prediction"
+    },
+    {
+      "paper_id": "GP-007",
+      "status": "missing_prediction"
+    },
+    {
+      "paper_id": "GP-008",
+      "checks": [
+        {
+          "entity": "formulations",
+          "field": "formulation_name",
+          "expected": "alpha-CD163/LNP-FAPCAR",
+          "result": "correct"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl)amino)octanoate",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "DSPC",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "cholesterol",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "PEG-lipid",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "DSPE-PEG-maleimide",
+          "result": "missing"
+        },
+        {
+          "entity": "components",
+          "field": "component_name_reported",
+          "expected": "rat anti-mouse CD163",
+          "result": "missing"
+        },
+        {
+          "entity": "experiments",
+          "field": "payload_name",
+          "expected": "FAPCAR mRNA",
+          "result": "missing"
+        },
+        {
+          "entity": "experiments",
+          "field": "payload_name",
+          "expected": "FAPCAR mRNA",
+          "result": "missing"
+        },
+        {
+          "entity": "outcomes",
+          "field": "endpoint_name",
+          "expected": "FAPCAR_or_GFP_positive_BMDMs",
+          "result": "missing"
+        },
+        {
+          "entity": "outcomes",
+          "field": "endpoint_name",
+          "expected": "expression_after_unmodified_LNP",
+          "result": "missing"
+        },
+        {
+          "entity": "outcomes",
+          "field": "endpoint_name",
+          "expected": "activated_HSC_elimination",
+          "result": "missing"
+        },
+        {
+          "entity": "outcomes",
+          "field": "endpoint_name",
+          "expected": "reporter_recipient_cell",
+          "result": "missing"
+        }
+      ],
+      "low_confidence_evidence_ids": []
+    },
+    {
+      "paper_id": "GP-009",
+      "zero_record_expectation": "correct"
+    }
+  ],
+  "gate_G1": "pending_human_approval"
+}

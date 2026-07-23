@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"3.0.0\",\n  \"paper_id\": \"GP-004\",\n  \"reader_id\": \"reader_a\",\n  \"original_experiments_present\": true,\n  \"experiments\": [\n    {\n      \"reader_experiment_key\": \"exp_1\",\n      \"experiment_label\": \"Luciferase mRNA-LNP delivery in healthy mice\",\n      \"evidence_sentence_ids\": [\"S03\", \"S04\"],\n      \"experiment_anchor_quote\": \"We confirm specific hepatotropism of mRNA-LNP via intravenous injection of firefly luciferase encoding mRNA-LNP, with protein expression lasting about 3 days.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"firefly luciferase\",\n      \"biological_model_mention\": \"mice\",\n      \"recipient_cell_mention\": \"hepatocytes, endothelial cells, Kupffer cells\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different payload (luciferase) and purpose (delivery validation) compared to therapeutic experiments.\"\n    },\n    {\n      \"reader_experiment_key\": \"exp_2\",\n      \"experiment_label\": \"HGF mRNA-LNP in healthy mice\",\n      \"evidence_sentence_ids\": [\"S05\"],\n      \"experiment_anchor_quote\": \"In homeostasis, HGF mRNA-LNP efficiently induce hepatocyte proliferation.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF\",\n      \"biological_model_mention\": \"healthy mice (homeostasis)\",\n      \"recipient_cell_mention\": \"hepatocytes\",\n      \"therapeutic_target_mention\": \"hepatocyte proliferation\",\n      \"distinctness_reason\": \"Different payload (HGF), healthy model, and proliferation readout compared to other experiments.\"\n    },\n    {\n      \"reader_experiment_key\": \"exp_3\",\n      \"experiment_label\": \"HGF+EGF mRNA-LNP in chronic liver injury (NAFLD) model\",\n      \"evidence_sentence_ids\": [\"S06\"],\n      \"experiment_anchor_quote\": \"In a chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease, injections of both HGF and EGF mRNA-LNP sharply reverse steatosis and accelerate restoration of liver function.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF and EGF\",\n      \"biological_model_mention\": \"chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease\",\n      \"recipient_cell_mention\": \"hepatocytes\",\n      \"therapeutic_target_mention\": \"liver regeneration, steatosis reversal\",\n      \"distinctness_reason\": \"Combination treatment (HGF+EGF) and chronic liver injury (NAFLD) disease context, distinct from healthy and acute injury models.\"\n    },\n    {\n      \"reader_experiment_key\": \"exp_4\",\n      \"experiment_label\": \"HGF+EGF mRNA-LNP in acute liver injury (acetaminophen) model\",\n      \"evidence_sentence_ids\": [\"S07\"],\n      \"experiment_anchor_quote\": \"Likewise, HGF and EGF mRNA-LNP accelerate liver regeneration after acetaminophen-induced acute liver injury with rapid return to baseline ALT levels.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF and EGF\",\n      \"biological_model_mention\": \"acetaminophen-induced acute liver injury mouse model\",\n      \"recipient_cell_mention\": \"hepatocytes\",\n      \"therapeutic_target_mention\": \"liver regeneration\",\n      \"distinctness_reason\": \"Combination treatment (HGF+EGF) and acute liver injury (acetaminophen) disease context, distinct from chronic model and healthy model.\"\n    }\n  ]\n}",
+  "usage": {
+    "completion_tokens": 2712,
+    "prompt_tokens": 1171,
+    "total_tokens": 3883,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 1853,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

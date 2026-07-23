@@ -1,0 +1,999 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-004",
+  "lnp_formulations": [
+    {
+      "lnp_formulation_id": "GP-004-1",
+      "lnp_formulation_name_reported": {
+        "value": "mRNA-LNP",
+        "status": "reported",
+        "evidence_quote": "lipid-nanoparticle-encapsulated mRNA (mRNA-LNP)",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "lnp_composition_raw_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "LNP composition not reported in the abstract"
+      },
+      "lnp_composition_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "not reported"
+      },
+      "lnp_np_ratio_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "not reported"
+      },
+      "lnp_formulation_description_reported": {
+        "value": "Nucleoside-modified, lipid-nanoparticle-encapsulated mRNA",
+        "status": "reported",
+        "evidence_quote": "nucleoside-modified, lipid-nanoparticle-encapsulated mRNA",
+        "confidence": "high",
+        "missing_reason": null
+      }
+    }
+  ],
+  "lnp_components": [],
+  "lnp_experiments": [
+    {
+      "lnp_experiment_id": "GP-004-1-1",
+      "lnp_formulation_id": "GP-004-1",
+      "delivery_recipient_cell_reported": {
+        "value": "hepatocytes, endothelial cells, Kupffer cells",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected along with a subpopulation of endothelial and Kupffer cells",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "delivery_recipient_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_reported": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_quote": "specific hepatotropism",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "specific hepatotropism",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "tissue_or_organ_reported": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_quote": "In the liver",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "disease_context_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Disease context not explicitly stated; likely healthy mice but not specified."
+      },
+      "species_reported": {
+        "value": "mice",
+        "status": "reported",
+        "evidence_quote": "in mice",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "experimental_context_reported": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_quote": "in mice",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_type_reported": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_quote": "mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_name_reported": {
+        "value": "firefly luciferase encoding mRNA",
+        "status": "reported",
+        "evidence_quote": "firefly luciferase encoding mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_encoded_product_reported": {
+        "value": "firefly luciferase",
+        "status": "reported",
+        "evidence_quote": "firefly luciferase encoding mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_molecular_target_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not applicable; mRNA encodes a reporter protein."
+      },
+      "dose_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "dose_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "administration_route_reported": {
+        "value": "intravenous injection",
+        "status": "reported",
+        "evidence_quote": "via intravenous injection of firefly luciferase encoding mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "timepoint_value_reported": {
+        "value": 3.0,
+        "status": "reported",
+        "evidence_quote": "about 3 days",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "timepoint_unit_reported": {
+        "value": "days",
+        "status": "reported",
+        "evidence_quote": "about 3 days",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "assay_reported": {
+        "value": "protein expression",
+        "status": "reported",
+        "evidence_quote": "protein expression lasting about 3 days",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Comparator not mentioned in abstract."
+      }
+    },
+    {
+      "lnp_experiment_id": "GP-004-1-2",
+      "lnp_formulation_id": "GP-004-1",
+      "delivery_recipient_cell_reported": {
+        "value": "hepatocytes, endothelial cells, Kupffer cells",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected along with a subpopulation of endothelial and Kupffer cells",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "delivery_recipient_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_reported": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_quote": "hepatocyte proliferation",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "hepatocyte proliferation",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "tissue_or_organ_reported": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_quote": "In the liver",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "disease_context_reported": {
+        "value": "homeostasis",
+        "status": "reported",
+        "evidence_quote": "In homeostasis",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "species_reported": {
+        "value": "mice",
+        "status": "reported",
+        "evidence_quote": "in mice",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "experimental_context_reported": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_quote": "in mice",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_type_reported": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_quote": "mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_name_reported": {
+        "value": "HGF mRNA",
+        "status": "reported",
+        "evidence_quote": "HGF mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_encoded_product_reported": {
+        "value": "hepatocyte growth factor (HGF)",
+        "status": "reported",
+        "evidence_quote": "hepatocyte-growth-factor (HGF)",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_molecular_target_reported": {
+        "value": "hepatocyte growth factor (HGF)",
+        "status": "reported",
+        "evidence_quote": "hepatocyte-growth-factor (HGF)",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "dose_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "dose_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "administration_route_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Administration route not explicitly stated for this experiment."
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint not mentioned in abstract."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint not mentioned in abstract."
+      },
+      "assay_reported": {
+        "value": "hepatocyte proliferation",
+        "status": "reported",
+        "evidence_quote": "induce hepatocyte proliferation",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Comparator not mentioned in abstract."
+      }
+    },
+    {
+      "lnp_experiment_id": "GP-004-1-3",
+      "lnp_formulation_id": "GP-004-1",
+      "delivery_recipient_cell_reported": {
+        "value": "hepatocytes, endothelial cells, Kupffer cells",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected along with a subpopulation of endothelial and Kupffer cells",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "delivery_recipient_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_reported": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_quote": "hepatocytes",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "hepatocytes",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "tissue_or_organ_reported": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_quote": "liver",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "disease_context_reported": {
+        "value": "non-alcoholic fatty liver disease (NAFLD)",
+        "status": "reported",
+        "evidence_quote": "chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "species_reported": {
+        "value": "mice",
+        "status": "reported",
+        "evidence_quote": "mouse model",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "experimental_context_reported": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_quote": "mouse model",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_type_reported": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_quote": "mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_name_reported": {
+        "value": "HGF and EGF mRNA",
+        "status": "reported",
+        "evidence_quote": "HGF and EGF mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_encoded_product_reported": {
+        "value": "hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+        "status": "reported",
+        "evidence_quote": "hepatocyte-growth-factor (HGF) and epidermal-growth-factor (EGF)",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_molecular_target_reported": {
+        "value": "hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+        "status": "reported",
+        "evidence_quote": "hepatocyte-growth-factor (HGF) and epidermal-growth-factor (EGF)",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "dose_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "dose_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "administration_route_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Administration route not explicitly stated for this experiment."
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint not mentioned in abstract."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint not mentioned in abstract."
+      },
+      "assay_reported": {
+        "value": "steatosis reversal and liver function restoration",
+        "status": "reported",
+        "evidence_quote": "sharply reverse steatosis and accelerate restoration of liver function",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Comparator not mentioned in abstract."
+      }
+    },
+    {
+      "lnp_experiment_id": "GP-004-1-4",
+      "lnp_formulation_id": "GP-004-1",
+      "delivery_recipient_cell_reported": {
+        "value": "hepatocytes, endothelial cells, Kupffer cells",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected along with a subpopulation of endothelial and Kupffer cells",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "delivery_recipient_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_reported": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_quote": "hepatocytes",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "hepatocytes",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "tissue_or_organ_reported": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_quote": "liver",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "disease_context_reported": {
+        "value": "acetaminophen-induced acute liver injury",
+        "status": "reported",
+        "evidence_quote": "acetaminophen-induced acute liver injury",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "species_reported": {
+        "value": "mice",
+        "status": "reported",
+        "evidence_quote": "mouse model",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "experimental_context_reported": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_quote": "mouse model",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_type_reported": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_quote": "mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_name_reported": {
+        "value": "HGF and EGF mRNA",
+        "status": "reported",
+        "evidence_quote": "HGF and EGF mRNA-LNP",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_encoded_product_reported": {
+        "value": "hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+        "status": "reported",
+        "evidence_quote": "hepatocyte-growth-factor (HGF) and epidermal-growth-factor (EGF)",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "payload_molecular_target_reported": {
+        "value": "hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+        "status": "reported",
+        "evidence_quote": "hepatocyte-growth-factor (HGF) and epidermal-growth-factor (EGF)",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "dose_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "dose_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose not mentioned in abstract."
+      },
+      "administration_route_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Administration route not explicitly stated for this experiment."
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint not mentioned in abstract."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint not mentioned in abstract."
+      },
+      "assay_reported": {
+        "value": "liver regeneration and ALT measurement",
+        "status": "reported",
+        "evidence_quote": "accelerate liver regeneration after acetaminophen-induced acute liver injury with rapid return to baseline ALT levels",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Comparator not mentioned in abstract."
+      }
+    }
+  ],
+  "lnp_outcomes": [
+    {
+      "lnp_outcome_id": "GP-004-1-1-1",
+      "lnp_experiment_id": "GP-004-1-1",
+      "endpoint_family": {
+        "value": "transfection",
+        "status": "reported",
+        "evidence_quote": "transfected",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "transfection",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported for transfection efficiency."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "virtually all hepatocytes",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes are transfected",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-004-1-1-2",
+      "lnp_experiment_id": "GP-004-1-1",
+      "endpoint_family": {
+        "value": "functional_expression",
+        "status": "reported",
+        "evidence_quote": "protein expression",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "protein expression duration",
+        "status": "reported",
+        "evidence_quote": "protein expression lasting about 3 days",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": 3.0,
+        "status": "reported",
+        "evidence_quote": "about 3 days",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_unit_reported": {
+        "value": "days",
+        "status": "reported",
+        "evidence_quote": "about 3 days",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "about 3 days",
+        "status": "reported",
+        "evidence_quote": "protein expression lasting about 3 days",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_type_reported": {
+        "value": "approximate",
+        "status": "reported",
+        "evidence_quote": "about",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-004-1-2-1",
+      "lnp_experiment_id": "GP-004-1-2",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_quote": "induce hepatocyte proliferation",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "hepatocyte proliferation",
+        "status": "reported",
+        "evidence_quote": "induce hepatocyte proliferation",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "efficiently induce",
+        "status": "reported",
+        "evidence_quote": "efficiently induce hepatocyte proliferation",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-004-1-3-1",
+      "lnp_experiment_id": "GP-004-1-3",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_quote": "reverse steatosis",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "steatosis reversal",
+        "status": "reported",
+        "evidence_quote": "reverse steatosis",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "sharply reverse",
+        "status": "reported",
+        "evidence_quote": "sharply reverse steatosis",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-004-1-3-2",
+      "lnp_experiment_id": "GP-004-1-3",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_quote": "restoration of liver function",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "restoration of liver function",
+        "status": "reported",
+        "evidence_quote": "accelerate restoration of liver function",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "accelerate restoration",
+        "status": "reported",
+        "evidence_quote": "accelerate restoration of liver function",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-004-1-4-1",
+      "lnp_experiment_id": "GP-004-1-4",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_quote": "return to baseline ALT levels",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "return to baseline ALT levels",
+        "status": "reported",
+        "evidence_quote": "rapid return to baseline ALT levels",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "rapid return",
+        "status": "reported",
+        "evidence_quote": "rapid return to baseline ALT levels",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported."
+      }
+    }
+  ]
+}

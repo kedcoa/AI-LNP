@@ -1,0 +1,80 @@
+"""Freeze approved v3 experiment maps before detailed extraction."""
+
+from __future__ import annotations
+
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+from .run_abstract_first import ROOT
+
+
+RUN = ROOT / "data" / "staging" / "extraction" / "g1_v3_boundaries"
+REVIEW = ROOT / "data" / "review" / "day5_g1_v3_boundary_review.jsonl"
+FROZEN = ROOT / "data" / "staging" / "extraction" / "g1_v3_frozen_boundaries"
+REPORT = ROOT / "reports" / "extraction" / "day5_g1_v3_frozen_boundaries.json"
+
+
+CUSTOM_GP007 = [
+    ("ACT in-vivo HIRI experiment", ["S03", "S04", "S05", "S06"], "ACT", "HIRI mice"),
+    ("ACT in-vitro LSEC experiment", ["S03", "S04", "S05", "S06"], "ACT", "hypoxia-reoxygenation or lactate-stimulated LSECs"),
+    ("LSEC-specific Micu1-overexpression experiment", ["S03", "S07"], "Micu1-overexpression virus", None),
+    ("ACT plus siMicu1-LNP experiment", ["S03", "S07"], "ACT + siMicu1 LNP", None),
+    ("ACT plus lactate-inhibitor experiment", ["S07"], "ACT + lactate inhibitor", None),
+    ("ACT-derivative structural-analysis experiment", ["S03", "S08"], "ACT derivatives", None),
+]
+
+
+def freeze() -> dict:
+    reviews = [json.loads(line) for line in REVIEW.read_text(encoding="utf-8").splitlines() if line.strip()]
+    incomplete = [row["paper_id"] for row in reviews if row.get("boundary_decision") not in {"reader_a", "reader_b", "custom_required"} or not row.get("reviewer_reason")]
+    if incomplete:
+        raise ValueError(f"Incomplete boundary decisions: {incomplete}")
+    FROZEN.mkdir(parents=True, exist_ok=True)
+    frozen_papers = []
+    for row in reviews:
+        paper_id = row["paper_id"]
+        if row["boundary_decision"] in {"reader_a", "reader_b"}:
+            source_reader = row["boundary_decision"]
+            source = json.loads((RUN / paper_id / f"{source_reader}.validated.json").read_text(encoding="utf-8"))
+            experiments = source["experiments"]
+        elif paper_id == "GP-007":
+            source_reader = "human_custom"
+            sentence_lookup = {item["sentence_id"]: item["text"] for item in json.loads((RUN / paper_id / "sentences.json").read_text(encoding="utf-8"))}
+            experiments = []
+            for index, (label, sentence_ids, treatment, model) in enumerate(CUSTOM_GP007, 1):
+                experiments.append({
+                    "reader_experiment_key": f"CUSTOM-{index:02d}",
+                    "experiment_label": label,
+                    "evidence_sentence_ids": sentence_ids,
+                    "experiment_anchor_quote": sentence_lookup[sentence_ids[-1]],
+                    "formulation_or_delivery_system_mention": "siMicu1 lipid nanoparticles" if "siMicu1" in label else None,
+                    "payload_or_treatment_mention": treatment,
+                    "biological_model_mention": model,
+                    "recipient_cell_mention": "LSECs" if "LSEC" in label or "siMicu1" in label else None,
+                    "therapeutic_target_mention": None,
+                    "distinctness_reason": "Human-approved custom boundary; see boundary review rationale.",
+                })
+        else:
+            raise ValueError(f"No custom-map implementation for {paper_id}")
+        frozen = {
+            "contract_version": "3.0.0",
+            "paper_id": paper_id,
+            "boundary_source": source_reader,
+            "reviewer": row.get("reviewer"),
+            "reviewed_at": row.get("reviewed_at"),
+            "reviewer_reason": row.get("reviewer_reason"),
+            "experiments": [
+                {"experiment_id": f"{paper_id}-E{index:02d}", **experiment}
+                for index, experiment in enumerate(experiments, 1)
+            ],
+        }
+        (FROZEN / f"{paper_id}.json").write_text(json.dumps(frozen, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        frozen_papers.append({"paper_id": paper_id, "experiments": len(experiments), "source": source_reader})
+    report = {"frozen_at": datetime.now(timezone.utc).isoformat(), "papers": frozen_papers, "status": "ready_for_experiment_scoped_extraction"}
+    REPORT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    return report
+
+
+if __name__ == "__main__":
+    print(json.dumps(freeze(), indent=2))

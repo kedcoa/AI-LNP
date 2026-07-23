@@ -1,0 +1,494 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-008",
+  "lnp_formulations": [
+    {
+      "lnp_formulation_id": "GP-008-1",
+      "lnp_formulation_name_reported": {
+        "value": "αCD163/LNP-FAPCAR",
+        "status": "reported",
+        "evidence_quote": "CD163 antibody-conjugated liposomal nanoparticles (LNPs) encapsulating FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA (αCD163/LNP-FAPCAR)",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "lnp_composition_raw_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No specific lipid composition or ratios are reported; only a general description 'liposomal nanoparticles' is provided which is not sufficient for raw composition."
+      },
+      "lnp_composition_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No basis for composition (e.g., molar ratio, weight ratio) is reported."
+      },
+      "lnp_np_ratio_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No N/P ratio is reported in the text."
+      },
+      "lnp_formulation_description_reported": {
+        "value": "CD163 antibody-conjugated liposomal nanoparticles encapsulating FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA",
+        "status": "reported",
+        "evidence_quote": "CD163 antibody-conjugated liposomal nanoparticles (LNPs) encapsulating FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA",
+        "confidence": "high",
+        "missing_reason": null
+      }
+    }
+  ],
+  "lnp_components": [
+    {
+      "lnp_component_id": "GP-008-1-1",
+      "lnp_formulation_id": "GP-008-1",
+      "lnp_component_name_reported": {
+        "value": "CD163 antibody",
+        "status": "reported",
+        "evidence_quote": "CD163 antibody-conjugated liposomal nanoparticles",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "lnp_component_role": {
+        "value": "targeting_ligand",
+        "status": "reported",
+        "evidence_quote": "CD163 antibody-conjugated liposomal nanoparticles (LNPs) encapsulating FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA",
+        "confidence": "medium",
+        "missing_reason": null
+      },
+      "lnp_component_amount_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported in text."
+      },
+      "lnp_component_amount_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not reported in text."
+      },
+      "lnp_component_identity_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Not specified."
+      }
+    }
+  ],
+  "lnp_experiments": [
+    {
+      "lnp_experiment_id": "GP-008-1",
+      "lnp_formulation_id": "GP-008-1",
+      "delivery_recipient_cell_reported": {
+        "value": "liver macrophages",
+        "status": "reported",
+        "evidence_quote": "selectively transduce liver macrophages",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "delivery_recipient_cell_normalized": {
+        "value": "other_liver_macrophage",
+        "status": "reported",
+        "evidence_quote": "selectively transduce liver macrophages",
+        "confidence": "medium",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_reported": {
+        "value": "activated hepatic stellate cells (HSCs)",
+        "status": "reported",
+        "evidence_quote": "activated HSCs",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_normalized": {
+        "value": "activated hepatic stellate cells",
+        "status": "reported",
+        "evidence_quote": "activated HSCs",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "tissue_or_organ_reported": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_quote": "liver fibrosis",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "disease_context_reported": {
+        "value": "liver fibrosis",
+        "status": "reported",
+        "evidence_quote": "liver fibrosis",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "species_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Species not reported in abstract."
+      },
+      "experimental_context_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Experimental context (in vitro/ex vivo/in vivo) not explicitly reported."
+      },
+      "payload_type_reported": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_quote": "mRNA",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "payload_name_reported": {
+        "value": "FAP-specific CAR-M mRNA",
+        "status": "reported",
+        "evidence_quote": "FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "payload_encoded_product_reported": {
+        "value": "FAP-specific CAR-M",
+        "status": "reported",
+        "evidence_quote": "FAP-specific chimeric antigen receptor macrophage (CAR-M)",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "payload_molecular_target_reported": {
+        "value": "FAP",
+        "status": "reported",
+        "evidence_quote": "FAP",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "dose_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose value not reported."
+      },
+      "dose_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Dose unit not reported."
+      },
+      "administration_route_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Administration route not reported."
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint value not reported."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Timepoint unit not reported."
+      },
+      "assay_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Assay not reported."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "Comparator not reported."
+      }
+    }
+  ],
+  "lnp_outcomes": [
+    {
+      "lnp_outcome_id": "GP-008-1-1",
+      "lnp_experiment_id": "GP-008-1",
+      "endpoint_family": {
+        "value": "transfection",
+        "status": "reported",
+        "evidence_quote": "transduced macrophages",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "transduction of macrophages",
+        "status": "reported",
+        "evidence_quote": "efficiently transduced macrophages",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported in abstract."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No unit reported in abstract."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "efficiently transduced",
+        "status": "reported",
+        "evidence_quote": "efficiently transduced macrophages",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No normalization basis reported in abstract."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty value reported in abstract."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty type reported in abstract."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No comparator reported in abstract."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-008-1-2",
+      "lnp_experiment_id": "GP-008-1",
+      "endpoint_family": {
+        "value": "functional_expression",
+        "status": "reported",
+        "evidence_quote": "augmenting their phagocytic capabilities",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "phagocytic capabilities",
+        "status": "reported",
+        "evidence_quote": "augmenting their phagocytic capabilities toward target cells",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported in abstract."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No unit reported in abstract."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "augmented",
+        "status": "reported",
+        "evidence_quote": "augmenting their phagocytic capabilities",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No normalization basis reported in abstract."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty value reported in abstract."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty type reported in abstract."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No comparator reported in abstract."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-008-1-3",
+      "lnp_experiment_id": "GP-008-1",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_quote": "significant reduction of ECM",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "ECM reduction",
+        "status": "reported",
+        "evidence_quote": "significant reduction of ECM",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported in abstract."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No unit reported in abstract."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "significant reduction",
+        "status": "reported",
+        "evidence_quote": "significant reduction of ECM",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No normalization basis reported in abstract."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty value reported in abstract."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty type reported in abstract."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No comparator reported in abstract."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-008-1-4",
+      "lnp_experiment_id": "GP-008-1",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_quote": "enhancement of liver fibrosis resolution",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "liver fibrosis resolution",
+        "status": "reported",
+        "evidence_quote": "concomitant enhancement of liver fibrosis resolution",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No numeric value reported in abstract."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No unit reported in abstract."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "enhancement",
+        "status": "reported",
+        "evidence_quote": "enhancement of liver fibrosis resolution",
+        "confidence": "low",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No normalization basis reported in abstract."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty value reported in abstract."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No uncertainty type reported in abstract."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No comparator reported in abstract."
+      }
+    }
+  ]
+}

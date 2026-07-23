@@ -1,0 +1,387 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-002",
+  "lnp_formulations": [
+    {
+      "lnp_formulation_id": "GP-002-1",
+      "lnp_formulation_name_reported": {
+        "value": "mRNA lipid nanoparticles (LNPs)",
+        "status": "reported",
+        "evidence_quote": "mRNA lipid nanoparticles (LNPs)",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "lnp_composition_raw_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No specific lipid composition or ratios reported."
+      },
+      "lnp_composition_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No composition basis reported."
+      },
+      "lnp_np_ratio_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "No NP ratio reported."
+      },
+      "lnp_formulation_description_reported": {
+        "value": "intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver and also many cells of spontaneous hepatocellular carcinomas in situ",
+        "status": "reported",
+        "evidence_quote": "intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver and also many cells of spontaneous hepatocellular carcinomas in situ",
+        "confidence": "high",
+        "missing_reason": null
+      }
+    }
+  ],
+  "lnp_components": [],
+  "lnp_experiments": [
+    {
+      "lnp_experiment_id": "GP-002-1",
+      "lnp_formulation_id": "GP-002-1",
+      "delivery_recipient_cell_reported": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_quote": "transfects virtually all hepatocytes",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "delivery_recipient_cell_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_quote": "transfects virtually all hepatocytes",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_reported": {
+        "value": "cells of spontaneous hepatocellular carcinomas",
+        "status": "reported",
+        "evidence_quote": "cells of spontaneous hepatocellular carcinomas",
+        "confidence": "medium",
+        "missing_reason": null
+      },
+      "therapeutic_target_cell_normalized": {
+        "value": "hepatocellular carcinoma cells",
+        "status": "reported",
+        "evidence_quote": "cells of spontaneous hepatocellular carcinomas",
+        "confidence": "medium",
+        "missing_reason": null
+      },
+      "tissue_or_organ_reported": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_quote": "liver",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "disease_context_reported": {
+        "value": "primary and secondary liver cancer",
+        "status": "reported",
+        "evidence_quote": "primary and secondary liver cancer",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "species_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "species not specified in abstract"
+      },
+      "experimental_context_reported": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_quote": "intravenous delivery",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "payload_type_reported": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_quote": "messenger RNA (mRNA) therapeutics",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "payload_name_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "payload name not specified in abstract"
+      },
+      "payload_encoded_product_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "encoded product not specified in abstract"
+      },
+      "payload_molecular_target_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "molecular target not specified in abstract"
+      },
+      "dose_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "dose not specified in abstract"
+      },
+      "dose_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "dose unit not specified in abstract"
+      },
+      "administration_route_reported": {
+        "value": "intravenous",
+        "status": "reported",
+        "evidence_quote": "intravenous delivery",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "timepoint not specified in abstract"
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "timepoint unit not specified in abstract"
+      },
+      "assay_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "assay not specified in abstract"
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "low",
+        "missing_reason": "comparator not specified in abstract"
+      }
+    }
+  ],
+  "lnp_outcomes": [
+    {
+      "lnp_outcome_id": "GP-002-1-1",
+      "lnp_experiment_id": "GP-002-1",
+      "endpoint_family": {
+        "value": "transfection",
+        "status": "reported",
+        "evidence_quote": "transfects",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "transfection efficiency in hepatocytes of healthy, fibrotic, and cirrhotic liver",
+        "status": "reported",
+        "evidence_quote": "efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No numeric value reported in abstract."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No unit reported in abstract."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "virtually all hepatocytes",
+        "status": "reported",
+        "evidence_quote": "virtually all hepatocytes",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No normalization basis reported in abstract."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No uncertainty value reported in abstract."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No uncertainty type reported in abstract."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No comparator reported in abstract."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-002-1-2",
+      "lnp_experiment_id": "GP-002-1",
+      "endpoint_family": {
+        "value": "transfection",
+        "status": "reported",
+        "evidence_quote": "transfects",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "transfection in spontaneous hepatocellular carcinoma cells",
+        "status": "reported",
+        "evidence_quote": "many cells of spontaneous hepatocellular carcinomas in situ",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No numeric value reported in abstract."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No unit reported in abstract."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "many cells",
+        "status": "reported",
+        "evidence_quote": "many cells of spontaneous hepatocellular carcinomas in situ",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No normalization basis reported in abstract."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No uncertainty value reported in abstract."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No uncertainty type reported in abstract."
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No comparator reported in abstract."
+      }
+    },
+    {
+      "lnp_outcome_id": "GP-002-1-3",
+      "lnp_experiment_id": "GP-002-1",
+      "endpoint_family": {
+        "value": "functional_expression",
+        "status": "reported",
+        "evidence_quote": "protein expression",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "protein expression in xenograft models of primary and secondary liver cancer",
+        "status": "reported",
+        "evidence_quote": "Delivery of mRNA is also possible in xenograft models of both primary and secondary liver cancer, albeit with attenuated protein expression relative to the normal liver.",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No numeric value reported in abstract."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No unit reported in abstract."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "attenuated",
+        "status": "reported",
+        "evidence_quote": "attenuated protein expression",
+        "confidence": "high",
+        "missing_reason": null
+      },
+      "normalization_basis_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No normalization basis reported in abstract."
+      },
+      "uncertainty_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No uncertainty value reported in abstract."
+      },
+      "uncertainty_type_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_quote": null,
+        "confidence": "high",
+        "missing_reason": "No uncertainty type reported in abstract."
+      },
+      "comparator_reported": {
+        "value": "normal liver",
+        "status": "reported",
+        "evidence_quote": "relative to the normal liver",
+        "confidence": "high",
+        "missing_reason": null
+      }
+    }
+  ]
+}

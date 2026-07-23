@@ -1,0 +1,100 @@
+{
+  "contract_version": "3.0.0",
+  "paper_id": "GP-002",
+  "boundary_source": "reader_b",
+  "reviewer": "renemilywei",
+  "reviewed_at": "2026-07-23T07:14:23.187424+00:00",
+  "reviewer_reason": "Each of the final target tissues or cells should be distinctly mentioned instead of grouped together.",
+  "experiments": [
+    {
+      "experiment_id": "GP-002-E01",
+      "reader_experiment_key": "GP-002-EXP-1",
+      "experiment_label": "mRNA-LNP transfection of healthy liver",
+      "evidence_sentence_ids": [
+        "S05"
+      ],
+      "experiment_anchor_quote": "intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver",
+      "formulation_or_delivery_system_mention": "mRNA lipid nanoparticles (LNPs)",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "hepatocytes",
+      "therapeutic_target_mention": "healthy liver",
+      "distinctness_reason": "Healthy liver context is distinct from fibrotic, cirrhotic, and tumor contexts as separately reported."
+    },
+    {
+      "experiment_id": "GP-002-E02",
+      "reader_experiment_key": "GP-002-EXP-2",
+      "experiment_label": "mRNA-LNP transfection of fibrotic liver",
+      "evidence_sentence_ids": [
+        "S05"
+      ],
+      "experiment_anchor_quote": "intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver",
+      "formulation_or_delivery_system_mention": "mRNA lipid nanoparticles (LNPs)",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "hepatocytes",
+      "therapeutic_target_mention": "fibrotic liver",
+      "distinctness_reason": "Fibrotic liver disease context is distinct from healthy, cirrhotic, and tumor contexts."
+    },
+    {
+      "experiment_id": "GP-002-E03",
+      "reader_experiment_key": "GP-002-EXP-3",
+      "experiment_label": "mRNA-LNP transfection of cirrhotic liver",
+      "evidence_sentence_ids": [
+        "S05"
+      ],
+      "experiment_anchor_quote": "intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver",
+      "formulation_or_delivery_system_mention": "mRNA lipid nanoparticles (LNPs)",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "hepatocytes",
+      "therapeutic_target_mention": "cirrhotic liver",
+      "distinctness_reason": "Cirrhotic liver disease context is distinct from healthy, fibrotic, and tumor contexts."
+    },
+    {
+      "experiment_id": "GP-002-E04",
+      "reader_experiment_key": "GP-002-EXP-4",
+      "experiment_label": "mRNA-LNP transfection of spontaneous hepatocellular carcinoma in situ",
+      "evidence_sentence_ids": [
+        "S05"
+      ],
+      "experiment_anchor_quote": "also many cells of spontaneous hepatocellular carcinomas in situ",
+      "formulation_or_delivery_system_mention": "mRNA lipid nanoparticles (LNPs)",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": "spontaneous hepatocellular carcinomas in situ",
+      "recipient_cell_mention": "many cells of spontaneous hepatocellular carcinomas",
+      "therapeutic_target_mention": "spontaneous hepatocellular carcinomas",
+      "distinctness_reason": "Spontaneous tumor context is distinct from healthy/fibrotic/cirrhotic liver and xenograft models."
+    },
+    {
+      "experiment_id": "GP-002-E05",
+      "reader_experiment_key": "GP-002-EXP-5",
+      "experiment_label": "mRNA-LNP delivery in primary liver cancer xenograft model",
+      "evidence_sentence_ids": [
+        "S06"
+      ],
+      "experiment_anchor_quote": "Delivery of mRNA is also possible in xenograft models of both primary and secondary liver cancer",
+      "formulation_or_delivery_system_mention": "mRNA lipid nanoparticles (LNPs)",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": "xenograft models of both primary and secondary liver cancer",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": "primary liver cancer",
+      "distinctness_reason": "Primary xenograft model is distinct from secondary xenograft and spontaneous tumor contexts."
+    },
+    {
+      "experiment_id": "GP-002-E06",
+      "reader_experiment_key": "GP-002-EXP-6",
+      "experiment_label": "mRNA-LNP delivery in secondary liver cancer xenograft model",
+      "evidence_sentence_ids": [
+        "S06"
+      ],
+      "experiment_anchor_quote": "Delivery of mRNA is also possible in xenograft models of both primary and secondary liver cancer",
+      "formulation_or_delivery_system_mention": "mRNA lipid nanoparticles (LNPs)",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": "xenograft models of both primary and secondary liver cancer",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": "secondary liver cancer",
+      "distinctness_reason": "Secondary xenograft model is distinct from primary xenograft and spontaneous tumor contexts."
+    }
+  ]
+}

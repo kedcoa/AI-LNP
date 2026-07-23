@@ -1,0 +1,21 @@
+{
+  "model": "glm-5.2",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"3.1.0\",\n  \"paper_id\": \"GP-008\",\n  \"source_read_again\": true,\n  \"issues\": [\n    {\n      \"experiment_id\": \"GP-008-E01\",\n      \"field_name\": \"therapeutic_target_cell_entity_ids\",\n      \"issue_type\": \"omitted_fact\",\n      \"severity\": \"review\",\n      \"explanation\": \"The experiment boundary mentions 'FAP (fibroblast activation protein) on activated HSCs' as the therapeutic target, but no cell entity is created for activated HSCs (hepatic stellate cells) and therapeutic_target_cell_entity_ids is empty.\",\n      \"supporting_or_corrective_sentence_id\": \"S05\",\n      \"supporting_or_corrective_quote\": \"FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA\"\n    },\n    {\n      \"experiment_id\": \"GP-008-E01\",\n      \"field_name\": \"payload_molecular_target_reported\",\n      \"issue_type\": \"evidence_mismatch\",\n      \"severity\": \"review\",\n      \"explanation\": \"The evidence quote for payload_molecular_target_reported is 'FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA', which describes the payload, not the molecular target. The molecular target is FAP, but the evidence quote should better reflect the target context.\",\n      \"supporting_or_corrective_sentence_id\": \"S05\",\n      \"supporting_or_corrective_quote\": \"FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA\"\n    }\n  ],\n  \"completeness_assessment\": \"incomplete\",\n  \"verifier_summary\": \"The extraction captures the core LNP formulation, payload, targeting ligand, and recipient cell correctly. However, the therapeutic target cells (activated HSCs) are mentioned in the experiment boundary but omitted from cell_entities and therapeutic_target_cell_entity_ids. Additionally, the evidence quote for payload_molecular_target_reported is the same as the payload description rather than specifically supporting the molecular target. All other fields are appropriately marked as missing where no information is available in the approved sentences.\"\n}",
+  "usage": {
+    "completion_tokens": 1751,
+    "prompt_tokens": 3831,
+    "total_tokens": 5582,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 1296,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

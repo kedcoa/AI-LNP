@@ -1,0 +1,16 @@
+{
+  "run_at": "2026-07-23T10:14:06.931938+00:00",
+  "models": {
+    "extractor": "glm-5.2",
+    "verifier": "glm-5.2"
+  },
+  "source_scope": "full_text_with_supplement",
+  "papers": [
+    {
+      "paper_id": "GP-002",
+      "status": "error",
+      "error_type": "RateLimitError",
+      "error": "Error code: 429 - {'error': {'message': 'The request rate exceeds the current model TPM limit 5000000. Please reduce the request frequency or contact Tencent Cloud support to request a higher limit.', 'type': 'invalid_request_error', 'code': '429001'}}"
+    }
+  ]
+}

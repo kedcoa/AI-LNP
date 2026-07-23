@@ -1,0 +1,21 @@
+{
+  "model": "glm-5.2",
+  "finish_reason": "stop",
+  "content": "{\"contract_version\": \"3.0.0\", \"paper_id\": \"GP-005\", \"reader_id\": \"reader_b\", \"original_experiments_present\": true, \"experiments\": [{\"reader_experiment_key\": \"GP-005-EXP-01\", \"experiment_label\": \"Intravital imaging of mRNA-LNP and siRNA-LNP spatio-temporal distribution in liver in vivo\", \"evidence_sentence_ids\": [\"S02\", \"S03\"], \"experiment_anchor_quote\": \"Here, the spatio-temporal distribution of mRNA encoding enhanced green fluorescent protein (Egfp), siRNA, or both co-encapsulated into lipid nanoparticles (LNP) in the liver in vivo using real-time intravital imaging is investigated.\", \"formulation_or_delivery_system_mention\": \"lipid nanoparticles (LNP)\", \"payload_or_treatment_mention\": \"mRNA encoding enhanced green fluorescent protein (Egfp), siRNA, or both co-encapsulated\", \"biological_model_mention\": \"liver in vivo\", \"recipient_cell_mention\": \"Kupffer cells (KC), hepatocytes\", \"therapeutic_target_mention\": null, \"distinctness_reason\": \"Core in vivo intravital imaging experiment comparing mRNA-LNP and siRNA-LNP uptake and Egfp translation in KC vs hepatocytes; distinct from subsequent intervention attempts.\"}, {\"reader_experiment_key\": \"GP-005-EXP-02\", \"experiment_label\": \"Attempts to increase NPC Egfp translation via ribonuclease inhibition, pseudouridine substitution, or different ionizable lipid\", \"evidence_sentence_ids\": [\"S04\"], \"experiment_anchor_quote\": \"Despite attempts such as inhibiting intracellular ribonuclease, substituting uridine bases in mRNA with pseudouridine, and using a different ionizable lipid in the LNP mixture, no substantial increase in Egfp translation by NPC is possible.\", \"formulation_or_delivery_system_mention\": \"LNP mixture with different ionizable lipid\", \"payload_or_treatment_mention\": \"Egfp mRNA with pseudouridine substitution; intracellular ribonuclease inhibitor\", \"biological_model_mention\": null, \"recipient_cell_mention\": \"NPC (non-parenchymal cells)\", \"therapeutic_target_mention\": null, \"distinctness_reason\": \"Distinct intervention experiments testing ribonuclease inhibition, pseudouridine substitution, and alternative ionizable lipid to improve NPC translation; different treatments from the core imaging experiment.\"}, {\"reader_experiment_key\": \"GP-005-EXP-03\", \"experiment_label\": \"Comparison of total RNA, protein, and ribosomal protein levels between hepatocytes and other liver cells\", \"evidence_sentence_ids\": [\"S05\"], \"experiment_anchor_quote\": \"The investigation reveals that hepatocytes, which are distinct from other liver cells due to their polyploidy, exhibit significantly elevated levels of total RNA and protein, along with a higher proportion of ribosomal protein per individual cell.\", \"formulation_or_delivery_system_mention\": null, \"payload_or_treatment_mention\": null, \"biological_model_mention\": \"liver cells\", \"recipient_cell_mention\": \"hepatocytes, other liver cells\", \"therapeutic_target_mention\": null, \"distinctness_reason\": \"Distinct molecular characterization experiment measuring total RNA, protein, and ribosomal protein per cell, linking polyploidy to translational capacity; no LNP or payload involved.\"}]}",
+  "usage": {
+    "completion_tokens": 1604,
+    "prompt_tokens": 1161,
+    "total_tokens": 2765,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 884,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

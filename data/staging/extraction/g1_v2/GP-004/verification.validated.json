@@ -1,0 +1,33 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-004",
+  "source_read_again": true,
+  "issues": [
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-004-1-2",
+      "field_name": "delivery_recipient_cell_reported",
+      "severity": "review",
+      "explanation": "The evidence quote used is from the luciferase experiment (first experiment), not the homeostasis HGF experiment. The abstract does not explicitly state the cell types for this experiment.",
+      "supporting_or_corrective_quote": "In homeostasis, HGF mRNA-LNP efficiently induce hepatocyte proliferation."
+    },
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-004-1-3",
+      "field_name": "delivery_recipient_cell_reported",
+      "severity": "review",
+      "explanation": "The evidence quote used is from the luciferase experiment, not the NAFLD experiment. The abstract does not explicitly state the cell types for this experiment.",
+      "supporting_or_corrective_quote": "injections of both HGF and EGF mRNA-LNP sharply reverse steatosis and accelerate restoration of liver function."
+    },
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-004-1-4",
+      "field_name": "delivery_recipient_cell_reported",
+      "severity": "review",
+      "explanation": "The evidence quote used is from the luciferase experiment, not the acetaminophen injury experiment. The abstract does not explicitly state the cell types for this experiment.",
+      "supporting_or_corrective_quote": "HGF and EGF mRNA-LNP accelerate liver regeneration after acetaminophen-induced acute liver injury with rapid return to baseline ALT levels."
+    }
+  ],
+  "completeness_assessment": "incomplete",
+  "verifier_summary": "The first-pass extraction captures most explicit facts, but there are evidence mismatches where the same quote from the luciferase experiment is used for subsequent experiments, despite the abstract not specifying cell types for those conditions. Additionally, the disease context for the first experiment (healthy mice) is not explicitly stated, but this is a minor omission. No issues with payloads stored as components or descriptions stored as composition were found. The experiments and outcomes are correctly separated."
+}

@@ -1,0 +1,236 @@
+{
+  "contract_version": "3.1.0",
+  "paper_id": "GP-002",
+  "lnp_experiment_id": "GP-002-E02",
+  "experiment_label": "mRNA-LNP transfection of fibrotic liver",
+  "is_lnp_experiment": true,
+  "lnp_formulation_name_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No formulation name reported in approved sentences."
+  },
+  "lnp_formulation_description_reported": {
+    "value": "mRNA lipid nanoparticles (LNPs)",
+    "status": "reported",
+    "evidence_sentence_id": "S05",
+    "evidence_quote": "mRNA lipid nanoparticles (LNPs)",
+    "missing_reason": null
+  },
+  "lnp_composition_raw_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No explicit composition reported."
+  },
+  "lnp_components": [],
+  "payload_type_reported": {
+    "value": "mRNA",
+    "status": "reported",
+    "evidence_sentence_id": "S05",
+    "evidence_quote": "mRNA",
+    "missing_reason": null
+  },
+  "payload_name_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No specific payload name reported."
+  },
+  "payload_encoded_product_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No encoded product reported."
+  },
+  "payload_molecular_target_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No molecular target reported."
+  },
+  "targeting_ligand_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No targeting ligand reported."
+  },
+  "cell_entities": [
+    {
+      "cell_entity_id": "CE1",
+      "cell_name_reported": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_sentence_id": "S05",
+        "evidence_quote": "hepatocytes",
+        "missing_reason": null
+      },
+      "cell_type_normalized": {
+        "value": "hepatocyte",
+        "status": "reported",
+        "evidence_sentence_id": "S05",
+        "evidence_quote": "hepatocytes",
+        "missing_reason": null
+      }
+    },
+    {
+      "cell_entity_id": "CE2",
+      "cell_name_reported": {
+        "value": "cells of spontaneous hepatocellular carcinomas",
+        "status": "reported",
+        "evidence_sentence_id": "S05",
+        "evidence_quote": "cells of spontaneous hepatocellular carcinomas",
+        "missing_reason": null
+      },
+      "cell_type_normalized": {
+        "value": "tumor_cell",
+        "status": "reported",
+        "evidence_sentence_id": "S05",
+        "evidence_quote": "cells of spontaneous hepatocellular carcinomas",
+        "missing_reason": null
+      }
+    }
+  ],
+  "delivery_recipient_cell_entity_ids": [
+    "CE1",
+    "CE2"
+  ],
+  "therapeutic_target_cell_entity_ids": [],
+  "tissue_or_organ_reported": {
+    "value": "liver",
+    "status": "reported",
+    "evidence_sentence_id": "S05",
+    "evidence_quote": "liver",
+    "missing_reason": null
+  },
+  "disease_context_reported": {
+    "value": "fibrotic liver",
+    "status": "reported",
+    "evidence_sentence_id": "S05",
+    "evidence_quote": "fibrotic",
+    "missing_reason": null
+  },
+  "species_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Species not reported in approved sentences."
+  },
+  "experimental_context_reported": {
+    "value": "in_vivo",
+    "status": "reported",
+    "evidence_sentence_id": "S05",
+    "evidence_quote": "intravenous delivery",
+    "missing_reason": null
+  },
+  "biological_model_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No biological model reported."
+  },
+  "dose_value_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No dose reported."
+  },
+  "dose_unit_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No dose unit reported."
+  },
+  "administration_route_reported": {
+    "value": "intravenous",
+    "status": "reported",
+    "evidence_sentence_id": "S05",
+    "evidence_quote": "intravenous delivery",
+    "missing_reason": null
+  },
+  "assay_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No assay reported."
+  },
+  "comparator_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No comparator reported."
+  },
+  "lnp_outcomes": [
+    {
+      "lnp_outcome_id": "O1",
+      "endpoint_family": {
+        "value": "transfection",
+        "status": "reported",
+        "evidence_sentence_id": "S05",
+        "evidence_quote": "efficiently transfects",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "efficient transfection of hepatocytes and tumor cells",
+        "status": "reported",
+        "evidence_sentence_id": "S05",
+        "evidence_quote": "efficiently transfects virtually all hepatocytes ... and also many cells of spontaneous hepatocellular carcinomas",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No numeric value reported."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No unit reported."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "efficiently transfects virtually all hepatocytes",
+        "status": "reported",
+        "evidence_sentence_id": "S05",
+        "evidence_quote": "efficiently transfects virtually all hepatocytes",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No comparator reported."
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint reported."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint unit reported."
+      }
+    }
+  ]
+}

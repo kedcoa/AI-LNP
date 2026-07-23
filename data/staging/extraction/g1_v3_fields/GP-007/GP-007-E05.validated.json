@@ -1,0 +1,218 @@
+{
+  "contract_version": "3.1.0",
+  "paper_id": "GP-007",
+  "lnp_experiment_id": "GP-007-E05",
+  "experiment_label": "ACT plus lactate-inhibitor experiment",
+  "is_lnp_experiment": true,
+  "lnp_formulation_name_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "lnp_formulation_description_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "lnp_composition_raw_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "lnp_components": [],
+  "payload_type_reported": {
+    "value": "siRNA",
+    "status": "reported",
+    "evidence_sentence_id": "S07",
+    "evidence_quote": "siMicu1 lipid nanoparticles",
+    "missing_reason": null
+  },
+  "payload_name_reported": {
+    "value": "siMicu1",
+    "status": "reported",
+    "evidence_sentence_id": "S07",
+    "evidence_quote": "siMicu1",
+    "missing_reason": null
+  },
+  "payload_encoded_product_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not applicable; payload is siRNA, not mRNA."
+  },
+  "payload_molecular_target_reported": {
+    "value": "Micu1",
+    "status": "reported",
+    "evidence_sentence_id": "S07",
+    "evidence_quote": "siMicu1",
+    "missing_reason": null
+  },
+  "targeting_ligand_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "cell_entities": [
+    {
+      "cell_entity_id": "CE1",
+      "cell_name_reported": {
+        "value": "LSECs",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "LSECs-specific",
+        "missing_reason": null
+      },
+      "cell_type_normalized": {
+        "value": "liver_sinusoidal_endothelial_cell",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "LSECs-specific",
+        "missing_reason": null
+      }
+    }
+  ],
+  "delivery_recipient_cell_entity_ids": [],
+  "therapeutic_target_cell_entity_ids": [
+    "CE1"
+  ],
+  "tissue_or_organ_reported": {
+    "value": "liver",
+    "status": "reported",
+    "evidence_sentence_id": "S07",
+    "evidence_quote": "anti-HIRI effects",
+    "missing_reason": null
+  },
+  "disease_context_reported": {
+    "value": "hepatic ischemia-reperfusion injury",
+    "status": "reported",
+    "evidence_sentence_id": "S07",
+    "evidence_quote": "anti-HIRI effects",
+    "missing_reason": null
+  },
+  "species_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "experimental_context_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "biological_model_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "dose_value_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "dose_unit_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "administration_route_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "assay_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "comparator_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "Not explicitly reported in approved source sentences."
+  },
+  "lnp_outcomes": [
+    {
+      "lnp_outcome_id": "OUT1",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "enhance its anti-HIRI effects",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "anti-HIRI effects",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "anti-HIRI effects",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "Not reported."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "Not reported."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "synergized to enhance",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "ACT synergized with ... siMicu1 lipid nanoparticles to enhance its anti-HIRI effects",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "Not explicitly reported."
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "Not reported."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "Not reported."
+      }
+    }
+  ]
+}

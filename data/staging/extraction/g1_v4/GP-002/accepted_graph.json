@@ -1,0 +1,875 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-002",
+  "source_scope": "abstract_only",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "E1",
+      "entity_type": "lnp_formulation",
+      "reported_name": "mRNA lipid nanoparticles (LNPs)",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "mRNA lipid nanoparticles (LNPs)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E2",
+      "entity_type": "payload",
+      "reported_name": "mRNA",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "E3",
+      "entity_type": "route",
+      "reported_name": "intravenous delivery",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "intravenous delivery"
+        }
+      ]
+    },
+    {
+      "entity_id": "E4",
+      "entity_type": "cell",
+      "reported_name": "hepatocytes",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "E5",
+      "entity_type": "cell",
+      "reported_name": "cells of spontaneous hepatocellular carcinomas",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "cells of spontaneous hepatocellular carcinomas"
+        }
+      ]
+    },
+    {
+      "entity_id": "E7",
+      "entity_type": "biological_model",
+      "reported_name": "xenograft models of both primary",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "xenograft models of both primary and secondary"
+        }
+      ]
+    },
+    {
+      "entity_id": "E8",
+      "entity_type": "biological_model",
+      "reported_name": "xenograft models of both primary and secondary",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "xenograft models of both primary and secondary"
+        }
+      ]
+    },
+    {
+      "entity_id": "E9",
+      "entity_type": "biological_model",
+      "reported_name": "spontaneous hepatocellular carcinomas in situ",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "spontaneous hepatocellular carcinomas in situ"
+        }
+      ]
+    },
+    {
+      "entity_id": "E10",
+      "entity_type": "disease",
+      "reported_name": "fibrotic",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "fibrotic"
+        }
+      ]
+    },
+    {
+      "entity_id": "E11",
+      "entity_type": "disease",
+      "reported_name": "cirrhotic",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "cirrhotic"
+        }
+      ]
+    },
+    {
+      "entity_id": "E12",
+      "entity_type": "physiological_state",
+      "reported_name": "healthy",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "healthy"
+        }
+      ]
+    },
+    {
+      "entity_id": "E13",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "liver"
+        }
+      ]
+    },
+    {
+      "entity_id": "E20",
+      "entity_type": "disease",
+      "reported_name": "spontaneous hepatocellular carcinomas in situ",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "spontaneous hepatocellular carcinomas in situ"
+        }
+      ]
+    },
+    {
+      "entity_id": "E22",
+      "entity_type": "disease",
+      "reported_name": "primary liver cancer",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C001",
+          "quote": "primary liver cancer"
+        }
+      ]
+    },
+    {
+      "entity_id": "E23",
+      "entity_type": "disease",
+      "reported_name": "secondary liver cancer",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "secondary liver cancer"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP1",
+      "entity_type": "endpoint",
+      "reported_name": "efficiently transfects virtually all hepatocytes",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently transfects virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP2",
+      "entity_type": "endpoint",
+      "reported_name": "many cells of spontaneous hepatocellular carcinomas",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "many cells of spontaneous hepatocellular carcinomas"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP3",
+      "entity_type": "endpoint",
+      "reported_name": "Delivery of mRNA is also possible",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "Delivery of mRNA is also possible"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP4",
+      "entity_type": "endpoint",
+      "reported_name": "attenuated protein expression relative to the normal liver",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "attenuated protein expression relative to the normal liver"
+        }
+      ]
+    },
+    {
+      "entity_id": "E16",
+      "entity_type": "outcome_value",
+      "reported_name": "virtually all hepatocytes",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "E17",
+      "entity_type": "outcome_value",
+      "reported_name": "many cells",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "many cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "E18",
+      "entity_type": "outcome_value",
+      "reported_name": "possible",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "possible"
+        }
+      ]
+    },
+    {
+      "entity_id": "E19",
+      "entity_type": "outcome_value",
+      "reported_name": "attenuated protein expression relative to the normal liver",
+      "normalized_name": null,
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "attenuated protein expression relative to the normal liver"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C_S1",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "E1",
+      "predicate": "carries_payload",
+      "object_entity_id": "E2",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "mRNA lipid nanoparticles (LNPs)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C_S2",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "E1",
+      "predicate": "has_route",
+      "object_entity_id": "E3",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "intravenous delivery"
+        }
+      ]
+    },
+    {
+      "claim_id": "C1_1",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E4",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently transfects virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C1_2",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E1",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E13",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "C1_3",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E1",
+      "predicate": "has_physiological_context",
+      "object_entity_id": "E12",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "healthy"
+        }
+      ]
+    },
+    {
+      "claim_id": "C1_4",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP1",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently transfects virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C1_5",
+      "experiment_id": "EXP1",
+      "subject_entity_id": "EP1",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E16",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C2_1",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E4",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently transfects virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C2_2",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E1",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E13",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "C2_3",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E1",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E10",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "fibrotic"
+        }
+      ]
+    },
+    {
+      "claim_id": "C2_4",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP1",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently transfects virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C2_5",
+      "experiment_id": "EXP2",
+      "subject_entity_id": "EP1",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E16",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C3_1",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E4",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently transfects virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C3_2",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E1",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E13",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "C3_3",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E1",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E11",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "cirrhotic"
+        }
+      ]
+    },
+    {
+      "claim_id": "C3_4",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP1",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "efficiently transfects virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C3_5",
+      "experiment_id": "EXP3",
+      "subject_entity_id": "EP1",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E16",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "C4_1",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E5",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "many cells of spontaneous hepatocellular carcinomas"
+        }
+      ]
+    },
+    {
+      "claim_id": "C4_2",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E1",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E20",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "spontaneous hepatocellular carcinomas in situ"
+        }
+      ]
+    },
+    {
+      "claim_id": "C4_3",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E1",
+      "predicate": "has_biological_model",
+      "object_entity_id": "E9",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "spontaneous hepatocellular carcinomas in situ"
+        }
+      ]
+    },
+    {
+      "claim_id": "C4_4",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP2",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "many cells of spontaneous hepatocellular carcinomas"
+        }
+      ]
+    },
+    {
+      "claim_id": "C4_5",
+      "experiment_id": "EXP4",
+      "subject_entity_id": "EP2",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E17",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "many cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "C5_1",
+      "experiment_id": "EXP5",
+      "subject_entity_id": "E1",
+      "predicate": "has_biological_model",
+      "object_entity_id": "E7",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "xenograft models of both primary and secondary"
+        }
+      ]
+    },
+    {
+      "claim_id": "C5_2",
+      "experiment_id": "EXP5",
+      "subject_entity_id": "E1",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E22",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "primary"
+        }
+      ]
+    },
+    {
+      "claim_id": "C5_3",
+      "experiment_id": "EXP5",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP3",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "Delivery of mRNA is also possible"
+        }
+      ]
+    },
+    {
+      "claim_id": "C5_4",
+      "experiment_id": "EXP5",
+      "subject_entity_id": "EP3",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E18",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "possible"
+        }
+      ]
+    },
+    {
+      "claim_id": "C5_5",
+      "experiment_id": "EXP5",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP4",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "attenuated protein expression relative to the normal liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "C5_6",
+      "experiment_id": "EXP5",
+      "subject_entity_id": "EP4",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E19",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "attenuated protein expression relative to the normal liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "C6_1",
+      "experiment_id": "EXP6",
+      "subject_entity_id": "E1",
+      "predicate": "has_biological_model",
+      "object_entity_id": "E8",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "xenograft models of both primary and secondary"
+        }
+      ]
+    },
+    {
+      "claim_id": "C6_2",
+      "experiment_id": "EXP6",
+      "subject_entity_id": "E1",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E23",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "secondary"
+        }
+      ]
+    },
+    {
+      "claim_id": "C6_3",
+      "experiment_id": "EXP6",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP3",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "Delivery of mRNA is also possible"
+        }
+      ]
+    },
+    {
+      "claim_id": "C6_4",
+      "experiment_id": "EXP6",
+      "subject_entity_id": "EP3",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E18",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "possible"
+        }
+      ]
+    },
+    {
+      "claim_id": "C6_5",
+      "experiment_id": "EXP6",
+      "subject_entity_id": "E1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP4",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "attenuated protein expression relative to the normal liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "C6_6",
+      "experiment_id": "EXP6",
+      "subject_entity_id": "EP4",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E19",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "attenuated protein expression relative to the normal liver"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP1",
+      "label": "Intravenous mRNA-LNP to healthy liver",
+      "claim_ids": [
+        "C1_1",
+        "C1_2",
+        "C1_3",
+        "C1_4",
+        "C1_5"
+      ],
+      "shared_claim_ids": [
+        "C_S1",
+        "C_S2"
+      ],
+      "source_scope_clause_ids": [
+        "C005"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Experiment inferred from abstract description; no explicit dose or timepoint."
+    },
+    {
+      "experiment_id": "EXP2",
+      "label": "Intravenous mRNA-LNP to fibrotic liver",
+      "claim_ids": [
+        "C2_1",
+        "C2_2",
+        "C2_3",
+        "C2_4",
+        "C2_5"
+      ],
+      "shared_claim_ids": [
+        "C_S1",
+        "C_S2"
+      ],
+      "source_scope_clause_ids": [
+        "C005"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Experiment inferred from abstract description."
+    },
+    {
+      "experiment_id": "EXP3",
+      "label": "Intravenous mRNA-LNP to cirrhotic liver",
+      "claim_ids": [
+        "C3_1",
+        "C3_2",
+        "C3_3",
+        "C3_4",
+        "C3_5"
+      ],
+      "shared_claim_ids": [
+        "C_S1",
+        "C_S2"
+      ],
+      "source_scope_clause_ids": [
+        "C005"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Experiment inferred from abstract description."
+    },
+    {
+      "experiment_id": "EXP4",
+      "label": "Intravenous mRNA-LNP to spontaneous hepatocellular carcinoma",
+      "claim_ids": [
+        "C4_1",
+        "C4_2",
+        "C4_3",
+        "C4_4",
+        "C4_5"
+      ],
+      "shared_claim_ids": [
+        "C_S1",
+        "C_S2"
+      ],
+      "source_scope_clause_ids": [
+        "C005"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Experiment inferred from abstract description."
+    },
+    {
+      "experiment_id": "EXP5",
+      "label": "Intravenous mRNA-LNP to xenograft model of primary liver cancer",
+      "claim_ids": [
+        "C5_1",
+        "C5_2",
+        "C5_3",
+        "C5_4",
+        "C5_5",
+        "C5_6"
+      ],
+      "shared_claim_ids": [
+        "C_S1",
+        "C_S2"
+      ],
+      "source_scope_clause_ids": [
+        "C006"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Experiment inferred from abstract description."
+    },
+    {
+      "experiment_id": "EXP6",
+      "label": "Intravenous mRNA-LNP to xenograft model of secondary liver cancer",
+      "claim_ids": [
+        "C6_1",
+        "C6_2",
+        "C6_3",
+        "C6_4",
+        "C6_5",
+        "C6_6"
+      ],
+      "shared_claim_ids": [
+        "C_S1",
+        "C_S2"
+      ],
+      "source_scope_clause_ids": [
+        "C006"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Experiment inferred from abstract description."
+    }
+  ]
+}
