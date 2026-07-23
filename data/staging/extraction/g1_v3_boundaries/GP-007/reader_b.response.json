@@ -1,0 +1,21 @@
+{
+  "model": "glm-5.2",
+  "finish_reason": "stop",
+  "content": "{\"contract_version\":\"3.0.0\",\"paper_id\":\"GP-007\",\"reader_id\":\"reader_b\",\"original_experiments_present\":true,\"experiments\":[{\"reader_experiment_key\":\"exp_1_act_in_vivo_hiri\",\"experiment_label\":\"ACT treatment in HIRI mice in vivo\",\"evidence_sentence_ids\":[\"S03\",\"S04\",\"S05\",\"S06\"],\"experiment_anchor_quote\":\"we explored the hepatoprotective mechanisms of ACT in vivo in HIRI mice\",\"formulation_or_delivery_system_mention\":null,\"payload_or_treatment_mention\":\"acteoside (ACT)\",\"biological_model_mention\":\"HIRI mice\",\"recipient_cell_mention\":null,\"therapeutic_target_mention\":\"MICU1\",\"distinctness_reason\":\"In vivo HIRI mouse model represents a distinct biological model compared to in vitro cell experiments.\"},{\"reader_experiment_key\":\"exp_2_act_in_vitro_lsecs\",\"experiment_label\":\"ACT treatment in hypoxia-reoxygenation or lactate-stimulated LSECs in vitro\",\"evidence_sentence_ids\":[\"S03\",\"S04\",\"S05\",\"S06\"],\"experiment_anchor_quote\":\"in vitro in hypoxia-reoxygenation or lactate-stimulated LSECs\",\"formulation_or_delivery_system_mention\":null,\"payload_or_treatment_mention\":\"acteoside (ACT)\",\"biological_model_mention\":\"hypoxia-reoxygenation or lactate-stimulated LSECs\",\"recipient_cell_mention\":\"liver sinusoidal endothelial cells (LSECs)\",\"therapeutic_target_mention\":\"MICU1\",\"distinctness_reason\":\"In vitro hypoxia-reoxygenation or lactate-stimulated LSECs model is a distinct biological model from in vivo mice.\"},{\"reader_experiment_key\":\"exp_3_act_combination_lactate_inhibitor_or_simicu1\",\"experiment_label\":\"ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles\",\"evidence_sentence_ids\":[\"S07\"],\"experiment_anchor_quote\":\"ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects\",\"formulation_or_delivery_system_mention\":\"lipid nanoparticles\",\"payload_or_treatment_mention\":\"ACT, lactate inhibitors, siMicu1\",\"biological_model_mention\":\"HIRI model\",\"recipient_cell_mention\":null,\"therapeutic_target_mention\":\"MICU1, lactate\",\"distinctness_reason\":\"Explicit combination treatment with lactate inhibitors or siMicu1 lipid nanoparticles differs from ACT alone.\"},{\"reader_experiment_key\":\"exp_4_lsec_specific_micu1_overexpression\",\"experiment_label\":\"LSECs-specific Micu1 overexpression\",\"evidence_sentence_ids\":[\"S03\",\"S07\"],\"experiment_anchor_quote\":\"LSECs-specific Micu1 overexpression abolished these benefits\",\"formulation_or_delivery_system_mention\":\"LSECs-specific overexpression virus\",\"payload_or_treatment_mention\":\"Micu1 overexpression\",\"biological_model_mention\":\"HIRI model\",\"recipient_cell_mention\":\"liver sinusoidal endothelial cells (LSECs)\",\"therapeutic_target_mention\":\"MICU1\",\"distinctness_reason\":\"Different payload (overexpression virus) and opposite effect compared to ACT or siMicu1 treatments.\"},{\"reader_experiment_key\":\"exp_5_act_derivatives_structural_analysis\",\"experiment_label\":\"Structural analysis of ACT derivatives\",\"evidence_sentence_ids\":[\"S03\",\"S08\"],\"experiment_anchor_quote\":\"Structural analysis revealed that the C26/C27/C40/C41 hydroxyl groups determined ACT's MICU1-binding and hepatoprotective activities.\",\"formulation_or_delivery_system_mention\":null,\"payload_or_treatment_mention\":\"ACT derivatives\",\"biological_model_mention\":\"Structural analysis\",\"recipient_cell_mention\":null,\"therapeutic_target_mention\":\"MICU1\",\"distinctness_reason\":\"Structural analysis of ACT derivatives represents a distinct experimental approach and payload variation.\"}]}",
+  "usage": {
+    "completion_tokens": 1965,
+    "prompt_tokens": 1347,
+    "total_tokens": 3312,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 939,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "contract_version": "3.0.0",
+  "paper_id": "GP-004",
+  "reader_id": "reader_b",
+  "original_experiments_present": true,
+  "experiments": [
+    {
+      "reader_experiment_key": "experiment_1_luciferase_mRNA_LNP_hepatotropism",
+      "experiment_label": "Luciferase mRNA-LNP hepatotropism in healthy mice",
+      "evidence_sentence_ids": [
+        "S03",
+        "S04"
+      ],
+      "experiment_anchor_quote": "We confirm specific hepatotropism of mRNA-LNP via intravenous injection of firefly luciferase encoding mRNA-LNP",
+      "formulation_or_delivery_system_mention": "lipid-nanoparticle-encapsulated mRNA (mRNA-LNP)",
+      "payload_or_treatment_mention": "firefly luciferase encoding mRNA",
+      "biological_model_mention": "mouse (homeostasis, implied healthy)",
+      "recipient_cell_mention": "hepatocytes, endothelial cells, Kupffer cells",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Different payload (luciferase vs growth factors) and purpose (confirm hepatotropism) from other experiments."
+    },
+    {
+      "reader_experiment_key": "experiment_2_HGF_mRNA_LNP_healthy",
+      "experiment_label": "HGF mRNA-LNP in healthy mice",
+      "evidence_sentence_ids": [
+        "S05"
+      ],
+      "experiment_anchor_quote": "In homeostasis, HGF mRNA-LNP efficiently induce hepatocyte proliferation.",
+      "formulation_or_delivery_system_mention": "mRNA-LNP",
+      "payload_or_treatment_mention": "HGF mRNA",
+      "biological_model_mention": "mouse in homeostasis (healthy)",
+      "recipient_cell_mention": "hepatocytes",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Different payload (HGF only) and context (healthy) compared to other experiments with combination or disease models."
+    },
+    {
+      "reader_experiment_key": "experiment_3_HGF_EGF_mRNA_LNP_NAFLD",
+      "experiment_label": "HGF+EGF mRNA-LNP in chronic NAFLD model",
+      "evidence_sentence_ids": [
+        "S06"
+      ],
+      "experiment_anchor_quote": "In a chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease, injections of both HGF and EGF mRNA-LNP sharply reverse steatosis and accelerate restoration of liver function.",
+      "formulation_or_delivery_system_mention": "mRNA-LNP",
+      "payload_or_treatment_mention": "HGF and EGF mRNA (combination)",
+      "biological_model_mention": "chronic liver injury mouse model (NAFLD)",
+      "recipient_cell_mention": "hepatocytes (implied)",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Different disease context (chronic NAFLD) and combination payload compared to healthy or acute liver injury experiments."
+    },
+    {
+      "reader_experiment_key": "experiment_4_HGF_EGF_mRNA_LNP_acetaminophen",
+      "experiment_label": "HGF+EGF mRNA-LNP in acute acetaminophen injury model",
+      "evidence_sentence_ids": [
+        "S07"
+      ],
+      "experiment_anchor_quote": "Likewise, HGF and EGF mRNA-LNP accelerate liver regeneration after acetaminophen-induced acute liver injury with rapid return to baseline ALT levels.",
+      "formulation_or_delivery_system_mention": "mRNA-LNP",
+      "payload_or_treatment_mention": "HGF and EGF mRNA (combination)",
+      "biological_model_mention": "acetaminophen-induced acute liver injury mouse model",
+      "recipient_cell_mention": "hepatocytes (implied)",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Different disease context (acute acetaminophen injury) compared to other experiments with healthy or chronic NAFLD models."
+    }
+  ]
+}

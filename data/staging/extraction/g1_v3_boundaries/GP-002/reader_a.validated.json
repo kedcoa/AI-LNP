@@ -1,0 +1,50 @@
+{
+  "contract_version": "3.0.0",
+  "paper_id": "GP-002",
+  "reader_id": "reader_a",
+  "original_experiments_present": true,
+  "experiments": [
+    {
+      "reader_experiment_key": "Exp1",
+      "experiment_label": "Healthy/fibrotic/cirrhotic liver",
+      "evidence_sentence_ids": [
+        "S05"
+      ],
+      "experiment_anchor_quote": "intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver",
+      "formulation_or_delivery_system_mention": "lipid nanoparticles",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": "healthy, fibrotic, and cirrhotic liver",
+      "recipient_cell_mention": "hepatocytes",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "This experiment reports delivery to healthy, fibrotic, and cirrhotic liver, which is a distinct disease context from spontaneous tumors and xenografts."
+    },
+    {
+      "reader_experiment_key": "Exp2",
+      "experiment_label": "Spontaneous hepatocellular carcinoma",
+      "evidence_sentence_ids": [
+        "S05"
+      ],
+      "experiment_anchor_quote": "many cells of spontaneous hepatocellular carcinomas in situ",
+      "formulation_or_delivery_system_mention": "lipid nanoparticles",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": "spontaneous hepatocellular carcinomas",
+      "recipient_cell_mention": "cells of spontaneous hepatocellular carcinomas",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "This experiment reports delivery to spontaneous hepatocellular carcinoma, a distinct disease context from non-tumor liver and xenografts."
+    },
+    {
+      "reader_experiment_key": "Exp3",
+      "experiment_label": "Xenograft models of primary and secondary liver cancer",
+      "evidence_sentence_ids": [
+        "S06"
+      ],
+      "experiment_anchor_quote": "Delivery of mRNA is also possible in xenograft models of both primary and secondary liver cancer",
+      "formulation_or_delivery_system_mention": "lipid nanoparticles",
+      "payload_or_treatment_mention": "mRNA",
+      "biological_model_mention": "xenograft models of both primary and secondary liver cancer",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "This experiment reports delivery to xenograft models of primary and secondary liver cancer, a distinct disease context from non-tumor liver and spontaneous tumors."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "contract_version": "3.1.0",
+  "paper_id": "GP-007",
+  "source_read_again": true,
+  "issues": [
+    {
+      "experiment_id": "GP-007-E05",
+      "field_name": "is_lnp_experiment",
+      "issue_type": "unsupported_value",
+      "severity": "blocking",
+      "explanation": "E05 is labeled 'ACT plus lactate-inhibitor experiment' and its boundary payload is 'ACT + lactate inhibitor'. There is no LNP mentioned in S07 for the lactate-inhibitor arm. The extraction incorrectly marks is_lnp_experiment=true and populates payload_type=siRNA, payload_name=siMicu1, and payload_molecular_target=Micu1, all of which belong to E04 (the siMicu1-LNP experiment), not E05.",
+      "supporting_or_corrective_sentence_id": "S07",
+      "supporting_or_corrective_quote": "ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects"
+    },
+    {
+      "experiment_id": "GP-007-E05",
+      "field_name": "payload_type_reported",
+      "issue_type": "wrong_entity",
+      "severity": "blocking",
+      "explanation": "payload_type is set to 'siRNA' with evidence from 'siMicu1 lipid nanoparticles', but E05 is the lactate-inhibitor experiment. The siRNA/siMicu1 payload belongs to E04. E05's payload should be a lactate inhibitor (small molecule), not siRNA.",
+      "supporting_or_corrective_sentence_id": "S07",
+      "supporting_or_corrective_quote": "ACT synergized with lactate inhibitors"
+    },
+    {
+      "experiment_id": "GP-007-E05",
+      "field_name": "payload_name_reported",
+      "issue_type": "wrong_entity",
+      "severity": "blocking",
+      "explanation": "payload_name is set to 'siMicu1' but E05 is the ACT + lactate inhibitor experiment. siMicu1 is the payload of E04, not E05.",
+      "supporting_or_corrective_sentence_id": "S07",
+      "supporting_or_corrective_quote": "ACT synergized with lactate inhibitors"
+    },
+    {
+      "experiment_id": "GP-007-E05",
+      "field_name": "payload_molecular_target_reported",
+      "issue_type": "wrong_entity",
+      "severity": "blocking",
+      "explanation": "payload_molecular_target is set to 'Micu1' but E05 is the lactate-inhibitor experiment. Micu1 is the target of the siMicu1 LNP in E04, not the lactate inhibitor in E05.",
+      "supporting_or_corrective_sentence_id": "S07",
+      "supporting_or_corrective_quote": "ACT synergized with lactate inhibitors"
+    },
+    {
+      "experiment_id": "GP-007-E05",
+      "field_name": "lnp_outcomes[0].outcome_qualitative_value_reported",
+      "issue_type": "evidence_mismatch",
+      "severity": "blocking",
+      "explanation": "The outcome evidence_quote references 'siMicu1 lipid nanoparticles' but E05 is the lactate-inhibitor experiment. The quote should reference lactate inhibitors, not siMicu1 LNPs.",
+      "supporting_or_corrective_sentence_id": "S07",
+      "supporting_or_corrective_quote": "ACT synergized with lactate inhibitors"
+    },
+    {
+      "experiment_id": "GP-007-E06",
+      "field_name": "cell_entities",
+      "issue_type": "unsupported_value",
+      "severity": "review",
+      "explanation": "cell_entities is populated with LSECs sourced from S03, but S08 (the structural-analysis sentence) does not mention any cells. S03 is a general methods overview sentence listing many tools; the structural analysis experiment itself (S08) is about ACT derivative hydroxyl groups and MICU1-binding, with no cell entity mentioned.",
+      "supporting_or_corrective_sentence_id": "S08",
+      "supporting_or_corrective_quote": "Structural analysis revealed that the C26/C27/C40/C41 hydroxyl groups determined ACT's MICU1-binding and hepatoprotective activities."
+    }
+  ],
+  "completeness_assessment": "incomplete",
+  "verifier_summary": "E05 (ACT + lactate inhibitor) is critically mis-extracted: it is incorrectly flagged as an LNP experiment with siRNA/siMicu1 payload fields that actually belong to E04. All LNP-related fields and the outcome evidence quote in E05 are wrong. E06 has an unsupported cell_entities entry (LSECs) drawn from the general methods sentence S03 rather than from the structural-analysis sentence S08, which mentions no cells. E01–E04 extractions are consistent with their approved sentences."
+}

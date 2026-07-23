@@ -1,0 +1,33 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-008",
+  "source_read_again": true,
+  "issues": [
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-008-1",
+      "field_name": "tissue_or_organ_reported",
+      "severity": "review",
+      "explanation": "The evidence quote 'liver fibrosis' is the disease context, not the tissue/organ. The tissue 'liver' is implied but not directly stated in the quote. The quote should be a direct mention of 'liver'.",
+      "supporting_or_corrective_quote": "liver"
+    },
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-008-1",
+      "field_name": "delivery_recipient_cell_normalized",
+      "severity": "review",
+      "explanation": "The evidence quote 'selectively transduce liver macrophages' supports the reported value 'liver macrophages', but the normalized value 'other_liver_macrophage' is not directly supported by the quote. The quote does not contain that term.",
+      "supporting_or_corrective_quote": "selectively transduce liver macrophages"
+    },
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-008-1-1",
+      "field_name": "lnp_component_role",
+      "severity": "review",
+      "explanation": "The evidence quote does not explicitly state that the CD163 antibody serves as a 'targeting_ligand'. The role is inferred from the description of conjugation, but the quote does not directly support the field value.",
+      "supporting_or_corrective_quote": "CD163 antibody-conjugated liposomal nanoparticles"
+    }
+  ],
+  "completeness_assessment": "complete",
+  "verifier_summary": "The first pass extraction captures all explicitly reported facts from the abstract. However, there are minor evidence quote mismatches for the tissue/organ field (quote states disease instead of tissue), the normalized cell type (quote does not match normalized term), and the component role (role not explicitly stated in quote). These issues are flagged for review but do not indicate missing or incorrect information."
+}

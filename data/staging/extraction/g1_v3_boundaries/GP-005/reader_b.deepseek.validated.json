@@ -1,0 +1,80 @@
+{
+  "contract_version": "3.0.0",
+  "paper_id": "GP-005",
+  "reader_id": "reader_b",
+  "original_experiments_present": true,
+  "experiments": [
+    {
+      "reader_experiment_key": "GP-005_reader_b_exp1",
+      "experiment_label": "mRNA-LNP in vivo",
+      "evidence_sentence_ids": [
+        "S02",
+        "S03"
+      ],
+      "experiment_anchor_quote": "the translation of Egfp mRNA occurs exclusively in hepatocytes during intravital imaging.",
+      "formulation_or_delivery_system_mention": "lipid nanoparticles (LNP)",
+      "payload_or_treatment_mention": "mRNA encoding enhanced green fluorescent protein (Egfp)",
+      "biological_model_mention": "liver in vivo",
+      "recipient_cell_mention": "Kupffer cells (KC) and hepatocytes",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Payload is Egfp mRNA; translation outcome reported."
+    },
+    {
+      "reader_experiment_key": "GP-005_reader_b_exp2",
+      "experiment_label": "siRNA-LNP in vivo",
+      "evidence_sentence_ids": [
+        "S02",
+        "S03"
+      ],
+      "experiment_anchor_quote": "both KC and hepatocytes demonstrate comparable high and rapid uptake of mRNA-LNP and siRNA-LNP in vivo",
+      "formulation_or_delivery_system_mention": "lipid nanoparticles (LNP)",
+      "payload_or_treatment_mention": "siRNA",
+      "biological_model_mention": "liver in vivo",
+      "recipient_cell_mention": "Kupffer cells (KC) and hepatocytes",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Payload is siRNA; uptake outcome reported."
+    },
+    {
+      "reader_experiment_key": "GP-005_reader_b_exp3",
+      "experiment_label": "RNase inhibition attempt",
+      "evidence_sentence_ids": [
+        "S04"
+      ],
+      "experiment_anchor_quote": "inhibiting intracellular ribonuclease",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "inhibiting intracellular ribonuclease",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "NPC",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Different treatment: inhibiting intracellular ribonuclease."
+    },
+    {
+      "reader_experiment_key": "GP-005_reader_b_exp4",
+      "experiment_label": "Pseudouridine substitution attempt",
+      "evidence_sentence_ids": [
+        "S04"
+      ],
+      "experiment_anchor_quote": "substituting uridine bases in mRNA with pseudouridine",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "substituting uridine bases in mRNA with pseudouridine",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "NPC",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Different payload modification: pseudouridine substitution."
+    },
+    {
+      "reader_experiment_key": "GP-005_reader_b_exp5",
+      "experiment_label": "Different ionizable lipid attempt",
+      "evidence_sentence_ids": [
+        "S04"
+      ],
+      "experiment_anchor_quote": "using a different ionizable lipid in the LNP mixture",
+      "formulation_or_delivery_system_mention": "LNP mixture",
+      "payload_or_treatment_mention": "different ionizable lipid",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "NPC",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Different formulation: different ionizable lipid in LNP."
+    }
+  ]
+}

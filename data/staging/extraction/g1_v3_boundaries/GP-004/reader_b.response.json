@@ -1,0 +1,21 @@
+{
+  "model": "glm-5.2",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"3.0.0\",\n  \"paper_id\": \"GP-004\",\n  \"reader_id\": \"reader_b\",\n  \"original_experiments_present\": true,\n  \"experiments\": [\n    {\n      \"reader_experiment_key\": \"GP-004-EXP-1\",\n      \"experiment_label\": \"mRNA-LNP hepatotropism confirmation via luciferase expression\",\n      \"evidence_sentence_ids\": [\"S03\", \"S04\"],\n      \"experiment_anchor_quote\": \"We confirm specific hepatotropism of mRNA-LNP via intravenous injection of firefly luciferase encoding mRNA-LNP, with protein expression lasting about 3 days.\",\n      \"formulation_or_delivery_system_mention\": \"lipid-nanoparticle-encapsulated mRNA (mRNA-LNP)\",\n      \"payload_or_treatment_mention\": \"firefly luciferase encoding mRNA\",\n      \"biological_model_mention\": \"mice\",\n      \"recipient_cell_mention\": \"hepatocytes, endothelial cells, Kupffer cells\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Distinct payload (luciferase reporter) and purpose (biodistribution/tropism confirmation) versus therapeutic experiments.\"\n    },\n    {\n      \"reader_experiment_key\": \"GP-004-EXP-2\",\n      \"experiment_label\": \"HGF mRNA-LNP in homeostatic liver to induce hepatocyte proliferation\",\n      \"evidence_sentence_ids\": [\"S05\"],\n      \"experiment_anchor_quote\": \"In homeostasis, HGF mRNA-LNP efficiently induce hepatocyte proliferation.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF mRNA-LNP\",\n      \"biological_model_mention\": \"mice (homeostatic, non-injured)\",\n      \"recipient_cell_mention\": \"hepatocytes\",\n      \"therapeutic_target_mention\": \"hepatocyte proliferation\",\n      \"distinctness_reason\": \"Distinct disease context (homeostasis/no injury) and single payload (HGF only) versus injury models.\"\n    },\n    {\n      \"reader_experiment_key\": \"GP-004-EXP-3\",\n      \"experiment_label\": \"HGF and EGF mRNA-LNP in chronic liver injury (NAFLD) model\",\n      \"evidence_sentence_ids\": [\"S06\"],\n      \"experiment_anchor_quote\": \"In a chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease, injections of both HGF and EGF mRNA-LNP sharply reverse steatosis and accelerate restoration of liver function.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF and EGF mRNA-LNP (combination)\",\n      \"biological_model_mention\": \"chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease\",\n      \"recipient_cell_mention\": \"hepatocytes\",\n      \"therapeutic_target_mention\": \"steatosis reversal; liver function restoration\",\n      \"distinctness_reason\": \"Distinct disease context (chronic NAFLD model) and combination payload (HGF+EGF) versus homeostatic or acute injury experiments.\"\n    },\n    {\n      \"reader_experiment_key\": \"GP-004-EXP-4\",\n      \"experiment_label\": \"HGF and EGF mRNA-LNP in acetaminophen-induced acute liver injury\",\n      \"evidence_sentence_ids\": [\"S07\"],\n      \"experiment_anchor_quote\": \"Likewise, HGF and EGF mRNA-LNP accelerate liver regeneration after acetaminophen-induced acute liver injury with rapid return to baseline ALT levels.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF and EGF mRNA-LNP (combination)\",\n      \"biological_model_mention\": \"acetaminophen-induced acute liver injury mouse model\",\n      \"recipient_cell_mention\": \"hepatocytes\",\n      \"therapeutic_target_mention\": \"liver regeneration; ALT normalization\",\n      \"distinctness_reason\": \"Distinct disease context (acute acetaminophen injury) and timepoint/outcome (rapid ALT return) versus chronic NAFLD or homeostatic experiments.\"\n    }\n  ]\n}",
+  "usage": {
+    "completion_tokens": 1096,
+    "prompt_tokens": 1164,
+    "total_tokens": 2260,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 193,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,452 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-007",
+  "source_read_again": true,
+  "observations": [
+    {
+      "observation_id": "OBS-001",
+      "experiment_id": "EXP-001",
+      "claim_id": "C-EXP001-6",
+      "issue_type": "wrong_entity_type",
+      "action": "corrected",
+      "explanation": "Predicate has_outcome_value requires the subject to be an endpoint. Changed subject_entity_id from E-008 (intervention) to E-011 (endpoint).",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "enhance its anti-HIRI effects"
+        }
+      ]
+    }
+  ],
+  "corrected_graph": {
+    "contract_version": "4.0.0",
+    "paper_id": "GP-007",
+    "source_scope": "abstract_only",
+    "original_lnp_experiments_present": true,
+    "entities": [
+      {
+        "entity_id": "E-001",
+        "entity_type": "lnp_formulation",
+        "reported_name": "siMicu1 lipid nanoparticles",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "siMicu1 lipid nanoparticles"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-002",
+        "entity_type": "payload",
+        "reported_name": "siMicu1",
+        "normalized_name": null,
+        "normalization_status": "inferred",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "siMicu1"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-003",
+        "entity_type": "molecular_target",
+        "reported_name": "MICU1",
+        "normalized_name": "MICU1",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "C002",
+            "quote": "mitochondrial calcium uptake 1 (MICU1)"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-004",
+        "entity_type": "cell",
+        "reported_name": "liver sinusoidal endothelial cells (LSECs)",
+        "normalized_name": "LSECs",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "liver sinusoidal endothelial cells (LSECs)"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-005",
+        "entity_type": "disease",
+        "reported_name": "Hepatic ischemia-reperfusion injury (HIRI)",
+        "normalized_name": "HIRI",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "C001",
+            "quote": "Hepatic ischemia-reperfusion injury (HIRI)"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-006",
+        "entity_type": "species",
+        "reported_name": "mice",
+        "normalized_name": "Mus musculus",
+        "normalization_status": "inferred",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "HIRI mice"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-007",
+        "entity_type": "biological_model",
+        "reported_name": "HIRI mice",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "HIRI mice"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-008",
+        "entity_type": "intervention",
+        "reported_name": "acteoside (ACT)",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C002",
+            "quote": "acteoside (ACT)"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-009",
+        "entity_type": "physiological_state",
+        "reported_name": "hypoxia-reoxygenation",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "hypoxia-reoxygenation"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-010",
+        "entity_type": "physiological_state",
+        "reported_name": "lactate-stimulated",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "lactate-stimulated"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-011",
+        "entity_type": "endpoint",
+        "reported_name": "anti-HIRI effects",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C007",
+            "quote": "anti-HIRI effects"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-012",
+        "entity_type": "outcome_value",
+        "reported_name": "enhanced",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C007",
+            "quote": "enhance its anti-HIRI effects"
+          }
+        ]
+      },
+      {
+        "entity_id": "E-013",
+        "entity_type": "biological_model",
+        "reported_name": "in vitro LSECs model",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "in vitro in hypoxia-reoxygenation or lactate-stimulated LSECs"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "C-SHARED-1",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "E-001",
+        "predicate": "carries_payload",
+        "object_entity_id": "E-002",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "siMicu1 lipid nanoparticles"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-SHARED-2",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "E-002",
+        "predicate": "targets_molecule",
+        "object_entity_id": "E-003",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "siMicu1"
+          },
+          {
+            "clause_id": "C002",
+            "quote": "mitochondrial calcium uptake 1 (MICU1)"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP001-1",
+        "experiment_id": "EXP-001",
+        "subject_entity_id": "E-007",
+        "predicate": "has_disease_context",
+        "object_entity_id": "E-005",
+        "evidence": [
+          {
+            "clause_id": "C001",
+            "quote": "Hepatic ischemia-reperfusion injury (HIRI)"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP001-2",
+        "experiment_id": "EXP-001",
+        "subject_entity_id": "E-007",
+        "predicate": "has_species",
+        "object_entity_id": "E-006",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "HIRI mice"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP001-3",
+        "experiment_id": "EXP-001",
+        "subject_entity_id": "E-007",
+        "predicate": "has_intervention",
+        "object_entity_id": "E-008",
+        "evidence": [
+          {
+            "clause_id": "C002",
+            "quote": "acteoside (ACT)"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP001-4",
+        "experiment_id": "EXP-001",
+        "subject_entity_id": "E-007",
+        "predicate": "has_intervention",
+        "object_entity_id": "E-001",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "siMicu1 lipid nanoparticles"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP001-5",
+        "experiment_id": "EXP-001",
+        "subject_entity_id": "E-008",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E-011",
+        "evidence": [
+          {
+            "clause_id": "C007",
+            "quote": "ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP001-6",
+        "experiment_id": "EXP-001",
+        "subject_entity_id": "E-011",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E-012",
+        "evidence": [
+          {
+            "clause_id": "C007",
+            "quote": "enhance its anti-HIRI effects"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP002-1",
+        "experiment_id": "EXP-002",
+        "subject_entity_id": "E-013",
+        "predicate": "has_physiological_context",
+        "object_entity_id": "E-009",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "hypoxia-reoxygenation"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP002-2",
+        "experiment_id": "EXP-002",
+        "subject_entity_id": "E-001",
+        "predicate": "delivered_to_cell",
+        "object_entity_id": "E-004",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "siMicu1 lipid nanoparticles"
+          },
+          {
+            "clause_id": "C003",
+            "quote": "hypoxia-reoxygenation"
+          },
+          {
+            "clause_id": "C003",
+            "quote": "liver sinusoidal endothelial cells (LSECs)"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP003-1",
+        "experiment_id": "EXP-003",
+        "subject_entity_id": "E-013",
+        "predicate": "has_physiological_context",
+        "object_entity_id": "E-010",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "lactate-stimulated"
+          }
+        ]
+      },
+      {
+        "claim_id": "C-EXP003-2",
+        "experiment_id": "EXP-003",
+        "subject_entity_id": "E-001",
+        "predicate": "delivered_to_cell",
+        "object_entity_id": "E-004",
+        "evidence": [
+          {
+            "clause_id": "C003",
+            "quote": "siMicu1 lipid nanoparticles"
+          },
+          {
+            "clause_id": "C003",
+            "quote": "lactate-stimulated"
+          },
+          {
+            "clause_id": "C003",
+            "quote": "liver sinusoidal endothelial cells (LSECs)"
+          }
+        ]
+      }
+    ],
+    "experiments": [
+      {
+        "experiment_id": "SHARED",
+        "label": "Shared LNP formulation and payload characteristics",
+        "claim_ids": [
+          "C-SHARED-1",
+          "C-SHARED-2"
+        ],
+        "shared_claim_ids": [],
+        "source_scope_clause_ids": [
+          "C003",
+          "C002"
+        ],
+        "boundary_status": "inferred",
+        "boundary_reason": "Inferred from the use of siMicu1 lipid nanoparticles across multiple experimental contexts."
+      },
+      {
+        "experiment_id": "EXP-001",
+        "label": "In vivo combination of ACT and siMicu1 LNP in HIRI mice",
+        "claim_ids": [
+          "C-EXP001-1",
+          "C-EXP001-2",
+          "C-EXP001-3",
+          "C-EXP001-4",
+          "C-EXP001-5",
+          "C-EXP001-6"
+        ],
+        "shared_claim_ids": [
+          "C-SHARED-1",
+          "C-SHARED-2"
+        ],
+        "source_scope_clause_ids": [
+          "C001",
+          "C002",
+          "C003",
+          "C007"
+        ],
+        "boundary_status": "inferred",
+        "boundary_reason": "Inferred from clause C007 which states that ACT synergized with siMicu1 lipid nanoparticles to enhance anti-HIRI effects, indicating an in vivo experiment with both interventions."
+      },
+      {
+        "experiment_id": "EXP-002",
+        "label": "In vitro siMicu1 LNP in LSECs under hypoxia-reoxygenation",
+        "claim_ids": [
+          "C-EXP002-1",
+          "C-EXP002-2"
+        ],
+        "shared_claim_ids": [
+          "C-SHARED-1",
+          "C-SHARED-2"
+        ],
+        "source_scope_clause_ids": [
+          "C003"
+        ],
+        "boundary_status": "inferred",
+        "boundary_reason": "Inferred from clause C003 which mentions using siMicu1 lipid nanoparticles in vitro in hypoxia-reoxygenation LSECs."
+      },
+      {
+        "experiment_id": "EXP-003",
+        "label": "In vitro siMicu1 LNP in LSECs under lactate-stimulated",
+        "claim_ids": [
+          "C-EXP003-1",
+          "C-EXP003-2"
+        ],
+        "shared_claim_ids": [
+          "C-SHARED-1",
+          "C-SHARED-2"
+        ],
+        "source_scope_clause_ids": [
+          "C003"
+        ],
+        "boundary_status": "inferred",
+        "boundary_reason": "Inferred from clause C003 which mentions using siMicu1 lipid nanoparticles in vitro in lactate-stimulated LSECs."
+      }
+    ]
+  },
+  "unresolved_ambiguities": []
+}

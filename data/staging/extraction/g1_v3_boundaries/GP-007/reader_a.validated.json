@@ -1,0 +1,97 @@
+{
+  "contract_version": "3.0.0",
+  "paper_id": "GP-007",
+  "reader_id": "reader_a",
+  "original_experiments_present": true,
+  "experiments": [
+    {
+      "reader_experiment_key": "GP-007_exp1",
+      "experiment_label": "ACT treatment in HIRI mice (in vivo)",
+      "evidence_sentence_ids": [
+        "S03",
+        "S04"
+      ],
+      "experiment_anchor_quote": "ACT enhanced endoplasmic reticulum function and restored mitochondrial homeostasis, thereby alleviating LSECs damage and HIRI.",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "acteoside (ACT)",
+      "biological_model_mention": "HIRI mice",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": "MICU1",
+      "distinctness_reason": "Distinct treatment (ACT) and model (in vivo HIRI mice) from other experiments."
+    },
+    {
+      "reader_experiment_key": "GP-007_exp2",
+      "experiment_label": "ACT treatment in stimulated LSECs (in vitro)",
+      "evidence_sentence_ids": [
+        "S03",
+        "S04"
+      ],
+      "experiment_anchor_quote": "in vitro in hypoxia-reoxygenation or lactate-stimulated LSECs",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "ACT",
+      "biological_model_mention": "liver sinusoidal endothelial cells (LSECs)",
+      "recipient_cell_mention": "LSECs",
+      "therapeutic_target_mention": "MICU1",
+      "distinctness_reason": "In vitro model with LSECs under hypoxia-reoxygenation or lactate stimulation, distinct from in vivo experiments."
+    },
+    {
+      "reader_experiment_key": "GP-007_exp3",
+      "experiment_label": "LSECs-specific Micu1 overexpression in HIRI mice",
+      "evidence_sentence_ids": [
+        "S03",
+        "S07"
+      ],
+      "experiment_anchor_quote": "LSECs-specific Micu1 overexpression abolished these benefits.",
+      "formulation_or_delivery_system_mention": "LSECs-specific overexpression virus",
+      "payload_or_treatment_mention": "Micu1 overexpression",
+      "biological_model_mention": "HIRI mice",
+      "recipient_cell_mention": "LSECs",
+      "therapeutic_target_mention": "MICU1",
+      "distinctness_reason": "Genetic overexpression of Micu1 specifically in LSECs, distinct from drug treatment experiments."
+    },
+    {
+      "reader_experiment_key": "GP-007_exp4",
+      "experiment_label": "ACT with siMicu1 lipid nanoparticles in HIRI mice",
+      "evidence_sentence_ids": [
+        "S03",
+        "S07"
+      ],
+      "experiment_anchor_quote": "ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects",
+      "formulation_or_delivery_system_mention": "siMicu1 lipid nanoparticles",
+      "payload_or_treatment_mention": "ACT and siMicu1",
+      "biological_model_mention": "HIRI mice",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": "MICU1",
+      "distinctness_reason": "Combination of ACT with siMicu1 knockdown, distinct from ACT alone or other combinations."
+    },
+    {
+      "reader_experiment_key": "GP-007_exp5",
+      "experiment_label": "ACT with lactate inhibitors in HIRI mice",
+      "evidence_sentence_ids": [
+        "S07"
+      ],
+      "experiment_anchor_quote": "ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "ACT and lactate inhibitors",
+      "biological_model_mention": "HIRI mice",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": "MICU1",
+      "distinctness_reason": "Combination of ACT with lactate inhibitors, distinct from ACT alone or other combinations."
+    },
+    {
+      "reader_experiment_key": "GP-007_exp6",
+      "experiment_label": "Structural analysis of ACT derivatives",
+      "evidence_sentence_ids": [
+        "S03",
+        "S08"
+      ],
+      "experiment_anchor_quote": "Structural analysis revealed that the C26/C27/C40/C41 hydroxyl groups determined ACT's MICU1-binding and hepatoprotective activities.",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "ACT derivatives",
+      "biological_model_mention": "HIRI mice",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": "MICU1",
+      "distinctness_reason": "Testing ACT derivatives to identify active hydroxyl groups, distinct from ACT treatment experiments."
+    }
+  ]
+}

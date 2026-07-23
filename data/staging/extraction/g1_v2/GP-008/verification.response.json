@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"2.0.0\",\n  \"paper_id\": \"GP-008\",\n  \"source_read_again\": true,\n  \"issues\": [\n    {\n      \"issue_type\": \"evidence_mismatch\",\n      \"entity_id\": \"GP-008-1\",\n      \"field_name\": \"tissue_or_organ_reported\",\n      \"severity\": \"review\",\n      \"explanation\": \"The evidence quote 'liver fibrosis' is the disease context, not the tissue/organ. The tissue 'liver' is implied but not directly stated in the quote. The quote should be a direct mention of 'liver'.\",\n      \"supporting_or_corrective_quote\": \"liver\"\n    },\n    {\n      \"issue_type\": \"evidence_mismatch\",\n      \"entity_id\": \"GP-008-1\",\n      \"field_name\": \"delivery_recipient_cell_normalized\",\n      \"severity\": \"review\",\n      \"explanation\": \"The evidence quote 'selectively transduce liver macrophages' supports the reported value 'liver macrophages', but the normalized value 'other_liver_macrophage' is not directly supported by the quote. The quote does not contain that term.\",\n      \"supporting_or_corrective_quote\": \"selectively transduce liver macrophages\"\n    },\n    {\n      \"issue_type\": \"evidence_mismatch\",\n      \"entity_id\": \"GP-008-1-1\",\n      \"field_name\": \"lnp_component_role\",\n      \"severity\": \"review\",\n      \"explanation\": \"The evidence quote does not explicitly state that the CD163 antibody serves as a 'targeting_ligand'. The role is inferred from the description of conjugation, but the quote does not directly support the field value.\",\n      \"supporting_or_corrective_quote\": \"CD163 antibody-conjugated liposomal nanoparticles\"\n    }\n  ],\n  \"completeness_assessment\": \"complete\",\n  \"verifier_summary\": \"The first pass extraction captures all explicitly reported facts from the abstract. However, there are minor evidence quote mismatches for the tissue/organ field (quote states disease instead of tissue), the normalized cell type (quote does not match normalized term), and the component role (role not explicitly stated in quote). These issues are flagged for review but do not indicate missing or incorrect information.\"\n}",
+  "usage": {
+    "completion_tokens": 3122,
+    "prompt_tokens": 4304,
+    "total_tokens": 7426,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 2624,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "contract_version": "3.1.0",
+  "paper_id": "GP-007",
+  "lnp_experiment_id": "GP-007-E04",
+  "experiment_label": "ACT plus siMicu1-LNP experiment",
+  "is_lnp_experiment": true,
+  "lnp_formulation_name_reported": {
+    "value": "siMicu1 lipid nanoparticles",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "siMicu1 lipid nanoparticles",
+    "missing_reason": null
+  },
+  "lnp_formulation_description_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No description provided in approved sentences."
+  },
+  "lnp_composition_raw_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No explicit composition reported."
+  },
+  "lnp_components": [],
+  "payload_type_reported": {
+    "value": "siRNA",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "siMicu1",
+    "missing_reason": null
+  },
+  "payload_name_reported": {
+    "value": "siMicu1",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "siMicu1",
+    "missing_reason": null
+  },
+  "payload_encoded_product_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "siRNA does not encode a protein."
+  },
+  "payload_molecular_target_reported": {
+    "value": "Micu1",
+    "status": "reported",
+    "evidence_sentence_id": "S07",
+    "evidence_quote": "Micu1 overexpression",
+    "missing_reason": null
+  },
+  "targeting_ligand_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No targeting ligand mentioned."
+  },
+  "cell_entities": [
+    {
+      "cell_entity_id": "CE1",
+      "cell_name_reported": {
+        "value": "LSECs",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "liver sinusoidal endothelial cells (LSECs)",
+        "missing_reason": null
+      },
+      "cell_type_normalized": {
+        "value": "liver_sinusoidal_endothelial_cell",
+        "status": "reported",
+        "evidence_sentence_id": "S03",
+        "evidence_quote": "liver sinusoidal endothelial cells (LSECs)",
+        "missing_reason": null
+      }
+    }
+  ],
+  "delivery_recipient_cell_entity_ids": [
+    "CE1"
+  ],
+  "therapeutic_target_cell_entity_ids": [
+    "CE1"
+  ],
+  "tissue_or_organ_reported": {
+    "value": "liver",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "liver sinusoidal endothelial cells",
+    "missing_reason": null
+  },
+  "disease_context_reported": {
+    "value": "HIRI",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "HIRI mice",
+    "missing_reason": null
+  },
+  "species_reported": {
+    "value": "mouse",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "HIRI mice",
+    "missing_reason": null
+  },
+  "experimental_context_reported": {
+    "value": "in_vivo",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "in vivo in HIRI mice",
+    "missing_reason": null
+  },
+  "biological_model_reported": {
+    "value": "HIRI mouse model",
+    "status": "reported",
+    "evidence_sentence_id": "S03",
+    "evidence_quote": "in vivo in HIRI mice",
+    "missing_reason": null
+  },
+  "dose_value_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No dose information provided."
+  },
+  "dose_unit_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No dose unit provided."
+  },
+  "administration_route_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No administration route mentioned."
+  },
+  "assay_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No assay described."
+  },
+  "comparator_reported": {
+    "value": null,
+    "status": "missing",
+    "evidence_sentence_id": null,
+    "evidence_quote": null,
+    "missing_reason": "No comparator explicitly stated."
+  },
+  "lnp_outcomes": [
+    {
+      "lnp_outcome_id": "O1",
+      "endpoint_family": {
+        "value": "therapeutic_effect",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "anti-HIRI effects",
+        "missing_reason": null
+      },
+      "endpoint_name_reported": {
+        "value": "anti-HIRI effect",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "anti-HIRI effects",
+        "missing_reason": null
+      },
+      "outcome_numeric_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No numeric value provided."
+      },
+      "outcome_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No unit provided."
+      },
+      "outcome_qualitative_value_reported": {
+        "value": "enhanced",
+        "status": "reported",
+        "evidence_sentence_id": "S07",
+        "evidence_quote": "enhance its anti-HIRI effects",
+        "missing_reason": null
+      },
+      "comparator_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No comparator explicitly stated."
+      },
+      "timepoint_value_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint provided."
+      },
+      "timepoint_unit_reported": {
+        "value": null,
+        "status": "missing",
+        "evidence_sentence_id": null,
+        "evidence_quote": null,
+        "missing_reason": "No timepoint unit provided."
+      }
+    }
+  ]
+}

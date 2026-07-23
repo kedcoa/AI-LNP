@@ -1,0 +1,41 @@
+{
+  "frozen_at": "2026-07-23T10:21:15.356433+00:00",
+  "review_completion": {
+    "rows": 32,
+    "decisions": {
+      "correct": 20,
+      "incorrect": 9,
+      "ambiguous_or_absent": 3
+    },
+    "all_have_reasons_reviewers_and_timestamps": true
+  },
+  "metrics": {
+    "reviewed_semantic_precision": 0.6896551724137931,
+    "best_case_overall_precision": 0.8235294117647058,
+    "best_case_correct_fields": 42,
+    "incorrect_fields": 9,
+    "abstract_extracted_fields_audited": 51,
+    "traceable_abstract_evidence_coverage": 1.0,
+    "valid_bundle_rate": 0.6666666666666666,
+    "invalid_model_response_papers": 3,
+    "abstract_omissions_deferred_to_full_text": 286,
+    "abstract_available_gold_values": 34,
+    "critical_field_recall": null,
+    "recall_status": "not_established_due_to_invalid_responses_and_unresolved_entity_linkage"
+  },
+  "gate": {
+    "name": "G1_extraction_quality",
+    "required_precision": 0.9,
+    "decision": "FAIL",
+    "reason": "Best-case precision is below 90%; three papers produced no valid extraction; critical-field recall is not established."
+  },
+  "required_remediation": [
+    "Remove payload records from formulation components.",
+    "Separate payload type, encoded product, formulation description, and lipid composition.",
+    "Preserve reported recipient-cell text alongside controlled categories.",
+    "Prevent disease or tissue sites from being stored as cell types.",
+    "Create separate outcome records for distinct endpoints.",
+    "Require the cited excerpt to directly support each accepted value.",
+    "Replace or repair the unreliable model response path and rerun all gold papers."
+  ]
+}

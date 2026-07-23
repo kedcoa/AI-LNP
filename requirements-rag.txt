@@ -1,0 +1,9 @@
+# Install into the isolated .venv-rag environment.
+paper-qa==2026.3.18
+pymupdf==1.28.0
+sentence-transformers==5.6.0
+faiss-cpu==1.14.3
+chromadb==1.5.9
+
+# SciSpaCy 0.5.5 cannot build on Python 3.14. The pipeline therefore keeps
+# SciSpaCy enrichment optional and always runs the tested custom entity detector.

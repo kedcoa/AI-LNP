@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"3.0.0\",\n  \"paper_id\": \"GP-004\",\n  \"reader_id\": \"reader_b\",\n  \"original_experiments_present\": true,\n  \"experiments\": [\n    {\n      \"reader_experiment_key\": \"experiment_1_luciferase_mRNA_LNP_hepatotropism\",\n      \"experiment_label\": \"Luciferase mRNA-LNP hepatotropism in healthy mice\",\n      \"evidence_sentence_ids\": [\"S03\", \"S04\"],\n      \"experiment_anchor_quote\": \"We confirm specific hepatotropism of mRNA-LNP via intravenous injection of firefly luciferase encoding mRNA-LNP\",\n      \"formulation_or_delivery_system_mention\": \"lipid-nanoparticle-encapsulated mRNA (mRNA-LNP)\",\n      \"payload_or_treatment_mention\": \"firefly luciferase encoding mRNA\",\n      \"biological_model_mention\": \"mouse (homeostasis, implied healthy)\",\n      \"recipient_cell_mention\": \"hepatocytes, endothelial cells, Kupffer cells\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different payload (luciferase vs growth factors) and purpose (confirm hepatotropism) from other experiments.\"\n    },\n    {\n      \"reader_experiment_key\": \"experiment_2_HGF_mRNA_LNP_healthy\",\n      \"experiment_label\": \"HGF mRNA-LNP in healthy mice\",\n      \"evidence_sentence_ids\": [\"S05\"],\n      \"experiment_anchor_quote\": \"In homeostasis, HGF mRNA-LNP efficiently induce hepatocyte proliferation.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF mRNA\",\n      \"biological_model_mention\": \"mouse in homeostasis (healthy)\",\n      \"recipient_cell_mention\": \"hepatocytes\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different payload (HGF only) and context (healthy) compared to other experiments with combination or disease models.\"\n    },\n    {\n      \"reader_experiment_key\": \"experiment_3_HGF_EGF_mRNA_LNP_NAFLD\",\n      \"experiment_label\": \"HGF+EGF mRNA-LNP in chronic NAFLD model\",\n      \"evidence_sentence_ids\": [\"S06\"],\n      \"experiment_anchor_quote\": \"In a chronic liver injury mouse model recapitulating non-alcoholic fatty liver disease, injections of both HGF and EGF mRNA-LNP sharply reverse steatosis and accelerate restoration of liver function.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF and EGF mRNA (combination)\",\n      \"biological_model_mention\": \"chronic liver injury mouse model (NAFLD)\",\n      \"recipient_cell_mention\": \"hepatocytes (implied)\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different disease context (chronic NAFLD) and combination payload compared to healthy or acute liver injury experiments.\"\n    },\n    {\n      \"reader_experiment_key\": \"experiment_4_HGF_EGF_mRNA_LNP_acetaminophen\",\n      \"experiment_label\": \"HGF+EGF mRNA-LNP in acute acetaminophen injury model\",\n      \"evidence_sentence_ids\": [\"S07\"],\n      \"experiment_anchor_quote\": \"Likewise, HGF and EGF mRNA-LNP accelerate liver regeneration after acetaminophen-induced acute liver injury with rapid return to baseline ALT levels.\",\n      \"formulation_or_delivery_system_mention\": \"mRNA-LNP\",\n      \"payload_or_treatment_mention\": \"HGF and EGF mRNA (combination)\",\n      \"biological_model_mention\": \"acetaminophen-induced acute liver injury mouse model\",\n      \"recipient_cell_mention\": \"hepatocytes (implied)\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"Different disease context (acute acetaminophen injury) compared to other experiments with healthy or chronic NAFLD models.\"\n    }\n  ]\n}",
+  "usage": {
+    "completion_tokens": 2765,
+    "prompt_tokens": 1171,
+    "total_tokens": 3936,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 1869,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

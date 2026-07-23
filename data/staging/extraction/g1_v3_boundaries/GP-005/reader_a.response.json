@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"3.0.0\",\n  \"paper_id\": \"GP-005\",\n  \"reader_id\": \"reader_a\",\n  \"original_experiments_present\": true,\n  \"experiments\": [\n    {\n      \"reader_experiment_key\": \"EXP-001\",\n      \"experiment_label\": \"In vivo liver mRNA-LNP and siRNA-LNP distribution and translation\",\n      \"evidence_sentence_ids\": [\"S03\", \"S04\", \"S05\"],\n      \"experiment_anchor_quote\": \"Although both KC and hepatocytes demonstrate comparable high and rapid uptake of mRNA-LNP and siRNA-LNP in vivo, the translation of Egfp mRNA occurs exclusively in hepatocytes during intravital imaging.\",\n      \"formulation_or_delivery_system_mention\": \"lipid nanoparticles (LNP)\",\n      \"payload_or_treatment_mention\": \"mRNA encoding enhanced green fluorescent protein (Egfp); siRNA; co-encapsulation; attempts with pseudouridine substitution, ribonuclease inhibition, different ionizable lipid\",\n      \"biological_model_mention\": \"liver in vivo\",\n      \"recipient_cell_mention\": \"Kupffer cells (KC); hepatocytes\",\n      \"therapeutic_target_mention\": null,\n      \"distinctness_reason\": \"The paper describes a single investigation of spatio-temporal distribution and translation of mRNA-LNP and siRNA-LNP in liver cells. All reported conditions (including modification attempts) are part of the same experimental context, with no separate reporting of distinct experiments differing in treatment, model, or disease context.\"\n    }\n  ]\n}",
+  "usage": {
+    "completion_tokens": 1944,
+    "prompt_tokens": 1173,
+    "total_tokens": 3117,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 1608,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

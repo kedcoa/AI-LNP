@@ -1,0 +1,800 @@
+{
+  "$defs": {
+    "ComponentExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "title": "Component Id",
+          "type": "string"
+        },
+        "component_name_normalized": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "component_name_reported": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "component_role": {
+          "$ref": "#/$defs/EvidenceBoundValue_Literal__ionizable_lipid____helper_lipid____sterol____peg_lipid____targeting_ligand____targeting_anchor____targeting_or_tracer_polymer____sort_lipid____payload____other___"
+        },
+        "formulation_id": {
+          "title": "Formulation Id",
+          "type": "string"
+        },
+        "inchikey": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "percentage": {
+          "$ref": "#/$defs/EvidenceBoundValue_float_"
+        },
+        "percentage_unit": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        }
+      },
+      "required": [
+        "component_id",
+        "formulation_id",
+        "component_name_reported",
+        "component_name_normalized",
+        "component_role",
+        "inchikey",
+        "percentage",
+        "percentage_unit"
+      ],
+      "title": "ComponentExtraction",
+      "type": "object"
+    },
+    "EvidenceBoundValue_Literal__hepatocyte____kupffer_cell____lsec____hsc____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "hepatocyte",
+                "kupffer_cell",
+                "lsec",
+                "hsc",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['hepatocyte', 'kupffer_cell', 'lsec', 'hsc', 'other']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_Literal__in_vitro____ex_vivo____in_vivo___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "in_vitro",
+                "ex_vivo",
+                "in_vivo"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_Literal__ionizable_lipid____helper_lipid____sterol____peg_lipid____targeting_ligand____targeting_anchor____targeting_or_tracer_polymer____sort_lipid____payload____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "ionizable_lipid",
+                "helper_lipid",
+                "sterol",
+                "peg_lipid",
+                "targeting_ligand",
+                "targeting_anchor",
+                "targeting_or_tracer_polymer",
+                "sort_lipid",
+                "payload",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['ionizable_lipid', 'helper_lipid', 'sterol', 'peg_lipid', 'targeting_ligand', 'targeting_anchor', 'targeting_or_tracer_polymer', 'sort_lipid', 'payload', 'other']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_Literal__mol_____weight_____molar_ratio____mass_ratio____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "mol%",
+                "weight%",
+                "molar_ratio",
+                "mass_ratio",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['mol%', 'weight%', 'molar_ratio', 'mass_ratio', 'other']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_Literal__uptake____functional_expression____transfection____gene_knockdown____cre_recombination____viability____toxicity____biodistribution____therapeutic_effect____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "uptake",
+                "functional_expression",
+                "transfection",
+                "gene_knockdown",
+                "cre_recombination",
+                "viability",
+                "toxicity",
+                "biodistribution",
+                "therapeutic_effect",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['uptake', 'functional_expression', 'transfection', 'gene_knockdown', 'cre_recombination', 'viability', 'toxicity', 'biodistribution', 'therapeutic_effect', 'other']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_float_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[float]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_str_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[str]",
+      "type": "object"
+    },
+    "EvidenceExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "evidence_location_type": {
+          "enum": [
+            "abstract",
+            "results",
+            "methods",
+            "table",
+            "figure",
+            "figure_caption",
+            "supplement",
+            "other"
+          ],
+          "title": "Evidence Location Type",
+          "type": "string"
+        },
+        "evidence_text": {
+          "minLength": 1,
+          "title": "Evidence Text",
+          "type": "string"
+        },
+        "extraction_confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "title": "Extraction Confidence",
+          "type": "string"
+        },
+        "extraction_method": {
+          "enum": [
+            "manual",
+            "text_extraction",
+            "structured_table",
+            "ocr",
+            "vision"
+          ],
+          "title": "Extraction Method",
+          "type": "string"
+        },
+        "figure_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Figure Number"
+        },
+        "page_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Page Number"
+        },
+        "paper_id": {
+          "title": "Paper Id",
+          "type": "string"
+        },
+        "section_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Section Name"
+        },
+        "supplement_identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Supplement Identifier"
+        },
+        "table_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Table Number"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "paper_id",
+        "evidence_text",
+        "evidence_location_type",
+        "section_name",
+        "page_number",
+        "table_number",
+        "figure_number",
+        "supplement_identifier",
+        "extraction_method",
+        "extraction_confidence"
+      ],
+      "title": "EvidenceExtraction",
+      "type": "object"
+    },
+    "ExperimentExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "assay": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "cell_source": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "comparator_description": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "comparator_type": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "delivery_recipient_cell": {
+          "$ref": "#/$defs/EvidenceBoundValue_Literal__hepatocyte____kupffer_cell____lsec____hsc____other___"
+        },
+        "dose": {
+          "$ref": "#/$defs/EvidenceBoundValue_float_"
+        },
+        "dose_unit": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "experiment_id": {
+          "title": "Experiment Id",
+          "type": "string"
+        },
+        "formulation_id": {
+          "title": "Formulation Id",
+          "type": "string"
+        },
+        "model_context": {
+          "$ref": "#/$defs/EvidenceBoundValue_Literal__in_vitro____ex_vivo____in_vivo___"
+        },
+        "paper_id": {
+          "title": "Paper Id",
+          "type": "string"
+        },
+        "payload_name": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "payload_type": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "protocol_reference": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "reporter": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "route": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "species": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "therapeutic_target_cell": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "timepoint": {
+          "$ref": "#/$defs/EvidenceBoundValue_float_"
+        },
+        "timepoint_unit": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        }
+      },
+      "required": [
+        "experiment_id",
+        "paper_id",
+        "formulation_id",
+        "delivery_recipient_cell",
+        "therapeutic_target_cell",
+        "cell_source",
+        "species",
+        "model_context",
+        "payload_type",
+        "payload_name",
+        "reporter",
+        "dose",
+        "dose_unit",
+        "route",
+        "timepoint",
+        "timepoint_unit",
+        "assay",
+        "comparator_type",
+        "comparator_description",
+        "protocol_reference"
+      ],
+      "title": "ExperimentExtraction",
+      "type": "object"
+    },
+    "FormulationExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "composition_basis": {
+          "$ref": "#/$defs/EvidenceBoundValue_Literal__mol_____weight_____molar_ratio____mass_ratio____other___"
+        },
+        "composition_raw": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "formulation_id": {
+          "title": "Formulation Id",
+          "type": "string"
+        },
+        "formulation_name": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "formulation_notes": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "np_ratio": {
+          "$ref": "#/$defs/EvidenceBoundValue_float_"
+        },
+        "paper_id": {
+          "title": "Paper Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "formulation_id",
+        "paper_id",
+        "formulation_name",
+        "composition_raw",
+        "composition_basis",
+        "np_ratio",
+        "formulation_notes"
+      ],
+      "title": "FormulationExtraction",
+      "type": "object"
+    },
+    "OutcomeExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "comparator": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "endpoint_family": {
+          "$ref": "#/$defs/EvidenceBoundValue_Literal__uptake____functional_expression____transfection____gene_knockdown____cre_recombination____viability____toxicity____biodistribution____therapeutic_effect____other___"
+        },
+        "endpoint_name": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "experiment_id": {
+          "title": "Experiment Id",
+          "type": "string"
+        },
+        "normalization_basis": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "outcome_id": {
+          "title": "Outcome Id",
+          "type": "string"
+        },
+        "outcome_unit": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "outcome_value": {
+          "$ref": "#/$defs/EvidenceBoundValue_float_"
+        },
+        "qualitative_outcome": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "uncertainty_type": {
+          "$ref": "#/$defs/EvidenceBoundValue_str_"
+        },
+        "uncertainty_value": {
+          "$ref": "#/$defs/EvidenceBoundValue_float_"
+        }
+      },
+      "required": [
+        "outcome_id",
+        "experiment_id",
+        "endpoint_family",
+        "endpoint_name",
+        "outcome_value",
+        "outcome_unit",
+        "normalization_basis",
+        "uncertainty_value",
+        "uncertainty_type",
+        "qualitative_outcome",
+        "comparator"
+      ],
+      "title": "OutcomeExtraction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One independently validated detailed-extraction payload.",
+  "properties": {
+    "components": {
+      "items": {
+        "$ref": "#/$defs/ComponentExtraction"
+      },
+      "title": "Components",
+      "type": "array"
+    },
+    "contract_version": {
+      "const": "1.0.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/EvidenceExtraction"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "experiments": {
+      "items": {
+        "$ref": "#/$defs/ExperimentExtraction"
+      },
+      "title": "Experiments",
+      "type": "array"
+    },
+    "formulations": {
+      "items": {
+        "$ref": "#/$defs/FormulationExtraction"
+      },
+      "title": "Formulations",
+      "type": "array"
+    },
+    "outcomes": {
+      "items": {
+        "$ref": "#/$defs/OutcomeExtraction"
+      },
+      "title": "Outcomes",
+      "type": "array"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contract_version",
+    "paper_id",
+    "formulations",
+    "components",
+    "experiments",
+    "outcomes",
+    "evidence"
+  ],
+  "title": "ExtractionBundle",
+  "type": "object"
+}

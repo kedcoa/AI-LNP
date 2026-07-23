@@ -1,0 +1,41 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-006",
+  "source_read_again": true,
+  "issues": [
+    {
+      "issue_type": "omitted_fact",
+      "entity_id": "GP-006-1",
+      "field_name": "payload_name_reported",
+      "severity": "blocking",
+      "explanation": "The abstract states that LNPs encapsulate both Cas9 mRNA and specifically designed sgRNAs. The first pass extraction only includes Cas9 mRNA as the payload, omitting the sgRNA payload.",
+      "supporting_or_corrective_quote": "we injected LNPs encapsulating Cas9 mRNA and specifically designed sgRNAs intravenously"
+    },
+    {
+      "issue_type": "omitted_fact",
+      "entity_id": "GP-006-1",
+      "field_name": "timepoint_value_reported",
+      "severity": "review",
+      "explanation": "The abstract reports sustained FVIII activity over 26 weeks, but the timepoint value is not captured in the extraction.",
+      "supporting_or_corrective_quote": "Sustained endogenous FVIII activity up to 6% was achieved over 26 weeks"
+    },
+    {
+      "issue_type": "omitted_fact",
+      "entity_id": "GP-006-1",
+      "field_name": "timepoint_unit_reported",
+      "severity": "review",
+      "explanation": "The abstract reports sustained FVIII activity over 26 weeks, but the timepoint unit is not captured in the extraction.",
+      "supporting_or_corrective_quote": "over 26 weeks"
+    },
+    {
+      "issue_type": "evidence_mismatch",
+      "entity_id": "GP-006-1-1",
+      "field_name": "outcome_numeric_value_reported",
+      "severity": "review",
+      "explanation": "The abstract says 'up to 6%', which is a maximum, not a precise single value. The extraction reports 6.0 as a single value. The quote does not directly support a single value of 6% without qualification.",
+      "supporting_or_corrective_quote": "up to 6%"
+    }
+  ],
+  "completeness_assessment": "incomplete",
+  "verifier_summary": "The first pass extraction omitted the sgRNA payload present in the LNPs and the timepoint (26 weeks) for the FVIII activity outcome. Also, the FVIII activity value quote 'up to 6%' is not a precise single value but the extraction reports 6.0. These issues should be addressed."
+}

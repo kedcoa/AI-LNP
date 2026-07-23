@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"3.0.0\",\n  \"paper_id\": \"GP-006\",\n  \"reader_id\": \"reader_a\",\n  \"original_experiments_present\": true,\n  \"experiments\": [\n    {\n      \"reader_experiment_key\": \"EXP-001\",\n      \"experiment_label\": \"In vivo gene editing in HemA mice using Cas9 mRNA/sgRNA LNPs\",\n      \"evidence_sentence_ids\": [\"S04\"],\n      \"experiment_anchor_quote\": \"To target a five base pair deletion in FVIII exon 1 in a specific HemA mouse strain, we injected LNPs encapsulating Cas9 mRNA and specifically designed sgRNAs intravenously for in vivo gene editing of the mutant FVIII.\",\n      \"formulation_or_delivery_system_mention\": \"LNPs (MC3-based)\",\n      \"payload_or_treatment_mention\": \"Cas9 mRNA and specifically designed sgRNAs\",\n      \"biological_model_mention\": \"HemA mice (specific strain with five base pair deletion in FVIII exon 1)\",\n      \"recipient_cell_mention\": \"liver sinusoidal endothelial cells (LSECs)\",\n      \"therapeutic_target_mention\": \"mutant factor VIII (FVIII) gene\",\n      \"distinctness_reason\": \"Only one experimental treatment is described in the paper; all results (S05-S07) derive from this single in vivo experiment.\"\n    }\n  ]\n}",
+  "usage": {
+    "completion_tokens": 1699,
+    "prompt_tokens": 1158,
+    "total_tokens": 2857,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 1394,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

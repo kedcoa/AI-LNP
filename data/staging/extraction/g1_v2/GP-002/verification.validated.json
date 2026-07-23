@@ -1,0 +1,41 @@
+{
+  "contract_version": "2.0.0",
+  "paper_id": "GP-002",
+  "source_read_again": true,
+  "issues": [
+    {
+      "issue_type": "unsupported_value",
+      "entity_id": "GP-002-1",
+      "field_name": "lnp_formulation_description_reported",
+      "severity": "blocking",
+      "explanation": "The quoted text describes an experimental outcome (transfection of hepatocytes), not a formulation description (e.g., composition, size, or structure). The abstract does not provide any description of the LNP formulation itself.",
+      "supporting_or_corrective_quote": "No description of the LNP formulation is provided in the abstract."
+    },
+    {
+      "issue_type": "merged_experiments",
+      "entity_id": "GP-002-1",
+      "field_name": "lnp_experiments",
+      "severity": "blocking",
+      "explanation": "The first pass groups multiple distinct experimental contexts into one experiment. The abstract describes at least two separate in vivo settings: (1) spontaneous HCC model (including healthy, fibrotic, and cirrhotic livers) and (2) xenograft models of primary and secondary liver cancer. These should be represented as separate experiments with different target cells, disease contexts, and outcomes.",
+      "supporting_or_corrective_quote": "intravenous delivery of mRNA lipid nanoparticles (LNPs) efficiently transfects virtually all hepatocytes in healthy, fibrotic, and cirrhotic liver and also many cells of spontaneous hepatocellular carcinomas in situ. Delivery of mRNA is also possible in xenograft models of both primary and secondary liver cancer, albeit with attenuated protein expression relative to the normal liver."
+    },
+    {
+      "issue_type": "omitted_fact",
+      "entity_id": "GP-002-1",
+      "field_name": "disease_context_reported",
+      "severity": "review",
+      "explanation": "The abstract mentions 'healthy, fibrotic, and cirrhotic liver' as distinct conditions, but the first pass only reports 'primary and secondary liver cancer'. The fibrotic and cirrhotic contexts are omitted.",
+      "supporting_or_corrective_quote": "healthy, fibrotic, and cirrhotic liver"
+    },
+    {
+      "issue_type": "omitted_fact",
+      "entity_id": "GP-002-1",
+      "field_name": "therapeutic_target_cell_reported",
+      "severity": "review",
+      "explanation": "The xenograft models involve different target cells (e.g., human cancer cells from primary and secondary liver tumors), but the first pass only captures 'cells of spontaneous hepatocellular carcinomas'. This information is missing for the xenograft experiments.",
+      "supporting_or_corrective_quote": "xenograft models of both primary and secondary liver cancer"
+    }
+  ],
+  "completeness_assessment": "incomplete",
+  "verifier_summary": "The first pass extraction has several issues: (1) the formulation description field is incorrectly populated with an experimental outcome quote; (2) multiple distinct experimental contexts (spontaneous HCC model with healthy/fibrotic/cirrhotic liver and xenograft models) are merged into a single experiment; (3) the disease context omits 'fibrotic' and 'cirrhotic' conditions; (4) the target cell information for xenograft models is not captured. These issues affect the accuracy and completeness of the extraction."
+}

@@ -1,0 +1,122 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "evidence_location_type": {
+      "enum": [
+        "abstract",
+        "results",
+        "methods",
+        "table",
+        "figure",
+        "figure_caption",
+        "supplement",
+        "other"
+      ],
+      "title": "Evidence Location Type",
+      "type": "string"
+    },
+    "evidence_text": {
+      "minLength": 1,
+      "title": "Evidence Text",
+      "type": "string"
+    },
+    "extraction_confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Extraction Confidence",
+      "type": "string"
+    },
+    "extraction_method": {
+      "enum": [
+        "manual",
+        "text_extraction",
+        "structured_table",
+        "ocr",
+        "vision"
+      ],
+      "title": "Extraction Method",
+      "type": "string"
+    },
+    "figure_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Figure Number"
+    },
+    "page_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Page Number"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    },
+    "section_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Section Name"
+    },
+    "supplement_identifier": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Supplement Identifier"
+    },
+    "table_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Table Number"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "paper_id",
+    "evidence_text",
+    "evidence_location_type",
+    "section_name",
+    "page_number",
+    "table_number",
+    "figure_number",
+    "supplement_identifier",
+    "extraction_method",
+    "extraction_confidence"
+  ],
+  "title": "EvidenceExtraction",
+  "type": "object"
+}

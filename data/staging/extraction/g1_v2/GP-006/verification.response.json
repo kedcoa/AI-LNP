@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"2.0.0\",\n  \"paper_id\": \"GP-006\",\n  \"source_read_again\": true,\n  \"issues\": [\n    {\n      \"issue_type\": \"omitted_fact\",\n      \"entity_id\": \"GP-006-1\",\n      \"field_name\": \"payload_name_reported\",\n      \"severity\": \"blocking\",\n      \"explanation\": \"The abstract states that LNPs encapsulate both Cas9 mRNA and specifically designed sgRNAs. The first pass extraction only includes Cas9 mRNA as the payload, omitting the sgRNA payload.\",\n      \"supporting_or_corrective_quote\": \"we injected LNPs encapsulating Cas9 mRNA and specifically designed sgRNAs intravenously\"\n    },\n    {\n      \"issue_type\": \"omitted_fact\",\n      \"entity_id\": \"GP-006-1\",\n      \"field_name\": \"timepoint_value_reported\",\n      \"severity\": \"review\",\n      \"explanation\": \"The abstract reports sustained FVIII activity over 26 weeks, but the timepoint value is not captured in the extraction.\",\n      \"supporting_or_corrective_quote\": \"Sustained endogenous FVIII activity up to 6% was achieved over 26 weeks\"\n    },\n    {\n      \"issue_type\": \"omitted_fact\",\n      \"entity_id\": \"GP-006-1\",\n      \"field_name\": \"timepoint_unit_reported\",\n      \"severity\": \"review\",\n      \"explanation\": \"The abstract reports sustained FVIII activity over 26 weeks, but the timepoint unit is not captured in the extraction.\",\n      \"supporting_or_corrective_quote\": \"over 26 weeks\"\n    },\n    {\n      \"issue_type\": \"evidence_mismatch\",\n      \"entity_id\": \"GP-006-1-1\",\n      \"field_name\": \"outcome_numeric_value_reported\",\n      \"severity\": \"review\",\n      \"explanation\": \"The abstract says 'up to 6%', which is a maximum, not a precise single value. The extraction reports 6.0 as a single value. The quote does not directly support a single value of 6% without qualification.\",\n      \"supporting_or_corrective_quote\": \"up to 6%\"\n    }\n  ],\n  \"completeness_assessment\": \"incomplete\",\n  \"verifier_summary\": \"The first pass extraction omitted the sgRNA payload present in the LNPs and the timepoint (26 weeks) for the FVIII activity outcome. Also, the FVIII activity value quote 'up to 6%' is not a precise single value but the extraction reports 6.0. These issues should be addressed.\"\n}",
+  "usage": {
+    "completion_tokens": 3657,
+    "prompt_tokens": 3375,
+    "total_tokens": 7032,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 3083,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

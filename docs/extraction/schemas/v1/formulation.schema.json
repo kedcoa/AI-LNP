@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "EvidenceBoundValue_Literal__mol_____weight_____molar_ratio____mass_ratio____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "mol%",
+                "weight%",
+                "molar_ratio",
+                "mass_ratio",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['mol%', 'weight%', 'molar_ratio', 'mass_ratio', 'other']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_float_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[float]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_str_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[str]",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "composition_basis": {
+      "$ref": "#/$defs/EvidenceBoundValue_Literal__mol_____weight_____molar_ratio____mass_ratio____other___"
+    },
+    "composition_raw": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "formulation_id": {
+      "title": "Formulation Id",
+      "type": "string"
+    },
+    "formulation_name": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "formulation_notes": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "np_ratio": {
+      "$ref": "#/$defs/EvidenceBoundValue_float_"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "formulation_id",
+    "paper_id",
+    "formulation_name",
+    "composition_raw",
+    "composition_basis",
+    "np_ratio",
+    "formulation_notes"
+  ],
+  "title": "FormulationExtraction",
+  "type": "object"
+}

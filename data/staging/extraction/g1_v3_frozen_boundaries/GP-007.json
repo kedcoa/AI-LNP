@@ -1,0 +1,109 @@
+{
+  "contract_version": "3.0.0",
+  "paper_id": "GP-007",
+  "boundary_source": "human_custom",
+  "reviewer": "renemilywei",
+  "reviewed_at": "2026-07-23T07:22:01.882163+00:00",
+  "reviewer_reason": "Reader A separates the distinct lactate-inhibitor and siMicu1-LNP interventions, but both readers overassign experimental context. A custom six-experiment map is required, with unresolved model context for interventions not explicitly assigned to in-vivo or in-vitro settings.\n\nUse this custom map:\nACT in-vivo HIRI experimentScope: S03–S06\nModel: HIRI mice\nTreatment: ACT\n\nACT in-vitro LSEC experimentScope: S03–S06\nModel: hypoxia-reoxygenation or lactate-stimulated LSECs\nTreatment: ACT\n\nLSEC-specific Micu1-overexpression experimentScope: S03 and S07\nIntervention: Micu1-overexpression virus\nModel context: leave unresolved from the abstract\n\nACT plus siMicu1-LNP experimentScope: S03 and S07\nIntervention: ACT + siMicu1 LNP\nModel context: unresolved unless full text establishes it\n\nACT plus lactate-inhibitor experimentScope: S07\nIntervention: ACT + lactate inhibitor\nModel context: unresolved\n\nACT-derivative structural-analysis experimentScope: S03 and S08\nIntervention: ACT derivatives\nThis is not an LNP experiment, but keeping it as a separate neighboring experiment prevents its structural results from leaking into the siMicu1-LNP record.",
+  "experiments": [
+    {
+      "experiment_id": "GP-007-E01",
+      "reader_experiment_key": "CUSTOM-01",
+      "experiment_label": "ACT in-vivo HIRI experiment",
+      "evidence_sentence_ids": [
+        "S03",
+        "S04",
+        "S05",
+        "S06"
+      ],
+      "experiment_anchor_quote": "This competitive binding mode also suppressed MICU1-dependent glycolysis by blocking Ca2+-stimulated lactate production and histone H3K18 lactylation, which epigenetically regulated MICU1 transcription.",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "ACT",
+      "biological_model_mention": "HIRI mice",
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Human-approved custom boundary; see boundary review rationale."
+    },
+    {
+      "experiment_id": "GP-007-E02",
+      "reader_experiment_key": "CUSTOM-02",
+      "experiment_label": "ACT in-vitro LSEC experiment",
+      "evidence_sentence_ids": [
+        "S03",
+        "S04",
+        "S05",
+        "S06"
+      ],
+      "experiment_anchor_quote": "This competitive binding mode also suppressed MICU1-dependent glycolysis by blocking Ca2+-stimulated lactate production and histone H3K18 lactylation, which epigenetically regulated MICU1 transcription.",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "ACT",
+      "biological_model_mention": "hypoxia-reoxygenation or lactate-stimulated LSECs",
+      "recipient_cell_mention": "LSECs",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Human-approved custom boundary; see boundary review rationale."
+    },
+    {
+      "experiment_id": "GP-007-E03",
+      "reader_experiment_key": "CUSTOM-03",
+      "experiment_label": "LSEC-specific Micu1-overexpression experiment",
+      "evidence_sentence_ids": [
+        "S03",
+        "S07"
+      ],
+      "experiment_anchor_quote": "Notably, ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects, while LSECs-specific Micu1 overexpression abolished these benefits.",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "Micu1-overexpression virus",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "LSECs",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Human-approved custom boundary; see boundary review rationale."
+    },
+    {
+      "experiment_id": "GP-007-E04",
+      "reader_experiment_key": "CUSTOM-04",
+      "experiment_label": "ACT plus siMicu1-LNP experiment",
+      "evidence_sentence_ids": [
+        "S03",
+        "S07"
+      ],
+      "experiment_anchor_quote": "Notably, ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects, while LSECs-specific Micu1 overexpression abolished these benefits.",
+      "formulation_or_delivery_system_mention": "siMicu1 lipid nanoparticles",
+      "payload_or_treatment_mention": "ACT + siMicu1 LNP",
+      "biological_model_mention": null,
+      "recipient_cell_mention": "LSECs",
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Human-approved custom boundary; see boundary review rationale."
+    },
+    {
+      "experiment_id": "GP-007-E05",
+      "reader_experiment_key": "CUSTOM-05",
+      "experiment_label": "ACT plus lactate-inhibitor experiment",
+      "evidence_sentence_ids": [
+        "S07"
+      ],
+      "experiment_anchor_quote": "Notably, ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects, while LSECs-specific Micu1 overexpression abolished these benefits.",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "ACT + lactate inhibitor",
+      "biological_model_mention": null,
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Human-approved custom boundary; see boundary review rationale."
+    },
+    {
+      "experiment_id": "GP-007-E06",
+      "reader_experiment_key": "CUSTOM-06",
+      "experiment_label": "ACT-derivative structural-analysis experiment",
+      "evidence_sentence_ids": [
+        "S03",
+        "S08"
+      ],
+      "experiment_anchor_quote": "Structural analysis revealed that the C26/C27/C40/C41 hydroxyl groups determined ACT's MICU1-binding and hepatoprotective activities.",
+      "formulation_or_delivery_system_mention": null,
+      "payload_or_treatment_mention": "ACT derivatives",
+      "biological_model_mention": null,
+      "recipient_cell_mention": null,
+      "therapeutic_target_mention": null,
+      "distinctness_reason": "Human-approved custom boundary; see boundary review rationale."
+    }
+  ]
+}

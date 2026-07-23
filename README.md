@@ -138,3 +138,122 @@ search
   -> validate
   -> review
   -> curate
+```
+
+## Full-text RAG pipeline
+
+The G1 extraction workflow now uses a modular, provenance-preserving full-text
+retrieval-augmented generation pipeline. Retrieval and extraction are evaluated
+separately: finding the correct evidence does not by itself mean that an LLM
+extracted the correct structured value.
+
+```text
+PMC XML / supplement PDF
+  -> GROBID adapter or PyMuPDF ingestion
+  -> provenance-bearing document blocks
+  -> SQLite FTS5/BM25 lexical retrieval
+  -> sentence-transformer + FAISS/Chroma semantic retrieval
+  -> custom LNP entity candidates (optional SciSpaCy enrichment)
+  -> field-specific evidence packets
+  -> retrieval and contradiction gates
+  -> experiment-scoped LLM evidence graph
+  -> independent second-read verification
+  -> Pydantic and deterministic graph validation
+  -> human scientific review
+```
+
+### Pipeline stages
+
+1. **Ingestion** reads structured PMC XML first and supplemental PDFs with
+   PyMuPDF. Every block retains its paper, source file, section, page, XML
+   element, and parser provenance. GROBID is an optional fallback when usable
+   structured XML is unavailable.
+2. **Lexical retrieval** stores blocks in SQLite and uses FTS5/BM25 to find
+   exact terminology, chemical names, ratios, doses, and cell markers.
+3. **Semantic retrieval** uses a local sentence-transformer with FAISS. A
+   Chroma adapter is also available. Biomedical synonym expansion and
+   conservative adjacent-paragraph retrieval reduce vocabulary and context
+   misses.
+4. **Entity candidates** detect LNPs, lipid components, RNA payloads, cells,
+   species, routes, genes, proteins, and outcomes. The deterministic detector
+   always runs; SciSpaCy enrichment is optional because the current SciSpaCy
+   release does not build under Python 3.14.
+5. **Evidence packets** retrieve composition, payload, experiment-boundary,
+   delivery-recipient-cell, therapeutic-target-cell, model-context, and outcome
+   evidence separately. Results are hard-filtered by paper to prevent
+   cross-paper leakage.
+6. **Evidence gates** require sufficient source blocks and relevant entity
+   types. Missing evidence causes abstention. Mixed positive and negative
+   evidence is retained and flagged instead of being simplified into a false
+   answer.
+7. **Experiment-scoped extraction** uses the existing evidence-graph schema:
+   atomic entities, typed relations, explicit experiment IDs, and exact source
+   quotes. Delivery recipients and therapeutic targets remain separate, and
+   each cell and endpoint receives its own relation.
+8. **Second read and validation** asks an independent model pass to reread the
+   source and apply corrections. Pydantic and deterministic audits reject
+   invalid links, merged cells, payload-as-component errors, non-verbatim
+   evidence, context leakage, and unsupported relations.
+9. **Review and curation** expose evidence and saved scientific decisions.
+   Human verification remains mandatory before G1 approval.
+
+### Current benchmark
+
+On the 31 human-verified evidence locations across the nine open-access gold
+papers, the current hybrid retriever finds the correct source within its top
+eight blocks for **28/31 checks (90.3% recall@8)**. This is retrieval recall,
+not extraction precision and not a G1 pass. The three remaining retrieval
+misses are GP-008 macrophage-delivery, HSC therapeutic-effect, and
+recipient-cell-specificity evidence.
+
+Readable benchmark outputs:
+
+- `reports/rag/gold_v1_retrieval_table.md`
+- `reports/rag/gold_v1_retrieval_table.csv`
+- `reports/rag/gold_v1_retrieval_sentence-transformers.json`
+
+### Local setup and commands
+
+RAG dependencies are isolated from the original environment:
+
+```bash
+python3 -m venv .venv-rag
+.venv-rag/bin/pip install -r requirements-rag.txt
+```
+
+Build the corpus and retrieval packets:
+
+```bash
+.venv-rag/bin/python -m src.rag.ingestion
+.venv-rag/bin/python -m src.rag.run_pipeline
+```
+
+Run the fixed retrieval benchmark and build the plain results table:
+
+```bash
+.venv-rag/bin/python -m src.rag.benchmark --backend sentence-transformers -k 8
+.venv-rag/bin/python -m src.rag.build_retrieval_table
+```
+
+Start the optional evidence review interface:
+
+```bash
+.venv/bin/streamlit run src/rag/review_app.py
+```
+
+Run one experiment-scoped extraction only after retrieval gates pass and a
+provider has sufficient quota:
+
+```bash
+.venv/bin/python -m src.rag.run_experiment_extraction --paper-id GP-002
+```
+
+The API key and provider URL belong in `.env`, which is ignored by Git.
+
+## G1 architecture history
+
+The initial schema-first abstract extraction trial validated JSON structure but
+could not establish scientific correctness or preserve full experiment context;
+after repeated omissions and cross-experiment field leakage, the workflow moved
+to full-text hybrid RAG so each typed claim is grounded in retrieved,
+provenance-bearing evidence before validation and human review.

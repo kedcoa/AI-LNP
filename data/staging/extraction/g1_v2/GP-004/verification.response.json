@@ -1,0 +1,21 @@
+{
+  "model": "deepseek-v4-flash",
+  "finish_reason": "stop",
+  "content": "{\n  \"contract_version\": \"2.0.0\",\n  \"paper_id\": \"GP-004\",\n  \"source_read_again\": true,\n  \"issues\": [\n    {\n      \"issue_type\": \"evidence_mismatch\",\n      \"entity_id\": \"GP-004-1-2\",\n      \"field_name\": \"delivery_recipient_cell_reported\",\n      \"severity\": \"review\",\n      \"explanation\": \"The evidence quote used is from the luciferase experiment (first experiment), not the homeostasis HGF experiment. The abstract does not explicitly state the cell types for this experiment.\",\n      \"supporting_or_corrective_quote\": \"In homeostasis, HGF mRNA-LNP efficiently induce hepatocyte proliferation.\"\n    },\n    {\n      \"issue_type\": \"evidence_mismatch\",\n      \"entity_id\": \"GP-004-1-3\",\n      \"field_name\": \"delivery_recipient_cell_reported\",\n      \"severity\": \"review\",\n      \"explanation\": \"The evidence quote used is from the luciferase experiment, not the NAFLD experiment. The abstract does not explicitly state the cell types for this experiment.\",\n      \"supporting_or_corrective_quote\": \"injections of both HGF and EGF mRNA-LNP sharply reverse steatosis and accelerate restoration of liver function.\"\n    },\n    {\n      \"issue_type\": \"evidence_mismatch\",\n      \"entity_id\": \"GP-004-1-4\",\n      \"field_name\": \"delivery_recipient_cell_reported\",\n      \"severity\": \"review\",\n      \"explanation\": \"The evidence quote used is from the luciferase experiment, not the acetaminophen injury experiment. The abstract does not explicitly state the cell types for this experiment.\",\n      \"supporting_or_corrective_quote\": \"HGF and EGF mRNA-LNP accelerate liver regeneration after acetaminophen-induced acute liver injury with rapid return to baseline ALT levels.\"\n    }\n  ],\n  \"completeness_assessment\": \"incomplete\",\n  \"verifier_summary\": \"The first-pass extraction captures most explicit facts, but there are evidence mismatches where the same quote from the luciferase experiment is used for subsequent experiments, despite the abstract not specifying cell types for those conditions. Additionally, the disease context for the first experiment (healthy mice) is not explicitly stated, but this is a minor omission. No issues with payloads stored as components or descriptions stored as composition were found. The experiments and outcomes are correctly separated.\"\n}",
+  "usage": {
+    "completion_tokens": 3842,
+    "prompt_tokens": 7724,
+    "total_tokens": 11566,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 3312,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": null,
+      "cached_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "$defs": {
+    "EvidenceBoundValue_Literal__ionizable_lipid____helper_lipid____sterol____peg_lipid____targeting_ligand____targeting_anchor____targeting_or_tracer_polymer____sort_lipid____payload____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "ionizable_lipid",
+                "helper_lipid",
+                "sterol",
+                "peg_lipid",
+                "targeting_ligand",
+                "targeting_anchor",
+                "targeting_or_tracer_polymer",
+                "sort_lipid",
+                "payload",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[Literal['ionizable_lipid', 'helper_lipid', 'sterol', 'peg_lipid', 'targeting_ligand', 'targeting_anchor', 'targeting_or_tracer_polymer', 'sort_lipid', 'payload', 'other']]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_float_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[float]",
+      "type": "object"
+    },
+    "EvidenceBoundValue_str_": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Value Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "value_status",
+        "missing_reason"
+      ],
+      "title": "EvidenceBoundValue[str]",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "component_id": {
+      "title": "Component Id",
+      "type": "string"
+    },
+    "component_name_normalized": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "component_name_reported": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "component_role": {
+      "$ref": "#/$defs/EvidenceBoundValue_Literal__ionizable_lipid____helper_lipid____sterol____peg_lipid____targeting_ligand____targeting_anchor____targeting_or_tracer_polymer____sort_lipid____payload____other___"
+    },
+    "formulation_id": {
+      "title": "Formulation Id",
+      "type": "string"
+    },
+    "inchikey": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    },
+    "percentage": {
+      "$ref": "#/$defs/EvidenceBoundValue_float_"
+    },
+    "percentage_unit": {
+      "$ref": "#/$defs/EvidenceBoundValue_str_"
+    }
+  },
+  "required": [
+    "component_id",
+    "formulation_id",
+    "component_name_reported",
+    "component_name_normalized",
+    "component_role",
+    "inchikey",
+    "percentage",
+    "percentage_unit"
+  ],
+  "title": "ComponentExtraction",
+  "type": "object"
+}

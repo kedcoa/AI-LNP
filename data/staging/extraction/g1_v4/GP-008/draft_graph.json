@@ -1,0 +1,413 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-008",
+  "source_scope": "abstract_only",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "E001",
+      "entity_type": "lnp_formulation",
+      "reported_name": "αCD163/LNP-FAPCAR",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "E002",
+      "entity_type": "lnp_component",
+      "reported_name": "liposomal nanoparticles (LNPs)",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "liposomal nanoparticles (LNPs)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E003",
+      "entity_type": "payload",
+      "reported_name": "FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "E004",
+      "entity_type": "targeting_ligand",
+      "reported_name": "CD163 antibody",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "CD163 antibody-conjugated"
+        }
+      ]
+    },
+    {
+      "entity_id": "E005",
+      "entity_type": "encoded_product",
+      "reported_name": "FAP-specific CAR-M",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "FAP-specific chimeric antigen receptor macrophage (CAR-M)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E006",
+      "entity_type": "molecular_target",
+      "reported_name": "FAP",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "FAP"
+        }
+      ]
+    },
+    {
+      "entity_id": "E007",
+      "entity_type": "cell",
+      "reported_name": "liver macrophages",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "liver macrophages"
+        }
+      ]
+    },
+    {
+      "entity_id": "E008",
+      "entity_type": "cell",
+      "reported_name": "activated HSCs",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "activated HSCs"
+        }
+      ]
+    },
+    {
+      "entity_id": "E009",
+      "entity_type": "cell",
+      "reported_name": "hyperactive fibroblasts",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C009",
+          "quote": "hyperactive fibroblasts"
+        }
+      ]
+    },
+    {
+      "entity_id": "E010",
+      "entity_type": "disease",
+      "reported_name": "liver fibrosis",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C001",
+          "quote": "liver fibrosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "E011",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C001",
+          "quote": "Liver"
+        }
+      ]
+    },
+    {
+      "entity_id": "E012",
+      "entity_type": "endpoint",
+      "reported_name": "ECM",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "ECM"
+        }
+      ]
+    },
+    {
+      "entity_id": "E013",
+      "entity_type": "endpoint",
+      "reported_name": "liver fibrosis resolution",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "liver fibrosis resolution"
+        }
+      ]
+    },
+    {
+      "entity_id": "E014",
+      "entity_type": "outcome_value",
+      "reported_name": "significant reduction",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "significant reduction"
+        }
+      ]
+    },
+    {
+      "entity_id": "E015",
+      "entity_type": "outcome_value",
+      "reported_name": "enhancement",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "enhancement"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM001",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "has_component",
+      "object_entity_id": "E002",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "liposomal nanoparticles (LNPs)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM002",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "carries_payload",
+      "object_entity_id": "E003",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "encapsulating FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM003",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "has_targeting_ligand",
+      "object_entity_id": "E004",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "CD163 antibody-conjugated"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM004",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E003",
+      "predicate": "encodes_product",
+      "object_entity_id": "E005",
+      "evidence": [
+        {
+          "clause_id": "C005",
+          "quote": "FAP-specific chimeric antigen receptor macrophage (CAR-M) mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM005",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E005",
+      "predicate": "targets_molecule",
+      "object_entity_id": "E006",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "FAP"
+        },
+        {
+          "clause_id": "C005",
+          "quote": "FAP-specific"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM006",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E007",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "selectively transduce liver macrophages"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM007",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "therapeutic_target_cell",
+      "object_entity_id": "E009",
+      "evidence": [
+        {
+          "clause_id": "C009",
+          "quote": "target and neutralize hyperactive fibroblasts"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM008",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E011",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "liver macrophages"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM009",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E010",
+      "evidence": [
+        {
+          "clause_id": "C001",
+          "quote": "liver fibrosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM010",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E012",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "reduction of ECM"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM011",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E001",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E013",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "enhancement of liver fibrosis resolution"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM012",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E012",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E014",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "significant reduction"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLAIM013",
+      "experiment_id": "EX001",
+      "subject_entity_id": "E013",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E015",
+      "evidence": [
+        {
+          "clause_id": "C008",
+          "quote": "enhancement"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EX001",
+      "label": "αCD163/LNP-FAPCAR LNP experiment",
+      "claim_ids": [
+        "CLAIM001",
+        "CLAIM002",
+        "CLAIM003",
+        "CLAIM004",
+        "CLAIM005",
+        "CLAIM006",
+        "CLAIM007",
+        "CLAIM008",
+        "CLAIM009",
+        "CLAIM010",
+        "CLAIM011",
+        "CLAIM012",
+        "CLAIM013"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005",
+        "C006",
+        "C007",
+        "C008",
+        "C009"
+      ],
+      "boundary_status": "ambiguous",
+      "boundary_reason": "Abstract only; no explicit details on experimental conditions such as dose, route, timepoint, species, or biological model."
+    }
+  ]
+}

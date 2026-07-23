@@ -1,0 +1,433 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-006",
+  "source_scope": "abstract_only",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "E-001",
+      "entity_type": "lnp_formulation",
+      "reported_name": "MC3-based LNPs",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "MC3-based LNPs"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-002",
+      "entity_type": "lnp_component",
+      "reported_name": "MC3",
+      "normalized_name": null,
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "MC3-based LNPs"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-003",
+      "entity_type": "payload",
+      "reported_name": "Cas9 mRNA",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "Cas9 mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-004",
+      "entity_type": "payload",
+      "reported_name": "specifically designed sgRNAs",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "specifically designed sgRNAs"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-005",
+      "entity_type": "molecular_target",
+      "reported_name": "FVIII exon 1",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "a five base pair deletion in FVIII exon 1"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-006",
+      "entity_type": "cell",
+      "reported_name": "liver sinusoidal endothelial cells (LSECs)",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "liver sinusoidal endothelial cells (LSECs)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-007",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": null,
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "liver sinusoidal endothelial cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-008",
+      "entity_type": "disease",
+      "reported_name": "hemophilia A",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C001",
+          "quote": "hemophilia A (HemA)"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-009",
+      "entity_type": "species",
+      "reported_name": "mouse",
+      "normalized_name": null,
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "HemA mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-010",
+      "entity_type": "biological_model",
+      "reported_name": "HemA mice",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "HemA mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-011",
+      "entity_type": "route",
+      "reported_name": "intravenously",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "intravenously"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-012",
+      "entity_type": "timepoint",
+      "reported_name": "26 weeks",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "over 26 weeks"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-013",
+      "entity_type": "endpoint",
+      "reported_name": "FVIII activity",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "endogenous FVIII activity"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-014",
+      "entity_type": "endpoint",
+      "reported_name": "gene editing rate",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "gene editing rate"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-015",
+      "entity_type": "outcome_value",
+      "reported_name": "6% FVIII activity",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "up to 6%"
+        }
+      ]
+    },
+    {
+      "entity_id": "E-016",
+      "entity_type": "outcome_value",
+      "reported_name": "15.3% gene editing rate in LSECs",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "average gene editing rate of 15.3% in LSECs"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-001",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-001",
+      "predicate": "has_component",
+      "object_entity_id": "E-002",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "MC3-based LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-002",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-001",
+      "predicate": "carries_payload",
+      "object_entity_id": "E-003",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "LNPs encapsulating Cas9 mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-003",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-001",
+      "predicate": "carries_payload",
+      "object_entity_id": "E-004",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "and specifically designed sgRNAs"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-004",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-004",
+      "predicate": "targets_molecule",
+      "object_entity_id": "E-005",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "target a five base pair deletion in FVIII exon 1"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-005",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-001",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "E-006",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "delivery into liver sinusoidal endothelial cells (LSECs)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-006",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-006",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "E-007",
+      "evidence": [
+        {
+          "clause_id": "C003",
+          "quote": "liver sinusoidal endothelial cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-007",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-010",
+      "predicate": "has_disease_context",
+      "object_entity_id": "E-008",
+      "evidence": [
+        {
+          "clause_id": "C001",
+          "quote": "hemophilia A (HemA)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-008",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-010",
+      "predicate": "has_species",
+      "object_entity_id": "E-009",
+      "evidence": [
+        {
+          "clause_id": "C002",
+          "quote": "HemA mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-009",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-001",
+      "predicate": "has_route",
+      "object_entity_id": "E-011",
+      "evidence": [
+        {
+          "clause_id": "C004",
+          "quote": "intravenously"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-010",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-010",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E-013",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "Sustained endogenous FVIII activity up to 6% was achieved over 26 weeks in treated HemA mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-011",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-006",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E-014",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "average gene editing rate of 15.3% in LSECs"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-012",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-013",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E-015",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "up to 6%"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-013",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-014",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "E-016",
+      "evidence": [
+        {
+          "clause_id": "C007",
+          "quote": "average gene editing rate of 15.3% in LSECs"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-014",
+      "experiment_id": "EXP-001",
+      "subject_entity_id": "E-013",
+      "predicate": "has_timepoint",
+      "object_entity_id": "E-012",
+      "evidence": [
+        {
+          "clause_id": "C006",
+          "quote": "over 26 weeks"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP-001",
+      "label": "In vivo gene editing of mutant FVIII in HemA mice using MC3-based LNPs encapsulating Cas9 mRNA and sgRNAs",
+      "claim_ids": [
+        "CLM-001",
+        "CLM-002",
+        "CLM-003",
+        "CLM-004",
+        "CLM-005",
+        "CLM-006",
+        "CLM-007",
+        "CLM-008",
+        "CLM-009",
+        "CLM-010",
+        "CLM-011",
+        "CLM-012",
+        "CLM-013",
+        "CLM-014"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "C002",
+        "C003",
+        "C004",
+        "C005",
+        "C006",
+        "C007"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The experiment is explicitly described in clauses C002-C007, detailing LNP injection, gene editing, and outcomes."
+    }
+  ]
+}
