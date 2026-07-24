@@ -1,0 +1,148 @@
+{
+  "contract_version": "4.1.0",
+  "paper_id": "GP-005",
+  "add_entities": [
+    {
+      "entity_id": "A07",
+      "entity_type": "assay",
+      "reported_name": "intravital imaging",
+      "normalized_name": "intravital microscopy",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "intravital imaging"
+        }
+      ]
+    },
+    {
+      "entity_id": "E09",
+      "entity_type": "endpoint",
+      "reported_name": "uptake of mRNA-LNP and siRNA-LNP by KC and hepatocytes in vivo",
+      "normalized_name": "Kupffer cell and hepatocyte uptake of mRNA- and siRNA-LNPs",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "both KC and hepatocytes demonstrate comparable high and rapid uptake of mRNA‐LNP and siRNA‐LNP in vivo"
+        }
+      ]
+    },
+    {
+      "entity_id": "O09",
+      "entity_type": "outcome_value",
+      "reported_name": "comparable high and rapid uptake in KC and hepatocytes",
+      "normalized_name": "comparably high and rapid uptake in Kupffer cells and hepatocytes",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "comparable high and rapid uptake"
+        }
+      ]
+    },
+    {
+      "entity_id": "E10",
+      "entity_type": "endpoint",
+      "reported_name": "translation of Egfp mRNA during intravital imaging",
+      "normalized_name": "EGFP mRNA translation by intravital microscopy",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "the translation of Egfp mRNA occurs exclusively in hepatocytes during intravital imaging"
+        }
+      ]
+    },
+    {
+      "entity_id": "O10",
+      "entity_type": "outcome_value",
+      "reported_name": "translation of Egfp mRNA occurs exclusively in hepatocytes during intravital imaging",
+      "normalized_name": "EGFP mRNA translation exclusively in hepatocytes by intravital microscopy",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "occurs exclusively in hepatocytes during intravital imaging"
+        }
+      ]
+    }
+  ],
+  "add_claims": [
+    {
+      "claim_id": "CL048",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "A07",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E09",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "both KC and hepatocytes demonstrate comparable high and rapid uptake of mRNA‐LNP and siRNA‐LNP in vivo"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL049",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "E09",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O09",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "comparable high and rapid uptake"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL050",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "A07",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E10",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "the translation of Egfp mRNA occurs exclusively in hepatocytes during intravital imaging"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL051",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "E10",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O10",
+      "evidence": [
+        {
+          "clause_id": "B022C003",
+          "quote": "occurs exclusively in hepatocytes during intravital imaging"
+        }
+      ]
+    }
+  ],
+  "experiment_claim_additions": [
+    {
+      "experiment_id": "GP-005-E01",
+      "claim_ids": [
+        "CL048",
+        "CL049",
+        "CL050",
+        "CL051"
+      ],
+      "source_scope_clause_ids": [
+        "B022C003"
+      ]
+    }
+  ],
+  "dispositions": [
+    {
+      "candidate_id": "RC-B022C003-42-32ef0299",
+      "status": "retained",
+      "claim_id": "CL049",
+      "reason": "The candidate reports two supported, semantically distinct intravital-imaging results: comparable high and rapid LNP uptake by Kupffer cells and hepatocytes, and EGFP mRNA translation exclusively in hepatocytes."
+    }
+  ],
+  "mechanism_steps": []
+}

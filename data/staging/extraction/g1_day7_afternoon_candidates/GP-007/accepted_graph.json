@@ -1,0 +1,1088 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-007",
+  "source_scope": "full_text_with_supplement",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "ENT-FORM-01",
+      "entity_type": "lnp_formulation",
+      "reported_name": "siMicu1-LNPs",
+      "normalized_name": "siMicu1 lipid nanoparticles",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "we constructed siMicu1-LNPs associated with ApoE for targeted delivery to the liver"
+        },
+        {
+          "clause_id": "B004C003",
+          "quote": "particle size of siMicu1-LNPs was 80.03 ± 1.19 nm"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-COMP-01",
+      "entity_type": "lnp_component",
+      "reported_name": "Cholesterol",
+      "normalized_name": "cholesterol",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B002C003",
+          "quote": "Cholesterol and DSPE-PEG were then dissolved in ethanol"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-COMP-02",
+      "entity_type": "lnp_component",
+      "reported_name": "DSPE-PEG",
+      "normalized_name": "DSPE-PEG",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B002C003",
+          "quote": "Cholesterol and DSPE-PEG were then dissolved in ethanol"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-COMP-03",
+      "entity_type": "lnp_component",
+      "reported_name": "FITC-labeled HA derivatives",
+      "normalized_name": "FITC-labeled hyaluronic acid derivatives",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C003",
+          "quote": "0.1 mol% FITC-labeled HA derivatives were added to the lipid mixture"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-PAY-01",
+      "entity_type": "payload",
+      "reported_name": "siMicu1",
+      "normalized_name": "MICU1-targeting siRNA",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B002C001",
+          "quote": "LNPs entrapping siMicu1"
+        },
+        {
+          "clause_id": "B004C001",
+          "quote": "inhibition of Micu1"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TARGET-01",
+      "entity_type": "molecular_target",
+      "reported_name": "Micu1",
+      "normalized_name": "MICU1",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "inhibition of Micu1"
+        },
+        {
+          "clause_id": "B006C005",
+          "quote": "ACT directly bound to MICU1"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-CELL-01",
+      "entity_type": "cell",
+      "reported_name": "LSECs",
+      "normalized_name": "liver sinusoidal endothelial cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C003",
+          "quote": "liver sinusoidal endothelial cells (LSECs)"
+        },
+        {
+          "clause_id": "B004C012",
+          "quote": "thereby protecting the function of LSECs"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ORGAN-01",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": "liver",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C006",
+          "quote": "liver was the primary target organ"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-DISEASE-01",
+      "entity_type": "disease",
+      "reported_name": "HIRI",
+      "normalized_name": "hepatic ischemia-reperfusion injury",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C001",
+          "quote": "Hepatic ischemia-reperfusion injury (HIRI)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-SPECIES-01",
+      "entity_type": "species",
+      "reported_name": "C57BL/6J mice",
+      "normalized_name": "Mus musculus",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C001",
+          "quote": "C57BL/6J mice (8 weeks old, male, 22-24 g)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MODEL-01",
+      "entity_type": "biological_model",
+      "reported_name": "HIRI mice",
+      "normalized_name": "mouse hepatic ischemia-reperfusion injury model",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B006C003",
+          "quote": "in vivo in HIRI mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MODEL-02",
+      "entity_type": "biological_model",
+      "reported_name": "hypoxia-reoxygenation or lactate-stimulated LSECs",
+      "normalized_name": "hypoxia-reoxygenation- or lactate-stimulated LSEC model",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B006C003",
+          "quote": "in vitro in hypoxia-reoxygenation or lactate-stimulated LSECs"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-01",
+      "entity_type": "intervention",
+      "reported_name": "ACT",
+      "normalized_name": "acteoside",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C002",
+          "quote": "acteoside (ACT)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-02",
+      "entity_type": "intervention",
+      "reported_name": "LNPs-siMicu1",
+      "normalized_name": "siMicu1 lipid nanoparticles",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B005C002",
+          "quote": "an intravenous injection of LNPs-siMicu1 (5 μl/g)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-03",
+      "entity_type": "intervention",
+      "reported_name": "AAV8-stab2-oeMicu1",
+      "normalized_name": "Stab2-promoter AAV8 expressing Micu1",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B011C001",
+          "quote": "HIRI + AAV8-stab2-oeMicu1 group"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-04",
+      "entity_type": "intervention",
+      "reported_name": "lactate inhibitors",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B006C007",
+          "quote": "ACT synergized with lactate inhibitors"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-05",
+      "entity_type": "intervention",
+      "reported_name": "ACT-d1",
+      "normalized_name": "acteoside derivative 1",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B018C001",
+          "quote": "ACT-d1 was removed the structures (highlighted in red) at the C8 sites while retaining other key hydroxyl groups responsible for binding to MICU1 and Ca2+."
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-06",
+      "entity_type": "intervention",
+      "reported_name": "ACT-d2",
+      "normalized_name": "acteoside derivative 2",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B018C002",
+          "quote": "ACT-d2 was removed all active hydroxyls groups"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ROUTE-01",
+      "entity_type": "route",
+      "reported_name": "intraperitoneally",
+      "normalized_name": "intraperitoneal administration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C003",
+          "quote": "ACT was administered intraperitoneally"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ROUTE-02",
+      "entity_type": "route",
+      "reported_name": "intravenous injection",
+      "normalized_name": "intravenous administration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B005C002",
+          "quote": "an intravenous injection of LNPs-siMicu1"
+        },
+        {
+          "clause_id": "B011C002",
+          "quote": "intravenously injected with AAV-oeMicu1"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-DOSE-01",
+      "entity_type": "dose",
+      "reported_name": "25, 50 and 100 mg/kg",
+      "normalized_name": "25, 50, and 100 mg/kg",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C003",
+          "quote": "ACT was administered intraperitoneally at 25, 50 and 100 mg/kg"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-DOSE-02",
+      "entity_type": "dose",
+      "reported_name": "5 μl/g",
+      "normalized_name": "5 µL/g",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B005C002",
+          "quote": "LNPs-siMicu1 (5 μl/g)"
+        },
+        {
+          "clause_id": "B011C002",
+          "quote": "AAV-oeMicu1 (5 μl/g)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TIME-01",
+      "entity_type": "timepoint",
+      "reported_name": "within one week prior to surgery",
+      "normalized_name": "within 1 week before surgery",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "within one week prior to surgery"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TIME-02",
+      "entity_type": "timepoint",
+      "reported_name": "2 h prior to surgery",
+      "normalized_name": "2 hours before surgery",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B005C002",
+          "quote": "2 h prior to surgery"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TIME-03",
+      "entity_type": "timepoint",
+      "reported_name": "14 days before surgery",
+      "normalized_name": "14 days before surgery",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B011C002",
+          "quote": "14 days before surgery"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-01",
+      "entity_type": "assay",
+      "reported_name": "in vivo fluorescence imaging analysis",
+      "normalized_name": "in vivo fluorescence imaging",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C005",
+          "quote": "in vivo fluorescence imaging analysis using FITC-labeled siMicu1-LNPs"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-02",
+      "entity_type": "assay",
+      "reported_name": "TEM",
+      "normalized_name": "transmission electron microscopy",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C011",
+          "quote": "TEM results indicated"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-03",
+      "entity_type": "assay",
+      "reported_name": "Ca2+ content assay",
+      "normalized_name": "Fluo-4 flow-cytometric calcium assay",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B019C001",
+          "quote": "Fluo-4 calcium ion assay kit (Beyotime, S1061S) was used following the manufacturer's instructions by flow cytometry"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-04",
+      "entity_type": "assay",
+      "reported_name": "Mass spectrometry (MS) analysis",
+      "normalized_name": "mass spectrometry",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B018C003",
+          "quote": "Mass spectrometry (MS) analysis confirmed the successful structural modifications of these ACT derivatives"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-01",
+      "entity_type": "endpoint",
+      "reported_name": "LNP biodistribution",
+      "normalized_name": "organ biodistribution",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C005",
+          "quote": "to determine the biodistribution of the siMicu1-LNPs formulation"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-01",
+      "entity_type": "outcome_value",
+      "reported_name": "liver was the primary target organ",
+      "normalized_name": "primary accumulation in liver",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C006",
+          "quote": "liver was the primary target organ"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-02",
+      "entity_type": "endpoint",
+      "reported_name": "plasma AST, plasma ALT, MDA, and SOD activity",
+      "normalized_name": "liver injury biomarkers and oxidative-stress measures",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C009",
+          "quote": "plasma AST and ALT, along with elevated MDA and reduced SOD activities"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-02",
+      "entity_type": "outcome_value",
+      "reported_name": "largely improved; more significantly with ACT",
+      "normalized_name": "improved, with greater improvement under combination treatment",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C009",
+          "quote": "were largely improved in the HIRI + LNPs-siMicu1 group, more significantly in the HIRI + LNPs-siMicu1 + ACT group"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-03",
+      "entity_type": "endpoint",
+      "reported_name": "body weight",
+      "normalized_name": "body weight",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "there was no significant change in body weight"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-03",
+      "entity_type": "outcome_value",
+      "reported_name": "no significant change",
+      "normalized_name": "no significant change",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "there was no significant change in body weight"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-04",
+      "entity_type": "endpoint",
+      "reported_name": "spleen coefficient",
+      "normalized_name": "spleen coefficient",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "decrease trend of spleen coefficient"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-04",
+      "entity_type": "outcome_value",
+      "reported_name": "remarkable decrease trend",
+      "normalized_name": "decrease trend",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "a remarkable decrease trend of spleen coefficient"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-05",
+      "entity_type": "endpoint",
+      "reported_name": "mitochondrial cristae fragmentation, mitochondrial Ca2+ accumulation, and LSEC defenestration",
+      "normalized_name": "LSEC mitochondrial and fenestration pathology",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C011",
+          "quote": "mitochondrial cristae fragmentation, Ca2+ accumulation in mitochondria and the “defenestration” phenotype of LSECs"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-05",
+      "entity_type": "outcome_value",
+      "reported_name": "ameliorate",
+      "normalized_name": "amelioration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C011",
+          "quote": "ACT synergized with siMicu1-LNPs to ameliorate mitochondrial cristae fragmentation, Ca2+ accumulation in mitochondria and the “defenestration” phenotype of LSECs induced by HIRI"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-06",
+      "entity_type": "endpoint",
+      "reported_name": "aminotransferases",
+      "normalized_name": "serum aminotransferase levels",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B016C005",
+          "quote": "ACT significantly mitigated the elevation of aminotransferases"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-06",
+      "entity_type": "outcome_value",
+      "reported_name": "significantly mitigated the elevation",
+      "normalized_name": "significant mitigation",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B016C005",
+          "quote": "ACT significantly mitigated the elevation of aminotransferases"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-07",
+      "entity_type": "endpoint",
+      "reported_name": "Ca2+ homeostasis",
+      "normalized_name": "intracellular calcium homeostasis",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B014C006",
+          "quote": "ACT intervention significantly restored Ca2+ homeostasis in LSECs following HR."
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-07",
+      "entity_type": "outcome_value",
+      "reported_name": "significantly restored",
+      "normalized_name": "significant restoration",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B014C006",
+          "quote": "ACT intervention significantly restored Ca2+ homeostasis in LSECs following HR."
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-08",
+      "entity_type": "endpoint",
+      "reported_name": "anti-HIRI effects",
+      "normalized_name": "protection against hepatic ischemia-reperfusion injury",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B006C007",
+          "quote": "enhance its anti-HIRI effects"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-08",
+      "entity_type": "outcome_value",
+      "reported_name": "abolished these benefits",
+      "normalized_name": "abolished benefit",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B006C007",
+          "quote": "LSECs-specific Micu1 overexpression abolished these benefits."
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-09",
+      "entity_type": "endpoint",
+      "reported_name": "intracellular L-lactate levels",
+      "normalized_name": "intracellular L-lactate concentration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B018C005",
+          "quote": "ACT-d1 effectively reduced intracellular L-lactate levels"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-09",
+      "entity_type": "outcome_value",
+      "reported_name": "effectively reduced",
+      "normalized_name": "effective reduction",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B018C005",
+          "quote": "ACT-d1 effectively reduced intracellular L-lactate levels"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-10",
+      "entity_type": "endpoint",
+      "reported_name": "mitochondrial Ca2+ accumulation",
+      "normalized_name": "mitochondrial calcium accumulation",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B018C005",
+          "quote": "inhibited mitochondrial Ca2+ accumulation"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-10",
+      "entity_type": "outcome_value",
+      "reported_name": "inhibited",
+      "normalized_name": "inhibition",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B018C005",
+          "quote": "inhibited mitochondrial Ca2+ accumulation"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-V02",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-PAY-01",
+      "predicate": "targets_molecule",
+      "object_entity_id": "ENT-TARGET-01",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "To verify whether the inhibition of Micu1 improves LSECs' function by maintaining Ca2+ homeostasis and inhibiting glycolysis in vivo, we constructed siMicu1-LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V03",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-FORM-01",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "ENT-ORGAN-01",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "we constructed siMicu1-LNPs associated with ApoE for targeted delivery to the liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V04",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-INT-02",
+      "predicate": "has_route",
+      "object_entity_id": "ENT-ROUTE-02",
+      "evidence": [
+        {
+          "clause_id": "B005C002",
+          "quote": "Mice in groups 3 and 4 were received an intravenous injection of LNPs-siMicu1 (5 μl/g) 2 h prior to surgery."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V05",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-INT-02",
+      "predicate": "has_dose",
+      "object_entity_id": "ENT-DOSE-02",
+      "evidence": [
+        {
+          "clause_id": "B005C002",
+          "quote": "Mice in groups 3 and 4 were received an intravenous injection of LNPs-siMicu1 (5 μl/g) 2 h prior to surgery."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V06",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-INT-02",
+      "predicate": "has_timepoint",
+      "object_entity_id": "ENT-TIME-02",
+      "evidence": [
+        {
+          "clause_id": "B005C002",
+          "quote": "Mice in groups 3 and 4 were received an intravenous injection of LNPs-siMicu1 (5 μl/g) 2 h prior to surgery."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V07",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-ASSAY-01",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-01",
+      "evidence": [
+        {
+          "clause_id": "B004C005",
+          "quote": "to determine the biodistribution of the siMicu1-LNPs formulation following tail vein injection, we performed in vivo fluorescence imaging analysis using FITC-labeled siMicu1-LNPs."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V08",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-END-01",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-01",
+      "evidence": [
+        {
+          "clause_id": "B004C006",
+          "quote": "liver was the primary target organ"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V09",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-END-02",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-02",
+      "evidence": [
+        {
+          "clause_id": "B004C009",
+          "quote": "The increased levels of plasma AST and ALT, along with elevated MDA and reduced SOD activities induced by HIRI, were largely improved in the HIRI + LNPs-siMicu1 group, more significantly in the HIRI + LNPs-siMicu1 + ACT group"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V10",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-END-03",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-03",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "there was no significant change in body weight"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V11",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-END-04",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-04",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "a remarkable decrease trend of spleen coefficient"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V12",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-ASSAY-02",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-05",
+      "evidence": [
+        {
+          "clause_id": "B004C011",
+          "quote": "TEM results indicated that ACT synergized with siMicu1-LNPs to ameliorate mitochondrial cristae fragmentation, Ca2+ accumulation in mitochondria and the “defenestration” phenotype of LSECs induced by HIRI"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V13",
+      "experiment_id": "GP-007-E04",
+      "subject_entity_id": "ENT-END-05",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-05",
+      "evidence": [
+        {
+          "clause_id": "B004C011",
+          "quote": "ACT synergized with siMicu1-LNPs to ameliorate mitochondrial cristae fragmentation, Ca2+ accumulation in mitochondria and the “defenestration” phenotype of LSECs induced by HIRI"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V15",
+      "experiment_id": "GP-007-E01",
+      "subject_entity_id": "ENT-MODEL-01",
+      "predicate": "has_disease_context",
+      "object_entity_id": "ENT-DISEASE-01",
+      "evidence": [
+        {
+          "clause_id": "B006C003",
+          "quote": "in vivo in HIRI mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V20",
+      "experiment_id": "GP-007-E01",
+      "subject_entity_id": "ENT-END-06",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-06",
+      "evidence": [
+        {
+          "clause_id": "B016C005",
+          "quote": "ACT significantly mitigated the elevation of aminotransferases"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V21",
+      "experiment_id": "GP-007-E02",
+      "subject_entity_id": "ENT-MODEL-02",
+      "predicate": "has_intervention",
+      "object_entity_id": "ENT-INT-01",
+      "evidence": [
+        {
+          "clause_id": "B006C003",
+          "quote": "we explored the hepatoprotective mechanisms of ACT in vivo in HIRI mice and in vitro in hypoxia-reoxygenation or lactate-stimulated LSECs."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V23",
+      "experiment_id": "GP-007-E02",
+      "subject_entity_id": "ENT-END-07",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-07",
+      "evidence": [
+        {
+          "clause_id": "B014C006",
+          "quote": "ACT intervention significantly restored Ca2+ homeostasis in LSECs following HR."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V27",
+      "experiment_id": "GP-007-E03",
+      "subject_entity_id": "ENT-INT-03",
+      "predicate": "has_route",
+      "object_entity_id": "ENT-ROUTE-02",
+      "evidence": [
+        {
+          "clause_id": "B011C002",
+          "quote": "Mice in groups 3-4 were intravenously injected with AAV-oeMicu1 (5 μl/g) 14 days before surgery."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V28",
+      "experiment_id": "GP-007-E03",
+      "subject_entity_id": "ENT-INT-03",
+      "predicate": "has_dose",
+      "object_entity_id": "ENT-DOSE-02",
+      "evidence": [
+        {
+          "clause_id": "B011C002",
+          "quote": "Mice in groups 3-4 were intravenously injected with AAV-oeMicu1 (5 μl/g) 14 days before surgery."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V29",
+      "experiment_id": "GP-007-E03",
+      "subject_entity_id": "ENT-INT-03",
+      "predicate": "has_timepoint",
+      "object_entity_id": "ENT-TIME-03",
+      "evidence": [
+        {
+          "clause_id": "B011C002",
+          "quote": "Mice in groups 3-4 were intravenously injected with AAV-oeMicu1 (5 μl/g) 14 days before surgery."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V30",
+      "experiment_id": "GP-007-E03",
+      "subject_entity_id": "ENT-END-08",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-08",
+      "evidence": [
+        {
+          "clause_id": "B006C007",
+          "quote": "LSECs-specific Micu1 overexpression abolished these benefits."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V31",
+      "experiment_id": "GP-007-E05",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "compared_with",
+      "object_entity_id": "ENT-INT-04",
+      "evidence": [
+        {
+          "clause_id": "B006C007",
+          "quote": "ACT synergized with lactate inhibitors"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V35",
+      "experiment_id": "GP-007-E06",
+      "subject_entity_id": "ENT-END-09",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-09",
+      "evidence": [
+        {
+          "clause_id": "B018C005",
+          "quote": "ACT-d1 effectively reduced intracellular L-lactate levels"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-V36",
+      "experiment_id": "GP-007-E06",
+      "subject_entity_id": "ENT-END-10",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-10",
+      "evidence": [
+        {
+          "clause_id": "B018C005",
+          "quote": "ACT-d1 effectively reduced intracellular L-lactate levels and inhibited mitochondrial Ca2+ accumulation"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "GP-007-E01",
+      "label": "ACT in-vivo HIRI experiment",
+      "claim_ids": [
+        "CLM-V15",
+        "CLM-V20"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B006C003",
+        "B009C001",
+        "B009C003",
+        "B009C004",
+        "B010C001",
+        "B016C005"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "ACT-treated mouse HIRI cohorts are explicitly described; RNA-sequencing and other assays are retained as context-specific evidence without assigning unrelated assays to the model."
+    },
+    {
+      "experiment_id": "GP-007-E02",
+      "label": "ACT in-vitro LSEC experiment",
+      "claim_ids": [
+        "CLM-V21",
+        "CLM-V23"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B006C003",
+        "B014C006",
+        "B019C001"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The source explicitly describes ACT studied in hypoxia-reoxygenation or lactate-stimulated LSECs. Delivery-recipient and therapeutic-target fields are not established separately."
+    },
+    {
+      "experiment_id": "GP-007-E03",
+      "label": "LSEC-specific Micu1-overexpression experiment",
+      "claim_ids": [
+        "CLM-V27",
+        "CLM-V28",
+        "CLM-V29",
+        "CLM-V30"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B006C007",
+        "B011C001",
+        "B011C002"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The AAV8-Stab2-Micu1 cohorts, intravenous administration, dose volume, and timing are explicitly reported."
+    },
+    {
+      "experiment_id": "GP-007-E04",
+      "label": "ACT plus siMicu1-LNP experiment",
+      "claim_ids": [
+        "CLM-V02",
+        "CLM-V03",
+        "CLM-V04",
+        "CLM-V05",
+        "CLM-V06",
+        "CLM-V07",
+        "CLM-V08",
+        "CLM-V09",
+        "CLM-V10",
+        "CLM-V11",
+        "CLM-V12",
+        "CLM-V13"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B002C001",
+        "B004C001",
+        "B004C005",
+        "B004C006",
+        "B004C008",
+        "B004C009",
+        "B004C011",
+        "B005C002"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Figure 7 text explicitly describes siMicu1-LNP administration before HIRI surgery and ACT administration. Liver targeting is supported; LSEC-selective LNP delivery is not."
+    },
+    {
+      "experiment_id": "GP-007-E05",
+      "label": "ACT plus lactate-inhibitor experiment",
+      "claim_ids": [
+        "CLM-V31"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B006C007"
+      ],
+      "boundary_status": "ambiguous",
+      "boundary_reason": "Only an abstract-level qualitative synergy statement is available. The lactate inhibitor, experimental system, administration details, assay, recipient cell, therapeutic target, endpoint, and quantitative outcome are unspecified."
+    },
+    {
+      "experiment_id": "GP-007-E06",
+      "label": "ACT-derivative structural-analysis experiment",
+      "claim_ids": [
+        "CLM-V35",
+        "CLM-V36"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B018C001",
+        "B018C002",
+        "B018C003",
+        "B018C004",
+        "B018C005",
+        "B018C006"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "ACT-d1 and ACT-d2 are explicitly structurally modified and functionally evaluated; mass spectrometry confirms modification, while the binding-analysis assay itself is not named."
+    }
+  ]
+}

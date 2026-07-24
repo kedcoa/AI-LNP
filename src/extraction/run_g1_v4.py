@@ -41,7 +41,7 @@ PREDICATE_TYPES: dict[str, tuple[set[str], set[str]]] = {
     "has_route": ({"intervention", "lnp_formulation"}, {"route"}),
     "has_dose": ({"intervention", "lnp_formulation"}, {"dose"}),
     "has_timepoint": ({"intervention", "endpoint"}, {"timepoint"}),
-    "measures_endpoint": ({"intervention", "lnp_formulation", "payload"}, {"endpoint"}),
+    "measures_endpoint": ({"intervention", "lnp_formulation", "payload", "assay"}, {"endpoint"}),
     "has_outcome_value": ({"endpoint"}, {"outcome_value"}),
     "compared_with": ({"intervention", "endpoint", "biological_model"}, {"intervention", "endpoint", "biological_model", "cell"}),
 }

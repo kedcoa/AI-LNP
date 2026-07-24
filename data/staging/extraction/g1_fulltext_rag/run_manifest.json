@@ -1,16 +1,70 @@
 {
-  "run_at": "2026-07-23T10:14:06.931938+00:00",
+  "run_at": "2026-07-24T03:17:54.022790+00:00",
+  "provider": "openai",
   "models": {
-    "extractor": "glm-5.2",
-    "verifier": "glm-5.2"
+    "extractor": "gpt-5.6-sol",
+    "verifier": "gpt-5.6-terra"
   },
   "source_scope": "full_text_with_supplement",
   "papers": [
     {
-      "paper_id": "GP-002",
-      "status": "error",
-      "error_type": "RateLimitError",
-      "error": "Error code: 429 - {'error': {'message': 'The request rate exceeds the current model TPM limit 5000000. Please reduce the request frequency or contact Tencent Cloud support to request a higher limit.', 'type': 'invalid_request_error', 'code': '429001'}}"
+      "paper_id": "GP-009",
+      "status": "accepted",
+      "experiments": 7,
+      "claims": 47,
+      "unresolved_ambiguities": [
+        "The supplied source clauses identify C57BL/6 mice for the radiolabeled biodistribution study and Ai6 mice for the Cre-reporter study, but do not specify mouse strain or model for every anti-CD31 and anti-CD4 experiment; species/model claims were therefore not propagated across those experiment boundaries.",
+        "The supplied clauses establish anti-CD117 targeting and CD117-positive HSC phenotyping, but do not explicitly provide a gene/protein normalization for CD117; its normalized molecular-target name remains unresolved.",
+        "The anti-CD4 luciferase experiment reports enhanced spleen and reduced liver expression qualitatively, but no numerical outcomes or explicit assay timepoint are supplied in the source clauses; these were not fabricated."
+      ],
+      "post_repair_observations": 0,
+      "deterministically_pruned_claim_ids": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005",
+        "C006",
+        "C010",
+        "C011",
+        "C012",
+        "C013",
+        "C014",
+        "C016",
+        "C027",
+        "C028",
+        "C030",
+        "C037",
+        "C038",
+        "C040",
+        "C041",
+        "C042",
+        "C043",
+        "C050",
+        "C051",
+        "C052",
+        "C053",
+        "C054",
+        "C055",
+        "C057",
+        "C058",
+        "C059",
+        "C060",
+        "C066",
+        "C068",
+        "C069",
+        "C071",
+        "C074",
+        "C075",
+        "C081",
+        "C082",
+        "C083",
+        "C084",
+        "C086",
+        "C088",
+        "C090"
+      ],
+      "final_audit_findings": 0
     }
   ]
 }

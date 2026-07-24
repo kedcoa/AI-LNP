@@ -8,7 +8,7 @@ from .models import RetrievalPacket, RetrievalQuery
 
 
 FIELD_QUERIES = {
-    "lnp_composition_raw": (
+    "formulation": (
         "What exact LNP lipid components, chemical names, molar ratios, and preparation "
         "conditions are reported?", ["lnp", "lipid_or_material"], "formulation"
     ),
@@ -16,21 +16,32 @@ FIELD_QUERIES = {
         "What exact molecular cargo is encapsulated, and what does it encode or target?",
         ["lnp", "payload"], "payload"
     ),
-    "experiment_boundary": (
-        "List each distinct intervention experiment with formulation, payload, model, "
-        "dose, route, timepoint, assay, and control kept together.", ["lnp"], "experiment_boundary"
+    "biological_model": (
+        "For each distinct LNP intervention, what species, biological model, disease or "
+        "physiological context, dose, route, timepoint, and control are reported?",
+        ["lnp", "species"], "model_context"
     ),
-    "delivery_recipient_cell_reported": (
+    "recipient_cell": (
         "Which cells physically receive the LNP or express its payload in each experiment?",
         ["lnp", "cell"], "recipient_cell"
     ),
-    "therapeutic_target_cell_reported": (
+    "therapeutic_target": (
         "Which cells are acted upon for the therapeutic effect in each experiment, "
         "distinguishing them from delivery recipient cells?", ["cell"], "therapeutic_target"
     ),
+    "assay": (
+        "For each distinct LNP intervention, which assay or measurement method was used, "
+        "and which experiment does it belong to?", [], "outcome"
+    ),
+    "endpoint": (
+        "For each distinct LNP intervention, what endpoint was measured, including "
+        "negative, qualitative, cell-specific, and comparator endpoints?",
+        ["outcome"], "outcome"
+    ),
     "outcomes": (
-        "What distinct measured endpoint names and observed outcomes are reported for "
-        "each experiment?", ["outcome"], "outcome"
+        "For each endpoint in each distinct LNP intervention, what exact quantitative or "
+        "qualitative outcome was observed, including zero, absent, or below-detection results?",
+        ["outcome"], "outcome"
     ),
 }
 
@@ -44,7 +55,7 @@ class ExtractionInput:
         return {field: evidence_prompt(packet) for field, packet in self.packets.items()}
 
 
-def retrieve_extraction_input(index: HybridIndex, paper_id: str, k: int = 10) -> ExtractionInput:
+def retrieve_extraction_input(index: HybridIndex, paper_id: str, k: int = 6) -> ExtractionInput:
     packets = {}
     for number, (field, (question, entity_types, group)) in enumerate(FIELD_QUERIES.items(), 1):
         packet = index.retrieve(RetrievalQuery(
@@ -54,6 +65,7 @@ def retrieve_extraction_input(index: HybridIndex, paper_id: str, k: int = 10) ->
             field_group=group,
             required_entity_types=entity_types,
         ), k=k)
+        packet = index.expand_hierarchy_context(packet)
         packets[field] = packet
     return ExtractionInput(paper_id=paper_id, packets=packets)
 

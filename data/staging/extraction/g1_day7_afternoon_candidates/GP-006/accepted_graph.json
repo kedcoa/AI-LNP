@@ -1,0 +1,1407 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-006",
+  "source_scope": "full_text_with_supplement",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "F_E01",
+      "entity_type": "lnp_formulation",
+      "reported_name": "MC3-based LNPs encapsulating Cas9 mRNA and specifically designed sgRNAs",
+      "normalized_name": "MC3 lipid nanoparticles carrying Cas9 mRNA and sgRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C006",
+          "quote": "MC3-based LNPs"
+        },
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "entity_id": "F_E02_DII",
+      "entity_type": "lnp_formulation",
+      "reported_name": "DiI-labeled LNPs",
+      "normalized_name": "DiI-labeled MC3 lipid nanoparticles",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B003C022",
+          "quote": "To investigate the liver distribution of MC3 LNP"
+        },
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "entity_id": "F_E02_GFP",
+      "entity_type": "lnp_formulation",
+      "reported_name": "GFP LNP",
+      "normalized_name": "MC3 lipid nanoparticles carrying GFP mRNA",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B003C028",
+          "quote": "Ionizable cationic lipids exhibit positive charges in low pH environ- To further conﬁrm the targeting speciﬁcity and efﬁciency, we encapsu- ments and can therefore bind to the negative charges of phosphate lated GFP mRNA into LNPs (GFP LNP) and intravenously injected backbones in nucleic acids such as mRNA, siRNA, and DNA."
+        },
+        {
+          "clause_id": "B003C029",
+          "quote": "At them into mice at a dosage of 1.2 mg/kg."
+        }
+      ]
+    },
+    {
+      "entity_id": "F_E02_LUC",
+      "entity_type": "lnp_formulation",
+      "reported_name": "Luc LNP",
+      "normalized_name": "MC3 lipid nanoparticles carrying luciferase mRNA",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B002C001",
+          "quote": "we synthesized the luciferase mRNA encapsulated MC3 LNP (Luc LNP)."
+        }
+      ]
+    },
+    {
+      "entity_id": "CMP_MC3",
+      "entity_type": "lnp_component",
+      "reported_name": "MC3",
+      "normalized_name": "D-Lin-MC3-DMA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C017",
+          "quote": "D-Lin-MC3-DMA (MC3)-based LNPs"
+        },
+        {
+          "clause_id": "B004C001",
+          "quote": "MC3:DOPE:cholesterol:DMG-PEG2K = 50:10:39:1"
+        }
+      ]
+    },
+    {
+      "entity_id": "CMP_DOPE",
+      "entity_type": "lnp_component",
+      "reported_name": "DOPE",
+      "normalized_name": "1,2-dioleoyl-sn-glycero-3-phosphoethanolamine",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "MC3:DOPE:cholesterol:DMG-PEG2K = 50:10:39:1"
+        }
+      ]
+    },
+    {
+      "entity_id": "CMP_CHOL",
+      "entity_type": "lnp_component",
+      "reported_name": "cholesterol",
+      "normalized_name": "cholesterol",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "MC3:DOPE:cholesterol:DMG-PEG2K = 50:10:39:1"
+        }
+      ]
+    },
+    {
+      "entity_id": "CMP_DMGPEG",
+      "entity_type": "lnp_component",
+      "reported_name": "DMG-PEG2K",
+      "normalized_name": "DMG-PEG2000",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "MC3:DOPE:cholesterol:DMG-PEG2K = 50:10:39:1"
+        }
+      ]
+    },
+    {
+      "entity_id": "P_CAS9",
+      "entity_type": "payload",
+      "reported_name": "Cas9 mRNA",
+      "normalized_name": "Cas9 messenger RNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "entity_id": "P_SGRNA",
+      "entity_type": "payload",
+      "reported_name": "specifically designed sgRNAs",
+      "normalized_name": "F8-targeting single-guide RNA",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        },
+        {
+          "clause_id": "B008C019",
+          "quote": "we designed two different sgRNAs for Cas9 nuclease targeting Animal model for in vivo gene editing the mutant mouse F8 gene."
+        }
+      ]
+    },
+    {
+      "entity_id": "P_GFP",
+      "entity_type": "payload",
+      "reported_name": "GFP mRNA",
+      "normalized_name": "green fluorescent protein messenger RNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C028",
+          "quote": "Ionizable cationic lipids exhibit positive charges in low pH environ- To further conﬁrm the targeting speciﬁcity and efﬁciency, we encapsu- ments and can therefore bind to the negative charges of phosphate lated GFP mRNA into LNPs (GFP LNP) and intravenously injected backbones in nucleic acids such as mRNA, siRNA, and DNA."
+        }
+      ]
+    },
+    {
+      "entity_id": "P_LUC",
+      "entity_type": "payload",
+      "reported_name": "luciferase mRNA",
+      "normalized_name": "luciferase messenger RNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C001",
+          "quote": "luciferase mRNA encapsulated MC3 LNP (Luc LNP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "P_DII",
+      "entity_type": "payload",
+      "reported_name": "DiI",
+      "normalized_name": "1,1'-dioctadecyl-3,3,3',3'-tetramethylindocarbocyanine perchlorate",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "entity_id": "PROD_CAS9",
+      "entity_type": "encoded_product",
+      "reported_name": "Cas9",
+      "normalized_name": "CRISPR-associated protein 9",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "Cas9 mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "PROD_GFP",
+      "entity_type": "encoded_product",
+      "reported_name": "GFP protein",
+      "normalized_name": "green fluorescent protein",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C033",
+          "quote": "LSECs not only uptake LNPs but can also express GFP protein"
+        }
+      ]
+    },
+    {
+      "entity_id": "TARGET_F8",
+      "entity_type": "molecular_target",
+      "reported_name": "mutant mouse F8 gene",
+      "normalized_name": "F8",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C019",
+          "quote": "the mutant mouse F8 gene"
+        },
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL_LSEC",
+      "entity_type": "cell",
+      "reported_name": "liver sinusoidal endothelial cells (LSECs)",
+      "normalized_name": "liver sinusoidal endothelial cell",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C006",
+          "quote": "liver sinusoidal endothelial cells (LSECs)"
+        },
+        {
+          "clause_id": "B003C031",
+          "quote": "We used lymphatic vessel endothelial hyaluronan reduce the cell toxicity.19,20 In addition, the positive charge of ioniz- receptor-1 (LYVE-1) as a marker for LSECs."
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL_HEP",
+      "entity_type": "cell",
+      "reported_name": "hepatocytes",
+      "normalized_name": "hepatocyte",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C026",
+          "quote": "most of DiI-labeled liver cells were hepatocytes."
+        },
+        {
+          "clause_id": "B003C035",
+          "quote": "LNPs composed of MC3 cationic lipids have been in hepatocytes and LSECs, respectively."
+        }
+      ]
+    },
+    {
+      "entity_id": "T_LIVER",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": "liver",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C025",
+          "quote": "One hour after injection, mouse RESULTS livers were harvested and stained with FITC-Isolectin B4 as a vascular Synthesis and optimization of LNP formulations stain after cryosection to conﬁrm the in vivo distribution."
+        },
+        {
+          "clause_id": "B009C006",
+          "quote": "liver sinusoidal endothelial cells (LSECs)"
+        }
+      ]
+    },
+    {
+      "entity_id": "DIS_HEMA",
+      "entity_type": "disease",
+      "reported_name": "hemophilia A",
+      "normalized_name": "hemophilia A",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C003",
+          "quote": "hemophilia A"
+        },
+        {
+          "clause_id": "B009C015",
+          "quote": "Additionally, unlike DNA, of factor VIII (FVIII) due to a variant in the F8 gene on the X chro- mRNA does not pose a risk of oncogenic mutagenesis via insertion mosome."
+        }
+      ]
+    },
+    {
+      "entity_id": "SPEC_MOUSE",
+      "entity_type": "species",
+      "reported_name": "mice",
+      "normalized_name": "Mus musculus",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "HemA mice"
+        },
+        {
+          "clause_id": "B003C023",
+          "quote": "into mice."
+        }
+      ]
+    },
+    {
+      "entity_id": "MODEL_HEMA",
+      "entity_type": "biological_model",
+      "reported_name": "HemA mice",
+      "normalized_name": "hemophilia A mouse model",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "a mutant factor VIII (FVIII) gene in HemA mice."
+        },
+        {
+          "clause_id": "B008C020",
+          "quote": "hemophilia A mouse model"
+        }
+      ]
+    },
+    {
+      "entity_id": "MODEL_MOUSE",
+      "entity_type": "biological_model",
+      "reported_name": "mice",
+      "normalized_name": "mouse model",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "into mice."
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E01",
+      "entity_type": "intervention",
+      "reported_name": "intravenous Cas9 mRNA/sgRNA LNP injection",
+      "normalized_name": "intravenous CRISPR-Cas9 mRNA/sgRNA LNP treatment",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E02_DII",
+      "entity_type": "intervention",
+      "reported_name": "intravenous DiI-labeled LNP injection",
+      "normalized_name": "intravenous DiI-labeled LNP treatment",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E02_GFP",
+      "entity_type": "intervention",
+      "reported_name": "intravenous GFP LNP injection",
+      "normalized_name": "intravenous GFP mRNA LNP treatment",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C029",
+          "quote": "At them into mice at a dosage of 1.2 mg/kg."
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E02_LUC",
+      "entity_type": "intervention",
+      "reported_name": "Luc LNP treatment",
+      "normalized_name": "luciferase mRNA LNP treatment",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C008",
+          "quote": "Mice were treated with 0.2 mg/kg Luc LNPs."
+        }
+      ]
+    },
+    {
+      "entity_id": "ROUTE_IV",
+      "entity_type": "route",
+      "reported_name": "intravenously",
+      "normalized_name": "intravenous administration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "sgRNAs intravenously"
+        },
+        {
+          "clause_id": "B003C029",
+          "quote": "At them into mice at a dosage of 1.2 mg/kg."
+        }
+      ]
+    },
+    {
+      "entity_id": "DOSE_DII",
+      "entity_type": "dose",
+      "reported_name": "0.4 mg/kg",
+      "normalized_name": "0.4 mg/kg",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "entity_id": "DOSE_GFP",
+      "entity_type": "dose",
+      "reported_name": "1.2 mg/kg",
+      "normalized_name": "1.2 mg/kg",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C029",
+          "quote": "at a dosage of 1.2 mg/kg"
+        }
+      ]
+    },
+    {
+      "entity_id": "DOSE_LUC",
+      "entity_type": "dose",
+      "reported_name": "0.2 mg/kg",
+      "normalized_name": "0.2 mg/kg",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C008",
+          "quote": "0.2 mg/kg Luc LNPs"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP_1H",
+      "entity_type": "timepoint",
+      "reported_name": "One hour after injection",
+      "normalized_name": "1 hour after injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C025",
+          "quote": "One hour after injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP_6H",
+      "entity_type": "timepoint",
+      "reported_name": "Six hours after injection",
+      "normalized_name": "6 hours after injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C030",
+          "quote": "Six hours after injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP_26W",
+      "entity_type": "timepoint",
+      "reported_name": "over 26 weeks",
+      "normalized_name": "26 weeks follow-up",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C010",
+          "quote": "over 26 weeks"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_SEQ",
+      "entity_type": "assay",
+      "reported_name": "Sequencing",
+      "normalized_name": "DNA sequencing",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C012",
+          "quote": "Sequencing data indicated"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_IMMUNO",
+      "entity_type": "assay",
+      "reported_name": "immunostaining",
+      "normalized_name": "immunostaining",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C030",
+          "quote": "Six hours after injection, physiological pH 7.4, only a portion of the amides in ionizable lipid we euthanized the treated mice and collected their livers to perform remains protonated, leading to a weak negative surface, which can immunostaining."
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_LUC",
+      "entity_type": "assay",
+      "reported_name": "luciferase assay",
+      "normalized_name": "luciferase assay",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "Luciferase expression of HPCs and LSECs were determined by luciferase assay"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_EDITRATE",
+      "entity_type": "endpoint",
+      "reported_name": "gene editing rate",
+      "normalized_name": "F8 gene-editing rate in LSECs",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C012",
+          "quote": "an average gene editing rate of 15.3% in LSECs"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_EDITRATE",
+      "entity_type": "outcome_value",
+      "reported_name": "15.3% in LSECs",
+      "normalized_name": "15.3% mean F8 gene-editing rate in LSECs",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C012",
+          "quote": "an average gene editing rate of 15.3% in LSECs"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_INDEL",
+      "entity_type": "endpoint",
+      "reported_name": "indel variants at the mutant site",
+      "normalized_name": "indel spectrum at mutant F8 site",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "Indel variants generated at the mutant site"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_INDEL",
+      "entity_type": "outcome_value",
+      "reported_name": "mostly a single base-pair deletion",
+      "normalized_name": "predominantly single-base-pair deletions",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "mostly a single base-pair deletion"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_FRAME",
+      "entity_type": "endpoint",
+      "reported_name": "frameshift correction of FVIII gene",
+      "normalized_name": "F8 reading-frame correction",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "correction of FVIII gene."
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_FRAME",
+      "entity_type": "outcome_value",
+      "reported_name": "frameshift correction of FVIII gene",
+      "normalized_name": "FVIII reading frame corrected",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "resulting in frameshift but also correction of diseases caused by frameshift variants via indel- correction of FVIII gene."
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_FVIII",
+      "entity_type": "endpoint",
+      "reported_name": "endogenous FVIII activity",
+      "normalized_name": "endogenous factor VIII activity",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C010",
+          "quote": "Sustained endogenous FVIII activity"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_FVIII",
+      "entity_type": "outcome_value",
+      "reported_name": "up to 6%",
+      "normalized_name": "up to 6% endogenous FVIII activity",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B009C010",
+          "quote": "up to 6% was achieved over 26 weeks in treated HemA mice."
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_GFP_LSEC",
+      "entity_type": "endpoint",
+      "reported_name": "GFP expression in LSECs",
+      "normalized_name": "GFP protein expression in LSECs",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B003C033",
+          "quote": "LSECs not only uptake LNPs but can also express GFP protein"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_GFP_LSEC",
+      "entity_type": "outcome_value",
+      "reported_name": "LYVE-1 and GFP signals colocalized",
+      "normalized_name": "GFP signal colocalized with LYVE-1-positive LSECs",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B003C032",
+          "quote": "colocalization of LYVE-1 and GFP signals"
+        },
+        {
+          "clause_id": "B003C033",
+          "quote": "LSECs not only uptake LNPs but can also express GFP protein"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_LUC_CELL",
+      "entity_type": "endpoint",
+      "reported_name": "luciferase expression in hepatocytes and LSECs",
+      "normalized_name": "cell-type-specific luciferase expression",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B003C035",
+          "quote": "LNPs composed of MC3 cationic lipids have been in hepatocytes and LSECs, respectively."
+        },
+        {
+          "clause_id": "B008C011",
+          "quote": "Luciferase expression of HPCs and LSECs were determined by luciferase assay"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_LUC_CELL",
+      "entity_type": "outcome_value",
+      "reported_name": "about 17-fold higher expression in hepatocytes than LSECs",
+      "normalized_name": "hepatocyte luciferase expression approximately 17-fold higher than LSEC expression",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C015",
+          "quote": "expression were obtained from both hepatocytes and LSECs with tein, our aim was to induce an indel mutation into the mutant mouse about 17-fold higher expression in hepatocytes than LSECs."
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C02",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "F_E01",
+      "predicate": "carries_payload",
+      "object_entity_id": "P_CAS9",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "claim_id": "C03",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "F_E01",
+      "predicate": "carries_payload",
+      "object_entity_id": "P_SGRNA",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "claim_id": "C04",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "P_CAS9",
+      "predicate": "encodes_product",
+      "object_entity_id": "PROD_CAS9",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "Cas9 mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "C05",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "P_SGRNA",
+      "predicate": "targets_molecule",
+      "object_entity_id": "TARGET_F8",
+      "evidence": [
+        {
+          "clause_id": "B008C019",
+          "quote": "we designed two different sgRNAs for Cas9 nuclease targeting Animal model for in vivo gene editing the mutant mouse F8 gene."
+        }
+      ]
+    },
+    {
+      "claim_id": "C06",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "F_E01",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "CELL_LSEC",
+      "evidence": [
+        {
+          "clause_id": "B009C006",
+          "quote": "MC3-based LNPs for efﬁcient mRNA delivery palindromic repeats (CRISPR) that utilizes CRISPR-associated endo- into liver sinusoidal endothelial cells (LSECs)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C07",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "F_E01",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "T_LIVER",
+      "evidence": [
+        {
+          "clause_id": "B009C006",
+          "quote": "liver sinusoidal endothelial cells (LSECs)"
+        }
+      ]
+    },
+    {
+      "claim_id": "C08",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "has_formulation",
+      "object_entity_id": "F_E01",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "claim_id": "C09",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "has_biological_model",
+      "object_entity_id": "MODEL_HEMA",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "a mutant factor VIII (FVIII) gene in HemA mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C10",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "MODEL_HEMA",
+      "predicate": "has_species",
+      "object_entity_id": "SPEC_MOUSE",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "HemA mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "C11",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "MODEL_HEMA",
+      "predicate": "has_disease_context",
+      "object_entity_id": "DIS_HEMA",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "HemA mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "C12",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "has_route",
+      "object_entity_id": "ROUTE_IV",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "sgRNAs intravenously"
+        }
+      ]
+    },
+    {
+      "claim_id": "C13",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "targets_molecule",
+      "object_entity_id": "TARGET_F8",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "To target a ﬁve base pair deletion in strand break (DSB) in speciﬁc DNA sequences.5 This technique FVIII exon 1 in a speciﬁc HemA mouse strain, we injected triggers the error-prone DSB repair mechanism including non-ho- LNPs encapsulating Cas9 mRNA and speciﬁcally designed mologous end-joining (NHEJ), which introduces insertion-deletion sgRNAs intravenously for in vivo gene editing of the mutant mutations (indels) at the targeting site."
+        }
+      ]
+    },
+    {
+      "claim_id": "C14",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "therapeutic_target_cell",
+      "object_entity_id": "CELL_LSEC",
+      "evidence": [
+        {
+          "clause_id": "B009C013",
+          "quote": "effectively correct the mutant FVIII gene in LSECs and restore DNA, and siRNA) to targeted organs or cell types while protecting FVIII activity for therapeutic treatment of HemA."
+        }
+      ]
+    },
+    {
+      "claim_id": "C15",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_SEQ",
+      "evidence": [
+        {
+          "clause_id": "B009C012",
+          "quote": "Sequencing data indicated"
+        }
+      ]
+    },
+    {
+      "claim_id": "C16",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_EDITRATE",
+      "evidence": [
+        {
+          "clause_id": "B009C012",
+          "quote": "Sequencing data indicated an average gene editing rate of 15.3% in LSECs."
+        }
+      ]
+    },
+    {
+      "claim_id": "C17",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "EP_EDITRATE",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_EDITRATE",
+      "evidence": [
+        {
+          "clause_id": "B009C012",
+          "quote": "an average gene editing rate of 15.3% in LSECs"
+        }
+      ]
+    },
+    {
+      "claim_id": "C18",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_INDEL",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "Indel variants generated at the mutant site"
+        }
+      ]
+    },
+    {
+      "claim_id": "C19",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "EP_INDEL",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_INDEL",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "mostly a single base-pair deletion"
+        }
+      ]
+    },
+    {
+      "claim_id": "C20",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_FRAME",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "correction of FVIII gene."
+        }
+      ]
+    },
+    {
+      "claim_id": "C21",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "EP_FRAME",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_FRAME",
+      "evidence": [
+        {
+          "clause_id": "B009C009",
+          "quote": "resulting in frameshift but also correction of diseases caused by frameshift variants via indel- correction of FVIII gene."
+        }
+      ]
+    },
+    {
+      "claim_id": "C22",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "I_E01",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_FVIII",
+      "evidence": [
+        {
+          "clause_id": "B009C010",
+          "quote": "Sustained endogenous FVIII activity mediated repair.6 This powerful gene editing tool is effective in both up to 6% was achieved over 26 weeks in treated HemA mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C23",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "EP_FVIII",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_FVIII",
+      "evidence": [
+        {
+          "clause_id": "B009C010",
+          "quote": "up to 6% was achieved over 26 weeks in treated HemA mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C24",
+      "experiment_id": "GP-006-E01",
+      "subject_entity_id": "EP_FVIII",
+      "predicate": "has_timepoint",
+      "object_entity_id": "TP_26W",
+      "evidence": [
+        {
+          "clause_id": "B009C010",
+          "quote": "over 26 weeks"
+        }
+      ]
+    },
+    {
+      "claim_id": "C25",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "F_E02_DII",
+      "predicate": "has_component",
+      "object_entity_id": "CMP_MC3",
+      "evidence": [
+        {
+          "clause_id": "B003C022",
+          "quote": "To investigate the liver distribution of MC3 LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "C26",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "F_E02_DII",
+      "predicate": "carries_payload",
+      "object_entity_id": "P_DII",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C27",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_DII",
+      "predicate": "has_formulation",
+      "object_entity_id": "F_E02_DII",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C28",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_DII",
+      "predicate": "has_biological_model",
+      "object_entity_id": "MODEL_MOUSE",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "into mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C29",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_DII",
+      "predicate": "has_route",
+      "object_entity_id": "ROUTE_IV",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C30",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_DII",
+      "predicate": "has_dose",
+      "object_entity_id": "DOSE_DII",
+      "evidence": [
+        {
+          "clause_id": "B003C023",
+          "quote": "perchlorate (DiI)-labeled LNPs (0.4 mg/kg) into mice."
+        }
+      ]
+    },
+    {
+      "claim_id": "C31",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "F_E02_DII",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "CELL_LSEC",
+      "evidence": [
+        {
+          "clause_id": "B003C027",
+          "quote": "DiI-labeled cells also colocalized with Isolectin B4-labeled FDA-approved LNP-based RNA interference (RNAi) drug.10,11 LSECs suggesting that LNPs have LSEC-targeting ability"
+        }
+      ]
+    },
+    {
+      "claim_id": "C32",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "F_E02_GFP",
+      "predicate": "carries_payload",
+      "object_entity_id": "P_GFP",
+      "evidence": [
+        {
+          "clause_id": "B003C028",
+          "quote": "Ionizable cationic lipids exhibit positive charges in low pH environ- To further conﬁrm the targeting speciﬁcity and efﬁciency, we encapsu- ments and can therefore bind to the negative charges of phosphate lated GFP mRNA into LNPs (GFP LNP) and intravenously injected backbones in nucleic acids such as mRNA, siRNA, and DNA."
+        }
+      ]
+    },
+    {
+      "claim_id": "C33",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "P_GFP",
+      "predicate": "encodes_product",
+      "object_entity_id": "PROD_GFP",
+      "evidence": [
+        {
+          "clause_id": "B003C033",
+          "quote": "express GFP protein"
+        }
+      ]
+    },
+    {
+      "claim_id": "C34",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_GFP",
+      "predicate": "has_formulation",
+      "object_entity_id": "F_E02_GFP",
+      "evidence": [
+        {
+          "clause_id": "B003C029",
+          "quote": "At them into mice at a dosage of 1.2 mg/kg."
+        }
+      ]
+    },
+    {
+      "claim_id": "C35",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_GFP",
+      "predicate": "has_biological_model",
+      "object_entity_id": "MODEL_MOUSE",
+      "evidence": [
+        {
+          "clause_id": "B003C029",
+          "quote": "At them into mice at a dosage of 1.2 mg/kg."
+        }
+      ]
+    },
+    {
+      "claim_id": "C36",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_GFP",
+      "predicate": "has_route",
+      "object_entity_id": "ROUTE_IV",
+      "evidence": [
+        {
+          "clause_id": "B003C029",
+          "quote": "At them into mice at a dosage of 1.2 mg/kg."
+        }
+      ]
+    },
+    {
+      "claim_id": "C37",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_GFP",
+      "predicate": "has_dose",
+      "object_entity_id": "DOSE_GFP",
+      "evidence": [
+        {
+          "clause_id": "B003C029",
+          "quote": "at a dosage of 1.2 mg/kg"
+        }
+      ]
+    },
+    {
+      "claim_id": "C38",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_GFP",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_IMMUNO",
+      "evidence": [
+        {
+          "clause_id": "B003C030",
+          "quote": "Six hours after injection, physiological pH 7.4, only a portion of the amides in ionizable lipid we euthanized the treated mice and collected their livers to perform remains protonated, leading to a weak negative surface, which can immunostaining."
+        }
+      ]
+    },
+    {
+      "claim_id": "C39",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "F_E02_GFP",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "CELL_LSEC",
+      "evidence": [
+        {
+          "clause_id": "B003C033",
+          "quote": "LSECs not only uptake LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "C40",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_GFP",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_GFP_LSEC",
+      "evidence": [
+        {
+          "clause_id": "B003C032",
+          "quote": "colocalization of LYVE-1 and GFP signals, indicating that"
+        },
+        {
+          "clause_id": "B003C033",
+          "quote": "LSECs not only uptake LNPs but can also express GFP protein"
+        }
+      ]
+    },
+    {
+      "claim_id": "C41",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "EP_GFP_LSEC",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_GFP_LSEC",
+      "evidence": [
+        {
+          "clause_id": "B003C032",
+          "quote": "colocalization of LYVE-1 and GFP signals"
+        },
+        {
+          "clause_id": "B003C033",
+          "quote": "LSECs not only uptake LNPs but can also express GFP protein"
+        }
+      ]
+    },
+    {
+      "claim_id": "C42",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "EP_GFP_LSEC",
+      "predicate": "has_timepoint",
+      "object_entity_id": "TP_6H",
+      "evidence": [
+        {
+          "clause_id": "B003C030",
+          "quote": "Six hours after injection"
+        }
+      ]
+    },
+    {
+      "claim_id": "C44",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "F_E02_LUC",
+      "predicate": "carries_payload",
+      "object_entity_id": "P_LUC",
+      "evidence": [
+        {
+          "clause_id": "B002C001",
+          "quote": "luciferase mRNA encapsulated MC3 LNP (Luc LNP)."
+        }
+      ]
+    },
+    {
+      "claim_id": "C47",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_LUC",
+      "predicate": "has_dose",
+      "object_entity_id": "DOSE_LUC",
+      "evidence": [
+        {
+          "clause_id": "B008C008",
+          "quote": "0.2 mg/kg Luc LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "C48",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_LUC",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_LUC",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "Luciferase expression of HPCs and LSECs were determined by luciferase assay"
+        }
+      ]
+    },
+    {
+      "claim_id": "C51",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "I_E02_LUC",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_LUC_CELL",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "Luciferase expression of HPCs and LSECs were determined by luciferase assay"
+        }
+      ]
+    },
+    {
+      "claim_id": "C52",
+      "experiment_id": "GP-006-E02",
+      "subject_entity_id": "EP_LUC_CELL",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_LUC_CELL",
+      "evidence": [
+        {
+          "clause_id": "B008C015",
+          "quote": "expression were obtained from both hepatocytes and LSECs with tein, our aim was to induce an indel mutation into the mutant mouse about 17-fold higher expression in hepatocytes than LSECs."
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "GP-006-E01",
+      "label": "In vivo CRISPR-Cas9 mRNA LNP gene editing of mutant FVIII in HemA mice",
+      "claim_ids": [
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C08",
+        "C09",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "C22",
+        "C23",
+        "C24"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B008C019",
+        "B009C005",
+        "B009C006",
+        "B009C007",
+        "B009C009",
+        "B009C010",
+        "B009C012",
+        "B009C013"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The source explicitly connects intravenous Cas9 mRNA/sgRNA LNP injection in HemA mice to editing of mutant FVIII/F8, LSEC targeting, sequencing-based editing outcomes, and sustained FVIII activity."
+    },
+    {
+      "experiment_id": "GP-006-E02",
+      "label": "In vivo MC3 LNP reporter delivery and cell-type expression comparison",
+      "claim_ids": [
+        "C25",
+        "C26",
+        "C27",
+        "C28",
+        "C29",
+        "C30",
+        "C31",
+        "C32",
+        "C33",
+        "C34",
+        "C35",
+        "C36",
+        "C37",
+        "C38",
+        "C39",
+        "C40",
+        "C41",
+        "C42",
+        "C44",
+        "C47",
+        "C48",
+        "C51",
+        "C52"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B002C001",
+        "B003C022",
+        "B003C023",
+        "B003C025",
+        "B003C026",
+        "B003C027",
+        "B003C028",
+        "B003C029",
+        "B003C030",
+        "B003C031",
+        "B003C032",
+        "B003C033",
+        "B008C008",
+        "B008C011",
+        "B008C015",
+        "B008C017"
+      ],
+      "boundary_status": "ambiguous",
+      "boundary_reason": "The approved inventory groups separate DiI, GFP mRNA, and luciferase mRNA reporter studies. They are retained under E02 as required, while distinct interventions, payloads, doses, assays, timepoints, recipient-cell claims, and outcomes are not merged."
+    }
+  ]
+}

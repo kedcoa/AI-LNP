@@ -1,0 +1,299 @@
+{
+  "contract_version": "2.0.0",
+  "object_id": "GP-006-main-p005-figure-01",
+  "readability": "partially_readable",
+  "object_type": "multi_panel",
+  "panels_detected": [
+    "A",
+    "B",
+    "C"
+  ],
+  "raw_panel_labels": [
+    {
+      "label_id": "rpl-001",
+      "panel": "A",
+      "group": null,
+      "label": "panel",
+      "value": "A",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-002",
+      "panel": "A",
+      "group": "WT mF8 exon 1",
+      "label": "sequence",
+      "value": "AGTGCCATCAGAAGATACTACCTTGGTGCAGTGGAATTGTCCTGGAACTATATTCAGAGTGA",
+      "unit": null,
+      "label_type": "data_label",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-003",
+      "panel": "A",
+      "group": "Mutant mF8 exon 1",
+      "label": "sequence",
+      "value": "AGTGCCATCAGAAGATACTACCTTGGTGGAATTGTCCTGGAACTATATTCAGAGTGA",
+      "unit": null,
+      "label_type": "data_label",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-004",
+      "panel": "A",
+      "group": "WT mF8 exon 1",
+      "label": "region",
+      "value": "NSGHA deletion region",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-005",
+      "panel": "A",
+      "group": "mF8 sgRNA",
+      "label": "sgRNA sequence",
+      "value": "GCCATCAGAAGATACTACCT",
+      "unit": null,
+      "label_type": "data_label",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-006",
+      "panel": "A",
+      "group": "NSGHA sgRNA",
+      "label": "sgRNA sequence",
+      "value": "ATCAGAAGATACTACCTTGG",
+      "unit": null,
+      "label_type": "data_label",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-007",
+      "panel": "A",
+      "group": "Mutant mF8 exon 1",
+      "label": "annotation",
+      "value": "Stop codon induced from frameshift",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-008",
+      "panel": "A",
+      "group": "Mutant mF8 exon 1",
+      "label": "stop-codon marker",
+      "value": "*",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-009",
+      "panel": "B",
+      "group": null,
+      "label": "panel",
+      "value": "B",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-010",
+      "panel": "B",
+      "group": null,
+      "label": "condition",
+      "value": "sgRNA",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-011",
+      "panel": "B",
+      "group": "mF8 sgRNA",
+      "label": "T7E1 conditions",
+      "value": "−, +",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-012",
+      "panel": "B",
+      "group": "NSGHA sgRNA",
+      "label": "T7E1 conditions",
+      "value": "−, +",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-013",
+      "panel": "B",
+      "group": null,
+      "label": "DNA band annotation",
+      "value": "Uncut",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-014",
+      "panel": "B",
+      "group": null,
+      "label": "DNA band annotation",
+      "value": "Cut",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-015",
+      "panel": "C",
+      "group": null,
+      "label": "panel",
+      "value": "C",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-016",
+      "panel": "C",
+      "group": null,
+      "label": "y-axis",
+      "value": "Percentage (%)",
+      "unit": "%",
+      "label_type": "axis_label",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "rpl-017",
+      "panel": "C",
+      "group": null,
+      "label": "visible y-axis ticks",
+      "value": "30, 40, 50, 60, 70, 80, 90, 100",
+      "unit": "%",
+      "label_type": "axis_label",
+      "visibly_printed": true
+    }
+  ],
+  "printed_facts": [
+    {
+      "fact_id": "pf-001",
+      "panel": "A",
+      "population": "mouse F8 exon 1",
+      "intervention": "mutant mF8 sequence",
+      "endpoint": "deletion",
+      "value": "GTGCA is the sequence indicated as deleted from mutant mF8",
+      "unit": null,
+      "visible_support": "“NSGHA deletion region”; WT contains boxed “GTGCA,” which is absent from the mutant sequence",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "pf-002",
+      "panel": "A",
+      "population": "mutant mouse F8",
+      "intervention": "frameshift mutation",
+      "endpoint": "premature stop codon",
+      "value": "induced",
+      "unit": null,
+      "visible_support": "“Stop codon induced from frameshift” and an asterisk on the mutant sequence",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "pf-003",
+      "panel": "A",
+      "population": "mutant mouse F8",
+      "intervention": "mF8 sgRNA",
+      "endpoint": "sgRNA sequence",
+      "value": "GCCATCAGAAGATACTACCT",
+      "unit": null,
+      "visible_support": "“mF8 sgRNA” arrow: “GCCATCAGAAGATACTACCT”",
+      "support_kind": "printed_data_label",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "pf-004",
+      "panel": "A",
+      "population": "mutant mouse F8",
+      "intervention": "NSGHA sgRNA",
+      "endpoint": "sgRNA sequence",
+      "value": "ATCAGAAGATACTACCTTGG",
+      "unit": null,
+      "visible_support": "“NSGHA sgRNA” arrow: “ATCAGAAGATACTACCTTGG”",
+      "support_kind": "printed_data_label",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "pf-005",
+      "panel": "B",
+      "population": "mouse fibroblast NIH3T3 cells",
+      "intervention": "mF8 sgRNA or NSGHA sgRNA",
+      "endpoint": "in vitro gene-editing efficiency assessment",
+      "value": "determined by T7 endonuclease 1 (T7E1) assay",
+      "unit": null,
+      "visible_support": "“In vitro gene editing efficiency of two sgRNAs in NIH3T3cells was determined by T7 endonuclease 1 (T7E1) assay”",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "pf-006",
+      "panel": "B",
+      "population": "DNA from sgRNA-treated NIH3T3 cells",
+      "intervention": "T7E1 assay",
+      "endpoint": "gel-band interpretation",
+      "value": "blue arrow denotes uncut DNA; red arrow denotes cut DNA",
+      "unit": null,
+      "visible_support": "“Blue arrow represents uncut DNA and red arrow represents cut DNA”",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "pf-007",
+      "panel": "C",
+      "population": "mouse fibroblast NIH3T3 cells",
+      "intervention": "mF8sgRNA-mediated gene editing",
+      "endpoint": "indel mutation pattern",
+      "value": "analyzed using TIDE",
+      "unit": null,
+      "visible_support": "“The pattern of indel mutations after mF8sgRNA-mediated gene editing in NIH3T3cells was analyzed by online genomic DNA analysis tool TIDE”",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    }
+  ],
+  "qualitative_comparisons": [],
+  "excluded_estimates": [
+    {
+      "estimate_id": "ee-001",
+      "panel": "B",
+      "endpoint": "gene-editing efficiency of mF8 sgRNA and NSGHA sgRNA",
+      "estimated_value": null,
+      "exclusion_reason": "no_printed_value"
+    },
+    {
+      "estimate_id": "ee-002",
+      "panel": "C",
+      "endpoint": "percentage represented by the visible green bar",
+      "estimated_value": null,
+      "exclusion_reason": "requires_digitization"
+    },
+    {
+      "estimate_id": "ee-003",
+      "panel": "C",
+      "endpoint": "indel category corresponding to the visible green bar",
+      "estimated_value": null,
+      "exclusion_reason": "ambiguous_group_mapping"
+    }
+  ],
+  "unresolved_ambiguities": [
+    "The lower portions of panels B and C are cropped, so the complete cut-band pattern, x-axis labels, indel categories, and any additional bars are unavailable.",
+    "Panel C has no visible printed data label for the green bar; its numerical height must not be inferred from the axis.",
+    "The full WT and mutant sequence strings are small; the boxed GTGCA deletion is clear, but full-sequence transcription may warrant human verification."
+  ],
+  "acceptance_status": "human_review_required"
+}

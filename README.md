@@ -126,6 +126,53 @@ The LLM may assist with screening and structured extraction, but extracted
 values must pass schema validation and evidence review before entering the
 curated database.
 
+### OpenAI PDF, table, and figure extraction
+
+Day 8 adds a native OpenAI multimodal path for evidence that text-only parsing
+cannot reliably recover. It complements, rather than replaces, the full-text
+RAG pipeline.
+
+| Source content | Primary path | OpenAI role | Acceptance rule |
+|---|---|---|---|
+| Body text and captions | PMC XML/PDF text plus full-text RAG | Structured, experiment-scoped extraction and independent reread | Exact quote and source coordinates required |
+| Structured tables | XML/HTML table parsing first | Interpret a rendered table only when structure is unavailable | Preserve row, column, cell, unit, and visible support |
+| Figure data labels | Original-resolution object crop | Transcribe visibly printed values, legends, panels, and flow-cytometry quadrants | Printed values only; axis position is not an exact measurement |
+| Unlabelled bars, curves, and points | Original-resolution object crop | Record qualitative direction | Never invent or visually estimate an exact reported value |
+| Multi-page captions | Reconstructed object plus continuation pages | Read the complete caption with its figure/table | Truncated captions require retry or human review |
+| Unreadable or ambiguous objects | Deterministic audit and second-read verification | Abstain and queue review | Human verification required |
+
+The exhaustive gold-set gate uses all nine readable papers. The saved Day 8
+checkpoint contains 17 PDFs, 103 detected objects (85 figures and 18 tables),
+94 canonical objects after removing 9 exact duplicates, and 27 four-object
+Batch API bundles. OpenAI Batch is used to reduce cost, while content hashes
+and saved request indexes make reruns resumable and prevent accidental
+duplicate work.
+
+The final test is end to end:
+
+```text
+saved full-text extraction
+  + exhaustive table/figure object extraction
+  -> deterministic source audit
+  -> independent evidence verification
+  -> merged text + visual evidence
+  -> human review only for unresolved items
+  -> frozen-gold recall and precision gate
+```
+
+The July 24 checkpoint was intentionally stopped before inference completed.
+It is therefore a reproducible prepared test, not a claimed final accuracy
+result. Resume by regenerating the ignored Batch payload from the checked-in
+inventory and submitting it:
+
+```bash
+.venv-rag/bin/python -m src.extraction.prepare_day8_final_gate \
+  --bundle-size 4 --model gpt-5.4
+.venv-rag/bin/python -m src.extraction.submit_day8_final_gate submit
+```
+
+API keys remain in `.env` and are never committed.
+
 ## Data workflow
 
 Literature information moves through the following stages:

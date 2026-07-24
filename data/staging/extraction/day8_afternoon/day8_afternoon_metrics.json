@@ -1,0 +1,31 @@
+{
+  "merged_records": 117,
+  "verified_records": 117,
+  "dispositions": {
+    "retain": 106,
+    "correct": 0,
+    "reject": 10,
+    "human_review": 1
+  },
+  "human_review_rate": 0.0,
+  "human_adjudicated": 1,
+  "input_tokens": 360104,
+  "output_tokens": 25771,
+  "estimated_cost": null,
+  "estimated_cost_note": "Not computed: no stable model price was encoded in the run.",
+  "frozen_regressions": {
+    "GO-006": {
+      "role": "structured-table regression",
+      "result": "targeted PDF matched; retained only when the exact table cell was visible"
+    },
+    "GO-017": {
+      "role": "direct measurement versus inferred mechanism rejection",
+      "result": "unsupported biological interpretation rejected (D8M-0108)"
+    },
+    "GO-018": {
+      "role": "image/panel regression",
+      "result": "object vision recovered panel/channel/quadrant labels; source-type exact gold match remains pending human adjudication"
+    }
+  },
+  "curation_policy": "Only retain dispositions may enter curation; reject and human_review records remain blocked."
+}

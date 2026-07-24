@@ -1,0 +1,100 @@
+{
+  "contract_version": "2.0.0",
+  "object_id": "GP-008-pnas.202534673-p002-figure-10",
+  "readability": "partially_readable",
+  "object_type": "other",
+  "panels_detected": [
+    "Fig. 1G"
+  ],
+  "raw_panel_labels": [
+    {
+      "label_id": "label-1",
+      "panel": "Fig. 1G",
+      "group": null,
+      "label": "Figure reference",
+      "value": "Fig. 1G",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "label-2",
+      "panel": "Fig. 1G",
+      "group": "mRNA",
+      "label": "fluorescent probe",
+      "value": "Cy5",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    },
+    {
+      "label_id": "label-3",
+      "panel": "Fig. 1G",
+      "group": "BMDMs",
+      "label": "fluorescent label",
+      "value": "GFP",
+      "unit": null,
+      "label_type": "other",
+      "visibly_printed": true
+    }
+  ],
+  "printed_facts": [
+    {
+      "fact_id": "fact-1",
+      "panel": "Fig. 1G",
+      "population": "mRNA cargo",
+      "intervention": "αCD163/LNP-FAPCAR under increasingly acidic conditions",
+      "endpoint": "mRNA release",
+      "value": "greater proportion released at lower pH",
+      "unit": null,
+      "visible_support": "“the lower the pH, the greater the proportion of mRNA released (Fig. 1G)”",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "fact-2",
+      "panel": "Fig. 1G",
+      "population": "mRNA",
+      "intervention": "red fluorescent probe",
+      "endpoint": "labeling",
+      "value": "Cy5 was used to label the mRNA",
+      "unit": null,
+      "visible_support": "“A red fluorescent probe (Cy5) was used to label the mRNA”",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    },
+    {
+      "fact_id": "fact-3",
+      "panel": "Fig. 1G",
+      "population": "BMDMs",
+      "intervention": "GFP",
+      "endpoint": "labeling",
+      "value": "GFP was used to label the BMDMs",
+      "unit": null,
+      "visible_support": "“the GFP was used to label the BMDMs”",
+      "support_kind": "printed_text",
+      "confidence": "high"
+    }
+  ],
+  "qualitative_comparisons": [
+    {
+      "comparison_id": "comparison-1",
+      "panel": "Fig. 1G",
+      "endpoint": "proportion of mRNA released from αCD163/LNP-FAPCAR",
+      "subject_group": "lower-pH environment",
+      "comparator_groups": [
+        "higher-pH environment"
+      ],
+      "direction": "higher",
+      "visible_support": "“the lower the pH, the greater the proportion of mRNA released”",
+      "exact_number_available": false,
+      "confidence": "high"
+    }
+  ],
+  "excluded_estimates": [],
+  "unresolved_ambiguities": [
+    "The actual Fig. 1G graphical panel and any plotted values are not visible in this crop.",
+    "The phrase “revealing its internalization” is truncated/grammatically ambiguous, so the internalized entity and recipient-cell relationship cannot be assigned confidently."
+  ],
+  "acceptance_status": "qualitative_only"
+}

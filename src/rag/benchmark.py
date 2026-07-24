@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / "data" / "staging" / "rag" / "gold_v1"
 EVIDENCE = ROOT / "data" / "annotations" / "gold_v1" / "evidence.csv"
 OUTPUT = ROOT / "reports" / "rag"
+DEVELOPMENT_PAPERS = {"GP-001", "GP-004", "GP-006", "GP-008"}
 
 FIELD_QUESTIONS = {
     "composition": "What lipids and molar ratios comprise the LNP formulation?",
@@ -60,8 +61,17 @@ def entity_types(group: str) -> list[str]:
 
 def source_match(hit, row: dict[str, str]) -> bool:
     gold_path = row["xml_file"]
+    gold_pmcid = re.search(r"PMC\d+", gold_path)
+    hit_pmcid = re.search(r"PMC\d+", hit.source_path)
     same_source = bool(gold_path) and (
         hit.source_path == gold_path or Path(hit.source_path).name == Path(gold_path).name
+        or (
+            gold_pmcid
+            and hit_pmcid
+            and gold_pmcid.group() == hit_pmcid.group()
+            and Path(gold_path).suffix.lower() in {".xml", ".nxml"}
+            and Path(hit.source_path).suffix.lower() in {".xml", ".nxml"}
+        )
     )
     xml_id = row["xml_element_id"].strip()
     page = row["page_number"].strip()
@@ -121,12 +131,30 @@ def run(backend: str = "tfidf", k: int = 8) -> dict:
             "hits": sum(row["hit"] for row in selected),
             "recall_at_k": sum(row["hit"] for row in selected) / len(selected),
         }
+    development = [row for row in results if row["paper_id"] in DEVELOPMENT_PAPERS]
+    holdout = [row for row in results if row["paper_id"] not in DEVELOPMENT_PAPERS]
     report = {
         "backend": backend,
         "k": k,
         "queries": len(results),
         "hits": sum(row["hit"] for row in results),
         "recall_at_k": sum(row["hit"] for row in results) / len(results),
+        "split_metrics": {
+            "development": {
+                "papers": sorted(DEVELOPMENT_PAPERS),
+                "queries": len(development),
+                "hits": sum(row["hit"] for row in development),
+                "recall_at_k": sum(row["hit"] for row in development) / len(development),
+                "used_for_tuning": True,
+            },
+            "holdout": {
+                "papers": sorted({row["paper_id"] for row in holdout}),
+                "queries": len(holdout),
+                "hits": sum(row["hit"] for row in holdout),
+                "recall_at_k": sum(row["hit"] for row in holdout) / len(holdout),
+                "used_for_tuning": False,
+            },
+        },
         "per_paper": per_paper,
         "results": results,
         "limitations": [
@@ -145,6 +173,6 @@ def run(backend: str = "tfidf", k: int = 8) -> dict:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--backend", choices=["tfidf", "sentence-transformers"], default="tfidf")
-    parser.add_argument("-k", type=int, default=8)
+    parser.add_argument("-k", type=int, default=6)
     args = parser.parse_args()
     print(json.dumps(run(args.backend, args.k), indent=2))

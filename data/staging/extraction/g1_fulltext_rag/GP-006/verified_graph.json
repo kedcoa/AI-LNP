@@ -1,0 +1,1131 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-006",
+  "source_read_again": true,
+  "observations": [
+    {
+      "observation_id": "O001",
+      "experiment_id": "GP-006-E01",
+      "claim_id": null,
+      "issue_type": "wrong_experiment_link",
+      "action": "corrected",
+      "explanation": "The approved in vivo LNP experiment includes the NSGHAsgRNA/Cas9 mRNA MC3-LNP arm, but its support spans the gene-editing results clauses as well as the treatment clauses. Relevant in-scope clauses were retained and unrelated formulation-optimization and hydrodynamic-plasmid experiments were excluded from experiment-specific claims.",
+      "evidence": [
+        {
+          "clause_id": "B008C020",
+          "quote": "The NSGHAsgRNA was encapsulated with Cas9 mRNA into MC3 LNP and intravenously injected into NSG HemA mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+        },
+        {
+          "clause_id": "B007C015",
+          "quote": "NGS sequencing analysis revealed an approximately 16.5% deletion frequency in LSECs following Cas9/sgRNA LNP treatment."
+        }
+      ]
+    },
+    {
+      "observation_id": "O002",
+      "experiment_id": null,
+      "claim_id": "C005",
+      "issue_type": "wrong_entity_type",
+      "action": "removed",
+      "explanation": "Component-role claims used an lnp_component as both the subject and object of has_component_role. The contract provides no entity type for a component-role object, so these claims were removed.",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "ionizable cationic lipids, specifically MC3"
+        },
+        {
+          "clause_id": "B001C005",
+          "quote": "We incorporated the helper lipid DOPE and DMG-PEG2000 into MC3 LNP formulation"
+        }
+      ]
+    },
+    {
+      "observation_id": "O003",
+      "experiment_id": "GP-006-E01",
+      "claim_id": "C037",
+      "issue_type": "wrong_entity_type",
+      "action": "removed",
+      "explanation": "An editing endpoint is not a therapeutic intervention and cannot have therapeutic_target_cell as a valid relation. LSEC-specific editing is instead represented as an endpoint with cell-specific reported name and outcome.",
+      "evidence": [
+        {
+          "clause_id": "B007C009",
+          "quote": "LSECs showed gene editing rates of approximately 16.50% ± 2.96%"
+        }
+      ]
+    },
+    {
+      "observation_id": "O004",
+      "experiment_id": "GP-006-E01",
+      "claim_id": "C034",
+      "issue_type": "wrong_entity_type",
+      "action": "removed",
+      "explanation": "The endpoint-to-tissue has_tissue_context relation was removed because this predicate is not applicable to an endpoint under the graph typing rules. Tissue/cell context is retained in the endpoint's reported name.",
+      "evidence": [
+        {
+          "clause_id": "B008C033",
+          "quote": "Administration of Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about 52.7% in total liver cells."
+        }
+      ]
+    },
+    {
+      "observation_id": "O005",
+      "experiment_id": "GP-006-E01",
+      "claim_id": "C010",
+      "issue_type": "omitted_claim",
+      "action": "corrected",
+      "explanation": "Cas9 mRNA is retained as an LNP payload. An encodes_product claim was omitted because the provided evidence directly reports delivery of Cas9 mRNA but does not separately state that this mRNA encodes Cas9 protein in the pertinent experiment clause.",
+      "evidence": [
+        {
+          "clause_id": "B008C020",
+          "quote": "The NSGHAsgRNA was encapsulated with Cas9 mRNA into MC3 LNP"
+        }
+      ]
+    },
+    {
+      "observation_id": "O006",
+      "experiment_id": "GP-006-E01",
+      "claim_id": "C027",
+      "issue_type": "merged_claim",
+      "action": "corrected",
+      "explanation": "CT and CFT remain distinct endpoints and have separate outcome claims, although both outcomes are reported in one source sentence.",
+      "evidence": [
+        {
+          "clause_id": "B008C024",
+          "quote": "Clotting time (CT) is the time when the clotting starts, and clot formation time (CFT) is the time when the clot firmness of 20 mm is detected."
+        },
+        {
+          "clause_id": "B008C026",
+          "quote": "Results indicated that Cas9/sgRNA LNP-treated mice exhibited shorter CT and CFT durations compared with untreated mice"
+        }
+      ]
+    },
+    {
+      "observation_id": "O007",
+      "experiment_id": "GP-006-E01",
+      "claim_id": "C012",
+      "issue_type": "omitted_claim",
+      "action": "corrected",
+      "explanation": "Delivery to LSECs is supported and retained. Hepatocytes are reported as a distinct edited cell population and are not represented as the therapeutic target cell; this avoids conflating delivery/editing recipient cells with the intended LSEC target context.",
+      "evidence": [
+        {
+          "clause_id": "B007C011",
+          "quote": "we successfully employed LNPs to deliver Cas9 mRNA and sgRNA to LSECs."
+        },
+        {
+          "clause_id": "B007C009",
+          "quote": "the F8 gene was edited in 60.54% ± 11.65% of hepatocytes, whereas LSECs showed gene editing rates of approximately 16.50% ± 2.96%"
+        }
+      ]
+    }
+  ],
+  "corrected_graph": {
+    "contract_version": "4.0.0",
+    "paper_id": "GP-006",
+    "source_scope": "full_text",
+    "original_lnp_experiments_present": true,
+    "entities": [
+      {
+        "entity_id": "E_FORM_01",
+        "entity_type": "lnp_formulation",
+        "reported_name": "MC3 LNP",
+        "normalized_name": "D-Lin-MC3-DMA-based lipid nanoparticle",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "MC3 LNP"
+          },
+          {
+            "clause_id": "B004C001",
+            "quote": "D-Lin-MC3-DMA (MC3)-based LNPs"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_COMP_01",
+        "entity_type": "lnp_component",
+        "reported_name": "MC3",
+        "normalized_name": "D-Lin-MC3-DMA",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B004C001",
+            "quote": "D-Lin-MC3-DMA (MC3)-based LNPs"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_COMP_02",
+        "entity_type": "lnp_component",
+        "reported_name": "cholesterol",
+        "normalized_name": "cholesterol",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B002C002",
+            "quote": "MC3, cholesterol, DOPE, and DMG-PEG2000"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_COMP_03",
+        "entity_type": "lnp_component",
+        "reported_name": "DOPE",
+        "normalized_name": "1,2-dioleoyl-sn-glycero-3-phosphoethanolamine",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B002C002",
+            "quote": "MC3, cholesterol, DOPE, and DMG-PEG2000"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_COMP_04",
+        "entity_type": "lnp_component",
+        "reported_name": "DMG-PEG2000",
+        "normalized_name": "DMG-PEG 2000",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B002C002",
+            "quote": "MC3, cholesterol, DOPE, and DMG-PEG2000"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_PAYLOAD_01",
+        "entity_type": "payload",
+        "reported_name": "Cas9 mRNA",
+        "normalized_name": "CRISPR-associated protein 9 mRNA",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_PAYLOAD_02",
+        "entity_type": "payload",
+        "reported_name": "NSGHAsgRNA",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "NSGHAsgRNA"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_TARGET_01",
+        "entity_type": "molecular_target",
+        "reported_name": "mutant F8 gene",
+        "normalized_name": "F8",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "mutant F8 gene"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_CELL_01",
+        "entity_type": "cell",
+        "reported_name": "LSECs",
+        "normalized_name": "liver sinusoidal endothelial cells",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B005C006",
+            "quote": "liver sinusoidal endothelial cells (LSECs)"
+          },
+          {
+            "clause_id": "B007C011",
+            "quote": "LSECs"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_CELL_02",
+        "entity_type": "cell",
+        "reported_name": "hepatocytes",
+        "normalized_name": "hepatocyte",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "hepatocytes"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_DISEASE_01",
+        "entity_type": "disease",
+        "reported_name": "HemA",
+        "normalized_name": "hemophilia A",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B005C015",
+            "quote": "Additionally, unlike DNA, of factor VIII (FVIII) due to a variant in the F8 gene on the X chro- mRNA does not pose a risk of oncogenic mutagenesis via insertion mosome."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_SPECIES_01",
+        "entity_type": "species",
+        "reported_name": "mice",
+        "normalized_name": "Mus musculus",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_MODEL_01",
+        "entity_type": "biological_model",
+        "reported_name": "NSG HemA mice",
+        "normalized_name": "NSG hemophilia A mouse model",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_INTERVENTION_01",
+        "entity_type": "intervention",
+        "reported_name": "Cas9/NSGHAsgRNA LNP treatment",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "Cas9/ NSGHAsgRNA LNP"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ROUTE_01",
+        "entity_type": "route",
+        "reported_name": "intravenously injected",
+        "normalized_name": "intravenous injection",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "intravenously injected"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_DOSE_01",
+        "entity_type": "dose",
+        "reported_name": "4 mg/kg of Cas9/sgRNA LNP",
+        "normalized_name": "4 mg/kg",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "4 mg/kg of Cas9/sgRNA LNP"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ASSAY_01",
+        "entity_type": "assay",
+        "reported_name": "aPTT assay",
+        "normalized_name": "activated partial thromboplastin time assay",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C004",
+            "quote": "FVIII activity was measured by aPTT assay."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ASSAY_02",
+        "entity_type": "assay",
+        "reported_name": "ROTEM assay",
+        "normalized_name": "rotational thromboelastometry assay",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C023",
+            "quote": "Therefore, as a preliminary test to assess endogenous FVIII restoration, we performed rotational thromboelas- the in vivo gene editing efﬁcacy of NSGHAsgRNA on mutant tometry (ROTEM) assay to monitor the clot formation using fresh F8, we ﬁrst employed hydrodynamic injection to deliver a co-ex- whole blood collected from treated mice."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ASSAY_03",
+        "entity_type": "assay",
+        "reported_name": "deep sequencing",
+        "normalized_name": "deep sequencing",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B008C031",
+            "quote": "To further assess the in vivo gene editing efﬁcacy of We further analyzed genomic DNA from treated mice using deep two sgRNAs, we separately delivered plasmids encoding Cas9 sequencing to identify the gene editing rate."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ASSAY_04",
+        "entity_type": "assay",
+        "reported_name": "NGS analysis",
+        "normalized_name": "next-generation sequencing analysis",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B007C010",
+            "quote": "No indel variants were found the WT F8 gene, we chose NSGHAsgRNA for the subsequent gene at ﬁve top predicted potential off-target sites when compared with un- editing experiments."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ENDPOINT_01",
+        "entity_type": "endpoint",
+        "reported_name": "FVIII activity",
+        "normalized_name": "factor VIII activity",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C021",
+            "quote": "FVIII activity"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ENDPOINT_02",
+        "entity_type": "endpoint",
+        "reported_name": "clotting time (CT)",
+        "normalized_name": "clotting time",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B008C024",
+            "quote": "Clotting time (CT)"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ENDPOINT_03",
+        "entity_type": "endpoint",
+        "reported_name": "clot formation time (CFT)",
+        "normalized_name": "clot formation time",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B008C024",
+            "quote": "clot formation time (CFT)"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ENDPOINT_04",
+        "entity_type": "endpoint",
+        "reported_name": "gene editing rate in total liver cells",
+        "normalized_name": "gene-editing rate in total liver cells",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B008C033",
+            "quote": "Following injection, Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about we euthanized the treated mice and extracted genomic DNA 52.7% in total liver cells."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ENDPOINT_05",
+        "entity_type": "endpoint",
+        "reported_name": "gene editing rate in LSECs",
+        "normalized_name": "gene-editing rate in liver sinusoidal endothelial cells",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "LSECs showed gene editing rates"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ENDPOINT_06",
+        "entity_type": "endpoint",
+        "reported_name": "gene editing rate in hepatocytes",
+        "normalized_name": "gene-editing rate in hepatocytes",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "the F8 gene was edited in 60.54% ± 11.65% of hepatocytes"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_ENDPOINT_07",
+        "entity_type": "endpoint",
+        "reported_name": "indel variants at five top predicted potential off-target sites",
+        "normalized_name": "indels at five top-predicted potential off-target sites",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B007C010",
+            "quote": "No indel variants were found the WT F8 gene, we chose NSGHAsgRNA for the subsequent gene at ﬁve top predicted potential off-target sites when compared with un- editing experiments."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_OUTCOME_01",
+        "entity_type": "outcome_value",
+        "reported_name": "3.30% ± 0.68% of FVIII activity",
+        "normalized_name": "3.30% ± 0.68% FVIII activity",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B008C021",
+            "quote": "Post-treatment, It was previously demonstrated in our lab that following hydrody- FVIII activity was measured by aPTT, and our results indicated namic injection of plasmid DNA, transfection occurred predomi- that the treated mice generated an average of 3.30% ± 0.68% of nantly in hepatocytes; however, lower transgene expression was FVIII activity over a span of 26 weeks (Figure 5A)."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_OUTCOME_02",
+        "entity_type": "outcome_value",
+        "reported_name": "shorter CT durations compared with untreated mice",
+        "normalized_name": "shorter clotting time versus untreated mice",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C026",
+            "quote": "Following injection, we measured endogenous FVIII that Cas9/sgRNA LNP-treated mice exhibited shorter CT and CFT activity in the treated mice using activated partial thromboplastin durations compared with untreated mice, displaying a clotting ability time (aPTT) assay."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_OUTCOME_03",
+        "entity_type": "outcome_value",
+        "reported_name": "shorter CFT durations compared with untreated mice",
+        "normalized_name": "shorter clot formation time versus untreated mice",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C026",
+            "quote": "Following injection, we measured endogenous FVIII that Cas9/sgRNA LNP-treated mice exhibited shorter CT and CFT activity in the treated mice using activated partial thromboplastin durations compared with untreated mice, displaying a clotting ability time (aPTT) assay."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_OUTCOME_04",
+        "entity_type": "outcome_value",
+        "reported_name": "52.7% in total liver cells",
+        "normalized_name": "approximately 52.7%",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C033",
+            "quote": "52.7% in total liver cells"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_OUTCOME_05",
+        "entity_type": "outcome_value",
+        "reported_name": "16.50% ± 2.96%",
+        "normalized_name": "16.50% ± 2.96%",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "16.50% ± 2.96%"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_OUTCOME_06",
+        "entity_type": "outcome_value",
+        "reported_name": "60.54% ± 11.65%",
+        "normalized_name": "60.54% ± 11.65%",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "60.54% ± 11.65%"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_OUTCOME_07",
+        "entity_type": "outcome_value",
+        "reported_name": "No indel variants were found at five top predicted potential off-target sites",
+        "normalized_name": "no detected indels at five top-predicted potential off-target sites",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B007C010",
+            "quote": "No indel variants were found the WT F8 gene, we chose NSGHAsgRNA for the subsequent gene at ﬁve top predicted potential off-target sites when compared with un- editing experiments."
+          }
+        ]
+      },
+      {
+        "entity_id": "E_TIME_01",
+        "entity_type": "timepoint",
+        "reported_name": "over a span of 26 weeks",
+        "normalized_name": "26 weeks",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C021",
+            "quote": "over a span of 26 weeks"
+          }
+        ]
+      },
+      {
+        "entity_id": "E_COMPARATOR_01",
+        "entity_type": "intervention",
+        "reported_name": "untreated mice",
+        "normalized_name": "untreated control",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C026",
+            "quote": "untreated mice"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "C001",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "E_FORM_01",
+        "predicate": "has_component",
+        "object_entity_id": "E_COMP_01",
+        "evidence": [
+          {
+            "clause_id": "B004C001",
+            "quote": "D-Lin-MC3-DMA (MC3)-based LNPs"
+          }
+        ]
+      },
+      {
+        "claim_id": "C002",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "E_FORM_01",
+        "predicate": "has_component",
+        "object_entity_id": "E_COMP_02",
+        "evidence": [
+          {
+            "clause_id": "B002C002",
+            "quote": "lipid ethanol phase containing MC3, cholesterol, DOPE, and DMG-PEG2000"
+          }
+        ]
+      },
+      {
+        "claim_id": "C003",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "E_FORM_01",
+        "predicate": "has_component",
+        "object_entity_id": "E_COMP_03",
+        "evidence": [
+          {
+            "clause_id": "B001C005",
+            "quote": "We incorporated the helper lipid DOPE and DMG-PEG2000 into MC3 LNP formulation"
+          }
+        ]
+      },
+      {
+        "claim_id": "C004",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "E_FORM_01",
+        "predicate": "has_component",
+        "object_entity_id": "E_COMP_04",
+        "evidence": [
+          {
+            "clause_id": "B001C005",
+            "quote": "We incorporated the helper lipid DOPE and DMG-PEG2000 into MC3 LNP formulation"
+          }
+        ]
+      },
+      {
+        "claim_id": "C007",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "has_formulation",
+        "object_entity_id": "E_FORM_01",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "claim_id": "C008",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_FORM_01",
+        "predicate": "carries_payload",
+        "object_entity_id": "E_PAYLOAD_01",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "claim_id": "C009",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_FORM_01",
+        "predicate": "carries_payload",
+        "object_entity_id": "E_PAYLOAD_02",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "claim_id": "C011",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_PAYLOAD_02",
+        "predicate": "targets_molecule",
+        "object_entity_id": "E_TARGET_01",
+        "evidence": [
+          {
+            "clause_id": "B007C008",
+            "quote": "NSGHAsgRNA, targeting the mutant F8 sequence"
+          }
+        ]
+      },
+      {
+        "claim_id": "C012",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_FORM_01",
+        "predicate": "delivered_to_cell",
+        "object_entity_id": "E_CELL_01",
+        "evidence": [
+          {
+            "clause_id": "B007C011",
+            "quote": "Based on our ﬁndings, we successfully employed treated mice using next generation sequencing (NGS) analysis (Fig- LNPs to deliver Cas9 mRNA and sgRNA to LSECs."
+          }
+        ]
+      },
+      {
+        "claim_id": "C014",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "targets_molecule",
+        "object_entity_id": "E_TARGET_01",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "induce indel mutations in the mutant F8 gene"
+          }
+        ]
+      },
+      {
+        "claim_id": "C015",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_MODEL_01",
+        "predicate": "has_disease_context",
+        "object_entity_id": "E_DISEASE_01",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "claim_id": "C016",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_MODEL_01",
+        "predicate": "has_species",
+        "object_entity_id": "E_SPECIES_01",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "claim_id": "C017",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "has_biological_model",
+        "object_entity_id": "E_MODEL_01",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP."
+          }
+        ]
+      },
+      {
+        "claim_id": "C018",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "has_route",
+        "object_entity_id": "E_ROUTE_01",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "intravenously injected"
+          }
+        ]
+      },
+      {
+        "claim_id": "C019",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "has_dose",
+        "object_entity_id": "E_DOSE_01",
+        "evidence": [
+          {
+            "clause_id": "B008C020",
+            "quote": "4 mg/kg of Cas9/sgRNA LNP"
+          }
+        ]
+      },
+      {
+        "claim_id": "C020",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "has_assay",
+        "object_entity_id": "E_ASSAY_01",
+        "evidence": [
+          {
+            "clause_id": "B008C021",
+            "quote": "Post-treatment, It was previously demonstrated in our lab that following hydrody- FVIII activity was measured by aPTT, and our results indicated namic injection of plasmid DNA, transfection occurred predomi- that the treated mice generated an average of 3.30% ± 0.68% of nantly in hepatocytes; however, lower transgene expression was FVIII activity over a span of 26 weeks (Figure 5A)."
+          }
+        ]
+      },
+      {
+        "claim_id": "C021",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ASSAY_01",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E_ENDPOINT_01",
+        "evidence": [
+          {
+            "clause_id": "B009C004",
+            "quote": "FVIII activity was measured by aPTT assay."
+          }
+        ]
+      },
+      {
+        "claim_id": "C022",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_01",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E_OUTCOME_01",
+        "evidence": [
+          {
+            "clause_id": "B008C021",
+            "quote": "Post-treatment, It was previously demonstrated in our lab that following hydrody- FVIII activity was measured by aPTT, and our results indicated namic injection of plasmid DNA, transfection occurred predomi- that the treated mice generated an average of 3.30% ± 0.68% of nantly in hepatocytes; however, lower transgene expression was FVIII activity over a span of 26 weeks (Figure 5A)."
+          }
+        ]
+      },
+      {
+        "claim_id": "C023",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_01",
+        "predicate": "has_timepoint",
+        "object_entity_id": "E_TIME_01",
+        "evidence": [
+          {
+            "clause_id": "B008C021",
+            "quote": "over a span of 26 weeks"
+          }
+        ]
+      },
+      {
+        "claim_id": "C024",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "has_assay",
+        "object_entity_id": "E_ASSAY_02",
+        "evidence": [
+          {
+            "clause_id": "B008C023",
+            "quote": "Therefore, as a preliminary test to assess endogenous FVIII restoration, we performed rotational thromboelas- the in vivo gene editing efﬁcacy of NSGHAsgRNA on mutant tometry (ROTEM) assay to monitor the clot formation using fresh F8, we ﬁrst employed hydrodynamic injection to deliver a co-ex- whole blood collected from treated mice."
+          }
+        ]
+      },
+      {
+        "claim_id": "C025",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ASSAY_02",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E_ENDPOINT_02",
+        "evidence": [
+          {
+            "clause_id": "B008C024",
+            "quote": "Clotting time (CT) is the pressing plasmid encoding Cas9 and NSGHAsgRNA into NSG time when the clotting starts, and clot formation time (CFT) is the HemA mice to correct the ﬁve base-pair deletion in exon 1 of time when the clot ﬁrmness of 20 mm is detected."
+          }
+        ]
+      },
+      {
+        "claim_id": "C026",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ASSAY_02",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E_ENDPOINT_03",
+        "evidence": [
+          {
+            "clause_id": "B008C024",
+            "quote": "Clotting time (CT) is the pressing plasmid encoding Cas9 and NSGHAsgRNA into NSG time when the clotting starts, and clot formation time (CFT) is the HemA mice to correct the ﬁve base-pair deletion in exon 1 of time when the clot ﬁrmness of 20 mm is detected."
+          }
+        ]
+      },
+      {
+        "claim_id": "C027",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_02",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E_OUTCOME_02",
+        "evidence": [
+          {
+            "clause_id": "B008C026",
+            "quote": "Following injection, we measured endogenous FVIII that Cas9/sgRNA LNP-treated mice exhibited shorter CT and CFT activity in the treated mice using activated partial thromboplastin durations compared with untreated mice, displaying a clotting ability time (aPTT) assay."
+          }
+        ]
+      },
+      {
+        "claim_id": "C028",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_03",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E_OUTCOME_03",
+        "evidence": [
+          {
+            "clause_id": "B008C026",
+            "quote": "Following injection, we measured endogenous FVIII that Cas9/sgRNA LNP-treated mice exhibited shorter CT and CFT activity in the treated mice using activated partial thromboplastin durations compared with untreated mice, displaying a clotting ability time (aPTT) assay."
+          }
+        ]
+      },
+      {
+        "claim_id": "C029",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_02",
+        "predicate": "compared_with",
+        "object_entity_id": "E_COMPARATOR_01",
+        "evidence": [
+          {
+            "clause_id": "B008C026",
+            "quote": "compared with untreated mice"
+          }
+        ]
+      },
+      {
+        "claim_id": "C030",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_03",
+        "predicate": "compared_with",
+        "object_entity_id": "E_COMPARATOR_01",
+        "evidence": [
+          {
+            "clause_id": "B008C026",
+            "quote": "compared with untreated mice"
+          }
+        ]
+      },
+      {
+        "claim_id": "C031",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_INTERVENTION_01",
+        "predicate": "has_assay",
+        "object_entity_id": "E_ASSAY_03",
+        "evidence": [
+          {
+            "clause_id": "B008C031",
+            "quote": "To further assess the in vivo gene editing efﬁcacy of We further analyzed genomic DNA from treated mice using deep two sgRNAs, we separately delivered plasmids encoding Cas9 sequencing to identify the gene editing rate."
+          }
+        ]
+      },
+      {
+        "claim_id": "C032",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ASSAY_03",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E_ENDPOINT_04",
+        "evidence": [
+          {
+            "clause_id": "B008C031",
+            "quote": "To further assess the in vivo gene editing efﬁcacy of We further analyzed genomic DNA from treated mice using deep two sgRNAs, we separately delivered plasmids encoding Cas9 sequencing to identify the gene editing rate."
+          }
+        ]
+      },
+      {
+        "claim_id": "C033",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_04",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E_OUTCOME_04",
+        "evidence": [
+          {
+            "clause_id": "B008C033",
+            "quote": "Following injection, Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about we euthanized the treated mice and extracted genomic DNA 52.7% in total liver cells."
+          }
+        ]
+      },
+      {
+        "claim_id": "C035",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ASSAY_04",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E_ENDPOINT_05",
+        "evidence": [
+          {
+            "clause_id": "B007C015",
+            "quote": "NGS sequencing analysis re- HemA, accounting for 50%–60% of all the deletions (Figures 6C vealed an approximately 16.5% deletion frequency in LSECs following and 6D)."
+          }
+        ]
+      },
+      {
+        "claim_id": "C036",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_05",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E_OUTCOME_05",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "Since both that the F8 gene was edited in 60.54% ± 11.65% of hepatocytes, sgRNAs exhibit similar gene editing efﬁciencies and to avoid repeated whereas LSECs showed gene editing rates of approximately targeting of the corrected F8 gene by mF8sgRNA, which also targets 16.50% ± 2.96% (Figure 6A; Table S1)."
+          }
+        ]
+      },
+      {
+        "claim_id": "C038",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ASSAY_04",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E_ENDPOINT_06",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "the F8 gene was edited in 60.54% ± 11.65% of hepatocytes"
+          }
+        ]
+      },
+      {
+        "claim_id": "C039",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_06",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E_OUTCOME_06",
+        "evidence": [
+          {
+            "clause_id": "B007C009",
+            "quote": "60.54% ± 11.65%"
+          }
+        ]
+      },
+      {
+        "claim_id": "C041",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ASSAY_04",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "E_ENDPOINT_07",
+        "evidence": [
+          {
+            "clause_id": "B007C010",
+            "quote": "No indel variants were found the WT F8 gene, we chose NSGHAsgRNA for the subsequent gene at ﬁve top predicted potential off-target sites when compared with un- editing experiments."
+          }
+        ]
+      },
+      {
+        "claim_id": "C042",
+        "experiment_id": "GP-006-E01",
+        "subject_entity_id": "E_ENDPOINT_07",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "E_OUTCOME_07",
+        "evidence": [
+          {
+            "clause_id": "B007C010",
+            "quote": "No indel variants were found the WT F8 gene, we chose NSGHAsgRNA for the subsequent gene at ﬁve top predicted potential off-target sites when compared with un- editing experiments."
+          }
+        ]
+      }
+    ],
+    "experiments": [
+      {
+        "experiment_id": "GP-006-E01",
+        "label": "In vivo CRISPR-Cas9 mRNA LNP gene editing of mutant F8 in NSG HemA mice",
+        "claim_ids": [
+          "C007",
+          "C008",
+          "C009",
+          "C011",
+          "C012",
+          "C014",
+          "C015",
+          "C016",
+          "C017",
+          "C018",
+          "C019",
+          "C020",
+          "C021",
+          "C022",
+          "C023",
+          "C024",
+          "C025",
+          "C026",
+          "C027",
+          "C028",
+          "C029",
+          "C030",
+          "C031",
+          "C032",
+          "C033",
+          "C035",
+          "C036",
+          "C038",
+          "C039",
+          "C041",
+          "C042"
+        ],
+        "shared_claim_ids": [
+          "C001",
+          "C002",
+          "C003",
+          "C004"
+        ],
+        "source_scope_clause_ids": [
+          "B004C002",
+          "B007C008",
+          "B007C009",
+          "B007C010",
+          "B007C011",
+          "B007C015",
+          "B008C020",
+          "B008C021",
+          "B008C023",
+          "B008C024",
+          "B008C026",
+          "B008C031",
+          "B008C033",
+          "B009C003",
+          "B009C004"
+        ],
+        "boundary_status": "explicit",
+        "boundary_reason": "The experiment is explicitly defined by encapsulation of NSGHAsgRNA with Cas9 mRNA in MC3 LNP, intravenous dosing of NSG HemA mice, and subsequent FVIII, coagulation, on-target editing, and off-target measurements. Hydrodynamic injection and plasmid-only findings are distinct preliminary experiments and are excluded."
+      }
+    ]
+  },
+  "unresolved_ambiguities": [
+    "The supplied text does not expand the name or sequence of NSGHAsgRNA; its normalized name remains unresolved.",
+    "The source text contains page-column interleaving around some clauses. Only exact, semantically intact quotations were retained where possible.",
+    "The 52.7% total-liver editing result and the cell-fraction editing values are reported in the same LNP-treatment results sequence, but the provided excerpts do not state the exact temporal relationship between every molecular endpoint measurement."
+  ]
+}
