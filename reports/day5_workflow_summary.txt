@@ -1,0 +1,100 @@
+TODAY'S WORKFLOW SUMMARY
+
+Today, the AI-LNP extraction workflow progressed from an abstract-only,
+schema-first prototype to a modular full-text retrieval-augmented generation
+pipeline.
+
+The work completed today included:
+
+1. Reviewing the initial abstract extraction results and identifying scientific
+   errors that ordinary schema validation could not catch.
+2. Refining field definitions so LNP components, payloads, encoded products,
+   delivery recipient cells, therapeutic target cells, experimental contexts,
+   endpoints, and outcomes remain distinct.
+3. Introducing explicit experiment boundaries to prevent disease, model, cell,
+   dose, route, and outcome information from leaking between experiments.
+4. Building an experiment-scoped evidence-graph schema with atomic entities,
+   typed relations, exact source quotations, deterministic audits, and an
+   independent second-reader correction pass.
+5. Preserving the previous schemas, cached responses, review decisions,
+   baseline results, and invalidated review artifacts.
+6. Building a full-text corpus for nine open-access gold papers using PMC XML
+   and PyMuPDF extraction of supplemental PDFs.
+7. Implementing SQLite FTS5/BM25 lexical retrieval, local
+   sentence-transformer retrieval, FAISS retrieval, and an optional Chroma
+   adapter.
+8. Adding custom biomedical entity candidates for LNPs, lipid components,
+   payloads, cells, species, routes, genes, proteins, and outcomes, while
+   retaining SciSpaCy as an optional enrichment layer.
+9. Adding field-specific evidence packets for formulation, payload, experiment
+   boundaries, delivery recipients, therapeutic targets, model context, and
+   outcomes.
+10. Adding evidence gates for insufficient evidence, cross-paper leakage,
+    missing entity types, contradictory evidence, duplicate evidence, and
+    unsupported extraction.
+11. Improving retrieval through auditable biomedical synonym expansion,
+    conservative adjacent-paragraph retrieval, and main-text/supplement source
+    balancing.
+12. Raising retrieval recall at eight blocks from 80.6% to 90.3%, corresponding
+    to 28 of 31 human-verified evidence locations.
+13. Producing simple Markdown and CSV retrieval-result tables showing each
+    successful and missed evidence location.
+14. Building a Streamlit evidence-review interface that saves both decisions
+    and scientific reasons.
+15. Building a full-text experiment-scoped SenseNova extraction runner that
+    preserves clause-to-source provenance and writes into a separate output
+    directory.
+16. Testing SenseNova extraction with sensenova-6.7-flash-lite,
+    deepseek-v4-flash, and GLM-5.2. The first two consumed their output budgets
+    as hidden reasoning without returning JSON, while GLM-5.2 was rejected by
+    the provider's token-per-minute limit. No failed response was accepted.
+17. Updating the README with the full RAG architecture, benchmark, setup,
+    commands, safeguards, and architecture history.
+18. Running 45 passing local tests, checking for staged secrets, excluding
+    .env, and committing and pushing the completed work to GitHub in commit
+    1055f48 on branch codex/day-4-clean-start.
+
+Retrieval recall is not precise and does not by itself pass G1.
+The remaining work is to run experiment-scoped extraction when a suitable
+provider has sufficient quota, validate the resulting evidence graph, compare
+the extracted values with human-verified full-text answers, and obtain human
+scientific approval.
+
+The progression was:
+
+1. **Initial extraction schema**
+
+   The LLM read abstracts and filled fields such as formulation, component, payload, recipient cell, therapeutic target, experiment context, and outcome. Pydantic checked types, required fields, allowed values, and structural consistency.
+
+2. **More comprehensive extraction schema**
+
+   Human review exposed deeper problems: fields from separate experiments were mixed, delivery recipients were confused with therapeutic targets, cells and outcomes were merged, and valid-looking values lacked appropriate evidence. Therefore, the flat schema became an experiment-scoped evidence graph containing:
+
+   - Explicit experiment IDs
+   - Atomic LNP components
+   - Separate payload and encoded-product entities
+   - Separate recipient-cell and therapeutic-target relations
+   - Separate endpoints and outcome values
+   - Exact evidence quotations
+   - Typed relationships between entities
+   - A second-reader correction pass
+
+3. **Full-text RAG**
+
+   Even the improved schema could not recover information absent from an abstract. RAG was added to search full text and supplements for the relevant evidence before extraction. It improves what information reaches the extractor; it does not replace the schema.
+
+So the final design combines both:
+
+```text
+Full-text RAG
+    finds the relevant evidence
+            ↓
+Experiment-scoped evidence graph
+    organizes the evidence correctly
+            ↓
+Validators and second reader
+    reject structural and evidentiary errors
+            ↓
+Human scientific verification
+    determines whether the result is actually correct
+```

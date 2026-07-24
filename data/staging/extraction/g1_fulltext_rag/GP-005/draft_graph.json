@@ -1,0 +1,1395 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-005",
+  "source_scope": "full_text_with_supplement",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "ENT-LNP-GENERIC",
+      "entity_type": "lnp_formulation",
+      "reported_name": "LNP",
+      "normalized_name": "lipid nanoparticle",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "The lipid components (MC3, DSPC, Chol, and PEG2000‐lipid)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LNP1",
+      "entity_type": "lnp_formulation",
+      "reported_name": "Egfp mRNA‐LNP (LNP1)",
+      "normalized_name": "LNP1",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "Egfp mRNA‐LNP (LNP1)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LNP16",
+      "entity_type": "lnp_formulation",
+      "reported_name": "LNP16",
+      "normalized_name": "LNP16",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "LNP16"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LNP17",
+      "entity_type": "lnp_formulation",
+      "reported_name": "LNP17",
+      "normalized_name": "LNP17",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B010C005",
+          "quote": "LNP17"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LNP3-7",
+      "entity_type": "lnp_formulation",
+      "reported_name": "LNP3‐LNP7",
+      "normalized_name": "LNP3–LNP7",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "LNP3‐LNP7"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MC3",
+      "entity_type": "lnp_component",
+      "reported_name": "MC3",
+      "normalized_name": "DLin-MC3-DMA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "MC3"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-DSPC",
+      "entity_type": "lnp_component",
+      "reported_name": "DSPC",
+      "normalized_name": "1,2-distearoyl-sn-glycero-3-phosphocholine",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "DSPC"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-CHOL",
+      "entity_type": "lnp_component",
+      "reported_name": "Chol",
+      "normalized_name": "cholesterol",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "Chol"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-PEG2000",
+      "entity_type": "lnp_component",
+      "reported_name": "PEG2000‐lipid",
+      "normalized_name": "PEG2000-lipid",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "PEG2000‐lipid"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-SM102",
+      "entity_type": "lnp_component",
+      "reported_name": "SM‐102",
+      "normalized_name": "SM-102",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B016C002",
+          "quote": "SM‐102"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-EGFP-MRNA",
+      "entity_type": "payload",
+      "reported_name": "Egfp mRNA",
+      "normalized_name": "EGFP-encoding mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B015C002",
+          "quote": "enhanced green fluorescent protein (Egfp) encoding mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LABELED-EGFP-MRNA",
+      "entity_type": "payload",
+      "reported_name": "fluorochrome‐labeled Egfp mRNA",
+      "normalized_name": "fluorochrome-labeled EGFP-encoding mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B015C002",
+          "quote": "fluorochrome‐labeled Egfp mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-SIRNA",
+      "entity_type": "payload",
+      "reported_name": "labeled siRNA",
+      "normalized_name": "fluorescently labeled siRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B015C002",
+          "quote": "labeled siRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-CONTROL-SIRNA",
+      "entity_type": "payload",
+      "reported_name": "control siRNA",
+      "normalized_name": "negative-control siRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "control siRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TLR4-SIRNA",
+      "entity_type": "payload",
+      "reported_name": "an siRNA against Tlr4",
+      "normalized_name": "TLR4-targeting siRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C005",
+          "quote": "an siRNA against Tlr4"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MOD-EGFP-MRNA",
+      "entity_type": "payload",
+      "reported_name": "m1Ψ or 5moU modified Egfp mRNA",
+      "normalized_name": "m1Ψ- or 5-methoxyuridine-modified EGFP mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "m1Ψ or 5moU modified Egfp mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-EGFP",
+      "entity_type": "encoded_product",
+      "reported_name": "EGFP protein",
+      "normalized_name": "enhanced green fluorescent protein",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C002",
+          "quote": "EGFP protein"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TLR4",
+      "entity_type": "molecular_target",
+      "reported_name": "Tlr4 mRNA",
+      "normalized_name": "TLR4 mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "Tlr4 mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-KC",
+      "entity_type": "cell",
+      "reported_name": "KC",
+      "normalized_name": "Kupffer cell",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C007",
+          "quote": "KC"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-HEPATOCYTE",
+      "entity_type": "cell",
+      "reported_name": "hepatocytes",
+      "normalized_name": "hepatocyte",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-HEPA1-6",
+      "entity_type": "cell",
+      "reported_name": "Hepa 1–6 cells",
+      "normalized_name": "Hepa 1-6 cell",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "Hepa 1–6 cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-HELA",
+      "entity_type": "cell",
+      "reported_name": "HeLa cells",
+      "normalized_name": "HeLa cell",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B016C004",
+          "quote": "HeLa cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MACROPHAGES",
+      "entity_type": "cell",
+      "reported_name": "macrophages",
+      "normalized_name": "macrophage",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B016C005",
+          "quote": "macrophages"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LSEC",
+      "entity_type": "cell",
+      "reported_name": "LSEC",
+      "normalized_name": "liver sinusoidal endothelial cell",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C001",
+          "quote": "LSEC"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MOMPHI",
+      "entity_type": "cell",
+      "reported_name": "MoMΦ",
+      "normalized_name": "monocyte-derived macrophage",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C001",
+          "quote": "MoMΦ"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-HSC",
+      "entity_type": "cell",
+      "reported_name": "HSC",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "HSC"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LIVER",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": "liver",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "liver"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MOUSE",
+      "entity_type": "species",
+      "reported_name": "mice",
+      "normalized_name": "Mus musculus",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C005",
+          "quote": "mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-C57BL6J",
+      "entity_type": "biological_model",
+      "reported_name": "C57BL6J wild type mice",
+      "normalized_name": "wild-type C57BL/6J mouse",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "C57BL6J wild type mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-IV",
+      "entity_type": "route",
+      "reported_name": "intravenous injection",
+      "normalized_name": "intravenous administration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C006",
+          "quote": "intravenous injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-DOSE-2MGKG",
+      "entity_type": "dose",
+      "reported_name": "2 mg k−1g",
+      "normalized_name": "2 mg/kg",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "2 mg k−1g"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TIME-16H",
+      "entity_type": "timepoint",
+      "reported_name": "16 h after the injection",
+      "normalized_name": "16 hours post-injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "16 h after the injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TIME-24H",
+      "entity_type": "timepoint",
+      "reported_name": "24 h",
+      "normalized_name": "24 hours",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B017C002",
+          "quote": "24 h"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-IVM",
+      "entity_type": "assay",
+      "reported_name": "Intravital microscopy",
+      "normalized_name": "intravital microscopy",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "Intravital microscopy"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-QPCR",
+      "entity_type": "assay",
+      "reported_name": "QPCR‐based detection",
+      "normalized_name": "quantitative PCR",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "QPCR‐based detection"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-FLOW",
+      "entity_type": "assay",
+      "reported_name": "flow cytometry",
+      "normalized_name": "flow cytometry",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B010C001",
+          "quote": "flow cytometry"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-IMMUNOBLOT",
+      "entity_type": "assay",
+      "reported_name": "immunoblot",
+      "normalized_name": "immunoblotting",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C006",
+          "quote": "immunoblot"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-CONFOCAL",
+      "entity_type": "assay",
+      "reported_name": "confocal microscopy",
+      "normalized_name": "confocal microscopy",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B002C004",
+          "quote": "Confocal microscopy"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-DAPI",
+      "entity_type": "assay",
+      "reported_name": "DAPI staining",
+      "normalized_name": "DAPI staining",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B017C007",
+          "quote": "DAPI staining"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-UPTAKE-EGFP-MRNA",
+      "entity_type": "endpoint",
+      "reported_name": "uptake of Egfp mRNA",
+      "normalized_name": "cellular uptake of EGFP mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C002",
+          "quote": "uptake of Egfp mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-EGFP-TRANSLATION",
+      "entity_type": "endpoint",
+      "reported_name": "EGFP protein translation",
+      "normalized_name": "EGFP protein expression",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "EGFP protein translation"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TLR4-KNOCKDOWN",
+      "entity_type": "endpoint",
+      "reported_name": "knockdown of Tlr4 mRNA",
+      "normalized_name": "TLR4 mRNA knockdown",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "knockdown of Tlr4 mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-PLOIDY",
+      "entity_type": "endpoint",
+      "reported_name": "Ploidy (2n, 4n)",
+      "normalized_name": "cellular ploidy",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C011",
+          "quote": "Ploidy (2n, 4n)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-KC-UPTAKE",
+      "entity_type": "outcome_value",
+      "reported_name": "KC, followed by hepatocytes and the Hepa 1–6 cells, internalized the largest amounts of LNP1",
+      "normalized_name": "Kupffer cells had the greatest LNP1 uptake, followed by hepatocytes and Hepa 1-6 cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "KC, followed by hepatocytes and the Hepa 1–6 cells, internalized the largest amounts of LNP1"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-HC-EGFP",
+      "entity_type": "outcome_value",
+      "reported_name": "hepatocytes, and similarly the Hepa 1–6 cells, were most efficient in EGFP protein production",
+      "normalized_name": "hepatocytes and Hepa 1-6 cells showed the highest EGFP production",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "hepatocytes, and similarly the Hepa 1–6 cells, were most efficient in EGFP protein production"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-KC-LOW",
+      "entity_type": "outcome_value",
+      "reported_name": "low EGFP protein translation by KC",
+      "normalized_name": "low EGFP translation in Kupffer cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "low EGFP protein translation by KC"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-LSEC-SIGNAL",
+      "entity_type": "outcome_value",
+      "reported_name": "signals in each cell type",
+      "normalized_name": "detectable EGFP signal",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B010C001",
+          "quote": "detected signals in each cell type"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-MOMPHI-LOW",
+      "entity_type": "outcome_value",
+      "reported_name": "detectable and significant level, albeit low",
+      "normalized_name": "significant but low EGFP expression",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C002",
+          "quote": "detectable and significant level, albeit low"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-LNP16-UPTAKE",
+      "entity_type": "outcome_value",
+      "reported_name": "taken up in significant amounts",
+      "normalized_name": "significant LNP16 uptake",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "taken up in significant amounts"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-HSC-NO-UPTAKE",
+      "entity_type": "outcome_value",
+      "reported_name": "did not absorb the LNP at a significant level",
+      "normalized_name": "no significant LNP uptake",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "did not absorb the LNP at a significant level"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-LNP16-NO-KD",
+      "entity_type": "outcome_value",
+      "reported_name": "did not lead to a knockdown of Tlr4 mRNA",
+      "normalized_name": "no TLR4 mRNA knockdown",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "did not lead to a knockdown of Tlr4 mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-LNP17-KD",
+      "entity_type": "outcome_value",
+      "reported_name": "a significant reduction of Tlr4 mRNA",
+      "normalized_name": "significant reduction of TLR4 mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "a significant reduction of Tlr4 mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-HELA-EGFP",
+      "entity_type": "outcome_value",
+      "reported_name": "translated the mRNA of all formulations into EGFP protein at significant amounts",
+      "normalized_name": "significant EGFP expression from all formulations",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C004",
+          "quote": "translated the mRNA of all formulations into EGFP protein at significant amounts"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-MAC-LOW",
+      "entity_type": "outcome_value",
+      "reported_name": "translation by macrophages was low, irrespective of the type of ionizable lipid or mRNA used",
+      "normalized_name": "low macrophage translation regardless of ionizable lipid or mRNA type",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C005",
+          "quote": "translation by macrophages was low, irrespective of the type of ionizable lipid or mRNA used"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CL-S01",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-LNP-GENERIC",
+      "predicate": "has_component",
+      "object_entity_id": "ENT-MC3",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "The lipid components (MC3, DSPC, Chol, and PEG2000‐lipid)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-S02",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-LNP-GENERIC",
+      "predicate": "has_component",
+      "object_entity_id": "ENT-DSPC",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "The lipid components (MC3, DSPC, Chol, and PEG2000‐lipid)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-S03",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-LNP-GENERIC",
+      "predicate": "has_component",
+      "object_entity_id": "ENT-CHOL",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "The lipid components (MC3, DSPC, Chol, and PEG2000‐lipid)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-S04",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-LNP-GENERIC",
+      "predicate": "has_component",
+      "object_entity_id": "ENT-PEG2000",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "The lipid components (MC3, DSPC, Chol, and PEG2000‐lipid)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-01",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "carries_payload",
+      "object_entity_id": "ENT-EGFP-MRNA",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "Egfp mRNA‐LNP (LNP1)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-02",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-EGFP-MRNA",
+      "predicate": "encodes_product",
+      "object_entity_id": "ENT-EGFP",
+      "evidence": [
+        {
+          "clause_id": "B015C002",
+          "quote": "enhanced green fluorescent protein (Egfp) encoding mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-03",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "ENT-LIVER",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "Intravital microscopy of liver 16 h after the injection of DMSO and 2 mg k−1g Egfp mRNA‐LNP (LNP1)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-04",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "has_biological_model",
+      "object_entity_id": "ENT-C57BL6J",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "injection of DMSO and 2 mg k−1g Egfp mRNA‐LNP (LNP1) into C57BL6J wild type mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-05",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-C57BL6J",
+      "predicate": "has_species",
+      "object_entity_id": "ENT-MOUSE",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "C57BL6J wild type mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-06",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "has_dose",
+      "object_entity_id": "ENT-DOSE-2MGKG",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "2 mg k−1g Egfp mRNA‐LNP (LNP1)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-07",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "has_timepoint",
+      "object_entity_id": "ENT-TIME-16H",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "16 h after the injection of DMSO and 2 mg k−1g Egfp mRNA‐LNP (LNP1)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-08",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "has_assay",
+      "object_entity_id": "ENT-IVM",
+      "evidence": [
+        {
+          "clause_id": "B007C003",
+          "quote": "Intravital microscopy of liver 16 h after the injection"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-09",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "ENT-KC",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "KC, followed by hepatocytes and the Hepa 1–6 cells, internalized the largest amounts of LNP1"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-10",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "ENT-HEPATOCYTE",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "KC, followed by hepatocytes and the Hepa 1–6 cells, internalized the largest amounts of LNP1"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-11",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "ENT-HEPA1-6",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "KC, followed by hepatocytes and the Hepa 1–6 cells, internalized the largest amounts of LNP1"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-12",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-UPTAKE-EGFP-MRNA",
+      "evidence": [
+        {
+          "clause_id": "B009C002",
+          "quote": "assess the uptake of Egfp mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-13",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-UPTAKE-EGFP-MRNA",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-KC-UPTAKE",
+      "evidence": [
+        {
+          "clause_id": "B009C004",
+          "quote": "KC, followed by hepatocytes and the Hepa 1–6 cells, internalized the largest amounts of LNP1"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-14",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-EGFP-TRANSLATION",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "confirmed the low EGFP protein translation by KC using flow cytometry"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-15",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-EGFP-TRANSLATION",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-KC-LOW",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "low EGFP protein translation by KC"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-16",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-EGFP-TRANSLATION",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-HC-EGFP",
+      "evidence": [
+        {
+          "clause_id": "B009C007",
+          "quote": "hepatocytes, and similarly the Hepa 1–6 cells, were most efficient in EGFP protein production"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-17",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP16",
+      "predicate": "carries_payload",
+      "object_entity_id": "ENT-CONTROL-SIRNA",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "The LNP16 containing control siRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-18",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP16",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "ENT-HEPATOCYTE",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "LNP16 were taken up in significant amounts by hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-19",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP16",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "ENT-KC",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "LNP16 were taken up in significant amounts by hepatocytes and KC"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-20",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-UPTAKE-EGFP-MRNA",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-LNP16-UPTAKE",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "LNP16 were taken up in significant amounts by hepatocytes and KC"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-21",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-UPTAKE-EGFP-MRNA",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-HSC-NO-UPTAKE",
+      "evidence": [
+        {
+          "clause_id": "B010C004",
+          "quote": "HSC did not absorb the LNP at a significant level"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-22",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP17",
+      "predicate": "carries_payload",
+      "object_entity_id": "ENT-TLR4-SIRNA",
+      "evidence": [
+        {
+          "clause_id": "B010C005",
+          "quote": "LNP bearing an siRNA against Tlr4"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-23",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP17",
+      "predicate": "carries_payload",
+      "object_entity_id": "ENT-EGFP-MRNA",
+      "evidence": [
+        {
+          "clause_id": "B010C005",
+          "quote": "the same Egfp mRNA (LNP17)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-24",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-TLR4-SIRNA",
+      "predicate": "targets_molecule",
+      "object_entity_id": "ENT-TLR4",
+      "evidence": [
+        {
+          "clause_id": "B010C005",
+          "quote": "an siRNA against Tlr4"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-25",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-LNP17",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-TLR4-KNOCKDOWN",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "LNP17 caused a significant reduction of Tlr4 mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-26",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-TLR4-KNOCKDOWN",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-LNP17-KD",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "LNP17 caused a significant reduction of Tlr4 mRNA in HC, KC, and HSC"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E01-27",
+      "experiment_id": "GP-005-E01",
+      "subject_entity_id": "ENT-TLR4-KNOCKDOWN",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-LNP16-NO-KD",
+      "evidence": [
+        {
+          "clause_id": "B010C006",
+          "quote": "LNP16 containing control siRNA did not lead to a knockdown of Tlr4 mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-01",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-LNP3-7",
+      "predicate": "has_component",
+      "object_entity_id": "ENT-SM102",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "LNP3‐LNP7 (Table 1) which included combinations of the ionizable lipid SM‐102"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-02",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-LNP3-7",
+      "predicate": "carries_payload",
+      "object_entity_id": "ENT-MOD-EGFP-MRNA",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "LNP3‐LNP7 (Table 1) which included combinations of the ionizable lipid SM‐102 and m1Ψ or 5moU modified Egfp mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-03",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-MOD-EGFP-MRNA",
+      "predicate": "encodes_product",
+      "object_entity_id": "ENT-EGFP",
+      "evidence": [
+        {
+          "clause_id": "B016C004",
+          "quote": "translated the mRNA of all formulations into EGFP protein"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-04",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-LNP3-7",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "ENT-HELA",
+      "evidence": [
+        {
+          "clause_id": "B016C004",
+          "quote": "HeLa cells translated the mRNA of all formulations into EGFP protein"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-05",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-LNP3-7",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "ENT-MACROPHAGES",
+      "evidence": [
+        {
+          "clause_id": "B016C005",
+          "quote": "translation by macrophages was low, irrespective of the type of ionizable lipid or mRNA used"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-06",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-LNP3-7",
+      "predicate": "has_assay",
+      "object_entity_id": "ENT-FLOW",
+      "evidence": [
+        {
+          "clause_id": "B016C004",
+          "quote": "We observed using flow cytometry"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-07",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-LNP3-7",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-EGFP-TRANSLATION",
+      "evidence": [
+        {
+          "clause_id": "B016C001",
+          "quote": "exploration of the role of mRNA modifications and of a different ionizable lipid on mRNA translation"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-08",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-EGFP-TRANSLATION",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-HELA-EGFP",
+      "evidence": [
+        {
+          "clause_id": "B016C004",
+          "quote": "HeLa cells translated the mRNA of all formulations into EGFP protein at significant amounts"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E02-09",
+      "experiment_id": "GP-005-E02",
+      "subject_entity_id": "ENT-EGFP-TRANSLATION",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-MAC-LOW",
+      "evidence": [
+        {
+          "clause_id": "B016C005",
+          "quote": "translation by macrophages was low, irrespective of the type of ionizable lipid or mRNA used"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E03-01",
+      "experiment_id": "GP-005-E03",
+      "subject_entity_id": "ENT-HEPATOCYTE",
+      "predicate": "has_assay",
+      "object_entity_id": "ENT-DAPI",
+      "evidence": [
+        {
+          "clause_id": "B017C007",
+          "quote": "Measurement of DNA content by DAPI staining"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E03-02",
+      "experiment_id": "GP-005-E03",
+      "subject_entity_id": "ENT-HEPATOCYTE",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-PLOIDY",
+      "evidence": [
+        {
+          "clause_id": "B017C011",
+          "quote": "Ploidy (2n, 4n) was assessed by flow cytometric analysis of nuclei staining"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL-E03-03",
+      "experiment_id": "GP-005-E03",
+      "subject_entity_id": "ENT-HEPA1-6",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-PLOIDY",
+      "evidence": [
+        {
+          "clause_id": "B017C011",
+          "quote": "Ploidy (2n, 4n) was assessed by flow cytometric analysis of nuclei staining"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "GP-005-E01",
+      "label": "Intravital imaging and cellular analysis of mRNA/siRNA LNP distribution, translation, and Tlr4 knockdown",
+      "claim_ids": [
+        "CL-E01-01",
+        "CL-E01-02",
+        "CL-E01-03",
+        "CL-E01-04",
+        "CL-E01-05",
+        "CL-E01-06",
+        "CL-E01-07",
+        "CL-E01-08",
+        "CL-E01-09",
+        "CL-E01-10",
+        "CL-E01-11",
+        "CL-E01-12",
+        "CL-E01-13",
+        "CL-E01-14",
+        "CL-E01-15",
+        "CL-E01-16",
+        "CL-E01-17",
+        "CL-E01-18",
+        "CL-E01-19",
+        "CL-E01-20",
+        "CL-E01-21",
+        "CL-E01-22",
+        "CL-E01-23",
+        "CL-E01-24",
+        "CL-E01-25",
+        "CL-E01-26",
+        "CL-E01-27"
+      ],
+      "shared_claim_ids": [
+        "CL-S01",
+        "CL-S02",
+        "CL-S03",
+        "CL-S04"
+      ],
+      "source_scope_clause_ids": [
+        "B003C001",
+        "B003C002",
+        "B003C003",
+        "B003C004",
+        "B003C005",
+        "B003C006",
+        "B003C007",
+        "B007C001",
+        "B007C002",
+        "B007C003",
+        "B007C004",
+        "B009C001",
+        "B009C002",
+        "B009C004",
+        "B009C005",
+        "B009C006",
+        "B009C007",
+        "B010C001",
+        "B010C002",
+        "B010C003",
+        "B010C004",
+        "B010C005",
+        "B010C006",
+        "B011C001",
+        "B011C002",
+        "B011C003",
+        "B011C004",
+        "B011C005",
+        "B011C006",
+        "B011C007"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "The approved core imaging experiment spans in vivo imaging, cellular uptake/translation analyses, and the explicitly linked co-encapsulated control- and Tlr4-siRNA formulations."
+    },
+    {
+      "experiment_id": "GP-005-E02",
+      "label": "Alternative ionizable lipid and modified mRNA effects on EGFP translation",
+      "claim_ids": [
+        "CL-E02-01",
+        "CL-E02-02",
+        "CL-E02-03",
+        "CL-E02-04",
+        "CL-E02-05",
+        "CL-E02-06",
+        "CL-E02-07",
+        "CL-E02-08",
+        "CL-E02-09"
+      ],
+      "shared_claim_ids": [
+        "CL-S01",
+        "CL-S02",
+        "CL-S03",
+        "CL-S04"
+      ],
+      "source_scope_clause_ids": [
+        "B016C001",
+        "B016C002",
+        "B016C003",
+        "B016C004",
+        "B016C005"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The clauses explicitly introduce the intervention comparison and report translation outcomes for SM-102 and modified-Egfp-mRNA formulations in HeLa cells and macrophages."
+    },
+    {
+      "experiment_id": "GP-005-E03",
+      "label": "Ploidy analysis of hepatocytes and other cells",
+      "claim_ids": [
+        "CL-E03-01",
+        "CL-E03-02",
+        "CL-E03-03"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B017C001",
+        "B017C005",
+        "B017C006",
+        "B017C007",
+        "B017C011"
+      ],
+      "boundary_status": "ambiguous",
+      "boundary_reason": "The retrieved clauses support ploidy measurement methods but do not contain the inventory-described quantitative total-RNA, total-protein, or ribosomal-protein outcomes; those unsupported outcomes were omitted."
+    }
+  ]
+}

@@ -1,0 +1,1087 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-008",
+  "source_scope": "full_text_with_supplement",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "ENT-FORM-01",
+      "entity_type": "lnp_formulation",
+      "reported_name": "αCD163/LNP-FAPCAR",
+      "normalized_name": "anti-CD163-conjugated lipid nanoparticle encapsulating FAP-CAR mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C016",
+          "quote": "αCD163/LNP-FAPCAR (FAPCAR mRNA with CD163-directed antibody conjugation)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-COMP-01",
+      "entity_type": "lnp_component",
+      "reported_name": "heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl) amino) octanoate",
+      "normalized_name": "heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl)amino)octanoate",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B001C006",
+          "quote": "heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl) 144 amino) octanoate"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-COMP-02",
+      "entity_type": "lnp_component",
+      "reported_name": "DSPC",
+      "normalized_name": "1,2-distearoyl-sn-glycero-3-phosphocholine",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "DSPC"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-COMP-03",
+      "entity_type": "lnp_component",
+      "reported_name": "cholesterol",
+      "normalized_name": "cholesterol",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "cholesterol"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-COMP-04",
+      "entity_type": "lnp_component",
+      "reported_name": "PEG-lipid",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "PEG-lipid"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-AMT-01",
+      "entity_type": "dose",
+      "reported_name": "45 molar parts",
+      "normalized_name": "45 mol%",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "at a molar ratio of 45:30:23.5:1.5 (ionizable lipid: DSPC: cholesterol: PEG-lipid)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-AMT-02",
+      "entity_type": "dose",
+      "reported_name": "30 mol%",
+      "normalized_name": "30 mol%",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B001C002",
+          "quote": "DSPC content (30 mol%)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-AMT-03",
+      "entity_type": "dose",
+      "reported_name": "23.5 molar parts",
+      "normalized_name": "23.5 mol%",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "at a molar ratio of 45:30:23.5:1.5 (ionizable lipid: DSPC: cholesterol: PEG-lipid)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-AMT-04",
+      "entity_type": "dose",
+      "reported_name": "1.5 molar parts",
+      "normalized_name": "1.5 mol%",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "at a molar ratio of 45:30:23.5:1.5 (ionizable lipid: DSPC: cholesterol: PEG-lipid)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-LIG-01",
+      "entity_type": "targeting_ligand",
+      "reported_name": "purified rat anti-mouse CD163",
+      "normalized_name": "rat anti-mouse CD163 antibody",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B001C007",
+          "quote": "purified rat 147 anti-mouse CD163"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-PAY-01",
+      "entity_type": "payload",
+      "reported_name": "FAPCAR mRNA",
+      "normalized_name": "FAP-targeted chimeric antigen receptor mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "mRNA encoding an FAP-targeted CAR"
+        },
+        {
+          "clause_id": "B013C016",
+          "quote": "FAPCAR mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-PROD-01",
+      "entity_type": "encoded_product",
+      "reported_name": "FAPCAR",
+      "normalized_name": "FAP-targeted chimeric antigen receptor",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "FAP-targeted CAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TARGET-01",
+      "entity_type": "molecular_target",
+      "reported_name": "FAP",
+      "normalized_name": "fibroblast activation protein",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "FAP-targeted CAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-CELL-01",
+      "entity_type": "cell",
+      "reported_name": "BMDMs",
+      "normalized_name": "bone marrow-derived macrophages",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C005",
+          "quote": "We incubated BMDMs with αCD163/LNPs containing mRNA encoding FAPCAR or GFP for 48 h in vitro."
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-CELL-02",
+      "entity_type": "cell",
+      "reported_name": "overactive HSCs that express FAP upon activation",
+      "normalized_name": "activated FAP-positive hepatic stellate cells",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B007C004",
+          "quote": "overactive HSCs that express FAP upon activation"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-SPECIES-01",
+      "entity_type": "species",
+      "reported_name": "mice",
+      "normalized_name": "Mus musculus",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "mice treated with αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-MODEL-01",
+      "entity_type": "biological_model",
+      "reported_name": "CCL4 group",
+      "normalized_name": "carbon tetrachloride-associated liver fibrosis model",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B013C005",
+          "quote": "CCL4 group"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TISSUE-01",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": "liver",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "liver fibrosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-DIS-01",
+      "entity_type": "disease",
+      "reported_name": "liver fibrosis",
+      "normalized_name": "liver fibrosis",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "liver fibrosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-01",
+      "entity_type": "intervention",
+      "reported_name": "αCD163/LNP-FAPCAR treatment",
+      "normalized_name": "anti-CD163-targeted LNP delivering FAP-CAR mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C020",
+          "quote": "the αCD163/LNP-FAPCAR cohort"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-02",
+      "entity_type": "intervention",
+      "reported_name": "αCD163/LNP-Luc",
+      "normalized_name": "anti-CD163-targeted LNP delivering luciferase mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C016",
+          "quote": "αCD163/LNP-Luc (luciferase mRNA control)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-INT-03",
+      "entity_type": "intervention",
+      "reported_name": "unmodified LNP-FAPCAR",
+      "normalized_name": "untargeted LNP delivering FAP-CAR mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C016",
+          "quote": "unmodified LNP-FAPCAR (FAPCAR mRNA without targeting moiety)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-TIME-01",
+      "entity_type": "timepoint",
+      "reported_name": "48 h",
+      "normalized_name": "48 hours",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C005",
+          "quote": "for 48 h in vitro"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-01",
+      "entity_type": "assay",
+      "reported_name": "flow cytometry",
+      "normalized_name": "flow cytometry",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C006",
+          "quote": "Flow cytometry showed"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-01",
+      "entity_type": "endpoint",
+      "reported_name": "BMDMs expressing GFP or FAPCAR",
+      "normalized_name": "encoded-product expression in BMDMs",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B008C007",
+          "quote": "BMDMs expressed GFP or FAPCAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-01",
+      "entity_type": "outcome_value",
+      "reported_name": "over 80%",
+      "normalized_name": ">80%",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C007",
+          "quote": "over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR, respectively."
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-02",
+      "entity_type": "outcome_value",
+      "reported_name": "fewer than 20%",
+      "normalized_name": "<20%",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C008",
+          "quote": "unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-02",
+      "entity_type": "assay",
+      "reported_name": "histology, Sirius red staining, and Masson’s trichrome staining",
+      "normalized_name": "histological fibrosis assessment",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "histology, Sirius red staining, and Masson’s trichrome staining"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-02",
+      "entity_type": "endpoint",
+      "reported_name": "liver fibrosis",
+      "normalized_name": "severity of liver fibrosis",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "alleviate liver fibrosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-03",
+      "entity_type": "outcome_value",
+      "reported_name": "significantly alleviate liver fibrosis",
+      "normalized_name": "significant alleviation of liver fibrosis",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "could significantly alleviate liver fibrosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-03",
+      "entity_type": "endpoint",
+      "reported_name": "therapeutic benefit",
+      "normalized_name": "therapeutic benefit",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B013C018",
+          "quote": "no appreciable therapeutic benefit"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-04",
+      "entity_type": "outcome_value",
+      "reported_name": "no appreciable therapeutic benefit",
+      "normalized_name": "no appreciable therapeutic benefit",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B013C018",
+          "quote": "The αCD163/LNP-Luc cohort exhibited no appreciable therapeutic benefit."
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-04",
+      "entity_type": "endpoint",
+      "reported_name": "fibrosis-associated biomarkers",
+      "normalized_name": "fibrosis-associated biomarkers",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B013C019",
+          "quote": "select fibrosis-associated biomarkers"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-05",
+      "entity_type": "outcome_value",
+      "reported_name": "modest improvements",
+      "normalized_name": "modest improvements",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B013C019",
+          "quote": "demonstrated modest improvements in select fibrosis-associated biomarkers"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-05",
+      "entity_type": "endpoint",
+      "reported_name": "fibrosis regression",
+      "normalized_name": "fibrosis regression",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B013C020",
+          "quote": "the most pronounced fibrosis regression"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-06",
+      "entity_type": "outcome_value",
+      "reported_name": "the most pronounced fibrosis regression",
+      "normalized_name": "greatest fibrosis regression among compared cohorts",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B013C020",
+          "quote": "the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-03",
+      "entity_type": "assay",
+      "reported_name": "scRNA-seq",
+      "normalized_name": "single-cell RNA sequencing",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "The scRNA-seq results revealed"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-06",
+      "entity_type": "endpoint",
+      "reported_name": "FAP+ macrophages",
+      "normalized_name": "abundance of FAP-positive macrophages",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "FAP+ macrophages"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-07",
+      "entity_type": "outcome_value",
+      "reported_name": "markedly attenuating the amount of FAP+ macrophages",
+      "normalized_name": "marked reduction in FAP-positive macrophages",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "treatment markedly attenuating the amount of FAP+ macrophages"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-CELL-03",
+      "entity_type": "cell",
+      "reported_name": "MMP12+ macrophages",
+      "normalized_name": "MMP12-positive macrophages",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C046",
+          "quote": "MMP12+macrophage-conditioned medium"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-ASSAY-04",
+      "entity_type": "assay",
+      "reported_name": "coculture system of the macrophages and TGF-β1-induced HSCs",
+      "normalized_name": "macrophage-conditioned-medium exposure of TGF-beta1-induced hepatic stellate cells",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C044",
+          "quote": "we established the coculture system of the macrophages and TGF-β1-induced HSCs"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-END-07",
+      "entity_type": "endpoint",
+      "reported_name": "fibrosis-related proteins and mRNAs in HSCs",
+      "normalized_name": "fibrosis-related protein and mRNA expression in hepatic stellate cells",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B004C046",
+          "quote": "fibrosis-related proteins and mRNAs"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-OUT-08",
+      "entity_type": "outcome_value",
+      "reported_name": "expressed fewer fibrosis-related proteins and mRNAs",
+      "normalized_name": "reduced fibrosis-related protein and mRNA expression",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C046",
+          "quote": "HSCs exposed to MMP12+macrophage-conditioned medium (CM) expressed fewer fibrosis-related proteins and mRNAs"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-005",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-COMP-01",
+      "predicate": "has_component_amount",
+      "object_entity_id": "ENT-AMT-01",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "at a molar ratio of 45:30:23.5:1.5 (ionizable lipid: DSPC: cholesterol: PEG-lipid)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-006",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-COMP-02",
+      "predicate": "has_component_amount",
+      "object_entity_id": "ENT-AMT-02",
+      "evidence": [
+        {
+          "clause_id": "B001C002",
+          "quote": "DSPC content (30 mol%)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-007",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-COMP-03",
+      "predicate": "has_component_amount",
+      "object_entity_id": "ENT-AMT-03",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "at a molar ratio of 45:30:23.5:1.5 (ionizable lipid: DSPC: cholesterol: PEG-lipid)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-008",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-COMP-04",
+      "predicate": "has_component_amount",
+      "object_entity_id": "ENT-AMT-04",
+      "evidence": [
+        {
+          "clause_id": "B001C001",
+          "quote": "at a molar ratio of 45:30:23.5:1.5 (ionizable lipid: DSPC: cholesterol: PEG-lipid)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-010",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-FORM-01",
+      "predicate": "carries_payload",
+      "object_entity_id": "ENT-PAY-01",
+      "evidence": [
+        {
+          "clause_id": "B013C016",
+          "quote": "αCD163/LNP-FAPCAR (FAPCAR mRNA with CD163-directed antibody conjugation)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-011",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-PAY-01",
+      "predicate": "encodes_product",
+      "object_entity_id": "ENT-PROD-01",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "mRNA encoding an FAP-targeted CAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-012",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "ENT-PROD-01",
+      "predicate": "targets_molecule",
+      "object_entity_id": "ENT-TARGET-01",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "FAP-targeted CAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-016",
+      "experiment_id": "GP-008-E02",
+      "subject_entity_id": "ENT-ASSAY-01",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-01",
+      "evidence": [
+        {
+          "clause_id": "B008C007",
+          "quote": "BMDMs expressed GFP or FAPCAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-017",
+      "experiment_id": "GP-008-E02",
+      "subject_entity_id": "ENT-END-01",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-01",
+      "evidence": [
+        {
+          "clause_id": "B008C007",
+          "quote": "over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR, respectively."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-019",
+      "experiment_id": "GP-008-E02",
+      "subject_entity_id": "ENT-END-01",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-02",
+      "evidence": [
+        {
+          "clause_id": "B008C008",
+          "quote": "unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-020",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "has_formulation",
+      "object_entity_id": "ENT-FORM-01",
+      "evidence": [
+        {
+          "clause_id": "B013C016",
+          "quote": "αCD163/LNP-FAPCAR (FAPCAR mRNA with CD163-directed antibody conjugation)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-021",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "has_species",
+      "object_entity_id": "ENT-SPECIES-01",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "mice treated with αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-022",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "has_biological_model",
+      "object_entity_id": "ENT-MODEL-01",
+      "evidence": [
+        {
+          "clause_id": "B013C005",
+          "quote": "there was a high level of expression of the targets above in the CCL4 group."
+        },
+        {
+          "clause_id": "B013C006",
+          "quote": "The treatment of αCD163/LNP-FAPCAR inhibited this."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-023",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "ENT-TISSUE-01",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "could significantly alleviate liver fibrosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-024",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "has_disease_context",
+      "object_entity_id": "ENT-DIS-01",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "could significantly alleviate liver fibrosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-025",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "has_assay",
+      "object_entity_id": "ENT-ASSAY-02",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "histology, Sirius red staining, and Masson’s trichrome staining"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-026",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-ASSAY-02",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-02",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "alleviate liver fibrosis as assessed by histology, Sirius red staining, and Masson’s trichrome staining"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-027",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-END-02",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-03",
+      "evidence": [
+        {
+          "clause_id": "B013C007",
+          "quote": "could significantly alleviate liver fibrosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-028",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "compared_with",
+      "object_entity_id": "ENT-INT-02",
+      "evidence": [
+        {
+          "clause_id": "B013C016",
+          "quote": "αCD163/LNP-Luc (luciferase mRNA control)"
+        },
+        {
+          "clause_id": "B013C018",
+          "quote": "The αCD163/LNP-Luc cohort exhibited no appreciable therapeutic benefit."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-029",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-02",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-03",
+      "evidence": [
+        {
+          "clause_id": "B013C018",
+          "quote": "The αCD163/LNP-Luc cohort exhibited no appreciable therapeutic benefit."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-030",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-END-03",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-04",
+      "evidence": [
+        {
+          "clause_id": "B013C018",
+          "quote": "The αCD163/LNP-Luc cohort exhibited no appreciable therapeutic benefit."
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-031",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "compared_with",
+      "object_entity_id": "ENT-INT-03",
+      "evidence": [
+        {
+          "clause_id": "B013C016",
+          "quote": "unmodified LNP-FAPCAR (FAPCAR mRNA without targeting moiety)"
+        },
+        {
+          "clause_id": "B013C020",
+          "quote": "the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-032",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-03",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-04",
+      "evidence": [
+        {
+          "clause_id": "B013C019",
+          "quote": "the LNP-FAPCAR group demonstrated modest improvements in select fibrosis-associated biomarkers"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-033",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-END-04",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-05",
+      "evidence": [
+        {
+          "clause_id": "B013C019",
+          "quote": "demonstrated modest improvements in select fibrosis-associated biomarkers"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-034",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-INT-01",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-05",
+      "evidence": [
+        {
+          "clause_id": "B013C020",
+          "quote": "the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-035",
+      "experiment_id": "GP-008-E04",
+      "subject_entity_id": "ENT-END-05",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-06",
+      "evidence": [
+        {
+          "clause_id": "B013C020",
+          "quote": "the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-037",
+      "experiment_id": "GP-008-E05",
+      "subject_entity_id": "ENT-ASSAY-03",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-06",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "FAP+ cells within the macrophage subset in fibrotic livers"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-038",
+      "experiment_id": "GP-008-E05",
+      "subject_entity_id": "ENT-END-06",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-07",
+      "evidence": [
+        {
+          "clause_id": "B004C004",
+          "quote": "αCD163/LNP-FAPCAR treatment markedly attenuating the amount of FAP+ macrophages"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-040",
+      "experiment_id": "GP-008-E05",
+      "subject_entity_id": "ENT-ASSAY-04",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "ENT-END-07",
+      "evidence": [
+        {
+          "clause_id": "B004C046",
+          "quote": "HSCs exposed to MMP12+macrophage-conditioned medium (CM) expressed fewer fibrosis-related proteins and mRNAs"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-041",
+      "experiment_id": "GP-008-E05",
+      "subject_entity_id": "ENT-END-07",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "ENT-OUT-08",
+      "evidence": [
+        {
+          "clause_id": "B004C046",
+          "quote": "HSCs exposed to MMP12+macrophage-conditioned medium (CM) expressed fewer fibrosis-related proteins and mRNAs"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "GP-008-E01",
+      "label": "αCD163/LNP-FAPCAR formulation and composition",
+      "claim_ids": [
+        "CLM-005",
+        "CLM-006",
+        "CLM-007",
+        "CLM-008",
+        "CLM-010",
+        "CLM-011",
+        "CLM-012"
+      ],
+      "shared_claim_ids": [
+        "CLM-005",
+        "CLM-006",
+        "CLM-007",
+        "CLM-008",
+        "CLM-010",
+        "CLM-011",
+        "CLM-012"
+      ],
+      "source_scope_clause_ids": [
+        "B001C001",
+        "B001C002",
+        "B001C006",
+        "B001C007",
+        "B009C001",
+        "B013C016"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The formulation-method section explicitly reports lipid composition and antibody conjugation."
+    },
+    {
+      "experiment_id": "GP-008-E02",
+      "label": "In-vitro BMDM delivery and encoded-product expression",
+      "claim_ids": [
+        "CLM-016",
+        "CLM-017",
+        "CLM-019"
+      ],
+      "shared_claim_ids": [
+        "CLM-010",
+        "CLM-011",
+        "CLM-012"
+      ],
+      "source_scope_clause_ids": [
+        "B008C005",
+        "B008C006",
+        "B008C007",
+        "B008C008"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "BMDM incubation, a 48-hour in-vitro timepoint, and flow-cytometric expression results are explicitly reported together."
+    },
+    {
+      "experiment_id": "GP-008-E04",
+      "label": "In-vivo αCD163/LNP-FAPCAR antifibrotic efficacy in mice",
+      "claim_ids": [
+        "CLM-020",
+        "CLM-021",
+        "CLM-022",
+        "CLM-023",
+        "CLM-024",
+        "CLM-025",
+        "CLM-026",
+        "CLM-027",
+        "CLM-028",
+        "CLM-029",
+        "CLM-030",
+        "CLM-031",
+        "CLM-032",
+        "CLM-033",
+        "CLM-034",
+        "CLM-035"
+      ],
+      "shared_claim_ids": [
+        "CLM-010",
+        "CLM-011",
+        "CLM-012"
+      ],
+      "source_scope_clause_ids": [
+        "B013C005",
+        "B013C006",
+        "B013C007",
+        "B013C016",
+        "B013C018",
+        "B013C019",
+        "B013C020"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The source explicitly describes treatment of mice, fibrosis assessments, and three intervention cohorts."
+    },
+    {
+      "experiment_id": "GP-008-E05",
+      "label": "Macrophage profiling and macrophage-conditioned-medium effects on TGF-β1-induced HSCs",
+      "claim_ids": [
+        "CLM-037",
+        "CLM-038",
+        "CLM-040",
+        "CLM-041"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B004C004",
+        "B004C044",
+        "B004C046"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Single-cell macrophage profiling and the macrophage/HSC coculture system are separately described experimental readouts."
+    }
+  ]
+}

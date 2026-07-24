@@ -206,7 +206,7 @@ class HybridIndex:
         connection.close()
         return [(row[0], float(row[1])) for row in rows]
 
-    def retrieve(self, query: RetrievalQuery, k: int = 8, rrf_k: int = 60) -> RetrievalPacket:
+    def retrieve(self, query: RetrievalQuery, k: int = 6, rrf_k: int = 60) -> RetrievalPacket:
         expanded_question = expand_question(query.question)
         lexical = self.lexical_search(expanded_question, query.paper_id, k * 2)
         vector = self.vector_backend.search(expanded_question, query.paper_id, k * 2)
@@ -268,6 +268,64 @@ class HybridIndex:
             query=query, hits=hits, retrieval_methods=["sqlite_fts5_bm25", type(self.vector_backend).__name__],
             warnings=warnings,
         )
+
+    def expand_hierarchy_context(
+        self,
+        packet: RetrievalPacket,
+        *,
+        seed_count: int = 3,
+        neighbors_per_seed: int = 1,
+        max_hits: int = 10,
+    ) -> RetrievalPacket:
+        """Add bounded neighboring blocks without crossing a source or section."""
+        selected_ids = {hit.block_id for hit in packet.hits}
+        expanded = list(packet.hits)
+        for seed in packet.hits[:seed_count]:
+            block = self.blocks[seed.block_id]
+            position = self.block_order[seed.block_id]
+            candidates: list[DocumentBlock] = []
+            for distance in range(1, neighbors_per_seed + 1):
+                for neighbor_position in (position - distance, position + distance):
+                    if not 0 <= neighbor_position < len(self.ordered_blocks):
+                        continue
+                    neighbor = self.ordered_blocks[neighbor_position]
+                    if neighbor.paper_id != block.paper_id or neighbor.source_path != block.source_path:
+                        continue
+                    if block.source_kind == "pdf":
+                        if (
+                            block.page_number is None
+                            or neighbor.page_number is None
+                            or abs(block.page_number - neighbor.page_number) > 1
+                        ):
+                            continue
+                    elif neighbor.section_path != block.section_path:
+                        continue
+                    candidates.append(neighbor)
+            for neighbor in candidates:
+                if neighbor.block_id in selected_ids or len(expanded) >= max_hits:
+                    continue
+                selected_ids.add(neighbor.block_id)
+                expanded.append(RetrievalHit(
+                    query_id=packet.query.query_id,
+                    block_id=neighbor.block_id,
+                    paper_id=neighbor.paper_id,
+                    text=neighbor.text,
+                    section_path=neighbor.section_path,
+                    source_path=neighbor.source_path,
+                    page_number=neighbor.page_number,
+                    xml_element_id=neighbor.xml_element_id,
+                    fused_score=seed.fused_score * 0.18,
+                    entity_types=sorted({
+                        value.entity_type
+                        for value in self.entities.get(neighbor.block_id, [])
+                    }),
+                ))
+        return packet.model_copy(update={
+            "hits": expanded,
+            "retrieval_methods": packet.retrieval_methods + [
+                "hierarchy_bounded_neighbor_expansion"
+            ],
+        })
 
 
 def load_blocks(corpus_root: Path) -> list[DocumentBlock]:

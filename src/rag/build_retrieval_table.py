@@ -36,8 +36,12 @@ def build() -> tuple[Path, Path]:
         "",
         f"Correct source retrieved in top {report['k']}: **{report['hits']}/{report['queries']} "
         f"({report['recall_at_k']:.1%})**",
+        f"Development: **{report['split_metrics']['development']['hits']}/"
+        f"{report['split_metrics']['development']['queries']}**; holdout: "
+        f"**{report['split_metrics']['holdout']['hits']}/"
+        f"{report['split_metrics']['holdout']['queries']}**.",
         "",
-        "| Evidence | Paper | Field | Correct source in top 8? | Rank | Human-verified location |",
+        f"| Evidence | Paper | Field | Correct source in top {report['k']}? | Rank | Human-verified location |",
         "|---|---|---|---:|---:|---|",
     ]
     lines.extend(

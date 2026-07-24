@@ -1,0 +1,81 @@
+{
+  "contract_version": "4.1.0",
+  "paper_id": "GP-004",
+  "add_entities": [
+    {
+      "entity_id": "EP_EGFP_F480_KUP",
+      "entity_type": "endpoint",
+      "reported_name": "eGFP expression in F4/80+ Kupffer cells",
+      "normalized_name": "eGFP expression in F4/80-positive Kupffer cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C005",
+          "quote": "few F4/80+ Kupffer cells expressed eGFP"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_EGFP_F480_KUP_FEW",
+      "entity_type": "outcome_value",
+      "reported_name": "few F4/80+ Kupffer cells expressed eGFP",
+      "normalized_name": "few F4/80-positive Kupffer cells expressed eGFP",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C005",
+          "quote": "few F4/80+ Kupffer cells expressed eGFP"
+        }
+      ]
+    }
+  ],
+  "add_claims": [
+    {
+      "claim_id": "V088",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "ASSAY_IHC",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_EGFP_F480_KUP",
+      "evidence": [
+        {
+          "clause_id": "B008C005",
+          "quote": "few F4/80+ Kupffer cells expressed eGFP"
+        }
+      ]
+    },
+    {
+      "claim_id": "V089",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "EP_EGFP_F480_KUP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_EGFP_F480_KUP_FEW",
+      "evidence": [
+        {
+          "clause_id": "B008C005",
+          "quote": "few F4/80+ Kupffer cells expressed eGFP"
+        }
+      ]
+    }
+  ],
+  "experiment_claim_additions": [
+    {
+      "experiment_id": "GP-004-E01",
+      "claim_ids": [
+        "V088",
+        "V089"
+      ],
+      "source_scope_clause_ids": [
+        "B008C005"
+      ]
+    }
+  ],
+  "dispositions": [
+    {
+      "candidate_id": "RC-B008C005-35-943f42e6",
+      "status": "retained",
+      "claim_id": "V089",
+      "reason": "Qualitative, population-specific eGFP-expression result in F4/80+ Kupffer cells."
+    }
+  ],
+  "mechanism_steps": []
+}

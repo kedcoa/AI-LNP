@@ -1,0 +1,1400 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-008",
+  "source_scope": "full_text_with_supplement",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "F1",
+      "entity_type": "lnp_formulation",
+      "reported_name": "αCD163/LNP-FAPCAR",
+      "normalized_name": "anti-CD163-conjugated LNP encapsulating FAPCAR mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "αCD163/LNP-FAPCAR"
+        },
+        {
+          "clause_id": "B006C002",
+          "quote": "liposomal nanoparticles (LNP), conjugated with CD163 antibodies and encapsulating FAPCAR mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "F2",
+      "entity_type": "lnp_formulation",
+      "reported_name": "LNP-FAPCAR",
+      "normalized_name": "LNP encapsulating FAPCAR mRNA",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C001",
+          "quote": "LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "F3",
+      "entity_type": "lnp_formulation",
+      "reported_name": "αCD163/LNP-GFP",
+      "normalized_name": "anti-CD163-conjugated LNP encapsulating GFP mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "αCD163/LNP-GFP"
+        }
+      ]
+    },
+    {
+      "entity_id": "F4",
+      "entity_type": "lnp_formulation",
+      "reported_name": "αCD163/LNP-Luc",
+      "normalized_name": "anti-CD163-conjugated LNP encapsulating luciferase mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "240 Bioluminescence 241 In the liver fibrosis model, mice were intravenously administered with α 242 CD163/LNP-Luc loaded with Luciferase or with α CD163/LNP-ZsGreen loaded with 243 ZsGreen mRNA (via an intravenous injection of the tail vein at a dose of 0.4 mg of 244 mRNA per kg body weight)."
+        }
+      ]
+    },
+    {
+      "entity_id": "F5",
+      "entity_type": "lnp_formulation",
+      "reported_name": "αCD163/LNP-ZsGreen",
+      "normalized_name": "anti-CD163-conjugated LNP encapsulating ZsGreen mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "240 Bioluminescence 241 In the liver fibrosis model, mice were intravenously administered with α 242 CD163/LNP-Luc loaded with Luciferase or with α CD163/LNP-ZsGreen loaded with 243 ZsGreen mRNA (via an intravenous injection of the tail vein at a dose of 0.4 mg of 244 mRNA per kg body weight)."
+        }
+      ]
+    },
+    {
+      "entity_id": "C1",
+      "entity_type": "lnp_component",
+      "reported_name": "heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl) amino) octanoate",
+      "normalized_name": "heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl)amino)octanoate",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C006",
+          "quote": "heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl) 144 amino) octanoate"
+        }
+      ]
+    },
+    {
+      "entity_id": "C2",
+      "entity_type": "lnp_component",
+      "reported_name": "DSPC",
+      "normalized_name": "1,2-distearoyl-sn-glycero-3-phosphocholine",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "DSPC"
+        }
+      ]
+    },
+    {
+      "entity_id": "C3",
+      "entity_type": "lnp_component",
+      "reported_name": "cholesterol",
+      "normalized_name": "cholesterol",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "cholesterol"
+        }
+      ]
+    },
+    {
+      "entity_id": "C4",
+      "entity_type": "lnp_component",
+      "reported_name": "PEG-lipid",
+      "normalized_name": "PEG lipid",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "PEG-lipid"
+        }
+      ]
+    },
+    {
+      "entity_id": "C5",
+      "entity_type": "lnp_component",
+      "reported_name": "DSPE-PEG-maleimide",
+      "normalized_name": "DSPE-PEG-maleimide",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "DSPE-PEG-maleimide"
+        }
+      ]
+    },
+    {
+      "entity_id": "P1",
+      "entity_type": "payload",
+      "reported_name": "FAPCAR mRNA",
+      "normalized_name": "mRNA encoding an FAP-targeted chimeric antigen receptor",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C002",
+          "quote": "FAPCAR mRNA"
+        },
+        {
+          "clause_id": "B002C017",
+          "quote": "a modified nucleoside-inclusive mRNA encoding an FAP-targeted CAR sequence"
+        }
+      ]
+    },
+    {
+      "entity_id": "P2",
+      "entity_type": "payload",
+      "reported_name": "GFP mRNA",
+      "normalized_name": "green fluorescent protein mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C006",
+          "quote": "GFP mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "P3",
+      "entity_type": "payload",
+      "reported_name": "Luciferase mRNA",
+      "normalized_name": "luciferase mRNA",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "Luciferase"
+        }
+      ]
+    },
+    {
+      "entity_id": "P4",
+      "entity_type": "payload",
+      "reported_name": "ZsGreen mRNA",
+      "normalized_name": "ZsGreen mRNA",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "ZsGreen mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP1",
+      "entity_type": "encoded_product",
+      "reported_name": "FAPCAR",
+      "normalized_name": "FAP-targeted chimeric antigen receptor",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "FAPCAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP2",
+      "entity_type": "encoded_product",
+      "reported_name": "GFP",
+      "normalized_name": "green fluorescent protein",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "GFP"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP3",
+      "entity_type": "encoded_product",
+      "reported_name": "Luciferase",
+      "normalized_name": "luciferase",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "Luciferase"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP4",
+      "entity_type": "encoded_product",
+      "reported_name": "ZsGreen",
+      "normalized_name": "ZsGreen fluorescent protein",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C019",
+          "quote": "ZsGreen"
+        }
+      ]
+    },
+    {
+      "entity_id": "L1",
+      "entity_type": "targeting_ligand",
+      "reported_name": "rat anti-mouse CD163",
+      "normalized_name": "anti-mouse CD163 antibody",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C007",
+          "quote": "purified rat 147 anti-mouse CD163"
+        }
+      ]
+    },
+    {
+      "entity_id": "MT1",
+      "entity_type": "molecular_target",
+      "reported_name": "CD163",
+      "normalized_name": "CD163",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "CD163"
+        }
+      ]
+    },
+    {
+      "entity_id": "MT2",
+      "entity_type": "molecular_target",
+      "reported_name": "FAP",
+      "normalized_name": "fibroblast activation protein",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C004",
+          "quote": "FAP"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL1",
+      "entity_type": "cell",
+      "reported_name": "macrophages",
+      "normalized_name": "macrophage",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "macrophages"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL2",
+      "entity_type": "cell",
+      "reported_name": "BMDMs",
+      "normalized_name": "bone marrow-derived macrophages",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C005",
+          "quote": "BMDMs"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL3",
+      "entity_type": "cell",
+      "reported_name": "HSCs",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B006C004",
+          "quote": "HSCs"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL4",
+      "entity_type": "cell",
+      "reported_name": "FAP+ JS-1 cells",
+      "normalized_name": "FAP-positive JS-1 cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C015",
+          "quote": "FAP+ 210 using a flow cytometer; then, the cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "T1",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": "liver",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B012C005",
+          "quote": "liver"
+        }
+      ]
+    },
+    {
+      "entity_id": "D1",
+      "entity_type": "disease",
+      "reported_name": "liver fibrosis",
+      "normalized_name": "liver fibrosis",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B006C001",
+          "quote": "liver fibrosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "S1",
+      "entity_type": "species",
+      "reported_name": "mice",
+      "normalized_name": "Mus musculus",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C001",
+          "quote": "mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "M1",
+      "entity_type": "biological_model",
+      "reported_name": "fibrotic mice induced by CCL4",
+      "normalized_name": "carbon tetrachloride-induced mouse liver fibrosis model",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C001",
+          "quote": "fibrotic mice induced by CCL4"
+        }
+      ]
+    },
+    {
+      "entity_id": "I1",
+      "entity_type": "intervention",
+      "reported_name": "αCD163/LNP-FAPCAR treatment",
+      "normalized_name": "anti-CD163/LNP-FAPCAR treatment",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C001",
+          "quote": "treated with αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "R1",
+      "entity_type": "route",
+      "reported_name": "intravenous injection of the tail vein",
+      "normalized_name": "intravenous tail-vein injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "via an intravenous injection of the tail vein"
+        }
+      ]
+    },
+    {
+      "entity_id": "DO1",
+      "entity_type": "dose",
+      "reported_name": "0.4 mg of mRNA per kg body weight",
+      "normalized_name": "0.4 mg mRNA/kg body weight",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "0.4 mg of 244 mRNA per kg body weight"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP1",
+      "entity_type": "timepoint",
+      "reported_name": "48 h",
+      "normalized_name": "48 hours",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C005",
+          "quote": "48 h"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP2",
+      "entity_type": "timepoint",
+      "reported_name": "8 h postinjection",
+      "normalized_name": "8 hours post-injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C002",
+          "quote": "8 h postinjection"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP3",
+      "entity_type": "timepoint",
+      "reported_name": "day 14",
+      "normalized_name": "14 days post-injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "day 14"
+        }
+      ]
+    },
+    {
+      "entity_id": "A1",
+      "entity_type": "assay",
+      "reported_name": "flow cytometry",
+      "normalized_name": "flow cytometry",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B007C006",
+          "quote": "Flow cytometry"
+        }
+      ]
+    },
+    {
+      "entity_id": "A2",
+      "entity_type": "assay",
+      "reported_name": "in vivo bioluminescence imaging",
+      "normalized_name": "in vivo bioluminescence imaging",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B012C002",
+          "quote": "In vivo bioluminescence imaging"
+        }
+      ]
+    },
+    {
+      "entity_id": "A3",
+      "entity_type": "assay",
+      "reported_name": "scRNA-seq",
+      "normalized_name": "single-cell RNA sequencing",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C001",
+          "quote": "scRNA-seq"
+        }
+      ]
+    },
+    {
+      "entity_id": "E1",
+      "entity_type": "endpoint",
+      "reported_name": "BMDM GFP or FAPCAR expression after αCD163/LNP exposure",
+      "normalized_name": "transfection/expression frequency in BMDMs",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "entity_id": "O1",
+      "entity_type": "outcome_value",
+      "reported_name": "over 80%",
+      "normalized_name": ">80% of BMDMs positive",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "over 80%"
+        }
+      ]
+    },
+    {
+      "entity_id": "E2",
+      "entity_type": "endpoint",
+      "reported_name": "mRNA delivery to target BMDMs by unmodified LNPs",
+      "normalized_name": "in vitro BMDM transfection frequency with unmodified LNP",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B007C008",
+          "quote": "unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro"
+        }
+      ]
+    },
+    {
+      "entity_id": "O2",
+      "entity_type": "outcome_value",
+      "reported_name": "fewer than 20%",
+      "normalized_name": "<20% of target BMDMs",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C008",
+          "quote": "fewer than 20%"
+        }
+      ]
+    },
+    {
+      "entity_id": "E3",
+      "entity_type": "endpoint",
+      "reported_name": "hepatic fluorescence persistence",
+      "normalized_name": "duration of hepatic ZsGreen fluorescence",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "hepatic fluorescence persistence"
+        }
+      ]
+    },
+    {
+      "entity_id": "O3",
+      "entity_type": "outcome_value",
+      "reported_name": "sustained through day 14",
+      "normalized_name": "hepatic fluorescence sustained through day 14",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "sustained through day 14"
+        }
+      ]
+    },
+    {
+      "entity_id": "E4",
+      "entity_type": "endpoint",
+      "reported_name": "proportion of HSCs",
+      "normalized_name": "HSC proportion in liver tissue",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C012",
+          "quote": "proportion of HSCs"
+        }
+      ]
+    },
+    {
+      "entity_id": "O4",
+      "entity_type": "outcome_value",
+      "reported_name": "a lower proportion of HSCs than the Fibrosis group",
+      "normalized_name": "lower HSC proportion versus fibrosis control",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C012",
+          "quote": "a lower proportion of HSCs than the Fibrosis group"
+        }
+      ]
+    },
+    {
+      "entity_id": "E5",
+      "entity_type": "endpoint",
+      "reported_name": "apoptosis of Heps",
+      "normalized_name": "hepatocyte apoptosis",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C031",
+          "quote": "apoptosis of Heps"
+        }
+      ]
+    },
+    {
+      "entity_id": "O5",
+      "entity_type": "outcome_value",
+      "reported_name": "significantly lower",
+      "normalized_name": "significantly lower than fibrosis group",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B011C031",
+          "quote": "significantly lower"
+        }
+      ]
+    },
+    {
+      "entity_id": "E6",
+      "entity_type": "endpoint",
+      "reported_name": "FAP+ macrophages",
+      "normalized_name": "abundance of FAP-positive macrophages",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B014C004",
+          "quote": "FAP+ macrophages"
+        }
+      ]
+    },
+    {
+      "entity_id": "O6",
+      "entity_type": "outcome_value",
+      "reported_name": "markedly attenuating the amount of FAP+ macrophages",
+      "normalized_name": "marked reduction in FAP-positive macrophages",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B014C004",
+          "quote": "markedly attenuating the amount of FAP+ macrophages"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CL1",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C1",
+      "evidence": [
+        {
+          "clause_id": "B004C006",
+          "quote": "ionizable lipid 143 employed in this study, heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl) 144 amino) octanoate"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL2",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "C1",
+      "predicate": "has_component_role",
+      "object_entity_id": "C1",
+      "evidence": [
+        {
+          "clause_id": "B004C006",
+          "quote": "ionizable lipid"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL3",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C2",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "ionizable lipid: DSPC: cholesterol: PEG-lipid"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL4",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C3",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "ionizable lipid: DSPC: cholesterol: PEG-lipid"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL5",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C4",
+      "evidence": [
+        {
+          "clause_id": "B004C001",
+          "quote": "ionizable lipid: DSPC: cholesterol: PEG-lipid"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL6",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C5",
+      "evidence": [
+        {
+          "clause_id": "B004C008",
+          "quote": "post-insertion of DSPE-PEG-maleimide into 150 pre-formed LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL7",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "carries_payload",
+      "object_entity_id": "P1",
+      "evidence": [
+        {
+          "clause_id": "B006C002",
+          "quote": "LNP), conjugated with CD163 antibodies and encapsulating FAPCAR mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL8",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "P1",
+      "predicate": "encodes_product",
+      "object_entity_id": "EP1",
+      "evidence": [
+        {
+          "clause_id": "B002C017",
+          "quote": "mRNA encoding an FAP-targeted CAR sequence"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL9",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "EP1",
+      "predicate": "targets_molecule",
+      "object_entity_id": "MT2",
+      "evidence": [
+        {
+          "clause_id": "B002C017",
+          "quote": "FAP-targeted CAR sequence"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL10",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_targeting_ligand",
+      "object_entity_id": "L1",
+      "evidence": [
+        {
+          "clause_id": "B004C007",
+          "quote": "antibody-targeted LNPs were prepared by conjugating LNP-mRNAs to purified rat 147 anti-mouse CD163"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL11",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "L1",
+      "predicate": "targets_molecule",
+      "object_entity_id": "MT1",
+      "evidence": [
+        {
+          "clause_id": "B004C007",
+          "quote": "anti-mouse CD163"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL12",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "CELL1",
+      "evidence": [
+        {
+          "clause_id": "B012C023",
+          "quote": "CD163 antibody-LNP mRNA formulations confer macrophage-specific delivery"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL13",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "therapeutic_target_cell",
+      "object_entity_id": "CELL3",
+      "evidence": [
+        {
+          "clause_id": "B006C004",
+          "quote": "can recognize and eliminate overactive HSCs that express FAP upon activation"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL14",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "CELL3",
+      "predicate": "targets_molecule",
+      "object_entity_id": "MT2",
+      "evidence": [
+        {
+          "clause_id": "B006C004",
+          "quote": "HSCs that express FAP upon activation"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL15",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "has_formulation",
+      "object_entity_id": "F1",
+      "evidence": [
+        {
+          "clause_id": "B011C001",
+          "quote": "treated with αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL16",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "has_disease_context",
+      "object_entity_id": "D1",
+      "evidence": [
+        {
+          "clause_id": "B006C001",
+          "quote": "approach to liver fibrosis treatment"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL17",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "has_biological_model",
+      "object_entity_id": "M1",
+      "evidence": [
+        {
+          "clause_id": "B012C001",
+          "quote": "We administered LNP carrying either Photinus pyralis luciferase (LNP-Luc or αCD163/LNP-Luc) or ZsGreen (LNP-ZsGreen or αCD163/LNP-ZsGreen) mRNA into the fibrotic mice induced by CCL4"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL18",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "M1",
+      "predicate": "has_species",
+      "object_entity_id": "S1",
+      "evidence": [
+        {
+          "clause_id": "B012C001",
+          "quote": "fibrotic mice induced by CCL4"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL19",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "T1",
+      "evidence": [
+        {
+          "clause_id": "B011C001",
+          "quote": "liver tissues were collected"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL20",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F4",
+      "predicate": "carries_payload",
+      "object_entity_id": "P3",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "α 242 CD163/LNP-Luc loaded with Luciferase"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL21",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "P3",
+      "predicate": "encodes_product",
+      "object_entity_id": "EP3",
+      "evidence": [
+        {
+          "clause_id": "B012C001",
+          "quote": "Photinus pyralis luciferase (LNP-Luc or αCD163/LNP-Luc)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL22",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F5",
+      "predicate": "carries_payload",
+      "object_entity_id": "P4",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "α CD163/LNP-ZsGreen loaded with 243 ZsGreen mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL23",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "P4",
+      "predicate": "encodes_product",
+      "object_entity_id": "EP4",
+      "evidence": [
+        {
+          "clause_id": "B009C019",
+          "quote": "ZsGreen mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL24",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F4",
+      "predicate": "has_route",
+      "object_entity_id": "R1",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "via an intravenous injection of the tail vein"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL25",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F5",
+      "predicate": "has_route",
+      "object_entity_id": "R1",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "via an intravenous injection of the tail vein"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL26",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F4",
+      "predicate": "has_dose",
+      "object_entity_id": "DO1",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "at a dose of 0.4 mg of 244 mRNA per kg body weight"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL27",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F5",
+      "predicate": "has_dose",
+      "object_entity_id": "DO1",
+      "evidence": [
+        {
+          "clause_id": "B009C015",
+          "quote": "at a dose of 0.4 mg of 244 mRNA per kg body weight"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL28",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F3",
+      "predicate": "carries_payload",
+      "object_entity_id": "P2",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "αCD163/LNP-GFP"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL29",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "P2",
+      "predicate": "encodes_product",
+      "object_entity_id": "EP2",
+      "evidence": [
+        {
+          "clause_id": "B008C006",
+          "quote": "GFP mRNA"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL30",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "delivered_to_cell",
+      "object_entity_id": "CELL2",
+      "evidence": [
+        {
+          "clause_id": "B007C006",
+          "quote": "effectively delivered its mRNA cargo to target cells"
+        },
+        {
+          "clause_id": "B007C007",
+          "quote": "BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL31",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_timepoint",
+      "object_entity_id": "TP1",
+      "evidence": [
+        {
+          "clause_id": "B007C005",
+          "quote": "incubated BMDMs with αCD163/LNPs containing mRNA encoding FAPCAR or GFP for 48 h in vitro"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL32",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "has_assay",
+      "object_entity_id": "A1",
+      "evidence": [
+        {
+          "clause_id": "B007C006",
+          "quote": "Flow cytometry showed that the LNP conjugated to the αCD163 effectively delivered its mRNA cargo to target cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL33",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E1",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL34",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "E1",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O1",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "over 80% of the BMDMs expressed GFP or FAPCAR"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL35",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F2",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E2",
+      "evidence": [
+        {
+          "clause_id": "B007C008",
+          "quote": "unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL36",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "E2",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O2",
+      "evidence": [
+        {
+          "clause_id": "B007C008",
+          "quote": "fewer than 20% of target BMDMs in vitro"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL37",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "E1",
+      "predicate": "compared_with",
+      "object_entity_id": "E2",
+      "evidence": [
+        {
+          "clause_id": "B007C007",
+          "quote": "over 80% of the BMDMs expressed GFP or FAPCAR"
+        },
+        {
+          "clause_id": "B007C008",
+          "quote": "In contrast, unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL38",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F5",
+      "predicate": "has_assay",
+      "object_entity_id": "A2",
+      "evidence": [
+        {
+          "clause_id": "B012C002",
+          "quote": "In vivo bioluminescence imaging"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL39",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F5",
+      "predicate": "has_timepoint",
+      "object_entity_id": "TP3",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "sustained through day 14"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL40",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F5",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E3",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "ZsGreen mRNA tracking studies demonstrated prolonged hepatic fluorescence persistence"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL41",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "E3",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O3",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "sustained through day 14"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL42",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "F4",
+      "predicate": "has_timepoint",
+      "object_entity_id": "TP2",
+      "evidence": [
+        {
+          "clause_id": "B012C002",
+          "quote": "achieved peak fluorescence intensity at 8 h postinjection"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL43",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "has_assay",
+      "object_entity_id": "A3",
+      "evidence": [
+        {
+          "clause_id": "B011C001",
+          "quote": "treated with αCD163/LNP-FAPCAR (LNP group) for scRNA-seq"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL44",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E4",
+      "evidence": [
+        {
+          "clause_id": "B011C012",
+          "quote": "We found that the LNP group had a lower proportion of HSCs than the Fibrosis group"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL45",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "E4",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O4",
+      "evidence": [
+        {
+          "clause_id": "B011C012",
+          "quote": "a lower proportion of HSCs than the Fibrosis group"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL46",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E5",
+      "evidence": [
+        {
+          "clause_id": "B011C031",
+          "quote": "the apoptosis of Heps in the LNP group"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL47",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "E5",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O5",
+      "evidence": [
+        {
+          "clause_id": "B011C031",
+          "quote": "significantly lower"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL48",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "I1",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "E6",
+      "evidence": [
+        {
+          "clause_id": "B014C004",
+          "quote": "αCD163/LNP-FAPCAR treatment markedly attenuating the amount of FAP+ macrophages"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL49",
+      "experiment_id": "GP-008-E01",
+      "subject_entity_id": "E6",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "O6",
+      "evidence": [
+        {
+          "clause_id": "B014C004",
+          "quote": "markedly attenuating the amount of FAP+ macrophages"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "GP-008-E01",
+      "label": "αCD163/LNP-FAPCAR in situ CAR-M treatment for liver fibrosis",
+      "claim_ids": [
+        "CL1",
+        "CL2",
+        "CL3",
+        "CL4",
+        "CL5",
+        "CL6",
+        "CL7",
+        "CL8",
+        "CL9",
+        "CL10",
+        "CL11",
+        "CL12",
+        "CL13",
+        "CL14",
+        "CL15",
+        "CL16",
+        "CL17",
+        "CL18",
+        "CL19",
+        "CL20",
+        "CL21",
+        "CL22",
+        "CL23",
+        "CL24",
+        "CL25",
+        "CL26",
+        "CL27",
+        "CL28",
+        "CL29",
+        "CL30",
+        "CL31",
+        "CL32",
+        "CL33",
+        "CL34",
+        "CL35",
+        "CL36",
+        "CL37",
+        "CL38",
+        "CL39",
+        "CL40",
+        "CL41",
+        "CL42",
+        "CL43",
+        "CL44",
+        "CL45",
+        "CL46",
+        "CL47",
+        "CL48",
+        "CL49"
+      ],
+      "shared_claim_ids": [],
+      "source_scope_clause_ids": [
+        "B002C017",
+        "B003C001",
+        "B003C004",
+        "B004C001",
+        "B004C006",
+        "B004C007",
+        "B004C008",
+        "B006C001",
+        "B006C002",
+        "B006C004",
+        "B007C005",
+        "B007C006",
+        "B007C007",
+        "B007C008",
+        "B008C006",
+        "B009C015",
+        "B009C019",
+        "B011C001",
+        "B011C012",
+        "B011C031",
+        "B012C001",
+        "B012C002",
+        "B012C007",
+        "B012C023",
+        "B014C004"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The approved inventory identifies one experiment, and the retrieved clauses consistently describe formulation, in vitro delivery, biodistribution, and biological outcomes associated with the αCD163/LNP-FAPCAR program."
+    }
+  ]
+}

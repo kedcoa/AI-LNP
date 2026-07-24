@@ -1,0 +1,1359 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-002",
+  "source_scope": "full_text",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "F1",
+      "entity_type": "lnp_formulation",
+      "reported_name": "SM-102 mRNA-LNPs",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "mRNA-LNPs were produced with the following lipid molar ratios: 50 ionizable (SM-102)/10 DSPC/38.5 cholesterol/1.5 DMG-PEG2000."
+        },
+        {
+          "clause_id": "B017C003",
+          "quote": "we intravenously injected adult male mice (n = 5) with mRNA-LNPs encoding enhanced green fluorescent protein (eGFP)"
+        },
+        {
+          "clause_id": "B016C003",
+          "quote": "We injected eGFP mRNA-LNPs intravenously into 4 male Mdr2 knockout mice"
+        },
+        {
+          "clause_id": "B011C006",
+          "quote": "Tissues were analyzed approximately 24 h after an injection of 10 μg eGFP mRNA-LNPs via the tail vein."
+        },
+        {
+          "clause_id": "B009C005",
+          "quote": "mRNA-LNPs encoding eGFP (10 μg in 100 μL of TBS) were injected via tail vein."
+        }
+      ]
+    },
+    {
+      "entity_id": "C1",
+      "entity_type": "lnp_component",
+      "reported_name": "SM-102",
+      "normalized_name": "SM-102",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "50 ionizable (SM-102)"
+        }
+      ]
+    },
+    {
+      "entity_id": "C2",
+      "entity_type": "lnp_component",
+      "reported_name": "DSPC",
+      "normalized_name": "1,2-distearoyl-sn-glycero-3-phosphocholine",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "10 DSPC"
+        }
+      ]
+    },
+    {
+      "entity_id": "C3",
+      "entity_type": "lnp_component",
+      "reported_name": "cholesterol",
+      "normalized_name": "cholesterol",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "38.5 cholesterol"
+        }
+      ]
+    },
+    {
+      "entity_id": "C4",
+      "entity_type": "lnp_component",
+      "reported_name": "DMG-PEG2000",
+      "normalized_name": "DMG-PEG2000",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "1.5 DMG-PEG2000"
+        }
+      ]
+    },
+    {
+      "entity_id": "P1",
+      "entity_type": "payload",
+      "reported_name": "mRNA encoding enhanced green fluorescent protein (eGFP)",
+      "normalized_name": "enhanced green fluorescent protein mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "mRNA-LNPs encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP1",
+      "entity_type": "encoded_product",
+      "reported_name": "enhanced green fluorescent protein (eGFP)",
+      "normalized_name": "enhanced green fluorescent protein",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "S1",
+      "entity_type": "species",
+      "reported_name": "mice",
+      "normalized_name": "Mus musculus",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "adult male mice"
+        },
+        {
+          "clause_id": "B016C003",
+          "quote": "4 male Mdr2 knockout mice"
+        },
+        {
+          "clause_id": "B011C003",
+          "quote": "BALB/c nude mice"
+        },
+        {
+          "clause_id": "B009C001",
+          "quote": "Male BALB/c nude mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "L1",
+      "entity_type": "tissue_or_organ",
+      "reported_name": "liver",
+      "normalized_name": "liver",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "To assess the delivery of mRNA to the liver"
+        }
+      ]
+    },
+    {
+      "entity_id": "PS1",
+      "entity_type": "physiological_state",
+      "reported_name": "healthy",
+      "normalized_name": "healthy",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "We injected 5 healthy mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "M1",
+      "entity_type": "biological_model",
+      "reported_name": "healthy adult male mice",
+      "normalized_name": "healthy mouse model",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "we intravenously injected adult male mice (n = 5)"
+        },
+        {
+          "clause_id": "B017C008",
+          "quote": "We injected 5 healthy mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "M2",
+      "entity_type": "biological_model",
+      "reported_name": "Mdr2 knockout mice with severe fibrosis (F3)",
+      "normalized_name": "Mdr2 knockout mouse model with F3 severe fibrosis",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "4 male Mdr2 knockout mice"
+        },
+        {
+          "clause_id": "B016C009",
+          "quote": "F3 (severe fibrosis)"
+        }
+      ]
+    },
+    {
+      "entity_id": "M3",
+      "entity_type": "biological_model",
+      "reported_name": "Mdr2 knockout mice with cirrhosis (F4)",
+      "normalized_name": "Mdr2 knockout mouse model with F4 cirrhosis",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "4 male Mdr2 knockout mice"
+        },
+        {
+          "clause_id": "B016C009",
+          "quote": "F4 (cirrhosis)"
+        }
+      ]
+    },
+    {
+      "entity_id": "M4",
+      "entity_type": "biological_model",
+      "reported_name": "Mdr2 knockout mouse model with spontaneous HCC",
+      "normalized_name": "Mdr2 knockout mouse model",
+      "normalization_status": "inferred",
+      "evidence": [
+        {
+          "clause_id": "B016C002",
+          "quote": "Mdr2 knockout mice are unable to secrete phospholipids into the bile, resulting in the development of sclerosing cholangitis with severe liver fibrosis by early adulthood and spontaneous HCC by 1 year of age."
+        }
+      ]
+    },
+    {
+      "entity_id": "M5",
+      "entity_type": "biological_model",
+      "reported_name": "orthotopic HuH-7 xenograft model",
+      "normalized_name": "orthotopic HuH-7 hepatocellular carcinoma xenograft model",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C002",
+          "quote": "we established an orthotopic xenograft model using HuH-7 human HCC cells"
+        },
+        {
+          "clause_id": "B011C003",
+          "quote": "Cells were engrafted into the livers of thioacetamide (TAA)-treated BALB/c nude mice by single direct injection."
+        },
+        {
+          "clause_id": "B011C006",
+          "quote": "Tissues were analyzed approximately 24 h after an injection of 10 μg eGFP mRNA-LNPs via the tail vein."
+        }
+      ]
+    },
+    {
+      "entity_id": "M6",
+      "entity_type": "biological_model",
+      "reported_name": "A549-mCherry xenograft group",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "Male BALB/c nude mice were used for this experiment."
+        },
+        {
+          "clause_id": "B009C004",
+          "quote": "Mice received either 1 × 106 A549-mCherry cells (n = 9)"
+        },
+        {
+          "clause_id": "B009C005",
+          "quote": "mRNA-LNPs encoding eGFP (10 μg in 100 μL of TBS) were injected via tail vein."
+        }
+      ]
+    },
+    {
+      "entity_id": "M7",
+      "entity_type": "biological_model",
+      "reported_name": "HCT116-mCherry xenograft group",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "Male BALB/c nude mice were used for this experiment."
+        },
+        {
+          "clause_id": "B009C004",
+          "quote": "or 2 × 106 HCT116-mCherry cells (n = 9)."
+        },
+        {
+          "clause_id": "B009C005",
+          "quote": "mRNA-LNPs encoding eGFP (10 μg in 100 μL of TBS) were injected via tail vein."
+        }
+      ]
+    },
+    {
+      "entity_id": "DIS1",
+      "entity_type": "disease",
+      "reported_name": "severe liver fibrosis (F3)",
+      "normalized_name": "severe hepatic fibrosis",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C009",
+          "quote": "F3 (severe fibrosis)"
+        }
+      ]
+    },
+    {
+      "entity_id": "DIS2",
+      "entity_type": "disease",
+      "reported_name": "cirrhosis (F4)",
+      "normalized_name": "liver cirrhosis",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B016C009",
+          "quote": "F4 (cirrhosis)"
+        }
+      ]
+    },
+    {
+      "entity_id": "DIS3",
+      "entity_type": "disease",
+      "reported_name": "spontaneous HCC in situ",
+      "normalized_name": "spontaneous hepatocellular carcinoma in situ",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C002",
+          "quote": "spontaneous HCC by 1 year of age"
+        },
+        {
+          "clause_id": "B004C002",
+          "quote": "spontaneous HCC in situ"
+        }
+      ]
+    },
+    {
+      "entity_id": "I01",
+      "entity_type": "intervention",
+      "reported_name": "10 μg eGFP mRNA-LNP administration to healthy mice",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "We injected 5 healthy mice with 10 μg eGFP mRNA-LNPs via the tail vein and investigated reporter expression after 24 h."
+        }
+      ]
+    },
+    {
+      "entity_id": "I02",
+      "entity_type": "intervention",
+      "reported_name": "intravenous eGFP mRNA-LNP administration in Mdr2 knockout mice",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "We injected eGFP mRNA-LNPs intravenously into 4 male Mdr2 knockout mice at 11 months of age, and 14 h post-injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "I05",
+      "entity_type": "intervention",
+      "reported_name": "10 μg eGFP mRNA-LNP administration in HuH-7 xenograft mice",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B011C006",
+          "quote": "Tissues were analyzed approximately 24 h after an injection of 10 μg eGFP mRNA-LNPs via the tail vein."
+        }
+      ]
+    },
+    {
+      "entity_id": "I06",
+      "entity_type": "intervention",
+      "reported_name": "10 μg eGFP mRNA-LNP administration in secondary-liver-cancer xenograft mice",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "mRNA-LNPs encoding eGFP (10 μg in 100 μL of TBS) were injected via tail vein."
+        },
+        {
+          "clause_id": "B009C006",
+          "quote": "Mice were euthanized approximately 24 h later"
+        }
+      ]
+    },
+    {
+      "entity_id": "R1",
+      "entity_type": "route",
+      "reported_name": "via the tail vein",
+      "normalized_name": "intravenous injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "via the tail vein"
+        },
+        {
+          "clause_id": "B011C006",
+          "quote": "via the tail vein"
+        },
+        {
+          "clause_id": "B009C005",
+          "quote": "via tail vein"
+        }
+      ]
+    },
+    {
+      "entity_id": "D1",
+      "entity_type": "dose",
+      "reported_name": "10 μg eGFP mRNA-LNPs",
+      "normalized_name": "10 micrograms",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "10 μg eGFP mRNA-LNPs"
+        },
+        {
+          "clause_id": "B011C006",
+          "quote": "10 μg eGFP mRNA-LNPs"
+        },
+        {
+          "clause_id": "B009C005",
+          "quote": "10 μg in 100 μL of TBS"
+        }
+      ]
+    },
+    {
+      "entity_id": "T24",
+      "entity_type": "timepoint",
+      "reported_name": "24 h post-injection",
+      "normalized_name": "24 hours post-injection",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "after 24 h"
+        },
+        {
+          "clause_id": "B011C006",
+          "quote": "approximately 24 h after an injection"
+        },
+        {
+          "clause_id": "B009C006",
+          "quote": "approximately 24 h later"
+        }
+      ]
+    },
+    {
+      "entity_id": "T14",
+      "entity_type": "timepoint",
+      "reported_name": "14 h post-injection",
+      "normalized_name": "14 hours post-injection",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "14 h post-injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "END1",
+      "entity_type": "endpoint",
+      "reported_name": "hepatic eGFP fluorescence",
+      "normalized_name": "hepatic eGFP fluorescence",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B017C004",
+          "quote": "eGFP fluorescence was observed in the liver after 24 h"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT1",
+      "entity_type": "outcome_value",
+      "reported_name": "around 10-fold higher than background",
+      "normalized_name": "approximately 10-fold above background",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C004",
+          "quote": "measured fluorescence values around 10-fold higher than background"
+        }
+      ]
+    },
+    {
+      "entity_id": "END2",
+      "entity_type": "endpoint",
+      "reported_name": "hepatocyte eGFP staining",
+      "normalized_name": "hepatocyte eGFP immunostaining",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C015",
+          "quote": "eGFP staining in virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT2",
+      "entity_type": "outcome_value",
+      "reported_name": "strong staining in virtually all hepatocytes",
+      "normalized_name": "strong staining in nearly all hepatocytes",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B017C015",
+          "quote": "strong eGFP staining in virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "END4",
+      "entity_type": "endpoint",
+      "reported_name": "eGFP-positive surface area",
+      "normalized_name": "eGFP-positive tissue surface area",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C013",
+          "quote": "detectable eGFP staining across a higher surface area"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT4",
+      "entity_type": "outcome_value",
+      "reported_name": "greater variability in F4 than F3",
+      "normalized_name": "greater eGFP protein-expression variability in F4 than F3",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C009",
+          "quote": "greater variability in protein expression for Mdr2−/− mice with a fibrosis score of F4 (cirrhosis) relative to F3 (severe fibrosis)"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT5",
+      "entity_type": "outcome_value",
+      "reported_name": "higher surface area in F3 than F4",
+      "normalized_name": "greater eGFP-positive area in F3 than F4",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C013",
+          "quote": "mice with severe fibrosis (F3) had detectable eGFP staining across a higher surface area compared to mice with cirrhosis (F4)"
+        }
+      ]
+    },
+    {
+      "entity_id": "END5",
+      "entity_type": "endpoint",
+      "reported_name": "reporter expression in spontaneous HCC in situ",
+      "normalized_name": "reporter expression in spontaneous hepatocellular carcinoma in situ",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "We observed mRNA expression in healthy, fibrotic, and cirrhotic mouse liver tissue; spontaneous HCC in situ"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT6",
+      "entity_type": "outcome_value",
+      "reported_name": "mRNA expression observed in spontaneous HCC in situ",
+      "normalized_name": "expression detected",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "We observed mRNA expression in healthy, fibrotic, and cirrhotic mouse liver tissue; spontaneous HCC in situ"
+        }
+      ]
+    },
+    {
+      "entity_id": "END6",
+      "entity_type": "endpoint",
+      "reported_name": "eGFP fluorescence in tumor and non-tumor liver",
+      "normalized_name": "eGFP fluorescence in tumor and non-tumor liver",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B011C008",
+          "quote": "Quantitation of eGFP fluorescence confirms broadly comparable signal between tumors and non-tumor liver tissue"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT7",
+      "entity_type": "outcome_value",
+      "reported_name": "no significant difference between liver and tumor",
+      "normalized_name": "no significant liver-versus-tumor difference",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C008",
+          "quote": "no significant difference found between liver and tumor (Wilcoxon matched-pairs signed-rank test, n = 8, W = 10.00, p = 0.5469)"
+        }
+      ]
+    },
+    {
+      "entity_id": "END7",
+      "entity_type": "endpoint",
+      "reported_name": "GFP staining in HuH-7-derived tumors",
+      "normalized_name": "tumor GFP immunostaining",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C011",
+          "quote": "clear GFP staining in HuH-7-derived tumors"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT8",
+      "entity_type": "outcome_value",
+      "reported_name": "clear GFP staining in tumors",
+      "normalized_name": "clear tumor GFP staining",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B011C011",
+          "quote": "clear GFP staining in HuH-7-derived tumors"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CL1",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C1",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "50 ionizable (SM-102)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL2",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C2",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "10 DSPC"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL3",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C3",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "38.5 cholesterol"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL4",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F1",
+      "predicate": "has_component",
+      "object_entity_id": "C4",
+      "evidence": [
+        {
+          "clause_id": "B003C004",
+          "quote": "1.5 DMG-PEG2000"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL5",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F1",
+      "predicate": "carries_payload",
+      "object_entity_id": "P1",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "mRNA-LNPs encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "claim_id": "CL6",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "P1",
+      "predicate": "encodes_product",
+      "object_entity_id": "EP1",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "mRNA-LNPs encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C1",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "M1",
+      "predicate": "has_species",
+      "object_entity_id": "S1",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "adult male mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C2",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "M1",
+      "predicate": "has_physiological_context",
+      "object_entity_id": "PS1",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "5 healthy mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C3",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "M1",
+      "predicate": "has_tissue_context",
+      "object_entity_id": "L1",
+      "evidence": [
+        {
+          "clause_id": "B017C003",
+          "quote": "delivery of mRNA to the liver"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C4",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "M1",
+      "predicate": "has_intervention",
+      "object_entity_id": "I01",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "We injected 5 healthy mice with 10 μg eGFP mRNA-LNPs via the tail vein and investigated reporter expression after 24 h."
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C6",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "I01",
+      "predicate": "has_route",
+      "object_entity_id": "R1",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "via the tail vein"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C7",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "I01",
+      "predicate": "has_dose",
+      "object_entity_id": "D1",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "10 μg eGFP mRNA-LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C8",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "I01",
+      "predicate": "has_timepoint",
+      "object_entity_id": "T24",
+      "evidence": [
+        {
+          "clause_id": "B017C008",
+          "quote": "after 24 h"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C9",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "END1",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT1",
+      "evidence": [
+        {
+          "clause_id": "B017C004",
+          "quote": "measured fluorescence values around 10-fold higher than background"
+        }
+      ]
+    },
+    {
+      "claim_id": "E01C10",
+      "experiment_id": "GP-002-E01",
+      "subject_entity_id": "END2",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT2",
+      "evidence": [
+        {
+          "clause_id": "B017C015",
+          "quote": "strong eGFP staining in virtually all hepatocytes"
+        }
+      ]
+    },
+    {
+      "claim_id": "E02C1",
+      "experiment_id": "GP-002-E02",
+      "subject_entity_id": "M2",
+      "predicate": "has_species",
+      "object_entity_id": "S1",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "4 male Mdr2 knockout mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E02C2",
+      "experiment_id": "GP-002-E02",
+      "subject_entity_id": "M2",
+      "predicate": "has_disease_context",
+      "object_entity_id": "DIS1",
+      "evidence": [
+        {
+          "clause_id": "B016C009",
+          "quote": "F3 (severe fibrosis)"
+        }
+      ]
+    },
+    {
+      "claim_id": "E02C3",
+      "experiment_id": "GP-002-E02",
+      "subject_entity_id": "M2",
+      "predicate": "has_intervention",
+      "object_entity_id": "I02",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "We injected eGFP mRNA-LNPs intravenously into 4 male Mdr2 knockout mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E02C4",
+      "experiment_id": "GP-002-E02",
+      "subject_entity_id": "I02",
+      "predicate": "has_formulation",
+      "object_entity_id": "F1",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "We injected eGFP mRNA-LNPs intravenously into 4 male Mdr2 knockout mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E02C5",
+      "experiment_id": "GP-002-E02",
+      "subject_entity_id": "I02",
+      "predicate": "has_timepoint",
+      "object_entity_id": "T14",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "14 h post-injection"
+        }
+      ]
+    },
+    {
+      "claim_id": "E02C6",
+      "experiment_id": "GP-002-E02",
+      "subject_entity_id": "END4",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT5",
+      "evidence": [
+        {
+          "clause_id": "B016C013",
+          "quote": "mice with severe fibrosis (F3) had detectable eGFP staining across a higher surface area compared to mice with cirrhosis (F4)"
+        }
+      ]
+    },
+    {
+      "claim_id": "E03C1",
+      "experiment_id": "GP-002-E03",
+      "subject_entity_id": "M3",
+      "predicate": "has_species",
+      "object_entity_id": "S1",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "4 male Mdr2 knockout mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E03C2",
+      "experiment_id": "GP-002-E03",
+      "subject_entity_id": "M3",
+      "predicate": "has_disease_context",
+      "object_entity_id": "DIS2",
+      "evidence": [
+        {
+          "clause_id": "B016C009",
+          "quote": "F4 (cirrhosis)"
+        }
+      ]
+    },
+    {
+      "claim_id": "E03C3",
+      "experiment_id": "GP-002-E03",
+      "subject_entity_id": "M3",
+      "predicate": "has_intervention",
+      "object_entity_id": "I02",
+      "evidence": [
+        {
+          "clause_id": "B016C003",
+          "quote": "We injected eGFP mRNA-LNPs intravenously into 4 male Mdr2 knockout mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E04C1",
+      "experiment_id": "GP-002-E04",
+      "subject_entity_id": "M4",
+      "predicate": "has_disease_context",
+      "object_entity_id": "DIS3",
+      "evidence": [
+        {
+          "clause_id": "B016C002",
+          "quote": "Mdr2 knockout mice are unable to secrete phospholipids into the bile, resulting in the development of sclerosing cholangitis with severe liver fibrosis by early adulthood and spontaneous HCC by 1 year of age."
+        }
+      ]
+    },
+    {
+      "claim_id": "E04C2",
+      "experiment_id": "GP-002-E04",
+      "subject_entity_id": "END5",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT6",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "We observed mRNA expression in healthy, fibrotic, and cirrhotic mouse liver tissue; spontaneous HCC in situ"
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C1",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "M5",
+      "predicate": "has_species",
+      "object_entity_id": "S1",
+      "evidence": [
+        {
+          "clause_id": "B011C003",
+          "quote": "BALB/c nude mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C2",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "M5",
+      "predicate": "has_intervention",
+      "object_entity_id": "I05",
+      "evidence": [
+        {
+          "clause_id": "B011C006",
+          "quote": "Tissues were analyzed approximately 24 h after an injection of 10 μg eGFP mRNA-LNPs via the tail vein."
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C3",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "I05",
+      "predicate": "has_formulation",
+      "object_entity_id": "F1",
+      "evidence": [
+        {
+          "clause_id": "B011C006",
+          "quote": "an injection of 10 μg eGFP mRNA-LNPs"
+        },
+        {
+          "clause_id": "B001C001",
+          "quote": "multiple mouse models of liver disease and cancer following intravenous administration of mRNA-LNPs based on the ionizable lipid SM-102"
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C4",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "I05",
+      "predicate": "has_route",
+      "object_entity_id": "R1",
+      "evidence": [
+        {
+          "clause_id": "B011C006",
+          "quote": "via the tail vein"
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C5",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "I05",
+      "predicate": "has_dose",
+      "object_entity_id": "D1",
+      "evidence": [
+        {
+          "clause_id": "B011C006",
+          "quote": "10 μg eGFP mRNA-LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C6",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "I05",
+      "predicate": "has_timepoint",
+      "object_entity_id": "T24",
+      "evidence": [
+        {
+          "clause_id": "B011C006",
+          "quote": "approximately 24 h after an injection"
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C7",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "END6",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT7",
+      "evidence": [
+        {
+          "clause_id": "B011C008",
+          "quote": "no significant difference found between liver and tumor (Wilcoxon matched-pairs signed-rank test, n = 8, W = 10.00, p = 0.5469)"
+        }
+      ]
+    },
+    {
+      "claim_id": "E05C8",
+      "experiment_id": "GP-002-E05",
+      "subject_entity_id": "END7",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT8",
+      "evidence": [
+        {
+          "clause_id": "B011C011",
+          "quote": "clear GFP staining in HuH-7-derived tumors"
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C1",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "M6",
+      "predicate": "has_species",
+      "object_entity_id": "S1",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "Male BALB/c nude mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C2",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "M7",
+      "predicate": "has_species",
+      "object_entity_id": "S1",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "Male BALB/c nude mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C3",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "M6",
+      "predicate": "has_intervention",
+      "object_entity_id": "I06",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "mRNA-LNPs encoding eGFP (10 μg in 100 μL of TBS) were injected via tail vein."
+        },
+        {
+          "clause_id": "B001C001",
+          "quote": "multiple mouse models of liver disease and cancer following intravenous administration of mRNA-LNPs based on the ionizable lipid SM-102"
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C4",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "M7",
+      "predicate": "has_intervention",
+      "object_entity_id": "I06",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "mRNA-LNPs encoding eGFP (10 μg in 100 μL of TBS) were injected via tail vein."
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C5",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "I06",
+      "predicate": "has_formulation",
+      "object_entity_id": "F1",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "mRNA-LNPs encoding eGFP (10 μg in 100 μL of TBS) were injected via tail vein."
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C6",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "I06",
+      "predicate": "has_route",
+      "object_entity_id": "R1",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "injected via tail vein"
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C7",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "I06",
+      "predicate": "has_dose",
+      "object_entity_id": "D1",
+      "evidence": [
+        {
+          "clause_id": "B009C005",
+          "quote": "10 μg in 100 μL of TBS"
+        }
+      ]
+    },
+    {
+      "claim_id": "E06C8",
+      "experiment_id": "GP-002-E06",
+      "subject_entity_id": "I06",
+      "predicate": "has_timepoint",
+      "object_entity_id": "T24",
+      "evidence": [
+        {
+          "clause_id": "B009C006",
+          "quote": "approximately 24 h later"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "GP-002-E01",
+      "label": "mRNA-LNP transfection of healthy liver",
+      "claim_ids": [
+        "E01C1",
+        "E01C2",
+        "E01C3",
+        "E01C4",
+        "E01C6",
+        "E01C7",
+        "E01C8",
+        "E01C9",
+        "E01C10"
+      ],
+      "shared_claim_ids": [
+        "CL1",
+        "CL2",
+        "CL3",
+        "CL4",
+        "CL5",
+        "CL6"
+      ],
+      "source_scope_clause_ids": [
+        "B017C003",
+        "B017C004",
+        "B017C008",
+        "B017C015"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The healthy-mouse baseline is separately introduced and reported."
+    },
+    {
+      "experiment_id": "GP-002-E02",
+      "label": "mRNA-LNP transfection of fibrotic liver",
+      "claim_ids": [
+        "E02C1",
+        "E02C2",
+        "E02C3",
+        "E02C4",
+        "E02C5",
+        "E02C6"
+      ],
+      "shared_claim_ids": [
+        "CL1",
+        "CL2",
+        "CL3",
+        "CL4",
+        "CL5",
+        "CL6"
+      ],
+      "source_scope_clause_ids": [
+        "B016C003",
+        "B016C009",
+        "B016C013"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "F3 severe fibrosis is an outcome-defined subgroup of the Mdr2-knockout experiment."
+    },
+    {
+      "experiment_id": "GP-002-E03",
+      "label": "mRNA-LNP transfection of cirrhotic liver",
+      "claim_ids": [
+        "E03C1",
+        "E03C2",
+        "E03C3"
+      ],
+      "shared_claim_ids": [
+        "CL1",
+        "CL2",
+        "CL3",
+        "CL4",
+        "CL5",
+        "CL6"
+      ],
+      "source_scope_clause_ids": [
+        "B016C003",
+        "B016C009"
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "F4 cirrhosis is an outcome-defined subgroup of the Mdr2-knockout experiment."
+    },
+    {
+      "experiment_id": "GP-002-E04",
+      "label": "mRNA-LNP transfection of spontaneous hepatocellular carcinoma in situ",
+      "claim_ids": [
+        "E04C1",
+        "E04C2"
+      ],
+      "shared_claim_ids": [
+        "CL1",
+        "CL2",
+        "CL3",
+        "CL4",
+        "CL5",
+        "CL6"
+      ],
+      "source_scope_clause_ids": [
+        "B004C002",
+        "B016C002"
+      ],
+      "boundary_status": "ambiguous",
+      "boundary_reason": "Only aggregate spontaneous-HCC expression reporting is available in the supplied clauses; a model-specific administration relation is not exactly co-supported."
+    },
+    {
+      "experiment_id": "GP-002-E05",
+      "label": "mRNA-LNP delivery in primary liver cancer xenograft model",
+      "claim_ids": [
+        "E05C1",
+        "E05C2",
+        "E05C3",
+        "E05C4",
+        "E05C5",
+        "E05C6",
+        "E05C7",
+        "E05C8"
+      ],
+      "shared_claim_ids": [
+        "CL1",
+        "CL2",
+        "CL3",
+        "CL4",
+        "CL5",
+        "CL6"
+      ],
+      "source_scope_clause_ids": [
+        "B011C002",
+        "B011C003",
+        "B011C006",
+        "B011C008",
+        "B011C011"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The orthotopic HuH-7 xenograft experiment, dosing, and tumor readouts are explicitly reported."
+    },
+    {
+      "experiment_id": "GP-002-E06",
+      "label": "mRNA-LNP delivery in secondary liver cancer xenograft model",
+      "claim_ids": [
+        "E06C1",
+        "E06C2",
+        "E06C3",
+        "E06C4",
+        "E06C5",
+        "E06C6",
+        "E06C7",
+        "E06C8"
+      ],
+      "shared_claim_ids": [
+        "CL1",
+        "CL2",
+        "CL3",
+        "CL4",
+        "CL5",
+        "CL6"
+      ],
+      "source_scope_clause_ids": [
+        "B009C001",
+        "B009C004",
+        "B009C005",
+        "B009C006"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "The A549 and HCT116 xenograft groups and their shared mRNA-LNP administration are explicitly described; group-specific reporter outcomes are not supplied."
+    }
+  ]
+}

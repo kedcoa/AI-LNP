@@ -1,0 +1,38 @@
+{
+  "paper_id": "GP-008",
+  "model": "gpt-5.6",
+  "missed_ids_retried": [
+    "GO-018"
+  ],
+  "selected_pages": {
+    "pnas.2534673123.sapp.pdf": [
+      18,
+      19,
+      20
+    ]
+  },
+  "focus": [
+    {
+      "case_id": "GO-018",
+      "source_file": "pnas.2534673123.sapp.pdf",
+      "original_pages": [
+        18,
+        19,
+        20
+      ],
+      "figure_or_table": "Appendix Figure 5G-L",
+      "requested_field": "recipient_cell_specificity",
+      "instruction": "Determine the directly supported population/intervention/endpoint/value from the cited visual panels and marker labels; do not infer beyond them."
+    }
+  ],
+  "record_count": 16,
+  "comparison": [
+    {
+      "gold_id": "GO-018",
+      "whole_pdf_status": "missed",
+      "targeted_status": "matched",
+      "explanation": "Deterministic term check against the frozen outcome; final scientific acceptance remains a human decision."
+    }
+  ],
+  "status": "human_review_required"
+}

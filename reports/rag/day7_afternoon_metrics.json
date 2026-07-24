@@ -1,0 +1,72 @@
+{
+  "metric_version": "day7_afternoon_candidate_v1",
+  "calculated_at": "2026-07-24T04:23:03.893154+00:00",
+  "scope": "Isolated Day 7 afternoon candidate graphs; production human-reviewed accepted graphs were not overwritten.",
+  "retrieval": {
+    "recall_at_6": 1.0,
+    "development": "17/17",
+    "holdout": "14/14"
+  },
+  "extraction": {
+    "baseline_recovered": [
+      "GO-005",
+      "GO-007",
+      "GO-008",
+      "GO-010",
+      "GO-015",
+      "GO-016"
+    ],
+    "newly_recovered": [
+      "GO-001",
+      "GO-003",
+      "GO-004",
+      "GO-013"
+    ],
+    "recovered_total": 10,
+    "gold_total": 15,
+    "exact_outcome_recall": 0.6666666666666666,
+    "residual": {
+      "GO-002": "Explicit qualitative F4/80-positive Kupffer result remained omitted.",
+      "GO-006": "The 1.01% insertion value remains in a structured supplement table and was not extracted.",
+      "GO-011": "Explicit negative Kupffer-cell EGFP expression remained omitted.",
+      "GO-017": "GP-008 therapeutic HSC-elimination relation remained omitted; strict reruns failed schema validation.",
+      "GO-018": "Image-based supplementary recipient-cell result remains for the Day 8 PDF/figure workflow."
+    }
+  },
+  "papers": [
+    {
+      "paper_id": "GP-004",
+      "experiments": 4,
+      "claims": 50,
+      "candidate_only": true
+    },
+    {
+      "paper_id": "GP-005",
+      "experiments": 3,
+      "claims": 37,
+      "candidate_only": true
+    },
+    {
+      "paper_id": "GP-006",
+      "experiments": 2,
+      "claims": 46,
+      "candidate_only": true
+    },
+    {
+      "paper_id": "GP-007",
+      "experiments": 6,
+      "claims": 23,
+      "candidate_only": true
+    },
+    {
+      "paper_id": "GP-008",
+      "experiments": 4,
+      "claims": 30,
+      "candidate_only": true
+    }
+  ],
+  "promotion": {
+    "status": "candidate_only",
+    "reason": "Do not replace reviewed production graphs wholesale: GP-008 strict reruns failed schema validation, and other candidates must be merged field-by-field to avoid losing previously adjudicated claims."
+  }
+}

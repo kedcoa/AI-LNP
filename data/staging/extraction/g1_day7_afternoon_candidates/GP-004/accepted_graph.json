@@ -1,0 +1,1887 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-004",
+  "source_scope": "full_text_with_supplement",
+  "original_lnp_experiments_present": true,
+  "entities": [
+    {
+      "entity_id": "F_PLATFORM",
+      "entity_type": "lnp_formulation",
+      "reported_name": "LNP used in this study",
+      "normalized_name": "study lipid nanoparticle platform",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid53,54."
+        }
+      ]
+    },
+    {
+      "entity_id": "F_LUC",
+      "entity_type": "lnp_formulation",
+      "reported_name": "Luc mRNA-LNP",
+      "normalized_name": "firefly luciferase mRNA lipid nanoparticle",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "F_EGFP",
+      "entity_type": "lnp_formulation",
+      "reported_name": "eGFP mRNA-LNP",
+      "normalized_name": "enhanced green fluorescent protein mRNA lipid nanoparticle",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "mRNA-LNP encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "F_HGF",
+      "entity_type": "lnp_formulation",
+      "reported_name": "HGF mRNA-LNP",
+      "normalized_name": "hepatocyte growth factor mRNA lipid nanoparticle",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C003",
+          "quote": "HGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "entity_id": "F_EGF",
+      "entity_type": "lnp_formulation",
+      "reported_name": "EGF mRNA-LNP",
+      "normalized_name": "epidermal growth factor mRNA lipid nanoparticle",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs decreased steatosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "F_HGF_EGF",
+      "entity_type": "lnp_formulation",
+      "reported_name": "HGF/EGF mRNA-LNP",
+      "normalized_name": "HGF mRNA-LNP plus EGF mRNA-LNP combination",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "the combination of HGF/EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "entity_id": "F_POLYC",
+      "entity_type": "lnp_formulation",
+      "reported_name": "Poly(C) RNA-LNP",
+      "normalized_name": "polycytidylic acid RNA lipid nanoparticle",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C002",
+          "quote": "LNP loaded with untranslatable Poly(C) RNA (Poly(C) RNA-LNP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "C_IONIZABLE",
+      "entity_type": "lnp_component",
+      "reported_name": "ionizable cationic lipid",
+      "normalized_name": "ionizable cationic lipid",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics)"
+        }
+      ]
+    },
+    {
+      "entity_id": "C_PC",
+      "entity_type": "lnp_component",
+      "reported_name": "phosphatidylcholine",
+      "normalized_name": "phosphatidylcholine",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "phosphatidylcholine"
+        }
+      ]
+    },
+    {
+      "entity_id": "C_CHOL",
+      "entity_type": "lnp_component",
+      "reported_name": "cholesterol",
+      "normalized_name": "cholesterol",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "cholesterol"
+        }
+      ]
+    },
+    {
+      "entity_id": "C_PEG",
+      "entity_type": "lnp_component",
+      "reported_name": "PEG-lipid",
+      "normalized_name": "PEG lipid",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "PEG-lipid"
+        }
+      ]
+    },
+    {
+      "entity_id": "P_LUC",
+      "entity_type": "payload",
+      "reported_name": "firefly luciferase encoding mRNA",
+      "normalized_name": "firefly luciferase mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "firefly luciferase encoding mRNA"
+        }
+      ]
+    },
+    {
+      "entity_id": "P_EGFP",
+      "entity_type": "payload",
+      "reported_name": "eGFP mRNA",
+      "normalized_name": "enhanced green fluorescent protein mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "mRNA-LNP encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "P_HGF",
+      "entity_type": "payload",
+      "reported_name": "HGF mRNA",
+      "normalized_name": "hepatocyte growth factor mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C001",
+          "quote": "hepatocyte growth factor (HGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "P_EGF",
+      "entity_type": "payload",
+      "reported_name": "EGF mRNA",
+      "normalized_name": "epidermal growth factor mRNA",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B007C001",
+          "quote": "epidermal growth factor (EGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "PROD_LUC",
+      "entity_type": "encoded_product",
+      "reported_name": "firefly luciferase",
+      "normalized_name": "firefly luciferase",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B007C001",
+          "quote": "firefly luciferase (Luc)"
+        }
+      ]
+    },
+    {
+      "entity_id": "PROD_EGFP",
+      "entity_type": "encoded_product",
+      "reported_name": "enhanced green fluorescent protein",
+      "normalized_name": "enhanced green fluorescent protein",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "PROD_HGF",
+      "entity_type": "encoded_product",
+      "reported_name": "hepatocyte growth factor",
+      "normalized_name": "hepatocyte growth factor",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B007C001",
+          "quote": "hepatocyte growth factor (HGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "PROD_EGF",
+      "entity_type": "encoded_product",
+      "reported_name": "epidermal growth factor",
+      "normalized_name": "epidermal growth factor",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B007C001",
+          "quote": "epidermal growth factor (EGF)"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL_HEP",
+      "entity_type": "cell",
+      "reported_name": "hepatocytes",
+      "normalized_name": "hepatocyte",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C013",
+          "quote": "hepatocytes are the main cells targeted by IV-administered mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL_ENDO",
+      "entity_type": "cell",
+      "reported_name": "endothelial cells",
+      "normalized_name": "endothelial cell",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C013",
+          "quote": "a significant fraction of endothelial cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL_KUPFFER",
+      "entity_type": "cell",
+      "reported_name": "Kupffer cells",
+      "normalized_name": "Kupffer cell",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C013",
+          "quote": "Kupffer cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "CELL_CD45",
+      "entity_type": "cell",
+      "reported_name": "CD45+ cells",
+      "normalized_name": "CD45-positive cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B001C016",
+          "quote": "CD45+ cell density"
+        }
+      ]
+    },
+    {
+      "entity_id": "SPEC_MOUSE",
+      "entity_type": "species",
+      "reported_name": "mice",
+      "normalized_name": "Mus musculus",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B014C002",
+          "quote": "Mice were either 10–12 week-old Bl6/C57 female for the liver injury models or 7–8 week-old Balb/c female"
+        }
+      ]
+    },
+    {
+      "entity_id": "STATE_HOME",
+      "entity_type": "physiological_state",
+      "reported_name": "homeostasis",
+      "normalized_name": "homeostasis",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B010C003",
+          "quote": "in homeostasis"
+        }
+      ]
+    },
+    {
+      "entity_id": "MODEL_CDE",
+      "entity_type": "biological_model",
+      "reported_name": "chronic CDE diet-induced NAFLD mouse model",
+      "normalized_name": "CDE diet-induced NAFLD mouse model",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C003",
+          "quote": "chronic Choline-Deficient Ethionine-supplemented (CDE) diet-induced non-alcoholic fatty liver disease (NAFLD) mouse model"
+        }
+      ]
+    },
+    {
+      "entity_id": "DISEASE_NAFLD",
+      "entity_type": "disease",
+      "reported_name": "non-alcoholic fatty liver disease",
+      "normalized_name": "nonalcoholic fatty liver disease",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C003",
+          "quote": "non-alcoholic fatty liver disease (NAFLD)"
+        }
+      ]
+    },
+    {
+      "entity_id": "MODEL_APAP",
+      "entity_type": "biological_model",
+      "reported_name": "acute acetaminophen-induced liver injury mouse model",
+      "normalized_name": "acetaminophen-induced acute liver injury mouse model",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B010C003",
+          "quote": "acute acetaminophen-induced liver injury mouse model"
+        }
+      ]
+    },
+    {
+      "entity_id": "DISEASE_APAP",
+      "entity_type": "disease",
+      "reported_name": "APAP injury",
+      "normalized_name": "acetaminophen-induced liver injury",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "following APAP injury"
+        }
+      ]
+    },
+    {
+      "entity_id": "ROUTE_IV",
+      "entity_type": "route",
+      "reported_name": "intravenous injection",
+      "normalized_name": "intravenous administration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B014C003",
+          "quote": "intravenously by either retro-orbital or tail vein injections"
+        }
+      ]
+    },
+    {
+      "entity_id": "DOSE_LUC",
+      "entity_type": "dose",
+      "reported_name": "5 μg Luc mRNA-LNP/20 g body weight",
+      "normalized_name": "5 µg per 20 g body weight",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "5 μg Luc mRNA-LNP/20 g body weight"
+        }
+      ]
+    },
+    {
+      "entity_id": "DOSE_EGFP",
+      "entity_type": "dose",
+      "reported_name": "10 μg eGFP mRNA-LNP/20 g body weight",
+      "normalized_name": "10 µg per 20 g body weight",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "10 μg eGFP mRNA-LNP/20 g body weight"
+        }
+      ]
+    },
+    {
+      "entity_id": "DOSE_HGF",
+      "entity_type": "dose",
+      "reported_name": "HGF 10 μg",
+      "normalized_name": "10 µg HGF mRNA-LNP",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B014C003",
+          "quote": "HGF (10 μg)"
+        }
+      ]
+    },
+    {
+      "entity_id": "DOSE_COMBO",
+      "entity_type": "dose",
+      "reported_name": "HGF 5 μg + EGF 5 μg",
+      "normalized_name": "5 µg HGF mRNA plus 5 µg EGF mRNA",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B014C003",
+          "quote": "combination HGF (5 μg) + EGF (5 μg)"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP_WEEK",
+      "entity_type": "timepoint",
+      "reported_name": "5 h and days 1, 2, 3, 6, and 8",
+      "normalized_name": "5 hours and days 1, 2, 3, 6, and 8",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "at 5 h, days 1, 2, 3, 6, and 8"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP_5H",
+      "entity_type": "timepoint",
+      "reported_name": "5 h following a single injection",
+      "normalized_name": "5 hours after injection",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "5 h following a single injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP_48H",
+      "entity_type": "timepoint",
+      "reported_name": "48 hour time point",
+      "normalized_name": "48 hours",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B002C018",
+          "quote": "48 hour time point"
+        }
+      ]
+    },
+    {
+      "entity_id": "TP_T2",
+      "entity_type": "timepoint",
+      "reported_name": "T2",
+      "normalized_name": null,
+      "normalization_status": "unresolved",
+      "evidence": [
+        {
+          "clause_id": "B001C013",
+          "quote": "at T2"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_BLI",
+      "entity_type": "assay",
+      "reported_name": "bioluminescence",
+      "normalized_name": "bioluminescence imaging",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C005",
+          "quote": "as measured by bioluminescence"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_IHC",
+      "entity_type": "assay",
+      "reported_name": "immunohistochemistry",
+      "normalized_name": "immunohistochemistry",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C001",
+          "quote": "immunohistochemistry"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_FLOW",
+      "entity_type": "assay",
+      "reported_name": "flow cytometry",
+      "normalized_name": "flow cytometry",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C008",
+          "quote": "flow cytometry"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_EDU",
+      "entity_type": "assay",
+      "reported_name": "EdU assessment",
+      "normalized_name": "EdU incorporation assay",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C002",
+          "quote": "assessing 5-ethynyl-2′-deoxyuridine (EdU)"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_OILRED",
+      "entity_type": "assay",
+      "reported_name": "Oil Red O staining",
+      "normalized_name": "Oil Red O staining",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "Oil Red O staining"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_ALT",
+      "entity_type": "assay",
+      "reported_name": "serum ALT",
+      "normalized_name": "serum alanine aminotransferase assay",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "serum ALT levels"
+        }
+      ]
+    },
+    {
+      "entity_id": "ASSAY_TUNEL",
+      "entity_type": "assay",
+      "reported_name": "TUNEL",
+      "normalized_name": "TUNEL assay",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "TUNEL+ cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_LUC_DIST",
+      "entity_type": "endpoint",
+      "reported_name": "Luc mRNA-LNP expression distribution",
+      "normalized_name": "organ distribution of luciferase expression",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C005",
+          "quote": "liver restricted Luc mRNA-LNP expression"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_LUC_LIVER",
+      "entity_type": "outcome_value",
+      "reported_name": "liver restricted expression",
+      "normalized_name": "restricted to liver",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C005",
+          "quote": "Both delivery methods led to liver restricted Luc mRNA-LNP expression"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_LUC_ACTIVITY",
+      "entity_type": "endpoint",
+      "reported_name": "Luc activity",
+      "normalized_name": "luciferase activity",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "Luc activity"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_LUC_ACTIVITY",
+      "entity_type": "outcome_value",
+      "reported_name": "highest at 5 h; baseline at day 8",
+      "normalized_name": "peak at 5 hours and baseline by day 8",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "The highest Luc activity was detected as early as 5 h after injection, and remained stable for 24 h."
+        },
+        {
+          "clause_id": "B012C008",
+          "quote": "bioluminescence decreased progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_EGFP_HEP",
+      "entity_type": "endpoint",
+      "reported_name": "eGFP expression in hepatocytes",
+      "normalized_name": "eGFP-positive hepatocytes",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C003",
+          "quote": "Virtually all hepatocytes identified with HNF4α expressed eGFP"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_EGFP_HEP",
+      "entity_type": "outcome_value",
+      "reported_name": "virtually all hepatocytes expressed eGFP",
+      "normalized_name": "virtually all hepatocytes positive",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C003",
+          "quote": "Virtually all hepatocytes identified with HNF4α expressed eGFP"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_EGFP_ENDO",
+      "entity_type": "endpoint",
+      "reported_name": "eGFP-positive CD31+ cells",
+      "normalized_name": "eGFP-positive endothelial cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "70.7 ± 9% CD31+ cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_EGFP_ENDO",
+      "entity_type": "outcome_value",
+      "reported_name": "70.7 ± 9%",
+      "normalized_name": "70.7 ± 9 percent",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "70.7 ± 9% CD31+ cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_EGFP_KUP",
+      "entity_type": "endpoint",
+      "reported_name": "eGFP-positive CD11b+ cells",
+      "normalized_name": "eGFP-positive Kupffer cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "41.5 ± 14.6% CD11b+ cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_EGFP_KUP",
+      "entity_type": "outcome_value",
+      "reported_name": "41.5 ± 14.6%",
+      "normalized_name": "41.5 ± 14.6 percent",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "41.5 ± 14.6% CD11b+ cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_HGF_PROLIF",
+      "entity_type": "endpoint",
+      "reported_name": "EdU+HNF4α+ hepatocytes",
+      "normalized_name": "proliferating HNF4α-positive hepatocytes",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C018",
+          "quote": "EdU+HNF4α+ hepatocytes"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_HGF_PROLIF",
+      "entity_type": "outcome_value",
+      "reported_name": "121-fold increase versus PolyC control",
+      "normalized_name": "121-fold increase versus Poly(C) RNA control",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C018",
+          "quote": "a 121-fold increase of EdU+HNF4α+ hepatocytes in HGF mRNA-LNP- treated mice compared to control PolyC RNA-treated mice"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_STEATOSIS",
+      "entity_type": "endpoint",
+      "reported_name": "steatosis",
+      "normalized_name": "hepatic steatosis",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "greatly reduce steatosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_STEATOSIS_REDUCED",
+      "entity_type": "outcome_value",
+      "reported_name": "greatly reduced steatosis",
+      "normalized_name": "reduced steatosis",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "greatly reduce steatosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_STEATOSIS_SINGLE",
+      "entity_type": "outcome_value",
+      "reported_name": "decreased steatosis after either HGF or EGF mRNA-LNP",
+      "normalized_name": "decreased steatosis",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs decreased steatosis"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_STEATOSIS_COMBO_SUPERIOR",
+      "entity_type": "outcome_value",
+      "reported_name": "significantly more efficient steatosis reversion with combination",
+      "normalized_name": "combination superior for steatosis reversal",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "combination of both mRNA-LNP consistently resulted in significantly more efficient steatosis reversion"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_CHOLESTEROL",
+      "entity_type": "endpoint",
+      "reported_name": "serum cholesterol",
+      "normalized_name": "serum cholesterol",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "release of cholesterol in serum"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_CHOLESTEROL_RELEASE",
+      "entity_type": "outcome_value",
+      "reported_name": "release of cholesterol in serum",
+      "normalized_name": "serum cholesterol release",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "inducing release of cholesterol in serum"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_OILRED",
+      "entity_type": "endpoint",
+      "reported_name": "Oil Red O staining",
+      "normalized_name": "Oil Red O staining",
+      "normalization_status": "exact",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "Oil Red O staining"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_OILRED_DECREASE",
+      "entity_type": "outcome_value",
+      "reported_name": "decreased Oil Red O staining",
+      "normalized_name": "decreased Oil Red O staining",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "decrease of Oil Red O staining"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_ALT",
+      "entity_type": "endpoint",
+      "reported_name": "serum ALT levels",
+      "normalized_name": "serum alanine aminotransferase level",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "serum ALT levels"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_ALT_BASELINE",
+      "entity_type": "outcome_value",
+      "reported_name": "restored baseline serum ALT",
+      "normalized_name": "serum ALT restored to baseline",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "restoring baseline levels of serum ALT"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_ALT_LOWER",
+      "entity_type": "outcome_value",
+      "reported_name": "significantly lower serum ALT",
+      "normalized_name": "significantly reduced serum ALT",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "significantly lower serum ALT levels"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_CD45_DENSITY",
+      "entity_type": "endpoint",
+      "reported_name": "CD45+ cell density",
+      "normalized_name": "CD45-positive cell density",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B001C016",
+          "quote": "CD45+ cell density"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_CD45_SIMILAR",
+      "entity_type": "outcome_value",
+      "reported_name": "similar increase in both treatment groups",
+      "normalized_name": "similar CD45-positive-cell-density increase",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B001C016",
+          "quote": "a similar increase in CD45+ cell density in both Poly(C) RNA-LNP-treated controls and HGF/EGF mRNA-LNP-treated group"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_REPAIR",
+      "entity_type": "endpoint",
+      "reported_name": "restoration of liver function",
+      "normalized_name": "liver-function restoration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "restoration of liver function"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_REPAIR_ACCELERATED",
+      "entity_type": "outcome_value",
+      "reported_name": "accelerated restoration of liver function",
+      "normalized_name": "accelerated liver-function restoration",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "accelerate restoration of liver function following APAP injury"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_NECROSIS",
+      "entity_type": "endpoint",
+      "reported_name": "necrotic areas",
+      "normalized_name": "hepatic necrotic areas",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "necrotic areas"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_NECROSIS_ABSENT",
+      "entity_type": "outcome_value",
+      "reported_name": "disappearance of necrotic areas",
+      "normalized_name": "necrotic areas disappeared",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "disappearance of necrotic areas"
+        }
+      ]
+    },
+    {
+      "entity_id": "EP_TUNEL",
+      "entity_type": "endpoint",
+      "reported_name": "TUNEL+ cells",
+      "normalized_name": "TUNEL-positive cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "TUNEL+ cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "OUT_TUNEL_ABSENT",
+      "entity_type": "outcome_value",
+      "reported_name": "absence of TUNEL+ cells",
+      "normalized_name": "no TUNEL-positive cells",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "absence of TUNEL+ cells"
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E01_LUC",
+      "entity_type": "intervention",
+      "reported_name": "single intravenous Luc mRNA-LNP injection",
+      "normalized_name": "luciferase mRNA-LNP intervention",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "following a single IV injection"
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E01_EGFP",
+      "entity_type": "intervention",
+      "reported_name": "single intravenous eGFP mRNA-LNP injection",
+      "normalized_name": "eGFP mRNA-LNP intervention",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "following a single injection of mRNA-LNP encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E02_HGF",
+      "entity_type": "intervention",
+      "reported_name": "single intravenous HGF mRNA-LNP injection",
+      "normalized_name": "HGF mRNA-LNP intervention",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B016C002",
+          "quote": "a single IV injection of mRNA-LNP encoding the mitogen HGF"
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E03_COMBO",
+      "entity_type": "intervention",
+      "reported_name": "HGF/EGF mRNA-LNP combination treatment in CDE model",
+      "normalized_name": "HGF plus EGF mRNA-LNP combination intervention",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "the combination of HGF/EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E03_HGF",
+      "entity_type": "intervention",
+      "reported_name": "single HGF mRNA-LNP injection in CDE model",
+      "normalized_name": "single HGF mRNA-LNP intervention",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs"
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E03_EGF",
+      "entity_type": "intervention",
+      "reported_name": "single EGF mRNA-LNP injection in CDE model",
+      "normalized_name": "single EGF mRNA-LNP intervention",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs"
+        }
+      ]
+    },
+    {
+      "entity_id": "I_E04_COMBO",
+      "entity_type": "intervention",
+      "reported_name": "HGF and EGF mRNA-LNP treatment following APAP injury",
+      "normalized_name": "HGF plus EGF mRNA-LNP intervention",
+      "normalization_status": "synonym",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "mRNA-LNP encoding HGF and EGF"
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "V001",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F_PLATFORM",
+      "predicate": "has_component",
+      "object_entity_id": "C_IONIZABLE",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "LNP used in this study contain an ionizable cationic lipid"
+        }
+      ]
+    },
+    {
+      "claim_id": "V002",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F_PLATFORM",
+      "predicate": "has_component",
+      "object_entity_id": "C_PC",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine"
+        }
+      ]
+    },
+    {
+      "claim_id": "V003",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F_PLATFORM",
+      "predicate": "has_component",
+      "object_entity_id": "C_CHOL",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol"
+        }
+      ]
+    },
+    {
+      "claim_id": "V004",
+      "experiment_id": "SHARED",
+      "subject_entity_id": "F_PLATFORM",
+      "predicate": "has_component",
+      "object_entity_id": "C_PEG",
+      "evidence": [
+        {
+          "clause_id": "B004C002",
+          "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid"
+        }
+      ]
+    },
+    {
+      "claim_id": "V005",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_LUC",
+      "predicate": "has_formulation",
+      "object_entity_id": "F_LUC",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V006",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "F_LUC",
+      "predicate": "carries_payload",
+      "object_entity_id": "P_LUC",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V010",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_LUC",
+      "predicate": "has_dose",
+      "object_entity_id": "DOSE_LUC",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "5 μg Luc mRNA-LNP/20 g body weight"
+        }
+      ]
+    },
+    {
+      "claim_id": "V011",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_LUC",
+      "predicate": "has_timepoint",
+      "object_entity_id": "TP_WEEK",
+      "evidence": [
+        {
+          "clause_id": "B012C003",
+          "quote": "during a 1-week time course (at 5 h, days 1, 2, 3, 6, and 8)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V012",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_LUC",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_BLI",
+      "evidence": [
+        {
+          "clause_id": "B012C005",
+          "quote": "as measured by bioluminescence"
+        }
+      ]
+    },
+    {
+      "claim_id": "V013",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_LUC",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_LUC_DIST",
+      "evidence": [
+        {
+          "clause_id": "B012C005",
+          "quote": "liver restricted Luc mRNA-LNP expression"
+        }
+      ]
+    },
+    {
+      "claim_id": "V014",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "EP_LUC_DIST",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_LUC_LIVER",
+      "evidence": [
+        {
+          "clause_id": "B012C005",
+          "quote": "Both delivery methods led to liver restricted Luc mRNA-LNP expression"
+        }
+      ]
+    },
+    {
+      "claim_id": "V015",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_LUC",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_LUC_ACTIVITY",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "Luc activity"
+        }
+      ]
+    },
+    {
+      "claim_id": "V016",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "EP_LUC_ACTIVITY",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_LUC_ACTIVITY",
+      "evidence": [
+        {
+          "clause_id": "B012C007",
+          "quote": "The highest Luc activity was detected as early as 5 h after injection, and remained stable for 24 h."
+        },
+        {
+          "clause_id": "B012C008",
+          "quote": "bioluminescence decreased progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection"
+        }
+      ]
+    },
+    {
+      "claim_id": "V017",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_EGFP",
+      "predicate": "has_formulation",
+      "object_entity_id": "F_EGFP",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "single injection of mRNA-LNP encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V018",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "F_EGFP",
+      "predicate": "carries_payload",
+      "object_entity_id": "P_EGFP",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "mRNA-LNP encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V019",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "P_EGFP",
+      "predicate": "encodes_product",
+      "object_entity_id": "PROD_EGFP",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "encoding enhanced green fluorescent protein (eGFP)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V022",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_EGFP",
+      "predicate": "has_dose",
+      "object_entity_id": "DOSE_EGFP",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "10 μg eGFP mRNA-LNP/20 g body weight"
+        }
+      ]
+    },
+    {
+      "claim_id": "V023",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "I_E01_EGFP",
+      "predicate": "has_timepoint",
+      "object_entity_id": "TP_5H",
+      "evidence": [
+        {
+          "clause_id": "B009C001",
+          "quote": "5 h following a single injection"
+        }
+      ]
+    },
+    {
+      "claim_id": "V030",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "EP_EGFP_HEP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_EGFP_HEP",
+      "evidence": [
+        {
+          "clause_id": "B008C003",
+          "quote": "Virtually all hepatocytes identified with HNF4α expressed eGFP"
+        }
+      ]
+    },
+    {
+      "claim_id": "V032",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "EP_EGFP_ENDO",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_EGFP_ENDO",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "70.7 ± 9% CD31+ cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "V034",
+      "experiment_id": "GP-004-E01",
+      "subject_entity_id": "EP_EGFP_KUP",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_EGFP_KUP",
+      "evidence": [
+        {
+          "clause_id": "B008C011",
+          "quote": "41.5 ± 14.6% CD11b+ cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "V037",
+      "experiment_id": "GP-004-E02",
+      "subject_entity_id": "P_HGF",
+      "predicate": "encodes_product",
+      "object_entity_id": "PROD_HGF",
+      "evidence": [
+        {
+          "clause_id": "B007C001",
+          "quote": "hepatocyte growth factor (HGF)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V043",
+      "experiment_id": "GP-004-E02",
+      "subject_entity_id": "I_E02_HGF",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_EDU",
+      "evidence": [
+        {
+          "clause_id": "B016C002",
+          "quote": "induce DNA synthesis and cell proliferation by assessing 5-ethynyl-2′-deoxyuridine (EdU)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V046",
+      "experiment_id": "GP-004-E02",
+      "subject_entity_id": "EP_HGF_PROLIF",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_HGF_PROLIF",
+      "evidence": [
+        {
+          "clause_id": "B002C018",
+          "quote": "a 121-fold increase of EdU+HNF4α+ hepatocytes in HGF mRNA-LNP- treated mice compared to control PolyC RNA-treated mice"
+        }
+      ]
+    },
+    {
+      "claim_id": "V047",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_COMBO",
+      "predicate": "has_formulation",
+      "object_entity_id": "F_HGF_EGF",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "the combination of HGF/EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "claim_id": "V050",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "P_EGF",
+      "predicate": "encodes_product",
+      "object_entity_id": "PROD_EGF",
+      "evidence": [
+        {
+          "clause_id": "B007C001",
+          "quote": "epidermal growth factor (EGF)"
+        }
+      ]
+    },
+    {
+      "claim_id": "V054",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_COMBO",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_OILRED",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "Oil Red O staining"
+        }
+      ]
+    },
+    {
+      "claim_id": "V057",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_COMBO",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_STEATOSIS",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "the combination of HGF/EGF mRNA-LNP greatly reduce steatosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "V058",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "EP_STEATOSIS",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_STEATOSIS_REDUCED",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "greatly reduce steatosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "V059",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_COMBO",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_CHOLESTEROL",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "inducing release of cholesterol in serum"
+        }
+      ]
+    },
+    {
+      "claim_id": "V060",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "EP_CHOLESTEROL",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_CHOLESTEROL_RELEASE",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "inducing release of cholesterol in serum"
+        }
+      ]
+    },
+    {
+      "claim_id": "V061",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_COMBO",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_OILRED",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "decrease of Oil Red O staining"
+        }
+      ]
+    },
+    {
+      "claim_id": "V062",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "EP_OILRED",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_OILRED_DECREASE",
+      "evidence": [
+        {
+          "clause_id": "B002C024",
+          "quote": "decrease of Oil Red O staining"
+        }
+      ]
+    },
+    {
+      "claim_id": "V066",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "EP_CD45_DENSITY",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_CD45_SIMILAR",
+      "evidence": [
+        {
+          "clause_id": "B001C016",
+          "quote": "a similar increase in CD45+ cell density in both Poly(C) RNA-LNP-treated controls and HGF/EGF mRNA-LNP-treated group"
+        }
+      ]
+    },
+    {
+      "claim_id": "V068",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_EGF",
+      "predicate": "has_formulation",
+      "object_entity_id": "F_EGF",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs"
+        }
+      ]
+    },
+    {
+      "claim_id": "V070",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_HGF",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_STEATOSIS",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs decreased steatosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "V071",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "I_E03_EGF",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_STEATOSIS",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs decreased steatosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "V072",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "EP_STEATOSIS",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_STEATOSIS_SINGLE",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "single injections of either HGF or EGF mRNA-LNPs decreased steatosis"
+        }
+      ]
+    },
+    {
+      "claim_id": "V073",
+      "experiment_id": "GP-004-E03",
+      "subject_entity_id": "EP_STEATOSIS",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_STEATOSIS_COMBO_SUPERIOR",
+      "evidence": [
+        {
+          "clause_id": "B002C032",
+          "quote": "combination of both mRNA-LNP consistently resulted in significantly more efficient steatosis reversion"
+        }
+      ]
+    },
+    {
+      "claim_id": "V076",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "I_E04_COMBO",
+      "predicate": "has_disease_context",
+      "object_entity_id": "DISEASE_APAP",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "following APAP injury"
+        }
+      ]
+    },
+    {
+      "claim_id": "V078",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "I_E04_COMBO",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_ALT",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "serum ALT levels"
+        }
+      ]
+    },
+    {
+      "claim_id": "V079",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "I_E04_COMBO",
+      "predicate": "has_assay",
+      "object_entity_id": "ASSAY_TUNEL",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "TUNEL+ cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "V080",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "I_E04_COMBO",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_REPAIR",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "accelerate restoration of liver function following APAP injury"
+        }
+      ]
+    },
+    {
+      "claim_id": "V081",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "EP_REPAIR",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_REPAIR_ACCELERATED",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "accelerate restoration of liver function following APAP injury"
+        }
+      ]
+    },
+    {
+      "claim_id": "V082",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "I_E04_COMBO",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_NECROSIS",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "disappearance of necrotic areas"
+        }
+      ]
+    },
+    {
+      "claim_id": "V083",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "EP_NECROSIS",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_NECROSIS_ABSENT",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "disappearance of necrotic areas"
+        }
+      ]
+    },
+    {
+      "claim_id": "V084",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "I_E04_COMBO",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_TUNEL",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "absence of TUNEL+ cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "V085",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "EP_TUNEL",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_TUNEL_ABSENT",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "absence of TUNEL+ cells"
+        }
+      ]
+    },
+    {
+      "claim_id": "V086",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "I_E04_COMBO",
+      "predicate": "measures_endpoint",
+      "object_entity_id": "EP_ALT",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "significantly lower serum ALT levels"
+        }
+      ]
+    },
+    {
+      "claim_id": "V087",
+      "experiment_id": "GP-004-E04",
+      "subject_entity_id": "EP_ALT",
+      "predicate": "has_outcome_value",
+      "object_entity_id": "OUT_ALT_LOWER",
+      "evidence": [
+        {
+          "clause_id": "B006C009",
+          "quote": "significantly lower serum ALT levels"
+        }
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "GP-004-E01",
+      "label": "Luciferase mRNA-LNP delivery in healthy mice",
+      "claim_ids": [
+        "V005",
+        "V006",
+        "V010",
+        "V011",
+        "V012",
+        "V013",
+        "V014",
+        "V015",
+        "V016",
+        "V017",
+        "V018",
+        "V019",
+        "V022",
+        "V023",
+        "V030",
+        "V032",
+        "V034"
+      ],
+      "shared_claim_ids": [
+        "V001",
+        "V002",
+        "V003",
+        "V004"
+      ],
+      "source_scope_clause_ids": [
+        "B004C002",
+        "B007C001",
+        "B008C001",
+        "B008C003",
+        "B008C008",
+        "B008C011",
+        "B008C013",
+        "B009C001",
+        "B009C012",
+        "B009C018",
+        "B012C003",
+        "B012C005",
+        "B012C007",
+        "B012C008",
+        "B012C011"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Human-approved E01 combines delivery-validation studies: luciferase organ distribution/kinetics and eGFP cell-type mapping."
+    },
+    {
+      "experiment_id": "GP-004-E02",
+      "label": "HGF mRNA-LNP in healthy mice",
+      "claim_ids": [
+        "V037",
+        "V043",
+        "V046"
+      ],
+      "shared_claim_ids": [
+        "V001",
+        "V002",
+        "V003",
+        "V004"
+      ],
+      "source_scope_clause_ids": [
+        "B002C018",
+        "B007C001",
+        "B010C003",
+        "B014C003",
+        "B016C002"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Single HGF mRNA-LNP treatment at homeostasis with an EdU/HNF4α hepatocyte-proliferation endpoint."
+    },
+    {
+      "experiment_id": "GP-004-E03",
+      "label": "HGF+EGF mRNA-LNP in chronic liver injury (NAFLD) model",
+      "claim_ids": [
+        "V047",
+        "V050",
+        "V054",
+        "V057",
+        "V058",
+        "V059",
+        "V060",
+        "V061",
+        "V062",
+        "V066",
+        "V068",
+        "V070",
+        "V071",
+        "V072",
+        "V073"
+      ],
+      "shared_claim_ids": [
+        "V001",
+        "V002",
+        "V003",
+        "V004"
+      ],
+      "source_scope_clause_ids": [
+        "B001C013",
+        "B001C016",
+        "B002C024",
+        "B002C032",
+        "B007C001",
+        "B010C003"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "CDE diet-induced NAFLD experiment. It includes combination HGF/EGF outcomes and reported single-HGF and single-EGF steatosis findings within the same Figure 4 study context."
+    },
+    {
+      "experiment_id": "GP-004-E04",
+      "label": "HGF+EGF mRNA-LNP in acute liver injury (acetaminophen) model",
+      "claim_ids": [
+        "V076",
+        "V078",
+        "V079",
+        "V080",
+        "V081",
+        "V082",
+        "V083",
+        "V084",
+        "V085",
+        "V086",
+        "V087"
+      ],
+      "shared_claim_ids": [
+        "V001",
+        "V002",
+        "V003",
+        "V004"
+      ],
+      "source_scope_clause_ids": [
+        "B006C009",
+        "B010C003"
+      ],
+      "boundary_status": "explicit",
+      "boundary_reason": "Combination HGF/EGF mRNA-LNP treatment following acute acetaminophen injury, with distinct liver-function, necrosis, TUNEL, and ALT results."
+    }
+  ]
+}

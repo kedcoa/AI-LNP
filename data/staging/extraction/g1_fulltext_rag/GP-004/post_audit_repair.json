@@ -1,0 +1,1331 @@
+{
+  "contract_version": "4.0.0",
+  "paper_id": "GP-004",
+  "source_read_again": true,
+  "observations": [
+    {
+      "observation_id": "OBS-01",
+      "experiment_id": "GP-004-E05",
+      "claim_id": null,
+      "issue_type": "wrong_experiment_link",
+      "action": "removed",
+      "explanation": "The eGFP cellular-specificity experiment was not included in the human-approved experiment inventory, which specifies four experiments (E01–E04). Its experiment record, exclusive entities, and claims were removed rather than adding an unapproved experiment.",
+      "evidence": [
+        {
+          "clause_id": "B006C001",
+          "quote": "To further evaluate the histologic specificity of IV-injected mRNA-LNP, we performed immunostaining"
+        },
+        {
+          "clause_id": "B006C012",
+          "quote": "Examination of eGFP expression in various organs supports that liver is the main target organ of IV-administered eGFP mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "observation_id": "OBS-02",
+      "experiment_id": null,
+      "claim_id": null,
+      "issue_type": "wrong_entity_type",
+      "action": "corrected",
+      "explanation": "Claims using intervention --carries_payload--> payload were corrected so that the LNP formulation is the payload-carrying subject. This conforms to the predicate semantics without introducing a new inferred entity.",
+      "evidence": [
+        {
+          "clause_id": "B009C003",
+          "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+        },
+        {
+          "clause_id": "B012C004",
+          "quote": "HGF mRNA-LNP"
+        },
+        {
+          "clause_id": "B008C003",
+          "quote": "the combination of HGF and EGF mRNA-LNP"
+        }
+      ]
+    },
+    {
+      "observation_id": "OBS-03",
+      "experiment_id": null,
+      "claim_id": null,
+      "issue_type": "unsupported",
+      "action": "corrected",
+      "explanation": "For retained relations, entity evidence was expanded with exact source clauses shared by the claim and both linked entities. Claims lacking an approved experiment were removed with E05.",
+      "evidence": [
+        {
+          "clause_id": "B009C003",
+          "quote": "Here, we determined the organ distribution and duration of protein activity produced by firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+        },
+        {
+          "clause_id": "B012C002",
+          "quote": "we examined the potential of a single IV injection of mRNA-LNP encoding the mitogen HGF"
+        },
+        {
+          "clause_id": "B008C003",
+          "quote": "the combination of HGF and EGF mRNA-LNP accelerates the restoration of liver function"
+        }
+      ]
+    }
+  ],
+  "corrected_graph": {
+    "contract_version": "4.0.0",
+    "paper_id": "GP-004",
+    "source_scope": "full_text_with_supplement",
+    "original_lnp_experiments_present": true,
+    "entities": [
+      {
+        "entity_id": "ENT-FORM-01",
+        "entity_type": "lnp_formulation",
+        "reported_name": "mRNA-LNP",
+        "normalized_name": "mRNA lipid nanoparticle",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid53,54."
+          },
+          {
+            "clause_id": "B009C003",
+            "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+          },
+          {
+            "clause_id": "B012C004",
+            "quote": "HGF mRNA-LNP"
+          },
+          {
+            "clause_id": "B008C003",
+            "quote": "the combination of HGF and EGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-COMP-01",
+        "entity_type": "lnp_component",
+        "reported_name": "ionizable cationic lipid",
+        "normalized_name": "ionizable cationic lipid",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "ionizable cationic lipid"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-COMP-02",
+        "entity_type": "lnp_component",
+        "reported_name": "phosphatidylcholine",
+        "normalized_name": "phosphatidylcholine",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "phosphatidylcholine"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-COMP-03",
+        "entity_type": "lnp_component",
+        "reported_name": "cholesterol",
+        "normalized_name": "cholesterol",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "cholesterol"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-COMP-04",
+        "entity_type": "lnp_component",
+        "reported_name": "PEG-lipid",
+        "normalized_name": "PEG-lipid",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "PEG-lipid"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-SPEC-01",
+        "entity_type": "species",
+        "reported_name": "mice",
+        "normalized_name": "Mus musculus",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C011",
+            "quote": "tail vein (n = 2 mice) or retro-orbital (n = 6 mice) injection of Luc mRNA-LNP."
+          },
+          {
+            "clause_id": "B012C004",
+            "quote": "When mice were given a single injection of HGF mRNA-LNP"
+          },
+          {
+            "clause_id": "B008C003",
+            "quote": "mouse model"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-CELL-01",
+        "entity_type": "cell",
+        "reported_name": "hepatocytes",
+        "normalized_name": "hepatocyte",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "assessing 5-ethynyl-2′-deoxyuridine (EdU) incorporation in hepatocytes"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-ROUTE-01",
+        "entity_type": "route",
+        "reported_name": "IV injection",
+        "normalized_name": "intravenous injection",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "following a single IV injection"
+          },
+          {
+            "clause_id": "B012C002",
+            "quote": "a single IV injection of mRNA-LNP encoding the mitogen HGF"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-PAY-01",
+        "entity_type": "payload",
+        "reported_name": "firefly luciferase encoding mRNA",
+        "normalized_name": "firefly luciferase mRNA",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+          },
+          {
+            "clause_id": "B005C001",
+            "quote": "mRNAs were produced using T7 RNA polymerase (Megascript, Ambion) on a linearized plasmid encoding codon-optimized firefly luciferase (Luc)"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-PROD-01",
+        "entity_type": "encoded_product",
+        "reported_name": "firefly luciferase",
+        "normalized_name": "firefly luciferase",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B005C001",
+            "quote": "linearized plasmid encoding codon-optimized firefly luciferase (Luc)"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-INT-01",
+        "entity_type": "intervention",
+        "reported_name": "Luc mRNA-LNP",
+        "normalized_name": "firefly luciferase mRNA-LNP",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+          },
+          {
+            "clause_id": "B009C005",
+            "quote": "Both delivery methods led to liver restricted Luc mRNA-LNP expression as measured by bioluminescence"
+          },
+          {
+            "clause_id": "B009C007",
+            "quote": "The highest Luc activity was detected as early as 5 h after injection"
+          },
+          {
+            "clause_id": "B009C008",
+            "quote": "finally reach baseline activity at day 8 post-injection"
+          },
+          {
+            "clause_id": "B009C011",
+            "quote": "injection of Luc mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-DOSE-01",
+        "entity_type": "dose",
+        "reported_name": "5 μg Luc mRNA-LNP/20 g body weight",
+        "normalized_name": "5 µg per 20 g body weight",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "5 μg Luc mRNA-LNP/20 g body weight"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-ASSAY-01",
+        "entity_type": "assay",
+        "reported_name": "bioluminescence",
+        "normalized_name": "bioluminescence imaging",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C005",
+            "quote": "Both delivery methods led to liver restricted Luc mRNA-LNP expression as measured by bioluminescence"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-END-01",
+        "entity_type": "endpoint",
+        "reported_name": "Luc activity",
+        "normalized_name": "luciferase activity",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B009C007",
+            "quote": "The highest Luc activity was detected as early as 5 h after injection"
+          },
+          {
+            "clause_id": "B009C008",
+            "quote": "finally reach baseline activity at day 8 post-injection"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-01",
+        "entity_type": "outcome_value",
+        "reported_name": "highest activity at 5 h and stable for 24 h",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "B009C007",
+            "quote": "The highest Luc activity was detected as early as 5 h after injection, and remained stable for 24 h."
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-02",
+        "entity_type": "outcome_value",
+        "reported_name": "baseline activity at day 8",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "B009C008",
+            "quote": "finally reach baseline activity at day 8 post-injection"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-PAY-02",
+        "entity_type": "payload",
+        "reported_name": "HGF mRNA",
+        "normalized_name": "hepatocyte growth factor mRNA",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C004",
+            "quote": "HGF mRNA-LNP"
+          },
+          {
+            "clause_id": "B012C002",
+            "quote": "mRNA-LNP encoding the mitogen HGF"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-PROD-02",
+        "entity_type": "encoded_product",
+        "reported_name": "HGF",
+        "normalized_name": "hepatocyte growth factor",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "mRNA-LNP encoding the mitogen HGF"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-INT-02",
+        "entity_type": "intervention",
+        "reported_name": "HGF mRNA-LNP",
+        "normalized_name": "hepatocyte growth factor mRNA-LNP",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "a single IV injection of mRNA-LNP encoding the mitogen HGF"
+          },
+          {
+            "clause_id": "B012C004",
+            "quote": "When mice were given a single injection of HGF mRNA-LNP"
+          },
+          {
+            "clause_id": "B012C008",
+            "quote": "HGF mRNA-LNP induced a marked increase in EdU+ proliferative cell numbers"
+          },
+          {
+            "clause_id": "B012C016",
+            "quote": "HGF mRNA-LNP-treated mice compared to control Poly(C) RNA-treated mice"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-STATE-01",
+        "entity_type": "physiological_state",
+        "reported_name": "homeostatic context",
+        "normalized_name": "homeostasis",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "in a homeostatic context"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-DOSE-02",
+        "entity_type": "dose",
+        "reported_name": "10 μg mRNA-LNP/20 g body weight",
+        "normalized_name": "10 µg per 20 g body weight",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C004",
+            "quote": "10 μg mRNA-LNP/20 g body weight"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-ASSAY-02",
+        "entity_type": "assay",
+        "reported_name": "EdU incorporation",
+        "normalized_name": "5-ethynyl-2′-deoxyuridine incorporation assay",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "assessing 5-ethynyl-2′-deoxyuridine (EdU) incorporation"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-END-02",
+        "entity_type": "endpoint",
+        "reported_name": "EdU+ proliferative cell numbers",
+        "normalized_name": "number of EdU-positive proliferating cells",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C008",
+            "quote": "HGF mRNA-LNP induced a marked increase in EdU+ proliferative cell numbers"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-03",
+        "entity_type": "outcome_value",
+        "reported_name": "marked increase in EdU+ proliferative cell numbers",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "B012C008",
+            "quote": "HGF mRNA-LNP induced a marked increase in EdU+ proliferative cell numbers"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-END-03",
+        "entity_type": "endpoint",
+        "reported_name": "HNF4α+ EdU+ hepatocytes",
+        "normalized_name": "EdU-positive HNF4α-positive hepatocytes",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B012C016",
+            "quote": "EdU+ HNF4α+ hepatocytes"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-04",
+        "entity_type": "outcome_value",
+        "reported_name": "61.25 ± 10.66%",
+        "normalized_name": "61.25 ± 10.66 percent",
+        "normalization_status": "exact",
+        "evidence": [
+          {
+            "clause_id": "B012C016",
+            "quote": "61.25 ± 10.66%"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-05",
+        "entity_type": "outcome_value",
+        "reported_name": "121-fold increase",
+        "normalized_name": "121-fold increase versus Poly(C) RNA-LNP",
+        "normalization_status": "inferred",
+        "evidence": [
+          {
+            "clause_id": "B012C016",
+            "quote": "121-fold increase of EdU+ HNF4α+ hepatocytes in HGF mRNA-LNP-treated mice compared to control Poly(C) RNA-treated mice"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-PAY-03",
+        "entity_type": "payload",
+        "reported_name": "EGF mRNA",
+        "normalized_name": "epidermal growth factor mRNA",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "the combination of HGF and EGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-PROD-03",
+        "entity_type": "encoded_product",
+        "reported_name": "EGF",
+        "normalized_name": "epidermal growth factor",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B005C001",
+            "quote": "epidermal growth factor (EGF)"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-INT-03",
+        "entity_type": "intervention",
+        "reported_name": "combination of HGF and EGF mRNA-LNP",
+        "normalized_name": "HGF plus EGF mRNA-LNP",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "the combination of HGF and EGF mRNA-LNP"
+          },
+          {
+            "clause_id": "B002C024",
+            "quote": "the combination of HGF/EGF mRNA-LNP greatly reduce steatosis"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-MODEL-01",
+        "entity_type": "biological_model",
+        "reported_name": "chronic CDE diet-induced NAFLD mouse model",
+        "normalized_name": "CDE diet-induced NAFLD mouse model",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "chronic Choline-Deficient Ethionine-supplemented (CDE) diet-induced non-alcoholic fatty liver disease (NAFLD) mouse model"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-DIS-01",
+        "entity_type": "disease",
+        "reported_name": "non-alcoholic fatty liver disease (NAFLD)",
+        "normalized_name": "nonalcoholic fatty liver disease",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "non-alcoholic fatty liver disease (NAFLD)"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-END-04",
+        "entity_type": "endpoint",
+        "reported_name": "steatosis",
+        "normalized_name": "hepatic steatosis",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "the combination of HGF/EGF mRNA-LNP greatly reduce steatosis"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-06",
+        "entity_type": "outcome_value",
+        "reported_name": "greatly reduce steatosis",
+        "normalized_name": "reduced hepatic steatosis",
+        "normalization_status": "inferred",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "the combination of HGF/EGF mRNA-LNP greatly reduce steatosis"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-END-05",
+        "entity_type": "endpoint",
+        "reported_name": "serum ALT",
+        "normalized_name": "serum alanine aminotransferase",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "restoring baseline levels of serum ALT"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-07",
+        "entity_type": "outcome_value",
+        "reported_name": "restoring baseline levels of serum ALT",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "restoring baseline levels of serum ALT"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-MODEL-02",
+        "entity_type": "biological_model",
+        "reported_name": "acute acetaminophen-induced liver injury mouse model",
+        "normalized_name": "acetaminophen-induced acute liver injury mouse model",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "acute acetaminophen-induced liver injury mouse model"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-DIS-02",
+        "entity_type": "disease",
+        "reported_name": "acute acetaminophen-induced liver injury",
+        "normalized_name": "acetaminophen-induced acute liver injury",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "acute acetaminophen-induced liver injury"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-END-06",
+        "entity_type": "endpoint",
+        "reported_name": "restoration of liver function",
+        "normalized_name": "liver function restoration",
+        "normalization_status": "synonym",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "accelerates the restoration of liver function"
+          }
+        ]
+      },
+      {
+        "entity_id": "ENT-OUT-08",
+        "entity_type": "outcome_value",
+        "reported_name": "accelerates restoration of liver function",
+        "normalized_name": null,
+        "normalization_status": "unresolved",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "accelerates the restoration of liver function"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "CLM-S01",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "has_component",
+        "object_entity_id": "ENT-COMP-01",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid53,54."
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-S02",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "has_component",
+        "object_entity_id": "ENT-COMP-02",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid53,54."
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-S03",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "has_component",
+        "object_entity_id": "ENT-COMP-03",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid53,54."
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-S04",
+        "experiment_id": "SHARED",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "has_component",
+        "object_entity_id": "ENT-COMP-04",
+        "evidence": [
+          {
+            "clause_id": "B004C002",
+            "quote": "LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid53,54."
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-01",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-INT-01",
+        "predicate": "has_formulation",
+        "object_entity_id": "ENT-FORM-01",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-02",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "carries_payload",
+        "object_entity_id": "ENT-PAY-01",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP)"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-03",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-PAY-01",
+        "predicate": "encodes_product",
+        "object_entity_id": "ENT-PROD-01",
+        "evidence": [
+          {
+            "clause_id": "B005C001",
+            "quote": "linearized plasmid encoding codon-optimized firefly luciferase (Luc)"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-04",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-INT-01",
+        "predicate": "has_species",
+        "object_entity_id": "ENT-SPEC-01",
+        "evidence": [
+          {
+            "clause_id": "B009C011",
+            "quote": "tail vein (n = 2 mice) or retro-orbital (n = 6 mice) injection of Luc mRNA-LNP."
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-05",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-INT-01",
+        "predicate": "has_route",
+        "object_entity_id": "ENT-ROUTE-01",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "following a single IV injection"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-06",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-INT-01",
+        "predicate": "has_dose",
+        "object_entity_id": "ENT-DOSE-01",
+        "evidence": [
+          {
+            "clause_id": "B009C003",
+            "quote": "5 μg Luc mRNA-LNP/20 g body weight"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-07",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-INT-01",
+        "predicate": "has_assay",
+        "object_entity_id": "ENT-ASSAY-01",
+        "evidence": [
+          {
+            "clause_id": "B009C005",
+            "quote": "Both delivery methods led to liver restricted Luc mRNA-LNP expression as measured by bioluminescence"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-08",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-INT-01",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "ENT-END-01",
+        "evidence": [
+          {
+            "clause_id": "B009C007",
+            "quote": "The highest Luc activity was detected as early as 5 h after injection"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-09",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-END-01",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-01",
+        "evidence": [
+          {
+            "clause_id": "B009C007",
+            "quote": "The highest Luc activity was detected as early as 5 h after injection, and remained stable for 24 h."
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E01-10",
+        "experiment_id": "GP-004-E01",
+        "subject_entity_id": "ENT-END-01",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-02",
+        "evidence": [
+          {
+            "clause_id": "B009C008",
+            "quote": "finally reach baseline activity at day 8 post-injection"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-01",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "has_formulation",
+        "object_entity_id": "ENT-FORM-01",
+        "evidence": [
+          {
+            "clause_id": "B012C004",
+            "quote": "HGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-02",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "carries_payload",
+        "object_entity_id": "ENT-PAY-02",
+        "evidence": [
+          {
+            "clause_id": "B012C004",
+            "quote": "HGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-03",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-PAY-02",
+        "predicate": "encodes_product",
+        "object_entity_id": "ENT-PROD-02",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "mRNA-LNP encoding the mitogen HGF"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-04",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "has_species",
+        "object_entity_id": "ENT-SPEC-01",
+        "evidence": [
+          {
+            "clause_id": "B012C004",
+            "quote": "When mice were given a single injection of HGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-05",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "has_physiological_context",
+        "object_entity_id": "ENT-STATE-01",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "in a homeostatic context"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-06",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "has_route",
+        "object_entity_id": "ENT-ROUTE-01",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "a single IV injection of mRNA-LNP encoding the mitogen HGF"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-07",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "has_dose",
+        "object_entity_id": "ENT-DOSE-02",
+        "evidence": [
+          {
+            "clause_id": "B012C004",
+            "quote": "10 μg mRNA-LNP/20 g body weight"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-08",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "therapeutic_target_cell",
+        "object_entity_id": "ENT-CELL-01",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "assessing 5-ethynyl-2′-deoxyuridine (EdU) incorporation in hepatocytes"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-09",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "has_assay",
+        "object_entity_id": "ENT-ASSAY-02",
+        "evidence": [
+          {
+            "clause_id": "B012C002",
+            "quote": "assessing 5-ethynyl-2′-deoxyuridine (EdU) incorporation"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-10",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "ENT-END-02",
+        "evidence": [
+          {
+            "clause_id": "B012C008",
+            "quote": "HGF mRNA-LNP induced a marked increase in EdU+ proliferative cell numbers"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-11",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-END-02",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-03",
+        "evidence": [
+          {
+            "clause_id": "B012C008",
+            "quote": "HGF mRNA-LNP induced a marked increase in EdU+ proliferative cell numbers"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-12",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-INT-02",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "ENT-END-03",
+        "evidence": [
+          {
+            "clause_id": "B012C016",
+            "quote": "121-fold increase of EdU+ HNF4α+ hepatocytes in HGF mRNA-LNP-treated mice compared to control Poly(C) RNA-treated mice"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-13",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-END-03",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-04",
+        "evidence": [
+          {
+            "clause_id": "B012C016",
+            "quote": "61.25 ± 10.66%"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E02-14",
+        "experiment_id": "GP-004-E02",
+        "subject_entity_id": "ENT-END-03",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-05",
+        "evidence": [
+          {
+            "clause_id": "B012C016",
+            "quote": "121-fold increase of EdU+ HNF4α+ hepatocytes in HGF mRNA-LNP-treated mice compared to control Poly(C) RNA-treated mice"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-01",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "has_formulation",
+        "object_entity_id": "ENT-FORM-01",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "the combination of HGF and EGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-02",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "carries_payload",
+        "object_entity_id": "ENT-PAY-02",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "the combination of HGF and EGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-03",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-FORM-01",
+        "predicate": "carries_payload",
+        "object_entity_id": "ENT-PAY-03",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "the combination of HGF and EGF mRNA-LNP"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-04",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "has_species",
+        "object_entity_id": "ENT-SPEC-01",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "mouse model"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-05",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "has_biological_model",
+        "object_entity_id": "ENT-MODEL-01",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "chronic Choline-Deficient Ethionine-supplemented (CDE) diet-induced non-alcoholic fatty liver disease (NAFLD) mouse model"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-06",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "has_disease_context",
+        "object_entity_id": "ENT-DIS-01",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "non-alcoholic fatty liver disease (NAFLD)"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-07",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "ENT-END-04",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "the combination of HGF/EGF mRNA-LNP greatly reduce steatosis"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-08",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-END-04",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-06",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "the combination of HGF/EGF mRNA-LNP greatly reduce steatosis"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-09",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "ENT-END-05",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "restoring baseline levels of serum ALT"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E03-10",
+        "experiment_id": "GP-004-E03",
+        "subject_entity_id": "ENT-END-05",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-07",
+        "evidence": [
+          {
+            "clause_id": "B002C024",
+            "quote": "restoring baseline levels of serum ALT"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E04-01",
+        "experiment_id": "GP-004-E04",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "has_biological_model",
+        "object_entity_id": "ENT-MODEL-02",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "acute acetaminophen-induced liver injury mouse model"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E04-02",
+        "experiment_id": "GP-004-E04",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "has_disease_context",
+        "object_entity_id": "ENT-DIS-02",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "acute acetaminophen-induced liver injury"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E04-03",
+        "experiment_id": "GP-004-E04",
+        "subject_entity_id": "ENT-INT-03",
+        "predicate": "measures_endpoint",
+        "object_entity_id": "ENT-END-06",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "accelerates the restoration of liver function"
+          }
+        ]
+      },
+      {
+        "claim_id": "CLM-E04-04",
+        "experiment_id": "GP-004-E04",
+        "subject_entity_id": "ENT-END-06",
+        "predicate": "has_outcome_value",
+        "object_entity_id": "ENT-OUT-08",
+        "evidence": [
+          {
+            "clause_id": "B008C003",
+            "quote": "accelerates the restoration of liver function"
+          }
+        ]
+      }
+    ],
+    "experiments": [
+      {
+        "experiment_id": "GP-004-E01",
+        "label": "Luciferase mRNA-LNP expression kinetics after intravenous administration",
+        "claim_ids": [
+          "CLM-E01-01",
+          "CLM-E01-02",
+          "CLM-E01-03",
+          "CLM-E01-04",
+          "CLM-E01-05",
+          "CLM-E01-06",
+          "CLM-E01-07",
+          "CLM-E01-08",
+          "CLM-E01-09",
+          "CLM-E01-10"
+        ],
+        "shared_claim_ids": [
+          "CLM-S01",
+          "CLM-S02",
+          "CLM-S03",
+          "CLM-S04"
+        ],
+        "source_scope_clause_ids": [
+          "B005C001",
+          "B009C003",
+          "B009C005",
+          "B009C007",
+          "B009C008",
+          "B009C011"
+        ],
+        "boundary_status": "explicit",
+        "boundary_reason": "This experiment is explicitly defined by a single intravenous Luc mRNA-LNP injection and a one-week expression time course."
+      },
+      {
+        "experiment_id": "GP-004-E02",
+        "label": "HGF mRNA-LNP induction of hepatocyte proliferation in homeostasis",
+        "claim_ids": [
+          "CLM-E02-01",
+          "CLM-E02-02",
+          "CLM-E02-03",
+          "CLM-E02-04",
+          "CLM-E02-05",
+          "CLM-E02-06",
+          "CLM-E02-07",
+          "CLM-E02-08",
+          "CLM-E02-09",
+          "CLM-E02-10",
+          "CLM-E02-11",
+          "CLM-E02-12",
+          "CLM-E02-13",
+          "CLM-E02-14"
+        ],
+        "shared_claim_ids": [
+          "CLM-S01",
+          "CLM-S02",
+          "CLM-S03",
+          "CLM-S04"
+        ],
+        "source_scope_clause_ids": [
+          "B012C002",
+          "B012C004",
+          "B012C008",
+          "B012C016"
+        ],
+        "boundary_status": "explicit",
+        "boundary_reason": "This experiment uses HGF mRNA-LNP in a homeostatic context and measures EdU-defined proliferation."
+      },
+      {
+        "experiment_id": "GP-004-E03",
+        "label": "Combined HGF and EGF mRNA-LNP in CDE diet-induced NAFLD",
+        "claim_ids": [
+          "CLM-E03-01",
+          "CLM-E03-02",
+          "CLM-E03-03",
+          "CLM-E03-04",
+          "CLM-E03-05",
+          "CLM-E03-06",
+          "CLM-E03-07",
+          "CLM-E03-08",
+          "CLM-E03-09",
+          "CLM-E03-10"
+        ],
+        "shared_claim_ids": [
+          "CLM-S01",
+          "CLM-S02",
+          "CLM-S03",
+          "CLM-S04"
+        ],
+        "source_scope_clause_ids": [
+          "B002C024",
+          "B008C003"
+        ],
+        "boundary_status": "explicit",
+        "boundary_reason": "The source explicitly distinguishes the chronic CDE diet-induced NAFLD mouse model from the acute acetaminophen model."
+      },
+      {
+        "experiment_id": "GP-004-E04",
+        "label": "Combined HGF and EGF mRNA-LNP in acetaminophen-induced acute liver injury",
+        "claim_ids": [
+          "CLM-E04-01",
+          "CLM-E04-02",
+          "CLM-E04-03",
+          "CLM-E04-04"
+        ],
+        "shared_claim_ids": [
+          "CLM-S01",
+          "CLM-S02",
+          "CLM-S03",
+          "CLM-S04"
+        ],
+        "source_scope_clause_ids": [
+          "B008C003"
+        ],
+        "boundary_status": "explicit",
+        "boundary_reason": "The abstract explicitly identifies an acute acetaminophen-induced liver injury mouse model as a separate therapeutic context."
+      }
+    ]
+  },
+  "unresolved_ambiguities": []
+}

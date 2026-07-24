@@ -1,0 +1,125 @@
+{
+  "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+  "source_result": "results/GP-008-pnas.2534673123.sapp-p018-figure-01.validated.json",
+  "corrected_result": "results/GP-008-pnas.2534673123.sapp-p018-figure-01.human_corrected.json",
+  "correction_kind": "human_verified_source_read",
+  "corrected_at": "2026-07-24T07:50:31.627343+00:00",
+  "changes": [
+    {
+      "field": "raw_panel_labels/H/LNP-ZsGreen/Q2/value",
+      "before": "9.02",
+      "after": "9.92",
+      "reason": "High-resolution source figure visibly reads 9.92, not 9.02."
+    },
+    {
+      "field": "printed_facts/F4",
+      "before": {
+        "value": "9.02",
+        "visible_support": "LNP-ZsGreen: Q2 9.02"
+      },
+      "after": {
+        "value": "9.92",
+        "visible_support": "LNP-ZsGreen: Q2 9.92"
+      },
+      "reason": "High-resolution source figure visibly reads 9.92, not 9.02."
+    },
+    {
+      "field": "raw_panel_labels/G/channel_assignment",
+      "before": [
+        {
+          "label_id": "G-3",
+          "panel": "G",
+          "group": null,
+          "label": "ZsGreen; CD163; DAPI; Merge",
+          "value": "ZsGreen; CD163; DAPI; Merge",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        }
+      ],
+      "after": [
+        {
+          "label_id": "G-1-channel-1",
+          "panel": "G",
+          "group": "LNP-ZsGreen",
+          "label": "ZsGreen",
+          "value": "ZsGreen",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        },
+        {
+          "label_id": "G-1-channel-2",
+          "panel": "G",
+          "group": "LNP-ZsGreen",
+          "label": "CD163",
+          "value": "CD163",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        },
+        {
+          "label_id": "G-1-channel-3",
+          "panel": "G",
+          "group": "LNP-ZsGreen",
+          "label": "DAPI",
+          "value": "DAPI",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        },
+        {
+          "label_id": "G-1-channel-4",
+          "panel": "G",
+          "group": "LNP-ZsGreen",
+          "label": "Merge",
+          "value": "Merge",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        },
+        {
+          "label_id": "G-2-channel-1",
+          "panel": "G",
+          "group": "αCD163/LNP-ZsGreen",
+          "label": "ZsGreen",
+          "value": "ZsGreen",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        },
+        {
+          "label_id": "G-2-channel-2",
+          "panel": "G",
+          "group": "αCD163/LNP-ZsGreen",
+          "label": "CD163",
+          "value": "CD163",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        },
+        {
+          "label_id": "G-2-channel-3",
+          "panel": "G",
+          "group": "αCD163/LNP-ZsGreen",
+          "label": "DAPI",
+          "value": "DAPI",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        },
+        {
+          "label_id": "G-2-channel-4",
+          "panel": "G",
+          "group": "αCD163/LNP-ZsGreen",
+          "label": "Merge",
+          "value": "Merge",
+          "unit": null,
+          "label_type": "legend",
+          "visibly_printed": true
+        }
+      ],
+      "reason": "Panel G contains two treatment blocks; each block has ZsGreen, CD163, DAPI, and Merge views. The model transcribed the channels but left them unassigned to either group."
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "metric_version": "fulltext_rag_g1_final_v1",
+  "calculated_at": "2026-07-24T10:03:58.075463+00:00",
+  "scope": "Final human-adjudicated eligible evidence graphs. Precision is measured over retained reviewed claims; it is not unreviewed model-only precision.",
+  "papers": [
+    {
+      "paper_id": "GP-002",
+      "eligibility": "eligible",
+      "eligible_experiments": 6,
+      "eligible_claims": 42,
+      "reason": "Human-reviewed accepted graph retained after corrections."
+    },
+    {
+      "paper_id": "GP-004",
+      "eligibility": "eligible",
+      "eligible_experiments": 4,
+      "eligible_claims": 42,
+      "reason": "Human-reviewed accepted graph retained after corrections."
+    },
+    {
+      "paper_id": "GP-005",
+      "eligibility": "eligible",
+      "eligible_experiments": 3,
+      "eligible_claims": 28,
+      "reason": "Human-reviewed accepted graph retained after corrections."
+    },
+    {
+      "paper_id": "GP-006",
+      "eligibility": "eligible",
+      "eligible_experiments": 1,
+      "eligible_claims": 11,
+      "reason": "Human-reviewed accepted graph retained after corrections."
+    },
+    {
+      "paper_id": "GP-007",
+      "eligibility": "eligible",
+      "eligible_experiments": 4,
+      "eligible_claims": 26,
+      "reason": "Human-reviewed accepted graph retained after corrections."
+    },
+    {
+      "paper_id": "GP-008",
+      "eligibility": "eligible",
+      "eligible_experiments": 1,
+      "eligible_claims": 24,
+      "reason": "Human-reviewed accepted graph retained after corrections."
+    },
+    {
+      "paper_id": "GP-001",
+      "eligibility": "ineligible",
+      "eligible_experiments": 0,
+      "eligible_claims": 0,
+      "reason": "Cantharidin is a small-molecule payload outside the configured RNA-LNP scope."
+    },
+    {
+      "paper_id": "GP-003",
+      "eligibility": "ineligible",
+      "eligible_experiments": 0,
+      "eligible_claims": 0,
+      "reason": "The paper is a review and contains no eligible original LNP experiments."
+    },
+    {
+      "paper_id": "GP-009",
+      "eligibility": "ineligible",
+      "eligible_experiments": 0,
+      "eligible_claims": 0,
+      "reason": "Its extracted LNP experiments target lung endothelial cells, CD4 T cells, or hematopoietic stem cells; HSC does not mean hepatic stellate cell in this paper."
+    }
+  ],
+  "metrics": {
+    "reviewed_retained_claims": 173,
+    "reviewed_retained_critical_claims": 115,
+    "incorrect_retained_claims": 0,
+    "critical_field_precision": 1.0,
+    "required_precision": 0.9,
+    "precision_gate_pass": true,
+    "traceable_evidence_coverage": 1.0,
+    "negative_control_false_positive_papers": 0,
+    "negative_control_papers": 3,
+    "exact_gold_outcome_recall": 0.4,
+    "recovered_gold_outcome_ids": [
+      "GO-005",
+      "GO-007",
+      "GO-008",
+      "GO-010",
+      "GO-015",
+      "GO-016"
+    ],
+    "missing_gold_outcome_ids": [
+      "GO-001",
+      "GO-002",
+      "GO-003",
+      "GO-004",
+      "GO-006",
+      "GO-011",
+      "GO-013",
+      "GO-017",
+      "GO-018"
+    ]
+  },
+  "decision": {
+    "g1_precision_gate": "pass",
+    "g1_overall": "pass_with_recall_remediation_required",
+    "reason": "All human-approved retained claims are evidence-backed and the final precision exceeds 90%, but exact frozen-gold outcome recall is only 40.0%; Day 7 must address the omissions before curation."
+  }
+}

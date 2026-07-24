@@ -1,0 +1,117 @@
+{
+  "analysis_version": "day7_morning_g1_error_audit_v1",
+  "calculated_at": "2026-07-24T03:42:08.075631+00:00",
+  "scope": "All nine outcomes missing from the frozen G1 gold comparison.",
+  "metrics": {
+    "gold_outcomes": 15,
+    "exact_outcomes_recovered": 6,
+    "exact_outcome_recall": 0.4,
+    "missing_outcomes": 9,
+    "missing_outcomes_with_retrieved_evidence": 9,
+    "missing_outcomes_with_retrieval_miss_or_provenance_defect": 0,
+    "category_counts": {
+      "experiment_boundary_error": 4,
+      "human_gold_disagreement": 1,
+      "incomplete_evidence": 1,
+      "normalization_error": 1,
+      "wrong_relation": 2
+    },
+    "retrieval_k": 6,
+    "retrieval_recall_at_k": 1.0,
+    "extraction_recall_given_retrieval": 0.4,
+    "post_review_critical_precision": 1.0
+  },
+  "errors": [
+    {
+      "gold_outcome_id": "GO-001",
+      "paper_id": "GP-004",
+      "evidence_id": "EVID-004",
+      "endpoint_name": "eGFP_positive_CD11b_positive_cells",
+      "retrieved_at_k": true,
+      "retrieval_rank": 2,
+      "primary_error_category": "experiment_boundary_error",
+      "rationale": "Evidence was retrieved, but the GP-004 Kupffer/CD11b reporter experiment was omitted."
+    },
+    {
+      "gold_outcome_id": "GO-002",
+      "paper_id": "GP-004",
+      "evidence_id": "EVID-004",
+      "endpoint_name": "eGFP_expression_in_F4_80_positive_cells",
+      "retrieved_at_k": true,
+      "retrieval_rank": 2,
+      "primary_error_category": "experiment_boundary_error",
+      "rationale": "Evidence was retrieved, but the GP-004 F4/80-positive qualitative result was omitted with its experiment."
+    },
+    {
+      "gold_outcome_id": "GO-003",
+      "paper_id": "GP-006",
+      "evidence_id": "EVID-007",
+      "endpoint_name": "GFP_expression_in_LYVE1_positive_LSECs",
+      "retrieved_at_k": true,
+      "retrieval_rank": 2,
+      "primary_error_category": "experiment_boundary_error",
+      "rationale": "Evidence was retrieved, but GP-006 retained only the Cas9/sgRNA experiment and omitted reporter delivery."
+    },
+    {
+      "gold_outcome_id": "GO-004",
+      "paper_id": "GP-006",
+      "evidence_id": "EVID-007",
+      "endpoint_name": "hepatocyte_to_LSEC_luciferase_expression_ratio",
+      "retrieved_at_k": true,
+      "retrieval_rank": 2,
+      "primary_error_category": "experiment_boundary_error",
+      "rationale": "Evidence was retrieved, but the hepatocyte-to-LSEC reporter comparison was omitted with the reporter experiment."
+    },
+    {
+      "gold_outcome_id": "GO-006",
+      "paper_id": "GP-006",
+      "evidence_id": "EVID-010",
+      "endpoint_name": "total_insertion_frequency_in_LSECs",
+      "retrieved_at_k": true,
+      "retrieval_rank": 3,
+      "primary_error_category": "incomplete_evidence",
+      "rationale": "The supplement page was retrieved and deletion frequency was retained, but the insertion-frequency table value was omitted."
+    },
+    {
+      "gold_outcome_id": "GO-011",
+      "paper_id": "GP-005",
+      "evidence_id": "EVID-020",
+      "endpoint_name": "EGFP_expression_in_Kupffer_cells",
+      "retrieved_at_k": true,
+      "retrieval_rank": 1,
+      "primary_error_category": "normalization_error",
+      "rationale": "The graph retained low Kupffer translation but did not preserve the frozen exact negative result of no obvious EGFP-positive Kupffer cells."
+    },
+    {
+      "gold_outcome_id": "GO-013",
+      "paper_id": "GP-007",
+      "evidence_id": "EVID-024",
+      "endpoint_name": "LSEC_ultrastructure_and_function",
+      "retrieved_at_k": true,
+      "retrieval_rank": 1,
+      "primary_error_category": "wrong_relation",
+      "rationale": "GP-007 retained improvement values without a complete intervention-to-endpoint relation for the frozen LSEC protection outcome."
+    },
+    {
+      "gold_outcome_id": "GO-017",
+      "paper_id": "GP-008",
+      "evidence_id": "EVID-029",
+      "endpoint_name": "activated_HSC_elimination",
+      "retrieved_at_k": true,
+      "retrieval_rank": 1,
+      "primary_error_category": "wrong_relation",
+      "rationale": "GP-008 retained the therapeutic-target-cell link but not the macrophage-mediated activated-HSC elimination outcome."
+    },
+    {
+      "gold_outcome_id": "GO-018",
+      "paper_id": "GP-008",
+      "evidence_id": "EVID-030",
+      "endpoint_name": "reporter_recipient_cell",
+      "retrieved_at_k": true,
+      "retrieval_rank": 1,
+      "primary_error_category": "human_gold_disagreement",
+      "rationale": "The frozen page was 18, but the extracted PDF places Appendix Figure 5 panels G-L and marker labels on page 19."
+    }
+  ],
+  "interpretation": "Retrieval and extraction are reported separately: retrieved evidence does not count as an extracted outcome, and a provenance mismatch is not an LLM error."
+}

@@ -1,0 +1,49 @@
+{
+  "metric_version": "day7_v4.1_completeness_repair",
+  "calculated_at": "2026-07-24T04:38:43.822291+00:00",
+  "exact_outcome_recall": 0.8,
+  "recovered": [
+    "GO-001",
+    "GO-002",
+    "GO-003",
+    "GO-004",
+    "GO-005",
+    "GO-007",
+    "GO-008",
+    "GO-010",
+    "GO-011",
+    "GO-013",
+    "GO-015",
+    "GO-016"
+  ],
+  "newly_recovered": [
+    "GO-002",
+    "GO-011"
+  ],
+  "residual": {
+    "GO-006": "Structured supplement-table value requires the PDF/table workflow.",
+    "GO-017": "Independent disposition rejected the available text as inferred rather than a measured outcome.",
+    "GO-018": "Image-derived recipient-cell specificity requires the PDF/figure workflow."
+  },
+  "validated_proofs": {
+    "GO-002": {
+      "paper_id": "GP-004",
+      "candidate_ids": [
+        "RC-B008C005-35-943f42e6"
+      ],
+      "claim_ids": [
+        "V089"
+      ]
+    },
+    "GO-011": {
+      "paper_id": "GP-005",
+      "candidate_ids": [
+        "RC-B022C003-42-32ef0299"
+      ],
+      "claim_ids": [
+        "CL049"
+      ]
+    }
+  },
+  "tests": "68 passed"
+}

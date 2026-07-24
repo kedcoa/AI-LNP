@@ -1,0 +1,807 @@
+{
+  "title": "Day 8 PDF/OpenAI focused review",
+  "outcomes": [
+    {
+      "gold_id": "GO-006",
+      "paper_id": "GP-006",
+      "expected_fact": "Table S2 reports total insertion frequency in LSECs of 1.01 ± 0.38% after Cas9/sgRNA LNP treatment.",
+      "expected_endpoint": "total_insertion_frequency_in_LSECs",
+      "expected_value": "1.01",
+      "expected_unit": "percent",
+      "source_file": "mmc1.pdf",
+      "source_page": 2,
+      "figure_or_table": "Table S2",
+      "panel_or_cell": "LSEC",
+      "page_was_sent_before_fix": true,
+      "page_was_sent_after_fix": true,
+      "whole_pdf_status": "missed",
+      "targeted_status": "matched",
+      "closest_whole_pdf_records": [
+        {
+          "record_id": "GP-006-R030",
+          "paper_id": "GP-006",
+          "experiment_id": "Cas9-LNP-indel-pattern",
+          "population": "F8 indel variants from treated NSG hemophilia A mouse liver cells",
+          "intervention": "Intravenous MC3 LNP encapsulating Cas9 mRNA and NSGHAsgRNA",
+          "endpoint": "+2-base-pair insertion frequency",
+          "value": "0.78",
+          "unit": "%",
+          "location": {
+            "file_name": "main.pdf",
+            "page": 6,
+            "figure_or_table": "Figure 6",
+            "panel_or_cell": "C-D; Table S2 referenced",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "We also analyzed the +2 and +5 insertion patterns among indel variants, but their frequencies were significantly lower (0.78% and 0%, respectively) compared with deletion variants (Table S2)."
+          },
+          "measurement_status": "exact",
+          "confidence": "medium",
+          "ambiguity": "The parsed main text does not specify whether this frequency is for LSECs, hepatocytes, or a pooled population; the surrounding paragraph focuses on LSECs."
+        },
+        {
+          "record_id": "GP-006-R031",
+          "paper_id": "GP-006",
+          "experiment_id": "Cas9-LNP-indel-pattern",
+          "population": "F8 indel variants from treated NSG hemophilia A mouse liver cells",
+          "intervention": "Intravenous MC3 LNP encapsulating Cas9 mRNA and NSGHAsgRNA",
+          "endpoint": "+5-base-pair insertion frequency",
+          "value": "0",
+          "unit": "%",
+          "location": {
+            "file_name": "main.pdf",
+            "page": 6,
+            "figure_or_table": "Figure 6",
+            "panel_or_cell": "C-D; Table S2 referenced",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "We also analyzed the +2 and +5 insertion patterns among indel variants, but their frequencies were significantly lower (0.78% and 0%, respectively) compared with deletion variants (Table S2)."
+          },
+          "measurement_status": "exact",
+          "confidence": "medium",
+          "ambiguity": "The parsed main text does not specify whether this frequency is for LSECs, hepatocytes, or a pooled population; the surrounding paragraph focuses on LSECs."
+        },
+        {
+          "record_id": "GP-006-R008",
+          "paper_id": "GP-006",
+          "experiment_id": "DiI-LNP-liver-biodistribution",
+          "population": "Mouse liver sinusoidal endothelial cells marked by Isolectin B4",
+          "intervention": "0.4 mg/kg intravenous DiI-labeled MC3 LNP; liver collected after 1 hour",
+          "endpoint": "LNP colocalization with LSEC/vascular-cell marker",
+          "value": "detected",
+          "unit": null,
+          "location": {
+            "file_name": "main.pdf",
+            "page": 4,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "A",
+            "evidence_source_type": "caption",
+            "evidence_quote": "Colocalization of LNPs and vascular cells were indicated by white arrowheads."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Isolectin B4 marks vascular cells; the body text interprets the colocalized cells as LSECs."
+        },
+        {
+          "record_id": "GP-006-R009",
+          "paper_id": "GP-006",
+          "experiment_id": "GFP-LNP-LSEC-transfection",
+          "population": "Mouse LYVE-1-positive liver sinusoidal endothelial cells",
+          "intervention": "1.2 mg/kg intravenous GFP mRNA MC3 LNP; liver collected after 6 hours",
+          "endpoint": "GFP protein expression in LSECs",
+          "value": "detected by GFP/LYVE-1 colocalization",
+          "unit": null,
+          "location": {
+            "file_name": "main.pdf",
+            "page": 4,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "B",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "The immunostaining images showed colocalization of LYVE-1 and GFP signals, indicating that LSECs not only uptake LNPs but can also express GFP protein (Figure 2B)."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-006-R010",
+          "paper_id": "GP-006",
+          "experiment_id": "Luc-LNP-cell-type-transfection",
+          "population": "Isolated mouse hepatocytes versus isolated mouse LSECs",
+          "intervention": "0.2 mg/kg intravenous Luc mRNA MC3 LNP",
+          "endpoint": "hepatocyte-to-LSEC luciferase expression ratio",
+          "value": "about 17-fold higher in hepatocytes",
+          "unit": "fold",
+          "location": {
+            "file_name": "main.pdf",
+            "page": 4,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "C",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "The results indicated that high levels of luciferase expression were obtained from both hepatocytes and LSECs with about 17-fold higher expression in hepatocytes than LSECs."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        }
+      ],
+      "closest_targeted_records": [
+        {
+          "record_id": "GP-006-R027",
+          "paper_id": "GP-006",
+          "experiment_id": "Cas9-NSGHAsgRNA-LNP-insertion-patterns",
+          "population": "Isolated LSECs from treated NSG hemophilia A mice",
+          "intervention": "4 mg/kg Cas9 mRNA/NSGHAsgRNA MC3 LNP, intravenous",
+          "endpoint": "Total F8 insertion frequency",
+          "value": "1.01 ± 0.38",
+          "unit": "%",
+          "location": {
+            "file_name": "mmc1.pdf",
+            "page": 2,
+            "figure_or_table": "Table S2",
+            "panel_or_cell": "LSEC × total insertion frequency",
+            "evidence_source_type": "table",
+            "evidence_quote": "LSEC — total insertion frequency: 1.01 ± 0.38 %"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-006-R022",
+          "paper_id": "GP-006",
+          "experiment_id": "Cas9-NSGHAsgRNA-LNP-insertion-patterns",
+          "population": "Isolated LSECs from treated NSG hemophilia A mice",
+          "intervention": "4 mg/kg Cas9 mRNA/NSGHAsgRNA MC3 LNP, intravenous",
+          "endpoint": "F8 +1-bp insertion frequency",
+          "value": "0.78 ± 0.27",
+          "unit": "%",
+          "location": {
+            "file_name": "mmc1.pdf",
+            "page": 2,
+            "figure_or_table": "Table S2",
+            "panel_or_cell": "LSEC × +1",
+            "evidence_source_type": "table",
+            "evidence_quote": "LSEC — +1: 0.78 ± 0.27 %"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Main-text wording associates 0.78% with the +2 insertion pattern, but Table S2 assigns 0.78 ± 0.27% to +1."
+        },
+        {
+          "record_id": "GP-006-R023",
+          "paper_id": "GP-006",
+          "experiment_id": "Cas9-NSGHAsgRNA-LNP-insertion-patterns",
+          "population": "Isolated LSECs from treated NSG hemophilia A mice",
+          "intervention": "4 mg/kg Cas9 mRNA/NSGHAsgRNA MC3 LNP, intravenous",
+          "endpoint": "F8 +2-bp insertion frequency",
+          "value": "0.21 ± 0.10",
+          "unit": "%",
+          "location": {
+            "file_name": "mmc1.pdf",
+            "page": 2,
+            "figure_or_table": "Table S2",
+            "panel_or_cell": "LSEC × +2",
+            "evidence_source_type": "table",
+            "evidence_quote": "LSEC — +2: 0.21 ± 0.10 %"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Main-text wording reports 0.78% for +2, conflicting with the +2 value of 0.21 ± 0.10% in Table S2."
+        },
+        {
+          "record_id": "GP-006-R024",
+          "paper_id": "GP-006",
+          "experiment_id": "Cas9-NSGHAsgRNA-LNP-insertion-patterns",
+          "population": "Isolated LSECs from treated NSG hemophilia A mice",
+          "intervention": "4 mg/kg Cas9 mRNA/NSGHAsgRNA MC3 LNP, intravenous",
+          "endpoint": "F8 +3-bp insertion frequency",
+          "value": "0.01 ± 0.01",
+          "unit": "%",
+          "location": {
+            "file_name": "mmc1.pdf",
+            "page": 2,
+            "figure_or_table": "Table S2",
+            "panel_or_cell": "LSEC × +3",
+            "evidence_source_type": "table",
+            "evidence_quote": "LSEC — +3: 0.01 ± 0.01 %"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-006-R025",
+          "paper_id": "GP-006",
+          "experiment_id": "Cas9-NSGHAsgRNA-LNP-insertion-patterns",
+          "population": "Isolated LSECs from treated NSG hemophilia A mice",
+          "intervention": "4 mg/kg Cas9 mRNA/NSGHAsgRNA MC3 LNP, intravenous",
+          "endpoint": "F8 +4-bp insertion frequency",
+          "value": "0.00",
+          "unit": "%",
+          "location": {
+            "file_name": "mmc1.pdf",
+            "page": 2,
+            "figure_or_table": "Table S2",
+            "panel_or_cell": "LSEC × +4",
+            "evidence_source_type": "table",
+            "evidence_quote": "LSEC — +4: 0.00"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        }
+      ],
+      "closest_focused_retry_records": [],
+      "human_question": "Does the closest extracted record directly support the expected fact at the cited original source location, without adding an inference?"
+    },
+    {
+      "gold_id": "GO-017",
+      "paper_id": "GP-008",
+      "expected_fact": "FAPCAR-expressing macrophages recognized and eliminated FAP-positive activated HSC models; the LNP cargo was expressed in macrophages, not HSCs.",
+      "expected_endpoint": "activated_HSC_elimination",
+      "expected_value": "",
+      "expected_unit": "",
+      "source_file": "data/raw/fulltext/gold_v1/xml/candidate_00132_PMC13229182.xml",
+      "source_page": null,
+      "figure_or_table": "Figures 2 and 6",
+      "panel_or_cell": "",
+      "page_was_sent_before_fix": null,
+      "page_was_sent_after_fix": null,
+      "whole_pdf_status": "matched",
+      "targeted_status": "matched",
+      "closest_whole_pdf_records": [
+        {
+          "record_id": "GP-008-R011",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-phagocytosis-assay",
+          "population": "BMDMs cocultured with FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "Phagocytic rate relative to untreated WT BMDMs",
+          "value": ">10-fold",
+          "unit": "fold",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "A–D",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "the αCD163/LNP-FAPCAR treatment induced a phagocytic rate more than ten times that of the WT group"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "The text reports a lower-bound fold change rather than an exact value."
+        },
+        {
+          "record_id": "GP-008-R012",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-phagocytosis-assay",
+          "population": "BMDMs cocultured with FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "Phagocytic rate relative to unmodified LNP-FAPCAR",
+          "value": "approximately 3-fold",
+          "unit": "fold",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "A–D",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "the αCD163/LNP-FAPCAR treatment induced a phagocytic rate...approximately three times that of the LNP-FAPCAR group."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "The printed value is explicitly approximate."
+        },
+        {
+          "record_id": "GP-008-R013",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-phagocytosis-assay",
+          "population": "BMDMs cocultured with FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-Luc control",
+          "endpoint": "Phagocytic efficiency",
+          "value": "no increase",
+          "unit": null,
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "A–D",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "the αCD163/LNP-Luc group did not exhibit increased phagocytic efficiency"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-008-R014",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-target-cell-killing-assay",
+          "population": "FAP-positive JS-1 target cells cocultured with BMDMs",
+          "intervention": "BMDMs treated with αCD163/LNP-FAPCAR",
+          "endpoint": "Target-cell killing efficiency",
+          "value": "approximately 40",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 4,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "F",
+            "evidence_source_type": "figure",
+            "evidence_quote": "The cytotoxicity of BMDMs against target FAP+ JS-1 cells."
+          },
+          "measurement_status": "visually_estimated",
+          "confidence": "medium",
+          "ambiguity": "Estimated from the bar height; no numerical value is printed on the bar."
+        },
+        {
+          "record_id": "GP-008-R015",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-polarization-and-gene-expression",
+          "population": "Screened BMDMs after coculture with FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "Mmp9 gene expression versus controls",
+          "value": "no significant effect",
+          "unit": null,
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "O",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "no significant effect on the gene expression of Mmp9 and Mmp13 (Fig. 2 O–Q)."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        }
+      ],
+      "closest_targeted_records": [
+        {
+          "record_id": "GP-008-R010",
+          "paper_id": "GP-008",
+          "experiment_id": "JS1-FAP-induction",
+          "population": "Mouse JS-1 hepatic stellate cells",
+          "intervention": "TGF-β1 induction",
+          "endpoint": "FAP-positive cells",
+          "value": "79.4",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.2534673123.sapp.pdf",
+            "page": 11,
+            "figure_or_table": "Figure S1",
+            "panel_or_cell": "A, TGF-β1 FAP+ gate",
+            "evidence_source_type": "figure",
+            "evidence_quote": "JS-1 cells induced with TGF-β1; FAP+ 79.4."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-008-R011",
+          "paper_id": "GP-008",
+          "experiment_id": "JS1-FAP-induction",
+          "population": "Untreated mouse JS-1 hepatic stellate cells",
+          "intervention": "No TGF-β1 induction",
+          "endpoint": "FAP-positive cells",
+          "value": "0.37",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.2534673123.sapp.pdf",
+            "page": 11,
+            "figure_or_table": "Figure S1",
+            "panel_or_cell": "A, NC FAP+ gate",
+            "evidence_source_type": "figure",
+            "evidence_quote": "JS-1 cells; NC; FAP+ 0.37."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-008-R012",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-phagocytosis-FAP-positive-JS1",
+          "population": "BMDMs cocultured with FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "Phagocytic rate relative to untreated WT BMDMs",
+          "value": ">10",
+          "unit": "fold",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "A–D",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "the αCD163/LNP-FAPCAR treatment induced a phagocytic rate more than ten times that of the WT group"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Printed as a relative threshold, not an exact fold estimate."
+        },
+        {
+          "record_id": "GP-008-R013",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-phagocytosis-FAP-positive-JS1",
+          "population": "BMDMs cocultured with FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "Phagocytic rate relative to LNP-FAPCAR",
+          "value": "approximately 3",
+          "unit": "fold",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "A–D",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "the αCD163/LNP-FAPCAR treatment induced a phagocytic rate ... approximately three times that of the LNP-FAPCAR group."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "The authors report an approximate relative value."
+        },
+        {
+          "record_id": "GP-008-R014",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-phagocytosis-control",
+          "population": "BMDMs cocultured with FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-Luc",
+          "endpoint": "Increase in phagocytic efficiency versus WT",
+          "value": "No increase",
+          "unit": null,
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "A–D",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "the αCD163/LNP-Luc group did not exhibit increased phagocytic efficiency"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        }
+      ],
+      "closest_focused_retry_records": [],
+      "human_question": "Does the closest extracted record directly support the expected fact at the cited original source location, without adding an inference?"
+    },
+    {
+      "gold_id": "GO-018",
+      "paper_id": "GP-008",
+      "expected_fact": "Supplementary Figure 5 maps reporter expression to CD163/F4/80-positive macrophages and compares ALB, Desmin, F4/80, and SOX9 cell markers.",
+      "expected_endpoint": "reporter_recipient_cell",
+      "expected_value": "",
+      "expected_unit": "",
+      "source_file": "pnas.2534673123.sapp.pdf",
+      "source_page": 19,
+      "figure_or_table": "Appendix Figure 5G-L",
+      "panel_or_cell": "",
+      "page_was_sent_before_fix": false,
+      "page_was_sent_after_fix": true,
+      "whole_pdf_status": "missed",
+      "targeted_status": "matched",
+      "closest_whole_pdf_records": [
+        {
+          "record_id": "GP-008-R040",
+          "paper_id": "GP-008",
+          "experiment_id": "Primary-hepatic-macrophage-phenotyping",
+          "population": "F4/80-positive primary macrophages isolated from livers of CCl4-fibrotic mice",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "CCR2-positive macrophages",
+          "value": "approximately 21.5",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 9,
+            "figure_or_table": "Figure 5",
+            "panel_or_cell": "D",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow cytometry analysis of CCR2, MMP12, MMP13, IL-6, MKI67, and CD9 expression in primary macrophages from mouse liver and across biological replicates."
+          },
+          "measurement_status": "visually_estimated",
+          "confidence": "medium",
+          "ambiguity": "Estimated from the LNP-group bar."
+        },
+        {
+          "record_id": "GP-008-R041",
+          "paper_id": "GP-008",
+          "experiment_id": "Primary-hepatic-macrophage-phenotyping",
+          "population": "F4/80-positive primary macrophages isolated from livers of CCl4-fibrotic mice",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "MMP12-positive macrophages",
+          "value": "approximately 26",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 9,
+            "figure_or_table": "Figure 5",
+            "panel_or_cell": "D",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow cytometry analysis of CCR2, MMP12, MMP13, IL-6, MKI67, and CD9 expression in primary macrophages from mouse liver and across biological replicates."
+          },
+          "measurement_status": "visually_estimated",
+          "confidence": "medium",
+          "ambiguity": "Estimated from the LNP-group bar."
+        },
+        {
+          "record_id": "GP-008-R042",
+          "paper_id": "GP-008",
+          "experiment_id": "Primary-hepatic-macrophage-phenotyping",
+          "population": "F4/80-positive primary macrophages isolated from livers of CCl4-fibrotic mice",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "MMP13-positive macrophages",
+          "value": "approximately 21",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 9,
+            "figure_or_table": "Figure 5",
+            "panel_or_cell": "D",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow cytometry analysis of CCR2, MMP12, MMP13, IL-6, MKI67, and CD9 expression in primary macrophages from mouse liver and across biological replicates."
+          },
+          "measurement_status": "visually_estimated",
+          "confidence": "medium",
+          "ambiguity": "Estimated from the LNP-group bar."
+        },
+        {
+          "record_id": "GP-008-R043",
+          "paper_id": "GP-008",
+          "experiment_id": "Primary-hepatic-macrophage-phenotyping",
+          "population": "F4/80-positive primary macrophages isolated from livers of CCl4-fibrotic mice",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "IL-6-positive macrophages versus fibrotic control",
+          "value": "no significant difference",
+          "unit": null,
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 9,
+            "figure_or_table": "Figure 5",
+            "panel_or_cell": "D",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow cytometry analysis of CCR2, MMP12, MMP13, IL-6, MKI67, and CD9 expression...Significance was indicated as *P < 0.01 and non-significance as ns P > 0.05."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-008-R044",
+          "paper_id": "GP-008",
+          "experiment_id": "Primary-hepatic-macrophage-phenotyping",
+          "population": "F4/80-positive primary macrophages isolated from livers of CCl4-fibrotic mice",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "MKI67-positive macrophages",
+          "value": "approximately 2.2",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 9,
+            "figure_or_table": "Figure 5",
+            "panel_or_cell": "D",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow cytometry analysis of CCR2, MMP12, MMP13, IL-6, MKI67, and CD9 expression in primary macrophages from mouse liver and across biological replicates."
+          },
+          "measurement_status": "visually_estimated",
+          "confidence": "medium",
+          "ambiguity": "Estimated from the LNP-group bar."
+        }
+      ],
+      "closest_targeted_records": [
+        {
+          "record_id": "GP-008-R007",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-GFP-mRNA-transfection",
+          "population": "Mouse bone-marrow-derived macrophages (BMDMs)",
+          "intervention": "αCD163/LNP-GFP for 48 h in vitro",
+          "endpoint": "GFP-positive BMDMs",
+          "value": ">80",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 1",
+            "panel_or_cell": "J–K",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "over 80% of the BMDMs expressed GFP ... upon exposure to αCD163/LNP-GFP"
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Printed as a threshold rather than an exact point estimate."
+        },
+        {
+          "record_id": "GP-008-R008",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-FAPCAR-mRNA-transfection",
+          "population": "Mouse bone-marrow-derived macrophages (BMDMs)",
+          "intervention": "αCD163/LNP-FAPCAR for 48 h in vitro",
+          "endpoint": "FAPCAR-positive BMDMs",
+          "value": ">80",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 1",
+            "panel_or_cell": "L–M",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "over 80% of the BMDMs expressed ... FAPCAR upon exposure to ... αCD163/LNP-FAPCAR, respectively."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Printed as a threshold rather than an exact point estimate."
+        },
+        {
+          "record_id": "GP-008-R015",
+          "paper_id": "GP-008",
+          "experiment_id": "BMDM-flow-phagocytosis",
+          "population": "BMDMs cocultured with pHrodo-labeled FAP-positive JS-1 cells",
+          "intervention": "αCD163/LNP-FAPCAR",
+          "endpoint": "pHrodo-positive F4/80-positive population",
+          "value": "33.3",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 4,
+            "figure_or_table": "Figure 2",
+            "panel_or_cell": "C, αCD163/LNP-FAPCAR Q2",
+            "evidence_source_type": "figure",
+            "evidence_quote": "αCD163/LNP-FAPCAR flow plot, upper-right quadrant Q2: 33.3."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Quadrant percentage is treated as the phagocytic population based on the caption."
+        },
+        {
+          "record_id": "GP-008-R017",
+          "paper_id": "GP-008",
+          "experiment_id": "human-macrophage-FAPCAR-transfection",
+          "population": "PMA-induced human THP-1 macrophages",
+          "intervention": "h-αCD163/LNP-FAPCAR",
+          "endpoint": "FAPCAR-positive macrophages",
+          "value": ">70",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 5,
+            "figure_or_table": "Figure S4",
+            "panel_or_cell": "A–B",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "over 70% of the macrophages (THP-1 cells induced with PMA) expressed FAPCAR upon exposure to h-αCD163/LNP-FAPCAR."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": "Printed as a threshold rather than an exact point estimate."
+        },
+        {
+          "record_id": "GP-008-R003",
+          "paper_id": "GP-008",
+          "experiment_id": "targeted-LNP-characterization-TEM",
+          "population": "αCD163/LNP-FAPCAR nanoparticles",
+          "intervention": "CD163-antibody-conjugated LNP encapsulating FAPCAR mRNA",
+          "endpoint": "Mean particle size by TEM",
+          "value": "110.3 ± 6.8",
+          "unit": "nm",
+          "location": {
+            "file_name": "pnas.202534673.pdf",
+            "page": 2,
+            "figure_or_table": "Figure 1",
+            "panel_or_cell": "D",
+            "evidence_source_type": "body_text",
+            "evidence_quote": "The resulting αCD163/LNP-FAPCAR displayed a mean particle size of 110.3 ± 6.8 nm (Fig. 1D)."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        }
+      ],
+      "closest_focused_retry_records": [
+        {
+          "record_id": "GP-008-GO-018-L-06",
+          "paper_id": "GP-008",
+          "experiment_id": "Appendix Figure 5G-L recipient-cell specificity",
+          "population": "F4/80+ liver macrophages",
+          "intervention": "Intravenous αCD163/LNP-ZsGreen (40 μg ZsGreen mRNA) in CCL4-induced fibrotic mice",
+          "endpoint": "F4/80+/ZsGreen+ positive cells",
+          "value": "approximately 55",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.2534673123.sapp.pdf",
+            "page": 18,
+            "figure_or_table": "Appendix Figure 5",
+            "panel_or_cell": "K-L, F4/80+/ZsGreen+",
+            "evidence_source_type": "figure",
+            "evidence_quote": "The caption identifies macrophages as F4/80+, and panel L plots the green αCD163/LNP-ZsGreen F4/80+/ZsGreen+ bar at approximately 55%."
+          },
+          "measurement_status": "visually_estimated",
+          "confidence": "medium",
+          "ambiguity": "The bar has no printed numerical value."
+        },
+        {
+          "record_id": "GP-008-GO-018-H-01",
+          "paper_id": "GP-008",
+          "experiment_id": "Appendix Figure 5G-L recipient-cell specificity",
+          "population": "Screened liver macrophages, CD163+ and ZsGreen+ quadrant (Q2)",
+          "intervention": "Intravenous LNP-ZsGreen (40 μg ZsGreen mRNA) in CCL4-induced fibrotic mice",
+          "endpoint": "CD163 and ZsGreen double-positive cells",
+          "value": "9.92",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.2534673123.sapp.pdf",
+            "page": 18,
+            "figure_or_table": "Appendix Figure 5",
+            "panel_or_cell": "H, LNP-ZsGreen Q2",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow-cytometry panel H labels the vertical axis CD163 and horizontal axis ZsGreen; LNP-ZsGreen Q2 is printed as 9.92."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-008-GO-018-H-02",
+          "paper_id": "GP-008",
+          "experiment_id": "Appendix Figure 5G-L recipient-cell specificity",
+          "population": "Screened liver macrophages, CD163− and ZsGreen+ quadrant (Q3)",
+          "intervention": "Intravenous LNP-ZsGreen (40 μg ZsGreen mRNA) in CCL4-induced fibrotic mice",
+          "endpoint": "ZsGreen-positive, CD163-negative cells",
+          "value": "0.71",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.2534673123.sapp.pdf",
+            "page": 18,
+            "figure_or_table": "Appendix Figure 5",
+            "panel_or_cell": "H, LNP-ZsGreen Q3",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow-cytometry panel H labels the vertical axis CD163 and horizontal axis ZsGreen; LNP-ZsGreen Q3 is printed as 0.71."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-008-GO-018-H-03",
+          "paper_id": "GP-008",
+          "experiment_id": "Appendix Figure 5G-L recipient-cell specificity",
+          "population": "Screened liver macrophages, CD163+ and ZsGreen+ quadrant (Q2)",
+          "intervention": "Intravenous αCD163/LNP-ZsGreen (40 μg ZsGreen mRNA) in CCL4-induced fibrotic mice",
+          "endpoint": "CD163 and ZsGreen double-positive cells",
+          "value": "10.4",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.2534673123.sapp.pdf",
+            "page": 18,
+            "figure_or_table": "Appendix Figure 5",
+            "panel_or_cell": "H, αCD163/LNP-ZsGreen Q2",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow-cytometry panel H labels the vertical axis CD163 and horizontal axis ZsGreen; αCD163/LNP-ZsGreen Q2 is printed as 10.4."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        },
+        {
+          "record_id": "GP-008-GO-018-H-04",
+          "paper_id": "GP-008",
+          "experiment_id": "Appendix Figure 5G-L recipient-cell specificity",
+          "population": "Screened liver macrophages, CD163− and ZsGreen+ quadrant (Q3)",
+          "intervention": "Intravenous αCD163/LNP-ZsGreen (40 μg ZsGreen mRNA) in CCL4-induced fibrotic mice",
+          "endpoint": "ZsGreen-positive, CD163-negative cells",
+          "value": "15.0",
+          "unit": "%",
+          "location": {
+            "file_name": "pnas.2534673123.sapp.pdf",
+            "page": 18,
+            "figure_or_table": "Appendix Figure 5",
+            "panel_or_cell": "H, αCD163/LNP-ZsGreen Q3",
+            "evidence_source_type": "figure",
+            "evidence_quote": "Flow-cytometry panel H labels the vertical axis CD163 and horizontal axis ZsGreen; αCD163/LNP-ZsGreen Q3 is printed as 15.0."
+          },
+          "measurement_status": "exact",
+          "confidence": "high",
+          "ambiguity": null
+        }
+      ],
+      "human_question": "Does the closest extracted record directly support the expected fact at the cited original source location, without adding an inference?"
+    }
+  ]
+}
