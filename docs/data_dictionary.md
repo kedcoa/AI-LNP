@@ -58,10 +58,17 @@ Stores the biological and experimental context in which a formulation was tested
 - `formulation_id`: Foreign key linking the experiment to the tested formulation.
 - `cell_type`: One of the four controlled liver-cell types.
 - `cell_source`: Primary cell, cell line, isolated cell, or other reported source.
+- `tissue_or_organ`: Reported tissue or organ in which the experiment or
+  delivery measurement was performed.
 - `species`: Species used in the experiment.
+- `disease_model`: Reported disease, injury, tumor, or physiological model.
 - `in_vitro_in_vivo`: Experimental setting.
 - `payload_type`: Payload category, such as mRNA, siRNA, or gene editor.
 - `payload_name`: Specific payload or construct, when reported.
+- `payload_encoded_product`: Product encoded by the payload, such as
+  luciferase, Cas9, or a therapeutic protein.
+- `payload_molecular_target`: Gene, transcript, protein, or other molecular
+  target acted on by the payload.
 - `reporter`: Reporter system, such as luciferase or GFP.
 - `dose`: Reported dose.
 - `dose_unit`: Unit associated with the dose.

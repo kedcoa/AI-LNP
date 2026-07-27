@@ -1,0 +1,41 @@
+route_version: compact-route-1.1.0
+status: main_calls_attempted_pending_human_verification
+
+prompt:
+  version: compact-prompt-1.1.0
+  implementation: src.extraction.compact_prompt_v1.COMPACT_EXTRACTION_PROMPT
+  sha256: b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7
+
+response_contract:
+  version: compact-1.1.0
+  implementation: src.extraction.compact_contracts.CompactExtractionResponse
+  generated_schema: docs/extraction/schemas/compact_v1/compact_extraction_response.schema.json
+  schema_sha256: 205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e
+
+evidence_packet:
+  version: compact-packet-1.0.0
+  implementation: src.rag.compact_packet.CompactEvidencePacket
+  implementation_status: day_2_morning_human_approved
+  content_policy: relevant_deduplicated_passages_with_local_evidence_ids
+  api_serialization:
+    version: compact-api-packet-1.0.0
+    implementation: src.rag.compact_api_packet.CompactApiPacket
+    output: data/staging/rag/compact_api_packets_v1
+    evidence_budget_estimated_tokens: 16000
+    budget_status: human_approved
+    token_estimation: ceil_compact_utf8_json_bytes_divided_by_4
+
+api:
+  provider: openai
+  interface: responses.parse
+  structured_output: pydantic
+  model_environment_variable: COMPACT_EXTRACTION_MODEL
+  store: false
+
+baseline:
+  route: fulltext-rag-evidence-graph-v4
+  manifest: docs/extraction/baselines/fulltext_rag_v4.json
+
+activation_gate:
+  active: false
+  requirement: implement_and_gold_evaluate_compact_route_before_replacing_baseline

@@ -387,6 +387,119 @@ def test_expected_tables_exist(database_path: Path) -> None:
     assert EXPECTED_TABLES.issubset(actual_tables)
 
 
+def test_experiment_has_compact_contract_columns(database_path: Path) -> None:
+    expected = {
+        "tissue_or_organ",
+        "disease_model",
+        "payload_encoded_product",
+        "payload_molecular_target",
+    }
+    with sqlite3.connect(database_path) as connection:
+        actual = {
+            row[1]
+            for row in connection.execute("PRAGMA table_info(experiment)")
+        }
+    assert expected.issubset(actual)
+
+
+def test_existing_database_receives_additive_experiment_migration(tmp_path: Path) -> None:
+    path = tmp_path / "legacy_lnp_evidence.db"
+    with sqlite3.connect(path) as connection:
+        connection.execute(
+            """
+            CREATE TABLE experiment (
+                experiment_id INTEGER PRIMARY KEY,
+                paper_id INTEGER NOT NULL,
+                formulation_id INTEGER NOT NULL,
+                cell_type TEXT NOT NULL
+            )
+            """
+        )
+        connection.execute(
+            """
+            INSERT INTO experiment (
+                experiment_id, paper_id, formulation_id, cell_type
+            )
+            VALUES (1, 1, 1, 'hepatocyte')
+            """
+        )
+
+    initialize_database(path)
+
+    with sqlite3.connect(path) as connection:
+        columns = {
+            row[1]
+            for row in connection.execute("PRAGMA table_info(experiment)")
+        }
+        retained = connection.execute(
+            "SELECT experiment_id, cell_type FROM experiment"
+        ).fetchall()
+
+    assert {
+        "tissue_or_organ",
+        "disease_model",
+        "payload_encoded_product",
+        "payload_molecular_target",
+    }.issubset(columns)
+    assert retained == [(1, "hepatocyte")]
+
+
+def test_compact_contract_fields_round_trip_through_experiment_table(
+    database_path: Path,
+) -> None:
+    with sqlite3.connect(database_path) as connection:
+        paper_id = connection.execute(
+            """
+            INSERT INTO paper (
+                title, source_type, retrieval_date, screening_status
+            )
+            VALUES ('Migration test', 'synthetic_test', '2026-07-27', 'include')
+            """
+        ).lastrowid
+        formulation_id = connection.execute(
+            """
+            INSERT INTO formulation (paper_id, formulation_name)
+            VALUES (?, 'LNP-1')
+            """,
+            (paper_id,),
+        ).lastrowid
+        connection.execute(
+            """
+            INSERT INTO experiment (
+                paper_id,
+                formulation_id,
+                cell_type,
+                tissue_or_organ,
+                disease_model,
+                payload_encoded_product,
+                payload_molecular_target
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                paper_id,
+                formulation_id,
+                "hsc",
+                "liver",
+                "liver fibrosis",
+                "FAP-CAR",
+                "FAP",
+            ),
+        )
+        stored = connection.execute(
+            """
+            SELECT
+                tissue_or_organ,
+                disease_model,
+                payload_encoded_product,
+                payload_molecular_target
+            FROM experiment
+            """
+        ).fetchone()
+
+    assert stored == ("liver", "liver fibrosis", "FAP-CAR", "FAP")
+
+
 def test_foreign_keys_are_enforced(database_path: Path) -> None:
     with sqlite3.connect(database_path) as connection:
         connection.execute("PRAGMA foreign_keys = ON")

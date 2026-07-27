@@ -1,0 +1,58 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-009",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_00e5ea0909dfce3a016a673115cdb4819aa0ee462f1de289bb",
+  "request_fingerprint": "8d36607a89ff51c0c64bc6acb5072f3bf12eaedf0f06f302b84a285b6c0870e3",
+  "packet_checksum": "01eb5a359674ae7e47c8ea5fe291130b45b6c654601ca9a4a51bfcff6749833e",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:21:09.187882+00:00",
+  "completed_at": "2026-07-27T10:21:14.370800+00:00",
+  "elapsed_seconds": 5.182918,
+  "usage": {
+    "input_tokens": 20508,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 20505
+    },
+    "output_tokens": 387,
+    "output_tokens_details": {
+      "reasoning_tokens": 109
+    },
+    "total_tokens": 20895
+  },
+  "eligibility": {
+    "decision": "ineligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE",
+      "NO_TARGET_CELL_EVIDENCE"
+    ],
+    "evidence_ids": [
+      "GP-009-E-52aa2dcb19fee404",
+      "GP-009-E-9f8f06cd49f73aa6",
+      "GP-009-E-6e3f276531062d8c",
+      "GP-009-E-eebd6e63463b8d5b"
+    ],
+    "explanation": "The packet reports original in vivo and in vitro mRNA-LNP experiments with linked formulations and outcomes, but it does not report delivery to hepatocytes, Kupffer cells, LSECs, or hepatic stellate cells. Reported liver-level uptake/expression cannot be treated as evidence for a qualifying hepatic target cell."
+  },
+  "record_counts": {
+    "formulations": 0,
+    "components": 0,
+    "experiments": 0,
+    "outcomes": 0,
+    "unresolved_items": 2
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

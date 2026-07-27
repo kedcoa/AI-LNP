@@ -1,0 +1,59 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-004",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_04d9f2706146a808016a672ead3084819b8bb72d3d5084bc9d",
+  "request_fingerprint": "cff731dc9df66759c5aa0183b1e71c75b5a95e506bb351127a47169eaf71b0db",
+  "packet_checksum": "af5d0698a9739e760babbf53724965cddb1716e3ab89188e5258425239f68e22",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:10:52.572917+00:00",
+  "completed_at": "2026-07-27T10:11:17.824514+00:00",
+  "elapsed_seconds": 25.251597,
+  "usage": {
+    "input_tokens": 20049,
+    "input_tokens_details": {
+      "cache_write_tokens": 20046,
+      "cached_tokens": 0
+    },
+    "output_tokens": 4266,
+    "output_tokens_details": {
+      "reasoning_tokens": 240
+    },
+    "total_tokens": 24315
+  },
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "GP-004-E-9331dfb69db5483e",
+      "GP-004-E-50647e1940bafbbd",
+      "GP-004-E-dd2583840b74edd5",
+      "GP-004-E-3cadcaa508e40b67",
+      "GP-004-E-575b2fc9ece61198"
+    ],
+    "explanation": "Original mouse experiments used identifiable mRNA-LNPs. eGFP mRNA-LNP transfected hepatocytes, endothelial cells, and Kupffer cells, and HGF/EGF mRNA-LNP treatment was linked to measured outcomes in liver-injury models."
+  },
+  "record_counts": {
+    "formulations": 1,
+    "components": 4,
+    "experiments": 3,
+    "outcomes": 4,
+    "unresolved_items": 3
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

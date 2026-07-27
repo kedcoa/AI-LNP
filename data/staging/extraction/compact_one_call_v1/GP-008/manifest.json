@@ -1,0 +1,61 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-008",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_0c881552507a34c6016a672f1733a88199b2cc33ab650aa71f",
+  "request_fingerprint": "8c677244ad23802ddf919920989740731043dc89ffaddcd621067e27a8a95968",
+  "packet_checksum": "3788ce2d243eaa90b4de38e5b8e25f30c9b59860f39337b86adc06802ba96673",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:12:38.553505+00:00",
+  "completed_at": "2026-07-27T10:13:05.501211+00:00",
+  "elapsed_seconds": 26.947706,
+  "usage": {
+    "input_tokens": 20831,
+    "input_tokens_details": {
+      "cache_write_tokens": 20828,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3806,
+    "output_tokens_details": {
+      "reasoning_tokens": 885
+    },
+    "total_tokens": 24637
+  },
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "GP-008-E-38bead8279685734",
+      "GP-008-E-9f4e4aba562731a4",
+      "GP-008-E-78b7081add1094e3",
+      "GP-008-E-314b6997ecd0e60c",
+      "GP-008-E-51d08120feab231b",
+      "GP-008-E-c2f49c1ec1cd78d3",
+      "GP-008-E-d32251f9c2db82ae"
+    ],
+    "explanation": "The packet reports experimental delivery of FAP-targeted CAR mRNA in an antibody-targeted LNP, with macrophage-relevant in vivo evidence and linked liver-fibrosis outcomes in mice."
+  },
+  "record_counts": {
+    "formulations": 2,
+    "components": 5,
+    "experiments": 1,
+    "outcomes": 2,
+    "unresolved_items": 3
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

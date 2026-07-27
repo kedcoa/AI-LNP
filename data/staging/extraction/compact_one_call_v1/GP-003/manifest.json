@@ -1,0 +1,52 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-003",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_04b2d3398290853f016a672ea6f0b4819baf9e289ad64cfdd0",
+  "request_fingerprint": "5d2da1413b1762af883af1e4fdb20feedeadc22a973d7ce507686a23bf4c8fdd",
+  "packet_checksum": "325fb4f9b362fca32451feef33dfc20b82933f81b5a2bf89ca82d861437e3217",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:10:46.225810+00:00",
+  "completed_at": "2026-07-27T10:10:52.122297+00:00",
+  "elapsed_seconds": 5.896487,
+  "usage": {
+    "input_tokens": 19335,
+    "input_tokens_details": {
+      "cache_write_tokens": 19332,
+      "cached_tokens": 0
+    },
+    "output_tokens": 212,
+    "output_tokens_details": {
+      "reasoning_tokens": 81
+    },
+    "total_tokens": 19547
+  },
+  "eligibility": {
+    "decision": "ineligible",
+    "reason_codes": [
+      "NOT_ORIGINAL_RESEARCH"
+    ],
+    "evidence_ids": [
+      "GP-003-E-93c2af1bcf62a929",
+      "GP-003-E-240d9595395015cf"
+    ],
+    "explanation": "The paper explicitly describes itself as a review and summarizes evidence from other studies rather than reporting an original experimental LNP delivery study."
+  },
+  "record_counts": {
+    "formulations": 0,
+    "components": 0,
+    "experiments": 0,
+    "outcomes": 0,
+    "unresolved_items": 0
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

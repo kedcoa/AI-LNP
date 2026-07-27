@@ -256,7 +256,9 @@ class HybridIndex:
             hits.append(RetrievalHit(
                 query_id=query.query_id, block_id=block_id, paper_id=block.paper_id,
                 text=block.text, section_path=block.section_path, source_path=block.source_path,
+                source_kind=block.source_kind, block_type=block.block_type,
                 page_number=block.page_number, xml_element_id=block.xml_element_id,
+                table_number=block.table_number, figure_number=block.figure_number,
                 lexical_score=lexical_scores.get(block_id),
                 vector_score=vector_scores.get(block_id), fused_score=fused[block_id],
                 entity_types=sorted({x.entity_type for x in self.entities.get(block_id, [])}),
@@ -312,8 +314,12 @@ class HybridIndex:
                     text=neighbor.text,
                     section_path=neighbor.section_path,
                     source_path=neighbor.source_path,
+                    source_kind=neighbor.source_kind,
+                    block_type=neighbor.block_type,
                     page_number=neighbor.page_number,
                     xml_element_id=neighbor.xml_element_id,
+                    table_number=neighbor.table_number,
+                    figure_number=neighbor.figure_number,
                     fused_score=seed.fused_score * 0.18,
                     entity_types=sorted({
                         value.entity_type

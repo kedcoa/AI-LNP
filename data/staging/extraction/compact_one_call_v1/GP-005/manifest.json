@@ -1,0 +1,60 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-005",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_0f28fde3db669761016a672ec6e3f48198a3f91f8ebb730a2d",
+  "request_fingerprint": "7fa76827854c1aab598fc7815e5872436c80e87cc7169bbc231ca05905a44209",
+  "packet_checksum": "051b51daee2c78fc6896097ec4255dc275ba7951e7edffe106fae5fa6fa87f3d",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:11:18.282217+00:00",
+  "completed_at": "2026-07-27T10:11:46.136719+00:00",
+  "elapsed_seconds": 27.854502,
+  "usage": {
+    "input_tokens": 20551,
+    "input_tokens_details": {
+      "cache_write_tokens": 20548,
+      "cached_tokens": 0
+    },
+    "output_tokens": 4676,
+    "output_tokens_details": {
+      "reasoning_tokens": 484
+    },
+    "total_tokens": 25227
+  },
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "GP-005-E-23cde312d42649c2",
+      "GP-005-E-ac7e05a4c142ccbb",
+      "GP-005-E-5476ac363ed05d4c",
+      "GP-005-E-60a7b4a513e710e6",
+      "GP-005-E-d5934f7a75e37a6b",
+      "GP-005-E-43684e77da05b1d0"
+    ],
+    "explanation": "Original experiments report identifiable mRNA-LNP formulations, including LNP1, with uptake and/or translation outcomes in hepatocytes and Kupffer cells."
+  },
+  "record_counts": {
+    "formulations": 3,
+    "components": 4,
+    "experiments": 3,
+    "outcomes": 3,
+    "unresolved_items": 3
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

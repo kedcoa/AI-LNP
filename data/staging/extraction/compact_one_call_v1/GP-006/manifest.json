@@ -1,0 +1,58 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-006",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_029dabb3ce8cef07016a672ee3ab18819aba068abdca442672",
+  "request_fingerprint": "9fe285bf6bec2820d7d8973bfc21ad44f1e8970d2bd0fec07e02e471b84058f3",
+  "packet_checksum": "d556f6c414dfb9a90bc9fc06c209986f4e84eac979ced40fc9d45c4e22184dee",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:11:46.721231+00:00",
+  "completed_at": "2026-07-27T10:12:14.531856+00:00",
+  "elapsed_seconds": 27.810625,
+  "usage": {
+    "input_tokens": 20315,
+    "input_tokens_details": {
+      "cache_write_tokens": 20312,
+      "cached_tokens": 0
+    },
+    "output_tokens": 4197,
+    "output_tokens_details": {
+      "reasoning_tokens": 791
+    },
+    "total_tokens": 24512
+  },
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "GP-006-E-b0e824a66a4f04c1",
+      "GP-006-E-6a0db3e1706fd8f7",
+      "GP-006-E-d010646bb645e446",
+      "GP-006-E-0531a76f7f816a56"
+    ],
+    "explanation": "The paper reports in vivo MC3 LNP delivery of Cas9 mRNA/NSGHAsgRNA in NSG HemA mice, with deep-sequencing gene-editing outcomes in isolated hepatocytes and LSECs."
+  },
+  "record_counts": {
+    "formulations": 2,
+    "components": 4,
+    "experiments": 2,
+    "outcomes": 3,
+    "unresolved_items": 3
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

@@ -1,0 +1,2350 @@
+{
+  "paper_id": "GP-001",
+  "model": "gpt-5.6-terra",
+  "reasoning_effort": "low",
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "packet_checksum": "0f1f82c5f4eaa10b599a8e4052f0fbde5a12a541b89604e1af809c7b2b6867fe",
+  "request_fingerprint": "ebb09eba3165d7fa8d6e88875c4016b623572e00a0f39df04d4661aa8a3e0546",
+  "system_prompt": "Extract only directly reported LNP evidence from the supplied packet. Use no outside knowledge. For every scientific field, return either a reported value with valid packet evidence IDs or missing with a short reason and no evidence IDs. Set eligibility to eligible only for original experimental LNP delivery of mRNA, siRNA, saRNA, or circRNA with evidence relevant to hepatocytes, Kupffer cells, LSECs, or hepatic stellate cells and a formulation-experiment-outcome link. Set a clearly failed criterion to ineligible and insufficient evidence to uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep formulations, components, experiments, and outcomes separate and preserve their links. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. A reported negative result is an outcome, not missing. List unresolved ambiguities. Return only the structured response required by the supplied schema.",
+  "packet": {
+    "packet_version": "compact-api-packet-1.0.0",
+    "paper_id": "GP-001",
+    "blocked_fields": [
+      "lnp_composition_raw",
+      "payload"
+    ],
+    "sources": [
+      {
+        "source_id": "S-005db52f0a11",
+        "chunk_id": "GP-001-B-dbdb067c75636e36d75f",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Materials and methods",
+        "subsection": "Characterization"
+      },
+      {
+        "source_id": "S-15376f4cfe6b",
+        "chunk_id": "GP-001-B-fe037f1fbf3cd687415a",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Materials and methods",
+        "subsection": "In vivo pharmacokinetics"
+      },
+      {
+        "source_id": "S-1ddf553a0607",
+        "chunk_id": "GP-001-B-f9b9a2178f2012943141",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Discussion"
+      },
+      {
+        "source_id": "S-26ab8464973c",
+        "chunk_id": "GP-001-B-91af53133af59fe456d1",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Materials and methods",
+        "subsection": "Materials"
+      },
+      {
+        "source_id": "S-28f51bdcba80",
+        "chunk_id": "GP-001-B-5e897e54078a6ae775be",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Materials and methods",
+        "subsection": "In vivo experiment > In vivo antitumor efficacy"
+      },
+      {
+        "source_id": "S-2d2755f77f2b",
+        "chunk_id": "GP-001-B-74f1ea164aa1e6b1ed81",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Conclusion"
+      },
+      {
+        "source_id": "S-2d87e3274603",
+        "chunk_id": "GP-001-B-f225239c8f184b32ffb4",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Discussion"
+      },
+      {
+        "source_id": "S-2e8ac4bab714",
+        "chunk_id": "GP-001-B-0c2f20b73087e518589f",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "figure_caption",
+        "section": "Results",
+        "subsection": "In vivo antitumor effects and safety",
+        "figure_number": "Figure 5."
+      },
+      {
+        "source_id": "S-2f5437b77460",
+        "chunk_id": "GP-001-B-76dd51c841bada384005",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Introduction"
+      },
+      {
+        "source_id": "S-401b9faa3e2b",
+        "chunk_id": "GP-001-B-ce54a3e0b577276d3445",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "figure_caption",
+        "section": "Results",
+        "subsection": "Tumor targeting in vitro",
+        "figure_number": "Figure 2."
+      },
+      {
+        "source_id": "S-43f231ef2eb9",
+        "chunk_id": "GP-001-B-130b2bcfcc075443bf45",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Results",
+        "subsection": "In vivo antitumor effects and safety"
+      },
+      {
+        "source_id": "S-44f0e0d1478c",
+        "chunk_id": "GP-001-B-2aa8e795279cd3862193",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Discussion"
+      },
+      {
+        "source_id": "S-44f52315d136",
+        "chunk_id": "GP-001-B-50d94e8643872c870d82",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Materials and methods",
+        "subsection": "Preparation"
+      },
+      {
+        "source_id": "S-4d62ceb99532",
+        "chunk_id": "GP-001-B-5a1ac8d210e9373a86f9",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Introduction"
+      },
+      {
+        "source_id": "S-523db9f43ef3",
+        "chunk_id": "GP-001-B-679c520d704e9601addb",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "abstract",
+        "section": "Abstract"
+      },
+      {
+        "source_id": "S-57da0bd21382",
+        "chunk_id": "GP-001-B-da61f79cdba0abc317c0",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Results",
+        "subsection": "In vitro antitumor analysis"
+      },
+      {
+        "source_id": "S-63aed168ef13",
+        "chunk_id": "GP-001-B-0baa8f837c1c223fa89f",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Discussion"
+      },
+      {
+        "source_id": "S-65230eac3b20",
+        "chunk_id": "GP-001-B-c2fe9434834a2a0db694",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "figure_caption",
+        "section": "Results",
+        "subsection": "In vivo antitumor effects and safety",
+        "figure_number": "Figure 4."
+      },
+      {
+        "source_id": "S-756f738f81c1",
+        "chunk_id": "GP-001-B-3ffaa908c12700ea3ee3",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Results",
+        "subsection": "Optimization and characterization of SLNs"
+      },
+      {
+        "source_id": "S-8e7bd03cdb45",
+        "chunk_id": "GP-001-B-9041789ca63e4018c3e8",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Materials and methods",
+        "subsection": "In vivo experiment > In vivo imaging"
+      },
+      {
+        "source_id": "S-95e194061ad4",
+        "chunk_id": "GP-001-B-d50f7ecc8f25d21069b1",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Introduction"
+      },
+      {
+        "source_id": "S-d87005eb5f9f",
+        "chunk_id": "GP-001-B-0fdbdc20c0e20bc15b0d",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Introduction"
+      },
+      {
+        "source_id": "S-e086e15279f0",
+        "chunk_id": "GP-001-B-c8c7b24f10b74b5f80c2",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Results",
+        "subsection": "In vivo antitumor effects and safety"
+      },
+      {
+        "source_id": "S-ea15e159ab00",
+        "chunk_id": "GP-001-B-c6b7ecc7e8b57495b4b0",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00001_PMC13244520.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Materials and methods",
+        "subsection": "Statistical analysis"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "GP-001-E-2cd80ac2114421cb",
+        "text": "GA specifically binds to GA receptors highly expressed on hepatocellular carcinoma cells, mediating active targeting uptake and significantly enhancing antitumor activity.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-63aed168ef13"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-bd4ae467b68e8653",
+        "text": "2026).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607",
+          "S-63aed168ef13"
+        ],
+        "context_after_evidence_id": "GP-001-E-72bd6da5829a41f5"
+      },
+      {
+        "evidence_id": "GP-001-E-72bd6da5829a41f5",
+        "text": "This property enables FA-modified nanocarriers to achieve active targeting uptake.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-63aed168ef13"
+        ],
+        "context_before_evidence_id": "GP-001-E-bd4ae467b68e8653"
+      },
+      {
+        "evidence_id": "GP-001-E-756b06a97bb0a364",
+        "text": "The introduction of FA enabled specific tumor cell uptake via receptor-mediated endocytosis, thereby enhancing drug accumulation in tumor tissues.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-63aed168ef13"
+        ],
+        "context_after_evidence_id": "GP-001-E-198e0da882acb9f6"
+      },
+      {
+        "evidence_id": "GP-001-E-198e0da882acb9f6",
+        "text": "This dual-targeting platform significantly improved the tumor-specific delivery of MMAE while reducing toxicity to normal tissues.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-63aed168ef13"
+        ],
+        "context_before_evidence_id": "GP-001-E-756b06a97bb0a364"
+      },
+      {
+        "evidence_id": "GP-001-E-0bb25cf6ead04d2f",
+        "text": "(2020) demonstrated that dual-ligand-modified doxorubicin (DOX) carriers exhibited significant advantages in enhancing cellular uptake by hepatoma cells, improving in vitro and in vivo antitumor activity, and reducing systemic toxicity.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-63aed168ef13"
+        ],
+        "context_after_evidence_id": "GP-001-E-e969aa3a1bdc5db3"
+      },
+      {
+        "evidence_id": "GP-001-E-e969aa3a1bdc5db3",
+        "text": "These findings indicate that the dual-ligand modification strategy can significantly enhance the specific targeting ability of nanocarriers to hepatoma cells (Sheng et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-63aed168ef13"
+        ],
+        "context_before_evidence_id": "GP-001-E-0bb25cf6ead04d2f"
+      },
+      {
+        "evidence_id": "GP-001-E-be3411883f2ecca3",
+        "text": "(A) Weights of the different experimental groups after treatment.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2e8ac4bab714"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-1844c6e99e829834",
+        "text": "The data are expressed as the means ± SDs, n = 3.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2e8ac4bab714",
+          "S-401b9faa3e2b",
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-8cf5254df4bc3de3",
+        "text": "Compared with the saline group: **P < 0.01.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2e8ac4bab714",
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-8d8f8dae197bbcd0",
+        "text": "(B) Survival rates of mice treated with each preparation.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2e8ac4bab714"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-cff7b352baf0d260",
+        "text": "The curves for the CTD, FA-CSLNs, and GA-FA-CSLNs groups overlapped with that of the saline group.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2e8ac4bab714"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-9a1ab837b57e7430",
+        "text": "(C) Indicators of in vivo liver and kidney function after treatment.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2e8ac4bab714"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-03333d9f8e70e700",
+        "text": "(D) H&E staining of major organs in different treatment groups (×20.0).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2e8ac4bab714"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-a7b41f0167ea78a4",
+        "text": "The active targeting strategy involves functionalizing the nanoparticle surface with specific ligands, which can prevent nanocarriers from being recognized and cleared by the mononuclear phagocyte system following intravenous administration, while enabling them to recognize and bind to receptors overexpressed on target cells, thereby enhancing cellular uptake and therapeutic efficacy (Iurisci et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d87005eb5f9f"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-3a8b58702663b0e8",
+        "text": "Our findings showed that both FA-CSLNs and GA-FA-CSLNs exhibited significantly stronger in vitro antitumor effects than cisplatin (positive control), with tumor suppression rates of 89.92 ± 0.81% and 96.46 ± 1.56%, respectively.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d87005eb5f9f"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-c76445b54ddbd138",
+        "text": "To verify the in vivo biodistribution characteristics of GA-FA-CSLNs, each formulation was labeled with Cy5.5 fluorescent dye and injected into tumor-bearing nude mice via the tail vein.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-43f231ef2eb9"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-c5f8c7dfa68f5194",
+        "text": "At 24 hours after injection, it was observed that the fluorescent intensity of each nanoformulation group at the tumor site was higher than that of the free Cy5.5 group.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-43f231ef2eb9"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-7e878ca9b579cd73",
+        "text": "Flow cytometry and Western blot analysis further revealed its molecular mechanism: inducing apoptosis of Huh-7 cells by significantly upregulating the expression of pro-apoptotic proteins Bax and Cleaved Caspase-3, while downregulating the expression of the anti-apoptotic protein Bcl-2.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f0e0d1478c"
+        ],
+        "context_after_evidence_id": "GP-001-E-54852f8b5260ab5f"
+      },
+      {
+        "evidence_id": "GP-001-E-54852f8b5260ab5f",
+        "text": "More importantly, this study innovatively found that GA-FA-CSLNs could significantly downregulate the expression level of EphB4 protein in Huh-7 cells.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f0e0d1478c"
+        ],
+        "context_before_evidence_id": "GP-001-E-7e878ca9b579cd73"
+      },
+      {
+        "evidence_id": "GP-001-E-240592a4720720f6",
+        "text": "The GA-FA-CSLNs treatment group had the highest tumor inhibition rate (58.67%), which was significantly better than the single-ligand modified group, unmodified group, and positive drug sorafenib group.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f0e0d1478c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-2aaab99060667b75",
+        "text": "Histopathological analysis (H&E, TUNEL, PCNA) results showed that after treatment with GAF-A-CSLNs, the tumor tissue exhibited the most significant necrosis, the strongest apoptotic effect, and the most obvious proliferation inhibition.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f0e0d1478c"
+        ],
+        "context_after_evidence_id": "GP-001-E-bb2c684b78b2b06b"
+      },
+      {
+        "evidence_id": "GP-001-E-bb2c684b78b2b06b",
+        "text": "At the same time, the expression of EphB4 and Bcl-2 in tumor tissue was downregulated, and the expression of Bax and Caspase-3 was upregulated, which perfectly reproduced the molecular phenotype of the in vitro experiment, confirming the consistency of the antitumor mechanism of GA-FA-CSLNs in vitro and in vivo.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f0e0d1478c"
+        ],
+        "context_before_evidence_id": "GP-001-E-2aaab99060667b75"
+      },
+      {
+        "evidence_id": "GP-001-E-64a8b19b24de00b6",
+        "text": "Firstly, the level range of key influencing factors in the preparation process of GA-FA-CSLNs was determined via single-factor experiments (Additional file 1: Table S2).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ],
+        "context_after_evidence_id": "GP-001-E-92d233aa5df2640a"
+      },
+      {
+        "evidence_id": "GP-001-E-92d233aa5df2640a",
+        "text": "On this basis, the Box-Behnken design was employed to systematically optimize the preparation process of these nanoparticles (Additional file 1: Tables S3, S4, Fig.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ],
+        "context_before_evidence_id": "GP-001-E-64a8b19b24de00b6"
+      },
+      {
+        "evidence_id": "GP-001-E-62e84911c141e879",
+        "text": "S1).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-4160906d0307e170",
+        "text": "The final optimized preparation parameters were as follows: glycerol monostearate dosage of 7.697 mg, ultrasonic time of 23.137 minutes, and a mass ratio of Pluronic F-68 to Lipoid E PC S of 3.963:1.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-64cd446a78c6abcb",
+        "text": "According to the prediction of the optimized model, the response value (Y value) was 73.9, while the actual Y value in the verification experiment was 73.02 ± 1.53 with a relative deviation of <3% (Additional file 1: Table S5), indicating that the optimized process had good reliability and repeatability.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-e7aa7d330cce4d63",
+        "text": "A Malvern particle size analyzer was used to characterize the particle size and zeta potential of GA-FA-CSLNs.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ],
+        "context_after_evidence_id": "GP-001-E-4f997368afb22815"
+      },
+      {
+        "evidence_id": "GP-001-E-4f997368afb22815",
+        "text": "The results showed that the average particle size was 95.5 ± 0.007 nm and the PDI was 0.244 ± 0.012 (Table 1), suggesting a moderate nanoparticle size distribution of the nanoparticles.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ],
+        "context_before_evidence_id": "GP-001-E-e7aa7d330cce4d63",
+        "context_after_evidence_id": "GP-001-E-6d15d753e5353ed0"
+      },
+      {
+        "evidence_id": "GP-001-E-6d15d753e5353ed0",
+        "text": "Transmission electron microscopy images revealed that GA-FA-CSLNs had a regular spherical shape and uniform dispersion (Figure 1A and B), and the particle size distribution curve exhibited a unimodal pattern (Figure 1C), further confirming the uniform particle size distribution.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ],
+        "context_before_evidence_id": "GP-001-E-4f997368afb22815"
+      },
+      {
+        "evidence_id": "GP-001-E-8d7ae50e4b10d2bf",
+        "text": "The EE% and DL% of each formulation were analyzed using HPLC.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-c3b377bcdc3d376e",
+        "text": "The results showed that all formulations had an EE% of >94% and a DL% of >0.5% (Table 1), indicating that the preparation process had high drug encapsulation capacity and loading efficiency.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-a3c75411330d4cb4",
+        "text": "The results of the short-term stability experiment (Additional file 1: Table S6) showed that, except for the GA-CSLNs group, no significant changes in particle size and PDI were observed in other formulations after storage at 4 °C for 14 days, suggesting that these formulations had good short-term storage stability.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-756f738f81c1"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-f445d98f166229ac",
+        "text": "The amphiphilic derivative GA was synthesized by the research group in the preceding stage.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-294670cbceddc5b9",
+        "text": "Subsequently, single-factor and Box-Behnken experimental designs were used to optimize the GA-FA-CSLNs preparation process.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-08a7d4d5f5baf6dc",
+        "text": "The experimental methods are described in Supplementary Material Method S1, Method S2, and Table S1.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-301bb7dfd8dbec31",
+        "text": "CSLNs, GA-CSLNs, FA-CSLNs, and GA-FA-CSLNs were prepared by emulsification and sonication.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-2ccc4dd1032f3bb2",
+        "text": "The glycerol monostearate (8 mg), Lipoid E PC S (70 mg), and CTD (2 mg) were weighed and dissolved in 5 mL of methanol to form the organic phase.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ],
+        "context_after_evidence_id": "GP-001-E-0f16680cadb6c124"
+      },
+      {
+        "evidence_id": "GP-001-E-0f16680cadb6c124",
+        "text": "For GA-CSLNs, FA-CSLNs, and GA-FA-CSLNs, 5 mg GA, 5 mg FA, and a mixture of 5 mg GA + 5 mg FA were separately added to the organic phase, respectively.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ],
+        "context_before_evidence_id": "GP-001-E-2ccc4dd1032f3bb2"
+      },
+      {
+        "evidence_id": "GP-001-E-8c71eb41ea6f6d06",
+        "text": "Pluronic F-68 (280 mg) was weighed and dissolved in 15 mL of water to form the aqueous phase.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ],
+        "context_after_evidence_id": "GP-001-E-c83d70a0b5567655"
+      },
+      {
+        "evidence_id": "GP-001-E-c83d70a0b5567655",
+        "text": "The water bath was heated to 55 °C, and the organic phase was slowly injected into the aqueous phase under magnetic stirring (1000 rpm).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ],
+        "context_before_evidence_id": "GP-001-E-8c71eb41ea6f6d06"
+      },
+      {
+        "evidence_id": "GP-001-E-99affc48d4ab7cd3",
+        "text": "The mixture was then stirred at a constant temperature of 55 °C for 1 hour and placed in an ultrasonic cell crusher (SCIENTZ-IID, Ningbo Scientz Biotechnology Co., Ltd., Ningbo, China) for 23 minutes.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-1d95f5b8b0ff4b76",
+        "text": "The sample was cooled and cured at room temperature, diluted to 20 mL, and then passed through a 0.22 µm microporous filter membrane to obtain CSLN or GA-CSLNs, FA-CSLNs, and GA-FA-CSLNs.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-44f52315d136"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-b5c1343a76ccc733",
+        "text": "In mainstream clinical practice, HCC is primarily managed via surgical resection, liver transplantation, locoregional therapies, and systemic treatments including tyrosine kinase inhibitors and immune checkpoint inhibitors.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4d62ceb99532"
+        ],
+        "context_after_evidence_id": "GP-001-E-baaa6ed51bb69f1c"
+      },
+      {
+        "evidence_id": "GP-001-E-baaa6ed51bb69f1c",
+        "text": "However, over 80% of patients are unfortunately diagnosed at an advanced stage, rendering them ineligible for curative interventions such as surgical resection or liver transplantation (Vogl et al.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4d62ceb99532"
+        ],
+        "context_before_evidence_id": "GP-001-E-b5c1343a76ccc733"
+      },
+      {
+        "evidence_id": "GP-001-E-b4f9fa2fb6f8a619",
+        "text": "A tumor-bearing mouse model was constructed by injecting 0.1 mL of a Huh-7 cell suspension (1 × 107 cells/mL) into the axillary region of BALB/c nude mice.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ],
+        "context_after_evidence_id": "GP-001-E-694fa7ecbb688547"
+      },
+      {
+        "evidence_id": "GP-001-E-694fa7ecbb688547",
+        "text": "Upon reaching a tumor volume of 64 mm3, 28 nude mice were randomly divided into seven groups: the blank control group, CTD group, CSLNs group, GA-CSLNs group, FA-CSLNs group, GA-FA-CSLNs group, and positive control group.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ],
+        "context_before_evidence_id": "GP-001-E-b4f9fa2fb6f8a619",
+        "context_after_evidence_id": "GP-001-E-bb98c45555c74acd"
+      },
+      {
+        "evidence_id": "GP-001-E-bb98c45555c74acd",
+        "text": "The control group was administered an equal amount of saline via the tail vein, the positive control group was administered sorafenib (30 µg/10 g) by gavage, and the remaining experimental groups were injected with CTD, CSLNs, GA-CSLNs, FA-CSLNs, or GA-FA-CSLNs (CTD: 3.75 µg/10 g) via the tail vein.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ],
+        "context_before_evidence_id": "GP-001-E-694fa7ecbb688547"
+      },
+      {
+        "evidence_id": "GP-001-E-26837cf2aef4013e",
+        "text": "The drug was administered once every two days for a total of seven times.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-7d47cd89d831e0fb",
+        "text": "The long and short diameters of the tumors, the body weights of tumor-bearing nude mice, and their survival status were recorded for each treatment.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-98b23196aa2e74a3",
+        "text": "On day 15, blood was collected from the retroorbital venous plexus under anesthesia, and the mice were subsequently euthanized via an intraperitoneal injection of sodium pentobarbital (150 mg/kg).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-048020c186b642df",
+        "text": "Death was confirmed by the absence of spontaneous breathing, cessation of heartbeat, and loss of corneal reflex, with a waiting period of 5 minutes to ensure irreversible death.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-89b8d90a3d1e6716",
+        "text": "The hearts, livers, spleens, lungs, and kidneys were collected, and the tumors were removed.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-69ee9fd82295c970",
+        "text": "The organs and tumors were rinsed in saline, wiped dry, and weighed.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ],
+        "context_after_evidence_id": "GP-001-E-ca5ef71d00ff93fa"
+      },
+      {
+        "evidence_id": "GP-001-E-ca5ef71d00ff93fa",
+        "text": "The organs and tumors preserved in 4% paraformaldehyde solution were dehydrated, embedded in paraffin, and sliced with a microtome.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ],
+        "context_before_evidence_id": "GP-001-E-69ee9fd82295c970"
+      },
+      {
+        "evidence_id": "GP-001-E-ed18b5cf3e079257",
+        "text": "Paraffin sections were stained with hematoxylin and eosin (H&E) to observe the histopathological changes in each group under a microscope and detected via the proliferating cell nuclear antigen (PCNA) assay and terminal deoxynucleotidyl transferase-mediated dUTP nick-end labeling (TUNEL) assay to examine the proliferation and apoptosis of the cells.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-5f42d6a5b6b6f6f2",
+        "text": "Standard kits were used to detect liver function indices, including AST and ALT, and kidney function indices, including BUN and Cr.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-780a319d77dbcfd7",
+        "text": "Furthermore, the protein expression levels of EphB4, caspase 3, Bcl-2, and Bax in tumor tissues were detected via Western blotting.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-28f51bdcba80"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-ba18d6d9a3173b1f",
+        "text": "In vitro studies showed enhanced cellular uptake, the lowest IC50, and 43.2% apoptosis in Huh-7 cells.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-523db9f43ef3"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-a00cc00c86ee9bd1",
+        "text": "In vivo, the tumor inhibition rate reached 58.67%, superior to free CTD and sorafenib, with 100% 14-day survival and no significant abnormalities in serum biochemistry or histopathology.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-523db9f43ef3"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-c4cf2c2c4ab0d1a3",
+        "text": "Through systematic formulation optimization, the nanoparticle exhibited uniform particle size, high encapsulation efficiency, and favorable stability.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2d2755f77f2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-e0cae4f3b202e608",
+        "text": "First, the formulation exhibited suboptimal particle size distribution (PDI > 0.3), necessitating systematic optimization of the preparation process.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2f5437b77460"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-954de4f9bcaf2d17",
+        "text": "Third, the in vivo pharmacokinetic behavior, biodistribution, and safety profile of this dual-ligand system require comprehensive evaluation.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2f5437b77460"
+        ],
+        "context_after_evidence_id": "GP-001-E-344d886a79c55523"
+      },
+      {
+        "evidence_id": "GP-001-E-344d886a79c55523",
+        "text": "To address these gaps, the present study was designed with the following objectives: (i) to optimize the preparation process of GA-FA-CSLNs using single-factor experiments combined with Box-Behnken design–response surface methodology to obtain a formulation with uniform particle size and high encapsulation efficiency; (ii) to systematically evaluate the in vitro and in vivo antitumor activity of GA-FA-CSLNs using Huh-7 cells and a corresponding xenograft mouse model, with a particular focus on the EphB4 signaling pathway and its role in CTD-mediated apoptosis; and (iii) to investigate the pharmacokinetic behavior and in vivo safety of GA-FA-CSLNs, including their ability to prolong circulation time, enhance tumor accumulation, and mitigate CTD-associated toxicity.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2f5437b77460"
+        ],
+        "context_before_evidence_id": "GP-001-E-954de4f9bcaf2d17"
+      },
+      {
+        "evidence_id": "GP-001-E-2a3af25a5be4a63a",
+        "text": "When the tumor size reached 64 mm³, mice were anesthetized via an intraperitoneal injection of tribromoethanol (250 mg/kg) to maintain immobility during imaging.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-8e7bd03cdb45"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-24d40cba0d3894ea",
+        "text": "Cy5.5, Cy5.5-labeled Cy5.5-SLNs, GA-Cy5.5-SLNs, FA-Cy5.5-SLNs, and GA-FA-Cy5.5-SLNs were injected intravenously into tumor-bearing mice.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-8e7bd03cdb45"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-6eaef7ac6ce9e44c",
+        "text": "After 24 hours, the mice were placed in an IVIS Lumina XRMS series instrument (PerkinElmer, Waltham, MA) to record in vivo images of each group.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-8e7bd03cdb45"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-201f237e5f12cdd4",
+        "text": "The imaging mode was fluorescence mode with an excitation wavelength of 673 nm and an emission wavelength of 707 nm.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-8e7bd03cdb45"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-9f2e1ee6b58d331f",
+        "text": "CTD control (98.6%) was obtained from the China National Institute for Food and Drug Control (China, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-f3b00d47149701fb",
+        "text": "110783-202206).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-eeabd46eff3ce71d",
+        "text": "CTD API (98%) was obtained from Shanghai Yuanye Biotechnology Co.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-312b584939350496",
+        "text": "(China, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-f888f836eef235e9",
+        "text": "W13900-100 mg).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-c02e612994f67f5c",
+        "text": "Glycerol monostearate was obtained from Macklin (Shanghai, China, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-03a3466b7d400928",
+        "text": "S821699-1 kg).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-75bb847f6b2fdc63",
+        "text": "Lipoid E PC S was obtained from Lipoid Corporation (Germany, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-30eda41377e0f414",
+        "text": "97281-44-2).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-61d369bee6b7a4c4",
+        "text": "Pluronic F-68 (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-e245f487c6548426",
+        "text": "S30691-100 g) and FA (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-01d283e94848e593",
+        "text": "V65214-10 mg) were obtained from Shanghai Yuanye Biotechnology Co.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-84c2d2ae61dd87a5",
+        "text": "(China).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-078d7db9707bc450",
+        "text": "Acetonitrile (chromatographically pure) was obtained from Honeywell Trading Shanghai Co (China, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-c9e95fe59178f7ac",
+        "text": "AH015-4).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-195e6a7851398d24",
+        "text": "Methanol (analytically pure, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-43c7887dd9cec1e0",
+        "text": "10014118), anhydrous ethanol (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-2a03ac6713ad5d59",
+        "text": "10009259), xylene (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-8431fffef04603f9",
+        "text": "10023461), and neutral gum (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-c1580e8d633324db",
+        "text": "10004160) were obtained from Sinopharm Group Chemical Reagent Co.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-ddbe20078d867916",
+        "text": "Tribromoethanol was obtained from Shanghai Runwell Technology Co., Ltd (China, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-e6dce7b6d30ba519",
+        "text": "R019285-25 g).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-f91d51920c92a8f5",
+        "text": "Sodium pentobarbital was obtained from Yacoo Science Co., Ltd.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-885cce16abb3ae37",
+        "text": "W0091).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-6ecf8f7ac6097822",
+        "text": "GA was synthesized in our laboratory (Hunan University of Chinese Medicine, China).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-51a968b210c6206f",
+        "text": "An enhanced cell counting kit 8 (WST-8/CCK 8, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-7fe8a22ba2813d83",
+        "text": "E-CK-A362), alanine aminotransferase (ALT) activity assay kit (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ],
+        "context_after_evidence_id": "GP-001-E-2c8795cdaadaf41e"
+      },
+      {
+        "evidence_id": "GP-001-E-2c8795cdaadaf41e",
+        "text": "E-BC-K235-M), aspartate aminotransferase (AST) activity assay kit (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ],
+        "context_before_evidence_id": "GP-001-E-7fe8a22ba2813d83",
+        "context_after_evidence_id": "GP-001-E-ab7efd29deb57872"
+      },
+      {
+        "evidence_id": "GP-001-E-ab7efd29deb57872",
+        "text": "E-BC-K236-M), creatinine (Cr) colorimetric assay kit (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ],
+        "context_before_evidence_id": "GP-001-E-2c8795cdaadaf41e",
+        "context_after_evidence_id": "GP-001-E-3843afe852d5c6b5"
+      },
+      {
+        "evidence_id": "GP-001-E-3843afe852d5c6b5",
+        "text": "E-BC-K188-M), and blood urea nitrogen (BUN) colorimetric assay kit (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ],
+        "context_before_evidence_id": "GP-001-E-ab7efd29deb57872"
+      },
+      {
+        "evidence_id": "GP-001-E-5049f2510ccae8d2",
+        "text": "E-BC-K183-M) were obtained from Elabscience Biotechnology Co.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-e7cbe4afdf527555",
+        "text": "(Wuhan, China).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-a61f6968941c20ba",
+        "text": "Penicillin-Streptomycin Liquid purchased from Beijing Solarbio Technology Co., Ltd (Beijing, China, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-bdb139ee28963f53",
+        "text": "P1400).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-8ef2e751419428b4",
+        "text": "DMEM, high-glucose medium (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-9d6ce352690cbb33",
+        "text": "PM150210), fetal bovine serum (FBS, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-d020e892bb37bc05",
+        "text": "164210-50), and trypsin lysate (Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-e398a9b50372813d",
+        "text": "PB180226) were purchased from Procell Life Science & Technology (Wuhan, China).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-3089c9d6d288c30f",
+        "text": "The Annexin V-FITC/PI double-staining Apoptosis Detection Kit was obtained from BestBio (Shanghai, China, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-2f8657b88e0173ff",
+        "text": "BB-4101).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-2872c6b9dfd94e65",
+        "text": "C423770-1 ml) and o-Phthalic anhydride (99%, Catalog No.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-26ab8464973c"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-5344848d49076aba",
+        "text": "(A, B) In vivo fluorescence intensity in tumor-bearing mice after different treatments.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ],
+        "context_after_evidence_id": "GP-001-E-5f44a8f2435fbb4f"
+      },
+      {
+        "evidence_id": "GP-001-E-5f44a8f2435fbb4f",
+        "text": "(C) Tumor growth curves of the mice after various treatments.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ],
+        "context_before_evidence_id": "GP-001-E-5344848d49076aba"
+      },
+      {
+        "evidence_id": "GP-001-E-8ea413a376130c4f",
+        "text": "The data are expressed as the means ± SDs, n = 4.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-f92f2846e0bada5b",
+        "text": "(D) Tumor weight in each group at the end of treatment.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-b92ba2b8fcfee4cd",
+        "text": "*: Compared with the saline group; #: compared with the sorafenib group; **## P < 0.01.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-45f6ce6b64b927fe",
+        "text": "(E) Tumor images.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-d7773cc34ac4ab5b",
+        "text": "(F) H&E staining, TUNEL assay, and PCNA assay of tumors (H&E: × 30; TUNEL, PCNA: × 20).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-0f958fbaebd101d0",
+        "text": "(G, H) Expression and quantification of EphB4, Caspase 3, Bax, and Bcl-2 proteins.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-6980c6d45e54e31e",
+        "text": "*: compared with the saline group, #: compared with the sorafenib group, **## P < 0.01.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-65230eac3b20"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-65f56dd9f07859d1",
+        "text": "Pharmacokinetic-related parameters were calculated for each formulation via DPSv17.10 software.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ea15e159ab00"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-cf0316f4334d7317",
+        "text": "Body weight monitoring results showed that during the treatment cycle, except for the positive drug sorafenib group, where nude mice showed a significant weight loss, no significant changes in body weight were observed in the nude mice of other experimental groups (Figure 5A).",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e086e15279f0"
+        ],
+        "context_after_evidence_id": "GP-001-E-be64c844dfb248d1"
+      },
+      {
+        "evidence_id": "GP-001-E-be64c844dfb248d1",
+        "text": "Survival curve results (Figure 5B) showed that after 14 days of treatment, the survival rates of nude mice in the CSLNs group and GA-CSLNs group were 83.33%, and the survival rate of the GA-FA-CSLNs group reached 100%, while the survival rate of the positive drug group was only 66.67%.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e086e15279f0"
+        ],
+        "context_before_evidence_id": "GP-001-E-cf0316f4334d7317",
+        "context_after_evidence_id": "GP-001-E-fa7338c29ac71fbd"
+      },
+      {
+        "evidence_id": "GP-001-E-fa7338c29ac71fbd",
+        "text": "This indicated that GA-FA-CSLNs could significantly prolong the survival time of nude mice, with a better effect than the single-ligand modified groups and the positive drug group.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e086e15279f0"
+        ],
+        "context_before_evidence_id": "GP-001-E-be64c844dfb248d1",
+        "context_after_evidence_id": "GP-001-E-0179581b661ea9bd"
+      },
+      {
+        "evidence_id": "GP-001-E-0179581b661ea9bd",
+        "text": "After 14 days of treatment, the serum biochemical indicators of nude mice were detected.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e086e15279f0"
+        ],
+        "context_before_evidence_id": "GP-001-E-fa7338c29ac71fbd"
+      },
+      {
+        "evidence_id": "GP-001-E-471b48044e702afd",
+        "text": "The results showed that the serum Cr level in the free CTD group was significantly increased (Figure 5C), and the AST and BUN levels in the CSLNs group and positive drug group showed significant abnormalities.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e086e15279f0"
+        ],
+        "context_after_evidence_id": "GP-001-E-396fb5c771577626"
+      },
+      {
+        "evidence_id": "GP-001-E-396fb5c771577626",
+        "text": "However, all serum biochemical indicators of the GA-CSLNs group, FA-CSLNs group, and GA-FA-CSLNs group were within the normal range, and no obvious liver or kidney function damage was observed, suggesting that GA and FA ligand modification could significantly reduce the hepatotoxicity and nephrotoxicity of CTD.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e086e15279f0"
+        ],
+        "context_before_evidence_id": "GP-001-E-471b48044e702afd"
+      },
+      {
+        "evidence_id": "GP-001-E-6d976c5dda239606",
+        "text": "(A) CLSM images of Huh-7 cells after different treatments.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-401b9faa3e2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-4fcf2999b908ef87",
+        "text": "Scale = 50 μm.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-401b9faa3e2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-5a500f394f4745f8",
+        "text": "(B) Flow cytometry was used to detect cellular uptake.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-401b9faa3e2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-866551dc94f65e89",
+        "text": "(C) Intake quantification results.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-401b9faa3e2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-bf0ccd087e5a9313",
+        "text": "*P < 0.05, **P < 0.01.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-401b9faa3e2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-479a8484fdef52f0",
+        "text": "As a potent cytotoxic agent, CTD inhibits cancer cell growth and proliferation by inducing DNA damage and triggering apoptosis in a broad spectrum of tumor cells via the extrinsic and intrinsic apoptotic pathways (Naz et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-95e194061ad4"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-34e3a10cf4016d95",
+        "text": "CTD significantly inhibited HCC growth and induced endogenous apoptosis by targeting EphB4 to inhibit the downstream JAK2/STAT3 and PI3K/Akt pathways.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-95e194061ad4"
+        ],
+        "context_after_evidence_id": "GP-001-E-c2c747f3e78a909c"
+      },
+      {
+        "evidence_id": "GP-001-E-c2c747f3e78a909c",
+        "text": "However, the clinical application of CTD is limited by its poor water solubility, which poses challenges for formulation development and bioavailability, in addition to its inherent toxicities, including nephrotoxicity, dysphagia, and hepatic congestion (Bischoff 2024).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-95e194061ad4"
+        ],
+        "context_before_evidence_id": "GP-001-E-34e3a10cf4016d95"
+      },
+      {
+        "evidence_id": "GP-001-E-8add8993c11cae27",
+        "text": "After confirming the in vitro tumor targeting ability of GA-FA-CSLNs, the CCK-8 assay was used to initially evaluate the in vitro toxicity of each formulation against Huh-7 hepatoma cells.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-5463939b0a643e62",
+        "text": "When Huh-7 cells were co-incubated with different formulations at various drug concentrations for 48 hours, cell viability decreased in a dose-dependent manner (Figure 3A).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ],
+        "context_after_evidence_id": "GP-001-E-e466911be2c35be2"
+      },
+      {
+        "evidence_id": "GP-001-E-e466911be2c35be2",
+        "text": "Compared with the free CTD group, the GA-FA-CSLNs group exhibited the most significant inhibitory effect on Huh-7 cells, with a significantly reduced IC50 (Figure 3B), suggesting that GA-FA-CSLNs had the strongest in vitro toxicity against Huh-7 cells.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ],
+        "context_before_evidence_id": "GP-001-E-5463939b0a643e62"
+      },
+      {
+        "evidence_id": "GP-001-E-4ec487d090330765",
+        "text": "The results showed that all formulations could induce apoptosis of Huh-7 cells after 48 hours of intervention, and most apoptotic cells were in the late apoptotic stage.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-26d61a1419b1510a",
+        "text": "To deeply explore the molecular mechanism of apoptosis induced by the nanoformulations, Western blotting was used to detect the expression levels of apoptosis-related proteins.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ],
+        "context_after_evidence_id": "GP-001-E-a7b1bbfe88f76f7f"
+      },
+      {
+        "evidence_id": "GP-001-E-a7b1bbfe88f76f7f",
+        "text": "The results (Figure 3E−H) showed that compared with the control group, the expression levels of pro-apoptotic proteins (caspase 3, Bax) in all experimental groups were significantly upregulated (P < 0.01), while the expression level of the anti-apoptotic protein (Bcl-2) was significantly downregulated (P < 0.01).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ],
+        "context_before_evidence_id": "GP-001-E-26d61a1419b1510a"
+      },
+      {
+        "evidence_id": "GP-001-E-e76713430e197deb",
+        "text": "Among them, the GA-FA-CSLNs group showed the maximum upregulation of caspase 3 and Bax expressions and the maximum downregulation of Bcl-2 expression.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ],
+        "context_after_evidence_id": "GP-001-E-f01cdf159c3bc837"
+      },
+      {
+        "evidence_id": "GP-001-E-f01cdf159c3bc837",
+        "text": "This result was consistent with the flow cytometry results, indicating that GA-FA-CSLNs had the strongest pro-apoptotic effect.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-57da0bd21382"
+        ],
+        "context_before_evidence_id": "GP-001-E-e76713430e197deb"
+      },
+      {
+        "evidence_id": "GP-001-E-fceca26a98d72104",
+        "text": "The calculation formulas of EE% and DL% are as follows: (1) EE%=WloadedWtotal×100% (2) DL%=WloadedWtotal+Wexcipients×100%",
+        "retrieval_field_tags": [
+          "outcomes",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-005db52f0a11"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-1edd6fd2982fe3af",
+        "text": "Third, although the absolute zeta potential of GA-FA-CSLNs is relatively low (below ±30 mV), the hydration layer formed by PEGylation contributes to its short-term stability.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2d87e3274603"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-f2b111bca96a0661",
+        "text": "Fourth, the current safety evaluation was limited to a 14-day observation period; the long-term toxicity and potential immunogenicity of the dual-ligand nanoplatform remain to be systematically assessed.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-2d87e3274603"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-486cc060ac2a4708",
+        "text": "The finally obtained GA-FA-CSLNs had a particle size range of 95–125 nm, and the PDI of all formulations was <0.25, indicating a narrow particle size distribution and good uniformity, which successfully solved the problem of uneven particle size distribution of GA-FA-CSLNs in previous studies.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_after_evidence_id": "GP-001-E-28bbd541d52bea08"
+      },
+      {
+        "evidence_id": "GP-001-E-28bbd541d52bea08",
+        "text": "Particle size is a critical characteristic of lipid-based nanocarriers, as it influences stability, encapsulation efficiency, drug release profiles, and biodistribution.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_before_evidence_id": "GP-001-E-486cc060ac2a4708"
+      },
+      {
+        "evidence_id": "GP-001-E-8ef68503b8e16462",
+        "text": "The vasculature of solid tumors exhibits distinct structural abnormalities compared with normal tissues, including larger and more irregular vessel diameters, increased vessel density, enhanced permeability, and pronounced leakage (Krishnaswami et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-503918070d89b400",
+        "text": "The leaky tumor vasculature allows circulating nanocarriers with a size below approximately 150 nm to extravasate through the tumor vessel wall and accumulate within the tumor interstitium, thereby increasing the local concentration of chemotherapeutic agents (Han et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-965d3dbef31770bc",
+        "text": "Therefore, the small particle size and uniform distribution of GA-FA-CSLNs (95.5 nm, PDI < 0.25) are conducive to exploiting the EPR effect, facilitating their penetration across the tumor vascular wall and accumulation in tumor tissue, thus establishing a foundation for subsequent targeted drug delivery (Alfaifi et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_before_evidence_id": "GP-001-E-bd4ae467b68e8653"
+      },
+      {
+        "evidence_id": "GP-001-E-9c4e0c4c0c456722",
+        "text": "The surface charge of nanocarriers, typically represented by the zeta potential, is a key determinant of their long-term storage stability.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_after_evidence_id": "GP-001-E-fa351d4cc8e9a2f4"
+      },
+      {
+        "evidence_id": "GP-001-E-fa351d4cc8e9a2f4",
+        "text": "It is generally accepted that a zeta potential greater than ±30 mV provides sufficient electrostatic repulsion to prevent particle aggregation and maintain colloidal stability (Jain and Thareja 2019).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_before_evidence_id": "GP-001-E-9c4e0c4c0c456722",
+        "context_after_evidence_id": "GP-001-E-74c65dd34df050ea"
+      },
+      {
+        "evidence_id": "GP-001-E-74c65dd34df050ea",
+        "text": "In the present study, the zeta potential of GA-FA-CSLNs was below ±30 mV, indicating that electrostatic stabilization alone may be insufficient to maintain long-term storage stability.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_before_evidence_id": "GP-001-E-fa351d4cc8e9a2f4"
+      },
+      {
+        "evidence_id": "GP-001-E-cee57e444c339610",
+        "text": "Notably, the change in zeta potential from −1.26 ± 0.127 mV in unmodified CSLNs to −4.11 ± 0.035 mV in the dual-ligand modified formulation served as indirect evidence of successful surface modification.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-0a6c0815d6383edc",
+        "text": "The results showed that when FA receptors were saturated, the intracellular fluorescent signal of the FA-C6-SLNs group was significantly weakened (almost no fluorescence), indicating that its cellular uptake was effectively inhibited.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_after_evidence_id": "GP-001-E-df04a9077ecfa66f"
+      },
+      {
+        "evidence_id": "GP-001-E-df04a9077ecfa66f",
+        "text": "Under the same conditions, the GA-FA-C6-SLNs group still exhibited a strong fluorescent signal, suggesting that its cellular uptake was not affected by FA receptor blocking (Xu et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ],
+        "context_before_evidence_id": "GP-001-E-0a6c0815d6383edc"
+      },
+      {
+        "evidence_id": "GP-001-E-fe70809e816e7652",
+        "text": "Even if a single targeting pathway was blocked, efficient cellular uptake could still be achieved through the pathway mediated by the other ligand, significantly improving the reliability of targeted drug delivery.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1ddf553a0607"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-e84f5d204bf0e235",
+        "text": "SD rats were randomly divided into three groups, with six rats in each group, and were injected with CSLNs, FA-CSLNs, or GA-FA-CSLNs (CTD: 0.2 mg/kg) through the tail vein, with the CSLNs group as the control.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-15376f4cfe6b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-6777615ae361644c",
+        "text": "The supernatant was transferred to a clean tube, and 50 μL of phthalic anhydride (internal standard, 0.576 μg/mL) was added.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-15376f4cfe6b"
+        ]
+      },
+      {
+        "evidence_id": "GP-001-E-f66bc5014f052295",
+        "text": "The solvent was evaporated under reduced pressure using a rotary evaporator (LABCONCO, USA).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-15376f4cfe6b"
+        ]
+      }
+    ],
+    "packet_checksum": "0f1f82c5f4eaa10b599a8e4052f0fbde5a12a541b89604e1af809c7b2b6867fe"
+  }
+}

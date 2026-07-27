@@ -1,0 +1,60 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-007",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_0e078ce21fab1768016a673112b5f8819b8960d83ca60e9c76",
+  "request_fingerprint": "83f0f680240d040685b8775e9d9ba1bb6b52ed0db1a99865d52ad1b27648e9e9",
+  "packet_checksum": "01add67ef7c5a90d8c48f352cb811612a73b365bab12254af2c34eb013d0617f",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:21:05.979235+00:00",
+  "completed_at": "2026-07-27T10:21:28.324402+00:00",
+  "elapsed_seconds": 22.345167,
+  "usage": {
+    "input_tokens": 19993,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 19990
+    },
+    "output_tokens": 3247,
+    "output_tokens_details": {
+      "reasoning_tokens": 425
+    },
+    "total_tokens": 23240
+  },
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE",
+      "FORMULATION_INCOMPLETE"
+    ],
+    "evidence_ids": [
+      "GP-007-E-ca7573f048241a56",
+      "GP-007-E-450ee76f1f41150a",
+      "GP-007-E-ed5fce0eb33d0dce",
+      "GP-007-E-8585a45cd0259fe9",
+      "GP-007-E-4249c47d2d7ef839"
+    ],
+    "explanation": "The paper reports an original mouse HIRI experiment using identifiable siMicu1 LNPs. The LNPs were intravenously administered before surgery, and reported outcomes include liver injury measures and LSEC-associated sinusoidal/ultrastructural outcomes. Full quantitative formulation composition is not reported in the packet."
+  },
+  "record_counts": {
+    "formulations": 1,
+    "components": 4,
+    "experiments": 1,
+    "outcomes": 3,
+    "unresolved_items": 4
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

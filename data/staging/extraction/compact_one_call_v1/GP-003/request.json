@@ -1,0 +1,1980 @@
+{
+  "paper_id": "GP-003",
+  "model": "gpt-5.6-terra",
+  "reasoning_effort": "low",
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "packet_checksum": "325fb4f9b362fca32451feef33dfc20b82933f81b5a2bf89ca82d861437e3217",
+  "request_fingerprint": "5d2da1413b1762af883af1e4fdb20feedeadc22a973d7ce507686a23bf4c8fdd",
+  "system_prompt": "Extract only directly reported LNP evidence from the supplied packet. Use no outside knowledge. For every scientific field, return either a reported value with valid packet evidence IDs or missing with a short reason and no evidence IDs. Set eligibility to eligible only for original experimental LNP delivery of mRNA, siRNA, saRNA, or circRNA with evidence relevant to hepatocytes, Kupffer cells, LSECs, or hepatic stellate cells and a formulation-experiment-outcome link. Set a clearly failed criterion to ineligible and insufficient evidence to uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep formulations, components, experiments, and outcomes separate and preserve their links. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. A reported negative result is an outcome, not missing. List unresolved ambiguities. Return only the structured response required by the supplied schema.",
+  "packet": {
+    "packet_version": "compact-api-packet-1.0.0",
+    "paper_id": "GP-003",
+    "blocked_fields": [],
+    "sources": [
+      {
+        "source_id": "S-074db47bab9d",
+        "chunk_id": "GP-003-B-9bd1cf155897e343cfe0",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Potential Advantages of RNA-Targeted Therapeutics"
+      },
+      {
+        "source_id": "S-0a9caea374cb",
+        "chunk_id": "GP-003-B-071c4f36e18f9514aae8",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Emerging RNA-Targeted Therapeutics for ncRNAs",
+        "subsection": "ncRNAs as therapeutic targets"
+      },
+      {
+        "source_id": "S-0b37a5a888dc",
+        "chunk_id": "GP-003-B-6dc0b17f8c2dd14de35c",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Introduction"
+      },
+      {
+        "source_id": "S-0df78869093e",
+        "chunk_id": "GP-003-B-d306e4e714b9f9f1be92",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bench Evidence"
+      },
+      {
+        "source_id": "S-3677b35ee16e",
+        "chunk_id": "GP-003-B-d7aa478894cdcbd89193",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bench Evidence"
+      },
+      {
+        "source_id": "S-3e2334fa5c8e",
+        "chunk_id": "GP-003-B-dc4519f57169f24b11bc",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Established Therapies for the Management of Lipid-Metabolic Disorders"
+      },
+      {
+        "source_id": "S-5139ad4cfdc6",
+        "chunk_id": "GP-003-B-0bc1de1b8fe61559b9ab",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Introduction"
+      },
+      {
+        "source_id": "S-540452e155cc",
+        "chunk_id": "GP-003-B-21335e18dd11783cd5fc",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Potential Advantages of RNA-Targeted Therapeutics"
+      },
+      {
+        "source_id": "S-6b4214fc91a5",
+        "chunk_id": "GP-003-B-50eac03c8567b2f3fe8f",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Established Therapies for the Management of Lipid-Metabolic Disorders"
+      },
+      {
+        "source_id": "S-77457a528780",
+        "chunk_id": "GP-003-B-e86223299c1e493ffc7e",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bedside Evidence",
+        "subsection": "PCSK9 siRNA: Inclisiran"
+      },
+      {
+        "source_id": "S-795bc76f8cfc",
+        "chunk_id": "GP-003-B-63c361f8cdbc9191bc6b",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Emerging RNA-Targeted Therapeutics for ncRNAs",
+        "subsection": "RNA-based in vivo base editing: mRNA-LNP delivery for PCSK9 inactivation"
+      },
+      {
+        "source_id": "S-7c92695c2296",
+        "chunk_id": "GP-003-B-a8422aee6677823ff055",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Emerging RNA-Targeted Therapeutics for ncRNAs",
+        "subsection": "RNA-based in vivo base editing: mRNA-LNP delivery for PCSK9 inactivation"
+      },
+      {
+        "source_id": "S-850bcfa6e9b3",
+        "chunk_id": "GP-003-B-e49350eec19bb319df72",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bedside Evidence",
+        "subsection": "Lp(a)-targeted therapies"
+      },
+      {
+        "source_id": "S-85fcc001a771",
+        "chunk_id": "GP-003-B-b65eb09f31b5223b330f",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Established Therapies for the Management of Lipid-Metabolic Disorders"
+      },
+      {
+        "source_id": "S-90b931ec934c",
+        "chunk_id": "GP-003-B-b95febc86fcc22692a6d",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bedside Evidence",
+        "subsection": "ANGPTL3-targeted therapies"
+      },
+      {
+        "source_id": "S-936811f274f1",
+        "chunk_id": "GP-003-B-9b6ce60278b49fd548ff",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Emerging RNA-Targeted Therapeutics for ncRNAs"
+      },
+      {
+        "source_id": "S-a34a6eedebb5",
+        "chunk_id": "GP-003-B-3f9843a098c4dd3188b4",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Introduction"
+      },
+      {
+        "source_id": "S-a5b9d479e1b5",
+        "chunk_id": "GP-003-B-1844740c2cb239e5da75",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Established Therapies for the Management of Lipid-Metabolic Disorders"
+      },
+      {
+        "source_id": "S-ac0e0a02eaf2",
+        "chunk_id": "GP-003-B-62c5183d82bd005636a7",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bench Evidence"
+      },
+      {
+        "source_id": "S-b9d5159c8450",
+        "chunk_id": "GP-003-B-070daaffb779fb775887",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Concluding Remarks and Future Perspective"
+      },
+      {
+        "source_id": "S-c027afc8bcba",
+        "chunk_id": "GP-003-B-c2062950593c121a1a94",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Concluding Remarks and Future Perspective"
+      },
+      {
+        "source_id": "S-ca2a5b56db26",
+        "chunk_id": "GP-003-B-c1890c90984caa44e786",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bench Evidence"
+      },
+      {
+        "source_id": "S-d4bcacf08690",
+        "chunk_id": "GP-003-B-e0021ba0e8007fdada53",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "figure_caption",
+        "section": "Potential Advantages of RNA-Targeted Therapeutics",
+        "figure_number": "Fig. 2."
+      },
+      {
+        "source_id": "S-d93a140dbe7a",
+        "chunk_id": "GP-003-B-a75e9de68e4867e76605",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Potential Advantages of RNA-Targeted Therapeutics"
+      },
+      {
+        "source_id": "S-dc84458ff81d",
+        "chunk_id": "GP-003-B-a98add1b1afab9b2e6e8",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "figure_caption",
+        "section": "Potential Advantages of RNA-Targeted Therapeutics",
+        "figure_number": "Fig. 3."
+      },
+      {
+        "source_id": "S-e509a3d3b433",
+        "chunk_id": "GP-003-B-ffd92cf64a5de4a6c8cb",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "Established Therapies for the Management of Lipid-Metabolic Disorders"
+      },
+      {
+        "source_id": "S-f17a30b0cd01",
+        "chunk_id": "GP-003-B-35029705d0cccc24a0c5",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "abstract",
+        "section": "Abstract"
+      },
+      {
+        "source_id": "S-f2596fa58741",
+        "chunk_id": "GP-003-B-3bdf4f32a7c7f941c64e",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bench Evidence"
+      },
+      {
+        "source_id": "S-f8d9612013d5",
+        "chunk_id": "GP-003-B-54ccf8896cf8967af2f2",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bedside Evidence",
+        "subsection": "ApoC3-targeted therapies"
+      },
+      {
+        "source_id": "S-ff5d6743ab4d",
+        "chunk_id": "GP-003-B-9e57f832ffedff952f1a",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00019_PMC13184955.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "RNA-Targeted Therapeutics for Lipid-Metabolic Disorders: Bedside Evidence",
+        "subsection": "ANGPTL3-targeted therapies"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "GP-003-E-c53f19dab1d94163",
+        "text": "The next phase of RNA-targeted therapeutics for lipid-driven ASCVD may extend beyond hepatic lipid regulation toward the modulation of vascular inflammation and plaque biology.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-8225dd19d8d64690",
+        "text": "Looking further ahead, while GalNAc-conjugated RNAs have established efficient and durable liver targeting for genes such as PCSK9, APOC3, ANGPTL3, and Lp(a), addressing residual cardiovascular risk will require extrahepatic delivery to immune and vascular cells that drive plaque progression.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_after_evidence_id": "GP-003-E-c92a303a4ffc1da6"
+      },
+      {
+        "evidence_id": "GP-003-E-c92a303a4ffc1da6",
+        "text": "Emerging nanoparticle platforms, particularly LNPs, are being explored for their potential to deliver nucleic acid therapeutics directly to hepatocytes and vascular cells involved in lipid metabolism [126,236].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_before_evidence_id": "GP-003-E-8225dd19d8d64690",
+        "context_after_evidence_id": "GP-003-E-d6ce3af2a0d1eda3"
+      },
+      {
+        "evidence_id": "GP-003-E-d6ce3af2a0d1eda3",
+        "text": "LNPs offer a versatile platform capable of delivering not only siRNA to silence disease-causing genes [e.g., targeting PCSK9, ANGPTL3, APOC3, or Lp(a)] but also mRNAs to express therapeutic proteins, opening new avenues for treating dyslipidemia and atherosclerosis [237,238].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_before_evidence_id": "GP-003-E-c92a303a4ffc1da6",
+        "context_after_evidence_id": "GP-003-E-3e00d47db1460b49"
+      },
+      {
+        "evidence_id": "GP-003-E-3e00d47db1460b49",
+        "text": "The 2026 ACC Scientific Statement on Gene Editing Therapy in Cardiovascular Disease underscores the clinical readiness of these approaches, particularly for hepatically expressed targets such as PCSK9, ANGPTL3, and Lp(a), while also highlighting the need for long-term safety monitoring, equitable access, and ethical implementation [131].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_before_evidence_id": "GP-003-E-d6ce3af2a0d1eda3",
+        "context_after_evidence_id": "GP-003-E-fb0a12d046ee5898"
+      },
+      {
+        "evidence_id": "GP-003-E-fb0a12d046ee5898",
+        "text": "These delivery advances will enable rational combination therapies, in which RNA-targeted agents are integrated with statins or other lipid-modifying interventions to achieve synergistic and durable risk reduction.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_before_evidence_id": "GP-003-E-3e00d47db1460b49",
+        "context_after_evidence_id": "GP-003-E-16558d39359df36e"
+      },
+      {
+        "evidence_id": "GP-003-E-16558d39359df36e",
+        "text": "However, efficient and safe extrahepatic delivery remains a major technical challenge, and most strategies are currently in preclinical or early translational stages.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_before_evidence_id": "GP-003-E-fb0a12d046ee5898"
+      },
+      {
+        "evidence_id": "GP-003-E-b9c5914a2c6abf00",
+        "text": "Complementing these delivery efforts, recent systematic screens have prioritized novel, causal targets for CVD, thereby mapping a concrete pipeline for the next generation of RNA-targeted therapies [239].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-45cccf8750858230",
+        "text": "A recently published comprehensive review further highlights the rapidly expanding landscape of mRNA-based biotechnologies for CVDs, including mRNA modifications, delivery platforms, genome and epigenomic editing, and chimeric antigen receptor engineering for immune cell therapy, with preclinical and clinical applications in hypercholesterolemia, atherosclerosis, cardiac injury, fibrosis, and amyloidosis [240].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-503a3cd9cc319e19",
+        "text": "In parallel, targeting inflammatory transcriptional programs within plaque-resident cells could potentially expand RNA-targeted therapeutics beyond lipid lowering toward modulation of vascular disease processes, potentially positioning them as an important component of future precision therapies of ASCVD.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_after_evidence_id": "GP-003-E-f39cd2461f5ab739"
+      },
+      {
+        "evidence_id": "GP-003-E-f39cd2461f5ab739",
+        "text": "A projected timeline of anticipated milestones for RNA-targeted therapeutics in lipid metabolic disorders is shown in Fig.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ],
+        "context_before_evidence_id": "GP-003-E-503a3cd9cc319e19"
+      },
+      {
+        "evidence_id": "GP-003-E-4f29089a53237ef2",
+        "text": "We can envisage more RNA-targeted drugs against hypercholesterolemia and ASCVD will emerge in the decades to come.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-b9d5159c8450"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-0d80d350aa06846d",
+        "text": "Anti-miR-33 treatment in Ldlr−/− mice with established atherosclerotic plaques increased HDL-C, enhanced reverse cholesterol transport, reduced plaque size and lipid content, and increased markers of plaque stability [114].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0a9caea374cb"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-62558978e9349ea4",
+        "text": "Anti-miR-122 silencing in mice lowered plasma cholesterol levels and improved hepatic steatosis [104], and the landmark antagomir study demonstrated that miR-122 inhibition reduces cholesterol biosynthesis gene expression and plasma cholesterol [113].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0a9caea374cb"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-a231d9a9d9d56d3c",
+        "text": "For miR-148a, anti-miR-148a silencing in mice increases hepatic LDLR and ABCA1 expression, lowers LDL-C while raising HDL-C, and reduces atherosclerotic plaque burden [108,111].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0a9caea374cb"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-8550ef5a8d908cb0",
+        "text": "Collectively, these studies establish anti-miR therapeutics as a major RNA-targeted strategy for lipid disorders, with strong preclinical evidence supporting their continued development.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0a9caea374cb"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-240d9595395015cf",
+        "text": "This review highlights how RNA-targeted therapeutics are transforming the management of lipid-driven diseases and their downstream cardiovascular consequences, including ASCVD, by targeting their genetic causes.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5139ad4cfdc6"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-cd3c8547f1dbff39",
+        "text": "We describe key targets, PCSK9, Lp(a), ApoC3, and ANGPTL3, and why RNA platforms are well suited to modulate them.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5139ad4cfdc6"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-84eb587f80ec5cbd",
+        "text": "While previous reviews have provided excellent summaries of RNA-targeted therapies for dyslipidemia, including the foundational work by Tsimikas [46] and the recent comprehensive analysis by Kosmas et al.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5139ad4cfdc6"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-2674d9931bd04455",
+        "text": "Unlike these prior reviews, which focused exclusively on protein-coding mRNAs and ASO/siRNA silencing, we expand the scope to include (a) ncRNAs (miRNAs and lncRNAs) as targets of RNA-targeted therapeutics, with detailed preclinical evidence for anti-miR ASOs, and (b) mRNA-LNP-based in vivo base editing (e.g., VERVE-101 and VERVE-102 targeting PCSK9), a rapidly emerging modality that has reached clinical trials.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5139ad4cfdc6"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-1ac70499ff4a1347",
+        "text": "In addition, we incorporate the most recent clinical developments and guidelines (e.g., ORION-16, GATEWAY, the 2026 American College of Cardiology [ACC]/American Heart Association [AHA] guideline, and the 2026 ACC Scientific Statement on Gene Editing Therapy in Cardiovascular Disease) and briefly discuss emerging modalities that extend beyond traditional ASOs and siRNAs, such as CRISPR-mediated genome editing, which is RNA-based but not RNA-targeted (as it targets DNA rather than binding directly to a disease-causing mRNA).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5139ad4cfdc6"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-fab746f9ca7c5b56",
+        "text": "In the FOURIER trial, evolocumab reduced LDL-C by 59% and decreased MACE in ASCVD patients (HR 0.85) (NCT01764633) [70].",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a5b9d479e1b5"
+        ],
+        "context_after_evidence_id": "GP-003-E-392c65b7b82f8da5"
+      },
+      {
+        "evidence_id": "GP-003-E-392c65b7b82f8da5",
+        "text": "In the ODYSSEY OUTCOMES trial, alirocumab added to statin therapy reduced LDL-C by 54.7% compared with placebo (from 101.4 to 53.3 mg/dl) and significantly decreased MACE (HR 0.85; 95% CI 0.78 to 0.93) (NCT01663402) [71].",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a5b9d479e1b5"
+        ],
+        "context_before_evidence_id": "GP-003-E-fab746f9ca7c5b56"
+      },
+      {
+        "evidence_id": "GP-003-E-98e47d1f0bf72f10",
+        "text": "Beyond LDL-C lowering, PCSK9 inhibitors also reduce Lp(a) by 20% to 30%, supporting their use in patients with elevated Lp(a) as reflected in the 2023 ESC guidelines (Class IIa recommendation) [74].",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a5b9d479e1b5"
+        ],
+        "context_after_evidence_id": "GP-003-E-661f8adc7d175c94"
+      },
+      {
+        "evidence_id": "GP-003-E-661f8adc7d175c94",
+        "text": "These agents are generally reserved for high-risk patients not achieving LDL-C goals on maximally tolerated statin and ezetimibe therapy, or those with statin intolerance [75].",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a5b9d479e1b5"
+        ],
+        "context_before_evidence_id": "GP-003-E-98e47d1f0bf72f10"
+      },
+      {
+        "evidence_id": "GP-003-E-eae5d1d24fe9bed7",
+        "text": "More recently, tafolecimab has been approved in China as a third PCSK9 monoclonal antibody, demonstrating robust LDL-C reductions of over 60% in clinical trials [76].",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a5b9d479e1b5"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-b7317c4685f18efa",
+        "text": "In 2,909 patients with or at risk for ASCVD, enlicitide 20 mg daily reduced LDL-C by 57.1% at 24 weeks compared with placebo (P < 0.001), with significant improvements in non-HDL-C, ApoB, and Lp(a) and a favorable safety profile [77].",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a5b9d479e1b5"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-33b524e7df0bbfdd",
+        "text": "For lipid disorders specifically, several RNA-targeted therapies have now been approved.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-540452e155cc"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-99de1edd7d9aeb66",
+        "text": "Inclisiran (2021) became the first small-interfering RNA therapy for heterozygous FH or clinical ASCVD [163].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-540452e155cc"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-0c063425b34fe9e3",
+        "text": "The successful development of these lipid-targeting RNA therapies has paved the way for investigational candidates such as pelacarsen (ASO) and olpasiran (siRNA), which are currently in clinical trials for lowering Lp(a) and addressing residual cardiovascular risk.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-540452e155cc"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-c58418ecd84452d1",
+        "text": "RNA platforms offer the ability to modulate inflammatory mediators [166,167], vascular remodeling pathways, and perhaps plaque instability itself [168].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-540452e155cc"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-80cce7de833f38fe",
+        "text": "RNA-targeted therapeutics not only represent incremental additions to existing therapies but also constitute a new class of gene-directed medicines capable of addressing the root causes of atherosclerosis.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-540452e155cc"
+        ],
+        "context_after_evidence_id": "GP-003-E-467e943be09ea23c"
+      },
+      {
+        "evidence_id": "GP-003-E-467e943be09ea23c",
+        "text": "By expanding the range of druggable targets and providing durable, hepatocyte-specific modulation of pathogenic pathways, RNA-targeted therapeutics hold the potential to redefine lipid-driven ASCVD management.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-540452e155cc"
+        ],
+        "context_before_evidence_id": "GP-003-E-80cce7de833f38fe"
+      },
+      {
+        "evidence_id": "GP-003-E-f992aff6942386a7",
+        "text": "RNA-targeted therapeutics, including antisense oligonucleotides (ASOs) and small interfering RNAs (siRNAs), offer a transformative approach by durably silencing genetically validated lipid targets.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f17a30b0cd01"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-87dea2c33d68cbad",
+        "text": "Beyond protein-coding messenger RNAs (mRNAs), RNA therapeutics can also target noncoding RNAs (microRNAs and long noncoding RNAs) that regulate cholesterol homeostasis.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f17a30b0cd01"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-1e1e3fa380c314f2",
+        "text": "Additionally, mRNA lipid nanoparticle-based in vivo base editing (e.g., VERVE 101/102 targeting PCSK9) has entered clinical trials, offering potential for permanent genetic correction with a single infusion.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f17a30b0cd01"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-b88d90a80c4f62b6",
+        "text": "In the future, RNA-targeted therapeutics may expand beyond hepatic lipid modulation to directly target vascular lipid metabolism and plaque biology.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f17a30b0cd01"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-0dcf9dbf7f0d3f7e",
+        "text": "Advances in extrahepatic delivery and rational combination regimens could transform RNA therapy from transient lipid-lowering to long-term, disease-modifying interventions.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f17a30b0cd01"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-74ae0b49735165de",
+        "text": "The recent 2026 American College of Cardiology/American Heart Association dyslipidemia guideline emphasizes the clinical importance of targeting PCSK9, APOC3, Lp(a), and ANGPTL3.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f17a30b0cd01"
+        ],
+        "context_after_evidence_id": "GP-003-E-93c2af1bcf62a929"
+      },
+      {
+        "evidence_id": "GP-003-E-93c2af1bcf62a929",
+        "text": "This review provides a state-of-the-art overview of RNA-targeted therapeutics in hyperlipidemia and discusses future research directions in this emerging field.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f17a30b0cd01"
+        ],
+        "context_before_evidence_id": "GP-003-E-74ae0b49735165de"
+      },
+      {
+        "evidence_id": "GP-003-E-2ea619d21f23389f",
+        "text": "Advances in the design and delivery, most notably GalNAc conjugation for hepatocyte targeting and the development of LNPs, have enabled the efficient hepatic delivery of these therapeutics, leading to the rapid development of NATs [38,169].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f2596fa58741"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-f918548a79367dc9",
+        "text": "The success of this liver-targeted paradigm, pioneered in cardiovascular disease by the GalNAc-conjugated siRNA inclisiran, has established it as the foundational and most clinically advanced strategy, even as efforts continue to achieve efficient delivery to other cardiovascular tissues [171,172].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f2596fa58741"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-1fe7e4ee4c9a7177",
+        "text": "We are now entering a new era with novel advanced therapies (NATs), particularly RNA-targeted therapeutics [39], a term we use here to refer specifically to antisense oligonucleotides (ASOs) and small interfering RNAs (siRNAs) that achieve gene silencing through sequence-specific binding to target RNA transcripts (including both protein-coding messenger RNAs [mRNAs] and noncoding RNAs [ncRNAs]).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a34a6eedebb5"
+        ],
+        "context_after_evidence_id": "GP-003-E-4e33b1490f8e989c"
+      },
+      {
+        "evidence_id": "GP-003-E-4e33b1490f8e989c",
+        "text": "These treatments work by silencing the expression of single genes that cause disease, exhibiting a more precise and genetically informed strategy for managing ASCVD.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a34a6eedebb5"
+        ],
+        "context_before_evidence_id": "GP-003-E-1fe7e4ee4c9a7177"
+      },
+      {
+        "evidence_id": "GP-003-E-602405343a3b3735",
+        "text": "The clinical validation of this paradigm was achieved with inclisiran, a GalNAc-conjugated siRNA targeting PCSK9, demonstrating a consistent LDL-C decrease with 2-year dosage [45].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a34a6eedebb5"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-9e9fa5d4cfb1d1e1",
+        "text": "In the CLEAR Outcomes trial, treatment in statin-intolerant patients resulted in a 21.1% greater LDL-C reduction and a 13% lower risk of major adverse cardiovascular events (MACE) versus placebo, with no excess muscle-related adverse events but higher incidences of gout and cholelithiasis [64].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6b4214fc91a5"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-abf6e819bbed7408",
+        "text": "Collectively, the dual approvals of olezarsen and plozasiran demonstrate the successful translation of human genetics into 2 distinct, long-acting RNA-targeted therapeutic platforms, offering powerful new options for normalizing TGs, mitigating pancreatitis risk, and reducing residual cardiovascular risk.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-f8d9612013d5"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-33049f78e83d7485",
+        "text": "Targeting hepatic cholesterol synthesis: ACLY siRNA, the RNAi platform is also being leveraged to target fundamental intracellular metabolic enzymes, expanding its reach beyond secreted regulators.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ac0e0a02eaf2"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-3e3d87b131c47479",
+        "text": "Translating this pharmacology into the RNAi domain, a GalNAc-conjugated siRNA targeting hepatic ACLY, aclysiran, has demonstrated compelling preclinical proof of concept.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ac0e0a02eaf2"
+        ],
+        "context_after_evidence_id": "GP-003-E-17f571bbb0ba8d23"
+      },
+      {
+        "evidence_id": "GP-003-E-17f571bbb0ba8d23",
+        "text": "In a murine model of atherosclerosis, monthly administration of aclysiran achieved potent and sustained (~1 month) knockdown of hepatic ACLY, leading to substantial reductions in plasma LDL-C and TGs and attenuation of atherosclerotic plaque burden comparable to that of daily oral bempedoic acid.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ac0e0a02eaf2"
+        ],
+        "context_before_evidence_id": "GP-003-E-3e3d87b131c47479"
+      },
+      {
+        "evidence_id": "GP-003-E-c2f2ab671edcb1e0",
+        "text": "Importantly, aclysiran operates independently of the ACSVL1 activation required by the small-molecule prodrug, potentially offering a more consistent therapeutic response and bypassing mechanisms associated with muscle toxicity.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ac0e0a02eaf2"
+        ],
+        "context_after_evidence_id": "GP-003-E-6fc0385f394c4f79"
+      },
+      {
+        "evidence_id": "GP-003-E-6fc0385f394c4f79",
+        "text": "This approach mechanistically recapitulates the benefits of pharmacological ACLY inhibition but confers an extended dosing interval intrinsic to the siRNA platform [191].",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ac0e0a02eaf2"
+        ],
+        "context_before_evidence_id": "GP-003-E-c2f2ab671edcb1e0"
+      },
+      {
+        "evidence_id": "GP-003-E-fa31c4c5595b4755",
+        "text": "Beyond RNA-targeted gene silencing, the therapeutic landscape has expanded to include mRNA-based in vivo base editing, which represents a paradigm shift from transient protein modulation to permanent genetic correction [125].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-795bc76f8cfc"
+        ],
+        "context_after_evidence_id": "GP-003-E-299fc4ce9c1eb5ac"
+      },
+      {
+        "evidence_id": "GP-003-E-299fc4ce9c1eb5ac",
+        "text": "This approach uses lipid nanoparticles (LNPs) to deliver 2 RNA components: an mRNA encoding an adenine base editor and a guide RNA (gRNA) targeting a specific genomic locus.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-795bc76f8cfc"
+        ],
+        "context_before_evidence_id": "GP-003-E-fa31c4c5595b4755",
+        "context_after_evidence_id": "GP-003-E-a8e2ec1356077027"
+      },
+      {
+        "evidence_id": "GP-003-E-a8e2ec1356077027",
+        "text": "Upon hepatocyte uptake, the base editor introduces a precise single-base change in the DNA, permanently inactivating the target gene without double-strand breaks [125,126].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-795bc76f8cfc"
+        ],
+        "context_before_evidence_id": "GP-003-E-299fc4ce9c1eb5ac"
+      },
+      {
+        "evidence_id": "GP-003-E-cf122bddbf30bf22",
+        "text": "Critically, approximately 80% of the attributable CVD burden is linked to modifiable risk factors [5].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0b37a5a888dc"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-146150592f79769a",
+        "text": "The principle that “lower is better” for low-density lipoprotein cholesterol (LDL-C) has recently been reinforced by a randomized trial showing that achieving LDL-C levels below 55 mg/dl substantially reduces major cardiovascular events compared with the standard target of below 70 mg/dl (hazard ratio, 0.67; 95% CI, 0.52 to 0.86; P = 0.002) (NCT04626973) [6].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0b37a5a888dc"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-2734d917875537a7",
+        "text": "In addition to targeting protein-coding mRNAs, ASO and siRNA platforms can be directed against ncRNAs, including microRNAs (miRNAs) and long noncoding RNAs (lncRNAs).",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-936811f274f1"
+        ],
+        "context_after_evidence_id": "GP-003-E-b0255fc647eadb26"
+      },
+      {
+        "evidence_id": "GP-003-E-b0255fc647eadb26",
+        "text": "This remains an RNA-targeted strategy, as the therapeutic agent binds directly to the ncRNA transcript.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-936811f274f1"
+        ],
+        "context_before_evidence_id": "GP-003-E-2734d917875537a7"
+      },
+      {
+        "evidence_id": "GP-003-E-63e6909f3b1617a8",
+        "text": "Although most of these approaches are still in preclinical or early clinical stages, they represent important future directions for RNA-targeted therapeutics in dyslipidemia and atherosclerosis.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-936811f274f1"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-52d7e6cfe687ad3f",
+        "text": "The 2 primary categories of these RNA-targeting drugs are ASOs and siRNAs.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-074db47bab9d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-62a04b826354f27b",
+        "text": "Clinically, the key distinction lies in durability: siRNAs achieve prolonged effects through catalytic recycling within RNA-induced silencing complex, whereas ASOs are not recycled and typically require more frequent administration [134–136].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-074db47bab9d"
+        ],
+        "context_after_evidence_id": "GP-003-E-01346dd5ba349041"
+      },
+      {
+        "evidence_id": "GP-003-E-01346dd5ba349041",
+        "text": "This difference in pharmacological durability was illustrated in the race to develop PCSK9-targeting RNA therapies.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-074db47bab9d"
+        ],
+        "context_before_evidence_id": "GP-003-E-62a04b826354f27b"
+      },
+      {
+        "evidence_id": "GP-003-E-37307a5d51d9f260",
+        "text": "Its development was discontinued in 2022 [137], whereas the siRNA (inclisiran) achieved approval with a 2-year regimen, underscoring how dosing convenience and sustained efficacy have become decisive factors for chronic ASCVD management.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-074db47bab9d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-d4cb6de57e088e89",
+        "text": "siRNAs can be created artificially and treated, or they can form naturally inside cells from larger RNA molecules, such as those produced during a viral infection [138].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-074db47bab9d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-6912db2705847086",
+        "text": "Zodasiran, a GalNAc-conjugated siRNA, targets hepatic ANGPTL3 expression.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ff5d6743ab4d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-c30e786d0defdf50",
+        "text": "Its efficacy and safety were assessed in a 24-week, phase IIb ARCHES-2 trial involving 204 individuals with mixed hyperlipidemia (NCT04832971) [231].",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ff5d6743ab4d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-54cdf545cd149322",
+        "text": "Zodasiran treatment produced dose-dependent reductions, with the 200-mg dose lowering TGs by >50%, non-HDL cholesterol by 36%, ApoB by 22%, and LDL cholesterol by 20%.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ff5d6743ab4d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-d66458032daf6478",
+        "text": "The phase 2 GATEWAY trial reported LDL cholesterol reductions of approximately 35.7% to 39.9% at month 6 in patients with HoFH, with even greater reductions (55.8%) observed in those also receiving concomitant PCSK9 inhibitor therapy, supporting its potential in this high-risk population [232].",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ff5d6743ab4d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-1c046d6139fec3c5",
+        "text": "For these reasons, research is now shifting toward innovative treatments such as RNA-targeted therapeutics (siRNA and ASO therapies).",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d93a140dbe7a"
+        ],
+        "context_after_evidence_id": "GP-003-E-f4bd65ad9e81021d"
+      },
+      {
+        "evidence_id": "GP-003-E-f4bd65ad9e81021d",
+        "text": "This strategy marks a breakthrough advance in medicine, enabling the precise targeting of molecules and pathways that traditional drugs and antibody treatments could not previously address.",
+        "retrieval_field_tags": [
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d93a140dbe7a"
+        ],
+        "context_before_evidence_id": "GP-003-E-1c046d6139fec3c5"
+      },
+      {
+        "evidence_id": "GP-003-E-c218f7bf230663c1",
+        "text": "VERVE-102 (NCT06164730) is a next-generation base editing therapy that uses a GalNAc-conjugated LNP (GalNAc-LNP) to achieve more hepatocyte-specific delivery.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ],
+        "context_after_evidence_id": "GP-003-E-6aee9fb698920384"
+      },
+      {
+        "evidence_id": "GP-003-E-6aee9fb698920384",
+        "text": "This design enables hepatocyte uptake via either the LDLR or the ASGPR, potentially overcoming reduced LDLR function in FH [129].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ],
+        "context_before_evidence_id": "GP-003-E-c218f7bf230663c1"
+      },
+      {
+        "evidence_id": "GP-003-E-1c1120bf5679e57f",
+        "text": "In nonhuman primates, a single infusion of VERVE-102 (3 mg/kg) led to durable mean reductions of 80% in blood PCSK9 and 62% in LDL-C.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-7909fd05552f8668",
+        "text": "Off-target editing was not detected across a panel of ~6,000 candidate sites, and no germline transmission was observed [130].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-d2a522e3017f45d6",
+        "text": "The ongoing phase 1b Heart-2 trial is evaluating safety, tolerability, and pharmacodynamics in patients with heterozygous familial hypercholesterolemia or premature coronary artery disease [129,130].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ],
+        "context_after_evidence_id": "GP-003-E-72d8e461f9962530"
+      },
+      {
+        "evidence_id": "GP-003-E-72d8e461f9962530",
+        "text": "These clinical milestones demonstrate that mRNA-LNP delivery for in vivo base editing has moved from bench to bedside for lipid disorders, complementing RNA-targeted silencing approaches.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ],
+        "context_before_evidence_id": "GP-003-E-d2a522e3017f45d6",
+        "context_after_evidence_id": "GP-003-E-4dce89d60b14fe9e"
+      },
+      {
+        "evidence_id": "GP-003-E-4dce89d60b14fe9e",
+        "text": "However, long-term safety, off-target editing risks, and durability beyond the lifespan of edited hepatocytes remain important considerations [125,126,128].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ],
+        "context_before_evidence_id": "GP-003-E-72d8e461f9962530"
+      },
+      {
+        "evidence_id": "GP-003-E-f88f334b87668670",
+        "text": "The 2026 ACC Scientific Statement on Gene Editing Therapy in Cardiovascular Disease highlights VERVE-102 as a leading example of in vivo base editing for lipid disorders, noting interim LDL-C reductions of 53% to 69% and emphasizing the potential for durable, single-infusion treatment [131].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-7c92695c2296"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-c7bfe4d5a48c37d8",
+        "text": "Food and Drug Administration (FDA)-approved RNA-based therapeutics (1998 to 2025).",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-dc84458ff81d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-016c3498f204a31b",
+        "text": "Chronological overview of selected RNA-based therapies granted approval by the FDA from 1998 to 2025.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-dc84458ff81d"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-6fb39929a5851068",
+        "text": "A prespecified subgroup analysis of the ACCORD-LIPID trial indicated that fenofibrate improved cardiovascular outcomes, specifically in individuals with atherogenic dyslipidemia, as characterized by high TGs (≥204 mg/dl) and low HDL-C (<34 mg/dl).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-85fcc001a771"
+        ],
+        "context_after_evidence_id": "GP-003-E-90ea9b7eabf8fe64"
+      },
+      {
+        "evidence_id": "GP-003-E-90ea9b7eabf8fe64",
+        "text": "This benefit was not observed in the broader group of type 2 diabetes patients treated with simvastatin (NCT00000620) [80].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-85fcc001a771"
+        ],
+        "context_before_evidence_id": "GP-003-E-6fb39929a5851068",
+        "context_after_evidence_id": "GP-003-E-fe80b5cdcd1c9d53"
+      },
+      {
+        "evidence_id": "GP-003-E-fe80b5cdcd1c9d53",
+        "text": "The PROMINENT outcomes trial demonstrated that although pemafibrate improved atherogenic lipid parameters, it did not translate into a reduction in CVDs for high-risk patients with type 2 diabetes and mixed dyslipidemia (NCT03071692) [81].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-85fcc001a771"
+        ],
+        "context_before_evidence_id": "GP-003-E-90ea9b7eabf8fe64"
+      },
+      {
+        "evidence_id": "GP-003-E-536595c09c072698",
+        "text": "Solbinsiran, a GalNAc-conjugated siRNA, an ANGPTL3 inhibitor, progressed to a phase II trial of interest following its promising evaluation in earlier preclinical and phase I studies (NCT04644809) [233].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ],
+        "context_after_evidence_id": "GP-003-E-0c29f384ce8525c4"
+      },
+      {
+        "evidence_id": "GP-003-E-0c29f384ce8525c4",
+        "text": "The durability and safety of solbinsiran were evaluated in PROLONG-ANG3 (NCT05256654), a double-blind, randomized, placebo-controlled phase II trial.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ],
+        "context_before_evidence_id": "GP-003-E-536595c09c072698"
+      },
+      {
+        "evidence_id": "GP-003-E-7671b904a7cb4a0d",
+        "text": "Compared with the placebo, the 400-mg dose administered on days 0 and 90 produced a significant reduction in ApoB on day 180 (−14.3%, P = 0.0085), whereas the effects of the 100- and 800-mg doses did not reach statistical significance.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-2dfee901563c0845",
+        "text": "Treatment was generally well tolerated, with a lower incidence of adverse events in the solbinsiran group (44% to 60%) than in the placebo group (65%).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ],
+        "context_after_evidence_id": "GP-003-E-35298dcafb76377e"
+      },
+      {
+        "evidence_id": "GP-003-E-35298dcafb76377e",
+        "text": "The study concluded that solbinsiran 400 mg effectively reduces ApoB and is well tolerated, although its effect on cardiovascular outcomes remains to be determined [234].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ],
+        "context_before_evidence_id": "GP-003-E-2dfee901563c0845"
+      },
+      {
+        "evidence_id": "GP-003-E-fb0e3dd579f7a274",
+        "text": "A recent editorial commentary on the PROLONG-ANG3 trial highlights the dual effect of solbinsiran on both TG-rich remnants and LDL particles, its favorable hepatic safety profile with potential benefits on hepatic steatosis, and the practical advantage of quarterly subcutaneous dosing, while noting that the inconsistent dose response and short follow-up limit long-term conclusions [235].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ],
+        "context_after_evidence_id": "GP-003-E-d7a903d78789fb6a"
+      },
+      {
+        "evidence_id": "GP-003-E-d7a903d78789fb6a",
+        "text": "Thus, the therapeutic targeting of ANGPTL3 has evolved from a hepatotoxic ASO to safer, durable siRNA candidates, which now await definitive outcome trials to confirm their clinical potential in cardiovascular risk reduction.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ],
+        "context_before_evidence_id": "GP-003-E-fb0e3dd579f7a274"
+      },
+      {
+        "evidence_id": "GP-003-E-fdfc4227a198d52f",
+        "text": "Meta-analytic data further demonstrated that ANGPTL3-targeted siRNAs provide broader lipid modulation, reducing TGs by 52% and LDL-C by 13.2%, while also decreasing HDL-C by approximately 20%, a differential effect distinct from APOC3-targeted agents [212].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-192784c26a03e809",
+        "text": "Collectively, the clinical development and regulatory status of leading siRNA and ASO therapies for dyslipidemia are summarized in Table 1.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-90b931ec934c"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-b0d19165412cc45f",
+        "text": "Subsequent research focused on optimizing the siRNA chemical scaffold to increase durability and tolerability.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ca2a5b56db26"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-8dcc87e1f41e484b",
+        "text": "A systematic structure–activity relationship study identified a novel, long-acting APOC3 siRNA with minimal chemical modifications.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ca2a5b56db26"
+        ],
+        "context_after_evidence_id": "GP-003-E-1da0c00abb6300ff"
+      },
+      {
+        "evidence_id": "GP-003-E-1da0c00abb6300ff",
+        "text": "This optimized candidate demonstrated long duration of action and an excellent safety profile across species, with comparative analysis suggesting the potential for less frequent dosing than earlier clinical-stage candidates [180].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ca2a5b56db26"
+        ],
+        "context_before_evidence_id": "GP-003-E-8dcc87e1f41e484b"
+      },
+      {
+        "evidence_id": "GP-003-E-0be751eb53c9ad08",
+        "text": "The translational importance of this target has been further demonstrated in a novel mouse model of combined hyperlipidemia, where therapeutic lipid lowering successfully reduced atherosclerotic plaque burden, providing a robust system for evaluating future APOC3-targeting therapies [181].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ca2a5b56db26"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-3924a4ca80a79fe0",
+        "text": "Finally, quantitative systems pharmacology modeling of a GalNAc-conjugated APOC3 siRNA has elucidated the key in vivo delivery processes responsible for its sustained pharmacodynamics, successfully enabling PK/PD translation from animals to humans [182].",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-ca2a5b56db26"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-d88319dcc42dfcb7",
+        "text": "Now, RNA-targeted therapeutics, including siRNAs (e.g., inclisiran and plozasiran), ASOs (e.g., olezarsen and pelacarsen), anti-miR agents, and mRNA-LNP-based in vivo base editing (e.g., VERVE-101/102), constitute the fourth revolution.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-c027afc8bcba"
+        ],
+        "context_after_evidence_id": "GP-003-E-578583a6afac0aa5"
+      },
+      {
+        "evidence_id": "GP-003-E-578583a6afac0aa5",
+        "text": "These modalities achieve durable gene silencing or permanent genetic correction with infrequent dosing, promising to address residual cardiovascular risk more effectively than ever before.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-c027afc8bcba"
+        ],
+        "context_before_evidence_id": "GP-003-E-d88319dcc42dfcb7"
+      },
+      {
+        "evidence_id": "GP-003-E-9481c6fd6fddfdee",
+        "text": "A cross-species, LNP-formulated siRNA targeting PCSK9 induced potent (50% to 70%) and durable silencing of hepatic mRNA in rodents and nonhuman primates.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0df78869093e"
+        ],
+        "context_after_evidence_id": "GP-003-E-4d83453c2ba52930"
+      },
+      {
+        "evidence_id": "GP-003-E-4d83453c2ba52930",
+        "text": "This resulted in a sustained reduction in plasma PCSK9 protein and a corresponding >60% decrease in LDL cholesterol that lasted several weeks after a single dosage, without affecting HDL-C or TGs.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-0df78869093e"
+        ],
+        "context_before_evidence_id": "GP-003-E-9481c6fd6fddfdee"
+      },
+      {
+        "evidence_id": "GP-003-E-97fd9698e6a8c1b3",
+        "text": "Increased Lp(a) is a genetically determined risk factor previously inaccessible to pharmacotherapy.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-bce4abf590bd4b55",
+        "text": "A preclinical proof of concept was established with olpasiran, a GalNAc-conjugated siRNA.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-800972a02caff779",
+        "text": "In transgenic mice and cynomolgus monkeys, a single dosage produced a dose-responsive decrease in plasma Lp(a), achieving a >80% decrease that was sustained for 5 to 8 weeks, demonstrating the potent and durable silencing achievable through this modality [183,184].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ],
+        "context_after_evidence_id": "GP-003-E-bb8ebfb5b10d6985"
+      },
+      {
+        "evidence_id": "GP-003-E-bb8ebfb5b10d6985",
+        "text": "This RNAi approach has been further validated with the GalNAc-conjugated siRNA SLN360.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ],
+        "context_before_evidence_id": "GP-003-E-800972a02caff779"
+      },
+      {
+        "evidence_id": "GP-003-E-34295a41ba5d9089",
+        "text": "In primary hepatocytes, SLN360 potently and selectively silences LPA mRNA.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-84afb99d41e704b2",
+        "text": "In cynomolgus monkeys, a single subcutaneous dose produced a dose-dependent, persistent drop in serum Lp(a) of up to 95%, with effects lasting ≥9 weeks.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-4e587ef8a146483d",
+        "text": "The study established a minimally effective dose (0.3 mg/kg), highlighting the potent and durable pharmacology achievable with this platform [185].",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-c44b67a7d59b81f6",
+        "text": "Further optimization of the siRNA platform has yielded candidates with extended durability.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-a2de8fa2433bd761",
+        "text": "The siRNA RN026 demonstrated profound and sustained Lp(a) lowering in preclinical models.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-0c22147fb034f0d3",
+        "text": "In transgenic mice expressing human LPA, a single dose lowered the serum Apo(a) concentration by 98% for more than 6 weeks.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ],
+        "context_after_evidence_id": "GP-003-E-bc313d415d859a16"
+      },
+      {
+        "evidence_id": "GP-003-E-bc313d415d859a16",
+        "text": "In nonhuman primates, a single 2-mg/kg dose achieved a 99% peak reduction in Lp(a), with a 95% reduction maintained at 99 d postdose.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ],
+        "context_before_evidence_id": "GP-003-E-0c22147fb034f0d3"
+      },
+      {
+        "evidence_id": "GP-003-E-c5d0b9fa8a68632e",
+        "text": "RNA sequencing analysis indicated minimal off-target risk, and the candidate was well tolerated in toxicology studies.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3677b35ee16e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-a15bf95eca360754",
+        "text": "IPE (4 g/day) significantly reduced MACE by 25% in the REDUCE-IT trial, with consistent benefit even in patients with baseline LDL-C <55 mg/dl.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3e2334fa5c8e"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-b201c3671c94cc14",
+        "text": "Cardiovascular death was reduced by 20%, though therapy was associated with increased atrial fibrillation risk [84,85].",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3e2334fa5c8e"
+        ],
+        "context_after_evidence_id": "GP-003-E-cfe42da38eefc24b"
+      },
+      {
+        "evidence_id": "GP-003-E-cfe42da38eefc24b",
+        "text": "However, the use of mineral oil as the placebo comparator has generated discussion regarding potential effects on lipid and inflammatory biomarkers in the control group [86].",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3e2334fa5c8e"
+        ],
+        "context_before_evidence_id": "GP-003-E-b201c3671c94cc14"
+      },
+      {
+        "evidence_id": "GP-003-E-9ae4ca035432081e",
+        "text": "This figure illustrates the mechanism of liver-targeted gene silencing by subcutaneously administered N-acetylgalactosamine (GalNAc)-conjugated oligonucleotides.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d4bcacf08690"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-7f7436baec456ba4",
+        "text": "The GalNAc ligand directs both the small interfering RNA (siRNA) and antisense oligonucleotide (ASO) conjugates to hepatocytes by binding to the ASGPR (also known as ASGR1) and subsequent endocytosis.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d4bcacf08690"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-a73524399a43c2f5",
+        "text": "For siRNA (left), the released RNA strand loads into the RISC complex to guide sequence-specific cleavage and degradation of the target mRNA, reducing protein expression.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d4bcacf08690"
+        ],
+        "context_after_evidence_id": "GP-003-E-999b8b897493c172"
+      },
+      {
+        "evidence_id": "GP-003-E-999b8b897493c172",
+        "text": "For the ASO (right), the DNA-based oligo hybridizes with target mRNA, recruiting RNase H to cleave the mRNA, enabling catalytic reuse of the ASO.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d4bcacf08690"
+        ],
+        "context_before_evidence_id": "GP-003-E-a73524399a43c2f5",
+        "context_after_evidence_id": "GP-003-E-e271878a1bc1b1bd"
+      },
+      {
+        "evidence_id": "GP-003-E-e271878a1bc1b1bd",
+        "text": "Both pathways result in potent gene silencing, with ASGPR recycled to the cell surface.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-d4bcacf08690"
+        ],
+        "context_before_evidence_id": "GP-003-E-999b8b897493c172"
+      },
+      {
+        "evidence_id": "GP-003-E-cbee85ddbed12e26",
+        "text": "Lp(a) is a genetically determined and largely statin-resistant risk factor for ASCVD [213–215], making it an ideal candidate for RNA-targeted intervention.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-850bcfa6e9b3"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-2c96cf661576700f",
+        "text": "Levels ≥125 nmol/l (≥50 mg/dl) are associated with a 1.4-fold increased ASCVD risk, while levels ≥250 nmol/l confer a >2-fold increased risk [216], underscoring the urgent need for effective Lp(a)-lowering therapies.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-850bcfa6e9b3"
+        ],
+        "context_after_evidence_id": "GP-003-E-c20483eda8935616"
+      },
+      {
+        "evidence_id": "GP-003-E-c20483eda8935616",
+        "text": "This unmet need has accelerated the development of RNA-targeted agents.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-850bcfa6e9b3"
+        ],
+        "context_before_evidence_id": "GP-003-E-2c96cf661576700f"
+      },
+      {
+        "evidence_id": "GP-003-E-0c7c32778de6f71a",
+        "text": "In a phase 2b study, pelacarsen achieved robust Lp(a) reductions of ≥80%, with a favorable safety profile, and it is currently being evaluated for cardiovascular outcomes in the phase 3 Lp(a) HORIZON trial (NCT04023552).",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-850bcfa6e9b3"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-e8f660510575fe40",
+        "text": "Consistent with this, subsequent trial data reported even greater dose-dependent reductions of up to 97% [219].",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-850bcfa6e9b3"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-0fe1b2e1027cf409",
+        "text": "In the phase 3 ORION-16 trial involving adolescents with heterozygous FH, inclisiran 300 mg administered subcutaneously on days 1, 90, and 270 reduced LDL cholesterol by 28.5% compared with placebo at day 330, with sustained effects over 2 years and no treatment-related serious adverse events (NCT04652726) [198].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-77457a528780"
+        ],
+        "context_after_evidence_id": "GP-003-E-deab498d8073aaa7"
+      },
+      {
+        "evidence_id": "GP-003-E-deab498d8073aaa7",
+        "text": "This efficacy is supported by real-world evidence.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-77457a528780"
+        ],
+        "context_before_evidence_id": "GP-003-E-0fe1b2e1027cf409"
+      },
+      {
+        "evidence_id": "GP-003-E-852dc9859bfe59ee",
+        "text": "A meta-analysis of real-world studies demonstrated an average LDL-C reduction of 42.8%, with greater reductions observed when inclisiran was combined with statin therapy (45.7%) than when it was used as monotherapy [199].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-77457a528780"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-b33598e02927f6e0",
+        "text": "Other siRNA therapies in development include ARO-APOC3, which targets APOC3 to lower TGs and has received FDA fast-track status for severe hypertriglyceridemia and related conditions.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-77457a528780"
+        ]
+      },
+      {
+        "evidence_id": "GP-003-E-8a45cce5efa17042",
+        "text": "Additional candidates, such as SLN360 (phase 2) and olpasiran (phase 1), are being studied to reduce Lp(a) [201].",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-77457a528780"
+        ],
+        "context_after_evidence_id": "GP-003-E-765dacd2c4c1518f"
+      },
+      {
+        "evidence_id": "GP-003-E-765dacd2c4c1518f",
+        "text": "Thus, RNA interference has matured from genetic insight into a robust therapeutic platform, exemplified by the approved siRNA inclisiran for lowering LDL-C, with a promising pipeline extending its durable silencing strategy to other key lipid regulators, such as APOC3, ANGPTL3, and Lp(a), to address the multifaceted nature of residual CVD risk.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-77457a528780"
+        ],
+        "context_before_evidence_id": "GP-003-E-8a45cce5efa17042"
+      },
+      {
+        "evidence_id": "GP-003-E-9c824c288f3b656a",
+        "text": "Oral ezetimibe (10 mg daily) reduces Lp(a) by approximately 7%, though this is of limited clinical relevance [59,60].",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e509a3d3b433"
+        ]
+      }
+    ],
+    "packet_checksum": "325fb4f9b362fca32451feef33dfc20b82933f81b5a2bf89ca82d861437e3217"
+  }
+}
