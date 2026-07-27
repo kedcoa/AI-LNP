@@ -1,0 +1,1927 @@
+{
+  "paper_id": "GP-007",
+  "model": "gpt-5.6-terra",
+  "reasoning_effort": "low",
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "packet_checksum": "01add67ef7c5a90d8c48f352cb811612a73b365bab12254af2c34eb013d0617f",
+  "request_fingerprint": "83f0f680240d040685b8775e9d9ba1bb6b52ed0db1a99865d52ad1b27648e9e9",
+  "system_prompt": "Extract only directly reported LNP evidence from the supplied packet. Use no outside knowledge. For every scientific field, return either a reported value with valid packet evidence IDs or missing with a short reason and no evidence IDs. Set eligibility to eligible only for original experimental LNP delivery of mRNA, siRNA, saRNA, or circRNA with evidence relevant to hepatocytes, Kupffer cells, LSECs, or hepatic stellate cells and a formulation-experiment-outcome link. Set a clearly failed criterion to ineligible and insufficient evidence to uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep formulations, components, experiments, and outcomes separate and preserve their links. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. A reported negative result is an outcome, not missing. List unresolved ambiguities. Return only the structured response required by the supplied schema.",
+  "packet": {
+    "packet_version": "compact-api-packet-1.0.0",
+    "paper_id": "GP-007",
+    "blocked_fields": [],
+    "sources": [
+      {
+        "source_id": "S-16590d293dec",
+        "chunk_id": "GP-007-B-afe3c2418e4a7b10bbd3",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.1 Preparation and characterization of lipid nanoparticles (LNPs)-siMicu1"
+      },
+      {
+        "source_id": "S-19b52849321f",
+        "chunk_id": "GP-007-B-c296e117c38e2785e1cf",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.4 Animal studies"
+      },
+      {
+        "source_id": "S-1c9cad17b225",
+        "chunk_id": "GP-007-B-5ec35e24e75ea3a7a5fe",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.5 Acteoside inhibits Micu1 transcription by suppressing H3K18 lactylation in LSECs"
+      },
+      {
+        "source_id": "S-3fca3b59ae2c",
+        "chunk_id": "GP-007-B-8e151567facdad21b261",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "abstract",
+        "section": "Abstract"
+      },
+      {
+        "source_id": "S-47e531ef7745",
+        "chunk_id": "GP-007-B-9dc9a2157bafc30f4d2e",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.3 Synthesis and identification of ACT derivatives"
+      },
+      {
+        "source_id": "S-4d71bf786efc",
+        "chunk_id": "GP-007-B-28110fece4c8cf6010a0",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.4 Animal studies"
+      },
+      {
+        "source_id": "S-4f51e091b201",
+        "chunk_id": "GP-007-B-d08915cc0aff5d1e902e",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.4 Animal studies"
+      },
+      {
+        "source_id": "S-5c830a9bf9f6",
+        "chunk_id": "GP-007-B-65a1a1f25898312d9e3d",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.8 MICU1 overexpression in LSECs or the hydroxyl structures at C26/C27/C40/C41 sites determines the protective effects of acteoside on Ca2+ homeostasis and glycolytic flux"
+      },
+      {
+        "source_id": "S-5e37d34f0ff9",
+        "chunk_id": "GP-007-B-0bb9fd1e0e50e15448ed",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.3 Acteoside inhibits the overflow of Ca2+ from the ER to mitochondria and LSECs damage by influencing MICU1-regulated IP3R-VDAC1-MCU axis"
+      },
+      {
+        "source_id": "S-61913a7ecabf",
+        "chunk_id": "GP-007-B-8599e83c4522d99b0e4c",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.4 Acteoside inhibits Ca2+-stimulated glycolysis by directly interacting with and blocking MICU1"
+      },
+      {
+        "source_id": "S-6cff29076b57",
+        "chunk_id": "GP-007-B-cb78ce4c4a520e3e9b0b",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.7 The anti-HIRI properties of acteoside can be partially improved with the specific inhibition of Micu1 in livers"
+      },
+      {
+        "source_id": "S-71a029e824cf",
+        "chunk_id": "GP-007-B-6f947db85ba1914f793e",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.1 Preparation and characterization of lipid nanoparticles (LNPs)-siMicu1"
+      },
+      {
+        "source_id": "S-91970158a7a9",
+        "chunk_id": "GP-007-B-b3894055097661afcb3e",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.6 Acteoside synergizes with lactate inhibitors to maintain Ca2+ homeostasis through negative regulation of H3K18la-Micu1 signaling"
+      },
+      {
+        "source_id": "S-98f324bd2b98",
+        "chunk_id": "GP-007-B-8520b37413516a878030",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.7 Cleavage under targets and tagmentation (CUT&Tag) experiment"
+      },
+      {
+        "source_id": "S-a30755f5ac7a",
+        "chunk_id": "GP-007-B-6034885f5bf556e4b97d",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.8 MICU1 overexpression in LSECs or the hydroxyl structures at C26/C27/C40/C41 sites determines the protective effects of acteoside on Ca2+ homeostasis and glycolytic flux"
+      },
+      {
+        "source_id": "S-a9ed7e20aed2",
+        "chunk_id": "GP-007-B-0ef97e4964610fb21e53",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.1 ER homeostasis and respiratory-related metabolic processes at the crux of acteoside in improving HIRI"
+      },
+      {
+        "source_id": "S-af67e139a2b0",
+        "chunk_id": "GP-007-B-40156ce4aa965335e1d5",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "4. Discussion"
+      },
+      {
+        "source_id": "S-bb2b8d3cbae4",
+        "chunk_id": "GP-007-B-8cc31509b2f206c4e878",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.5 Cell culture and treatment"
+      },
+      {
+        "source_id": "S-bec033965724",
+        "chunk_id": "GP-007-B-51328d15ab8118a0f4f0",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "4. Discussion"
+      },
+      {
+        "source_id": "S-daece8dbf21c",
+        "chunk_id": "GP-007-B-03ae63be25e363d8a232",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "2. Materials and Methods",
+        "subsection": "2.6 RNA sequencing (RNA-Seq) of liver and LSECs"
+      },
+      {
+        "source_id": "S-df884e684b2b",
+        "chunk_id": "GP-007-B-631d8164f58b691ffe60",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.3 Acteoside inhibits the overflow of Ca2+ from the ER to mitochondria and LSECs damage by influencing MICU1-regulated IP3R-VDAC1-MCU axis"
+      },
+      {
+        "source_id": "S-e259b5f9d750",
+        "chunk_id": "GP-007-B-7ef36aee0f638302754d",
+        "source_path": "data/raw/fulltext/gold_v1/xml/candidate_00167_PMC13137855.xml",
+        "source_kind": "pmc_xml",
+        "block_type": "paragraph",
+        "section": "3. Results",
+        "subsection": "3.2 Acteoside enhances ER function before restoring mitochondrial homeostasis in LSECs damaged by hypoxia"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "GP-007-E-fd9ce1c76f622856",
+        "text": "For bulk liver-seq, we extracted total RNA from mouse liver using Trizol reagent and quantifying RNA concentration using Nano Rhatometer@Spectrophotometer (IMPLEN, USA).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-daece8dbf21c"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-3549e1db6d22fbf6",
+        "text": "Briefly, after purifying mRNA and enriching 250-300 bp cDNA fragments, we constructed a sequencing library on the Illumina Novaseq platform.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-daece8dbf21c"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-39365851f3459acb",
+        "text": "For single-cell type RNA-seq, we used the Trizol classic extraction method to extract total RNA from primary LSECs.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-daece8dbf21c"
+        ],
+        "context_after_evidence_id": "GP-007-E-184bc8c3e98a950b"
+      },
+      {
+        "evidence_id": "GP-007-E-184bc8c3e98a950b",
+        "text": "After evaluating the RNA purity, concentration and integrity by a NanoRhatometer spectrophotometer (IMPLEN, USA), we prepared primary LSECs RNA libraries and sequenced the indexed libraries on an Illumina NovaSeq 6,000 (2 x 150 bp).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-daece8dbf21c"
+        ],
+        "context_before_evidence_id": "GP-007-E-39365851f3459acb"
+      },
+      {
+        "evidence_id": "GP-007-E-12e1f744ee9e9693",
+        "text": "Interestingly, unlike the moderate impact on MCU, we observed a significant increase in the mRNA expression of Micu1 following HIRI/HR, which was significantly decreased by ACT administration.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5e37d34f0ff9"
+        ],
+        "context_after_evidence_id": "GP-007-E-bf84daff07043e8d"
+      },
+      {
+        "evidence_id": "GP-007-E-bf84daff07043e8d",
+        "text": "This change was highly consistent with the sequencing data obtained from liver or LSECs (Figure 3G and Figure S3H).",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5e37d34f0ff9"
+        ],
+        "context_before_evidence_id": "GP-007-E-12e1f744ee9e9693",
+        "context_after_evidence_id": "GP-007-E-819bfbd9142bd656"
+      },
+      {
+        "evidence_id": "GP-007-E-819bfbd9142bd656",
+        "text": "This raises the question of whether MICU1 is a key target to regulate IP3R-VDAC1-MCU complex and the behavior of Ca2+ import from ER into mitochondria and subsequent mitochondrial homeostasis.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5e37d34f0ff9"
+        ],
+        "context_before_evidence_id": "GP-007-E-bf84daff07043e8d",
+        "context_after_evidence_id": "GP-007-E-de78981ec3bf3d33"
+      },
+      {
+        "evidence_id": "GP-007-E-de78981ec3bf3d33",
+        "text": "To investigate this, we utilized siMicu1 to transfect LSECs (Figure S3I) and discovered that ACT synergistically inhibited the mRNA levels of the IP3R-VDAC1-MCU complex in conjunction with siMicu1 (Figure 3H), thereby enhancing the blockade of Ca2+ entry into the mitochondria.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5e37d34f0ff9"
+        ],
+        "context_before_evidence_id": "GP-007-E-819bfbd9142bd656"
+      },
+      {
+        "evidence_id": "GP-007-E-c778b4557dfbe4a0",
+        "text": "Initially, we sought to identify critical targets underlying the abnormal changes observed in clinical data from pre- and post-liver transplant patients to determine the possible cause of HIRI.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-74f0f77e9c4bdc9e",
+        "text": "After analyzing the top 10,000 genes expression profiles of patients before and after liver transplantation in the GSE12720, GSE112713 and GSE14951, we identified 4,346 intersecting genes (Figure 1A).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-711d21c5ebb85242",
+        "text": "Significant alterations in ER function (protein folding, Ca2+ transport)-related genes [activating transcription factor 4 (Atf4), DNA damage inducible transcript 3 (Ddit3, CHOP), inositol 1,4,5-trisphosphate receptor type 1 (Itpr1, IP3R), mitochondrial calcium uniporter (Mcu, MCU)] and glycolysis-related genes [pyruvate kinase m (Pkm), glyceraldehyde-3-phosphate dehydrogenase (Gapdh), dynamin 1 like (Dnm1l), lactate dehydrogenase a (Ldha)] were observed across all three datasets following HIRI (Figure 1B).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-05c7cce3b9de4638",
+        "text": "We then validated the anti-HIRI effects of ACT in animal experiments and whether they were consistent with clinically relevant phenomena.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-e62094dfc418e8c4",
+        "text": "Focusing on the characteristics of HIRI-induced oxidative stress and provocative inflammation, ACT significantly mitigated the elevation of aminotransferases (Figure S1A and S1B).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-0720c2e2ecd6f9df",
+        "text": "Furthermore, in contrast to the typical liver pathological manifestations observed in the HIRI group, the ischemic area (indicated by a dotted line) in all ACT groups exhibited notable improvement (Figure 1C).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-438a51bbff67e8d2",
+        "text": "To reveal the transcriptional landscape of ACT improving HIRI, we further performed liver RNA sequencing analysis, and genes from cluster 2 (931 genes) and cluster 3 (1,045 genes) were significantly enriched in ER function (protein folding, Ca2+ transport) and energy metabolism (cell respiration) process-related terms (Figure 1D).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ],
+        "context_after_evidence_id": "GP-007-E-b75cd9bedce4e21e"
+      },
+      {
+        "evidence_id": "GP-007-E-b75cd9bedce4e21e",
+        "text": "The bubble chart verified the top 15 target genes that were significantly enriched in cluster 2 and cluster 3.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ],
+        "context_before_evidence_id": "GP-007-E-438a51bbff67e8d2"
+      },
+      {
+        "evidence_id": "GP-007-E-5c2b4261d571e76e",
+        "text": "Notably, ACT significantly reversed the HIRI-induced increase in ER function-related genes [Atf4, Ddit3, ATPase sarcoplasmic/endoplasmic reticulum Ca2+ transporting 2 (Atp2a2), voltage dependent anion channel 1 (Vdac1, VDAC1), mitochondrial calcium uniporter regulator 1 (Mcur1), eukaryotic translation initiation factor 2 alpha kinase 3 (Eif2ak3, PERK), Itpr1, mitochondrial calcium uptake 1 (Micu1, MICU1), Mcu] and glycolysis-related genes [Ldha, Pkm, hexokinase 2 (Hk2), glucose-6-phosphate dehydrogenase (G6pdx)] (Figure 1E).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-d29682fc00b10032",
+        "text": "During the analysis of liver ultrastructure, we notably observed that ACT exerted significant potential to enhance the hepatic sinusoidal microenvironment, particularly concerning the LSECs “fenestrae” (Figure 1F).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ],
+        "context_after_evidence_id": "GP-007-E-28435cadaf1bd24d"
+      },
+      {
+        "evidence_id": "GP-007-E-28435cadaf1bd24d",
+        "text": "However, the interaction patterns and target cells of the signaling network associated with Ca2+-centered ER dysfunction and glycolysis-dominated respiratory-related metabolic processes in sinusoidal space of HIRI and ACT-treated groups remain unclear and requires further investigation.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a9ed7e20aed2"
+        ],
+        "context_before_evidence_id": "GP-007-E-d29682fc00b10032"
+      },
+      {
+        "evidence_id": "GP-007-E-019d73c30253563d",
+        "text": "For the animal experiments in Figure 8, mice were randomly assigned to four groups (n = 6 mice per group): (1) Sham group; (2) HIRI group; (3) HIRI + AAV8-stab2-oeMicu1 group; (4) HIRI + AAV8-stab2-oeMicu1 + ACT (50 mg/kg) group.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4d71bf786efc"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-083e6922be10413a",
+        "text": "Mice in groups 3-4 were intravenously injected with AAV-oeMicu1 (5 μl/g) 14 days before surgery.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4d71bf786efc"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-0ad12e3e530321db",
+        "text": "Other surgical manipulations and drug administration protocols in these studies were the same as the first animal batch.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4d71bf786efc"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-d3b0af60177d4738",
+        "text": "The intracellular Ca2+ homeostasis regulatory system primarily includes voltage-gated Ca2+ channels [voltage-gated calcium channels (VGCCs)], receptor-operated Ca2+ channels [IP3R, Ryanodine Receptor (RyR)], and mitochondrial Ca2+ uptake machinery, including MCU and its regulatory protein MICU1 24.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-af67e139a2b0"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-982ff84e9b6a7030",
+        "text": "Conversely, the skeletal muscle-specific knockout of MICU1 compromises mitochondrial Ca2+ uptake capacity, resulting in structural damage to muscle fibers 5.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-af67e139a2b0"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-c70dff0eeb5c8d24",
+        "text": "Furthermore, as glycolysis-dependent cells, LSECs exhibit heightened susceptibility to acute ischemia-reperfusion injury, whereas their pathologically enhanced glycolysis triggers a vicious cycle of lactate accumulation and disrupted Ca2+ homeostasis 26.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-af67e139a2b0"
+        ],
+        "context_after_evidence_id": "GP-007-E-568a982ff04c1a56"
+      },
+      {
+        "evidence_id": "GP-007-E-568a982ff04c1a56",
+        "text": "This apparent discrepancy likely arises from fundamental differences in energy utilization and Ca2+ handling between hepatocytes and LSECs, whereby MICU1-mediated Ca2+ uptake supports oxidative metabolism in hepatocytes but promotes Ca2+ overload and injury in glycolysis-dependent LSECs under acute HIRI.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-af67e139a2b0"
+        ],
+        "context_before_evidence_id": "GP-007-E-c70dff0eeb5c8d24"
+      },
+      {
+        "evidence_id": "GP-007-E-45c68ef8508e8f32",
+        "text": "Consistent with MICU1's context-dependent roles, liver-targeted siMicu1-LNPs potentiated (Figure 7) whereas LSECs-specific Micu1 overexpression driven by a Stab2 promoter AAV largely abolished (Figure 8) the hepatoprotective and sinusoid-stabilizing effects of ACT.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-af67e139a2b0"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-f5123c6ea97af8a9",
+        "text": "It is noteworthy that liver macrophages and LSECs exchange metabolic intermediates through the perisinusoidal space.",
+        "retrieval_field_tags": [
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-bec033965724"
+        ],
+        "context_after_evidence_id": "GP-007-E-2cc57dc914d7bfa3"
+      },
+      {
+        "evidence_id": "GP-007-E-2cc57dc914d7bfa3",
+        "text": "Under pathological conditions of aggravated inflammation in metabolic dysfunction-associated steatotic liver disease 31 and HCC 32, liver macrophages also exhibited the increased H3K18la levels similar to those in LSECs due to a lactate-accumulated microenvironment.",
+        "retrieval_field_tags": [
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-bec033965724"
+        ],
+        "context_before_evidence_id": "GP-007-E-f5123c6ea97af8a9"
+      },
+      {
+        "evidence_id": "GP-007-E-9aa5e75c0f1fd4a6",
+        "text": "Considering the established association between glycolysis and histone lactylation 6, together with our existing results (Figure 4), we inquired whether ACT could influence these processes to ameliorate HR injury, and established models for HR and lactate accumulation.",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-5a5c8908d5d1a041",
+        "text": "As illustrated in Figure 5A, 5B and Figure S5A, ACT significantly reduced the levels of global lactylation and H3K18la induced by HR or excessive lactate in a dose-dependent manner.",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_after_evidence_id": "GP-007-E-1e29ca7755ded607"
+      },
+      {
+        "evidence_id": "GP-007-E-1e29ca7755ded607",
+        "text": "Concurrently, the accumulation of lactate, a by-product of glycolysis, was associated with an increase in intracellular Ca2+ (Figure 5C, Figure S5B) and induced Ca2+ channel protein expression on the ER-mitochondrial axis (Figure S5C).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_before_evidence_id": "GP-007-E-5a5c8908d5d1a041",
+        "context_after_evidence_id": "GP-007-E-8e627575f92dd385"
+      },
+      {
+        "evidence_id": "GP-007-E-8e627575f92dd385",
+        "text": "This Ca2+ increase further enhanced intracellular glycolysis (Figure S5D) and induced phagocytic dysfunction in LSECs (Figure 5D and Figure S5E).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_before_evidence_id": "GP-007-E-1e29ca7755ded607"
+      },
+      {
+        "evidence_id": "GP-007-E-511b7f0a7aa05a8c",
+        "text": "Notably, these effects were effectively reversed through chemical intervention with ACT.",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-894e17740dbb2bce",
+        "text": "To screen candidate target genes regulated by histone lactylation in HR, CUT&Tag was performed with ChIP-grade H3K18la antibody and IgG in LSECs (Figure 5E).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-fd5c7b18823f7aa9",
+        "text": "Figure 5F showed that H3K18la was enriched in promoter regions of genes (especially the regions < 1 kb) in all groups.",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-f8e9b1d97ec38688",
+        "text": "To identify H3K18la-target genes in LSECs, we classified genes into 4 categories according to their expression and H3K18la modification: upregulated genes with or without differential H3K18la, and downregulated genes with or without differential H3K18la (Figure 5G and Figure S5F).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_after_evidence_id": "GP-007-E-657964ba812184ae"
+      },
+      {
+        "evidence_id": "GP-007-E-657964ba812184ae",
+        "text": "Through a de novo motif search among the 2 categories of H3K18la-modified genes, we found that upregulated and downregulated genes with H3K18la exhibited distinct enriched DNA sequences (Figure 5H).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_before_evidence_id": "GP-007-E-f8e9b1d97ec38688"
+      },
+      {
+        "evidence_id": "GP-007-E-75d1d11a2a7c3a02",
+        "text": "GO term analysis revealed that genes with increased H3K18la modification during HR were actively involved in the regulation of Ca2+ transport, indicating the pivotal role of H3K18la in Ca2+ transport regulation (Figure 5I).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-337e17330e94d2ec",
+        "text": "We subsequently integrated CUT&Tag data with LSECs transcriptome sequencing and whole liver transcriptome sequencing results, and Vdac1, Mcu and Micu1 were selected as candidate genes (Figure 5J and 5K).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_after_evidence_id": "GP-007-E-075a5d52c30b7e29"
+      },
+      {
+        "evidence_id": "GP-007-E-075a5d52c30b7e29",
+        "text": "The signals of enriched H3K18la in the promoter regions of Vdac1, Mcu and Micu1 were observed in Figure 5L and Figure S5G.",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_before_evidence_id": "GP-007-E-337e17330e94d2ec",
+        "context_after_evidence_id": "GP-007-E-1e306063f58c4428"
+      },
+      {
+        "evidence_id": "GP-007-E-1e306063f58c4428",
+        "text": "The enrichment of H3K18la at the promoter regions of Vdac1 and Micu1 was less prominent after ACT intervention.",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_before_evidence_id": "GP-007-E-075a5d52c30b7e29",
+        "context_after_evidence_id": "GP-007-E-c213d4c2bdca23d2"
+      },
+      {
+        "evidence_id": "GP-007-E-c213d4c2bdca23d2",
+        "text": "Subsequently, ChIP-qPCR analysis indicated that ACT effectively reduced the enrichment of H3K18la in the promoter region of Micu1, but not in Vdac1 or Mcu (Figure 5M).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ],
+        "context_before_evidence_id": "GP-007-E-1e306063f58c4428"
+      },
+      {
+        "evidence_id": "GP-007-E-5c8b7ada194395d5",
+        "text": "Notably, these HR-induced pathological alterations and their reversal by ACT were also validated in human LSECs, showing consistent attenuation of ER stress, Ca2+ dysregulation, glycolytic lactate production and H3K18la modification (Figure S9).",
+        "retrieval_field_tags": [
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-1c9cad17b225"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-f8db1c915b4743be",
+        "text": "To clarify the key substituents of ACT that affect MICU1, we designed two distinct modified ACT derivatives: (1) ACT-d1 was removed the structures (highlighted in red) at the C8 sites while retaining other key hydroxyl groups responsible for binding to MICU1 and Ca2+.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-13b1891b19e75479",
+        "text": "(2) ACT-d2 was removed all active hydroxyls groups (Figure 8H, left panel).",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ],
+        "context_after_evidence_id": "GP-007-E-b28314b6caaa75f7"
+      },
+      {
+        "evidence_id": "GP-007-E-b28314b6caaa75f7",
+        "text": "Mass spectrometry (MS) analysis confirmed the successful structural modifications of these ACT derivatives (Figure 8H, middle and right panel).",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ],
+        "context_before_evidence_id": "GP-007-E-13b1891b19e75479"
+      },
+      {
+        "evidence_id": "GP-007-E-a2ba7fb3e9e8e0c7",
+        "text": "Structurally, ACT-d1 exhibited stronger interactions with MICU1 due to its more open molecular structure, while ACT-d2 virtually unbound compared to the unmodified ACT compound (Figure 8I).",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-d6660d0ae8439fc3",
+        "text": "Functionally, ACT-d1 effectively reduced intracellular L-lactate levels and inhibited mitochondrial Ca2+ accumulation (Figure 8J and Figure S8I), thereby restoring the structural integrity of LSECs in vitro (Figure 8K).",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ],
+        "context_after_evidence_id": "GP-007-E-a71d6e121d0b456d"
+      },
+      {
+        "evidence_id": "GP-007-E-a71d6e121d0b456d",
+        "text": "In contrast, ACT-d2 demonstrated negligible effects in these areas.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ],
+        "context_before_evidence_id": "GP-007-E-d6660d0ae8439fc3",
+        "context_after_evidence_id": "GP-007-E-22cfbaa31b595562"
+      },
+      {
+        "evidence_id": "GP-007-E-22cfbaa31b595562",
+        "text": "These results validated that the modified ACT derivative (ACT-d1), which retained hydroxyls at C26, C27, C40 and C41 positions, enhanced the regulatory effects of ACT on MICU1.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ],
+        "context_before_evidence_id": "GP-007-E-a71d6e121d0b456d",
+        "context_after_evidence_id": "GP-007-E-943b02ca44db408c"
+      },
+      {
+        "evidence_id": "GP-007-E-943b02ca44db408c",
+        "text": "This structural optimization strategy provided a promising avenue for the further development of MICU1-targeted therapies to mitigate HIRI.",
+        "retrieval_field_tags": [
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-a30755f5ac7a"
+        ],
+        "context_before_evidence_id": "GP-007-E-22cfbaa31b595562"
+      },
+      {
+        "evidence_id": "GP-007-E-baee2a15b43af832",
+        "text": "ER-mitochondrial contact offers a dynamic platform for physiological and biochemical communication, facilitating the exchange of Ca2+, ROS and lipids within cells 18.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-04f9a07464a47a60",
+        "text": "Considering the results in Figure 2, we focused on the changes in genes related to the transfer process of substances between ER and mitochondria in primary LSECs and preliminarily confirmed the involvement of Ca2+ but no other signals in ACT-induced protective effects.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-5542e347ca40e34f",
+        "text": "Subsequently, the significantly altered genes in the HIRI and HR groups from the liver/LSECs sequencing were visualized using a Venn diagram, followed by a heatmap visualization that included the ACT group (Figure 3A, upper panel and Figure S3A).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ],
+        "context_after_evidence_id": "GP-007-E-cb365924fb01a96d"
+      },
+      {
+        "evidence_id": "GP-007-E-cb365924fb01a96d",
+        "text": "As expected, the expression of Ca2+ transport-related genes (Mcu, Vdac1, Itpr1 and Atp2a2) was partially downregulated after ACT administration (Figure 3A, lower panel), which was confirmed by molecular biology experiments both in livers and LSECs (Figure 3B, 3C and Figure S3B).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ],
+        "context_before_evidence_id": "GP-007-E-5542e347ca40e34f",
+        "context_after_evidence_id": "GP-007-E-f497c46e6b7960c2"
+      },
+      {
+        "evidence_id": "GP-007-E-f497c46e6b7960c2",
+        "text": "Then, we measured the amplitude of the Ca2+ transient response (Figure 3D and Figure S3C) and intracellular content (Figure 3E) to monitor the spontaneous Ca2+ transient behavior of LSECs and assess the intracellular Ca2+ status under HR or HR + ACT intervention.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ],
+        "context_before_evidence_id": "GP-007-E-cb365924fb01a96d"
+      },
+      {
+        "evidence_id": "GP-007-E-c6b3aa88431b51aa",
+        "text": "Notably, ACT intervention significantly restored Ca2+ homeostasis in LSECs following HR.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-843eedbfe976900f",
+        "text": "Given the expansion of the ER structure in HR (Figure S2B), we hypothesized that the active edge sites exposed on the ER may enhance contact with mitochondria, thereby facilitating percolation pathways for the delivery of excess Ca2+ between these organelles.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-2656636b76824f7a",
+        "text": "As shown in Figure 3F upper panel and Figure S3D and S3E, ACT-reversible increases in both ER-mitochondria co-localization and Rhod-2M labeled mitochondrial Ca2+ were observed after HR stimulation.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ],
+        "context_after_evidence_id": "GP-007-E-3092adb8699af0e5"
+      },
+      {
+        "evidence_id": "GP-007-E-3092adb8699af0e5",
+        "text": "ACT significantly reduced the signal coincidence of the IP3R (located in the ER)-VDAC1 [(located in the outer mitochondrial membrane (OMM)]-MCU [(located in the inner mitochondrial membrane (IMM)] complex at the ER-mitochondria contact sites (Figure 3F lower part, Figure S3F and S3G).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-df884e684b2b"
+        ],
+        "context_before_evidence_id": "GP-007-E-2656636b76824f7a"
+      },
+      {
+        "evidence_id": "GP-007-E-b6da491d853da941",
+        "text": "To identify the impact of MICU1 overexpression on LSECs, we screened truncated variants of the Stab2 promoter (a specific scavenger receptor expressed in LSECs) as potential candidate sequences 22.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5c830a9bf9f6"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-c14c55fc63e06d91",
+        "text": "Dual-luciferase reporter assays demonstrated that a 644 bp truncated fragment (designated Stab2-2), spanning from -500 to +144 relative to the transcription start site, exhibited significantly higher activity compared to the full-length promoter and other truncations, while showing no detectable activity in hepatocytes (Figure 8A and Figure S8A).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5c830a9bf9f6"
+        ],
+        "context_after_evidence_id": "GP-007-E-0448683433f82222"
+      },
+      {
+        "evidence_id": "GP-007-E-0448683433f82222",
+        "text": "Utilizing this optimized promoter, we designed an AAV8 vector (AAV8-Stab2-oeMicu1) to specifically deliver Micu1 to LSECs and injected it into mice 2 weeks prior to HIRI surgery with or without ACT administration (Figure 8B and Figure S8B).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5c830a9bf9f6"
+        ],
+        "context_before_evidence_id": "GP-007-E-c14c55fc63e06d91",
+        "context_after_evidence_id": "GP-007-E-027f7dd947f25b84"
+      },
+      {
+        "evidence_id": "GP-007-E-027f7dd947f25b84",
+        "text": "Following the overexpression of Micu1 in LSECs (Figure S8C), we observed an increased ratio of spleen to body weight (Figure S8D) and a high intensity of green fluorescence in the hepatic sinusoids of mice treated with HIRI + AAV8-Stab2-oeMicu1 (Figure 8C).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5c830a9bf9f6"
+        ],
+        "context_before_evidence_id": "GP-007-E-0448683433f82222",
+        "context_after_evidence_id": "GP-007-E-cbb728756a80c83f"
+      },
+      {
+        "evidence_id": "GP-007-E-cbb728756a80c83f",
+        "text": "Compared to the HIRI + AAV8-CMV group, the overexpression of Micu1 resulted in more severe HIRI damage, as evidenced by significantly increased levels of serum ALT, AST and hepatic MDA levels, along with decreased SOD levels (Figure 8D).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw",
+          "outcomes"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-5c830a9bf9f6"
+        ],
+        "context_before_evidence_id": "GP-007-E-027f7dd947f25b84"
+      },
+      {
+        "evidence_id": "GP-007-E-ca7573f048241a56",
+        "text": "LNPs entrapping siMicu1 were designed for efficient liver targeting.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-71a029e824cf"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-b3b19f6c19a95c25",
+        "text": "Briefly, fluorescein isothiocyanate (FITC) was first covalently conjugated to hyaluronic acid (HA) via EDC/NHS-mediated coupling to generate FITC-labeled HA derivatives.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-71a029e824cf"
+        ],
+        "context_after_evidence_id": "GP-007-E-b551b3484ce0c2df"
+      },
+      {
+        "evidence_id": "GP-007-E-b551b3484ce0c2df",
+        "text": "Cholesterol and DSPE-PEG were then dissolved in ethanol, and 0.1 mol% FITC-labeled HA derivatives were added to the lipid mixture.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-71a029e824cf"
+        ],
+        "context_before_evidence_id": "GP-007-E-b3b19f6c19a95c25"
+      },
+      {
+        "evidence_id": "GP-007-E-0fcf3d19800c7d6f",
+        "text": "Subsequently, a T-junction mixer was used to quickly mix siMicu1 and above solution, which was then dialyzed, filtered and concentrated overnight to obtain the final preparation of LNPs-siMicu1 (100 μl suspension in 10 ml PBS).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-71a029e824cf"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-b64e983411d69ffa",
+        "text": "Subsequently, we isolated primary LSECs, exposed to HR model for mimicking HIRI pathological state in vitro, followed by single cell-type RNA sequencing (Figure S2A).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e259b5f9d750"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-7331414214d40217",
+        "text": "The heatmap illustrated representative transcripts associated with ER functional annotation (Figure 2C) like Atf4, Ddit3 and Eif2ak3 involved in Figure 2D, upper panel.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e259b5f9d750"
+        ],
+        "context_after_evidence_id": "GP-007-E-f8c288f426cf9248"
+      },
+      {
+        "evidence_id": "GP-007-E-f8c288f426cf9248",
+        "text": "Correlation analysis demonstrated a high degree of uniformity among samples in both whole liver and single LSECs type groups, with high coupling correlations observed in the expression of core genes related to ER function [Eif2ak3, Ddit3, heat shock protein family a member 5 (Hspa5, GRP78), Atf4] (Figure 2D, lower panel).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-e259b5f9d750"
+        ],
+        "context_before_evidence_id": "GP-007-E-7331414214d40217"
+      },
+      {
+        "evidence_id": "GP-007-E-faf814eba375197d",
+        "text": "Briefly, we incubated LSECs with NE1 buffer (20 mM HEPES, pH 7.9, 10 mM KCl, 0.1% Triton X-100, 20% glycerol, 0.5 mM spermidine and EDTA-free protease inhibitors) on ice for 10 min.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-98f324bd2b98"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-bc8dd72cda7e0f56",
+        "text": "After collecting the nuclear pellet, concanavalin A-coated magnetic beads (ConA beads) were added to the resuspended cells and incubated to facilitate cell binding.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-98f324bd2b98"
+        ],
+        "context_after_evidence_id": "GP-007-E-8444418d6e4c0de4"
+      },
+      {
+        "evidence_id": "GP-007-E-8444418d6e4c0de4",
+        "text": "We subsequently used the nonionic detergent 0.01% digitonin to remove the unbound supernatant and incubated cells with ConA beads containing H3K18la antibody, a secondary antibody, and Hyperactive pA-Tn5 transposase.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-98f324bd2b98"
+        ],
+        "context_before_evidence_id": "GP-007-E-bc8dd72cda7e0f56",
+        "context_after_evidence_id": "GP-007-E-a4b3d496608f12ca"
+      },
+      {
+        "evidence_id": "GP-007-E-a4b3d496608f12ca",
+        "text": "The active pA-Tn5 transposase cleaved DNA fragments associated with the target protein, which were then ligated to P5 and P7 adapters.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-98f324bd2b98"
+        ],
+        "context_before_evidence_id": "GP-007-E-8444418d6e4c0de4"
+      },
+      {
+        "evidence_id": "GP-007-E-973d8de1e6f2b75e",
+        "text": "Furthermore, the expression changes of glycolysis-genes in LSECs and liver tissues demonstrated a strict correlation (Figure S4B and S4C).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-61913a7ecabf"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-6be2abee251630f5",
+        "text": "Consistently, the activities of key enzyme [hexokinase (HK), phosphofructokinase (PFK) and lactate dehydrogenase (LDH)] activities, as well as mRNA and protein levels of glycolytic metabolites and their corresponding canonical glycolytic enzymes, were significantly reduced after ACT administration (Figure 4A, Figure S4D and S4E).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-61913a7ecabf"
+        ],
+        "context_after_evidence_id": "GP-007-E-0ffb308f4724320a"
+      },
+      {
+        "evidence_id": "GP-007-E-0ffb308f4724320a",
+        "text": "Concurrently, ACT alleviated the accumulation of lactic acid and the insufficient supply of ATP caused by HIRI (Figure 4A).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-61913a7ecabf"
+        ],
+        "context_before_evidence_id": "GP-007-E-6be2abee251630f5"
+      },
+      {
+        "evidence_id": "GP-007-E-5a61cb9f13551fa5",
+        "text": "The results of oxygen consumption rate (OCR) and extracellular acidification rate (ECAR) further confirmed that glycolytic reserves were significantly reduced in the HR+ACT group.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-61913a7ecabf"
+        ],
+        "context_after_evidence_id": "GP-007-E-d0f0306c2f561905"
+      },
+      {
+        "evidence_id": "GP-007-E-d0f0306c2f561905",
+        "text": "However, no additional inhibition was observed upon the addition of the glycolytic inhibitor 2-deoxyglucose (2-DG).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-61913a7ecabf"
+        ],
+        "context_before_evidence_id": "GP-007-E-5a61cb9f13551fa5"
+      },
+      {
+        "evidence_id": "GP-007-E-33f5a1bc18c698a1",
+        "text": "To further elucidate the connection between Ca2+ signaling and glycolysis process, we administered 2-APB (a Ca2+ influx inhibitor) to LSECs.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "outcomes",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-61913a7ecabf"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-65f7ae6a4e2f0351",
+        "text": "Primary LSECs, LSECs (BNBIO) line and HEK293T cell lines were cultured at 37 °C in a 5% CO2 atmosphere using DMEM supplemented with 10% fetal bovine serum and 1% penicillin G-streptomycin (100 U/ml penicillin and 100 µg/ml streptomycin).",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-bb2b8d3cbae4"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-c21ee84135ee3d94",
+        "text": "In the lactate accumulation model, LSECs were treated with lactate (5 mM) for 24 h according to established protocols.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-bb2b8d3cbae4"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-da06f3ff14a8b1c9",
+        "text": "For cell transfection, LSECs were transfected with Micu1-siRNA using Lipofectamine RNAi MAX transfection reagent (Hanheng, China) for 48 h, incubated with ACT in Opti-MEM medium for 1 h and then established HR or lactate models for another 20 h.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-bb2b8d3cbae4"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-47b4313981a13e5f",
+        "text": "Hepatic ischemia-reperfusion injury (HIRI) contributes to metabolic disorders within hepatic sinusoid and frequently occurs during liver transplantation, yet its underlying mechanisms and intervention strategies remain obscure.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ],
+        "context_after_evidence_id": "GP-007-E-8e3f3b0fe887a8f2"
+      },
+      {
+        "evidence_id": "GP-007-E-8e3f3b0fe887a8f2",
+        "text": "This study aimed to elucidate whether acteoside (ACT) improved HIRI by repairing mitochondrial calcium uptake 1 (MICU1)-mediated Ca2+ dysregulation and facilitating glycolytic reprogramming.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ],
+        "context_before_evidence_id": "GP-007-E-47b4313981a13e5f"
+      },
+      {
+        "evidence_id": "GP-007-E-9117e4b81a628413",
+        "text": "Using RNA sequencing, cleavage under targets & tagmentation (CUT&Tag) analysis, liver sinusoidal endothelial cells (LSECs)-specific overexpression virus or siMicu1 lipid nanoparticles and ACT derivatives, we explored the hepatoprotective mechanisms of ACT in vivo in HIRI mice and in vitro in hypoxia-reoxygenation or lactate-stimulated LSECs.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-ebbeb760bbfd747e",
+        "text": "Mechanistically, ACT directly bound to MICU1 and inhibited the overflow of Ca2+ from endoplasmic reticulum (ER) to mitochondria and subsequent mitochondrial Ca2+ overload.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ],
+        "context_after_evidence_id": "GP-007-E-34375c09a2c74321"
+      },
+      {
+        "evidence_id": "GP-007-E-34375c09a2c74321",
+        "text": "This competitive binding mode also suppressed MICU1-dependent glycolysis by blocking Ca2+-stimulated lactate production and histone H3K18 lactylation, which epigenetically regulated MICU1 transcription.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [
+          "GP-007-E01",
+          "GP-007-E02"
+        ],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ],
+        "context_before_evidence_id": "GP-007-E-ebbeb760bbfd747e"
+      },
+      {
+        "evidence_id": "GP-007-E-6fc5e1642d053d17",
+        "text": "Notably, ACT synergized with lactate inhibitors or siMicu1 lipid nanoparticles to enhance its anti-HIRI effects, while LSECs-specific Micu1 overexpression abolished these benefits.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [
+          "GP-007-E03",
+          "GP-007-E04",
+          "GP-007-E05"
+        ],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-3329599714f8804c",
+        "text": "Structural analysis revealed that the C26/C27/C40/C41 hydroxyl groups determined ACT's MICU1-binding and hepatoprotective activities.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [
+          "GP-007-E06"
+        ],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ],
+        "context_after_evidence_id": "GP-007-E-7b5391eb27c91d48"
+      },
+      {
+        "evidence_id": "GP-007-E-7b5391eb27c91d48",
+        "text": "This study identifies MICU1 as a central regulator of HIRI and reveals ACT as a targeted therapy by restoring Ca2+ balance and metabolic homeostasis.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-3fca3b59ae2c"
+        ],
+        "context_before_evidence_id": "GP-007-E-3329599714f8804c"
+      },
+      {
+        "evidence_id": "GP-007-E-38ca3a3ce8571587",
+        "text": "The aqueous layer was discarded, and the DCM layer was concentrated under reduced pressure.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-47e531ef7745"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-cbd5cd2260768d37",
+        "text": "The separation was carried out on a Welch UltimateTM C18 column (250 mm × 4.6 mm; 5 μm) with mobile phase A consisting of 0.1% formic acid in water and mobile phase B being acetonitrile.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-47e531ef7745"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-b0b3f8ce22c38e8a",
+        "text": "The gradient elution program was set as follows: 0-1 min, 5% B; 1-25 min linear gradient from 5% to 60% B; 25-30 min gradient from 60% to 90% B.",
+        "retrieval_field_tags": [
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-47e531ef7745"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-ebe1bd8015dbfde8",
+        "text": "For physicochemical characterization of LNPs-siMicu1, we conducted dynamic light scattering measurements to assess the polydispersity index (PDI) and zeta potential values of LNPs-siMicu1, utilizing an immersion cell electrode (ZEN1002, Malvern) in conjunction with a Zetasizer (Nano ZS, Malvern Co.).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-16590d293dec"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-56c4b1efc158c702",
+        "text": "Additionally, we investigated the morphology of LNPs-siMicu1 through negative stain imaging using transmission electron microscopy (JEM 1200EX, JEOL).",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-16590d293dec"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-aa934a73187f557a",
+        "text": "Specifically, we employed ultrasonic disruption or high-speed centrifugation of LNPs-siMicu1 to isolate total LNPs or free siMicu1.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-16590d293dec"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-f7075557699c0576",
+        "text": "The mobile phase consisted of ultrapure water, acetonitrile, and methanol in a ratio of 39%: 37%: 24%.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-16590d293dec"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-7fbcc3a0f2b784c8",
+        "text": "The encapsulation efficiency (EE%) = (Amount of encapsulated siMicu1 / Total initial amount of siMicu1) × 100%.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-16590d293dec"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-42751544820dab75",
+        "text": "To evaluate the in vivo targeting efficacy of LNPs, we prepared FITC-labeled LNPs-siMicu1 and administered them to mice via tail vein injection.",
+        "retrieval_field_tags": [
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "outcomes",
+          "payload"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-16590d293dec"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-58e1079b8d377f61",
+        "text": "Following stimulation with exogenous lactate or HR, the combination of ACT with galloflavin or oxamate resulted in a more pronounced inhibition of MICU1 mRNA and protein levels compared to MCU.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-91970158a7a9"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-540e45c89f0ba77f",
+        "text": "The assessment of Ca2+ transient response amplitude (Figure 6E and Figure S6E) and intracellular Ca2+ content (Figure 6F and Figure S6F) indicated that the synergy of ACT with galloflavin or particularly oxamate, mitigated intracellular Ca2+ dysregulation induced by HR or lactate accumulation.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-91970158a7a9"
+        ],
+        "context_after_evidence_id": "GP-007-E-cc8b7053c81bc7f3"
+      },
+      {
+        "evidence_id": "GP-007-E-cc8b7053c81bc7f3",
+        "text": "Regarding the Ca2+-stimulated glycolytic process, we observed that ACT inhibited the protein expression and enzyme activity of key glycolytic enzymes, particularly HK, pyruvate kinase (PK) and LDH with the help of galloflavin or oxamate, while exerting minimal impact on PFK expression and enzyme activity (Figure 6G and Figure S6G).",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-91970158a7a9"
+        ],
+        "context_before_evidence_id": "GP-007-E-540e45c89f0ba77f"
+      },
+      {
+        "evidence_id": "GP-007-E-85539a061d97e22c",
+        "text": "Additionally, given the close relationship between fluctuations in Ca2+ levels and the ER-mitochondrial axis, we assessed ER stress-related proteins and monitored mitochondrial status.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-91970158a7a9"
+        ],
+        "context_after_evidence_id": "GP-007-E-a01953bfe6cc15d2"
+      },
+      {
+        "evidence_id": "GP-007-E-a01953bfe6cc15d2",
+        "text": "ACT also synergistically reduced the expression of ER stress-related proteins such as CHOP, GRP78, IRF3 and PERK (Figure 6H), and improved mitochondrial fragmentation (Figure 6I), maintaining the normal functions of ER and mitochondria in cooperation with galloflavin or oxamate.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-91970158a7a9"
+        ],
+        "context_before_evidence_id": "GP-007-E-85539a061d97e22c",
+        "context_after_evidence_id": "GP-007-E-c39db48d04a7784c"
+      },
+      {
+        "evidence_id": "GP-007-E-c39db48d04a7784c",
+        "text": "These results indicated that accumulated lactate facilitated the H3K18la modification of MICU1, thereby enhancing its ability to facilitate Ca2+ delivery through the ER-mitochondrial axis and further promoted glycolysis, all of which were remarkably inhibited by ACT.",
+        "retrieval_field_tags": [
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-91970158a7a9"
+        ],
+        "context_before_evidence_id": "GP-007-E-a01953bfe6cc15d2"
+      },
+      {
+        "evidence_id": "GP-007-E-ed5fce0eb33d0dce",
+        "text": "For the animal experiments in Figure 7, mice were randomly assigned to four groups (n = 6 mice per group): (1) Sham group; (2) HIRI group; (3) HIRI + LNPs-siMicu1 group; (4) HIRI + LNPs-siMicu1 + ACT (50 mg/kg) group.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-19b52849321f"
+        ],
+        "context_after_evidence_id": "GP-007-E-8a573add8f5b7936"
+      },
+      {
+        "evidence_id": "GP-007-E-8a573add8f5b7936",
+        "text": "Mice in groups 3 and 4 were received an intravenous injection of LNPs-siMicu1 (5 μl/g) 2 h prior to surgery.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-19b52849321f"
+        ],
+        "context_before_evidence_id": "GP-007-E-ed5fce0eb33d0dce"
+      },
+      {
+        "evidence_id": "GP-007-E-450ee76f1f41150a",
+        "text": "To verify whether the inhibition of Micu1 improves LSECs' function by maintaining Ca2+ homeostasis and inhibiting glycolysis in vivo, we constructed siMicu1-LNPs associated with ApoE for targeted delivery to the liver, and evaluated their quality and biological performance before injection.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-2928bea85d5b56fc",
+        "text": "Dynamic light scattering (DLS) and Zeta-potential analysis showed that the particle size of siMicu1-LNPs was 80.03 ± 1.19 nm and the surface potential was 10.12 mV (Figure 7B).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-591b28d883931a97",
+        "text": "The encapsulation efficiency (EE%) determined by UPLC was 71.97% (Figure 7C).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-ec5a4dc4f7a76100",
+        "text": "In addition, to determine the biodistribution of the siMicu1-LNPs formulation following tail vein injection, we performed in vivo fluorescence imaging analysis using FITC-labeled siMicu1-LNPs.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-2755d54b950854b9",
+        "text": "Robust photon fluxes were readily detected in the abdomen at 6 h post-injection, and further ex vivo imaging of the heart, liver, spleen, lung and kidney clearly demonstrated that liver was the primary target organ (Figure 7D and Figure S7A).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ],
+        "context_after_evidence_id": "GP-007-E-47d77dd97cd9a252"
+      },
+      {
+        "evidence_id": "GP-007-E-47d77dd97cd9a252",
+        "text": "Subsequently, we intravenously injected mice with blank-LNPs or siMicu1-LNPs into mice via the caudal vein before HIRI surgery and ACT administration (Figure 7E and Figure S7B).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ],
+        "context_before_evidence_id": "GP-007-E-2755d54b950854b9"
+      },
+      {
+        "evidence_id": "GP-007-E-1165d6b8d3a712de",
+        "text": "Compared with the HIRI+LNPs-blank group, there was no significant change in body weight but a remarkable decrease trend of spleen coefficient in the HIRI+LNPs-siMicu1 group and HIRI + LNPs-siMicu1 + ACT group (Figure S7C).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ],
+        "context_after_evidence_id": "GP-007-E-2cee26f38a1d4591"
+      },
+      {
+        "evidence_id": "GP-007-E-2cee26f38a1d4591",
+        "text": "The increased levels of plasma AST and ALT, along with elevated MDA and reduced SOD activities induced by HIRI, were largely improved in the HIRI + LNPs-siMicu1 group, more significantly in the HIRI + LNPs-siMicu1 + ACT group (Figure 7F).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ],
+        "context_before_evidence_id": "GP-007-E-1165d6b8d3a712de",
+        "context_after_evidence_id": "GP-007-E-8585a45cd0259fe9"
+      },
+      {
+        "evidence_id": "GP-007-E-8585a45cd0259fe9",
+        "text": "The areas of liver sinus congestion and inflammatory cell infiltration in the HIRI + LNPs-blank group were significantly increased, but the fundamental structure of liver lobules was significantly restored in HIRI + LNPs-siMicu1 and HIRI + LNPs-siMicu1 + ACT groups (Figure 7G).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ],
+        "context_before_evidence_id": "GP-007-E-2cee26f38a1d4591"
+      },
+      {
+        "evidence_id": "GP-007-E-4249c47d2d7ef839",
+        "text": "TEM results indicated that ACT synergized with siMicu1-LNPs to ameliorate mitochondrial cristae fragmentation, Ca2+ accumulation in mitochondria and the “defenestration” phenotype of LSECs induced by HIRI, thereby protecting the sinusoidal microenvironment (Figure 7H).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ],
+        "context_after_evidence_id": "GP-007-E-1db684478f7dee70"
+      },
+      {
+        "evidence_id": "GP-007-E-1db684478f7dee70",
+        "text": "Consistent with in vitro experiments, ACT and siMicu1 synergistically inhibited the expression of genes and proteins related to Ca2+ transfer in the ER-mitochondrial axis (Figure 7I and Figure S7D), alleviated mitochondrial Ca2+ accumulation (Figure 7J and Figure S7E), and reversed the increased expression and activity of glycolysis-related enzymes induced by HIRI (Figure 7K and Figure S7F), thereby protecting the function of LSECs (Figure 7L and Figure S7G).",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "experiment_boundary",
+          "lnp_composition_raw",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-6cff29076b57"
+        ],
+        "context_before_evidence_id": "GP-007-E-4249c47d2d7ef839"
+      },
+      {
+        "evidence_id": "GP-007-E-ddc2ba1c067638c0",
+        "text": "For the animal experiments in Figure 1, mice were randomly assigned to six groups (n = 6 mice per group): (1) Sham group; (2) HIRI group; (3) HIRI + ACT low-dose (L, 25 mg/kg) group; (4) HIRI + ACT medium-dose (M, 50 mg/kg) group; (5) HIRI + ACT high-dose (H, 100 mg/kg) group; (6) HIRI + N-Acetyl-L-cysteine (NAC, 100 mg/kg) group.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4f51e091b201"
+        ]
+      },
+      {
+        "evidence_id": "GP-007-E-98f163d7693f469a",
+        "text": "Given that ACT is a water-soluble glycoside compound, oral administration is susceptible to degradation through first-pass metabolism.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4f51e091b201"
+        ],
+        "context_after_evidence_id": "GP-007-E-eef4633399db21ff"
+      },
+      {
+        "evidence_id": "GP-007-E-eef4633399db21ff",
+        "text": "Therefore, ACT was administered intraperitoneally at 25, 50 and 100 mg/kg, with NAC (100 mg/kg) as a positive control, based on our previous research 10.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4f51e091b201"
+        ],
+        "context_before_evidence_id": "GP-007-E-98f163d7693f469a"
+      },
+      {
+        "evidence_id": "GP-007-E-91a7ced3eca04b01",
+        "text": "Mice in groups 1 and 2 received an intraperitoneal injection of 10 ml/kg saline as a parallel control, while mice in groups 3-6 were administered the corresponding drug via intraperitoneal injection within one week prior to surgery.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4f51e091b201"
+        ],
+        "context_after_evidence_id": "GP-007-E-6f4c482f603b0eec"
+      },
+      {
+        "evidence_id": "GP-007-E-6f4c482f603b0eec",
+        "text": "Subsequently, HIRI surgery was performed on mice in groups 2 to 6 11.",
+        "retrieval_field_tags": [
+          "experiment_boundary"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-4f51e091b201"
+        ],
+        "context_before_evidence_id": "GP-007-E-91a7ced3eca04b01"
+      }
+    ],
+    "packet_checksum": "01add67ef7c5a90d8c48f352cb811612a73b365bab12254af2c34eb013d0617f"
+  }
+}

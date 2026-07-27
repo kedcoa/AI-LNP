@@ -116,9 +116,11 @@ CREATE TABLE IF NOT EXISTS experiment (
                 'lsec',
                 'hsc'
             )
-        ),
+    ),
     cell_source TEXT,
+    tissue_or_organ TEXT,
     species TEXT,
+    disease_model TEXT,
     in_vitro_in_vivo TEXT
         CHECK (
             in_vitro_in_vivo IS NULL
@@ -131,6 +133,8 @@ CREATE TABLE IF NOT EXISTS experiment (
         ),
     payload_type TEXT,
     payload_name TEXT,
+    payload_encoded_product TEXT,
+    payload_molecular_target TEXT,
     reporter TEXT,
     dose REAL,
     dose_unit TEXT,

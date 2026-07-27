@@ -12,7 +12,28 @@ PATTERNS = {
     "species": r"\b(?:mice|mouse|rats?|human|humans?)\b",
     "route": r"\b(?:intravenously|intravenous|tail vein|oral(?:ly)?|intramuscular(?:ly)?)\b",
     "gene_or_protein": r"\b(?:Cas9|FVIII|Micu1|MICU1|HGF|EGF|eGFP|EGFP|FAP|FAPCAR)\b",
-    "lipid_or_material": r"\b(?:MC3|SM-102|DSPC|DOPE|cholesterol|DMG-PEG(?:2000|2K)?|DSPE-PEG(?:-maleimide)?)\b",
+    # Known materials are useful high-precision anchors, but generic component
+    # roles are essential because papers continually introduce new lipid names.
+    "lipid_or_material": (
+        r"\b(?:MC3|SM-102|DSPC|DOPE|cholesterol|"
+        r"DMG-PEG(?:2000|2K)?|DSPE-PEG(?:-maleimide)?|"
+        r"ionizable lipid|cationic lipid|amino lipid|helper lipid|"
+        r"phospholipid|sterol|PEG[- ]lipid|PEGylated lipid|"
+        r"polyethylene glycol lipid|phosphatidylcholine)\b"
+    ),
+    # These signals identify composition evidence without pretending that a
+    # finite lipid-name dictionary can cover the chemistry literature.
+    "composition_signal": (
+        r"(?:\bmol\s*%|\bmolar ratios?\b|"
+        r"\b\d+(?:\.\d+)?(?:\s*:\s*\d+(?:\.\d+)?){2,}\b|"
+        r"\blipid mixture\b|\bethanolic lipid phase\b)"
+    ),
+    # Paper-local labels are detected by shape rather than enumerated names.
+    "formulation_label": (
+        r"\b(?:LNP[-_ ]?[A-Za-z]?\d+[A-Za-z0-9_-]*|"
+        r"formulation\s+[A-Za-z]?\d+[A-Za-z0-9_-]*|"
+        r"lipid\s+[A-Za-z0-9_-]*\d[A-Za-z0-9_-]*)\b"
+    ),
     "outcome": r"\b(?:expression|transfection|translation|uptake|activity|frequency|efficiency|ameliorat\w*|reduc\w*|increas\w*)\b",
 }
 

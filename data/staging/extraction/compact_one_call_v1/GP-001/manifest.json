@@ -1,0 +1,55 @@
+{
+  "status": "completed_pending_human_verification",
+  "paper_id": "GP-001",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_0e2e3ec10fd219ad016a673103b7fc819a961f8c81ed39564e",
+  "request_fingerprint": "ebb09eba3165d7fa8d6e88875c4016b623572e00a0f39df04d4661aa8a3e0546",
+  "packet_checksum": "0f1f82c5f4eaa10b599a8e4052f0fbde5a12a541b89604e1af809c7b2b6867fe",
+  "prompt_version": "compact-prompt-1.1.0",
+  "prompt_checksum": "b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "started_at": "2026-07-27T10:20:50.241767+00:00",
+  "completed_at": "2026-07-27T10:20:55.122667+00:00",
+  "elapsed_seconds": 4.8809,
+  "usage": {
+    "input_tokens": 19933,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 19930
+    },
+    "output_tokens": 249,
+    "output_tokens_details": {
+      "reasoning_tokens": 71
+    },
+    "total_tokens": 20182
+  },
+  "eligibility": {
+    "decision": "ineligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "NOT_ELIGIBLE_LNP",
+      "UNSUPPORTED_PAYLOAD"
+    ],
+    "evidence_ids": [
+      "GP-001-E-301bb7dfd8dbec31",
+      "GP-001-E-2ccc4dd1032f3bb2",
+      "GP-001-E-bb98c45555c74acd"
+    ],
+    "explanation": "The paper reports original experiments using CSLNs/GA-FA-CSLNs formulated with the small-molecule drug CTD, rather than an LNP delivering mRNA, siRNA, saRNA, or circRNA."
+  },
+  "record_counts": {
+    "formulations": 0,
+    "components": 0,
+    "experiments": 0,
+    "outcomes": 0,
+    "unresolved_items": 0
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "narrative_requested": false
+  }
+}

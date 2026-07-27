@@ -7,12 +7,26 @@ from src.rag.guardrails import gate_packet
 from src.rag.models import DocumentBlock, RetrievalQuery
 
 
-def block(block_id: str, text: str) -> DocumentBlock:
+def block(block_id: str, text: str, block_type: str = "paragraph") -> DocumentBlock:
     return DocumentBlock(
         block_id=block_id, paper_id="GP-X", source_path="x.xml", source_kind="pmc_xml",
-        section_path="Results", block_type="paragraph", text=text, char_start=0,
+        section_path="Results", block_type=block_type, text=text, char_start=0,
         char_end=len(text), parser="test", parser_confidence=1.0,
     )
+
+
+def formulation_gate(text: str, tmp_path: Path, block_type: str = "paragraph"):
+    blocks = [block("F1", text, block_type)]
+    index = HybridIndex(tmp_path / "formulation.sqlite", TfidfVectorBackend())
+    index.build(blocks, regex_candidates(blocks))
+    packet = index.retrieve(RetrievalQuery(
+        query_id="Q-FORMULATION",
+        paper_id="GP-X",
+        question="What LNP lipid composition and molar ratio are reported?",
+        field_group="formulation",
+        required_entity_types=[],
+    ), k=1)
+    return gate_packet(packet, min_hits=1)
 
 
 def test_hybrid_retrieval_finds_cell_specific_evidence(tmp_path: Path):
@@ -38,6 +52,50 @@ def test_cell_candidates_are_separate():
     assert "hepatocytes" in values
     assert "endothelial cells" in values
     assert "kupffer cells" in values
+
+
+def test_familiar_mc3_formulation_passes_gate(tmp_path: Path):
+    gate = formulation_gate(
+        "The LNP contained MC3, DSPC, cholesterol, and DMG-PEG2000.",
+        tmp_path,
+    )
+    assert gate.passed
+
+
+def test_novel_named_lipid_passes_via_dynamic_label_and_composition_signal(tmp_path: Path):
+    gate = formulation_gate(
+        "LNP-1 contained the novel lipid ZX-17 at 50 mol%.",
+        tmp_path,
+    )
+    assert gate.passed
+
+
+def test_generic_component_role_wording_passes_gate(tmp_path: Path):
+    gate = formulation_gate(
+        "The lipid mixture contained an ionizable lipid, helper lipid, "
+        "cholesterol, and PEG-lipid.",
+        tmp_path,
+    )
+    assert gate.passed
+
+
+def test_composition_table_with_molar_ratio_passes_gate(tmp_path: Path):
+    gate = formulation_gate(
+        "Formulation F3 | ionizable lipid:phospholipid:cholesterol:PEG-lipid "
+        "| molar ratio 50:10:38.5:1.5",
+        tmp_path,
+        block_type="table",
+    )
+    assert gate.passed
+
+
+def test_unrelated_use_of_lipid_does_not_pass_formulation_gate(tmp_path: Path):
+    gate = formulation_gate(
+        "Dietary lipid intake was associated with body weight in the cohort.",
+        tmp_path,
+    )
+    assert not gate.passed
+    assert "No strong formulation evidence" in gate.reasons[-1]
 
 
 def test_evidence_gate_rejects_single_hit():

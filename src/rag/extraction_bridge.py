@@ -10,7 +10,7 @@ from .models import RetrievalPacket, RetrievalQuery
 FIELD_QUERIES = {
     "formulation": (
         "What exact LNP lipid components, chemical names, molar ratios, and preparation "
-        "conditions are reported?", ["lnp", "lipid_or_material"], "formulation"
+        "conditions are reported?", [], "formulation"
     ),
     "payload": (
         "What exact molecular cargo is encapsulated, and what does it encode or target?",

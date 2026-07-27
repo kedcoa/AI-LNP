@@ -34,7 +34,8 @@ class EntityCandidate(StrictModel):
     text: str
     entity_type: Literal[
         "lnp", "lipid_or_material", "payload", "cell", "tissue", "disease",
-        "species", "route", "dose", "timepoint", "assay", "outcome", "gene_or_protein",
+        "species", "route", "dose", "timepoint", "assay", "outcome",
+        "gene_or_protein", "composition_signal", "formulation_label",
     ]
     char_start: int
     char_end: int
@@ -60,8 +61,12 @@ class RetrievalHit(StrictModel):
     text: str
     section_path: str
     source_path: str
+    source_kind: Literal["pmc_xml", "pdf", "grobid_tei"] | None = None
+    block_type: Literal["title", "abstract", "paragraph", "table", "figure_caption", "pdf_page"] | None = None
     page_number: int | None
     xml_element_id: str | None = None
+    table_number: str | None = None
+    figure_number: str | None = None
     lexical_score: float | None = None
     vector_score: float | None = None
     fused_score: float

@@ -7,6 +7,11 @@ from .models import EvidenceGate, RetrievalPacket
 
 
 NEGATION = re.compile(r"\b(no|not|none|without|failed|did not|was not|were not)\b", re.I)
+FORMULATION_EVIDENCE_TYPES = {
+    "lipid_or_material",
+    "composition_signal",
+    "formulation_label",
+}
 
 
 def gate_packet(
@@ -26,6 +31,17 @@ def gate_packet(
         missing = [t for t in packet.query.required_entity_types if not observed[t]]
         if missing:
             reasons.append("Required entity types absent from evidence: " + ", ".join(missing))
+    if packet.query.field_group == "formulation":
+        observed_types = {
+            entity_type
+            for hit in packet.hits
+            for entity_type in hit.entity_types
+        }
+        if not observed_types.intersection(FORMULATION_EVIDENCE_TYPES):
+            reasons.append(
+                "No strong formulation evidence was retrieved: expected a known or "
+                "generic component term, composition signal, or formulation label."
+            )
     block_ids = [hit.block_id for hit in packet.hits]
     if len(block_ids) != len(set(block_ids)):
         reasons.append("Duplicate evidence blocks detected.")
