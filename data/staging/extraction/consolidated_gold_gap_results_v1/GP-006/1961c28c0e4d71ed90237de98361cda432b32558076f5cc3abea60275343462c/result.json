@@ -1,0 +1,63 @@
+{
+  "disposition": "recovered",
+  "recovered_candidate_ids": [
+    "OC-e7802a64c3c71f07"
+  ],
+  "unresolved_candidate_ids": [
+    "OC-be694177da34d91d"
+  ],
+  "experiments": [],
+  "outcomes": [
+    {
+      "outcome_id": "O8",
+      "experiment_id": "E1",
+      "assay": {
+        "value": "insertion frequency patterns",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-006-FC-526c1ab1d7cb8022",
+          "GP-006-FC-62ca93d20c9e9976",
+          "V-f14f79dac89b0fae"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "frequency of the +1 insertion pattern in LSECs",
+        "status": "reported",
+        "evidence_ids": [
+          "V-f14f79dac89b0fae"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No comparator was reported for the LSEC +1 insertion-frequency value."
+      },
+      "outcome_value": {
+        "value": 0.78,
+        "status": "reported",
+        "evidence_ids": [
+          "V-f14f79dac89b0fae"
+        ],
+        "missing_reason": null
+      },
+      "outcome_unit": {
+        "value": "% (± 0.27%)",
+        "status": "reported",
+        "evidence_ids": [
+          "V-f14f79dac89b0fae"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Numeric insertion-frequency outcome reported without a separate qualitative outcome."
+      }
+    }
+  ],
+  "unresolved_reason": "OC-be694177da34d91d reports GFP and LYVE-1 colocalization in LSECs, but neither existing experiment encodes GFP or otherwise provides a compatible GFP experiment link; a new experiment record is not permitted."
+}

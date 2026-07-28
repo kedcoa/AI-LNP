@@ -1,0 +1,89 @@
+{
+  "model": "gpt-5.6-terra",
+  "prompt_version": "consolidated-gap-recovery-prompt-1.0.0",
+  "prompt": "Recover omitted biomedical outcome records for exactly one paper.\nUse only the supplied evidence passages and images. Candidate IDs identify\npossibly duplicated evidence groups, not expected answers. Account for every\ncandidate ID as recovered or unresolved. Multiple duplicate candidates may\nsupport the same outcome. Keep biologically distinct endpoints or cell\npopulations as distinct outcome records. Do not repeat existing outcomes.\nExact printed and explicitly derived visual values may be recovered; visually\nestimated axis values must remain unresolved. Never invent values, evidence\nlabels, comparisons, units, or record links. New outcome IDs must come from\npermitted_new_outcome_ids.",
+  "task": {
+    "task_version": "consolidated-recovery-task-1.0.0",
+    "paper_id": "GP-004",
+    "purpose": "Recover distinct cell-population eGFP outcomes represented in the selected Results evidence; do not combine biologically different cell populations into one outcome.",
+    "candidate_ids": [
+      "OC-50a8a10d7440e225",
+      "OC-88f65d75fdf21989"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "GP-004-FC-4dd33ccc119f1671",
+        "text": "Significant percentages of these cell populations express eGFP, including 41.5 ± 14.6% CD11b+ cells, 34.1 ± 2.2% CD45+ cells, and 70.7 ± 9% CD31+ cells (Fig.",
+        "source_ids": [
+          "FC-S-783827e9e8236666"
+        ]
+      },
+      {
+        "evidence_id": "GP-004-FC-af61355776c8ccca",
+        "text": "Virtually all hepatocytes identified with HNF4α expressed eGFP (Fig.",
+        "source_ids": [
+          "FC-S-783827e9e8236666"
+        ]
+      },
+      {
+        "evidence_id": "GP-004-FC-cde0316a82a5bd30",
+        "text": "eGFP expression was absent in CK19+ cholangiocytes and α-SMA+ vascular smooth muscle cells, while few F4/80+ Kupffer cells expressed eGFP.",
+        "source_ids": [
+          "FC-S-783827e9e8236666"
+        ]
+      },
+      {
+        "evidence_id": "GP-004-E-0e95fa28bea7a24c",
+        "text": "Significant percentages of these cell populations express eGFP, including 41.5 ± 14.6% CD11b+ cells, 34.1 ± 2.2% CD45+ cells, and 70.7 ± 9% CD31+ cells (Fig.",
+        "source_ids": [
+          "S-cc46e53e45ad"
+        ]
+      },
+      {
+        "evidence_id": "GP-004-E-1f28a42d83d7b914",
+        "text": "eGFP expression was absent in CK19+ cholangiocytes and α-SMA+ vascular smooth muscle cells, while few F4/80+ Kupffer cells expressed eGFP.",
+        "source_ids": [
+          "S-cc46e53e45ad"
+        ]
+      }
+    ],
+    "visual_assets": [
+      {
+        "label": "Figure 2",
+        "crop_evidence_id": "V-21ea3a21e96c00ca",
+        "source_path": "/Users/renemilywei/Desktop/AI-LNP/data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_Fig2_HTML.jpg",
+        "page_number": null
+      }
+    ],
+    "existing_formulation_ids": [
+      "F1"
+    ],
+    "existing_experiment_ids": [
+      "E1",
+      "E2",
+      "E3"
+    ],
+    "existing_outcome_ids": [
+      "O1",
+      "O2",
+      "O3",
+      "O4"
+    ],
+    "permitted_new_outcome_ids": [
+      "O5",
+      "O6"
+    ],
+    "permitted_new_experiments": 0,
+    "permitted_new_outcomes": 2,
+    "source_result_sha256": "f40218e9fc74e50f4d5de656b9c8e8ae37d5ff145431599a41219fd612d2122b",
+    "source_inventory_sha256": "625de626997466f8eeaf15273f2fc66df80aa2e46bf4f9f6c11f27874f5c1dc7",
+    "task_checksum": "7d2539d8a968f5d0a31e19e8cc9781c55649f7b99fd0a7bbff456390fd4dece1"
+  },
+  "visual_assets": [
+    {
+      "label": "Figure 2",
+      "image_path": "/Users/renemilywei/Desktop/AI-LNP/data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_Fig2_HTML.jpg",
+      "image_sha256": "21ea3a21e96c00cae7d607a3fd59d4e07bcee348766f3ebeedf0de5fa737df06"
+    }
+  ]
+}

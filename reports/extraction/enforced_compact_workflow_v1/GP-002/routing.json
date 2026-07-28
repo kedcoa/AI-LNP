@@ -1,0 +1,32 @@
+{
+  "routing_version": "compact-routing-1.0.0",
+  "paper_id": "GP-002",
+  "complexity_route": "complex",
+  "ordinary_validation_status": "invalid",
+  "coverage_status": null,
+  "routes": [
+    {
+      "route_id": "RT-a8b57b27fadeec32",
+      "source": "ordinary_validation",
+      "source_id": "VF-1470df4e95b44aea",
+      "route": "first_call_required",
+      "reason": "Whole-response/schema failure cannot be repaired as one field; a schema-current first extraction is required.",
+      "evidence_ids": []
+    },
+    {
+      "route_id": "RT-4d30572a5d700522",
+      "source": "ordinary_validation",
+      "source_id": "VF-50509db338589991",
+      "route": "first_call_required",
+      "reason": "Whole-response/schema failure cannot be repaired as one field; a schema-current first extraction is required.",
+      "evidence_ids": []
+    }
+  ],
+  "finalization_allowed": false,
+  "finalization_blockers": [
+    "ordinary_validation_invalid",
+    "complex_outcome_coverage_incomplete",
+    "repair_or_vision_routes_pending"
+  ],
+  "paid_api_requests": 0
+}

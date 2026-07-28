@@ -1,0 +1,60 @@
+{
+  "model": "gpt-5.6-terra",
+  "prompt_version": "day5-g1-gp008-repair-1.0.0",
+  "system_prompt": "Return exactly one new in-vitro experiment and exactly two new\noutcomes using only the supplied evidence. Do not change existing records.\nKeep >80 and <20 as distinct outcomes and preserve the inequality meaning.\nThe unmodified LNP result is the comparator to targeted alpha-CD163 LNP.\nUse only supplied evidence IDs. Use missing fields when the evidence does not\nreport a value. Do not attach these records to the existing in-vivo experiment.",
+  "payload": {
+    "paper_id": "GP-008",
+    "existing_formulation_ids": [
+      "F1",
+      "F2"
+    ],
+    "reserved_experiment_ids": [
+      "E1"
+    ],
+    "reserved_outcome_ids": [
+      "O1",
+      "O2"
+    ],
+    "required_output": {
+      "experiments": 1,
+      "outcomes": 2,
+      "instructions": [
+        "Create a separate in-vitro BMDM experiment; do not attach these outcomes to the existing in-vivo E1 experiment.",
+        "Return the targeted alpha-CD163 LNP expression/delivery result above 80%.",
+        "Return the unmodified-LNP comparator expression/delivery result below 20%.",
+        "Use only the supplied evidence IDs and preserve the inequality signs."
+      ]
+    },
+    "evidence": [
+      {
+        "evidence_id": "GP-008-E-85ffa081af3058cd",
+        "text": "Notably, over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR, respectively.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-199d2629b091"
+        ],
+        "context_after_evidence_id": "GP-008-E-7d00a9f09c5299f7"
+      },
+      {
+        "evidence_id": "GP-008-E-7d00a9f09c5299f7",
+        "text": "In contrast, unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro (Fig.",
+        "retrieval_field_tags": [
+          "delivery_recipient_cell_reported",
+          "payload",
+          "therapeutic_target_cell_reported"
+        ],
+        "experiment_candidate_ids": [],
+        "source_ids": [
+          "S-199d2629b091"
+        ],
+        "context_before_evidence_id": "GP-008-E-85ffa081af3058cd"
+      }
+    ]
+  },
+  "fingerprint": "70f3c609aed37e8047e282b96af7f32281be81969ef5438b5bb9e8253104dae7"
+}
