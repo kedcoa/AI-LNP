@@ -1,306 +1,210 @@
-# SenseTime LNP
+# AI-LNP
 
-An AI-assisted, literature-grounded tool for finding and comparing lipid
-nanoparticle (LNP) starting formulations for four liver cell types:
+AI-LNP is a literature-grounded system for finding and comparing lipid
+nanoparticle (LNP) evidence for hepatocytes, Kupffer cells, liver sinusoidal
+endothelial cells (LSECs), and hepatic stellate cells (HSCs).
 
-- Hepatocytes
-- Kupffer cells
-- Liver sinusoidal endothelial cells (LSECs)
-- Hepatic stellate cells (HSCs)
+The current engineering priority is reliable evidence recovery: every accepted
+record must preserve its paper, experiment, biological context, outcome,
+source location, and exact supporting evidence.
 
-The initial payload categories are mRNA, siRNA, saRNA, and circRNA.
+## Current status
 
-## Project track
+The compact extraction workflow has been implemented and tested on nine
+open-access gold-set papers.
 
-This project follows the new **eight-week Track B plan**. It combines an
-evidence-first four-cell literature application with a conditional,
-hepatocyte-first COMET adaptation and prospective validation workflow.
+| Measure | Current result |
+|---|---:|
+| Gold papers | 9 |
+| Gold outcome records | 15 |
+| Final recovered outcome records | 10/15 (66.7%) |
+| Missing outcome records | 5/15 (33.3%) |
+| Local candidate-inventory recall | 15/15 |
+| Current quality-gate status | **Not passed** |
 
-COMET training is gated rather than assumed. The literature evidence and
-similarity modes remain complete products if the curated hepatocyte dataset is
-too small, too heterogeneous, or fails grouped evaluation. Kupffer-cell, LSEC,
-and HSC predictions remain disabled until each cell passes the same readiness
-and model-value gates.
+The 15/15 candidate-inventory result means local code can flag evidence groups
+that may represent outcomes. It does **not** mean those outcomes have been
+correctly extracted, validated, and merged. The final recovery result remains
+10/15, so the compact route is not yet reliable enough for unattended database
+expansion.
 
-Full plan: `LNP_Liver_Tool_8_Week_Timeline_v4_COMET_Hepatocyte_First.md`
-
-## Intended eight-week deliverable
-
-A public, read-only Streamlit application that:
-
-- retrieves traceable literature evidence;
-- filters evidence by biological and experimental context;
-- distinguishes comparable from non-comparable outcomes;
-- retrieves similar reported formulations;
-- displays out-of-distribution warnings;
-- optionally produces constrained DOE experimental suggestions;
-- exposes a separately gated COMET research mode when validation passes; and
-- preserves citations and evidence for every material result.
-
-The interface is designed explicitly during **Day 21**, implemented and wired
-to provenance-safe application services during **Day 24**, and usability- and
-mode-tested during **Day 25**.
-
-## Claims not made by the application
-
-The application will not claim:
-
-- prospective biological validation;
-- reliable prediction for an unseen cell type;
-- a universally best LNP formulation;
-- a validated four-cell predictive model;
-- completed wet-lab validation; or
-- proof of in-vivo liver-cell targeting.
-
-## Output hierarchy
-
-The application separates five output categories:
-
-1. **Direct literature evidence**  
-   Formulations, experiments, or outcomes explicitly reported in a cited
-   source.
-
-2. **Normalized or derived data**  
-   Values mechanically transformed from reported information using documented
-   and reversible code.
-
-3. **Similarity analogy**  
-   Existing formulations retrieved because their encoded composition is
-   similar to the query. Similarity is not presented as an efficacy prediction.
-
-4. **DOE experimental suggestion**  
-   Untested candidates selected to improve experimental-space coverage while
-   satisfying programmed constraints. These require expert review.
-
-5. **COMET model prediction**
-   A separately labelled `y_hat` available only in research mode after the
-   selected cell/task passes readiness, baseline, grouped-holdout, stability,
-   and out-of-domain gates. It never replaces reported evidence.
-
-## Eight-week roadmap
-
-- **Week 1:** discovery, screening rules, and a field-level gold answer set.
-- **Week 2:** full-text/table/figure extraction and scientific normalization.
-- **Week 3:** per-cell readiness audits and conditional literature expansion.
-- **Week 4:** COMET reproduction, baselines, grouped splits, and adaptation.
-- **Week 5:** UI/UX design, candidate scoring, integration, and product tests.
-- **Week 6:** prospective experiment design, feasibility review, and preregistration.
-- **Week 7:** formulation, physical QC, and the frozen hepatocyte experiment.
-- **Week 8:** prospective analysis, honest application updates, and next-version planning.
-
-## Data identity boundary
-
-The application maintains a strict distinction between:
-
-- `X`: a formulation or candidate input;
-- `y_hat`: an optional model prediction; and
-- `y`: a reported or experimentally measured outcome.
-
-DOE generates `X`, not `y`.
-
-A model generates `y_hat`, not `y`.
-
-Only reported literature measurements or quality-controlled wet-lab
-measurements may be treated as `y`.
-
-## Literature discovery
-
-The project uses a versioned search manifest covering hepatocytes, Kupffer
-cells, liver sinusoidal endothelial cells, and hepatic stellate cells.
-
-PubMed and Europe PMC are the discovery sources. Every cell type receives the
-same retrieval cap. Exact query text, request parameters, timestamps,
-pagination state, raw responses, and checksums are preserved for each run.
-
-PMC and other open-full-text services are used later for targeted full-text
-retrieval. They are not counted as additional discovery sources.
-
-Current search manifest: `docs/search/query_manifest_v1.yaml`
-
-## LLM provider
-
-The project currently uses SenseNova through its OpenAI-compatible API
-endpoint.
-
-The LLM may assist with screening and structured extraction, but extracted
-values must pass schema validation and evidence review before entering the
-curated database.
-
-### OpenAI PDF, table, and figure extraction
-
-Day 8 adds a native OpenAI multimodal path for evidence that text-only parsing
-cannot reliably recover. It complements, rather than replaces, the full-text
-RAG pipeline.
-
-| Source content | Primary path | OpenAI role | Acceptance rule |
-|---|---|---|---|
-| Body text and captions | PMC XML/PDF text plus full-text RAG | Structured, experiment-scoped extraction and independent reread | Exact quote and source coordinates required |
-| Structured tables | XML/HTML table parsing first | Interpret a rendered table only when structure is unavailable | Preserve row, column, cell, unit, and visible support |
-| Figure data labels | Original-resolution object crop | Transcribe visibly printed values, legends, panels, and flow-cytometry quadrants | Printed values only; axis position is not an exact measurement |
-| Unlabelled bars, curves, and points | Original-resolution object crop | Record qualitative direction | Never invent or visually estimate an exact reported value |
-| Multi-page captions | Reconstructed object plus continuation pages | Read the complete caption with its figure/table | Truncated captions require retry or human review |
-| Unreadable or ambiguous objects | Deterministic audit and second-read verification | Abstain and queue review | Human verification required |
-
-The exhaustive gold-set gate uses all nine readable papers. The saved Day 8
-checkpoint contains 17 PDFs, 103 detected objects (85 figures and 18 tables),
-94 canonical objects after removing 9 exact duplicates, and 27 four-object
-Batch API bundles. OpenAI Batch is used to reduce cost, while content hashes
-and saved request indexes make reruns resumable and prevent accidental
-duplicate work.
-
-The final test is end to end:
+## Current compact workflow
 
 ```text
-saved full-text extraction
-  + exhaustive table/figure object extraction
-  -> deterministic source audit
-  -> independent evidence verification
-  -> merged text + visual evidence
-  -> human review only for unresolved items
-  -> frozen-gold recall and precision gate
+paper retrieval
+  -> ingestion and provenance-preserving parsing
+  -> lexical + semantic retrieval
+  -> full local evidence inventory
+  -> compact API packet
+  -> local complexity assessment
+  -> first structured LLM extraction
+  -> ordinary schema/evidence validation
+  -> complex-paper candidate and coverage check
+  -> route unmatched or invalid evidence
+       -> narrow text repair
+       -> targeted table/figure vision
+       -> human review when ambiguous
+  -> deterministic merge
+  -> validation and coverage recheck
+  -> final result
+  -> gold-set evaluation
 ```
 
-The July 24 checkpoint was intentionally stopped before inference completed.
-It is therefore a reproducible prepared test, not a claimed final accuracy
-result. Resume by regenerating the ignored Batch payload from the checked-in
-inventory and submitting it:
+### Main files
 
-```bash
-.venv-rag/bin/python -m src.extraction.prepare_day8_final_gate \
-  --bundle-size 4 --model gpt-5.4
-.venv-rag/bin/python -m src.extraction.submit_day8_final_gate submit
-```
+| Stage | Main file(s) | Purpose |
+|---|---|---|
+| Ingestion | `src/rag/ingestion.py`, `src/rag/run_pipeline.py` | Parse papers and retain source coordinates and provenance. |
+| Compact packet | `src/rag/compact_api_packet.py` | Select high-value evidence while recording what the token budget excludes. |
+| Complexity | `src/extraction/assess_outcome_complexity.py` | Classify a packet locally before extraction so complex papers receive coverage checking. |
+| First extraction | `src/extraction/run_compact_one_call.py` | Make the first structured extraction call and save its candidate, validation, complexity, and coverage artifacts. |
+| Ordinary validation | `src/extraction/compact_validation.py` | Check schema, identifiers, links, field states, and evidence references. |
+| Outcome inventory | `build_full_outcome_inventory.py`, `build_outcome_candidates.py`, `consolidate_outcome_candidates.py` | Detect and deduplicate possible outcome groups using the larger local evidence view. |
+| Coverage | `src/extraction/check_outcome_coverage.py` | Compare extracted records with candidate groups and keep unmatched groups explicit. |
+| Routing | `src/extraction/route_compact_findings.py` | Separate field errors, missing text outcomes, missing visual outcomes, and ambiguous cases. |
+| Text repair | `run_narrow_repair.py`, `run_missing_record_repair.py` | Repair one bounded field or recover one missing text-supported record. |
+| Vision repair | `build_missing_record_vision_tasks.py`, `run_missing_record_vision.py` | Send only a targeted figure/table image and small context packet for visual recovery. |
+| Merge | `merge_compact_results.py`, `merge_missing_records.py`, `merge_consolidated_gap_results.py` | Merge validated additions without overwriting the original extraction. |
+| Final evaluation | `src/extraction/evaluate_final_gold_dynamic.py` | Measure one-to-one recovery from the actual merged records. |
 
-API keys remain in `.env` and are never committed.
+No validation or candidate-counting step automatically triggers a paid call.
+Call-running commands require explicit confirmation and cache completed
+responses to prevent accidental duplicate spending.
 
-## Data workflow
+## Why the current result is not ideal
 
-Literature information moves through the following stages:
+The compact packet reduced input cost, but it sometimes compressed a large
+paper into too small or too text-oriented an evidence view. Schema validation
+could prove that returned JSON was well formed, but it could not prove that the
+model had returned every experiment in the paper. The later candidate and
+coverage checks exposed silent omissions, yet detecting a missing group did not
+itself reconstruct the exact table cells, figure labels, panel relationships,
+or experiment boundaries needed for a final record.
+
+Repeated recovery prompts could not reliably fix evidence that had never been
+converted into a clear machine-readable form. This is why the next improvement
+is structural document parsing and targeted local vision, rather than simply
+sending more of the PDF to an LLM.
+
+## Next extraction improvement: Docling + local VLM
+
+The planned extraction route is:
 
 ```text
-search
-  -> screen
-  -> retrieve
-  -> extract
-  -> validate
-  -> review
-  -> curate
+PDF / XML / supplements
+  -> Docling document structure
+       -> sections, captions, tables, cells, reading order
+       -> figure and table object boundaries
+  -> local vision-language model (Ollama + Gemma)
+       -> printed labels and numeric values
+       -> panel, legend, marker, and spatial relationships
+       -> explicit uncertainty/abstention
+  -> structured visual observations
+  -> compact evidence packet containing only relevant observations
+  -> LLM normalization into project contracts
+  -> deterministic validation, coverage, and merge
 ```
 
-## Full-text RAG pipeline
+Docling should recover layout and table structure. The local VLM should inspect
+only the figures or table regions that require visual interpretation. Its
+output should be structured observations—not unconstrained conclusions—and
+must preserve object, panel, row, column, label, value, unit, and image
+coordinates. Exact values are accepted only when visibly printed or
+deterministically derived; estimates and ambiguity go to human review.
 
-The G1 extraction workflow now uses a modular, provenance-preserving full-text
-retrieval-augmented generation pipeline. Retrieval and extraction are evaluated
-separately: finding the correct evidence does not by itself mean that an LLM
-extracted the correct structured value.
+This approach can improve recall without sending every page to a paid model.
+It must still be benchmarked against all 15 gold outcomes before it is trusted.
+
+## Expanding literature discovery
+
+The discovery stage should expand beyond PubMed and Europe PMC while retaining
+deduplication and a complete search manifest.
 
 ```text
-PMC XML / supplement PDF
-  -> GROBID adapter or PyMuPDF ingestion
-  -> provenance-bearing document blocks
-  -> SQLite FTS5/BM25 lexical retrieval
-  -> sentence-transformer + FAISS/Chroma semantic retrieval
-  -> custom LNP entity candidates (optional SciSpaCy enrichment)
-  -> field-specific evidence packets
-  -> retrieval and contradiction gates
-  -> experiment-scoped LLM evidence graph
-  -> independent second-read verification
-  -> Pydantic and deterministic graph validation
-  -> human scientific review
+cell-specific query families
+  -> PubMed + Europe PMC
+  -> OpenAlex discovery and citation graph
+  -> semantic similarity search
+  -> backward references + forward citations
+  -> DOI / PMID / PMCID / title normalization
+  -> deduplication
+  -> screening and source-priority ranking
 ```
 
-### Pipeline stages
+- **OpenAlex** broadens discovery, supplies citation relationships, and can find
+  relevant papers that use different terminology.
+- **Semantic search** retrieves conceptually related work rather than relying
+  only on exact keywords. Semantic Scholar may be evaluated subject to its
+  current API terms and rate limits.
+- **Backward and forward citation chaining** finds foundational and follow-up
+  studies from already relevant papers.
+- **LNP databases and atlases** are useful as formulation and nearest-neighbor
+  leads. Their entries should not be treated as complete outcome evidence unless
+  they link back to a verifiable primary paper.
 
-1. **Ingestion** reads structured PMC XML first and supplemental PDFs with
-   PyMuPDF. Every block retains its paper, source file, section, page, XML
-   element, and parser provenance. GROBID is an optional fallback when usable
-   structured XML is unavailable.
-2. **Lexical retrieval** stores blocks in SQLite and uses FTS5/BM25 to find
-   exact terminology, chemical names, ratios, doses, and cell markers.
-3. **Semantic retrieval** uses a local sentence-transformer with FAISS. A
-   Chroma adapter is also available. Biomedical synonym expansion and
-   conservative adjacent-paragraph retrieval reduce vocabulary and context
-   misses.
-4. **Entity candidates** detect LNPs, lipid components, RNA payloads, cells,
-   species, routes, genes, proteins, and outcomes. The deterministic detector
-   always runs; SciSpaCy enrichment is optional because the current SciSpaCy
-   release does not build under Python 3.14.
-5. **Evidence packets** retrieve composition, payload, experiment-boundary,
-   delivery-recipient-cell, therapeutic-target-cell, model-context, and outcome
-   evidence separately. Results are hard-filtered by paper to prevent
-   cross-paper leakage.
-6. **Evidence gates** require sufficient source blocks and relevant entity
-   types. Missing evidence causes abstention. Mixed positive and negative
-   evidence is retained and flagged instead of being simplified into a false
-   answer.
-7. **Experiment-scoped extraction** uses the existing evidence-graph schema:
-   atomic entities, typed relations, explicit experiment IDs, and exact source
-   quotes. Delivery recipients and therapeutic targets remain separate, and
-   each cell and endpoint receives its own relation.
-8. **Second read and validation** asks an independent model pass to reread the
-   source and apply corrections. Pydantic and deterministic audits reject
-   invalid links, merged cells, payload-as-component errors, non-verbatim
-   evidence, context leakage, and unsupported relations.
-9. **Review and curation** expose evidence and saved scientific decisions.
-   Human verification remains mandatory before G1 approval.
+Every source must preserve query text, filters, pagination, retrieval date,
+identifiers, raw response provenance, and deduplication decisions.
 
-### Current benchmark
+## Full-text access
 
-On the 31 human-verified evidence locations across the nine open-access gold
-papers, the current hybrid retriever finds the correct source within its top
-eight blocks for **28/31 checks (90.3% recall@8)**. This is retrieval recall,
-not extraction precision and not a G1 pass. The three remaining retrieval
-misses are GP-008 macrophage-delivery, HSC therapeutic-effect, and
-recipient-cell-specificity evidence.
+Use the following lawful priority order:
 
-Readable benchmark outputs:
+1. PMC, Europe PMC, publisher open access, and author manuscripts.
+2. DOI and repository lookup, including institutional repositories.
+3. Unpaywall-style open-access resolution.
+4. University-library link resolver, proxy, or VPN using the user's authorized
+   institutional account.
+5. Interlibrary loan or an author copy when no accessible full text exists.
+6. Abstract-only processing with an explicit full-text-unavailable status.
 
-- `reports/rag/gold_v1_retrieval_table.md`
-- `reports/rag/gold_v1_retrieval_table.csv`
-- `reports/rag/gold_v1_retrieval_sentence-transformers.json`
+The system may help navigate a university library session that the user has
+opened and authenticated, but it must not store credentials, bypass access
+controls, or redistribute licensed PDFs. Licensed papers and derived evidence
+must follow the institution's terms.
 
-### Local setup and commands
+## Scientific boundaries
 
-RAG dependencies are isolated from the original environment:
+The application keeps these categories separate:
+
+- **Reported evidence (`y`)**: a measurement explicitly supported by a paper.
+- **Normalized/derived data**: a documented mechanical transformation.
+- **Similarity result**: a related reported formulation, not a prediction.
+- **Experimental suggestion (`X`)**: an untested candidate.
+- **Model prediction (`y_hat`)**: a separately labelled estimate, never
+  presented as reported evidence.
+
+The application does not claim a universally best formulation, validated
+four-cell prediction, prospective biological validation, or complete evidence
+recovery while the gold-set gate remains below target.
+
+## Local setup
 
 ```bash
 python3 -m venv .venv-rag
 .venv-rag/bin/pip install -r requirements-rag.txt
-```
-
-Build the corpus and retrieval packets:
-
-```bash
 .venv-rag/bin/python -m src.rag.ingestion
 .venv-rag/bin/python -m src.rag.run_pipeline
 ```
 
-Run the fixed retrieval benchmark and build the plain results table:
+Run local tests:
 
 ```bash
-.venv-rag/bin/python -m src.rag.benchmark --backend sentence-transformers -k 8
-.venv-rag/bin/python -m src.rag.build_retrieval_table
+.venv/bin/python -m pytest -q
 ```
 
-Start the optional evidence review interface:
+Local vision testing will use Ollama with a multimodal Gemma model. The model
+download was intentionally stopped on July 28, 2026 and can be resumed with:
 
 ```bash
-.venv/bin/streamlit run src/rag/review_app.py
+ollama pull gemma3:4b
 ```
 
-Run one experiment-scoped extraction only after retrieval gates pass and a
-provider has sufficient quota:
+API keys remain only in `.env`. The file is ignored by Git and must never be
+committed.
 
-```bash
-.venv/bin/python -m src.rag.run_experiment_extraction --paper-id GP-002
-```
+## Current reference documents
 
-The API key and provider URL belong in `.env`, which is ignored by Git.
-
-## G1 architecture history
-
-The initial schema-first abstract extraction trial validated JSON structure but
-could not establish scientific correctness or preserve full experiment context;
-after repeated omissions and cross-experiment field leakage, the workflow moved
-to full-text hybrid RAG so each typed claim is grounded in retrieved,
-provenance-bearing evidence before validation and human review.
+- `docs/extraction/corrected_compact_workflow.md`
+- `docs/extraction/outcome_complexity_workflow.md`
+- `reports/extraction/final_gold_dynamic_v1/evaluation.json`
+- `reports/extraction/day5_afternoon_g1/comparison.md`

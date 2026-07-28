@@ -1,0 +1,646 @@
+{
+  "task_version": "consolidated-recovery-task-1.0.0",
+  "paper_id": "GP-004",
+  "purpose": "Recover distinct cell-population eGFP outcomes represented in the selected Results evidence; do not combine biologically different cell populations into one outcome.",
+  "candidate_ids": [
+    "OC-50a8a10d7440e225",
+    "OC-88f65d75fdf21989"
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-FC-4dd33ccc119f1671",
+      "text": "Significant percentages of these cell populations express eGFP, including 41.5 ± 14.6% CD11b+ cells, 34.1 ± 2.2% CD45+ cells, and 70.7 ± 9% CD31+ cells (Fig.",
+      "source_ids": [
+        "FC-S-783827e9e8236666"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-af61355776c8ccca",
+      "text": "Virtually all hepatocytes identified with HNF4α expressed eGFP (Fig.",
+      "source_ids": [
+        "FC-S-783827e9e8236666"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-cde0316a82a5bd30",
+      "text": "eGFP expression was absent in CK19+ cholangiocytes and α-SMA+ vascular smooth muscle cells, while few F4/80+ Kupffer cells expressed eGFP.",
+      "source_ids": [
+        "FC-S-783827e9e8236666"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-0e95fa28bea7a24c",
+      "text": "Significant percentages of these cell populations express eGFP, including 41.5 ± 14.6% CD11b+ cells, 34.1 ± 2.2% CD45+ cells, and 70.7 ± 9% CD31+ cells (Fig.",
+      "source_ids": [
+        "S-cc46e53e45ad"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-1f28a42d83d7b914",
+      "text": "eGFP expression was absent in CK19+ cholangiocytes and α-SMA+ vascular smooth muscle cells, while few F4/80+ Kupffer cells expressed eGFP.",
+      "source_ids": [
+        "S-cc46e53e45ad"
+      ]
+    }
+  ],
+  "visual_assets": [
+    {
+      "label": "Figure 2",
+      "image_path": "/Users/renemilywei/Desktop/AI-LNP/data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_Fig2_HTML.jpg",
+      "image_sha256": "21ea3a21e96c00cae7d607a3fd59d4e07bcee348766f3ebeedf0de5fa737df06",
+      "crop_evidence_id": "V-21ea3a21e96c00ca",
+      "source_path": "/Users/renemilywei/Desktop/AI-LNP/data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_Fig2_HTML.jpg",
+      "page_number": null
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4"
+  ],
+  "existing_experiments": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "eGFP mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "enhanced green fluorescent protein (eGFP)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target reported for eGFP."
+      },
+      "delivery_recipient_cell": {
+        "value": "Hepatocytes; subpopulations of endothelial cells and Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-dd2583840b74edd5"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Cell-transfection experiment did not report a therapeutic target cell."
+      },
+      "tissue_or_organ": {
+        "value": "Liver",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": "Homeostasis",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827"
+        ],
+        "missing_reason": null
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 10.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "μg eGFP mRNA-LNP per 20 g body weight",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "Intravenous",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 5.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "h after injection",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-3cadcaa508e40b67"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Combined HGF and EGF mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-3cadcaa508e40b67"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-781c50d67af751aa"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Hepatocytes",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-1e6611acdea22c63"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": "Hepatocytes",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-575b2fc9ece61198"
+        ],
+        "missing_reason": null
+      },
+      "tissue_or_organ": {
+        "value": "Liver",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-025f5c277aab5b54"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": "CDE diet-induced chronic liver injury",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-025f5c277aab5b54"
+        ],
+        "missing_reason": null
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-025f5c277aab5b54"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 10.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-b293f56409c89709"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-b293f56409c89709"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "Intravenous (retro-orbital or tail vein)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-b293f56409c89709"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 2.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-575b2fc9ece61198"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "days after first injection",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-575b2fc9ece61198"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "experiment_id": "E3",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-38d6cef8e8150903"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Combined HGF and EGF mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-38d6cef8e8150903"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-781c50d67af751aa"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target reported."
+      },
+      "delivery_recipient_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Recipient cell identity was not directly reported for this APAP experiment."
+      },
+      "therapeutic_target_cell": {
+        "value": "Hepatocytes",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-2424879042507ab4"
+        ],
+        "missing_reason": null
+      },
+      "tissue_or_organ": {
+        "value": "Liver",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-615763cdaa039010"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-92eb86183d546f7f"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": "Acetaminophen (APAP)-induced acute liver injury",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-615763cdaa039010"
+        ],
+        "missing_reason": null
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-615763cdaa039010"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 10.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-b293f56409c89709"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-b293f56409c89709"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "Intravenous (retro-orbital or tail vein)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-b293f56409c89709"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 24.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-abe18f899dd66651",
+          "GP-004-E-53de397122977467"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "h after mRNA-LNP administration",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-abe18f899dd66651",
+          "GP-004-E-53de397122977467"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "existing_outcomes": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": {
+        "value": "Flow cytometry of liver non-parenchymal cell fractions",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-1bce9423e81c94ae"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Percentage of eGFP-positive CD31-positive endothelial cells",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-0e95fa28bea7a24c"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "None reported for this numerical value",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-0e95fa28bea7a24c"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": 70.7,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-0e95fa28bea7a24c"
+        ],
+        "missing_reason": null
+      },
+      "outcome_unit": {
+        "value": "%",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-0e95fa28bea7a24c"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": "Significant percentages of endothelial and immune-cell populations expressed eGFP.",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-0e95fa28bea7a24c"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E2",
+      "assay": {
+        "value": "Oil Red O staining of liver sections",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-575b2fc9ece61198"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Hepatocyte lipid accumulation (steatosis)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-575b2fc9ece61198"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Poly(C) RNA-LNP treatment",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-575b2fc9ece61198"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical outcome value reported in the packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical outcome unit reported."
+      },
+      "qualitative_outcome": {
+        "value": "Single injections of either HGF or EGF mRNA-LNP decreased steatosis; combined HGF/EGF mRNA-LNP produced more efficient steatosis reversal. A sharp decrease was observed 2 days after the first combined injection, while steatosis was maintained in Poly(C) RNA-LNP-treated mice.",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-575b2fc9ece61198",
+          "GP-004-E-fc1b2e9e166859e2"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": {
+        "value": "Serum ALT measurement",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-40caa7e2e5038278"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Serum ALT level",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-40caa7e2e5038278"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Poly(C) RNA-LNP and Luc mRNA-LNP controls",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-431b75f9ecb4f846"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical ALT value reported in the packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical ALT unit reported."
+      },
+      "qualitative_outcome": {
+        "value": "ALT was restored to normal levels at T2 after HGF/EGF mRNA-LNP; control ALT levels remained significantly greater.",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-40caa7e2e5038278",
+          "GP-004-E-431b75f9ecb4f846"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E3",
+      "assay": {
+        "value": "H&E staining",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-53de397122977467"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Central-vein necrotic areas",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-eed2eeefe62f6099"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Poly(C) RNA-LNP-treated control group",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-53de397122977467"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical necrosis value reported in the packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical necrosis unit reported."
+      },
+      "qualitative_outcome": {
+        "value": "At 24 h after HGF/EGF mRNA-LNP administration, necrotic areas had accelerated disappearance versus Poly(C) RNA-LNP controls; at 8 h there was no significant improvement.",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-53de397122977467",
+          "GP-004-E-eed2eeefe62f6099"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "permitted_new_outcome_ids": [
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 2,
+  "source_result_sha256": "f40218e9fc74e50f4d5de656b9c8e8ae37d5ff145431599a41219fd612d2122b",
+  "source_inventory_sha256": "625de626997466f8eeaf15273f2fc66df80aa2e46bf4f9f6c11f27874f5c1dc7",
+  "task_checksum": "f28266774997b0dd07abab0155e9d0bb4453868d269273f0b9c72dc9caec6202"
+}

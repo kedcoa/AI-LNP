@@ -1,0 +1,33 @@
+{
+  "report_version": "compact-validation-1.0.0",
+  "paper_id": "GP-002",
+  "status": "invalid",
+  "findings": [
+    {
+      "finding_id": "VF-1470df4e95b44aea",
+      "code": "pydantic.literal_error",
+      "message": "Input should be 'compact-1.1.0'",
+      "location": [
+        "contract_version"
+      ],
+      "record_collection": null,
+      "record_index": null,
+      "field_name": null,
+      "cited_evidence_ids": [],
+      "repairable": false
+    },
+    {
+      "finding_id": "VF-50509db338589991",
+      "code": "pydantic.missing",
+      "message": "Field required",
+      "location": [
+        "eligibility"
+      ],
+      "record_collection": null,
+      "record_index": null,
+      "field_name": null,
+      "cited_evidence_ids": [],
+      "repairable": false
+    }
+  ]
+}

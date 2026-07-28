@@ -1,0 +1,215 @@
+{
+  "experiment": {
+    "experiment_id": "E2",
+    "formulation_id": "F2",
+    "payload_type": {
+      "value": "mRNA",
+      "status": "reported",
+      "evidence_ids": [
+        "GP-008-E-85ffa081af3058cd"
+      ],
+      "missing_reason": null
+    },
+    "payload_name": {
+      "value": "GFP or FAPCAR",
+      "status": "reported",
+      "evidence_ids": [
+        "GP-008-E-85ffa081af3058cd"
+      ],
+      "missing_reason": null
+    },
+    "encoded_product": {
+      "value": "GFP or FAPCAR",
+      "status": "reported",
+      "evidence_ids": [
+        "GP-008-E-85ffa081af3058cd"
+      ],
+      "missing_reason": null
+    },
+    "molecular_target": {
+      "value": "CD163",
+      "status": "reported",
+      "evidence_ids": [
+        "GP-008-E-85ffa081af3058cd"
+      ],
+      "missing_reason": null
+    },
+    "delivery_recipient_cell": {
+      "value": "BMDMs",
+      "status": "reported",
+      "evidence_ids": [
+        "GP-008-E-85ffa081af3058cd",
+        "GP-008-E-7d00a9f09c5299f7"
+      ],
+      "missing_reason": null
+    },
+    "therapeutic_target_cell": {
+      "value": "BMDMs",
+      "status": "reported",
+      "evidence_ids": [
+        "GP-008-E-85ffa081af3058cd",
+        "GP-008-E-7d00a9f09c5299f7"
+      ],
+      "missing_reason": null
+    },
+    "tissue_or_organ": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    },
+    "species": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    },
+    "disease_model": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    },
+    "experimental_context": {
+      "value": "in_vitro",
+      "status": "reported",
+      "evidence_ids": [
+        "GP-008-E-7d00a9f09c5299f7"
+      ],
+      "missing_reason": null
+    },
+    "dose": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    },
+    "dose_unit": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    },
+    "route": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    },
+    "timepoint": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    },
+    "timepoint_unit": {
+      "value": null,
+      "status": "missing",
+      "evidence_ids": [],
+      "missing_reason": "Not reported."
+    }
+  },
+  "outcomes": [
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": {
+        "value": "GFP or FAPCAR expression",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-85ffa081af3058cd"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-85ffa081af3058cd"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "unmodified LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-7d00a9f09c5299f7"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Only an inequality (>80%) was reported; no exact value was provided."
+      },
+      "outcome_unit": {
+        "value": "%",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-85ffa081af3058cd"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": ">80% of BMDMs expressed GFP or FAPCAR.",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-85ffa081af3058cd"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E2",
+      "assay": {
+        "value": "mRNA delivery",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-7d00a9f09c5299f7"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Target BMDMs receiving mRNA from unmodified LNPs",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-7d00a9f09c5299f7"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "targeted αCD163 LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-85ffa081af3058cd"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Only an inequality (<20%) was reported; no exact value was provided."
+      },
+      "outcome_unit": {
+        "value": "%",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-7d00a9f09c5299f7"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": "<20% of target BMDMs received mRNA.",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-008-E-7d00a9f09c5299f7"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "explanation": "Created a separate in-vitro BMDM experiment with distinct targeted αCD163-LNP (>80%) and unmodified-LNP (<20%) outcomes."
+}

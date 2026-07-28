@@ -63,6 +63,22 @@ DIRECT_SECTIONS = re.compile(
     r"\b(?:methods?|materials?|results?|experimental|supplement)\b",
     re.I,
 )
+QUANTITATIVE_OUTCOME = re.compile(
+    r"(?:"
+    r"\b(?:over|under|more than|fewer than|less than|greater than)?\s*"
+    r"\d+(?:\.\d+)?\s*%|"
+    r"\d+(?:\.\d+)?\s*(?:±|\+/-)\s*\d+(?:\.\d+)?|"
+    r"\d+(?:\.\d+)?\s*[- ]?fold\b"
+    r")",
+    re.I,
+)
+BIOLOGICAL_OUTCOME_SIGNAL = re.compile(
+    r"\b(?:express(?:ed|ion)?|transfect(?:ed|ion)?|deliver(?:ed|y)?|uptake|"
+    r"internaliz(?:ed|ation)?|edit(?:ed|ing)?|insertion|deletion|indel|"
+    r"knockdown|silenc(?:ed|ing)?|activity|efficacy|survival|fibrosis|"
+    r"steatosis|necrosis|phagocyt(?:osed|osis)?|eliminat(?:ed|ion)?)\b",
+    re.I,
+)
 
 
 class ApiSource(StrictModel):
@@ -151,6 +167,12 @@ def evidence_priority(evidence: CompactEvidence) -> tuple[int, list[str]]:
     if DIRECT_EVIDENCE.search(text):
         score += 60
         reasons.append("direct_scientific_signal")
+    if QUANTITATIVE_OUTCOME.search(text) and (
+        "outcome" in evidence.field_groups
+        or BIOLOGICAL_OUTCOME_SIGNAL.search(text)
+    ):
+        score += 120
+        reasons.append("direct_quantitative_outcome")
     if evidence.experiment_candidate_ids:
         score += 30
         reasons.append("experiment_anchor")

@@ -1,0 +1,189 @@
+{
+  "workflow_version": "enforced-compact-workflow-1.0.0",
+  "scope": "local cached results; no API calls",
+  "paid_api_requests": 0,
+  "papers": [
+    {
+      "paper_id": "GP-001",
+      "complexity_route": "complex",
+      "eligibility": "ineligible",
+      "raw_candidates": 37,
+      "retained_candidates": 29,
+      "inventory_review": 28,
+      "coverage_status": "not_applicable",
+      "matched": 0,
+      "unmatched_text": 0,
+      "unmatched_vision": 0,
+      "review": 0,
+      "text_tasks": 0,
+      "vision_referrals": 0,
+      "finalization_allowed": true,
+      "blockers": []
+    },
+    {
+      "paper_id": "GP-002",
+      "complexity_route": "complex",
+      "eligibility": "invalid",
+      "raw_candidates": 110,
+      "retained_candidates": 74,
+      "inventory_review": 61,
+      "coverage_status": null,
+      "matched": 0,
+      "unmatched_text": 0,
+      "unmatched_vision": 0,
+      "review": 0,
+      "text_tasks": 0,
+      "vision_referrals": 0,
+      "finalization_allowed": false,
+      "blockers": [
+        "ordinary_validation_invalid",
+        "complex_outcome_coverage_incomplete",
+        "repair_or_vision_routes_pending"
+      ]
+    },
+    {
+      "paper_id": "GP-003",
+      "complexity_route": "complex",
+      "eligibility": "ineligible",
+      "raw_candidates": 17,
+      "retained_candidates": 15,
+      "inventory_review": 13,
+      "coverage_status": "not_applicable",
+      "matched": 0,
+      "unmatched_text": 0,
+      "unmatched_vision": 0,
+      "review": 0,
+      "text_tasks": 0,
+      "vision_referrals": 0,
+      "finalization_allowed": true,
+      "blockers": []
+    },
+    {
+      "paper_id": "GP-004",
+      "complexity_route": "complex",
+      "eligibility": "eligible",
+      "raw_candidates": 53,
+      "retained_candidates": 31,
+      "inventory_review": 22,
+      "coverage_status": "review_unmatched_groups",
+      "matched": 3,
+      "unmatched_text": 6,
+      "unmatched_vision": 0,
+      "review": 22,
+      "text_tasks": 5,
+      "vision_referrals": 0,
+      "finalization_allowed": false,
+      "blockers": [
+        "complex_outcome_coverage_incomplete",
+        "candidate_adjudication_incomplete",
+        "repair_or_vision_routes_pending"
+      ]
+    },
+    {
+      "paper_id": "GP-005",
+      "complexity_route": "complex",
+      "eligibility": "eligible",
+      "raw_candidates": 82,
+      "retained_candidates": 65,
+      "inventory_review": 64,
+      "coverage_status": "review_unmatched_groups",
+      "matched": 3,
+      "unmatched_text": 0,
+      "unmatched_vision": 1,
+      "review": 61,
+      "text_tasks": 0,
+      "vision_referrals": 0,
+      "finalization_allowed": false,
+      "blockers": [
+        "complex_outcome_coverage_incomplete",
+        "candidate_adjudication_incomplete",
+        "repair_or_vision_routes_pending"
+      ]
+    },
+    {
+      "paper_id": "GP-006",
+      "complexity_route": "complex",
+      "eligibility": "eligible",
+      "raw_candidates": 142,
+      "retained_candidates": 62,
+      "inventory_review": 38,
+      "coverage_status": "review_unmatched_groups",
+      "matched": 7,
+      "unmatched_text": 14,
+      "unmatched_vision": 6,
+      "review": 35,
+      "text_tasks": 6,
+      "vision_referrals": 1,
+      "finalization_allowed": false,
+      "blockers": [
+        "complex_outcome_coverage_incomplete",
+        "candidate_adjudication_incomplete",
+        "repair_or_vision_routes_pending"
+      ]
+    },
+    {
+      "paper_id": "GP-007",
+      "complexity_route": "complex",
+      "eligibility": "eligible",
+      "raw_candidates": 71,
+      "retained_candidates": 42,
+      "inventory_review": 41,
+      "coverage_status": "review_unmatched_groups",
+      "matched": 3,
+      "unmatched_text": 0,
+      "unmatched_vision": 0,
+      "review": 39,
+      "text_tasks": 0,
+      "vision_referrals": 0,
+      "finalization_allowed": false,
+      "blockers": [
+        "complex_outcome_coverage_incomplete",
+        "candidate_adjudication_incomplete"
+      ]
+    },
+    {
+      "paper_id": "GP-008",
+      "complexity_route": "complex",
+      "eligibility": "eligible",
+      "raw_candidates": 86,
+      "retained_candidates": 58,
+      "inventory_review": 44,
+      "coverage_status": "review_unmatched_groups",
+      "matched": 4,
+      "unmatched_text": 3,
+      "unmatched_vision": 7,
+      "review": 44,
+      "text_tasks": 3,
+      "vision_referrals": 0,
+      "finalization_allowed": false,
+      "blockers": [
+        "complex_outcome_coverage_incomplete",
+        "candidate_adjudication_incomplete",
+        "repair_or_vision_routes_pending"
+      ]
+    },
+    {
+      "paper_id": "GP-009",
+      "complexity_route": "complex",
+      "eligibility": "ineligible",
+      "raw_candidates": 74,
+      "retained_candidates": 44,
+      "inventory_review": 24,
+      "coverage_status": "not_applicable",
+      "matched": 0,
+      "unmatched_text": 0,
+      "unmatched_vision": 0,
+      "review": 0,
+      "text_tasks": 0,
+      "vision_referrals": 0,
+      "finalization_allowed": true,
+      "blockers": []
+    }
+  ],
+  "counts": {
+    "finalization_allowed": 3,
+    "finalization_blocked": 6,
+    "text_tasks": 14,
+    "vision_referrals": 1
+  }
+}

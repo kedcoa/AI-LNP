@@ -1,0 +1,361 @@
+{
+  "evaluation_version": "day5-compact-gold-morning-1.0.0",
+  "scope": "cached compact route; no API calls made by evaluator",
+  "paper_count": 9,
+  "schema_comparability": {
+    "current_schema_papers": 8,
+    "required": 9,
+    "passed": false
+  },
+  "retrieval_recall": {
+    "available_gold_locations": 29,
+    "total_gold_locations": 31,
+    "rate": 0.9354838709677419,
+    "unavailable_evidence_ids": [
+      "EVID-009",
+      "EVID-010"
+    ]
+  },
+  "eligibility_accuracy": {
+    "correct": 8,
+    "comparable_papers": 8,
+    "rate": 1.0,
+    "manual_review_papers": [
+      "GP-008"
+    ]
+  },
+  "exact_outcome_recall": {
+    "recalled": 1,
+    "total_exact_gold_outcomes": 3,
+    "rate": 0.3333333333333333
+  },
+  "evidence_reference_correctness": {
+    "structurally_valid_papers": 9,
+    "paper_count": 9,
+    "rate": 1.0,
+    "semantic_correctness": "human_review_required"
+  },
+  "human_review_rate": {
+    "papers_requiring_review": 7,
+    "paper_count": 9,
+    "rate": 0.7777777777777778
+  },
+  "critical_field_precision": "pending_human_review",
+  "experiment_mixing_errors": "pending_human_review",
+  "unsupported_claims": "pending_human_review",
+  "token_usage": {
+    "input_tokens": 180780,
+    "output_tokens": 26108,
+    "total_tokens": 206888
+  },
+  "paid_api_requests_this_evaluation": 0,
+  "automated_morning_gate": "not_passed",
+  "gate_reasons": [
+    "Not all papers use the current compact contract.",
+    "Not all frozen gold evidence locations reached the compact packet.",
+    "Not all exact frozen outcomes were recalled.",
+    "Semantic precision, mixing, and unsupported-claim review is pending."
+  ],
+  "papers": [
+    {
+      "paper_id": "GP-001",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "ineligible",
+      "actual_eligibility": "ineligible",
+      "eligibility_match": true,
+      "unresolved_items": 0,
+      "requires_human_review": false,
+      "record_counts": {
+        "formulations": 0,
+        "components": 0,
+        "experiments": 0,
+        "outcomes": 0,
+        "unresolved_items": 0
+      },
+      "usage": {
+        "input_tokens": 19933,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 19930
+        },
+        "output_tokens": 249,
+        "output_tokens_details": {
+          "reasoning_tokens": 71
+        },
+        "total_tokens": 20182
+      }
+    },
+    {
+      "paper_id": "GP-002",
+      "contract_version": "compact-1.0.0",
+      "current_schema": false,
+      "expected_eligibility": "eligible",
+      "actual_eligibility": "eligible",
+      "eligibility_match": true,
+      "unresolved_items": 3,
+      "requires_human_review": true,
+      "record_counts": {
+        "formulations": 1,
+        "components": 4,
+        "experiments": 4,
+        "outcomes": 6,
+        "unresolved_items": 3
+      },
+      "usage": {
+        "input_tokens": 19265,
+        "input_tokens_details": {
+          "cache_write_tokens": 19262,
+          "cached_tokens": 0
+        },
+        "output_tokens": 5068,
+        "output_tokens_details": {
+          "reasoning_tokens": 65
+        },
+        "total_tokens": 24333
+      }
+    },
+    {
+      "paper_id": "GP-003",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "ineligible",
+      "actual_eligibility": "ineligible",
+      "eligibility_match": true,
+      "unresolved_items": 0,
+      "requires_human_review": false,
+      "record_counts": {
+        "formulations": 0,
+        "components": 0,
+        "experiments": 0,
+        "outcomes": 0,
+        "unresolved_items": 0
+      },
+      "usage": {
+        "input_tokens": 19335,
+        "input_tokens_details": {
+          "cache_write_tokens": 19332,
+          "cached_tokens": 0
+        },
+        "output_tokens": 212,
+        "output_tokens_details": {
+          "reasoning_tokens": 81
+        },
+        "total_tokens": 19547
+      }
+    },
+    {
+      "paper_id": "GP-004",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "eligible",
+      "actual_eligibility": "eligible",
+      "eligibility_match": true,
+      "unresolved_items": 3,
+      "requires_human_review": true,
+      "record_counts": {
+        "formulations": 1,
+        "components": 4,
+        "experiments": 3,
+        "outcomes": 4,
+        "unresolved_items": 3
+      },
+      "usage": {
+        "input_tokens": 20049,
+        "input_tokens_details": {
+          "cache_write_tokens": 20046,
+          "cached_tokens": 0
+        },
+        "output_tokens": 4266,
+        "output_tokens_details": {
+          "reasoning_tokens": 240
+        },
+        "total_tokens": 24315
+      }
+    },
+    {
+      "paper_id": "GP-005",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "eligible",
+      "actual_eligibility": "eligible",
+      "eligibility_match": true,
+      "unresolved_items": 3,
+      "requires_human_review": true,
+      "record_counts": {
+        "formulations": 3,
+        "components": 4,
+        "experiments": 3,
+        "outcomes": 3,
+        "unresolved_items": 3
+      },
+      "usage": {
+        "input_tokens": 20551,
+        "input_tokens_details": {
+          "cache_write_tokens": 20548,
+          "cached_tokens": 0
+        },
+        "output_tokens": 4676,
+        "output_tokens_details": {
+          "reasoning_tokens": 484
+        },
+        "total_tokens": 25227
+      }
+    },
+    {
+      "paper_id": "GP-006",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "eligible",
+      "actual_eligibility": "eligible",
+      "eligibility_match": true,
+      "unresolved_items": 3,
+      "requires_human_review": true,
+      "record_counts": {
+        "formulations": 2,
+        "components": 4,
+        "experiments": 2,
+        "outcomes": 3,
+        "unresolved_items": 3
+      },
+      "usage": {
+        "input_tokens": 20315,
+        "input_tokens_details": {
+          "cache_write_tokens": 20312,
+          "cached_tokens": 0
+        },
+        "output_tokens": 4197,
+        "output_tokens_details": {
+          "reasoning_tokens": 791
+        },
+        "total_tokens": 24512
+      }
+    },
+    {
+      "paper_id": "GP-007",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "eligible",
+      "actual_eligibility": "eligible",
+      "eligibility_match": true,
+      "unresolved_items": 4,
+      "requires_human_review": true,
+      "record_counts": {
+        "formulations": 1,
+        "components": 4,
+        "experiments": 1,
+        "outcomes": 3,
+        "unresolved_items": 4
+      },
+      "usage": {
+        "input_tokens": 19993,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 19990
+        },
+        "output_tokens": 3247,
+        "output_tokens_details": {
+          "reasoning_tokens": 425
+        },
+        "total_tokens": 23240
+      }
+    },
+    {
+      "paper_id": "GP-008",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "manual_review",
+      "actual_eligibility": "eligible",
+      "eligibility_match": null,
+      "unresolved_items": 3,
+      "requires_human_review": true,
+      "record_counts": {
+        "formulations": 2,
+        "components": 5,
+        "experiments": 1,
+        "outcomes": 2,
+        "unresolved_items": 3
+      },
+      "usage": {
+        "input_tokens": 20831,
+        "input_tokens_details": {
+          "cache_write_tokens": 20828,
+          "cached_tokens": 0
+        },
+        "output_tokens": 3806,
+        "output_tokens_details": {
+          "reasoning_tokens": 885
+        },
+        "total_tokens": 24637
+      }
+    },
+    {
+      "paper_id": "GP-009",
+      "contract_version": "compact-1.1.0",
+      "current_schema": true,
+      "expected_eligibility": "ineligible",
+      "actual_eligibility": "ineligible",
+      "eligibility_match": true,
+      "unresolved_items": 2,
+      "requires_human_review": true,
+      "record_counts": {
+        "formulations": 0,
+        "components": 0,
+        "experiments": 0,
+        "outcomes": 0,
+        "unresolved_items": 2
+      },
+      "usage": {
+        "input_tokens": 20508,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 20505
+        },
+        "output_tokens": 387,
+        "output_tokens_details": {
+          "reasoning_tokens": 109
+        },
+        "total_tokens": 20895
+      }
+    }
+  ],
+  "exact_outcomes": [
+    {
+      "paper_id": "GP-006",
+      "gold_outcome_id": "GO-005",
+      "endpoint_name": "total_deletion_frequency_in_LSECs",
+      "value": 16.5,
+      "unit": "percent",
+      "evidence_id": "EVID-009",
+      "recalled": true,
+      "candidate_matches": [
+        {
+          "outcome_id": "O2",
+          "endpoint": "F8 gene editing rate in isolated LSECs",
+          "value": 16.5,
+          "unit": "% (± 2.96%)"
+        }
+      ]
+    },
+    {
+      "paper_id": "GP-006",
+      "gold_outcome_id": "GO-006",
+      "endpoint_name": "total_insertion_frequency_in_LSECs",
+      "value": 1.01,
+      "unit": "percent",
+      "evidence_id": "EVID-010",
+      "recalled": false,
+      "candidate_matches": []
+    },
+    {
+      "paper_id": "GP-006",
+      "gold_outcome_id": "GO-007",
+      "endpoint_name": "FVIII_activity",
+      "value": 3.3,
+      "unit": "percent_normal_activity",
+      "evidence_id": "EVID-011",
+      "recalled": false,
+      "candidate_matches": []
+    }
+  ]
+}

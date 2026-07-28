@@ -1,0 +1,576 @@
+{
+  "evaluation_version": "day5-afternoon-g1-1.0.0",
+  "pricing": {
+    "basis": "OpenAI standard short-context prices per 1M tokens",
+    "as_of": "2026-07-28",
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "models": {
+      "gpt-5.6-sol": {
+        "input": 5.0,
+        "cached_input": 0.5,
+        "cache_write": 6.25,
+        "output": 30.0
+      },
+      "gpt-5.6-terra": {
+        "input": 2.5,
+        "cached_input": 0.25,
+        "cache_write": 3.125,
+        "output": 15.0
+      }
+    }
+  },
+  "baseline_definition": "Frozen g1_fulltext_rag extractor, verifier, and post-audit-repair calls; GP-001 was locally excluded with zero model calls.",
+  "compact_definition": "Nine cached compact main calls plus the one recorded GP-006 selective-vision pilot. The pilot's token/cost/latency manifest is unavailable.",
+  "per_paper": [
+    {
+      "paper_id": "GP-001",
+      "baseline": {
+        "paper_id": "GP-001",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "calls": 0,
+        "vision_pages": 0,
+        "cost_usd": 0,
+        "accepted_outcomes": 0,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": null,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": []
+      },
+      "compact": {
+        "paper_id": "GP-001",
+        "input_tokens": 19933,
+        "output_tokens": 249,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.008725,
+        "accepted_outcomes": 0,
+        "latency_seconds": 4.8809,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    },
+    {
+      "paper_id": "GP-002",
+      "baseline": {
+        "paper_id": "GP-002",
+        "input_tokens": 56515,
+        "output_tokens": 29187,
+        "calls": 3,
+        "vision_pages": 0,
+        "cost_usd": 0.809685,
+        "accepted_outcomes": 7,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 229.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-002/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784855865.0,
+            "input_tokens": 10409,
+            "output_tokens": 10850,
+            "cost_usd": 0.3905525
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-002/post_audit_repair.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784856094.0,
+            "input_tokens": 19815,
+            "output_tokens": 9869,
+            "cost_usd": 0.209955
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-002/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784855962.0,
+            "input_tokens": 26291,
+            "output_tokens": 8468,
+            "cost_usd": 0.2091775
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-002",
+        "input_tokens": 19265,
+        "output_tokens": 5068,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.13622125,
+        "accepted_outcomes": 6,
+        "latency_seconds": 32.161284,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "explicit_unresolved_legacy_contract"
+      }
+    },
+    {
+      "paper_id": "GP-003",
+      "baseline": {
+        "paper_id": "GP-003",
+        "input_tokens": 27289,
+        "output_tokens": 8564,
+        "calls": 3,
+        "vision_pages": 0,
+        "cost_usd": 0.23434,
+        "accepted_outcomes": 0,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 29.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-003/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784857478.0,
+            "input_tokens": 7607,
+            "output_tokens": 230,
+            "cost_usd": 0.05444
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-003/post_audit_repair.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784857507.0,
+            "input_tokens": 11866,
+            "output_tokens": 3973,
+            "cost_usd": 0.09336525
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-003/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784857482.0,
+            "input_tokens": 7816,
+            "output_tokens": 4361,
+            "cost_usd": 0.08653475
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-003",
+        "input_tokens": 19335,
+        "output_tokens": 212,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.0636,
+        "accepted_outcomes": 0,
+        "latency_seconds": 5.896487,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    },
+    {
+      "paper_id": "GP-004",
+      "baseline": {
+        "paper_id": "GP-004",
+        "input_tokens": 67825,
+        "output_tokens": 28098,
+        "calls": 3,
+        "vision_pages": 0,
+        "cost_usd": 0.722105625,
+        "accepted_outcomes": 8,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 144.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-004/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784857817.0,
+            "input_tokens": 14678,
+            "output_tokens": 8921,
+            "cost_usd": 0.2749825
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-004/post_audit_repair.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784857961.0,
+            "input_tokens": 26163,
+            "output_tokens": 9109,
+            "cost_usd": 0.215083375
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-004/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784857913.0,
+            "input_tokens": 26984,
+            "output_tokens": 10068,
+            "cost_usd": 0.23203975
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-004",
+        "input_tokens": 20049,
+        "output_tokens": 4266,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.12664125,
+        "accepted_outcomes": 4,
+        "latency_seconds": 25.251597,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    },
+    {
+      "paper_id": "GP-005",
+      "baseline": {
+        "paper_id": "GP-005",
+        "input_tokens": 28544,
+        "output_tokens": 18450,
+        "calls": 2,
+        "vision_pages": 0,
+        "cost_usd": 0.513851625,
+        "accepted_outcomes": 9,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 75.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-005/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784859122.0,
+            "input_tokens": 8773,
+            "output_tokens": 8253,
+            "cost_usd": 0.3024175
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-005/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784859197.0,
+            "input_tokens": 19771,
+            "output_tokens": 10197,
+            "cost_usd": 0.211434125
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-005",
+        "input_tokens": 20551,
+        "output_tokens": 4676,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.13436,
+        "accepted_outcomes": 3,
+        "latency_seconds": 27.854502,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    },
+    {
+      "paper_id": "GP-006",
+      "baseline": {
+        "paper_id": "GP-006",
+        "input_tokens": 54075,
+        "output_tokens": 20256,
+        "calls": 3,
+        "vision_pages": 0,
+        "cost_usd": 0.6093225,
+        "accepted_outcomes": 7,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 110.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-006/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784860132.0,
+            "input_tokens": 13201,
+            "output_tokens": 6791,
+            "cost_usd": 0.2862325
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-006/post_audit_repair.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784860242.0,
+            "input_tokens": 18401,
+            "output_tokens": 6150,
+            "cost_usd": 0.146442125
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-006/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784860203.0,
+            "input_tokens": 22473,
+            "output_tokens": 7315,
+            "cost_usd": 0.176647875
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-006",
+        "input_tokens": 20315,
+        "output_tokens": 4197,
+        "calls": 2,
+        "metered_calls": 1,
+        "unmetered_calls": 1,
+        "vision_pages": 1,
+        "cost_usd_lower_bound": 0.1264375,
+        "accepted_outcomes": 7,
+        "latency_seconds": 27.810625,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    },
+    {
+      "paper_id": "GP-007",
+      "baseline": {
+        "paper_id": "GP-007",
+        "input_tokens": 30841,
+        "output_tokens": 18178,
+        "calls": 2,
+        "vision_pages": 0,
+        "cost_usd": 0.520462875,
+        "accepted_outcomes": 8,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 81.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-007/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784860954.0,
+            "input_tokens": 9950,
+            "output_tokens": 8242,
+            "cost_usd": 0.30944375
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-007/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784861035.0,
+            "input_tokens": 20891,
+            "output_tokens": 9936,
+            "cost_usd": 0.211019125
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-007",
+        "input_tokens": 19993,
+        "output_tokens": 3247,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.05371,
+        "accepted_outcomes": 3,
+        "latency_seconds": 22.345167,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    },
+    {
+      "paper_id": "GP-008",
+      "baseline": {
+        "paper_id": "GP-008",
+        "input_tokens": 41971,
+        "output_tokens": 15665,
+        "calls": 2,
+        "vision_pages": 0,
+        "cost_usd": 0.5239891250000001,
+        "accepted_outcomes": 7,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 61.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-008/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784862576.0,
+            "input_tokens": 16014,
+            "output_tokens": 7408,
+            "cost_usd": 0.32232375
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-008/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784862637.0,
+            "input_tokens": 25957,
+            "output_tokens": 8257,
+            "cost_usd": 0.201665375
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-008",
+        "input_tokens": 20831,
+        "output_tokens": 3806,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.122185,
+        "accepted_outcomes": 2,
+        "latency_seconds": 26.947706,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    },
+    {
+      "paper_id": "GP-009",
+      "baseline": {
+        "paper_id": "GP-009",
+        "input_tokens": 34143,
+        "output_tokens": 25600,
+        "calls": 2,
+        "vision_pages": 0,
+        "cost_usd": 0.69108975,
+        "accepted_outcomes": 0,
+        "latency_seconds": null,
+        "completion_timestamp_span_seconds": 97.0,
+        "latency_note": "Exact latency was not recorded. Timestamp span is a lower-bound orchestration proxy and excludes the first call's duration.",
+        "call_details": [
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-009/extractor.response.json",
+            "model": "gpt-5.6-sol",
+            "created_at": 1784863074.0,
+            "input_tokens": 9327,
+            "output_tokens": 11637,
+            "cost_usd": 0.4074
+          },
+          {
+            "path": "data/staging/extraction/g1_fulltext_rag/GP-009/verifier.response.json",
+            "model": "gpt-5.6-terra",
+            "created_at": 1784863171.0,
+            "input_tokens": 24816,
+            "output_tokens": 13963,
+            "cost_usd": 0.28368975
+          }
+        ]
+      },
+      "compact": {
+        "paper_id": "GP-009",
+        "input_tokens": 20508,
+        "output_tokens": 387,
+        "calls": 1,
+        "metered_calls": 1,
+        "unmetered_calls": 0,
+        "vision_pages": 0,
+        "cost_usd_lower_bound": 0.01093875,
+        "accepted_outcomes": 0,
+        "latency_seconds": 5.182918,
+        "latency_note": "Main-call latency is exact. The saved Day 4 GP-006 selective-vision pilot lacks a usage/latency manifest and is excluded from token, cost, and latency totals but included in calls and vision pages.",
+        "completion_disposition": "completed_final_result"
+      }
+    }
+  ],
+  "aggregate": {
+    "baseline": {
+      "papers": 9,
+      "input_tokens": 341203,
+      "output_tokens": 163998,
+      "calls": 20,
+      "vision_pages": 0,
+      "cost_usd": 4.6248465,
+      "accepted_outcomes": 46,
+      "cost_per_paper_usd": 0.5138718333333334,
+      "cost_per_accepted_outcome_usd": 0.10054014130434784,
+      "mean_recorded_main_latency_seconds": null,
+      "latency_comparability": "not recorded; only completion-timestamp spans available"
+    },
+    "compact": {
+      "papers": 9,
+      "input_tokens": 180780,
+      "output_tokens": 26108,
+      "calls": 10,
+      "vision_pages": 1,
+      "cost_usd": 0.78281875,
+      "accepted_outcomes": 25,
+      "cost_per_paper_usd": 0.08697986111111111,
+      "cost_per_accepted_outcome_usd": 0.03131275,
+      "mean_recorded_main_latency_seconds": 19.81457622222222,
+      "latency_comparability": "exact main-call latency"
+    },
+    "reductions": {
+      "input_tokens": 0.4701687851513615,
+      "output_tokens": 0.8408029366211783,
+      "calls": 0.5,
+      "cost_lower_bound": 0.8307362741660723
+    },
+    "unmetered_pilot_cost_break_even_usd": 3.84202775
+  },
+  "quality_comparison": {
+    "baseline_frozen_gold_outcomes": [
+      "GO-005",
+      "GO-007",
+      "GO-008",
+      "GO-010",
+      "GO-015",
+      "GO-016"
+    ],
+    "baseline_recall": 0.4,
+    "compact_frozen_gold_outcomes": {
+      "GO-004": "GP-006/O3: 17-fold hepatocyte:LSEC expression ratio",
+      "GO-005": "GP-006/O2: 16.50% LSEC editing",
+      "GO-007": "GP-006/O7: 3.30 ± 0.68% sustained FVIII activity",
+      "GO-008": "GP-002/O1: strong eGFP staining in virtually all hepatocytes",
+      "GO-010": "GP-005/O1: rapid Kupffer-cell LNP uptake",
+      "GO-011": "GP-005/O2: no observable Kupffer-cell EGFP translation",
+      "GO-013": "GP-007/O3: improved LSEC ultrastructure/function"
+    },
+    "compact_recall": 0.4666666666666667,
+    "regressions": [
+      {
+        "gold_outcome_id": "GO-015",
+        "description": ">80% targeted BMDM GFP/FAPCAR expression",
+        "cause": "Direct quantitative passage was dropped from API packet v1.",
+        "remediation": "Retained by corrected API packet v1.1; small repair still required."
+      },
+      {
+        "gold_outcome_id": "GO-016",
+        "description": "<20% BMDM expression after unmodified LNP",
+        "cause": "Direct quantitative passage was dropped from API packet v1.",
+        "remediation": "Retained by corrected API packet v1.1; small repair still required."
+      }
+    ],
+    "regression_ids": [
+      "GO-015",
+      "GO-016"
+    ],
+    "gains": [
+      "GO-004",
+      "GO-011",
+      "GO-013"
+    ],
+    "pending_quality_checks": [
+      "critical-field semantic precision",
+      "experiment-mixing review",
+      "unsupported-claim review",
+      "semantic evidence-reference correctness"
+    ]
+  },
+  "g1": {
+    "decision": "HOLD",
+    "criteria": [
+      {
+        "criterion": "Evidence quality must not materially regress",
+        "decision": "HOLD",
+        "evidence": "Frozen-gold outcome recall improved from 6/15 (40.0%) to 7/15 (46.7%), but two baseline-recovered GP-008 outcomes regressed and semantic critical-field precision, experiment mixing, and unsupported claims remain pending."
+      },
+      {
+        "criterion": "All nine papers complete or explicitly unresolved",
+        "decision": "PASS",
+        "evidence": "Eight papers have final merged results; GP-002 has an explicit legacy-contract unresolved disposition and a saved extraction result."
+      },
+      {
+        "criterion": "Routine text papers use one main plus <=1 small repair",
+        "decision": "PASS",
+        "evidence": "Every paper used one main call. GP-006 used one selective-vision crop call; no paper exceeded one exception call."
+      },
+      {
+        "criterion": "Cost materially lower than current route",
+        "decision": "PASS_WITH_METERING_CAVEAT",
+        "evidence": "Measured main-call cost fell from $4.6248 to $0.7828, an 83.1% reduction. The unmetered pilot would need to cost more than $3.8420 to erase the savings."
+      }
+    ],
+    "reason": "Cost, completion disposition, and call discipline pass, but the quality criterion is not yet fully established and two known GP-008 regressions require one targeted repair.",
+    "next_required_action": "Run one small GP-008 text repair against API packet v1.1, merge GO-015/GO-016, and complete semantic field review before reapplying G1."
+  }
+}

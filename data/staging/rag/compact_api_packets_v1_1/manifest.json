@@ -1,0 +1,445 @@
+{
+  "packet_version": "compact-api-packet-1.0.0",
+  "packet_budget_tokens": 16000,
+  "budget_status": "human_approved",
+  "token_estimation_method": "ceil(compact UTF-8 JSON bytes / 4)",
+  "papers": [
+    {
+      "paper_id": "GP-001",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-001.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-001.manifest.json",
+      "candidate_evidence": 302,
+      "selected_evidence": 159,
+      "excluded_evidence": 143,
+      "selected_sources": 24,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15964,
+        "total": 18120
+      },
+      "blocked_fields": [
+        "lnp_composition_raw",
+        "payload"
+      ]
+    },
+    {
+      "paper_id": "GP-002",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-002.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-002.manifest.json",
+      "candidate_evidence": 181,
+      "selected_evidence": 125,
+      "excluded_evidence": 56,
+      "selected_sources": 23,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15990,
+        "total": 18146
+      },
+      "blocked_fields": []
+    },
+    {
+      "paper_id": "GP-003",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-003.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-003.manifest.json",
+      "candidate_evidence": 234,
+      "selected_evidence": 135,
+      "excluded_evidence": 99,
+      "selected_sources": 30,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15987,
+        "total": 18143
+      },
+      "blocked_fields": []
+    },
+    {
+      "paper_id": "GP-004",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-004.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-004.manifest.json",
+      "candidate_evidence": 334,
+      "selected_evidence": 139,
+      "excluded_evidence": 195,
+      "selected_sources": 23,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 16000,
+        "total": 18156
+      },
+      "blocked_fields": []
+    },
+    {
+      "paper_id": "GP-005",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-005.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-005.manifest.json",
+      "candidate_evidence": 208,
+      "selected_evidence": 134,
+      "excluded_evidence": 74,
+      "selected_sources": 34,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15984,
+        "total": 18140
+      },
+      "blocked_fields": []
+    },
+    {
+      "paper_id": "GP-006",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-006.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-006.manifest.json",
+      "candidate_evidence": 631,
+      "selected_evidence": 135,
+      "excluded_evidence": 496,
+      "selected_sources": 23,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15990,
+        "total": 18146
+      },
+      "blocked_fields": []
+    },
+    {
+      "paper_id": "GP-007",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-007.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-007.manifest.json",
+      "candidate_evidence": 233,
+      "selected_evidence": 127,
+      "excluded_evidence": 106,
+      "selected_sources": 22,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15967,
+        "total": 18123
+      },
+      "blocked_fields": []
+    },
+    {
+      "paper_id": "GP-008",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-008.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-008.manifest.json",
+      "candidate_evidence": 531,
+      "selected_evidence": 153,
+      "excluded_evidence": 378,
+      "selected_sources": 20,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15987,
+        "total": 18143
+      },
+      "blocked_fields": []
+    },
+    {
+      "paper_id": "GP-009",
+      "packet_path": "data/staging/rag/compact_api_packets_v1_1/GP-009.json",
+      "manifest_path": "data/staging/rag/compact_api_packets_v1_1/GP-009.manifest.json",
+      "candidate_evidence": 222,
+      "selected_evidence": 141,
+      "excluded_evidence": 81,
+      "selected_sources": 20,
+      "estimated_input_tokens": {
+        "prompt": 273,
+        "response_schema": 1883,
+        "evidence_packet": 15987,
+        "total": 18143
+      },
+      "blocked_fields": []
+    }
+  ],
+  "frozen_gold_preservation": {
+    "frozen_gold_locations": 31,
+    "available_before_deduplication": 29,
+    "available_after_deduplication": 29,
+    "unavailable_before_deduplication": 2,
+    "lost_during_deduplication": 0,
+    "available_in_budgeted_packet": 29,
+    "lost_to_evidence_budget": 0,
+    "results": [
+      {
+        "evidence_id": "EVID-001",
+        "paper_id": "GP-001",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-002",
+        "paper_id": "GP-004",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-003",
+        "paper_id": "GP-004",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-004",
+        "paper_id": "GP-004",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-005",
+        "paper_id": "GP-006",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-006",
+        "paper_id": "GP-006",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-007",
+        "paper_id": "GP-006",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-008",
+        "paper_id": "GP-006",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-009",
+        "paper_id": "GP-006",
+        "available_before_deduplication": false,
+        "available_after_deduplication": false,
+        "available_in_budgeted_packet": false,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-010",
+        "paper_id": "GP-006",
+        "available_before_deduplication": false,
+        "available_after_deduplication": false,
+        "available_in_budgeted_packet": false,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-011",
+        "paper_id": "GP-006",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-012",
+        "paper_id": "GP-002",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-013",
+        "paper_id": "GP-002",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-014",
+        "paper_id": "GP-002",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-015",
+        "paper_id": "GP-003",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-016",
+        "paper_id": "GP-005",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-017",
+        "paper_id": "GP-005",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-018",
+        "paper_id": "GP-005",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-019",
+        "paper_id": "GP-005",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-020",
+        "paper_id": "GP-005",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-021",
+        "paper_id": "GP-007",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-022",
+        "paper_id": "GP-007",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-023",
+        "paper_id": "GP-007",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-024",
+        "paper_id": "GP-007",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-025",
+        "paper_id": "GP-008",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-026",
+        "paper_id": "GP-008",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-027",
+        "paper_id": "GP-008",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-028",
+        "paper_id": "GP-008",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-029",
+        "paper_id": "GP-008",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-030",
+        "paper_id": "GP-008",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      },
+      {
+        "evidence_id": "EVID-031",
+        "paper_id": "GP-009",
+        "available_before_deduplication": true,
+        "available_after_deduplication": true,
+        "available_in_budgeted_packet": true,
+        "lost_during_deduplication": false,
+        "lost_to_evidence_budget": false
+      }
+    ]
+  }
+}

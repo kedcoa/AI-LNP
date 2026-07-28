@@ -1,0 +1,98 @@
+{
+  "task_version": "day5-g1-text-repair-1.0.0",
+  "paper_id": "GP-008",
+  "status": "ready_for_human_authorization",
+  "paid_api_call_made": false,
+  "route": "narrow_text_repair",
+  "source_packet": "/Users/renemilywei/Desktop/AI-LNP/data/staging/rag/compact_api_packets_v1_1/GP-008.json",
+  "source_packet_checksum": "2597d0c6b5de2384648ee30eaa30498453b47ba279038ad40342b316afb7a0b2",
+  "base_result": "/Users/renemilywei/Desktop/AI-LNP/data/staging/extraction/compact_merged_v1/GP-008/final_result.json",
+  "why": "Restore two frozen-gold in-vitro BMDM percentage outcomes that were omitted by compact packet v1 ranking.",
+  "required_fragment": {
+    "experiments": 1,
+    "outcomes": 2,
+    "instructions": [
+      "Create a separate in-vitro BMDM experiment; do not attach these outcomes to the existing in-vivo E1 experiment.",
+      "Return the targeted alpha-CD163 LNP expression/delivery result above 80%.",
+      "Return the unmodified-LNP comparator expression/delivery result below 20%.",
+      "Use only the supplied evidence IDs and preserve the inequality signs."
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "OC-073c6262f43a6240",
+      "paper_id": "GP-008",
+      "endpoint_family": "expression",
+      "evidence_ids": [
+        "GP-008-E-85ffa081af3058cd"
+      ],
+      "source_ids": [
+        "S-199d2629b091"
+      ],
+      "evidence_text": "Notably, over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to \u03b1CD163/LNP-GFP or \u03b1CD163/LNP-FAPCAR, respectively.",
+      "direct_signal_terms": [
+        "80%"
+      ],
+      "figure_or_table": null,
+      "route_hint": "text",
+      "confidence": "high",
+      "confidence_reasons": [
+        "explicit_numeric_result",
+        "explicit_result_language"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "GP-008-E-85ffa081af3058cd",
+          "text": "Notably, over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to \u03b1CD163/LNP-GFP or \u03b1CD163/LNP-FAPCAR, respectively.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-199d2629b091"
+          ],
+          "context_after_evidence_id": "GP-008-E-7d00a9f09c5299f7"
+        }
+      ]
+    },
+    {
+      "candidate_id": "OC-49ac19315a9fb4cd",
+      "paper_id": "GP-008",
+      "endpoint_family": "expression",
+      "evidence_ids": [
+        "GP-008-E-7d00a9f09c5299f7"
+      ],
+      "source_ids": [
+        "S-199d2629b091"
+      ],
+      "evidence_text": "In contrast, unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro (Fig.",
+      "direct_signal_terms": [
+        "20%"
+      ],
+      "figure_or_table": null,
+      "route_hint": "text",
+      "confidence": "high",
+      "confidence_reasons": [
+        "explicit_numeric_result"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "GP-008-E-7d00a9f09c5299f7",
+          "text": "In contrast, unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-199d2629b091"
+          ],
+          "context_before_evidence_id": "GP-008-E-85ffa081af3058cd"
+        }
+      ]
+    }
+  ]
+}

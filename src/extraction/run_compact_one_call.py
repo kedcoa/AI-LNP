@@ -13,9 +13,11 @@ from typing import Any
 from dotenv import load_dotenv
 from openai import OpenAI
 from openai.lib._pydantic import to_strict_json_schema
-from pydantic import ValidationError
-
 from src.extraction.compact_contracts import CompactExtractionResponse
+from src.extraction.compact_validation import validate_candidate
+from src.extraction.assess_outcome_complexity import assess
+from src.extraction.build_outcome_candidates import build_candidates
+from src.extraction.check_outcome_coverage import check
 from src.extraction.compact_prompt_v1 import (
     COMPACT_EXTRACTION_PROMPT,
     PROMPT_VERSION,
@@ -109,6 +111,22 @@ def run_one(
             f"A completed response already exists for {paper_id}; refusing a duplicate paid call."
         )
     run_dir.mkdir(parents=True, exist_ok=True)
+    complexity = assess(packet)
+    (run_dir / "complexity.json").write_text(
+        complexity.model_dump_json(indent=2) + "\n", encoding="utf-8"
+    )
+    outcome_candidates = None
+    if complexity.route == "complex":
+        outcome_candidates = build_candidates(packet)
+        (run_dir / "outcome_candidates.json").write_text(
+            json.dumps(
+                [row.model_dump(mode="json") for row in outcome_candidates],
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
 
     packet_payload = packet.model_dump(mode="json", exclude_none=True)
     fingerprint = request_fingerprint(packet, model)
@@ -164,41 +182,45 @@ def run_one(
         raise RuntimeError(f"OpenAI structured extraction failed: {detail}")
     candidate_path = run_dir / "candidate.json"
     candidate_path.write_text(response.output_text + "\n", encoding="utf-8")
-    try:
-        parsed = CompactExtractionResponse.model_validate_json(response.output_text)
-    except ValidationError as error:
-        (run_dir / "validation_error.json").write_text(
-            json.dumps(
-                {
-                    "response_id": response.id,
-                    "model": response.model,
-                    "usage": (
-                        response.usage.model_dump(mode="json")
-                        if response.usage
-                        else None
-                    ),
-                    "errors": error.errors(include_url=False),
-                },
-                ensure_ascii=False,
-                indent=2,
-                default=str,
-            )
-            + "\n",
-            encoding="utf-8",
-        )
-        raise
-    if parsed.paper_id != paper_id:
+    parsed, validation_report = validate_candidate(
+        response.output_text,
+        paper_id=paper_id,
+        allowed_evidence_ids={row.evidence_id for row in packet.evidence},
+    )
+    (run_dir / "validation_report.json").write_text(
+        validation_report.model_dump_json(indent=2) + "\n",
+        encoding="utf-8",
+    )
+    if parsed is None:
         raise ValueError(
-            f"Response paper_id {parsed.paper_id!r} does not match requested {paper_id!r}"
+            f"Compact candidate failed {len(validation_report.findings)} "
+            "deterministic validation check(s); see validation_report.json"
         )
-    parsed.validate_evidence_ids({row.evidence_id for row in packet.evidence})
 
     result_path.write_text(
         json.dumps(parsed.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    coverage = None
+    if complexity.route == "complex":
+        coverage = check(
+            packet,
+            parsed.model_dump(mode="json"),
+            assessment=complexity,
+            candidates=outcome_candidates,
+        )
+        (run_dir / "outcome_coverage.json").write_text(
+            coverage.model_dump_json(indent=2) + "\n", encoding="utf-8"
+        )
+    needs_coverage_review = bool(
+        coverage and coverage.status == "review_unmatched_groups"
+    )
     manifest = {
-        "status": "completed_pending_human_verification",
+        "status": (
+            "completed_pending_outcome_coverage_review"
+            if needs_coverage_review
+            else "completed_pending_human_verification"
+        ),
         "paper_id": paper_id,
         "paid_api_requests": 1,
         "model_requested": model,
@@ -225,7 +247,12 @@ def run_one(
             "structured_output_valid": True,
             "paper_id_matches": True,
             "all_evidence_ids_exist_in_packet": True,
+            "validation_report_status": validation_report.status,
             "narrative_requested": False,
+            "complexity_route": complexity.route,
+            "outcome_coverage_status": (
+                coverage.status if coverage else "ordinary_validation_only"
+            ),
         },
     }
     (run_dir / "manifest.json").write_text(

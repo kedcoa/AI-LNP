@@ -1,0 +1,138 @@
+{
+  "benchmark_version": "day5-outcome-coverage-1.1.0",
+  "rules_status": "calibrated_local_gate_v1",
+  "safety_policy": {
+    "actionable_unmatched_groups_block_merge": true,
+    "medium_confidence_groups_trigger_paid_calls": false,
+    "overlapping_duplicate_groups_trigger_paid_calls": false,
+    "automatic_paid_repair_calls": false
+  },
+  "paid_api_requests": 0,
+  "first_call_tokens_added": 0,
+  "papers": [
+    {
+      "paper_id": "GP-001",
+      "route": "complex",
+      "complexity_score": 4,
+      "candidate_groups": 0,
+      "extracted_outcomes": 0,
+      "matched_candidate_groups": 0,
+      "unmatched_candidate_groups": 0,
+      "unmatched_text_groups": 0,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 0,
+      "status": "not_applicable"
+    },
+    {
+      "paper_id": "GP-002",
+      "route": "complex",
+      "complexity_score": 12,
+      "candidate_groups": 0,
+      "extracted_outcomes": 6,
+      "matched_candidate_groups": 0,
+      "unmatched_candidate_groups": 0,
+      "unmatched_text_groups": 0,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 0,
+      "status": "not_applicable"
+    },
+    {
+      "paper_id": "GP-003",
+      "route": "simple",
+      "complexity_score": 2,
+      "candidate_groups": 0,
+      "extracted_outcomes": 0,
+      "matched_candidate_groups": 0,
+      "unmatched_candidate_groups": 0,
+      "unmatched_text_groups": 0,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 0,
+      "status": "not_applicable"
+    },
+    {
+      "paper_id": "GP-004",
+      "route": "complex",
+      "complexity_score": 5,
+      "candidate_groups": 7,
+      "extracted_outcomes": 4,
+      "matched_candidate_groups": 2,
+      "unmatched_candidate_groups": 1,
+      "unmatched_text_groups": 1,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 4,
+      "status": "review_unmatched_groups"
+    },
+    {
+      "paper_id": "GP-005",
+      "route": "complex",
+      "complexity_score": 9,
+      "candidate_groups": 11,
+      "extracted_outcomes": 3,
+      "matched_candidate_groups": 6,
+      "unmatched_candidate_groups": 0,
+      "unmatched_text_groups": 0,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 5,
+      "status": "complete"
+    },
+    {
+      "paper_id": "GP-006",
+      "route": "complex",
+      "complexity_score": 12,
+      "candidate_groups": 22,
+      "extracted_outcomes": 3,
+      "matched_candidate_groups": 11,
+      "unmatched_candidate_groups": 5,
+      "unmatched_text_groups": 4,
+      "unmatched_vision_groups": 1,
+      "review_only_groups": 6,
+      "status": "review_unmatched_groups"
+    },
+    {
+      "paper_id": "GP-007",
+      "route": "complex",
+      "complexity_score": 4,
+      "candidate_groups": 23,
+      "extracted_outcomes": 3,
+      "matched_candidate_groups": 4,
+      "unmatched_candidate_groups": 0,
+      "unmatched_text_groups": 0,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 19,
+      "status": "complete"
+    },
+    {
+      "paper_id": "GP-008",
+      "route": "complex",
+      "complexity_score": 4,
+      "candidate_groups": 5,
+      "extracted_outcomes": 2,
+      "matched_candidate_groups": 0,
+      "unmatched_candidate_groups": 0,
+      "unmatched_text_groups": 0,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 5,
+      "status": "complete"
+    },
+    {
+      "paper_id": "GP-009",
+      "route": "complex",
+      "complexity_score": 12,
+      "candidate_groups": 0,
+      "extracted_outcomes": 0,
+      "matched_candidate_groups": 0,
+      "unmatched_candidate_groups": 0,
+      "unmatched_text_groups": 0,
+      "unmatched_vision_groups": 0,
+      "review_only_groups": 0,
+      "status": "not_applicable"
+    }
+  ],
+  "counts": {
+    "simple": 1,
+    "complex": 8,
+    "unmatched_text_groups": 5,
+    "unmatched_vision_groups": 1,
+    "review_only_groups": 39
+  }
+}

@@ -154,6 +154,38 @@ def test_budget_excludes_lower_priority_evidence_and_logs_it():
     )
 
 
+def test_direct_quantitative_outcome_outranks_caption_only_evidence():
+    direct_outcome = evidence(
+        "E-OUTCOME",
+        "Over 80% of BMDMs expressed GFP after alpha-CD163 LNP treatment.",
+        field_tags=["outcomes"],
+        field_groups=["outcome"],
+        chunk_id="B-OUTCOME",
+    )
+    caption = evidence(
+        "E-CAPTION",
+        "Figure 2 shows representative GFP expression after LNP treatment.",
+        field_tags=["outcomes"],
+        field_groups=["outcome"],
+        chunk_id="B-CAPTION",
+    )
+    assert evidence_priority(direct_outcome)[0] > evidence_priority(caption)[0]
+    assert "direct_quantitative_outcome" in evidence_priority(direct_outcome)[1]
+
+
+def test_quantitative_biological_outcome_survives_imperfect_field_tags():
+    mislabeled = evidence(
+        "E-MISLABELED",
+        "Fewer than 20% of BMDMs expressed GFP after unmodified LNP delivery.",
+        field_tags=["payload", "delivery_recipient_cell_reported"],
+        field_groups=["payload", "recipient_cell"],
+        chunk_id="B-MISLABELED",
+    )
+    score, reasons = evidence_priority(mislabeled)
+    assert score >= 180
+    assert "direct_quantitative_outcome" in reasons
+
+
 def test_context_reference_is_an_evidence_id_not_repeated_text():
     first_text = "LNP-A delivered mRNA to hepatocytes."
     rows = [

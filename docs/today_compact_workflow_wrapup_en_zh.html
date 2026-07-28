@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-LNP Extraction Review · 2026-07-28</title>
+  <meta name="description" content="Bilingual review of the AI-LNP compact extraction result and the Docling plus local VLM improvement plan.">
+  <style>
+    :root {
+      --ink: #17201d;
+      --muted: #64706b;
+      --paper: #f6f2e9;
+      --card: rgba(255,255,255,.82);
+      --line: #d8d4c8;
+      --green: #245b4a;
+      --mint: #dceae3;
+      --amber: #a65f20;
+      --peach: #f3dfce;
+      --red: #a33c32;
+      --shadow: 0 18px 55px rgba(23,32,29,.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 85% 5%, rgba(220,234,227,.9), transparent 28rem),
+        radial-gradient(circle at 10% 22%, rgba(243,223,206,.72), transparent 25rem),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .shell { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
+    header {
+      padding: 24px 0 68px;
+      min-height: 82vh;
+      display: grid;
+      align-content: space-between;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .82rem;
+    }
+    .language-switch {
+      display: inline-flex;
+      padding: 4px;
+      background: rgba(255,255,255,.7);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+    .language-switch button {
+      border: 0;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      cursor: pointer;
+    }
+    .language-switch button.active {
+      color: white;
+      background: var(--green);
+    }
+    .hero { padding-top: 70px; max-width: 930px; }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--green);
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .76rem;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      background: currentColor;
+    }
+    h1 {
+      margin: 20px 0 18px;
+      font-family: Georgia, "Times New Roman", "Songti SC", serif;
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: .97;
+      letter-spacing: -.055em;
+      font-weight: 600;
+    }
+    .lede {
+      max-width: 740px;
+      margin: 0;
+      font-size: clamp(1.08rem, 2vw, 1.4rem);
+      color: #46514c;
+    }
+    .score-strip {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 48px;
+    }
+    .score {
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.58);
+      border-radius: 18px;
+    }
+    .score strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .score span { color: var(--muted); font-size: .9rem; }
+    .score.alert strong { color: var(--red); }
+    main { padding-bottom: 90px; }
+    section { padding: 72px 0; border-top: 1px solid var(--line); }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr 1.7fr;
+      gap: 48px;
+      margin-bottom: 36px;
+    }
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "Songti SC", serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+    .section-head p { margin: 4px 0 0; color: var(--muted); font-size: 1.08rem; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .card {
+      padding: 26px;
+      min-height: 220px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .card .number {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 28px;
+      border-radius: 50%;
+      background: var(--peach);
+      color: var(--amber);
+      font-weight: 800;
+      font-size: .85rem;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); }
+    .flow {
+      display: grid;
+      gap: 10px;
+      padding: 28px;
+      border-radius: 24px;
+      background: var(--green);
+      color: white;
+    }
+    .flow-row {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+    }
+    .flow-row b { font-size: .78rem; color: #bcd5ca; }
+    .flow-row small { color: #dceae3; text-align: right; }
+    .flow-row.highlight { background: white; color: var(--ink); }
+    .flow-row.highlight b, .flow-row.highlight small { color: var(--amber); }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .feature {
+      padding: 30px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.67);
+    }
+    .feature h3 {
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", "Songti SC", serif;
+      font-size: 1.7rem;
+    }
+    .feature ul { padding-left: 20px; margin: 14px 0 0; color: var(--muted); }
+    .feature li + li { margin-top: 7px; }
+    .callout {
+      padding: 36px;
+      border-radius: 24px;
+      color: #202724;
+      background: var(--mint);
+      border: 1px solid #bfd3c9;
+      font-size: 1.13rem;
+    }
+    .callout strong { color: var(--green); }
+    .roadmap { counter-reset: item; }
+    .roadmap article {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 30px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .roadmap article::before {
+      counter-increment: item;
+      content: "0" counter(item);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.2rem;
+      color: var(--amber);
+    }
+    .roadmap h3 { margin: 0 0 7px; }
+    .roadmap p { margin: 0; color: var(--muted); }
+    footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    [data-lang="zh"] { display: none; }
+    body.zh [data-lang="en"] { display: none; }
+    body.zh [data-lang="zh"] { display: revert; }
+    @media (max-width: 800px) {
+      header { min-height: auto; padding-bottom: 50px; }
+      .hero { padding-top: 50px; }
+      .score-strip, .cards, .two-col, .section-head { grid-template-columns: 1fr; }
+      .section-head { gap: 16px; }
+      .flow-row { grid-template-columns: 42px 1fr; }
+      .flow-row small { grid-column: 2; text-align: left; }
+      .roadmap article { grid-template-columns: 55px 1fr; gap: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <nav aria-label="Page controls">
+      <div class="brand">AI-LNP · Daily Review</div>
+      <div class="language-switch" role="group" aria-label="Language">
+        <button class="active" type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="eyebrow">
+        <span data-lang="en">Extraction review · July 28, 2026</span>
+        <span data-lang="zh">提取工作复盘 · 2026 年 7 月 28 日</span>
+      </div>
+      <h1>
+        <span data-lang="en">We found the gap.<br>Now we fix the input.</span>
+        <span data-lang="zh">问题已经找到。<br>下一步，修复输入。</span>
+      </h1>
+      <p class="lede" data-lang="en">
+        The compact workflow reduced cost, but final gold-set recovery stopped at
+        10 of 15 outcomes. The lesson is clear: validation cannot recover evidence
+        that tables and figures were never converted into usable structure.
+      </p>
+      <p class="lede" data-lang="zh">
+        紧凑工作流降低了成本，但金标准数据最终只恢复了 15 条中的 10 条。
+        结论很明确：如果表格和图片没有先被转换成可用的结构，验证代码本身无法补回这些证据。
+      </p>
+      <div class="score-strip" aria-label="Current benchmark">
+        <div class="score alert"><strong>10/15</strong><span data-lang="en">final outcomes recovered</span><span data-lang="zh">最终恢复的结果记录</span></div>
+        <div class="score"><strong>66.7%</strong><span data-lang="en">current final recovery</span><span data-lang="zh">当前最终恢复率</span></div>
+        <div class="score"><strong>15/15</strong><span data-lang="en">locally detected candidates—not final records</span><span data-lang="zh">本地检测到的候选组——并非最终记录</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section>
+      <div class="section-head">
+        <h2 data-lang="en">Why today’s outcome was not ideal</h2>
+        <h2 data-lang="zh">为什么今天的结果不理想</h2>
+        <p data-lang="en">The system became better at noticing possible omissions, but not yet good enough at reconstructing the missing scientific evidence.</p>
+        <p data-lang="zh">系统更善于发现“可能漏了什么”，但还不能稳定地重建缺失的科学证据。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="number">01</span>
+          <h3 data-lang="en">Compression was too aggressive</h3>
+          <h3 data-lang="zh">压缩过度</h3>
+          <p data-lang="en">A large local packet was reduced to a much smaller API packet. Important paragraphs, table cells, or experiment boundaries could fall outside the selected evidence.</p>
+          <p data-lang="zh">庞大的本地证据包被压缩成很小的 API 输入，重要段落、表格单元格或实验边界可能没有被选中。</p>
+        </article>
+        <article class="card">
+          <span class="number">02</span>
+          <h3 data-lang="en">Schema validity was mistaken for completeness</h3>
+          <h3 data-lang="zh">把格式正确误当成内容完整</h3>
+          <p data-lang="en">The schema checked whether returned records had valid fields. It could not prove that every experiment in the paper had produced a record.</p>
+          <p data-lang="zh">Schema 能检查返回记录的字段是否合法，但无法证明论文里的每个实验都已经生成了记录。</p>
+        </article>
+        <article class="card">
+          <span class="number">03</span>
+          <h3 data-lang="en">Recovery prompts lacked structured visual input</h3>
+          <h3 data-lang="zh">恢复提示缺少结构化视觉输入</h3>
+          <p data-lang="en">Repeated calls were asked to recover evidence before tables and figures had been reliably parsed into rows, panels, labels, values, and relationships.</p>
+          <p data-lang="zh">在表格与图片尚未稳定解析为行、列、面板、标签、数值和关系之前，就反复要求模型恢复证据，成功率自然有限。</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2 data-lang="en">What kept going wrong</h2>
+        <h2 data-lang="zh">反复出现的错误</h2>
+        <p data-lang="en">Each patch addressed a visible symptom, but the underlying document-understanding layer was still incomplete.</p>
+        <p data-lang="zh">每次修改都处理了一个表面症状，但底层的文档理解能力仍然不完整。</p>
+      </div>
+      <div class="flow" aria-label="Failure chain">
+        <div class="flow-row"><b>INPUT</b><span data-lang="en">Paper text, supplements, tables and figures</span><span data-lang="zh">正文、补充材料、表格和图片</span><small data-lang="en">information exists</small><small data-lang="zh">信息存在</small></div>
+        <div class="flow-row highlight"><b>GAP</b><span data-lang="en">Layout and visual evidence not fully structured</span><span data-lang="zh">版面与视觉证据没有被完整结构化</span><small data-lang="en">root problem</small><small data-lang="zh">根本问题</small></div>
+        <div class="flow-row"><b>PACKET</b><span data-lang="en">Compact selection sees only part of the evidence</span><span data-lang="zh">紧凑证据包只能看到一部分信息</span><small data-lang="en">silent omission risk</small><small data-lang="zh">存在静默遗漏风险</small></div>
+        <div class="flow-row"><b>LLM</b><span data-lang="en">Produces a valid but incomplete result</span><span data-lang="zh">返回格式正确但内容不完整的结果</span><small data-lang="en">schema can pass</small><small data-lang="zh">可能通过格式检查</small></div>
+        <div class="flow-row"><b>CHECK</b><span data-lang="en">Candidate inventory notices unmatched groups</span><span data-lang="zh">候选清单发现未匹配的结果组</span><small data-lang="en">detection, not recovery</small><small data-lang="zh">只是检测，不是恢复</small></div>
+        <div class="flow-row"><b>FINAL</b><span data-lang="en">Five gold outcomes remain unmerged</span><span data-lang="zh">仍有 5 条金标准结果未被合并</span><small>10/15</small></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2 data-lang="en">The proposed fix</h2>
+        <h2 data-lang="zh">建议的解决方案</h2>
+        <p data-lang="en">Improve what the extraction model receives: structured document objects first, then a small evidence-focused prompt.</p>
+        <p data-lang="zh">先改善模型接收到的信息：先生成结构化文档对象，再发送小而精准的证据提示。</p>
+      </div>
+      <div class="two-col">
+        <article class="feature">
+          <h3>Docling</h3>
+          <p data-lang="en">A local document parser that can preserve reading order and turn PDF layout into explicit objects.</p>
+          <p data-lang="zh">本地文档解析工具，可保留阅读顺序，并把 PDF 版面转换成明确的文档对象。</p>
+          <ul data-lang="en"><li>Sections and reading order</li><li>Table rows, columns and cells</li><li>Captions and figure boundaries</li><li>Coordinates and provenance</li></ul>
+          <ul data-lang="zh"><li>章节与阅读顺序</li><li>表格行、列和单元格</li><li>图注与图片边界</li><li>坐标与来源信息</li></ul>
+        </article>
+        <article class="feature">
+          <h3 data-lang="en">Local VLM · Gemma via Ollama</h3>
+          <h3 data-lang="zh">本地 VLM · Ollama 运行 Gemma</h3>
+          <p data-lang="en">A local vision-language model that inspects only the relevant figure or table object.</p>
+          <p data-lang="zh">本地视觉语言模型，只检查真正相关的图片或表格区域。</p>
+          <ul data-lang="en"><li>Printed labels and numeric values</li><li>Panel and legend relationships</li><li>Cell-marker colocalization</li><li>Uncertainty and abstention</li></ul>
+          <ul data-lang="zh"><li>印刷标签与数值</li><li>面板与图例关系</li><li>细胞标记共定位</li><li>不确定性与主动拒答</li></ul>
+        </article>
+      </div>
+      <div class="callout" style="margin-top:18px">
+        <span data-lang="en"><strong>The goal is not to send more PDF text to an LLM.</strong> The goal is to convert each relevant visual object into a compact, traceable observation—panel, row, column, label, value, unit, relationship and uncertainty—then normalize only that evidence.</span>
+        <span data-lang="zh"><strong>目标不是把更多 PDF 文本发送给 LLM。</strong>目标是把每个相关视觉对象转换成紧凑且可追溯的观察记录——面板、行、列、标签、数值、单位、关系和不确定性——然后只对这些证据进行标准化。</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2 data-lang="en">Future steps</h2>
+        <h2 data-lang="zh">下一步</h2>
+        <p data-lang="en">Progress should be measured by reproducible evidence recovery, not by whether another model call completed.</p>
+        <p data-lang="zh">后续进展应以可复现的证据恢复率衡量，而不是以“是否又完成了一次模型调用”衡量。</p>
+      </div>
+      <div class="roadmap">
+        <article><div><h3 data-lang="en">Resume and verify local Gemma</h3><h3 data-lang="zh">继续下载并验证本地 Gemma</h3><p data-lang="en">Test real gold-set figures and tables. Compare its structured observations with known values and record failures honestly.</p><p data-lang="zh">使用真实金标准图片和表格测试，并把结构化观察与已知数值逐项比较，真实记录失败情况。</p></div></article>
+        <article><div><h3 data-lang="en">Add Docling object extraction</h3><h3 data-lang="zh">加入 Docling 对象提取</h3><p data-lang="en">Create stable table, caption and figure objects with coordinates, checksums and source provenance.</p><p data-lang="zh">生成稳定的表格、图注和图片对象，保存坐标、校验值和来源信息。</p></div></article>
+        <article><div><h3 data-lang="en">Define visual-observation contracts</h3><h3 data-lang="zh">定义视觉观察数据结构</h3><p data-lang="en">Require exact object IDs, locations, printed values, units and uncertainty. Reject unsupported inference and visual estimation.</p><p data-lang="zh">强制保存对象 ID、位置、印刷数值、单位和不确定性，拒绝无证据推断与视觉估算。</p></div></article>
+        <article><div><h3 data-lang="en">Re-run the frozen 15-outcome gate</h3><h3 data-lang="zh">重新运行固定的 15 条结果测试</h3><p data-lang="en">Measure final merged recovery, false additions, evidence accuracy, runtime and token cost. Do not pass the gate below the agreed target.</p><p data-lang="zh">衡量最终合并恢复率、错误新增、证据准确性、运行时间和 token 成本。未达到目标不得通过质量门槛。</p></div></article>
+        <article><div><h3 data-lang="en">Expand discovery and full-text access</h3><h3 data-lang="zh">扩大论文发现与全文获取</h3><p data-lang="en">Add OpenAlex, semantic retrieval and citation chaining; use open-access resolvers first and authorized university-library access when needed.</p><p data-lang="zh">加入 OpenAlex、语义检索和引用链；优先使用开放获取来源，必要时使用经过授权的大学图书馆访问。</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <span data-lang="en">AI-LNP · Honest checkpoint: candidate detection improved, final evidence recovery still requires structural document parsing.</span>
+      <span data-lang="zh">AI-LNP · 真实检查点：候选检测已有改善，但最终证据恢复仍需要结构化文档解析。</span>
+    </div>
+  </footer>
+  <script>
+    const controls = document.querySelectorAll("[data-set-lang]");
+    controls.forEach((button) => button.addEventListener("click", () => {
+      const language = button.dataset.setLang;
+      document.body.classList.toggle("zh", language === "zh");
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      controls.forEach((item) => {
+        const selected = item === button;
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+    }));
+  </script>
+</body>
+</html>
