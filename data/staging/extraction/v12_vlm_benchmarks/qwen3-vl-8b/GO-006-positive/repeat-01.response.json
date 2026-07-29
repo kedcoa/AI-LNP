@@ -1,0 +1,12 @@
+{
+  "model": "qwen3-vl:8b",
+  "created_at": "2026-07-29T05:17:32.097889Z",
+  "done_reason": "stop",
+  "total_duration_ns": 64587537167,
+  "load_duration_ns": 4167313959,
+  "prompt_eval_count": 3443,
+  "eval_count": 203,
+  "elapsed_seconds": 64.59860604198184,
+  "response_content": "\n{\n\n  \"object_id\": \"GP-006-mmc1-p002-table-03\",\n\n  \"query_id\": \"GO-006-positive\",\n\n  \"status\": \"extract\",\n\n  \"claims\": [\n\n    {\n\n      \"claim_id\": \"GO-006-positive-claim-1\",\n\n      \"subject\": \"LSEC\",\n\n      \"predicate\": \"total insertion frequency\",\n\n      \"result_type\": \"exact_numeric\",\n\n      \"value\": \"1.01±0.38%\",\n\n      \"panel_or_cell\": \"Table S2, LSEC row, total insertion frequency column\",\n\n      \"visible_support\": [\n\n        \"LSEC (row header)\",\n\n        \"total insertion frequency (column header)\",\n\n        \"1.01±0.38% (cell value)\"\n\n      ],\n\n      \"evidence_kinds\": [\"image\"],\n\n      \"confidence\": \"high\"\n\n    }\n\n  ],\n\n  \"missing_requirements\": []\n\n}",
+  "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png"
+}

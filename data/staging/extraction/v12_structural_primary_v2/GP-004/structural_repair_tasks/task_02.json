@@ -1,0 +1,98 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-a6b5ecbf468f2cd4"
+  ],
+  "candidate_ids": [
+    "AOC-a6b5ecbf468f2cd4"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-415d753e7b0e",
+    "label": "luciferase_zsgreen / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "luciferase_zsgreen",
+        "evidence_ids": [
+          "GP-004-E-65cf66cec8ce41e4",
+          "GP-004-FC-2e2b8c5eb6b51d2f",
+          "GP-004-FC-78f4c7e2c75fef80",
+          "GP-004-E-67be9e835a79ab2f",
+          "GP-004-E-fe3a71d8079bdc1c",
+          "GP-004-FC-70b64c7cad62f27c",
+          "GP-004-FC-f4b71ee333f9ea83"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-004-E-65cf66cec8ce41e4",
+          "GP-004-FC-2e2b8c5eb6b51d2f",
+          "GP-004-FC-78f4c7e2c75fef80",
+          "GP-004-E-67be9e835a79ab2f",
+          "GP-004-E-fe3a71d8079bdc1c",
+          "GP-004-FC-70b64c7cad62f27c",
+          "GP-004-FC-f4b71ee333f9ea83"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-a6b5ecbf468f2cd4",
+      "subject_text": "Both IV delivery routes resulted in similar protein",
+      "predicate": "expressed",
+      "object_text": "proteins into the liver",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-aa1c2885867bfc0a",
+        "GP-004-FC-2249bd15d7493e40"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-E-aa1c2885867bfc0a",
+      "text": "Both IV delivery routes resulted in similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver.Fig.",
+      "source_ids": [
+        "S-6206e3e3ebaa"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-2249bd15d7493e40",
+      "text": "Both IV delivery routes resulted in similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver.Fig.",
+      "source_ids": [
+        "FC-S-2e7faf7e803b8ce8",
+        "FC-S-2e7faf7e803b8ce8"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 2,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "e6e14857e5dd45e3f1f52138a5a532652ad255b7198788b3c01ca31fce59d601",
+  "task_checksum": "88424b4f1e49e03c57ad58fe8c13c7f01e91a692b2b110a2a548e9329519de07"
+}

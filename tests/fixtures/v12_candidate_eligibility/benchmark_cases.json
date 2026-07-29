@@ -1,0 +1,184 @@
+{
+  "fixture_version": "v12-candidate-eligibility-1.0.0",
+  "purpose": "Known-good and known-bad controls for the deterministic candidate eligibility gate.",
+  "cases": [
+    {
+      "case_id": "positive_sparse_kupffer_expression",
+      "expected_eligible": true,
+      "candidate": {
+        "subject_text": "F4/80-positive Kupffer cells",
+        "predicate": "expressed",
+        "object_text": "eGFP",
+        "endpoint_text": "eGFP expression",
+        "qualitative_result": "few",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "positive_negative_kupffer_result",
+      "expected_eligible": true,
+      "candidate": {
+        "subject_text": "F4/80-positive Kupffer cells",
+        "predicate": "expressed",
+        "object_text": "EGFP",
+        "endpoint_text": "EGFP expression",
+        "qualitative_result": "no obvious",
+        "polarity": "negative"
+      }
+    },
+    {
+      "case_id": "positive_plain_lsec_expression",
+      "expected_eligible": true,
+      "candidate": {
+        "subject_text": "LSECs",
+        "predicate": "expressed",
+        "object_text": "GFP protein",
+        "endpoint_text": "GFP expression",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "positive_numeric_cd11b_result",
+      "expected_eligible": true,
+      "candidate": {
+        "subject_text": "CD11b-positive liver cells",
+        "predicate": "expressed",
+        "object_text": "eGFP",
+        "endpoint_text": "eGFP expression",
+        "numeric_value": 41.5,
+        "value_text": "41.5 ± 14.6%",
+        "unit": "percent",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "positive_activated_hsc_elimination",
+      "expected_eligible": true,
+      "candidate": {
+        "subject_text": "FAPCAR-expressing macrophages",
+        "predicate": "eliminated",
+        "object_text": "FAP-positive activated HSCs",
+        "endpoint_text": "activated HSC elimination",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "positive_exact_insertion_value",
+      "expected_eligible": true,
+      "candidate": {
+        "subject_text": "LSECs",
+        "predicate": "edited",
+        "object_text": "total insertion frequency",
+        "endpoint_text": "insertion frequency",
+        "numeric_value": 1.01,
+        "value_text": "1.01%",
+        "unit": "percent",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "negative_speculative_benefit",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "endothelial and Kupffer cells",
+        "predicate": "expressed",
+        "object_text": "mRNA-LNP encoded mitogens would also be beneficial in adjacent hepatocytes",
+        "endpoint_text": "expression",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "negative_method_without_result",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "Liver sections were analyzed",
+        "predicate": "increased",
+        "object_text": "to identify enhanced green fluorescent protein-positive cells",
+        "endpoint_text": null,
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "negative_medium_confidence",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "Kupffer cells",
+        "predicate": "expressed",
+        "object_text": "eGFP",
+        "endpoint_text": "expression",
+        "polarity": "positive",
+        "confidence": "medium"
+      }
+    },
+    {
+      "case_id": "negative_unassigned_experiment",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "Kupffer cells",
+        "predicate": "expressed",
+        "object_text": "eGFP",
+        "endpoint_text": "expression",
+        "polarity": "positive",
+        "provisional_experiment_id": null
+      }
+    },
+    {
+      "case_id": "negative_review_marked_claim",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "Kupffer cells",
+        "predicate": "expressed",
+        "object_text": "eGFP",
+        "endpoint_text": "expression",
+        "polarity": "positive",
+        "review_reasons": [
+          "claim_requires_review"
+        ]
+      }
+    },
+    {
+      "case_id": "negative_hypothetical_effectiveness",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "lower ASGPR expression",
+        "predicate": "decreased",
+        "object_text": "may diminish effectiveness of ASGPR-based treatment",
+        "endpoint_text": "expression",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "negative_assay_determined_without_result",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "Luciferase expression in major organs",
+        "predicate": "measured_by",
+        "object_text": "were determined by ex vivo bioluminescence assay",
+        "endpoint_text": "luciferase expression",
+        "polarity": "neutral"
+      }
+    },
+    {
+      "case_id": "negative_dangling_figure_fragment",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "hepatocytes",
+        "predicate": "expressed",
+        "object_text": "eGFP (Fig",
+        "endpoint_text": "eGFP expression",
+        "polarity": "positive"
+      }
+    },
+    {
+      "case_id": "negative_adjective_parsed_as_subject",
+      "expected_eligible": false,
+      "candidate": {
+        "subject_text": "a pronounced",
+        "predicate": "expressed",
+        "object_text": "signal in liver parenchyma",
+        "endpoint_text": "expression",
+        "polarity": "positive"
+      }
+    }
+  ]
+}

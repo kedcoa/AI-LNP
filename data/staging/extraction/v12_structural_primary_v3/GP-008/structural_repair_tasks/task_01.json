@@ -1,0 +1,96 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-5e16cdbcd2e69a6e"
+  ],
+  "candidate_ids": [
+    "AOC-5e16cdbcd2e69a6e"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-044931098617",
+    "label": "fapcar / in_vitro",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "fapcar",
+        "evidence_ids": [
+          "GP-008-FC-67cba83633b522b0"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vitro",
+        "evidence_ids": [
+          "GP-008-FC-67cba83633b522b0"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "hsc",
+        "evidence_ids": [
+          "GP-008-FC-67cba83633b522b0"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "phagocytosis_cytotoxicity",
+        "evidence_ids": [
+          "GP-008-FC-67cba83633b522b0"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-5e16cdbcd2e69a6e",
+      "subject_text": "the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly",
+      "predicate": "eliminated",
+      "object_text": "the FAP+JS-1 target cells in vitro (Fig",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-67cba83633b522b0"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-67cba83633b522b0",
+      "text": "By transfecting target cells with luciferase, we quantified the killing effect, and the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly eliminated the FAP+JS-1 target cells in vitro (Fig.",
+      "source_ids": [
+        "FC-S-5f7e3c49e57be4bb"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 2,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "0c9183c32a268613069b98f8a2756b7e098b010ffe661e5bbbe4b007475e0eae",
+  "task_checksum": "339663dfc1735bba20ee7cd48b45b47e8f2ebdffe7c534525b5f7bb45f5e1e3c"
+}

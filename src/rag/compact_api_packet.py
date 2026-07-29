@@ -50,7 +50,9 @@ DIRECT_EVIDENCE = re.compile(
     r"\b(?:mRNA|siRNA|sgRNA|RNA|DNA|CRISPR|Cas9)\b|"
     r"\b(?:administered|injected|treated|transfected|delivered|encapsulated)\b|"
     r"\b(?:mg/kg|micrograms?|µg|hours?|days?|weeks?)\b|"
-    r"\b(?:increased|decreased|reduced|knockdown|expression|editing|uptake)\b|"
+    r"\b(?:increased|decreased|reduced|knockdown|expression|expressed|editing|"
+    r"uptake|colocali[sz](?:ed|ation)?|recogniz(?:ed|es)|"
+    r"phagocyt(?:osed|osis|ing)|eliminat(?:ed|es|ion))\b|"
     r"(?:\d+(?:\.\d+)?\s*(?:%|nm|mV))"
     r")",
     re.I,
@@ -76,7 +78,16 @@ BIOLOGICAL_OUTCOME_SIGNAL = re.compile(
     r"\b(?:express(?:ed|ion)?|transfect(?:ed|ion)?|deliver(?:ed|y)?|uptake|"
     r"internaliz(?:ed|ation)?|edit(?:ed|ing)?|insertion|deletion|indel|"
     r"knockdown|silenc(?:ed|ing)?|activity|efficacy|survival|fibrosis|"
-    r"steatosis|necrosis|phagocyt(?:osed|osis)?|eliminat(?:ed|ion)?)\b",
+    r"steatosis|necrosis|colocali[sz](?:ed|ation)?|recogniz(?:ed|es)?|"
+    r"phagocyt(?:osed|osis|ing)?|eliminat(?:ed|es|ion)?)\b",
+    re.I,
+)
+QUALITATIVE_OUTCOME = re.compile(
+    r"\b(?:few|absent|none|virtually all|solely|exclusively|"
+    r"expressed|showed|demonstrated|observed|"
+    r"colocali[sz](?:ed|ation)?|recogniz(?:ed|es)?|"
+    r"phagocyt(?:osed|osis|ing)?|eliminat(?:ed|es|ion)?|"
+    r"eradicated|increased|decreased|reduced|improved|attenuated)\b",
     re.I,
 )
 
@@ -173,6 +184,13 @@ def evidence_priority(evidence: CompactEvidence) -> tuple[int, list[str]]:
     ):
         score += 120
         reasons.append("direct_quantitative_outcome")
+    if (
+        not QUANTITATIVE_OUTCOME.search(text)
+        and BIOLOGICAL_OUTCOME_SIGNAL.search(text)
+        and QUALITATIVE_OUTCOME.search(text)
+    ):
+        score += 110
+        reasons.append("direct_qualitative_outcome")
     if evidence.experiment_candidate_ids:
         score += 30
         reasons.append("experiment_anchor")

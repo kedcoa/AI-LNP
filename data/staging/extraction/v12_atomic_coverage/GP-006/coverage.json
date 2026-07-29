@@ -1,0 +1,304 @@
+{
+  "coverage_version": "atomic-outcome-coverage-1.2.0",
+  "paper_id": "GP-006",
+  "source_result_path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-006/final_result.json",
+  "selected_candidate_count": 24,
+  "extracted_outcome_count": 8,
+  "matches": [
+    {
+      "candidate_id": "AOC-82a54230dd4de48f",
+      "outcome_id": "O7",
+      "score": 18,
+      "reasons": [
+        "semantic_overlap:6",
+        "shared_evidence",
+        "compatible_relationship",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "candidate_id": "AOC-29630305b6c9288a",
+      "outcome_id": "O2",
+      "score": 18,
+      "reasons": [
+        "semantic_overlap:2",
+        "shared_evidence",
+        "compatible_relationship",
+        "compatible_cell_target",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "candidate_id": "AOC-5680ceb27bf5884d",
+      "outcome_id": "O1",
+      "score": 16,
+      "reasons": [
+        "semantic_overlap:3",
+        "shared_evidence",
+        "compatible_relationship",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "candidate_id": "AOC-b1249fecf584f4f7",
+      "outcome_id": "O5",
+      "score": 15,
+      "reasons": [
+        "semantic_overlap:2",
+        "shared_evidence",
+        "compatible_relationship",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "candidate_id": "AOC-492811b87249e266",
+      "outcome_id": "O4",
+      "score": 15,
+      "reasons": [
+        "semantic_overlap:2",
+        "shared_evidence",
+        "compatible_relationship",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "candidate_id": "AOC-04f9eb5e5d1cdad5",
+      "outcome_id": "O3",
+      "score": 11,
+      "reasons": [
+        "semantic_overlap:5",
+        "compatible_relationship",
+        "compatible_cell_target"
+      ]
+    },
+    {
+      "candidate_id": "AOC-9e3877e87f09e30b",
+      "outcome_id": "O8",
+      "score": 10,
+      "reasons": [
+        "semantic_overlap:4",
+        "compatible_relationship",
+        "compatible_cell_target"
+      ]
+    }
+  ],
+  "unmatched_extracted_outcome_ids": [
+    "O6"
+  ],
+  "missing_text_record_candidates": [
+    {
+      "candidate_id": "AOC-5cdf7580c115edce",
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "predicate": "decreased",
+      "subject_text": "LSECs",
+      "object_text": "transgene",
+      "endpoint_text": "expression",
+      "qualitative_result": "lower",
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-006-E-1d1871fe74140517",
+        "GP-006-FC-47621725376733bb"
+      ],
+      "relevance_score": 14,
+      "relevance_reasons": [
+        "qualitative_result",
+        "explicit_endpoint",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-1ad805e42de65c53",
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "predicate": "edited",
+      "subject_text": "LSECs",
+      "object_text": "patterns in LSECs revealed that one base-pair deletions constitute the highest",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 46.5,
+      "evidence_ids": [
+        "GP-006-E-9c61cae7b3cbdfda",
+        "GP-006-FC-37d97abddfe8a8ff"
+      ],
+      "relevance_score": 13,
+      "relevance_reasons": [
+        "numeric_result",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-e3895c3ee92011c0",
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "predicate": "colocalized_with",
+      "subject_text": "LSECs",
+      "object_text": "Isolectin B4-labeled LSECs",
+      "endpoint_text": null,
+      "qualitative_result": "colocalized",
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-006-FC-78a44cbc6069b59c"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "qualitative_result",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-bf8a4ec1588b36c3",
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "predicate": "expressed",
+      "subject_text": "LSECs",
+      "object_text": "permanently in NSG HemA mice",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-006-E-8af0fe6c0065d45c",
+        "GP-006-FC-887ad8f0a2e6dcfc"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a4cc0f3adb169e3a",
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "predicate": "uptake_by",
+      "subject_text": "LSECs",
+      "object_text": "LNPs",
+      "endpoint_text": "uptake",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-e3e4da6b85173179",
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "predicate": "decreased",
+      "subject_text": "insertion patterns among indel variants, but their frequencies were significantly",
+      "object_text": "(0",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": 0.78,
+      "evidence_ids": [
+        "GP-006-E-b9606d3f1fb87b4c",
+        "GP-006-FC-9f474cb7932305b5"
+      ],
+      "relevance_score": 13,
+      "relevance_reasons": [
+        "numeric_result",
+        "qualitative_result",
+        "strong_relationship",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-bc1bce49f7d4f397",
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "predicate": "colocalized_with",
+      "subject_text": "The immunostaining images showed",
+      "object_text": "LYVE-1 and GFP signals",
+      "endpoint_text": null,
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "qualitative_result",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-abe0948a4a178820",
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "predicate": "expressed",
+      "subject_text": "LSECs",
+      "object_text": "HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively",
+      "endpoint_text": "Luciferase expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-006-FC-e7b45e90113a790f"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    }
+  ],
+  "review_candidates": [
+    {
+      "candidate_id": "AOC-6fcfbdf744e661cb",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 11
+    },
+    {
+      "candidate_id": "AOC-1737fc902b5ad35d",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 11
+    },
+    {
+      "candidate_id": "AOC-8f14a4a2ce97866a",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 10
+    },
+    {
+      "candidate_id": "AOC-8bc9d85dd15ce19b",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 10
+    },
+    {
+      "candidate_id": "AOC-5bf741348fedbdab",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 10
+    },
+    {
+      "candidate_id": "AOC-4afe681add34d1ac",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 10
+    },
+    {
+      "candidate_id": "AOC-118b7d2635c0365d",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 10
+    },
+    {
+      "candidate_id": "AOC-06e9ee5532c86270",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 10
+    },
+    {
+      "candidate_id": "AOC-8ae036a26c675d5d",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 5
+    }
+  ],
+  "status": "missing_text_records",
+  "paid_api_requests": 0
+}

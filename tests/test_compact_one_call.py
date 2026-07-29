@@ -1,5 +1,6 @@
 from pathlib import Path
 from types import SimpleNamespace
+import json
 
 import pytest
 
@@ -104,10 +105,21 @@ def test_run_one_makes_exactly_one_structured_call_and_records_usage(tmp_path):
     assert responses.calls[0]["service_tier"] == "default"
     assert len(responses.calls[0]["prompt_cache_key"]) <= 64
     assert responses.calls[0]["text"]["format"]["strict"] is True
+    payload = json.loads(responses.calls[0]["input"][1]["content"])
+    assert payload["evidence_packet"]["paper_id"] == "GP-TEST"
+    assert payload["outcome_recall_support"]["support_version"] == (
+        "main-route-recall-support-1.2.0"
+    )
     assert manifest["paid_api_requests"] == 1
+    assert manifest["checks"]["v12_recall_support_in_request"] is True
     assert manifest["usage"]["total_tokens"] == 120
     assert manifest["eligibility"]["decision"] == "uncertain"
-    assert (output_root / "GP-TEST" / "result.json").exists()
+    run_root = output_root / "GP-TEST"
+    assert (run_root / "result.json").exists()
+    request_snapshot = json.loads(
+        (run_root / "request.json").read_text()
+    )
+    assert request_snapshot["api_request"] == responses.calls[0]
 
 
 def test_run_one_refuses_duplicate_paid_call(tmp_path):

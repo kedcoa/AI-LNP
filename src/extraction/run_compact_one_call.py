@@ -15,6 +15,12 @@ from openai import OpenAI
 from openai.lib._pydantic import to_strict_json_schema
 from src.extraction.compact_contracts import CompactExtractionResponse
 from src.extraction.compact_validation import validate_candidate
+from src.extraction.v12_main_route import (
+    allowed_v12_evidence_ids,
+    build_v12_route_support,
+    evaluate_v12_result_coverage,
+    evaluate_v12_structural_result_coverage,
+)
 from src.extraction.assess_outcome_complexity import assess
 from src.extraction.build_outcome_candidates import build_candidates
 from src.extraction.check_outcome_coverage import check
@@ -28,7 +34,9 @@ from src.rag.compact_api_packet import CompactApiPacket
 
 ROOT = Path(__file__).resolve().parents[2]
 PACKET_ROOT = ROOT / "data" / "staging" / "rag" / "compact_api_packets_v1"
-OUTPUT_ROOT = ROOT / "data" / "staging" / "extraction" / "compact_one_call_v1"
+OUTPUT_ROOT = (
+    ROOT / "data" / "staging" / "extraction" / "compact_one_call_v1_2"
+)
 SCHEMA_PATH = (
     ROOT
     / "docs"
@@ -67,7 +75,11 @@ def load_packet(paper_id: str, packet_root: Path = PACKET_ROOT) -> CompactApiPac
     return packet
 
 
-def request_fingerprint(packet: CompactApiPacket, model: str) -> str:
+def request_fingerprint(
+    packet: CompactApiPacket,
+    model: str,
+    recall_support: dict[str, Any] | None = None,
+) -> str:
     return _sha256(
         _canonical_json(
             {
@@ -77,9 +89,52 @@ def request_fingerprint(packet: CompactApiPacket, model: str) -> str:
                 "prompt_checksum": prompt_sha256(),
                 "schema_checksum": _sha256(SCHEMA_PATH.read_bytes()),
                 "model": model,
+                "recall_support_checksum": (
+                    _sha256(_canonical_json(recall_support))
+                    if recall_support
+                    else None
+                ),
             }
         )
     )
+
+
+def build_openai_request(
+    packet: CompactApiPacket,
+    *,
+    model: str,
+    max_output_tokens: int = 12_000,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], str]:
+    """Build the exact request dictionary shared by preflight and generation."""
+
+    packet_payload = packet.model_dump(mode="json", exclude_none=True)
+    recall_support = build_v12_route_support(packet)
+    user_payload = {
+        "evidence_packet": packet_payload,
+        "outcome_recall_support": recall_support,
+    }
+    fingerprint = request_fingerprint(packet, model, recall_support)
+    api_request = {
+        "model": model,
+        "reasoning": {"effort": "low"},
+        "store": False,
+        "service_tier": "default",
+        "max_output_tokens": max_output_tokens,
+        "prompt_cache_key": fingerprint,
+        "input": [
+            {"role": "system", "content": COMPACT_EXTRACTION_PROMPT},
+            {"role": "user", "content": _canonical_json(user_payload)},
+        ],
+        "text": {
+            "format": {
+                "type": "json_schema",
+                "name": "CompactExtractionResponse",
+                "schema": to_strict_json_schema(CompactExtractionResponse),
+                "strict": True,
+            }
+        },
+    }
+    return api_request, recall_support, user_payload, fingerprint
 
 
 def _refusals(response: Any) -> list[str]:
@@ -128,8 +183,16 @@ def run_one(
             encoding="utf-8",
         )
 
-    packet_payload = packet.model_dump(mode="json", exclude_none=True)
-    fingerprint = request_fingerprint(packet, model)
+    (
+        api_request,
+        recall_support,
+        user_payload,
+        fingerprint,
+    ) = build_openai_request(
+        packet,
+        model=model,
+        max_output_tokens=max_output_tokens,
+    )
     request_snapshot = {
         "paper_id": paper_id,
         "model": model,
@@ -141,9 +204,12 @@ def run_one(
         "prompt_checksum": prompt_sha256(),
         "schema_checksum": _sha256(SCHEMA_PATH.read_bytes()),
         "packet_checksum": packet.packet_checksum,
+        "recall_support_version": recall_support["support_version"],
+        "recall_support_estimated_tokens": recall_support["estimated_tokens"],
         "request_fingerprint": fingerprint,
         "system_prompt": COMPACT_EXTRACTION_PROMPT,
-        "packet": packet_payload,
+        "request_payload": user_payload,
+        "api_request": api_request,
     }
     (run_dir / "request.json").write_text(
         json.dumps(request_snapshot, ensure_ascii=False, indent=2) + "\n",
@@ -151,26 +217,7 @@ def run_one(
     )
 
     started_at = datetime.now(timezone.utc)
-    response = client.responses.create(
-        model=model,
-        reasoning={"effort": "low"},
-        store=False,
-        service_tier="default",
-        max_output_tokens=max_output_tokens,
-        prompt_cache_key=fingerprint,
-        input=[
-            {"role": "system", "content": COMPACT_EXTRACTION_PROMPT},
-            {"role": "user", "content": _canonical_json(packet_payload)},
-        ],
-        text={
-            "format": {
-                "type": "json_schema",
-                "name": "CompactExtractionResponse",
-                "schema": to_strict_json_schema(CompactExtractionResponse),
-                "strict": True,
-            }
-        },
-    )
+    response = client.responses.create(**api_request)
     completed_at = datetime.now(timezone.utc)
 
     raw_response_path.write_text(
@@ -185,7 +232,10 @@ def run_one(
     parsed, validation_report = validate_candidate(
         response.output_text,
         paper_id=paper_id,
-        allowed_evidence_ids={row.evidence_id for row in packet.evidence},
+        allowed_evidence_ids=(
+            {row.evidence_id for row in packet.evidence}
+            | allowed_v12_evidence_ids(recall_support)
+        ),
     )
     (run_dir / "validation_report.json").write_text(
         validation_report.model_dump_json(indent=2) + "\n",
@@ -201,6 +251,23 @@ def run_one(
         json.dumps(parsed.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    v12_coverage = evaluate_v12_result_coverage(
+        recall_support,
+        parsed.model_dump(mode="json"),
+    )
+    (run_dir / "v12_outcome_coverage.json").write_text(
+        json.dumps(v12_coverage, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    v12_structural_coverage = evaluate_v12_structural_result_coverage(
+        recall_support,
+        parsed.model_dump(mode="json"),
+    )
+    (run_dir / "v12_structural_coverage.json").write_text(
+        json.dumps(v12_structural_coverage, ensure_ascii=False, indent=2)
+        + "\n",
+        encoding="utf-8",
+    )
     coverage = None
     if complexity.route == "complex":
         coverage = check(
@@ -213,7 +280,10 @@ def run_one(
             coverage.model_dump_json(indent=2) + "\n", encoding="utf-8"
         )
     needs_coverage_review = bool(
-        coverage and coverage.status == "review_unmatched_groups"
+        (coverage and coverage.status == "review_unmatched_groups")
+        or v12_coverage["status"] == "review_unmatched_support"
+        or v12_structural_coverage["status"]
+        == "review_unconfirmed_or_contradicted_facts"
     )
     manifest = {
         "status": (
@@ -231,6 +301,20 @@ def run_one(
         "prompt_version": PROMPT_VERSION,
         "prompt_checksum": prompt_sha256(),
         "schema_checksum": _sha256(SCHEMA_PATH.read_bytes()),
+        "recall_support_version": recall_support["support_version"],
+        "recall_support_estimated_tokens": recall_support["estimated_tokens"],
+        "recall_support_record_counts": {
+            "provisional_experiments": len(
+                recall_support["provisional_experiments"]
+            ),
+            "atomic_outcome_candidates": len(
+                recall_support["atomic_outcome_candidates"]
+            ),
+            "accepted_visual_claims": len(
+                recall_support["accepted_visual_claims"]
+            ),
+            "local_evidence": len(recall_support["local_evidence"]),
+        },
         "started_at": started_at.isoformat(),
         "completed_at": completed_at.isoformat(),
         "elapsed_seconds": (completed_at - started_at).total_seconds(),
@@ -253,6 +337,17 @@ def run_one(
             "outcome_coverage_status": (
                 coverage.status if coverage else "ordinary_validation_only"
             ),
+            "v12_outcome_coverage_status": v12_coverage["status"],
+            "v12_structural_coverage_status": (
+                v12_structural_coverage["status"]
+            ),
+            "v12_structural_coverage_counts": (
+                v12_structural_coverage["counts"]
+            ),
+            "v12_structural_coverage_routes": (
+                v12_structural_coverage["routes"]
+            ),
+            "v12_recall_support_in_request": True,
         },
     }
     (run_dir / "manifest.json").write_text(
@@ -267,6 +362,18 @@ def main() -> None:
         description="Send exactly one compact paper packet to OpenAI."
     )
     parser.add_argument("--paper-id", required=True)
+    parser.add_argument(
+        "--packet-root",
+        type=Path,
+        default=PACKET_ROOT,
+        help="Directory containing <paper_id>.json compact API packets.",
+    )
+    parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=OUTPUT_ROOT,
+        help="Separate directory for request, response, result, and validation files.",
+    )
     parser.add_argument(
         "--confirm-paid-call",
         action="store_true",
@@ -284,7 +391,13 @@ def main() -> None:
         timeout=300.0,
         max_retries=0,
     )
-    manifest = run_one(args.paper_id, model=model, client=client)
+    manifest = run_one(
+        args.paper_id,
+        model=model,
+        client=client,
+        packet_root=args.packet_root,
+        output_root=args.output_root,
+    )
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
 
 

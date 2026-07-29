@@ -186,6 +186,43 @@ def test_quantitative_biological_outcome_survives_imperfect_field_tags():
     assert "direct_quantitative_outcome" in reasons
 
 
+def test_qualitative_biological_outcomes_are_not_ranked_as_background():
+    cases = [
+        "Few F4/80-positive Kupffer cells expressed eGFP.",
+        "GFP signal colocalized with the LSEC marker LYVE-1.",
+        (
+            "FAPCAR macrophages recognized, phagocytosed, and eliminated "
+            "activated HSCs."
+        ),
+    ]
+    for index, text in enumerate(cases):
+        qualitative = evidence(
+            f"E-QUAL-{index}",
+            text,
+            field_tags=["delivery_recipient_cell_reported"],
+            field_groups=["recipient_cell"],
+            chunk_id=f"B-QUAL-{index}",
+        )
+        score, reasons = evidence_priority(qualitative)
+        assert score >= 180
+        assert "direct_qualitative_outcome" in reasons
+
+
+def test_assay_setup_is_not_promoted_as_a_qualitative_result():
+    setup = evidence(
+        "E-SETUP",
+        (
+            "Liver sections were stained with anti-GFP and anti-LYVE-1 "
+            "antibodies."
+        ),
+        field_tags=["outcomes"],
+        field_groups=["outcome"],
+        chunk_id="B-SETUP",
+    )
+    _, reasons = evidence_priority(setup)
+    assert "direct_qualitative_outcome" not in reasons
+
+
 def test_context_reference_is_an_evidence_id_not_repeated_text():
     first_text = "LNP-A delivered mRNA to hepatocytes."
     rows = [

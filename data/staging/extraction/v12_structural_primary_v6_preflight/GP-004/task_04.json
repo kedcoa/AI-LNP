@@ -1,0 +1,369 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 4000,
+  "input": [
+    {
+      "role": "system",
+      "content": "Recover only the atomic candidate facts and experiment context in\nthe supplied task. Candidate IDs are opaque labels: use candidate_facts as the\nrequired fact definitions and the supplied evidence as their only support.\nAccount for every candidate ID exactly once as recovered or unresolved. Do not\nmerge distinct cells, relationships, endpoints, values, polarities, or\nexperiments into a broad record. A candidate is recovered only when at least one\nreturned outcome preserves its specific facts and cites its evidence; shared\nevidence alone is not coverage. Do not repeat existing records. Return unresolved\nwith a specific reason when evidence is insufficient. Never invent identifiers,\nvalues, units, comparisons, or evidence labels."
+    },
+    {
+      "role": "user",
+      "content": "{\"candidate_facts\":[{\"candidate_id\":\"AOC-443efba50d243225\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-aaef2b0838c071e4\"],\"numeric_value\":null,\"object_text\":\"serum ALT levels at T8\",\"polarity\":\"positive\",\"predicate\":\"decreased\",\"qualitative_result\":\"significantly\",\"subject_text\":\"mRNA-LNP significantly released cholesterol into the serum, diminished steatosis, and\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-4509d8cef342fbfa\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-5be151239bc4ecc1\"],\"numeric_value\":null,\"object_text\":\"the control Luc mRNA-LNP-treated group, yet significantly greater than those in the HGF/EGF mRNA-LNP-treated group\",\"polarity\":\"positive\",\"predicate\":\"decreased\",\"qualitative_result\":\"significantly\",\"subject_text\":\"RNA-LNP-treated mice were as high as T0 levels and slightly\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-8c8f546f56920316\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-004-FC-543ca93b67c8c533\"],\"numeric_value\":null,\"object_text\":null,\"polarity\":\"positive\",\"predicate\":\"expressed\",\"qualitative_result\":null,\"subject_text\":\"hepatocytes\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-ac71595c5469604b\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-aaef2b0838c071e4\"],\"numeric_value\":null,\"object_text\":\"steatosis, and\",\"polarity\":\"positive\",\"predicate\":\"reduced\",\"qualitative_result\":\"significantly\",\"subject_text\":\"injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-f48424355c407385\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-c4461a1442793d2d\"],\"numeric_value\":null,\"object_text\":\"tool to\",\"polarity\":\"positive\",\"predicate\":\"delivered_to\",\"qualitative_result\":null,\"subject_text\":\"hepatocyte\",\"unit\":null,\"value_text\":null}],\"candidate_ids\":[\"AOC-443efba50d243225\",\"AOC-4509d8cef342fbfa\",\"AOC-8c8f546f56920316\",\"AOC-ac71595c5469604b\",\"AOC-f48424355c407385\"],\"evidence\":[{\"evidence_id\":\"GP-004-FC-aaef2b0838c071e4\",\"source_ids\":[\"FC-S-910df540c2d91e5a\"],\"text\":\"However, a second injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum, diminished steatosis, and decreased serum ALT levels at T8\"},{\"evidence_id\":\"GP-004-FC-5be151239bc4ecc1\",\"source_ids\":[\"FC-S-fbed1caf43ce7c87\"],\"text\":\"ALT levels in control Poly(C) RNA-LNP-treated mice were as high as T0 levels and slightly decreased in the control Luc mRNA-LNP-treated group, yet significantly greater than those in the HGF/EGF mRNA-LNP-treated group (Fig.\"},{\"evidence_id\":\"GP-004-FC-543ca93b67c8c533\",\"source_ids\":[\"FC-S-25c9196c495f7972\"],\"text\":\"3b, e) that were mainly comprised of hepatocytes identified with HNF4α expression (Fig.\"},{\"evidence_id\":\"GP-004-FC-c4461a1442793d2d\",\"source_ids\":[\"FC-S-25c9196c495f7972\"],\"text\":\"To demonstrate that the mRNA-LNP platform is an ideal delivery tool to express hepatocyte mitogens for proliferation, we examined the potential of a single IV injection of mRNA-LNP encoding the mitogen HGF to induce DNA synthesis and cell proliferation by assessing 5-ethynyl-2′-deoxyuridine (EdU) incorporation in hepatocytes in a homeostatic context (Fig.\"}],\"existing_experiment_ids\":[\"E1\",\"E2\",\"E3\"],\"existing_formulation_ids\":[\"F1\"],\"existing_outcome_ids\":[\"O1\",\"O2\",\"O3\",\"O4\",\"O5\",\"O6\"],\"experiment_context\":{\"anchors\":[{\"anchor_type\":\"payload\",\"evidence_ids\":[\"GP-004-FC-5be151239bc4ecc1\"],\"value\":\"hgf_egf\"},{\"anchor_type\":\"model\",\"evidence_ids\":[\"GP-004-FC-5be151239bc4ecc1\"],\"value\":\"in_vivo\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[],\"value\":\"kupffer_cell\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[],\"value\":\"hepatocyte\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[],\"value\":\"immunostaining\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[],\"value\":\"flow_cytometry\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[],\"value\":\"sequencing\"}],\"label\":\"hgf_egf / in_vivo\",\"provisional_experiment_id\":\"PEX-GP-004-65c3dda2c00c\"},\"paper_id\":\"GP-004\",\"permitted_new_experiments\":0,\"permitted_new_outcomes\":8,\"route_ids\":[\"structural:AOC-443efba50d243225\",\"structural:AOC-4509d8cef342fbfa\",\"structural:AOC-8c8f546f56920316\",\"structural:AOC-ac71595c5469604b\",\"structural:AOC-f48424355c407385\"],\"source_inventory_sha256\":\"2678588b644045c5ba9903c265a7468e7acbcfc68480dbbd334837cecbfccdcb\",\"source_result_sha256\":\"4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97\",\"task_checksum\":\"a15acaaa6df2f276cffc5b6242e8e79a2f80a83aa2b21518c39521108b5bfab7\",\"task_version\":\"missing-record-task-1.1.0\"}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "MissingRecordFragment",
+      "schema": {
+        "$defs": {
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "disposition": {
+            "enum": [
+              "recovered",
+              "unresolved"
+            ],
+            "title": "Disposition",
+            "type": "string"
+          },
+          "recovered_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Recovered Candidate Ids",
+            "type": "array"
+          },
+          "unresolved_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Candidate Ids",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "maxItems": 2,
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "maxItems": 8,
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unresolved Reason"
+          }
+        },
+        "required": [
+          "disposition",
+          "recovered_candidate_ids",
+          "unresolved_candidate_ids",
+          "experiments",
+          "outcomes",
+          "unresolved_reason"
+        ],
+        "title": "MissingRecordFragment",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}

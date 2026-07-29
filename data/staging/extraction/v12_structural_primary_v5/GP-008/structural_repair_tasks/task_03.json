@@ -1,0 +1,158 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-0901c53222785cae",
+    "structural:AOC-22389fb78b0d25aa",
+    "structural:AOC-27a42aa903014f05",
+    "structural:AOC-a3cadab19708d5fa"
+  ],
+  "candidate_ids": [
+    "AOC-0901c53222785cae",
+    "AOC-22389fb78b0d25aa",
+    "AOC-27a42aa903014f05",
+    "AOC-a3cadab19708d5fa"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+    "label": "fapcar / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "fapcar",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "kupffer_cell",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "histology",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-0901c53222785cae",
+      "subject_text": "Heps",
+      "predicate": "expressed",
+      "object_text": "was almost absent in Heps",
+      "endpoint_text": "expression",
+      "qualitative_result": "absent",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "negative",
+      "evidence_ids": [
+        "GP-008-FC-1dc71dae4927710a"
+      ]
+    },
+    {
+      "candidate_id": "AOC-22389fb78b0d25aa",
+      "subject_text": "HSCs",
+      "predicate": "increased",
+      "object_text": "HSCs",
+      "endpoint_text": "expression",
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-1dc71dae4927710a"
+      ]
+    },
+    {
+      "candidate_id": "AOC-27a42aa903014f05",
+      "subject_text": "Notably, the αCD163/LNP-FAPCAR cohort",
+      "predicate": "reached",
+      "object_text": "the most pronounced fibrosis regression",
+      "endpoint_text": "fibrosis",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-a5f4eb9b5d252ba0"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a3cadab19708d5fa",
+      "subject_text": "HSCs",
+      "predicate": "decreased",
+      "object_text": "proportion of HSCs than the Fibrosis group",
+      "endpoint_text": "Fibrosis",
+      "qualitative_result": "lower",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-730aaa4eea997e6f"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-1dc71dae4927710a",
+      "text": "In the Fibrosis group, PCNA expression was significantly increased in HSCs\nPCNA expression was almost absent in Heps",
+      "source_ids": [
+        "FC-S-9a8b8f55dd34f16d"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-a5f4eb9b5d252ba0",
+      "text": "Notably, the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression.",
+      "source_ids": [
+        "FC-S-b842c4f3d32bf804"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-730aaa4eea997e6f",
+      "text": "We found that the LNP group had a lower proportion of HSCs than the Fibrosis group.",
+      "source_ids": [
+        "FC-S-9a8b8f55dd34f16d"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "e0a06adf2f03629103eb44778904d319fced7665d9f25ea26d9c557e1e69c668",
+  "task_checksum": "00054a3b8bbcd3747e9df42ad3674e2b52920acd48d4bd2fc896dd8138366d5b"
+}

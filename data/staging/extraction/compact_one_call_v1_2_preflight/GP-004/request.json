@@ -1,0 +1,561 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "low"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_cache_key": "a05627a6880ed6c6b8e0fcbc817d1d195ee5e3ed808e737c9c08028405a5ee28",
+  "input": [
+    {
+      "role": "system",
+      "content": "Extract only directly reported LNP evidence from the supplied packet. Use no outside knowledge. For each scientific field, return a reported value with valid supplied evidence IDs, or missing with a reason and no evidence IDs. Set eligibility to eligible only for original experimental LNP delivery of supported RNA involving an eligible liver cell and a linked formulation, experiment, and outcome. Failed criteria are ineligible; insufficient evidence is uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep record types and links separate. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. Treat recall-support candidates as navigation aids, not facts: verify cited evidence, preserve experiment boundaries, keep distinct relationships separate, and deduplicate. A reported negative result is an outcome, not missing. List ambiguities. Return only the required structured response."
+    },
+    {
+      "role": "user",
+      "content": "{\"evidence_packet\":{\"blocked_fields\":[],\"evidence\":[{\"context_after_evidence_id\":\"GP-004-E-273b65f8b9cd06c6\",\"evidence_id\":\"GP-004-E-f5a3dee2e92e5312\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\"],\"source_ids\":[\"S-c4ebcefd002f\"],\"text\":\"6 Efficient expression of HGF protein following a single injection of HGF mRNA-LNP.\"},{\"context_before_evidence_id\":\"GP-004-E-f5a3dee2e92e5312\",\"evidence_id\":\"GP-004-E-273b65f8b9cd06c6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\"],\"source_ids\":[\"S-c4ebcefd002f\"],\"text\":\"Immunostaining for HGF on liver sections 5, 24 and 48 hours after a single injection of Poly(C) RNA-LNP or HGF mRNA-LNP.\"},{\"evidence_id\":\"GP-004-E-815b0bae34ee13f3\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\"],\"source_ids\":[\"S-c4ebcefd002f\"],\"text\":\"Representative images from 2 mice injected with either Poly(C) mRNA-LNP or HGF mRNA-LNP per time point.\"},{\"evidence_id\":\"GP-004-E-1427576a7d79e3dd\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-ea4fff03f935\"],\"text\":\"Murine liver repair via transient activation of regenerative pathways in hepatocytes using lipid nanoparticle-complexed nucleoside- modified mRNA.\"},{\"context_after_evidence_id\":\"GP-004-E-33c99bcea45d6aed\",\"evidence_id\":\"GP-004-E-a0167c0d9bb7d131\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-ea4fff03f935\"],\"text\":\"1 Hepatocytes are the main liver cell type targeted by eGFP mRNA-LNP.\"},{\"context_before_evidence_id\":\"GP-004-E-a0167c0d9bb7d131\",\"evidence_id\":\"GP-004-E-33c99bcea45d6aed\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-ea4fff03f935\"],\"text\":\"GFP immunostaining on liver sections from mice 5 hours after injection with a single dose of Poly(C) RNA-LNP or eGFP mRNA-LNP.\"},{\"evidence_id\":\"GP-004-E-7c0d52cf1408ed87\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-ea4fff03f935\"],\"text\":\"100X magnification pictures of representative images from 3 mice injected with eGFP-mRNA-LNP and 2 mice injected with Poly(C) RNA-LNP are shown.\"},{\"evidence_id\":\"GP-004-E-bb2e5d97814ac516\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-e4f08c4dba30\"],\"text\":\"9 RNA-LNP treatment induces equally a mild inflammation in control Poly(C) RNA-LNP- and HGF/EGF mRNA-LNP- treated mice.\"},{\"evidence_id\":\"GP-004-E-bebfbbe46e9032a5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-e4f08c4dba30\"],\"text\":\"Mice were fed normal diet (control No injury) or CDE diet for 3 weeks as explained in Fig.\"},{\"evidence_id\":\"GP-004-E-75630dea72d12a81\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-e4f08c4dba30\"],\"text\":\"4A and then injected with a single dose of HGF/EGF mRNA- LNP or Poly(C) RNA-LNP.\"},{\"evidence_id\":\"GP-004-E-90372821dd4a42f0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-e4f08c4dba30\"],\"text\":\"Liver sections were immunostained for CD45 at T0 and T2, 0 and 2 days after the diet was discontinued.\"},{\"evidence_id\":\"GP-004-E-76188fc7eb676c9d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\"],\"source_ids\":[\"S-450bad96a1d7\"],\"text\":\"7 Efficient expression of HGF and EGF proteins via injection of the corresponding mRNA-LNP into uninjured mice.\"},{\"evidence_id\":\"GP-004-E-0899161589d7231b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\"],\"source_ids\":[\"S-450bad96a1d7\"],\"text\":\"Mice were injected with a single dose of HGF or EGF mRNA-LNP and liver sections analyzed 24 hours after injection.\"},{\"evidence_id\":\"GP-004-E-499f43bf1116bb88\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\"],\"source_ids\":[\"S-450bad96a1d7\"],\"text\":\"Representative images from 3 mice injected with either HGF mRNA-LNP or EGF mRNA-LNP.\"},{\"context_after_evidence_id\":\"GP-004-E-2c606219e3e7278a\",\"evidence_id\":\"GP-004-E-a4fd475a76549015\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\"],\"source_ids\":[\"S-b7aebc0aac1b\"],\"text\":\"5 Quantification of endothelial and blood cells from liver NPC fractions from mice injected IV with mRNA-LNP.\"},{\"context_before_evidence_id\":\"GP-004-E-a4fd475a76549015\",\"evidence_id\":\"GP-004-E-2c606219e3e7278a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\"],\"source_ids\":[\"S-b7aebc0aac1b\"],\"text\":\"a, b Representative flow cytometry analyses of NPC fractions from mice 5 hours after a single injection of Poly(C) RNA-LNP (n=3 mice) or eGFP mRNA-LNP (n=3 mice) are shown.\"},{\"evidence_id\":\"GP-004-E-59770ccbedc0f9cf\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\"],\"source_ids\":[\"S-b7aebc0aac1b\"],\"text\":\"c Representative gating strategy from CD45 staining to isolate live GFP+ CD45+ cells as compared to isotype control and Poly (C) RNA-injected cells.\"},{\"evidence_id\":\"GP-004-E-1a48f6257568e412\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\"],\"source_ids\":[\"S-a979fe7ec966\"],\"text\":\"8 Injection of both HGF/EGF mRNA-LNP decrease the lipid content in hepatocytes following CDE diet.\"},{\"evidence_id\":\"GP-004-E-4a1140e289fa53e0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\"],\"source_ids\":[\"S-a979fe7ec966\"],\"text\":\"Mice were fed CDE diet for 3 weeks as explained in Fig.\"},{\"evidence_id\":\"GP-004-E-15fa46cfae2c696e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\"],\"source_ids\":[\"S-a979fe7ec966\"],\"text\":\"4A and then injected with a single dose of HGF or EGF mRNA-LNP or combined together, while Poly(C) RNA-LNP and Luc mRNA-LNP were used as negative controls.\"},{\"evidence_id\":\"GP-004-E-f0ad3b771bb22d0a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\"],\"source_ids\":[\"S-a979fe7ec966\"],\"text\":\"Liver sections were stained with Oil Red O to detect the lipid content in hepatocytes at T2 and T8, 2 and 8 days after the diet was discontinued.\"},{\"evidence_id\":\"GP-004-E-c04ca0b2cad6f721\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"in intermediately lower levels of ALT at T2, indicating that the combination of HGF/EGF mRNA- LNP was more efficient in restoring normal ALT levels (Fig.\"},{\"evidence_id\":\"GP-004-E-3e2edda0c3d8d105\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"Response: Please see below the edited version of the method related to the LNP with the new addition in red: “LNP formulation of the mRNA: PolyC-RNA (Sigma) and FPLC-purified m1Ψ- containing mRNAs were encapsulated in LNP using a self-assembly process in which an aqueous solution of mRNA at pH=4.0 is rapidly mixed with a solution of lipids dissolved in ethanol33.\"},{\"context_after_evidence_id\":\"GP-004-E-e840d505f49a45bb\",\"evidence_id\":\"GP-004-E-9c91f0cec660187b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"LNPs used in this study were similar in composition to those described previously33, 34, which contain an ionizable cationic lipid (pKa in the range of 6.0-6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid.\"},{\"context_after_evidence_id\":\"GP-004-E-77fb372964f5875f\",\"context_before_evidence_id\":\"GP-004-E-9c91f0cec660187b\",\"evidence_id\":\"GP-004-E-e840d505f49a45bb\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"The proprietary lipid and LNP composition are described in US patent US10,221,127.\"},{\"context_before_evidence_id\":\"GP-004-E-e840d505f49a45bb\",\"evidence_id\":\"GP-004-E-77fb372964f5875f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\",\"S-baa6ab455549\"],\"text\":\"They had a diameter of ~80 nm as measured by dynamic light scattering using a Zetasizer Nano ZS (Malvern Instruments Ltd, Malvern, UK) instrument.\"},{\"context_after_evidence_id\":\"GP-004-E-e5b6b5c54f32e3ed\",\"evidence_id\":\"GP-004-E-13d7bf34a82582ad\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"Acuitas will provide the LNP used in this work to academic investigators who would like to test it.” 6) There are no controls of immuno-stimulation and cytokine release.\"},{\"context_before_evidence_id\":\"GP-004-E-13d7bf34a82582ad\",\"evidence_id\":\"GP-004-E-e5b6b5c54f32e3ed\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-704022115eeb\",\"S-a96b8533bdb9\"],\"text\":\"This is critical for understanding Figure 4.\"},{\"context_after_evidence_id\":\"GP-004-E-d81b83ec4dba56cd\",\"evidence_id\":\"GP-004-E-add6904730f00a65\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"Response: We have addressed this comment by showing that the abundance of CD45+ cells that include Kupffer cells of the liver and any immune cells from the blood, was similar in control Poly(C) RNA-LNP and EGF/HGF mRNA-LNP treated groups.\"},{\"context_before_evidence_id\":\"GP-004-E-add6904730f00a65\",\"evidence_id\":\"GP-004-E-d81b83ec4dba56cd\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"This is commented in page 6 at the end of the first paragraph as follows: “We confirmed that the beneficial effect of HGF/EGF mRNA-LNP was not due to influx of inflammatory cells from mRNA delivered via LNP by comparing the presence of CD45+ in Poly(C) RNA-LNP-treated controls and HGF/EGF mRNA-LNP-treated group at T2, when the effect of HGF/EGF mRNA-LNP is the most effective at restoring liver tissue (Supplementary Fig.\"},{\"evidence_id\":\"GP-004-E-cc7782c08c528405\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\",\"S-f83607381c9a\"],\"text\":\"As described in the CDE-induced liver injury model, influx of CD45+ cells increased after 3 weeks of CDE diet compared to untreated mice.\"},{\"evidence_id\":\"GP-004-E-f5641e1c357b2484\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"We noticed a similar increase in CD45+ cell density in both Poly(C) RNA-LNP-treated controls and HGF/EGF mRNA-LNP-treated group, yet expectedly mild as mRNAs used in this study were generated using modified nucleosides and were HPLC purified to mitigate inflammatory responses in vivo 26, 27.\"},{\"context_after_evidence_id\":\"GP-004-E-a373280a6c65d931\",\"evidence_id\":\"GP-004-E-6087ab0428555396\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"Additionally, the majority of CD45+ cells reflected mostly the spatial pattern of CD45+ Kupffer cells within the liver, as opposed to a neutrophilic inflammatory response.\"},{\"context_after_evidence_id\":\"GP-004-E-c8b44aa88559ecfc\",\"context_before_evidence_id\":\"GP-004-E-6087ab0428555396\",\"evidence_id\":\"GP-004-E-a373280a6c65d931\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"These data highlighted further the specific role of HGF/EGF mRNA-LNP in restoring the liver tissue in treated mice.” Reviewer #2 This manuscript reports on a system to safely and transiently express HGF and EGF mRNAs specifically to the liver for the treatment of serious liver diseases, in this case non-alcoholic fatty liver disease (NAFLD), a disease of almost epidemic proportions in the Western world.\"},{\"context_after_evidence_id\":\"GP-004-E-adfcf0baf59a65f5\",\"context_before_evidence_id\":\"GP-004-E-a373280a6c65d931\",\"evidence_id\":\"GP-004-E-c8b44aa88559ecfc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-704022115eeb\",\"S-a96b8533bdb9\"],\"text\":\"The manuscript is a little limited in that only one liver disease (but important one) is explored, simply showing fatty infiltration is reduced more rapidly with the treatment along with a quicker reduction in liver enzymes that signal hepatocyte injury, along with a more rapid rise in blood cholesterol.\"},{\"context_before_evidence_id\":\"GP-004-E-c8b44aa88559ecfc\",\"evidence_id\":\"GP-004-E-adfcf0baf59a65f5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-a96b8533bdb9\"],\"text\":\"Thus, it would have been good to show how the treatments affected other diseases, particularly models of acute liver injury (galactosamine or repeated carbon tetrachloride) and\"},{\"evidence_id\":\"GP-004-E-4ac0fd01021a3119\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-704022115eeb\",\"S-d7b338b15c20\"],\"text\":\"examine the expression of mRNAs in the liver via LNP delivery.\"},{\"evidence_id\":\"GP-004-E-21cee8984ae7b3e9\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-704022115eeb\",\"S-d7b338b15c20\"],\"text\":\"For the most part, the experiments are well performed, though there a few controls that should have been included instead of polyC RNA.\"},{\"evidence_id\":\"GP-004-E-94168b287d0493a6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-704022115eeb\",\"S-d7b338b15c20\"],\"text\":\"Why was polyC mRNA used as the control instead of Luciferase or GFP?\"},{\"evidence_id\":\"GP-004-E-1888f163319c0d99\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-704022115eeb\",\"S-ec9ef4aabdee\"],\"text\":\"Suppl Figs 6 and 7: legends state 'protein', the abscissas state 'mRNA' 2.\"},{\"context_after_evidence_id\":\"GP-004-E-29dcbce68a99c857\",\"evidence_id\":\"GP-004-E-c4f6b6ff71f64182\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-14fea9da55ba\"],\"text\":\"We thank the reviewer for bringing our attention to the asialoglycoprotein receptor (ASGPR) mediated hepatocyte targeting strategy for gene therapy of liver diseases.\"},{\"context_after_evidence_id\":\"GP-004-E-4fef464f2477072b\",\"context_before_evidence_id\":\"GP-004-E-c4f6b6ff71f64182\",\"evidence_id\":\"GP-004-E-29dcbce68a99c857\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-14fea9da55ba\"],\"text\":\"We have now included in the discussion a more thorough discussion of this strategy as follows in the fourth paragraph of page 7: “Similar to mRNA-LNP hepatotropism, asialoglycoprotein receptor (ASGPR) mediated hepatocyte targeting has been reported for gene therapy of liver diseases 36.\"},{\"context_before_evidence_id\":\"GP-004-E-29dcbce68a99c857\",\"evidence_id\":\"GP-004-E-4fef464f2477072b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-14fea9da55ba\"],\"text\":\"This strategy has also shown organ specificity limitations such as saturation of the receptor, which can reduce liver selectivity and, therefore, increase the possibility for adverse effects systemically 37.\"},{\"evidence_id\":\"GP-004-E-5231570dd3626ea0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-14fea9da55ba\"],\"text\":\"Moreover, lower ASGPR expression observed in the event of diseases such as hepatocellular carcinoma and hepatitis may diminish effectiveness of the ASGPR-based strategy treatment 36.” 2.\"},{\"context_after_evidence_id\":\"GP-004-E-5fd499a6bdcb321f\",\"evidence_id\":\"GP-004-E-1d7a487eb8ffef28\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-14fea9da55ba\"],\"text\":\"Response: These two points are critical and have been addressed by including two new figures: Figure 5 and 6.\"},{\"context_before_evidence_id\":\"GP-004-E-1d7a487eb8ffef28\",\"evidence_id\":\"GP-004-E-5fd499a6bdcb321f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-14fea9da55ba\"],\"text\":\"Figure 5 tests the ability of HGF/EGF mRNA-LNP to restore liver function during persistent liver damage when mice are fed the CDE diet continuously.\"},{\"context_after_evidence_id\":\"GP-004-E-56f2c8730bacde13\",\"evidence_id\":\"GP-004-E-b48ce864f042dd7b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-d7b338b15c20\"],\"text\":\"We have included a new panel E that illustrates the numbers of EdU+ cells (first graph), percentages (second graph) and absolute numbers (third graph) of EdU+HNF4α+ hepatocytes and EdU+CD45+ blood cells.\"},{\"context_before_evidence_id\":\"GP-004-E-b48ce864f042dd7b\",\"evidence_id\":\"GP-004-E-56f2c8730bacde13\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-d7b338b15c20\"],\"text\":\"In the text (page 5, second paragraph), we included: “Quantification of the percentage of HNF4α+ EdU+ cells at the 48 hour time point validated that the majority of EdU+ cells are HNF4α+ hepatocytes in HGF mRNA-LNP-treated mice (61.25 +/- 10.66%), while HNF4α+ EdU+ cells were rarely detected in PolyC RNA-LNP (0.97 +/- 1.66%), indicating a 121-fold increase of EdU+HNF4α+ hepatocytes in HGF mRNA-LNP- treated mice compared to control PolyC RNA-treated mice (Fig.\"},{\"evidence_id\":\"GP-004-E-6e6304c87e73980f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-d7b338b15c20\"],\"text\":\"In addition to the PolyC loaded LNP, we have utilized LNP loaded with Luciferase mRNA, and showed that the combination of HGF/EGF mRNA-LNP greatly reduce steatosis by inducing release of cholesterol in serum and decrease of Oil Red O staining as well as restoring baseline levels of serum ALT compared to both PolyC RNA-LNPs and Luciferase mRNA-LNP with the same significance (p<0.005) for both controls (new Figure 4C and 4D, new Supplementary Figure 8).\"},{\"evidence_id\":\"GP-004-E-fc1b2e9e166859e2\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-d7b338b15c20\"],\"text\":\"We showed that single injections of either HGF or EGF mRNA-LNPs decreased steatosis, although combination of both mRNA-LNP consistently resulted in significantly more efficient steatosis reversion (Fig.\"},{\"evidence_id\":\"GP-004-E-ddf257e58c0f48cc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"outcomes\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-d7b338b15c20\"],\"text\":\"Likewise, single injection of either HGF or EGF mRNA-LNP resulted\"},{\"evidence_id\":\"GP-004-E-e2ec5365dc9c21a6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-2a9ee8d53ef4\"],\"text\":\"The manuscript “Liver repair via transient activation of regenerative pathways in hepatocytes using lipid nanoparticle-complexed nucleoside-modified mRNA” by Rizvi et al described a method to transiently express hepatocyte growth factor and EGF using lipid nanoparticles.\"},{\"context_after_evidence_id\":\"GP-004-E-620e286efa4cb0d4\",\"evidence_id\":\"GP-004-E-8d5774df1651b268\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-2a9ee8d53ef4\",\"S-ec9ef4aabdee\"],\"text\":\"The authors use this nanoparticle platform to deliver modified mRNA encoding EGF and HGF to the liver to induce hepatocyte proliferation.\"},{\"context_before_evidence_id\":\"GP-004-E-8d5774df1651b268\",\"evidence_id\":\"GP-004-E-620e286efa4cb0d4\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-2a9ee8d53ef4\",\"S-ec9ef4aabdee\"],\"text\":\"They then examine this in a liver injury model and show improvement in liver function.\"},{\"evidence_id\":\"GP-004-E-4d949f160f511437\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-2a9ee8d53ef4\",\"S-ec9ef4aabdee\"],\"text\":\"Unsurprisingly in the mouse the main organ that this was distributed to was the liver but also uptake was seen in many other organ macrophages (lung/spleen).\"},{\"evidence_id\":\"GP-004-E-b4675c17776fee7c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-ec9ef4aabdee\"],\"text\":\"We showed that mRNA-LNP encoding HGF and EGF accelerate restoration of liver function following APAP injury assessed with disappearance of necrotic areas and absence of TUNEL+ cells, accompanied by significantly lower serum ALT levels.\"},{\"evidence_id\":\"GP-004-E-1f58c1e21bb9d514\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-ec9ef4aabdee\"],\"text\":\"Suppl Figs 6 and 7: To be consistent throughout the manuscript, we have simplified the abscissas by writing only PolyC and HGF or EGF when the corresponding mRNA/RNA-LNP were injected.\"},{\"evidence_id\":\"GP-004-E-5bfe87040c709963\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-ec9ef4aabdee\"],\"text\":\"Mice were injected intraperitoneally with 50µg/g BW EdU in PBS two hours prior to sacrifice.\"},{\"evidence_id\":\"GP-004-E-856bab3606de3d43\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-ec9ef4aabdee\"],\"text\":\"Reviewer #3 The manuscript “Liver repair via transient activation of regenerative pathways in hepatocytes using lipid nanoparticle-complexed nucleoside-modified mRNA” by Rizvi et al described a method to transiently express hepatocyte growth factor and EGF using lipid nanoparticles.\"},{\"context_after_evidence_id\":\"GP-004-E-f15ef9b3ce1f1e58\",\"evidence_id\":\"GP-004-E-90073b6f5f13bfd9\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-ec9ef4aabdee\"],\"text\":\"Response about the “lipid nanoparticle that is not novel as has been widely leveraged in the community”: We have indeed discussed this point in the discussion section in the second paragraph of page 7 as follows: “Although the utility of injections of mRNA-LNP has been reported in protein replacement therapy for mouse models of liver diseases that are protein deficient or express defective proteins (reviewed by Trepotec and colleagues6 and 33), this clinical application still requires repeated injections to achieve the desired sustained expression of proteins for life.\"},{\"context_before_evidence_id\":\"GP-004-E-90073b6f5f13bfd9\",\"evidence_id\":\"GP-004-E-f15ef9b3ce1f1e58\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-ec9ef4aabdee\"],\"text\":\"Our study introduces nucleoside-modified mRNA-LNP to a specific clinical application that\"},{\"context_after_evidence_id\":\"GP-004-E-0a8d4842fa5f11e5\",\"evidence_id\":\"GP-004-E-6104df4aada2fbb0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\"],\"source_ids\":[\"S-9f22cf8ace89\"],\"text\":\"Similar to mRNA-LNP hepatotropism, asialoglycoprotein receptor (ASGPR) mediated hepatocyte targeting has been reported for gene therapy of liver diseases37.\"},{\"context_before_evidence_id\":\"GP-004-E-6104df4aada2fbb0\",\"evidence_id\":\"GP-004-E-0a8d4842fa5f11e5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\"],\"source_ids\":[\"S-9f22cf8ace89\"],\"text\":\"This strategy has also shown organ specificity limitations such as saturation of the receptor, which can reduce liver selectivity and, therefore, increase the possibility for adverse effects systemically38.\"},{\"evidence_id\":\"GP-004-E-4e62cb53c25d4df7\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\"],\"source_ids\":[\"S-9f22cf8ace89\"],\"text\":\"Moreover, lower ASGPR expression observed in the event of diseases such as hepatocellular carcinoma and hepatitis may diminish effectiveness of the ASGPR-based strategy treatment37.\"},{\"evidence_id\":\"GP-004-E-06240bfff0c048f5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-042decafcf9d\"],\"text\":\"mRNA-LNP were thawed and freshly diluted on ice in Dulbecco’s Phosphate Buffered Saline (PBS) prior to each experiment.\"},{\"evidence_id\":\"GP-004-E-e29c5e3c31a38827\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-042decafcf9d\"],\"text\":\"Mice were either 10–12 week-old Bl6/C57 female for the liver injury models or 7–8 week-old Balb/c female (purchased from the Jackson Laboratory, Bar Harbor, ME) to study the kinetics of expression and identity of cell types transfected in vivo using luciferase- and eGFP mRNA-LNP at homeostasis.\"},{\"evidence_id\":\"GP-004-E-b293f56409c89709\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-042decafcf9d\"],\"text\":\"Mice were administered 100 μl of diluted mRNA-LNP-encoding luciferase (5 μg), eGFP (10 μg), HGF (10 μg), Poly(C) (10 μg), or combination HGF (5 μg) + EGF (5 μg) intravenously by either retro-orbital or tail vein injections using 1/2cc lo-dose insulin syringes (EXELINT).\"},{\"evidence_id\":\"GP-004-E-7ce24286c5ee21c9\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-cc46e53e45ad\"],\"text\":\"To identify the specific cell types transfected in the liver, we performed immunohistochemistry using characteristic markers for hepatocytes, cholangiocytes, Kupffer cells, endothelial cells, and vascular smooth muscle cells.\"},{\"evidence_id\":\"GP-004-E-8bd21c8aa7f50cfb\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-cc46e53e45ad\"],\"text\":\"Mice injected with LNP loaded with untranslatable Poly(C) RNA (Poly(C) RNA-LNP) were used as eGFP-negative controls.\"},{\"context_after_evidence_id\":\"GP-004-E-147c0afb95f333b0\",\"evidence_id\":\"GP-004-E-1f28a42d83d7b914\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-cc46e53e45ad\"],\"text\":\"eGFP expression was absent in CK19+ cholangiocytes and α-SMA+ vascular smooth muscle cells, while few F4/80+ Kupffer cells expressed eGFP.\"},{\"context_before_evidence_id\":\"GP-004-E-1f28a42d83d7b914\",\"evidence_id\":\"GP-004-E-147c0afb95f333b0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-cc46e53e45ad\"],\"text\":\"These were also represented within the CD45+GFP+ population of the liver.\"},{\"evidence_id\":\"GP-004-E-bf69b1e014344c7f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-cc46e53e45ad\"],\"text\":\"The NPC fractions yielded an average 10.5 ± 7.7% CD11b+ Kupffer cells, 20.2 ± 10.5% CD45+ leukocytes, and 12.1 ± 6.2% CD31+ endothelial cells (Supplementary Fig.\"},{\"evidence_id\":\"GP-004-E-0e95fa28bea7a24c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-cc46e53e45ad\"],\"text\":\"Significant percentages of these cell populations express eGFP, including 41.5 ± 14.6% CD11b+ cells, 34.1 ± 2.2% CD45+ cells, and 70.7 ± 9% CD31+ cells (Fig.\"},{\"evidence_id\":\"GP-004-E-615763cdaa039010\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"To test a broader clinical applicability of HGF/EGF mRNA-LNP to rescue liver diseases, we next evaluated the ability of HGF/EGF mRNA-LNP to accelerate liver regeneration in the well-established acetaminophen (APAP)-induced acute liver injury model29–32 (Fig.\"},{\"evidence_id\":\"GP-004-E-92eb86183d546f7f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"Mice were then fasted for 14 h to allow consistent APAP-mediated liver damage among mice before injecting a single dose of APAP (550 mg/kg).\"},{\"evidence_id\":\"GP-004-E-abe18f899dd66651\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"A single injection of HGF/EGF mRNA-LNP was administered during the recovery period 24 h after APAP injection, and mice were analyzed 32 h and 48 h after APAP injury.\"},{\"evidence_id\":\"GP-004-E-53de397122977467\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"Beneficial effects of mRNA-LNP were consistently and significantly observed 24 h after the single administration of HGF/EGF mRNA-LNP with accelerated disappearance of necrotic areas that were still seen in the Poly(C) RNA-LNP-treated control group assessed by H&E staining (Fig.\"},{\"context_after_evidence_id\":\"GP-004-E-eed2eeefe62f6099\",\"evidence_id\":\"GP-004-E-0b4774fd24dcd78a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"6d, e) that were still present in Poly(C) RNA-LNP control group.\"},{\"context_before_evidence_id\":\"GP-004-E-0b4774fd24dcd78a\",\"evidence_id\":\"GP-004-E-eed2eeefe62f6099\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"However, analyses at the early time point, 8 h following mRNA-LNP injection indicated no significant improvement of central vein necrotic areas (Fig.\"},{\"context_after_evidence_id\":\"GP-004-E-b669db94a8eddebc\",\"evidence_id\":\"GP-004-E-0ad28e58ba5fdce5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"6d, e).\"},{\"context_after_evidence_id\":\"GP-004-E-f3cd9563ae3e7209\",\"context_before_evidence_id\":\"GP-004-E-0ad28e58ba5fdce5\",\"evidence_id\":\"GP-004-E-b669db94a8eddebc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"These results extend the clinical application of the mitogens HGF and EGF delivered via mRNA-LNP to treat acute liver diseases.Fig.\"},{\"context_before_evidence_id\":\"GP-004-E-b669db94a8eddebc\",\"evidence_id\":\"GP-004-E-f3cd9563ae3e7209\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"6HGF/EGF mRNA-LNP accelerate liver recovery in the APAP-induced acute liver injury model.a Mice were exposed to the Whitten effect and an overnight fast prior to a single injection of APAP (550 mg/kg).\"},{\"context_after_evidence_id\":\"GP-004-E-c3c3e7c00fea6280\",\"evidence_id\":\"GP-004-E-38d6cef8e8150903\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"A single dose of control Poly(C) RNA-LNP or HGF/EGF(H/E) mRNA-LNP was administered 24 h following APAP injection.\"},{\"context_after_evidence_id\":\"GP-004-E-2f8a65433269b53b\",\"context_before_evidence_id\":\"GP-004-E-38d6cef8e8150903\",\"evidence_id\":\"GP-004-E-c3c3e7c00fea6280\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"b–e Mice were analyzed 32 h and 48 h after APAP injection for necrosis with ×100 magnification bright-field images of H&E staining (b), serum ALT levels (c, 3-4 mice per group in triplicate (n = 9–12) per time point, except Poly(C) treated mice at 32 h for which 2 mice were used (n = 6)), and observation of TUNEL+ necrotic and apoptotic cells in central vein liver tissue areas (d), that were quantified per ×40 magnification field (e, 3 mice per group per time point with 2 fields per mouse (n = 6)).\"},{\"context_before_evidence_id\":\"GP-004-E-c3c3e7c00fea6280\",\"evidence_id\":\"GP-004-E-2f8a65433269b53b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"b, d Representative images from 3 to 4 mice per group per time point.\"},{\"evidence_id\":\"GP-004-E-8f8a63d5e9c4c612\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"experiment_boundary\"],\"source_ids\":[\"S-9a0f25ce45ab\"],\"text\":\"Grey: control RNA, blue: combined mRNA.\"},{\"evidence_id\":\"GP-004-E-97474f092790fc6c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-23cf1646dc62\"],\"text\":\"To test whether mRNA-LNP are effective tools for activating hepatocyte mitogen pathways in vivo, here we comprehensively identify the liver as the major target organ of mRNA-LNP-produced proteins following a single injection of firefly luciferase (Luc)-encoding mRNA-LNP, and show that robust protein expression lasts for about 3 days.\"},{\"evidence_id\":\"GP-004-E-dd2583840b74edd5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-23cf1646dc62\"],\"text\":\"mRNA-LNP transfect virtually all hepatocytes in the liver along with a subpopulation of endothelial cells and Kupffer cells.\"},{\"evidence_id\":\"GP-004-E-2424879042507ab4\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-23cf1646dc62\"],\"text\":\"As a proof-of-principle of therapeutic intervention, we demonstrate that HGF mRNA-LNP efficiently induce proliferation of hepatocytes in homeostasis, and that the combination of HGF and EGF mRNA-LNP accelerates the restoration of liver function in the chronic Choline-Deficient Ethionine-supplemented (CDE) diet-induced non-alcoholic fatty liver disease (NAFLD) mouse model as well as in the acute acetaminophen-induced liver injury mouse model.\"},{\"evidence_id\":\"GP-004-E-50647e1940bafbbd\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-baa6ab455549\"],\"text\":\"Poly(C) RNA (Sigma) and FPLC-purified m1Ψ-containing mRNAs were encapsulated in LNP using a self-assembly process in which an aqueous solution of mRNA at pH = 4.0 is rapidly mixed with a solution of lipids dissolved in ethanol53.\"},{\"evidence_id\":\"GP-004-E-9331dfb69db5483e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-baa6ab455549\"],\"text\":\"LNP used in this study contain an ionizable cationic lipid (pKa in the range of 6.0–6.5, proprietary to Acuitas Therapeutics) / phosphatidylcholine / cholesterol / PEG-lipid53,54.\"},{\"context_after_evidence_id\":\"GP-004-E-77fb372964f5875f\",\"evidence_id\":\"GP-004-E-e768ce5fffebb52f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-baa6ab455549\"],\"text\":\"The proprietary lipid and LNP composition are described in US patent US10,221,127 entitled “Lipids and lipid nanoparticle formulations for delivery of nucleic acids” (https://www.lens.org/lens/patent/183-348-727-217-109)10.\"},{\"evidence_id\":\"GP-004-E-68ae38d453a07841\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"lnp_composition_raw\",\"payload\"],\"source_ids\":[\"S-baa6ab455549\"],\"text\":\"Acuitas will provide the LNP used in this work to academic investigators who would like to test it.\"},{\"evidence_id\":\"GP-004-E-4a8cc1ec7a06c7d4\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-3ea809e7c6e6\"],\"text\":\"Organ-specific delivery of mRNA after systemic administration remains a work-in-progress.\"},{\"evidence_id\":\"GP-004-E-d84a015a982d76a0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-3ea809e7c6e6\"],\"text\":\"When injected IV, mRNA-LNP mainly target the liver by binding circulating apolipoprotein E (ApoE) that in turn target ApoE receptors on the surface of hepatocytes35.\"},{\"context_after_evidence_id\":\"GP-004-E-3e4e2d784b96ec84\",\"evidence_id\":\"GP-004-E-28f03fb6e67a2306\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-3ea809e7c6e6\"],\"text\":\"Given the transient expression of mitogen proteins in these additional cell types and the healthy condition of the organs where they reside, we have not observed any overall health issues.\"},{\"context_before_evidence_id\":\"GP-004-E-28f03fb6e67a2306\",\"evidence_id\":\"GP-004-E-3e4e2d784b96ec84\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\"],\"source_ids\":[\"S-3ea809e7c6e6\"],\"text\":\"However, to prevent any potential side effects in organs other than the liver, and thus to restrict expression in hepatocytes exclusively, mRNA-LNP could be conjugated with specific antibodies against hepatocytes as demonstrated for successful mRNA-LNP targeting to lung endothelial cells using an antibody against the vascular cell adhesion molecule, PECAM-136.\"},{\"context_after_evidence_id\":\"GP-004-E-972d3e138bf126db\",\"evidence_id\":\"GP-004-E-a72862f18ec2ffcd\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"To further evaluate the histologic specificity of IV-injected mRNA-LNP, we performed immunostaining on sections from liver, lung, intestine, and spleen 5 h following a single injection of mRNA-LNP encoding enhanced green fluorescent protein (eGFP) (10 μg eGFP mRNA-LNP/20 g body weight) to identify eGFP+ transfected cells.\"},{\"context_before_evidence_id\":\"GP-004-E-a72862f18ec2ffcd\",\"evidence_id\":\"GP-004-E-972d3e138bf126db\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"While a pronounced expression was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig.\"},{\"evidence_id\":\"GP-004-E-ac5ffef51d25a107\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"1), eGFP expression was absent in parenchymal cells of the other organs analyzed (Supplementary Figs.\"},{\"evidence_id\":\"GP-004-E-fd825b27dcaebf09\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"Notable eGFP expression was observed in the red pulp area of spleen that mainly overlapped with CD45 and CD31 expression, suggesting that the eGFP+ cells in spleen were blood and endothelial cells (Supplementary Fig.\"},{\"evidence_id\":\"GP-004-E-9727e33fb834be68\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"The same pattern was observed for intestine where eGFP expression was confined to the lamina propria, which contains small blood and lymph vessels as well as blood cells (Supplementary Fig.\"},{\"evidence_id\":\"GP-004-E-81ab08786ec37000\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"In the lung, scattered eGFP+ cells were found that resembled alveolar macrophages, given their morphology, intra-alveolar luminal location, and CD45 expression (Supplementary Fig.\"},{\"context_after_evidence_id\":\"GP-004-E-bb88af4966174b2f\",\"evidence_id\":\"GP-004-E-4ffd81157880235c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"Examination of eGFP expression in various organs supports that liver is the main target organ of IV-administered eGFP mRNA-LNP, specifically the parenchymal hepatocytes, yet indicates transfection and translation in some populations of endothelial cells and hematopoietic cells in the liver, spleen, intestine, and lung as previously reported11–13.Fig.\"},{\"context_before_evidence_id\":\"GP-004-E-4ffd81157880235c\",\"evidence_id\":\"GP-004-E-bb88af4966174b2f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"2Identification of transfected liver cell types 5 h after IV eGFP mRNA-LNP injection.a Co-immunostaining for eGFP (green) and liver cell type specific markers (red).\"},{\"evidence_id\":\"GP-004-E-1bce9423e81c94ae\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"b Representative flow cytometry analyses showing percent of eGFP+ cells in CD11b+, CD45+, and CD31+ NPC fractions from mice injected with Poly(C) RNA-LNP or eGFP mRNA-LNP.\"},{\"evidence_id\":\"GP-004-E-2fe92a17370f5591\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"outcomes\",\"payload\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-263a2be8ee47\"],\"text\":\"a Representative images from 3 mice injected with eGFP-mRNA-LNP and 2 mice injected with Poly(C) RNA-LNP.\"},{\"evidence_id\":\"GP-004-E-bfc65400af24fd1d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"A critical study from Pardi and colleagues compared the efficiency of mRNA-LNP to express proteins in various organs based on the route of mRNA-LNP delivery9,10.\"},{\"evidence_id\":\"GP-004-E-bcf573445dd3edfc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"Intravenous (IV) injection was reported as the most effective route to efficiently target protein expression into the liver9.\"},{\"evidence_id\":\"GP-004-E-67be9e835a79ab2f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"Here, we determined the organ distribution and duration of protein activity produced by firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP) during a 1-week time course (at 5 h, days 1, 2, 3, 6, and 8) following a single IV injection (5 μg Luc mRNA-LNP/20 g body weight).\"},{\"context_after_evidence_id\":\"GP-004-E-525e4ad8fb4e4525\",\"evidence_id\":\"GP-004-E-8753c6febebb2e66\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"The efficiency of two IV delivery methods including tail vein injection and retro-orbital venous sinus injection were compared.\"},{\"context_before_evidence_id\":\"GP-004-E-8753c6febebb2e66\",\"evidence_id\":\"GP-004-E-525e4ad8fb4e4525\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"Both delivery methods led to liver restricted Luc mRNA-LNP expression as measured by bioluminescence (Fig.\"},{\"evidence_id\":\"GP-004-E-440906cb169c4960\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"Thereafter, bioluminescence decreased progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection (Fig.\"},{\"context_after_evidence_id\":\"GP-004-E-aa1c2885867bfc0a\",\"evidence_id\":\"GP-004-E-16f87e7497b89b42\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"1b).\"},{\"context_before_evidence_id\":\"GP-004-E-16f87e7497b89b42\",\"evidence_id\":\"GP-004-E-aa1c2885867bfc0a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"Both IV delivery routes resulted in similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver.Fig.\"},{\"evidence_id\":\"GP-004-E-65cf66cec8ce41e4\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"delivery_recipient_cell_reported\",\"experiment_boundary\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-6206e3e3ebaa\"],\"text\":\"1A single IV injection of Luc mRNA-LNP induces robust and restricted luciferase activity in liver.a Images of bioluminescence measurement from 5 h, day1 (d1) up to day 8 (d8) following tail vein (n = 2 mice) or retro-orbital (n = 6 mice) injection of Luc mRNA-LNP.\"},{\"evidence_id\":\"GP-004-E-962fd9d259036a80\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"As a proof-of-principle for therapeutic intervention, we evaluated the ability of in vivo delivery of HGF and EGF via mRNA-LNP to rescue chronic liver injury caused by CDE diet.\"},{\"evidence_id\":\"GP-004-E-51b5e85849b346d8\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Given the reported synergy between HGF and EGF to promote liver regeneration by increasing cell proliferation and metabolism15,23–26, we examined the ability of both HGF and EGF mRNA-LNP (HGF/EGF mRNA-LNP) to drive liver recovery from steatohepatitis in the CDE model.\"},{\"evidence_id\":\"GP-004-E-1e6611acdea22c63\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"We first confirmed that HGF and EGF proteins were highly expressed in hepatocytes 24 h after a single IV injection of HGF/EGF mRNA-LNP (Supplementary Fig.\"},{\"evidence_id\":\"GP-004-E-32b43d7ea9f60f28\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Injections of both HGF/EGF mRNA-LNP were performed as soon as the diet was terminated as well as 4 days later during the recovery period (Fig.\"},{\"evidence_id\":\"GP-004-E-575b2fc9ece61198\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Analyses of lipid accumulation in hepatocytes as assessed by Oil Red O staining on liver sections revealed a sharp decrease of steatosis 2 days after the first injection of HGF/EGF mRNA-LNP compared to that with Poly(C) RNA-LNP treatment, in which steatosis was evenly maintained with persistent macrosteatosis (Fig.\"},{\"evidence_id\":\"GP-004-E-1ddb8376c41f4a8a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"At day 8 of recovery, steatosis was greatly diminished in both groups as expected with time, although the extent of steatosis remained larger in the control Poly(C) RNA-LNP-treated group.\"},{\"evidence_id\":\"GP-004-E-f0b53bbbafc13391\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"HGF/EGF mRNA-LNP significantly accelerated the secretion of lipids from hepatocytes to the blood circulation compared to both Poly(C) RNA-LNP and Luc mRNA-LNP -treated control groups, as previously reported in rats in vivo19 and in cultured hepatocytes in vitro21.\"},{\"evidence_id\":\"GP-004-E-fe3a71d8079bdc1c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Luc mRNA-loaded LNP were used as an additional negative LNP control that delivered neutral luciferase protein in hepatocytes.\"},{\"evidence_id\":\"GP-004-E-99bfcf414d35ac80\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Single injections of either HGF or EGF mRNA-LNP decreased steatosis, although combination of both mRNA-LNP consistently resulted in significantly more efficient steatosis reversion assessed with serum cholesterol levels and Oil Red O staining (Fig.\"},{\"evidence_id\":\"GP-004-E-40caa7e2e5038278\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Moreover, serum levels of ALT, which are indicative of liver damage and hepatocyte necrosis, were restored to normal levels at T2, 2 days after the first injection of HGF/EGF mRNA-LNP.\"},{\"evidence_id\":\"GP-004-E-431b75f9ecb4f846\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"ALT levels in control Poly(C) RNA-LNP-treated mice were as high as T0 levels and slightly decreased in the control Luc mRNA-LNP-treated group, yet significantly greater than those in the HGF/EGF mRNA-LNP-treated group (Fig.\"},{\"context_after_evidence_id\":\"GP-004-E-cc24a213e506ffe7\",\"evidence_id\":\"GP-004-E-cbca6d2f8b90d654\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Single injection of either HGF or EGF mRNA-LNP resulted in intermediately lower levels of ALT at T2, indicating that the combination of HGF/EGF mRNA-LNP was more efficient in restoring normal ALT levels.\"},{\"context_before_evidence_id\":\"GP-004-E-cbca6d2f8b90d654\",\"evidence_id\":\"GP-004-E-cc24a213e506ffe7\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"We confirmed that the beneficial effect of HGF/EGF mRNA-LNP was not due to influx of inflammatory cells from mRNA delivered via LNP by comparing the presence of CD45+ cells in Poly(C) RNA-LNP-treated controls and HGF/EGF mRNA-LNP-treated group at T2, when the effect of HGF/EGF mRNA-LNP is the most effective at restoring liver tissue (Supplementary Fig.\"},{\"evidence_id\":\"GP-004-E-2d5e23ebc2fbb976\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"We noticed a similar increase in CD45+ cell density in both Poly(C) RNA-LNP-treated controls and HGF/EGF mRNA-LNP-treated group, yet expectedly mild as mRNAs used in this study were generated using modified nucleosides and were HPLC purified to mitigate inflammatory responses in vivo27,28.\"},{\"context_after_evidence_id\":\"GP-004-E-9fe5f36df2164e9d\",\"evidence_id\":\"GP-004-E-fce02b84bc465682\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"In addition, the majority of CD45+ cells reflected mostly the spatial pattern of CD45+ Kupffer cells within the liver, as opposed to a neutrophilic inflammatory response.\"},{\"context_before_evidence_id\":\"GP-004-E-fce02b84bc465682\",\"evidence_id\":\"GP-004-E-9fe5f36df2164e9d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"These data further highlighted the specific role of HGF/EGF mRNA-LNP in restoring the liver tissue in treated mice.Fig.\"},{\"evidence_id\":\"GP-004-E-025f5c277aab5b54\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"4HGF/EGF mRNA-LNP accelerate restoration of liver function during recovery from CDE-induced chronic liver injury.a Injury scheme timeline: mice were fed CDD choline deficient diet for 1 week followed by three weeks of CDD diet supplemented with 0.1% ethionine (CDE).\"},{\"context_after_evidence_id\":\"GP-004-E-376638f995021aa3\",\"evidence_id\":\"GP-004-E-3cadcaa508e40b67\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Mice were injected with either controls Poly(C) RNA or Luc mRNA-LNP, or HGF(H) and EGF(E) single or combined (H/E) mRNA-LNP at the end of the CDE diet (T0), followed by another injection 4 days into recovery (T4).\"},{\"context_before_evidence_id\":\"GP-004-E-3cadcaa508e40b67\",\"evidence_id\":\"GP-004-E-376638f995021aa3\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"b Bright-field images at ×100 magnification of Oil Red O staining showing lipid accumulation in hepatocytes at T2 and T8 in mice injected with either Poly(C) RNA-LNP or H/E mRNA-LNP.\"},{\"evidence_id\":\"GP-004-E-b306180ffe714a28\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Analyses of total serum cholesterol levels (c) and ALT levels (d) from 3 to 4 mice per group in duplicate or triplicate (n = 8–12) per time point treated with controls Poly(C) RNA-LNP or Luc mRNA-LNP, or single HGF(H), single EGF(E) or the combination H/E mRNA-LNP indicate sharp reversion of steatosis and restoration of basic levels of ALT after H/E mRNA-LNP injections.\"},{\"evidence_id\":\"GP-004-E-2fa371672561b7f8\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"lnp_composition_raw\",\"therapeutic_target_cell_reported\"],\"source_ids\":[\"S-f83607381c9a\"],\"text\":\"Dark grey: T0, light grey: control RNA, light blue: single mRNA, dark blue: combined mRNA.\"},{\"evidence_id\":\"GP-004-E-781c50d67af751aa\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\"],\"source_ids\":[\"S-18dfc8d875ac\"],\"text\":\"mRNAs were produced using T7 RNA polymerase (Megascript, Ambion) on a linearized plasmid encoding codon-optimized firefly luciferase (Luc)50,51, eGFP, epidermal growth factor (EGF), and hepatocyte growth factor (HGF).\"},{\"evidence_id\":\"GP-004-E-75f0872c68256922\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\"],\"source_ids\":[\"S-18dfc8d875ac\"],\"text\":\"One-methylpseudouridine (m1Ψ)-5’-triphosphate (TriLink) instead of UTP was used to generate modified nucleoside-containing mRNA.\"}],\"packet_checksum\":\"af5d0698a9739e760babbf53724965cddb1716e3ab89188e5258425239f68e22\",\"packet_version\":\"compact-api-packet-1.0.0\",\"paper_id\":\"GP-004\",\"sources\":[{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-27d715fd5fe6f04620bc\",\"section\":\"Methods\",\"source_id\":\"S-042decafcf9d\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"In vivo administration of mRNA-LNP\",\"xml_element_id\":\"Par20\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-2b7f6a3d6d337ffa0ffe\",\"page_number\":7,\"section\":\"Supplement page 7\",\"source_id\":\"S-14fea9da55ba\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM2_ESM.pdf\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-bf7cb0f3bc0cb3150418\",\"section\":\"Methods\",\"source_id\":\"S-18dfc8d875ac\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"mRNA production\",\"xml_element_id\":\"Par17\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-64d45d3867dbb1999895\",\"section\":\"Introduction\",\"source_id\":\"S-23cf1646dc62\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"xml_element_id\":\"Par5\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-8f8ebc21885e5f499049\",\"section\":\"Results\",\"source_id\":\"S-263a2be8ee47\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"Liver-targeted nucleoside-modified mRNA-LNP predominantly transfect hepatocytes\",\"xml_element_id\":\"Par7\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-820ec9bc1844d690f6d8\",\"page_number\":2,\"section\":\"Supplement page 2\",\"source_id\":\"S-2a9ee8d53ef4\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM2_ESM.pdf\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-89a5b01b92eab088846f\",\"section\":\"Discussion\",\"source_id\":\"S-3ea809e7c6e6\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"xml_element_id\":\"Par14\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-5ee3d8c885192a84e467\",\"page_number\":7,\"section\":\"Supplement page 7\",\"source_id\":\"S-450bad96a1d7\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM1_ESM.pdf\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-9073615a90f41589486b\",\"section\":\"Results\",\"source_id\":\"S-6206e3e3ebaa\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"Retro-orbital injection directs nucleoside-modified mRNA-LNP to liver\",\"xml_element_id\":\"Par6\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-2853135bd6095605c550\",\"page_number\":1,\"section\":\"Supplement page 1\",\"source_id\":\"S-704022115eeb\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM2_ESM.pdf\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-569b2fa24c720321910f\",\"section\":\"Results\",\"source_id\":\"S-9a0f25ce45ab\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"Nucleoside-modified mRNA-LNP encoding HGF and EGF accelerate restoration of liver function in the acute acetaminophen-induced liver injury model\",\"xml_element_id\":\"Par12\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-25096334728e4d5291b5\",\"section\":\"Discussion\",\"source_id\":\"S-9f22cf8ace89\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"xml_element_id\":\"Par15\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-0a472f25b7cb9a08b6a6\",\"page_number\":4,\"section\":\"Supplement page 4\",\"source_id\":\"S-a96b8533bdb9\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM2_ESM.pdf\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-f0c72b035adf015788cd\",\"page_number\":8,\"section\":\"Supplement page 8\",\"source_id\":\"S-a979fe7ec966\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM1_ESM.pdf\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-b4d7f5b3f31dfdf9e15e\",\"page_number\":5,\"section\":\"Supplement page 5\",\"source_id\":\"S-b7aebc0aac1b\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM1_ESM.pdf\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-6e6c5970c8283ab141bc\",\"section\":\"Methods\",\"source_id\":\"S-baa6ab455549\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"LNP formulation of the mRNA\",\"xml_element_id\":\"Par18\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-1c494d761f6ab67c45ce\",\"page_number\":6,\"section\":\"Supplement page 6\",\"source_id\":\"S-c4ebcefd002f\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM1_ESM.pdf\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-47d98dca42394190ba9c\",\"section\":\"Results\",\"source_id\":\"S-cc46e53e45ad\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"Liver-targeted nucleoside-modified mRNA-LNP predominantly transfect hepatocytes\",\"xml_element_id\":\"Par8\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-47cf3fcd1a29ea837fc0\",\"page_number\":3,\"section\":\"Supplement page 3\",\"source_id\":\"S-d7b338b15c20\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM2_ESM.pdf\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-4bf34c7fb4de8b1b8851\",\"page_number\":9,\"section\":\"Supplement page 9\",\"source_id\":\"S-e4f08c4dba30\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM1_ESM.pdf\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-341c855bf3e475873fcc\",\"page_number\":1,\"section\":\"Supplement page 1\",\"source_id\":\"S-ea4fff03f935\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM1_ESM.pdf\"},{\"block_type\":\"pdf_page\",\"chunk_id\":\"GP-004-B-cbf7926ae781394facc2\",\"page_number\":5,\"section\":\"Supplement page 5\",\"source_id\":\"S-ec9ef4aabdee\",\"source_kind\":\"pdf\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_20903_MOESM2_ESM.pdf\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"GP-004-B-a0ca7836b1ad2b69711a\",\"section\":\"Results\",\"source_id\":\"S-f83607381c9a\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/raw/fulltext/oa_packages/PMC7840919/41467_2021_Article_20903.nxml\",\"subsection\":\"Nucleoside-modified mRNA-LNP encoding HGF and EGF accelerate restoration of liver function in a chronic liver injury model\",\"xml_element_id\":\"Par10\"}]},\"outcome_recall_support\":{\"accepted_visual_claims\":[],\"atomic_outcome_candidates\":[{\"candidate_id\":\"AOC-bdb5d5f9e14a9b35\",\"claim_ids\":[\"ACL-a1ebbd7d411d023d\"],\"confidence\":\"high\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-af61355776c8ccca\"],\"numeric_value\":null,\"object_text\":\"eGFP (Fig\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"provisional_experiment_id\":\"PEX-GP-004-00c9dca895b9\",\"qualitative_result\":\"Virtually all\",\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"FC-S-783827e9e8236666\"],\"structural_signature\":\"[\\\"PEX-GP-004-00c9dca895b9\\\",\\\"expressed\\\",\\\"positive\\\",\\\"egfp_gfp\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"virtually all\\\",\\\"hepatocytes\\\",\\\"egfp fig\\\"]\",\"subject_text\":\"hepatocytes\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-c9850f1420740bed\",\"claim_ids\":[\"ACL-a2d61c0279ccfdc3\",\"ACL-74d1b7642b9f1386\",\"ACL-736aba34a4679f09\"],\"confidence\":\"high\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-004-E-972d3e138bf126db\",\"GP-004-E-e29c5e3c31a38827\",\"GP-004-FC-66b43dcd526b6e18\"],\"numeric_value\":null,\"object_text\":\"was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"provisional_experiment_id\":\"PEX-GP-004-00c9dca895b9\",\"qualitative_result\":null,\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"S-263a2be8ee47\",\"S-042decafcf9d\",\"FC-S-1f7e29eaf1c74013\"],\"structural_signature\":\"[\\\"PEX-GP-004-00c9dca895b9\\\",\\\"expressed\\\",\\\"positive\\\",\\\"egfp_gfp\\\",\\\"\\\",\\\"expression\\\",\\\"\\\",\\\"\\\",\\\"\\\"]\",\"subject_text\":\"a pronounced\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-25c71a72288ec9b9\",\"claim_ids\":[\"ACL-78333367988ec5a7\"],\"confidence\":\"high\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-cde0316a82a5bd30\"],\"numeric_value\":null,\"object_text\":\"eGFP\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"provisional_experiment_id\":\"PEX-GP-004-00c9dca895b9\",\"qualitative_result\":\"few\",\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"FC-S-783827e9e8236666\"],\"structural_signature\":\"[\\\"PEX-GP-004-00c9dca895b9\\\",\\\"expressed\\\",\\\"positive\\\",\\\"egfp_gfp\\\",\\\"kupffer_cell\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"few\\\"]\",\"subject_text\":\"Kupffer cells\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-df2292753a83aedd\",\"claim_ids\":[\"ACL-2ae8ef9bb53b34c6\",\"ACL-f1cd4a656dcd4fbc\"],\"confidence\":\"high\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-004-E-81ab08786ec37000\",\"GP-004-FC-291597f2c1490207\"],\"numeric_value\":null,\"object_text\":\"(Supplementary Fig\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"provisional_experiment_id\":\"PEX-GP-004-00c9dca895b9\",\"qualitative_result\":null,\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"S-263a2be8ee47\",\"FC-S-1f7e29eaf1c74013\"],\"structural_signature\":\"[\\\"PEX-GP-004-00c9dca895b9\\\",\\\"expressed\\\",\\\"positive\\\",\\\"egfp_gfp\\\",\\\"macrophage\\\",\\\"expression\\\",\\\"\\\",\\\"\\\",\\\"\\\"]\",\"subject_text\":\"macrophages\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-85bcfbca96926517\",\"claim_ids\":[\"ACL-2427159f00a77837\"],\"confidence\":\"high\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-004-FC-cf395fdeb1008314\"],\"numeric_value\":null,\"object_text\":\"mRNA-LNP encoded mitogens by endothelial and Kupffer cells would also be beneficial in activating the corresponding pathways in adjacent hepatocytes\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"provisional_experiment_id\":\"PEX-GP-004-00c9dca895b9\",\"qualitative_result\":null,\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"FC-S-783827e9e8236666\"],\"structural_signature\":\"[\\\"PEX-GP-004-00c9dca895b9\\\",\\\"expressed\\\",\\\"positive\\\",\\\"generic_lnp\\\",\\\"hepatocyte|kupffer_cell\\\",\\\"expression\\\",\\\"\\\",\\\"\\\",\\\"\\\"]\",\"subject_text\":\"hepatocyte\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-7b87066fa933b1b0\",\"claim_ids\":[\"ACL-7338145ddd87749c\"],\"confidence\":\"high\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-aaef2b0838c071e4\"],\"numeric_value\":null,\"object_text\":\"serum ALT levels at T8, suggesting that a repeated regimen of HGF/EGF mRNA-LNP injections could alleviate chronic liver damage\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"decreased\",\"provisional_experiment_id\":\"PEX-GP-004-65c3dda2c00c\",\"qualitative_result\":\"significantly\",\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"FC-S-910df540c2d91e5a\"],\"structural_signature\":\"[\\\"PEX-GP-004-65c3dda2c00c\\\",\\\"decreased\\\",\\\"positive\\\",\\\"hgf_egf\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"significantly\\\",\\\"mrna lnp significantly released cholesterol into the serum diminished steatosis and\\\",\\\"serum alt levels at t8 suggesting that a repeated regimen of hgf egf mrna lnp injections could alleviate chronic liver damage\\\"]\",\"subject_text\":\"mRNA-LNP significantly released cholesterol into the serum, diminished steatosis, and\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-3a132fcdbc563265\",\"claim_ids\":[\"ACL-3fa16330e2103759\"],\"confidence\":\"high\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-3c25e1ae6b8c58ec\"],\"numeric_value\":null,\"object_text\":\"persistent macrosteatosis (Fig\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"maintained\",\"provisional_experiment_id\":\"PEX-GP-004-65c3dda2c00c\",\"qualitative_result\":\"maintained\",\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"FC-S-fbed1caf43ce7c87\"],\"structural_signature\":\"[\\\"PEX-GP-004-65c3dda2c00c\\\",\\\"maintained\\\",\\\"positive\\\",\\\"hgf_egf\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"maintained\\\",\\\"hepatocytes\\\",\\\"persistent macrosteatosis fig\\\"]\",\"subject_text\":\"hepatocytes\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-f869cbc45127e97b\",\"claim_ids\":[\"ACL-08476a81fb6b146c\"],\"confidence\":\"high\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-004-FC-aaef2b0838c071e4\"],\"numeric_value\":null,\"object_text\":\"serum ALT levels at T8, suggesting that a repeated regimen of HGF/EGF mRNA-LNP injections could alleviate chronic liver damage\",\"paper_id\":\"GP-004\",\"polarity\":\"positive\",\"predicate\":\"reduced\",\"provisional_experiment_id\":\"PEX-GP-004-65c3dda2c00c\",\"qualitative_result\":\"significantly\",\"review_reasons\":[],\"route_hint\":\"text\",\"source_ids\":[\"FC-S-910df540c2d91e5a\"],\"structural_signature\":\"[\\\"PEX-GP-004-65c3dda2c00c\\\",\\\"reduced\\\",\\\"positive\\\",\\\"hgf_egf\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"\\\",\\\"significantly\\\",\\\"injection of hgf egf mrna lnp significantly released cholesterol into the serum\\\",\\\"serum alt levels at t8 suggesting that a repeated regimen of hgf egf mrna lnp injections could alleviate chronic liver damage\\\"]\",\"subject_text\":\"injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum\",\"unit\":null,\"value_text\":null}],\"estimated_tokens\":4742,\"instructions\":[\"Candidates are navigation aids, not verified final outcomes.\",\"Create a final record only when its cited evidence directly supports it.\",\"Keep distinct provisional experiments and atomic relationships separate.\",\"Deduplicate candidates against outcomes already supported by the packet.\",\"Use only evidence IDs present in the packet or local_evidence below.\"],\"local_evidence\":[{\"evidence_id\":\"GP-004-FC-af61355776c8ccca\",\"provenance\":{\"column_label\":null,\"evidence_id\":\"GP-004-FC-af61355776c8ccca\",\"locator_type\":\"text\",\"panel_label\":null,\"row_label\":null,\"source_id\":\"FC-S-783827e9e8236666\"},\"source_ids\":[\"FC-S-783827e9e8236666\"],\"source_kind\":\"text\",\"text\":\"Virtually all hepatocytes identified with HNF4α expressed eGFP (Fig.\"},{\"evidence_id\":\"GP-004-FC-66b43dcd526b6e18\",\"provenance\":{\"column_label\":null,\"evidence_id\":\"GP-004-FC-66b43dcd526b6e18\",\"locator_type\":\"text\",\"panel_label\":null,\"row_label\":null,\"source_id\":\"FC-S-1f7e29eaf1c74013\"},\"source_ids\":[\"FC-S-1f7e29eaf1c74013\",\"FC-S-1f7e29eaf1c74013\",\"FC-S-1f7e29eaf1c74013\"],\"source_kind\":\"text\",\"text\":\"a pronounced expression was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig.\"},{\"evidence_id\":\"GP-004-FC-cde0316a82a5bd30\",\"provenance\":{\"column_label\":null,\"evidence_id\":\"GP-004-FC-cde0316a82a5bd30\",\"locator_type\":\"text\",\"panel_label\":null,\"row_label\":null,\"source_id\":\"FC-S-783827e9e8236666\"},\"source_ids\":[\"FC-S-783827e9e8236666\"],\"source_kind\":\"text\",\"text\":\"few F4/80+ Kupffer cells expressed eGFP.\"},{\"evidence_id\":\"GP-004-FC-291597f2c1490207\",\"provenance\":{\"column_label\":null,\"evidence_id\":\"GP-004-FC-291597f2c1490207\",\"locator_type\":\"text\",\"panel_label\":null,\"row_label\":null,\"source_id\":\"FC-S-1f7e29eaf1c74013\"},\"source_ids\":[\"FC-S-1f7e29eaf1c74013\",\"FC-S-1f7e29eaf1c74013\"],\"source_kind\":\"text\",\"text\":\"In the lung, scattered eGFP+ cells were found that resembled alveolar macrophages, given their morphology, intra-alveolar luminal location, and CD45 expression (Supplementary Fig.\"},{\"evidence_id\":\"GP-004-FC-cf395fdeb1008314\",\"provenance\":{\"column_label\":null,\"evidence_id\":\"GP-004-FC-cf395fdeb1008314\",\"locator_type\":\"text\",\"panel_label\":null,\"row_label\":null,\"source_id\":\"FC-S-783827e9e8236666\"},\"source_ids\":[\"FC-S-783827e9e8236666\"],\"source_kind\":\"text\",\"text\":\"Given that hepatocyte mitogens are mostly secreted proteins, expression of mRNA-LNP encoded mitogens by endothelial and Kupffer cells would also be beneficial in activating the corresponding pathways in adjacent hepatocytes.\"},{\"evidence_id\":\"GP-004-FC-aaef2b0838c071e4\",\"provenance\":{\"column_label\":null,\"evidence_id\":\"GP-004-FC-aaef2b0838c071e4\",\"locator_type\":\"text\",\"panel_label\":null,\"row_label\":null,\"source_id\":\"FC-S-910df540c2d91e5a\"},\"source_ids\":[\"FC-S-910df540c2d91e5a\"],\"source_kind\":\"text\",\"text\":\"However, a second injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum, diminished steatosis, and decreased serum ALT levels at T8, suggesting that a repeated regimen of HGF/EGF mRNA-LNP injections could alleviate chronic liver damage.\"},{\"evidence_id\":\"GP-004-FC-3c25e1ae6b8c58ec\",\"provenance\":{\"column_label\":null,\"evidence_id\":\"GP-004-FC-3c25e1ae6b8c58ec\",\"locator_type\":\"text\",\"panel_label\":null,\"row_label\":null,\"source_id\":\"FC-S-fbed1caf43ce7c87\"},\"source_ids\":[\"FC-S-fbed1caf43ce7c87\"],\"source_kind\":\"text\",\"text\":\"Analyses of lipid accumulation in hepatocytes as assessed by Oil Red O staining on liver sections revealed a sharp decrease of steatosis 2 days after the first injection of HGF/EGF mRNA-LNP compared to that with Poly(C) RNA-LNP treatment, in which steatosis was evenly maintained with persistent macrosteatosis (Fig.\"}],\"paper_id\":\"GP-004\",\"provisional_experiments\":[{\"anchors\":[{\"anchor_type\":\"payload\",\"evidence_ids\":[\"GP-004-E-1bce9423e81c94ae\",\"GP-004-E-2c606219e3e7278a\",\"GP-004-E-2fe92a17370f5591\",\"GP-004-E-33c99bcea45d6aed\",\"GP-004-E-49e7cf84d4e37097\",\"GP-004-E-7c0d52cf1408ed87\",\"GP-004-E-8bd21c8aa7f50cfb\",\"GP-004-E-e29c5e3c31a38827\",\"GP-004-FC-03876d9736f044cf\",\"GP-004-FC-0c819dd2def7bf75\",\"GP-004-FC-12053cd9ad8e1269\",\"GP-004-FC-16180acf04a1970f\",\"GP-004-FC-1958aad9a1f1ee19\",\"GP-004-FC-1b79e7319f76338c\",\"GP-004-FC-3857aed64b8bc1b4\",\"GP-004-FC-55b617cdedc8e003\",\"GP-004-FC-8a482c9df224c3c2\",\"GP-004-FC-9251097e29b31269\",\"GP-004-FC-9c747bda0bff0486\",\"GP-004-FC-bf9eacbe09f4ad9e\",\"GP-004-FC-c862aaafedd5b3c3\",\"GP-004-FC-cde92da0d62e839a\",\"GP-004-E-0e95fa28bea7a24c\",\"GP-004-E-1f28a42d83d7b914\",\"GP-004-E-44b663f029e6e370\",\"GP-004-E-4ffd81157880235c\",\"GP-004-E-59770ccbedc0f9cf\",\"GP-004-E-81ab08786ec37000\",\"GP-004-E-9727e33fb834be68\",\"GP-004-E-972d3e138bf126db\",\"GP-004-E-a72862f18ec2ffcd\",\"GP-004-E-ac5ffef51d25a107\",\"GP-004-E-bb88af4966174b2f\",\"GP-004-E-d301c2bddc4426bf\",\"GP-004-E-fd825b27dcaebf09\",\"GP-004-FC-1b89a31b384a7046\",\"GP-004-FC-23e3a27064893327\",\"GP-004-FC-291597f2c1490207\",\"GP-004-FC-2d0b76491192ab4a\",\"GP-004-FC-4773a726e074aec3\",\"GP-004-FC-4dd33ccc119f1671\",\"GP-004-FC-592ed74176fd5937\",\"GP-004-FC-66b43dcd526b6e18\",\"GP-004-FC-7f3219c27d7b8a64\",\"GP-004-FC-af61355776c8ccca\",\"GP-004-FC-bdbc539faa37bfad\",\"GP-004-FC-be523d5d2cc45eeb\",\"GP-004-FC-c3e5bc02a1cae215\",\"GP-004-FC-c69610063e02bfdb\",\"GP-004-FC-cde0316a82a5bd30\"],\"value\":\"egfp_gfp\"},{\"anchor_type\":\"model\",\"evidence_ids\":[\"GP-004-E-1bce9423e81c94ae\",\"GP-004-E-2c606219e3e7278a\",\"GP-004-E-2fe92a17370f5591\",\"GP-004-E-33c99bcea45d6aed\",\"GP-004-E-49e7cf84d4e37097\",\"GP-004-E-7c0d52cf1408ed87\",\"GP-004-E-8bd21c8aa7f50cfb\",\"GP-004-E-e29c5e3c31a38827\",\"GP-004-FC-03876d9736f044cf\",\"GP-004-FC-0c819dd2def7bf75\",\"GP-004-FC-12053cd9ad8e1269\",\"GP-004-FC-16180acf04a1970f\",\"GP-004-FC-1958aad9a1f1ee19\",\"GP-004-FC-1b79e7319f76338c\",\"GP-004-FC-3857aed64b8bc1b4\",\"GP-004-FC-55b617cdedc8e003\",\"GP-004-FC-8a482c9df224c3c2\",\"GP-004-FC-9251097e29b31269\",\"GP-004-FC-9c747bda0bff0486\",\"GP-004-FC-bf9eacbe09f4ad9e\",\"GP-004-FC-c862aaafedd5b3c3\",\"GP-004-FC-cde92da0d62e839a\",\"GP-004-E-0e95fa28bea7a24c\",\"GP-004-E-1f28a42d83d7b914\",\"GP-004-E-44b663f029e6e370\",\"GP-004-E-4ffd81157880235c\",\"GP-004-E-59770ccbedc0f9cf\",\"GP-004-E-81ab08786ec37000\",\"GP-004-E-9727e33fb834be68\",\"GP-004-E-972d3e138bf126db\",\"GP-004-E-a72862f18ec2ffcd\",\"GP-004-E-ac5ffef51d25a107\",\"GP-004-E-bb88af4966174b2f\",\"GP-004-E-d301c2bddc4426bf\",\"GP-004-E-fd825b27dcaebf09\",\"GP-004-FC-1b89a31b384a7046\",\"GP-004-FC-23e3a27064893327\",\"GP-004-FC-291597f2c1490207\",\"GP-004-FC-2d0b76491192ab4a\",\"GP-004-FC-4773a726e074aec3\",\"GP-004-FC-4dd33ccc119f1671\",\"GP-004-FC-592ed74176fd5937\",\"GP-004-FC-66b43dcd526b6e18\",\"GP-004-FC-7f3219c27d7b8a64\",\"GP-004-FC-af61355776c8ccca\",\"GP-004-FC-bdbc539faa37bfad\",\"GP-004-FC-be523d5d2cc45eeb\",\"GP-004-FC-c3e5bc02a1cae215\",\"GP-004-FC-c69610063e02bfdb\",\"GP-004-FC-cde0316a82a5bd30\"],\"value\":\"in_vivo\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[\"GP-004-E-49e7cf84d4e37097\",\"GP-004-FC-9c747bda0bff0486\",\"GP-004-E-1f28a42d83d7b914\",\"GP-004-FC-cde0316a82a5bd30\"],\"value\":\"kupffer_cell\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[\"GP-004-E-81ab08786ec37000\",\"GP-004-FC-291597f2c1490207\"],\"value\":\"macrophage\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-004-E-33c99bcea45d6aed\",\"GP-004-E-49e7cf84d4e37097\",\"GP-004-FC-03876d9736f044cf\",\"GP-004-FC-0c819dd2def7bf75\",\"GP-004-FC-16180acf04a1970f\",\"GP-004-FC-9c747bda0bff0486\",\"GP-004-FC-c862aaafedd5b3c3\",\"GP-004-E-a72862f18ec2ffcd\",\"GP-004-E-bb88af4966174b2f\",\"GP-004-FC-592ed74176fd5937\",\"GP-004-FC-be523d5d2cc45eeb\"],\"value\":\"immunostaining\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-004-E-1bce9423e81c94ae\",\"GP-004-E-2c606219e3e7278a\",\"GP-004-E-49e7cf84d4e37097\",\"GP-004-FC-3857aed64b8bc1b4\",\"GP-004-FC-9c747bda0bff0486\",\"GP-004-FC-bf9eacbe09f4ad9e\",\"GP-004-E-d301c2bddc4426bf\",\"GP-004-FC-1b89a31b384a7046\"],\"value\":\"flow_cytometry\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-004-FC-c69610063e02bfdb\"],\"value\":\"phagocytosis_cytotoxicity\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-004-E-a72862f18ec2ffcd\",\"GP-004-FC-be523d5d2cc45eeb\"],\"value\":\"histology\"}],\"boundary_reason\":\"Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.\",\"boundary_status\":\"inferred\",\"confidence\":\"medium\",\"label\":\"egfp_gfp / in_vivo\",\"provisional_experiment_id\":\"PEX-GP-004-00c9dca895b9\"},{\"anchors\":[{\"anchor_type\":\"payload\",\"evidence_ids\":[\"GP-004-E-0899161589d7231b\",\"GP-004-E-1021bbc69d3e566e\",\"GP-004-E-12343d379452fe6d\",\"GP-004-E-160c78bf3a0c716d\",\"GP-004-E-273b65f8b9cd06c6\",\"GP-004-E-3cadcaa508e40b67\",\"GP-004-E-431b75f9ecb4f846\",\"GP-004-E-499f43bf1116bb88\",\"GP-004-E-56f2c8730bacde13\",\"GP-004-E-575b2fc9ece61198\",\"GP-004-E-76188fc7eb676c9d\",\"GP-004-E-815b0bae34ee13f3\",\"GP-004-E-962fd9d259036a80\",\"GP-004-E-9fe5f36df2164e9d\",\"GP-004-E-a373280a6c65d931\",\"GP-004-E-abe18f899dd66651\",\"GP-004-E-b293f56409c89709\",\"GP-004-E-b306180ffe714a28\",\"GP-004-E-bb2e5d97814ac516\",\"GP-004-E-d776a7c110037300\",\"GP-004-E-ed8fea0eb24b05c5\",\"GP-004-E-f3cd9563ae3e7209\",\"GP-004-E-f5641e1c357b2484\",\"GP-004-E-f68f615dad942e41\",\"GP-004-FC-02b903e840e42014\",\"GP-004-FC-08da33a72a8d2361\",\"GP-004-FC-0d9b5fe01ed89e0c\",\"GP-004-FC-239740afb3398c29\",\"GP-004-FC-28debb889d77206b\",\"GP-004-FC-2c118a043c28cf38\",\"GP-004-FC-3c25e1ae6b8c58ec\",\"GP-004-FC-3dd5703fd7fc9767\",\"GP-004-FC-421ae497949a7b60\",\"GP-004-FC-432a613124372afe\",\"GP-004-FC-475834f7dc0de389\",\"GP-004-FC-4d7bdaa6b119f1f3\",\"GP-004-FC-50af90b820ab5165\",\"GP-004-FC-5be151239bc4ecc1\",\"GP-004-FC-611c7421881e8078\",\"GP-004-FC-635a18d7c0f97f79\",\"GP-004-FC-6bf14be3f24c556e\",\"GP-004-FC-77dd9b9c318dadac\",\"GP-004-FC-7bc10d1c554e9bfd\",\"GP-004-FC-86b2a56062f282a1\",\"GP-004-FC-a22fe36db0205267\",\"GP-004-FC-a3bd13b00a8677bd\",\"GP-004-FC-ad61b7d1bd277a8c\",\"GP-004-FC-aef98c734ab5b0c1\",\"GP-004-FC-af54f9c005e1e7de\",\"GP-004-FC-be911b4618a724fd\",\"GP-004-FC-bf07ec79700b40d8\",\"GP-004-FC-d208c4e6085bc783\",\"GP-004-FC-ee99360dd0073ec6\",\"GP-004-FC-f01757d2e9b1d397\",\"GP-004-FC-fd4bf6d11ea27974\"],\"value\":\"hgf_egf\"},{\"anchor_type\":\"model\",\"evidence_ids\":[\"GP-004-E-0899161589d7231b\",\"GP-004-E-1021bbc69d3e566e\",\"GP-004-E-12343d379452fe6d\",\"GP-004-E-160c78bf3a0c716d\",\"GP-004-E-273b65f8b9cd06c6\",\"GP-004-E-3cadcaa508e40b67\",\"GP-004-E-431b75f9ecb4f846\",\"GP-004-E-499f43bf1116bb88\",\"GP-004-E-56f2c8730bacde13\",\"GP-004-E-575b2fc9ece61198\",\"GP-004-E-76188fc7eb676c9d\",\"GP-004-E-815b0bae34ee13f3\",\"GP-004-E-962fd9d259036a80\",\"GP-004-E-9fe5f36df2164e9d\",\"GP-004-E-a373280a6c65d931\",\"GP-004-E-abe18f899dd66651\",\"GP-004-E-b293f56409c89709\",\"GP-004-E-b306180ffe714a28\",\"GP-004-E-bb2e5d97814ac516\",\"GP-004-E-d776a7c110037300\",\"GP-004-E-ed8fea0eb24b05c5\",\"GP-004-E-f3cd9563ae3e7209\",\"GP-004-E-f5641e1c357b2484\",\"GP-004-E-f68f615dad942e41\",\"GP-004-FC-02b903e840e42014\",\"GP-004-FC-08da33a72a8d2361\",\"GP-004-FC-0d9b5fe01ed89e0c\",\"GP-004-FC-239740afb3398c29\",\"GP-004-FC-28debb889d77206b\",\"GP-004-FC-2c118a043c28cf38\",\"GP-004-FC-3c25e1ae6b8c58ec\",\"GP-004-FC-3dd5703fd7fc9767\",\"GP-004-FC-421ae497949a7b60\",\"GP-004-FC-432a613124372afe\",\"GP-004-FC-475834f7dc0de389\",\"GP-004-FC-4d7bdaa6b119f1f3\",\"GP-004-FC-50af90b820ab5165\",\"GP-004-FC-5be151239bc4ecc1\",\"GP-004-FC-611c7421881e8078\",\"GP-004-FC-635a18d7c0f97f79\",\"GP-004-FC-6bf14be3f24c556e\",\"GP-004-FC-77dd9b9c318dadac\",\"GP-004-FC-7bc10d1c554e9bfd\",\"GP-004-FC-86b2a56062f282a1\",\"GP-004-FC-a22fe36db0205267\",\"GP-004-FC-a3bd13b00a8677bd\",\"GP-004-FC-ad61b7d1bd277a8c\",\"GP-004-FC-aef98c734ab5b0c1\",\"GP-004-FC-af54f9c005e1e7de\",\"GP-004-FC-be911b4618a724fd\",\"GP-004-FC-bf07ec79700b40d8\",\"GP-004-FC-d208c4e6085bc783\",\"GP-004-FC-ee99360dd0073ec6\",\"GP-004-FC-f01757d2e9b1d397\",\"GP-004-FC-fd4bf6d11ea27974\"],\"value\":\"in_vivo\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[\"GP-004-FC-239740afb3398c29\"],\"value\":\"kupffer_cell\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[\"GP-004-E-f68f615dad942e41\",\"GP-004-FC-08da33a72a8d2361\",\"GP-004-FC-421ae497949a7b60\"],\"value\":\"hepatocyte\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-004-E-273b65f8b9cd06c6\",\"GP-004-E-f68f615dad942e41\",\"GP-004-FC-08da33a72a8d2361\",\"GP-004-FC-239740afb3398c29\",\"GP-004-FC-28debb889d77206b\"],\"value\":\"immunostaining\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-004-FC-239740afb3398c29\"],\"value\":\"flow_cytometry\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-004-FC-239740afb3398c29\"],\"value\":\"sequencing\"}],\"boundary_reason\":\"Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.\",\"boundary_status\":\"inferred\",\"confidence\":\"medium\",\"label\":\"hgf_egf / in_vivo\",\"provisional_experiment_id\":\"PEX-GP-004-65c3dda2c00c\"}],\"support_version\":\"main-route-recall-support-1.2.0\"}}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "CompactExtractionResponse",
+      "schema": {
+        "$defs": {
+          "ComponentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "title": "Component Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "identity": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "role": {
+                "$ref": "#/$defs/ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___"
+              },
+              "amount": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "amount_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "component_id",
+              "formulation_id",
+              "identity",
+              "role",
+              "amount",
+              "amount_unit"
+            ],
+            "title": "ComponentRecord",
+            "type": "object"
+          },
+          "EligibilityRecord": {
+            "additionalProperties": false,
+            "description": "Evidence-grounded final paper disposition for the extraction task.",
+            "properties": {
+              "decision": {
+                "enum": [
+                  "eligible",
+                  "ineligible",
+                  "uncertain"
+                ],
+                "title": "Decision",
+                "type": "string"
+              },
+              "reason_codes": {
+                "items": {
+                  "enum": [
+                    "ORIGINAL_EXPERIMENT",
+                    "IDENTIFIABLE_LNP",
+                    "SUPPORTED_PAYLOAD",
+                    "TARGET_CELL_EVIDENCE",
+                    "USABLE_FORMULATION_OUTCOME_LINKAGE",
+                    "NOT_ORIGINAL_RESEARCH",
+                    "NOT_ELIGIBLE_LNP",
+                    "UNSUPPORTED_PAYLOAD",
+                    "NO_TARGET_CELL_EVIDENCE",
+                    "NO_FORMULATION_OUTCOME_LINKAGE",
+                    "DUPLICATE_SCIENTIFIC_REPORT",
+                    "RETRACTED_OR_INVALID",
+                    "FULL_TEXT_REQUIRED",
+                    "PUBLICATION_TYPE_AMBIGUOUS",
+                    "LNP_IDENTITY_AMBIGUOUS",
+                    "PAYLOAD_AMBIGUOUS",
+                    "TARGET_CELL_AMBIGUOUS",
+                    "FORMULATION_INCOMPLETE",
+                    "OUTCOME_LINKAGE_AMBIGUOUS",
+                    "CHEMISTRY_AMBIGUOUS"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Reason Codes",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "explanation": {
+                "maxLength": 500,
+                "minLength": 1,
+                "title": "Explanation",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision",
+              "reason_codes",
+              "evidence_ids",
+              "explanation"
+            ],
+            "title": "EligibilityRecord",
+            "type": "object"
+          },
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "FormulationRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "formulation_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition_basis": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "np_ratio": {
+                "$ref": "#/$defs/ReportedField_float_"
+              }
+            },
+            "required": [
+              "formulation_id",
+              "formulation_name",
+              "composition",
+              "composition_basis",
+              "np_ratio"
+            ],
+            "title": "FormulationRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "ionizable_lipid",
+                      "helper_lipid",
+                      "cholesterol",
+                      "peg_lipid",
+                      "targeting_ligand",
+                      "sort_lipid",
+                      "other"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid', 'targeting_ligand', 'sort_lipid', 'other']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One paper response joined to a local evidence packet after validation.",
+        "properties": {
+          "contract_version": {
+            "const": "compact-1.1.0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "paper_id": {
+            "title": "Paper Id",
+            "type": "string"
+          },
+          "eligibility": {
+            "$ref": "#/$defs/EligibilityRecord"
+          },
+          "formulations": {
+            "items": {
+              "$ref": "#/$defs/FormulationRecord"
+            },
+            "title": "Formulations",
+            "type": "array"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/$defs/ComponentRecord"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_items": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "contract_version",
+          "paper_id",
+          "eligibility",
+          "formulations",
+          "components",
+          "experiments",
+          "outcomes",
+          "unresolved_items"
+        ],
+        "title": "CompactExtractionResponse",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}

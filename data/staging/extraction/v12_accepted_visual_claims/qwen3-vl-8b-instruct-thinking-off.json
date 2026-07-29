@@ -1,0 +1,38 @@
+{
+  "registry_version": "accepted-visual-claims-1.2.0",
+  "model": "qwen3-vl:8b-instruct",
+  "model_digest": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+  "thinking": false,
+  "benchmark_report": "reports/extraction/v12_vlm_benchmarks/qwen3-vl-8b-instruct-thinking-off/evaluation.json",
+  "benchmark_gate_passed": true,
+  "claims": [
+    {
+      "evidence_id": "VLM-6649d72f82d06811",
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L-stacked.png",
+      "claim": {
+        "claim_id": "VCL-4fc730093a048751",
+        "subject": "αCD163/LNP-ZsGreen",
+        "predicate": "co-staining with F4/80+ macrophages",
+        "endpoint": null,
+        "result_type": "qualitative",
+        "value": "F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells",
+        "unit": null,
+        "intervention_context": null,
+        "panel_or_cell": "L",
+        "visible_support": [
+          "In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen.",
+          "The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...'",
+          "In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel."
+        ],
+        "evidence_kinds": [
+          "image",
+          "caption"
+        ],
+        "confidence": "high"
+      },
+      "support_text": "In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen. | The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...' | In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel."
+    }
+  ],
+  "gold_identifiers_in_payload": false
+}

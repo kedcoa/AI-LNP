@@ -1,0 +1,369 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 4000,
+  "input": [
+    {
+      "role": "system",
+      "content": "Recover only the atomic candidate facts and experiment context in\nthe supplied task. Candidate IDs are opaque labels: use candidate_facts as the\nrequired fact definitions and the supplied evidence as their only support.\nAccount for every candidate ID exactly once as recovered or unresolved. Do not\nmerge distinct cells, relationships, endpoints, values, polarities, or\nexperiments into a broad record. A candidate is recovered only when at least one\nreturned outcome preserves its specific facts and cites its evidence; shared\nevidence alone is not coverage. Do not repeat existing records. Return unresolved\nwith a specific reason when evidence is insufficient. Never invent identifiers,\nvalues, units, comparisons, or evidence labels."
+    },
+    {
+      "role": "user",
+      "content": "{\"candidate_facts\":[{\"candidate_id\":\"AOC-VIS-49acb14b88ab3f62\",\"endpoint_text\":\"total insertion frequency\",\"evidence_ids\":[\"VIS-5f9b6daebb6cb3d8\"],\"numeric_value\":4.23,\"object_text\":null,\"polarity\":\"neutral\",\"predicate\":\"reached\",\"qualitative_result\":null,\"subject_text\":\"Hepatocyte\",\"unit\":\"%\",\"value_text\":\"4.23±1.17 %\"},{\"candidate_id\":\"AOC-VIS-652075a583572547\",\"endpoint_text\":\"total insertion frequency\",\"evidence_ids\":[\"VIS-1406333dda06dfeb\"],\"numeric_value\":1.01,\"object_text\":null,\"polarity\":\"neutral\",\"predicate\":\"reached\",\"qualitative_result\":null,\"subject_text\":\"LSEC\",\"unit\":\"%\",\"value_text\":\"1.01±0.38%\"},{\"candidate_id\":\"AOC-VIS-7129c612afdb7bee\",\"endpoint_text\":\"+1\",\"evidence_ids\":[\"VIS-4466b06097b27185\"],\"numeric_value\":3.39,\"object_text\":null,\"polarity\":\"neutral\",\"predicate\":\"reached\",\"qualitative_result\":null,\"subject_text\":\"Hepatocyte\",\"unit\":\"%\",\"value_text\":\"3.39 ± 0.91 %\"},{\"candidate_id\":\"AOC-VIS-daa35a9f428a7b5f\",\"endpoint_text\":\"+3\",\"evidence_ids\":[\"VIS-d31fe91bcfb345d6\"],\"numeric_value\":0.01,\"object_text\":null,\"polarity\":\"neutral\",\"predicate\":\"reached\",\"qualitative_result\":null,\"subject_text\":\"LSEC\",\"unit\":\"%\",\"value_text\":\"0.01 ± 0.01 %\"},{\"candidate_id\":\"AOC-VIS-dc9ab6e247d8663c\",\"endpoint_text\":\"+2\",\"evidence_ids\":[\"VIS-366ecf655cea361a\"],\"numeric_value\":0.83,\"object_text\":null,\"polarity\":\"neutral\",\"predicate\":\"reached\",\"qualitative_result\":null,\"subject_text\":\"Hepatocyte\",\"unit\":\"%\",\"value_text\":\"0.83 ± 0.27 %\"},{\"candidate_id\":\"AOC-bf8a4ec1588b36c3\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-006-E-8af0fe6c0065d45c\",\"GP-006-FC-887ad8f0a2e6dcfc\"],\"numeric_value\":null,\"object_text\":\"permanently in NSG HemA mice\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"qualitative_result\":null,\"subject_text\":\"LSECs\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-e3e4da6b85173179\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-006-E-b9606d3f1fb87b4c\",\"GP-006-FC-9f474cb7932305b5\"],\"numeric_value\":0.78,\"object_text\":\"(0\",\"polarity\":\"positive\",\"predicate\":\"decreased\",\"qualitative_result\":\"significantly\",\"subject_text\":\"insertion patterns among indel variants, but their frequencies were significantly\",\"unit\":\"%\",\"value_text\":\"0.78%\"}],\"candidate_ids\":[\"AOC-VIS-49acb14b88ab3f62\",\"AOC-VIS-652075a583572547\",\"AOC-VIS-7129c612afdb7bee\",\"AOC-VIS-daa35a9f428a7b5f\",\"AOC-VIS-dc9ab6e247d8663c\",\"AOC-bf8a4ec1588b36c3\",\"AOC-e3e4da6b85173179\"],\"evidence\":[{\"evidence_id\":\"VIS-5f9b6daebb6cb3d8\",\"source_ids\":[\"GP-006-mmc1-p002-table-03:table-0:r1:c6\"],\"text\":\"Hepatocyte | total insertion frequency | 4.23±1.17 %\"},{\"evidence_id\":\"VIS-1406333dda06dfeb\",\"source_ids\":[\"GP-006-mmc1-p002-table-03:table-0:r2:c6\"],\"text\":\"LSEC | total insertion frequency | 1.01±0.38%\"},{\"evidence_id\":\"VIS-4466b06097b27185\",\"source_ids\":[\"GP-006-mmc1-p002-table-03:table-0:r1:c1\"],\"text\":\"Hepatocyte | +1 | 3.39 ± 0.91 %\"},{\"evidence_id\":\"VIS-d31fe91bcfb345d6\",\"source_ids\":[\"GP-006-mmc1-p002-table-03:table-0:r2:c3\"],\"text\":\"LSEC | +3 | 0.01 ± 0.01 %\"},{\"evidence_id\":\"VIS-366ecf655cea361a\",\"source_ids\":[\"GP-006-mmc1-p002-table-03:table-0:r1:c2\"],\"text\":\"Hepatocyte | +2 | 0.83 ± 0.27 %\"},{\"evidence_id\":\"GP-006-E-8af0fe6c0065d45c\",\"source_ids\":[\"S-5e3078bd8fb5\"],\"text\":\"These results suggested that Cas9/sgRNA LNP treatment induced indel repair in LSECs and restoration of the endogenous FVIII expression permanently in NSG HemA mice.Figure 6Gene editing efficiency of isolated HPCs and LSECsAfter Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.\"},{\"evidence_id\":\"GP-006-FC-887ad8f0a2e6dcfc\",\"source_ids\":[\"FC-S-df43cccf8956b818\",\"FC-S-df43cccf8956b818\"],\"text\":\"These results suggested that Cas9/sgRNA LNP treatment induced indel repair in LSECs and restoration of the endogenous FVIII expression permanently in NSG HemA mice.\\nFigure 6Gene editing efficiency of isolated HPCs and LSECsAfter Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.\"},{\"evidence_id\":\"GP-006-E-b9606d3f1fb87b4c\",\"source_ids\":[\"S-5e3078bd8fb5\"],\"text\":\"We also analyzed the +2 and +5 insertion patterns among indel variants, but their frequencies were significantly lower (0.78% and 0%, respectively) compared with deletion variants (Table S2).\"},{\"evidence_id\":\"GP-006-FC-9f474cb7932305b5\",\"source_ids\":[\"FC-S-df43cccf8956b818\",\"FC-S-df43cccf8956b818\"],\"text\":\"We also analyzed the +2 and +5 insertion patterns among indel variants, but their frequencies were significantly lower (0.78% and 0%, respectively) compared with deletion variants (Table S2).\"}],\"existing_experiment_ids\":[\"E1\",\"E2\"],\"existing_formulation_ids\":[\"F1\",\"F2\"],\"existing_outcome_ids\":[\"O1\",\"O2\",\"O3\",\"O4\",\"O5\",\"O6\",\"O7\",\"O8\"],\"experiment_context\":{\"anchors\":[{\"anchor_type\":\"payload\",\"evidence_ids\":[\"GP-006-E-8af0fe6c0065d45c\",\"GP-006-FC-887ad8f0a2e6dcfc\"],\"value\":\"cas9_sgrna\"},{\"anchor_type\":\"model\",\"evidence_ids\":[\"GP-006-E-8af0fe6c0065d45c\",\"GP-006-FC-887ad8f0a2e6dcfc\"],\"value\":\"in_vivo\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[\"GP-006-E-8af0fe6c0065d45c\",\"GP-006-FC-887ad8f0a2e6dcfc\"],\"value\":\"lsec\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[],\"value\":\"sequencing\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-006-E-8af0fe6c0065d45c\",\"GP-006-FC-887ad8f0a2e6dcfc\"],\"value\":\"coagulation_activity\"}],\"label\":\"cas9_sgrna / in_vivo\",\"provisional_experiment_id\":\"PEX-GP-006-d4cca5a9f0e1\"},\"paper_id\":\"GP-006\",\"permitted_new_experiments\":0,\"permitted_new_outcomes\":8,\"route_ids\":[\"structural:AOC-VIS-49acb14b88ab3f62\",\"structural:AOC-VIS-652075a583572547\",\"structural:AOC-VIS-7129c612afdb7bee\",\"structural:AOC-VIS-daa35a9f428a7b5f\",\"structural:AOC-VIS-dc9ab6e247d8663c\",\"structural:AOC-bf8a4ec1588b36c3\",\"structural:AOC-e3e4da6b85173179\"],\"source_inventory_sha256\":\"3fc30210d59e81fd2a6748d65aa3d5d459cc8af0a7c54e73fbed2269a1f012e1\",\"source_result_sha256\":\"787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998\",\"task_checksum\":\"b649a0f36b49aed9149c457a98a60c1a631de02d5ab92c088e2b9db70585b16c\",\"task_version\":\"missing-record-task-1.1.0\"}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "MissingRecordFragment",
+      "schema": {
+        "$defs": {
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "disposition": {
+            "enum": [
+              "recovered",
+              "unresolved"
+            ],
+            "title": "Disposition",
+            "type": "string"
+          },
+          "recovered_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Recovered Candidate Ids",
+            "type": "array"
+          },
+          "unresolved_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Candidate Ids",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "maxItems": 2,
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "maxItems": 8,
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unresolved Reason"
+          }
+        },
+        "required": [
+          "disposition",
+          "recovered_candidate_ids",
+          "unresolved_candidate_ids",
+          "experiments",
+          "outcomes",
+          "unresolved_reason"
+        ],
+        "title": "MissingRecordFragment",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}

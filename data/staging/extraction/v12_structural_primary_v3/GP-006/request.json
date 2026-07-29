@@ -1,0 +1,4031 @@
+{
+  "preparation_version": "v12-frozen-baseline-structural-1.0.0",
+  "paper_id": "GP-006",
+  "source_result": {
+    "path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-006/final_result.json",
+    "sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998"
+  },
+  "support_snapshot": {
+    "path": "data/staging/extraction/v12_main_route_support/GP-006/support.json",
+    "sha256": "b85dd021a32097f03ad0676bfeabf441d505e607ab351335ed5f651bd62927d3"
+  },
+  "source_evidence_registry": {
+    "artifacts": [
+      {
+        "kind": "legacy_repair_task",
+        "path": "data/staging/extraction/consolidated_gold_gap_tasks_v1/GP-006/task.json",
+        "sha256": "f55ed70c1eeb93f7e0d9040f0f6455c2c8aa168f8c5c8be36aea68f51c5fed58",
+        "embedded_checksum": "8daddd5f38ffd27eb01e8ce8a54e7c831a4ebdc4b46e2bf203762b4f2e036177"
+      },
+      {
+        "kind": "validated_full_evidence_packet",
+        "path": "data/staging/rag/compact_packets_v1/GP-006.json",
+        "sha256": "f2cd3454b4f953e28f5d0f4de838e3e0755a50bf28106d6c5b333f79eae3046d"
+      },
+      {
+        "kind": "atomic_claim_evidence",
+        "path": "data/staging/extraction/v12_atomic_inventory/GP-006/claims.json",
+        "sha256": "8a0ccc4049553bb17d77846f67015d014fdf7018f3556a2a5aef4d704c66d0b9"
+      }
+    ],
+    "verified_evidence_ids": [
+      "GP-006-E-001aeb0c00d268b7",
+      "GP-006-E-0043b99ab0bf3320",
+      "GP-006-E-0062483addf27f5e",
+      "GP-006-E-00b0211c6bbeb13b",
+      "GP-006-E-00b78f47abff55d6",
+      "GP-006-E-00fac3d4777e057d",
+      "GP-006-E-011d44576cc09a69",
+      "GP-006-E-01e16ac80b80695b",
+      "GP-006-E-02200ac27c3e7e1d",
+      "GP-006-E-022f2b3f91b6afdf",
+      "GP-006-E-03654698546fcb91",
+      "GP-006-E-0496ab585d5d2ce7",
+      "GP-006-E-04a36692cd969e4a",
+      "GP-006-E-04f3109bdceef1f6",
+      "GP-006-E-0531a76f7f816a56",
+      "GP-006-E-056bb0d128bc9ecd",
+      "GP-006-E-05a830ec57ce418e",
+      "GP-006-E-06457018821342ce",
+      "GP-006-E-06981f0d61585c3b",
+      "GP-006-E-06fab5f83faff0f5",
+      "GP-006-E-08570ca8c59e9863",
+      "GP-006-E-08da7bc1f8b9a0cc",
+      "GP-006-E-08e2bd57bb350010",
+      "GP-006-E-0925b430bdd7a6c5",
+      "GP-006-E-0997299690177c88",
+      "GP-006-E-09c6673c0636981b",
+      "GP-006-E-09f27a614bffbf2d",
+      "GP-006-E-0a711ba62b3c0836",
+      "GP-006-E-0ae9081dddca16ec",
+      "GP-006-E-0b504b38b403fd69",
+      "GP-006-E-0d07bcc42f8330b3",
+      "GP-006-E-0d51446684dc2c77",
+      "GP-006-E-0d6bc28d7c1c1fee",
+      "GP-006-E-0ddd9b0412ade45d",
+      "GP-006-E-0e3cd2c8001735ab",
+      "GP-006-E-0e6b9af402839b5c",
+      "GP-006-E-0e932dc79aa7ba74",
+      "GP-006-E-0f16dd3ffabb97c5",
+      "GP-006-E-0f4500a1e115b1f5",
+      "GP-006-E-0f7d1745669bdab7",
+      "GP-006-E-1015af8d2444e38c",
+      "GP-006-E-1026eebfa4555fab",
+      "GP-006-E-1065f5f604d71251",
+      "GP-006-E-11035215a37239af",
+      "GP-006-E-118131ed63922e62",
+      "GP-006-E-11b0b2c677c57f98",
+      "GP-006-E-11e9f9f226b5a5b6",
+      "GP-006-E-1355aca43d156451",
+      "GP-006-E-14a49d1ed311776f",
+      "GP-006-E-14d472b4489cd518",
+      "GP-006-E-1629bc90ee6fa4ff",
+      "GP-006-E-165021b8ab9633f5",
+      "GP-006-E-167851cee3226cf3",
+      "GP-006-E-16ac4ee6578345b8",
+      "GP-006-E-16f724746cecd59c",
+      "GP-006-E-1754b7caa9dbf398",
+      "GP-006-E-17987d9fcb987630",
+      "GP-006-E-17e327d347caa88f",
+      "GP-006-E-1852a0ae073c649d",
+      "GP-006-E-186b7f12022bd191",
+      "GP-006-E-188a61c5d932ae24",
+      "GP-006-E-1893c0cd1beb2ee9",
+      "GP-006-E-18caf92cc2e6c267",
+      "GP-006-E-18f2a303c9ed52ec",
+      "GP-006-E-191ac0774ac7347b",
+      "GP-006-E-1abbea6a2923c49a",
+      "GP-006-E-1ae317c2bde667d2",
+      "GP-006-E-1ba850bbbd0c2200",
+      "GP-006-E-1d0d39aff392d38f",
+      "GP-006-E-1d1871fe74140517",
+      "GP-006-E-1d83f7d8dacfc5aa",
+      "GP-006-E-1e527773e8493acf",
+      "GP-006-E-1e5982c27d0377f7",
+      "GP-006-E-1e61c8cc97fc51bb",
+      "GP-006-E-1f4927afa9b8c773",
+      "GP-006-E-1fb55a3ed5cc73f9",
+      "GP-006-E-205812a9ce3f23bf",
+      "GP-006-E-206594e67467a044",
+      "GP-006-E-22a954aae3f000e4",
+      "GP-006-E-2346d4bce33ad74e",
+      "GP-006-E-236dda8f8f61cb4c",
+      "GP-006-E-23846b81ce438fb1",
+      "GP-006-E-240343c0e8cb8fff",
+      "GP-006-E-24e00024f72693f7",
+      "GP-006-E-251d555e882c93c1",
+      "GP-006-E-25602777cecc667d",
+      "GP-006-E-25d8a3c0f31c5cb6",
+      "GP-006-E-264c32868d21e30d",
+      "GP-006-E-26559b4f75a71a23",
+      "GP-006-E-267c23695b6e8fc2",
+      "GP-006-E-26fe0abf124e063a",
+      "GP-006-E-274fbeed0c70a008",
+      "GP-006-E-2877b762c6ec7a72",
+      "GP-006-E-2898d3d88a40b8e9",
+      "GP-006-E-28a8426e372a36ad",
+      "GP-006-E-29315268269642b9",
+      "GP-006-E-29707ed272101949",
+      "GP-006-E-2a28bcf9ba6d945f",
+      "GP-006-E-2a75a690d1b66c13",
+      "GP-006-E-2c95738714e9766c",
+      "GP-006-E-2d535ec515dc0f44",
+      "GP-006-E-2d91970a45e55b21",
+      "GP-006-E-2d998758bd27cac9",
+      "GP-006-E-2e097618155f951b",
+      "GP-006-E-2e7a6e0f71ef5212",
+      "GP-006-E-2e9019861338e79d",
+      "GP-006-E-2efd975a38b81dd6",
+      "GP-006-E-2fe1dd7e2e10b59d",
+      "GP-006-E-2fee62ceba9ad7ff",
+      "GP-006-E-302e1b54621fd617",
+      "GP-006-E-30adff05e58443b2",
+      "GP-006-E-30b11d1c5d2a17ef",
+      "GP-006-E-318d0c6bfd26973b",
+      "GP-006-E-31c0ada2828d03ec",
+      "GP-006-E-322a412492e8ff52",
+      "GP-006-E-323d468562cf1eb7",
+      "GP-006-E-327ed9965c3b1163",
+      "GP-006-E-32a5266e232442a9",
+      "GP-006-E-32e4db9d084b2e32",
+      "GP-006-E-32e50e788323d5f0",
+      "GP-006-E-331470ab8527c636",
+      "GP-006-E-337cb58e5b080aa3",
+      "GP-006-E-347afe08a5543c1f",
+      "GP-006-E-34e0b1bb52cea6e4",
+      "GP-006-E-352e15aaca7dcf8d",
+      "GP-006-E-353f63dc96d99de2",
+      "GP-006-E-368e2e2db8c7bbd6",
+      "GP-006-E-376ddd1f6da1553f",
+      "GP-006-E-3776c7071f5acfcc",
+      "GP-006-E-38443dc928c759aa",
+      "GP-006-E-384d2f1937d86e1e",
+      "GP-006-E-388cd03f8dc359ea",
+      "GP-006-E-38a025a0a98a4bb8",
+      "GP-006-E-39845d2f0f88a74c",
+      "GP-006-E-39cfd74bbca7e6bf",
+      "GP-006-E-3aa76efe6ac10863",
+      "GP-006-E-3b192b9e75ea9cba",
+      "GP-006-E-3b273a8bdff7ead9",
+      "GP-006-E-3b60876f947e61b6",
+      "GP-006-E-3b69c2449a207263",
+      "GP-006-E-3c6e73bc825c5293",
+      "GP-006-E-3ce982a20b163307",
+      "GP-006-E-3d5a9ac6ce6344bf",
+      "GP-006-E-3dc0ede6c9ee7c6e",
+      "GP-006-E-3e3341076cbabd57",
+      "GP-006-E-3e72c5459cb502fb",
+      "GP-006-E-3ed93bbf08f38909",
+      "GP-006-E-3f62a24b25431ba6",
+      "GP-006-E-3f837e8088f2feb7",
+      "GP-006-E-3fa586c52cdd44e6",
+      "GP-006-E-3fc93b2f41ba7bc0",
+      "GP-006-E-4023891f275a8fb3",
+      "GP-006-E-4054fa8038c3b33a",
+      "GP-006-E-408e7ca9ce39a022",
+      "GP-006-E-414a0cef4e579c86",
+      "GP-006-E-42044a2a47a2f75d",
+      "GP-006-E-42085d3adfb294a3",
+      "GP-006-E-4263cb1fe882848c",
+      "GP-006-E-42aad5557a4b8d6e",
+      "GP-006-E-437b2d7caf20004c",
+      "GP-006-E-43c86b116654ae1f",
+      "GP-006-E-43e373dde767b402",
+      "GP-006-E-43feaf2c551e9f03",
+      "GP-006-E-44f76eb37d91da27",
+      "GP-006-E-45340ed253dbdbe8",
+      "GP-006-E-457ec1984afbb801",
+      "GP-006-E-45a93dd97a0d6f6b",
+      "GP-006-E-45d873d4bfdc6bbe",
+      "GP-006-E-45f2bc49139c9c04",
+      "GP-006-E-460559e09702c442",
+      "GP-006-E-4685bffc8e79713f",
+      "GP-006-E-4776bf83cab7b817",
+      "GP-006-E-47fbd2351d5818b3",
+      "GP-006-E-4844a1af216e0fd1",
+      "GP-006-E-48468beb70da5d13",
+      "GP-006-E-4850b6ed1a17c784",
+      "GP-006-E-48bd3430c4be5e32",
+      "GP-006-E-490fc51d9d69fdf5",
+      "GP-006-E-49aa288323638d31",
+      "GP-006-E-4a1a08705018e6cb",
+      "GP-006-E-4a200749ba0ebc00",
+      "GP-006-E-4aa41b5e81fa0029",
+      "GP-006-E-4aab7999fa1ae5f1",
+      "GP-006-E-4ae8f5b0126c1755",
+      "GP-006-E-4b011dc783ca5bef",
+      "GP-006-E-4bc9bdb3ed831376",
+      "GP-006-E-4bf453e375ea1f62",
+      "GP-006-E-4c6bd32879ae8b09",
+      "GP-006-E-4d2d6d8a205208e9",
+      "GP-006-E-4da6ebf552f087fe",
+      "GP-006-E-4e868359f9bbe4cc",
+      "GP-006-E-4e92571383e0d1cf",
+      "GP-006-E-4f5bf6ad6622f76c",
+      "GP-006-E-4fc5603495aef879",
+      "GP-006-E-4fff01591c7f718a",
+      "GP-006-E-500278fee45a8a70",
+      "GP-006-E-5007d9d26c7b6519",
+      "GP-006-E-5055dee39c9a116b",
+      "GP-006-E-50664ef9a3341591",
+      "GP-006-E-50929f80242be246",
+      "GP-006-E-50d8b1a0582610e8",
+      "GP-006-E-519aaee997514e7a",
+      "GP-006-E-522cfec803a872e5",
+      "GP-006-E-529ecbec5a4188a6",
+      "GP-006-E-5307426a332d226c",
+      "GP-006-E-5347cce0c36de6df",
+      "GP-006-E-534d198cb45f4245",
+      "GP-006-E-53f30be0eed59f00",
+      "GP-006-E-53f62d7b0d5aad1b",
+      "GP-006-E-5436c5c0eaf9f226",
+      "GP-006-E-543b47a68437c1ee",
+      "GP-006-E-546c7e17dcb6e399",
+      "GP-006-E-5487360ab61a484e",
+      "GP-006-E-54d20f35b2578db0",
+      "GP-006-E-55f44b169e94687e",
+      "GP-006-E-55f8e3c934f62f8c",
+      "GP-006-E-56381afcc7db7c5f",
+      "GP-006-E-566609fc939d51d8",
+      "GP-006-E-56b63226bb6113c2",
+      "GP-006-E-56e52a0558f89775",
+      "GP-006-E-575ca6ef75bb6026",
+      "GP-006-E-587490a5a98365fe",
+      "GP-006-E-58a79d244091e5e8",
+      "GP-006-E-59e9f3521fd193a4",
+      "GP-006-E-59f7e2ac844a0af9",
+      "GP-006-E-59f92281bdac3d87",
+      "GP-006-E-5a4dc916f99b08f5",
+      "GP-006-E-5a7141e027c1e23e",
+      "GP-006-E-5a79db70a9b9c66e",
+      "GP-006-E-5ab3d3faa28e3f18",
+      "GP-006-E-5ab640fad553cbf9",
+      "GP-006-E-5b17d5bf9a42504e",
+      "GP-006-E-5b23f50422c59644",
+      "GP-006-E-5bc524c305ccad93",
+      "GP-006-E-5c6caa9775e59dc6",
+      "GP-006-E-5da1aeadc0b69fa2",
+      "GP-006-E-5e4039599aef821b",
+      "GP-006-E-5f122a68499afbfa",
+      "GP-006-E-5f1df7ac5c7ec3f9",
+      "GP-006-E-5f7734b130f30f12",
+      "GP-006-E-61352269ff3b61f2",
+      "GP-006-E-617cce788495f182",
+      "GP-006-E-620fe27b8415029b",
+      "GP-006-E-6212ca0bf7c18c89",
+      "GP-006-E-628afdaf4e212569",
+      "GP-006-E-62ea0c604b0d8e91",
+      "GP-006-E-62f1e032cc211889",
+      "GP-006-E-638b10ba35d9ff16",
+      "GP-006-E-6402e8d6f0a78106",
+      "GP-006-E-6420f3392341549b",
+      "GP-006-E-64257dfe61c5528d",
+      "GP-006-E-64668b2195f5628e",
+      "GP-006-E-64f7677a78bcfad4",
+      "GP-006-E-670e413e3c7f5c80",
+      "GP-006-E-6782a11958eb6ff1",
+      "GP-006-E-67a76876670055b7",
+      "GP-006-E-685f5039efe8ba0e",
+      "GP-006-E-68a20ad486a8bb40",
+      "GP-006-E-68a2d90951163b05",
+      "GP-006-E-68b33f58d6056c62",
+      "GP-006-E-694180f7cb721dac",
+      "GP-006-E-69488096029a4d13",
+      "GP-006-E-6959bb3d49435fa2",
+      "GP-006-E-6978c1c089bccc0a",
+      "GP-006-E-697e48ce4b92ae44",
+      "GP-006-E-6a0db3e1706fd8f7",
+      "GP-006-E-6a22d1abe219f74c",
+      "GP-006-E-6a3435c74cc09bc8",
+      "GP-006-E-6b5e55ebe6f0252a",
+      "GP-006-E-6b61b7571ccc0315",
+      "GP-006-E-6c2cd1e3d68ffdc1",
+      "GP-006-E-6c5223116feafecb",
+      "GP-006-E-6ca123c75ec331db",
+      "GP-006-E-6ca43377a5741131",
+      "GP-006-E-6cb9944c75db17b3",
+      "GP-006-E-6d4f3e1b61f52af1",
+      "GP-006-E-6d589f01b5d8d297",
+      "GP-006-E-6dc865fc510969ce",
+      "GP-006-E-6dda6c3d35f697bf",
+      "GP-006-E-6de66baf9d03fb47",
+      "GP-006-E-6e34ccb8adb205c7",
+      "GP-006-E-6e65de1f046ce5e7",
+      "GP-006-E-6e8bb32a2b5cc3dd",
+      "GP-006-E-6fddc6a4b9f5b969",
+      "GP-006-E-7026d10f8143dea8",
+      "GP-006-E-7063d7fd75ec34c3",
+      "GP-006-E-7066b69b1d22a88d",
+      "GP-006-E-70f20afbfc1ad73f",
+      "GP-006-E-714e5672bf9cb748",
+      "GP-006-E-71ab5613fb938239",
+      "GP-006-E-721b4da6da071902",
+      "GP-006-E-728cd35a77b6dc90",
+      "GP-006-E-739d5ce9816b66bd",
+      "GP-006-E-73b738f9d2a69eb3",
+      "GP-006-E-73d8480c64481ec4",
+      "GP-006-E-73f1ffedf59b4e9a",
+      "GP-006-E-74135f00d03a10a7",
+      "GP-006-E-7421c6b53e09680c",
+      "GP-006-E-746a8d8ae7a2df45",
+      "GP-006-E-74c83e0498ee796d",
+      "GP-006-E-7576ab15c007b65a",
+      "GP-006-E-75c87da5af2cac28",
+      "GP-006-E-75f625c0c2b94025",
+      "GP-006-E-7665fc6ae0c7e9c0",
+      "GP-006-E-76ff9f8713e37af4",
+      "GP-006-E-7740f7a99fad1a59",
+      "GP-006-E-776edf32a6cd1e09",
+      "GP-006-E-77c40ea97cdb07f0",
+      "GP-006-E-77d2f1db0458b654",
+      "GP-006-E-78eed201d713f786",
+      "GP-006-E-79b3dab8b673af3c",
+      "GP-006-E-79bddcfc808ac7f2",
+      "GP-006-E-79fa10c0773f791e",
+      "GP-006-E-7a8c8957f3e9c69f",
+      "GP-006-E-7ada1177881cfc24",
+      "GP-006-E-7b8e9a1053fc31cd",
+      "GP-006-E-7b9aa7f976a97456",
+      "GP-006-E-7c54f86441d4600b",
+      "GP-006-E-7d56e6eed3ee48cf",
+      "GP-006-E-7d6ce93555277cf7",
+      "GP-006-E-7e2d4479a031ad93",
+      "GP-006-E-7f098a7ae995beab",
+      "GP-006-E-7f0eb1bc41390d3b",
+      "GP-006-E-7f2d78c2211cbd03",
+      "GP-006-E-80809d22c6e9efd4",
+      "GP-006-E-80d4da94a56f107b",
+      "GP-006-E-80ec7675d0b30f2f",
+      "GP-006-E-819874027ffc2bcd",
+      "GP-006-E-81f92c2f012ddc02",
+      "GP-006-E-8219b01faf96f7c2",
+      "GP-006-E-8251eb4749894a7e",
+      "GP-006-E-8264deff1ee05ed0",
+      "GP-006-E-82fbd9dc95a0ddc5",
+      "GP-006-E-83de7cfe295ed625",
+      "GP-006-E-843f5b61821a741c",
+      "GP-006-E-855c97bb526541ca",
+      "GP-006-E-858ed8f6555239b3",
+      "GP-006-E-862e885b62033068",
+      "GP-006-E-867ec96fb2b754b0",
+      "GP-006-E-8682bc7aeb8782b4",
+      "GP-006-E-86a9a348a2446fc6",
+      "GP-006-E-86d8739a04a2d661",
+      "GP-006-E-8713d0ed1b8d418b",
+      "GP-006-E-87acfef48a91248a",
+      "GP-006-E-88481d3ead492ef4",
+      "GP-006-E-885f38daf70a323c",
+      "GP-006-E-88e754f131a9eb58",
+      "GP-006-E-89eb32d1acf771f1",
+      "GP-006-E-8a20712089f87482",
+      "GP-006-E-8a6e9a32dc34c1f9",
+      "GP-006-E-8a98b1b849179d1d",
+      "GP-006-E-8af0fe6c0065d45c",
+      "GP-006-E-8be2ce689d8cd7e5",
+      "GP-006-E-8c0d77afe365c243",
+      "GP-006-E-8d7bd2258f3b5ce9",
+      "GP-006-E-8e9084aadcfe157d",
+      "GP-006-E-8eb02bfce9139f8e",
+      "GP-006-E-8f4df2feafb0205d",
+      "GP-006-E-8fa07de9c5dab319",
+      "GP-006-E-8fbb0d1c6f7ead81",
+      "GP-006-E-8ff82b0560aa3803",
+      "GP-006-E-902bb82ee215acaf",
+      "GP-006-E-905dd85e67125d87",
+      "GP-006-E-906892b9d03ad884",
+      "GP-006-E-90dcfc4bb7fcab1f",
+      "GP-006-E-91510402d7266cd1",
+      "GP-006-E-9165649eafef4ccb",
+      "GP-006-E-920137df508d3327",
+      "GP-006-E-9209cc57a2370d29",
+      "GP-006-E-92296abd9b78cf45",
+      "GP-006-E-9231771b9f8ab732",
+      "GP-006-E-92c62d38adae1511",
+      "GP-006-E-935f88138f138812",
+      "GP-006-E-93cea4fdbb45840b",
+      "GP-006-E-93ef63a8bccbdd1d",
+      "GP-006-E-94c1e79dd31b9816",
+      "GP-006-E-959ae913a97917eb",
+      "GP-006-E-95d463fdb5878698",
+      "GP-006-E-9639540f59a1cf85",
+      "GP-006-E-9655a5aee7a5eba0",
+      "GP-006-E-965b5c623f20a6ac",
+      "GP-006-E-96efa409ee1544de",
+      "GP-006-E-972a33ac3a5f39b1",
+      "GP-006-E-97a5e569c6d920ba",
+      "GP-006-E-9827b3be53b46860",
+      "GP-006-E-98a018260fe74873",
+      "GP-006-E-98b05947b338a7ca",
+      "GP-006-E-9a178dea0d1c1edd",
+      "GP-006-E-9a837975a321f191",
+      "GP-006-E-9b96d10009dee305",
+      "GP-006-E-9c35d535a2119402",
+      "GP-006-E-9c5c0502b15d1c15",
+      "GP-006-E-9c61cae7b3cbdfda",
+      "GP-006-E-9d98c5a3f7488444",
+      "GP-006-E-9e1837b3ba2f6748",
+      "GP-006-E-9ed0427729e01df6",
+      "GP-006-E-9ee509aa3108dee5",
+      "GP-006-E-9f183e6da7d454b9",
+      "GP-006-E-9f3bc637e22d4344",
+      "GP-006-E-a0897663260f67a0",
+      "GP-006-E-a08ecf764f191a65",
+      "GP-006-E-a0d01199c8cace77",
+      "GP-006-E-a1100cad4220b630",
+      "GP-006-E-a181577cc20c7605",
+      "GP-006-E-a1b9f76eac92a536",
+      "GP-006-E-a1bacdde94544f45",
+      "GP-006-E-a345bd164dac3c26",
+      "GP-006-E-a46ce748afa2a376",
+      "GP-006-E-a4f6876686162e96",
+      "GP-006-E-a50aa8b9a9806899",
+      "GP-006-E-a51f5fb334b9268c",
+      "GP-006-E-a55adf9ea66e4d82",
+      "GP-006-E-a646b1030db7fdba",
+      "GP-006-E-a736252681ae235e",
+      "GP-006-E-a73d3d707af2d253",
+      "GP-006-E-a74107c5e9da85e7",
+      "GP-006-E-a78bb52af134cbf4",
+      "GP-006-E-a7ada68b5fe46eeb",
+      "GP-006-E-a86b56da952907a2",
+      "GP-006-E-a8ea6d4714dc2843",
+      "GP-006-E-a90b53cad3a2ab53",
+      "GP-006-E-aa3a32b6716aacf3",
+      "GP-006-E-aa8be5a2625eaa18",
+      "GP-006-E-aad2b295ff4f3d67",
+      "GP-006-E-aae9c2952cb83528",
+      "GP-006-E-aafd5a395004bbe6",
+      "GP-006-E-ab32c0faea637986",
+      "GP-006-E-ab37450030a5d654",
+      "GP-006-E-ab5a32e037c62749",
+      "GP-006-E-ab6a59c6da34953c",
+      "GP-006-E-ab862563484c7031",
+      "GP-006-E-ab8a4fff019d5fa5",
+      "GP-006-E-ababe92b5bc39df8",
+      "GP-006-E-ac114c9b7c105f85",
+      "GP-006-E-acab04d1f843e5ac",
+      "GP-006-E-ad0d7c1f545b6662",
+      "GP-006-E-ad44259aca1febd4",
+      "GP-006-E-ade3492a3635921c",
+      "GP-006-E-ae2f2d06ddb001e3",
+      "GP-006-E-ae7e9d6b16364787",
+      "GP-006-E-aef2921ceca65903",
+      "GP-006-E-af328f29045367bb",
+      "GP-006-E-af6a64c8a12fb820",
+      "GP-006-E-affc545f67cd52be",
+      "GP-006-E-b05886b4b3079f82",
+      "GP-006-E-b0bb5b62f8c83c23",
+      "GP-006-E-b0cc3e963094b7da",
+      "GP-006-E-b0e824a66a4f04c1",
+      "GP-006-E-b10daba60fbb6cf8",
+      "GP-006-E-b18c92b5b19e879d",
+      "GP-006-E-b194ab35adb997e1",
+      "GP-006-E-b20d7085526dce15",
+      "GP-006-E-b212204323f1d764",
+      "GP-006-E-b2e63376079a7ada",
+      "GP-006-E-b385318e4b44a460",
+      "GP-006-E-b3adb8527f9ffc9e",
+      "GP-006-E-b3c96219277ea1f5",
+      "GP-006-E-b42205c69bb757fe",
+      "GP-006-E-b42a1b6d73919ca1",
+      "GP-006-E-b43eb3bc8fb854a6",
+      "GP-006-E-b44c04fee7a863fe",
+      "GP-006-E-b48cd8d9f9dfa1e9",
+      "GP-006-E-b51b81fd66767a5b",
+      "GP-006-E-b55e158bccb134a3",
+      "GP-006-E-b64ffd16a2d47703",
+      "GP-006-E-b652bc9d9798b480",
+      "GP-006-E-b76873faa9ae1cfb",
+      "GP-006-E-b7f2369f5b7b5a22",
+      "GP-006-E-b805a306ab007f94",
+      "GP-006-E-b879c347c5a8d394",
+      "GP-006-E-b8b1d13c74226482",
+      "GP-006-E-b8cd47ce9a46602f",
+      "GP-006-E-b9582605803626f0",
+      "GP-006-E-b9606d3f1fb87b4c",
+      "GP-006-E-ba5d6ec6810acbf4",
+      "GP-006-E-bb41ea6f7efc1587",
+      "GP-006-E-bc0c32ed24663d66",
+      "GP-006-E-bc11600ad3381049",
+      "GP-006-E-bc36e1123533ad17",
+      "GP-006-E-bc4334f31265f7c5",
+      "GP-006-E-bcf1f4181f0cc4f6",
+      "GP-006-E-bd9074ef6dfe5abc",
+      "GP-006-E-be9ba6f4531cb71a",
+      "GP-006-E-beba56d7e3eacf2d",
+      "GP-006-E-c29aaf784401d9b1",
+      "GP-006-E-c38e90721505d686",
+      "GP-006-E-c3b21542af75299e",
+      "GP-006-E-c3bd8170e1875181",
+      "GP-006-E-c44f9ee6708e752d",
+      "GP-006-E-c4627a88cdf756da",
+      "GP-006-E-c5767951169e9aa7",
+      "GP-006-E-c613d1cb95b86688",
+      "GP-006-E-c61a636ca7cf30d8",
+      "GP-006-E-c6271b74cea2fcab",
+      "GP-006-E-c630fab5ea0b8a62",
+      "GP-006-E-c72e676ec9dd0591",
+      "GP-006-E-c7c65de397de8575",
+      "GP-006-E-c8396070cedc542a",
+      "GP-006-E-c83c2d49d269e334",
+      "GP-006-E-c85d04a488041ab0",
+      "GP-006-E-c865958df1ab3827",
+      "GP-006-E-c880de483e81461c",
+      "GP-006-E-c92773318fa10479",
+      "GP-006-E-c96069ae41c1c7d0",
+      "GP-006-E-c9aa0098cbd029ba",
+      "GP-006-E-cb7ba3fa6d2aaeac",
+      "GP-006-E-cbb4b18b0548f46a",
+      "GP-006-E-cbbd408c062062bb",
+      "GP-006-E-cc02a443e93a1881",
+      "GP-006-E-cc34b31491f5552e",
+      "GP-006-E-cca8be763a409cb1",
+      "GP-006-E-ccba9b5d6caec0b0",
+      "GP-006-E-ccd1ec557ffbf678",
+      "GP-006-E-cd28156c9062c154",
+      "GP-006-E-cd84947ffac461d0",
+      "GP-006-E-ce161a14a66ac8e3",
+      "GP-006-E-ce206aafd64e2bd8",
+      "GP-006-E-cf7acb6f6b424b57",
+      "GP-006-E-cfba1d725704a8ff",
+      "GP-006-E-cfd24de11dbc7b5c",
+      "GP-006-E-cfe7e971fca0ebe3",
+      "GP-006-E-d00192c208c54de2",
+      "GP-006-E-d010646bb645e446",
+      "GP-006-E-d0a74e558f739401",
+      "GP-006-E-d18589e268d50539",
+      "GP-006-E-d1f0a01359d09eb5",
+      "GP-006-E-d22913824fc90c03",
+      "GP-006-E-d2a6b3117c36330e",
+      "GP-006-E-d3317a534b16a25d",
+      "GP-006-E-d3ba7ca704f02d6e",
+      "GP-006-E-d3e18515195bb633",
+      "GP-006-E-d40935e802d3097f",
+      "GP-006-E-d441e792fab8d51c",
+      "GP-006-E-d465d6e7741552b8",
+      "GP-006-E-d51c4773a0f7ee4a",
+      "GP-006-E-d51e57e7bfc1ef65",
+      "GP-006-E-d587464229669da0",
+      "GP-006-E-d6122fa1e032eb29",
+      "GP-006-E-d61e0f63122d157d",
+      "GP-006-E-d6ad3aa43d45f3c0",
+      "GP-006-E-d6d7bb9c701f1b8f",
+      "GP-006-E-d77bae5951747ca6",
+      "GP-006-E-d785564460b44c69",
+      "GP-006-E-d7a6c5b7066a40c4",
+      "GP-006-E-d80edd7fb074b51d",
+      "GP-006-E-d8408c157c0c4e42",
+      "GP-006-E-d9909301335d542b",
+      "GP-006-E-d9a16a0c73e6b6b2",
+      "GP-006-E-d9c30e3abca70fcb",
+      "GP-006-E-d9cdfc0218c45e82",
+      "GP-006-E-d9dd4b3086e5d210",
+      "GP-006-E-db5e6acb97018b1c",
+      "GP-006-E-db71dcb516b3d0b7",
+      "GP-006-E-db7b1235412cd3b8",
+      "GP-006-E-dc7bc18d9812653f",
+      "GP-006-E-dce6790930288091",
+      "GP-006-E-de2baf236a968e9d",
+      "GP-006-E-de9018db08e780b8",
+      "GP-006-E-df27ba9da07fa60c",
+      "GP-006-E-dff9b3028173451d",
+      "GP-006-E-dffca213ec8ea56c",
+      "GP-006-E-e083b346c4bbadd6",
+      "GP-006-E-e0c3edca1cf8860e",
+      "GP-006-E-e2283600a48ca889",
+      "GP-006-E-e22b14e94c266219",
+      "GP-006-E-e2343b9230ca5145",
+      "GP-006-E-e2a0f4feefaa8b8a",
+      "GP-006-E-e2a56ccf7060d8b1",
+      "GP-006-E-e2cb259904655a7d",
+      "GP-006-E-e2dd5e710b2be277",
+      "GP-006-E-e3485b581e85e9ed",
+      "GP-006-E-e416256c6afe2d15",
+      "GP-006-E-e4290a9d00940781",
+      "GP-006-E-e4c06efa2f82b044",
+      "GP-006-E-e561330c265148f3",
+      "GP-006-E-e5fc2bffa72e82fc",
+      "GP-006-E-e66684edec88ce15",
+      "GP-006-E-e67d181c974e5257",
+      "GP-006-E-e6d90875a3fd1e99",
+      "GP-006-E-e6fa5dbb44333a7b",
+      "GP-006-E-e77f320b73e493a8",
+      "GP-006-E-e7eeb482ce7e1c67",
+      "GP-006-E-e83582003f7ef86c",
+      "GP-006-E-e839d2728bc69824",
+      "GP-006-E-e8c4517f30b03f17",
+      "GP-006-E-e95284d8ccda71f2",
+      "GP-006-E-e992f4a7f7c62896",
+      "GP-006-E-e9fbfc32f292fac7",
+      "GP-006-E-eabead190d4bc8ce",
+      "GP-006-E-eadeaaeb8383cc7d",
+      "GP-006-E-eadffeff9267c959",
+      "GP-006-E-eb12f556415f76ff",
+      "GP-006-E-eb56ad29b5f15801",
+      "GP-006-E-ebef0e0382b338c5",
+      "GP-006-E-ec27eee6e83f35c8",
+      "GP-006-E-ec5f37093b7e8f33",
+      "GP-006-E-ed84d0b6b60acbf3",
+      "GP-006-E-ed925827cad62ef0",
+      "GP-006-E-edf5b055c6dd57d1",
+      "GP-006-E-ee27064599628f43",
+      "GP-006-E-ef30848eadf16e94",
+      "GP-006-E-ef798f3259752156",
+      "GP-006-E-f03ce458818d1248",
+      "GP-006-E-f0a7be6dc0bdd16d",
+      "GP-006-E-f1b594a3e130be71",
+      "GP-006-E-f1e89c4ed3ac314e",
+      "GP-006-E-f204f3cecf18f8b8",
+      "GP-006-E-f260b2ab0f380204",
+      "GP-006-E-f2eec16b0e7dbae7",
+      "GP-006-E-f3a448758c176557",
+      "GP-006-E-f3dda9c744c9ef01",
+      "GP-006-E-f3e8c1545a2083a6",
+      "GP-006-E-f4c4a050824725a3",
+      "GP-006-E-f51aaf9de6d6aedb",
+      "GP-006-E-f6cd49bdaf437782",
+      "GP-006-E-f75ee24f1a6122f4",
+      "GP-006-E-f7bbb5e7a09d7670",
+      "GP-006-E-f7f01e53ded17199",
+      "GP-006-E-f842f4a3bdb05f7b",
+      "GP-006-E-f883c525b5c1c206",
+      "GP-006-E-f9877fb9cb50d013",
+      "GP-006-E-fa13a0c9c4f0e937",
+      "GP-006-E-fa92dee623ad09ff",
+      "GP-006-E-fae454ca723c6f63",
+      "GP-006-E-fb1260a8e24b8b03",
+      "GP-006-E-fbdfb64ddf9dd6fe",
+      "GP-006-E-fc0ab312d18dabf3",
+      "GP-006-E-fc0ecf46b5f2d8e1",
+      "GP-006-E-fd97f15232d0ef06",
+      "GP-006-E-ffa0fdc342b50396",
+      "GP-006-E-ffaea02df64b19b8",
+      "GP-006-FC-2214c93b5fbd6e62",
+      "GP-006-FC-2933aab8ba43e65f",
+      "GP-006-FC-37d97abddfe8a8ff",
+      "GP-006-FC-3d990eb3b5256ae4",
+      "GP-006-FC-3e4e91ad1d87d149",
+      "GP-006-FC-47621725376733bb",
+      "GP-006-FC-526c1ab1d7cb8022",
+      "GP-006-FC-626bb1932bd8fc95",
+      "GP-006-FC-62ca93d20c9e9976",
+      "GP-006-FC-63bdc9d25ef4e4bb",
+      "GP-006-FC-63f5cf7bff32d296",
+      "GP-006-FC-69b7abdabc16327a",
+      "GP-006-FC-7361d01a6001a425",
+      "GP-006-FC-76d45df84af8fb28",
+      "GP-006-FC-78a44cbc6069b59c",
+      "GP-006-FC-867518f9f8de93ec",
+      "GP-006-FC-887ad8f0a2e6dcfc",
+      "GP-006-FC-92657c282e617e5c",
+      "GP-006-FC-93ddf5afe2ae4f05",
+      "GP-006-FC-9f474cb7932305b5",
+      "GP-006-FC-9fbc0a5de298fd1d",
+      "GP-006-FC-abb8b283bf6f0123",
+      "GP-006-FC-b16055e80a147cd9",
+      "GP-006-FC-b2660ab6c22b99c3",
+      "GP-006-FC-b323069f000605af",
+      "GP-006-FC-ba615cd4efb70b57",
+      "GP-006-FC-c3f6161ba91cfe74",
+      "GP-006-FC-c6c8e8922e46148b",
+      "GP-006-FC-c963377ef4e15d2f",
+      "GP-006-FC-e47e445580c98e0f",
+      "GP-006-FC-e7b45e90113a790f",
+      "GP-006-FC-f120a95c20f84306",
+      "GP-006-FC-fffe09edc2964851",
+      "V-4f94262c8d768ec4",
+      "V-f14f79dac89b0fae"
+    ]
+  },
+  "request_payload": {
+    "evidence_packet": {
+      "packet_version": "compact-api-packet-1.0.0",
+      "paper_id": "GP-006",
+      "blocked_fields": [],
+      "sources": [
+        {
+          "source_id": "S-03587aa43190",
+          "chunk_id": "GP-006-B-476c28d9e6cdba0b678a",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Materials and methods",
+          "subsection": "In vitro luciferase assay",
+          "xml_element_id": "p0135"
+        },
+        {
+          "source_id": "S-0b5279cfb9b0",
+          "chunk_id": "GP-006-B-4841e656298b801ea2b0",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Materials and methods",
+          "subsection": "LNP injection and samples collection",
+          "xml_element_id": "p0120"
+        },
+        {
+          "source_id": "S-1385dd7253d2",
+          "chunk_id": "GP-006-B-ce8f6ea751317cd70397",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Sustained expression of mouse FVIII following Cas9/sgRNA LNP injection",
+          "xml_element_id": "p0055"
+        },
+        {
+          "source_id": "S-23e0134068c1",
+          "chunk_id": "GP-006-B-02d27c7a988c0c74cdcd",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 6",
+          "page_number": 6
+        },
+        {
+          "source_id": "S-350c76d2298a",
+          "chunk_id": "GP-006-B-d5b5e287cef77c39eede",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Materials and methods",
+          "subsection": "Synthesis of LNP",
+          "xml_element_id": "p0105"
+        },
+        {
+          "source_id": "S-54a70efbd7fb",
+          "chunk_id": "GP-006-B-4d6fabdcf8eb04151f9c",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 5",
+          "page_number": 5
+        },
+        {
+          "source_id": "S-55f0be143c71",
+          "chunk_id": "GP-006-B-7df84450abc737a647af",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 4",
+          "page_number": 4
+        },
+        {
+          "source_id": "S-5e3078bd8fb5",
+          "chunk_id": "GP-006-B-27c2d0f121c05f0f7744",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Sustained expression of mouse FVIII following Cas9/sgRNA LNP injection",
+          "xml_element_id": "p0060"
+        },
+        {
+          "source_id": "S-620e08261866",
+          "chunk_id": "GP-006-B-879835a91135e4abd857",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Evaluation of in vivo gene editing of mutant F8 in HemA NSG mouse model",
+          "xml_element_id": "p0050"
+        },
+        {
+          "source_id": "S-73ad7f1fcdfa",
+          "chunk_id": "GP-006-B-b4ccde25e18fbd56ff92",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Materials and methods",
+          "subsection": "AST and ALT assays",
+          "xml_element_id": "p0145"
+        },
+        {
+          "source_id": "S-7c087795cc04",
+          "chunk_id": "GP-006-B-995a4cc839ac2b5ecedb",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 3",
+          "page_number": 3
+        },
+        {
+          "source_id": "S-b067f0c73a63",
+          "chunk_id": "GP-006-B-9d5e2e6933f0aed4d1ad",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Synthesis and optimization of LNP formulations",
+          "xml_element_id": "p0035"
+        },
+        {
+          "source_id": "S-b35a38070366",
+          "chunk_id": "GP-006-B-b8f56b23486fb7cf8f56",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 7",
+          "page_number": 7
+        },
+        {
+          "source_id": "S-b4035d8ab232",
+          "chunk_id": "GP-006-B-ef79d80010295650edbf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 8",
+          "page_number": 8
+        },
+        {
+          "source_id": "S-c0becf5515aa",
+          "chunk_id": "GP-006-B-c75d54fd1403e877755a",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Materials and methods",
+          "subsection": "Thromboelastography",
+          "xml_element_id": "p0155"
+        },
+        {
+          "source_id": "S-d3a16a52979c",
+          "chunk_id": "GP-006-B-c337230f644f1db60cd9",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 9",
+          "page_number": 9
+        },
+        {
+          "source_id": "S-d439bf18428e",
+          "chunk_id": "GP-006-B-7cbc178d8798faabb5f9",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/mmc2.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 10",
+          "page_number": 10
+        },
+        {
+          "source_id": "S-f814d46daf08",
+          "chunk_id": "GP-006-B-095ced2cd9dc64e219ed",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Synthesis and optimization of LNP formulations",
+          "xml_element_id": "p0030"
+        },
+        {
+          "source_id": "S-fec7cd0399d1",
+          "chunk_id": "GP-006-B-54069c643760155aee58",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11617921/main.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Biodistribution of MC3 LNPs",
+          "xml_element_id": "p0040"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "GP-006-E-302e1b54621fd617",
+          "text": "Arrows indicate the injection days.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1",
+            "S-620e08261866"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-d6ad3aa43d45f3c0",
+          "text": "(B) After hydrodynamic injection of Cas9/NSGHAsgRNA and Cas9/mF8sgRNA expression plasmid, the in vivo gene editing rate was analyzed by online genomic DNA analysis tool TIDE, respectively.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1",
+            "S-620e08261866"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-b7f2369f5b7b5a22",
+          "text": "In this study, we synthesized mRNA LNPs using ionizable cationic lipids, specifically MC3, which is the same lipid used in the first FDA-approved LNP-based RNA interference (RNAi) drug.10,11 Ionizable cationic lipids exhibit positive charges in low pH environments and can therefore bind to the negative charges of phosphate backbones in nucleic acids such as mRNA, siRNA, and DNA.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f814d46daf08"
+          ],
+          "context_after_evidence_id": "GP-006-E-457ec1984afbb801"
+        },
+        {
+          "evidence_id": "GP-006-E-457ec1984afbb801",
+          "text": "At physiological pH 7.4, only a portion of the amides in ionizable lipid remains protonated, leading to a weak negative surface, which can reduce the cell toxicity.19,20 In addition, the positive charge of ionizable lipids enables the nucleic acids to be released from the endosome by binding to the negatively charged endosomal membrane.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f814d46daf08"
+          ],
+          "context_before_evidence_id": "GP-006-E-b7f2369f5b7b5a22"
+        },
+        {
+          "evidence_id": "GP-006-E-6fddc6a4b9f5b969",
+          "text": "Cationic lipid is the most important component in LNPs, as it determines the potency of LNPs.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f814d46daf08"
+          ],
+          "context_after_evidence_id": "GP-006-E-fbdfb64ddf9dd6fe"
+        },
+        {
+          "evidence_id": "GP-006-E-fbdfb64ddf9dd6fe",
+          "text": "LNPs composed of MC3 cationic lipids have been reported to have liver-targeting ability after systemic delivery.21,22 Besides ionizable cationic lipid, the ratio between other lipid components, including cholesterol, helper lipid and lipid-conjugated polyethylene glycol (PEG) is also important.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f814d46daf08"
+          ],
+          "context_before_evidence_id": "GP-006-E-6fddc6a4b9f5b969",
+          "context_after_evidence_id": "GP-006-E-500278fee45a8a70"
+        },
+        {
+          "evidence_id": "GP-006-E-500278fee45a8a70",
+          "text": "We incorporated the helper lipid DOPE and DMG-PEG2000 into MC3 LNP formulation to facilitate and stabilize the formation of LNPs.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f814d46daf08"
+          ],
+          "context_before_evidence_id": "GP-006-E-fbdfb64ddf9dd6fe"
+        },
+        {
+          "evidence_id": "GP-006-E-96efa409ee1544de",
+          "text": "Cholesterol was also used to enhance LNP stability and help LNP escape from endosome.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f814d46daf08"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-5307426a332d226c",
+          "text": "We further analyzed genomic DNA from treated mice using deep sequencing to identify the gene editing rate.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5"
+          ],
+          "context_after_evidence_id": "GP-006-E-5b17d5bf9a42504e"
+        },
+        {
+          "evidence_id": "GP-006-E-5b17d5bf9a42504e",
+          "text": "Administration of Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about 52.7% in total liver cells.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5"
+          ],
+          "context_before_evidence_id": "GP-006-E-5307426a332d226c",
+          "context_after_evidence_id": "GP-006-E-29315268269642b9"
+        },
+        {
+          "evidence_id": "GP-006-E-29315268269642b9",
+          "text": "We further isolated hepatocytes and LSECs to identify the respective gene editing rate.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5"
+          ],
+          "context_before_evidence_id": "GP-006-E-5b17d5bf9a42504e",
+          "context_after_evidence_id": "GP-006-E-d010646bb645e446"
+        },
+        {
+          "evidence_id": "GP-006-E-d010646bb645e446",
+          "text": "The data indicated that the F8 gene was edited in 60.54% ± 11.65% of hepatocytes, whereas LSECs showed gene editing rates of approximately 16.50% ± 2.96% (Figure 6A; Table S1).",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5"
+          ],
+          "context_before_evidence_id": "GP-006-E-29315268269642b9"
+        },
+        {
+          "evidence_id": "GP-006-E-9c61cae7b3cbdfda",
+          "text": "The investigation of gene editing patterns in LSECs revealed that one base-pair deletions constitute the highest editing pattern (around 46.5% of total deletions), together with four base-pair deletions, which can help rescue the five base-pair deletion in NSG HemA, accounting for 50%–60% of all the deletions (Figures 6C and 6D).",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-b9606d3f1fb87b4c",
+          "text": "We also analyzed the +2 and +5 insertion patterns among indel variants, but their frequencies were significantly lower (0.78% and 0%, respectively) compared with deletion variants (Table S2).",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5"
+          ],
+          "context_after_evidence_id": "GP-006-E-8af0fe6c0065d45c"
+        },
+        {
+          "evidence_id": "GP-006-E-8af0fe6c0065d45c",
+          "text": "These results suggested that Cas9/sgRNA LNP treatment induced indel repair in LSECs and restoration of the endogenous FVIII expression permanently in NSG HemA mice.Figure 6Gene editing efficiency of isolated HPCs and LSECsAfter Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5"
+          ],
+          "context_before_evidence_id": "GP-006-E-b9606d3f1fb87b4c",
+          "context_after_evidence_id": "GP-006-E-22a954aae3f000e4"
+        },
+        {
+          "evidence_id": "GP-006-E-22a954aae3f000e4",
+          "text": "(A) Gene editing rate of Cas9/NSGHAsgRNA from genomic DNA of whole liver, isolated HPCs and LSECs were evaluated by deep sequencing, respectively (n = 3).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5",
+            "S-b4035d8ab232"
+          ],
+          "context_before_evidence_id": "GP-006-E-0531a76f7f816a56"
+        },
+        {
+          "evidence_id": "GP-006-E-a74107c5e9da85e7",
+          "text": "(C and D) Percentage of deletion patterns in HPCs and LSECs after treatment of Cas9/NSGHAsgRNA LNPs are shown.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-5e3078bd8fb5",
+            "S-b4035d8ab232"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-42aad5557a4b8d6e",
+          "text": "Luciferase expression was normalized by total protein, measured by BCA assay kit (Bio-Rad, USA), and reported as RLU/mg.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-03587aa43190"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-0a711ba62b3c0836",
+          "text": "Different mRNA LNPs were intravenously injected to mice through retro-orbital plexus.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-0b5279cfb9b0",
+            "S-d3a16a52979c"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-8682bc7aeb8782b4",
+          "text": "We then ampliﬁed and sequenced the mutant mouse F8 exon 1 region to determine the extent of gene editing.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb",
+            "S-620e08261866"
+          ],
+          "context_after_evidence_id": "GP-006-E-e2cb259904655a7d"
+        },
+        {
+          "evidence_id": "GP-006-E-566609fc939d51d8",
+          "text": "Colocalization of LNPs and vascular cells were indicated by white arrowheads.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71",
+            "S-fec7cd0399d1"
+          ],
+          "context_before_evidence_id": "GP-006-E-6782a11958eb6ff1",
+          "context_after_evidence_id": "GP-006-E-a646b1030db7fdba"
+        },
+        {
+          "evidence_id": "GP-006-E-a646b1030db7fdba",
+          "text": "(B) To determine the LSEC-targeting ability, mice were intravenously injected with 1.2 mg/kg of GFP LNPs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71",
+            "S-fec7cd0399d1"
+          ],
+          "context_before_evidence_id": "GP-006-E-566609fc939d51d8"
+        },
+        {
+          "evidence_id": "GP-006-E-d22913824fc90c03",
+          "text": "Liver sections harvested 6 h after LNP injection were stained with anti-GFP (green) and anti-LYVE-1(red) antibodies.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71",
+            "S-fec7cd0399d1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-d7a6c5b7066a40c4",
+          "text": "(C) Mice were treated with 0.2 mg/kg Luc LNPs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71",
+            "S-fec7cd0399d1"
+          ],
+          "context_after_evidence_id": "GP-006-E-b55e158bccb134a3"
+        },
+        {
+          "evidence_id": "GP-006-E-b55e158bccb134a3",
+          "text": "Livers of treated mice were perfused with Liberase to obtain single cell suspensions.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71",
+            "S-fec7cd0399d1"
+          ],
+          "context_before_evidence_id": "GP-006-E-d7a6c5b7066a40c4"
+        },
+        {
+          "evidence_id": "GP-006-E-1026eebfa4555fab",
+          "text": "The total liver cells were subsequently puriﬁed to isolate hepatocytes (HPCs) and LSECs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71",
+            "S-fec7cd0399d1"
+          ],
+          "context_after_evidence_id": "GP-006-E-331470ab8527c636"
+        },
+        {
+          "evidence_id": "GP-006-E-331470ab8527c636",
+          "text": "Luciferase expression of HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71",
+            "S-fec7cd0399d1"
+          ],
+          "context_before_evidence_id": "GP-006-E-1026eebfa4555fab"
+        },
+        {
+          "evidence_id": "GP-006-E-1d1871fe74140517",
+          "text": "It was previously demonstrated in our lab that following hydrodynamic injection of plasmid DNA, transfection occurred predominantly in hepatocytes; however, lower transgene expression was also observed in LSECs.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ],
+          "context_after_evidence_id": "GP-006-E-6de66baf9d03fb47"
+        },
+        {
+          "evidence_id": "GP-006-E-6de66baf9d03fb47",
+          "text": "Therefore, as a preliminary test to assess the in vivo gene editing efficacy of NSGHAsgRNA on mutant F8, we first employed hydrodynamic injection to deliver a co-expressing plasmid encoding Cas9 and NSGHAsgRNA into NSG HemA mice to correct the five base-pair deletion in exon 1 of the F8 gene.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ],
+          "context_before_evidence_id": "GP-006-E-1d1871fe74140517"
+        },
+        {
+          "evidence_id": "GP-006-E-61352269ff3b61f2",
+          "text": "Following injection, we measured endogenous FVIII activity in the treated mice using activated partial thromboplastin time (aPTT) assay.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ],
+          "context_after_evidence_id": "GP-006-E-06fab5f83faff0f5"
+        },
+        {
+          "evidence_id": "GP-006-E-06fab5f83faff0f5",
+          "text": "Our results indicated that delivery of Cas9/NSGHAsgRNA plasmid led to an increase in FVIII activity in NSG HemA mice.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ],
+          "context_before_evidence_id": "GP-006-E-61352269ff3b61f2",
+          "context_after_evidence_id": "GP-006-E-5f1df7ac5c7ec3f9"
+        },
+        {
+          "evidence_id": "GP-006-E-5f1df7ac5c7ec3f9",
+          "text": "Specifically, after two injections, treated NSG HemA mice displayed approximately 2.6% FVIII activity (Figure 4A).",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ],
+          "context_before_evidence_id": "GP-006-E-06fab5f83faff0f5"
+        },
+        {
+          "evidence_id": "GP-006-E-3fc93b2f41ba7bc0",
+          "text": "To further assess the in vivo gene editing efficacy of two sgRNAs, we separately delivered plasmids encoding Cas9 and either NSGHAsgRNA or mF8sgRNA.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-42044a2a47a2f75d",
+          "text": "Following injection, we euthanized the treated mice and extracted genomic DNA from their liver tissue.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-ab6a59c6da34953c",
+          "text": "Our data showed that the in vivo gene editing efficiency of NSGHAsgRNA was comparable to that of mF8sgRNA, with both sgRNAs resulting in a gene editing efficiency of around 5% in genomic DNA extracted from whole liver (Figure 4B).Figure 4In vivo gene editing efficiency of two specific Cas9/sgRNAs using hydrodynamic injection in NSG HemA mice(A) Plasmid expressing Cas9 and NSGHAsgRNA was delivered to NSG HemA mice through hydrodynamic injection.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-620e08261866"
+          ],
+          "context_before_evidence_id": "GP-006-E-8682bc7aeb8782b4"
+        },
+        {
+          "evidence_id": "GP-006-E-490fc51d9d69fdf5",
+          "text": "Arrowheads and arrows indicate nicked form and supercoiled form of double-strand DNA, respectively.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-7c087795cc04",
+            "S-b067f0c73a63"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-cc02a443e93a1881",
+          "text": "(D) Quantification of luciferase expression from IVIS imaging, presented as mean luciferase signals ± standard deviations, expressed in bioluminescence light units (BLUs), N/P 3, n = 3; N/P 8, n = 6.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-7c087795cc04",
+            "S-b067f0c73a63"
+          ],
+          "context_before_evidence_id": "GP-006-E-cd28156c9062c154"
+        },
+        {
+          "evidence_id": "GP-006-E-ad44259aca1febd4",
+          "text": "Characterization of LNP: (E) size distribution and (F) average size at N/P ratio = 8 was analyzed using qNano.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-7c087795cc04",
+            "S-b067f0c73a63"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-2d998758bd27cac9",
+          "text": "Examination of plasma (G) AST and (H) ALT levels 1 day after intravenous injection of 1 mg/kg Luc LNP.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-7c087795cc04",
+            "S-b067f0c73a63"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-2a75a690d1b66c13",
+          "text": "To optimize LNP formulation, we synthesized the luciferase mRNA encapsulated MC3 LNP (Luc LNP).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_after_evidence_id": "GP-006-E-c44f9ee6708e752d"
+        },
+        {
+          "evidence_id": "GP-006-E-c44f9ee6708e752d",
+          "text": "We used a microfluidic system, NanoAssemblr Benchtop, to mix the luciferase mRNA aqueous phase with the lipid ethanol phase containing MC3, cholesterol, DOPE, and DMG-PEG2000 at ratios of 50:10:39:1, respectively.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_before_evidence_id": "GP-006-E-2a75a690d1b66c13"
+        },
+        {
+          "evidence_id": "GP-006-E-fc0ab312d18dabf3",
+          "text": "Since the charge ratio between nitrogen group of cationic lipid and phosphate group of nucleic acid significantly affects encapsulation efficiency and size,23,24 we optimized the Luc LNPs according to N/P ratio of 3–8.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_after_evidence_id": "GP-006-E-47fbd2351d5818b3"
+        },
+        {
+          "evidence_id": "GP-006-E-47fbd2351d5818b3",
+          "text": "Results showed that a higher N/P ratio allowed for enhanced encapsulation efficiency and in vivo transfection efficiency (Figures 1A–1C).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_before_evidence_id": "GP-006-E-fc0ab312d18dabf3"
+        },
+        {
+          "evidence_id": "GP-006-E-a90b53cad3a2ab53",
+          "text": "Since the N/P of 8 resulted in a higher yield compared with N/P of 6 (61.7% vs.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-0d51446684dc2c77",
+          "text": "47.5%), we selected N/P 8 for the following experiments.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-6dda6c3d35f697bf",
+          "text": "The size of the formulated LNPs was validated prior to injection (Figures 1D and 1E).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_after_evidence_id": "GP-006-E-b43eb3bc8fb854a6"
+        },
+        {
+          "evidence_id": "GP-006-E-b43eb3bc8fb854a6",
+          "text": "The mean particle size of LNPs was approximately 163 nm.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_before_evidence_id": "GP-006-E-6dda6c3d35f697bf",
+          "context_after_evidence_id": "GP-006-E-62ea0c604b0d8e91"
+        },
+        {
+          "evidence_id": "GP-006-E-62ea0c604b0d8e91",
+          "text": "We assessed potential liver damage by evaluating plasma transaminase levels in mice treated with 1 mg/kg Luc LNPs.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_before_evidence_id": "GP-006-E-b43eb3bc8fb854a6"
+        },
+        {
+          "evidence_id": "GP-006-E-327ed9965c3b1163",
+          "text": "None of the treated mice showed elevated alanine aminotransferase (ALT) and aspartate aminotransferase (AST) levels compared with the untreated mice (Figures 1F and 1G).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_after_evidence_id": "GP-006-E-11e9f9f226b5a5b6"
+        },
+        {
+          "evidence_id": "GP-006-E-11e9f9f226b5a5b6",
+          "text": "These data suggested that treatment with a high dose of MC3 LNP did not induce any significant liver damage, indicating that MC3 LNPs are suitable for in vivo treatment.Figure 1Optimization of MC3 lipid nanoparticles(A) Gel electrophoresis analysis of MC3 lipid nanoparticles (LNPs) at different N/P ratios.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_before_evidence_id": "GP-006-E-327ed9965c3b1163"
+        },
+        {
+          "evidence_id": "GP-006-E-cd28156c9062c154",
+          "text": "(B) Encapsulation efficiency of luciferase mRNA LNP (Luc LNP) at N/P ratios of 3 and 8, determined by RiboGreen assay.(C) Evaluation of luciferase expression 6 h after intravenous injection of 0.3 mg/kg Luc LNPs at N/P ratios of 3 and 8 using IVIS imaging.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b067f0c73a63"
+          ],
+          "context_after_evidence_id": "GP-006-E-cc02a443e93a1881"
+        },
+        {
+          "evidence_id": "GP-006-E-a1bacdde94544f45",
+          "text": "Liver injury was evaluated using alanine aminotransferase (ALT) reagent kit (Teco diagnostics, Anaheim, CA) and aspartate aminotransferase (AST) commercial enzyme kit (Randox, London, United Kingdom) at indicated time points after LNP injection, respectively.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-73ad7f1fcdfa"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-3d5a9ac6ce6344bf",
+          "text": "FVIII activity was measured by aPTT assay.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2",
+            "S-b35a38070366"
+          ],
+          "context_after_evidence_id": "GP-006-E-0062483addf27f5e"
+        },
+        {
+          "evidence_id": "GP-006-E-0062483addf27f5e",
+          "text": "The effect of LNP treatment showed signiﬁcant improvement of FVIII activity.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2",
+            "S-b35a38070366"
+          ],
+          "context_before_evidence_id": "GP-006-E-3d5a9ac6ce6344bf"
+        },
+        {
+          "evidence_id": "GP-006-E-3e72c5459cb502fb",
+          "text": "Negative control (untreated NSG HemA) and positive controls (1% WT whole blood added to NSG HemA whole blood) were included.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2",
+            "S-b35a38070366"
+          ],
+          "context_after_evidence_id": "GP-006-E-df27ba9da07fa60c"
+        },
+        {
+          "evidence_id": "GP-006-E-68a2d90951163b05",
+          "text": "Coagulation function of experimental mice treated with Cas9 mRNA LNPs was examined at indicated time points after treatment.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-c0becf5515aa"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-8eb02bfce9139f8e",
+          "text": "Whole blood was collected by submental bleeding and mixed with anticoagulant 3.8% citric acid at a ratio of 1:9 (anticoagulant: whole blood).",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-c0becf5515aa"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-90dcfc4bb7fcab1f",
+          "text": "In the last section, we demonstrated two sgRNAs exhibited similar in vivo gene editing efficacy through hydrodynamic injection.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_after_evidence_id": "GP-006-E-b8b1d13c74226482"
+        },
+        {
+          "evidence_id": "GP-006-E-b8b1d13c74226482",
+          "text": "Following these results, we selected NSGHAsgRNA for subsequent gene editing experiments via LNP-mediated delivery of Cas9 mRNA/sgRNA.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_before_evidence_id": "GP-006-E-90dcfc4bb7fcab1f",
+          "context_after_evidence_id": "GP-006-E-6a0db3e1706fd8f7"
+        },
+        {
+          "evidence_id": "GP-006-E-6a0db3e1706fd8f7",
+          "text": "The NSGHAsgRNA was encapsulated with Cas9 mRNA into MC3 LNP and intravenously injected into NSG HemA mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_before_evidence_id": "GP-006-E-b8b1d13c74226482"
+        },
+        {
+          "evidence_id": "GP-006-E-8e9084aadcfe157d",
+          "text": "Post-treatment, FVIII activity was measured by aPTT, and our results indicated that the treated mice generated an average of 3.30% ± 0.68% of FVIII activity over a span of 26 weeks (Figure 5A).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_after_evidence_id": "GP-006-E-f0a7be6dc0bdd16d"
+        },
+        {
+          "evidence_id": "GP-006-E-f0a7be6dc0bdd16d",
+          "text": "To further validate endogenous FVIII restoration, we performed rotational thromboelastometry (ROTEM) assay to monitor the clot formation using fresh whole blood collected from treated mice.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_before_evidence_id": "GP-006-E-8e9084aadcfe157d",
+          "context_after_evidence_id": "GP-006-E-022f2b3f91b6afdf"
+        },
+        {
+          "evidence_id": "GP-006-E-022f2b3f91b6afdf",
+          "text": "Clotting time (CT) is the time when the clotting starts, and clot formation time (CFT) is the time when the clot firmness of 20 mm is detected.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_before_evidence_id": "GP-006-E-f0a7be6dc0bdd16d"
+        },
+        {
+          "evidence_id": "GP-006-E-4f5bf6ad6622f76c",
+          "text": "Results indicated that Cas9/sgRNA LNP-treated mice exhibited shorter CT and CFT durations compared with untreated mice, displaying a clotting ability better than controls containing 1% of normal whole blood.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_after_evidence_id": "GP-006-E-8f4df2feafb0205d"
+        },
+        {
+          "evidence_id": "GP-006-E-8f4df2feafb0205d",
+          "text": "This result suggested an improved coagulation due to targeted correction of the mutant F8 gene (Figures 5B and 5C).Figure 5Recovery of endogenous FVIII activity after Cas9/sgRNA LNP injection(A) FVIII activity following Cas9/sgRNA LNP treatment.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_before_evidence_id": "GP-006-E-4f5bf6ad6622f76c",
+          "context_after_evidence_id": "GP-006-E-c96069ae41c1c7d0"
+        },
+        {
+          "evidence_id": "GP-006-E-c96069ae41c1c7d0",
+          "text": "NSG HemA were injected with 4 mg/kg of Cas9/NSGHAsgRNA LNP (n = 2–8) to correct the mutant F8 gene.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_before_evidence_id": "GP-006-E-8f4df2feafb0205d"
+        },
+        {
+          "evidence_id": "GP-006-E-5436c5c0eaf9f226",
+          "text": "(B) NSG HemAs were treated with 4 mg/kg of Cas9/NSGHAsgRNA LNPs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-e2a56ccf7060d8b1",
+          "text": "(C) Clotting time (CT) and clot formation time (CFT) of untreated negative control and Cas9/NSGHAsgRNA LNP-treated mice are shown.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-1385dd7253d2"
+          ],
+          "context_before_evidence_id": "GP-006-E-3e72c5459cb502fb"
+        },
+        {
+          "evidence_id": "GP-006-E-7d6ce93555277cf7",
+          "text": "Organic and aqueous solutions were assembled using NanoAssemblr system (Precision NanoSystems, San Francisco, CA, USA) at a 1:3 volume ratio to synthesize mRNA LNPs.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-350c76d2298a"
+          ],
+          "context_after_evidence_id": "GP-006-E-23846b81ce438fb1"
+        },
+        {
+          "evidence_id": "GP-006-E-23846b81ce438fb1",
+          "text": "Encapsulation efficiency of mRNA LNPs was determined by Quant-it RiboGreen RNA Assay Kit (Thermo Fisher, USA).",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-350c76d2298a"
+          ],
+          "context_before_evidence_id": "GP-006-E-7d6ce93555277cf7"
+        },
+        {
+          "evidence_id": "GP-006-E-5da1aeadc0b69fa2",
+          "text": "In vivo gene editing efﬁciency of two speciﬁc Cas9/sgRNAs using hydrodynamic injection in NSG HemA mice (A) Plasmid expressing Cas9 and NSGHAsgRNA was delivered to NSG HemA mice through hydrodynamic injection.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-a46ce748afa2a376",
+          "text": "small deletion and insertion variants.29 To edit the mutant F8 gene in NSG HemA mice, we selected two sgRNAs, mF8sgRNA and LSECs to identify the respective gene editing rate.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-ab5a32e037c62749",
+          "text": "Since both that the F8 gene was edited in 60.54% ± 11.65% of hepatocytes, sgRNAs exhibit similar gene editing efﬁciencies and to avoid repeated whereas LSECs showed gene editing rates of approximately targeting of the corrected F8 gene by mF8sgRNA, which also targets 16.50% ± 2.96% (Figure 6A; Table S1).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-191ac0774ac7347b",
+          "text": "No indel variants were found the WT F8 gene, we chose NSGHAsgRNA for the subsequent gene at ﬁve top predicted potential off-target sites when compared with un- editing experiments.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-d9dd4b3086e5d210",
+          "text": "Based on our ﬁndings, we successfully employed treated mice using next generation sequencing (NGS) analysis (Fig- LNPs to deliver Cas9 mRNA and sgRNA to LSECs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-09f27a614bffbf2d",
+          "text": "The investigation of gene editing patterns in LSECs revealed were generated at the deletion site to facilitate the repair of the frame- that one base-pair deletions constitute the highest editing pattern shift variants in the mutant F8 gene in vivo.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-3c6e73bc825c5293",
+          "text": "The corrected mutants (around 46.5% of total deletions), together with four base-pair dele- exhibited endogenous FVIII expression and effectively restored the tions, which can help rescue the ﬁve base-pair deletion in NSG coagulation activity in NSG HemA mice.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-7066b69b1d22a88d",
+          "text": "NGS sequencing analysis re- HemA, accounting for 50%–60% of all the deletions (Figures 6C vealed an approximately 16.5% deletion frequency in LSECs following and 6D).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-93ef63a8bccbdd1d",
+          "text": "We also analyzed the +2 and +5 insertion patterns among Cas9/sgRNA LNP treatment.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-d51e57e7bfc1ef65",
+          "text": "Of the deletions, 1 (7.68%) and 4 indel variants, but their frequencies were signiﬁcantly lower (0.78% (1.38%) deletion were able to restore the reading frame, potentially and 0%, respectively) compared with deletion variants (Table S2).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-75f625c0c2b94025",
+          "text": "aiding in the recovery of FVIII expression.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-ef798f3259752156",
+          "text": "While +2 and +5 insertions These results suggested that Cas9/sgRNA LNP treatment induced in- can also restore the reading frame, <1% insertion frequency was del repair in LSECs and restoration of the endogenous FVIII expres- observed.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-e2283600a48ca889",
+          "text": "With improvements in editing efﬁciencies, LSECs are the primary source of FVIII biosynthesis.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-6cb9944c75db17b3",
+          "text": "Previous research effective levels to prevent bleeding in patients with hemophilia A of LNP-mediated gene delivery has primarily focused on the hepato- could be achieved.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ],
+          "context_after_evidence_id": "GP-006-E-7c54f86441d4600b"
+        },
+        {
+          "evidence_id": "GP-006-E-7c54f86441d4600b",
+          "text": "This indel repair strategy can be applied to cyte-targeting capability of MC3-based and other LNPs to correct he- HemA patients with frameshift mutations, in particular, for patients patocyte-related diseases.25,26 While the Fah mutant mouse model whose reading frames can be rescued by a one base-pair deletion has been commonly utilized to demonstrate in vivo gene editing efﬁ- using gene editing.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ],
+          "context_before_evidence_id": "GP-006-E-6cb9944c75db17b3",
+          "context_after_evidence_id": "GP-006-E-74c83e0498ee796d"
+        },
+        {
+          "evidence_id": "GP-006-E-74c83e0498ee796d",
+          "text": "cacy in hepatocytes, there is a lack of reported studies on LSEC- related disease genes for in vivo gene editing experiments.27,28 In The advantage of in situ correction of mutant F8 in LSECs is the resto- this study, we optimized MC3 LNPs with various N/P ratio and ration of its original and physiological function.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ],
+          "context_before_evidence_id": "GP-006-E-7c54f86441d4600b"
+        },
+        {
+          "evidence_id": "GP-006-E-32e4db9d084b2e32",
+          "text": "Our results align with previous physiological conditions, such as infection, surgery, pregnancy, and ﬁndings, conﬁrming the LSEC-targeting potential of MC3-based inﬂammatory states.30–33 Additionally, the release of FVIII occurs LNPs.22 To demonstrate the in vivo gene editing capacity of LSECs following acute exercise and increases during the recovery period in in a disease model, we utilized a novel NSG HemA mouse model both healthy individuals and mild-moderate HemA patients.34–37 characterized by a ﬁve base-pair deletion in F8 exon 1.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ],
+          "context_after_evidence_id": "GP-006-E-6c5223116feafecb"
+        },
+        {
+          "evidence_id": "GP-006-E-6c5223116feafecb",
+          "text": "Unlike conven- Additionally, it offers great beneﬁt to restore F8 gene expression via tional HemA mouse models featuring disruption of F8 exon 16 by gene editing in LSECs, where it undergoes unique post-translational insertion of a neo cassette, this NSG HemA model presents a speciﬁc modiﬁcations, storage, and secretion.38 Ectopic expression of FVIII target for gene editing to restore FVIII expression by inducing in hepatocytes, which have different post-translational modiﬁcation indel mutations of F8 gene in LSECs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ],
+          "context_before_evidence_id": "GP-006-E-32e4db9d084b2e32",
+          "context_after_evidence_id": "GP-006-E-c85d04a488041ab0"
+        },
+        {
+          "evidence_id": "GP-006-E-c85d04a488041ab0",
+          "text": "This model mimics the genetic processes than LSECs, may impact protein folding, trafﬁcking, variant seen in approximately 16% of severe HemA patients with and release, leading to endoplasmic reticulum (ER) stress.25,39,40 In 6 Molecular Therapy: Nucleic Acids Vol.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-23e0134068c1"
+          ],
+          "context_before_evidence_id": "GP-006-E-6c5223116feafecb"
+        },
+        {
+          "evidence_id": "GP-006-E-80d4da94a56f107b",
+          "text": "In vitro gene editing efﬁciency of two sgRNAs in mouse ﬁbroblast NIH3T3cells (A) Representative genomic DNA sequence of wild-type (WT) and mutant mouse F8 (mF8).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-0d07bcc42f8330b3",
+          "text": "Two sgRNA sequences against mutant mF8 are shown within red and green arrows.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-920137df508d3327",
+          "text": "(B) In vitro gene editing efﬁciency of two sgRNAs in NIH3T3cells was determined by T7 endonuclease 1 (T7E1) assay, respectively.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-4bc9bdb3ed831376",
+          "text": "Blue arrow represents uncut DNA and red arrow represents cut DNA.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-f7f01e53ded17199",
+          "text": "(C) The pattern of indel mutations after mF8sgRNA-mediated gene editing in NIH3T3cells was analyzed by online genomic DNA analysis tool TIDE.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-e2cb259904655a7d",
+          "text": "Our data showed that the in vivo gene editing 3 days after transfection to estimate overall gene editing efﬁciency efﬁciency of NSGHAsgRNA was comparable to that of using T7 endonuclease (T7E1) assay.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_before_evidence_id": "GP-006-E-8682bc7aeb8782b4",
+          "context_after_evidence_id": "GP-006-E-1893c0cd1beb2ee9"
+        },
+        {
+          "evidence_id": "GP-006-E-1893c0cd1beb2ee9",
+          "text": "The result indicated that mF8sgRNA, with both sgRNAs resulting in a gene editing efﬁ- mF8sgRNA could induce an indel variant into mouse F8 exon 1 ciency of around 5% in genomic DNA extracted from whole liver with a 23% of indel mutation rate (Figure 3B).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_before_evidence_id": "GP-006-E-e2cb259904655a7d"
+        },
+        {
+          "evidence_id": "GP-006-E-1e527773e8493acf",
+          "text": "tiﬁed the indel pattern at the mutation site via the Sanger sequencing and Tracking of indels by Decomposition (TIDE) online tool, Sustained expression of mouse FVIII following Cas9/sgRNA LNP showing insertion and deletion rates of 3.5% and 28.5%, respectively.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-8fbb0d1c6f7ead81",
+          "text": "injection Among all the deletion patterns, approximately 60% were one base- In the last section, we demonstrated two sgRNAs exhibited similar pair deletions that can restore the 50 base-pair deletion to normal in vivo gene editing efﬁcacy through hydrodynamic injection.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-31c0ada2828d03ec",
+          "text": "As expected, NSGHAsgRNA showed no Following these results, we selected NSGHAsgRNA for subsequent editing activity in WT F8 gene.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-bcf1f4181f0cc4f6",
+          "text": "gene editing experiments via LNP-mediated delivery of Cas9 mRNA/sgRNA.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_after_evidence_id": "GP-006-E-b0e824a66a4f04c1"
+        },
+        {
+          "evidence_id": "GP-006-E-b0e824a66a4f04c1",
+          "text": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_before_evidence_id": "GP-006-E-bcf1f4181f0cc4f6"
+        },
+        {
+          "evidence_id": "GP-006-E-d9a16a0c73e6b6b2",
+          "text": "Post-treatment, It was previously demonstrated in our lab that following hydrody- FVIII activity was measured by aPTT, and our results indicated namic injection of plasmid DNA, transfection occurred predomi- that the treated mice generated an average of 3.30% ± 0.68% of nantly in hepatocytes; however, lower transgene expression was FVIII activity over a span of 26 weeks (Figure 5A).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-69488096029a4d13",
+          "text": "To further validate also observed in LSECs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_after_evidence_id": "GP-006-E-ab32c0faea637986"
+        },
+        {
+          "evidence_id": "GP-006-E-ab32c0faea637986",
+          "text": "Therefore, as a preliminary test to assess endogenous FVIII restoration, we performed rotational thromboelas- the in vivo gene editing efﬁcacy of NSGHAsgRNA on mutant tometry (ROTEM) assay to monitor the clot formation using fresh F8, we ﬁrst employed hydrodynamic injection to deliver a co-ex- whole blood collected from treated mice.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_before_evidence_id": "GP-006-E-69488096029a4d13",
+          "context_after_evidence_id": "GP-006-E-bb41ea6f7efc1587"
+        },
+        {
+          "evidence_id": "GP-006-E-bb41ea6f7efc1587",
+          "text": "Clotting time (CT) is the pressing plasmid encoding Cas9 and NSGHAsgRNA into NSG time when the clotting starts, and clot formation time (CFT) is the HemA mice to correct the ﬁve base-pair deletion in exon 1 of time when the clot ﬁrmness of 20 mm is detected.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_before_evidence_id": "GP-006-E-ab32c0faea637986"
+        },
+        {
+          "evidence_id": "GP-006-E-0043b99ab0bf3320",
+          "text": "Following injection, we measured endogenous FVIII that Cas9/sgRNA LNP-treated mice exhibited shorter CT and CFT activity in the treated mice using activated partial thromboplastin durations compared with untreated mice, displaying a clotting ability time (aPTT) assay.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-4bf453e375ea1f62",
+          "text": "Our results indicated that delivery of Cas9/ better than controls containing 1% of normal whole blood.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_after_evidence_id": "GP-006-E-0ddd9b0412ade45d"
+        },
+        {
+          "evidence_id": "GP-006-E-0ddd9b0412ade45d",
+          "text": "This result NSGHAsgRNA plasmid led to an increase in FVIII activity in suggested an improved coagulation due to targeted correction of the NSG HemA mice.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ],
+          "context_before_evidence_id": "GP-006-E-4bf453e375ea1f62"
+        },
+        {
+          "evidence_id": "GP-006-E-64668b2195f5628e",
+          "text": "Speciﬁcally, after two injections, treated NSG mutant F8 gene (Figures 5B and 5C).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-0e932dc79aa7ba74",
+          "text": "HemA mice displayed approximately 2.6% FVIII activity (Fig- ure 4A).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-2a28bcf9ba6d945f",
+          "text": "To further assess the in vivo gene editing efﬁcacy of We further analyzed genomic DNA from treated mice using deep two sgRNAs, we separately delivered plasmids encoding Cas9 sequencing to identify the gene editing rate.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-c880de483e81461c",
+          "text": "Following injection, Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about we euthanized the treated mice and extracted genomic DNA 52.7% in total liver cells.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-54a70efbd7fb"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-5c6caa9775e59dc6",
+          "text": "Molecular Therapy: Nucleic Acids addedtosectionsandstainedatroomtemperaturefor2h.Sectionswere treated NSG HemA mice were served as control.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-79fa10c0773f791e",
+          "text": "Whole blood was mounted with mounting medium containing DAPI (H-1200-10, Vec- collected by submental bleeding and mixed with anticoagulant 3.8% tor Laboratories, CA, USA) for nuclear staining.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_after_evidence_id": "GP-006-E-26fe0abf124e063a"
+        },
+        {
+          "evidence_id": "GP-006-E-26fe0abf124e063a",
+          "text": "Images were examined citric acid at a ratio of 1:9 (anticoagulant: whole blood).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_before_evidence_id": "GP-006-E-79fa10c0773f791e"
+        },
+        {
+          "evidence_id": "GP-006-E-d18589e268d50539",
+          "text": "To verify cell-type-spe- CFT were directly measured using NATEM (Non-Activated Throm- ciﬁc gene editing, the livers of treated mice were perfused with HBSS boelastometry) kit assay by rotational thromboelastometry (ROTEM buffer containing 0.5 mM EDTA and 25 mM HEPES, followed by delta, Instrumentation Laboratory, Bedford, MA).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_after_evidence_id": "GP-006-E-d8408c157c0c4e42"
+        },
+        {
+          "evidence_id": "GP-006-E-d8408c157c0c4e42",
+          "text": "digestion with a buffer containing Liberase (5401119001, Sigma- Aldrich).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_before_evidence_id": "GP-006-E-d18589e268d50539"
+        },
+        {
+          "evidence_id": "GP-006-E-bc0c32ed24663d66",
+          "text": "LSECs were further isolated using mouse CD146 MicroBeads Genomic DNA of treated mice was extracted from transfected cells (130-092-007, Miltenyi Biotec).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-8219b01faf96f7c2",
+          "text": "APC-labeled anti-CD31, (102510, BioLegend), BV421-labeled, anti- The mouse FVIII region targeted by sgRNA was ampliﬁed using CD45 (103133, BioLegend), and PE-labeled anti-CD146 (130-118- CloneAmp HiFi PCR Premix (Takara Bio) with primers mF8-VF1 407, Miltenyi Biotec).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-c38e90721505d686",
+          "text": "To identify the gene editing rate, puriﬁed PCR amplicons were shipped to Azenta Life Sciences (Seattle, WA, USA) In vitro luciferase assay for Sanger sequencing or deep sequencing.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_after_evidence_id": "GP-006-E-d40935e802d3097f"
+        },
+        {
+          "evidence_id": "GP-006-E-d40935e802d3097f",
+          "text": "The Sanger sequencing Liver lobes were homogenized using Bead Ruptor Elite (OMNI, US) data were analyzed using Tracking of indels by Decomposition in passive lysis buffer (E1941, Promega, USA).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_before_evidence_id": "GP-006-E-c38e90721505d686"
+        },
+        {
+          "evidence_id": "GP-006-E-e77f320b73e493a8",
+          "text": "Luciferase expression was normalized by total protein, measured by BCA assay kit (Bio- Statistical analyses Rad, USA), and reported as RLU/mg.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_after_evidence_id": "GP-006-E-77c40ea97cdb07f0"
+        },
+        {
+          "evidence_id": "GP-006-E-77c40ea97cdb07f0",
+          "text": "All the statistical analyses were carried out utilizing GraphPad Prism 7 software.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_before_evidence_id": "GP-006-E-e77f320b73e493a8"
+        },
+        {
+          "evidence_id": "GP-006-E-bd9074ef6dfe5abc",
+          "text": "Kingdom) at indicated time points after LNP injection, respectively.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-3b69c2449a207263",
+          "text": "developed study design, performed experiments, analyzed data, and wrote and For the hydrodynamic injection of sgRNA and Cas9 plasmids, we revised the manuscript.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-fc0ecf46b5f2d8e1",
+          "text": "pL-CRISPR.EFS.tRFP plasmid (a gift from Benjamin Ebert, Addgene plasmid # 57819; http://n2t.net/addgene:57819; RRID: Addg- DECLARATION OF INTERESTS ene_57819).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_after_evidence_id": "GP-006-E-8be2ce689d8cd7e5"
+        },
+        {
+          "evidence_id": "GP-006-E-8be2ce689d8cd7e5",
+          "text": "These constructs were hydrodynamically injected into C.H.M.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ],
+          "context_before_evidence_id": "GP-006-E-fc0ecf46b5f2d8e1"
+        },
+        {
+          "evidence_id": "GP-006-E-587490a5a98365fe",
+          "text": "(mL) equal to 9% the mouse’s body weight (g).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-06981f0d61585c3b",
+          "text": "of 3.8% sodium citrate added to each sample.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-87acfef48a91248a",
+          "text": "injection was performed in week 5, and blood samples were collected weekly up to week 10.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-529ecbec5a4188a6",
+          "text": "Coagulation function of experimental mice treated with Cas9 mRNA 2.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-f2eec16b0e7dbae7",
+          "text": "Sarmiento Doncel, S., Díaz Mosquera, G.A., Cortes, J.M., Agudelo Rico, C., Meza LNPs was examined at indicated time points after treatment.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-d439bf18428e"
+          ]
+        },
+        {
+          "evidence_id": "GP-006-E-6782a11958eb6ff1",
+          "text": "Cell distribution of MC3 LNPs after intravenous injection in mice (A) One hour after intravenous injection of DiI-labeled LNPs (red) in mice, liver tissues were harvested and stained with FITC-Isolectin-B4 (green) to mark vascular cells.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_after_evidence_id": "GP-006-E-566609fc939d51d8"
+        },
+        {
+          "evidence_id": "GP-006-E-d9c30e3abca70fcb",
+          "text": "Since LSECs are the primary source of plasma FVIII pro- expression were obtained from both hepatocytes and LSECs with tein, our aim was to induce an indel mutation into the mutant mouse about 17-fold higher expression in hepatocytes than LSECs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_after_evidence_id": "GP-006-E-30adff05e58443b2"
+        },
+        {
+          "evidence_id": "GP-006-E-30adff05e58443b2",
+          "text": "These FVIII gene in LSECs to corrects the reading frame.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_before_evidence_id": "GP-006-E-d9c30e3abca70fcb",
+          "context_after_evidence_id": "GP-006-E-dc7bc18d9812653f"
+        },
+        {
+          "evidence_id": "GP-006-E-dc7bc18d9812653f",
+          "text": "Either insertion or data indicate MC3 LNPs can efﬁciently transfect both hepatocytes deletion that rescues the reading frame from the nonsense variant can and LSECs.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_before_evidence_id": "GP-006-E-30adff05e58443b2"
+        },
+        {
+          "evidence_id": "GP-006-E-251d555e882c93c1",
+          "text": "help restore expression of the endogenous mouse F8 gene.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_after_evidence_id": "GP-006-E-cd84947ffac461d0"
+        },
+        {
+          "evidence_id": "GP-006-E-cd84947ffac461d0",
+          "text": "To achieve this, we designed two different sgRNAs for Cas9 nuclease targeting Animal model for in vivo gene editing the mutant mouse F8 gene.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_before_evidence_id": "GP-006-E-251d555e882c93c1",
+          "context_after_evidence_id": "GP-006-E-f3dda9c744c9ef01"
+        },
+        {
+          "evidence_id": "GP-006-E-f3dda9c744c9ef01",
+          "text": "One of these sgRNAs, mF8sgRNA, can To assess the in vivo gene editing efﬁcacy, we established a colony of target both wild-type (WT) F8 gene and mutant F8 gene in NSG hemophilia A mouse model on an immunodeﬁcient NOD.Cg- HemA mice (Figure 3A), while the other, NSGHAsgRNA speciﬁcally Prkdcscid Il2rgtm1Wjl/SzJ mice (NSG) background (NSG HemA).",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_before_evidence_id": "GP-006-E-cd84947ffac461d0",
+          "context_after_evidence_id": "GP-006-E-b05886b4b3079f82"
+        },
+        {
+          "evidence_id": "GP-006-E-b05886b4b3079f82",
+          "text": "targets the mutant FVIII gene in NSG HemA mice.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-55f0be143c71"
+          ],
+          "context_before_evidence_id": "GP-006-E-f3dda9c744c9ef01"
+        },
+        {
+          "evidence_id": "GP-006-E-df27ba9da07fa60c",
+          "text": "(C) Clotting time (CT) and clot formation time (CFT) of untreated negative control and Cas9/ NSGHAsgRNA LNP-treated mice are shown.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b35a38070366"
+          ],
+          "context_before_evidence_id": "GP-006-E-3e72c5459cb502fb"
+        },
+        {
+          "evidence_id": "GP-006-E-0531a76f7f816a56",
+          "text": "Gene editing efﬁciency of isolated HPCs and LSECs After Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "payload",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b4035d8ab232"
+          ],
+          "context_after_evidence_id": "GP-006-E-22a954aae3f000e4"
+        }
+      ],
+      "packet_checksum": "d556f6c414dfb9a90bc9fc06c209986f4e84eac979ced40fc9d45c4e22184dee"
+    },
+    "outcome_recall_support": {
+      "support_version": "main-route-recall-support-1.2.0",
+      "paper_id": "GP-006",
+      "instructions": [
+        "Candidates are navigation aids, not verified final outcomes.",
+        "Create a final record only when its cited evidence directly supports it.",
+        "Keep distinct provisional experiments and atomic relationships separate.",
+        "Deduplicate candidates against outcomes already supported by the packet.",
+        "Use only evidence IDs present in the packet or local_evidence below."
+      ],
+      "provisional_experiments": [
+        {
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "label": "cas9_sgrna / in_vivo",
+          "anchors": [
+            {
+              "anchor_type": "payload",
+              "value": "cas9_sgrna",
+              "evidence_ids": [
+                "GP-006-E-0043b99ab0bf3320",
+                "GP-006-E-0531a76f7f816a56",
+                "GP-006-E-06fab5f83faff0f5",
+                "GP-006-E-08e2bd57bb350010",
+                "GP-006-E-0ddd9b0412ade45d",
+                "GP-006-E-1893c0cd1beb2ee9",
+                "GP-006-E-1e527773e8493acf",
+                "GP-006-E-2a28bcf9ba6d945f",
+                "GP-006-E-39cfd74bbca7e6bf",
+                "GP-006-E-3ed93bbf08f38909",
+                "GP-006-E-3fc93b2f41ba7bc0",
+                "GP-006-E-45340ed253dbdbe8",
+                "GP-006-E-4f5bf6ad6622f76c",
+                "GP-006-E-50929f80242be246",
+                "GP-006-E-529ecbec5a4188a6",
+                "GP-006-E-5436c5c0eaf9f226",
+                "GP-006-E-575ca6ef75bb6026",
+                "GP-006-E-5da1aeadc0b69fa2",
+                "GP-006-E-68a2d90951163b05",
+                "GP-006-E-6a0db3e1706fd8f7",
+                "GP-006-E-6de66baf9d03fb47",
+                "GP-006-E-8af0fe6c0065d45c",
+                "GP-006-E-8fbb0d1c6f7ead81",
+                "GP-006-E-90dcfc4bb7fcab1f",
+                "GP-006-E-a46ce748afa2a376",
+                "GP-006-E-aae9c2952cb83528",
+                "GP-006-E-ab32c0faea637986",
+                "GP-006-E-ab6a59c6da34953c",
+                "GP-006-E-b0e824a66a4f04c1",
+                "GP-006-E-bb41ea6f7efc1587",
+                "GP-006-E-c880de483e81461c",
+                "GP-006-E-c96069ae41c1c7d0",
+                "GP-006-E-cd84947ffac461d0",
+                "GP-006-E-d6ad3aa43d45f3c0",
+                "GP-006-E-d9dd4b3086e5d210",
+                "GP-006-E-df27ba9da07fa60c",
+                "GP-006-E-e2a56ccf7060d8b1",
+                "GP-006-E-e2cb259904655a7d",
+                "GP-006-E-e8c4517f30b03f17",
+                "GP-006-E-f3dda9c744c9ef01",
+                "GP-006-FC-04266ee2680a9fcf",
+                "GP-006-FC-064672da51c70535",
+                "GP-006-FC-07db2e68388e299d",
+                "GP-006-FC-0d88df50c50a2d7b",
+                "GP-006-FC-0ed3611eb9cd257d",
+                "GP-006-FC-14455a8d919172dc",
+                "GP-006-FC-1559b312001971ce",
+                "GP-006-FC-1dde658a87a9c408",
+                "GP-006-FC-2214c93b5fbd6e62",
+                "GP-006-FC-261c43cc443b02fc",
+                "GP-006-FC-33a30c8fe6de4481",
+                "GP-006-FC-35fa0a771986447c",
+                "GP-006-FC-3ad2c6ed80a67d38",
+                "GP-006-FC-3b79457f9b137cb1",
+                "GP-006-FC-50f84f5cf4de92e7",
+                "GP-006-FC-582e4f97c32024f7",
+                "GP-006-FC-5c012a1b85ee2781",
+                "GP-006-FC-626bb1932bd8fc95",
+                "GP-006-FC-694108d5f28fb462",
+                "GP-006-FC-76d45df84af8fb28",
+                "GP-006-FC-795d1550039906f2",
+                "GP-006-FC-7a82fb7ca2c9070a",
+                "GP-006-FC-867518f9f8de93ec",
+                "GP-006-FC-887ad8f0a2e6dcfc",
+                "GP-006-FC-8df538fe0f0fd3be",
+                "GP-006-FC-95003d17d91f1f8b",
+                "GP-006-FC-95c3955b90c9e87b",
+                "GP-006-FC-961e94fbff8c0791",
+                "GP-006-FC-971f7c6b9a94be06",
+                "GP-006-FC-987fa1c209db6f85",
+                "GP-006-FC-9933e02891a5b41c",
+                "GP-006-FC-99dc9dd80989fb16",
+                "GP-006-FC-adea59d639d660fe",
+                "GP-006-FC-ae534ba92d69dcc6",
+                "GP-006-FC-b05c2b5a17b8404e",
+                "GP-006-FC-bf206922431492d8",
+                "GP-006-FC-c252c9b510e3e81c",
+                "GP-006-FC-cc33b7a799584181",
+                "GP-006-FC-cdb6cb15b65bdadd",
+                "GP-006-FC-cea1f7198773c291",
+                "GP-006-FC-d235a96b68dc6444",
+                "GP-006-FC-d673bb7b0d04e627",
+                "GP-006-FC-d791474f1c105691",
+                "GP-006-FC-ea80a3d2d7500008",
+                "GP-006-FC-efe1e079b7e12b0f",
+                "GP-006-FC-f431dab3df9c3ecd",
+                "GP-006-FC-fe48905ec0a74ad5"
+              ]
+            },
+            {
+              "anchor_type": "model",
+              "value": "in_vivo",
+              "evidence_ids": [
+                "GP-006-E-0043b99ab0bf3320",
+                "GP-006-E-0531a76f7f816a56",
+                "GP-006-E-06fab5f83faff0f5",
+                "GP-006-E-08e2bd57bb350010",
+                "GP-006-E-0ddd9b0412ade45d",
+                "GP-006-E-1893c0cd1beb2ee9",
+                "GP-006-E-1e527773e8493acf",
+                "GP-006-E-2a28bcf9ba6d945f",
+                "GP-006-E-39cfd74bbca7e6bf",
+                "GP-006-E-3ed93bbf08f38909",
+                "GP-006-E-3fc93b2f41ba7bc0",
+                "GP-006-E-45340ed253dbdbe8",
+                "GP-006-E-4f5bf6ad6622f76c",
+                "GP-006-E-50929f80242be246",
+                "GP-006-E-529ecbec5a4188a6",
+                "GP-006-E-5436c5c0eaf9f226",
+                "GP-006-E-575ca6ef75bb6026",
+                "GP-006-E-5da1aeadc0b69fa2",
+                "GP-006-E-68a2d90951163b05",
+                "GP-006-E-6a0db3e1706fd8f7",
+                "GP-006-E-6de66baf9d03fb47",
+                "GP-006-E-8af0fe6c0065d45c",
+                "GP-006-E-8fbb0d1c6f7ead81",
+                "GP-006-E-90dcfc4bb7fcab1f",
+                "GP-006-E-a46ce748afa2a376",
+                "GP-006-E-aae9c2952cb83528",
+                "GP-006-E-ab32c0faea637986",
+                "GP-006-E-ab6a59c6da34953c",
+                "GP-006-E-b0e824a66a4f04c1",
+                "GP-006-E-bb41ea6f7efc1587",
+                "GP-006-E-c880de483e81461c",
+                "GP-006-E-c96069ae41c1c7d0",
+                "GP-006-E-cd84947ffac461d0",
+                "GP-006-E-d6ad3aa43d45f3c0",
+                "GP-006-E-d9dd4b3086e5d210",
+                "GP-006-E-df27ba9da07fa60c",
+                "GP-006-E-e2a56ccf7060d8b1",
+                "GP-006-E-e2cb259904655a7d",
+                "GP-006-E-e8c4517f30b03f17",
+                "GP-006-E-f3dda9c744c9ef01",
+                "GP-006-FC-04266ee2680a9fcf",
+                "GP-006-FC-064672da51c70535",
+                "GP-006-FC-07db2e68388e299d",
+                "GP-006-FC-0d88df50c50a2d7b",
+                "GP-006-FC-0ed3611eb9cd257d",
+                "GP-006-FC-14455a8d919172dc",
+                "GP-006-FC-1559b312001971ce",
+                "GP-006-FC-1dde658a87a9c408",
+                "GP-006-FC-2214c93b5fbd6e62",
+                "GP-006-FC-261c43cc443b02fc",
+                "GP-006-FC-33a30c8fe6de4481",
+                "GP-006-FC-35fa0a771986447c",
+                "GP-006-FC-3ad2c6ed80a67d38",
+                "GP-006-FC-3b79457f9b137cb1",
+                "GP-006-FC-50f84f5cf4de92e7",
+                "GP-006-FC-582e4f97c32024f7",
+                "GP-006-FC-5c012a1b85ee2781",
+                "GP-006-FC-626bb1932bd8fc95",
+                "GP-006-FC-694108d5f28fb462",
+                "GP-006-FC-76d45df84af8fb28",
+                "GP-006-FC-795d1550039906f2",
+                "GP-006-FC-7a82fb7ca2c9070a",
+                "GP-006-FC-867518f9f8de93ec",
+                "GP-006-FC-887ad8f0a2e6dcfc",
+                "GP-006-FC-8df538fe0f0fd3be",
+                "GP-006-FC-95003d17d91f1f8b",
+                "GP-006-FC-95c3955b90c9e87b",
+                "GP-006-FC-961e94fbff8c0791",
+                "GP-006-FC-971f7c6b9a94be06",
+                "GP-006-FC-987fa1c209db6f85",
+                "GP-006-FC-9933e02891a5b41c",
+                "GP-006-FC-99dc9dd80989fb16",
+                "GP-006-FC-adea59d639d660fe",
+                "GP-006-FC-ae534ba92d69dcc6",
+                "GP-006-FC-b05c2b5a17b8404e",
+                "GP-006-FC-bf206922431492d8",
+                "GP-006-FC-c252c9b510e3e81c",
+                "GP-006-FC-cc33b7a799584181",
+                "GP-006-FC-cdb6cb15b65bdadd",
+                "GP-006-FC-cea1f7198773c291",
+                "GP-006-FC-d235a96b68dc6444",
+                "GP-006-FC-d673bb7b0d04e627",
+                "GP-006-FC-d791474f1c105691",
+                "GP-006-FC-ea80a3d2d7500008",
+                "GP-006-FC-efe1e079b7e12b0f",
+                "GP-006-FC-f431dab3df9c3ecd",
+                "GP-006-FC-fe48905ec0a74ad5"
+              ]
+            },
+            {
+              "anchor_type": "cell_context",
+              "value": "lsec",
+              "evidence_ids": [
+                "GP-006-E-0531a76f7f816a56",
+                "GP-006-E-8af0fe6c0065d45c",
+                "GP-006-E-a46ce748afa2a376",
+                "GP-006-E-d9dd4b3086e5d210",
+                "GP-006-FC-0ed3611eb9cd257d",
+                "GP-006-FC-887ad8f0a2e6dcfc",
+                "GP-006-FC-95003d17d91f1f8b",
+                "GP-006-FC-b05c2b5a17b8404e"
+              ]
+            },
+            {
+              "anchor_type": "assay",
+              "value": "sequencing",
+              "evidence_ids": [
+                "GP-006-E-1e527773e8493acf",
+                "GP-006-E-2a28bcf9ba6d945f",
+                "GP-006-E-50929f80242be246",
+                "GP-006-E-d9dd4b3086e5d210",
+                "GP-006-FC-2214c93b5fbd6e62",
+                "GP-006-FC-3b79457f9b137cb1",
+                "GP-006-FC-95003d17d91f1f8b",
+                "GP-006-FC-9933e02891a5b41c",
+                "GP-006-FC-fe48905ec0a74ad5"
+              ]
+            },
+            {
+              "anchor_type": "assay",
+              "value": "coagulation_activity",
+              "evidence_ids": [
+                "GP-006-E-0043b99ab0bf3320",
+                "GP-006-E-06fab5f83faff0f5",
+                "GP-006-E-0ddd9b0412ade45d",
+                "GP-006-E-1e527773e8493acf",
+                "GP-006-E-39cfd74bbca7e6bf",
+                "GP-006-E-3ed93bbf08f38909",
+                "GP-006-E-50929f80242be246",
+                "GP-006-E-529ecbec5a4188a6",
+                "GP-006-E-68a2d90951163b05",
+                "GP-006-E-8af0fe6c0065d45c",
+                "GP-006-E-ab32c0faea637986",
+                "GP-006-FC-064672da51c70535",
+                "GP-006-FC-261c43cc443b02fc",
+                "GP-006-FC-3b79457f9b137cb1",
+                "GP-006-FC-50f84f5cf4de92e7",
+                "GP-006-FC-5c012a1b85ee2781",
+                "GP-006-FC-694108d5f28fb462",
+                "GP-006-FC-7a82fb7ca2c9070a",
+                "GP-006-FC-867518f9f8de93ec",
+                "GP-006-FC-887ad8f0a2e6dcfc",
+                "GP-006-FC-971f7c6b9a94be06",
+                "GP-006-FC-adea59d639d660fe",
+                "GP-006-FC-ae534ba92d69dcc6",
+                "GP-006-FC-bf206922431492d8",
+                "GP-006-FC-f431dab3df9c3ecd",
+                "GP-006-FC-fe48905ec0a74ad5"
+              ]
+            }
+          ],
+          "boundary_status": "inferred",
+          "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+          "confidence": "medium"
+        },
+        {
+          "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+          "label": "egfp_gfp / in_vivo",
+          "anchors": [
+            {
+              "anchor_type": "payload",
+              "value": "egfp_gfp",
+              "evidence_ids": [
+                "GP-006-E-7665fc6ae0c7e9c0",
+                "GP-006-E-a646b1030db7fdba",
+                "GP-006-E-d22913824fc90c03",
+                "GP-006-E-db5e6acb97018b1c",
+                "GP-006-FC-281878559e1f7bff",
+                "GP-006-FC-4eba4f8602045a6d",
+                "GP-006-FC-70b9be208951ae05",
+                "GP-006-FC-809c1c8c9feb38ea",
+                "GP-006-FC-b6c5074ea623a07c",
+                "GP-006-FC-c791d7d087e7455d",
+                "GP-006-FC-c858a61784289344",
+                "GP-006-E-1abbea6a2923c49a",
+                "GP-006-E-79bddcfc808ac7f2",
+                "GP-006-E-91510402d7266cd1",
+                "GP-006-E-94c1e79dd31b9816",
+                "GP-006-E-9d98c5a3f7488444",
+                "GP-006-FC-2eab214b01f5f3e2",
+                "GP-006-FC-31edc2cfc908b6b0",
+                "GP-006-FC-50615c83197efb02",
+                "GP-006-FC-8f0a3c75b28c76de",
+                "GP-006-FC-c963377ef4e15d2f"
+              ]
+            },
+            {
+              "anchor_type": "model",
+              "value": "in_vivo",
+              "evidence_ids": [
+                "GP-006-E-7665fc6ae0c7e9c0",
+                "GP-006-E-a646b1030db7fdba",
+                "GP-006-E-d22913824fc90c03",
+                "GP-006-E-db5e6acb97018b1c",
+                "GP-006-FC-281878559e1f7bff",
+                "GP-006-FC-4eba4f8602045a6d",
+                "GP-006-FC-70b9be208951ae05",
+                "GP-006-FC-809c1c8c9feb38ea",
+                "GP-006-FC-b6c5074ea623a07c",
+                "GP-006-FC-c791d7d087e7455d",
+                "GP-006-FC-c858a61784289344",
+                "GP-006-E-1abbea6a2923c49a",
+                "GP-006-E-79bddcfc808ac7f2",
+                "GP-006-E-91510402d7266cd1",
+                "GP-006-E-94c1e79dd31b9816",
+                "GP-006-E-9d98c5a3f7488444",
+                "GP-006-FC-2eab214b01f5f3e2",
+                "GP-006-FC-31edc2cfc908b6b0",
+                "GP-006-FC-50615c83197efb02",
+                "GP-006-FC-8f0a3c75b28c76de",
+                "GP-006-FC-c963377ef4e15d2f"
+              ]
+            },
+            {
+              "anchor_type": "cell_context",
+              "value": "lsec",
+              "evidence_ids": [
+                "GP-006-E-7665fc6ae0c7e9c0",
+                "GP-006-E-a646b1030db7fdba",
+                "GP-006-E-d22913824fc90c03",
+                "GP-006-FC-281878559e1f7bff",
+                "GP-006-FC-70b9be208951ae05",
+                "GP-006-FC-809c1c8c9feb38ea",
+                "GP-006-FC-b6c5074ea623a07c",
+                "GP-006-FC-c791d7d087e7455d",
+                "GP-006-FC-c858a61784289344",
+                "GP-006-E-1abbea6a2923c49a",
+                "GP-006-E-91510402d7266cd1",
+                "GP-006-E-94c1e79dd31b9816",
+                "GP-006-FC-2eab214b01f5f3e2",
+                "GP-006-FC-50615c83197efb02",
+                "GP-006-FC-c963377ef4e15d2f"
+              ]
+            },
+            {
+              "anchor_type": "assay",
+              "value": "immunostaining",
+              "evidence_ids": [
+                "GP-006-E-1abbea6a2923c49a",
+                "GP-006-E-91510402d7266cd1",
+                "GP-006-FC-2eab214b01f5f3e2",
+                "GP-006-FC-c963377ef4e15d2f"
+              ]
+            }
+          ],
+          "boundary_status": "inferred",
+          "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+          "confidence": "medium"
+        }
+      ],
+      "atomic_outcome_candidates": [
+        {
+          "candidate_id": "AOC-e3895c3ee92011c0",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-16969bb19be2e97a"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+          "subject_text": "LSECs",
+          "predicate": "colocalized_with",
+          "object_text": "Isolectin B4-labeled LSECs",
+          "endpoint_text": null,
+          "qualitative_result": "colocalized",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-FC-78a44cbc6069b59c"
+          ],
+          "source_ids": [
+            "FC-S-0d3e35eb30b2abf7"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"colocalized_with\",\"positive\",\"\",\"lsec\",\"\",\"\",\"\",\"colocalized\"]"
+        },
+        {
+          "candidate_id": "AOC-bc1bce49f7d4f397",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-92feb1f2ab53f9d9"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+          "subject_text": "The immunostaining images showed",
+          "predicate": "colocalized_with",
+          "object_text": "LYVE-1 and GFP signals",
+          "endpoint_text": null,
+          "qualitative_result": "colocalization",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-FC-c963377ef4e15d2f"
+          ],
+          "source_ids": [
+            "FC-S-0d3e35eb30b2abf7"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"colocalized_with\",\"positive\",\"egfp_gfp\",\"lsec\",\"\",\"\",\"\",\"colocalization\"]"
+        },
+        {
+          "candidate_id": "AOC-abe0948a4a178820",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-9c5943e694b6c65d"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+          "subject_text": "LSECs",
+          "predicate": "expressed",
+          "object_text": "HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively",
+          "endpoint_text": "Luciferase expression",
+          "qualitative_result": null,
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-FC-e7b45e90113a790f"
+          ],
+          "source_ids": [
+            "FC-S-0d3e35eb30b2abf7"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"expressed\",\"positive\",\"luciferase_zsgreen\",\"lsec\",\"luciferase expression\",\"\",\"\",\"\"]"
+        },
+        {
+          "candidate_id": "AOC-a4cc0f3adb169e3a",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-f44a0411949f19b3"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+          "subject_text": "LSECs",
+          "predicate": "uptake_by",
+          "object_text": "LNPs",
+          "endpoint_text": "uptake",
+          "qualitative_result": null,
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-FC-c963377ef4e15d2f"
+          ],
+          "source_ids": [
+            "FC-S-0d3e35eb30b2abf7"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"uptake_by\",\"positive\",\"egfp_gfp\",\"lsec\",\"uptake\",\"\",\"\",\"\"]"
+        },
+        {
+          "candidate_id": "AOC-e3e4da6b85173179",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-67dc9172ef73d219",
+            "ACL-882e32ce1849fc07"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "insertion patterns among indel variants, but their frequencies were significantly",
+          "predicate": "decreased",
+          "object_text": "(0",
+          "endpoint_text": null,
+          "qualitative_result": "significantly",
+          "numeric_value": 0.78,
+          "value_text": "0.78%",
+          "unit": "%",
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-E-b9606d3f1fb87b4c",
+            "GP-006-FC-9f474cb7932305b5"
+          ],
+          "source_ids": [
+            "S-5e3078bd8fb5",
+            "FC-S-df43cccf8956b818"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"decreased\",\"positive\",\"\",\"\",\"\",\"0.78\",\"\",\"significantly\"]"
+        },
+        {
+          "candidate_id": "AOC-5cdf7580c115edce",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-640248c122bb7227",
+            "ACL-c8835eb80d5402e0"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSECs",
+          "predicate": "decreased",
+          "object_text": "transgene",
+          "endpoint_text": "expression",
+          "qualitative_result": "lower",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-E-1d1871fe74140517",
+            "GP-006-FC-47621725376733bb"
+          ],
+          "source_ids": [
+            "S-620e08261866",
+            "FC-S-051e1c2dbbc8ba2a"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"decreased\",\"positive\",\"\",\"lsec\",\"expression\",\"\",\"\",\"lower\"]"
+        },
+        {
+          "candidate_id": "AOC-1ad805e42de65c53",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-bfe9ba40d908beb1",
+            "ACL-5d09e21c51516128",
+            "ACL-f19ef3c7af48d26c",
+            "ACL-55e3872c36a7d194"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSECs",
+          "predicate": "edited",
+          "object_text": "patterns in LSECs revealed that one base-pair deletions constitute the highest",
+          "endpoint_text": null,
+          "qualitative_result": null,
+          "numeric_value": 46.5,
+          "value_text": "46.5%",
+          "unit": "%",
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-E-9c61cae7b3cbdfda",
+            "GP-006-FC-37d97abddfe8a8ff"
+          ],
+          "source_ids": [
+            "S-5e3078bd8fb5",
+            "FC-S-df43cccf8956b818"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"lsec\",\"\",\"46.5\",\"\",\"\"]"
+        },
+        {
+          "candidate_id": "AOC-bf8a4ec1588b36c3",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-3427e8cc173b553f",
+            "ACL-0bd25869644a00d8"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSECs",
+          "predicate": "expressed",
+          "object_text": "permanently in NSG HemA mice",
+          "endpoint_text": "expression",
+          "qualitative_result": null,
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-006-E-8af0fe6c0065d45c",
+            "GP-006-FC-887ad8f0a2e6dcfc"
+          ],
+          "source_ids": [
+            "S-5e3078bd8fb5",
+            "FC-S-df43cccf8956b818"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"expressed\",\"positive\",\"cas9_sgrna\",\"lsec\",\"expression\",\"\",\"\",\"\"]"
+        },
+        {
+          "candidate_id": "AOC-VIS-7129c612afdb7bee",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-4466b06097b27185"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "Hepatocyte",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+1",
+          "qualitative_result": null,
+          "numeric_value": 3.39,
+          "value_text": "3.39 ± 0.91 %",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-4466b06097b27185"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c1"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+1|3.39 ± 0.91 %"
+        },
+        {
+          "candidate_id": "AOC-VIS-dc9ab6e247d8663c",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-366ecf655cea361a"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "Hepatocyte",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+2",
+          "qualitative_result": null,
+          "numeric_value": 0.83,
+          "value_text": "0.83 ± 0.27 %",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-366ecf655cea361a"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c2"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+2|0.83 ± 0.27 %"
+        },
+        {
+          "candidate_id": "AOC-VIS-2c2da0f5dda94d65",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-4353afe26a6a1063"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "Hepatocyte",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+3",
+          "qualitative_result": null,
+          "numeric_value": 0.01,
+          "value_text": "0.01 ± 0.01 %",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-4353afe26a6a1063"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+3|0.01 ± 0.01 %"
+        },
+        {
+          "candidate_id": "AOC-VIS-0fbb4b4c600d48aa",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-696377230fc94ddb"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "Hepatocyte",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+4",
+          "qualitative_result": null,
+          "numeric_value": 0.0,
+          "value_text": "0.00",
+          "unit": null,
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-696377230fc94ddb"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+4|0.00"
+        },
+        {
+          "candidate_id": "AOC-VIS-0b058d8c214aa681",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-9e55d39758b25aac"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "Hepatocyte",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": ">+4",
+          "qualitative_result": null,
+          "numeric_value": 0.0,
+          "value_text": "0.00",
+          "unit": null,
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-9e55d39758b25aac"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|>+4|0.00"
+        },
+        {
+          "candidate_id": "AOC-VIS-49acb14b88ab3f62",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-5f9b6daebb6cb3d8"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "Hepatocyte",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "total insertion frequency",
+          "qualitative_result": null,
+          "numeric_value": 4.23,
+          "value_text": "4.23±1.17 %",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-5f9b6daebb6cb3d8"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c6"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|total insertion frequency|4.23±1.17 %"
+        },
+        {
+          "candidate_id": "AOC-VIS-363dd9619f54439c",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-54f6c0ece297b4fd"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSEC",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+1",
+          "qualitative_result": null,
+          "numeric_value": 0.78,
+          "value_text": "0.78 ± 0.27 %",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-54f6c0ece297b4fd"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c1"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+1|0.78 ± 0.27 %"
+        },
+        {
+          "candidate_id": "AOC-VIS-276eb4e7f1fff39d",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-39f70fcf14234857"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSEC",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+2",
+          "qualitative_result": null,
+          "numeric_value": 0.21,
+          "value_text": "0.21 ± 0.10 %",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-39f70fcf14234857"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+2|0.21 ± 0.10 %"
+        },
+        {
+          "candidate_id": "AOC-VIS-daa35a9f428a7b5f",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-d31fe91bcfb345d6"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSEC",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+3",
+          "qualitative_result": null,
+          "numeric_value": 0.01,
+          "value_text": "0.01 ± 0.01 %",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-d31fe91bcfb345d6"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c3"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+3|0.01 ± 0.01 %"
+        },
+        {
+          "candidate_id": "AOC-VIS-2d588ddb8971cb86",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-17055d4d2d8a1c95"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSEC",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "+4",
+          "qualitative_result": null,
+          "numeric_value": 0.0,
+          "value_text": "0.00",
+          "unit": null,
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-17055d4d2d8a1c95"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+4|0.00"
+        },
+        {
+          "candidate_id": "AOC-VIS-34d61facaf050381",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-786c099845be13cd"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSEC",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": ">+4",
+          "qualitative_result": null,
+          "numeric_value": 0.0,
+          "value_text": "0.00",
+          "unit": null,
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-786c099845be13cd"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|>+4|0.00"
+        },
+        {
+          "candidate_id": "AOC-VIS-652075a583572547",
+          "paper_id": "GP-006",
+          "claim_ids": [
+            "ACL-VIS-1406333dda06dfeb"
+          ],
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "subject_text": "LSEC",
+          "predicate": "reached",
+          "object_text": null,
+          "endpoint_text": "total insertion frequency",
+          "qualitative_result": null,
+          "numeric_value": 1.01,
+          "value_text": "1.01±0.38%",
+          "unit": "%",
+          "polarity": "neutral",
+          "evidence_ids": [
+            "VIS-1406333dda06dfeb"
+          ],
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c6"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|total insertion frequency|1.01±0.38%"
+        }
+      ],
+      "accepted_visual_claims": [],
+      "local_evidence": [
+        {
+          "evidence_id": "GP-006-FC-78a44cbc6069b59c",
+          "text": "Interestingly, DiI-labeled cells also colocalized with Isolectin B4-labeled LSECs",
+          "source_ids": [
+            "FC-S-0d3e35eb30b2abf7"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-006-FC-78a44cbc6069b59c",
+            "source_id": "FC-S-0d3e35eb30b2abf7",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-006-FC-c963377ef4e15d2f",
+          "text": "The immunostaining images showed colocalization of LYVE-1 and GFP signals\nLSECs not only uptake LNPs but can also express GFP protein (Figure 2B).",
+          "source_ids": [
+            "FC-S-0d3e35eb30b2abf7"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-006-FC-c963377ef4e15d2f",
+            "source_id": "FC-S-0d3e35eb30b2abf7",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-006-FC-e7b45e90113a790f",
+          "text": "Luciferase expression of HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively.",
+          "source_ids": [
+            "FC-S-0d3e35eb30b2abf7"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-006-FC-e7b45e90113a790f",
+            "source_id": "FC-S-0d3e35eb30b2abf7",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-006-FC-9f474cb7932305b5",
+          "text": "We also analyzed the +2 and +5 insertion patterns among indel variants, but their frequencies were significantly lower (0.78% and 0%, respectively) compared with deletion variants (Table S2).",
+          "source_ids": [
+            "FC-S-df43cccf8956b818",
+            "FC-S-df43cccf8956b818"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-006-FC-9f474cb7932305b5",
+            "source_id": "FC-S-df43cccf8956b818",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-006-FC-47621725376733bb",
+          "text": "however, lower transgene expression was also observed in LSECs.",
+          "source_ids": [
+            "FC-S-051e1c2dbbc8ba2a",
+            "FC-S-051e1c2dbbc8ba2a"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-006-FC-47621725376733bb",
+            "source_id": "FC-S-051e1c2dbbc8ba2a",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-006-FC-37d97abddfe8a8ff",
+          "text": "The investigation of gene editing patterns in LSECs revealed that one base-pair deletions constitute the highest editing pattern (around 46.5% of total deletions)\nfour base-pair deletions, which can help rescue the five base-pair deletion in NSG HemA, accounting for 50%–60% of all the deletions (Figures 6C and 6D).",
+          "source_ids": [
+            "FC-S-df43cccf8956b818",
+            "FC-S-df43cccf8956b818"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-006-FC-37d97abddfe8a8ff",
+            "source_id": "FC-S-df43cccf8956b818",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-006-FC-887ad8f0a2e6dcfc",
+          "text": "These results suggested that Cas9/sgRNA LNP treatment induced indel repair in LSECs and restoration of the endogenous FVIII expression permanently in NSG HemA mice.\nFigure 6Gene editing efficiency of isolated HPCs and LSECsAfter Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.",
+          "source_ids": [
+            "FC-S-df43cccf8956b818",
+            "FC-S-df43cccf8956b818"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-006-FC-887ad8f0a2e6dcfc",
+            "source_id": "FC-S-df43cccf8956b818",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "VIS-4466b06097b27185",
+          "text": "Hepatocyte | +1 | 3.39 ± 0.91 %",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c1"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c1"
+          ]
+        },
+        {
+          "evidence_id": "VIS-366ecf655cea361a",
+          "text": "Hepatocyte | +2 | 0.83 ± 0.27 %",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c2"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c2"
+          ]
+        },
+        {
+          "evidence_id": "VIS-4353afe26a6a1063",
+          "text": "Hepatocyte | +3 | 0.01 ± 0.01 %",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+          ]
+        },
+        {
+          "evidence_id": "VIS-696377230fc94ddb",
+          "text": "Hepatocyte | +4 | 0.00",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+          ]
+        },
+        {
+          "evidence_id": "VIS-9e55d39758b25aac",
+          "text": "Hepatocyte | >+4 | 0.00",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+          ]
+        },
+        {
+          "evidence_id": "VIS-5f9b6daebb6cb3d8",
+          "text": "Hepatocyte | total insertion frequency | 4.23±1.17 %",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c6"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r1:c6"
+          ]
+        },
+        {
+          "evidence_id": "VIS-54f6c0ece297b4fd",
+          "text": "LSEC | +1 | 0.78 ± 0.27 %",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c1"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c1"
+          ]
+        },
+        {
+          "evidence_id": "VIS-39f70fcf14234857",
+          "text": "LSEC | +2 | 0.21 ± 0.10 %",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+          ]
+        },
+        {
+          "evidence_id": "VIS-d31fe91bcfb345d6",
+          "text": "LSEC | +3 | 0.01 ± 0.01 %",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c3"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c3"
+          ]
+        },
+        {
+          "evidence_id": "VIS-17055d4d2d8a1c95",
+          "text": "LSEC | +4 | 0.00",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+          ]
+        },
+        {
+          "evidence_id": "VIS-786c099845be13cd",
+          "text": "LSEC | >+4 | 0.00",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+          ]
+        },
+        {
+          "evidence_id": "VIS-1406333dda06dfeb",
+          "text": "LSEC | total insertion frequency | 1.01±0.38%",
+          "source_ids": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c6"
+          ],
+          "source_kind": "docling_table_cell",
+          "provenance": [
+            "GP-006-mmc1-p002-table-03:table-0:r2:c6"
+          ]
+        }
+      ],
+      "estimated_tokens": 7163
+    }
+  }
+}

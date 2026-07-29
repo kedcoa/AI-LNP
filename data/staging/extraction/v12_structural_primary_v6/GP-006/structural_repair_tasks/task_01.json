@@ -1,0 +1,199 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-006",
+  "route_ids": [
+    "structural:AOC-04f9eb5e5d1cdad5",
+    "structural:AOC-1737fc902b5ad35d",
+    "structural:AOC-6fcfbdf744e661cb",
+    "structural:AOC-a4cc0f3adb169e3a",
+    "structural:AOC-bc1bce49f7d4f397",
+    "structural:AOC-e3895c3ee92011c0"
+  ],
+  "candidate_ids": [
+    "AOC-04f9eb5e5d1cdad5",
+    "AOC-1737fc902b5ad35d",
+    "AOC-6fcfbdf744e661cb",
+    "AOC-a4cc0f3adb169e3a",
+    "AOC-bc1bce49f7d4f397",
+    "AOC-e3895c3ee92011c0"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+    "label": "egfp_gfp / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "lsec",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-04f9eb5e5d1cdad5",
+      "subject_text": "LSECs",
+      "predicate": "increased",
+      "object_text": "hepatocytes than LSECs",
+      "endpoint_text": "expression",
+      "qualitative_result": "higher",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-e47e445580c98e0f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-1737fc902b5ad35d",
+      "subject_text": "LSECs",
+      "predicate": "expressed",
+      "object_text": "GFP protein",
+      "endpoint_text": "uptake",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-6fcfbdf744e661cb",
+      "subject_text": "hepatocytes",
+      "predicate": "expressed",
+      "object_text": "levels in hepatocytes and LSECs, respectively",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-92657c282e617e5c"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a4cc0f3adb169e3a",
+      "subject_text": "LSECs",
+      "predicate": "uptake_by",
+      "object_text": "LNPs",
+      "endpoint_text": "uptake",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-bc1bce49f7d4f397",
+      "subject_text": "The immunostaining images showed",
+      "predicate": "colocalized_with",
+      "object_text": "LYVE-1 and GFP signals",
+      "endpoint_text": null,
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-e3895c3ee92011c0",
+      "subject_text": "LSECs",
+      "predicate": "colocalized_with",
+      "object_text": "Isolectin B4-labeled LSECs",
+      "endpoint_text": null,
+      "qualitative_result": "colocalized",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-78a44cbc6069b59c"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-006-FC-e47e445580c98e0f",
+      "text": "The results indicated that high levels of luciferase expression were obtained from both hepatocytes and LSECs with about 17-fold higher expression in hepatocytes than LSECs.",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-c963377ef4e15d2f",
+      "text": "The immunostaining images showed colocalization of LYVE-1 and GFP signals\nLSECs not only uptake LNPs but can also express GFP protein (Figure 2B).",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-92657c282e617e5c",
+      "text": "Next, we used Luc LNPs to evaluate mRNA expression levels in hepatocytes and LSECs, respectively.",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-78a44cbc6069b59c",
+      "text": "Interestingly, DiI-labeled cells also colocalized with Isolectin B4-labeled LSECs",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8"
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "source_inventory_sha256": "3fc30210d59e81fd2a6748d65aa3d5d459cc8af0a7c54e73fbed2269a1f012e1",
+  "task_checksum": "4a72642c4745dc391b49d808606dcdbd1f3c92adf467459d24762c4756b6f755"
+}

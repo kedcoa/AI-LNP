@@ -1,0 +1,279 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-006",
+  "route_ids": [
+    "structural:AOC-9e3877e87f09e30b",
+    "structural:AOC-VIS-0b058d8c214aa681",
+    "structural:AOC-VIS-0fbb4b4c600d48aa",
+    "structural:AOC-VIS-276eb4e7f1fff39d",
+    "structural:AOC-VIS-2c2da0f5dda94d65",
+    "structural:AOC-VIS-2d588ddb8971cb86",
+    "structural:AOC-VIS-34d61facaf050381",
+    "structural:AOC-VIS-363dd9619f54439c"
+  ],
+  "candidate_ids": [
+    "AOC-9e3877e87f09e30b",
+    "AOC-VIS-0b058d8c214aa681",
+    "AOC-VIS-0fbb4b4c600d48aa",
+    "AOC-VIS-276eb4e7f1fff39d",
+    "AOC-VIS-2c2da0f5dda94d65",
+    "AOC-VIS-2d588ddb8971cb86",
+    "AOC-VIS-34d61facaf050381",
+    "AOC-VIS-363dd9619f54439c"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+    "label": "cas9_sgrna / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "cas9_sgrna",
+        "evidence_ids": [
+          "GP-006-E-8af0fe6c0065d45c",
+          "GP-006-FC-887ad8f0a2e6dcfc"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-006-E-8af0fe6c0065d45c",
+          "GP-006-FC-887ad8f0a2e6dcfc"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "lsec",
+        "evidence_ids": [
+          "GP-006-E-8af0fe6c0065d45c",
+          "GP-006-FC-887ad8f0a2e6dcfc"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "coagulation_activity",
+        "evidence_ids": [
+          "GP-006-E-8af0fe6c0065d45c",
+          "GP-006-FC-887ad8f0a2e6dcfc"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-9e3877e87f09e30b",
+      "subject_text": "LSECs",
+      "predicate": "edited",
+      "object_text": "repair in LSECs and restoration of the endogenous FVIII",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-8af0fe6c0065d45c",
+        "GP-006-FC-887ad8f0a2e6dcfc"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-0b058d8c214aa681",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": ">+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-9e55d39758b25aac"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-0fbb4b4c600d48aa",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-696377230fc94ddb"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-276eb4e7f1fff39d",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+2",
+      "qualitative_result": null,
+      "numeric_value": 0.21,
+      "value_text": "0.21 ± 0.10 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-39f70fcf14234857"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-2c2da0f5dda94d65",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+3",
+      "qualitative_result": null,
+      "numeric_value": 0.01,
+      "value_text": "0.01 ± 0.01 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-4353afe26a6a1063"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-2d588ddb8971cb86",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-17055d4d2d8a1c95"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-34d61facaf050381",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": ">+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-786c099845be13cd"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-363dd9619f54439c",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+1",
+      "qualitative_result": null,
+      "numeric_value": 0.78,
+      "value_text": "0.78 ± 0.27 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-54f6c0ece297b4fd"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-006-E-8af0fe6c0065d45c",
+      "text": "These results suggested that Cas9/sgRNA LNP treatment induced indel repair in LSECs and restoration of the endogenous FVIII expression permanently in NSG HemA mice.Figure 6Gene editing efficiency of isolated HPCs and LSECsAfter Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.",
+      "source_ids": [
+        "S-5e3078bd8fb5"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-887ad8f0a2e6dcfc",
+      "text": "These results suggested that Cas9/sgRNA LNP treatment induced indel repair in LSECs and restoration of the endogenous FVIII expression permanently in NSG HemA mice.\nFigure 6Gene editing efficiency of isolated HPCs and LSECsAfter Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ]
+    },
+    {
+      "evidence_id": "VIS-9e55d39758b25aac",
+      "text": "Hepatocyte | >+4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+      ]
+    },
+    {
+      "evidence_id": "VIS-696377230fc94ddb",
+      "text": "Hepatocyte | +4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+      ]
+    },
+    {
+      "evidence_id": "VIS-39f70fcf14234857",
+      "text": "LSEC | +2 | 0.21 ± 0.10 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+      ]
+    },
+    {
+      "evidence_id": "VIS-4353afe26a6a1063",
+      "text": "Hepatocyte | +3 | 0.01 ± 0.01 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+      ]
+    },
+    {
+      "evidence_id": "VIS-17055d4d2d8a1c95",
+      "text": "LSEC | +4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+      ]
+    },
+    {
+      "evidence_id": "VIS-786c099845be13cd",
+      "text": "LSEC | >+4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+      ]
+    },
+    {
+      "evidence_id": "VIS-54f6c0ece297b4fd",
+      "text": "LSEC | +1 | 0.78 ± 0.27 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c1"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "source_inventory_sha256": "3fc30210d59e81fd2a6748d65aa3d5d459cc8af0a7c54e73fbed2269a1f012e1",
+  "task_checksum": "945ffb5bdefbb45b16608e8a2d0e76c0d3f0b4cbee2244f44dfe21142855bdcd"
+}

@@ -12,6 +12,7 @@ from typing import Any
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from openai.lib._pydantic import to_strict_json_schema
 
 from src.extraction.compact_contracts import ReportedField
 from src.extraction.missing_record_contracts import (
@@ -23,11 +24,16 @@ from src.extraction.missing_record_contracts import (
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_ROOT = ROOT / "data/staging/extraction/missing_record_repair_v1"
 PROMPT_VERSION = "missing-record-repair-prompt-1.0.0"
-PROMPT = """Recover only outcomes or experiments represented by the supplied
-candidate groups and evidence. Do not repeat existing records. Use only supplied
-evidence IDs. Return new records when the evidence is sufficient; otherwise
-return unresolved with a specific reason. Never invent identifiers, values,
-units, comparisons, or evidence labels."""
+PROMPT = """Recover only the atomic candidate facts and experiment context in
+the supplied task. Candidate IDs are opaque labels: use candidate_facts as the
+required fact definitions and the supplied evidence as their only support.
+Account for every candidate ID exactly once as recovered or unresolved. Do not
+merge distinct cells, relationships, endpoints, values, polarities, or
+experiments into a broad record. A candidate is recovered only when at least one
+returned outcome preserves its specific facts and cites its evidence; shared
+evidence alone is not coverage. Do not repeat existing records. Return unresolved
+with a specific reason when evidence is insufficient. Never invent identifiers,
+values, units, comparisons, or evidence labels."""
 
 
 def _canonical(value: Any) -> str:
@@ -41,8 +47,9 @@ def _sha(value: bytes | str) -> str:
 
 
 def load_task(path: Path) -> MissingRecordTask:
-    task = MissingRecordTask.model_validate_json(path.read_text(encoding="utf-8"))
-    unsigned = task.model_dump(mode="json", exclude={"task_checksum"})
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    task = MissingRecordTask.model_validate(raw)
+    unsigned = {key: value for key, value in raw.items() if key != "task_checksum"}
     if _sha(_canonical(unsigned)) != task.task_checksum:
         raise ValueError("Missing-record task checksum mismatch")
     return task
@@ -105,11 +112,43 @@ def fingerprint(task: MissingRecordTask, model: str) -> str:
                 "task_checksum": task.task_checksum,
                 "prompt_version": PROMPT_VERSION,
                 "prompt_sha256": _sha(PROMPT),
-                "schema": MissingRecordFragment.model_json_schema(),
+                "schema": to_strict_json_schema(MissingRecordFragment),
                 "model": model,
             }
         )
     )
+
+
+def build_openai_request(
+    task: MissingRecordTask,
+    *,
+    model: str,
+    max_output_tokens: int = 4_000,
+) -> dict[str, Any]:
+    """Build the exact bounded request shared by preflight and generation."""
+
+    return {
+        "model": model,
+        "reasoning": {"effort": "medium"},
+        "store": False,
+        "service_tier": "default",
+        "max_output_tokens": max_output_tokens,
+        "input": [
+            {"role": "system", "content": PROMPT},
+            {
+                "role": "user",
+                "content": _canonical(task.model_dump(mode="json")),
+            },
+        ],
+        "text": {
+            "format": {
+                "type": "json_schema",
+                "name": "MissingRecordFragment",
+                "schema": to_strict_json_schema(MissingRecordFragment),
+                "strict": True,
+            }
+        },
+    }
 
 
 def run(
@@ -138,37 +177,15 @@ def run(
     if run_dir.exists():
         raise FileExistsError("Incomplete run exists; refusing an automatic paid retry")
     run_dir.mkdir(parents=True)
-    request = {
-        "model": model,
-        "task": task.model_dump(mode="json"),
-        "prompt_version": PROMPT_VERSION,
-        "prompt": PROMPT,
-        "max_output_tokens": max_output_tokens,
-    }
+    request = build_openai_request(
+        task, model=model, max_output_tokens=max_output_tokens
+    )
     (run_dir / "request.json").write_text(
         json.dumps(request, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     started = datetime.now(timezone.utc)
-    api_response = client.responses.create(
-        model=model,
-        reasoning={"effort": "low"},
-        store=False,
-        service_tier="default",
-        max_output_tokens=max_output_tokens,
-        input=[
-            {"role": "system", "content": PROMPT},
-            {"role": "user", "content": _canonical(task.model_dump(mode="json"))},
-        ],
-        text={
-            "format": {
-                "type": "json_schema",
-                "name": "MissingRecordFragment",
-                "schema": MissingRecordFragment.model_json_schema(),
-                "strict": True,
-            }
-        },
-    )
+    api_response = client.responses.create(**request)
     if not api_response.output_text:
         raise RuntimeError("Missing-record request returned no structured output")
     response = MissingRecordFragment.model_validate_json(api_response.output_text)

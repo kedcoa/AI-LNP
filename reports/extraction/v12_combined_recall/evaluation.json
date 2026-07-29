@@ -1,0 +1,90 @@
+{
+  "evaluation_version": "v12-combined-development-1.0",
+  "scope": "development gold only; held-out set is not yet populated",
+  "recovered": 15,
+  "total": 15,
+  "rate": 1.0,
+  "recovered_gold_outcome_ids": [
+    "GO-001",
+    "GO-002",
+    "GO-003",
+    "GO-004",
+    "GO-005",
+    "GO-006",
+    "GO-007",
+    "GO-008",
+    "GO-010",
+    "GO-011",
+    "GO-013",
+    "GO-015",
+    "GO-016",
+    "GO-017",
+    "GO-018"
+  ],
+  "missing_gold_outcome_ids": [],
+  "previously_recovered_retained": "10/10",
+  "text_track": {
+    "recovered": 13,
+    "total": 13,
+    "missing": []
+  },
+  "visual_track": [
+    {
+      "gold_outcome_id": "GO-006",
+      "recalled": true,
+      "candidate_id": "AOC-VIS-652075a583572547",
+      "route": "docling_table_intersection"
+    },
+    {
+      "gold_outcome_id": "GO-018",
+      "recalled": true,
+      "candidate_id": null,
+      "route": "gated_local_vlm",
+      "gate": "passed"
+    }
+  ],
+  "recall_by_type": {
+    "cell_type_selectivity": {
+      "recalled": 2,
+      "total": 2
+    },
+    "functional_delivery": {
+      "recalled": 3,
+      "total": 3
+    },
+    "functional_expression": {
+      "recalled": 4,
+      "total": 4
+    },
+    "gene_editing": {
+      "recalled": 2,
+      "total": 2
+    },
+    "therapeutic_effect": {
+      "recalled": 2,
+      "total": 2
+    },
+    "therapeutic_function": {
+      "recalled": 1,
+      "total": 1
+    },
+    "uptake": {
+      "recalled": 1,
+      "total": 1
+    }
+  },
+  "precision": {
+    "status": "not_final_extraction_precision",
+    "critical_field_gate": 0.9,
+    "docling_candidates": 12,
+    "known_gold_matches": 1,
+    "candidate_gold_match_yield": 0.08333333333333333,
+    "explanation": "Candidate yield is not precision. Final precision requires validated extraction outputs and one-to-one false-positive review."
+  },
+  "vlm": {
+    "model": "qwen3-vl:8b-instruct",
+    "model_digest": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+    "integration_allowed": true
+  },
+  "paid_api_requests": 0
+}

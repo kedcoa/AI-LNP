@@ -1,0 +1,46 @@
+{
+  "contract_version": "1.0.0",
+  "cases": [
+    {
+      "query_id": "GO-006-positive",
+      "gold_outcome_id": "GO-006",
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "query": "Extract the directly measured total insertion frequency for LSECs. Require the printed table cell and its row and column headers.",
+      "expected_status": "extract",
+      "required_claim_terms": ["LSEC", "total insertion frequency", "1.01", "0.38"],
+      "forbidden_claim_terms": ["16.50", "total deletion frequency"]
+    },
+    {
+      "query_id": "GO-018-positive",
+      "gold_outcome_id": "GO-018",
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "query": "For αCD163/LNP-ZsGreen in Appendix Fig 5 K-L, compare the F4/80-positive and Desmin-positive co-staining and state which marker has the visibly higher ZsGreen-positive percentage. Use the caption's marker-to-cell mapping and do not estimate bar heights.",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L-stacked.png",
+      "expected_status": "extract",
+      "required_claim_terms": ["ZsGreen", "macrophage", "Desmin"],
+      "required_value_patterns": [
+        "(?:macrophage|F4/80).{0,80}(?:rather than|over|preferential|predominant|enrich|higher).{0,80}(?:Desmin|HSC)"
+      ],
+      "forbidden_claim_terms": ["1.01", "insertion frequency"]
+    },
+    {
+      "query_id": "GO-006-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "query": "Extract the reporter localization to F4/80-positive macrophages rather than Desmin-positive hepatic stellate cells.",
+      "expected_status": "abstain",
+      "required_claim_terms": [],
+      "forbidden_claim_terms": []
+    },
+    {
+      "query_id": "GO-018-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "query": "Extract the exact total insertion frequency and standard deviation for LSECs after Cas9/sgRNA LNP treatment.",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L-stacked.png",
+      "expected_status": "abstain",
+      "required_claim_terms": [],
+      "forbidden_claim_terms": []
+    }
+  ]
+}

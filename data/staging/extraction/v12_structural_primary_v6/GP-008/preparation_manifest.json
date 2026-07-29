@@ -1,0 +1,70 @@
+{
+  "paper_id": "GP-008",
+  "source_result_path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-008/final_result.json",
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "support_sha256": "949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca",
+  "packet_checksum": "3788ce2d243eaa90b4de38e5b8e25f30c9b59860f39337b86adc06802ba96673",
+  "source_evidence_registry": {
+    "artifacts": [
+      {
+        "kind": "legacy_repair_task",
+        "path": "data/staging/extraction/consolidated_gold_gap_tasks_v1/GP-008/task.json",
+        "sha256": "bb4d4053d8f7d582d11b6244c17b78bf498074250bc9fdb46a4e1a928e1bac97",
+        "embedded_checksum": "e5f37477e7806d877a87b47567ce5fd4266600daa7a7f9cc7fe4859c28bc1e67"
+      },
+      {
+        "kind": "validated_full_evidence_packet",
+        "path": "data/staging/rag/compact_packets_v1/GP-008.json",
+        "sha256": "c6d8092e240523320d80d6a1653243728f51cb57652442d73714611c3e32c980"
+      },
+      {
+        "kind": "atomic_claim_evidence",
+        "path": "data/staging/extraction/v12_atomic_inventory/GP-008/claims.json",
+        "sha256": "7b168422e7e9ad73bede33bab47c3344210f82d22fd3bc42106e0e4493c2797b"
+      }
+    ]
+  },
+  "verified_source_evidence_ids": [
+    "GP-008-E-10f321f4dd53870f",
+    "GP-008-E-1bf7bda856a91d0c",
+    "GP-008-E-1c5d35fdb8d32fac",
+    "GP-008-E-314b6997ecd0e60c",
+    "GP-008-E-38bead8279685734",
+    "GP-008-E-51d08120feab231b",
+    "GP-008-E-536ddd1a9e1a2ad1",
+    "GP-008-E-54366734b908d658",
+    "GP-008-E-78b7081add1094e3",
+    "GP-008-E-7d00a9f09c5299f7",
+    "GP-008-E-85ffa081af3058cd",
+    "GP-008-E-8e2d2b814fb05a67",
+    "GP-008-E-9f06a8fd077bd7aa",
+    "GP-008-E-9f4e4aba562731a4",
+    "GP-008-E-c2f49c1ec1cd78d3",
+    "GP-008-E-ca8a2e82a75114a8",
+    "GP-008-E-d32251f9c2db82ae",
+    "GP-008-FC-015cba9d1bfac43b",
+    "V-784e837ef94bbff3"
+  ],
+  "baseline_validation_status": "valid",
+  "structural_counts": {
+    "confirmed": 0,
+    "contradicted": 0,
+    "unconfirmed": 25
+  },
+  "structural_routes": {
+    "none": 0,
+    "bounded_repair_task": 21,
+    "human_review": 4
+  },
+  "integration_blocked": true,
+  "task_count": 4,
+  "human_review_candidate_ids": [
+    "AOC-4bdf31a39ad76762",
+    "AOC-7a0e931be9d99f82",
+    "AOC-c6aff5784136f10c",
+    "AOC-dfdefe756df4d2ba"
+  ],
+  "gold_identifiers_in_task_input": [],
+  "paid_api_requests": 0,
+  "manifest_checksum": "1e9ba9f257f1685044e0d22121df77b4d8f3ecc3f60ff4df4762e68ae68ce8e4"
+}

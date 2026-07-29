@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-vl:8b-instruct",
+  "created_at": "2026-07-29T07:10:55.189734Z",
+  "done_reason": "stop",
+  "total_duration_ns": 12339666500,
+  "load_duration_ns": 113074750,
+  "prompt_eval_count": 2638,
+  "eval_count": 207,
+  "elapsed_seconds": 12.342495916003827,
+  "response_content": "{\n  \"object_id\": \"GP-006-mmc1-p002-table-03\",\n  \"query_id\": \"GO-006-positive\",\n  \"status\": \"extract\",\n  \"claims\": [\n    {\n      \"claim_id\": \"GO-006-positive-001\",\n      \"subject\": \"LSEC\",\n      \"predicate\": \"total insertion frequency\",\n      \"result_type\": \"exact_numeric\",\n      \"value\": \"1.01±0.38%\",\n      \"panel_or_cell\": \"Table S2, row 'LSEC', column 'total insertion frequency'\",\n      \"visible_support\": [\n        \"LSEC\",\n        \"total insertion frequency\",\n        \"1.01±0.38%\"\n      ],\n      \"evidence_kinds\": [\n        \"docling_table_cell\"\n      ],\n      \"confidence\": \"high\"\n    }\n  ],\n  \"abstention_reason\": null,\n  \"missing_requirements\": []\n}",
+  "response_message": {
+    "role": "assistant",
+    "content": "{\n  \"object_id\": \"GP-006-mmc1-p002-table-03\",\n  \"query_id\": \"GO-006-positive\",\n  \"status\": \"extract\",\n  \"claims\": [\n    {\n      \"claim_id\": \"GO-006-positive-001\",\n      \"subject\": \"LSEC\",\n      \"predicate\": \"total insertion frequency\",\n      \"result_type\": \"exact_numeric\",\n      \"value\": \"1.01±0.38%\",\n      \"panel_or_cell\": \"Table S2, row 'LSEC', column 'total insertion frequency'\",\n      \"visible_support\": [\n        \"LSEC\",\n        \"total insertion frequency\",\n        \"1.01±0.38%\"\n      ],\n      \"evidence_kinds\": [\n        \"docling_table_cell\"\n      ],\n      \"confidence\": \"high\"\n    }\n  ],\n  \"abstention_reason\": null,\n  \"missing_requirements\": []\n}"
+  },
+  "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png"
+}

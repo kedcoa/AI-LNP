@@ -1,0 +1,215 @@
+{
+  "evaluation_version": "atomic-outcome-inventory-eval-1.2.0",
+  "scope": "local text-track candidates; no API calls",
+  "text_recalled": 13,
+  "text_total": 13,
+  "text_rate": 1.0,
+  "missing_text_gold_outcome_ids": [],
+  "previously_recovered_retained": "10/10",
+  "targeted_text_misses_recalled": "3/3",
+  "visual_gold_outcome_ids_deferred": [
+    "GO-006",
+    "GO-018"
+  ],
+  "recall_by_type": {
+    "cell_type_selectivity": {
+      "recalled": 1,
+      "total": 1
+    },
+    "functional_delivery": {
+      "recalled": 3,
+      "total": 3
+    },
+    "functional_expression": {
+      "recalled": 4,
+      "total": 4
+    },
+    "gene_editing": {
+      "recalled": 1,
+      "total": 1
+    },
+    "therapeutic_effect": {
+      "recalled": 2,
+      "total": 2
+    },
+    "therapeutic_function": {
+      "recalled": 1,
+      "total": 1
+    },
+    "uptake": {
+      "recalled": 1,
+      "total": 1
+    }
+  },
+  "selected_atomic_candidates_in_gold_papers": 138,
+  "one_to_one_gold_matched_candidates": 13,
+  "gold_match_yield": 0.09420289855072464,
+  "precision_status": "candidate yield is not final extraction precision; critical-field precision is measured after validated records are produced",
+  "results": [
+    {
+      "gold_outcome_id": "GO-008",
+      "paper_id": "GP-002",
+      "endpoint_family": "functional_expression",
+      "recalled": true,
+      "candidate_id": "AOC-3fd83613047c8c22",
+      "score": 8,
+      "reasons": [
+        "token_overlap:6",
+        "qualitative_result"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-001",
+      "paper_id": "GP-004",
+      "endpoint_family": "functional_delivery",
+      "recalled": true,
+      "candidate_id": "AOC-f01346c482122239",
+      "score": 18,
+      "reasons": [
+        "token_overlap:5",
+        "gold_source_location",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-002",
+      "paper_id": "GP-004",
+      "endpoint_family": "functional_delivery",
+      "recalled": true,
+      "candidate_id": "AOC-25c71a72288ec9b9",
+      "score": 13,
+      "reasons": [
+        "token_overlap:7",
+        "gold_source_location",
+        "qualitative_result"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-010",
+      "paper_id": "GP-005",
+      "endpoint_family": "uptake",
+      "recalled": true,
+      "candidate_id": "AOC-f0da6df6de42bd8b",
+      "score": 13,
+      "reasons": [
+        "token_overlap:8",
+        "gold_source_location",
+        "qualitative_result"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-011",
+      "paper_id": "GP-005",
+      "endpoint_family": "functional_expression",
+      "recalled": true,
+      "candidate_id": "AOC-b80119627837f36d",
+      "score": 10,
+      "reasons": [
+        "token_overlap:3",
+        "gold_source_location",
+        "negative_polarity"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-003",
+      "paper_id": "GP-006",
+      "endpoint_family": "functional_delivery",
+      "recalled": true,
+      "candidate_id": "AOC-bc1bce49f7d4f397",
+      "score": 11,
+      "reasons": [
+        "token_overlap:7",
+        "gold_source_location"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-004",
+      "paper_id": "GP-006",
+      "endpoint_family": "cell_type_selectivity",
+      "recalled": true,
+      "candidate_id": "AOC-e3fdee3baed64871",
+      "score": 11,
+      "reasons": [
+        "token_overlap:4",
+        "gold_source_location",
+        "qualitative_result"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-005",
+      "paper_id": "GP-006",
+      "endpoint_family": "gene_editing",
+      "recalled": true,
+      "candidate_id": "AOC-29630305b6c9288a",
+      "score": 14,
+      "reasons": [
+        "token_overlap:6",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-007",
+      "paper_id": "GP-006",
+      "endpoint_family": "therapeutic_function",
+      "recalled": true,
+      "candidate_id": "AOC-82a54230dd4de48f",
+      "score": 19,
+      "reasons": [
+        "token_overlap:11",
+        "gold_source_location",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-013",
+      "paper_id": "GP-007",
+      "endpoint_family": "therapeutic_effect",
+      "recalled": true,
+      "candidate_id": "AOC-e0026f57dba1b503",
+      "score": 11,
+      "reasons": [
+        "token_overlap:6",
+        "gold_source_location"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-015",
+      "paper_id": "GP-008",
+      "endpoint_family": "functional_expression",
+      "recalled": true,
+      "candidate_id": "AOC-3e55d1a24e7762f3",
+      "score": 19,
+      "reasons": [
+        "token_overlap:10",
+        "gold_source_location",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-016",
+      "paper_id": "GP-008",
+      "endpoint_family": "functional_expression",
+      "recalled": true,
+      "candidate_id": "AOC-4efa2990a4dc498a",
+      "score": 19,
+      "reasons": [
+        "token_overlap:7",
+        "gold_source_location",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "gold_outcome_id": "GO-017",
+      "paper_id": "GP-008",
+      "endpoint_family": "therapeutic_effect",
+      "recalled": true,
+      "candidate_id": "AOC-5e16cdbcd2e69a6e",
+      "score": 9,
+      "reasons": [
+        "token_overlap:4",
+        "gold_source_location"
+      ]
+    }
+  ],
+  "paid_api_requests": 0
+}

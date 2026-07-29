@@ -14,11 +14,46 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class MissingRecordExperimentAnchor(StrictModel):
+    anchor_type: str
+    value: str
+    evidence_ids: list[str]
+
+
+class MissingRecordExperimentContext(StrictModel):
+    provisional_experiment_id: str
+    label: str
+    anchors: list[MissingRecordExperimentAnchor] = Field(min_length=1)
+
+
+class MissingRecordCandidateFact(StrictModel):
+    """The actual fact represented by one otherwise opaque candidate ID."""
+
+    candidate_id: str
+    subject_text: str
+    predicate: str
+    object_text: str | None
+    endpoint_text: str | None
+    qualitative_result: str | None
+    numeric_value: float | None
+    value_text: str | None
+    unit: str | None
+    polarity: str
+    evidence_ids: list[str] = Field(min_length=1)
+
+
 class MissingRecordTask(StrictModel):
-    task_version: Literal["missing-record-task-1.0.0"]
+    task_version: Literal[
+        "missing-record-task-1.0.0",
+        "missing-record-task-1.1.0",
+    ]
     paper_id: str
     route_ids: list[str] = Field(min_length=1)
     candidate_ids: list[str] = Field(min_length=1)
+    experiment_context: MissingRecordExperimentContext | None = None
+    candidate_facts: list[MissingRecordCandidateFact] = Field(
+        default_factory=list, max_length=8
+    )
     evidence: list[RepairEvidence] = Field(min_length=1, max_length=12)
     existing_formulation_ids: list[str]
     existing_experiment_ids: list[str]
@@ -28,6 +63,42 @@ class MissingRecordTask(StrictModel):
     source_result_sha256: str
     source_inventory_sha256: str
     task_checksum: str
+
+    @model_validator(mode="after")
+    def validate_candidate_facts(self) -> "MissingRecordTask":
+        if len(set(self.candidate_ids)) != len(self.candidate_ids):
+            raise ValueError("candidate_ids must be unique")
+        if self.task_version == "missing-record-task-1.1.0":
+            if self.experiment_context is None:
+                raise ValueError(
+                    "v1.1 structural tasks require experiment_context"
+                )
+            fact_ids = [row.candidate_id for row in self.candidate_facts]
+            if len(set(fact_ids)) != len(fact_ids):
+                raise ValueError("candidate_facts IDs must be unique")
+            if set(fact_ids) != set(self.candidate_ids):
+                raise ValueError(
+                    "candidate_facts must describe every candidate ID exactly "
+                    "once"
+                )
+            allowed_evidence = {row.evidence_id for row in self.evidence}
+            for anchor in self.experiment_context.anchors:
+                unknown_anchor_evidence = (
+                    set(anchor.evidence_ids) - allowed_evidence
+                )
+                if unknown_anchor_evidence:
+                    raise ValueError(
+                        "experiment_context references unavailable task "
+                        f"evidence: {sorted(unknown_anchor_evidence)}"
+                    )
+            for fact in self.candidate_facts:
+                unknown = set(fact.evidence_ids) - allowed_evidence
+                if unknown:
+                    raise ValueError(
+                        f"{fact.candidate_id} references unavailable task "
+                        f"evidence: {sorted(unknown)}"
+                    )
+        return self
 
 
 class MissingRecordFragment(StrictModel):

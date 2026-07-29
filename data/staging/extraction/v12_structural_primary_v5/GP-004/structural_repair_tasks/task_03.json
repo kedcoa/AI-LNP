@@ -1,0 +1,122 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-8c8f546f56920316",
+    "structural:AOC-ac71595c5469604b"
+  ],
+  "candidate_ids": [
+    "AOC-8c8f546f56920316",
+    "AOC-ac71595c5469604b"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-65c3dda2c00c",
+    "label": "hgf_egf / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "hgf_egf",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "kupffer_cell",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "hepatocyte",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "flow_cytometry",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-8c8f546f56920316",
+      "subject_text": "hepatocytes",
+      "predicate": "expressed",
+      "object_text": null,
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-543ca93b67c8c533"
+      ]
+    },
+    {
+      "candidate_id": "AOC-ac71595c5469604b",
+      "subject_text": "injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum",
+      "predicate": "reduced",
+      "object_text": "steatosis, and",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-aaef2b0838c071e4"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-FC-543ca93b67c8c533",
+      "text": "3b, e) that were mainly comprised of hepatocytes identified with HNF4α expression (Fig.",
+      "source_ids": [
+        "FC-S-25c9196c495f7972"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-aaef2b0838c071e4",
+      "text": "However, a second injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum, diminished steatosis, and decreased serum ALT levels at T8",
+      "source_ids": [
+        "FC-S-910df540c2d91e5a"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 4,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "c87b4feadc5d13069346532dd8dcb092d7f31f3ecb517d2f73275f37d2f8660a",
+  "task_checksum": "dce70b7a76659f6b2cc5a6075255f93d4074521324d51d901d4c2e778f1baf78"
+}

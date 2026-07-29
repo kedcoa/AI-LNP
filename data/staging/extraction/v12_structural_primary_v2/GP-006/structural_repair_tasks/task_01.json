@@ -1,0 +1,215 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-006",
+  "route_ids": [
+    "structural:AOC-a4cc0f3adb169e3a",
+    "structural:AOC-abe0948a4a178820",
+    "structural:AOC-bc1bce49f7d4f397",
+    "structural:AOC-e3895c3ee92011c0"
+  ],
+  "candidate_ids": [
+    "AOC-a4cc0f3adb169e3a",
+    "AOC-abe0948a4a178820",
+    "AOC-bc1bce49f7d4f397",
+    "AOC-e3895c3ee92011c0"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+    "label": "egfp_gfp / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-006-E-7665fc6ae0c7e9c0",
+          "GP-006-E-a646b1030db7fdba",
+          "GP-006-E-d22913824fc90c03",
+          "GP-006-E-db5e6acb97018b1c",
+          "GP-006-FC-281878559e1f7bff",
+          "GP-006-FC-4eba4f8602045a6d",
+          "GP-006-FC-70b9be208951ae05",
+          "GP-006-FC-809c1c8c9feb38ea",
+          "GP-006-FC-b6c5074ea623a07c",
+          "GP-006-FC-c791d7d087e7455d",
+          "GP-006-FC-c858a61784289344",
+          "GP-006-E-1abbea6a2923c49a",
+          "GP-006-E-79bddcfc808ac7f2",
+          "GP-006-E-91510402d7266cd1",
+          "GP-006-E-94c1e79dd31b9816",
+          "GP-006-E-9d98c5a3f7488444",
+          "GP-006-FC-2eab214b01f5f3e2",
+          "GP-006-FC-31edc2cfc908b6b0",
+          "GP-006-FC-50615c83197efb02",
+          "GP-006-FC-8f0a3c75b28c76de",
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-006-E-7665fc6ae0c7e9c0",
+          "GP-006-E-a646b1030db7fdba",
+          "GP-006-E-d22913824fc90c03",
+          "GP-006-E-db5e6acb97018b1c",
+          "GP-006-FC-281878559e1f7bff",
+          "GP-006-FC-4eba4f8602045a6d",
+          "GP-006-FC-70b9be208951ae05",
+          "GP-006-FC-809c1c8c9feb38ea",
+          "GP-006-FC-b6c5074ea623a07c",
+          "GP-006-FC-c791d7d087e7455d",
+          "GP-006-FC-c858a61784289344",
+          "GP-006-E-1abbea6a2923c49a",
+          "GP-006-E-79bddcfc808ac7f2",
+          "GP-006-E-91510402d7266cd1",
+          "GP-006-E-94c1e79dd31b9816",
+          "GP-006-E-9d98c5a3f7488444",
+          "GP-006-FC-2eab214b01f5f3e2",
+          "GP-006-FC-31edc2cfc908b6b0",
+          "GP-006-FC-50615c83197efb02",
+          "GP-006-FC-8f0a3c75b28c76de",
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "lsec",
+        "evidence_ids": [
+          "GP-006-E-7665fc6ae0c7e9c0",
+          "GP-006-E-a646b1030db7fdba",
+          "GP-006-E-d22913824fc90c03",
+          "GP-006-FC-281878559e1f7bff",
+          "GP-006-FC-70b9be208951ae05",
+          "GP-006-FC-809c1c8c9feb38ea",
+          "GP-006-FC-b6c5074ea623a07c",
+          "GP-006-FC-c791d7d087e7455d",
+          "GP-006-FC-c858a61784289344",
+          "GP-006-E-1abbea6a2923c49a",
+          "GP-006-E-91510402d7266cd1",
+          "GP-006-E-94c1e79dd31b9816",
+          "GP-006-FC-2eab214b01f5f3e2",
+          "GP-006-FC-50615c83197efb02",
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": [
+          "GP-006-E-1abbea6a2923c49a",
+          "GP-006-E-91510402d7266cd1",
+          "GP-006-FC-2eab214b01f5f3e2",
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-a4cc0f3adb169e3a",
+      "subject_text": "LSECs",
+      "predicate": "uptake_by",
+      "object_text": "GFP protein (Figure 2B)",
+      "endpoint_text": "uptake",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-abe0948a4a178820",
+      "subject_text": "LSECs",
+      "predicate": "expressed",
+      "object_text": "HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively",
+      "endpoint_text": "Luciferase expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-e7b45e90113a790f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-bc1bce49f7d4f397",
+      "subject_text": "The immunostaining images showed",
+      "predicate": "colocalized_with",
+      "object_text": "LYVE-1 and GFP signals",
+      "endpoint_text": null,
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-e3895c3ee92011c0",
+      "subject_text": "LSECs",
+      "predicate": "colocalized_with",
+      "object_text": "Isolectin B4-labeled LSECs",
+      "endpoint_text": null,
+      "qualitative_result": "colocalized",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-78a44cbc6069b59c"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-006-FC-c963377ef4e15d2f",
+      "text": "LSECs not only uptake LNPs but can also express GFP protein (Figure 2B).",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-e7b45e90113a790f",
+      "text": "Luciferase expression of HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively.",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-78a44cbc6069b59c",
+      "text": "Interestingly, DiI-labeled cells also colocalized with Isolectin B4-labeled LSECs",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8"
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "source_inventory_sha256": "832b4ce9e274a41bb8aea37b68703793533e88ab7f52c25196c4ebc0e6e6cb7f",
+  "task_checksum": "021ae2470f35f12892d7b1174371d7d017d14cecf364e2253eb7b15ed933e465"
+}

@@ -30,7 +30,7 @@ def test_prompt_is_short_and_contains_critical_scientific_rules():
         "Do not store payload as an LNP component.",
         "Do not convert a mechanism, hypothesis, or interpretation into a measured outcome.",
         "reported value",
-        "valid packet evidence IDs",
+        "valid supplied evidence IDs",
         "missing",
         "Set eligibility to eligible only",
         "Ineligible or uncertain papers must return empty extraction lists.",
@@ -47,8 +47,8 @@ def test_prompt_hash_is_deterministic():
 
 def test_route_versions_prompt_contract_packet_and_baseline():
     route = yaml.safe_load(ROUTE.read_text(encoding="utf-8"))
-    assert route["route_version"] == "compact-route-1.1.0"
-    assert route["status"] == "main_calls_attempted_pending_human_verification"
+    assert route["route_version"] == "compact-route-1.2.0"
+    assert route["status"] == "v12_recall_support_integrated_pending_main_rerun"
     assert route["prompt"]["version"] == PROMPT_VERSION
     assert route["prompt"]["sha256"] == prompt_sha256()
     assert route["response_contract"]["version"] == "compact-1.1.0"
@@ -70,6 +70,12 @@ def test_route_versions_prompt_contract_packet_and_baseline():
     )
     assert api_packet["evidence_budget_estimated_tokens"] == 16000
     assert api_packet["budget_status"] == "human_approved"
+    assert route["outcome_recall_support"]["version"] == (
+        "main-route-recall-support-1.2.0"
+    )
+    assert route["outcome_recall_support"]["visual_gate"] == (
+        "positive_and_adversarial_abstention_fixtures_must_all_pass"
+    )
     assert route["activation_gate"]["active"] is False
     assert route["baseline"]["manifest"] == str(
         BASELINE.relative_to(ROOT)
