@@ -1,0 +1,87 @@
+{
+  "fixture_version": "v12-text-qualitative-1.0.0",
+  "purpose": "Permanent behavior examples for qualitative outcome retention; these are not extraction-time gold inputs.",
+  "cases": [
+    {
+      "case_id": "kupffer_sparse_expression",
+      "text": "eGFP expression was absent in CK19-positive cholangiocytes and alpha-SMA-positive vascular smooth muscle cells, while few F4/80-positive Kupffer cells expressed eGFP.",
+      "expected_relationships": [
+        {
+          "subject": "CK19-positive cholangiocytes",
+          "predicate": "expressed",
+          "object": "eGFP",
+          "polarity": "negative",
+          "qualitative_result": "absent"
+        },
+        {
+          "subject": "alpha-SMA-positive vascular smooth muscle cells",
+          "predicate": "expressed",
+          "object": "eGFP",
+          "polarity": "negative",
+          "qualitative_result": "absent"
+        },
+        {
+          "subject": "F4/80-positive Kupffer cells",
+          "predicate": "expressed",
+          "object": "eGFP",
+          "polarity": "positive",
+          "qualitative_result": "few"
+        }
+      ]
+    },
+    {
+      "case_id": "lsec_reporter_colocalization",
+      "text": "The immunostaining images showed colocalization of LYVE-1 and GFP signals, indicating that LSECs not only uptake LNPs but can also express GFP protein.",
+      "expected_relationships": [
+        {
+          "subject": "GFP signal",
+          "predicate": "colocalized_with",
+          "object": "LYVE-1",
+          "polarity": "positive",
+          "qualitative_result": "colocalized"
+        },
+        {
+          "subject": "LSECs",
+          "predicate": "uptake",
+          "object": "LNPs",
+          "polarity": "positive",
+          "qualitative_result": "reported"
+        },
+        {
+          "subject": "LSECs",
+          "predicate": "expressed",
+          "object": "GFP protein",
+          "polarity": "positive",
+          "qualitative_result": "reported"
+        }
+      ]
+    },
+    {
+      "case_id": "activated_hsc_elimination",
+      "text": "FAPCAR-expressing macrophages recognized, phagocytosed, and eliminated FAP-positive activated HSC models.",
+      "expected_relationships": [
+        {
+          "subject": "FAPCAR-expressing macrophages",
+          "predicate": "recognized",
+          "object": "FAP-positive activated HSC models",
+          "polarity": "positive",
+          "qualitative_result": "reported"
+        },
+        {
+          "subject": "FAPCAR-expressing macrophages",
+          "predicate": "phagocytosed",
+          "object": "FAP-positive activated HSC models",
+          "polarity": "positive",
+          "qualitative_result": "reported"
+        },
+        {
+          "subject": "FAPCAR-expressing macrophages",
+          "predicate": "eliminated",
+          "object": "FAP-positive activated HSC models",
+          "polarity": "positive",
+          "qualitative_result": "reported"
+        }
+      ]
+    }
+  ]
+}

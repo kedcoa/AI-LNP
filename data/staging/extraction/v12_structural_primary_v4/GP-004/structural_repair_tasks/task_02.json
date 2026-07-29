@@ -1,0 +1,115 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-522a5dab8c0d1f14",
+    "structural:AOC-a6b5ecbf468f2cd4"
+  ],
+  "candidate_ids": [
+    "AOC-522a5dab8c0d1f14",
+    "AOC-a6b5ecbf468f2cd4"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-415d753e7b0e",
+    "label": "luciferase_zsgreen / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "luciferase_zsgreen",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-522a5dab8c0d1f14",
+      "subject_text": "Thereafter, bioluminescence",
+      "predicate": "decreased",
+      "object_text": "progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection (Fig",
+      "endpoint_text": "activity",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-440906cb169c4960",
+        "GP-004-FC-79cd6ce9072c0e6f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a6b5ecbf468f2cd4",
+      "subject_text": "Both IV delivery routes resulted in similar protein",
+      "predicate": "expressed",
+      "object_text": "levels and kinetics, indicating either approach can be employed for transient",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-aa1c2885867bfc0a",
+        "GP-004-FC-2249bd15d7493e40"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-E-440906cb169c4960",
+      "text": "Thereafter, bioluminescence decreased progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection (Fig.",
+      "source_ids": [
+        "S-6206e3e3ebaa"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-79cd6ce9072c0e6f",
+      "text": "Thereafter, bioluminescence decreased progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection (Fig.",
+      "source_ids": [
+        "FC-S-2e7faf7e803b8ce8",
+        "FC-S-2e7faf7e803b8ce8"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-aa1c2885867bfc0a",
+      "text": "Both IV delivery routes resulted in similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver.Fig.",
+      "source_ids": [
+        "S-6206e3e3ebaa"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-2249bd15d7493e40",
+      "text": "Both IV delivery routes resulted in similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver.Fig.",
+      "source_ids": [
+        "FC-S-2e7faf7e803b8ce8",
+        "FC-S-2e7faf7e803b8ce8"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 4,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "bb4204bbeca7bea9907600861b56412e124f18e1601fead0d42070075a87426e",
+  "task_checksum": "6fb9afc2c30450a65bf8211a5d1c9954045e1a1ffb53845ae0276d8279cc87d7"
+}

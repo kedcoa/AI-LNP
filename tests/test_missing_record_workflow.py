@@ -139,6 +139,13 @@ def test_missing_record_response_rejects_made_up_evidence():
         validate_response(result, _task())
 
 
+def test_structural_task_requires_facts_for_every_opaque_candidate():
+    payload = _task().model_dump(mode="json")
+    payload["task_version"] = "missing-record-task-1.1.0"
+    with pytest.raises(ValueError, match="experiment_context"):
+        MissingRecordTask.model_validate(payload)
+
+
 def test_whole_response_schema_failure_requires_first_call_not_field_repair():
     finding = ValidationFinding(
         finding_id="VF-schema",

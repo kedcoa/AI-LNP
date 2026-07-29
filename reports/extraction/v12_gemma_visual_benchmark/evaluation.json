@@ -1,0 +1,112 @@
+{
+  "contract_version": "1.0.0",
+  "model": "gemma3:4b",
+  "model_digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+  "model_capabilities": [
+    "completion",
+    "vision"
+  ],
+  "repeats": 1,
+  "seed": 17,
+  "paid_api_requests": 0,
+  "local_only": true,
+  "summary": {
+    "runs": 4,
+    "passed": 0,
+    "positive_passed": 0,
+    "positive_total": 2,
+    "abstention_passed": 0,
+    "abstention_total": 2,
+    "total_prompt_tokens": 8675,
+    "total_output_tokens": 766,
+    "total_elapsed_seconds": 30.079977001005318
+  },
+  "runs": [
+    {
+      "query_id": "GO-006-positive",
+      "gold_outcome_id": "GO-006",
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png",
+      "repeat": 1,
+      "expected_status": "extract",
+      "actual_status": "extract",
+      "claims": 1,
+      "audit_issues": [
+        "CLAIM-001: visible_support omits query anchor: LSEC",
+        "CLAIM-001: visible_support omits query anchor: insertion frequency",
+        "CLAIM-001: visible_support omits query anchor: total"
+      ],
+      "passed": false,
+      "prompt_tokens": 1693,
+      "output_tokens": 234,
+      "elapsed_seconds": 9.124989999982063
+    },
+    {
+      "query_id": "GO-018-positive",
+      "gold_outcome_id": "GO-018",
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L.png",
+      "repeat": 1,
+      "expected_status": "extract",
+      "actual_status": "extract",
+      "claims": 1,
+      "audit_issues": [
+        "required term missing: macrophage",
+        "claim omits required query anchor: macrophage",
+        "ZsGreen: visible_support omits query anchor: macrophage",
+        "ZsGreen: visible_support omits query anchor: localization"
+      ],
+      "passed": false,
+      "prompt_tokens": 2650,
+      "output_tokens": 172,
+      "elapsed_seconds": 4.590485416993033
+    },
+    {
+      "query_id": "GO-006-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png",
+      "repeat": 1,
+      "expected_status": "abstain",
+      "actual_status": "extract",
+      "claims": 1,
+      "audit_issues": [
+        "expected abstain but model returned extract",
+        "CLAIM-001: visible_support omits query anchor: macrophage",
+        "CLAIM-001: visible_support omits query anchor: HSC",
+        "CLAIM-001: visible_support omits query anchor: localization"
+      ],
+      "passed": false,
+      "prompt_tokens": 1682,
+      "output_tokens": 195,
+      "elapsed_seconds": 8.091968916996848
+    },
+    {
+      "query_id": "GO-018-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L.png",
+      "repeat": 1,
+      "expected_status": "abstain",
+      "actual_status": "extract",
+      "claims": 1,
+      "audit_issues": [
+        "expected abstain but model returned extract",
+        "claim omits required query anchor: LSEC",
+        "claim omits required query anchor: Cas9/sgRNA",
+        "C1: visible_support omits query anchor: LSEC",
+        "C1: visible_support omits query anchor: insertion frequency",
+        "C1: visible_support omits query anchor: Cas9/sgRNA",
+        "C1: visible_support omits query anchor: total",
+        "C1: exact value absent from Docling evidence"
+      ],
+      "passed": false,
+      "prompt_tokens": 2650,
+      "output_tokens": 165,
+      "elapsed_seconds": 8.272532667033374
+    }
+  ],
+  "integration_gate_passed": false,
+  "integration_allowed": false,
+  "decision": "reject_model_outputs"
+}

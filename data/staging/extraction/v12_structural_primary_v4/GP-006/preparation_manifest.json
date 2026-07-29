@@ -1,0 +1,80 @@
+{
+  "paper_id": "GP-006",
+  "source_result_path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-006/final_result.json",
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "support_sha256": "b85dd021a32097f03ad0676bfeabf441d505e607ab351335ed5f651bd62927d3",
+  "packet_checksum": "d556f6c414dfb9a90bc9fc06c209986f4e84eac979ced40fc9d45c4e22184dee",
+  "source_evidence_registry": {
+    "artifacts": [
+      {
+        "kind": "legacy_repair_task",
+        "path": "data/staging/extraction/consolidated_gold_gap_tasks_v1/GP-006/task.json",
+        "sha256": "f55ed70c1eeb93f7e0d9040f0f6455c2c8aa168f8c5c8be36aea68f51c5fed58",
+        "embedded_checksum": "8daddd5f38ffd27eb01e8ce8a54e7c831a4ebdc4b46e2bf203762b4f2e036177"
+      },
+      {
+        "kind": "validated_full_evidence_packet",
+        "path": "data/staging/rag/compact_packets_v1/GP-006.json",
+        "sha256": "f2cd3454b4f953e28f5d0f4de838e3e0755a50bf28106d6c5b333f79eae3046d"
+      },
+      {
+        "kind": "atomic_claim_evidence",
+        "path": "data/staging/extraction/v12_atomic_inventory/GP-006/claims.json",
+        "sha256": "8a0ccc4049553bb17d77846f67015d014fdf7018f3556a2a5aef4d704c66d0b9"
+      }
+    ]
+  },
+  "verified_source_evidence_ids": [
+    "GP-006-E-0062483addf27f5e",
+    "GP-006-E-0531a76f7f816a56",
+    "GP-006-E-0d51446684dc2c77",
+    "GP-006-E-0e932dc79aa7ba74",
+    "GP-006-E-1026eebfa4555fab",
+    "GP-006-E-22a954aae3f000e4",
+    "GP-006-E-29315268269642b9",
+    "GP-006-E-2a75a690d1b66c13",
+    "GP-006-E-30adff05e58443b2",
+    "GP-006-E-331470ab8527c636",
+    "GP-006-E-42aad5557a4b8d6e",
+    "GP-006-E-500278fee45a8a70",
+    "GP-006-E-5307426a332d226c",
+    "GP-006-E-5f1df7ac5c7ec3f9",
+    "GP-006-E-61352269ff3b61f2",
+    "GP-006-E-6a0db3e1706fd8f7",
+    "GP-006-E-8e9084aadcfe157d",
+    "GP-006-E-8f4df2feafb0205d",
+    "GP-006-E-b0e824a66a4f04c1",
+    "GP-006-E-b55e158bccb134a3",
+    "GP-006-E-b7f2369f5b7b5a22",
+    "GP-006-E-b9606d3f1fb87b4c",
+    "GP-006-E-c44f9ee6708e752d",
+    "GP-006-E-c96069ae41c1c7d0",
+    "GP-006-E-d010646bb645e446",
+    "GP-006-E-d51e57e7bfc1ef65",
+    "GP-006-E-d7a6c5b7066a40c4",
+    "GP-006-E-d9a16a0c73e6b6b2",
+    "GP-006-E-d9c30e3abca70fcb",
+    "GP-006-FC-526c1ab1d7cb8022",
+    "GP-006-FC-62ca93d20c9e9976",
+    "V-f14f79dac89b0fae"
+  ],
+  "baseline_validation_status": "valid",
+  "structural_counts": {
+    "confirmed": 0,
+    "contradicted": 0,
+    "unconfirmed": 20
+  },
+  "structural_routes": {
+    "none": 0,
+    "bounded_repair_task": 19,
+    "human_review": 1
+  },
+  "integration_blocked": true,
+  "task_count": 3,
+  "human_review_candidate_ids": [
+    "AOC-abe0948a4a178820"
+  ],
+  "gold_identifiers_in_task_input": [],
+  "paid_api_requests": 0,
+  "manifest_checksum": "2cfe47c303dbb32a083b8d3b01bb57bab2c233f56d991e7ef05269a1ed464820"
+}

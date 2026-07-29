@@ -1,0 +1,2865 @@
+{
+  "preparation_version": "v12-frozen-baseline-structural-1.0.0",
+  "paper_id": "GP-008",
+  "source_result": {
+    "path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-008/final_result.json",
+    "sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b"
+  },
+  "support_snapshot": {
+    "path": "data/staging/extraction/v12_main_route_support/GP-008/support.json",
+    "sha256": "cbf186cf2c8d773a9309326a66e575dd34402247313f41344637051c4628eef4"
+  },
+  "source_evidence_registry": {
+    "artifacts": [
+      {
+        "kind": "legacy_repair_task",
+        "path": "data/staging/extraction/consolidated_gold_gap_tasks_v1/GP-008/task.json",
+        "sha256": "bb4d4053d8f7d582d11b6244c17b78bf498074250bc9fdb46a4e1a928e1bac97",
+        "embedded_checksum": "e5f37477e7806d877a87b47567ce5fd4266600daa7a7f9cc7fe4859c28bc1e67"
+      },
+      {
+        "kind": "validated_full_evidence_packet",
+        "path": "data/staging/rag/compact_packets_v1/GP-008.json",
+        "sha256": "c6d8092e240523320d80d6a1653243728f51cb57652442d73714611c3e32c980"
+      },
+      {
+        "kind": "atomic_claim_evidence",
+        "path": "data/staging/extraction/v12_atomic_inventory/GP-008/claims.json",
+        "sha256": "34ca697d1ed0c4d2094230452d89fc32921d368ba64fd59f8e0d1cc2c3afbdbb"
+      }
+    ]
+  },
+  "request_payload": {
+    "evidence_packet": {
+      "packet_version": "compact-api-packet-1.0.0",
+      "paper_id": "GP-008",
+      "blocked_fields": [],
+      "sources": [
+        {
+          "source_id": "S-0cbbf2a1b75b",
+          "chunk_id": "GP-008-B-83e9d3966dc6ce0d68d6",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Design, Manufacturing, and Characterization of αCD163/LNP-FAPCAR."
+        },
+        {
+          "source_id": "S-479d9bc0ce1e",
+          "chunk_id": "GP-008-B-dfdcd078c18dfc6d5d74",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "αCD163/LNP-FAPCAR Enhanced MMP12+ Scar Clearance Phenotype by Reprogramming Macrophage Subpopulations to Alleviate Liver Fibrosis."
+        },
+        {
+          "source_id": "S-606d887e5207",
+          "chunk_id": "GP-008-B-1975f5ff6da903e683ef",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 19",
+          "page_number": 19
+        },
+        {
+          "source_id": "S-6c16ffc4255c",
+          "chunk_id": "GP-008-B-6bff0f7b7ff94acdc625",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "figure_caption",
+          "section": "Results",
+          "subsection": "Design, Manufacturing, and Characterization of αCD163/LNP-FAPCAR.",
+          "figure_number": "Fig. 1."
+        },
+        {
+          "source_id": "S-6ea2461ede73",
+          "chunk_id": "GP-008-B-71a4424c5da61cf6dfd3",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 5",
+          "page_number": 5
+        },
+        {
+          "source_id": "S-789c810554d5",
+          "chunk_id": "GP-008-B-437cb36d9263dacb355d",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "The Administration of αCD163/LNP-FAPCAR Effectively Mitigated Liver Damage in a Mouse Model of Hepatic Fibrosis."
+        },
+        {
+          "source_id": "S-9b36f545d675",
+          "chunk_id": "GP-008-B-e2eaf27c84a87c32a415",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "figure_caption",
+          "section": "Results",
+          "subsection": "αCD163/LNP-FAPCAR Enhanced MMP12+ Scar Clearance Phenotype by Reprogramming Macrophage Subpopulations to Alleviate Liver Fibrosis.",
+          "figure_number": "Fig. 5."
+        },
+        {
+          "source_id": "S-a07542061aa4",
+          "chunk_id": "GP-008-B-152bad1f863349afad63",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "Design, Manufacturing, and Characterization of αCD163/LNP-FAPCAR."
+        },
+        {
+          "source_id": "S-a283414abad5",
+          "chunk_id": "GP-008-B-2b1a1ca2b6da2afd668c",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 14",
+          "page_number": 14
+        },
+        {
+          "source_id": "S-a297c652f968",
+          "chunk_id": "GP-008-B-b25763f9f3085478cc25",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 7",
+          "page_number": 7
+        },
+        {
+          "source_id": "S-a86b1e0bd14d",
+          "chunk_id": "GP-008-B-299ee7f65b6fa4b59702",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 6",
+          "page_number": 6
+        },
+        {
+          "source_id": "S-aca141e2ae83",
+          "chunk_id": "GP-008-B-fce8a78129355edc3eab",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 2",
+          "page_number": 2
+        },
+        {
+          "source_id": "S-b89129642edf",
+          "chunk_id": "GP-008-B-751c319649350b00614e",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "section": "Results",
+          "subsection": "In Vitro Functional Evaluation of αCD163/LNP-FAPCAR."
+        },
+        {
+          "source_id": "S-bc227636a671",
+          "chunk_id": "GP-008-B-f0e09d286befc21c043a",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 3",
+          "page_number": 3
+        },
+        {
+          "source_id": "S-bd13c7ee602b",
+          "chunk_id": "GP-008-B-6da06556a71ae1833b57",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 17",
+          "page_number": 17
+        },
+        {
+          "source_id": "S-cdd3cd145a49",
+          "chunk_id": "GP-008-B-308a9b925b83c22a3042",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 27",
+          "page_number": 27
+        },
+        {
+          "source_id": "S-e3fc652a16a2",
+          "chunk_id": "GP-008-B-ce0eb8f9c9b8af6032ef",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 28",
+          "page_number": 28
+        },
+        {
+          "source_id": "S-e44932e4c0b7",
+          "chunk_id": "GP-008-B-d29d8487307d126e34c4",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 16",
+          "page_number": 16
+        },
+        {
+          "source_id": "S-ea10b0fe8979",
+          "chunk_id": "GP-008-B-66cffb0f019e5d839388",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf",
+          "source_kind": "pdf",
+          "block_type": "pdf_page",
+          "section": "Supplement page 4",
+          "page_number": 4
+        },
+        {
+          "source_id": "S-f1548abcf322",
+          "chunk_id": "GP-008-B-e7588facf11267d4eba3",
+          "source_path": "data/raw/fulltext/oa_packages/PMC13229182/pnas.202534673.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "figure_caption",
+          "section": "Results",
+          "subsection": "In Vitro Functional Evaluation of αCD163/LNP-FAPCAR.",
+          "figure_number": "Fig. 2."
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "GP-008-E-9050fdf93dadc744",
+          "text": "Then TEM revealed that LNP-FAPCAR exhibited a spherical shape with a uniform particle size of 103.1 ± 5.4 nm (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-854a46ad09989ab1",
+          "text": "1B) and a negative charge of −4.58 mV (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-ca8a2e82a75114a8",
+          "text": "To improve mRNA delivery to macrophages, we linked an antibody peptide targeting CD163 to the LNP surface, forming αCD163/LNP-FAPCAR (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-2c0440d419387594",
+          "text": "The resulting αCD163/LNP-FAPCAR displayed a mean particle size of 110.3 ± 6.8 nm (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-2472b40c9754ca79",
+          "text": "1D) and an average zeta potential of −3.38 mV (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-8f8a7b99044155d2",
+          "text": "We evaluated the storage stability of the αCD163/LNP-FAPCAR-formulated mRNA under varied thermal and pH stresses.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-e4a2dd15c4a419e4",
+          "text": "The formulation remained intact for 28 d at either 4 °C or 25 °C.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-769aee47fc1f38e3",
+          "text": "The mRNA release from LNP was measured in samples stored for 1 wk after manufacturing under pressure conditions (40 °C) (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-0a9621d6d0c73afd",
+          "text": "αCD163/LNP-FAPCAR gradually discharges its mRNA cargo as the environment becomes more acidic; the lower the pH, the greater the proportion of mRNA released (Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "lnp_composition_raw"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a07542061aa4"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-1554829605feba5e",
+          "text": "To explore whether αCD163/LNP-FAPCAR can improve liver function in vivo, we detected the extent of liver injury by evaluating the hydroxyproline (Fig.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-1c5d35fdb8d32fac",
+          "text": "The results showed that there was a high level of expression of the targets above in the CCL4 group.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-769adcd4ab72170f",
+          "text": "The treatment of αCD163/LNP-FAPCAR inhibited this.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_after_evidence_id": "GP-008-E-10f321f4dd53870f"
+        },
+        {
+          "evidence_id": "GP-008-E-10f321f4dd53870f",
+          "text": "Meanwhile, we observed that mice treated with αCD163/LNP-FAPCAR could significantly alleviate liver fibrosis as assessed by histology, Sirius red staining, and Masson’s trichrome staining (Fig.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-769adcd4ab72170f"
+        },
+        {
+          "evidence_id": "GP-008-E-84551fd8d4078bee",
+          "text": "Furthermore, we found that MMP12 and IL-6 expression were much higher in the treatment group (Fig.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-343205aff4998f54",
+          "text": "And the gene expression levels of Col3, Tgf-b1, Mmp12, Il-6, and Il-10 were identical to the protein levels (Fig.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-8e2d2b814fb05a67",
+          "text": "To elucidate the mechanistic basis of antibody-conjugated LNP-mediated therapeutic efficacy in hepatic fibrosis, we conducted a comparative analysis of three intervention cohorts: αCD163/LNP-Luc (luciferase mRNA control), unmodified LNP-FAPCAR (FAPCAR mRNA without targeting moiety), and αCD163/LNP-FAPCAR (FAPCAR mRNA with CD163-directed antibody conjugation) (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-0e7348ad4658b593",
+          "text": "The αCD163/LNP-Luc cohort exhibited no appreciable therapeutic benefit.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_after_evidence_id": "GP-008-E-4f0b75402a590ba9"
+        },
+        {
+          "evidence_id": "GP-008-E-4f0b75402a590ba9",
+          "text": "In contrast, the LNP-FAPCAR group demonstrated modest improvements in select fibrosis-associated biomarkers, indicating that hepatic accumulation of FAPCAR-M conferred partial antifibrotic activity.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-0e7348ad4658b593",
+          "context_after_evidence_id": "GP-008-E-e88efe7cd93c20a5"
+        },
+        {
+          "evidence_id": "GP-008-E-e88efe7cd93c20a5",
+          "text": "Notably, the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-4f0b75402a590ba9",
+          "context_after_evidence_id": "GP-008-E-54366734b908d658"
+        },
+        {
+          "evidence_id": "GP-008-E-54366734b908d658",
+          "text": "IHC analyses of hepatic tissue further validated that αCD163/LNP-FAPCAR treatment enabled targeted elimination of FAP+ cells (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-e88efe7cd93c20a5"
+        },
+        {
+          "evidence_id": "GP-008-E-1451c44a1d352d2b",
+          "text": "S7 P and Q), establishing FAPCAR-M as the critical effector population driving therapeutic resolution of liver fibrosis.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_after_evidence_id": "GP-008-E-5af90e3f84c63f86"
+        },
+        {
+          "evidence_id": "GP-008-E-5af90e3f84c63f86",
+          "text": "At the same time, we established mouse models of liver fibrosis induced by BDL and MCD diet to test the therapeutic efficiency of αCD163/LNP-FAPCAR.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-1451c44a1d352d2b",
+          "context_after_evidence_id": "GP-008-E-d32251f9c2db82ae"
+        },
+        {
+          "evidence_id": "GP-008-E-d32251f9c2db82ae",
+          "text": "The results showed that treatment with αCD163/LNP-FAPCAR effectively alleviates BDL- and MCD-diet-induced liver fibrosis in mice (SI Appendix, Figs.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-5af90e3f84c63f86",
+          "context_after_evidence_id": "GP-008-E-8aee3372658459e1"
+        },
+        {
+          "evidence_id": "GP-008-E-8aee3372658459e1",
+          "text": "S8 and S9), reduces collagen III expression and TGF-β1 levels, and increases MMP12 and IL-6 expression, which contribute to liver fibrosis repair.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-d32251f9c2db82ae",
+          "context_after_evidence_id": "GP-008-E-74cb6391396d04fd"
+        },
+        {
+          "evidence_id": "GP-008-E-74cb6391396d04fd",
+          "text": "These analyses collectively demonstrated that αCD163/LNP-FAPCAR effectively mitigated liver damage and fibrosis in mice.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-789c810554d5"
+          ],
+          "context_before_evidence_id": "GP-008-E-8aee3372658459e1"
+        },
+        {
+          "evidence_id": "GP-008-E-4d8bd4b95adb8533",
+          "text": "Design, fabrication, and characterization of αCD163/LNP-FAPCAR.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-388db776bc9df27f",
+          "text": "(A) The schematic representation of the modification process for FAPCAR encapsulated in LNP.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-21033c39c3ac5d17",
+          "text": "(B) A TEM image demonstrating the size distribution of LNP-FAPCAR, with over 80 particles counted.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_after_evidence_id": "GP-008-E-127e91ab93909e57"
+        },
+        {
+          "evidence_id": "GP-008-E-127e91ab93909e57",
+          "text": "An Inset provided a closer view of LNP-FAPCAR.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_before_evidence_id": "GP-008-E-21033c39c3ac5d17",
+          "context_after_evidence_id": "GP-008-E-6bdde0fb85081d87"
+        },
+        {
+          "evidence_id": "GP-008-E-6bdde0fb85081d87",
+          "text": "(Scale bar, 200 nm, mean ± SD.) (C) A structural depiction of αCD163/LNP-FAPCAR.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_before_evidence_id": "GP-008-E-127e91ab93909e57",
+          "context_after_evidence_id": "GP-008-E-46b79c3c8ffb16c5"
+        },
+        {
+          "evidence_id": "GP-008-E-46b79c3c8ffb16c5",
+          "text": "(D) A TEM image demonstrating the size distribution of αCD163/LNP-FAPCAR, with over 80 particles counted.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_before_evidence_id": "GP-008-E-6bdde0fb85081d87",
+          "context_after_evidence_id": "GP-008-E-f3b7ad784230a648"
+        },
+        {
+          "evidence_id": "GP-008-E-f3b7ad784230a648",
+          "text": "An Inset provided a closer view of αCD163/LNP-FAPCAR.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_before_evidence_id": "GP-008-E-46b79c3c8ffb16c5",
+          "context_after_evidence_id": "GP-008-E-5659bbb625b3ad53"
+        },
+        {
+          "evidence_id": "GP-008-E-5659bbb625b3ad53",
+          "text": "(Scale bar, 200 nm, mean ± SD.) (E) An average zeta potential of LNP-FAPCAR and αCD163/LNP-FAPCAR.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_before_evidence_id": "GP-008-E-f3b7ad784230a648"
+        },
+        {
+          "evidence_id": "GP-008-E-a44e3fdfa764abcc",
+          "text": "(F) Results from the mRNA analysis by RiboGreen assay quantifying the encapsulated mRNA of LNP over a time course of 28 d.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_after_evidence_id": "GP-008-E-4a5b7410c103e9c4"
+        },
+        {
+          "evidence_id": "GP-008-E-4a5b7410c103e9c4",
+          "text": "(G) Results of mRNA analysis using the RiboGreen assay quantified the amount of mRNA encapsulated in LNPs under different pH conditions.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ],
+          "context_before_evidence_id": "GP-008-E-a44e3fdfa764abcc"
+        },
+        {
+          "evidence_id": "GP-008-E-17f3f355e8b1e062",
+          "text": "(H and I) Statistical analysis and representative confocal fluorescence images of BMDMs transfected with mRNA, LNP-mRNA, or αCD163/LNP-mRNA.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-d970ee5e39f28092",
+          "text": "The mRNA was labeled with Cy5 (red), and BMDM expression was indicated by GFP (green fluorescence).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-e9466266dec9786d",
+          "text": "(Scale bar, 10 μm.) (J) Representative GFP expression in BMDMs through flow cytometry and (K) the analysis of GFP expression.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6c16ffc4255c"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-a75e9f017b7f45eb",
+          "text": "S3A), αCD163/LNP-FAPCAR can maintain the killing effect of BMDMs on target cells (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-b89129642edf"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-38bead8279685734",
+          "text": "We produced a modified nucleoside-inclusive mRNA encoding an FAP-targeted CAR (SI Appendix, Supplementary Materials 1).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-0cbbf2a1b75b"
+          ],
+          "context_after_evidence_id": "GP-008-E-9f4e4aba562731a4"
+        },
+        {
+          "evidence_id": "GP-008-E-9f4e4aba562731a4",
+          "text": "This was subsequently encapsulated in LNPs (LNP-FAPCAR) as shown in Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-0cbbf2a1b75b"
+          ],
+          "context_before_evidence_id": "GP-008-E-38bead8279685734"
+        },
+        {
+          "evidence_id": "GP-008-E-55c4d9e2b14358f2",
+          "text": "Before formulating LNPs, we first elucidated the functional impact of the CD28 costimulatory domain on CAR-M.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-0cbbf2a1b75b"
+          ],
+          "context_after_evidence_id": "GP-008-E-24aa6501ca87519a"
+        },
+        {
+          "evidence_id": "GP-008-E-24aa6501ca87519a",
+          "text": "Using lentiviral-mediated gene transfer, we engineered two distinct CAR-M constructs targeting FAP: αFAP-CD3ζ, which harbors the CD3ζ signaling domain alone, and αFAP-CD28-CD3ζ, which additionally encodes the CD28 intracellular costimulatory domain.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-0cbbf2a1b75b"
+          ],
+          "context_before_evidence_id": "GP-008-E-55c4d9e2b14358f2"
+        },
+        {
+          "evidence_id": "GP-008-E-9cde9b7c2b200430",
+          "text": "TGF-β1 induction efficiently converted approximately 80% of JS-1 cells to a FAP+ phenotype (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-0cbbf2a1b75b"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-739e6e3e1eb6e2b2",
+          "text": "Then we observed a significant difference in the proportion of macrophages among the samples, with the LNP group showing a lower proportion (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-314b6997ecd0e60c",
+          "text": "Following αCD163/LNP-FAPCAR intervention, the hepatic macrophage compartment underwent selective depletion, prompting investigation into the regulatory dynamics of macrophages in fibrogenesis.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ],
+          "context_after_evidence_id": "GP-008-E-51d08120feab231b"
+        },
+        {
+          "evidence_id": "GP-008-E-51d08120feab231b",
+          "text": "The scRNA-seq results revealed the presence of FAP+ cells within the macrophage subset in fibrotic livers, with αCD163/LNP-FAPCAR treatment markedly attenuating the amount of FAP+ macrophages; conversely, transcriptional levels of Acta2 and Col1a1 remained statistically unchanged between cohorts (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ],
+          "context_before_evidence_id": "GP-008-E-314b6997ecd0e60c"
+        },
+        {
+          "evidence_id": "GP-008-E-1bf7bda856a91d0c",
+          "text": "IF colocalization studies corroborated these findings, fibrotic liver tissue exhibited FAP/F4/80 double-positive macrophages, whereas such populations were virtually eradicated following αCD163/LNP-FAPCAR administration (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-452775cbce9dba40",
+          "text": "Immunophenotyping subsequently identified FAP-specific T cell populations at the splenic red pulp–white pulp interface in the treated mice (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-83762882890be990",
+          "text": "Notably, T cells derived exclusively from the αCD163/LNP-FAPCAR cohort elicited antigen-specific cytotoxicity against FAP+ macrophages (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-79cea4f869ee145b",
+          "text": "To delineate the immunomodulatory effects of αCD163/LNP-FAPCAR on hepatic macrophage heterogeneity, we conducted comparative transcriptomic profiling of macrophage subpopulations across treatment cohorts (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-4a8d68ccfbca6815",
+          "text": "Notably, antigen presentation–associated pathways were significantly upregulated within the macrophage compartment of the αCD163/LNP-FAPCAR group (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-c88e1484747f7ecb",
+          "text": "S12D), whereas NF-κB signaling, mediated by Toll-like receptor activation and downstream IL-6 release, characterized the LNP-only cohort (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-1a55d11d7aad276f",
+          "text": "SAM exhibits characteristic expression of surface markers such as Cd63, Trem2, Cd9, and GpnmB, while LAM has a similar gene expression profile but can achieve phenotypic differentiation through specific high expression of osteopontin (SPP1) (17).",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-4b637ab1beda68dc",
+          "text": "Given negligible SPP1 expression across all clusters, the analyzed macrophage landscape was predominantly enriched for SAM-like states.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-d88b0a8ed4f6ee75",
+          "text": "And subgroup identification was achieved by specific expression of Clec4f, with cluster 2 clearly identified as classical SAM, while cluster 7 exhibited SAM-like KC (SAM_KC) (Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-2187d872c9098581",
+          "text": "We found that, compared to the Fibrosis group, the LNP group had a higher proportion of clusters (2–4), while the other clusters (0, 1) were relatively lower (Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-0bc97423549acbf9",
+          "text": "Among them, the expression of Trem2, Mmp12, and Mmp13 associated with the elimination of scar tissue was higher specific to cluster 2, the expression of inflammatory factor IL-6 was higher in cluster (1, 4, 5), the Mki67 associated with proliferation specific to cluster 6 was expressed higher (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-411ff2bec943128e",
+          "text": "Critically, within the SAM lineage (cluster 2), MMP12 and MMP13 expression were significantly potentiated in the LNP group compared to fibrotic counterparts.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-a77ee36b1e6925f1",
+          "text": "S12G) confirmed elevated frequencies of CCR2+/MMP12+/MMP13+/IL-6+ subsets, with particularly pronounced enrichment of MMP12+ macrophages, alongside reduced MKI67+/CD9+ populations relative to fibrotic controls (Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-6dea751ac521de5e",
+          "text": "The results indicated that LNP treatment altered the proportions of different macrophage cluster subtypes, especially increasing MMP12 expression in macrophage subtypes involved in scar elimination.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-c6d65d1fc2c14798",
+          "text": "Finally, to explore the therapeutic potential of targeted FAP treatment for clinical applications, we collected liver fibrosis tissue from patients with different etiologies and performed IHC staining for FAP.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ],
+          "context_after_evidence_id": "GP-008-E-f92f9c6b8d5e5931"
+        },
+        {
+          "evidence_id": "GP-008-E-f92f9c6b8d5e5931",
+          "text": "The results showed that, compared with nonfibrotic liver tissues, liver fibrosis caused by various etiologies was associated with increased FAP expression (SI Appendix, Fig.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-479d9bc0ce1e"
+          ],
+          "context_before_evidence_id": "GP-008-E-c6d65d1fc2c14798"
+        },
+        {
+          "evidence_id": "GP-008-E-ee6e7d6cf11c8cbc",
+          "text": "Treatment with αCD163/LNP-FAPCAR effectively skewed their polarization toward a proreparative phenotype.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-9b36f545d675"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-aaf1d40e7660d480",
+          "text": "(A) UMAP illustrates macrophages clustering in both the fibrosis and LNP groups.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-9b36f545d675"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-202999ae6268273e",
+          "text": "(C) Vlnplot analysis of the marker gene expression in various macrophage clusters.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-9b36f545d675"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-91f729349e9c10a8",
+          "text": "In vitro functional assessment of αCD163/LNP-FAPCAR.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-9f1c889c86f7fdfa",
+          "text": "(A) Confocal microscopy images showed phagocytosis of FAP+JS-1 cells by BMDMs treated with various formulations.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ],
+          "context_after_evidence_id": "GP-008-E-98be7ac737c9906b"
+        },
+        {
+          "evidence_id": "GP-008-E-98be7ac737c9906b",
+          "text": "The JS-1 cells were labeled with pHrodo, and BMDMs were labeled with GFP (green fluorescence).",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ],
+          "context_before_evidence_id": "GP-008-E-9f1c889c86f7fdfa"
+        },
+        {
+          "evidence_id": "GP-008-E-1de638e9a94e767b",
+          "text": "(Scale bar, 10 μm.) (B) Quantitative analysis of the phagocytic index in BMDMs.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-10395a21906f3ed2",
+          "text": "(C and D) Flow cytometry was used to assess the phagocytic activity of BMDM cells in response to various formulations using pHrodo-labeled FAP+JS-1 cells and the statistical analysis.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-ba71b1c4bd111b87",
+          "text": "(G and H) Flow cytometry analysis of CD80 and CD206 expression in the screened BMDMs and the analysis.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-592b2bba8a8fbebc",
+          "text": "(I–Q) The mRNA relative expression of Cd80, Il-1β, IL-6, Cd206, Arg1, Il-10, Mmp9, Mmp12, and Mmp13 in screened BMDMs.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ],
+          "context_after_evidence_id": "GP-008-E-7380f16cd661f7f8"
+        },
+        {
+          "evidence_id": "GP-008-E-7380f16cd661f7f8",
+          "text": "(R–U) The protein levels of IL-1β, IL-6, IL-10, and TGF-β1 of the supernatant of the screened BMDMs.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ],
+          "context_before_evidence_id": "GP-008-E-592b2bba8a8fbebc",
+          "context_after_evidence_id": "GP-008-E-6406df785ac16694"
+        },
+        {
+          "evidence_id": "GP-008-E-6406df785ac16694",
+          "text": "(V–X) The relative protein expression level of p-P50NF-κB/P50NF-κB and p-Syk/Syk of screened BMDMs.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-f1548abcf322"
+          ],
+          "context_before_evidence_id": "GP-008-E-7380f16cd661f7f8"
+        },
+        {
+          "evidence_id": "GP-008-E-493c040b06dba178",
+          "text": "(H-J) Flow cytometry analysis of ZsGreen and CD163 expression in the screened 390 macrophages and the analysis.",
+          "retrieval_field_tags": [
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-606d887e5207"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-45bd3f1c6039d074",
+          "text": "Then the 220 GFP+BMDMs were treated with different LNPs (αCD163/LNP-Luc, LNP-FAPCAR, 221 and αCD163/LNP-FAPCAR).",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-9d28a6e499d9aa3a",
+          "text": "The supernatant was replaced with 225 pre-warmed medium at 37°C, and the dishes were incubated at 37°C in a 5% CO2 226 atmosphere to promote phagocytosis.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-2b3abc2e56d642ea",
+          "text": "Following a PBS wash, cells were resuspended in 500 µL 232 PBS + 1 % BSA and analyzed using a Becton Dickinson FACSCalibur flow 233 cytometer (San Jose, CA, USA).",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ],
+          "context_after_evidence_id": "GP-008-E-5f9dfb1a8a3ec733"
+        },
+        {
+          "evidence_id": "GP-008-E-5f9dfb1a8a3ec733",
+          "text": "The data were analyzed using FlowJo 10.4.2 234 software (BD Biosciences, San Jose, CA, USA).",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ],
+          "context_before_evidence_id": "GP-008-E-2b3abc2e56d642ea"
+        },
+        {
+          "evidence_id": "GP-008-E-723b0b7a8fcc6107",
+          "text": "240 Bioluminescence 241 In the liver fibrosis model, mice were intravenously administered with α 242 CD163/LNP-Luc loaded with Luciferase or with α CD163/LNP-ZsGreen loaded with 243 ZsGreen mRNA (via an intravenous injection of the tail vein at a dose of 0.4 mg of 244 mRNA per kg body weight).",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-cfca0c600aac8f7d",
+          "text": "Subsequently, the systemic Luciferase fluorescence 245 signal was monitored using an IVIS imaging system at specific time points.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ],
+          "context_after_evidence_id": "GP-008-E-8502b358321c72f9"
+        },
+        {
+          "evidence_id": "GP-008-E-8502b358321c72f9",
+          "text": "The 246 biodistribution of the injected particles was evaluated by imaging the entire organ 247 using IVIS.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ],
+          "context_before_evidence_id": "GP-008-E-cfca0c600aac8f7d"
+        },
+        {
+          "evidence_id": "GP-008-E-dd51290dbed76d7a",
+          "text": "To observe the 248 expression of LNPs in the liver, we detected the ZsGreen after administering 249 αCD163/LNP-ZsGreen loaded with ZsGreen mRNA at specific time points.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-d68da6a4e7101a1a",
+          "text": "256 Biosafety evaluation in vivo 257 On the 15th day post-injection, blood was drawn for hematology and serum chemistry, 258 and major organs were fixed, sectioned, and stained with H&E for histopathologic 259 evaluation.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a86b1e0bd14d"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-034e571e106b0c4c",
+          "text": "346 p-P50NF-κB/P50NF-κB and CD80 of BMDMs with FAP disposal and was analyzed using 347 western blot.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a283414abad5"
+          ],
+          "context_after_evidence_id": "GP-008-E-676f83007356f0d5"
+        },
+        {
+          "evidence_id": "GP-008-E-676f83007356f0d5",
+          "text": "(N-R) The relative protein expression level of p-Syk/Syk, p-Myd88/Myd88, 348 p-P50NF-κB/P50NF-κB and CD80 of BMDMs with FAP disposal and Syk inhibitor (BAY 349 61-3606, 2 µM for 24 h) was analyzed using western blot.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a283414abad5"
+          ],
+          "context_before_evidence_id": "GP-008-E-034e571e106b0c4c"
+        },
+        {
+          "evidence_id": "GP-008-E-c6ccca210ba82051",
+          "text": "(A) The transcriptomic differences of macrophages between Fibrosis and 455 LNP groups.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-cdd3cd145a49"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-d3d28c55624f3463",
+          "text": "(F) Vlnplot analysis of the 458 markers gene expression in various macrophage clusters between the Fibrosis (blue) and LNP 459 (pink) groups.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-cdd3cd145a49"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-7f920145e90d1ef9",
+          "text": "462 Tables S1 to S3 463 Appendix Table 1.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-cdd3cd145a49"
+          ],
+          "context_after_evidence_id": "GP-008-E-a5412978095f45ce"
+        },
+        {
+          "evidence_id": "GP-008-E-a5412978095f45ce",
+          "text": "Parameter of the diameter (z-average) and PDI of each LNP 464 formulation (± standard deviation) 465 Sample Diameter (nm) PDI 466 LNP 117.01±2.78 0.15±0.026 467 αCD163/LNP 132.05±3.10 0.176±0.017 468 Appendix Table 2.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-cdd3cd145a49"
+          ],
+          "context_before_evidence_id": "GP-008-E-7f920145e90d1ef9",
+          "context_after_evidence_id": "GP-008-E-1bc066632f211f97"
+        },
+        {
+          "evidence_id": "GP-008-E-1bc066632f211f97",
+          "text": "Efficiency table of antibody conjugation in different batches 469 Batch Total Lipid Concentration Volume of LNPs (ml) Amount of CD163 Antibody Free Antibody Amount of Antibody Conjugation Rate (%) 470 in LNPs (mg/ml) for LNP Conjugation (mg) Amount (mg) Conjugated to LNPs (mg) 471 1 4.836 2 0.312 0.182 0.119 91.54 472 2 4.077 2 0.264 0.153 0.103 92.79 473 3 4.358 2 0.278 0.154 0.114 91.94 474 Appendix Table 3.",
+          "retrieval_field_tags": [
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-cdd3cd145a49"
+          ],
+          "context_before_evidence_id": "GP-008-E-a5412978095f45ce"
+        },
+        {
+          "evidence_id": "GP-008-E-536ddd1a9e1a2ad1",
+          "text": "131 at a molar ratio of 45:30:23.5:1.5 (ionizable lipid: DSPC: cholesterol: PEG-lipid).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-6f55a8c9f1efd1ae",
+          "text": "132 Notably, the elevated DSPC content (30 mol%) relative to conventional LNP 133 formulations enhances interactions with monocyte-derived macrophages (MDMs), 134 thereby facilitating targeting of circulating monocytes and promoting chemotaxis 135 toward inflammatory sites (2).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-257a724c3bddea43",
+          "text": "136 The lipid mixture was subsequently combined with 6.25 mM sodium acetate buffer 137 (pH 5.0) containing mRNA at an aqueous: organic phase ratio of 3:1 (v/v) using a 138 microfluidic mixing device (Precision Nanosystems, Vancouver, BC).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-73fe5eefe200ee0a",
+          "text": "The resulting 139 formulation was dialyzed against PBS (pH 7.4) for at least 18 hours, followed by 140 concentration via ultrafiltration (Amicon centrifugal filter units; EMD Millipore, 141 Billerica, MA).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-bf01740187ef40f9",
+          "text": "The final preparation was sterile-filtered through a 0.22 μm 142 membrane and stored at 4°C until use.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ],
+          "context_after_evidence_id": "GP-008-E-9f06a8fd077bd7aa"
+        },
+        {
+          "evidence_id": "GP-008-E-9f06a8fd077bd7aa",
+          "text": "It is worth noting that the ionizable lipid 143 employed in this study, heptadecan-9-yl 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl) 144 amino) octanoate (molecular formula: C₄₄H₈₇NO₅; MW: 710.18), is an amino lipid 145 architecture that substantially enhances endosomal escape efficiency (3).",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ],
+          "context_before_evidence_id": "GP-008-E-bf01740187ef40f9"
+        },
+        {
+          "evidence_id": "GP-008-E-78b7081add1094e3",
+          "text": "The 146 antibody-targeted LNPs were prepared by conjugating LNP-mRNAs to purified rat 147 anti-mouse CD163 and control using SATA-maleimide chemistry.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ],
+          "context_after_evidence_id": "GP-008-E-cfa9465367a92fa9"
+        },
+        {
+          "evidence_id": "GP-008-E-cfa9465367a92fa9",
+          "text": "Antibodies were 148 stoichiometrically modified with SATA (N-succinimidyl S-acetylthioacetate) to 149 introduce sulfhydryl groups, followed by post-insertion of DSPE-PEG-maleimide into 150 pre-formed LNPs.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ],
+          "context_before_evidence_id": "GP-008-E-78b7081add1094e3",
+          "context_after_evidence_id": "GP-008-E-82bdf337a8a82e01"
+        },
+        {
+          "evidence_id": "GP-008-E-82bdf337a8a82e01",
+          "text": "This enabled site-specific thiol-maleimide bioconjugation, 151 covalently tethering the sulfhydryl-activated antibody to the nanoparticle surface via 152 stable thioether bond formation.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ],
+          "context_before_evidence_id": "GP-008-E-cfa9465367a92fa9"
+        },
+        {
+          "evidence_id": "GP-008-E-f2ed28bdcbe95396",
+          "text": "All ligand-decorated and control 157 LNPs were kept at 4 °C and used without further processing.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-4057065d8c83d652",
+          "text": "For TEM imaging, 5 µL of sample was adsorbed 162 onto carbon-coated 400-mesh copper grids, blotted, air-dried, and negatively stained 163 with 1 % aqueous uranyl acetate for 30 s.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-88a094f82def8d11",
+          "text": "165 Synthesis of Ionizable Lipid 166 A solution of nonyl 8-((2-hydroxyethyl)amino)octanoate (0.150 g, 0.42 mmol), 167 heptadecan-9-yl 8-bromooctanoate (0.217 g, 0.47 mmol), and N, 168 N-diisopropylethylamine (0.061 g, 0.47 mmol) in ethanol (2 mL) was stirred at 65°C 169 for 18 hours.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-3aad2dcb7b8d175a",
+          "text": "Following cooling to ambient temperature, the solvent was removed 170 under reduced pressure.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-311254315bac4c63",
+          "text": "Purification by silica gel chromatography [0–100% gradient of 1% 173 NH₄OH/20% MeOH in dichloromethane] afforded heptadecan-9-yl 174 8-((2-hydroxyethyl)(8-(nonyloxy)-8-oxooctyl)amino)octanoate (0.089 g, 30% yield)",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-ea10b0fe8979"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-c0d7ee15259a1fc7",
+          "text": "(C-D) Confocal microscopy images display the phagocytosis of FAP+ LX-2 cells 369 by macrophages subjected to various formulations and the quantitative analysis of the 370 phagocytic index (scale bar=10 μm).",
+          "retrieval_field_tags": [
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bd13c7ee602b"
+          ],
+          "context_after_evidence_id": "GP-008-E-bc0ebbca3fa4955f"
+        },
+        {
+          "evidence_id": "GP-008-E-bc0ebbca3fa4955f",
+          "text": "(E-F) Flow cytometry was employed to detect the 371 phagocytic activity of macrophages in response to various formulations, using 372 pHrodo-labeled FAP+ LX-2 cells and statistical analysis.",
+          "retrieval_field_tags": [
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bd13c7ee602b"
+          ],
+          "context_before_evidence_id": "GP-008-E-c0d7ee15259a1fc7",
+          "context_after_evidence_id": "GP-008-E-591f9eac2c6a48c7"
+        },
+        {
+          "evidence_id": "GP-008-E-591f9eac2c6a48c7",
+          "text": "(G) The cytotoxicity of macrophages 373 against target FAP+ LX-2 cells was assessed by co-culturing them overnight and calculating 374 the killing efficiency in biological replicates.",
+          "retrieval_field_tags": [
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bd13c7ee602b"
+          ],
+          "context_before_evidence_id": "GP-008-E-bc0ebbca3fa4955f"
+        },
+        {
+          "evidence_id": "GP-008-E-9aafff74f2f915dc",
+          "text": "(H-K) The qPCR analysis of CD80, IL-6, 375 CD206, and IL-10 expression of the screened macrophages.",
+          "retrieval_field_tags": [
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bd13c7ee602b"
+          ],
+          "context_after_evidence_id": "GP-008-E-016210283230a4d3"
+        },
+        {
+          "evidence_id": "GP-008-E-016210283230a4d3",
+          "text": "(L-O) The protein levels of IL-1β, 376 IL-6, IL-10, and TGF-β1 of the supernatant of the screened macrophages were measured 377 through ELISA.",
+          "retrieval_field_tags": [
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bd13c7ee602b"
+          ],
+          "context_before_evidence_id": "GP-008-E-9aafff74f2f915dc"
+        },
+        {
+          "evidence_id": "GP-008-E-03d66b2d7d1bdb7a",
+          "text": "176 Determination of encapsulation efficiency (EE) 177 The mRNA encapsulation efficiency (EE) was quantified using the Quant-iT 178 RiboGreen RNA assay kit (R32705, Thermo Fisher Scientific, China) according to the 179 manufacturer’s protocol.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-aef540d138f7bd11",
+          "text": "EE (%)=(fluorescence of total mRNA-fluorescence of free 180 mRNA)/fluorescence of total mRNA × 100%.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-f3535df1b892770e",
+          "text": "181 Antibody coupling efficiency determination 182 The LNP of the conjugated antibody was prepared by the molar ratio of antibody to 183 LNP 1:20, the total amount of antibody used was determined by the amount of LNP, 184 the conjugated LNP was purified by the Sepharose CL-4B gel filter column, and the 185 unconjugated free antibody was obtained, the total amount of free antibody was 186 determined by BCA method, and the amount of antibody of the conjugated antibody 187 LNP was detected by enzyme-linked immunosorbent assay (ELISA) method, 188 combined with the standard curve for quantification.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-88b49512db93fee5",
+          "text": "Coupling rate formula : total antibody amount of conjugated LNP Conjugation rate(%)= ×100 antibody amount-free antibody amount 190 In Vitro Transfection of Cells 191 LNP-encapsulated GFP mRNA was prepared for in vitro transfection experiments.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ],
+          "context_after_evidence_id": "GP-008-E-b4fb9f3b8b4537b7"
+        },
+        {
+          "evidence_id": "GP-008-E-b4fb9f3b8b4537b7",
+          "text": "192 Log-phase BMDMs were plated at 1×10^4 cells per well in 96-well plates and 193 transfected with 100 ng of the LNP-encapsulated GFP mRNA.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ],
+          "context_before_evidence_id": "GP-008-E-88b49512db93fee5"
+        },
+        {
+          "evidence_id": "GP-008-E-2ded16d4a38ef48b",
+          "text": "195 The preparation of LNP encapsulated His-tag-FAPCAR mRNA and controls was 196 undertaken for in vitro transfection experiments.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-ecf0b67029e10a17",
+          "text": "Log-phase BMDMs were seeded at 3 197 ×10⁵ cells per well in 6-well plates and then transfected with the respective 198 preparations.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-336a8f444fd1ee95",
+          "text": "200 Assessment of Cellular Uptake 201 BMDM cells pre-stained with the live-cell dye expressing green fluorescent protein 202 (GFP) were cultured at a density of 10^5 cells per well in 24-well plates and allowed 203 to adhere overnight.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-dd3a4c143097fe2a",
+          "text": "Subsequently, the cells were incubated for four hours with 204 Cy5-mRNA, LNP-Cy5-mRNA, and αCD163/LNP-Cy5-mRNA.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "experiment_boundary",
+            "lnp_composition_raw",
+            "outcomes",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-6ea2461ede73"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-210f58aa0abb5afa",
+          "text": "261 Liver specimens were fixed in 4 % neutral-buffered formaldehyde, paraffin-embedded, 262 and cut into 4 µm sections for histology and IHC.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-ac6a7f4dc646f20e",
+          "text": "After rehydration, sections were 264 stained for 1 h in Sirius red, rinsed six times with 0.5% acetic acid, dipped in absolute 265 alcohol, dehydrated, and mounted.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-490135676aeb3f92",
+          "text": "cDNA was synthesized with TaqMan 271 Reverse Transcription Reagents (Thermo Fisher).",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ],
+          "context_after_evidence_id": "GP-008-E-3701cdb0e62d7c0a"
+        },
+        {
+          "evidence_id": "GP-008-E-3701cdb0e62d7c0a",
+          "text": "qPCR was run in triplicate on an 272 ABI StepOnePlus 96-well system using TaqMan or SYBR Green Gene Expression 273 assays (Thermo Fisher) as appropriate.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ],
+          "context_before_evidence_id": "GP-008-E-490135676aeb3f92"
+        },
+        {
+          "evidence_id": "GP-008-E-8ea65043efae93e4",
+          "text": "After 1 h blocking in 5 % non-fat milk, membranes were probed 280 overnight at 4 °C with the indicated primary antibodies.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-710853ff7e26b9e3",
+          "text": "Samples were run in duplicate, standards on each plate, 284 and absorbance was read at 450 nm.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-6916e8ed67c1030d",
+          "text": "285 Pharmacokinetics analysis 286 mRNA quantification was performed utilizing the QuantiGene 2.0 bDNA assay 287 platform (Affymetrix).",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-8c534890fe3f1461",
+          "text": "291 Single-Cell RNA Sequencing 292 Liver cells were dissociated and live cells were enriched using the Dead Cell Removal 293 Kit (Miltenyi Biotec) for library preparation.",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-9024a77527b5e4d5",
+          "text": "The gene expression of the core cells was normalized 304 using a linear regression model, and a variance analysis was conducted to select the",
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-a297c652f968"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-afafc2e138df7719",
+          "text": "Rampado et al., \"Lipid Nanoparticles With Fine-Tuned Composition Show Enhanced 479 Colon Targeting as a Platform for mRNA Therapeutics\" in Adv Sci (Weinh).",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-e3fc652a16a2"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-95c8d8a3f9e9b9d2",
+          "text": "Sabnis et al., A Novel Amino Lipid Series for mRNA Delivery: Improved Endosomal 482 Escape and Sustained Pharmacology and Safety in Non-human Primates.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-e3fc652a16a2"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-be4ea7471a741c26",
+          "text": "484 485 Other supporting materials for this manuscript 486 Supplementary materials 1 487 (a modified nucleoside-inclusive mRNA encoding an FAP-targeted CAR sequence) 488 489 (Mu) SP -anti-4G5 FAP-scFv-CD28hinge/TM+CD-CD3ζ 490 491 ATGGGTGTCCCTACCCAGCTCCTGGGACTGCTCCTGCTGTGGATCACCGACGCCATCT 492 GCGAC 493 CAAATTGTTCTCACCCAGTCTCCAGCGCTCATGTCTGCTTCTCCAG 494 GGGAGAAGGTCACCATGACCTGCACTGCCAGCTCAAGTGTTAGTT 495 ACATGTACTGGTACCAGCAGAAGCCACGATCCTCCCCCAAACCCT 496 GGATTTTTCTCACCTCCAACCTGGCTTCTGGAGTCCCTGCTCGCTT 497 CAGTGGCCGTGGGTCTGGGACCTCTTTCTCTCTCACAATCAGCAG 498 CATGGAGGCTGAAGATGCTGCCACTTATTACTGCCAGCAGTGGAG 499 TGGTTACCCACCCATCACATTCGGCTCGGGGACAAAGTTGGAAAT 500 AAAAGGTGGAGGTGGCAGCGGAGGAGGTGGGTCCGGCGGTGGA 501 GGAAGCCAGGTCCAACTGCAGCAGCCTGGGGCTGAACTGGTAAA 502 GCCTGGGGCTTCAGTGAAGTTGTCCTGCAAGGCGTCTGGCTACAC 503 CATCACCAGCTACTCTCTGCACTGGGTGAAGCAGAGGCCTGGACA 504 AGGCCTTGAGTGGATTGGAGAGATTAATCCTGCCAATGGTGATCA",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-e3fc652a16a2"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-a098bae495d2fd16",
+          "text": "360 Cd80, Il-6, Cd206, and Il-10 expression in the screened BMDMs.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-e44932e4c0b7"
+          ],
+          "context_after_evidence_id": "GP-008-E-37b1d1be87b2b148"
+        },
+        {
+          "evidence_id": "GP-008-E-37b1d1be87b2b148",
+          "text": "(L-O) The protein levels of 361 IL-1β, IL-6, IL-10, and TGF-β1 of the supernatant of the screened BMDMs were measured 362 through ELISA.",
+          "retrieval_field_tags": [
+            "delivery_recipient_cell_reported",
+            "outcomes",
+            "therapeutic_target_cell_reported"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-e44932e4c0b7"
+          ],
+          "context_before_evidence_id": "GP-008-E-a098bae495d2fd16"
+        },
+        {
+          "evidence_id": "GP-008-E-6a035c496c09b79f",
+          "text": "Then, HBSS containing 0.5 mM EGTA was perfused for an additional 10 89 minutes at 37 °C, followed by HBSS containing 5 mM CaCl2 and 0.05% type IV 90 collagenase (Sigma, C5138, USA) for 10 minutes.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ],
+          "context_after_evidence_id": "GP-008-E-f7a6a0a81b5b1f5d"
+        },
+        {
+          "evidence_id": "GP-008-E-f7a6a0a81b5b1f5d",
+          "text": "This infusion method was 91 performed via the inferior vena cava and used the vascular system to deliver 92 collagenase to most liver cells while maintaining their structural integrity.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ],
+          "context_before_evidence_id": "GP-008-E-6a035c496c09b79f"
+        },
+        {
+          "evidence_id": "GP-008-E-f78e7f64c1d0a13f",
+          "text": "Subsequently, the transduced cells were 113 screened with puromycin, and cells with an expression rate exceeding 90% were 114 selected for subsequent experiments.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-47d6d5cd611c6b0e",
+          "text": "115 RNA Synthesis and Lipid Nanoparticle Formulation 116 The FAP-CAR design incorporated a murine anti-FAP scFv (clone 73.3) linked to the 117 cytoplasmic signaling domains of CD28 and CD3ζ (the sequence was in 118 Supplementary Material 1).",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-8e25a0786c115314",
+          "text": "The mRNA production was facilitated 122 using the MEGAScript T7 kit, substituting m1Ψ-5'-triphosphate for UTP, and 123 incorporating a 101-nucleotide poly(A) tail.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-f2087747d9eb7ce1",
+          "text": "CleanCap® trinucleotide cap1 analog 124 was incorporated cotranscriptionally during IVT to yield 5′-capped mRNA, which 125 was purified using cellulose.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-f4083e82e4bee635",
+          "text": "The purified mRNA was analyzed on agarose gels and 126 stored at -20°C.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-3eccab97e7243c55",
+          "text": "Cellulose-purified, m1Ψ-modified RNA was nano-encapsulated by 127 microfluidic rapid-mixing with an ethanol-lipid cocktail (ionizable cationic lipid, 128 helper phospholipid, cholesterol, and PEG-lipid) at acidic pH to form LNPs.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-780c626d2edea80d",
+          "text": "The 129 synthesis of the GFP/Luc/ZsGreen mRNA was the same as the FAP-CAR mRNA.",
+          "retrieval_field_tags": [
+            "lnp_composition_raw",
+            "payload"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-bc227636a671"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-1dbd77cec75ad350",
+          "text": "53 Cell Culture 54 The mouse HSC cell lines were procured from the YaJi Biological, the human HSC 55 cell lines and THP-1 monocytes were procured from the Chinese Academy of 56 Sciences' Cell Bank.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ],
+          "context_after_evidence_id": "GP-008-E-bfb01ac4dc084ff3"
+        },
+        {
+          "evidence_id": "GP-008-E-bfb01ac4dc084ff3",
+          "text": "They were cultured in DMEM supplemented with 10% fetal 57 bovine serum (FBS) and 1% penicillin-streptomycin (P/S) solution.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ],
+          "context_before_evidence_id": "GP-008-E-1dbd77cec75ad350"
+        },
+        {
+          "evidence_id": "GP-008-E-5dd525d5ffd2bc5b",
+          "text": "THP-1 monocytes 58 (5 × 10^5 cells/mL) were seeded in complete RPMI-1640 with 80 nM phorbol 59 12-myristate 13-acetate (PMA) for 72 h to obtain adherent macrophages.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-d1e4c1ed3109de15",
+          "text": "JS-1 cells 60 with puromycin resistance expressing luciferase and LX-2 cells expressing luciferase 61 were incubated with puro to increase luciferase expression before use in the 62 experiment.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ],
+          "context_after_evidence_id": "GP-008-E-1e89ad2838ddf3eb"
+        },
+        {
+          "evidence_id": "GP-008-E-1e89ad2838ddf3eb",
+          "text": "The cells were incubated at 37 °C in a 5% CO2 humidified atmosphere.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ],
+          "context_before_evidence_id": "GP-008-E-d1e4c1ed3109de15"
+        },
+        {
+          "evidence_id": "GP-008-E-7215ef39c86b1b3e",
+          "text": "63 Liver Fibrosis Models 64 Six to eight-week-old female Balb/c mice (Changsheng Bio, Liaoning) were 65 maintained in SPF barrier rooms (22 ± 2 °C, 45-65 % humidity, 12 h light/12 h dark) 66 with ad libitum access to standard chow and autoclaved water.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-b32e469a23a5833d",
+          "text": "injections of either vehicle (olive oil) or 10% CCL4 in olive oil (2 69 mL/kg) for 6 consecutive weeks.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-eb9defa50a9772cc",
+          "text": "Expose the common 72 bile duct and ligate it with 5-0 non-absorbable sutures, with a duration of up to 4 73 weeks after surgery.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ],
+          "context_after_evidence_id": "GP-008-E-3357912c860bd5e0"
+        },
+        {
+          "evidence_id": "GP-008-E-3357912c860bd5e0",
+          "text": "To induce liver fibrosis through methionine deficiency and 74 choline deficiency (MCD) diet, mice were fed either a normal diet or an MCD diet for 75 a duration of up to 8 weeks.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ],
+          "context_before_evidence_id": "GP-008-E-eb9defa50a9772cc"
+        },
+        {
+          "evidence_id": "GP-008-E-c2f49c1ec1cd78d3",
+          "text": "The mice received αCD163/LNP-FAPCAR treatment 76 after the model was completed via an intravenous injection into the tail vein at a dose 77 of 0.4 mg of mRNA per kg body weight, and the samples were collected after 14 days 78 of treatment.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ]
+        },
+        {
+          "evidence_id": "GP-008-E-70cb303b4ee27300",
+          "text": "Fresh medium was 84 exchanged every 48-72 h, and fully differentiated BMDMs were collected on day 7.",
+          "retrieval_field_tags": [
+            "experiment_boundary"
+          ],
+          "experiment_candidate_ids": [],
+          "source_ids": [
+            "S-aca141e2ae83"
+          ]
+        }
+      ],
+      "packet_checksum": "3788ce2d243eaa90b4de38e5b8e25f30c9b59860f39337b86adc06802ba96673"
+    },
+    "outcome_recall_support": {
+      "support_version": "main-route-recall-support-1.2.0",
+      "paper_id": "GP-008",
+      "instructions": [
+        "Candidates are navigation aids, not verified final outcomes.",
+        "Create a final record only when its cited evidence directly supports it.",
+        "Keep distinct provisional experiments and atomic relationships separate.",
+        "Deduplicate candidates against outcomes already supported by the packet.",
+        "Use only evidence IDs present in the packet or local_evidence below."
+      ],
+      "provisional_experiments": [
+        {
+          "provisional_experiment_id": "PEX-GP-008-044931098617",
+          "label": "fapcar / in_vitro",
+          "anchors": [
+            {
+              "anchor_type": "payload",
+              "value": "fapcar",
+              "evidence_ids": [
+                "GP-008-E-0d7c5f603e91d7fe",
+                "GP-008-E-2ded16d4a38ef48b",
+                "GP-008-E-367a892054c68fbd",
+                "GP-008-E-37d498eda688a886",
+                "GP-008-E-43f17505d9a3c544",
+                "GP-008-E-45bd3f1c6039d074",
+                "GP-008-E-55839a1df762b042",
+                "GP-008-E-5d880e56548ac163",
+                "GP-008-E-85ffa081af3058cd",
+                "GP-008-E-fb922339e2bceab0",
+                "GP-008-FC-1cea560b4cc4ad0e",
+                "GP-008-FC-3100ed6c7942dfbf",
+                "GP-008-FC-56829e42cd5be0db",
+                "GP-008-FC-5f83037090872a08",
+                "GP-008-FC-67cba83633b522b0",
+                "GP-008-FC-7e669f1c44e484d3",
+                "GP-008-FC-9eb806b42decfa30",
+                "GP-008-FC-a5c6681cff08ce5b",
+                "GP-008-FC-ce0c1c4780a08382",
+                "GP-008-FC-d09691a9c497083b"
+              ]
+            },
+            {
+              "anchor_type": "model",
+              "value": "in_vitro",
+              "evidence_ids": [
+                "GP-008-E-0d7c5f603e91d7fe",
+                "GP-008-E-2ded16d4a38ef48b",
+                "GP-008-E-367a892054c68fbd",
+                "GP-008-E-37d498eda688a886",
+                "GP-008-E-43f17505d9a3c544",
+                "GP-008-E-45bd3f1c6039d074",
+                "GP-008-E-55839a1df762b042",
+                "GP-008-E-5d880e56548ac163",
+                "GP-008-E-85ffa081af3058cd",
+                "GP-008-E-fb922339e2bceab0",
+                "GP-008-FC-1cea560b4cc4ad0e",
+                "GP-008-FC-3100ed6c7942dfbf",
+                "GP-008-FC-56829e42cd5be0db",
+                "GP-008-FC-5f83037090872a08",
+                "GP-008-FC-67cba83633b522b0",
+                "GP-008-FC-7e669f1c44e484d3",
+                "GP-008-FC-9eb806b42decfa30",
+                "GP-008-FC-a5c6681cff08ce5b",
+                "GP-008-FC-ce0c1c4780a08382",
+                "GP-008-FC-d09691a9c497083b"
+              ]
+            },
+            {
+              "anchor_type": "cell_context",
+              "value": "macrophage",
+              "evidence_ids": [
+                "GP-008-E-0d7c5f603e91d7fe",
+                "GP-008-E-367a892054c68fbd",
+                "GP-008-E-37d498eda688a886",
+                "GP-008-E-43f17505d9a3c544",
+                "GP-008-E-45bd3f1c6039d074",
+                "GP-008-E-55839a1df762b042",
+                "GP-008-E-5d880e56548ac163",
+                "GP-008-E-85ffa081af3058cd",
+                "GP-008-FC-1cea560b4cc4ad0e",
+                "GP-008-FC-3100ed6c7942dfbf",
+                "GP-008-FC-56829e42cd5be0db",
+                "GP-008-FC-5f83037090872a08",
+                "GP-008-FC-7e669f1c44e484d3",
+                "GP-008-FC-a5c6681cff08ce5b",
+                "GP-008-FC-ce0c1c4780a08382",
+                "GP-008-FC-d09691a9c497083b"
+              ]
+            },
+            {
+              "anchor_type": "cell_context",
+              "value": "hsc",
+              "evidence_ids": [
+                "GP-008-E-367a892054c68fbd",
+                "GP-008-E-fb922339e2bceab0",
+                "GP-008-FC-67cba83633b522b0",
+                "GP-008-FC-7e669f1c44e484d3"
+              ]
+            },
+            {
+              "anchor_type": "assay",
+              "value": "phagocytosis_cytotoxicity",
+              "evidence_ids": [
+                "GP-008-E-0d7c5f603e91d7fe",
+                "GP-008-E-367a892054c68fbd",
+                "GP-008-E-55839a1df762b042",
+                "GP-008-E-fb922339e2bceab0",
+                "GP-008-FC-56829e42cd5be0db",
+                "GP-008-FC-67cba83633b522b0",
+                "GP-008-FC-7e669f1c44e484d3",
+                "GP-008-FC-a5c6681cff08ce5b"
+              ]
+            }
+          ],
+          "boundary_status": "inferred",
+          "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+          "confidence": "medium"
+        },
+        {
+          "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+          "label": "fapcar / in_vivo",
+          "anchors": [
+            {
+              "anchor_type": "payload",
+              "value": "fapcar",
+              "evidence_ids": [
+                "GP-008-E-0bd62635eb18e64c",
+                "GP-008-E-10f321f4dd53870f",
+                "GP-008-E-1bf7bda856a91d0c",
+                "GP-008-E-5af90e3f84c63f86",
+                "GP-008-E-74cb6391396d04fd",
+                "GP-008-E-8a0c4ee90d900651",
+                "GP-008-E-c2f49c1ec1cd78d3",
+                "GP-008-E-d32251f9c2db82ae",
+                "GP-008-FC-1f16345c0446fa78",
+                "GP-008-FC-5835605256f27258",
+                "GP-008-FC-683094790484c6ae",
+                "GP-008-FC-90f8c2cce035eda2",
+                "GP-008-FC-96ada8d5543893f1",
+                "GP-008-FC-b80b326b2ec539ed",
+                "GP-008-FC-bc49f687bf36a65d",
+                "GP-008-FC-caad2eaa6539051c",
+                "GP-008-FC-cf5e6185f3a6efbf",
+                "GP-008-FC-d0ca8f4905e9d43e",
+                "GP-008-FC-fc77dcbf24f00e1a"
+              ]
+            },
+            {
+              "anchor_type": "model",
+              "value": "in_vivo",
+              "evidence_ids": [
+                "GP-008-E-0bd62635eb18e64c",
+                "GP-008-E-10f321f4dd53870f",
+                "GP-008-E-1bf7bda856a91d0c",
+                "GP-008-E-5af90e3f84c63f86",
+                "GP-008-E-74cb6391396d04fd",
+                "GP-008-E-8a0c4ee90d900651",
+                "GP-008-E-c2f49c1ec1cd78d3",
+                "GP-008-E-d32251f9c2db82ae",
+                "GP-008-FC-1f16345c0446fa78",
+                "GP-008-FC-5835605256f27258",
+                "GP-008-FC-683094790484c6ae",
+                "GP-008-FC-90f8c2cce035eda2",
+                "GP-008-FC-96ada8d5543893f1",
+                "GP-008-FC-b80b326b2ec539ed",
+                "GP-008-FC-bc49f687bf36a65d",
+                "GP-008-FC-caad2eaa6539051c",
+                "GP-008-FC-cf5e6185f3a6efbf",
+                "GP-008-FC-d0ca8f4905e9d43e",
+                "GP-008-FC-fc77dcbf24f00e1a"
+              ]
+            },
+            {
+              "anchor_type": "cell_context",
+              "value": "kupffer_cell",
+              "evidence_ids": [
+                "GP-008-E-1bf7bda856a91d0c",
+                "GP-008-FC-5835605256f27258"
+              ]
+            },
+            {
+              "anchor_type": "cell_context",
+              "value": "macrophage",
+              "evidence_ids": [
+                "GP-008-E-0bd62635eb18e64c",
+                "GP-008-E-1bf7bda856a91d0c",
+                "GP-008-FC-5835605256f27258",
+                "GP-008-FC-cf5e6185f3a6efbf"
+              ]
+            },
+            {
+              "anchor_type": "assay",
+              "value": "sequencing",
+              "evidence_ids": [
+                "GP-008-E-8a0c4ee90d900651",
+                "GP-008-FC-d0ca8f4905e9d43e"
+              ]
+            },
+            {
+              "anchor_type": "assay",
+              "value": "histology",
+              "evidence_ids": [
+                "GP-008-E-10f321f4dd53870f",
+                "GP-008-FC-bc49f687bf36a65d"
+              ]
+            }
+          ],
+          "boundary_status": "inferred",
+          "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+          "confidence": "medium"
+        },
+        {
+          "provisional_experiment_id": "PEX-GP-008-08e9104e95dd",
+          "label": "luciferase_zsgreen / in_vivo",
+          "anchors": [
+            {
+              "anchor_type": "payload",
+              "value": "luciferase_zsgreen",
+              "evidence_ids": [
+                "GP-008-E-723b0b7a8fcc6107",
+                "GP-008-E-d5e76e1bf5d48af8",
+                "GP-008-E-f8238c5dd3414fea",
+                "GP-008-FC-008d987874c60e3a",
+                "GP-008-FC-31d1c91359b57ac9",
+                "GP-008-FC-46fcbcd444f81ea2",
+                "GP-008-FC-4d79693b56611e90",
+                "GP-008-FC-5d9b99f62ef7377b"
+              ]
+            },
+            {
+              "anchor_type": "model",
+              "value": "in_vivo",
+              "evidence_ids": [
+                "GP-008-E-723b0b7a8fcc6107",
+                "GP-008-E-d5e76e1bf5d48af8",
+                "GP-008-E-f8238c5dd3414fea",
+                "GP-008-FC-008d987874c60e3a",
+                "GP-008-FC-31d1c91359b57ac9",
+                "GP-008-FC-46fcbcd444f81ea2",
+                "GP-008-FC-4d79693b56611e90",
+                "GP-008-FC-5d9b99f62ef7377b"
+              ]
+            },
+            {
+              "anchor_type": "cell_context",
+              "value": "macrophage",
+              "evidence_ids": [
+                "GP-008-E-723b0b7a8fcc6107",
+                "GP-008-E-d5e76e1bf5d48af8",
+                "GP-008-FC-008d987874c60e3a",
+                "GP-008-FC-31d1c91359b57ac9"
+              ]
+            }
+          ],
+          "boundary_status": "inferred",
+          "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+          "confidence": "medium"
+        }
+      ],
+      "atomic_outcome_candidates": [
+        {
+          "candidate_id": "AOC-5e16cdbcd2e69a6e",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-0432246c12e4059a"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-044931098617",
+          "subject_text": "the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly",
+          "predicate": "eliminated",
+          "object_text": "the FAP+JS-1 target cells in vitro (Fig",
+          "endpoint_text": null,
+          "qualitative_result": "significantly",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-008-FC-67cba83633b522b0"
+          ],
+          "source_ids": [
+            "FC-S-5f7e3c49e57be4bb"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-044931098617\",\"eliminated\",\"positive\",\"fapcar\",\"hsc\",\"\",\"\",\"\",\"significantly\"]"
+        },
+        {
+          "candidate_id": "AOC-486cf8fe3129bf3a",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-7d66b26070126933",
+            "ACL-e35add17cfc83a4a"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-08e9104e95dd",
+          "subject_text": "macrophages",
+          "predicate": "expressed",
+          "object_text": "ZsGreen protein in macrophages of fibrotic mice, with no detectable",
+          "endpoint_text": "expression",
+          "qualitative_result": "colocalization",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "negative",
+          "evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "source_ids": [
+            "FC-S-24da017be1cd98f5"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-08e9104e95dd\",\"expressed\",\"negative\",\"luciferase_zsgreen\",\"macrophage\",\"expression\",\"\",\"\",\"colocalization\"]"
+        },
+        {
+          "candidate_id": "AOC-23089bb225e891ee",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-fe21fa81be77989d"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-08e9104e95dd",
+          "subject_text": "In the αCD163/LNP-ZsGreen cohort, surface CD163 expression was markedly",
+          "predicate": "reduced",
+          "object_text": "minimal overlap between ZsGreen+ and CD163+ populations",
+          "endpoint_text": "expression",
+          "qualitative_result": "markedly",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-008-FC-72c5d70fe8a4c2a3"
+          ],
+          "source_ids": [
+            "FC-S-24da017be1cd98f5"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-08e9104e95dd\",\"reduced\",\"positive\",\"luciferase_zsgreen\",\"macrophage\",\"expression\",\"\",\"\",\"markedly\"]"
+        },
+        {
+          "candidate_id": "AOC-b03d712df1a87604",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-32a8310c8bb6d9ca"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-08e9104e95dd",
+          "subject_text": "Conversely, unmodified LNP operates independently of CD163-mediated",
+          "predicate": "uptake_by",
+          "object_text": "resulting in substantial ZsGreen/CD163",
+          "endpoint_text": "uptake",
+          "qualitative_result": "colocalization",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-008-FC-197c0d55a09731fa"
+          ],
+          "source_ids": [
+            "FC-S-24da017be1cd98f5"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-08e9104e95dd\",\"uptake_by\",\"positive\",\"luciferase_zsgreen\",\"macrophage\",\"uptake\",\"\",\"\",\"colocalization\"]"
+        },
+        {
+          "candidate_id": "AOC-a3cadab19708d5fa",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-f94ce974743843b3"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+          "subject_text": "HSCs",
+          "predicate": "decreased",
+          "object_text": "proportion of HSCs than the Fibrosis group",
+          "endpoint_text": "Fibrosis",
+          "qualitative_result": "lower",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-008-FC-730aaa4eea997e6f"
+          ],
+          "source_ids": [
+            "FC-S-9a8b8f55dd34f16d"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-51ddf3a73291\",\"decreased\",\"positive\",\"generic_lnp\",\"hsc\",\"fibrosis\",\"\",\"\",\"lower\"]"
+        },
+        {
+          "candidate_id": "AOC-0901c53222785cae",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-c6a0dff96f9f5cca"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+          "subject_text": "Heps",
+          "predicate": "expressed",
+          "object_text": "was almost absent in Heps",
+          "endpoint_text": "expression",
+          "qualitative_result": "absent",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "negative",
+          "evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "source_ids": [
+            "FC-S-9a8b8f55dd34f16d"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-51ddf3a73291\",\"expressed\",\"negative\",\"\",\"hepatocyte\",\"expression\",\"\",\"\",\"absent\"]"
+        },
+        {
+          "candidate_id": "AOC-22389fb78b0d25aa",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-176f152b10e94503"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+          "subject_text": "HSCs",
+          "predicate": "increased",
+          "object_text": "HSCs",
+          "endpoint_text": "expression",
+          "qualitative_result": "significantly",
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "source_ids": [
+            "FC-S-9a8b8f55dd34f16d"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-51ddf3a73291\",\"increased\",\"positive\",\"\",\"hsc\",\"expression\",\"\",\"\",\"significantly\"]"
+        },
+        {
+          "candidate_id": "AOC-27a42aa903014f05",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "ACL-1b75eee8d8a14a5b"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+          "subject_text": "Notably, the αCD163/LNP-FAPCAR cohort",
+          "predicate": "reached",
+          "object_text": "the most pronounced fibrosis regression",
+          "endpoint_text": "fibrosis",
+          "qualitative_result": null,
+          "numeric_value": null,
+          "value_text": null,
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "GP-008-FC-a5f4eb9b5d252ba0"
+          ],
+          "source_ids": [
+            "FC-S-b842c4f3d32bf804"
+          ],
+          "route_hint": "text",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"PEX-GP-008-51ddf3a73291\",\"reached\",\"positive\",\"fapcar\",\"\",\"fibrosis\",\"\",\"\",\"\"]"
+        },
+        {
+          "candidate_id": "AOC-VIS-93e606bcb9da49c1",
+          "paper_id": "GP-008",
+          "claim_ids": [
+            "VCL-4fc730093a048751"
+          ],
+          "provisional_experiment_id": "PEX-GP-008-08e9104e95dd",
+          "subject_text": "αCD163/LNP-ZsGreen",
+          "predicate": "colocalized_with",
+          "object_text": "F4/80+ macrophages",
+          "endpoint_text": "ZsGreen colocalization",
+          "qualitative_result": "F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells",
+          "numeric_value": null,
+          "value_text": "F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells",
+          "unit": null,
+          "polarity": "positive",
+          "evidence_ids": [
+            "VLM-6649d72f82d06811"
+          ],
+          "source_ids": [
+            "GP-008-pnas.2534673123.sapp-p018-figure-01"
+          ],
+          "route_hint": "vision",
+          "confidence": "high",
+          "review_reasons": [],
+          "structural_signature": "[\"GP-008\",\"PEX-GP-008-08e9104e95dd\",\"VCL-4fc730093a048751\",\"αCD163/LNP-ZsGreen\",\"colocalized_with\",\"F4/80+ macrophages\",\"ZsGreen colocalization\",\"F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells\",\"VLM-6649d72f82d06811\"]"
+        }
+      ],
+      "accepted_visual_claims": [
+        {
+          "evidence_id": "VLM-6649d72f82d06811",
+          "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+          "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L-stacked.png",
+          "claim": {
+            "claim_id": "VCL-4fc730093a048751",
+            "subject": "αCD163/LNP-ZsGreen",
+            "predicate": "co-staining with F4/80+ macrophages",
+            "endpoint": null,
+            "result_type": "qualitative",
+            "value": "F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells",
+            "unit": null,
+            "intervention_context": null,
+            "panel_or_cell": "L",
+            "visible_support": [
+              "In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen.",
+              "The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...'",
+              "In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel."
+            ],
+            "evidence_kinds": [
+              "image",
+              "caption"
+            ],
+            "confidence": "high"
+          },
+          "support_text": "In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen. | The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...' | In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel."
+        }
+      ],
+      "local_evidence": [
+        {
+          "evidence_id": "GP-008-FC-67cba83633b522b0",
+          "text": "By transfecting target cells with luciferase, we quantified the killing effect, and the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly eliminated the FAP+JS-1 target cells in vitro (Fig.",
+          "source_ids": [
+            "FC-S-5f7e3c49e57be4bb"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-008-FC-67cba83633b522b0",
+            "source_id": "FC-S-5f7e3c49e57be4bb",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-008-FC-31d1c91359b57ac9",
+          "text": "In colocalization studies, LNP exhibited specific expression of ZsGreen protein in macrophages of fibrotic mice, with no detectable expression in other hepatic cell types",
+          "source_ids": [
+            "FC-S-24da017be1cd98f5"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-008-FC-31d1c91359b57ac9",
+            "source_id": "FC-S-24da017be1cd98f5",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-008-FC-72c5d70fe8a4c2a3",
+          "text": "In the αCD163/LNP-ZsGreen cohort, surface CD163 expression was markedly diminished, with minimal overlap between ZsGreen+ and CD163+ populations.",
+          "source_ids": [
+            "FC-S-24da017be1cd98f5"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-008-FC-72c5d70fe8a4c2a3",
+            "source_id": "FC-S-24da017be1cd98f5",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-008-FC-197c0d55a09731fa",
+          "text": "Conversely, unmodified LNP operates independently of CD163-mediated uptake, resulting in substantial ZsGreen/CD163 colocalization, thereby indirectly corroborating the targeting function of conjugated antibodies (SI Appendix, Fig.",
+          "source_ids": [
+            "FC-S-24da017be1cd98f5"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-008-FC-197c0d55a09731fa",
+            "source_id": "FC-S-24da017be1cd98f5",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-008-FC-730aaa4eea997e6f",
+          "text": "We found that the LNP group had a lower proportion of HSCs than the Fibrosis group.",
+          "source_ids": [
+            "FC-S-9a8b8f55dd34f16d"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-008-FC-730aaa4eea997e6f",
+            "source_id": "FC-S-9a8b8f55dd34f16d",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-008-FC-1dc71dae4927710a",
+          "text": "In the Fibrosis group, PCNA expression was significantly increased in HSCs\nPCNA expression was almost absent in Heps",
+          "source_ids": [
+            "FC-S-9a8b8f55dd34f16d"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-008-FC-1dc71dae4927710a",
+            "source_id": "FC-S-9a8b8f55dd34f16d",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "GP-008-FC-a5f4eb9b5d252ba0",
+          "text": "Notably, the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression.",
+          "source_ids": [
+            "FC-S-b842c4f3d32bf804"
+          ],
+          "source_kind": "text",
+          "provenance": {
+            "evidence_id": "GP-008-FC-a5f4eb9b5d252ba0",
+            "source_id": "FC-S-b842c4f3d32bf804",
+            "locator_type": "text",
+            "row_label": null,
+            "column_label": null,
+            "panel_label": null
+          }
+        },
+        {
+          "evidence_id": "VLM-6649d72f82d06811",
+          "text": "In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen. | The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...' | In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel.",
+          "source_ids": [
+            "GP-008-pnas.2534673123.sapp-p018-figure-01"
+          ],
+          "source_kind": "gated_vlm_figure_region",
+          "provenance": {
+            "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+            "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L-stacked.png",
+            "panel_or_cell": "L"
+          }
+        }
+      ],
+      "estimated_tokens": 4514
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-006",
+  "route_ids": [
+    "structural:AOC-a4cc0f3adb169e3a",
+    "structural:AOC-bc1bce49f7d4f397",
+    "structural:AOC-e3895c3ee92011c0"
+  ],
+  "candidate_ids": [
+    "AOC-a4cc0f3adb169e3a",
+    "AOC-bc1bce49f7d4f397",
+    "AOC-e3895c3ee92011c0"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+    "label": "egfp_gfp / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "lsec",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": [
+          "GP-006-FC-c963377ef4e15d2f"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-a4cc0f3adb169e3a",
+      "subject_text": "LSECs",
+      "predicate": "uptake_by",
+      "object_text": "LNPs",
+      "endpoint_text": "uptake",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-bc1bce49f7d4f397",
+      "subject_text": "The immunostaining images showed",
+      "predicate": "colocalized_with",
+      "object_text": "LYVE-1 and GFP signals",
+      "endpoint_text": null,
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-e3895c3ee92011c0",
+      "subject_text": "LSECs",
+      "predicate": "colocalized_with",
+      "object_text": "Isolectin B4-labeled LSECs",
+      "endpoint_text": null,
+      "qualitative_result": "colocalized",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-78a44cbc6069b59c"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-006-FC-c963377ef4e15d2f",
+      "text": "The immunostaining images showed colocalization of LYVE-1 and GFP signals\nLSECs not only uptake LNPs but can also express GFP protein (Figure 2B).",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-78a44cbc6069b59c",
+      "text": "Interestingly, DiI-labeled cells also colocalized with Isolectin B4-labeled LSECs",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8"
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 6,
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "source_inventory_sha256": "b85dd021a32097f03ad0676bfeabf441d505e607ab351335ed5f651bd62927d3",
+  "task_checksum": "54ae11ca28363d769e47a08ccd369efb1fc622e9d2922e5a8195e1998d897eff"
+}

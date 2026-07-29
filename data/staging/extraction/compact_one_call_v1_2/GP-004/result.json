@@ -1,0 +1,363 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "GP-004",
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "GP-004-E-9331dfb69db5483e",
+      "GP-004-E-75f0872c68256922",
+      "GP-004-E-a72862f18ec2ffcd",
+      "GP-004-E-4ffd81157880235c"
+    ],
+    "explanation": "The paper reports in vivo mouse delivery of nucleoside-modified eGFP mRNA in an identifiable LNP formulation. At 5 h after IV administration, eGFP expression was reported in liver parenchymal hepatocytes, providing a formulation-linked experiment and outcome involving an eligible liver cell type."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F1",
+      "formulation_name": {
+        "value": "mRNA-LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": "Ionizable cationic lipid (proprietary to Acuitas Therapeutics; pKa 6.0–6.5) / phosphatidylcholine / cholesterol / PEG-lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "composition_basis": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The packet reports component identities but no molar, mass, or other quantitative composition basis."
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No N/P ratio was reported."
+      }
+    }
+  ],
+  "components": [
+    {
+      "component_id": "F1-C1",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "Ionizable cationic lipid (proprietary to Acuitas Therapeutics; pKa 6.0–6.5)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "ionizable_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount was reported."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit was reported."
+      }
+    },
+    {
+      "component_id": "F1-C2",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "Phosphatidylcholine",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "helper_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount was reported."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit was reported."
+      }
+    },
+    {
+      "component_id": "F1-C3",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "Cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount was reported."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit was reported."
+      }
+    },
+    {
+      "component_id": "F1-C4",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "PEG-lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "peg_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-9331dfb69db5483e"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount was reported."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit was reported."
+      }
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP1",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "Nucleoside-modified mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-75f0872c68256922"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "eGFP mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Enhanced green fluorescent protein (eGFP)",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The eGFP reporter payload does not have a reported molecular target."
+      },
+      "delivery_recipient_cell": {
+        "value": "Parenchymal hepatocytes",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-4ffd81157880235c"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "This was a cell-transfection/biological-distribution experiment; no therapeutic target cell was reported."
+      },
+      "tissue_or_organ": {
+        "value": "Liver",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd",
+          "GP-004-E-4ffd81157880235c"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": "Homeostasis",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827"
+        ],
+        "missing_reason": null
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 10.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "μg eGFP mRNA-LNP per 20 g body weight",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "Intravenous",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 5.0,
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "hours",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "OUT1",
+      "experiment_id": "EXP1",
+      "assay": {
+        "value": "Co-immunostaining",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-bb88af4966174b2f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "eGFP expression/transfection in liver cell types",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-a72862f18ec2ffcd",
+          "GP-004-E-4ffd81157880235c"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Poly(C) RNA-LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-1bce9423e81c94ae"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric hepatocyte expression value was reported in the supplied evidence."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome value or unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "Liver was the main target organ of IV-administered eGFP mRNA-LNP, specifically parenchymal hepatocytes; transfection and translation were also indicated in some endothelial and hematopoietic cell populations.",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-4ffd81157880235c"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [
+    "The proprietary ionizable-lipid identity was not disclosed in the packet.",
+    "LNP component ratios, component amounts, and N/P ratio were not reported.",
+    "The eGFP experiment is a homeostatic transfection experiment rather than a therapeutic disease-model experiment."
+  ]
+}

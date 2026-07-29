@@ -1,0 +1,71 @@
+{
+  "status": "completed_pending_outcome_coverage_review",
+  "paper_id": "GP-004",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_0cb7017b705ba913016a69ab53945c8198b2d0e8256a3f4a82",
+  "request_fingerprint": "a05627a6880ed6c6b8e0fcbc817d1d195ee5e3ed808e737c9c08028405a5ee28",
+  "packet_checksum": "af5d0698a9739e760babbf53724965cddb1716e3ab89188e5258425239f68e22",
+  "prompt_version": "compact-prompt-1.2.0",
+  "prompt_checksum": "4b7f700b4c84a571a4da15de01ed045328d35c9bc2768c9df229e35c8aa67697",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "recall_support_version": "main-route-recall-support-1.2.0",
+  "recall_support_estimated_tokens": 4742,
+  "recall_support_record_counts": {
+    "provisional_experiments": 2,
+    "atomic_outcome_candidates": 8,
+    "accepted_visual_claims": 0,
+    "local_evidence": 7
+  },
+  "started_at": "2026-07-29T07:27:12.975116+00:00",
+  "completed_at": "2026-07-29T07:27:40.129527+00:00",
+  "elapsed_seconds": 27.154411,
+  "usage": {
+    "input_tokens": 27443,
+    "input_tokens_details": {
+      "cache_write_tokens": 27440,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2951,
+    "output_tokens_details": {
+      "reasoning_tokens": 993
+    },
+    "total_tokens": 30394
+  },
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "GP-004-E-9331dfb69db5483e",
+      "GP-004-E-75f0872c68256922",
+      "GP-004-E-a72862f18ec2ffcd",
+      "GP-004-E-4ffd81157880235c"
+    ],
+    "explanation": "The paper reports in vivo mouse delivery of nucleoside-modified eGFP mRNA in an identifiable LNP formulation. At 5 h after IV administration, eGFP expression was reported in liver parenchymal hepatocytes, providing a formulation-linked experiment and outcome involving an eligible liver cell type."
+  },
+  "record_counts": {
+    "formulations": 1,
+    "components": 4,
+    "experiments": 1,
+    "outcomes": 1,
+    "unresolved_items": 3
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "validation_report_status": "valid",
+    "narrative_requested": false,
+    "complexity_route": "complex",
+    "outcome_coverage_status": "review_unmatched_groups",
+    "v12_outcome_coverage_status": "review_unmatched_support",
+    "v12_recall_support_in_request": true
+  }
+}

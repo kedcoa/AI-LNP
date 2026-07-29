@@ -1,0 +1,276 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-006",
+  "route_ids": [
+    "structural:AOC-1ad805e42de65c53",
+    "structural:AOC-5cdf7580c115edce",
+    "structural:AOC-VIS-0b058d8c214aa681",
+    "structural:AOC-VIS-0fbb4b4c600d48aa",
+    "structural:AOC-VIS-276eb4e7f1fff39d",
+    "structural:AOC-VIS-2c2da0f5dda94d65",
+    "structural:AOC-VIS-2d588ddb8971cb86",
+    "structural:AOC-VIS-34d61facaf050381"
+  ],
+  "candidate_ids": [
+    "AOC-1ad805e42de65c53",
+    "AOC-5cdf7580c115edce",
+    "AOC-VIS-0b058d8c214aa681",
+    "AOC-VIS-0fbb4b4c600d48aa",
+    "AOC-VIS-276eb4e7f1fff39d",
+    "AOC-VIS-2c2da0f5dda94d65",
+    "AOC-VIS-2d588ddb8971cb86",
+    "AOC-VIS-34d61facaf050381"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+    "label": "cas9_sgrna / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "cas9_sgrna",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "lsec",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "coagulation_activity",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-1ad805e42de65c53",
+      "subject_text": "LSECs",
+      "predicate": "edited",
+      "object_text": "patterns in LSECs revealed that one base-pair deletions constitute the highest",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 46.5,
+      "value_text": "46.5%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-9c61cae7b3cbdfda",
+        "GP-006-FC-37d97abddfe8a8ff"
+      ]
+    },
+    {
+      "candidate_id": "AOC-5cdf7580c115edce",
+      "subject_text": "LSECs",
+      "predicate": "decreased",
+      "object_text": "transgene",
+      "endpoint_text": "expression",
+      "qualitative_result": "lower",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-1d1871fe74140517",
+        "GP-006-FC-47621725376733bb"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-0b058d8c214aa681",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": ">+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-9e55d39758b25aac"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-0fbb4b4c600d48aa",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-696377230fc94ddb"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-276eb4e7f1fff39d",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+2",
+      "qualitative_result": null,
+      "numeric_value": 0.21,
+      "value_text": "0.21 ± 0.10 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-39f70fcf14234857"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-2c2da0f5dda94d65",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+3",
+      "qualitative_result": null,
+      "numeric_value": 0.01,
+      "value_text": "0.01 ± 0.01 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-4353afe26a6a1063"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-2d588ddb8971cb86",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-17055d4d2d8a1c95"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-34d61facaf050381",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": ">+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-786c099845be13cd"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-006-E-9c61cae7b3cbdfda",
+      "text": "The investigation of gene editing patterns in LSECs revealed that one base-pair deletions constitute the highest editing pattern (around 46.5% of total deletions), together with four base-pair deletions, which can help rescue the five base-pair deletion in NSG HemA, accounting for 50%–60% of all the deletions (Figures 6C and 6D).",
+      "source_ids": [
+        "S-5e3078bd8fb5"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-37d97abddfe8a8ff",
+      "text": "The investigation of gene editing patterns in LSECs revealed that one base-pair deletions constitute the highest editing pattern (around 46.5% of total deletions)\nfour base-pair deletions, which can help rescue the five base-pair deletion in NSG HemA, accounting for 50%–60% of all the deletions (Figures 6C and 6D).",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-E-1d1871fe74140517",
+      "text": "It was previously demonstrated in our lab that following hydrodynamic injection of plasmid DNA, transfection occurred predominantly in hepatocytes; however, lower transgene expression was also observed in LSECs.",
+      "source_ids": [
+        "S-620e08261866"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-47621725376733bb",
+      "text": "however, lower transgene expression was also observed in LSECs.",
+      "source_ids": [
+        "FC-S-051e1c2dbbc8ba2a",
+        "FC-S-051e1c2dbbc8ba2a"
+      ]
+    },
+    {
+      "evidence_id": "VIS-9e55d39758b25aac",
+      "text": "Hepatocyte | >+4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+      ]
+    },
+    {
+      "evidence_id": "VIS-696377230fc94ddb",
+      "text": "Hepatocyte | +4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+      ]
+    },
+    {
+      "evidence_id": "VIS-39f70fcf14234857",
+      "text": "LSEC | +2 | 0.21 ± 0.10 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+      ]
+    },
+    {
+      "evidence_id": "VIS-4353afe26a6a1063",
+      "text": "Hepatocyte | +3 | 0.01 ± 0.01 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+      ]
+    },
+    {
+      "evidence_id": "VIS-17055d4d2d8a1c95",
+      "text": "LSEC | +4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+      ]
+    },
+    {
+      "evidence_id": "VIS-786c099845be13cd",
+      "text": "LSEC | >+4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "source_inventory_sha256": "b85dd021a32097f03ad0676bfeabf441d505e607ab351335ed5f651bd62927d3",
+  "task_checksum": "47c0736ddc3d5127197bed6fad04634d21f92f83809ac2c79a2d01fb1b8779f6"
+}

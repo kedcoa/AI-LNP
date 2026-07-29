@@ -1,0 +1,180 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-23089bb225e891ee",
+    "structural:AOC-486cf8fe3129bf3a",
+    "structural:AOC-VIS-93e606bcb9da49c1",
+    "structural:AOC-b03d712df1a87604",
+    "structural:AOC-f6ff0f2d293c6c36"
+  ],
+  "candidate_ids": [
+    "AOC-23089bb225e891ee",
+    "AOC-486cf8fe3129bf3a",
+    "AOC-VIS-93e606bcb9da49c1",
+    "AOC-b03d712df1a87604",
+    "AOC-f6ff0f2d293c6c36"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-08e9104e95dd",
+    "label": "luciferase_zsgreen / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "luciferase_zsgreen",
+        "evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-23089bb225e891ee",
+      "subject_text": "In the αCD163/LNP-ZsGreen cohort, surface CD163 expression was markedly",
+      "predicate": "reduced",
+      "object_text": "minimal overlap between ZsGreen+ and CD163+ populations",
+      "endpoint_text": "expression",
+      "qualitative_result": "markedly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-72c5d70fe8a4c2a3"
+      ]
+    },
+    {
+      "candidate_id": "AOC-486cf8fe3129bf3a",
+      "subject_text": "macrophages",
+      "predicate": "expressed",
+      "object_text": "ZsGreen protein in macrophages of fibrotic mice, with no detectable",
+      "endpoint_text": "expression",
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "negative",
+      "evidence_ids": [
+        "GP-008-FC-31d1c91359b57ac9"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-93e606bcb9da49c1",
+      "subject_text": "αCD163/LNP-ZsGreen",
+      "predicate": "colocalized_with",
+      "object_text": "F4/80+ macrophages",
+      "endpoint_text": "ZsGreen colocalization",
+      "qualitative_result": "F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells",
+      "numeric_value": null,
+      "value_text": "F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells",
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "VLM-6649d72f82d06811"
+      ]
+    },
+    {
+      "candidate_id": "AOC-b03d712df1a87604",
+      "subject_text": "Conversely, unmodified LNP operates independently of CD163-mediated",
+      "predicate": "uptake_by",
+      "object_text": "resulting in substantial ZsGreen/CD163",
+      "endpoint_text": "uptake",
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-197c0d55a09731fa"
+      ]
+    },
+    {
+      "candidate_id": "AOC-f6ff0f2d293c6c36",
+      "subject_text": "macrophages",
+      "predicate": "reduced",
+      "object_text": "CD163 positivity and a markedly",
+      "endpoint_text": null,
+      "qualitative_result": "reduced",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-f945a79d5d56831e"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-72c5d70fe8a4c2a3",
+      "text": "In the αCD163/LNP-ZsGreen cohort, surface CD163 expression was markedly diminished, with minimal overlap between ZsGreen+ and CD163+ populations.",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-31d1c91359b57ac9",
+      "text": "In colocalization studies, LNP exhibited specific expression of ZsGreen protein in macrophages of fibrotic mice, with no detectable expression in other hepatic cell types",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    },
+    {
+      "evidence_id": "VLM-6649d72f82d06811",
+      "text": "In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen. | The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...' | In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel.",
+      "source_ids": [
+        "GP-008-pnas.2534673123.sapp-p018-figure-01"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-197c0d55a09731fa",
+      "text": "Conversely, unmodified LNP operates independently of CD163-mediated uptake, resulting in substantial ZsGreen/CD163 colocalization, thereby indirectly corroborating the targeting function of conjugated antibodies (SI Appendix, Fig.",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-f945a79d5d56831e",
+      "text": "In stark contrast, the αCD163/LNP-ZsGreen cohort displayed reduced CD163 positivity and a markedly diminished proportion of ZsGreen+/CD163+ double-positive macrophages (SI Appendix, Fig.",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca",
+  "task_checksum": "470d527ebed65f3a2218e757b6c65a454c20e8ab3019d4f5c5d4da2276cee0ae"
+}

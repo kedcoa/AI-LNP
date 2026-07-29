@@ -1,0 +1,71 @@
+{
+  "inventory_version": "provisional-experiments-1.2.0",
+  "paper_id": "GP-007",
+  "source_packet_checksum": "bd1006ad640e508266d391f9ae0bb68bb3eba498f6a131ba71fb9d19d290e530",
+  "experiments": [
+    {
+      "provisional_experiment_id": "PEX-GP-007-6ffe5cc9afcd",
+      "label": "simicu1 / in_vivo",
+      "anchors": [
+        {
+          "anchor_type": "payload",
+          "value": "simicu1",
+          "evidence_ids": [
+            "GP-007-E-42751544820dab75",
+            "GP-007-E-450ee76f1f41150a",
+            "GP-007-E-47d77dd97cd9a252",
+            "GP-007-E-8a573add8f5b7936",
+            "GP-007-E-ec5a4dc4f7a76100",
+            "GP-007-FC-302ccd066d51eb7b",
+            "GP-007-FC-485d526d793c42ad",
+            "GP-007-FC-60174f477efbf339",
+            "GP-007-FC-6a7cb5b9e0e0fd50",
+            "GP-007-FC-c6581806524627d7"
+          ]
+        },
+        {
+          "anchor_type": "model",
+          "value": "in_vivo",
+          "evidence_ids": [
+            "GP-007-E-42751544820dab75",
+            "GP-007-E-450ee76f1f41150a",
+            "GP-007-E-47d77dd97cd9a252",
+            "GP-007-E-8a573add8f5b7936",
+            "GP-007-E-ec5a4dc4f7a76100",
+            "GP-007-FC-302ccd066d51eb7b",
+            "GP-007-FC-485d526d793c42ad",
+            "GP-007-FC-60174f477efbf339",
+            "GP-007-FC-6a7cb5b9e0e0fd50",
+            "GP-007-FC-c6581806524627d7"
+          ]
+        },
+        {
+          "anchor_type": "cell_context",
+          "value": "lsec",
+          "evidence_ids": [
+            "GP-007-E-450ee76f1f41150a",
+            "GP-007-FC-6a7cb5b9e0e0fd50"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "imaging",
+          "evidence_ids": [
+            "GP-007-E-ec5a4dc4f7a76100",
+            "GP-007-FC-c6581806524627d7"
+          ]
+        }
+      ],
+      "claim_ids": [],
+      "shared_context_claim_ids": [],
+      "boundary_status": "inferred",
+      "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+      "confidence": "medium"
+    }
+  ],
+  "unassigned_claim_ids": [],
+  "validation_notes": [
+    "Gold annotations were not read by this builder.",
+    "Unknown-context evidence is merged only when exactly one compatible context exists for that payload signature."
+  ]
+}

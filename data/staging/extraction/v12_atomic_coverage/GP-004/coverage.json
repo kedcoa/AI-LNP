@@ -1,0 +1,281 @@
+{
+  "coverage_version": "atomic-outcome-coverage-1.2.0",
+  "paper_id": "GP-004",
+  "source_result_path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-004/final_result.json",
+  "selected_candidate_count": 24,
+  "extracted_outcome_count": 6,
+  "matches": [
+    {
+      "candidate_id": "AOC-f01346c482122239",
+      "outcome_id": "O5",
+      "score": 18,
+      "reasons": [
+        "semantic_overlap:6",
+        "shared_evidence",
+        "compatible_relationship",
+        "exact_numeric_value"
+      ]
+    },
+    {
+      "candidate_id": "AOC-3bed2b59363bfd0d",
+      "outcome_id": "O1",
+      "score": 8,
+      "reasons": [
+        "semantic_overlap:5",
+        "compatible_relationship"
+      ]
+    },
+    {
+      "candidate_id": "AOC-85bcfbca96926517",
+      "outcome_id": "O2",
+      "score": 8,
+      "reasons": [
+        "semantic_overlap:5",
+        "compatible_cell_target"
+      ]
+    },
+    {
+      "candidate_id": "AOC-0221e221a4b2cc3d",
+      "outcome_id": "O6",
+      "score": 8,
+      "reasons": [
+        "semantic_overlap:6",
+        "compatible_relationship"
+      ]
+    },
+    {
+      "candidate_id": "AOC-3e51accdc676fb1d",
+      "outcome_id": "O3",
+      "score": 7,
+      "reasons": [
+        "semantic_overlap:4",
+        "compatible_relationship"
+      ]
+    }
+  ],
+  "unmatched_extracted_outcome_ids": [
+    "O4"
+  ],
+  "missing_text_record_candidates": [
+    {
+      "candidate_id": "AOC-df2292753a83aedd",
+      "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+      "predicate": "expressed",
+      "subject_text": "macrophages",
+      "object_text": null,
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-E-81ab08786ec37000",
+        "GP-004-FC-291597f2c1490207"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-ac71595c5469604b",
+      "provisional_experiment_id": "PEX-GP-004-65c3dda2c00c",
+      "predicate": "reduced",
+      "subject_text": "injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum",
+      "object_text": "steatosis, and",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-FC-aaef2b0838c071e4"
+      ],
+      "relevance_score": 8,
+      "relevance_reasons": [
+        "qualitative_result",
+        "strong_relationship",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-522a5dab8c0d1f14",
+      "provisional_experiment_id": "PEX-GP-004-415d753e7b0e",
+      "predicate": "decreased",
+      "subject_text": "Thereafter, bioluminescence",
+      "object_text": "progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection",
+      "endpoint_text": "activity",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-E-440906cb169c4960",
+        "GP-004-FC-79cd6ce9072c0e6f"
+      ],
+      "relevance_score": 8,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-25c71a72288ec9b9",
+      "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+      "predicate": "expressed",
+      "subject_text": "Kupffer cells",
+      "object_text": "eGFP",
+      "endpoint_text": null,
+      "qualitative_result": "few",
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-FC-cde0316a82a5bd30"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "qualitative_result",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-d3346532a933edac",
+      "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+      "predicate": "expressed",
+      "subject_text": "hepatocytes",
+      "object_text": "eGFP",
+      "endpoint_text": null,
+      "qualitative_result": "Virtually all",
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-FC-af61355776c8ccca"
+      ],
+      "relevance_score": 8,
+      "relevance_reasons": [
+        "qualitative_result",
+        "strong_relationship",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-c9850f1420740bed",
+      "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+      "predicate": "expressed",
+      "subject_text": "parenchyma of the liver",
+      "object_text": "was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-E-972d3e138bf126db",
+        "GP-004-E-e29c5e3c31a38827",
+        "GP-004-E-fd825b27dcaebf09",
+        "GP-004-FC-66b43dcd526b6e18",
+        "GP-004-FC-bdbc539faa37bfad"
+      ],
+      "relevance_score": 8,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a6b5ecbf468f2cd4",
+      "provisional_experiment_id": "PEX-GP-004-415d753e7b0e",
+      "predicate": "expressed",
+      "subject_text": "Both IV delivery routes resulted in similar protein",
+      "object_text": "levels and kinetics, indicating either approach can be employed for transient",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-E-aa1c2885867bfc0a",
+        "GP-004-FC-2249bd15d7493e40"
+      ],
+      "relevance_score": 8,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-8c8f546f56920316",
+      "provisional_experiment_id": "PEX-GP-004-65c3dda2c00c",
+      "predicate": "expressed",
+      "subject_text": "hepatocytes",
+      "object_text": null,
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-004-FC-543ca93b67c8c533"
+      ],
+      "relevance_score": 8,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "experiment_assigned"
+      ]
+    }
+  ],
+  "review_candidates": [
+    {
+      "candidate_id": "AOC-138498a5777aad40",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 8
+    },
+    {
+      "candidate_id": "AOC-4509d8cef342fbfa",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 8
+    },
+    {
+      "candidate_id": "AOC-443efba50d243225",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 8
+    },
+    {
+      "candidate_id": "AOC-0ceffde71c90b55b",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 8
+    },
+    {
+      "candidate_id": "AOC-3074495c9c2de438",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 6
+    },
+    {
+      "candidate_id": "AOC-bf76aac0ea92ea04",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 6
+    },
+    {
+      "candidate_id": "AOC-f9ded9ac2f0998f4",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 5
+    },
+    {
+      "candidate_id": "AOC-f48424355c407385",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 5
+    },
+    {
+      "candidate_id": "AOC-8b08697c2563302d",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 5
+    },
+    {
+      "candidate_id": "AOC-29d56a9f2824b4ae",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 5
+    },
+    {
+      "candidate_id": "AOC-ea1da1fe4052a284",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 3
+    }
+  ],
+  "status": "missing_text_records",
+  "paid_api_requests": 0
+}

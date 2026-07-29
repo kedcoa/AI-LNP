@@ -1,0 +1,161 @@
+{
+  "coverage_version": "atomic-outcome-coverage-1.2.0",
+  "paper_id": "GP-007",
+  "source_result_path": "data/staging/extraction/compact_merged_v1/GP-007/final_result.json",
+  "selected_candidate_count": 18,
+  "extracted_outcome_count": 3,
+  "matches": [
+    {
+      "candidate_id": "AOC-e0026f57dba1b503",
+      "outcome_id": "O3",
+      "score": 8,
+      "reasons": [
+        "semantic_overlap:6",
+        "compatible_cell_target"
+      ]
+    },
+    {
+      "candidate_id": "AOC-406fe56fefddd4c8",
+      "outcome_id": "O2",
+      "score": 8,
+      "reasons": [
+        "semantic_overlap:18",
+        "compatible_relationship"
+      ]
+    }
+  ],
+  "unmatched_extracted_outcome_ids": [
+    "O1"
+  ],
+  "missing_text_record_candidates": [
+    {
+      "candidate_id": "AOC-159032ba33ef82c2",
+      "provisional_experiment_id": "PEX-GP-007-6ffe5cc9afcd",
+      "predicate": "expressed",
+      "subject_text": "with in vitro experiments, ACT and siMicu1 synergistically inhibited the",
+      "object_text": "and activity of glycolysis-related enzymes induced by HIRI (Figure 7K and Figure S7F), thereby protecting the function of LSECs (Figure 7L and Figure S7G)",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-007-FC-af56a369ee9f01e3"
+      ],
+      "relevance_score": 11,
+      "relevance_reasons": [
+        "explicit_endpoint",
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    },
+    {
+      "candidate_id": "AOC-4aacd1bca33658f9",
+      "provisional_experiment_id": "PEX-GP-007-6ffe5cc9afcd",
+      "predicate": "decreased",
+      "subject_text": "especially for LDH and increase ATP content, accompanied by the",
+      "object_text": "accumulation of L-lactate, but not D-lactate levels in LSECs",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-007-FC-cf7cbba3d02c50cf"
+      ],
+      "relevance_score": 9,
+      "relevance_reasons": [
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned",
+        "negative_result"
+      ]
+    },
+    {
+      "candidate_id": "AOC-de1e7f334030b85f",
+      "provisional_experiment_id": "PEX-GP-007-6ffe5cc9afcd",
+      "predicate": "increased",
+      "subject_text": "LSECs",
+      "object_text": "ratio of spleen to body weight (Figure S8D) and a high intensity of green fluorescence in the hepatic sinusoids of mice treated with HIRI + AAV8-Stab2-oeMicu1 (Figure 8C)",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": null,
+      "evidence_ids": [
+        "GP-007-E-027f7dd947f25b84",
+        "GP-007-FC-a2a5869dbe7e2fd7"
+      ],
+      "relevance_score": 8,
+      "relevance_reasons": [
+        "strong_relationship",
+        "cell_context",
+        "experiment_assigned"
+      ]
+    }
+  ],
+  "review_candidates": [
+    {
+      "candidate_id": "AOC-ff8aa7e0c979c862",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 12
+    },
+    {
+      "candidate_id": "AOC-877c350df43a1f28",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 12
+    },
+    {
+      "candidate_id": "AOC-9b10b30ae26e1362",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 10
+    },
+    {
+      "candidate_id": "AOC-5466aa702fe0401e",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 9
+    },
+    {
+      "candidate_id": "AOC-1418e319df9d64de",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 9
+    },
+    {
+      "candidate_id": "AOC-f26b4eb923b05ad9",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 9
+    },
+    {
+      "candidate_id": "AOC-5d043cf3e63620db",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 9
+    },
+    {
+      "candidate_id": "AOC-86b92d5ed6832de5",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 6
+    },
+    {
+      "candidate_id": "AOC-58f6c86a13774b5f",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 6
+    },
+    {
+      "candidate_id": "AOC-4d4d6c3bd6e51530",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 6
+    },
+    {
+      "candidate_id": "AOC-3033713d9e15e067",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 6
+    },
+    {
+      "candidate_id": "AOC-1e38c2826fcca1f3",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 6
+    },
+    {
+      "candidate_id": "AOC-5a8bf8cebf085a98",
+      "reason": "not_in_bounded_actionable_set",
+      "relevance_score": 5
+    }
+  ],
+  "status": "missing_text_records",
+  "paid_api_requests": 0
+}

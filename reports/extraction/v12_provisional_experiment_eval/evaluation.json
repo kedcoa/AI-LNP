@@ -1,0 +1,178 @@
+{
+  "evaluation_version": "provisional-experiment-eval-1.2.0",
+  "gold_experiments": 8,
+  "distinct_gold_groups_matched": 8,
+  "missing_gold_experiment_ids": [],
+  "known_gold_merge_failures": 0,
+  "status": "pass",
+  "precision_note": "Gold experiment annotations are partial. Unmatched provisional experiments require review and are not automatically false positives.",
+  "papers": [
+    {
+      "paper_id": "GP-002",
+      "gold_experiment_count": 1,
+      "provisional_experiment_count": 2,
+      "count_relation": "oversegmented_or_partial_gold",
+      "matches": [
+        {
+          "gold_experiment_id": "GX-004",
+          "provisional_experiment_id": "PEX-GP-002-330345af4b7b",
+          "provisional_label": "egfp_gfp / in_vivo",
+          "score": 11,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "assay"
+          ]
+        }
+      ],
+      "missing_gold_experiment_ids": [],
+      "unmatched_provisional_experiment_ids": [
+        "PEX-GP-002-e64bd40fdd0e"
+      ]
+    },
+    {
+      "paper_id": "GP-004",
+      "gold_experiment_count": 1,
+      "provisional_experiment_count": 4,
+      "count_relation": "oversegmented_or_partial_gold",
+      "matches": [
+        {
+          "gold_experiment_id": "GX-001",
+          "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+          "provisional_label": "egfp_gfp / in_vivo",
+          "score": 13,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "cell_context",
+            "assay"
+          ]
+        }
+      ],
+      "missing_gold_experiment_ids": [],
+      "unmatched_provisional_experiment_ids": [
+        "PEX-GP-004-7e306c61b2f2",
+        "PEX-GP-004-65c3dda2c00c",
+        "PEX-GP-004-415d753e7b0e"
+      ]
+    },
+    {
+      "paper_id": "GP-005",
+      "gold_experiment_count": 1,
+      "provisional_experiment_count": 2,
+      "count_relation": "oversegmented_or_partial_gold",
+      "matches": [
+        {
+          "gold_experiment_id": "GX-005",
+          "provisional_experiment_id": "PEX-GP-005-fe1cf7078f41",
+          "provisional_label": "egfp_gfp / in_vivo",
+          "score": 11,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "assay"
+          ]
+        }
+      ],
+      "missing_gold_experiment_ids": [],
+      "unmatched_provisional_experiment_ids": [
+        "PEX-GP-005-a39df08b9950"
+      ]
+    },
+    {
+      "paper_id": "GP-006",
+      "gold_experiment_count": 2,
+      "provisional_experiment_count": 4,
+      "count_relation": "oversegmented_or_partial_gold",
+      "matches": [
+        {
+          "gold_experiment_id": "GX-002",
+          "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+          "provisional_label": "egfp_gfp / in_vivo",
+          "score": 13,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "cell_context",
+            "assay"
+          ]
+        },
+        {
+          "gold_experiment_id": "GX-003",
+          "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+          "provisional_label": "cas9_sgrna / in_vivo",
+          "score": 13,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "cell_context",
+            "assay"
+          ]
+        }
+      ],
+      "missing_gold_experiment_ids": [],
+      "unmatched_provisional_experiment_ids": [
+        "PEX-GP-006-f0aaf088714e",
+        "PEX-GP-006-1d4a9fbfee97"
+      ]
+    },
+    {
+      "paper_id": "GP-007",
+      "gold_experiment_count": 1,
+      "provisional_experiment_count": 1,
+      "count_relation": "exact",
+      "matches": [
+        {
+          "gold_experiment_id": "GX-007",
+          "provisional_experiment_id": "PEX-GP-007-6ffe5cc9afcd",
+          "provisional_label": "simicu1 / in_vivo",
+          "score": 12,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "cell_context"
+          ]
+        }
+      ],
+      "missing_gold_experiment_ids": [],
+      "unmatched_provisional_experiment_ids": []
+    },
+    {
+      "paper_id": "GP-008",
+      "gold_experiment_count": 2,
+      "provisional_experiment_count": 4,
+      "count_relation": "oversegmented_or_partial_gold",
+      "matches": [
+        {
+          "gold_experiment_id": "GX-008",
+          "provisional_experiment_id": "PEX-GP-008-044931098617",
+          "provisional_label": "fapcar / in_vitro",
+          "score": 13,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "cell_context",
+            "assay"
+          ]
+        },
+        {
+          "gold_experiment_id": "GX-009",
+          "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+          "provisional_label": "fapcar / in_vivo",
+          "score": 13,
+          "reasons": [
+            "payload_signature",
+            "experimental_context",
+            "cell_context",
+            "assay"
+          ]
+        }
+      ],
+      "missing_gold_experiment_ids": [],
+      "unmatched_provisional_experiment_ids": [
+        "PEX-GP-008-afdd75fc803d",
+        "PEX-GP-008-08e9104e95dd"
+      ]
+    }
+  ]
+}

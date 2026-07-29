@@ -1,0 +1,181 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-d3346532a933edac",
+    "structural:AOC-df2292753a83aedd",
+    "structural:AOC-f9ded9ac2f0998f4"
+  ],
+  "candidate_ids": [
+    "AOC-d3346532a933edac",
+    "AOC-df2292753a83aedd",
+    "AOC-f9ded9ac2f0998f4"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+    "label": "egfp_gfp / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-004-E-81ab08786ec37000",
+          "GP-004-FC-291597f2c1490207",
+          "GP-004-FC-af61355776c8ccca"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-004-E-81ab08786ec37000",
+          "GP-004-FC-291597f2c1490207",
+          "GP-004-FC-af61355776c8ccca"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "kupffer_cell",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": [
+          "GP-004-E-81ab08786ec37000",
+          "GP-004-FC-291597f2c1490207"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "flow_cytometry",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "phagocytosis_cytotoxicity",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "histology",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-d3346532a933edac",
+      "subject_text": "hepatocytes",
+      "predicate": "expressed",
+      "object_text": "eGFP",
+      "endpoint_text": null,
+      "qualitative_result": "Virtually all",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-af61355776c8ccca"
+      ]
+    },
+    {
+      "candidate_id": "AOC-df2292753a83aedd",
+      "subject_text": "macrophages",
+      "predicate": "expressed",
+      "object_text": null,
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-81ab08786ec37000",
+        "GP-004-FC-291597f2c1490207"
+      ]
+    },
+    {
+      "candidate_id": "AOC-f9ded9ac2f0998f4",
+      "subject_text": "White arrowheads indicate",
+      "predicate": "colocalized_with",
+      "object_text": "cells",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-d7f66ab7a14baf43",
+        "GP-004-FC-d090ef08549941fc"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-FC-af61355776c8ccca",
+      "text": "Virtually all hepatocytes identified with HNF4α expressed eGFP (Fig.",
+      "source_ids": [
+        "FC-S-783827e9e8236666"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-81ab08786ec37000",
+      "text": "In the lung, scattered eGFP+ cells were found that resembled alveolar macrophages, given their morphology, intra-alveolar luminal location, and CD45 expression (Supplementary Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-291597f2c1490207",
+      "text": "In the lung, scattered eGFP+ cells were found that resembled alveolar macrophages, given their morphology, intra-alveolar luminal location, and CD45 expression (Supplementary Fig.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-d7f66ab7a14baf43",
+      "text": "White arrowheads indicate co-stained cells.",
+      "source_ids": [
+        "S-263a2be8ee47",
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-d090ef08549941fc",
+      "text": "White arrowheads indicate co-stained cells.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 6,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "2678588b644045c5ba9903c265a7468e7acbcfc68480dbbd334837cecbfccdcb",
+  "task_checksum": "1e77414a34823bc9e13017a5d96737e70190ba453b699218113fbdcb0441d20b"
+}

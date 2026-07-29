@@ -1,0 +1,101 @@
+{
+  "contract_version": "1.0.0",
+  "model": "qwen3-vl:8b",
+  "model_slug": "qwen3-vl-8b-thinking-off",
+  "thinking": false,
+  "model_digest": "901cae73216286ea8c5aba8b46d307ff7188f737285ec500c795a12f05225d28",
+  "model_capabilities": [
+    "completion",
+    "vision",
+    "tools",
+    "thinking"
+  ],
+  "repeats": 1,
+  "seed": 17,
+  "paid_api_requests": 0,
+  "local_only": true,
+  "summary": {
+    "runs": 4,
+    "passed": 0,
+    "positive_passed": 0,
+    "positive_total": 2,
+    "abstention_passed": 0,
+    "abstention_total": 2,
+    "total_prompt_tokens": 12390,
+    "total_output_tokens": 529,
+    "total_elapsed_seconds": 34.9769517480745
+  },
+  "runs": [
+    {
+      "query_id": "GO-006-positive",
+      "gold_outcome_id": "GO-006",
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png",
+      "repeat": 1,
+      "expected_status": "extract",
+      "actual_status": "invalid",
+      "claims": 0,
+      "audit_issues": [
+        "response validation failed: ValidationError: 1 validation error for GemmaVisualDecisionV12\n  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid"
+      ],
+      "passed": false,
+      "prompt_tokens": 2505,
+      "output_tokens": 156,
+      "elapsed_seconds": 10.028657041024417
+    },
+    {
+      "query_id": "GO-018-positive",
+      "gold_outcome_id": "GO-018",
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L.png",
+      "repeat": 1,
+      "expected_status": "extract",
+      "actual_status": "invalid",
+      "claims": 0,
+      "audit_issues": [
+        "response validation failed: ValidationError: 1 validation error for GemmaVisualDecisionV12\n  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid"
+      ],
+      "passed": false,
+      "prompt_tokens": 3696,
+      "output_tokens": 203,
+      "elapsed_seconds": 11.906722791027278
+    },
+    {
+      "query_id": "GO-006-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png",
+      "repeat": 1,
+      "expected_status": "abstain",
+      "actual_status": "invalid",
+      "claims": 0,
+      "audit_issues": [
+        "response validation failed: ValidationError: 1 validation error for GemmaVisualDecisionV12\n  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid"
+      ],
+      "passed": false,
+      "prompt_tokens": 2497,
+      "output_tokens": 80,
+      "elapsed_seconds": 6.426180833019316
+    },
+    {
+      "query_id": "GO-018-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L.png",
+      "repeat": 1,
+      "expected_status": "abstain",
+      "actual_status": "invalid",
+      "claims": 0,
+      "audit_issues": [
+        "response validation failed: ValidationError: 1 validation error for GemmaVisualDecisionV12\n  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid"
+      ],
+      "passed": false,
+      "prompt_tokens": 3692,
+      "output_tokens": 90,
+      "elapsed_seconds": 6.615391083003487
+    }
+  ],
+  "integration_gate_passed": false,
+  "integration_allowed": false,
+  "decision": "reject_model_outputs"
+}

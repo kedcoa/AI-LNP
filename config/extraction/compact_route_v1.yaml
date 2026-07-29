@@ -1,10 +1,17 @@
-route_version: compact-route-1.1.0
-status: main_calls_attempted_pending_human_verification
+route_version: compact-route-1.2.0
+status: v12_recall_support_integrated_pending_main_rerun
 
 prompt:
-  version: compact-prompt-1.1.0
+  version: compact-prompt-1.2.0
   implementation: src.extraction.compact_prompt_v1.COMPACT_EXTRACTION_PROMPT
-  sha256: b1589a1e37b5e0d9cc5c5aa250109da68a91c2f6f5ff40f51b021187172a8eb7
+  sha256: 4b7f700b4c84a571a4da15de01ed045328d35c9bc2768c9df229e35c8aa67697
+
+outcome_recall_support:
+  version: main-route-recall-support-1.2.0
+  implementation: src.extraction.v12_main_route.build_v12_route_support
+  policy: candidates_are_navigation_aids_and_require_direct_evidence
+  accepted_visual_registry: data/staging/extraction/v12_accepted_visual_claims/qwen3-vl-8b-instruct-thinking-off.json
+  visual_gate: positive_and_adversarial_abstention_fixtures_must_all_pass
 
 response_contract:
   version: compact-1.1.0
@@ -38,4 +45,4 @@ baseline:
 
 activation_gate:
   active: false
-  requirement: implement_and_gold_evaluate_compact_route_before_replacing_baseline
+  requirement: rerun_v12_and_pass_recall_precision_and_human_approval

@@ -1,0 +1,82 @@
+{
+  "baseline_version": "v12-preimplementation-1.0.0",
+  "frozen_on": "2026-07-29",
+  "purpose": "Immutable pre-v1.2 comparison inputs. Gold IDs and answers remain evaluation-only and must not enter extraction prompts or builders.",
+  "evaluation": {
+    "path": "reports/extraction/final_gold_dynamic_v1/evaluation.json",
+    "sha256": "a1aef704cf600d0498e5b29595608c6930d806ffabd3f997f08100939261336c",
+    "recovered": 10,
+    "total": 15,
+    "rate": 0.6666666666666666,
+    "missing_gold_outcome_ids": [
+      "GO-002",
+      "GO-003",
+      "GO-006",
+      "GO-017",
+      "GO-018"
+    ]
+  },
+  "gold_annotations": [
+    {
+      "path": "data/annotations/gold_v1/components.csv",
+      "sha256": "23f77ca718e1b63b19e2b8f0c33fce145e889063b5cf00a08d534950c423ccc4"
+    },
+    {
+      "path": "data/annotations/gold_v1/evidence.csv",
+      "sha256": "4dfc7bae2c9c3562371c92fef81557f6e2bf79e650216a4445c8eb24e5fc0fc8"
+    },
+    {
+      "path": "data/annotations/gold_v1/experiments.csv",
+      "sha256": "4b134c742496719dc612c5890aa102dcd4354003215baa42f10535ce5821166d"
+    },
+    {
+      "path": "data/annotations/gold_v1/formulations.csv",
+      "sha256": "66a8c5618e03b369f770a397fcba0966583dea168d3cca2dd84374331f461cc9"
+    },
+    {
+      "path": "data/annotations/gold_v1/issues.csv",
+      "sha256": "96df1f2be949710503d24e51de16e5196008976b70fc7258c03a88cfd63e1424"
+    },
+    {
+      "path": "data/annotations/gold_v1/outcomes.csv",
+      "sha256": "ea2da282fe56ff89431ac85c58f98e5132619ade0a6c40b1b3d1adda2ba080f5"
+    },
+    {
+      "path": "data/annotations/gold_v1/papers.csv",
+      "sha256": "27dd0230fc26ac9a7db1d851cd496976896ead362026fda981b31cab8b4f5c4b"
+    }
+  ],
+  "selected_result_files": [
+    {
+      "path": "data/staging/extraction/compact_one_call_v1/GP-002/result.json",
+      "sha256": "a47220db2031801a6e8f0be19b4700073bb78f44d0fdd2f741762f6897b057b1"
+    },
+    {
+      "path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-004/final_result.json",
+      "sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97"
+    },
+    {
+      "path": "data/staging/extraction/compact_merged_v1/GP-005/final_result.json",
+      "sha256": "6ddc24023327838c70c0ad27878b457e1d0d8dfeab952d1bc18a294ff06816ea"
+    },
+    {
+      "path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-006/final_result.json",
+      "sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998"
+    },
+    {
+      "path": "data/staging/extraction/compact_merged_v1/GP-007/final_result.json",
+      "sha256": "5374644018df54183297a9977935656f0bd1251668477f5eae9d9af758349089"
+    },
+    {
+      "path": "data/staging/extraction/consolidated_gold_gap_merged_v1/GP-008/final_result.json",
+      "sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b"
+    }
+  ],
+  "release_gates": {
+    "previously_recovered_outcomes_retained": "10/10",
+    "development_outcome_recall_target": "15/15",
+    "critical_field_precision_minimum": 0.9,
+    "unsupported_accepted_outcomes": 0,
+    "wrong_experiment_links": 0
+  }
+}

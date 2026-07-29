@@ -1,0 +1,24 @@
+{
+  "backfill_version": "v12-structural-coverage-backfill-1.0.0",
+  "scope": "stored requests and results only",
+  "runs": [
+    {
+      "paper_id": "GP-004",
+      "run_dir": "data/staging/extraction/compact_one_call_v1_2/GP-004",
+      "output_path": "data/staging/extraction/compact_one_call_v1_2/GP-004/v12_structural_coverage.json",
+      "status": "review_unconfirmed_or_contradicted_facts",
+      "counts": {
+        "confirmed": 0,
+        "contradicted": 0,
+        "unconfirmed": 8
+      },
+      "routes": {
+        "none": 0,
+        "bounded_repair_task": 5,
+        "human_review": 3
+      },
+      "integration_blocked": true
+    }
+  ],
+  "paid_api_requests": 0
+}

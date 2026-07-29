@@ -1,0 +1,99 @@
+{
+  "contract_version": "1.0.0",
+  "model": "qwen3-vl:8b",
+  "model_slug": "qwen3-vl-8b",
+  "model_digest": "901cae73216286ea8c5aba8b46d307ff7188f737285ec500c795a12f05225d28",
+  "model_capabilities": [
+    "completion",
+    "vision",
+    "tools",
+    "thinking"
+  ],
+  "repeats": 1,
+  "seed": 17,
+  "paid_api_requests": 0,
+  "local_only": true,
+  "summary": {
+    "runs": 4,
+    "passed": 1,
+    "positive_passed": 0,
+    "positive_total": 2,
+    "abstention_passed": 1,
+    "abstention_total": 2,
+    "total_prompt_tokens": 14765,
+    "total_output_tokens": 4891,
+    "total_elapsed_seconds": 384.7389820839744
+  },
+  "runs": [
+    {
+      "query_id": "GO-006-positive",
+      "gold_outcome_id": "GO-006",
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png",
+      "repeat": 1,
+      "expected_status": "extract",
+      "actual_status": "extract",
+      "claims": 1,
+      "audit_issues": [
+        "claim omits required query anchor: Cas9/sgRNA",
+        "GO-006-positive-claim-1: visible_support omits query anchor: Cas9/sgRNA"
+      ],
+      "passed": false,
+      "prompt_tokens": 3443,
+      "output_tokens": 203,
+      "elapsed_seconds": 64.59860604198184
+    },
+    {
+      "query_id": "GO-018-positive",
+      "gold_outcome_id": "GO-018",
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L.png",
+      "repeat": 1,
+      "expected_status": "extract",
+      "actual_status": "invalid",
+      "claims": 0,
+      "audit_issues": [
+        "response validation failed: ValidationError: 1 validation error for GemmaVisualDecisionV12\n  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid"
+      ],
+      "passed": false,
+      "prompt_tokens": 3659,
+      "output_tokens": 4533,
+      "elapsed_seconds": 229.23445370799163
+    },
+    {
+      "query_id": "GO-006-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-006-mmc1-p002-table-03",
+      "image_path": "data/staging/extraction/day8_object_vision/crops/GP-006/mmc1/GP-006-mmc1-p002-table-03.png",
+      "repeat": 1,
+      "expected_status": "abstain",
+      "actual_status": "invalid",
+      "claims": 0,
+      "audit_issues": [
+        "response validation failed: ValidationError: 1 validation error for GemmaVisualDecisionV12\n  Value error, abstain decisions require a reason [type=value_error, input_value={'object_id': 'GP-006-mmc...ization', 'macrophage']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      ],
+      "passed": false,
+      "prompt_tokens": 2969,
+      "output_tokens": 69,
+      "elapsed_seconds": 29.059513584012166
+    },
+    {
+      "query_id": "GO-018-adversarial-abstain",
+      "gold_outcome_id": null,
+      "object_id": "GP-008-pnas.2534673123.sapp-p018-figure-01",
+      "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L.png",
+      "repeat": 1,
+      "expected_status": "abstain",
+      "actual_status": "abstain",
+      "claims": 0,
+      "audit_issues": [],
+      "passed": true,
+      "prompt_tokens": 4694,
+      "output_tokens": 86,
+      "elapsed_seconds": 61.84640874998877
+    }
+  ],
+  "integration_gate_passed": false,
+  "integration_allowed": false,
+  "decision": "reject_model_outputs"
+}

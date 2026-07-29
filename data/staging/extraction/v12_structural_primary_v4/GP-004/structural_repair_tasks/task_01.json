@@ -1,0 +1,245 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-25c71a72288ec9b9",
+    "structural:AOC-bdb5d5f9e14a9b35",
+    "structural:AOC-c9850f1420740bed",
+    "structural:AOC-df2292753a83aedd"
+  ],
+  "candidate_ids": [
+    "AOC-25c71a72288ec9b9",
+    "AOC-bdb5d5f9e14a9b35",
+    "AOC-c9850f1420740bed",
+    "AOC-df2292753a83aedd"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+    "label": "egfp_gfp / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827",
+          "GP-004-E-81ab08786ec37000",
+          "GP-004-E-972d3e138bf126db",
+          "GP-004-E-fd825b27dcaebf09",
+          "GP-004-FC-291597f2c1490207",
+          "GP-004-FC-66b43dcd526b6e18",
+          "GP-004-FC-af61355776c8ccca",
+          "GP-004-FC-bdbc539faa37bfad",
+          "GP-004-FC-cde0316a82a5bd30"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827",
+          "GP-004-E-81ab08786ec37000",
+          "GP-004-E-972d3e138bf126db",
+          "GP-004-E-fd825b27dcaebf09",
+          "GP-004-FC-291597f2c1490207",
+          "GP-004-FC-66b43dcd526b6e18",
+          "GP-004-FC-af61355776c8ccca",
+          "GP-004-FC-bdbc539faa37bfad",
+          "GP-004-FC-cde0316a82a5bd30"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "kupffer_cell",
+        "evidence_ids": [
+          "GP-004-FC-cde0316a82a5bd30"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": [
+          "GP-004-E-81ab08786ec37000",
+          "GP-004-FC-291597f2c1490207"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "flow_cytometry",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "phagocytosis_cytotoxicity",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "histology",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-25c71a72288ec9b9",
+      "subject_text": "Kupffer cells",
+      "predicate": "expressed",
+      "object_text": "eGFP",
+      "endpoint_text": null,
+      "qualitative_result": "few",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-cde0316a82a5bd30"
+      ]
+    },
+    {
+      "candidate_id": "AOC-bdb5d5f9e14a9b35",
+      "subject_text": "hepatocytes",
+      "predicate": "expressed",
+      "object_text": "eGFP (Fig",
+      "endpoint_text": null,
+      "qualitative_result": "Virtually all",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-af61355776c8ccca"
+      ]
+    },
+    {
+      "candidate_id": "AOC-c9850f1420740bed",
+      "subject_text": "a pronounced",
+      "predicate": "expressed",
+      "object_text": "was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-972d3e138bf126db",
+        "GP-004-E-e29c5e3c31a38827",
+        "GP-004-E-fd825b27dcaebf09",
+        "GP-004-FC-66b43dcd526b6e18",
+        "GP-004-FC-bdbc539faa37bfad"
+      ]
+    },
+    {
+      "candidate_id": "AOC-df2292753a83aedd",
+      "subject_text": "macrophages",
+      "predicate": "expressed",
+      "object_text": "(Supplementary Fig",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-81ab08786ec37000",
+        "GP-004-FC-291597f2c1490207"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-FC-cde0316a82a5bd30",
+      "text": "eGFP expression was absent in CK19+ cholangiocytes and α-SMA+ vascular smooth muscle cells\nfew F4/80+ Kupffer cells expressed eGFP.",
+      "source_ids": [
+        "FC-S-783827e9e8236666"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-af61355776c8ccca",
+      "text": "Virtually all hepatocytes identified with HNF4α expressed eGFP (Fig.",
+      "source_ids": [
+        "FC-S-783827e9e8236666"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-972d3e138bf126db",
+      "text": "While a pronounced expression was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-e29c5e3c31a38827",
+      "text": "Mice were either 10–12 week-old Bl6/C57 female for the liver injury models or 7–8 week-old Balb/c female (purchased from the Jackson Laboratory, Bar Harbor, ME) to study the kinetics of expression and identity of cell types transfected in vivo using luciferase- and eGFP mRNA-LNP at homeostasis.",
+      "source_ids": [
+        "S-042decafcf9d"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-fd825b27dcaebf09",
+      "text": "Notable eGFP expression was observed in the red pulp area of spleen that mainly overlapped with CD45 and CD31 expression, suggesting that the eGFP+ cells in spleen were blood and endothelial cells (Supplementary Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-66b43dcd526b6e18",
+      "text": "a pronounced expression was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-bdbc539faa37bfad",
+      "text": "Notable eGFP expression was observed in the red pulp area of spleen that mainly overlapped with CD45 and CD31 expression",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-81ab08786ec37000",
+      "text": "In the lung, scattered eGFP+ cells were found that resembled alveolar macrophages, given their morphology, intra-alveolar luminal location, and CD45 expression (Supplementary Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-291597f2c1490207",
+      "text": "In the lung, scattered eGFP+ cells were found that resembled alveolar macrophages, given their morphology, intra-alveolar luminal location, and CD45 expression (Supplementary Fig.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "bb4204bbeca7bea9907600861b56412e124f18e1601fead0d42070075a87426e",
+  "task_checksum": "cbcc6e6703d72053d82869605f177c27a3cb609c9fea194d3842923633f08e89"
+}

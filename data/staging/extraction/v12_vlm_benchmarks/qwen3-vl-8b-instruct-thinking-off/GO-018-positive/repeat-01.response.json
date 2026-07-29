@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-vl:8b-instruct",
+  "created_at": "2026-07-29T07:11:34.534532Z",
+  "done_reason": "stop",
+  "total_duration_ns": 20564847333,
+  "load_duration_ns": 95372625,
+  "prompt_eval_count": 3661,
+  "eval_count": 331,
+  "elapsed_seconds": 20.575376541004516,
+  "response_content": "{\n  \"object_id\": \"GP-008-pnas.2534673123.sapp-p018-figure-01\",\n  \"query_id\": \"GO-018-positive\",\n  \"status\": \"extract\",\n  \"claims\": [\n    {\n      \"claim_id\": \"GO-018-positive-1\",\n      \"subject\": \"αCD163/LNP-ZsGreen\",\n      \"predicate\": \"co-staining with F4/80+ macrophages\",\n      \"result_type\": \"qualitative\",\n      \"value\": \"F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells\",\n      \"panel_or_cell\": \"L\",\n      \"visible_support\": [\n        \"In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen.\",\n        \"The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...'\",\n        \"In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel.\"\n      ],\n      \"evidence_kinds\": [\n        \"image\",\n        \"caption\"\n      ],\n      \"confidence\": \"high\"\n    }\n  ],\n  \"abstention_reason\": null,\n  \"missing_requirements\": []\n}",
+  "response_message": {
+    "role": "assistant",
+    "content": "{\n  \"object_id\": \"GP-008-pnas.2534673123.sapp-p018-figure-01\",\n  \"query_id\": \"GO-018-positive\",\n  \"status\": \"extract\",\n  \"claims\": [\n    {\n      \"claim_id\": \"GO-018-positive-1\",\n      \"subject\": \"αCD163/LNP-ZsGreen\",\n      \"predicate\": \"co-staining with F4/80+ macrophages\",\n      \"result_type\": \"qualitative\",\n      \"value\": \"F4/80+ cells show higher ZsGreen-positive percentage than Desmin+ cells\",\n      \"panel_or_cell\": \"L\",\n      \"visible_support\": [\n        \"In panel L, the green bar for F4/80+ZsGreen is visibly taller than the green bar for Desmin+ZsGreen.\",\n        \"The caption states: 'K-L) IF images depicting the co-staining with markers for liver cells (ALB+), HSCs (Desmin+), macrophages (F4/80+)...'\",\n        \"In panel K, the merge image for DAPI/ZsGreen/F4/80 shows more ZsGreen signal overlapping with F4/80 compared to the Desmin channel.\"\n      ],\n      \"evidence_kinds\": [\n        \"image\",\n        \"caption\"\n      ],\n      \"confidence\": \"high\"\n    }\n  ],\n  \"abstention_reason\": null,\n  \"missing_requirements\": []\n}"
+  },
+  "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L-stacked.png"
+}

@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-vl:8b-instruct",
+  "created_at": "2026-07-29T07:12:50.870567Z",
+  "done_reason": "stop",
+  "total_duration_ns": 9716423291,
+  "load_duration_ns": 103569833,
+  "prompt_eval_count": 3591,
+  "eval_count": 208,
+  "elapsed_seconds": 9.725378250004724,
+  "response_content": "{\n  \"object_id\": \"GP-008-pnas.2534673123.sapp-p018-figure-01\",\n  \"query_id\": \"GO-018-adversarial-abstain\",\n  \"status\": \"abstain\",\n  \"claims\": [],\n  \"abstention_reason\": \"missing_required_context\",\n  \"missing_requirements\": [\n    \"LSECs (Liver Sinusoidal Endothelial Cells) are not explicitly labeled or identified in the provided figure panels K and L. The markers shown are ALB+ (hepatocytes), Desmin+ (HSCs), F4/80+ (macrophages), and SOX9+ (bile duct cells). There is no visible evidence of LSEC-specific marker staining, nor any data presented for LSECs in the bar chart or microscopy images. Therefore, the requested total insertion frequency and standard deviation for LSECs cannot be extracted.\"\n  ]\n}",
+  "response_message": {
+    "role": "assistant",
+    "content": "{\n  \"object_id\": \"GP-008-pnas.2534673123.sapp-p018-figure-01\",\n  \"query_id\": \"GO-018-adversarial-abstain\",\n  \"status\": \"abstain\",\n  \"claims\": [],\n  \"abstention_reason\": \"missing_required_context\",\n  \"missing_requirements\": [\n    \"LSECs (Liver Sinusoidal Endothelial Cells) are not explicitly labeled or identified in the provided figure panels K and L. The markers shown are ALB+ (hepatocytes), Desmin+ (HSCs), F4/80+ (macrophages), and SOX9+ (bile duct cells). There is no visible evidence of LSEC-specific marker staining, nor any data presented for LSECs in the bar chart or microscopy images. Therefore, the requested total insertion frequency and standard deviation for LSECs cannot be extracted.\"\n  ]\n}"
+  },
+  "image_path": "data/staging/extraction/v12_docling_visual/GP-008-pnas.2534673123.sapp-p018-figure-01/focus/panels-K-L-stacked.png"
+}

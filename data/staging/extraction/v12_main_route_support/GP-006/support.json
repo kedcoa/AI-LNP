@@ -1,0 +1,1806 @@
+{
+  "support_version": "main-route-recall-support-1.2.0",
+  "paper_id": "GP-006",
+  "instructions": [
+    "Candidates are navigation aids, not verified final outcomes.",
+    "Create a final record only when its cited evidence directly supports it.",
+    "Keep distinct provisional experiments and atomic relationships separate.",
+    "Deduplicate candidates against outcomes already supported by the packet.",
+    "Use only evidence IDs present in the packet or local_evidence below."
+  ],
+  "provisional_experiments": [
+    {
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "label": "cas9_sgrna / in_vivo",
+      "anchors": [
+        {
+          "anchor_type": "payload",
+          "value": "cas9_sgrna",
+          "evidence_ids": [
+            "GP-006-E-0043b99ab0bf3320",
+            "GP-006-E-0531a76f7f816a56",
+            "GP-006-E-06fab5f83faff0f5",
+            "GP-006-E-08e2bd57bb350010",
+            "GP-006-E-0ddd9b0412ade45d",
+            "GP-006-E-1893c0cd1beb2ee9",
+            "GP-006-E-1e527773e8493acf",
+            "GP-006-E-2a28bcf9ba6d945f",
+            "GP-006-E-39cfd74bbca7e6bf",
+            "GP-006-E-3ed93bbf08f38909",
+            "GP-006-E-3fc93b2f41ba7bc0",
+            "GP-006-E-45340ed253dbdbe8",
+            "GP-006-E-4f5bf6ad6622f76c",
+            "GP-006-E-50929f80242be246",
+            "GP-006-E-529ecbec5a4188a6",
+            "GP-006-E-5436c5c0eaf9f226",
+            "GP-006-E-575ca6ef75bb6026",
+            "GP-006-E-5da1aeadc0b69fa2",
+            "GP-006-E-68a2d90951163b05",
+            "GP-006-E-6a0db3e1706fd8f7",
+            "GP-006-E-6de66baf9d03fb47",
+            "GP-006-E-8af0fe6c0065d45c",
+            "GP-006-E-8fbb0d1c6f7ead81",
+            "GP-006-E-90dcfc4bb7fcab1f",
+            "GP-006-E-a46ce748afa2a376",
+            "GP-006-E-aae9c2952cb83528",
+            "GP-006-E-ab32c0faea637986",
+            "GP-006-E-ab6a59c6da34953c",
+            "GP-006-E-b0e824a66a4f04c1",
+            "GP-006-E-bb41ea6f7efc1587",
+            "GP-006-E-c880de483e81461c",
+            "GP-006-E-c96069ae41c1c7d0",
+            "GP-006-E-cd84947ffac461d0",
+            "GP-006-E-d6ad3aa43d45f3c0",
+            "GP-006-E-d9dd4b3086e5d210",
+            "GP-006-E-df27ba9da07fa60c",
+            "GP-006-E-e2a56ccf7060d8b1",
+            "GP-006-E-e2cb259904655a7d",
+            "GP-006-E-e8c4517f30b03f17",
+            "GP-006-E-f3dda9c744c9ef01",
+            "GP-006-FC-04266ee2680a9fcf",
+            "GP-006-FC-064672da51c70535",
+            "GP-006-FC-07db2e68388e299d",
+            "GP-006-FC-0d88df50c50a2d7b",
+            "GP-006-FC-0ed3611eb9cd257d",
+            "GP-006-FC-14455a8d919172dc",
+            "GP-006-FC-1559b312001971ce",
+            "GP-006-FC-1dde658a87a9c408",
+            "GP-006-FC-2214c93b5fbd6e62",
+            "GP-006-FC-261c43cc443b02fc",
+            "GP-006-FC-33a30c8fe6de4481",
+            "GP-006-FC-35fa0a771986447c",
+            "GP-006-FC-3ad2c6ed80a67d38",
+            "GP-006-FC-3b79457f9b137cb1",
+            "GP-006-FC-50f84f5cf4de92e7",
+            "GP-006-FC-582e4f97c32024f7",
+            "GP-006-FC-5c012a1b85ee2781",
+            "GP-006-FC-626bb1932bd8fc95",
+            "GP-006-FC-694108d5f28fb462",
+            "GP-006-FC-76d45df84af8fb28",
+            "GP-006-FC-795d1550039906f2",
+            "GP-006-FC-7a82fb7ca2c9070a",
+            "GP-006-FC-867518f9f8de93ec",
+            "GP-006-FC-887ad8f0a2e6dcfc",
+            "GP-006-FC-8df538fe0f0fd3be",
+            "GP-006-FC-95003d17d91f1f8b",
+            "GP-006-FC-95c3955b90c9e87b",
+            "GP-006-FC-961e94fbff8c0791",
+            "GP-006-FC-971f7c6b9a94be06",
+            "GP-006-FC-987fa1c209db6f85",
+            "GP-006-FC-9933e02891a5b41c",
+            "GP-006-FC-99dc9dd80989fb16",
+            "GP-006-FC-adea59d639d660fe",
+            "GP-006-FC-ae534ba92d69dcc6",
+            "GP-006-FC-b05c2b5a17b8404e",
+            "GP-006-FC-bf206922431492d8",
+            "GP-006-FC-c252c9b510e3e81c",
+            "GP-006-FC-cc33b7a799584181",
+            "GP-006-FC-cdb6cb15b65bdadd",
+            "GP-006-FC-cea1f7198773c291",
+            "GP-006-FC-d235a96b68dc6444",
+            "GP-006-FC-d673bb7b0d04e627",
+            "GP-006-FC-d791474f1c105691",
+            "GP-006-FC-ea80a3d2d7500008",
+            "GP-006-FC-efe1e079b7e12b0f",
+            "GP-006-FC-f431dab3df9c3ecd",
+            "GP-006-FC-fe48905ec0a74ad5"
+          ]
+        },
+        {
+          "anchor_type": "model",
+          "value": "in_vivo",
+          "evidence_ids": [
+            "GP-006-E-0043b99ab0bf3320",
+            "GP-006-E-0531a76f7f816a56",
+            "GP-006-E-06fab5f83faff0f5",
+            "GP-006-E-08e2bd57bb350010",
+            "GP-006-E-0ddd9b0412ade45d",
+            "GP-006-E-1893c0cd1beb2ee9",
+            "GP-006-E-1e527773e8493acf",
+            "GP-006-E-2a28bcf9ba6d945f",
+            "GP-006-E-39cfd74bbca7e6bf",
+            "GP-006-E-3ed93bbf08f38909",
+            "GP-006-E-3fc93b2f41ba7bc0",
+            "GP-006-E-45340ed253dbdbe8",
+            "GP-006-E-4f5bf6ad6622f76c",
+            "GP-006-E-50929f80242be246",
+            "GP-006-E-529ecbec5a4188a6",
+            "GP-006-E-5436c5c0eaf9f226",
+            "GP-006-E-575ca6ef75bb6026",
+            "GP-006-E-5da1aeadc0b69fa2",
+            "GP-006-E-68a2d90951163b05",
+            "GP-006-E-6a0db3e1706fd8f7",
+            "GP-006-E-6de66baf9d03fb47",
+            "GP-006-E-8af0fe6c0065d45c",
+            "GP-006-E-8fbb0d1c6f7ead81",
+            "GP-006-E-90dcfc4bb7fcab1f",
+            "GP-006-E-a46ce748afa2a376",
+            "GP-006-E-aae9c2952cb83528",
+            "GP-006-E-ab32c0faea637986",
+            "GP-006-E-ab6a59c6da34953c",
+            "GP-006-E-b0e824a66a4f04c1",
+            "GP-006-E-bb41ea6f7efc1587",
+            "GP-006-E-c880de483e81461c",
+            "GP-006-E-c96069ae41c1c7d0",
+            "GP-006-E-cd84947ffac461d0",
+            "GP-006-E-d6ad3aa43d45f3c0",
+            "GP-006-E-d9dd4b3086e5d210",
+            "GP-006-E-df27ba9da07fa60c",
+            "GP-006-E-e2a56ccf7060d8b1",
+            "GP-006-E-e2cb259904655a7d",
+            "GP-006-E-e8c4517f30b03f17",
+            "GP-006-E-f3dda9c744c9ef01",
+            "GP-006-FC-04266ee2680a9fcf",
+            "GP-006-FC-064672da51c70535",
+            "GP-006-FC-07db2e68388e299d",
+            "GP-006-FC-0d88df50c50a2d7b",
+            "GP-006-FC-0ed3611eb9cd257d",
+            "GP-006-FC-14455a8d919172dc",
+            "GP-006-FC-1559b312001971ce",
+            "GP-006-FC-1dde658a87a9c408",
+            "GP-006-FC-2214c93b5fbd6e62",
+            "GP-006-FC-261c43cc443b02fc",
+            "GP-006-FC-33a30c8fe6de4481",
+            "GP-006-FC-35fa0a771986447c",
+            "GP-006-FC-3ad2c6ed80a67d38",
+            "GP-006-FC-3b79457f9b137cb1",
+            "GP-006-FC-50f84f5cf4de92e7",
+            "GP-006-FC-582e4f97c32024f7",
+            "GP-006-FC-5c012a1b85ee2781",
+            "GP-006-FC-626bb1932bd8fc95",
+            "GP-006-FC-694108d5f28fb462",
+            "GP-006-FC-76d45df84af8fb28",
+            "GP-006-FC-795d1550039906f2",
+            "GP-006-FC-7a82fb7ca2c9070a",
+            "GP-006-FC-867518f9f8de93ec",
+            "GP-006-FC-887ad8f0a2e6dcfc",
+            "GP-006-FC-8df538fe0f0fd3be",
+            "GP-006-FC-95003d17d91f1f8b",
+            "GP-006-FC-95c3955b90c9e87b",
+            "GP-006-FC-961e94fbff8c0791",
+            "GP-006-FC-971f7c6b9a94be06",
+            "GP-006-FC-987fa1c209db6f85",
+            "GP-006-FC-9933e02891a5b41c",
+            "GP-006-FC-99dc9dd80989fb16",
+            "GP-006-FC-adea59d639d660fe",
+            "GP-006-FC-ae534ba92d69dcc6",
+            "GP-006-FC-b05c2b5a17b8404e",
+            "GP-006-FC-bf206922431492d8",
+            "GP-006-FC-c252c9b510e3e81c",
+            "GP-006-FC-cc33b7a799584181",
+            "GP-006-FC-cdb6cb15b65bdadd",
+            "GP-006-FC-cea1f7198773c291",
+            "GP-006-FC-d235a96b68dc6444",
+            "GP-006-FC-d673bb7b0d04e627",
+            "GP-006-FC-d791474f1c105691",
+            "GP-006-FC-ea80a3d2d7500008",
+            "GP-006-FC-efe1e079b7e12b0f",
+            "GP-006-FC-f431dab3df9c3ecd",
+            "GP-006-FC-fe48905ec0a74ad5"
+          ]
+        },
+        {
+          "anchor_type": "cell_context",
+          "value": "lsec",
+          "evidence_ids": [
+            "GP-006-E-0531a76f7f816a56",
+            "GP-006-E-8af0fe6c0065d45c",
+            "GP-006-E-a46ce748afa2a376",
+            "GP-006-E-d9dd4b3086e5d210",
+            "GP-006-FC-0ed3611eb9cd257d",
+            "GP-006-FC-887ad8f0a2e6dcfc",
+            "GP-006-FC-95003d17d91f1f8b",
+            "GP-006-FC-b05c2b5a17b8404e"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "sequencing",
+          "evidence_ids": [
+            "GP-006-E-1e527773e8493acf",
+            "GP-006-E-2a28bcf9ba6d945f",
+            "GP-006-E-50929f80242be246",
+            "GP-006-E-d9dd4b3086e5d210",
+            "GP-006-FC-2214c93b5fbd6e62",
+            "GP-006-FC-3b79457f9b137cb1",
+            "GP-006-FC-95003d17d91f1f8b",
+            "GP-006-FC-9933e02891a5b41c",
+            "GP-006-FC-fe48905ec0a74ad5"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "coagulation_activity",
+          "evidence_ids": [
+            "GP-006-E-0043b99ab0bf3320",
+            "GP-006-E-06fab5f83faff0f5",
+            "GP-006-E-0ddd9b0412ade45d",
+            "GP-006-E-1e527773e8493acf",
+            "GP-006-E-39cfd74bbca7e6bf",
+            "GP-006-E-3ed93bbf08f38909",
+            "GP-006-E-50929f80242be246",
+            "GP-006-E-529ecbec5a4188a6",
+            "GP-006-E-68a2d90951163b05",
+            "GP-006-E-8af0fe6c0065d45c",
+            "GP-006-E-ab32c0faea637986",
+            "GP-006-FC-064672da51c70535",
+            "GP-006-FC-261c43cc443b02fc",
+            "GP-006-FC-3b79457f9b137cb1",
+            "GP-006-FC-50f84f5cf4de92e7",
+            "GP-006-FC-5c012a1b85ee2781",
+            "GP-006-FC-694108d5f28fb462",
+            "GP-006-FC-7a82fb7ca2c9070a",
+            "GP-006-FC-867518f9f8de93ec",
+            "GP-006-FC-887ad8f0a2e6dcfc",
+            "GP-006-FC-971f7c6b9a94be06",
+            "GP-006-FC-adea59d639d660fe",
+            "GP-006-FC-ae534ba92d69dcc6",
+            "GP-006-FC-bf206922431492d8",
+            "GP-006-FC-f431dab3df9c3ecd",
+            "GP-006-FC-fe48905ec0a74ad5"
+          ]
+        }
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+      "confidence": "medium"
+    },
+    {
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "label": "egfp_gfp / in_vivo",
+      "anchors": [
+        {
+          "anchor_type": "payload",
+          "value": "egfp_gfp",
+          "evidence_ids": [
+            "GP-006-E-7665fc6ae0c7e9c0",
+            "GP-006-E-a646b1030db7fdba",
+            "GP-006-E-d22913824fc90c03",
+            "GP-006-E-db5e6acb97018b1c",
+            "GP-006-FC-281878559e1f7bff",
+            "GP-006-FC-4eba4f8602045a6d",
+            "GP-006-FC-70b9be208951ae05",
+            "GP-006-FC-809c1c8c9feb38ea",
+            "GP-006-FC-b6c5074ea623a07c",
+            "GP-006-FC-c791d7d087e7455d",
+            "GP-006-FC-c858a61784289344",
+            "GP-006-E-1abbea6a2923c49a",
+            "GP-006-E-79bddcfc808ac7f2",
+            "GP-006-E-91510402d7266cd1",
+            "GP-006-E-94c1e79dd31b9816",
+            "GP-006-E-9d98c5a3f7488444",
+            "GP-006-FC-2eab214b01f5f3e2",
+            "GP-006-FC-31edc2cfc908b6b0",
+            "GP-006-FC-50615c83197efb02",
+            "GP-006-FC-8f0a3c75b28c76de",
+            "GP-006-FC-c963377ef4e15d2f"
+          ]
+        },
+        {
+          "anchor_type": "model",
+          "value": "in_vivo",
+          "evidence_ids": [
+            "GP-006-E-7665fc6ae0c7e9c0",
+            "GP-006-E-a646b1030db7fdba",
+            "GP-006-E-d22913824fc90c03",
+            "GP-006-E-db5e6acb97018b1c",
+            "GP-006-FC-281878559e1f7bff",
+            "GP-006-FC-4eba4f8602045a6d",
+            "GP-006-FC-70b9be208951ae05",
+            "GP-006-FC-809c1c8c9feb38ea",
+            "GP-006-FC-b6c5074ea623a07c",
+            "GP-006-FC-c791d7d087e7455d",
+            "GP-006-FC-c858a61784289344",
+            "GP-006-E-1abbea6a2923c49a",
+            "GP-006-E-79bddcfc808ac7f2",
+            "GP-006-E-91510402d7266cd1",
+            "GP-006-E-94c1e79dd31b9816",
+            "GP-006-E-9d98c5a3f7488444",
+            "GP-006-FC-2eab214b01f5f3e2",
+            "GP-006-FC-31edc2cfc908b6b0",
+            "GP-006-FC-50615c83197efb02",
+            "GP-006-FC-8f0a3c75b28c76de",
+            "GP-006-FC-c963377ef4e15d2f"
+          ]
+        },
+        {
+          "anchor_type": "cell_context",
+          "value": "lsec",
+          "evidence_ids": [
+            "GP-006-E-7665fc6ae0c7e9c0",
+            "GP-006-E-a646b1030db7fdba",
+            "GP-006-E-d22913824fc90c03",
+            "GP-006-FC-281878559e1f7bff",
+            "GP-006-FC-70b9be208951ae05",
+            "GP-006-FC-809c1c8c9feb38ea",
+            "GP-006-FC-b6c5074ea623a07c",
+            "GP-006-FC-c791d7d087e7455d",
+            "GP-006-FC-c858a61784289344",
+            "GP-006-E-1abbea6a2923c49a",
+            "GP-006-E-91510402d7266cd1",
+            "GP-006-E-94c1e79dd31b9816",
+            "GP-006-FC-2eab214b01f5f3e2",
+            "GP-006-FC-50615c83197efb02",
+            "GP-006-FC-c963377ef4e15d2f"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "immunostaining",
+          "evidence_ids": [
+            "GP-006-E-1abbea6a2923c49a",
+            "GP-006-E-91510402d7266cd1",
+            "GP-006-FC-2eab214b01f5f3e2",
+            "GP-006-FC-c963377ef4e15d2f"
+          ]
+        }
+      ],
+      "boundary_status": "inferred",
+      "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+      "confidence": "medium"
+    }
+  ],
+  "atomic_outcome_candidates": [
+    {
+      "candidate_id": "AOC-5cdf7580c115edce",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-640248c122bb7227",
+        "ACL-c8835eb80d5402e0"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSECs",
+      "predicate": "decreased",
+      "object_text": "transgene",
+      "endpoint_text": "expression",
+      "qualitative_result": "lower",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-1d1871fe74140517",
+        "GP-006-FC-47621725376733bb"
+      ],
+      "source_ids": [
+        "S-620e08261866",
+        "FC-S-051e1c2dbbc8ba2a"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"decreased\",\"positive\",\"\",\"lsec\",\"expression\",\"\",\"\",\"lower\"]"
+    },
+    {
+      "candidate_id": "AOC-04f9eb5e5d1cdad5",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-5a2b280873312cbb"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "subject_text": "LSECs",
+      "predicate": "increased",
+      "object_text": "hepatocytes than LSECs",
+      "endpoint_text": "expression",
+      "qualitative_result": "higher",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-e47e445580c98e0f"
+      ],
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"increased\",\"positive\",\"luciferase_zsgreen\",\"lsec\",\"expression\",\"\",\"\",\"higher\"]"
+    },
+    {
+      "candidate_id": "AOC-b1249fecf584f4f7",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-5d036b4d2284d2d3",
+        "ACL-83d06b90f61877a7"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "frequencies were significantly lower (0.78% and 0%, respectively) compared with",
+      "predicate": "edited",
+      "object_text": "variants (Table S2)",
+      "endpoint_text": null,
+      "qualitative_result": "lower",
+      "numeric_value": 0.0,
+      "value_text": "0%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-b9606d3f1fb87b4c",
+        "GP-006-FC-9f474cb7932305b5"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"\",\"\",\"0\",\"\",\"lower\"]"
+    },
+    {
+      "candidate_id": "AOC-82a54230dd4de48f",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-8059a6c7fe69ed18",
+        "ACL-ba4f2277f14d8d99"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "by aPTT, and our results indicated that the treated mice",
+      "predicate": "reached",
+      "object_text": "an average of 3",
+      "endpoint_text": "FVIII activity",
+      "qualitative_result": null,
+      "numeric_value": 3.3,
+      "value_text": "3.30%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-8e9084aadcfe157d",
+        "GP-006-FC-c6c8e8922e46148b"
+      ],
+      "source_ids": [
+        "S-1385dd7253d2",
+        "FC-S-1fd02dea48d2f778"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"reached\",\"positive\",\"\",\"\",\"fviii activity\",\"3.3\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-e3895c3ee92011c0",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-16969bb19be2e97a"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "subject_text": "LSECs",
+      "predicate": "colocalized_with",
+      "object_text": "Isolectin B4-labeled LSECs",
+      "endpoint_text": null,
+      "qualitative_result": "colocalized",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-78a44cbc6069b59c"
+      ],
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"colocalized_with\",\"positive\",\"\",\"lsec\",\"\",\"\",\"\",\"colocalized\"]"
+    },
+    {
+      "candidate_id": "AOC-bf8a4ec1588b36c3",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-3427e8cc173b553f",
+        "ACL-0bd25869644a00d8"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSECs",
+      "predicate": "expressed",
+      "object_text": "permanently in NSG HemA mice",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-8af0fe6c0065d45c",
+        "GP-006-FC-887ad8f0a2e6dcfc"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"expressed\",\"positive\",\"cas9_sgrna\",\"lsec\",\"expression\",\"\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-a4cc0f3adb169e3a",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-f44a0411949f19b3"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "subject_text": "LSECs",
+      "predicate": "uptake_by",
+      "object_text": "LNPs",
+      "endpoint_text": "uptake",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ],
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"uptake_by\",\"positive\",\"egfp_gfp\",\"lsec\",\"uptake\",\"\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-8ae036a26c675d5d",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-2ed2ee35b3572270",
+        "ACL-c32355857fcb15c9"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Our results indicated that",
+      "predicate": "delivered_to",
+      "object_text": "Cas9/NSGHAsgRNA plasmid led to an increase in FVIII activity in NSG HemA mice",
+      "endpoint_text": "FVIII activity",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-06fab5f83faff0f5",
+        "GP-006-FC-867518f9f8de93ec"
+      ],
+      "source_ids": [
+        "S-620e08261866",
+        "FC-S-051e1c2dbbc8ba2a"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"delivered_to\",\"positive\",\"cas9_sgrna\",\"\",\"fviii activity\",\"\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-e3e4da6b85173179",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-67dc9172ef73d219",
+        "ACL-882e32ce1849fc07"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "insertion patterns among indel variants, but their frequencies were significantly",
+      "predicate": "decreased",
+      "object_text": "(0",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": 0.78,
+      "value_text": "0.78%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-b9606d3f1fb87b4c",
+        "GP-006-FC-9f474cb7932305b5"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"decreased\",\"positive\",\"\",\"\",\"\",\"0.78\",\"\",\"significantly\"]"
+    },
+    {
+      "candidate_id": "AOC-492811b87249e266",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-1a5caeca6739f54d",
+        "ACL-f530db39ec7cc695",
+        "ACL-4c4ba3ef9a93d6db",
+        "ACL-a16baa1259efda82"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "We also analyzed the +2 and +5",
+      "predicate": "edited",
+      "object_text": "patterns among",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": 0.78,
+      "value_text": "0.78%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-b9606d3f1fb87b4c",
+        "GP-006-FC-9f474cb7932305b5"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"\",\"\",\"0.78\",\"\",\"significantly\"]"
+    },
+    {
+      "candidate_id": "AOC-29630305b6c9288a",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-b965ca4cd99b7729",
+        "ACL-39c4eda15a58863b"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSECs",
+      "predicate": "edited",
+      "object_text": "rates of approximately 16",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 16.5,
+      "value_text": "approximately approximately 16.50%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-d010646bb645e446",
+        "GP-006-FC-f120a95c20f84306"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"lsec\",\"\",\"16.5\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-1ad805e42de65c53",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-bfe9ba40d908beb1",
+        "ACL-5d09e21c51516128",
+        "ACL-f19ef3c7af48d26c",
+        "ACL-55e3872c36a7d194"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSECs",
+      "predicate": "edited",
+      "object_text": "patterns in LSECs revealed that one base-pair deletions constitute the highest",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 46.5,
+      "value_text": "46.5%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-9c61cae7b3cbdfda",
+        "GP-006-FC-37d97abddfe8a8ff"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"lsec\",\"\",\"46.5\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-bc1bce49f7d4f397",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-92feb1f2ab53f9d9"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "subject_text": "The immunostaining images showed",
+      "predicate": "colocalized_with",
+      "object_text": "LYVE-1 and GFP signals",
+      "endpoint_text": null,
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ],
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"colocalized_with\",\"positive\",\"egfp_gfp\",\"lsec\",\"\",\"\",\"\",\"colocalization\"]"
+    },
+    {
+      "candidate_id": "AOC-abe0948a4a178820",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-9c5943e694b6c65d"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "subject_text": "LSECs",
+      "predicate": "expressed",
+      "object_text": "HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively",
+      "endpoint_text": "Luciferase expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-e7b45e90113a790f"
+      ],
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"expressed\",\"positive\",\"luciferase_zsgreen\",\"lsec\",\"luciferase expression\",\"\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-9e3877e87f09e30b",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-d0e64bf273a4a184",
+        "ACL-960f0a49df7208cc"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSECs",
+      "predicate": "edited",
+      "object_text": "repair in LSECs and restoration of the endogenous FVIII",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-8af0fe6c0065d45c",
+        "GP-006-FC-887ad8f0a2e6dcfc"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"cas9_sgrna\",\"lsec\",\"expression\",\"\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-6fcfbdf744e661cb",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-28cb243baaa5bd2a"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "subject_text": "hepatocytes",
+      "predicate": "expressed",
+      "object_text": "levels in hepatocytes and LSECs, respectively",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-92657c282e617e5c"
+      ],
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"expressed\",\"positive\",\"generic_lnp\",\"lsec\",\"expression\",\"\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-1737fc902b5ad35d",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-98d0a13e6dc25d53"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-c4982a5c40d9",
+      "subject_text": "LSECs",
+      "predicate": "expressed",
+      "object_text": "GFP protein",
+      "endpoint_text": "uptake",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-c963377ef4e15d2f"
+      ],
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-c4982a5c40d9\",\"expressed\",\"positive\",\"egfp_gfp\",\"lsec\",\"uptake\",\"\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-8f14a4a2ce97866a",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-c1d41b3cb176f535",
+        "ACL-257fd74a8369574f"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Administration of Cas9/NSGHAsgRNA LNP resulted in a gene",
+      "predicate": "edited",
+      "object_text": "rate of about 52",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 52.7,
+      "value_text": "about about 52.7%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-5b17d5bf9a42504e",
+        "GP-006-FC-93ddf5afe2ae4f05"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"cas9_sgrna\",\"\",\"\",\"52.7\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-8bc9d85dd15ce19b",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-f4888629adb6801a",
+        "ACL-8c2721527ca5bf08"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Among all the",
+      "predicate": "edited",
+      "object_text": "patterns, approximately 60% were one base-pair deletions that can restore the 5′ base-pair",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 60.0,
+      "value_text": "approximately approximately 60%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-69b7abdabc16327a"
+      ],
+      "source_ids": [
+        "FC-S-10f71fe35d1af996"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"\",\"\",\"60\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-5bf741348fedbdab",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-eacbd0be598f2c2f",
+        "ACL-115359edf7219630",
+        "ACL-727ca2ff1b805ae9"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "We subsequently identified the",
+      "predicate": "edited",
+      "object_text": "pattern at the mutation site via the Sanger sequencing and Tracking of indels by Decomposition (TIDE) online tool, showing",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 3.5,
+      "value_text": "3.5%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-3d990eb3b5256ae4"
+      ],
+      "source_ids": [
+        "FC-S-10f71fe35d1af996"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"\",\"\",\"3.5\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-5680ceb27bf5884d",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-d810526dd065a506",
+        "ACL-19a4d75ce5bda548"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "hepatocytes",
+      "predicate": "edited",
+      "object_text": "60",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 60.54,
+      "value_text": "60.54%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-d010646bb645e446",
+        "GP-006-FC-f120a95c20f84306"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"\",\"\",\"60.54\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-4afe681add34d1ac",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-fe1e7f57a2e2a444",
+        "ACL-43d1aa00fe597e85"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "four base-pair deletions, which can help rescue the five base-pair",
+      "predicate": "edited",
+      "object_text": "NSG HemA, accounting for 50%–60% of all the deletions",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 50.0,
+      "value_text": "50%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-9c61cae7b3cbdfda",
+        "GP-006-FC-37d97abddfe8a8ff"
+      ],
+      "source_ids": [
+        "S-5e3078bd8fb5",
+        "FC-S-df43cccf8956b818"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"\",\"\",\"50\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-118b7d2635c0365d",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-949a04e3f2578311",
+        "ACL-dcb49a33080118ee"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "mF8sgRNA could induce an",
+      "predicate": "edited",
+      "object_text": "variant into mouse F8 exon 1 with a 23% of",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 23.0,
+      "value_text": "23%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-63f5cf7bff32d296"
+      ],
+      "source_ids": [
+        "FC-S-10f71fe35d1af996"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"\",\"\",\"\",\"23\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-06e9ee5532c86270",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-75abc24c9ec905ad",
+        "ACL-860ddc97f37d8a70",
+        "ACL-19ff7c313c04a6cb",
+        "ACL-1a61236420ad00f9"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Our data showed that the in vivo gene",
+      "predicate": "edited",
+      "object_text": "efficiency of NSGHAsgRNA was comparable to that of mF8sgRNA, with both sgRNAs resulting in a gene",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 5.0,
+      "value_text": "5%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-ab6a59c6da34953c",
+        "GP-006-FC-626bb1932bd8fc95"
+      ],
+      "source_ids": [
+        "S-620e08261866",
+        "FC-S-051e1c2dbbc8ba2a"
+      ],
+      "route_hint": "text",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "[\"PEX-GP-006-d4cca5a9f0e1\",\"edited\",\"positive\",\"cas9_sgrna\",\"\",\"\",\"5\",\"\",\"\"]"
+    },
+    {
+      "candidate_id": "AOC-VIS-7129c612afdb7bee",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-4466b06097b27185"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+1",
+      "qualitative_result": null,
+      "numeric_value": 3.39,
+      "value_text": "3.39 ± 0.91 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-4466b06097b27185"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c1"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+1|3.39 ± 0.91 %"
+    },
+    {
+      "candidate_id": "AOC-VIS-dc9ab6e247d8663c",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-366ecf655cea361a"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+2",
+      "qualitative_result": null,
+      "numeric_value": 0.83,
+      "value_text": "0.83 ± 0.27 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-366ecf655cea361a"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c2"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+2|0.83 ± 0.27 %"
+    },
+    {
+      "candidate_id": "AOC-VIS-2c2da0f5dda94d65",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-4353afe26a6a1063"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+3",
+      "qualitative_result": null,
+      "numeric_value": 0.01,
+      "value_text": "0.01 ± 0.01 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-4353afe26a6a1063"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+3|0.01 ± 0.01 %"
+    },
+    {
+      "candidate_id": "AOC-VIS-0fbb4b4c600d48aa",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-696377230fc94ddb"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-696377230fc94ddb"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|+4|0.00"
+    },
+    {
+      "candidate_id": "AOC-VIS-0b058d8c214aa681",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-9e55d39758b25aac"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": ">+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-9e55d39758b25aac"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|>+4|0.00"
+    },
+    {
+      "candidate_id": "AOC-VIS-49acb14b88ab3f62",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-5f9b6daebb6cb3d8"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "total insertion frequency",
+      "qualitative_result": null,
+      "numeric_value": 4.23,
+      "value_text": "4.23±1.17 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-5f9b6daebb6cb3d8"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c6"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|hepatocyte|reached|total insertion frequency|4.23±1.17 %"
+    },
+    {
+      "candidate_id": "AOC-VIS-363dd9619f54439c",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-54f6c0ece297b4fd"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+1",
+      "qualitative_result": null,
+      "numeric_value": 0.78,
+      "value_text": "0.78 ± 0.27 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-54f6c0ece297b4fd"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c1"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+1|0.78 ± 0.27 %"
+    },
+    {
+      "candidate_id": "AOC-VIS-276eb4e7f1fff39d",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-39f70fcf14234857"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+2",
+      "qualitative_result": null,
+      "numeric_value": 0.21,
+      "value_text": "0.21 ± 0.10 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-39f70fcf14234857"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+2|0.21 ± 0.10 %"
+    },
+    {
+      "candidate_id": "AOC-VIS-daa35a9f428a7b5f",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-d31fe91bcfb345d6"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+3",
+      "qualitative_result": null,
+      "numeric_value": 0.01,
+      "value_text": "0.01 ± 0.01 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-d31fe91bcfb345d6"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c3"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+3|0.01 ± 0.01 %"
+    },
+    {
+      "candidate_id": "AOC-VIS-2d588ddb8971cb86",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-17055d4d2d8a1c95"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-17055d4d2d8a1c95"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|+4|0.00"
+    },
+    {
+      "candidate_id": "AOC-VIS-34d61facaf050381",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-786c099845be13cd"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": ">+4",
+      "qualitative_result": null,
+      "numeric_value": 0.0,
+      "value_text": "0.00",
+      "unit": null,
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-786c099845be13cd"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|>+4|0.00"
+    },
+    {
+      "candidate_id": "AOC-VIS-652075a583572547",
+      "paper_id": "GP-006",
+      "claim_ids": [
+        "ACL-VIS-1406333dda06dfeb"
+      ],
+      "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "total insertion frequency",
+      "qualitative_result": null,
+      "numeric_value": 1.01,
+      "value_text": "1.01±0.38%",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-1406333dda06dfeb"
+      ],
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c6"
+      ],
+      "route_hint": "vision",
+      "confidence": "high",
+      "review_reasons": [],
+      "structural_signature": "GP-006|PEX-GP-006-d4cca5a9f0e1|lsec|reached|total insertion frequency|1.01±0.38%"
+    }
+  ],
+  "accepted_visual_claims": [],
+  "local_evidence": [
+    {
+      "evidence_id": "GP-006-FC-47621725376733bb",
+      "text": "however, lower transgene expression was also observed in LSECs.",
+      "source_ids": [
+        "FC-S-051e1c2dbbc8ba2a",
+        "FC-S-051e1c2dbbc8ba2a"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-47621725376733bb",
+        "source_id": "FC-S-051e1c2dbbc8ba2a",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-e47e445580c98e0f",
+      "text": "The results indicated that high levels of luciferase expression were obtained from both hepatocytes and LSECs with about 17-fold higher expression in hepatocytes than LSECs.",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-e47e445580c98e0f",
+        "source_id": "FC-S-0d3e35eb30b2abf7",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-9f474cb7932305b5",
+      "text": "We also analyzed the +2 and +5 insertion patterns among indel variants, but their frequencies were significantly lower (0.78% and 0%, respectively) compared with deletion variants (Table S2).",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-9f474cb7932305b5",
+        "source_id": "FC-S-df43cccf8956b818",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-c6c8e8922e46148b",
+      "text": "Post-treatment, FVIII activity was measured by aPTT, and our results indicated that the treated mice generated an average of 3.30% ± 0.68% of FVIII activity over a span of 26 weeks (Figure 5A).",
+      "source_ids": [
+        "FC-S-1fd02dea48d2f778",
+        "FC-S-1fd02dea48d2f778"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-c6c8e8922e46148b",
+        "source_id": "FC-S-1fd02dea48d2f778",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-78a44cbc6069b59c",
+      "text": "Interestingly, DiI-labeled cells also colocalized with Isolectin B4-labeled LSECs",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-78a44cbc6069b59c",
+        "source_id": "FC-S-0d3e35eb30b2abf7",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-887ad8f0a2e6dcfc",
+      "text": "These results suggested that Cas9/sgRNA LNP treatment induced indel repair in LSECs and restoration of the endogenous FVIII expression permanently in NSG HemA mice.\nFigure 6Gene editing efficiency of isolated HPCs and LSECsAfter Cas9/sgRNA LNP injection, HPCs and LSECs were isolated from treated NSG HemA mice, respectively.",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-887ad8f0a2e6dcfc",
+        "source_id": "FC-S-df43cccf8956b818",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-c963377ef4e15d2f",
+      "text": "The immunostaining images showed colocalization of LYVE-1 and GFP signals\nLSECs not only uptake LNPs but can also express GFP protein (Figure 2B).",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-c963377ef4e15d2f",
+        "source_id": "FC-S-0d3e35eb30b2abf7",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-867518f9f8de93ec",
+      "text": "Our results indicated that delivery of Cas9/NSGHAsgRNA plasmid led to an increase in FVIII activity in NSG HemA mice.",
+      "source_ids": [
+        "FC-S-051e1c2dbbc8ba2a",
+        "FC-S-051e1c2dbbc8ba2a"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-867518f9f8de93ec",
+        "source_id": "FC-S-051e1c2dbbc8ba2a",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-f120a95c20f84306",
+      "text": "The data indicated that the F8 gene was edited in 60.54% ± 11.65% of hepatocytes\nLSECs showed gene editing rates of approximately 16.50% ± 2.96% (Figure 6A",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-f120a95c20f84306",
+        "source_id": "FC-S-df43cccf8956b818",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-37d97abddfe8a8ff",
+      "text": "The investigation of gene editing patterns in LSECs revealed that one base-pair deletions constitute the highest editing pattern (around 46.5% of total deletions)\nfour base-pair deletions, which can help rescue the five base-pair deletion in NSG HemA, accounting for 50%–60% of all the deletions (Figures 6C and 6D).",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-37d97abddfe8a8ff",
+        "source_id": "FC-S-df43cccf8956b818",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-e7b45e90113a790f",
+      "text": "Luciferase expression of HPCs and LSECs were determined by luciferase assay and normalized by total protein, respectively.",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-e7b45e90113a790f",
+        "source_id": "FC-S-0d3e35eb30b2abf7",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-92657c282e617e5c",
+      "text": "Next, we used Luc LNPs to evaluate mRNA expression levels in hepatocytes and LSECs, respectively.",
+      "source_ids": [
+        "FC-S-0d3e35eb30b2abf7"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-92657c282e617e5c",
+        "source_id": "FC-S-0d3e35eb30b2abf7",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-93ddf5afe2ae4f05",
+      "text": "Administration of Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about 52.7% in total liver cells.",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-93ddf5afe2ae4f05",
+        "source_id": "FC-S-df43cccf8956b818",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-69b7abdabc16327a",
+      "text": "Among all the deletion patterns, approximately 60% were one base-pair deletions that can restore the 5′ base-pair deletion to normal reading frame (Figure 3C).",
+      "source_ids": [
+        "FC-S-10f71fe35d1af996"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-69b7abdabc16327a",
+        "source_id": "FC-S-10f71fe35d1af996",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-3d990eb3b5256ae4",
+      "text": "We subsequently identified the indel pattern at the mutation site via the Sanger sequencing and Tracking of indels by Decomposition (TIDE) online tool, showing insertion and deletion rates of 3.5% and 28.5%, respectively.",
+      "source_ids": [
+        "FC-S-10f71fe35d1af996"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-3d990eb3b5256ae4",
+        "source_id": "FC-S-10f71fe35d1af996",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-63f5cf7bff32d296",
+      "text": "The result indicated that mF8sgRNA could induce an indel variant into mouse F8 exon 1 with a 23% of indel mutation rate (Figure 3B).",
+      "source_ids": [
+        "FC-S-10f71fe35d1af996"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-63f5cf7bff32d296",
+        "source_id": "FC-S-10f71fe35d1af996",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "GP-006-FC-626bb1932bd8fc95",
+      "text": "Our data showed that the in vivo gene editing efficiency of NSGHAsgRNA was comparable to that of mF8sgRNA, with both sgRNAs resulting in a gene editing efficiency of around 5% in genomic DNA extracted from whole liver (Figure 4B).",
+      "source_ids": [
+        "FC-S-051e1c2dbbc8ba2a",
+        "FC-S-051e1c2dbbc8ba2a"
+      ],
+      "source_kind": "text",
+      "provenance": {
+        "evidence_id": "GP-006-FC-626bb1932bd8fc95",
+        "source_id": "FC-S-051e1c2dbbc8ba2a",
+        "locator_type": "text",
+        "row_label": null,
+        "column_label": null,
+        "panel_label": null
+      }
+    },
+    {
+      "evidence_id": "VIS-4466b06097b27185",
+      "text": "Hepatocyte | +1 | 3.39 ± 0.91 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c1"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c1"
+      ]
+    },
+    {
+      "evidence_id": "VIS-366ecf655cea361a",
+      "text": "Hepatocyte | +2 | 0.83 ± 0.27 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c2"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c2"
+      ]
+    },
+    {
+      "evidence_id": "VIS-4353afe26a6a1063",
+      "text": "Hepatocyte | +3 | 0.01 ± 0.01 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c3"
+      ]
+    },
+    {
+      "evidence_id": "VIS-696377230fc94ddb",
+      "text": "Hepatocyte | +4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c4"
+      ]
+    },
+    {
+      "evidence_id": "VIS-9e55d39758b25aac",
+      "text": "Hepatocyte | >+4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c5"
+      ]
+    },
+    {
+      "evidence_id": "VIS-5f9b6daebb6cb3d8",
+      "text": "Hepatocyte | total insertion frequency | 4.23±1.17 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c6"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c6"
+      ]
+    },
+    {
+      "evidence_id": "VIS-54f6c0ece297b4fd",
+      "text": "LSEC | +1 | 0.78 ± 0.27 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c1"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c1"
+      ]
+    },
+    {
+      "evidence_id": "VIS-39f70fcf14234857",
+      "text": "LSEC | +2 | 0.21 ± 0.10 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c2"
+      ]
+    },
+    {
+      "evidence_id": "VIS-d31fe91bcfb345d6",
+      "text": "LSEC | +3 | 0.01 ± 0.01 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c3"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c3"
+      ]
+    },
+    {
+      "evidence_id": "VIS-17055d4d2d8a1c95",
+      "text": "LSEC | +4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c4"
+      ]
+    },
+    {
+      "evidence_id": "VIS-786c099845be13cd",
+      "text": "LSEC | >+4 | 0.00",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c5"
+      ]
+    },
+    {
+      "evidence_id": "VIS-1406333dda06dfeb",
+      "text": "LSEC | total insertion frequency | 1.01±0.38%",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c6"
+      ],
+      "source_kind": "docling_table_cell",
+      "provenance": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c6"
+      ]
+    }
+  ],
+  "estimated_tokens": 11239
+}

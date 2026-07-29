@@ -1,0 +1,4521 @@
+{
+  "coverage_version": "deterministic-structural-coverage-1.2.0",
+  "experiment_associations": {
+    "E1": {
+      "status": "associated",
+      "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+      "compatible_provisional_experiment_ids": [
+        "PEX-GP-008-51ddf3a73291"
+      ],
+      "diagnostics": {
+        "PEX-GP-008-044931098617": [
+          "payload_match",
+          "model_contradiction"
+        ],
+        "PEX-GP-008-51ddf3a73291": [
+          "payload_match",
+          "model_match"
+        ],
+        "PEX-GP-008-08e9104e95dd": [
+          "payload_contradiction",
+          "model_match"
+        ]
+      }
+    },
+    "E2": {
+      "status": "associated",
+      "provisional_experiment_id": "PEX-GP-008-044931098617",
+      "compatible_provisional_experiment_ids": [
+        "PEX-GP-008-044931098617"
+      ],
+      "diagnostics": {
+        "PEX-GP-008-044931098617": [
+          "payload_match",
+          "model_match"
+        ],
+        "PEX-GP-008-51ddf3a73291": [
+          "payload_match",
+          "model_contradiction"
+        ],
+        "PEX-GP-008-08e9104e95dd": [
+          "payload_contradiction",
+          "model_contradiction"
+        ]
+      }
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "AOC-5e16cdbcd2e69a6e",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-5e16cdbcd2e69a6e",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-67cba83633b522b0"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": "PEX-GP-008-044931098617",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "contradiction",
+            "expected": [
+              "hsc"
+            ],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "canonical_cell_sets_differ_or_output_is_broader"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "eliminated",
+              "endpoint_keys": [
+                "elimination"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-5e16cdbcd2e69a6e",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-67cba83633b522b0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-044931098617",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "eliminated",
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-5e16cdbcd2e69a6e",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-67cba83633b522b0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-044931098617",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "eliminated",
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-5e16cdbcd2e69a6e",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-67cba83633b522b0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-044931098617",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "eliminated",
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-5e16cdbcd2e69a6e",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-67cba83633b522b0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-044931098617",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "eliminated",
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-5e16cdbcd2e69a6e",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-67cba83633b522b0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-044931098617",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "eliminated",
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-5e16cdbcd2e69a6e",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-67cba83633b522b0"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-044931098617",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "eliminated",
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-8dd9dc840e9e109b",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-8dd9dc840e9e109b",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": "PEX-GP-008-08e9104e95dd",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "contradiction",
+            "expected": [
+              "liver_unspecified",
+              "macrophage"
+            ],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "canonical_cell_sets_differ_or_output_is_broader"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "colocalized_with",
+              "endpoint_keys": [
+                "colocalization",
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-8dd9dc840e9e109b",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "colocalized_with",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-8dd9dc840e9e109b",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "colocalized_with",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-8dd9dc840e9e109b",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "colocalized_with",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-8dd9dc840e9e109b",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "colocalized_with",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-8dd9dc840e9e109b",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "colocalized_with",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-8dd9dc840e9e109b",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "colocalized_with",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-486cf8fe3129bf3a",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-486cf8fe3129bf3a",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": "PEX-GP-008-08e9104e95dd",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "contradiction",
+            "expected": [
+              "liver_unspecified",
+              "macrophage"
+            ],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "canonical_cell_sets_differ_or_output_is_broader"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "colocalization",
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-486cf8fe3129bf3a",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-486cf8fe3129bf3a",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-486cf8fe3129bf3a",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": [
+                "colocalization",
+                "expression"
+              ],
+              "observed": [
+                "expression"
+              ],
+              "reason": "endpoint_families_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-486cf8fe3129bf3a",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-486cf8fe3129bf3a",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-486cf8fe3129bf3a",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-31d1c91359b57ac9"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "liver_unspecified",
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "colocalization",
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-f6ff0f2d293c6c36",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-f6ff0f2d293c6c36",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-f945a79d5d56831e"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": "PEX-GP-008-08e9104e95dd",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "exact_or_synonym_match",
+            "expected": [
+              "macrophage"
+            ],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "canonical_cell_sets_match"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "reduced",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-f6ff0f2d293c6c36",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-f945a79d5d56831e"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "reduced",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-f6ff0f2d293c6c36",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-f945a79d5d56831e"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "reduced",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-f6ff0f2d293c6c36",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-f945a79d5d56831e"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reduced",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-f6ff0f2d293c6c36",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-f945a79d5d56831e"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reduced",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-f6ff0f2d293c6c36",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-f945a79d5d56831e"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reduced",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-f6ff0f2d293c6c36",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-f945a79d5d56831e"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reduced",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-b03d712df1a87604",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-b03d712df1a87604",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-197c0d55a09731fa"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": "PEX-GP-008-08e9104e95dd",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "exact_or_synonym_match",
+            "expected": [
+              "macrophage"
+            ],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "canonical_cell_sets_match"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "uptake_by",
+              "endpoint_keys": [
+                "colocalization",
+                "uptake"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-b03d712df1a87604",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-197c0d55a09731fa"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "uptake_by",
+                "endpoint_keys": [
+                  "colocalization",
+                  "uptake"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-b03d712df1a87604",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-197c0d55a09731fa"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "uptake_by",
+                "endpoint_keys": [
+                  "colocalization",
+                  "uptake"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-b03d712df1a87604",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-197c0d55a09731fa"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "uptake_by",
+                "endpoint_keys": [
+                  "colocalization",
+                  "uptake"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-b03d712df1a87604",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-197c0d55a09731fa"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "uptake_by",
+                "endpoint_keys": [
+                  "colocalization",
+                  "uptake"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-b03d712df1a87604",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-197c0d55a09731fa"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "exact_or_synonym_match",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_match"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "uptake_by",
+                "endpoint_keys": [
+                  "colocalization",
+                  "uptake"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-b03d712df1a87604",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-197c0d55a09731fa"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-08e9104e95dd",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "uptake_by",
+                "endpoint_keys": [
+                  "colocalization",
+                  "uptake"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-a3cadab19708d5fa",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-a3cadab19708d5fa",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-730aaa4eea997e6f"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-GP-008-51ddf3a73291",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "contradiction",
+            "expected": [
+              "hsc"
+            ],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "canonical_cell_sets_differ_or_output_is_broader"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "decreased",
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-a3cadab19708d5fa",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-730aaa4eea997e6f"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-a3cadab19708d5fa",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-730aaa4eea997e6f"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-a3cadab19708d5fa",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-730aaa4eea997e6f"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-a3cadab19708d5fa",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-730aaa4eea997e6f"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-a3cadab19708d5fa",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-730aaa4eea997e6f"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-a3cadab19708d5fa",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-730aaa4eea997e6f"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-35945510483f5b25",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-35945510483f5b25",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-1dc71dae4927710a"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-GP-008-51ddf3a73291",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "contradiction",
+            "expected": [
+              "hsc"
+            ],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "canonical_cell_sets_differ_or_output_is_broader"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "increased",
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-35945510483f5b25",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-35945510483f5b25",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-35945510483f5b25",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-35945510483f5b25",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-35945510483f5b25",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-35945510483f5b25",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-1dc71dae4927710a"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "contradiction",
+              "expected": [
+                "hsc"
+              ],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "canonical_cell_sets_differ_or_output_is_broader"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-27a42aa903014f05",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-27a42aa903014f05",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "E1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "GP-008-FC-a5f4eb9b5d252ba0"
+        ],
+        "output_evidence_ids": [
+          "GP-008-E-10f321f4dd53870f",
+          "GP-008-E-1c5d35fdb8d32fac"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-GP-008-51ddf3a73291",
+            "observed": "PEX-GP-008-51ddf3a73291",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [
+              "macrophage"
+            ],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "fibrosis"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-27a42aa903014f05",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-a5f4eb9b5d252ba0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-10f321f4dd53870f",
+            "GP-008-E-1c5d35fdb8d32fac"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-27a42aa903014f05",
+          "output_outcome_id": "O2",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-a5f4eb9b5d252ba0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-1bf7bda856a91d0c",
+            "GP-008-E-51d08120feab231b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-27a42aa903014f05",
+          "output_outcome_id": "O3",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-a5f4eb9b5d252ba0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-27a42aa903014f05",
+          "output_outcome_id": "O4",
+          "output_experiment_id": "E2",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-a5f4eb9b5d252ba0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-7d00a9f09c5299f7",
+            "GP-008-E-85ffa081af3058cd"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-044931098617",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": []
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-27a42aa903014f05",
+          "output_outcome_id": "O5",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-a5f4eb9b5d252ba0"
+          ],
+          "output_evidence_ids": [
+            "GP-008-E-54366734b908d658",
+            "GP-008-FC-015cba9d1bfac43b"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [
+                "macrophage"
+              ],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "elimination"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        },
+        {
+          "candidate_id": "AOC-27a42aa903014f05",
+          "output_outcome_id": "O6",
+          "output_experiment_id": "E1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "GP-008-FC-a5f4eb9b5d252ba0"
+          ],
+          "output_evidence_ids": [
+            "V-784e837ef94bbff3"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-GP-008-51ddf3a73291",
+              "observed": "PEX-GP-008-51ddf3a73291",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [
+                "kupffer_cell",
+                "macrophage"
+              ],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": [
+                  "fibrosis"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "localization"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "confirmed": 0,
+    "contradicted": 0,
+    "unconfirmed": 8
+  },
+  "routes": {
+    "none": 0,
+    "bounded_repair_task": 8,
+    "human_review": 0
+  },
+  "integration_blocked": true,
+  "paid_api_requests": 0,
+  "paper_id": "GP-008",
+  "status": "review_unconfirmed_or_contradicted_facts"
+}

@@ -1,0 +1,369 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 4000,
+  "input": [
+    {
+      "role": "system",
+      "content": "Recover only the atomic candidate facts and experiment context in\nthe supplied task. Candidate IDs are opaque labels: use candidate_facts as the\nrequired fact definitions and the supplied evidence as their only support.\nAccount for every candidate ID exactly once as recovered or unresolved. Do not\nmerge distinct cells, relationships, endpoints, values, polarities, or\nexperiments into a broad record. A candidate is recovered only when at least one\nreturned outcome preserves its specific facts and cites its evidence; shared\nevidence alone is not coverage. Do not repeat existing records. Return unresolved\nwith a specific reason when evidence is insufficient. Never invent identifiers,\nvalues, units, comparisons, or evidence labels."
+    },
+    {
+      "role": "user",
+      "content": "{\"candidate_facts\":[{\"candidate_id\":\"AOC-20ad96e8b1cd3a2b\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-008-FC-3100ed6c7942dfbf\"],\"numeric_value\":null,\"object_text\":\"the M1 marker CD80\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"qualitative_result\":\"significantly\",\"subject_text\":\"BMDMs\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-3e55d1a24e7762f3\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-008-FC-1cea560b4cc4ad0e\"],\"numeric_value\":80.0,\"object_text\":\"GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR, respectively\",\"polarity\":\"positive\",\"predicate\":\"expressed\",\"qualitative_result\":null,\"subject_text\":\"BMDMs\",\"unit\":\"%\",\"value_text\":\"over over 80%\"},{\"candidate_id\":\"AOC-4efa2990a4dc498a\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-008-FC-80c6ec1cbc3e9a46\"],\"numeric_value\":20.0,\"object_text\":\"mRNA to fewer than 20% of target BMDMs in vitro\",\"polarity\":\"positive\",\"predicate\":\"delivered_to\",\"qualitative_result\":null,\"subject_text\":\"BMDMs\",\"unit\":\"%\",\"value_text\":\"fewer than fewer than 20%\"},{\"candidate_id\":\"AOC-5e16cdbcd2e69a6e\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-008-FC-67cba83633b522b0\"],\"numeric_value\":null,\"object_text\":\"the FAP+JS-1 target cells in vitro\",\"polarity\":\"positive\",\"predicate\":\"eliminated\",\"qualitative_result\":\"significantly\",\"subject_text\":\"the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-737fa516740b048a\",\"endpoint_text\":null,\"evidence_ids\":[\"GP-008-FC-a5c6681cff08ce5b\"],\"numeric_value\":null,\"object_text\":\"the phagocytic rates of BMDMs\",\"polarity\":\"positive\",\"predicate\":\"increased\",\"qualitative_result\":\"significantly\",\"subject_text\":\"BMDMs\",\"unit\":null,\"value_text\":null},{\"candidate_id\":\"AOC-cf630d9c5b3ada5d\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-008-FC-2749728b21beb464\"],\"numeric_value\":null,\"object_text\":\"the\",\"polarity\":\"positive\",\"predicate\":\"reduced\",\"qualitative_result\":\"reduced\",\"subject_text\":\"Meanwhile, the αCD163/LNP-FAPCAR group\",\"unit\":null,\"value_text\":null}],\"candidate_ids\":[\"AOC-20ad96e8b1cd3a2b\",\"AOC-3e55d1a24e7762f3\",\"AOC-4efa2990a4dc498a\",\"AOC-5e16cdbcd2e69a6e\",\"AOC-737fa516740b048a\",\"AOC-cf630d9c5b3ada5d\"],\"evidence\":[{\"evidence_id\":\"GP-008-FC-3100ed6c7942dfbf\",\"source_ids\":[\"FC-S-5f7e3c49e57be4bb\"],\"text\":\"The results showed that BMDMs, especially those treated with αCD163/LNP-FAPCAR, significantly promoted the expression of the M1 marker CD80 (Fig.\"},{\"evidence_id\":\"GP-008-FC-1cea560b4cc4ad0e\",\"source_ids\":[\"FC-S-be45df6ef11313b3\"],\"text\":\"Notably, over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR, respectively.\"},{\"evidence_id\":\"GP-008-FC-80c6ec1cbc3e9a46\",\"source_ids\":[\"FC-S-be45df6ef11313b3\"],\"text\":\"In contrast, unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro (Fig.\"},{\"evidence_id\":\"GP-008-FC-67cba83633b522b0\",\"source_ids\":[\"FC-S-5f7e3c49e57be4bb\"],\"text\":\"By transfecting target cells with luciferase, we quantified the killing effect, and the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly eliminated the FAP+JS-1 target cells in vitro (Fig.\"},{\"evidence_id\":\"GP-008-FC-a5c6681cff08ce5b\",\"source_ids\":[\"FC-S-5f7e3c49e57be4bb\"],\"text\":\"Both αCD163/LNP-FAPCAR and LNP-FAPCAR treatments significantly enhanced the phagocytic rates of BMDMs.\"},{\"evidence_id\":\"GP-008-FC-2749728b21beb464\",\"source_ids\":[\"FC-S-5f7e3c49e57be4bb\"],\"text\":\"Meanwhile, the αCD163/LNP-FAPCAR group reduced the expression of the M2 marker CD206 (Fig.\"}],\"existing_experiment_ids\":[\"E1\",\"E2\"],\"existing_formulation_ids\":[\"F1\",\"F2\"],\"existing_outcome_ids\":[\"O1\",\"O2\",\"O3\",\"O4\",\"O5\",\"O6\"],\"experiment_context\":{\"anchors\":[{\"anchor_type\":\"payload\",\"evidence_ids\":[\"GP-008-FC-1cea560b4cc4ad0e\",\"GP-008-FC-3100ed6c7942dfbf\",\"GP-008-FC-67cba83633b522b0\",\"GP-008-FC-a5c6681cff08ce5b\"],\"value\":\"fapcar\"},{\"anchor_type\":\"model\",\"evidence_ids\":[\"GP-008-FC-1cea560b4cc4ad0e\",\"GP-008-FC-3100ed6c7942dfbf\",\"GP-008-FC-67cba83633b522b0\",\"GP-008-FC-a5c6681cff08ce5b\"],\"value\":\"in_vitro\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[\"GP-008-FC-1cea560b4cc4ad0e\",\"GP-008-FC-3100ed6c7942dfbf\",\"GP-008-FC-a5c6681cff08ce5b\"],\"value\":\"macrophage\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[\"GP-008-FC-67cba83633b522b0\"],\"value\":\"hsc\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[\"GP-008-FC-67cba83633b522b0\",\"GP-008-FC-a5c6681cff08ce5b\"],\"value\":\"phagocytosis_cytotoxicity\"}],\"label\":\"fapcar / in_vitro\",\"provisional_experiment_id\":\"PEX-GP-008-044931098617\"},\"paper_id\":\"GP-008\",\"permitted_new_experiments\":0,\"permitted_new_outcomes\":8,\"route_ids\":[\"structural:AOC-20ad96e8b1cd3a2b\",\"structural:AOC-3e55d1a24e7762f3\",\"structural:AOC-4efa2990a4dc498a\",\"structural:AOC-5e16cdbcd2e69a6e\",\"structural:AOC-737fa516740b048a\",\"structural:AOC-cf630d9c5b3ada5d\"],\"source_inventory_sha256\":\"949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca\",\"source_result_sha256\":\"64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b\",\"task_checksum\":\"f32ae46a35b7e07cc507e50adab4281bae1799c3573661fa93c8ba5e410d6260\",\"task_version\":\"missing-record-task-1.1.0\"}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "MissingRecordFragment",
+      "schema": {
+        "$defs": {
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "disposition": {
+            "enum": [
+              "recovered",
+              "unresolved"
+            ],
+            "title": "Disposition",
+            "type": "string"
+          },
+          "recovered_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Recovered Candidate Ids",
+            "type": "array"
+          },
+          "unresolved_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Candidate Ids",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "maxItems": 2,
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "maxItems": 8,
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unresolved Reason"
+          }
+        },
+        "required": [
+          "disposition",
+          "recovered_candidate_ids",
+          "unresolved_candidate_ids",
+          "experiments",
+          "outcomes",
+          "unresolved_reason"
+        ],
+        "title": "MissingRecordFragment",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}

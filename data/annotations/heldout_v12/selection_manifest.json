@@ -1,0 +1,38 @@
+{
+  "version": "heldout-v12-selection-1.0.0",
+  "status": "pending_human_selection_and_annotation",
+  "purpose": "Reserve genuinely untouched papers for testing whether v1.2 generalizes beyond the nine-paper development set.",
+  "contamination_rule": "No paper may enter this manifest after its full text, figures, expected experiments, or expected outcomes have been inspected during v1.2 implementation.",
+  "legacy_split_note": "The gold_v1 development papers have already informed diagnosis or implementation and are not considered untouched, regardless of their older split label.",
+  "selection_owner": "human",
+  "minimum_slots": [
+    {
+      "slot_id": "HV12-IMAGE",
+      "required_risks": [
+        "image_based_supplementary_table_or_figure",
+        "row_column_or_panel_relationship_required"
+      ],
+      "paper_id": null,
+      "approval_status": "pending"
+    },
+    {
+      "slot_id": "HV12-MULTI-EXPERIMENT",
+      "required_risks": [
+        "multiple_distinct_experiments",
+        "shared_cell_or_endpoint_vocabulary"
+      ],
+      "paper_id": null,
+      "approval_status": "pending"
+    }
+  ],
+  "additional_balance_axes": [
+    "qualitative_result_without_numeric_value",
+    "positive_and_negative_visual_relationships",
+    "ordinary_eligible_paper_sample"
+  ],
+  "separation_of_duties": {
+    "selection_and_gold_annotation": "human review before any v1.2 run",
+    "pipeline_builders": "must not read this directory",
+    "evaluation": "may read only after development implementation is frozen"
+  }
+}

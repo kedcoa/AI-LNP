@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 GOLD_ROOT = ROOT / "data/annotations/gold_v1"
 OUTPUT_ROOT = ROOT / "reports/extraction/final_gold_dynamic_v1"
 RESULT_ROOTS = [
+    ROOT / "data/staging/extraction/compact_one_call_v1_2",
     ROOT / "data/staging/extraction/consolidated_gold_gap_merged_v1",
     ROOT / "data/staging/extraction/compact_merged_v1_1",
     ROOT / "data/staging/extraction/compact_merged_v1",

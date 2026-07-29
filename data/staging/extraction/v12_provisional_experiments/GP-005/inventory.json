@@ -1,0 +1,108 @@
+{
+  "inventory_version": "provisional-experiments-1.2.0",
+  "paper_id": "GP-005",
+  "source_packet_checksum": "353a78fda0632acd5b7207a1d5703673aa43a66cab3c1289072c66f5916b6472",
+  "experiments": [
+    {
+      "provisional_experiment_id": "PEX-GP-005-fe1cf7078f41",
+      "label": "egfp_gfp / in_vivo",
+      "anchors": [
+        {
+          "anchor_type": "payload",
+          "value": "egfp_gfp",
+          "evidence_ids": [
+            "GP-005-E-60a7b4a513e710e6",
+            "GP-005-E-d5934f7a75e37a6b",
+            "GP-005-FC-10b84ad2c9f0e670",
+            "GP-005-FC-37bbcf35ac135135",
+            "GP-005-E-2e5249bc3825b83f",
+            "GP-005-FC-72250a9cf7bc304a"
+          ]
+        },
+        {
+          "anchor_type": "model",
+          "value": "in_vivo",
+          "evidence_ids": [
+            "GP-005-E-60a7b4a513e710e6",
+            "GP-005-E-d5934f7a75e37a6b",
+            "GP-005-FC-10b84ad2c9f0e670",
+            "GP-005-FC-37bbcf35ac135135",
+            "GP-005-E-2e5249bc3825b83f",
+            "GP-005-FC-72250a9cf7bc304a"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "imaging",
+          "evidence_ids": [
+            "GP-005-E-60a7b4a513e710e6",
+            "GP-005-E-d5934f7a75e37a6b",
+            "GP-005-FC-10b84ad2c9f0e670",
+            "GP-005-FC-37bbcf35ac135135"
+          ]
+        }
+      ],
+      "claim_ids": [],
+      "shared_context_claim_ids": [],
+      "boundary_status": "inferred",
+      "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+      "confidence": "medium"
+    },
+    {
+      "provisional_experiment_id": "PEX-GP-005-a39df08b9950",
+      "label": "sirna / in_vivo",
+      "anchors": [
+        {
+          "anchor_type": "payload",
+          "value": "sirna",
+          "evidence_ids": [
+            "GP-005-FC-36a44f688d535990",
+            "GP-005-E-dc158191b2ec1d12",
+            "GP-005-FC-52ce1a197d187b74"
+          ]
+        },
+        {
+          "anchor_type": "model",
+          "value": "in_vivo",
+          "evidence_ids": [
+            "GP-005-FC-36a44f688d535990",
+            "GP-005-E-dc158191b2ec1d12",
+            "GP-005-FC-52ce1a197d187b74"
+          ]
+        },
+        {
+          "anchor_type": "cell_context",
+          "value": "kupffer_cell",
+          "evidence_ids": [
+            "GP-005-FC-36a44f688d535990"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "sequencing",
+          "evidence_ids": [
+            "GP-005-E-dc158191b2ec1d12",
+            "GP-005-FC-52ce1a197d187b74"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "imaging",
+          "evidence_ids": [
+            "GP-005-FC-36a44f688d535990"
+          ]
+        }
+      ],
+      "claim_ids": [],
+      "shared_context_claim_ids": [],
+      "boundary_status": "inferred",
+      "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+      "confidence": "medium"
+    }
+  ],
+  "unassigned_claim_ids": [],
+  "validation_notes": [
+    "Gold annotations were not read by this builder.",
+    "Unknown-context evidence is merged only when exactly one compatible context exists for that payload signature."
+  ]
+}

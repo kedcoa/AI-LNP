@@ -1,0 +1,41 @@
+{
+  "inventory_version": "provisional-experiments-1.2.0",
+  "paper_id": "GP-001",
+  "source_packet_checksum": "77db16931f4990dfdd3534069397361adf7f47c11745ac855828d75de66bf4c1",
+  "experiments": [
+    {
+      "provisional_experiment_id": "PEX-GP-001-3d821cc903fb",
+      "label": "generic_lnp / unknown",
+      "anchors": [
+        {
+          "anchor_type": "payload",
+          "value": "generic_lnp",
+          "evidence_ids": [
+            "GP-001-E-75bb5b8e8164f65e",
+            "GP-001-E-a2d40855b331cf35",
+            "GP-001-FC-84d374136a934f1a",
+            "GP-001-FC-a025474d10140c0c"
+          ]
+        },
+        {
+          "anchor_type": "cell_context",
+          "value": "hepatocyte",
+          "evidence_ids": [
+            "GP-001-E-a2d40855b331cf35",
+            "GP-001-FC-84d374136a934f1a"
+          ]
+        }
+      ],
+      "claim_ids": [],
+      "shared_context_claim_ids": [],
+      "boundary_status": "ambiguous",
+      "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+      "confidence": "low"
+    }
+  ],
+  "unassigned_claim_ids": [],
+  "validation_notes": [
+    "Gold annotations were not read by this builder.",
+    "Unknown-context evidence is merged only when exactly one compatible context exists for that payload signature."
+  ]
+}

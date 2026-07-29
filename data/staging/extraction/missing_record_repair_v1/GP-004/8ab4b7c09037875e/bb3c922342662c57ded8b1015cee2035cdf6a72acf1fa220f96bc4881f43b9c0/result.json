@@ -1,0 +1,325 @@
+{
+  "disposition": "recovered",
+  "recovered_candidate_ids": [
+    "AOC-29d56a9f2824b4ae",
+    "AOC-3e51accdc676fb1d",
+    "AOC-522a5dab8c0d1f14",
+    "AOC-a6b5ecbf468f2cd4"
+  ],
+  "unresolved_candidate_ids": [],
+  "experiments": [
+    {
+      "experiment_id": "PEX-GP-004-415d753e7b0e",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA-LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Luc mRNA-LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Luc",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target was reported."
+      },
+      "delivery_recipient_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No delivery recipient cell was reported."
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No therapeutic target cell was reported."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40",
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No species was reported."
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model was reported."
+      },
+      "experimental_context": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The supplied evidence does not explicitly state the experimental context."
+      },
+      "dose": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No dose was reported."
+      },
+      "dose_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No dose unit was reported."
+      },
+      "route": {
+        "value": "IV",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "A time-course result was reported, but no single experiment timepoint was specified."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "A time-course result was reported, but no single experiment timepoint unit was specified."
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "AOC-29d56a9f2824b4ae",
+      "experiment_id": "PEX-GP-004-415d753e7b0e",
+      "assay": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No assay was reported for protein expression."
+      },
+      "endpoint": {
+        "value": "protein expression",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Both IV delivery routes",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric protein-expression value was reported."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "similar protein expression levels and kinetics",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "AOC-3e51accdc676fb1d",
+      "experiment_id": "PEX-GP-004-415d753e7b0e",
+      "assay": {
+        "value": "bioluminescence",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Luc mRNA-LNP expression",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Both delivery methods",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric expression value was reported."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "liver restricted",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-525e4ad8fb4e4525",
+          "GP-004-FC-bb226d88dafd1041"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "AOC-522a5dab8c0d1f14",
+      "experiment_id": "PEX-GP-004-415d753e7b0e",
+      "assay": {
+        "value": "bioluminescence",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-440906cb169c4960",
+          "GP-004-FC-79cd6ce9072c0e6f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "activity",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-440906cb169c4960",
+          "GP-004-FC-79cd6ce9072c0e6f"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No comparator was reported."
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The reported rate is expressed as one log per day rather than as a single outcome value."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No single outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "decreased progressively with an average rate of one log per day, reaching baseline activity at day 8 post-injection",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-440906cb169c4960",
+          "GP-004-FC-79cd6ce9072c0e6f"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "AOC-a6b5ecbf468f2cd4",
+      "experiment_id": "PEX-GP-004-415d753e7b0e",
+      "assay": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No assay was reported for protein expression."
+      },
+      "endpoint": {
+        "value": "protein expression",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Both IV delivery routes",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric protein-expression value was reported."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver",
+        "status": "reported",
+        "evidence_ids": [
+          "GP-004-E-aa1c2885867bfc0a",
+          "GP-004-FC-2249bd15d7493e40"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_reason": null
+}

@@ -1,0 +1,138 @@
+{
+  "task_version": "missing-record-task-1.1.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-9071481e1945fec6",
+    "structural:AOC-a52bc8417bc9d51f"
+  ],
+  "candidate_ids": [
+    "AOC-9071481e1945fec6",
+    "AOC-a52bc8417bc9d51f"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-afdd75fc803d",
+    "label": "egfp_gfp / in_vitro",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vitro",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "hsc",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "flow_cytometry",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "phagocytosis_cytotoxicity",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-9071481e1945fec6",
+      "subject_text": "BMDMs",
+      "predicate": "expressed",
+      "object_text": "the screened BMDMs and the analysis",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-d17010e8cbba6cec"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a52bc8417bc9d51f",
+      "subject_text": "BMDMs",
+      "predicate": "expressed",
+      "object_text": "BMDMs through flow cytometry and (K) the analysis of GFP",
+      "endpoint_text": "GFP expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-E-e9466266dec9786d",
+        "GP-008-FC-96045cb4ab6274c3"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-d17010e8cbba6cec",
+      "text": "(G and H) Flow cytometry analysis of CD80 and CD206 expression in the screened BMDMs and the analysis.",
+      "source_ids": [
+        "FC-S-b1303c7efd61ae31"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-E-e9466266dec9786d",
+      "text": "(Scale bar, 10 μm.) (J) Representative GFP expression in BMDMs through flow cytometry and (K) the analysis of GFP expression.",
+      "source_ids": [
+        "S-6c16ffc4255c"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-96045cb4ab6274c3",
+      "text": "(Scale bar, 10 μm.) (J) Representative GFP expression in BMDMs through flow cytometry and (K) the analysis of GFP expression.",
+      "source_ids": [
+        "FC-S-75e69a2f0aa58a3a",
+        "FC-S-75e69a2f0aa58a3a"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 4,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca",
+  "task_checksum": "e643d7122c1618d946b04b88537c98fccbc016681d7f3bba976957ab9fe8c1a1"
+}
