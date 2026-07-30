@@ -271,8 +271,12 @@ def audit(run_root: Path = RUN_ROOT) -> dict[str, Any]:
                     "candidate_count": len(task.candidate_ids),
                     "evidence_count": len(task.evidence),
                     "vision_candidate_count": sum(
-                        candidate_by_id[candidate_id].route_hint == "vision"
+                        candidate.route_hint == "vision"
                         for candidate_id in task.candidate_ids
+                        if (
+                            candidate := candidate_by_id.get(candidate_id)
+                        )
+                        is not None
                     ),
                     "repair_route": repair_route,
                     "visual_object_id": metadata.get("visual_object_id"),

@@ -457,6 +457,45 @@ def test_audit_rejects_wrong_visual_object_partition_metadata(
     ]
 
 
+def test_audit_reports_unknown_task_candidate_without_crashing(
+    tmp_path, monkeypatch
+):
+    row = candidate(candidate_id="AOC-UNKNOWN")
+    run_dir = _write_run(tmp_path, candidates=[row])
+    monkeypatch.setattr(
+        builder, "estimate_input_tokens", lambda task, model: 2_000
+    )
+    build_for_run(run_dir)
+    request_path = run_dir / "request.json"
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    request["request_payload"]["outcome_recall_support"][
+        "atomic_outcome_candidates"
+    ] = []
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    unsigned = {"paper_id": "GP-X"}
+    serialized = json.dumps(
+        unsigned, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    )
+    (run_dir / "preparation_manifest.json").write_text(
+        json.dumps(
+            {
+                **unsigned,
+                "manifest_checksum": hashlib.sha256(
+                    serialized.encode("utf-8")
+                ).hexdigest(),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    report = auditor.audit(tmp_path)
+
+    assert not report["passed"]
+    assert "GP-X:task_01.json:unknown_candidate:AOC-UNKNOWN" in report[
+        "issues"
+    ]
+
+
 def test_tasks_are_grouped_by_provisional_experiment_not_shared_source(tmp_path):
     run_dir = tmp_path / "GP-X"
     run_dir.mkdir()

@@ -31,7 +31,11 @@ def test_prepares_three_frozen_baselines_without_paid_calls(tmp_path):
                     / f"task_{index:02d}.json"
                 ).read_text()
             )
-            assert task["task_version"] == "missing-record-task-1.1.0"
+            assert task["task_version"] == "missing-record-task-1.2.0"
+            assert {
+                row["experiment_id"]
+                for row in task["existing_experiment_summaries"]
+            } == set(task["existing_experiment_ids"])
             assert task["experiment_context"]
             assert {row["candidate_id"] for row in task["candidate_facts"]} == set(
                 task["candidate_ids"]
