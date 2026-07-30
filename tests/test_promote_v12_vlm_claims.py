@@ -1,3 +1,4 @@
+import hashlib
 import json
 
 import pytest
@@ -56,6 +57,10 @@ def test_promote_requires_full_benchmark_gate(tmp_path):
 
 def test_promote_strips_query_ids_and_skips_numeric_table_claims(tmp_path):
     runs = tmp_path / "runs"
+    figure_path = tmp_path / "figure.png"
+    table_path = tmp_path / "table.png"
+    figure_path.write_bytes(b"trusted figure")
+    table_path.write_bytes(b"trusted table")
     for query_id, result_type in (
         ("positive-figure", "qualitative"),
         ("positive-table", "exact_numeric"),
@@ -81,14 +86,14 @@ def test_promote_strips_query_ids_and_skips_numeric_table_claims(tmp_path):
                 "repeat": 1,
                 "passed": True,
                 "expected_status": "extract",
-                "image_path": "figure.png",
+                "image_path": str(figure_path),
             },
             {
                 "query_id": "positive-table",
                 "repeat": 1,
                 "passed": True,
                 "expected_status": "extract",
-                "image_path": "table.png",
+                "image_path": str(table_path),
             },
         ],
     }))
@@ -105,3 +110,6 @@ def test_promote_strips_query_ids_and_skips_numeric_table_claims(tmp_path):
     assert "gold_outcome_id" not in serialized
     assert "GO-" not in serialized
     assert registry["claims"][0]["claim"]["claim_id"].startswith("VCL-")
+    assert registry["claims"][0]["image_sha256"] == hashlib.sha256(
+        figure_path.read_bytes()
+    ).hexdigest()

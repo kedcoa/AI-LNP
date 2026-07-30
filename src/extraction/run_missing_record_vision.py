@@ -47,8 +47,11 @@ def _sha(value: bytes | str) -> str:
 
 
 def load_task(path: Path) -> MissingRecordVisionTask:
-    task = MissingRecordVisionTask.model_validate_json(path.read_text(encoding="utf-8"))
-    unsigned = task.model_dump(mode="json", exclude={"task_checksum"})
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    task = MissingRecordVisionTask.model_validate(raw)
+    unsigned = {
+        key: value for key, value in raw.items() if key != "task_checksum"
+    }
     if _sha(_canonical(unsigned)) != task.task_checksum:
         raise ValueError("Missing-record vision task checksum mismatch")
     if _sha(Path(task.crop_path).read_bytes()) != task.crop_sha256:
@@ -60,7 +63,11 @@ def _as_text_task(task: MissingRecordVisionTask) -> MissingRecordTask:
     return MissingRecordTask(
         task_version=(
             "missing-record-task-1.2.0"
-            if task.task_version == "missing-record-vision-task-1.1.0"
+            if task.task_version
+            in {
+                "missing-record-vision-task-1.1.0",
+                "missing-record-vision-task-1.2.0",
+            }
             else "missing-record-task-1.0.0"
         ),
         paper_id=task.paper_id,

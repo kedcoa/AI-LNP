@@ -4,7 +4,9 @@ import json
 from openai.lib._pydantic import to_strict_json_schema
 
 import src.extraction.preflight_missing_record_repairs as preflight_module
-from src.extraction.build_missing_record_vision_tasks import build
+from src.extraction.build_missing_record_vision_tasks import (
+    build_for_run as build_vision_for_run,
+)
 from src.extraction.missing_record_contracts import MissingRecordFragment
 from src.extraction.preflight_missing_record_repairs import strict_schema_issues
 from tests.test_missing_record_workflow import _v12_task
@@ -46,10 +48,36 @@ def _prepared_run(tmp_path):
     result_path = run_dir / "result.json"
     result_path.write_text('{"paper_id":"GP-X"}\n', encoding="utf-8")
     result_sha256 = hashlib.sha256(result_path.read_bytes()).hexdigest()
+    routes = [
+        ("OC-TEXT-1", "text", None),
+        ("OC-TEXT-2", "text", None),
+        ("OC-VISION-1", "vision", "FIGURE-1"),
+        ("OC-VISION-2", "vision", "FIGURE-2"),
+    ]
+    visual_claims = []
+    for _candidate_id, route, visual_object_id in routes:
+        if route != "vision":
+            continue
+        crop_path = tmp_path / f"{visual_object_id}.png"
+        crop_path.write_bytes(
+            f"PNG:{visual_object_id}:".encode() + b"x" * 100_000
+        )
+        visual_claims.append(
+            {
+                "evidence_id": "E-1",
+                "object_id": visual_object_id,
+                "image_path": str(crop_path),
+                "image_sha256": hashlib.sha256(
+                    crop_path.read_bytes()
+                ).hexdigest(),
+                "claim": {"panel_or_cell": "A"},
+                "support_text": "Visible support.",
+            }
+        )
     support = {
         "paper_id": "GP-X",
         "atomic_outcome_candidates": [],
-        "accepted_visual_claims": [],
+        "accepted_visual_claims": visual_claims,
     }
     inventory_sha256 = hashlib.sha256(
         _canonical(support).encode()
@@ -66,12 +94,6 @@ def _prepared_run(tmp_path):
     )
 
     base_task = _v12_task(candidate_ids=["OC-BASE"])
-    routes = [
-        ("OC-TEXT-1", "text", None),
-        ("OC-TEXT-2", "text", None),
-        ("OC-VISION-1", "vision", "FIGURE-1"),
-        ("OC-VISION-2", "vision", "FIGURE-2"),
-    ]
     metadata = []
     for index, (candidate_id, route, visual_object_id) in enumerate(routes, 1):
         task = _sign_task(
@@ -91,30 +113,39 @@ def _prepared_run(tmp_path):
                 "visual_object_id": visual_object_id,
             }
         )
-        if route == "vision":
-            crop_path = tmp_path / f"{visual_object_id}.png"
-            crop_path.write_bytes(f"PNG:{visual_object_id}".encode())
-            crop_sha256 = hashlib.sha256(crop_path.read_bytes()).hexdigest()
-            visual_task = build(
-                text_task=task,
-                accepted_visual_claim={
-                    "evidence_id": "E-1",
-                    "object_id": visual_object_id,
-                    "image_path": str(crop_path),
-                    "image_sha256": crop_sha256,
-                    "claim": {"panel_or_cell": "A"},
-                    "support_text": "Visible support.",
-                },
-            )
-            (vision_root / f"task_{index:02d}.json").write_text(
-                visual_task.model_dump_json(indent=2) + "\n",
-                encoding="utf-8",
-            )
     (task_root / "manifest.json").write_text(
         json.dumps({"task_count": 4, "tasks": metadata}),
         encoding="utf-8",
     )
+    vision_root.rmdir()
+    build_vision_for_run(run_dir)
     return run_root
+
+
+def _passed_audit(candidate_count=4):
+    return {
+        "passed": True,
+        "issues": [],
+        "repair_candidate_count": candidate_count,
+        "papers": [
+            {
+                "confirmed_candidate_count": 3,
+                "repair_candidate_count": candidate_count,
+            }
+        ],
+    }
+
+
+def _resign_vision_task(path, mutate):
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    mutate(raw)
+    unsigned = {
+        key: value for key, value in raw.items() if key != "task_checksum"
+    }
+    raw["task_checksum"] = hashlib.sha256(
+        _canonical(unsigned).encode()
+    ).hexdigest()
+    path.write_text(json.dumps(raw), encoding="utf-8")
 
 
 def test_missing_record_response_schema_is_strict_at_every_object():
@@ -142,17 +173,7 @@ def test_preflight_reports_exact_paid_call_and_route_totals(
     monkeypatch.setattr(
         preflight_module,
         "audit",
-        lambda root: {
-            "passed": True,
-            "issues": [],
-            "repair_candidate_count": 4,
-            "papers": [
-                {
-                    "confirmed_candidate_count": 3,
-                    "repair_candidate_count": 4,
-                }
-            ],
-        },
+        lambda root: _passed_audit(),
     )
 
     report = preflight_module.preflight(
@@ -172,5 +193,115 @@ def test_preflight_reports_exact_paid_call_and_route_totals(
     assert len(report["request_paths"]) == 4
     assert report["estimated_cost"] is None
     assert report["pricing_status"] == "pricing_not_configured"
+    vision_rows = [
+        row for row in report["requests"] if row["route"] == "vision"
+    ]
+    assert all(row["image_input_bytes"] > 100_000 for row in vision_rows)
+    assert all(row["estimated_image_tokens"] is None for row in vision_rows)
+    assert all(
+        row["estimated_input_tokens"] < row["request_bytes"] // 10
+        for row in vision_rows
+    )
+    assert report["estimated_image_tokens"] is None
+    assert report["image_token_estimate_status"] == "not_configured"
     assert report["server_request_sent"] is False
     assert report["paid_api_requests"] == 0
+
+
+def test_preflight_rejects_resigned_vision_semantic_tampering(
+    tmp_path, monkeypatch
+):
+    run_root = _prepared_run(tmp_path)
+    vision_path = (
+        run_root
+        / "GP-X/missing_record_vision_tasks/task_03.json"
+    )
+    _resign_vision_task(
+        vision_path,
+        lambda raw: raw["candidate_facts"][0].update(
+            {"subject_text": "tampered subject"}
+        ),
+    )
+    monkeypatch.setattr(
+        preflight_module, "audit", lambda root: _passed_audit()
+    )
+
+    report = preflight_module.preflight(
+        run_root=run_root,
+        output_root=tmp_path / "out",
+        model="test",
+    )
+
+    assert not report["local_preflight_passed"]
+    assert report["vision_request_count"] == 1
+    assert any(
+        "vision_semantic_scope_mismatch" in issue
+        for issue in report["issues"]
+    )
+
+
+def test_preflight_rejects_resigned_vision_image_substitution(
+    tmp_path, monkeypatch
+):
+    run_root = _prepared_run(tmp_path)
+    replacement = tmp_path / "replacement.png"
+    replacement.write_bytes(b"replacement image")
+    replacement_sha = hashlib.sha256(replacement.read_bytes()).hexdigest()
+    vision_path = (
+        run_root
+        / "GP-X/missing_record_vision_tasks/task_03.json"
+    )
+
+    def substitute_image(raw):
+        raw["crop_path"] = str(replacement)
+        raw["crop_sha256"] = replacement_sha
+
+    _resign_vision_task(vision_path, substitute_image)
+    monkeypatch.setattr(
+        preflight_module, "audit", lambda root: _passed_audit()
+    )
+
+    report = preflight_module.preflight(
+        run_root=run_root,
+        output_root=tmp_path / "out",
+        model="test",
+    )
+
+    assert not report["local_preflight_passed"]
+    assert report["vision_request_count"] == 1
+    assert any(
+        "accepted_visual_image_binding_mismatch" in issue
+        for issue in report["issues"]
+    )
+
+
+def test_preflight_rejects_resigned_accepted_claim_hash_tampering(
+    tmp_path, monkeypatch
+):
+    run_root = _prepared_run(tmp_path)
+    vision_path = (
+        run_root
+        / "GP-X/missing_record_vision_tasks/task_03.json"
+    )
+    _resign_vision_task(
+        vision_path,
+        lambda raw: raw.update(
+            {"accepted_visual_claim_sha256": "0" * 64}
+        ),
+    )
+    monkeypatch.setattr(
+        preflight_module, "audit", lambda root: _passed_audit()
+    )
+
+    report = preflight_module.preflight(
+        run_root=run_root,
+        output_root=tmp_path / "out",
+        model="test",
+    )
+
+    assert not report["local_preflight_passed"]
+    assert report["vision_request_count"] == 1
+    assert any(
+        "accepted_visual_claim_sha256_mismatch" in issue
+        for issue in report["issues"]
+    )

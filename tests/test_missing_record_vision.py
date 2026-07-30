@@ -1,15 +1,17 @@
 import hashlib
+import json
 from types import SimpleNamespace
 
 import pytest
 from pydantic import ValidationError
 
 import src.extraction.build_v12_structural_repair_tasks as text_builder
+import src.extraction.preflight_missing_record_repairs as preflight_module
 from src.extraction.build_missing_record_vision_tasks import (
     build,
     build_for_run,
 )
-from src.extraction.run_missing_record_vision import run
+from src.extraction.run_missing_record_vision import load_task, run
 from tests.test_build_v12_structural_repair_tasks import _write_run
 from tests.test_deterministic_coverage_v12 import candidate
 from tests.test_missing_record_workflow import _v12_task
@@ -58,7 +60,9 @@ def test_visual_task_carries_candidate_facts_and_semantic_summaries(tmp_path):
     ]
     assert task.existing_outcome_summaries == []
     assert task.crop_path.endswith(".png")
-    assert task.task_version == "missing-record-vision-task-1.1.0"
+    assert task.task_version == "missing-record-vision-task-1.2.0"
+    assert task.source_text_task_checksum
+    assert task.accepted_visual_claim_sha256
 
 
 def test_visual_task_rejects_a_changed_accepted_image(tmp_path):
@@ -77,6 +81,39 @@ def test_visual_task_rejects_a_changed_accepted_image(tmp_path):
                 "support_text": "Visible support.",
             },
         )
+
+
+def test_legacy_vision_task_checksum_uses_its_original_raw_fields(tmp_path):
+    current = _visual_task(tmp_path).model_dump(mode="json")
+    current["task_version"] = "missing-record-vision-task-1.0.0"
+    for field in (
+        "experiment_context",
+        "candidate_facts",
+        "existing_experiment_summaries",
+        "existing_outcome_summaries",
+        "source_text_task_checksum",
+        "accepted_visual_claim_sha256",
+    ):
+        current.pop(field)
+    unsigned = {
+        key: value
+        for key, value in current.items()
+        if key != "task_checksum"
+    }
+    current["task_checksum"] = hashlib.sha256(
+        json.dumps(
+            unsigned,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode()
+    ).hexdigest()
+    task_path = tmp_path / "legacy-task.json"
+    task_path.write_text(json.dumps(current), encoding="utf-8")
+
+    assert load_task(task_path).task_version == (
+        "missing-record-vision-task-1.0.0"
+    )
 
 
 def test_route_manifest_builds_only_candidate_level_vision_tasks(
@@ -104,6 +141,9 @@ def test_route_manifest_builds_only_candidate_level_vision_tasks(
                 "evidence_id": "E-VISION",
                 "object_id": "FIGURE-1",
                 "image_path": str(crop_path),
+                "image_sha256": hashlib.sha256(
+                    crop_path.read_bytes()
+                ).hexdigest(),
                 "claim": {"panel_or_cell": "A"},
                 "support_text": "Visible support.",
             }
@@ -123,6 +163,80 @@ def test_route_manifest_builds_only_candidate_level_vision_tasks(
     assert (
         run_dir / manifest["tasks"][0]["task_path"]
     ).is_file()
+
+
+@pytest.mark.parametrize("provenance_issue", ["missing_digest", "mismatch"])
+def test_untrusted_visual_claim_is_quarantined_without_task_or_request(
+    tmp_path, monkeypatch, provenance_issue
+):
+    crop_path = tmp_path / "unsigned-figure.png"
+    crop_path.write_bytes(b"\x89PNG\r\nunsigned visual")
+    visual_candidate = candidate(
+        candidate_id="AOC-UNSIGNED",
+        claim_ids=["ACL-UNSIGNED"],
+        evidence_ids=["E-UNSIGNED"],
+        source_ids=["FIGURE-UNSIGNED"],
+        route_hint="vision",
+    )
+    accepted_visual_claim = {
+        "evidence_id": "E-UNSIGNED",
+        "object_id": "FIGURE-UNSIGNED",
+        "image_path": str(crop_path),
+        "claim": {"panel_or_cell": "A"},
+        "support_text": "Visible support.",
+    }
+    if provenance_issue == "mismatch":
+        accepted_visual_claim["image_sha256"] = hashlib.sha256(
+            crop_path.read_bytes()
+        ).hexdigest()
+    run_dir = _write_run(
+        tmp_path,
+        candidates=[visual_candidate],
+        accepted_visual_claims=[accepted_visual_claim],
+    )
+    monkeypatch.setattr(
+        text_builder, "estimate_input_tokens", lambda task, model: 2_000
+    )
+    text_builder.build_for_run(run_dir)
+    if provenance_issue == "mismatch":
+        crop_path.write_bytes(b"\x89PNG\r\nsubstituted visual")
+
+    manifest = build_for_run(run_dir)
+
+    assert manifest["task_count"] == 0
+    assert manifest["visual_human_review_candidate_ids"] == [
+        "AOC-UNSIGNED"
+    ]
+    assert not list(
+        (run_dir / "missing_record_vision_tasks").glob("task_*.json")
+    )
+
+    monkeypatch.setattr(
+        preflight_module,
+        "audit",
+        lambda root: {
+            "passed": True,
+            "issues": [],
+            "repair_candidate_count": 1,
+            "papers": [
+                {
+                    "confirmed_candidate_count": 0,
+                    "repair_candidate_count": 1,
+                }
+            ],
+        },
+    )
+    report = preflight_module.preflight(
+        run_root=tmp_path,
+        output_root=tmp_path / "preflight",
+        model="test",
+    )
+    assert report["local_preflight_passed"]
+    assert report["vision_request_count"] == 0
+    assert report["visual_human_review_candidate_ids"] == [
+        "AOC-UNSIGNED"
+    ]
+    assert not any(row["route"] == "vision" for row in report["requests"])
 
 
 def test_visual_raw_response_is_persisted_before_invalid_json_is_parsed(

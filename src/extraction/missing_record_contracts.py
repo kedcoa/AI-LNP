@@ -232,6 +232,7 @@ class MissingRecordVisionTask(StrictModel):
     task_version: Literal[
         "missing-record-vision-task-1.0.0",
         "missing-record-vision-task-1.1.0",
+        "missing-record-vision-task-1.2.0",
     ]
     paper_id: str
     route_ids: list[str] = Field(min_length=1)
@@ -261,11 +262,13 @@ class MissingRecordVisionTask(StrictModel):
     crop_path: str
     crop_sha256: str
     crop_evidence_id: str
+    source_text_task_checksum: str | None = None
+    accepted_visual_claim_sha256: str | None = None
     task_checksum: str
 
     @model_validator(mode="after")
     def validate_semantic_scope(self) -> "MissingRecordVisionTask":
-        if self.task_version != "missing-record-vision-task-1.1.0":
+        if self.task_version == "missing-record-vision-task-1.0.0":
             return self
         MissingRecordTask(
             task_version="missing-record-task-1.2.0",
@@ -291,6 +294,14 @@ class MissingRecordVisionTask(StrictModel):
         }:
             raise ValueError(
                 "v1.1 crop evidence must be present in the task evidence"
+            )
+        if self.task_version == "missing-record-vision-task-1.2.0" and (
+            not self.source_text_task_checksum
+            or not self.accepted_visual_claim_sha256
+        ):
+            raise ValueError(
+                "v1.2 vision tasks require source task and accepted claim "
+                "checksums"
             )
         return self
 

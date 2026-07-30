@@ -13,6 +13,10 @@ from typing import Any
 from openai.resources.responses.responses import Responses
 
 from src.extraction.audit_v12_structural_tasks import audit
+from src.extraction.build_missing_record_vision_tasks import (
+    matching_accepted_visual_claims,
+    vision_task_binding_issues,
+)
 from src.extraction.run_missing_record_repair import (
     build_openai_request as build_text_request,
 )
@@ -114,6 +118,20 @@ def _request_row(
     gold = sorted(set(GOLD_IDENTIFIER.findall(serialized)))
     if gold:
         issues.append(f"gold_identifiers:{gold}")
+    token_estimate_request = json.loads(serialized)
+    image_input_bytes = 0
+    if route == "vision":
+        image_input_bytes = Path(task.crop_path).stat().st_size
+        for message in token_estimate_request.get("input", []):
+            content = message.get("content")
+            if not isinstance(content, list):
+                continue
+            for item in content:
+                if item.get("type") == "input_image":
+                    item["image_url"] = ""
+    estimated_input_tokens = estimate_tokens(
+        _canonical(token_estimate_request)
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
         json.dumps(request, ensure_ascii=False, indent=2) + "\n",
@@ -130,7 +148,9 @@ def _request_row(
             "candidate_count": len(task.candidate_ids),
             "evidence_count": len(task.evidence),
             "request_bytes": len(serialized.encode("utf-8")),
-            "estimated_input_tokens": estimate_tokens(serialized),
+            "estimated_input_tokens": estimated_input_tokens,
+            "image_input_bytes": image_input_bytes,
+            "estimated_image_tokens": None,
             "max_output_tokens": request["max_output_tokens"],
             "sdk_create_keys_valid": not unknown_keys,
             "strict_schema_valid": not schema_issues,
@@ -171,8 +191,15 @@ def preflight(
     text_candidate_count = 0
     visual_candidate_count = 0
     visual_object_ids: set[str] = set()
+    visual_human_review_candidate_ids: set[str] = set()
 
     for run_dir in sorted(path for path in run_root.glob("GP-*") if path.is_dir()):
+        source_request = json.loads(
+            (run_dir / "request.json").read_text(encoding="utf-8")
+        )
+        accepted_visual_claims = source_request["request_payload"][
+            "outcome_recall_support"
+        ].get("accepted_visual_claims", [])
         structural_root = run_dir / "structural_repair_tasks"
         manifest = json.loads(
             (structural_root / "manifest.json").read_text(encoding="utf-8")
@@ -186,6 +213,20 @@ def preflight(
         vision_paths = {
             path.name: path for path in vision_root.glob("task_*.json")
         }
+        vision_manifest_path = vision_root / "manifest.json"
+        vision_manifest = (
+            json.loads(vision_manifest_path.read_text(encoding="utf-8"))
+            if vision_manifest_path.is_file()
+            else {}
+        )
+        paper_visual_human_review_ids = set(
+            vision_manifest.get(
+                "visual_human_review_candidate_ids", []
+            )
+        )
+        visual_human_review_candidate_ids |= (
+            paper_visual_human_review_ids
+        )
         expected_vision_names: set[str] = set()
 
         for task_path, metadata in zip(
@@ -197,6 +238,17 @@ def preflight(
                 text_candidate_count += len(task.candidate_ids)
                 request = build_text_request(task, model=model)
             elif route == "vision":
+                candidate_ids = set(metadata.get("candidate_ids", []))
+                quarantined = (
+                    candidate_ids & paper_visual_human_review_ids
+                )
+                if quarantined:
+                    if quarantined != candidate_ids:
+                        issues.append(
+                            f"{run_dir.name}:{task_path.name}:"
+                            "partial_visual_human_review_scope"
+                        )
+                    continue
                 expected_vision_names.add(task_path.name)
                 visual_object_id = metadata.get("visual_object_id")
                 if visual_object_id:
@@ -210,21 +262,29 @@ def preflight(
                     continue
                 source_task = load_task(task_path)
                 task = load_vision_task(vision_path)
-                if set(task.candidate_ids) != set(source_task.candidate_ids):
+                matching_claims = matching_accepted_visual_claims(
+                    text_task=source_task,
+                    visual_object_id=visual_object_id,
+                    claims=accepted_visual_claims,
+                )
+                if len(matching_claims) != 1:
                     issues.append(
                         f"{run_dir.name}:{task_path.name}:"
-                        "vision_candidate_scope_mismatch"
+                        "accepted_visual_claim_binding_mismatch"
                     )
-                if (
-                    task.source_result_sha256
-                    != source_task.source_result_sha256
-                    or task.source_inventory_sha256
-                    != source_task.source_inventory_sha256
-                ):
-                    issues.append(
+                    continue
+                binding_issues = vision_task_binding_issues(
+                    vision_task=task,
+                    text_task=source_task,
+                    accepted_visual_claim=matching_claims[0],
+                )
+                if binding_issues:
+                    issues.extend(
                         f"{run_dir.name}:{task_path.name}:"
-                        "vision_source_hash_mismatch"
+                        f"{binding_issue}"
+                        for binding_issue in binding_issues
                     )
+                    continue
                 visual_candidate_count += len(task.candidate_ids)
                 request = build_vision_request(task, model=model)
                 task_path = vision_path
@@ -285,11 +345,19 @@ def preflight(
         "text_request_count": text_request_count,
         "visual_candidate_count": visual_candidate_count,
         "visual_object_count": len(visual_object_ids),
+        "visual_human_review_candidate_ids": sorted(
+            visual_human_review_candidate_ids
+        ),
         "vision_request_count": vision_request_count,
         "total_paid_request_count": total_paid_request_count,
         "estimated_input_tokens": sum(
             row["estimated_input_tokens"] for row in rows
         ),
+        "image_input_bytes": sum(
+            row["image_input_bytes"] for row in rows
+        ),
+        "estimated_image_tokens": None,
+        "image_token_estimate_status": "not_configured",
         "max_output_tokens": sum(
             row["max_output_tokens"] for row in rows
         ),
