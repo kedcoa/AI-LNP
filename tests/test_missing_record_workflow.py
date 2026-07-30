@@ -14,10 +14,15 @@ from src.extraction.missing_record_contracts import (
 )
 from src.extraction.repair_contracts import RepairEvidence
 from src.extraction.run_missing_record_repair import (
+    PROMPT as TEXT_PROMPT,
+    PROMPT_VERSION as TEXT_PROMPT_VERSION,
     build_openai_request,
     fingerprint,
     run,
     validate_response,
+)
+from src.extraction.run_missing_record_vision import (
+    PROMPT as VISION_PROMPT,
 )
 from src.extraction.route_compact_findings import route
 
@@ -29,6 +34,27 @@ def _reported(value):
         "evidence_ids": ["E-1"],
         "missing_reason": None,
     }
+
+
+@pytest.mark.parametrize(
+    "required_text",
+    [
+        "already_represented",
+        "recovered_existing_experiment",
+        "recovered_new_experiment",
+        "unresolved",
+        "provisional experiment context is not a binding target",
+        "distinct experiments require distinct outcomes",
+        "preserve the comparator",
+    ],
+)
+def test_text_and_vision_prompts_define_resolution_semantics(required_text):
+    assert required_text in TEXT_PROMPT
+    assert required_text in VISION_PROMPT
+
+
+def test_text_prompt_uses_v1_2_version():
+    assert TEXT_PROMPT_VERSION == "missing-record-repair-prompt-1.2.0"
 
 
 def _missing():

@@ -23,7 +23,7 @@ from src.extraction.missing_record_contracts import (
 
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_ROOT = ROOT / "data/staging/extraction/missing_record_repair_v1"
-PROMPT_VERSION = "missing-record-repair-prompt-1.0.0"
+PROMPT_VERSION = "missing-record-repair-prompt-1.2.0"
 PROMPT = """Recover only the atomic candidate facts and experiment context in
 the supplied task. Candidate IDs are opaque labels: use candidate_facts as the
 required fact definitions and the supplied evidence as their only support.
@@ -35,7 +35,17 @@ evidence alone is not coverage. Do not repeat existing records. Return unresolve
 with a specific reason when evidence is insufficient. Never invent identifiers,
 values, units, comparisons, or evidence labels. For v1.2 tasks, return one
 candidate resolution for every candidate and explicitly link each returned
-outcome to its resolved candidate and experiment."""
+outcome to its resolved candidate and experiment. Every candidate receives
+exactly one resolution: already_represented, recovered_existing_experiment,
+recovered_new_experiment, or unresolved. already_represented references only
+existing outcomes and experiments. recovered_existing_experiment references at
+least one new outcome on existing experiments. recovered_new_experiment
+references at least one new outcome on the one permitted new experiment.
+unresolved returns no records and a specific reason. The provisional experiment context is not a binding target:
+use it only as a hint. A candidate may reference several outcomes only when they
+link to genuinely distinct experiments; distinct experiments require distinct outcomes.
+For a multi-arm comparison, produce one
+outcome on the encompassing experiment and preserve the comparator."""
 
 
 def _canonical(value: Any) -> str:

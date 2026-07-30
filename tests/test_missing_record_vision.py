@@ -16,6 +16,7 @@ from src.extraction.missing_record_contracts import (
     MissingRecordVisionResponse,
 )
 from src.extraction.run_missing_record_vision import (
+    PROMPT_VERSION,
     build_openai_request,
     load_task,
     run,
@@ -57,6 +58,10 @@ def _visual_task(tmp_path):
             "support_text": "The printed panel reports GFP expression.",
         },
     )
+
+
+def test_vision_prompt_uses_v1_2_version():
+    assert PROMPT_VERSION == "missing-record-vision-prompt-1.2.0"
 
 
 def _approved_vision_request(

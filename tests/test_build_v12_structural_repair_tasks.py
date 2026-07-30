@@ -20,6 +20,7 @@ def _write_run(
     experiments=None,
     outcomes=None,
     coverage_candidates=None,
+    experiment_associations=None,
     accepted_visual_claims=None,
     extra_evidence=None,
 ):
@@ -81,7 +82,7 @@ def _write_run(
             }
             for row in candidates
         ],
-        "experiment_associations": {},
+        "experiment_associations": experiment_associations or {},
     }
     (run_dir / "request.json").write_text(
         json.dumps(request), encoding="utf-8"
@@ -143,6 +144,25 @@ def _semantic_run(tmp_path):
     )
 
 
+def _associated_run(tmp_path, candidates):
+    return _write_run(
+        tmp_path,
+        candidates=candidates,
+        experiment_associations={
+            "EXP1": {
+                "status": "associated",
+                "provisional_experiment_id": "PEX-EGFP",
+            }
+        },
+    )
+
+
+def _build_associated_task(tmp_path):
+    run_dir = _associated_run(tmp_path, [candidate()])
+    build_for_run(run_dir)
+    return _load_tasks(run_dir)[0]
+
+
 def test_task_contains_semantic_summaries_for_every_existing_experiment(
     tmp_path,
 ):
@@ -160,6 +180,33 @@ def test_task_contains_semantic_summaries_for_every_existing_experiment(
     assert {
         row.outcome_id for row in task.existing_outcome_summaries
     } == {"OUT-EGFP", "OUT-HGF", "OUT-EGF"}
+
+
+def test_associated_provisional_experiment_still_permits_bounded_new_experiment(
+    tmp_path,
+):
+    task = _build_associated_task(tmp_path)
+
+    assert task.permitted_new_experiments == 1
+
+
+def test_repacking_accounts_for_new_experiment_output_allowance(tmp_path):
+    candidates = [
+        candidate(
+            candidate_id=f"AOC-{index}",
+            claim_ids=[f"ACL-{index}"],
+            evidence_ids=[f"E-{index}"],
+        )
+        for index in range(1, 6)
+    ]
+
+    manifest = build_for_run(_associated_run(tmp_path, candidates))
+
+    assert all(
+        row["estimated_worst_case_output_tokens"] <= 4_000
+        for row in manifest["tasks"]
+    )
+    assert sum(row["candidate_count"] for row in manifest["tasks"]) == 5
 
 
 def test_dynamic_packing_spills_before_measured_token_limit(
@@ -572,7 +619,7 @@ def test_tasks_are_grouped_by_provisional_experiment_not_shared_source(tmp_path)
     by_experiment = {
         row["provisional_experiment_id"]: row for row in manifest["tasks"]
     }
-    assert by_experiment["PEX-EGFP"]["permitted_new_experiments"] == 0
+    assert by_experiment["PEX-EGFP"]["permitted_new_experiments"] == 1
     assert by_experiment["PEX-OTHER"]["permitted_new_experiments"] == 1
     assert manifest["paid_api_requests"] == 0
 

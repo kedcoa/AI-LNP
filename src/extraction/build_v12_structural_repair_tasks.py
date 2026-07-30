@@ -311,12 +311,6 @@ def build_for_run(
         candidate_by_id[candidate_id] for candidate_id in sorted(repair_ids)
     ]
 
-    associated_experiments = {
-        row["provisional_experiment_id"]
-        for row in coverage["experiment_associations"].values()
-        if row.get("status") == "associated"
-        and row.get("provisional_experiment_id")
-    }
     provisional_by_id = {
         row["provisional_experiment_id"]: row
         for row in support["provisional_experiments"]
@@ -418,9 +412,7 @@ def build_for_run(
             "existing_outcome_summaries": [
                 row.model_dump(mode="json") for row in outcome_summaries
             ],
-            "permitted_new_experiments": (
-                0 if provisional_id in associated_experiments else 1
-            ),
+            "permitted_new_experiments": 1,
             "permitted_new_outcomes": min(
                 8, max(1, len(candidate_ids) * 2)
             ),
