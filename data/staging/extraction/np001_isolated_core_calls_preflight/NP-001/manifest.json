@@ -1,0 +1,94 @@
+{
+  "preflight_version": "compact-isolated-core-preflight-1.0.0",
+  "route": "primary-isolated-core-biological-slot-trial",
+  "route_version": "compact-route-1.5.0-trial",
+  "paper_id": "NP-001",
+  "model": "gpt-5.6-terra",
+  "packet_checksum": "d36f9479bb109650dccf6117d7da784057e2beaf2c69a797d347f9d1b382f593",
+  "slot_qualification_sha256": "e3a724585ec74866db3689bcecfc1f19440c6acc529f60919cf2627f1a74fd59",
+  "slot_ids": [
+    "CORE-HEPG2-TRANSFECTION",
+    "CORE-DC24-TRANSFECTION",
+    "CORE-DC24-IMMUNE",
+    "CORE-HPBMC-TRANSFECTION",
+    "CORE-HPBMC-IMMUNE",
+    "CORE-MOUSE-BIODISTRIBUTION"
+  ],
+  "proposed_calls": 6,
+  "provider_calls": 0,
+  "requests": [
+    {
+      "sequence": 1,
+      "slot_id": "CORE-HEPG2-TRANSFECTION",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np001_isolated_core_calls_preflight/NP-001/01/request.json",
+      "request_sha256": "631244ad4cb671a0d4cfe50059d3f4ce6006fb1eb9df985c827153ce48c90d16",
+      "request_bytes": 23431,
+      "estimated_input_tokens": 3444,
+      "max_output_tokens": 12000,
+      "request_fingerprint": "b90dc01276b51f2fb0631e37d415b953f4a8bd664e67a4a050556b79c91245b1",
+      "dynamic_schema_sha256": "567927b217edff0e54871eb78a545db9cd00d8dbba948f019585e84a952d3151",
+      "provider_calls": 0
+    },
+    {
+      "sequence": 2,
+      "slot_id": "CORE-DC24-TRANSFECTION",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np001_isolated_core_calls_preflight/NP-001/02/request.json",
+      "request_sha256": "96f09964e72141e15976e956928dd72016799f48150d4bf7cefa0314cd6368b8",
+      "request_bytes": 22072,
+      "estimated_input_tokens": 3104,
+      "max_output_tokens": 12000,
+      "request_fingerprint": "a577407dabf7d2d30e327c010a77b88c3356d339a42785ec7818c28ad976b4bb",
+      "dynamic_schema_sha256": "e08fce50b5d89396be3ee0b9ad39c1770b212a9c8d35f7987e9df3fb3bd07eb0",
+      "provider_calls": 0
+    },
+    {
+      "sequence": 3,
+      "slot_id": "CORE-DC24-IMMUNE",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np001_isolated_core_calls_preflight/NP-001/03/request.json",
+      "request_sha256": "c3ac9cec55a51194c6ceb382091dcbf2fad580ad0e9a1d9f932cadd5892960d4",
+      "request_bytes": 21853,
+      "estimated_input_tokens": 3049,
+      "max_output_tokens": 12000,
+      "request_fingerprint": "c742bde9c88d4c7c1c8c3865d3e6649424618f29e8537dce81266a33e4f41485",
+      "dynamic_schema_sha256": "e295a5ba0f38150ab4048b12cbffeb32f131afcff3f1dd42c1991daebba12144",
+      "provider_calls": 0
+    },
+    {
+      "sequence": 4,
+      "slot_id": "CORE-HPBMC-TRANSFECTION",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np001_isolated_core_calls_preflight/NP-001/04/request.json",
+      "request_sha256": "06a393491c66124ddf9966d5006ee74c310a584a9f69c140b8b150de5ab9d611",
+      "request_bytes": 22904,
+      "estimated_input_tokens": 3312,
+      "max_output_tokens": 12000,
+      "request_fingerprint": "6c2a32ceab96bd31010a1ac242c5d34e12b85171e8a86a19063019f48440691c",
+      "dynamic_schema_sha256": "0b46dbcada328f6c3c85209bdfedee41c420d92296823364704cf2af2865bb1a",
+      "provider_calls": 0
+    },
+    {
+      "sequence": 5,
+      "slot_id": "CORE-HPBMC-IMMUNE",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np001_isolated_core_calls_preflight/NP-001/05/request.json",
+      "request_sha256": "1d7dc2a4d54d3e60e672ebf336dc36e46a78e701b64a3f7e0ac71ef9c06e2835",
+      "request_bytes": 22384,
+      "estimated_input_tokens": 3182,
+      "max_output_tokens": 12000,
+      "request_fingerprint": "8e1831a7d93b5071350e382c91388b586fe07ad555541b050ab69d1f195ce98f",
+      "dynamic_schema_sha256": "88428cd01e1373cf046ea63c7be58adc58e9bae6a91fc5c899003f9398f5dca3",
+      "provider_calls": 0
+    },
+    {
+      "sequence": 6,
+      "slot_id": "CORE-MOUSE-BIODISTRIBUTION",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np001_isolated_core_calls_preflight/NP-001/06/request.json",
+      "request_sha256": "5e8d94d2dcfc09c33ab604ceed66c9e18c901e8b7fcd65f3ebdcefb8a01aa4d6",
+      "request_bytes": 21755,
+      "estimated_input_tokens": 3025,
+      "max_output_tokens": 12000,
+      "request_fingerprint": "61980f1807b7e6a0ff4be740c4ef786d46cd22ff1f07a50a5162b165d0b57326",
+      "dynamic_schema_sha256": "cf04768a38ddcfbd516be18f055d54fb7d9c055d23415d397c663a4713d30a1f",
+      "provider_calls": 0
+    }
+  ],
+  "manifest_checksum": "17412f17ff618ad8cfa09ae7a4b30f8efe954a987fe1157f33db8f77648cce48"
+}

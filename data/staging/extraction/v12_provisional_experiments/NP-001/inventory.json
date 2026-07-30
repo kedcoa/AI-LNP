@@ -1,0 +1,69 @@
+{
+  "inventory_version": "provisional-experiments-1.2.0",
+  "paper_id": "NP-001",
+  "source_packet_checksum": "7e7415c0dc08b6c204f4052f461e49d0398da5e51b9d9396c0f29b619ea5ccde",
+  "experiments": [
+    {
+      "provisional_experiment_id": "PEX-NP-001-682724960865",
+      "label": "egfp_gfp / unknown",
+      "anchors": [
+        {
+          "anchor_type": "payload",
+          "value": "egfp_gfp",
+          "evidence_ids": [
+            "NP-001-E-1ec1832fdbf78e17",
+            "NP-001-E-2703afe55479f86a",
+            "NP-001-E-41989f77e7adbcde",
+            "NP-001-E-66aa73012c21ab9d",
+            "NP-001-E-7484864b9360083c",
+            "NP-001-E-7b3c625323c08b9c",
+            "NP-001-E-9bb123b4191feb68",
+            "NP-001-E-9c55026e2d4b9713",
+            "NP-001-E-a087eca3e3a63589",
+            "NP-001-E-c6658491eb3ce79d",
+            "NP-001-FC-0b4ad62127552309",
+            "NP-001-FC-1824c7ac484965de",
+            "NP-001-FC-1ab6ca63a94a7dbf",
+            "NP-001-FC-27d1d034d716b3aa",
+            "NP-001-FC-3c482e914f406c68",
+            "NP-001-FC-5584fe233c29bcb0",
+            "NP-001-FC-6a6835cf68944636",
+            "NP-001-FC-77b4f58650dd24a4",
+            "NP-001-FC-7cf1676420a6d44b",
+            "NP-001-FC-8bc2d969df4e20e4",
+            "NP-001-FC-90c33335a62d7b15",
+            "NP-001-FC-9b6199e63d84fb26",
+            "NP-001-FC-9cfaf8e145cc16d0",
+            "NP-001-FC-9d1e48a4ef57b5b8",
+            "NP-001-FC-a94da6a778ca7b31",
+            "NP-001-FC-b237c1785cfb82d5",
+            "NP-001-FC-b686917aece69651",
+            "NP-001-FC-c9d42bd8d07a7b66",
+            "NP-001-FC-d3c378e593531489",
+            "NP-001-FC-ec7b168c68a2607e",
+            "NP-001-FC-ffcda17d9fe36190"
+          ]
+        },
+        {
+          "anchor_type": "assay",
+          "value": "flow_cytometry",
+          "evidence_ids": [
+            "NP-001-E-9c55026e2d4b9713",
+            "NP-001-FC-1824c7ac484965de",
+            "NP-001-FC-1ab6ca63a94a7dbf"
+          ]
+        }
+      ],
+      "claim_ids": [],
+      "shared_context_claim_ids": [],
+      "boundary_status": "ambiguous",
+      "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+      "confidence": "low"
+    }
+  ],
+  "unassigned_claim_ids": [],
+  "validation_notes": [
+    "Gold annotations were not read by this builder.",
+    "Unknown-context evidence is merged only when exactly one compatible context exists for that payload signature."
+  ]
+}

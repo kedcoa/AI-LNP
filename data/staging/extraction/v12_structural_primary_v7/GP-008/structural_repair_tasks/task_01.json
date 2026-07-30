@@ -1,0 +1,311 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-20ad96e8b1cd3a2b",
+    "structural:AOC-3e55d1a24e7762f3",
+    "structural:AOC-4efa2990a4dc498a",
+    "structural:AOC-5e16cdbcd2e69a6e",
+    "structural:AOC-737fa516740b048a"
+  ],
+  "candidate_ids": [
+    "AOC-20ad96e8b1cd3a2b",
+    "AOC-3e55d1a24e7762f3",
+    "AOC-4efa2990a4dc498a",
+    "AOC-5e16cdbcd2e69a6e",
+    "AOC-737fa516740b048a"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-044931098617",
+    "label": "fapcar / in_vitro",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "fapcar",
+        "evidence_ids": [
+          "GP-008-FC-1cea560b4cc4ad0e",
+          "GP-008-FC-3100ed6c7942dfbf",
+          "GP-008-FC-67cba83633b522b0",
+          "GP-008-FC-a5c6681cff08ce5b"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vitro",
+        "evidence_ids": [
+          "GP-008-FC-1cea560b4cc4ad0e",
+          "GP-008-FC-3100ed6c7942dfbf",
+          "GP-008-FC-67cba83633b522b0",
+          "GP-008-FC-a5c6681cff08ce5b"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": [
+          "GP-008-FC-1cea560b4cc4ad0e",
+          "GP-008-FC-3100ed6c7942dfbf",
+          "GP-008-FC-a5c6681cff08ce5b"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "hsc",
+        "evidence_ids": [
+          "GP-008-FC-67cba83633b522b0"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "phagocytosis_cytotoxicity",
+        "evidence_ids": [
+          "GP-008-FC-67cba83633b522b0",
+          "GP-008-FC-a5c6681cff08ce5b"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-20ad96e8b1cd3a2b",
+      "subject_text": "BMDMs",
+      "predicate": "expressed",
+      "object_text": "the M1 marker CD80",
+      "endpoint_text": "expression",
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-3100ed6c7942dfbf"
+      ]
+    },
+    {
+      "candidate_id": "AOC-3e55d1a24e7762f3",
+      "subject_text": "BMDMs",
+      "predicate": "expressed",
+      "object_text": "GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR, respectively",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 80.0,
+      "value_text": "over over 80%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-1cea560b4cc4ad0e"
+      ]
+    },
+    {
+      "candidate_id": "AOC-4efa2990a4dc498a",
+      "subject_text": "BMDMs",
+      "predicate": "delivered_to",
+      "object_text": "mRNA to fewer than 20% of target BMDMs in vitro",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 20.0,
+      "value_text": "fewer than fewer than 20%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-80c6ec1cbc3e9a46"
+      ]
+    },
+    {
+      "candidate_id": "AOC-5e16cdbcd2e69a6e",
+      "subject_text": "the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly",
+      "predicate": "eliminated",
+      "object_text": "the FAP+JS-1 target cells in vitro",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-67cba83633b522b0"
+      ]
+    },
+    {
+      "candidate_id": "AOC-737fa516740b048a",
+      "subject_text": "BMDMs",
+      "predicate": "increased",
+      "object_text": "the phagocytic rates of BMDMs",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-a5c6681cff08ce5b"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-3100ed6c7942dfbf",
+      "text": "The results showed that BMDMs, especially those treated with αCD163/LNP-FAPCAR, significantly promoted the expression of the M1 marker CD80 (Fig.",
+      "source_ids": [
+        "FC-S-5f7e3c49e57be4bb"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-1cea560b4cc4ad0e",
+      "text": "Notably, over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR, respectively.",
+      "source_ids": [
+        "FC-S-be45df6ef11313b3"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-80c6ec1cbc3e9a46",
+      "text": "In contrast, unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro (Fig.",
+      "source_ids": [
+        "FC-S-be45df6ef11313b3"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-67cba83633b522b0",
+      "text": "By transfecting target cells with luciferase, we quantified the killing effect, and the results demonstrated that the CAR-M derived from αCD163/LNP-FAPCAR significantly eliminated the FAP+JS-1 target cells in vitro (Fig.",
+      "source_ids": [
+        "FC-S-5f7e3c49e57be4bb"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-a5c6681cff08ce5b",
+      "text": "Both αCD163/LNP-FAPCAR and LNP-FAPCAR treatments significantly enhanced the phagocytic rates of BMDMs.",
+      "source_ids": [
+        "FC-S-5f7e3c49e57be4bb"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "FAPCAR mRNA",
+      "encoded_product": "FAP-targeted CAR",
+      "molecular_target": "FAP",
+      "delivery_recipient_cell": "hepatic macrophages",
+      "therapeutic_target_cell": "FAP+ macrophages",
+      "tissue_or_organ": "liver",
+      "species": "mouse",
+      "disease_model": "liver fibrosis",
+      "experimental_context": "in_vivo",
+      "dose": 0.4,
+      "dose_unit": "mg mRNA/kg body weight",
+      "route": "intravenous tail-vein injection",
+      "timepoint": 14.0,
+      "timepoint_unit": "days after treatment",
+      "outcome_endpoints": [
+        "liver fibrosis",
+        "amount of FAP+ macrophages in fibrotic livers",
+        "FAP+ cells in hepatic tissue",
+        "FAPCAR localization in F4/80+ macrophages in liver tissue"
+      ],
+      "comparator_context": [
+        "CCL4 group",
+        "untreated cohort"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "GFP or FAPCAR",
+      "encoded_product": "GFP or FAPCAR",
+      "molecular_target": "CD163",
+      "delivery_recipient_cell": "BMDMs",
+      "therapeutic_target_cell": "BMDMs",
+      "tissue_or_organ": null,
+      "species": null,
+      "disease_model": null,
+      "experimental_context": "in_vitro",
+      "dose": null,
+      "dose_unit": null,
+      "route": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+        "Target BMDMs receiving mRNA from unmodified LNPs"
+      ],
+      "comparator_context": [
+        "unmodified LNP",
+        "targeted αCD163 LNP"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "histology, Sirius red staining, and Masson's trichrome staining",
+      "endpoint": "liver fibrosis",
+      "comparator": "CCL4 group",
+      "qualitative_outcome": "Treatment with αCD163/LNP-FAPCAR significantly alleviated liver fibrosis."
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E1",
+      "assay": "single-cell RNA sequencing and immunofluorescence colocalization",
+      "endpoint": "amount of FAP+ macrophages in fibrotic livers",
+      "comparator": "untreated cohort",
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment markedly attenuated FAP+ macrophages; FAP/F4/80 double-positive macrophages were virtually eradicated after administration."
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "GFP or FAPCAR expression",
+      "endpoint": "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+      "comparator": "unmodified LNP",
+      "qualitative_outcome": ">80% of BMDMs expressed GFP or FAPCAR."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E2",
+      "assay": "mRNA delivery",
+      "endpoint": "Target BMDMs receiving mRNA from unmodified LNPs",
+      "comparator": "targeted αCD163 LNP",
+      "qualitative_outcome": "<20% of target BMDMs received mRNA."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "immunohistochemistry of hepatic tissue",
+      "endpoint": "FAP+ cells in hepatic tissue",
+      "comparator": null,
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment enabled targeted elimination of FAP+ cells."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "immunofluorescence staining",
+      "endpoint": "FAPCAR localization in F4/80+ macrophages in liver tissue",
+      "comparator": null,
+      "qualitative_outcome": "FAPCAR immunofluorescence staining highlighted F4/80+ macrophages in liver tissues."
+    }
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca",
+  "task_checksum": "3d0205cdfbfbdf81c937005e88049a49ebfa63c70f9e58891ff8c0ad4bdd01bb"
+}

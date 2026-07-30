@@ -1,0 +1,290 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-0901c53222785cae",
+    "structural:AOC-22389fb78b0d25aa",
+    "structural:AOC-27a42aa903014f05",
+    "structural:AOC-3b46bef07c59fc61",
+    "structural:AOC-97494ce37975f2a0"
+  ],
+  "candidate_ids": [
+    "AOC-0901c53222785cae",
+    "AOC-22389fb78b0d25aa",
+    "AOC-27a42aa903014f05",
+    "AOC-3b46bef07c59fc61",
+    "AOC-97494ce37975f2a0"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-51ddf3a73291",
+    "label": "fapcar / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "fapcar",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "kupffer_cell",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "histology",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-0901c53222785cae",
+      "subject_text": "Heps",
+      "predicate": "expressed",
+      "object_text": "was almost absent in Heps",
+      "endpoint_text": "expression",
+      "qualitative_result": "absent",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "negative",
+      "evidence_ids": [
+        "GP-008-FC-1dc71dae4927710a"
+      ]
+    },
+    {
+      "candidate_id": "AOC-22389fb78b0d25aa",
+      "subject_text": "HSCs",
+      "predicate": "increased",
+      "object_text": "HSCs",
+      "endpoint_text": "expression",
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-1dc71dae4927710a"
+      ]
+    },
+    {
+      "candidate_id": "AOC-27a42aa903014f05",
+      "subject_text": "Notably, the αCD163/LNP-FAPCAR cohort",
+      "predicate": "reached",
+      "object_text": "the most pronounced fibrosis regression",
+      "endpoint_text": "fibrosis",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-a5f4eb9b5d252ba0"
+      ]
+    },
+    {
+      "candidate_id": "AOC-3b46bef07c59fc61",
+      "subject_text": "macrophage",
+      "predicate": "expressed",
+      "object_text": "fewer fibrosis-related proteins and mRNAs",
+      "endpoint_text": "fibrosis",
+      "qualitative_result": "solely",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-e75218514098ec17"
+      ]
+    },
+    {
+      "candidate_id": "AOC-97494ce37975f2a0",
+      "subject_text": "macrophage",
+      "predicate": "expressed",
+      "object_text": "across all clusters, the analyzed macrophage landscape was predominantly enriched for SAM-like states",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-00a892f506ee3803"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-1dc71dae4927710a",
+      "text": "In the Fibrosis group, PCNA expression was significantly increased in HSCs\nPCNA expression was almost absent in Heps",
+      "source_ids": [
+        "FC-S-9a8b8f55dd34f16d"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-a5f4eb9b5d252ba0",
+      "text": "Notably, the αCD163/LNP-FAPCAR cohort achieved the most pronounced fibrosis regression.",
+      "source_ids": [
+        "FC-S-b842c4f3d32bf804"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-e75218514098ec17",
+      "text": "The results demonstrated that, compared with HSCs induced solely by TGF-β1, HSCs exposed to MMP12+macrophage-conditioned medium (CM) expressed fewer fibrosis-related proteins and mRNAs (Fig.",
+      "source_ids": [
+        "FC-S-a6f2290dacffb34f"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-00a892f506ee3803",
+      "text": "Given negligible SPP1 expression across all clusters, the analyzed macrophage landscape was predominantly enriched for SAM-like states.",
+      "source_ids": [
+        "FC-S-a6f2290dacffb34f"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "FAPCAR mRNA",
+      "encoded_product": "FAP-targeted CAR",
+      "molecular_target": "FAP",
+      "delivery_recipient_cell": "hepatic macrophages",
+      "therapeutic_target_cell": "FAP+ macrophages",
+      "tissue_or_organ": "liver",
+      "species": "mouse",
+      "disease_model": "liver fibrosis",
+      "experimental_context": "in_vivo",
+      "dose": 0.4,
+      "dose_unit": "mg mRNA/kg body weight",
+      "route": "intravenous tail-vein injection",
+      "timepoint": 14.0,
+      "timepoint_unit": "days after treatment",
+      "outcome_endpoints": [
+        "liver fibrosis",
+        "amount of FAP+ macrophages in fibrotic livers",
+        "FAP+ cells in hepatic tissue",
+        "FAPCAR localization in F4/80+ macrophages in liver tissue"
+      ],
+      "comparator_context": [
+        "CCL4 group",
+        "untreated cohort"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "GFP or FAPCAR",
+      "encoded_product": "GFP or FAPCAR",
+      "molecular_target": "CD163",
+      "delivery_recipient_cell": "BMDMs",
+      "therapeutic_target_cell": "BMDMs",
+      "tissue_or_organ": null,
+      "species": null,
+      "disease_model": null,
+      "experimental_context": "in_vitro",
+      "dose": null,
+      "dose_unit": null,
+      "route": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+        "Target BMDMs receiving mRNA from unmodified LNPs"
+      ],
+      "comparator_context": [
+        "unmodified LNP",
+        "targeted αCD163 LNP"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "histology, Sirius red staining, and Masson's trichrome staining",
+      "endpoint": "liver fibrosis",
+      "comparator": "CCL4 group",
+      "qualitative_outcome": "Treatment with αCD163/LNP-FAPCAR significantly alleviated liver fibrosis."
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E1",
+      "assay": "single-cell RNA sequencing and immunofluorescence colocalization",
+      "endpoint": "amount of FAP+ macrophages in fibrotic livers",
+      "comparator": "untreated cohort",
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment markedly attenuated FAP+ macrophages; FAP/F4/80 double-positive macrophages were virtually eradicated after administration."
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "GFP or FAPCAR expression",
+      "endpoint": "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+      "comparator": "unmodified LNP",
+      "qualitative_outcome": ">80% of BMDMs expressed GFP or FAPCAR."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E2",
+      "assay": "mRNA delivery",
+      "endpoint": "Target BMDMs receiving mRNA from unmodified LNPs",
+      "comparator": "targeted αCD163 LNP",
+      "qualitative_outcome": "<20% of target BMDMs received mRNA."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "immunohistochemistry of hepatic tissue",
+      "endpoint": "FAP+ cells in hepatic tissue",
+      "comparator": null,
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment enabled targeted elimination of FAP+ cells."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "immunofluorescence staining",
+      "endpoint": "FAPCAR localization in F4/80+ macrophages in liver tissue",
+      "comparator": null,
+      "qualitative_outcome": "FAPCAR immunofluorescence staining highlighted F4/80+ macrophages in liver tissues."
+    }
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca",
+  "task_checksum": "d155ed2f6afb6ce33695602596aca463c35bd629a307bdffea5a22a3ba52bda7"
+}

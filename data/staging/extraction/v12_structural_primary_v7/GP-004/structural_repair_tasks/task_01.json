@@ -1,0 +1,411 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-0221e221a4b2cc3d",
+    "structural:AOC-25c71a72288ec9b9",
+    "structural:AOC-3bed2b59363bfd0d",
+    "structural:AOC-c9850f1420740bed"
+  ],
+  "candidate_ids": [
+    "AOC-0221e221a4b2cc3d",
+    "AOC-25c71a72288ec9b9",
+    "AOC-3bed2b59363bfd0d",
+    "AOC-c9850f1420740bed"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-00c9dca895b9",
+    "label": "egfp_gfp / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827",
+          "GP-004-E-4ffd81157880235c",
+          "GP-004-E-9727e33fb834be68",
+          "GP-004-E-972d3e138bf126db",
+          "GP-004-E-ac5ffef51d25a107",
+          "GP-004-E-fd825b27dcaebf09",
+          "GP-004-FC-23e3a27064893327",
+          "GP-004-FC-2d0b76491192ab4a",
+          "GP-004-FC-66b43dcd526b6e18",
+          "GP-004-FC-bdbc539faa37bfad",
+          "GP-004-FC-c3e5bc02a1cae215",
+          "GP-004-FC-cde0316a82a5bd30"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-004-E-e29c5e3c31a38827",
+          "GP-004-E-4ffd81157880235c",
+          "GP-004-E-9727e33fb834be68",
+          "GP-004-E-972d3e138bf126db",
+          "GP-004-E-ac5ffef51d25a107",
+          "GP-004-E-fd825b27dcaebf09",
+          "GP-004-FC-23e3a27064893327",
+          "GP-004-FC-2d0b76491192ab4a",
+          "GP-004-FC-66b43dcd526b6e18",
+          "GP-004-FC-bdbc539faa37bfad",
+          "GP-004-FC-c3e5bc02a1cae215",
+          "GP-004-FC-cde0316a82a5bd30"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "kupffer_cell",
+        "evidence_ids": [
+          "GP-004-FC-cde0316a82a5bd30"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "flow_cytometry",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "phagocytosis_cytotoxicity",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "histology",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-0221e221a4b2cc3d",
+      "subject_text": "hepatocytes",
+      "predicate": "expressed",
+      "object_text": "various organs supports that liver is the main target organ of IV-administered eGFP mRNA-LNP, specifically the parenchymal hepatocytes, yet indicates transfection and translation in some populations of endothelial cells and hematopoietic ce",
+      "endpoint_text": "eGFP expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-4ffd81157880235c",
+        "GP-004-E-9727e33fb834be68",
+        "GP-004-E-fd825b27dcaebf09",
+        "GP-004-FC-2d0b76491192ab4a",
+        "GP-004-FC-bdbc539faa37bfad",
+        "GP-004-FC-c3e5bc02a1cae215"
+      ]
+    },
+    {
+      "candidate_id": "AOC-25c71a72288ec9b9",
+      "subject_text": "Kupffer cells",
+      "predicate": "expressed",
+      "object_text": "eGFP",
+      "endpoint_text": null,
+      "qualitative_result": "few",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-cde0316a82a5bd30"
+      ]
+    },
+    {
+      "candidate_id": "AOC-3bed2b59363bfd0d",
+      "subject_text": "1), eGFP",
+      "predicate": "expressed",
+      "object_text": "was absent in parenchymal cells of the other organs analyzed",
+      "endpoint_text": "eGFP expression",
+      "qualitative_result": "absent",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "negative",
+      "evidence_ids": [
+        "GP-004-E-ac5ffef51d25a107",
+        "GP-004-FC-23e3a27064893327",
+        "GP-004-FC-cde0316a82a5bd30"
+      ]
+    },
+    {
+      "candidate_id": "AOC-c9850f1420740bed",
+      "subject_text": "parenchyma of the liver",
+      "predicate": "expressed",
+      "object_text": "was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-972d3e138bf126db",
+        "GP-004-E-e29c5e3c31a38827",
+        "GP-004-E-fd825b27dcaebf09",
+        "GP-004-FC-66b43dcd526b6e18",
+        "GP-004-FC-bdbc539faa37bfad"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-E-4ffd81157880235c",
+      "text": "Examination of eGFP expression in various organs supports that liver is the main target organ of IV-administered eGFP mRNA-LNP, specifically the parenchymal hepatocytes, yet indicates transfection and translation in some populations of endothelial cells and hematopoietic cells in the liver, spleen, intestine, and lung as previously reported11–13.Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-9727e33fb834be68",
+      "text": "The same pattern was observed for intestine where eGFP expression was confined to the lamina propria, which contains small blood and lymph vessels as well as blood cells (Supplementary Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-fd825b27dcaebf09",
+      "text": "Notable eGFP expression was observed in the red pulp area of spleen that mainly overlapped with CD45 and CD31 expression, suggesting that the eGFP+ cells in spleen were blood and endothelial cells (Supplementary Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-2d0b76491192ab4a",
+      "text": "The same pattern was observed for intestine where eGFP expression was confined to the lamina propria, which contains small blood and lymph vessels as well as blood cells (Supplementary Fig.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-bdbc539faa37bfad",
+      "text": "Notable eGFP expression was observed in the red pulp area of spleen that mainly overlapped with CD45 and CD31 expression",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-c3e5bc02a1cae215",
+      "text": "Examination of eGFP expression in various organs supports that liver is the main target organ of IV-administered eGFP mRNA-LNP, specifically the parenchymal hepatocytes, yet indicates transfection and translation in some populations of endothelial cells and hematopoietic cells in the liver, spleen, intestine, and lung as previously reported11–13.Fig.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-cde0316a82a5bd30",
+      "text": "eGFP expression was absent in CK19+ cholangiocytes and α-SMA+ vascular smooth muscle cells\nfew F4/80+ Kupffer cells expressed eGFP.",
+      "source_ids": [
+        "FC-S-783827e9e8236666",
+        "FC-S-783827e9e8236666",
+        "FC-S-783827e9e8236666"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-ac5ffef51d25a107",
+      "text": "1), eGFP expression was absent in parenchymal cells of the other organs analyzed (Supplementary Figs.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-23e3a27064893327",
+      "text": "1), eGFP expression was absent in parenchymal cells of the other organs analyzed (Supplementary Figs.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-972d3e138bf126db",
+      "text": "While a pronounced expression was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig.",
+      "source_ids": [
+        "S-263a2be8ee47"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-e29c5e3c31a38827",
+      "text": "Mice were either 10–12 week-old Bl6/C57 female for the liver injury models or 7–8 week-old Balb/c female (purchased from the Jackson Laboratory, Bar Harbor, ME) to study the kinetics of expression and identity of cell types transfected in vivo using luciferase- and eGFP mRNA-LNP at homeostasis.",
+      "source_ids": [
+        "S-042decafcf9d"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-66b43dcd526b6e18",
+      "text": "a pronounced expression was obvious in the parenchyma of the liver as early as 5 h after eGFP mRNA-LNP administration (Fig.",
+      "source_ids": [
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013",
+        "FC-S-1f7e29eaf1c74013"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "eGFP mRNA",
+      "encoded_product": "enhanced green fluorescent protein (eGFP)",
+      "molecular_target": null,
+      "delivery_recipient_cell": "Hepatocytes; subpopulations of endothelial cells and Kupffer cells",
+      "therapeutic_target_cell": null,
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "Homeostasis",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg eGFP mRNA-LNP per 20 g body weight",
+      "route": "Intravenous",
+      "timepoint": 5.0,
+      "timepoint_unit": "h after injection",
+      "outcome_endpoints": [
+        "Percentage of eGFP-positive CD31-positive endothelial cells",
+        "Percentage of eGFP-positive CD11b-positive cells",
+        "Percentage of eGFP-positive CD45-positive cells"
+      ],
+      "comparator_context": [
+        "None reported for this numerical value"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "Combined HGF and EGF mRNA",
+      "encoded_product": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+      "molecular_target": null,
+      "delivery_recipient_cell": "Hepatocytes",
+      "therapeutic_target_cell": "Hepatocytes",
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "CDE diet-induced chronic liver injury",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+      "route": "Intravenous (retro-orbital or tail vein)",
+      "timepoint": 2.0,
+      "timepoint_unit": "days after first injection",
+      "outcome_endpoints": [
+        "Hepatocyte lipid accumulation (steatosis)",
+        "Serum ALT level"
+      ],
+      "comparator_context": [
+        "Poly(C) RNA-LNP treatment",
+        "Poly(C) RNA-LNP and Luc mRNA-LNP controls"
+      ]
+    },
+    {
+      "experiment_id": "E3",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "Combined HGF and EGF mRNA",
+      "encoded_product": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+      "molecular_target": null,
+      "delivery_recipient_cell": null,
+      "therapeutic_target_cell": "Hepatocytes",
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "Acetaminophen (APAP)-induced acute liver injury",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+      "route": "Intravenous (retro-orbital or tail vein)",
+      "timepoint": 24.0,
+      "timepoint_unit": "h after mRNA-LNP administration",
+      "outcome_endpoints": [
+        "Central-vein necrotic areas"
+      ],
+      "comparator_context": [
+        "Poly(C) RNA-LNP-treated control group"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD31-positive endothelial cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "Significant percentages of endothelial and immune-cell populations expressed eGFP."
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E2",
+      "assay": "Oil Red O staining of liver sections",
+      "endpoint": "Hepatocyte lipid accumulation (steatosis)",
+      "comparator": "Poly(C) RNA-LNP treatment",
+      "qualitative_outcome": "Single injections of either HGF or EGF mRNA-LNP decreased steatosis; combined HGF/EGF mRNA-LNP produced more efficient steatosis reversal. A sharp decrease was observed 2 days after the first combined injection, while steatosis was maintained in Poly(C) RNA-LNP-treated mice."
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "Serum ALT measurement",
+      "endpoint": "Serum ALT level",
+      "comparator": "Poly(C) RNA-LNP and Luc mRNA-LNP controls",
+      "qualitative_outcome": "ALT was restored to normal levels at T2 after HGF/EGF mRNA-LNP; control ALT levels remained significantly greater."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E3",
+      "assay": "H&E staining",
+      "endpoint": "Central-vein necrotic areas",
+      "comparator": "Poly(C) RNA-LNP-treated control group",
+      "qualitative_outcome": "At 24 h after HGF/EGF mRNA-LNP administration, necrotic areas had accelerated disappearance versus Poly(C) RNA-LNP controls; at 8 h there was no significant improvement."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD11b-positive cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "A significant percentage of CD11b-positive cells expressed eGFP (41.5 ± 14.6%)."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD45-positive cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "A significant percentage of CD45-positive cells expressed eGFP (34.1 ± 2.2%)."
+    }
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "2678588b644045c5ba9903c265a7468e7acbcfc68480dbbd334837cecbfccdcb",
+  "task_checksum": "422745de878ef22da334556f7895908b03a8329346ebafd4b7b0477b5dea3425"
+}

@@ -1,0 +1,238 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-006",
+  "route_ids": [
+    "structural:AOC-VIS-daa35a9f428a7b5f",
+    "structural:AOC-VIS-dc9ab6e247d8663c"
+  ],
+  "candidate_ids": [
+    "AOC-VIS-daa35a9f428a7b5f",
+    "AOC-VIS-dc9ab6e247d8663c"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+    "label": "cas9_sgrna / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "cas9_sgrna",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "lsec",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "coagulation_activity",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-VIS-daa35a9f428a7b5f",
+      "subject_text": "LSEC",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+3",
+      "qualitative_result": null,
+      "numeric_value": 0.01,
+      "value_text": "0.01 ± 0.01 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-d31fe91bcfb345d6"
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-dc9ab6e247d8663c",
+      "subject_text": "Hepatocyte",
+      "predicate": "reached",
+      "object_text": null,
+      "endpoint_text": "+2",
+      "qualitative_result": null,
+      "numeric_value": 0.83,
+      "value_text": "0.83 ± 0.27 %",
+      "unit": "%",
+      "polarity": "neutral",
+      "evidence_ids": [
+        "VIS-366ecf655cea361a"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "VIS-d31fe91bcfb345d6",
+      "text": "LSEC | +3 | 0.01 ± 0.01 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r2:c3"
+      ]
+    },
+    {
+      "evidence_id": "VIS-366ecf655cea361a",
+      "text": "Hepatocyte | +2 | 0.83 ± 0.27 %",
+      "source_ids": [
+        "GP-006-mmc1-p002-table-03:table-0:r1:c2"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "Cas9 mRNA and NSGHAsgRNA",
+      "encoded_product": "Cas9",
+      "molecular_target": "mutant F8 gene",
+      "delivery_recipient_cell": "hepatocytes and LSECs",
+      "therapeutic_target_cell": "LSECs",
+      "tissue_or_organ": "liver",
+      "species": "mouse",
+      "disease_model": "NSG HemA mice",
+      "experimental_context": "in_vivo",
+      "dose": 4.0,
+      "dose_unit": "mg/kg of Cas9/sgRNA LNP",
+      "route": "intravenous",
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "F8 gene editing rate in isolated hepatocytes",
+        "F8 gene editing rate in isolated LSECs",
+        "frequency of the +2 F8 insertion pattern",
+        "frequency of the +5 F8 insertion pattern",
+        "endogenous FVIII activity after two Cas9/sgRNA LNP injections",
+        "sustained endogenous FVIII activity after targeted correction of the mutant F8 gene",
+        "frequency of the +1 insertion pattern in LSECs"
+      ],
+      "comparator_context": [
+        "deletion variants"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "luciferase mRNA",
+      "encoded_product": "luciferase",
+      "molecular_target": null,
+      "delivery_recipient_cell": "hepatocytes and LSECs",
+      "therapeutic_target_cell": null,
+      "tissue_or_organ": "liver",
+      "species": "mice",
+      "disease_model": null,
+      "experimental_context": "in_vivo",
+      "dose": 0.2,
+      "dose_unit": "mg/kg Luc LNPs",
+      "route": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "luciferase expression in hepatocytes relative to LSECs"
+      ],
+      "comparator_context": [
+        "LSECs"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "deep sequencing",
+      "endpoint": "F8 gene editing rate in isolated hepatocytes",
+      "comparator": null,
+      "qualitative_outcome": null
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E1",
+      "assay": "deep sequencing",
+      "endpoint": "F8 gene editing rate in isolated LSECs",
+      "comparator": null,
+      "qualitative_outcome": null
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "luciferase assay normalized by total protein",
+      "endpoint": "luciferase expression in hepatocytes relative to LSECs",
+      "comparator": "LSECs",
+      "qualitative_outcome": "Luciferase expression was obtained from both hepatocytes and LSECs."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E1",
+      "assay": "indel-variant analysis by deep sequencing",
+      "endpoint": "frequency of the +2 F8 insertion pattern",
+      "comparator": "deletion variants",
+      "qualitative_outcome": "The +2 insertion pattern was less frequent than deletion variants."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "indel-variant analysis by deep sequencing",
+      "endpoint": "frequency of the +5 F8 insertion pattern",
+      "comparator": "deletion variants",
+      "qualitative_outcome": "The +5 insertion pattern was not detected and was less frequent than deletion variants."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "activated partial thromboplastin time (aPTT) assay",
+      "endpoint": "endogenous FVIII activity after two Cas9/sgRNA LNP injections",
+      "comparator": null,
+      "qualitative_outcome": "LNP treatment significantly improved FVIII activity."
+    },
+    {
+      "outcome_id": "O7",
+      "experiment_id": "E1",
+      "assay": "activated partial thromboplastin time (aPTT) assay",
+      "endpoint": "sustained endogenous FVIII activity after targeted correction of the mutant F8 gene",
+      "comparator": null,
+      "qualitative_outcome": "FVIII activity was sustained over 26 weeks, and targeted F8 correction produced improved coagulation."
+    },
+    {
+      "outcome_id": "O8",
+      "experiment_id": "E1",
+      "assay": "insertion frequency patterns",
+      "endpoint": "frequency of the +1 insertion pattern in LSECs",
+      "comparator": null,
+      "qualitative_outcome": null
+    }
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 4,
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "source_inventory_sha256": "3fc30210d59e81fd2a6748d65aa3d5d459cc8af0a7c54e73fbed2269a1f012e1",
+  "task_checksum": "65968bbd5e14026794fe0b74dbe6c23e1e36dc330348e98a894310f2a8f2f125"
+}

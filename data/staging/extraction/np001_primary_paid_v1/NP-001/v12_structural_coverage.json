@@ -1,0 +1,5948 @@
+{
+  "coverage_version": "deterministic-structural-coverage-1.2.0",
+  "experiment_associations": {
+    "EX1": {
+      "status": "associated",
+      "provisional_experiment_id": "PEX-NP-001-682724960865",
+      "compatible_provisional_experiment_ids": [
+        "PEX-NP-001-682724960865"
+      ],
+      "diagnostics": {
+        "PEX-NP-001-682724960865": [
+          "payload_match"
+        ]
+      }
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "AOC-10eba350735a69e1",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-10eba350735a69e1",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-9bb123b4191feb68",
+          "NP-001-FC-90c33335a62d7b15"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 100.0,
+              "unit": "percent"
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_units_do_not_match"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-10eba350735a69e1",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-9bb123b4191feb68",
+            "NP-001-FC-90c33335a62d7b15"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 100.0,
+                "unit": "percent"
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_units_do_not_match"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-a0f5b95d07c91732",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-a0f5b95d07c91732",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-a087eca3e3a63589",
+          "NP-001-FC-b686917aece69651"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "increased",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-a0f5b95d07c91732",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-a087eca3e3a63589",
+            "NP-001-FC-b686917aece69651"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-fe1d24b4b61d2cd3",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-fe1d24b4b61d2cd3",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-53d628e38fc684db"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "decreased",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-fe1d24b4b61d2cd3",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-53d628e38fc684db"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-61e82a63f5aeed1c",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-61e82a63f5aeed1c",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-ded04b21baa26113"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "maintained",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-61e82a63f5aeed1c",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-ded04b21baa26113"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "maintained",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-42a82cd74e0572eb",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-42a82cd74e0572eb",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-66aa73012c21ab9d",
+          "NP-001-FC-9cfaf8e145cc16d0"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-42a82cd74e0572eb",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-66aa73012c21ab9d",
+            "NP-001-FC-9cfaf8e145cc16d0"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-42ae3cfb0a690038",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-42ae3cfb0a690038",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-41989f77e7adbcde",
+          "NP-001-FC-8bc2d969df4e20e4"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-42ae3cfb0a690038",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-41989f77e7adbcde",
+            "NP-001-FC-8bc2d969df4e20e4"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-262cdd400cd5a877",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "malformed_candidate_subject"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-262cdd400cd5a877",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-a087eca3e3a63589",
+          "NP-001-FC-b686917aece69651"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "increased",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-262cdd400cd5a877",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-a087eca3e3a63589",
+            "NP-001-FC-b686917aece69651"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-f4b10cbf5db500f9",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-f4b10cbf5db500f9",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-53d628e38fc684db"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "increased",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-f4b10cbf5db500f9",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-53d628e38fc684db"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-e44aa7db96a672d9",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-e44aa7db96a672d9",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-00d75f88ef91e225"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "unconfirmed",
+            "expected": [
+              "macrophage"
+            ],
+            "observed": [],
+            "reason": "output_does_not_report_a_confirming_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-e44aa7db96a672d9",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-00d75f88ef91e225"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "unconfirmed",
+              "expected": [
+                "macrophage"
+              ],
+              "observed": [],
+              "reason": "output_does_not_report_a_confirming_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-9851a3d49ab929d6",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-9851a3d49ab929d6",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-637cb9ba7efa2cd3"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "increased",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-9851a3d49ab929d6",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-637cb9ba7efa2cd3"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-9c21e310ff7da532",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-9c21e310ff7da532",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-223e0a6b26a4a92d",
+          "NP-001-FC-9c4a91c377698d3f"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "increased",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-9c21e310ff7da532",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-223e0a6b26a4a92d",
+            "NP-001-FC-9c4a91c377698d3f"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "increased",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-a59819bf07f8d249",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-a59819bf07f8d249",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-fb44e14f6b55fb22"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-a59819bf07f8d249",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-fb44e14f6b55fb22"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-79ae650ce8c33eda",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-79ae650ce8c33eda",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-fb44e14f6b55fb22"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-79ae650ce8c33eda",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-fb44e14f6b55fb22"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-2e08b81493fa81a4",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-2e08b81493fa81a4",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-E-d0660dbc5d2984c2",
+          "NP-001-FC-6781a3a001912091",
+          "NP-001-FC-cd6222f2fda26e1c"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-2e08b81493fa81a4",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-E-d0660dbc5d2984c2",
+            "NP-001-FC-6781a3a001912091",
+            "NP-001-FC-cd6222f2fda26e1c"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-00f2300659cf77ba",
+      "eligibility": {
+        "eligible": true,
+        "reasons": []
+      },
+      "verdict": "unconfirmed",
+      "route": "bounded_repair_task",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-00f2300659cf77ba",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-de6b45258bfe7492"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "exact_or_synonym_match",
+            "expected": "PEX-NP-001-682724960865",
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "independently_computed_experiment_association_matches"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-00f2300659cf77ba",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-de6b45258bfe7492"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "exact_or_synonym_match",
+              "expected": "PEX-NP-001-682724960865",
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "independently_computed_experiment_association_matches"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-e96414d7a327a407",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-e96414d7a327a407",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-355646197a2b5e0a"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-e96414d7a327a407",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-355646197a2b5e0a"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-cdcef04b260fbd52",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-cdcef04b260fbd52",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-355646197a2b5e0a"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-cdcef04b260fbd52",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-355646197a2b5e0a"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-ce31eb863d6ec903",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons",
+          "speculative_or_interpretive_language"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-ce31eb863d6ec903",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-25d28b81b7b29e89"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "expressed",
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-ce31eb863d6ec903",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-25d28b81b7b29e89"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "expressed",
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-56e1007897125db1",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-56e1007897125db1",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-fa1c42828abd315c"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "decreased",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "exact_or_synonym_match",
+            "expected": "positive",
+            "observed": "positive",
+            "reason": "assertion_polarity_matches"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-56e1007897125db1",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-fa1c42828abd315c"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "decreased",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "exact_or_synonym_match",
+              "expected": "positive",
+              "observed": "positive",
+              "reason": "assertion_polarity_matches"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-77c7d1a0096902af",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "candidate_not_high_confidence",
+          "missing_provisional_experiment",
+          "candidate_has_review_reasons"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-77c7d1a0096902af",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "NP-001-FC-0ee4d909bd9678e7"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "exact_or_synonym_match",
+            "expected": {
+              "predicate": "delivered_to",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "predicate_and_endpoint_are_compatible"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "contradiction",
+            "expected": "negative",
+            "observed": "positive",
+            "reason": "assertion_polarity_differs"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_has_no_numeric_value"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-77c7d1a0096902af",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "NP-001-FC-0ee4d909bd9678e7"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "exact_or_synonym_match",
+              "expected": {
+                "predicate": "delivered_to",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "predicate_and_endpoint_are_compatible"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "contradiction",
+              "expected": "negative",
+              "observed": "positive",
+              "reason": "assertion_polarity_differs"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_has_no_numeric_value"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-a8a25ab2496bd765",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-a8a25ab2496bd765",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-eb0d80873ab25844"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 91.8,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-a8a25ab2496bd765",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-eb0d80873ab25844"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 91.8,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-5bfdfa4bf2ca2074",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-5bfdfa4bf2ca2074",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-20ff011b323cbd76"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 55.9,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-5bfdfa4bf2ca2074",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-20ff011b323cbd76"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 55.9,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-7185be3650c8aff2",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-7185be3650c8aff2",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-11bcdda5784d40a3"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 1.3,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-7185be3650c8aff2",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-11bcdda5784d40a3"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 1.3,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-0aa414e8297bcd5c",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-0aa414e8297bcd5c",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-4195b003bece11fe"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 0.77,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-0aa414e8297bcd5c",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-4195b003bece11fe"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 0.77,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-de8f42b584f3130f",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-de8f42b584f3130f",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-cb8c60cd5486802b"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 111.0,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-de8f42b584f3130f",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-cb8c60cd5486802b"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 111.0,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-aea4056fd79e6e4e",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-aea4056fd79e6e4e",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-3e09b89b17565682"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 66.72,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-aea4056fd79e6e4e",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-3e09b89b17565682"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 66.72,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-8057f86ddd65825e",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-8057f86ddd65825e",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-6f591489d54905af"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 1.4,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-8057f86ddd65825e",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-6f591489d54905af"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 1.4,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-6d2332d243478417",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-6d2332d243478417",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-67aaf8b965210277"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 1.31,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-6d2332d243478417",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-67aaf8b965210277"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 1.31,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-24257dd230d4a636",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-24257dd230d4a636",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-449da2133a8a1d36"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 103.0,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-24257dd230d4a636",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-449da2133a8a1d36"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 103.0,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-c8a7a109da063a73",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-c8a7a109da063a73",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-ca96394f67d13bcb"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 96.3,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-c8a7a109da063a73",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-ca96394f67d13bcb"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 96.3,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-991ad46f665b2fdc",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-991ad46f665b2fdc",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-05fb95f32fcbbd12"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 2.57,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-991ad46f665b2fdc",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-05fb95f32fcbbd12"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 2.57,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-5e2382f602ae6ff7",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-5e2382f602ae6ff7",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-a2ad4db86b03d45a"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 0.53,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-5e2382f602ae6ff7",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-a2ad4db86b03d45a"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 0.53,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-5c61ea14cb15945b",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-5c61ea14cb15945b",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-3bc8245ce3af64fd"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 106.8,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-5c61ea14cb15945b",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-3bc8245ce3af64fd"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 106.8,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-3f909924ef592500",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-3f909924ef592500",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-56ab9571f3e1823d"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 99.0,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-3f909924ef592500",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-56ab9571f3e1823d"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 99.0,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-3028c2c36bac97cb",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-3028c2c36bac97cb",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-a55b5e75c7b7c17b"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 2.58,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-3028c2c36bac97cb",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-a55b5e75c7b7c17b"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 2.58,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "AOC-VIS-77130af22074d0d7",
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          "missing_provisional_experiment"
+        ]
+      },
+      "verdict": "unconfirmed",
+      "route": "human_review",
+      "reason": "no_confirmed_structural_match",
+      "selected_assessment": {
+        "candidate_id": "AOC-VIS-77130af22074d0d7",
+        "output_outcome_id": "O1",
+        "output_experiment_id": "EX1",
+        "evidence_overlap": false,
+        "candidate_evidence_ids": [
+          "VIS-e285ff352209e22e"
+        ],
+        "output_evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "field_checks": [
+          {
+            "field_name": "intervention",
+            "result": "contradiction",
+            "expected": null,
+            "observed": "PEX-NP-001-682724960865",
+            "reason": "output_is_associated_with_a_different_experiment"
+          },
+          {
+            "field_name": "cell_population",
+            "result": "not_applicable",
+            "expected": [],
+            "observed": [],
+            "reason": "candidate_does_not_assert_a_cell_population"
+          },
+          {
+            "field_name": "endpoint_relationship",
+            "result": "contradiction",
+            "expected": {
+              "predicate": "reached",
+              "endpoint_keys": []
+            },
+            "observed": {
+              "endpoint_keys": [
+                "expression"
+              ]
+            },
+            "reason": "output_does_not_assert_the_candidate_relationship"
+          },
+          {
+            "field_name": "comparator",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_comparator_is_not_structured_yet"
+          },
+          {
+            "field_name": "timepoint",
+            "result": "not_applicable",
+            "expected": null,
+            "observed": null,
+            "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+          },
+          {
+            "field_name": "polarity",
+            "result": "unconfirmed",
+            "expected": "neutral",
+            "observed": "positive",
+            "reason": "neutral_candidate_polarity_requires_review"
+          },
+          {
+            "field_name": "numeric_value_unit",
+            "result": "contradiction",
+            "expected": {
+              "value": 1.05,
+              "unit": null
+            },
+            "observed": {
+              "value": 95.0,
+              "unit": "% cells positive for transfection"
+            },
+            "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+          }
+        ],
+        "verdict": "unconfirmed"
+      },
+      "assessments": [
+        {
+          "candidate_id": "AOC-VIS-77130af22074d0d7",
+          "output_outcome_id": "O1",
+          "output_experiment_id": "EX1",
+          "evidence_overlap": false,
+          "candidate_evidence_ids": [
+            "VIS-e285ff352209e22e"
+          ],
+          "output_evidence_ids": [
+            "NP-001-E-c6658491eb3ce79d"
+          ],
+          "field_checks": [
+            {
+              "field_name": "intervention",
+              "result": "contradiction",
+              "expected": null,
+              "observed": "PEX-NP-001-682724960865",
+              "reason": "output_is_associated_with_a_different_experiment"
+            },
+            {
+              "field_name": "cell_population",
+              "result": "not_applicable",
+              "expected": [],
+              "observed": [],
+              "reason": "candidate_does_not_assert_a_cell_population"
+            },
+            {
+              "field_name": "endpoint_relationship",
+              "result": "contradiction",
+              "expected": {
+                "predicate": "reached",
+                "endpoint_keys": []
+              },
+              "observed": {
+                "endpoint_keys": [
+                  "expression"
+                ]
+              },
+              "reason": "output_does_not_assert_the_candidate_relationship"
+            },
+            {
+              "field_name": "comparator",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_comparator_is_not_structured_yet"
+            },
+            {
+              "field_name": "timepoint",
+              "result": "not_applicable",
+              "expected": null,
+              "observed": null,
+              "reason": "candidate_timepoint_is_not_claim_scoped_yet"
+            },
+            {
+              "field_name": "polarity",
+              "result": "unconfirmed",
+              "expected": "neutral",
+              "observed": "positive",
+              "reason": "neutral_candidate_polarity_requires_review"
+            },
+            {
+              "field_name": "numeric_value_unit",
+              "result": "contradiction",
+              "expected": {
+                "value": 1.05,
+                "unit": null
+              },
+              "observed": {
+                "value": 95.0,
+                "unit": "% cells positive for transfection"
+              },
+              "reason": "numeric_values_differ_beyond_rounding_tolerance:0.5"
+            }
+          ],
+          "verdict": "unconfirmed"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "confirmed": 0,
+    "contradicted": 0,
+    "unconfirmed": 36
+  },
+  "routes": {
+    "none": 0,
+    "bounded_repair_task": 8,
+    "human_review": 28
+  },
+  "integration_blocked": true,
+  "paid_api_requests": 0,
+  "paper_id": "NP-001",
+  "status": "review_unconfirmed_or_contradicted_facts"
+}

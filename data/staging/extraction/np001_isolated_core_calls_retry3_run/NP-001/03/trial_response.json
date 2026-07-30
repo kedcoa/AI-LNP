@@ -1,0 +1,215 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-001",
+  "eligibility": {
+    "decision": "ineligible",
+    "reason_codes": [
+      "NO_TARGET_CELL_EVIDENCE",
+      "NO_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-001-E-f0dbf2460867f112",
+      "NP-001-E-1ec1832fdbf78e17",
+      "NP-001-E-00d75f88ef91e225"
+    ],
+    "explanation": "The packet reports LNP-related observations but does not directly identify an eligible liver target cell. The EGFP transfection result is stated for unspecified cells and unspecified formulations, while the DX-LNP MHC II result does not directly establish the RNA payload or a formulation\u2013experiment\u2013outcome linkage meeting eligibility criteria."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F1",
+      "formulation_name": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No individual formulation name is directly reported for the formulations associated with the EGFP transfection result."
+      },
+      "composition": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The reported theoretical composition gives alternative components and does not directly assign a complete composition to one formulation linked to an outcome."
+      },
+      "composition_basis": {
+        "value": "Theoretical composition estimated from the precise mass of individual components added to the ethanolic phase.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      }
+    }
+  ],
+  "components": [],
+  "experiments": [
+    {
+      "experiment_id": "EXP1",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "EGFP mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "EGFP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "delivery_recipient_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The cells transfected in the EGFP experiment are not identified in the supplied evidence."
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "tissue_or_organ": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "species": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "experimental_context": {
+        "value": "in_vitro",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "dose_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "route": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported."
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "OUT1",
+      "experiment_id": "EXP1",
+      "assay": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The assay used to measure EGFP-positive cells is not reported."
+      },
+      "endpoint": {
+        "value": "Cell transfection",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No comparator is reported."
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "A distinct numerical value for the linked formulation is not reported; the result is reported as a range across all formulations."
+      },
+      "outcome_unit": {
+        "value": "% transfected cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": "All formulations transfected cells in the range of 30% to 40%.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [],
+  "core_slot_contract_version": "compact-core-slot-trial-1.0.0",
+  "core_slot_accounting": {
+    "CORE-DC24-IMMUNE": {
+      "disposition": "extracted",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-1ec1832fdbf78e17"
+      ]
+    }
+  }
+}

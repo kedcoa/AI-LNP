@@ -1,0 +1,404 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-001",
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-001-E-7b3c625323c08b9c",
+      "NP-001-E-caaab3e6dabbfe5e",
+      "NP-001-E-c6658491eb3ce79d"
+    ],
+    "explanation": "The packet directly reports an in-vitro original experiment in HepG2 human hepatocellular carcinoma cells using EGFP mRNA-loaded LNP/DX25, with a linked positive-transfection outcome."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F1",
+      "formulation_name": {
+        "value": "LNP(DSPC)/DX25",
+        "status": "reported",
+        "evidence_ids": [
+          "VIS-cb8c60cd5486802b"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": "ALC-0315, DSPC, cholesterol/DX, and ALC-0159; DX25 denotes 25% cholesterol replacement with DX.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61",
+          "NP-001-E-2321e0f317cd65b7"
+        ],
+        "missing_reason": null
+      },
+      "composition_basis": {
+        "value": "Theoretical composition based on the precise masses of components added to the ethanolic phase; molar ratios assumed to match the lipid mixture.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112",
+          "NP-001-E-a288f42045cd9856"
+        ],
+        "missing_reason": null
+      },
+      "np_ratio": {
+        "value": 6.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-caaab3e6dabbfe5e"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "components": [
+    {
+      "component_id": "C1",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "ALC-0315",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "ionizable_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No ALC-0315 amount for LNP(DSPC)/DX25 is directly reported in the supplied packet."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No ALC-0315 amount unit for LNP(DSPC)/DX25 is directly reported in the supplied packet."
+      }
+    },
+    {
+      "component_id": "C2",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "DSPC",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61",
+          "VIS-cb8c60cd5486802b"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "helper_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No DSPC amount for LNP(DSPC)/DX25 is directly reported in the supplied packet."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No DSPC amount unit for LNP(DSPC)/DX25 is directly reported in the supplied packet."
+      }
+    },
+    {
+      "component_id": "C3",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61",
+          "NP-001-E-2321e0f317cd65b7"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The residual cholesterol amount after DX25 substitution is not directly reported."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The residual cholesterol amount unit is not directly reported."
+      }
+    },
+    {
+      "component_id": "C4",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "DX",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-2321e0f317cd65b7",
+          "VIS-cb8c60cd5486802b"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "other",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-2321e0f317cd65b7"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 25.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-2321e0f317cd65b7",
+          "VIS-cb8c60cd5486802b"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "% cholesterol replacement",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-2321e0f317cd65b7"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C5",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "ALC-0159",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "peg_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-0a318b647abaed61"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No ALC-0159 amount for LNP(DSPC)/DX25 is directly reported in the supplied packet."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No ALC-0159 amount unit for LNP(DSPC)/DX25 is directly reported in the supplied packet."
+      }
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EX1",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "EGFP-encoding mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "EGFP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is directly reported for the EGFP reporter-mRNA transfection experiment."
+      },
+      "delivery_recipient_cell": {
+        "value": "HepG2 human hepatocellular carcinoma cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-5670f3a91a9acfc1"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The packet reports HepG2 as the delivery recipient cell but does not explicitly designate a therapeutic target cell."
+      },
+      "tissue_or_organ": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No tissue or organ is directly reported as the experimental context for this HepG2 cell-culture experiment."
+      },
+      "species": {
+        "value": "human",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is directly reported for the HepG2 transfection experiment."
+      },
+      "experimental_context": {
+        "value": "in_vitro",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-dc987f88b78fcdf1"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 500.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-dc987f88b78fcdf1"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "ng total mRNA per well",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-dc987f88b78fcdf1"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No administration route is applicable or directly reported for the in-vitro cell-culture exposure."
+      },
+      "timepoint": {
+        "value": 24.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-dc987f88b78fcdf1"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "h",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-dc987f88b78fcdf1"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "EX1",
+      "assay": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The supplied evidence for this HepG2 outcome does not directly name the assay used to quantify EGFP-positive cells."
+      },
+      "endpoint": {
+        "value": "EGFP-positive transfection",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No comparator is directly reported for the approximately 95% result."
+      },
+      "outcome_value": {
+        "value": 95.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "outcome_unit": {
+        "value": "% cells positive for transfection",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": "Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP/DX25.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [
+    "The approximately 95% positive-transfection result is reported jointly for LNP, LNP/DX25, and LNP/DX50; the packet does not provide a formulation-specific percentage for LNP(DSPC)/DX25.",
+    "Exact molar or mass amounts of ALC-0315, DSPC, cholesterol, and ALC-0159 in LNP(DSPC)/DX25 are not directly reported in the supplied text.",
+    "The HepG2 outcome evidence does not explicitly name the quantification assay."
+  ]
+}

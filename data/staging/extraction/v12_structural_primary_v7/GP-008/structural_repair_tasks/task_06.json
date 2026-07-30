@@ -1,0 +1,246 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-9071481e1945fec6",
+    "structural:AOC-a52bc8417bc9d51f"
+  ],
+  "candidate_ids": [
+    "AOC-9071481e1945fec6",
+    "AOC-a52bc8417bc9d51f"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-afdd75fc803d",
+    "label": "egfp_gfp / in_vitro",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "egfp_gfp",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vitro",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "hsc",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "flow_cytometry",
+        "evidence_ids": [
+          "GP-008-E-e9466266dec9786d",
+          "GP-008-FC-96045cb4ab6274c3"
+        ]
+      },
+      {
+        "anchor_type": "assay",
+        "value": "phagocytosis_cytotoxicity",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-9071481e1945fec6",
+      "subject_text": "BMDMs",
+      "predicate": "expressed",
+      "object_text": "the screened BMDMs and the analysis",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-d17010e8cbba6cec"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a52bc8417bc9d51f",
+      "subject_text": "BMDMs",
+      "predicate": "expressed",
+      "object_text": "BMDMs through flow cytometry and (K) the analysis of GFP",
+      "endpoint_text": "GFP expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-E-e9466266dec9786d",
+        "GP-008-FC-96045cb4ab6274c3"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-d17010e8cbba6cec",
+      "text": "(G and H) Flow cytometry analysis of CD80 and CD206 expression in the screened BMDMs and the analysis.",
+      "source_ids": [
+        "FC-S-b1303c7efd61ae31"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-E-e9466266dec9786d",
+      "text": "(Scale bar, 10 μm.) (J) Representative GFP expression in BMDMs through flow cytometry and (K) the analysis of GFP expression.",
+      "source_ids": [
+        "S-6c16ffc4255c"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-96045cb4ab6274c3",
+      "text": "(Scale bar, 10 μm.) (J) Representative GFP expression in BMDMs through flow cytometry and (K) the analysis of GFP expression.",
+      "source_ids": [
+        "FC-S-75e69a2f0aa58a3a",
+        "FC-S-75e69a2f0aa58a3a"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "FAPCAR mRNA",
+      "encoded_product": "FAP-targeted CAR",
+      "molecular_target": "FAP",
+      "delivery_recipient_cell": "hepatic macrophages",
+      "therapeutic_target_cell": "FAP+ macrophages",
+      "tissue_or_organ": "liver",
+      "species": "mouse",
+      "disease_model": "liver fibrosis",
+      "experimental_context": "in_vivo",
+      "dose": 0.4,
+      "dose_unit": "mg mRNA/kg body weight",
+      "route": "intravenous tail-vein injection",
+      "timepoint": 14.0,
+      "timepoint_unit": "days after treatment",
+      "outcome_endpoints": [
+        "liver fibrosis",
+        "amount of FAP+ macrophages in fibrotic livers",
+        "FAP+ cells in hepatic tissue",
+        "FAPCAR localization in F4/80+ macrophages in liver tissue"
+      ],
+      "comparator_context": [
+        "CCL4 group",
+        "untreated cohort"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "GFP or FAPCAR",
+      "encoded_product": "GFP or FAPCAR",
+      "molecular_target": "CD163",
+      "delivery_recipient_cell": "BMDMs",
+      "therapeutic_target_cell": "BMDMs",
+      "tissue_or_organ": null,
+      "species": null,
+      "disease_model": null,
+      "experimental_context": "in_vitro",
+      "dose": null,
+      "dose_unit": null,
+      "route": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+        "Target BMDMs receiving mRNA from unmodified LNPs"
+      ],
+      "comparator_context": [
+        "unmodified LNP",
+        "targeted αCD163 LNP"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "histology, Sirius red staining, and Masson's trichrome staining",
+      "endpoint": "liver fibrosis",
+      "comparator": "CCL4 group",
+      "qualitative_outcome": "Treatment with αCD163/LNP-FAPCAR significantly alleviated liver fibrosis."
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E1",
+      "assay": "single-cell RNA sequencing and immunofluorescence colocalization",
+      "endpoint": "amount of FAP+ macrophages in fibrotic livers",
+      "comparator": "untreated cohort",
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment markedly attenuated FAP+ macrophages; FAP/F4/80 double-positive macrophages were virtually eradicated after administration."
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "GFP or FAPCAR expression",
+      "endpoint": "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+      "comparator": "unmodified LNP",
+      "qualitative_outcome": ">80% of BMDMs expressed GFP or FAPCAR."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E2",
+      "assay": "mRNA delivery",
+      "endpoint": "Target BMDMs receiving mRNA from unmodified LNPs",
+      "comparator": "targeted αCD163 LNP",
+      "qualitative_outcome": "<20% of target BMDMs received mRNA."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "immunohistochemistry of hepatic tissue",
+      "endpoint": "FAP+ cells in hepatic tissue",
+      "comparator": null,
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment enabled targeted elimination of FAP+ cells."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "immunofluorescence staining",
+      "endpoint": "FAPCAR localization in F4/80+ macrophages in liver tissue",
+      "comparator": null,
+      "qualitative_outcome": "FAPCAR immunofluorescence staining highlighted F4/80+ macrophages in liver tissues."
+    }
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 4,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca",
+  "task_checksum": "cc0daf6d1dabc891f7dcb8221bc1b7f6c57ba84fd248a32029bd142cabdd8d50"
+}

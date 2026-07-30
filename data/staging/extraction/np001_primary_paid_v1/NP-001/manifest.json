@@ -1,0 +1,84 @@
+{
+  "status": "completed_pending_outcome_coverage_review",
+  "paper_id": "NP-001",
+  "paid_api_requests": 1,
+  "model_requested": "gpt-5.6-terra",
+  "model_returned": "gpt-5.6-terra",
+  "response_id": "resp_053031ee40e1141a016a6af5d788a8819ba76ce47e10c1011b",
+  "request_fingerprint": "3e28ccb396703a351bbbe621ffc809d700ded7f8d9274ee996de32e4be3b661e",
+  "approved_request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/new_papers/NP-001/primary_exact_preflight/NP-001/request.json",
+  "approved_request_sha256": "4539b5bb876f8bd6321a73c9c8b1fc1f2f9f0ff3e82d022661e25b07670dee46",
+  "preflight_manifest_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/new_papers/NP-001/primary_exact_preflight/NP-001/manifest.json",
+  "packet_checksum": "d36f9479bb109650dccf6117d7da784057e2beaf2c69a797d347f9d1b382f593",
+  "prompt_version": "compact-prompt-1.2.0",
+  "prompt_checksum": "4b7f700b4c84a571a4da15de01ed045328d35c9bc2768c9df229e35c8aa67697",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "recall_support_version": "main-route-recall-support-1.2.0",
+  "recall_support_estimated_tokens": 9513,
+  "recall_support_record_counts": {
+    "provisional_experiments": 1,
+    "atomic_outcome_candidates": 36,
+    "accepted_visual_claims": 0,
+    "local_evidence": 30
+  },
+  "started_at": "2026-07-30T06:57:25.536502+00:00",
+  "completed_at": "2026-07-30T06:57:52.502974+00:00",
+  "elapsed_seconds": 26.966472,
+  "usage": {
+    "input_tokens": 32971,
+    "input_tokens_details": {
+      "cache_write_tokens": 32968,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3249,
+    "output_tokens_details": {
+      "reasoning_tokens": 890
+    },
+    "total_tokens": 36220
+  },
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-001-E-7b3c625323c08b9c",
+      "NP-001-E-caaab3e6dabbfe5e",
+      "NP-001-E-c6658491eb3ce79d"
+    ],
+    "explanation": "The packet directly reports an in-vitro original experiment in HepG2 human hepatocellular carcinoma cells using EGFP mRNA-loaded LNP/DX25, with a linked positive-transfection outcome."
+  },
+  "record_counts": {
+    "formulations": 1,
+    "components": 5,
+    "experiments": 1,
+    "outcomes": 1,
+    "unresolved_items": 3
+  },
+  "checks": {
+    "structured_output_valid": true,
+    "paper_id_matches": true,
+    "all_evidence_ids_exist_in_packet": true,
+    "validation_report_status": "valid",
+    "narrative_requested": false,
+    "complexity_route": "complex",
+    "outcome_coverage_status": "review_unmatched_groups",
+    "v12_outcome_coverage_status": "review_unmatched_support",
+    "v12_structural_coverage_status": "review_unconfirmed_or_contradicted_facts",
+    "v12_structural_coverage_counts": {
+      "confirmed": 0,
+      "contradicted": 0,
+      "unconfirmed": 36
+    },
+    "v12_structural_coverage_routes": {
+      "none": 0,
+      "bounded_repair_task": 8,
+      "human_review": 28
+    },
+    "v12_recall_support_in_request": true
+  }
+}

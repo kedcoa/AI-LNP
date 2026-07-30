@@ -1,0 +1,430 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 4000,
+  "input": [
+    {
+      "role": "system",
+      "content": "Recover only the atomic candidate facts and experiment context in\nthe supplied task. Candidate IDs are opaque labels: use candidate_facts as the\nrequired fact definitions and the supplied evidence as their only support.\nAccount for every candidate ID exactly once as recovered or unresolved. Do not\nmerge distinct cells, relationships, endpoints, values, polarities, or\nexperiments into a broad record. A candidate is recovered only when at least one\nreturned outcome preserves its specific facts and cites its evidence; shared\nevidence alone is not coverage. Do not repeat existing records. Return unresolved\nwith a specific reason when evidence is insufficient. Never invent identifiers,\nvalues, units, comparisons, or evidence labels. For v1.2 tasks, return one\ncandidate resolution for every candidate and explicitly link each returned\noutcome to its resolved candidate and experiment."
+    },
+    {
+      "role": "user",
+      "content": "{\"candidate_facts\":[{\"candidate_id\":\"AOC-cf630d9c5b3ada5d\",\"endpoint_text\":\"expression\",\"evidence_ids\":[\"GP-008-FC-2749728b21beb464\"],\"numeric_value\":null,\"object_text\":\"the\",\"polarity\":\"positive\",\"predicate\":\"reduced\",\"qualitative_result\":\"reduced\",\"subject_text\":\"Meanwhile, the αCD163/LNP-FAPCAR group\",\"unit\":null,\"value_text\":null}],\"candidate_ids\":[\"AOC-cf630d9c5b3ada5d\"],\"evidence\":[{\"evidence_id\":\"GP-008-FC-2749728b21beb464\",\"source_ids\":[\"FC-S-5f7e3c49e57be4bb\"],\"text\":\"Meanwhile, the αCD163/LNP-FAPCAR group reduced the expression of the M2 marker CD206 (Fig.\"}],\"existing_experiment_ids\":[\"E1\",\"E2\"],\"existing_experiment_summaries\":[{\"comparator_context\":[\"CCL4 group\",\"untreated cohort\"],\"delivery_recipient_cell\":\"hepatic macrophages\",\"disease_model\":\"liver fibrosis\",\"dose\":0.4,\"dose_unit\":\"mg mRNA/kg body weight\",\"encoded_product\":\"FAP-targeted CAR\",\"experiment_id\":\"E1\",\"experimental_context\":\"in_vivo\",\"formulation_id\":\"F2\",\"molecular_target\":\"FAP\",\"outcome_endpoints\":[\"liver fibrosis\",\"amount of FAP+ macrophages in fibrotic livers\",\"FAP+ cells in hepatic tissue\",\"FAPCAR localization in F4/80+ macrophages in liver tissue\"],\"payload_name\":\"FAPCAR mRNA\",\"payload_type\":\"mRNA\",\"route\":\"intravenous tail-vein injection\",\"species\":\"mouse\",\"therapeutic_target_cell\":\"FAP+ macrophages\",\"timepoint\":14.0,\"timepoint_unit\":\"days after treatment\",\"tissue_or_organ\":\"liver\"},{\"comparator_context\":[\"unmodified LNP\",\"targeted αCD163 LNP\"],\"delivery_recipient_cell\":\"BMDMs\",\"disease_model\":null,\"dose\":null,\"dose_unit\":null,\"encoded_product\":\"GFP or FAPCAR\",\"experiment_id\":\"E2\",\"experimental_context\":\"in_vitro\",\"formulation_id\":\"F2\",\"molecular_target\":\"CD163\",\"outcome_endpoints\":[\"BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR\",\"Target BMDMs receiving mRNA from unmodified LNPs\"],\"payload_name\":\"GFP or FAPCAR\",\"payload_type\":\"mRNA\",\"route\":null,\"species\":null,\"therapeutic_target_cell\":\"BMDMs\",\"timepoint\":null,\"timepoint_unit\":null,\"tissue_or_organ\":null}],\"existing_formulation_ids\":[\"F1\",\"F2\"],\"existing_outcome_ids\":[\"O1\",\"O2\",\"O3\",\"O4\",\"O5\",\"O6\"],\"existing_outcome_summaries\":[{\"assay\":\"histology, Sirius red staining, and Masson's trichrome staining\",\"comparator\":\"CCL4 group\",\"endpoint\":\"liver fibrosis\",\"experiment_id\":\"E1\",\"outcome_id\":\"O1\",\"qualitative_outcome\":\"Treatment with αCD163/LNP-FAPCAR significantly alleviated liver fibrosis.\"},{\"assay\":\"single-cell RNA sequencing and immunofluorescence colocalization\",\"comparator\":\"untreated cohort\",\"endpoint\":\"amount of FAP+ macrophages in fibrotic livers\",\"experiment_id\":\"E1\",\"outcome_id\":\"O2\",\"qualitative_outcome\":\"αCD163/LNP-FAPCAR treatment markedly attenuated FAP+ macrophages; FAP/F4/80 double-positive macrophages were virtually eradicated after administration.\"},{\"assay\":\"GFP or FAPCAR expression\",\"comparator\":\"unmodified LNP\",\"endpoint\":\"BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR\",\"experiment_id\":\"E2\",\"outcome_id\":\"O3\",\"qualitative_outcome\":\">80% of BMDMs expressed GFP or FAPCAR.\"},{\"assay\":\"mRNA delivery\",\"comparator\":\"targeted αCD163 LNP\",\"endpoint\":\"Target BMDMs receiving mRNA from unmodified LNPs\",\"experiment_id\":\"E2\",\"outcome_id\":\"O4\",\"qualitative_outcome\":\"<20% of target BMDMs received mRNA.\"},{\"assay\":\"immunohistochemistry of hepatic tissue\",\"comparator\":null,\"endpoint\":\"FAP+ cells in hepatic tissue\",\"experiment_id\":\"E1\",\"outcome_id\":\"O5\",\"qualitative_outcome\":\"αCD163/LNP-FAPCAR treatment enabled targeted elimination of FAP+ cells.\"},{\"assay\":\"immunofluorescence staining\",\"comparator\":null,\"endpoint\":\"FAPCAR localization in F4/80+ macrophages in liver tissue\",\"experiment_id\":\"E1\",\"outcome_id\":\"O6\",\"qualitative_outcome\":\"FAPCAR immunofluorescence staining highlighted F4/80+ macrophages in liver tissues.\"}],\"experiment_context\":{\"anchors\":[{\"anchor_type\":\"payload\",\"evidence_ids\":[],\"value\":\"fapcar\"},{\"anchor_type\":\"model\",\"evidence_ids\":[],\"value\":\"in_vitro\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[],\"value\":\"macrophage\"},{\"anchor_type\":\"cell_context\",\"evidence_ids\":[],\"value\":\"hsc\"},{\"anchor_type\":\"assay\",\"evidence_ids\":[],\"value\":\"phagocytosis_cytotoxicity\"}],\"label\":\"fapcar / in_vitro\",\"provisional_experiment_id\":\"PEX-GP-008-044931098617\"},\"paper_id\":\"GP-008\",\"permitted_new_experiments\":0,\"permitted_new_outcomes\":2,\"route_ids\":[\"structural:AOC-cf630d9c5b3ada5d\"],\"source_inventory_sha256\":\"949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca\",\"source_result_sha256\":\"64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b\",\"task_checksum\":\"1f147f5999437e7f8b40be4c6e84815ec22b06d24a354a1597a67fc1bcc4b33b\",\"task_version\":\"missing-record-task-1.2.0\"}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "MissingRecordFragment",
+      "schema": {
+        "$defs": {
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "MissingRecordCandidateResolution": {
+            "additionalProperties": false,
+            "properties": {
+              "candidate_id": {
+                "title": "Candidate Id",
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "already_represented",
+                  "recovered_existing_experiment",
+                  "recovered_new_experiment",
+                  "unresolved"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "outcome_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Outcome Ids",
+                "type": "array"
+              },
+              "experiment_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Experiment Ids",
+                "type": "array"
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Reason"
+              }
+            },
+            "required": [
+              "candidate_id",
+              "status",
+              "outcome_ids",
+              "experiment_ids",
+              "reason"
+            ],
+            "title": "MissingRecordCandidateResolution",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "disposition": {
+            "enum": [
+              "recovered",
+              "unresolved"
+            ],
+            "title": "Disposition",
+            "type": "string"
+          },
+          "recovered_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Recovered Candidate Ids",
+            "type": "array"
+          },
+          "unresolved_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Candidate Ids",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "maxItems": 2,
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "maxItems": 8,
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unresolved Reason"
+          },
+          "candidate_resolutions": {
+            "items": {
+              "$ref": "#/$defs/MissingRecordCandidateResolution"
+            },
+            "title": "Candidate Resolutions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "disposition",
+          "recovered_candidate_ids",
+          "unresolved_candidate_ids",
+          "experiments",
+          "outcomes",
+          "unresolved_reason",
+          "candidate_resolutions"
+        ],
+        "title": "MissingRecordFragment",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}
