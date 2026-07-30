@@ -43,8 +43,14 @@ from src.rag.compact_api_packet import estimate_tokens
 
 
 ROOT = Path(__file__).resolve().parents[2]
-OUTPUT_ROOT = ROOT / "data/staging/extraction/primary_candidate_accounting_trial"
-TRIAL_PREFLIGHT_VERSION = "primary-candidate-accounting-trial-preflight-1.0.0"
+PREFLIGHT_OUTPUT_ROOT = (
+    ROOT
+    / "data/staging/extraction/np001_primary_accounting_trial_preflight"
+)
+RUN_OUTPUT_ROOT = (
+    ROOT / "data/staging/extraction/np001_primary_accounting_trial_run"
+)
+TRIAL_PREFLIGHT_VERSION = "compact-primary-accounting-preflight-1.0.0"
 CORE_CONTRACT_VERSION = "compact-1.1.0"
 TRIAL_MAX_OUTPUT_TOKENS = 12_000
 TRIAL_PAPER_ID = "NP-001"
@@ -180,7 +186,28 @@ def build_trial_request(
     }
 
 
-def _schema_audit(schema: Mapping[str, Any]) -> dict[str, Any]:
+def _candidate_inventory(
+    candidates: list[dict[str, Any]], candidate_facts_sha256: str
+) -> dict[str, Any]:
+    candidate_ids = [str(candidate.get("candidate_id", "")) for candidate in candidates]
+    if any(not candidate_id for candidate_id in candidate_ids):
+        raise ValueError("trial candidate inventory contains an empty candidate ID")
+    if len(candidate_ids) != len(set(candidate_ids)):
+        raise ValueError("trial candidate inventory contains duplicate candidate IDs")
+    return {
+        "raw_candidate_count": len(candidate_ids),
+        "raw_candidate_ids": candidate_ids,
+        "quarantined_candidate_count": 0,
+        "quarantined_candidate_ids": [],
+        "sent_candidate_count": len(candidate_ids),
+        "sent_candidate_ids": candidate_ids,
+        "ordered_sent_candidate_facts_sha256": candidate_facts_sha256,
+    }
+
+
+def _schema_audit(
+    schema: Mapping[str, Any], sent_candidate_ids: list[str]
+) -> dict[str, Any]:
     accounting = schema.get("properties", {}).get("candidate_accounting", {})
     candidate_properties = accounting.get("properties", {})
     return {
@@ -190,7 +217,7 @@ def _schema_audit(schema: Mapping[str, Any]) -> dict[str, Any]:
         .get("const"),
         "candidate_count": len(candidate_properties),
         "candidate_ids_are_ordered": list(candidate_properties)
-        == [f"AOC-{index:02d}" for index in range(1, 37)],
+        == sent_candidate_ids,
         "accounting_is_closed": accounting.get("additionalProperties") is False,
         "all_candidates_required": schema.get("required", [])[-2:]
         == ["accounting_contract_version", "candidate_accounting"],
@@ -216,14 +243,19 @@ def preflight_trial_request(
     *,
     model: str,
     packet_root: Path = PACKET_ROOT,
-    output_root: Path = OUTPUT_ROOT,
+    output_root: Path = PREFLIGHT_OUTPUT_ROOT,
 ) -> dict[str, Any]:
     """Write a reviewable exact request and signed bindings, with zero provider calls."""
 
     _require_trial_paper(paper_id)
     packet = load_packet(paper_id, packet_root)
     request, support, payload, bindings = build_trial_request(packet, model=model)
-    schema_audit = _schema_audit(bindings["dynamic_schema"])
+    candidate_inventory = _candidate_inventory(
+        payload["candidate_facts"], bindings["candidate_facts_sha256"]
+    )
+    schema_audit = _schema_audit(
+        bindings["dynamic_schema"], candidate_inventory["sent_candidate_ids"]
+    )
     evidence_audit = _evidence_audit(packet, support, payload["candidate_facts"])
     if not all(
         (
@@ -242,7 +274,11 @@ def preflight_trial_request(
     request_path = paper_root / "request.json"
     request_bytes = (json.dumps(request, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     request_path.write_bytes(request_bytes)
-    audits = {"schema": schema_audit, "evidence": evidence_audit}
+    audits = {
+        "schema": schema_audit,
+        "evidence": evidence_audit,
+        "candidate_inventory": candidate_inventory,
+    }
     (paper_root / "audits.json").write_text(
         json.dumps(audits, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
@@ -280,6 +316,7 @@ def preflight_trial_request(
         "estimated_input_tokens": estimate_tokens(request),
         "max_output_tokens": TRIAL_MAX_OUTPUT_TOKENS,
         "candidate_count": 36,
+        "candidate_inventory": candidate_inventory,
         "provider_calls": 0,
         "audits_path": str(paper_root / "audits.json"),
         "preview_path": str(paper_root / "preview.txt"),
@@ -358,6 +395,13 @@ def _load_approved_request(
     ):
         if manifest.get(key) != bindings[key]:
             raise ValueError(f"trial manifest {key} does not match current trial inputs")
+    expected_inventory = _candidate_inventory(
+        payload["candidate_facts"], bindings["candidate_facts_sha256"]
+    )
+    if manifest.get("candidate_inventory") != expected_inventory:
+        raise ValueError(
+            "trial manifest candidate inventory does not match current trial inputs"
+        )
     if payload["candidate_facts"] != support["atomic_outcome_candidates"]:
         raise ValueError("trial request candidate facts are not the ordered recall inventory")
     return request, support, manifest
@@ -371,11 +415,21 @@ def run_approved_trial(
     manifest_path: Path,
     approved_request_sha256: str | None,
     packet_root: Path = PACKET_ROOT,
-    output_root: Path = OUTPUT_ROOT,
+    output_root: Path = RUN_OUTPUT_ROOT,
 ) -> dict[str, Any]:
     """Invoke the provider once, only for an exact preflight-approved request."""
 
     _require_trial_paper(paper_id)
+    run_dir = output_root / paper_id
+    invocation_path = run_dir / "invocation_started.json"
+    if invocation_path.exists():
+        raise FileExistsError(
+            "An NP-001 trial invocation already started; refusing duplicate paid call"
+        )
+    if (run_dir / "manifest.json").exists() or (run_dir / "response.json").exists():
+        raise FileExistsError(
+            "A completed NP-001 trial already exists; refusing duplicate paid call"
+        )
     packet = load_packet(paper_id, packet_root)
     request, support, preflight_manifest = _load_approved_request(
         paper_id=paper_id,
@@ -384,14 +438,31 @@ def run_approved_trial(
         manifest_path=manifest_path,
         approved_request_sha256=approved_request_sha256,
     )
-    run_dir = output_root / paper_id
-    if (run_dir / "manifest.json").exists() or (run_dir / "response.json").exists():
-        raise FileExistsError("A completed NP-001 trial already exists; refusing duplicate paid call")
     run_dir.mkdir(parents=True, exist_ok=True)
     started_at = datetime.now(timezone.utc)
+    approved_request_bytes = Path(preflight_manifest["request_path"]).read_bytes()
+    (run_dir / "request.json").write_bytes(approved_request_bytes)
+    invocation = {
+        "status": "invocation_started",
+        "paper_id": paper_id,
+        "route": TRIAL_ROUTE,
+        "route_version": TRIAL_ROUTE_VERSION,
+        "model": model,
+        "approved_request_sha256": approved_request_sha256,
+        "preflight_manifest_path": str(manifest_path.resolve()),
+        "started_at": started_at.isoformat(),
+    }
+    try:
+        with invocation_path.open("x", encoding="utf-8") as marker:
+            marker.write(json.dumps(invocation, ensure_ascii=False, indent=2) + "\n")
+            marker.flush()
+            os.fsync(marker.fileno())
+    except FileExistsError as exc:
+        raise FileExistsError(
+            "An NP-001 trial invocation already started; refusing duplicate paid call"
+        ) from exc
     response = client.responses.create(**request)
     completed_at = datetime.now(timezone.utc)
-    (run_dir / "request.json").write_bytes(Path(preflight_manifest["request_path"]).read_bytes())
     (run_dir / "response.json").write_text(
         json.dumps(response.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -457,7 +528,12 @@ def main() -> None:
     for subparser in (preflight_parser, approved_parser):
         subparser.add_argument("--paper-id", required=True)
         subparser.add_argument("--packet-root", type=Path, default=PACKET_ROOT)
-        subparser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
+    preflight_parser.add_argument(
+        "--output-root", type=Path, default=PREFLIGHT_OUTPUT_ROOT
+    )
+    approved_parser.add_argument(
+        "--output-root", type=Path, default=RUN_OUTPUT_ROOT
+    )
     preflight_parser.add_argument("--model", default="gpt-5.6-terra")
     approved_parser.add_argument("--model", default="gpt-5.6-terra")
     approved_parser.add_argument("--manifest", type=Path, required=True)

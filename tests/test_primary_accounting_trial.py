@@ -141,6 +141,15 @@ class _FakeResponses:
         return _FakeResponse(self.output_text)
 
 
+class _FailingResponses:
+    def __init__(self):
+        self.calls = []
+
+    def create(self, **request):
+        self.calls.append(request)
+        raise TimeoutError("provider outcome is unknown")
+
+
 def _preflight(tmp_path, trial_module):
     packet_root = tmp_path / "packets"
     output_root = tmp_path / "preflight"
@@ -248,7 +257,9 @@ def test_preflight_persists_exact_request_audits_preview_and_signed_bindings(tmp
     manifest = approved.manifest
 
     assert json.loads(request_bytes)["max_output_tokens"] == 12_000
-    assert (approved.output_root / "NP-001" / "audits.json").exists()
+    audits = json.loads(
+        (approved.output_root / "NP-001" / "audits.json").read_text()
+    )
     preview = (approved.output_root / "NP-001" / "preview.txt").read_text()
     assert str(approved.request_path.resolve()) in preview
     assert manifest["request_sha256"] in preview
@@ -257,15 +268,80 @@ def test_preflight_persists_exact_request_audits_preview_and_signed_bindings(tmp
     assert "Candidates: 36" in preview
     assert "Proposed paid calls: 1" in preview
     assert manifest["provider_calls"] == 0
+    assert manifest["preflight_version"] == (
+        "compact-primary-accounting-preflight-1.0.0"
+    )
     assert manifest["packet_checksum"] == approved.packet.packet_checksum
     assert manifest["candidate_facts_sha256"] == _sha256(_canonical_json(_support()["atomic_outcome_candidates"]))
     assert manifest["dynamic_schema_sha256"] == _sha256(
         _canonical_json(json.loads(request_bytes)["text"]["format"]["schema"])
     )
     assert manifest["request_sha256"] == _sha256(request_bytes)
+    ordered_ids = [f"AOC-{index:02d}" for index in range(1, 37)]
+    expected_inventory = {
+        "raw_candidate_count": 36,
+        "raw_candidate_ids": ordered_ids,
+        "quarantined_candidate_count": 0,
+        "quarantined_candidate_ids": [],
+        "sent_candidate_count": 36,
+        "sent_candidate_ids": ordered_ids,
+        "ordered_sent_candidate_facts_sha256": manifest[
+            "candidate_facts_sha256"
+        ],
+    }
+    assert audits["candidate_inventory"] == expected_inventory
+    assert manifest["candidate_inventory"] == expected_inventory
     assert manifest["manifest_checksum"] == _sha256(_canonical_json({
         key: value for key, value in manifest.items() if key != "manifest_checksum"
     }))
+
+
+def test_default_cli_preflight_and_run_use_distinct_supported_roots(
+    tmp_path, monkeypatch, capsys, trial_module
+):
+    packet_root = tmp_path / "packets"
+    preflight_root = tmp_path / "default-preflight"
+    run_root = tmp_path / "default-run"
+    _write_packet(packet_root)
+    responses = _FakeResponses(json.dumps(_empty_trial_response()))
+    client = SimpleNamespace(responses=responses)
+    monkeypatch.setattr(trial_module, "PACKET_ROOT", packet_root)
+    monkeypatch.setattr(trial_module, "PREFLIGHT_OUTPUT_ROOT", preflight_root)
+    monkeypatch.setattr(trial_module, "RUN_OUTPUT_ROOT", run_root)
+    monkeypatch.setattr(trial_module, "OpenAI", lambda **kwargs: client)
+    monkeypatch.setenv("OPENAI_API_KEY", "fake-test-key")
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["run_primary_accounting_trial.py", "--paper-id", "NP-001"],
+    )
+    trial_module.main()
+    preflight_manifest = json.loads(capsys.readouterr().out)
+    manifest_path = preflight_root / "NP-001" / "manifest.json"
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "run_primary_accounting_trial.py",
+            "run-approved",
+            "--paper-id",
+            "NP-001",
+            "--manifest",
+            str(manifest_path),
+            "--approved-request-sha256",
+            preflight_manifest["request_sha256"],
+        ],
+    )
+    trial_module.main()
+    run_manifest = json.loads(capsys.readouterr().out)
+
+    assert preflight_root != run_root
+    assert (preflight_root / "NP-001" / "request.json").exists()
+    assert (run_root / "NP-001" / "result.json").exists()
+    assert run_manifest["paid_api_requests"] == 1
+    assert len(responses.calls) == 1
 
 
 @pytest.mark.parametrize("approved_sha", [None, "0" * 64])
@@ -313,6 +389,38 @@ def test_run_approved_refuses_modified_bytes_and_existing_completion_without_pro
             packet_root=fresh.packet_root, output_root=tmp_path / "completed",
         )
     assert responses.calls == []
+
+
+def test_provider_failure_preserves_invocation_marker_and_blocks_second_dispatch(
+    tmp_path, trial_module
+):
+    approved = _preflight(tmp_path, trial_module)
+    responses = _FailingResponses()
+    run_root = tmp_path / "runs"
+    arguments = {
+        "paper_id": "NP-001",
+        "model": "gpt-5.6-terra",
+        "client": SimpleNamespace(responses=responses),
+        "manifest_path": approved.manifest_path,
+        "approved_request_sha256": approved.manifest["request_sha256"],
+        "packet_root": approved.packet_root,
+        "output_root": run_root,
+    }
+
+    with pytest.raises(TimeoutError, match="outcome is unknown"):
+        trial_module.run_approved_trial(**arguments)
+
+    marker_path = run_root / "NP-001" / "invocation_started.json"
+    marker = json.loads(marker_path.read_text())
+    assert marker["status"] == "invocation_started"
+    assert marker["approved_request_sha256"] == approved.manifest["request_sha256"]
+    assert marker["started_at"]
+    assert len(responses.calls) == 1
+
+    with pytest.raises(FileExistsError, match="invocation|duplicate"):
+        trial_module.run_approved_trial(**arguments)
+
+    assert len(responses.calls) == 1
 
 
 def test_run_approved_sends_the_signed_request_once_and_persists_trial_validator_artifacts(tmp_path, trial_module):
