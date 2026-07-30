@@ -1,4 +1,7 @@
+from types import SimpleNamespace
+
 import pytest
+from pydantic import ValidationError
 
 import src.extraction.build_v12_structural_repair_tasks as repair_builder
 from src.extraction.compact_contracts import ExperimentRecord, OutcomeRecord
@@ -8,7 +11,7 @@ from src.extraction.missing_record_contracts import (
     MissingRecordTask,
 )
 from src.extraction.repair_contracts import RepairEvidence
-from src.extraction.run_missing_record_repair import validate_response
+from src.extraction.run_missing_record_repair import run, validate_response
 from src.extraction.route_compact_findings import route
 
 
@@ -552,3 +555,27 @@ def test_whole_response_schema_failure_requires_first_call_not_field_repair():
         inventory=None,
     )
     assert decision.routes[0].route == "first_call_required"
+
+
+def test_raw_response_is_persisted_before_invalid_json_is_parsed(tmp_path):
+    response = SimpleNamespace(
+        id="resp-test",
+        model="test",
+        output_text="truncated {",
+        usage=None,
+        model_dump=lambda mode: {
+            "id": "resp-test",
+            "model": "test",
+            "output_text": "truncated {",
+        },
+    )
+    client = SimpleNamespace(
+        responses=SimpleNamespace(create=lambda **request: response)
+    )
+
+    with pytest.raises(ValidationError):
+        run(_v12_task(), model="test", client=client, output_root=tmp_path)
+
+    raw_paths = list(tmp_path.rglob("response.raw.json"))
+    assert len(raw_paths) == 1
+    assert "truncated {" in raw_paths[0].read_text(encoding="utf-8")

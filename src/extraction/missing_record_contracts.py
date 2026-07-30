@@ -229,26 +229,70 @@ class MissingRecordVisionReferral(StrictModel):
 
 
 class MissingRecordVisionTask(StrictModel):
-    task_version: Literal["missing-record-vision-task-1.0.0"]
+    task_version: Literal[
+        "missing-record-vision-task-1.0.0",
+        "missing-record-vision-task-1.1.0",
+    ]
     paper_id: str
     route_ids: list[str] = Field(min_length=1)
     candidate_ids: list[str] = Field(min_length=1)
+    experiment_context: MissingRecordExperimentContext | None = None
+    candidate_facts: list[MissingRecordCandidateFact] = Field(
+        default_factory=list, max_length=8
+    )
     evidence: list[RepairEvidence] = Field(min_length=1, max_length=12)
     existing_formulation_ids: list[str]
     existing_experiment_ids: list[str]
     existing_outcome_ids: list[str]
+    existing_experiment_summaries: list[MissingRecordExperimentSummary] = Field(
+        default_factory=list
+    )
+    existing_outcome_summaries: list[MissingRecordOutcomeSummary] = Field(
+        default_factory=list
+    )
     permitted_new_experiments: int = Field(ge=0, le=2)
     permitted_new_outcomes: int = Field(ge=1, le=8)
     source_result_sha256: str
     source_inventory_sha256: str
-    source_pdf: str
-    source_pdf_sha256: str
-    page_number: int = Field(ge=1)
+    source_pdf: str | None = None
+    source_pdf_sha256: str | None = None
+    page_number: int | None = Field(default=None, ge=1)
     figure_or_table: str
     crop_path: str
     crop_sha256: str
     crop_evidence_id: str
     task_checksum: str
+
+    @model_validator(mode="after")
+    def validate_semantic_scope(self) -> "MissingRecordVisionTask":
+        if self.task_version != "missing-record-vision-task-1.1.0":
+            return self
+        MissingRecordTask(
+            task_version="missing-record-task-1.2.0",
+            paper_id=self.paper_id,
+            route_ids=self.route_ids,
+            candidate_ids=self.candidate_ids,
+            experiment_context=self.experiment_context,
+            candidate_facts=self.candidate_facts,
+            evidence=self.evidence,
+            existing_formulation_ids=self.existing_formulation_ids,
+            existing_experiment_ids=self.existing_experiment_ids,
+            existing_outcome_ids=self.existing_outcome_ids,
+            existing_experiment_summaries=self.existing_experiment_summaries,
+            existing_outcome_summaries=self.existing_outcome_summaries,
+            permitted_new_experiments=self.permitted_new_experiments,
+            permitted_new_outcomes=self.permitted_new_outcomes,
+            source_result_sha256=self.source_result_sha256,
+            source_inventory_sha256=self.source_inventory_sha256,
+            task_checksum="vision-semantic-scope",
+        )
+        if self.crop_evidence_id not in {
+            row.evidence_id for row in self.evidence
+        }:
+            raise ValueError(
+                "v1.1 crop evidence must be present in the task evidence"
+            )
+        return self
 
 
 class MissingRecordVisionResponse(StrictModel):

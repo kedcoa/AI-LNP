@@ -12,13 +12,17 @@ from typing import Any
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from openai.lib._pydantic import to_strict_json_schema
 
 from src.extraction.missing_record_contracts import (
     MissingRecordTask,
     MissingRecordVisionResponse,
     MissingRecordVisionTask,
 )
-from src.extraction.run_missing_record_repair import validate_response
+from src.extraction.run_missing_record_repair import (
+    persist_raw_response,
+    validate_response,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -54,14 +58,22 @@ def load_task(path: Path) -> MissingRecordVisionTask:
 
 def _as_text_task(task: MissingRecordVisionTask) -> MissingRecordTask:
     return MissingRecordTask(
-        task_version="missing-record-task-1.0.0",
+        task_version=(
+            "missing-record-task-1.2.0"
+            if task.task_version == "missing-record-vision-task-1.1.0"
+            else "missing-record-task-1.0.0"
+        ),
         paper_id=task.paper_id,
         route_ids=task.route_ids,
         candidate_ids=task.candidate_ids,
+        experiment_context=task.experiment_context,
+        candidate_facts=task.candidate_facts,
         evidence=task.evidence,
         existing_formulation_ids=task.existing_formulation_ids,
         existing_experiment_ids=task.existing_experiment_ids,
         existing_outcome_ids=task.existing_outcome_ids,
+        existing_experiment_summaries=task.existing_experiment_summaries,
+        existing_outcome_summaries=task.existing_outcome_summaries,
         permitted_new_experiments=task.permitted_new_experiments,
         permitted_new_outcomes=task.permitted_new_outcomes,
         source_result_sha256=task.source_result_sha256,
@@ -72,18 +84,66 @@ def _as_text_task(task: MissingRecordVisionTask) -> MissingRecordTask:
 
 def validate(result: MissingRecordVisionResponse, task: MissingRecordVisionTask) -> None:
     text_task = _as_text_task(task)
-    text_task.evidence.append(
-        type(text_task.evidence[0])(
-            evidence_id=task.crop_evidence_id,
-            text=f"Rendered {task.figure_or_table}, page {task.page_number}",
-            source_ids=[],
+    if task.crop_evidence_id not in {
+        row.evidence_id for row in text_task.evidence
+    }:
+        text_task.evidence.append(
+            type(text_task.evidence[0])(
+                evidence_id=task.crop_evidence_id,
+                text=(
+                    f"Rendered {task.figure_or_table}, page "
+                    f"{task.page_number or 'unknown'}"
+                ),
+                source_ids=[],
+            )
         )
-    )
     validate_response(result.fragment, text_task)
 
 
 def _image(path: Path) -> str:
     return "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode()
+
+
+def build_openai_request(
+    task: MissingRecordVisionTask,
+    *,
+    model: str,
+    max_output_tokens: int = 4_000,
+) -> dict[str, Any]:
+    """Build the exact visual request shared by preflight and generation."""
+
+    return {
+        "model": model,
+        "reasoning": {"effort": "low"},
+        "store": False,
+        "service_tier": "default",
+        "max_output_tokens": max_output_tokens,
+        "input": [
+            {"role": "system", "content": PROMPT},
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "input_text",
+                        "text": _canonical(task.model_dump(mode="json")),
+                    },
+                    {
+                        "type": "input_image",
+                        "image_url": _image(Path(task.crop_path)),
+                        "detail": "original",
+                    },
+                ],
+            },
+        ],
+        "text": {
+            "format": {
+                "type": "json_schema",
+                "name": "MissingRecordVisionResponse",
+                "schema": to_strict_json_schema(MissingRecordVisionResponse),
+                "strict": True,
+            }
+        },
+    }
 
 
 def run(
@@ -101,7 +161,9 @@ def run(
                 "prompt_version": PROMPT_VERSION,
                 "prompt_sha256": _sha(PROMPT),
                 "model": model,
-                "schema": MissingRecordVisionResponse.model_json_schema(),
+                "schema": to_strict_json_schema(
+                    MissingRecordVisionResponse
+                ),
             }
         )
     )
@@ -121,44 +183,15 @@ def run(
     if run_dir.exists():
         raise FileExistsError("Incomplete vision run exists; refusing paid retry")
     run_dir.mkdir(parents=True)
+    request = build_openai_request(
+        task, model=model, max_output_tokens=max_output_tokens
+    )
     (run_dir / "request.json").write_text(
-        json.dumps(
-            {"model": model, "prompt": PROMPT, "task": task.model_dump(mode="json")},
-            ensure_ascii=False,
-            indent=2,
-        )
-        + "\n",
+        json.dumps(request, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    response = client.responses.create(
-        model=model,
-        reasoning={"effort": "low"},
-        store=False,
-        service_tier="default",
-        max_output_tokens=max_output_tokens,
-        input=[
-            {"role": "system", "content": PROMPT},
-            {
-                "role": "user",
-                "content": [
-                    {"type": "input_text", "text": _canonical(task.model_dump(mode="json"))},
-                    {
-                        "type": "input_image",
-                        "image_url": _image(Path(task.crop_path)),
-                        "detail": "original",
-                    },
-                ],
-            },
-        ],
-        text={
-            "format": {
-                "type": "json_schema",
-                "name": "MissingRecordVisionResponse",
-                "schema": MissingRecordVisionResponse.model_json_schema(),
-                "strict": True,
-            }
-        },
-    )
+    response = client.responses.create(**request)
+    persist_raw_response(run_dir, response)
     if not response.output_text:
         raise RuntimeError("Missing-record vision returned no structured output")
     result = MissingRecordVisionResponse.model_validate_json(response.output_text)

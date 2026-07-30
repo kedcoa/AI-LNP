@@ -263,6 +263,22 @@ def build_openai_request(
     }
 
 
+def persist_raw_response(run_dir: Path, api_response: Any) -> Path:
+    """Persist the provider envelope before inspecting structured output."""
+
+    raw_response_path = run_dir / "response.raw.json"
+    raw_response_path.write_text(
+        json.dumps(
+            api_response.model_dump(mode="json"),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return raw_response_path
+
+
 def run(
     task: MissingRecordTask,
     *,
@@ -298,6 +314,7 @@ def run(
     )
     started = datetime.now(timezone.utc)
     api_response = client.responses.create(**request)
+    persist_raw_response(run_dir, api_response)
     if not api_response.output_text:
         raise RuntimeError("Missing-record request returned no structured output")
     response = MissingRecordFragment.model_validate_json(api_response.output_text)
