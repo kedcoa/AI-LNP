@@ -257,7 +257,16 @@ def _fragment(
     )
 
 
-def _approved_request(tmp_path, task, *, max_output_tokens=4_000):
+def _approved_request(
+    tmp_path,
+    task,
+    *,
+    max_output_tokens=4_000,
+    estimated_input_tokens=100,
+    paper_id=None,
+    route="text",
+    task_checksum=None,
+):
     request = build_openai_request(
         task,
         model="test",
@@ -273,10 +282,15 @@ def _approved_request(tmp_path, task, *, max_output_tokens=4_000):
     request_sha256 = hashlib.sha256(request_path.read_bytes()).hexdigest()
     unsigned_manifest = {
         "preflight_version": "missing-record-request-preflight-1.2.0",
+        "local_preflight_passed": True,
         "requests": [
             {
+                "paper_id": paper_id or task.paper_id,
+                "route": route,
+                "task_checksum": task_checksum or task.task_checksum,
                 "request_path": str(request_path),
                 "request_sha256": request_sha256,
+                "estimated_input_tokens": estimated_input_tokens,
             }
         ],
     }
@@ -371,6 +385,66 @@ def test_runner_sends_exact_approved_dictionary(tmp_path):
     )
 
     assert client.calls == [json.loads(approved.path.read_bytes())]
+
+
+@pytest.mark.parametrize(
+    ("row_overrides", "message"),
+    [
+        ({"task_checksum": "other-task"}, "task checksum"),
+        ({"paper_id": "GP-OTHER"}, "paper"),
+        ({"route": "vision"}, "route"),
+    ],
+)
+def test_text_runner_rejects_signed_request_for_other_scope(
+    tmp_path,
+    row_overrides,
+    message,
+):
+    task = _v12_task()
+    approved = _approved_request(
+        tmp_path,
+        task,
+        **row_overrides,
+    )
+    client = ExplodingClient()
+
+    with pytest.raises(ValueError, match=message):
+        run(
+            task,
+            client=client,
+            approved_request_path=approved.path,
+            approved_request_sha256=approved.sha256,
+            confirm_paid_call=True,
+            output_root=tmp_path / "runs",
+        )
+
+    assert client.calls == 0
+    assert not (tmp_path / "runs").exists()
+
+
+def test_text_runner_rejects_signed_request_above_input_token_cap(
+    tmp_path,
+):
+    task = _v12_task()
+    approved = _approved_request(
+        tmp_path,
+        task,
+        estimated_input_tokens=6_001,
+    )
+    client = ExplodingClient()
+
+    with pytest.raises(ValueError, match="6,000"):
+        run(
+            task,
+            client=client,
+            approved_request_path=approved.path,
+            approved_request_sha256=approved.sha256,
+            confirm_paid_call=True,
+            output_root=tmp_path / "runs",
+        )
+
+    assert client.calls == 0
+    assert not (tmp_path / "runs").exists()
 
 
 def test_cache_fingerprint_includes_approved_output_limit(tmp_path):

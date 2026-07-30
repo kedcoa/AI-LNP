@@ -310,6 +310,9 @@ def run(
         approved_request_path,
         expected_sha256=approved_request_sha256,
         manifest_path=manifest_path,
+        expected_task_checksum=task.task_checksum,
+        expected_paper_id=task.paper_id,
+        expected_route="text",
     )
     run_fingerprint = fingerprint(
         task,
@@ -403,12 +406,16 @@ def main() -> None:
         load_approved_request,
     )
 
+    task = load_task(args.task)
     load_approved_request(
         args.approved_request_path,
         expected_sha256=args.approved_request_sha256,
         manifest_path=find_signed_preflight_manifest(
             args.approved_request_path
         ),
+        expected_task_checksum=task.task_checksum,
+        expected_paper_id=task.paper_id,
+        expected_route="text",
     )
     load_dotenv(ROOT / ".env")
     client = OpenAI(
@@ -420,7 +427,7 @@ def main() -> None:
     print(
         json.dumps(
             run(
-                load_task(args.task),
+                task,
                 client=client,
                 approved_request_path=args.approved_request_path,
                 approved_request_sha256=args.approved_request_sha256,

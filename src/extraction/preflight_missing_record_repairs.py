@@ -40,6 +40,7 @@ REPORT_PATH = (
     / "reports/extraction/v12_structural_primary_v6/request_preflight.json"
 )
 GOLD_IDENTIFIER = re.compile(r"\bG[OX]-\d+\b")
+MAX_INPUT_TOKENS = 6_000
 
 
 def _canonical(value: Any) -> str:
@@ -109,6 +110,9 @@ def load_approved_request(
     *,
     expected_sha256: str,
     manifest_path: Path,
+    expected_task_checksum: str | None = None,
+    expected_paper_id: str | None = None,
+    expected_route: str | None = None,
 ) -> dict[str, Any]:
     """Validate and return the exact dictionary approved in a signed preflight."""
 
@@ -128,6 +132,8 @@ def load_approved_request(
         or _sha(_canonical(unsigned_manifest)) != supplied_checksum
     ):
         raise ValueError("Signed preflight manifest checksum is invalid")
+    if manifest.get("local_preflight_passed") is not True:
+        raise ValueError("Signed manifest local preflight did not pass")
 
     resolved_path = path.resolve()
     matches = [
@@ -141,7 +147,40 @@ def load_approved_request(
         raise ValueError(
             "Signed preflight must list the approved request exactly once"
         )
-    row_sha256 = matches[0].get("request_sha256")
+    approved_row = matches[0]
+    if (
+        expected_task_checksum is not None
+        and approved_row.get("task_checksum") != expected_task_checksum
+    ):
+        raise ValueError(
+            "Approved request task checksum does not match current task"
+        )
+    if (
+        expected_paper_id is not None
+        and approved_row.get("paper_id") != expected_paper_id
+    ):
+        raise ValueError(
+            "Approved request paper does not match current task"
+        )
+    if (
+        expected_route is not None
+        and approved_row.get("route") != expected_route
+    ):
+        raise ValueError(
+            "Approved request route does not match current runner"
+        )
+    estimated_input_tokens = approved_row.get(
+        "estimated_input_tokens"
+    )
+    if (
+        type(estimated_input_tokens) is not int
+        or estimated_input_tokens < 0
+        or estimated_input_tokens > MAX_INPUT_TOKENS
+    ):
+        raise ValueError(
+            "Approved request estimated input must be at most 6,000 tokens"
+        )
+    row_sha256 = approved_row.get("request_sha256")
     if row_sha256 != expected_sha256:
         raise ValueError(
             "Supplied approved request SHA-256 does not match signed preflight"
@@ -251,6 +290,8 @@ def _request_row(
     estimated_input_tokens = estimate_tokens(
         _canonical(token_estimate_request)
     )
+    if estimated_input_tokens > MAX_INPUT_TOKENS:
+        issues.append("input_token_cap_exceeded")
     persisted_request = (
         json.dumps(request, ensure_ascii=False, indent=2) + "\n"
     )

@@ -26,6 +26,11 @@ def _write_signed_preflight(
     *,
     request=None,
     max_output_tokens=4_000,
+    estimated_input_tokens=100,
+    paper_id="GP-X",
+    route="text",
+    task_checksum="task-checksum",
+    local_preflight_passed=True,
 ):
     request = dict(
         request
@@ -49,10 +54,15 @@ def _write_signed_preflight(
     request_sha256 = hashlib.sha256(request_path.read_bytes()).hexdigest()
     unsigned_manifest = {
         "preflight_version": "missing-record-request-preflight-1.2.0",
+        "local_preflight_passed": local_preflight_passed,
         "requests": [
             {
+                "paper_id": paper_id,
+                "route": route,
+                "task_checksum": task_checksum,
                 "request_path": str(request_path),
                 "request_sha256": request_sha256,
+                "estimated_input_tokens": estimated_input_tokens,
             }
         ],
     }
@@ -361,6 +371,39 @@ def test_preflight_hashes_exact_persisted_request_bytes(
     ).hexdigest()
 
 
+def test_preflight_rejects_request_above_input_token_cap(
+    tmp_path,
+    monkeypatch,
+):
+    run_root = _prepared_run(tmp_path)
+    monkeypatch.setattr(
+        preflight_module,
+        "audit",
+        lambda root: _passed_audit(),
+    )
+    monkeypatch.setattr(
+        preflight_module,
+        "estimate_tokens",
+        lambda payload: 6_001,
+    )
+
+    report = preflight_module.preflight(
+        run_root=run_root,
+        output_root=tmp_path / "out",
+        model="test",
+    )
+
+    assert report["local_preflight_passed"] is False
+    assert all(
+        row["estimated_input_tokens"] == 6_001
+        for row in report["requests"]
+    )
+    assert sum(
+        "input_token_cap_exceeded" in issue
+        for issue in report["issues"]
+    ) == report["request_count"]
+
+
 def test_runner_rejects_request_bytes_not_listed_in_signed_manifest(
     tmp_path,
 ):
@@ -391,6 +434,21 @@ def test_approved_request_rejects_output_limit_other_than_4000(tmp_path):
         )
 
 
+def test_approved_request_accepts_input_token_cap_boundary(tmp_path):
+    approved = _write_signed_preflight(
+        tmp_path,
+        estimated_input_tokens=6_000,
+    )
+
+    request = preflight_module.load_approved_request(
+        approved.request_path,
+        expected_sha256=approved.sha256,
+        manifest_path=approved.manifest_path,
+    )
+
+    assert request["model"] == "test"
+
+
 def test_approved_request_rejects_tampered_manifest_checksum(tmp_path):
     approved = _write_signed_preflight(tmp_path)
     manifest = json.loads(
@@ -402,6 +460,20 @@ def test_approved_request_rejects_tampered_manifest_checksum(tmp_path):
     )
 
     with pytest.raises(ValueError, match="manifest checksum"):
+        preflight_module.load_approved_request(
+            approved.request_path,
+            expected_sha256=approved.sha256,
+            manifest_path=approved.manifest_path,
+        )
+
+
+def test_approved_request_rejects_failed_local_preflight(tmp_path):
+    approved = _write_signed_preflight(
+        tmp_path,
+        local_preflight_passed=False,
+    )
+
+    with pytest.raises(ValueError, match="local preflight"):
         preflight_module.load_approved_request(
             approved.request_path,
             expected_sha256=approved.sha256,
