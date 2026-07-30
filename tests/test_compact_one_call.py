@@ -110,6 +110,16 @@ def approved_primary_request(
     )
 
 
+def test_default_primary_preflight_excludes_trial_accounting_fields(tmp_path):
+    approved = approved_primary_request(tmp_path)
+    request = json.loads(approved.request_path.read_text())
+    schema = request["text"]["format"]["schema"]
+
+    assert "accounting_contract_version" not in schema["properties"]
+    assert "candidate_accounting" not in schema["properties"]
+    assert approved.manifest["route_version"] == "compact-route-1.2.0"
+
+
 def write_signed_manifest(path: Path, manifest):
     unsigned = {
         key: value
