@@ -128,6 +128,17 @@ def validate_response(
         raise ValueError(
             "recovered and unresolved candidate IDs must agree with candidate resolutions"
         )
+    if (response.disposition == "recovered") != bool(resolved_candidates):
+        raise ValueError(
+            "response disposition must agree with candidate resolutions"
+        )
+    existing_outcome_experiments = {
+        summary.outcome_id: summary.experiment_id
+        for summary in task.existing_outcome_summaries
+    }
+    returned_outcome_experiments = {
+        outcome.outcome_id: outcome.experiment_id for outcome in response.outcomes
+    }
     for resolution in response.candidate_resolutions:
         outcome_ids = set(resolution.outcome_ids)
         experiment_ids = set(resolution.experiment_ids)
@@ -153,6 +164,19 @@ def validate_response(
             raise ValueError("candidate resolution references an unknown outcome")
         if experiment_ids - allowed_experiments:
             raise ValueError("candidate resolution references an unknown experiment")
+        for outcome_id in outcome_ids:
+            if outcome_id in task.existing_outcome_ids:
+                linked_experiment_id = existing_outcome_experiments.get(outcome_id)
+                if linked_experiment_id is None:
+                    raise ValueError(
+                        "candidate resolution outcome summary is unavailable"
+                    )
+            else:
+                linked_experiment_id = returned_outcome_experiments[outcome_id]
+            if linked_experiment_id not in experiment_ids:
+                raise ValueError(
+                    "candidate resolution outcome summary does not match an experiment"
+                )
         linked_returned_outcomes = [
             outcome
             for outcome in response.outcomes

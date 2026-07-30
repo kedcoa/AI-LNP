@@ -115,6 +115,17 @@ def _experiment_summary(experiment_id):
     }
 
 
+def _outcome_summary(outcome_id, experiment_id):
+    return {
+        "outcome_id": outcome_id,
+        "experiment_id": experiment_id,
+        "assay": "microscopy",
+        "endpoint": "GFP expression",
+        "comparator": None,
+        "qualitative_outcome": "More than 80% expressed GFP.",
+    }
+
+
 def _v12_task_payload(**overrides):
     payload = _task().model_dump(mode="json")
     payload.update(
@@ -180,6 +191,7 @@ def _fragment(
     experiments=None,
     outcomes=None,
     candidate_resolutions=None,
+    disposition=None,
 ):
     recovered = ["OC-1"] if recovered is None else recovered
     unresolved = ["OC-2"] if unresolved is None else unresolved
@@ -194,7 +206,9 @@ def _fragment(
         else candidate_resolutions
     )
     return MissingRecordFragment(
-        disposition="recovered" if recovered else "unresolved",
+        disposition=("recovered" if recovered else "unresolved")
+        if disposition is None
+        else disposition,
         recovered_candidate_ids=recovered,
         unresolved_candidate_ids=unresolved,
         experiments=experiments,
@@ -287,6 +301,27 @@ def test_v12_task_requires_facts_for_every_opaque_candidate():
         MissingRecordTask.model_validate(payload)
 
 
+@pytest.mark.parametrize(
+    ("outcome_summaries", "message"),
+    [
+        (
+            [_outcome_summary("O1", "E1"), _outcome_summary("O1", "E1")],
+            "unique",
+        ),
+        ([_outcome_summary("O-MADE-UP", "E1")], "existing_outcome_ids"),
+        ([_outcome_summary("O1", "E-MADE-UP")], "existing experiment"),
+    ],
+)
+def test_v12_task_requires_unique_known_outcome_summaries(
+    outcome_summaries, message
+):
+    with pytest.raises(ValueError, match=message):
+        _v12_task(
+            existing_outcome_ids=["O1"],
+            existing_outcome_summaries=outcome_summaries,
+        )
+
+
 def test_response_requires_one_resolution_for_every_candidate():
     response = _fragment(candidate_resolutions=[_resolution("OC-1")])
     with pytest.raises(ValueError, match="candidate resolution"):
@@ -348,6 +383,69 @@ def test_unresolved_resolution_cannot_reference_records():
         validate_response(response, _v12_task())
 
 
+def test_already_represented_resolution_requires_linked_existing_outcome_summary():
+    response = _fragment(
+        recovered=["OC-1"],
+        unresolved=["OC-2"],
+        outcomes=[],
+        candidate_resolutions=[
+            _resolution(
+                "OC-1",
+                status="already_represented",
+                outcome_ids=["O1"],
+                experiment_ids=["E2"],
+            ),
+            _resolution(
+                "OC-2",
+                status="unresolved",
+                outcome_ids=[],
+                experiment_ids=[],
+                reason="Ambiguous.",
+            ),
+        ],
+    )
+    with pytest.raises(ValueError, match="outcome summary"):
+        validate_response(
+            response,
+            _v12_task(
+                existing_experiment_ids=["E1", "E2"],
+                existing_experiment_summaries=[
+                    _experiment_summary("E1"),
+                    _experiment_summary("E2"),
+                ],
+                existing_outcome_ids=["O1"],
+                existing_outcome_summaries=[_outcome_summary("O1", "E1")],
+            ),
+        )
+
+
+def test_recovered_disposition_cannot_coexist_with_all_unresolved_resolutions():
+    response = _fragment(
+        recovered=[],
+        unresolved=["OC-1", "OC-2"],
+        outcomes=[],
+        candidate_resolutions=[
+            _resolution(
+                "OC-1",
+                status="unresolved",
+                outcome_ids=[],
+                experiment_ids=[],
+                reason="Ambiguous.",
+            ),
+            _resolution(
+                "OC-2",
+                status="unresolved",
+                outcome_ids=[],
+                experiment_ids=[],
+                reason="Ambiguous.",
+            ),
+        ],
+        disposition="recovered",
+    )
+    with pytest.raises(ValueError, match="disposition"):
+        validate_response(response, _v12_task())
+
+
 def test_recovered_existing_experiment_requires_a_returned_outcome():
     response = _fragment(
         recovered=["OC-1"],
@@ -365,7 +463,13 @@ def test_recovered_existing_experiment_requires_a_returned_outcome():
         ],
     )
     with pytest.raises(ValueError, match="new outcome"):
-        validate_response(response, _v12_task(existing_outcome_ids=["O1"]))
+        validate_response(
+            response,
+            _v12_task(
+                existing_outcome_ids=["O1"],
+                existing_outcome_summaries=[_outcome_summary("O1", "E1")],
+            ),
+        )
 
 
 def test_recovered_new_experiment_requires_a_returned_outcome_for_that_experiment():

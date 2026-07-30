@@ -160,6 +160,22 @@ class MissingRecordTask(StrictModel):
                 )
             if len(set(summary_ids)) != len(summary_ids):
                 raise ValueError("existing experiment summary IDs must be unique")
+            outcome_summary_ids = [
+                row.outcome_id for row in self.existing_outcome_summaries
+            ]
+            if len(set(outcome_summary_ids)) != len(outcome_summary_ids):
+                raise ValueError("existing outcome summary IDs must be unique")
+            if set(outcome_summary_ids) - set(self.existing_outcome_ids):
+                raise ValueError(
+                    "existing outcome summaries must reference existing_outcome_ids"
+                )
+            if any(
+                row.experiment_id not in set(self.existing_experiment_ids)
+                for row in self.existing_outcome_summaries
+            ):
+                raise ValueError(
+                    "existing outcome summaries must reference an existing experiment"
+                )
         return self
 
 
