@@ -83,6 +83,7 @@ def merge(
     new_outcomes: list[dict[str, Any]] = []
     candidate_resolutions: list[dict[str, Any]] = []
     resolution_by_candidate: dict[str, dict[str, Any]] = {}
+    resolution_outcome_task_candidates: dict[str, set[str]] = {}
     recovered_candidate_ids: set[str] = set()
     unresolved_candidate_ids: set[str] = set()
     allowed_evidence_ids = {row.evidence_id for row in packet.evidence}
@@ -299,6 +300,10 @@ def merge(
                         "Candidate appears in more than one candidate resolution"
                     )
                 resolution_by_candidate[candidate_id] = resolution
+                for outcome_id in resolution["outcome_ids"]:
+                    resolution_outcome_task_candidates.setdefault(
+                        outcome_id, set()
+                    ).update(task.candidate_ids)
             candidate_resolutions.extend(resolution_rows)
 
         new_experiments.extend(fragment_experiments)
@@ -364,12 +369,16 @@ def merge(
                 resolution["candidate_id"]
             )
     confirmed_resolution_links: set[tuple[str, str]] = set()
+    confirmed_non_claimant_links: set[tuple[str, str]] = set()
     resolution_structural_coverage = []
-    for outcome_id, candidate_ids in sorted(resolution_claimants.items()):
+    for outcome_id, claimant_ids in sorted(resolution_claimants.items()):
+        task_candidate_ids_for_outcome = (
+            resolution_outcome_task_candidates[outcome_id]
+        )
         outcome_structural = evaluate_structural_coverage(
             candidates=[
                 candidate_by_id[candidate_id]
-                for candidate_id in sorted(candidate_ids)
+                for candidate_id in sorted(task_candidate_ids_for_outcome)
             ],
             provisional_experiments=support.get(
                 "provisional_experiments", []
@@ -380,6 +389,14 @@ def merge(
             },
         )
         for row in outcome_structural["candidates"]:
+            raw_confirmed = any(
+                assessment["verdict"] == "confirmed"
+                for assessment in row["assessments"]
+            )
+            if raw_confirmed and row["candidate_id"] not in claimant_ids:
+                confirmed_non_claimant_links.add(
+                    (row["candidate_id"], outcome_id)
+                )
             if row["verdict"] == "confirmed":
                 confirmed_resolution_links.add(
                     (row["candidate_id"], outcome_id)
@@ -387,9 +404,42 @@ def merge(
         resolution_structural_coverage.append(
             {
                 "outcome_id": outcome_id,
-                "candidate_ids": sorted(candidate_ids),
+                "candidate_ids": sorted(claimant_ids),
+                "evaluated_candidate_ids": sorted(
+                    task_candidate_ids_for_outcome
+                ),
                 "coverage": outcome_structural,
             }
+        )
+
+    if confirmed_non_claimant_links:
+        raise ValueError(
+            "Resolution outcomes structurally confirm a non-claimant "
+            f"candidate: {sorted(confirmed_non_claimant_links)}"
+        )
+    confirmed_outcomes_by_candidate_experiment: dict[
+        tuple[str, str], list[str]
+    ] = {}
+    for candidate_id, outcome_id in confirmed_resolution_links:
+        key = (
+            candidate_id,
+            str(outcomes_by_id[outcome_id]["experiment_id"]),
+        )
+        confirmed_outcomes_by_candidate_experiment.setdefault(
+            key, []
+        ).append(outcome_id)
+    same_experiment_multiple_matches = sorted(
+        (candidate_id, experiment_id, sorted(outcome_ids))
+        for (
+            candidate_id,
+            experiment_id,
+        ), outcome_ids in confirmed_outcomes_by_candidate_experiment.items()
+        if len(outcome_ids) > 1
+    )
+    if same_experiment_multiple_matches:
+        raise ValueError(
+            "Candidate has multiple structural matches in the same experiment: "
+            f"{same_experiment_multiple_matches}"
         )
 
     unverified_resolution_links = sorted(

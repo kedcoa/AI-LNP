@@ -290,6 +290,58 @@ def _valid_multi_experiment_inputs(tmp_path):
     )
 
 
+def _cloned_same_experiment_inputs(tmp_path):
+    row = candidate()
+    fragment = MissingRecordFragment(
+        disposition="recovered",
+        recovered_candidate_ids=[row.candidate_id],
+        unresolved_candidate_ids=[],
+        experiments=[],
+        outcomes=[
+            outcome(identifier="OUT1", experiment_id="EXP1"),
+            outcome(identifier="OUT2", experiment_id="EXP1"),
+        ],
+        unresolved_reason=None,
+        candidate_resolutions=[
+            _resolution(
+                row.candidate_id,
+                outcome_ids=["OUT1", "OUT2"],
+                experiment_ids=["EXP1"],
+            )
+        ],
+    )
+    return _merge_inputs(
+        tmp_path,
+        candidates=[row],
+        fragment=fragment,
+    )
+
+
+def _cloned_cross_candidate_inputs(tmp_path):
+    first = candidate(candidate_id="AOC-1", claim_ids=["ACL-1"])
+    second = candidate(candidate_id="AOC-2", claim_ids=["ACL-2"])
+    fragment = MissingRecordFragment(
+        disposition="recovered",
+        recovered_candidate_ids=["AOC-1", "AOC-2"],
+        unresolved_candidate_ids=[],
+        experiments=[],
+        outcomes=[
+            outcome(identifier="OUT1", experiment_id="EXP1"),
+            outcome(identifier="OUT2", experiment_id="EXP1"),
+        ],
+        unresolved_reason=None,
+        candidate_resolutions=[
+            _resolution("AOC-1", outcome_ids=["OUT1"]),
+            _resolution("AOC-2", outcome_ids=["OUT2"]),
+        ],
+    )
+    return _merge_inputs(
+        tmp_path,
+        candidates=[first, second],
+        fragment=fragment,
+    )
+
+
 def _mixed_resolution_inputs(tmp_path):
     recovered = candidate(candidate_id="AOC-1", claim_ids=["ACL-1"])
     unresolved = candidate(
@@ -347,6 +399,20 @@ def test_merge_accepts_one_candidate_with_distinct_verified_experiment_outcomes(
         "EXP1",
         "EXP2",
     ]
+
+
+def test_merge_rejects_cloned_outcomes_for_one_candidate_in_same_experiment(
+    tmp_path,
+):
+    with pytest.raises(ValueError, match="same experiment"):
+        merge(**_cloned_same_experiment_inputs(tmp_path))
+
+
+def test_merge_rejects_cloned_outcomes_split_across_candidate_resolutions(
+    tmp_path,
+):
+    with pytest.raises(ValueError, match="non-claimant"):
+        merge(**_cloned_cross_candidate_inputs(tmp_path))
 
 
 def test_unresolved_candidate_is_quarantined_without_discarding_verified_peer(

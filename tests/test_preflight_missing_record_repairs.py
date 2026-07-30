@@ -149,6 +149,34 @@ def _resign_vision_task(path, mutate):
     path.write_text(json.dumps(raw), encoding="utf-8")
 
 
+def _quarantine_one_visual_task(run_root):
+    run_dir = run_root / "GP-X"
+    vision_root = run_dir / "missing_record_vision_tasks"
+    manifest_path = vision_root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    quarantined = manifest["tasks"].pop(0)
+    (run_dir / quarantined["task_path"]).unlink()
+    review_row = {
+        "source_task_path": quarantined["source_task_path"],
+        "candidate_ids": quarantined["candidate_ids"],
+        "visual_object_id": quarantined["visual_object_id"],
+        "reason": "accepted_visual_claim_not_unique",
+    }
+    manifest.update(
+        {
+            "task_count": 1,
+            "visual_candidate_count": 1,
+            "visual_object_count": 1,
+            "visual_human_review_candidate_ids": quarantined[
+                "candidate_ids"
+            ],
+            "visual_human_review": [review_row],
+        }
+    )
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    return review_row
+
+
 def test_missing_record_response_schema_is_strict_at_every_object():
     schema = to_strict_json_schema(MissingRecordFragment)
     assert "candidate_resolutions" in schema["properties"]
@@ -188,7 +216,11 @@ def test_preflight_reports_exact_paid_call_and_route_totals(
     assert report["text_candidate_count"] == 2
     assert report["text_request_count"] == 2
     assert report["visual_candidate_count"] == 2
+    assert report["sendable_visual_candidate_count"] == 2
     assert report["visual_object_count"] == 2
+    assert report["visual_human_review_candidate_count"] == 0
+    assert report["visual_human_review_object_count"] == 0
+    assert report["visual_human_review"] == []
     assert report["vision_request_count"] == 2
     assert report["total_paid_request_count"] == 4
     assert len(report["request_paths"]) == 4
@@ -209,10 +241,43 @@ def test_preflight_reports_exact_paid_call_and_route_totals(
     assert report["paid_api_requests"] == 0
 
 
+def test_preflight_reports_structured_visual_human_review_scope(
+    tmp_path, monkeypatch
+):
+    run_root = _prepared_run(tmp_path)
+    review_row = _quarantine_one_visual_task(run_root)
+    monkeypatch.setattr(
+        preflight_module,
+        "audit",
+        lambda root: _passed_audit(),
+    )
+
+    report = preflight_module.preflight(
+        run_root=run_root,
+        output_root=tmp_path / "out",
+        model="test",
+    )
+
+    assert report["sendable_visual_candidate_count"] == 1
+    assert report["visual_human_review_candidate_count"] == 1
+    assert report["visual_human_review_object_count"] == 1
+    assert report["visual_human_review"] == [
+        {"paper_id": "GP-X", **review_row}
+    ]
+
+
 def test_preflight_hashes_exact_persisted_request_bytes(
     tmp_path, monkeypatch
 ):
     run_root = _prepared_run(tmp_path)
+    original_write_text = Path.write_text
+
+    def write_text_with_translated_newlines(path, data, **kwargs):
+        if path.name.startswith("task_"):
+            data = data.replace("\n", "\r\n")
+        return original_write_text(path, data, **kwargs)
+
+    monkeypatch.setattr(Path, "write_text", write_text_with_translated_newlines)
     monkeypatch.setattr(
         preflight_module,
         "audit",

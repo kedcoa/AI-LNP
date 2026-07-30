@@ -135,11 +135,9 @@ def _request_row(
     persisted_request = (
         json.dumps(request, ensure_ascii=False, indent=2) + "\n"
     )
+    payload_bytes = persisted_request.encode("utf-8")
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(
-        persisted_request,
-        encoding="utf-8",
-    )
+    output_path.write_bytes(payload_bytes)
     return (
         {
             "paper_id": task.paper_id,
@@ -147,10 +145,10 @@ def _request_row(
             "task_path": _display(task_path),
             "request_path": _display(output_path),
             "task_checksum": task.task_checksum,
-            "request_sha256": _sha(persisted_request),
+            "request_sha256": _sha(payload_bytes),
             "candidate_count": len(task.candidate_ids),
             "evidence_count": len(task.evidence),
-            "request_bytes": len(persisted_request.encode("utf-8")),
+            "request_bytes": len(payload_bytes),
             "estimated_input_tokens": estimated_input_tokens,
             "image_input_bytes": image_input_bytes,
             "estimated_image_tokens": None,
@@ -195,6 +193,8 @@ def preflight(
     visual_candidate_count = 0
     visual_object_ids: set[str] = set()
     visual_human_review_candidate_ids: set[str] = set()
+    visual_human_review_object_ids: set[str] = set()
+    visual_human_review: list[dict[str, Any]] = []
 
     for run_dir in sorted(path for path in run_root.glob("GP-*") if path.is_dir()):
         source_request = json.loads(
@@ -230,6 +230,25 @@ def preflight(
         visual_human_review_candidate_ids |= (
             paper_visual_human_review_ids
         )
+        for review_row in vision_manifest.get(
+            "visual_human_review", []
+        ):
+            object_id = review_row.get("visual_object_id")
+            if object_id:
+                visual_human_review_object_ids.add(object_id)
+            visual_human_review.append(
+                {
+                    "paper_id": run_dir.name,
+                    "source_task_path": review_row.get(
+                        "source_task_path"
+                    ),
+                    "candidate_ids": review_row.get(
+                        "candidate_ids", []
+                    ),
+                    "visual_object_id": object_id,
+                    "reason": review_row.get("reason"),
+                }
+            )
         expected_vision_names: set[str] = set()
 
         for task_path, metadata in zip(
@@ -338,7 +357,7 @@ def preflight(
         text_candidate_count + visual_candidate_count,
     )
     report = {
-        "preflight_version": "missing-record-request-preflight-1.1.0",
+        "preflight_version": "missing-record-request-preflight-1.2.0",
         "model": model,
         "pricing_status": "pricing_not_configured",
         "task_audit_passed": task_audit["passed"],
@@ -347,10 +366,18 @@ def preflight(
         "text_candidate_count": text_candidate_count,
         "text_request_count": text_request_count,
         "visual_candidate_count": visual_candidate_count,
+        "sendable_visual_candidate_count": visual_candidate_count,
         "visual_object_count": len(visual_object_ids),
         "visual_human_review_candidate_ids": sorted(
             visual_human_review_candidate_ids
         ),
+        "visual_human_review_candidate_count": len(
+            visual_human_review_candidate_ids
+        ),
+        "visual_human_review_object_count": len(
+            visual_human_review_object_ids
+        ),
+        "visual_human_review": visual_human_review,
         "vision_request_count": vision_request_count,
         "total_paid_request_count": total_paid_request_count,
         "estimated_input_tokens": sum(
