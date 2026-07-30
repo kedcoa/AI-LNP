@@ -244,6 +244,7 @@ def _approved_requests(
     model: str,
     manifest_path: Path,
     approvals: Mapping[str, str],
+    start_sequence: int,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     manifest = json.loads(manifest_path.read_text())
     unsigned = {
@@ -261,6 +262,8 @@ def _approved_requests(
     )
     approved = []
     for expected, entry in zip(expected_rows, manifest["requests"]):
+        if expected["sequence"] < start_sequence:
+            continue
         slot_id = expected["slot_id"]
         approved_sha = approvals.get(slot_id)
         if approved_sha != entry["request_sha256"]:
@@ -293,15 +296,19 @@ def run_approved_isolated_core_calls(
     approved_request_sha256_by_slot: Mapping[str, str],
     packet_root: Path = PACKET_ROOT,
     output_root: Path = RUN_OUTPUT_ROOT,
+    start_sequence: int = 1,
 ) -> dict[str, Any]:
     if paper_id != "NP-001":
         raise ValueError("isolated core calls accept only NP-001")
+    if start_sequence not in range(1, 7):
+        raise ValueError("start_sequence must be between 1 and 6")
     packet = load_packet(paper_id, packet_root)
     approved, qualification = _approved_requests(
         packet=packet,
         model=model,
         manifest_path=preflight_manifest_path,
         approvals=approved_request_sha256_by_slot,
+        start_sequence=start_sequence,
     )
     completed = []
     paper_root = output_root / paper_id
@@ -409,6 +416,7 @@ def run_approved_isolated_core_calls(
         "repair_calls": 0,
         "vision_calls": 0,
         "completed_slot_ids": completed,
+        "start_sequence": start_sequence,
     }
 
 

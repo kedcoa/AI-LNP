@@ -159,3 +159,52 @@ def test_runner_stops_sequence_on_provider_ambiguity(tmp_path):
     second_dir = tmp_path / "runs" / "NP-001" / "02"
     assert (second_dir / "invocation_started.json").exists()
     assert not (tmp_path / "runs" / "NP-001" / "03").exists()
+
+
+def test_runner_can_resume_at_sequence_three_without_calls_one_or_two(
+    tmp_path,
+):
+    from src.extraction.run_isolated_core_slot_calls import (
+        run_approved_isolated_core_calls,
+    )
+
+    approved = _preflight(tmp_path)
+    responses = _FakeResponses(json.dumps(_trial_response()))
+    approvals = {
+        row["slot_id"]: row["request_sha256"]
+        for row in approved.manifest["requests"][2:]
+    }
+    run_root = tmp_path / "retry-runs"
+
+    result = run_approved_isolated_core_calls(
+        "NP-001",
+        model="gpt-5.6-terra",
+        client=SimpleNamespace(responses=responses),
+        preflight_manifest_path=(
+            approved.output_root / "NP-001" / "manifest.json"
+        ),
+        approved_request_sha256_by_slot=approvals,
+        packet_root=approved.packet_root,
+        output_root=run_root,
+        start_sequence=3,
+    )
+
+    assert [
+        json.loads(call["input"][1]["content"])[
+            "core_slot_packets"
+        ][0]["slot_id"]
+        for call in responses.calls
+    ] == SLOT_IDS[2:]
+    assert result["paid_api_requests"] == 4
+    assert result["completed_slot_ids"] == SLOT_IDS[2:]
+    assert not (run_root / "NP-001" / "01").exists()
+    assert not (run_root / "NP-001" / "02").exists()
+    assert all(
+        (
+            run_root
+            / "NP-001"
+            / f"{sequence:02d}"
+            / "invocation_started.json"
+        ).exists()
+        for sequence in range(3, 7)
+    )
