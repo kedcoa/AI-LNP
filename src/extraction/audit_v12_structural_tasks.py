@@ -9,6 +9,12 @@ import re
 from pathlib import Path
 from typing import Any
 
+from src.extraction.build_v12_structural_repair_tasks import (
+    DEFAULT_MODEL,
+    _visual_object_id,
+    estimate_input_tokens,
+    estimate_worst_case_output_tokens,
+)
 from src.extraction.deterministic_coverage_v12 import (
     assess_candidate_eligibility,
 )
@@ -94,10 +100,19 @@ def audit(run_root: Path = RUN_ROOT) -> dict[str, Any]:
         task_paths = sorted(task_root.glob("task_*.json"))
         if len(task_paths) != task_manifest["task_count"]:
             issues.append(f"{paper_id}:task_manifest_count_mismatch")
+        manifest_tasks = task_manifest.get("tasks", [])
+        if len(manifest_tasks) != task_manifest["task_count"]:
+            issues.append(f"{paper_id}:task_metadata_count_mismatch")
+        oversized_ids = set(
+            task_manifest.get("oversized_candidate_ids", [])
+        )
+        model = task_manifest.get("model", DEFAULT_MODEL)
+        text_task_ids: set[str] = set()
+        vision_task_ids: set[str] = set()
         scoped_ids: set[str] = set()
         scoped_evidence_ids: set[str] = set()
         task_rows = []
-        for task_path in task_paths:
+        for task_index, task_path in enumerate(task_paths):
             try:
                 task = load_task(task_path)
             except Exception as exc:  # surfaced verbatim in the persisted audit
@@ -105,6 +120,75 @@ def audit(run_root: Path = RUN_ROOT) -> dict[str, Any]:
                     f"{paper_id}:{task_path.name}:invalid_task:{exc}"
                 )
                 continue
+            metadata = (
+                manifest_tasks[task_index]
+                if task_index < len(manifest_tasks)
+                else {}
+            )
+            metadata_ids = set(metadata.get("candidate_ids", []))
+            if metadata_ids != set(task.candidate_ids):
+                issues.append(
+                    f"{paper_id}:{task_path.name}:"
+                    "task_metadata_scope_mismatch"
+                )
+            repair_route = metadata.get("repair_route")
+            if repair_route == "text":
+                text_task_ids |= set(task.candidate_ids)
+            elif repair_route == "vision":
+                vision_task_ids |= set(task.candidate_ids)
+            else:
+                issues.append(
+                    f"{paper_id}:{task_path.name}:invalid_repair_route:"
+                    f"{repair_route}"
+                )
+            estimated_input = metadata.get("estimated_input_tokens")
+            estimated_output = metadata.get(
+                "estimated_worst_case_output_tokens"
+            )
+            if (
+                isinstance(estimated_input, bool)
+                or not isinstance(estimated_input, int)
+                or estimated_input < 0
+                or estimated_input > 6_000
+            ):
+                issues.append(
+                    f"{paper_id}:{task_path.name}:input_token_cap_exceeded"
+                )
+            if (
+                isinstance(estimated_output, bool)
+                or not isinstance(estimated_output, int)
+                or estimated_output < 0
+                or estimated_output > 4_000
+            ):
+                issues.append(
+                    f"{paper_id}:{task_path.name}:output_token_cap_exceeded"
+                )
+            actual_input = estimate_input_tokens(task, model=model)
+            actual_output = estimate_worst_case_output_tokens(task)
+            if actual_input > 6_000:
+                issues.append(
+                    f"{paper_id}:{task_path.name}:"
+                    "actual_input_token_cap_exceeded"
+                )
+            if actual_output > 4_000:
+                issues.append(
+                    f"{paper_id}:{task_path.name}:"
+                    "actual_output_token_cap_exceeded"
+                )
+            expected_visual_objects = {
+                _visual_object_id(candidate_by_id[candidate_id])
+                for candidate_id in task.candidate_ids
+                if candidate_id in candidate_by_id
+            }
+            if (
+                len(expected_visual_objects) != 1
+                or metadata.get("visual_object_id")
+                != next(iter(expected_visual_objects), None)
+            ):
+                issues.append(
+                    f"{paper_id}:{task_path.name}:"
+                    "visual_object_scope_mismatch"
+                )
             raw = task_path.read_text(encoding="utf-8")
             gold = sorted(set(GOLD_IDENTIFIER.findall(raw)))
             if gold:
@@ -160,9 +244,25 @@ def audit(run_root: Path = RUN_ROOT) -> dict[str, Any]:
                         f"{paper_id}:{task_path.name}:experiment_scope_mismatch:"
                         f"{candidate_id}"
                     )
+                expected_route = (
+                    "vision"
+                    if candidate.route_hint == "vision"
+                    else "text"
+                )
+                if repair_route != expected_route:
+                    issues.append(
+                        f"{paper_id}:{task_path.name}:route_mismatch:"
+                        f"{candidate_id}"
+                    )
             task_rows.append(
                 {
-                    "path": str(task_path.relative_to(ROOT)),
+                    "path": str(
+                        task_path.relative_to(
+                            ROOT
+                            if task_path.is_relative_to(ROOT)
+                            else run_root
+                        )
+                    ),
                     "sha256": _sha(task_path.read_bytes()),
                     "task_checksum": task.task_checksum,
                     "provisional_experiment_id": (
@@ -174,31 +274,75 @@ def audit(run_root: Path = RUN_ROOT) -> dict[str, Any]:
                         candidate_by_id[candidate_id].route_hint == "vision"
                         for candidate_id in task.candidate_ids
                     ),
+                    "repair_route": repair_route,
+                    "visual_object_id": metadata.get("visual_object_id"),
+                    "estimated_input_tokens": estimated_input,
+                    "estimated_worst_case_output_tokens": estimated_output,
+                    "actual_input_tokens": actual_input,
+                    "actual_worst_case_output_tokens": actual_output,
                 }
             )
-        if scoped_ids != expected_repair:
+        routed_repair_ids = (
+            text_task_ids | vision_task_ids | oversized_ids
+        )
+        if routed_repair_ids != expected_repair:
             issues.append(
                 f"{paper_id}:repair_scope_mismatch:"
-                f"missing={sorted(expected_repair - scoped_ids)}:"
-                f"extra={sorted(scoped_ids - expected_repair)}"
+                f"missing={sorted(expected_repair - routed_repair_ids)}:"
+                f"extra={sorted(routed_repair_ids - expected_repair)}"
             )
+        if text_task_ids & vision_task_ids:
+            issues.append(f"{paper_id}:text_vision_scope_overlap")
+        if (
+            (text_task_ids | vision_task_ids) & oversized_ids
+            or oversized_ids & (expected_human | expected_confirmed)
+        ):
+            issues.append(f"{paper_id}:oversized_scope_overlap")
         if scoped_ids & (expected_human | expected_confirmed):
             issues.append(f"{paper_id}:nonrepair_candidate_in_task")
+        coverage_ids = {
+            row["candidate_id"] for row in coverage["candidates"]
+        }
+        conserved_ids = (
+            text_task_ids
+            | vision_task_ids
+            | oversized_ids
+            | expected_human
+            | expected_confirmed
+        )
+        if conserved_ids != coverage_ids:
+            issues.append(
+                f"{paper_id}:candidate_conservation_mismatch:"
+                f"missing={sorted(coverage_ids - conserved_ids)}:"
+                f"extra={sorted(conserved_ids - coverage_ids)}"
+            )
         visual_evidence = {
-            row["evidence_id"] for row in support["accepted_visual_claims"]
+            row["evidence_id"]
+            for row in support.get("accepted_visual_claims", [])
         }
         visual_confirmed = {
             evidence_id
             for candidate_id in expected_confirmed
             for evidence_id in candidate_by_id[candidate_id].evidence_ids
         }
-        if not visual_evidence <= scoped_evidence_ids | visual_confirmed:
+        oversized_evidence = {
+            evidence_id
+            for candidate_id in oversized_ids
+            if candidate_id in candidate_by_id
+            for evidence_id in candidate_by_id[candidate_id].evidence_ids
+        }
+        if not visual_evidence <= (
+            scoped_evidence_ids | oversized_evidence | visual_confirmed
+        ):
             issues.append(f"{paper_id}:accepted_visual_claim_not_accounted_for")
         papers.append(
             {
                 "paper_id": paper_id,
                 "task_count": len(task_rows),
                 "repair_candidate_count": len(expected_repair),
+                "text_task_candidate_count": len(text_task_ids),
+                "vision_task_candidate_count": len(vision_task_ids),
+                "oversized_candidate_count": len(oversized_ids),
                 "human_review_candidate_count": len(expected_human),
                 "confirmed_candidate_count": len(expected_confirmed),
                 "tasks": task_rows,

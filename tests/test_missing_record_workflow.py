@@ -1,5 +1,6 @@
 import pytest
 
+import src.extraction.build_v12_structural_repair_tasks as repair_builder
 from src.extraction.compact_contracts import ExperimentRecord, OutcomeRecord
 from src.extraction.compact_validation import ValidationFinding, ValidationReport
 from src.extraction.missing_record_contracts import (
@@ -124,6 +125,34 @@ def _outcome_summary(outcome_id, experiment_id):
         "comparator": None,
         "qualitative_outcome": "More than 80% expressed GFP.",
     }
+
+
+def test_compact_summaries_project_reported_values_without_evidence_wrappers():
+    result = {
+        "experiments": [_experiment().model_dump(mode="json")],
+        "outcomes": [_outcome().model_dump(mode="json")],
+    }
+    experiment_summary = repair_builder.compact_experiment_summaries(result)[
+        0
+    ]
+    outcome_summary = repair_builder.compact_outcome_summaries(result)[0]
+    assert experiment_summary.payload_name == "GFP mRNA"
+    assert experiment_summary.outcome_endpoints == ["GFP expression"]
+    assert experiment_summary.comparator_context == []
+    assert outcome_summary.assay == "microscopy"
+    assert outcome_summary.qualitative_outcome == (
+        "More than 80% expressed GFP."
+    )
+    assert "evidence_ids" not in experiment_summary.model_dump_json()
+    assert "evidence_ids" not in outcome_summary.model_dump_json()
+
+
+def test_worst_case_output_estimate_accounts_for_candidates_and_experiments():
+    task = _v12_task(
+        candidate_ids=["OC-1", "OC-2"],
+        permitted_new_experiments=1,
+    )
+    assert repair_builder.estimate_worst_case_output_tokens(task) == 2_400
 
 
 def _v12_task_payload(**overrides):
