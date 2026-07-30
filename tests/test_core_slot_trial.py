@@ -52,7 +52,8 @@ def _write_packet(root: Path, paper_id="NP-001", include_mouse=True):
         ),
         (
             "E-HPBMC-IMM",
-            "Human PBMCs mounted a TNF-alpha immune cytokine response.",
+            "The LNP formulation caused human PBMCs to mount a TNF-alpha "
+            "immune cytokine response.",
         ),
     ]
     if include_mouse:
@@ -289,6 +290,115 @@ def _trial_response():
         ),
         "core_slot_accounting": {},
     }
+
+
+def _reported(value, *evidence_ids):
+    return {
+        "value": value,
+        "status": "reported",
+        "evidence_ids": list(evidence_ids),
+        "missing_reason": None,
+    }
+
+
+def _missing():
+    return {
+        "value": None,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "not reported",
+    }
+
+
+def _cross_slot_trial_response():
+    response = _trial_response()
+    response["eligibility"] = {
+        "decision": "eligible",
+        "reason_codes": [
+            "ORIGINAL_EXPERIMENT",
+            "IDENTIFIABLE_LNP",
+            "SUPPORTED_PAYLOAD",
+            "TARGET_CELL_EVIDENCE",
+            "USABLE_FORMULATION_OUTCOME_LINKAGE",
+        ],
+        "evidence_ids": ["E-FORM"],
+        "explanation": "Synthetic cross-slot evidence fixture.",
+    }
+    response["formulations"] = [
+        {
+            "formulation_id": "F-1",
+            "formulation_name": _reported(
+                "DX-loaded LNP",
+                "E-FORM",
+                "E-HPBMC-IMM",
+            ),
+            "composition": _reported(
+                "ALC-0315/DSPC/cholesterol/DX/ALC-0159",
+                "E-FORM",
+            ),
+            "composition_basis": _missing(),
+            "np_ratio": _missing(),
+        }
+    ]
+    response["experiments"] = [
+        {
+            "experiment_id": "X-HEP",
+            "formulation_id": "F-1",
+            "payload_type": _reported("mRNA", "E-PAYLOAD"),
+            "payload_name": _reported("EGFP mRNA", "E-PAYLOAD"),
+            "encoded_product": _reported("EGFP", "E-PAYLOAD"),
+            "molecular_target": _missing(),
+            "delivery_recipient_cell": _reported(
+                "HepG2",
+                "E-HEPG2-TX",
+            ),
+            "therapeutic_target_cell": _missing(),
+            "tissue_or_organ": _missing(),
+            "species": _missing(),
+            "disease_model": _missing(),
+            "experimental_context": _reported(
+                "in_vitro",
+                "E-HEPG2-TX",
+            ),
+            "dose": _missing(),
+            "dose_unit": _missing(),
+            "route": _missing(),
+            "timepoint": _missing(),
+            "timepoint_unit": _missing(),
+        }
+    ]
+    response["outcomes"] = [
+        {
+            "outcome_id": "O-HEP",
+            "experiment_id": "X-HEP",
+            "assay": _reported("flow cytometry", "E-HEPG2-TX"),
+            "endpoint": _reported(
+                "EGFP expression after transfection",
+                "E-HEPG2-TX",
+            ),
+            "comparator": _missing(),
+            "outcome_value": _missing(),
+            "outcome_unit": _missing(),
+            "qualitative_outcome": _reported(
+                "EGFP expression after transfection",
+                "E-HEPG2-TX",
+            ),
+        }
+    ]
+    response["core_slot_accounting"] = {
+        "CORE-HEPG2-TRANSFECTION": {
+            "disposition": "extracted",
+            "linked_experiment_id": "X-HEP",
+            "linked_outcome_ids": ["O-HEP"],
+            "evidence_ids": [
+                "E-FORM",
+                "E-PAYLOAD",
+                "E-HEPG2-TX",
+                "E-HPBMC-IMM",
+            ],
+        }
+    }
+    return response
 
 
 class _FakeResponse:
@@ -597,3 +707,52 @@ def test_run_sends_exact_request_once_and_persists_validation_artifacts(
             output_root=run_root,
         )
     assert len(responses.calls) == 1
+
+
+def test_paid_validation_rejects_cross_slot_compact_evidence(tmp_path):
+    from src.extraction.run_core_slot_trial import (
+        run_approved_core_slot_trial,
+    )
+
+    approved = _preflight(tmp_path)
+    request_payload = json.loads(
+        json.loads(approved.request_path.read_bytes())["input"][1][
+            "content"
+        ]
+    )
+    hep_ids = next(
+        row["evidence_ids"]
+        for row in request_payload["core_slot_packets"]
+        if row["slot_id"] == "CORE-HEPG2-TRANSFECTION"
+    )
+    assert "E-HPBMC-IMM" in {
+        row["evidence_id"] for row in request_payload["evidence"]
+    }
+    assert "E-HPBMC-IMM" not in hep_ids
+    responses = _FakeResponses(
+        json.dumps(_cross_slot_trial_response())
+    )
+    run_root = tmp_path / "runs"
+
+    manifest = run_approved_core_slot_trial(
+        "NP-001",
+        model="gpt-5.6-terra",
+        client=SimpleNamespace(responses=responses),
+        manifest_path=approved.manifest_path,
+        approved_request_sha256=approved.manifest["request_sha256"],
+        packet_root=approved.packet_root,
+        output_root=run_root,
+    )
+
+    report = json.loads(
+        (
+            run_root / "NP-001" / "scientific_validation.json"
+        ).read_text()
+    )
+    assert "evidence_outside_slot" in {
+        row["code"] for row in report["errors"]
+    }
+    assert "CORE-HEPG2-TRANSFECTION" not in report[
+        "confirmed_slot_ids"
+    ]
+    assert manifest["scientifically_confirmed"] == 0

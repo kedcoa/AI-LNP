@@ -561,6 +561,41 @@ def _fsync_directory(path: Path) -> None:
         os.close(directory_fd)
 
 
+def _compact_validation_slots(
+    qualification: Mapping[str, Any],
+    payload: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    packet_ids_by_slot = {
+        str(row["slot_id"]): {
+            str(evidence_id) for evidence_id in row["evidence_ids"]
+        }
+        for row in payload["core_slot_packets"]
+    }
+    validation_slots = []
+    for slot in qualification["qualified_slots"]:
+        slot_id = str(slot["slot_id"])
+        exact_ids = packet_ids_by_slot[slot_id]
+        validation_slot = dict(slot)
+        validation_slot["evidence_ids"] = [
+            evidence_id
+            for evidence_id in slot["evidence_ids"]
+            if evidence_id in exact_ids
+        ]
+        for category in (
+            "formulation_evidence_ids",
+            "payload_evidence_ids",
+            "model_evidence_ids",
+            "outcome_evidence_ids",
+        ):
+            validation_slot[category] = [
+                evidence_id
+                for evidence_id in slot[category]
+                if evidence_id in exact_ids
+            ]
+        validation_slots.append(validation_slot)
+    return validation_slots
+
+
 def run_approved_core_slot_trial(
     paper_id: str,
     *,
@@ -669,7 +704,7 @@ def run_approved_core_slot_trial(
     }
     validation = validate_core_slot_response(
         trial_response,
-        qualification["qualified_slots"],
+        _compact_validation_slots(qualification, payload),
         evidence_envelope,
     )
     (run_dir / "scientific_validation.json").write_text(
