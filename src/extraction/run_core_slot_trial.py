@@ -70,26 +70,179 @@ def _require_trial_paper(paper_id: str) -> None:
 def _slot_packets(
     packet: Any,
     qualified_slots: list[Mapping[str, Any]],
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[str], list[dict[str, Any]]]:
     evidence_by_id = {
         row.evidence_id: row.model_dump(mode="json", exclude_none=True)
         for row in packet.evidence
     }
+    shared_ids = _select_shared_evidence_ids(
+        evidence_by_id,
+        qualified_slots,
+    )
     packets = []
+    selected_ids = list(shared_ids)
     for slot in qualified_slots:
-        evidence_ids = [str(value) for value in slot["evidence_ids"]]
+        evidence_ids = _preferred_outcome_evidence_ids(
+            evidence_by_id,
+            slot,
+        )
+        selected_ids.extend(evidence_ids)
         packets.append(
             {
                 "slot_id": slot["slot_id"],
                 "model_family": slot["model_family"],
                 "outcome_family": slot["outcome_family"],
-                "evidence": [
-                    evidence_by_id[evidence_id]
-                    for evidence_id in evidence_ids
-                ],
+                "evidence_ids": list(
+                    dict.fromkeys((*shared_ids, *evidence_ids))
+                ),
             }
         )
-    return packets
+    selected_ids = list(dict.fromkeys(selected_ids))
+    return (
+        [evidence_by_id[value] for value in selected_ids],
+        shared_ids,
+        packets,
+    )
+
+
+def _text_has_term(text: str, term: str) -> bool:
+    import re
+
+    escaped = re.escape(term).replace(r"\ ", r"\s+")
+    return bool(
+        re.search(
+            rf"(?<![A-Za-z0-9]){escaped}(?![A-Za-z0-9])",
+            text,
+            flags=re.IGNORECASE,
+        )
+    )
+
+
+def _select_shared_evidence_ids(
+    evidence_by_id: Mapping[str, Mapping[str, Any]],
+    qualified_slots: list[Mapping[str, Any]],
+) -> list[str]:
+    if not qualified_slots:
+        return []
+    first_slot = qualified_slots[0]
+    formulation_candidates = [
+        str(value) for value in first_slot["formulation_evidence_ids"]
+    ]
+    formulation_signature = first_slot.get("formulation_signature", {})
+    expected_components = tuple(
+        formulation_signature.get("composition_terms", [])
+    )
+
+    def formulation_score(evidence_id: str) -> tuple[int, int]:
+        text = str(evidence_by_id[evidence_id]["text"])
+        group_score = int(
+            "dx_lnp" in formulation_signature.get("group_markers", [])
+            and (
+                (_text_has_term(text, "dx")
+                 or _text_has_term(text, "dexamethasone"))
+                and (
+                    _text_has_term(text, "lnp")
+                    or _text_has_term(text, "lnps")
+                    or _text_has_term(text, "lipid nanoparticle")
+                    or _text_has_term(text, "lipid nanoparticles")
+                )
+            )
+        )
+        component_score = sum(
+            _text_has_term(text, term) for term in expected_components
+        )
+        return group_score * 100 + component_score, -len(text)
+
+    selected_formulation = max(
+        formulation_candidates,
+        key=formulation_score,
+    )
+    outcome_text = " ".join(
+        str(evidence_by_id[evidence_id]["text"])
+        for slot in qualified_slots
+        for evidence_id in slot["outcome_evidence_ids"]
+    )
+    payload_signature = first_slot.get("payload_signature", {})
+    outcome_cargo_terms = [
+        term
+        for term in payload_signature.get("cargo_terms", [])
+        if _text_has_term(outcome_text, term)
+    ]
+
+    def payload_score(evidence_id: str) -> tuple[int, int, int]:
+        text = str(evidence_by_id[evidence_id]["text"])
+        cargo_score = sum(
+            _text_has_term(text, term) for term in outcome_cargo_terms
+        )
+        type_score = sum(
+            _text_has_term(text, term)
+            for term in payload_signature.get("type_terms", [])
+        )
+        return cargo_score, type_score, -len(text)
+
+    payload_candidates = [
+        str(value) for value in first_slot["payload_evidence_ids"]
+    ]
+    selected_payload = max(payload_candidates, key=payload_score)
+    return list(dict.fromkeys((selected_formulation, selected_payload)))
+
+
+def _preferred_outcome_evidence_ids(
+    evidence_by_id: Mapping[str, Mapping[str, Any]],
+    slot: Mapping[str, Any],
+) -> list[str]:
+    candidates = [
+        str(value) for value in slot["outcome_evidence_ids"]
+    ]
+    model_terms = {
+        "hepg2": ("hepg2", "hep g2"),
+        "dc2.4": ("dc2.4", "dc 2.4"),
+        "hpbmc": ("hpbmc", "hpbmcs", "human pbmc"),
+        "mouse_in_vivo": ("mouse", "mice", "murine"),
+    }.get(str(slot["model_family"]), ())
+    model_specific = [
+        evidence_id
+        for evidence_id in candidates
+        if any(
+            term.casefold()
+            in str(evidence_by_id[evidence_id]["text"]).casefold()
+            for term in model_terms
+        )
+    ]
+    if model_specific:
+        candidates = model_specific
+    preferred_terms = {
+        "transfection_expression": (
+            "transfect",
+            "reporter",
+            "egfp",
+            "gfp",
+            "luciferase",
+        ),
+        "cytokine_immune": (
+            "cytokine",
+            "immune",
+            "tnf",
+            "il-",
+            "mhc",
+        ),
+        "biodistribution_expression": (
+            "biodistribution",
+            "accumulation",
+            "organ distribution",
+            "tissue distribution",
+        ),
+    }.get(str(slot["outcome_family"]), ())
+    preferred = [
+        evidence_id
+        for evidence_id in candidates
+        if any(
+            term.casefold()
+            in str(evidence_by_id[evidence_id]["text"]).casefold()
+            for term in preferred_terms
+        )
+    ]
+    return preferred or candidates
 
 
 def build_core_slot_trial_request(
@@ -127,9 +280,15 @@ def build_core_slot_trial_request(
             }
         )
     )
+    evidence, shared_evidence_ids, slot_packets = _slot_packets(
+        packet,
+        qualified_slots,
+    )
     payload = {
         "paper_id": packet.paper_id,
-        "core_slot_packets": _slot_packets(packet, qualified_slots),
+        "evidence": evidence,
+        "shared_evidence_ids": shared_evidence_ids,
+        "core_slot_packets": slot_packets,
     }
     request = {
         "model": model,
@@ -365,6 +524,43 @@ def _load_approved_request(
     return request, qualification, manifest
 
 
+def _final_approved_request_bytes(
+    *,
+    request_path: Path,
+    approved_request_sha256: str,
+    expected_request: Mapping[str, Any],
+) -> tuple[bytes, dict[str, Any]]:
+    try:
+        request_bytes = request_path.read_bytes()
+    except OSError as exc:
+        raise ValueError(
+            "approved core slot request bytes are unavailable"
+        ) from exc
+    if _sha256(request_bytes) != approved_request_sha256:
+        raise ValueError(
+            "approved core slot request bytes changed before dispatch"
+        )
+    try:
+        request = json.loads(request_bytes)
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            "approved core slot request bytes are not valid JSON"
+        ) from exc
+    if request != expected_request:
+        raise ValueError(
+            "approved core slot request bytes changed before dispatch"
+        )
+    return request_bytes, request
+
+
+def _fsync_directory(path: Path) -> None:
+    directory_fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+
+
 def run_approved_core_slot_trial(
     paper_id: str,
     *,
@@ -397,9 +593,11 @@ def run_approved_core_slot_trial(
         approved_request_sha256=approved_request_sha256,
     )
     run_dir.mkdir(parents=True, exist_ok=True)
-    approved_request_bytes = Path(
-        preflight_manifest["request_path"]
-    ).read_bytes()
+    approved_request_bytes, request = _final_approved_request_bytes(
+        request_path=Path(preflight_manifest["request_path"]),
+        approved_request_sha256=str(approved_request_sha256),
+        expected_request=request,
+    )
     (run_dir / "request.json").write_bytes(approved_request_bytes)
     started_at = datetime.now(timezone.utc)
     invocation = {
@@ -423,6 +621,7 @@ def run_approved_core_slot_trial(
         raise FileExistsError(
             "A core slot trial invocation already started; refusing duplicate"
         ) from exc
+    _fsync_directory(run_dir)
     response = client.responses.create(**request)
     completed_at = datetime.now(timezone.utc)
     (run_dir / "response.json").write_text(
@@ -464,8 +663,9 @@ def run_approved_core_slot_trial(
         + "\n",
         encoding="utf-8",
     )
+    payload = json.loads(request["input"][1]["content"])
     evidence_envelope = {
-        row.evidence_id for row in packet.evidence
+        row["evidence_id"] for row in payload["evidence"]
     }
     validation = validate_core_slot_response(
         trial_response,

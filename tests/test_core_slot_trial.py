@@ -92,6 +92,50 @@ def _write_packet(root: Path, paper_id="NP-001", include_mouse=True):
     return packet
 
 
+def _write_noisy_packet(root: Path):
+    packet = _write_packet(root)
+    unsigned = packet.model_dump(
+        mode="json",
+        exclude={"packet_checksum"},
+    )
+    unrelated = [
+        {
+            "evidence_id": f"E-NOISE-{index:03d}",
+            "text": (
+                "An unrelated HeLa LNP formulation encapsulated luciferase "
+                f"mRNA payload in background experiment {index}."
+            ),
+            "retrieval_field_tags": [],
+            "experiment_candidate_ids": [],
+            "source_ids": [],
+        }
+        for index in range(60)
+    ]
+    unrelated.append(
+        {
+            "evidence_id": "E-MOUSE-DC-DISTRACTOR",
+            "text": (
+                "Mouse dendritic cells showed EGFP expression in vitro."
+            ),
+            "retrieval_field_tags": [],
+            "experiment_candidate_ids": [],
+            "source_ids": [],
+        }
+    )
+    unsigned["evidence"].extend(unrelated)
+    noisy = CompactApiPacket.model_validate(
+        {
+            **unsigned,
+            "packet_checksum": _sha256(_canonical_json(unsigned)),
+        }
+    )
+    (root / "NP-001.json").write_text(
+        noisy.model_dump_json(),
+        encoding="utf-8",
+    )
+    return noisy
+
+
 def test_preflight_is_np001_only_and_never_needs_a_provider(tmp_path):
     from src.extraction.run_core_slot_trial import preflight_core_slot_trial
 
@@ -152,15 +196,11 @@ def test_preflight_writes_qualified_only_exact_request_and_signed_preview(
     assert [
         row["slot_id"] for row in payload["core_slot_packets"]
     ] == qualified_ids
+    shared_ids = payload["shared_evidence_ids"]
+    assert shared_ids == ["E-FORM", "E-PAYLOAD"]
     for slot_packet in payload["core_slot_packets"]:
-        allowed = next(
-            row["evidence_ids"]
-            for row in qualification["qualified_slots"]
-            if row["slot_id"] == slot_packet["slot_id"]
-        )
-        assert [
-            row["evidence_id"] for row in slot_packet["evidence"]
-        ] == allowed
+        assert slot_packet["evidence_ids"][:2] == shared_ids
+        assert len(slot_packet["evidence_ids"]) == 3
     accounting = schema["properties"]["core_slot_accounting"]
     assert list(accounting["properties"]) == qualified_ids
     assert accounting["required"] == qualified_ids
@@ -193,6 +233,40 @@ def test_preflight_writes_qualified_only_exact_request_and_signed_preview(
     assert "Provider calls: 0" in preview
     assert not (paper_root / "invocation_started.json").exists()
     assert not (paper_root / "response.json").exists()
+
+
+def test_request_deduplicates_shared_context_and_excludes_unrelated_rows(
+    tmp_path,
+):
+    from src.extraction.run_core_slot_trial import (
+        build_core_slot_trial_request,
+    )
+
+    packet = _write_noisy_packet(tmp_path / "packets")
+
+    request, _qualification, _bindings = (
+        build_core_slot_trial_request(
+            packet,
+            model="gpt-5.6-terra",
+        )
+    )
+    payload = json.loads(request["input"][1]["content"])
+    serialized_ids = [
+        row["evidence_id"] for row in payload["evidence"]
+    ]
+
+    assert len(payload["shared_evidence_ids"]) == 2
+    assert len(payload["core_slot_packets"]) == 6
+    assert all(
+        len(slot["evidence_ids"]) == 3
+        for slot in payload["core_slot_packets"]
+    )
+    assert len(serialized_ids) == len(set(serialized_ids)) == 8
+    assert not any(
+        evidence_id.startswith("E-NOISE-")
+        for evidence_id in serialized_ids
+    )
+    assert "E-MOUSE-DC-DISTRACTOR" not in serialized_ids
 
 
 def _trial_response():
@@ -370,6 +444,107 @@ def test_provider_failure_keeps_durable_marker_and_blocks_redispatch(
     with pytest.raises(FileExistsError, match="invocation|duplicate"):
         run_approved_core_slot_trial(**arguments)
     assert len(responses.calls) == 1
+
+
+def test_run_rechecks_request_bytes_immediately_before_dispatch(
+    tmp_path,
+    monkeypatch,
+):
+    from src.extraction import run_core_slot_trial as trial
+
+    approved = _preflight(tmp_path)
+    responses = _FakeResponses(json.dumps(_trial_response()))
+    original_read_bytes = Path.read_bytes
+    reads = 0
+
+    def mutate_on_second_read(path):
+        nonlocal reads
+        value = original_read_bytes(path)
+        if path == approved.request_path:
+            reads += 1
+            if reads == 2:
+                return value + b" "
+        return value
+
+    monkeypatch.setattr(Path, "read_bytes", mutate_on_second_read)
+
+    with pytest.raises(ValueError, match="request bytes"):
+        trial.run_approved_core_slot_trial(
+            "NP-001",
+            model="gpt-5.6-terra",
+            client=SimpleNamespace(responses=responses),
+            manifest_path=approved.manifest_path,
+            approved_request_sha256=approved.manifest["request_sha256"],
+            packet_root=approved.packet_root,
+            output_root=tmp_path / "runs",
+        )
+
+    assert reads == 2
+    assert responses.calls == []
+    assert not (
+        tmp_path / "runs" / "NP-001" / "invocation_started.json"
+    ).exists()
+
+
+def test_run_fsyncs_marker_directory_before_provider_call(
+    tmp_path,
+    monkeypatch,
+):
+    from src.extraction import run_core_slot_trial as trial
+
+    approved = _preflight(tmp_path)
+    run_root = tmp_path / "runs"
+    run_dir = run_root / "NP-001"
+    directory_fd = 9876
+    events = []
+    original_fsync = trial.os.fsync
+
+    def fake_open(path, flags):
+        assert Path(path) == run_dir
+        assert flags & trial.os.O_DIRECTORY
+        events.append(("open_directory", flags))
+        return directory_fd
+
+    def fake_fsync(fd):
+        if fd == directory_fd:
+            events.append(("fsync_directory", fd))
+            return
+        original_fsync(fd)
+
+    def fake_close(fd):
+        assert fd == directory_fd
+        events.append(("close_directory", fd))
+
+    responses = _FakeResponses(
+        json.dumps(_trial_response()),
+        before_return=lambda: (
+            events.append(("provider", None))
+            if events[-2:] == [
+                ("fsync_directory", directory_fd),
+                ("close_directory", directory_fd),
+            ]
+            else pytest.fail("directory was not fsynced before provider")
+        ),
+    )
+    monkeypatch.setattr(trial.os, "open", fake_open)
+    monkeypatch.setattr(trial.os, "fsync", fake_fsync)
+    monkeypatch.setattr(trial.os, "close", fake_close)
+
+    trial.run_approved_core_slot_trial(
+        "NP-001",
+        model="gpt-5.6-terra",
+        client=SimpleNamespace(responses=responses),
+        manifest_path=approved.manifest_path,
+        approved_request_sha256=approved.manifest["request_sha256"],
+        packet_root=approved.packet_root,
+        output_root=run_root,
+    )
+
+    assert events[-3:] == [
+        ("fsync_directory", directory_fd),
+        ("close_directory", directory_fd),
+        ("provider", None),
+    ]
 
 
 def test_run_sends_exact_request_once_and_persists_validation_artifacts(
