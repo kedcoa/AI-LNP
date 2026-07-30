@@ -68,6 +68,13 @@ BIODISTRIBUTION_OUTCOME_TERMS = (
     "liver accumulation",
     "organ accumulation",
 )
+REPORTER_RESULT_PATTERNS = (
+    r"(?:e?gfp|luciferase|reporter).{0,30}"
+    r"(?:expression|positive|signal|activity)",
+    r"(?:expression|positive|signal|activity).{0,30}"
+    r"(?:e?gfp|luciferase|reporter)",
+    r"transfection\s+(?:efficiency|rate)",
+)
 BACKGROUND_SIGNALS = (
     "background",
     "introduction",
@@ -234,9 +241,15 @@ def _outcome_matches_family(text: str, family: str) -> bool:
     )
     explicit_transfection = "transfect" in text.casefold()
     expression = _contains_term(text, "expression")
+    reporter_result = any(
+        re.search(pattern, text, flags=re.IGNORECASE)
+        for pattern in REPORTER_RESULT_PATTERNS
+    )
     if family == "cytokine_immune":
         return immune
     if family == "transfection_expression":
+        if immune:
+            return reporter_result
         return explicit_transfection or (
             expression and not immune and not biodistribution
         )
@@ -289,23 +302,6 @@ def build_np001_core_slots(
         for evidence_id, text in rows
         if _payload_terms(text)
     ]
-    formulation_identity_terms = _ordered_union(
-        *[
-            _matched_terms(text, FORMULATION_IDENTITY_TERMS)
-            for _evidence_id, text in rows
-            if _contains_any(text, FORMULATION_KEYWORDS)
-        ]
-    )
-    formulation_composition_terms = _ordered_union(
-        *[
-            _matched_terms(text, FORMULATION_COMPOSITION_TERMS)
-            for _evidence_id, text in rows
-            if _contains_any(text, FORMULATION_KEYWORDS)
-        ]
-    )
-    payload_terms = _ordered_union(
-        *[_payload_terms(text) for _evidence_id, text in rows]
-    )
 
     evaluated_slots: list[dict[str, Any]] = []
     for spec in CORE_SLOT_SPECS:
@@ -326,6 +322,37 @@ def build_np001_core_slots(
             "model": model_evidence_ids,
             "outcome": outcome_evidence_ids,
         }
+        formulation_texts = [
+            text
+            for evidence_id, text in rows
+            if evidence_id in formulation_evidence_ids
+        ]
+        identity_terms = _ordered_union(
+            *[
+                _matched_terms(text, FORMULATION_IDENTITY_TERMS)
+                for text in formulation_texts
+            ]
+        )
+        specific_identity_terms = [
+            term
+            for term in identity_terms
+            if term in {"np-001", "np 001"}
+        ]
+        if specific_identity_terms:
+            identity_terms = specific_identity_terms
+        composition_terms = _ordered_union(
+            *[
+                _matched_terms(text, FORMULATION_COMPOSITION_TERMS)
+                for text in formulation_texts
+            ]
+        )
+        slot_payload_terms = _ordered_union(
+            *[
+                _payload_terms(text)
+                for evidence_id, text in rows
+                if evidence_id in payload_evidence_ids
+            ]
+        )
         missing_categories = [
             category
             for category, evidence_ids in categories.items()
@@ -345,13 +372,22 @@ def build_np001_core_slots(
                 "payload_evidence_ids": list(payload_evidence_ids),
                 "model_evidence_ids": model_evidence_ids,
                 "outcome_evidence_ids": outcome_evidence_ids,
-                "formulation_identity_terms": list(
-                    formulation_identity_terms
-                ),
-                "formulation_composition_terms": list(
-                    formulation_composition_terms
-                ),
-                "payload_terms": list(payload_terms),
+                "formulation_signature": {
+                    "identity_terms": identity_terms,
+                    "composition_terms": composition_terms,
+                },
+                "payload_signature": {
+                    "type_terms": [
+                        term
+                        for term in slot_payload_terms
+                        if term in PAYLOAD_TYPE_TERMS
+                    ],
+                    "cargo_terms": [
+                        term
+                        for term in slot_payload_terms
+                        if term in PAYLOAD_CARGO_TERMS
+                    ],
+                },
                 "exclusion_reason": (
                     None
                     if qualified
@@ -859,15 +895,18 @@ def validate_core_slot_response(
                 formulation_row,
                 ("formulation_name",),
             )
+            formulation_signature = slot.get(
+                "formulation_signature", {}
+            )
             expected_identity_terms = tuple(
-                slot.get("formulation_identity_terms", [])
+                formulation_signature.get("identity_terms", [])
             )
             composition_text = _reported_text(
                 formulation_row,
                 ("composition",),
             )
             expected_composition_terms = tuple(
-                slot.get("formulation_composition_terms", [])
+                formulation_signature.get("composition_terms", [])
             )
             identity_matches = (
                 not expected_identity_terms
@@ -878,7 +917,7 @@ def validate_core_slot_response(
             )
             composition_matches = (
                 not expected_composition_terms
-                or any(
+                or all(
                     _contains_term(composition_text, term)
                     for term in expected_composition_terms
                 )
@@ -929,13 +968,13 @@ def validate_core_slot_response(
                 "molecular_target",
             ),
         )
-        expected_payload_terms = set(slot.get("payload_terms", []))
+        payload_signature = slot.get("payload_signature", {})
         returned_payload_terms = set(_payload_terms(payload_text))
-        expected_payload_types = (
-            expected_payload_terms & set(PAYLOAD_TYPE_TERMS)
+        expected_payload_types = set(
+            payload_signature.get("type_terms", [])
         )
-        expected_payload_cargo = (
-            expected_payload_terms & set(PAYLOAD_CARGO_TERMS)
+        expected_payload_cargo = set(
+            payload_signature.get("cargo_terms", [])
         )
         if (
             expected_payload_types
@@ -1006,11 +1045,8 @@ def validate_core_slot_response(
             outcome_text = _reported_text(
                 outcome_row,
                 (
-                    "assay",
                     "endpoint",
-                    "comparator",
                     "outcome_value",
-                    "outcome_unit",
                     "qualitative_outcome",
                 ),
             )

@@ -836,6 +836,23 @@ def test_wrong_scientific_values_cannot_reuse_allowed_category_evidence():
     assert report["scientifically_confirmed"] == 0
 
 
+def test_generic_lnp_and_one_common_lipid_do_not_match_np001_formulation():
+    qualified, response = valid_trial_response()
+    response["formulations"][0]["formulation_name"] = reported(
+        "Unrelated LNP",
+        "E-FORM",
+    )
+    response["formulations"][0]["composition"] = reported(
+        "cholesterol only",
+        "E-FORM",
+    )
+
+    report = validate(response, qualified)
+
+    assert "formulation_semantic_mismatch" in rejection_reasons(report)
+    assert report["scientifically_confirmed"] == 0
+
+
 @pytest.mark.parametrize(
     ("slot_id", "outcome_id", "immune_expression"),
     [
@@ -866,6 +883,16 @@ def test_wrong_scientific_values_cannot_reuse_allowed_category_evidence():
             "O-MOUSE-BIO",
             "IL-6 immune expression increased",
         ),
+        (
+            "CORE-DC24-TRANSFECTION",
+            "O-DC-TX",
+            "IL-6 expression increased after transfection",
+        ),
+        (
+            "CORE-HPBMC-TRANSFECTION",
+            "O-HPBMC-TX",
+            "TNF expression increased after transfection",
+        ),
     ],
 )
 def test_immune_marker_expression_cannot_satisfy_other_families(
@@ -894,12 +921,57 @@ def test_immune_marker_expression_cannot_satisfy_other_families(
     assert slot_id not in report["confirmed_slot_ids"]
 
 
+@pytest.mark.parametrize(
+    ("model_text", "transfection_slot", "immune_slot"),
+    [
+        (
+            "DC2.4 IL-6 expression increased after transfection.",
+            "CORE-DC24-TRANSFECTION",
+            "CORE-DC24-IMMUNE",
+        ),
+        (
+            "hPBMC interferon expression increased after transfection.",
+            "CORE-HPBMC-TRANSFECTION",
+            "CORE-HPBMC-IMMUNE",
+        ),
+    ],
+)
+def test_procedural_transfection_does_not_qualify_an_immune_endpoint(
+    model_text,
+    transfection_slot,
+    immune_slot,
+):
+    packet = {
+        "paper_id": "NP-001",
+        "evidence": [
+            evidence(
+                "E-FORM",
+                "The NP-001 LNP formulation contained ionizable lipid, "
+                "helper lipid, cholesterol, and PEG-lipid.",
+            ),
+            evidence(
+                "E-PAYLOAD",
+                "The lipid nanoparticles encapsulated EGFP mRNA payload.",
+            ),
+            evidence("E-IMMUNE", model_text),
+        ],
+    }
+
+    report = build_np001_core_slots(packet)
+    by_id = {
+        row["slot_id"]: row for row in report["evaluated_slots"]
+    }
+
+    assert by_id[transfection_slot]["qualified"] is False
+    assert by_id[immune_slot]["qualified"] is True
+
+
 def test_duplicate_is_valid_only_when_an_extracted_slot_shares_record():
     qualified, response = valid_trial_response()
     shared_outcome = outcome(
         "O-DC-SHARED",
         "X-DC",
-        "EGFP transfection and IL-6 cytokine immune response",
+        "EGFP reporter expression and IL-6 cytokine immune response",
         "E-DC24-TX",
     )
     shared_outcome["qualitative_outcome"]["evidence_ids"].append(
