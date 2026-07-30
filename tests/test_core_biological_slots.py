@@ -194,6 +194,37 @@ def test_physical_characterization_only_never_qualifies_a_slot(
     )
 
 
+@pytest.mark.parametrize(
+    "false_payload_text",
+    [
+        "HepG2 internalization and expression increased.",
+        "HepG2 DNAse activity and reporter expression increased.",
+        "Background discussion: RNA delivery can change expression.",
+    ],
+)
+def test_payload_matching_rejects_substrings_and_background_mentions(
+    false_payload_text,
+):
+    packet = {
+        "paper_id": "NP-001",
+        "evidence": [
+            evidence("E-FORM", "The NP-001 LNP formulation was used."),
+            evidence("E-OUTCOME", false_payload_text),
+        ],
+    }
+
+    report = build_np001_core_slots(packet)
+    hep = next(
+        row
+        for row in report["evaluated_slots"]
+        if row["slot_id"] == "CORE-HEPG2-TRANSFECTION"
+    )
+
+    assert hep["qualified"] is False
+    assert hep["payload_evidence_ids"] == []
+    assert "payload" in hep["exclusion_reason"]
+
+
 def test_builder_refuses_to_infer_slots_for_an_arbitrary_paper():
     packet = deepcopy(qualifying_packet())
     packet["paper_id"] = "GP-008"
@@ -778,12 +809,97 @@ def test_formulation_or_payload_evidence_incompatibility_is_rejected(
     ]
 
 
+def test_wrong_scientific_values_cannot_reuse_allowed_category_evidence():
+    qualified, response = valid_trial_response()
+    response["formulations"][0]["formulation_name"] = reported(
+        "Completely different formulation",
+        "E-FORM",
+    )
+    for experiment_row in response["experiments"]:
+        experiment_row["payload_type"] = reported(
+            "siRNA",
+            "E-PAYLOAD",
+        )
+        experiment_row["payload_name"] = reported(
+            "unrelated siRNA",
+            "E-PAYLOAD",
+        )
+        experiment_row["encoded_product"] = reported(
+            "unrelated silencing cargo",
+            "E-PAYLOAD",
+        )
+
+    report = validate(response, qualified)
+
+    assert "formulation_semantic_mismatch" in rejection_reasons(report)
+    assert "payload_semantic_mismatch" in rejection_reasons(report)
+    assert report["scientifically_confirmed"] == 0
+
+
+@pytest.mark.parametrize(
+    ("slot_id", "outcome_id", "immune_expression"),
+    [
+        ("CORE-DC24-TRANSFECTION", "O-DC-TX", "IL-6 expression increased"),
+        ("CORE-DC24-TRANSFECTION", "O-DC-TX", "TNF expression increased"),
+        (
+            "CORE-DC24-TRANSFECTION",
+            "O-DC-TX",
+            "interferon expression increased",
+        ),
+        (
+            "CORE-HPBMC-TRANSFECTION",
+            "O-HPBMC-TX",
+            "IL-6 expression increased",
+        ),
+        (
+            "CORE-HPBMC-TRANSFECTION",
+            "O-HPBMC-TX",
+            "TNF expression increased",
+        ),
+        (
+            "CORE-HPBMC-TRANSFECTION",
+            "O-HPBMC-TX",
+            "interferon expression increased",
+        ),
+        (
+            "CORE-MOUSE-BIODISTRIBUTION",
+            "O-MOUSE-BIO",
+            "IL-6 immune expression increased",
+        ),
+    ],
+)
+def test_immune_marker_expression_cannot_satisfy_other_families(
+    slot_id,
+    outcome_id,
+    immune_expression,
+):
+    qualified, response = valid_trial_response()
+    outcome_row = next(
+        row
+        for row in response["outcomes"]
+        if row["outcome_id"] == outcome_id
+    )
+    outcome_row["endpoint"] = reported(
+        immune_expression,
+        outcome_row["endpoint"]["evidence_ids"][0],
+    )
+    outcome_row["qualitative_outcome"] = reported(
+        immune_expression,
+        outcome_row["qualitative_outcome"]["evidence_ids"][0],
+    )
+
+    report = validate(response, qualified)
+
+    assert "outcome_family_mismatch" in rejection_reasons(report)
+    assert slot_id not in report["confirmed_slot_ids"]
+
+
 def test_duplicate_is_valid_only_when_an_extracted_slot_shares_record():
     qualified, response = valid_trial_response()
     shared_outcome = outcome(
         "O-DC-SHARED",
         "X-DC",
-        "EGFP expression and IL-6 cytokine immune response",
+        "EGFP transfection and IL-6 cytokine immune response",
         "E-DC24-TX",
     )
     shared_outcome["qualitative_outcome"]["evidence_ids"].append(

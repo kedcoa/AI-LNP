@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass
+import re
 from typing import Any, Mapping, Sequence
 
 from pydantic import ValidationError
@@ -34,6 +35,44 @@ PAYLOAD_KEYWORDS = (
     "dna",
     "egfp",
     "luciferase",
+)
+FORMULATION_IDENTITY_TERMS = (
+    "np-001",
+    "np 001",
+    "lnp",
+    "lipid nanoparticle",
+    "lipid nanoparticles",
+)
+FORMULATION_COMPOSITION_TERMS = (
+    "ionizable lipid",
+    "helper lipid",
+    "cholesterol",
+    "peg-lipid",
+    "peg lipid",
+)
+PAYLOAD_TYPE_TERMS = ("mrna", "sirna", "rna", "dna")
+PAYLOAD_CARGO_TERMS = ("egfp", "gfp", "luciferase")
+IMMUNE_OUTCOME_TERMS = (
+    "cytokine",
+    "immune",
+    "il-6",
+    "il6",
+    "tnf",
+    "interferon",
+    "ifn",
+)
+BIODISTRIBUTION_OUTCOME_TERMS = (
+    "biodistribution",
+    "organ distribution",
+    "tissue distribution",
+    "liver accumulation",
+    "organ accumulation",
+)
+BACKGROUND_SIGNALS = (
+    "background",
+    "introduction",
+    "discussion",
+    "review",
 )
 
 
@@ -164,6 +203,48 @@ def _contains_any(text: str, values: tuple[str, ...]) -> bool:
     return any(value in folded for value in values)
 
 
+def _contains_term(text: str, term: str) -> bool:
+    escaped = re.escape(term).replace(r"\ ", r"\s+")
+    return bool(
+        re.search(
+            rf"(?<![A-Za-z0-9]){escaped}(?![A-Za-z0-9])",
+            text,
+            flags=re.IGNORECASE,
+        )
+    )
+
+
+def _matched_terms(
+    text: str,
+    terms: tuple[str, ...],
+) -> list[str]:
+    return [term for term in terms if _contains_term(text, term)]
+
+
+def _payload_terms(text: str) -> list[str]:
+    if _contains_any(text, BACKGROUND_SIGNALS):
+        return []
+    return _matched_terms(text, PAYLOAD_KEYWORDS)
+
+
+def _outcome_matches_family(text: str, family: str) -> bool:
+    immune = bool(_matched_terms(text, IMMUNE_OUTCOME_TERMS))
+    biodistribution = bool(
+        _matched_terms(text, BIODISTRIBUTION_OUTCOME_TERMS)
+    )
+    explicit_transfection = "transfect" in text.casefold()
+    expression = _contains_term(text, "expression")
+    if family == "cytokine_immune":
+        return immune
+    if family == "transfection_expression":
+        return explicit_transfection or (
+            expression and not immune and not biodistribution
+        )
+    if family == "biodistribution_expression":
+        return biodistribution or (expression and not immune)
+    return False
+
+
 def _evidence_rows(packet: Mapping[str, Any]) -> list[tuple[str, str]]:
     rows: list[tuple[str, str]] = []
     for row in packet.get("evidence", []):
@@ -206,8 +287,25 @@ def build_np001_core_slots(
     payload_evidence_ids = [
         evidence_id
         for evidence_id, text in rows
-        if _contains_any(text, PAYLOAD_KEYWORDS)
+        if _payload_terms(text)
     ]
+    formulation_identity_terms = _ordered_union(
+        *[
+            _matched_terms(text, FORMULATION_IDENTITY_TERMS)
+            for _evidence_id, text in rows
+            if _contains_any(text, FORMULATION_KEYWORDS)
+        ]
+    )
+    formulation_composition_terms = _ordered_union(
+        *[
+            _matched_terms(text, FORMULATION_COMPOSITION_TERMS)
+            for _evidence_id, text in rows
+            if _contains_any(text, FORMULATION_KEYWORDS)
+        ]
+    )
+    payload_terms = _ordered_union(
+        *[_payload_terms(text) for _evidence_id, text in rows]
+    )
 
     evaluated_slots: list[dict[str, Any]] = []
     for spec in CORE_SLOT_SPECS:
@@ -220,7 +318,7 @@ def build_np001_core_slots(
             evidence_id
             for evidence_id, text in rows
             if _contains_any(text, spec.model_aliases)
-            and _contains_any(text, spec.outcome_keywords)
+            and _outcome_matches_family(text, spec.outcome_family)
         ]
         categories = {
             "formulation": formulation_evidence_ids,
@@ -247,6 +345,13 @@ def build_np001_core_slots(
                 "payload_evidence_ids": list(payload_evidence_ids),
                 "model_evidence_ids": model_evidence_ids,
                 "outcome_evidence_ids": outcome_evidence_ids,
+                "formulation_identity_terms": list(
+                    formulation_identity_terms
+                ),
+                "formulation_composition_terms": list(
+                    formulation_composition_terms
+                ),
+                "payload_terms": list(payload_terms),
                 "exclusion_reason": (
                     None
                     if qualified
@@ -750,6 +855,42 @@ def validate_core_slot_response(
                 record_kind="formulation",
             ):
                 invalid = True
+            formulation_name_text = _reported_text(
+                formulation_row,
+                ("formulation_name",),
+            )
+            expected_identity_terms = tuple(
+                slot.get("formulation_identity_terms", [])
+            )
+            composition_text = _reported_text(
+                formulation_row,
+                ("composition",),
+            )
+            expected_composition_terms = tuple(
+                slot.get("formulation_composition_terms", [])
+            )
+            identity_matches = (
+                not expected_identity_terms
+                or any(
+                    _contains_term(formulation_name_text, term)
+                    for term in expected_identity_terms
+                )
+            )
+            composition_matches = (
+                not expected_composition_terms
+                or any(
+                    _contains_term(composition_text, term)
+                    for term in expected_composition_terms
+                )
+            )
+            if not identity_matches or not composition_matches:
+                _reject(
+                    report,
+                    slot_id,
+                    "formulation_semantic_mismatch",
+                    formulation_id=experiment_row.formulation_id,
+                )
+                invalid = True
 
         payload_evidence = _reported_evidence_ids(
             experiment_row,
@@ -778,6 +919,37 @@ def validate_core_slot_response(
             evidence_envelope=evidence_envelope,
             record_kind="payload",
         ):
+            invalid = True
+        payload_text = _reported_text(
+            experiment_row,
+            (
+                "payload_type",
+                "payload_name",
+                "encoded_product",
+                "molecular_target",
+            ),
+        )
+        expected_payload_terms = set(slot.get("payload_terms", []))
+        returned_payload_terms = set(_payload_terms(payload_text))
+        expected_payload_types = (
+            expected_payload_terms & set(PAYLOAD_TYPE_TERMS)
+        )
+        expected_payload_cargo = (
+            expected_payload_terms & set(PAYLOAD_CARGO_TERMS)
+        )
+        if (
+            expected_payload_types
+            and not expected_payload_types & returned_payload_terms
+        ) or (
+            expected_payload_cargo
+            and not expected_payload_cargo & returned_payload_terms
+        ):
+            _reject(
+                report,
+                slot_id,
+                "payload_semantic_mismatch",
+                experiment_id=experiment_id,
+            )
             invalid = True
         model_evidence = _reported_evidence_ids(
             experiment_row,
@@ -842,9 +1014,9 @@ def validate_core_slot_response(
                     "qualitative_outcome",
                 ),
             )
-            if not _contains_any(
+            if not _outcome_matches_family(
                 outcome_text,
-                spec.outcome_keywords,
+                spec.outcome_family,
             ):
                 _reject(
                     report,
