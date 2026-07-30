@@ -45,6 +45,10 @@ SCHEMA_PATH = (
     / "compact_v1"
     / "compact_extraction_response.schema.json"
 )
+PRIMARY_ROUTE = "primary"
+PRIMARY_ROUTE_VERSION = "compact-route-1.2.0"
+PRIMARY_PREFLIGHT_VERSION = "compact-primary-request-preflight-1.2.0"
+PRIMARY_MAX_OUTPUT_TOKENS = 12_000
 
 
 def _canonical_json(value: Any) -> str:
@@ -147,17 +151,219 @@ def _refusals(response: Any) -> list[str]:
     ]
 
 
+def _load_approved_primary_request(
+    *,
+    paper_id: str,
+    model: str,
+    packet: CompactApiPacket,
+    approved_request_path: Path,
+    approved_request_sha256: str,
+    preflight_manifest_path: Path,
+) -> tuple[
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+    str,
+]:
+    """Validate the signed primary preflight and exact approved request."""
+
+    try:
+        manifest = json.loads(
+            preflight_manifest_path.read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            "approved primary preflight manifest is unavailable or invalid"
+        ) from exc
+    if not isinstance(manifest, dict):
+        raise ValueError(
+            "approved primary preflight manifest must be a JSON object"
+        )
+    supplied_manifest_checksum = manifest.get("manifest_checksum")
+    unsigned_manifest = {
+        key: value
+        for key, value in manifest.items()
+        if key != "manifest_checksum"
+    }
+    if (
+        not isinstance(supplied_manifest_checksum, str)
+        or _sha256(_canonical_json(unsigned_manifest))
+        != supplied_manifest_checksum
+    ):
+        raise ValueError("approved primary manifest checksum is invalid")
+    if (
+        manifest.get("preflight_version")
+        != PRIMARY_PREFLIGHT_VERSION
+        or manifest.get("route") != PRIMARY_ROUTE
+        or manifest.get("route_version") != PRIMARY_ROUTE_VERSION
+    ):
+        raise ValueError(
+            "approved manifest is not for the current primary route/version"
+        )
+    if manifest.get("status") != "passed":
+        raise ValueError("approved primary manifest status is not passed")
+    if manifest.get("human_approval_required") is not True:
+        raise ValueError(
+            "approved primary manifest does not require human approval"
+        )
+
+    resolved_request_path = approved_request_path.resolve()
+    manifest_request_path = manifest.get("request_path")
+    if (
+        not isinstance(manifest_request_path, str)
+        or not Path(manifest_request_path).is_absolute()
+        or Path(manifest_request_path).resolve()
+        != resolved_request_path
+    ):
+        raise ValueError(
+            "approved manifest request path does not match approved request"
+        )
+    if manifest.get("request_sha256") != approved_request_sha256:
+        raise ValueError(
+            "supplied approved request SHA-256 does not match manifest"
+        )
+    try:
+        approved_request_bytes = resolved_request_path.read_bytes()
+    except OSError as exc:
+        raise ValueError("approved request bytes are unavailable") from exc
+    if _sha256(approved_request_bytes) != approved_request_sha256:
+        raise ValueError(
+            "approved request bytes do not match the supplied SHA-256"
+        )
+    if manifest.get("request_bytes") != len(approved_request_bytes):
+        raise ValueError(
+            "approved request byte count does not match manifest"
+        )
+    try:
+        approved_request = json.loads(approved_request_bytes)
+    except json.JSONDecodeError as exc:
+        raise ValueError("approved request bytes are not valid JSON") from exc
+    if not isinstance(approved_request, dict):
+        raise ValueError("approved request must be a JSON object")
+
+    if manifest.get("paper_id") != paper_id:
+        raise ValueError(
+            "approved manifest paper does not match current paper"
+        )
+    if manifest.get("packet_checksum") != packet.packet_checksum:
+        raise ValueError(
+            "approved manifest packet checksum does not match current packet"
+        )
+    if (
+        manifest.get("model") != model
+        or approved_request.get("model") != model
+    ):
+        raise ValueError(
+            "approved request model does not match current model"
+        )
+    max_output_tokens = approved_request.get("max_output_tokens")
+    if (
+        type(max_output_tokens) is not int
+        or max_output_tokens != PRIMARY_MAX_OUTPUT_TOKENS
+        or manifest.get("max_output_tokens")
+        != PRIMARY_MAX_OUTPUT_TOKENS
+    ):
+        raise ValueError(
+            "approved request max_output_tokens must be exactly 12,000"
+        )
+
+    inputs = approved_request.get("input")
+    user_inputs = (
+        [
+            row
+            for row in inputs
+            if isinstance(row, dict) and row.get("role") == "user"
+        ]
+        if isinstance(inputs, list)
+        else []
+    )
+    if (
+        len(user_inputs) != 1
+        or not isinstance(user_inputs[0].get("content"), str)
+    ):
+        raise ValueError(
+            "approved primary request must contain one JSON user payload"
+        )
+    try:
+        user_payload = json.loads(user_inputs[0]["content"])
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            "approved primary user payload is not valid JSON"
+        ) from exc
+    if not isinstance(user_payload, dict):
+        raise ValueError(
+            "approved primary user payload must be a JSON object"
+        )
+    packet_payload = user_payload.get("evidence_packet")
+    recall_support = user_payload.get("outcome_recall_support")
+    if not isinstance(packet_payload, dict) or not isinstance(
+        recall_support, dict
+    ):
+        raise ValueError(
+            "approved primary payload is missing packet or recall support"
+        )
+    if (
+        packet_payload.get("paper_id") != paper_id
+        or packet_payload.get("packet_checksum")
+        != packet.packet_checksum
+    ):
+        raise ValueError(
+            "approved request payload does not match current paper packet"
+        )
+    if (
+        recall_support.get("support_version")
+        != "main-route-recall-support-1.2.0"
+    ):
+        raise ValueError(
+            "approved request recall support is not for the primary route"
+        )
+    fingerprint = request_fingerprint(packet, model, recall_support)
+    if (
+        manifest.get("request_fingerprint") != fingerprint
+        or approved_request.get("prompt_cache_key") != fingerprint
+    ):
+        raise ValueError(
+            "approved request fingerprint does not match current request"
+        )
+    return (
+        approved_request,
+        recall_support,
+        user_payload,
+        fingerprint,
+    )
+
+
 def run_one(
     paper_id: str,
     *,
     model: str,
     client: OpenAI,
+    approved_request_path: Path,
+    approved_request_sha256: str,
+    preflight_manifest_path: Path,
+    confirm_paid_call: bool,
     packet_root: Path = PACKET_ROOT,
     output_root: Path = OUTPUT_ROOT,
-    max_output_tokens: int = 12_000,
 ) -> dict[str, Any]:
     """Make one paid request and persist its request, response, result, and usage."""
+    if not confirm_paid_call:
+        raise PermissionError(
+            "confirm_paid_call=True is required for a paid provider call"
+        )
     packet = load_packet(paper_id, packet_root)
+    (
+        approved_request,
+        recall_support,
+        user_payload,
+        fingerprint,
+    ) = _load_approved_primary_request(
+        paper_id=paper_id,
+        model=model,
+        packet=packet,
+        approved_request_path=approved_request_path,
+        approved_request_sha256=approved_request_sha256,
+        preflight_manifest_path=preflight_manifest_path,
+    )
     run_dir = output_root / paper_id
     result_path = run_dir / "result.json"
     raw_response_path = run_dir / "response.json"
@@ -183,23 +389,13 @@ def run_one(
             encoding="utf-8",
         )
 
-    (
-        api_request,
-        recall_support,
-        user_payload,
-        fingerprint,
-    ) = build_openai_request(
-        packet,
-        model=model,
-        max_output_tokens=max_output_tokens,
-    )
     request_snapshot = {
         "paper_id": paper_id,
         "model": model,
         "reasoning_effort": "low",
         "store": False,
         "service_tier": "default",
-        "max_output_tokens": max_output_tokens,
+        "max_output_tokens": approved_request["max_output_tokens"],
         "prompt_version": PROMPT_VERSION,
         "prompt_checksum": prompt_sha256(),
         "schema_checksum": _sha256(SCHEMA_PATH.read_bytes()),
@@ -209,15 +405,23 @@ def run_one(
         "request_fingerprint": fingerprint,
         "system_prompt": COMPACT_EXTRACTION_PROMPT,
         "request_payload": user_payload,
-        "api_request": api_request,
+        "approved_request_path": str(approved_request_path.resolve()),
+        "approved_request_sha256": approved_request_sha256,
+        "preflight_manifest_path": str(
+            preflight_manifest_path.resolve()
+        ),
     }
-    (run_dir / "request.json").write_text(
+    (run_dir / "request_metadata.json").write_text(
         json.dumps(request_snapshot, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
 
+    approved_request_bytes = approved_request_path.read_bytes()
+    if _sha256(approved_request_bytes) != approved_request_sha256:
+        raise ValueError("approved request bytes changed after validation")
+    (run_dir / "request.json").write_bytes(approved_request_bytes)
     started_at = datetime.now(timezone.utc)
-    response = client.responses.create(**api_request)
+    response = client.responses.create(**approved_request)
     completed_at = datetime.now(timezone.utc)
 
     raw_response_path.write_text(
@@ -297,6 +501,11 @@ def run_one(
         "model_returned": response.model,
         "response_id": response.id,
         "request_fingerprint": fingerprint,
+        "approved_request_path": str(approved_request_path.resolve()),
+        "approved_request_sha256": approved_request_sha256,
+        "preflight_manifest_path": str(
+            preflight_manifest_path.resolve()
+        ),
         "packet_checksum": packet.packet_checksum,
         "prompt_version": PROMPT_VERSION,
         "prompt_checksum": prompt_sha256(),
@@ -375,6 +584,23 @@ def main() -> None:
         help="Separate directory for request, response, result, and validation files.",
     )
     parser.add_argument(
+        "--approved-request-path",
+        type=Path,
+        required=True,
+        help="Exact request.json reviewed and approved by a human.",
+    )
+    parser.add_argument(
+        "--approved-request-sha256",
+        required=True,
+        help="SHA-256 of the exact approved request bytes.",
+    )
+    parser.add_argument(
+        "--preflight-manifest-path",
+        type=Path,
+        required=True,
+        help="Signed local preflight manifest binding the approved request.",
+    )
+    parser.add_argument(
         "--confirm-paid-call",
         action="store_true",
         help="Required guard acknowledging that exactly one paid API request may be made.",
@@ -395,6 +621,10 @@ def main() -> None:
         args.paper_id,
         model=model,
         client=client,
+        approved_request_path=args.approved_request_path,
+        approved_request_sha256=args.approved_request_sha256,
+        preflight_manifest_path=args.preflight_manifest_path,
+        confirm_paid_call=args.confirm_paid_call,
         packet_root=args.packet_root,
         output_root=args.output_root,
     )

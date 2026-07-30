@@ -3,17 +3,19 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
-import os
 import re
 from pathlib import Path
 from typing import Any
 
-from dotenv import load_dotenv
-from openai import OpenAI
+from src.rag.compact_api_packet import estimate_tokens
 
 from .run_compact_one_call import (
-    OUTPUT_ROOT as PAID_OUTPUT_ROOT,
+    PACKET_ROOT,
+    PRIMARY_PREFLIGHT_VERSION,
+    PRIMARY_ROUTE,
+    PRIMARY_ROUTE_VERSION,
     build_openai_request,
     load_packet,
 )
@@ -25,6 +27,21 @@ OUTPUT_ROOT = (
     ROOT / "data/staging/extraction/compact_one_call_v1_2_preflight"
 )
 GOLD_IDENTIFIER = re.compile(r"\bG[OX]-\d+")
+
+
+def _canonical_json(value: Any) -> str:
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _sha256(value: bytes | str) -> str:
+    if isinstance(value, str):
+        value = value.encode("utf-8")
+    return hashlib.sha256(value).hexdigest()
 
 
 def _schema_checks(schema: dict[str, Any]) -> dict[str, Any]:
@@ -111,105 +128,117 @@ def _evidence_checks(
     }
 
 
+def preflight_primary_request(
+    paper_id: str,
+    *,
+    model: str,
+    packet_root: Path = PACKET_ROOT,
+    output_root: Path = OUTPUT_ROOT,
+) -> dict[str, Any]:
+    """Persist and sign one exact compact primary request using local checks."""
+
+    packet = load_packet(paper_id, packet_root)
+    (
+        api_request,
+        recall_support,
+        _user_payload,
+        fingerprint,
+    ) = build_openai_request(packet, model=model)
+    serialized = _canonical_json(api_request)
+    schema_checks = _schema_checks(
+        api_request["text"]["format"]["schema"]
+    )
+    evidence_checks = _evidence_checks(api_request, recall_support)
+    gold_identifiers = sorted(
+        set(GOLD_IDENTIFIER.findall(serialized))
+    )
+    required_schema_checks = {
+        "root_is_object",
+        "root_is_not_any_of",
+        "within_5000_property_limit",
+        "within_10_level_object_limit",
+        "all_object_fields_required",
+        "all_objects_disallow_extra_properties",
+    }
+    if gold_identifiers:
+        raise ValueError(
+            f"{paper_id} request contains gold identifiers: "
+            f"{gold_identifiers}"
+        )
+    if not all(
+        value
+        for key, value in schema_checks.items()
+        if key in required_schema_checks
+    ):
+        raise ValueError(f"{paper_id} strict schema audit failed")
+    if not evidence_checks["all_support_evidence_ids_resolve"]:
+        raise ValueError(f"{paper_id} evidence audit failed")
+
+    paper_root = (output_root / paper_id).resolve()
+    paper_root.mkdir(parents=True, exist_ok=True)
+    request_path = paper_root / "request.json"
+    request_bytes = (
+        json.dumps(api_request, ensure_ascii=False, indent=2) + "\n"
+    ).encode("utf-8")
+    request_path.write_bytes(request_bytes)
+    unsigned_manifest = {
+        "preflight_version": PRIMARY_PREFLIGHT_VERSION,
+        "route": PRIMARY_ROUTE,
+        "route_version": PRIMARY_ROUTE_VERSION,
+        "status": "passed",
+        "human_approval_required": True,
+        "request_path": str(request_path),
+        "request_sha256": _sha256(request_bytes),
+        "paper_id": paper_id,
+        "model": model,
+        "packet_checksum": packet.packet_checksum,
+        "request_fingerprint": fingerprint,
+        "request_bytes": len(request_bytes),
+        "estimated_input_tokens": estimate_tokens(api_request),
+        "max_output_tokens": api_request["max_output_tokens"],
+        "schema_checks": schema_checks,
+        "evidence_checks": evidence_checks,
+        "gold_identifiers": gold_identifiers,
+        "provider_calls": 0,
+    }
+    manifest = {
+        **unsigned_manifest,
+        "manifest_checksum": _sha256(
+            _canonical_json(unsigned_manifest)
+        ),
+    }
+    (paper_root / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return manifest
+
+
 def run(
     paper_ids: list[str],
     *,
     model: str,
-    client: OpenAI,
+    packet_root: Path = PACKET_ROOT,
     output_root: Path = OUTPUT_ROOT,
 ) -> dict[str, Any]:
-    available_models = {row.id for row in client.models.list().data}
-    if model not in available_models:
-        raise ValueError(f"configured model is unavailable: {model}")
-
-    rows: list[dict[str, Any]] = []
-    for paper_id in paper_ids:
-        if (PAID_OUTPUT_ROOT / paper_id / "response.json").exists():
-            raise FileExistsError(
-                f"paid response already exists for {paper_id}"
-            )
-        packet = load_packet(paper_id)
-        (
-            api_request,
-            recall_support,
-            _user_payload,
-            fingerprint,
-        ) = build_openai_request(packet, model=model)
-        serialized = json.dumps(
-            api_request, ensure_ascii=False, sort_keys=True
+    rows = [
+        preflight_primary_request(
+            paper_id,
+            model=model,
+            packet_root=packet_root,
+            output_root=output_root,
         )
-        schema = api_request["text"]["format"]["schema"]
-        schema_checks = _schema_checks(schema)
-        evidence_checks = _evidence_checks(api_request, recall_support)
-        gold_identifiers = sorted(set(GOLD_IDENTIFIER.findall(serialized)))
-        if gold_identifiers:
-            raise ValueError(
-                f"{paper_id} request contains gold identifiers: "
-                f"{gold_identifiers}"
-            )
-        if not all(
-            value
-            for key, value in schema_checks.items()
-            if key
-            in {
-                "root_is_object",
-                "root_is_not_any_of",
-                "within_5000_property_limit",
-                "within_10_level_object_limit",
-                "all_object_fields_required",
-                "all_objects_disallow_extra_properties",
-            }
-        ):
-            raise ValueError(f"{paper_id} strict schema audit failed")
-        if not evidence_checks["all_support_evidence_ids_resolve"]:
-            raise ValueError(f"{paper_id} evidence audit failed")
-
-        # The official endpoint accepts the same model/input/reasoning/text
-        # shape as Responses but returns a token count without generation.
-        token_count = client.responses.input_tokens.count(
-            model=api_request["model"],
-            reasoning=api_request["reasoning"],
-            input=api_request["input"],
-            text=api_request["text"],
-        )
-        paper_root = output_root / paper_id
-        paper_root.mkdir(parents=True, exist_ok=True)
-        (paper_root / "request.json").write_text(
-            json.dumps(api_request, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-        row = {
-            "paper_id": paper_id,
-            "status": "passed",
-            "model": model,
-            "request_fingerprint": fingerprint,
-            "request_bytes": len(serialized.encode("utf-8")),
-            "server_input_tokens": token_count.input_tokens,
-            "schema_checks": schema_checks,
-            "evidence_checks": evidence_checks,
-            "gold_identifiers": gold_identifiers,
-            "accepted_visual_claims": len(
-                recall_support.get("accepted_visual_claims", [])
-            ),
-            "generation_requests": 0,
-            "input_token_count_requests": 1,
-        }
-        (paper_root / "preflight.json").write_text(
-            json.dumps(row, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-        rows.append(row)
-
+        for paper_id in paper_ids
+    ]
     report = {
-        "preflight_version": "compact-request-preflight-1.2.0",
+        "preflight_version": PRIMARY_PREFLIGHT_VERSION,
         "status": "passed",
         "model": model,
         "papers": rows,
-        "total_server_input_tokens": sum(
-            row["server_input_tokens"] for row in rows
+        "total_estimated_input_tokens": sum(
+            row["estimated_input_tokens"] for row in rows
         ),
-        "generation_requests": 0,
-        "input_token_count_requests": len(rows),
+        "provider_calls": 0,
     }
     output_root.mkdir(parents=True, exist_ok=True)
     (output_root / "report.json").write_text(
@@ -222,24 +251,21 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Validate exact compact requests through the non-generating "
-            "OpenAI input-token endpoint."
+            "Validate and persist exact compact primary requests locally."
         )
     )
     parser.add_argument("--paper-id", action="append", required=True)
+    parser.add_argument("--packet-root", type=Path, default=PACKET_ROOT)
+    parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
+    parser.add_argument("--model", default="gpt-5.6-terra")
     args = parser.parse_args()
-    load_dotenv(ROOT / ".env")
-    model = os.getenv("COMPACT_EXTRACTION_MODEL", "gpt-5.6-terra")
-    client = OpenAI(
-        api_key=os.environ["OPENAI_API_KEY"],
-        base_url=os.getenv(
-            "OPENAI_BASE_URL", "https://api.openai.com/v1"
-        ),
-        timeout=300.0,
-        max_retries=0,
-    )
     print(json.dumps(
-        run(args.paper_id, model=model, client=client),
+        run(
+            args.paper_id,
+            model=args.model,
+            packet_root=args.packet_root,
+            output_root=args.output_root,
+        ),
         ensure_ascii=False,
         indent=2,
     ))
