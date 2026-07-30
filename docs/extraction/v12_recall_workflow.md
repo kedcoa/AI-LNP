@@ -130,20 +130,31 @@ before a human decides whether to pay for them. Task generation, structural
 backfill, eligibility evaluation, auditing, and preflight all report
 `paid_api_requests: 0`.
 
+Every v1.2 repair response must include one candidate resolution per requested
+candidate. The merge verifies each candidate-to-outcome-to-experiment link
+against the task, then runs compact validation and deterministic structural
+coverage before writing a proposed result. A candidate may link to distinct
+outcomes from distinct experiments only when each link independently confirms
+the candidate. One outcome cannot silently cover multiple atomic candidates.
+Explicitly unresolved candidates remain in `quarantined_candidate_ids`; their
+presence blocks finalization but does not discard unrelated verified outcomes.
+The merge report preserves the original resolutions, the independently
+confirmed outcome IDs, and each candidate's verified or quarantined
+disposition.
+
 ## Current paid-call approval checkpoint
 
 The authoritative prepared set is
-`data/staging/extraction/v12_structural_primary_v6`. The permanent audit is
-`reports/extraction/v12_structural_primary_v6/task_audit.json`; it passes with
-no issues. Exact unsent request payloads are stored under
-`data/staging/extraction/v12_structural_primary_v6_preflight`, with their hashes
-and validation report in
-`reports/extraction/v12_structural_primary_v6/request_preflight.json`.
+`data/staging/extraction/v12_structural_primary_v7`. The preparation summary and
+task audit are under `reports/extraction/v12_structural_primary_v7`. Exact
+unsent text and selective-vision request payloads are stored under
+`data/staging/extraction/v12_structural_primary_v7_preflight`; their hashes,
+route totals, local token estimates, and exact paths are recorded in
+`reports/extraction/v12_structural_primary_v7/request_preflight.json`.
 
-There are 12 bounded calls, four per paper—not three full-paper calls. The
-increase is required because every selected candidate is now graded
-structurally; the old similarity filter had incorrectly removed the explicit
-GP-004 serum ALT candidate as “already covered.” The 12 requests cover 66
-repair candidates and have a conservative combined input upper bound of 44,645
-tokens. No server request or paid extraction call has been made. Human approval
-is required before running any of them.
+The v7 manifest is the sole source for the call count and candidate totals.
+Local preparation and preflight must show `server_request_sent: false`,
+`paid_api_requests: 0`, and `human_approval_required: true`. Pricing and image
+token estimates remain explicitly unconfigured rather than guessed. No request
+may be executed until a human reviews that exact manifest and separately
+invokes each runner with `--confirm-paid-call`.

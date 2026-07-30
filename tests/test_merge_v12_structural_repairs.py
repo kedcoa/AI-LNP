@@ -29,8 +29,9 @@ def _sha(value):
     return hashlib.sha256(value).hexdigest()
 
 
-def _write_inputs(tmp_path, candidates):
+def _write_inputs(tmp_path, candidates, *, experiments=None):
     result_path = tmp_path / "result.json"
+    result_experiments = [experiment()] if experiments is None else experiments
     result = {
         "contract_version": "compact-1.1.0",
         "paper_id": "GP-X",
@@ -56,7 +57,7 @@ def _write_inputs(tmp_path, candidates):
             }
         ],
         "components": [],
-        "experiments": [experiment()],
+        "experiments": result_experiments,
         "outcomes": [],
         "unresolved_items": [],
     }
@@ -107,7 +108,14 @@ def _write_inputs(tmp_path, candidates):
     return result_path, packet_path, support_path, support
 
 
-def _task(tmp_path, result_path, support, candidates):
+def _task(
+    tmp_path,
+    result_path,
+    support,
+    candidates,
+    *,
+    existing_experiment_ids=None,
+):
     from src.extraction.missing_record_contracts import MissingRecordTask
     from src.extraction.repair_contracts import RepairEvidence
 
@@ -124,7 +132,11 @@ def _task(tmp_path, result_path, support, candidates):
             ).model_dump(mode="json")
         ],
         "existing_formulation_ids": ["F1"],
-        "existing_experiment_ids": ["EXP1"],
+        "existing_experiment_ids": (
+            ["EXP1"]
+            if existing_experiment_ids is None
+            else existing_experiment_ids
+        ),
         "existing_outcome_ids": [],
         "permitted_new_experiments": 0,
         "permitted_new_outcomes": 8,
@@ -136,6 +148,217 @@ def _task(tmp_path, result_path, support, candidates):
     task_path = tmp_path / "task.json"
     task_path.write_text(json.dumps(signed), encoding="utf-8")
     return task_path
+
+
+def _resolution(
+    candidate_id,
+    *,
+    status="recovered_existing_experiment",
+    outcome_ids=None,
+    experiment_ids=None,
+    reason=None,
+):
+    return {
+        "candidate_id": candidate_id,
+        "status": status,
+        "outcome_ids": ["OUT1"] if outcome_ids is None else outcome_ids,
+        "experiment_ids": (
+            ["EXP1"] if experiment_ids is None else experiment_ids
+        ),
+        "reason": reason,
+    }
+
+
+def _merge_inputs(
+    tmp_path,
+    *,
+    candidates,
+    fragment,
+    experiments=None,
+):
+    result_path, packet_path, support_path, support = _write_inputs(
+        tmp_path,
+        candidates,
+        experiments=experiments,
+    )
+    existing_experiment_ids = [
+        row["experiment_id"]
+        for row in (
+            [experiment()] if experiments is None else experiments
+        )
+    ]
+    task_path = _task(
+        tmp_path,
+        result_path,
+        support,
+        candidates,
+        existing_experiment_ids=existing_experiment_ids,
+    )
+    fragment_path = tmp_path / "fragment.json"
+    fragment_path.write_text(fragment.model_dump_json(), encoding="utf-8")
+    return {
+        "result_path": result_path,
+        "packet_path": packet_path,
+        "support_path": support_path,
+        "pairs": [(task_path, fragment_path)],
+        "output_path": tmp_path / "merged.json",
+    }
+
+
+def _merge_inputs_with_unlinked_outcome(tmp_path):
+    row = candidate()
+    fragment = MissingRecordFragment(
+        disposition="recovered",
+        recovered_candidate_ids=[row.candidate_id],
+        unresolved_candidate_ids=[],
+        experiments=[],
+        outcomes=[outcome()],
+        unresolved_reason=None,
+        candidate_resolutions=[
+            _resolution(
+                row.candidate_id,
+                outcome_ids=[],
+                experiment_ids=["EXP1"],
+            )
+        ],
+    )
+    return _merge_inputs(
+        tmp_path,
+        candidates=[row],
+        fragment=fragment,
+    )
+
+
+def _merge_inputs_with_wrong_resolution_link(tmp_path):
+    row = candidate()
+    experiments = [
+        experiment(identifier="EXP1"),
+        experiment(identifier="EXP2"),
+    ]
+    fragment = MissingRecordFragment(
+        disposition="recovered",
+        recovered_candidate_ids=[row.candidate_id],
+        unresolved_candidate_ids=[],
+        experiments=[],
+        outcomes=[outcome(identifier="OUT1", experiment_id="EXP1")],
+        unresolved_reason=None,
+        candidate_resolutions=[
+            _resolution(
+                row.candidate_id,
+                outcome_ids=["OUT1"],
+                experiment_ids=["EXP2"],
+            )
+        ],
+    )
+    return _merge_inputs(
+        tmp_path,
+        candidates=[row],
+        fragment=fragment,
+        experiments=experiments,
+    )
+
+
+def _valid_multi_experiment_inputs(tmp_path):
+    row = candidate()
+    experiments = [
+        experiment(identifier="EXP1"),
+        experiment(identifier="EXP2"),
+    ]
+    fragment = MissingRecordFragment(
+        disposition="recovered",
+        recovered_candidate_ids=[row.candidate_id],
+        unresolved_candidate_ids=[],
+        experiments=[],
+        outcomes=[
+            outcome(identifier="OUT1", experiment_id="EXP1"),
+            outcome(identifier="OUT2", experiment_id="EXP2"),
+        ],
+        unresolved_reason=None,
+        candidate_resolutions=[
+            _resolution(
+                row.candidate_id,
+                outcome_ids=["OUT1", "OUT2"],
+                experiment_ids=["EXP1", "EXP2"],
+            )
+        ],
+    )
+    return _merge_inputs(
+        tmp_path,
+        candidates=[row],
+        fragment=fragment,
+        experiments=experiments,
+    )
+
+
+def _mixed_resolution_inputs(tmp_path):
+    recovered = candidate(candidate_id="AOC-1", claim_ids=["ACL-1"])
+    unresolved = candidate(
+        candidate_id="AOC-2",
+        claim_ids=["ACL-2"],
+        subject_text="liver sinusoidal endothelial cells",
+        predicate="reached",
+        object_text=None,
+        endpoint_text="total insertion frequency",
+        qualitative_result=None,
+        numeric_value=1.01,
+        value_text="1.01 ± 0.38 %",
+        unit="%",
+    )
+    fragment = MissingRecordFragment(
+        disposition="recovered",
+        recovered_candidate_ids=["AOC-1"],
+        unresolved_candidate_ids=["AOC-2"],
+        experiments=[],
+        outcomes=[outcome()],
+        unresolved_reason="AOC-2 remains structurally ambiguous.",
+        candidate_resolutions=[
+            _resolution("AOC-1"),
+            _resolution(
+                "AOC-2",
+                status="unresolved",
+                outcome_ids=[],
+                experiment_ids=[],
+                reason="AOC-2 remains structurally ambiguous.",
+            ),
+        ],
+    )
+    return _merge_inputs(
+        tmp_path,
+        candidates=[recovered, unresolved],
+        fragment=fragment,
+    )
+
+
+def test_merge_rejects_returned_outcome_absent_from_resolutions(tmp_path):
+    with pytest.raises(ValueError, match="candidate resolution"):
+        merge(**_merge_inputs_with_unlinked_outcome(tmp_path))
+
+
+def test_merge_rejects_resolution_with_wrong_experiment_link(tmp_path):
+    with pytest.raises(ValueError, match="experiment"):
+        merge(**_merge_inputs_with_wrong_resolution_link(tmp_path))
+
+
+def test_merge_accepts_one_candidate_with_distinct_verified_experiment_outcomes(
+    tmp_path,
+):
+    report = merge(**_valid_multi_experiment_inputs(tmp_path))
+    assert report["candidate_resolutions"][0]["experiment_ids"] == [
+        "EXP1",
+        "EXP2",
+    ]
+
+
+def test_unresolved_candidate_is_quarantined_without_discarding_verified_peer(
+    tmp_path,
+):
+    report = merge(**_mixed_resolution_inputs(tmp_path))
+    assert report["recovered_candidate_ids"] == ["AOC-1"]
+    assert report["quarantined_candidate_ids"] == ["AOC-2"]
+    merged = json.loads(
+        (tmp_path / "merged.json").read_text(encoding="utf-8")
+    )
+    assert [row["outcome_id"] for row in merged["outcomes"]] == ["OUT1"]
 
 
 def test_merge_rejects_one_broad_outcome_claimed_for_two_candidates(tmp_path):
