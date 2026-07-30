@@ -271,7 +271,6 @@ def parse_accounting_response(
     }
     malformed_entries: set[str] = set()
     invalid_candidates: set[str] = set()
-    linked_by_outcome: dict[str, set[str]] = {}
 
     for candidate_id in sorted(accounted_ids):
         entry = accounting[candidate_id]
@@ -347,15 +346,29 @@ def parse_accounting_response(
         for outcome_id in linked_outcome_ids:
             if outcome_id not in outcomes_by_id:
                 _error(report, "unknown_linked_outcome_id", "linked outcome does not exist in the compact response", candidate_id=candidate_id, outcome_id=outcome_id)
+                report["rejected_links"].append(
+                    {
+                        "candidate_id": candidate_id,
+                        "outcome_id": outcome_id,
+                        "reason": "unknown_outcome_id",
+                    }
+                )
                 invalid_candidates.add(candidate_id)
                 continue
-            linked_by_outcome.setdefault(outcome_id, set()).add(candidate_id)
             if disposition in {"extracted", "duplicate"}:
                 if candidate_outcome_matches(candidate_by_id[candidate_id], outcomes_by_id[outcome_id]):
                     valid_structural_links[candidate_id].add(outcome_id)
                 else:
                     report["rejected_links"].append({"candidate_id": candidate_id, "outcome_id": outcome_id, "reason": "structural_match_failed"})
                     invalid_candidates.add(candidate_id)
+
+    linked_by_outcome: dict[str, set[str]] = {}
+    for candidate_id in sorted(accounted_ids - invalid_candidates):
+        entry = accounting[candidate_id]
+        if entry.get("disposition") not in {"extracted", "duplicate"}:
+            continue
+        for outcome_id in valid_structural_links[candidate_id]:
+            linked_by_outcome.setdefault(outcome_id, set()).add(candidate_id)
 
     for candidate_id in sorted(accounted_ids - malformed_entries):
         entry = accounting[candidate_id]

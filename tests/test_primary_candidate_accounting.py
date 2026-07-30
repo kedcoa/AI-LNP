@@ -223,6 +223,10 @@ def test_validator_rejects_duplicate_or_nonexistent_returned_outcome_ids(monkeyp
         "duplicate_returned_outcome_ids",
         "unknown_linked_outcome_id",
     }
+    assert {
+        (link["candidate_id"], link["outcome_id"], link["reason"])
+        for link in report["rejected_links"]
+    } == {("AOC-two", "OUT-missing", "unknown_outcome_id")}
 
 
 def test_validator_rejects_accounting_evidence_outside_candidate_and_request_envelope():
@@ -338,6 +342,36 @@ def test_validator_requires_a_shared_structurally_valid_link_for_duplicates(monk
     assert report["valid_duplicates"] == 0
     assert {error["code"] for error in report["errors"]} == {
         "duplicate_link_not_shared"
+    }
+
+
+def test_unresolved_co_link_does_not_substantiate_a_duplicate(monkeypatch):
+    candidates = [_candidate("AOC-one", "E-1"), _candidate("AOC-two", "E-2")]
+    response = _trial_response(
+        _eligible_response(),
+        {
+            "AOC-one": _entry(
+                "duplicate",
+                "same_fact_as_linked_outcome",
+                outcome_ids=["OUT-1"],
+            ),
+            "AOC-two": _entry(
+                "ambiguous",
+                "experiment_assignment_uncertain",
+                evidence_id="E-2",
+                outcome_ids=["OUT-1"],
+            ),
+        },
+    )
+    monkeypatch.setattr(accounting, "candidate_outcome_matches", lambda *_: True)
+
+    _, report = parse_accounting_response(response, candidates, {"E-1", "E-2"})
+
+    assert report["valid_duplicates"] == 0
+    assert report["structurally_confirmed_candidates"] == 0
+    assert {error["code"] for error in report["errors"]} == {
+        "duplicate_link_not_shared",
+        "unresolved_disposition_has_links",
     }
 
 
