@@ -11,7 +11,15 @@ from src.extraction.build_missing_record_vision_tasks import (
     build,
     build_for_run,
 )
-from src.extraction.run_missing_record_vision import load_task, run
+from src.extraction.missing_record_contracts import (
+    MissingRecordFragment,
+    MissingRecordVisionResponse,
+)
+from src.extraction.run_missing_record_vision import (
+    build_openai_request,
+    load_task,
+    run,
+)
 from tests.test_build_v12_structural_repair_tasks import _write_run
 from tests.test_deterministic_coverage_v12 import candidate
 from tests.test_missing_record_workflow import _v12_task
@@ -49,6 +57,140 @@ def _visual_task(tmp_path):
             "support_text": "The printed panel reports GFP expression.",
         },
     )
+
+
+def _approved_vision_request(tmp_path, task):
+    request = build_openai_request(task, model="test")
+    preflight_root = tmp_path / "vision-preflight"
+    request_path = preflight_root / "GP-X/vision/task.json"
+    request_path.parent.mkdir(parents=True)
+    request_path.write_text(
+        json.dumps(request, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    request_sha256 = hashlib.sha256(request_path.read_bytes()).hexdigest()
+    unsigned_manifest = {
+        "preflight_version": "missing-record-request-preflight-1.2.0",
+        "requests": [
+            {
+                "request_path": str(request_path),
+                "request_sha256": request_sha256,
+            }
+        ],
+    }
+    manifest = {
+        **unsigned_manifest,
+        "manifest_checksum": hashlib.sha256(
+            json.dumps(
+                unsigned_manifest,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest(),
+    }
+    (preflight_root / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return SimpleNamespace(
+        request=request,
+        path=request_path,
+        sha256=request_sha256,
+    )
+
+
+def _valid_vision_response_json():
+    fragment = MissingRecordFragment(
+        disposition="unresolved",
+        recovered_candidate_ids=[],
+        unresolved_candidate_ids=["OC-1"],
+        experiments=[],
+        outcomes=[],
+        unresolved_reason="Not resolved.",
+        candidate_resolutions=[
+            {
+                "candidate_id": "OC-1",
+                "status": "unresolved",
+                "outcome_ids": [],
+                "experiment_ids": [],
+                "reason": "Not resolved.",
+            }
+        ],
+    )
+    return MissingRecordVisionResponse(
+        fragment=fragment,
+        value_status="not_resolved",
+        panel_or_table_cell=None,
+        visible_support="No exact printed value was resolved.",
+        derivation=None,
+        requires_human_review=False,
+    ).model_dump_json()
+
+
+class RecordingVisionClient:
+    def __init__(self, output_text):
+        self.calls = []
+        self.responses = SimpleNamespace(create=self.create)
+        self.output_text = output_text
+
+    def create(self, **request):
+        self.calls.append(request)
+        return SimpleNamespace(
+            id="resp-vision",
+            model="test",
+            output_text=self.output_text,
+            usage=None,
+            model_dump=lambda mode: {
+                "id": "resp-vision",
+                "model": "test",
+                "output_text": self.output_text,
+            },
+        )
+
+
+class ExplodingVisionClient:
+    def __init__(self):
+        self.calls = 0
+        self.responses = SimpleNamespace(create=self.create)
+
+    def create(self, **request):
+        self.calls += 1
+        raise AssertionError("provider must not be used")
+
+
+def test_callable_vision_runner_refuses_without_confirmation(tmp_path):
+    client = ExplodingVisionClient()
+
+    with pytest.raises(PermissionError, match="confirm_paid_call"):
+        run(
+            _visual_task(tmp_path),
+            client=client,
+            approved_request_path=tmp_path / "request.json",
+            approved_request_sha256="0" * 64,
+            confirm_paid_call=False,
+            output_root=tmp_path / "runs",
+        )
+
+    assert client.calls == 0
+    assert not (tmp_path / "runs").exists()
+
+
+def test_vision_runner_sends_exact_approved_dictionary(tmp_path):
+    task = _visual_task(tmp_path)
+    approved = _approved_vision_request(tmp_path, task)
+    client = RecordingVisionClient(_valid_vision_response_json())
+
+    run(
+        task,
+        client=client,
+        approved_request_path=approved.path,
+        approved_request_sha256=approved.sha256,
+        confirm_paid_call=True,
+        output_root=tmp_path / "runs",
+    )
+
+    assert client.calls == [json.loads(approved.path.read_bytes())]
 
 
 def test_visual_task_carries_candidate_facts_and_semantic_summaries(tmp_path):
@@ -257,12 +399,15 @@ def test_visual_raw_response_is_persisted_before_invalid_json_is_parsed(
     client = SimpleNamespace(
         responses=SimpleNamespace(create=lambda **request: response)
     )
+    approved = _approved_vision_request(tmp_path, task)
 
     with pytest.raises(ValidationError):
         run(
             task,
-            model="test",
             client=client,
+            approved_request_path=approved.path,
+            approved_request_sha256=approved.sha256,
+            confirm_paid_call=True,
             output_root=tmp_path / "runs",
         )
 

@@ -1,7 +1,9 @@
 import hashlib
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
+import pytest
 from openai.lib._pydantic import to_strict_json_schema
 
 import src.extraction.preflight_missing_record_repairs as preflight_module
@@ -16,6 +18,59 @@ from tests.test_missing_record_workflow import _v12_task
 def _canonical(value):
     return json.dumps(
         value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    )
+
+
+def _write_signed_preflight(
+    tmp_path,
+    *,
+    request=None,
+    max_output_tokens=4_000,
+):
+    request = dict(
+        request
+        or {
+            "model": "test",
+            "input": [{"role": "system", "content": "approved prompt"}],
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "schema": {"type": "object"},
+                }
+            },
+        }
+    )
+    request["max_output_tokens"] = max_output_tokens
+    request_path = tmp_path / "approved-request.json"
+    request_path.write_text(
+        json.dumps(request, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    request_sha256 = hashlib.sha256(request_path.read_bytes()).hexdigest()
+    unsigned_manifest = {
+        "preflight_version": "missing-record-request-preflight-1.2.0",
+        "requests": [
+            {
+                "request_path": str(request_path),
+                "request_sha256": request_sha256,
+            }
+        ],
+    }
+    manifest = {
+        **unsigned_manifest,
+        "manifest_checksum": hashlib.sha256(
+            _canonical(unsigned_manifest).encode()
+        ).hexdigest(),
+    }
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return SimpleNamespace(
+        request_path=request_path,
+        sha256=request_sha256,
+        manifest_path=manifest_path,
     )
 
 
@@ -296,6 +351,62 @@ def test_preflight_hashes_exact_persisted_request_bytes(
             request_bytes
         ).hexdigest()
         assert row["request_bytes"] == len(request_bytes)
+    unsigned_manifest = {
+        key: value
+        for key, value in report.items()
+        if key != "manifest_checksum"
+    }
+    assert report["manifest_checksum"] == hashlib.sha256(
+        _canonical(unsigned_manifest).encode()
+    ).hexdigest()
+
+
+def test_runner_rejects_request_bytes_not_listed_in_signed_manifest(
+    tmp_path,
+):
+    approved = _write_signed_preflight(tmp_path)
+    approved.request_path.write_text(
+        '{"model":"different"}\n', encoding="utf-8"
+    )
+
+    with pytest.raises(ValueError, match="approved request"):
+        preflight_module.load_approved_request(
+            approved.request_path,
+            expected_sha256=approved.sha256,
+            manifest_path=approved.manifest_path,
+        )
+
+
+def test_approved_request_rejects_output_limit_other_than_4000(tmp_path):
+    approved = _write_signed_preflight(
+        tmp_path,
+        max_output_tokens=4_001,
+    )
+
+    with pytest.raises(ValueError, match="4,000"):
+        preflight_module.load_approved_request(
+            approved.request_path,
+            expected_sha256=approved.sha256,
+            manifest_path=approved.manifest_path,
+        )
+
+
+def test_approved_request_rejects_tampered_manifest_checksum(tmp_path):
+    approved = _write_signed_preflight(tmp_path)
+    manifest = json.loads(
+        approved.manifest_path.read_text(encoding="utf-8")
+    )
+    manifest["requests"][0]["request_sha256"] = "f" * 64
+    approved.manifest_path.write_text(
+        json.dumps(manifest), encoding="utf-8"
+    )
+
+    with pytest.raises(ValueError, match="manifest checksum"):
+        preflight_module.load_approved_request(
+            approved.request_path,
+            expected_sha256=approved.sha256,
+            manifest_path=approved.manifest_path,
+        )
 
 
 def test_preflight_rejects_resigned_vision_semantic_tampering(

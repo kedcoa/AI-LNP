@@ -217,15 +217,21 @@ def validate_response(
             )
 
 
-def fingerprint(task: MissingRecordTask, model: str) -> str:
+def fingerprint(
+    task: MissingRecordTask,
+    *,
+    approved_request_sha256: str,
+    approved_request: dict[str, Any],
+) -> str:
     return _sha(
         _canonical(
             {
                 "task_checksum": task.task_checksum,
                 "prompt_version": PROMPT_VERSION,
                 "prompt_sha256": _sha(PROMPT),
-                "schema": to_strict_json_schema(MissingRecordFragment),
-                "model": model,
+                "approved_request_sha256": approved_request_sha256,
+                "max_output_tokens": approved_request["max_output_tokens"],
+                "model": approved_request["model"],
             }
         )
     )
@@ -282,12 +288,34 @@ def persist_raw_response(run_dir: Path, api_response: Any) -> Path:
 def run(
     task: MissingRecordTask,
     *,
-    model: str,
     client: OpenAI,
+    approved_request_path: Path,
+    approved_request_sha256: str,
+    confirm_paid_call: bool,
     output_root: Path = OUTPUT_ROOT,
-    max_output_tokens: int = 4_000,
 ) -> dict[str, Any]:
-    run_fingerprint = fingerprint(task, model)
+    if not confirm_paid_call and not approved_request_path.is_file():
+        raise PermissionError(
+            "confirm_paid_call=True is required for a paid provider call"
+        )
+    from src.extraction.preflight_missing_record_repairs import (
+        find_signed_preflight_manifest,
+        load_approved_request,
+    )
+
+    manifest_path = find_signed_preflight_manifest(
+        approved_request_path
+    )
+    approved_request = load_approved_request(
+        approved_request_path,
+        expected_sha256=approved_request_sha256,
+        manifest_path=manifest_path,
+    )
+    run_fingerprint = fingerprint(
+        task,
+        approved_request_sha256=approved_request_sha256,
+        approved_request=approved_request,
+    )
     task_key = _sha(task.task_checksum)[:16]
     run_dir = output_root / task.paper_id / task_key / run_fingerprint
     result_path = run_dir / "result.json"
@@ -302,18 +330,21 @@ def run(
             "cache_hit": True,
             "paid_api_requests_this_run": 0,
         }
+    if not confirm_paid_call:
+        raise PermissionError(
+            "confirm_paid_call=True is required for a paid provider call"
+        )
+    approved_request_bytes = approved_request_path.read_bytes()
+    if _sha(approved_request_bytes) != approved_request_sha256:
+        raise ValueError(
+            "approved request bytes changed after validation"
+        )
     if run_dir.exists():
         raise FileExistsError("Incomplete run exists; refusing an automatic paid retry")
     run_dir.mkdir(parents=True)
-    request = build_openai_request(
-        task, model=model, max_output_tokens=max_output_tokens
-    )
-    (run_dir / "request.json").write_text(
-        json.dumps(request, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    (run_dir / "request.json").write_bytes(approved_request_bytes)
     started = datetime.now(timezone.utc)
-    api_response = client.responses.create(**request)
+    api_response = client.responses.create(**approved_request)
     persist_raw_response(run_dir, api_response)
     if not api_response.output_text:
         raise RuntimeError("Missing-record request returned no structured output")
@@ -330,7 +361,9 @@ def run(
         "paper_id": task.paper_id,
         "candidate_ids": task.candidate_ids,
         "fingerprint": run_fingerprint,
-        "model_requested": model,
+        "model_requested": approved_request["model"],
+        "approved_request_sha256": approved_request_sha256,
+        "max_output_tokens": approved_request["max_output_tokens"],
         "model_returned": api_response.model,
         "response_id": api_response.id,
         "paid_api_requests": 1,
@@ -352,19 +385,50 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--task", type=Path, required=True)
+    parser.add_argument(
+        "--approved-request-path",
+        type=Path,
+        required=True,
+    )
+    parser.add_argument(
+        "--approved-request-sha256",
+        required=True,
+    )
     parser.add_argument("--confirm-paid-call", action="store_true")
     args = parser.parse_args()
     if not args.confirm_paid_call:
         parser.error("--confirm-paid-call is required")
+    from src.extraction.preflight_missing_record_repairs import (
+        find_signed_preflight_manifest,
+        load_approved_request,
+    )
+
+    load_approved_request(
+        args.approved_request_path,
+        expected_sha256=args.approved_request_sha256,
+        manifest_path=find_signed_preflight_manifest(
+            args.approved_request_path
+        ),
+    )
     load_dotenv(ROOT / ".env")
-    model = os.getenv("MISSING_RECORD_MODEL", "gpt-5.6-terra")
     client = OpenAI(
         api_key=os.environ["OPENAI_API_KEY"],
         base_url=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"),
         timeout=300,
         max_retries=0,
     )
-    print(json.dumps(run(load_task(args.task), model=model, client=client), indent=2))
+    print(
+        json.dumps(
+            run(
+                load_task(args.task),
+                client=client,
+                approved_request_path=args.approved_request_path,
+                approved_request_sha256=args.approved_request_sha256,
+                confirm_paid_call=True,
+            ),
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

@@ -1,3 +1,5 @@
+import hashlib
+import json
 from types import SimpleNamespace
 
 import pytest
@@ -11,7 +13,12 @@ from src.extraction.missing_record_contracts import (
     MissingRecordTask,
 )
 from src.extraction.repair_contracts import RepairEvidence
-from src.extraction.run_missing_record_repair import run, validate_response
+from src.extraction.run_missing_record_repair import (
+    build_openai_request,
+    fingerprint,
+    run,
+    validate_response,
+)
 from src.extraction.route_compact_findings import route
 
 
@@ -248,6 +255,196 @@ def _fragment(
         unresolved_reason="Ambiguous." if unresolved else None,
         candidate_resolutions=candidate_resolutions,
     )
+
+
+def _approved_request(tmp_path, task, *, max_output_tokens=4_000):
+    request = build_openai_request(
+        task,
+        model="test",
+        max_output_tokens=max_output_tokens,
+    )
+    preflight_root = tmp_path / f"preflight-{max_output_tokens}"
+    request_path = preflight_root / "GP-X/text/task.json"
+    request_path.parent.mkdir(parents=True)
+    request_path.write_text(
+        json.dumps(request, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    request_sha256 = hashlib.sha256(request_path.read_bytes()).hexdigest()
+    unsigned_manifest = {
+        "preflight_version": "missing-record-request-preflight-1.2.0",
+        "requests": [
+            {
+                "request_path": str(request_path),
+                "request_sha256": request_sha256,
+            }
+        ],
+    }
+    manifest = {
+        **unsigned_manifest,
+        "manifest_checksum": hashlib.sha256(
+            json.dumps(
+                unsigned_manifest,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest(),
+    }
+    (preflight_root / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return SimpleNamespace(
+        request=request,
+        path=request_path,
+        sha256=request_sha256,
+    )
+
+
+def _api_response(output_text):
+    return SimpleNamespace(
+        id="resp-test",
+        model="test",
+        output_text=output_text,
+        usage=None,
+        model_dump=lambda mode: {
+            "id": "resp-test",
+            "model": "test",
+            "output_text": output_text,
+        },
+    )
+
+
+class RecordingClient:
+    def __init__(self, output_text):
+        self.calls = []
+        self.responses = SimpleNamespace(create=self.create)
+        self.output_text = output_text
+
+    def create(self, **request):
+        self.calls.append(request)
+        return _api_response(self.output_text)
+
+
+class ExplodingClient:
+    def __init__(self):
+        self.calls = 0
+        self.responses = SimpleNamespace(create=self.create)
+
+    def create(self, **request):
+        self.calls += 1
+        raise AssertionError("provider must not be used")
+
+
+def test_callable_runner_refuses_before_provider_use_without_confirmation(
+    tmp_path,
+):
+    client = ExplodingClient()
+
+    with pytest.raises(PermissionError, match="confirm_paid_call"):
+        run(
+            _v12_task(),
+            client=client,
+            approved_request_path=tmp_path / "request.json",
+            approved_request_sha256="0" * 64,
+            confirm_paid_call=False,
+            output_root=tmp_path / "runs",
+        )
+
+    assert client.calls == 0
+    assert not (tmp_path / "runs").exists()
+
+
+def test_runner_sends_exact_approved_dictionary(tmp_path):
+    task = _v12_task()
+    approved = _approved_request(tmp_path, task)
+    client = RecordingClient(_fragment().model_dump_json())
+
+    run(
+        task,
+        client=client,
+        approved_request_path=approved.path,
+        approved_request_sha256=approved.sha256,
+        confirm_paid_call=True,
+        output_root=tmp_path / "runs",
+    )
+
+    assert client.calls == [json.loads(approved.path.read_bytes())]
+
+
+def test_cache_fingerprint_includes_approved_output_limit(tmp_path):
+    task = _v12_task()
+    approved = _approved_request(tmp_path, task)
+    changed = _approved_request(
+        tmp_path,
+        task,
+        max_output_tokens=4_001,
+    )
+
+    baseline = fingerprint(
+        task,
+        approved_request_sha256="a" * 64,
+        approved_request=approved.request,
+    )
+    assert baseline != fingerprint(
+        task,
+        approved_request_sha256="a" * 64,
+        approved_request=changed.request,
+    )
+    changed_model = {
+        **approved.request,
+        "model": "different-model",
+    }
+    assert baseline != fingerprint(
+        task,
+        approved_request_sha256="a" * 64,
+        approved_request=changed_model,
+    )
+    assert baseline != fingerprint(
+        task,
+        approved_request_sha256="b" * 64,
+        approved_request=approved.request,
+    )
+    changed_task = task.model_copy(
+        update={"task_checksum": "different-task"}
+    )
+    assert baseline != fingerprint(
+        changed_task,
+        approved_request_sha256="a" * 64,
+        approved_request=approved.request,
+    )
+
+
+def test_complete_cache_hit_does_not_require_paid_call_confirmation(
+    tmp_path,
+):
+    task = _v12_task()
+    approved = _approved_request(tmp_path, task)
+    output_root = tmp_path / "runs"
+    first_client = RecordingClient(_fragment().model_dump_json())
+    run(
+        task,
+        client=first_client,
+        approved_request_path=approved.path,
+        approved_request_sha256=approved.sha256,
+        confirm_paid_call=True,
+        output_root=output_root,
+    )
+    cache_client = ExplodingClient()
+
+    result = run(
+        task,
+        client=cache_client,
+        approved_request_path=approved.path,
+        approved_request_sha256=approved.sha256,
+        confirm_paid_call=False,
+        output_root=output_root,
+    )
+
+    assert result["cache_hit"] is True
+    assert result["paid_api_requests_this_run"] == 0
+    assert cache_client.calls == 0
 
 
 def test_missing_record_response_accounts_for_every_candidate():
@@ -572,10 +769,18 @@ def test_raw_response_is_persisted_before_invalid_json_is_parsed(tmp_path):
     client = SimpleNamespace(
         responses=SimpleNamespace(create=lambda **request: response)
     )
+    approved = _approved_request(tmp_path, _v12_task())
 
     with pytest.raises(ValidationError):
-        run(_v12_task(), model="test", client=client, output_root=tmp_path)
+        run(
+            _v12_task(),
+            client=client,
+            approved_request_path=approved.path,
+            approved_request_sha256=approved.sha256,
+            confirm_paid_call=True,
+            output_root=tmp_path / "runs",
+        )
 
-    raw_paths = list(tmp_path.rglob("response.raw.json"))
+    raw_paths = list((tmp_path / "runs").rglob("response.raw.json"))
     assert len(raw_paths) == 1
     assert "truncated {" in raw_paths[0].read_text(encoding="utf-8")

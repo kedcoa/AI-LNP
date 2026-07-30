@@ -58,6 +58,125 @@ def _display(path: Path) -> str:
     return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
 
 
+def _resolved_request_path(value: str) -> Path:
+    path = Path(value)
+    return (path if path.is_absolute() else ROOT / path).resolve()
+
+
+def find_signed_preflight_manifest(request_path: Path) -> Path:
+    """Find the signed preflight manifest that lists one approved request."""
+
+    resolved_request_path = request_path.resolve()
+    for parent in (resolved_request_path.parent, *resolved_request_path.parents):
+        manifest_path = parent / "manifest.json"
+        if not manifest_path.is_file():
+            continue
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        matches = [
+            row
+            for row in manifest.get("requests", [])
+            if isinstance(row, dict)
+            and isinstance(row.get("request_path"), str)
+            and _resolved_request_path(row["request_path"])
+            == resolved_request_path
+        ]
+        if matches:
+            return manifest_path
+    raise ValueError(
+        "Signed preflight manifest for approved request was not found"
+    )
+
+
+def _has_prompt_content(value: Any) -> bool:
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, list):
+        return any(_has_prompt_content(item) for item in value)
+    if isinstance(value, dict):
+        return any(
+            _has_prompt_content(item)
+            for key, item in value.items()
+            if key in {"content", "text"}
+        )
+    return False
+
+
+def load_approved_request(
+    path: Path,
+    *,
+    expected_sha256: str,
+    manifest_path: Path,
+) -> dict[str, Any]:
+    """Validate and return the exact dictionary approved in a signed preflight."""
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(manifest, dict):
+        raise ValueError("Signed preflight manifest must be a JSON object")
+    supplied_checksum = manifest.get("manifest_checksum")
+    unsigned_manifest = {
+        key: value
+        for key, value in manifest.items()
+        if key != "manifest_checksum"
+    }
+    if (
+        manifest.get("preflight_version")
+        != "missing-record-request-preflight-1.2.0"
+        or not isinstance(supplied_checksum, str)
+        or _sha(_canonical(unsigned_manifest)) != supplied_checksum
+    ):
+        raise ValueError("Signed preflight manifest checksum is invalid")
+
+    resolved_path = path.resolve()
+    matches = [
+        row
+        for row in manifest.get("requests", [])
+        if isinstance(row, dict)
+        and isinstance(row.get("request_path"), str)
+        and _resolved_request_path(row["request_path"]) == resolved_path
+    ]
+    if len(matches) != 1:
+        raise ValueError(
+            "Signed preflight must list the approved request exactly once"
+        )
+    row_sha256 = matches[0].get("request_sha256")
+    if row_sha256 != expected_sha256:
+        raise ValueError(
+            "Supplied approved request SHA-256 does not match signed preflight"
+        )
+    try:
+        request_bytes = resolved_path.read_bytes()
+    except OSError as exc:
+        raise ValueError("approved request bytes are unavailable") from exc
+    if _sha(request_bytes) != expected_sha256:
+        raise ValueError(
+            "approved request bytes do not match the supplied SHA-256"
+        )
+    try:
+        request = json.loads(request_bytes)
+    except json.JSONDecodeError as exc:
+        raise ValueError("Approved request is not valid JSON") from exc
+    if not isinstance(request, dict):
+        raise ValueError("Approved request must be a JSON object")
+    if not isinstance(request.get("model"), str) or not request["model"].strip():
+        raise ValueError("Approved request must name a model")
+    if not isinstance(request.get("input"), list) or not _has_prompt_content(
+        request["input"]
+    ):
+        raise ValueError("Approved request must contain prompt-bearing input")
+    schema = request.get("text", {}).get("format", {}).get("schema")
+    if not isinstance(schema, dict) or not schema:
+        raise ValueError("Approved request must contain a response schema")
+    max_output_tokens = request.get("max_output_tokens")
+    if type(max_output_tokens) is not int or max_output_tokens != 4_000:
+        raise ValueError(
+            "Approved request max_output_tokens must be exactly 4,000"
+        )
+    return request
+
+
 def strict_schema_issues(schema: Any, path: str = "$") -> list[str]:
     issues: list[str] = []
     if isinstance(schema, dict):
@@ -345,6 +464,7 @@ def preflight(
                 f"{sorted(extra_vision)}"
             )
 
+    rows.sort(key=lambda row: row["request_path"])
     text_request_count = sum(row["route"] == "text" for row in rows)
     vision_request_count = sum(row["route"] == "vision" for row in rows)
     total_paid_request_count = text_request_count + vision_request_count
@@ -356,7 +476,7 @@ def preflight(
         "repair_candidate_count",
         text_candidate_count + visual_candidate_count,
     )
-    report = {
+    unsigned_report = {
         "preflight_version": "missing-record-request-preflight-1.2.0",
         "model": model,
         "pricing_status": "pricing_not_configured",
@@ -402,6 +522,10 @@ def preflight(
         "paid_api_requests": 0,
         "ready_for_paid_calls": False,
         "human_approval_required": True,
+    }
+    report = {
+        **unsigned_report,
+        "manifest_checksum": _sha(_canonical(unsigned_report)),
     }
     output_root.mkdir(parents=True, exist_ok=True)
     (output_root / "manifest.json").write_text(
