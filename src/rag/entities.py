@@ -8,7 +8,7 @@ from .models import DocumentBlock, EntityCandidate
 PATTERNS = {
     "lnp": r"\b(?:lipid nanoparticles?|LNPs?|liposomes?)\b",
     "payload": r"\b(?:mRNA|siRNA|sgRNA|saRNA|circRNA|messenger RNA|small interfering RNA)\b",
-    "cell": r"\b(?:hepatocytes?|Kupffer cells?|LSECs?|liver sinusoidal endothelial cells?|hepatic stellate cells?|HSCs?|macrophages?|BMDMs?|endothelial cells?)\b",
+    "cell": r"\b(?:hepatocytes?|Kupffer cells?|LSECs?|liver sinusoidal endothelial cells?|hepatic stellate cells?|HSCs?|macrophages?|BMDMs?|endothelial cells?|HepG2(?: cells)?|dendritic cells|DC2\.4|h?PBMCs)\b",
     "species": r"\b(?:mice|mouse|rats?|human|humans?)\b",
     "route": r"\b(?:intravenously|intravenous|tail vein|oral(?:ly)?|intramuscular(?:ly)?)\b",
     "gene_or_protein": r"\b(?:Cas9|FVIII|Micu1|MICU1|HGF|EGF|eGFP|EGFP|FAP|FAPCAR)\b",
