@@ -64,6 +64,13 @@ def _outcome():
     )
 
 
+def _outcome_for(outcome_id, experiment_id):
+    outcome = _outcome()
+    outcome.outcome_id = outcome_id
+    outcome.experiment_id = experiment_id
+    return outcome
+
+
 def _task():
     return MissingRecordTask(
         task_version="missing-record-task-1.0.0",
@@ -81,6 +88,119 @@ def _task():
         source_result_sha256="a" * 64,
         source_inventory_sha256="b" * 64,
         task_checksum="c" * 64,
+    )
+
+
+def _experiment_summary(experiment_id):
+    return {
+        "experiment_id": experiment_id,
+        "formulation_id": "F1",
+        "payload_type": "mRNA",
+        "payload_name": "GFP mRNA",
+        "encoded_product": "GFP",
+        "molecular_target": None,
+        "delivery_recipient_cell": "hepatocyte",
+        "therapeutic_target_cell": "hepatocyte",
+        "tissue_or_organ": "liver",
+        "species": "mouse",
+        "disease_model": None,
+        "experimental_context": "in_vivo",
+        "dose": None,
+        "dose_unit": None,
+        "route": None,
+        "timepoint": None,
+        "timepoint_unit": None,
+        "outcome_endpoints": ["GFP expression"],
+        "comparator_context": [],
+    }
+
+
+def _v12_task_payload(**overrides):
+    payload = _task().model_dump(mode="json")
+    payload.update(
+        {
+            "task_version": "missing-record-task-1.2.0",
+            "candidate_ids": ["OC-1", "OC-2"],
+            "existing_experiment_summaries": [_experiment_summary("E1")],
+            "existing_outcome_summaries": [],
+            "experiment_context": {
+                "provisional_experiment_id": "E2",
+                "label": "GFP expression experiment",
+                "anchors": [
+                    {
+                        "anchor_type": "assay",
+                        "value": "microscopy",
+                        "evidence_ids": ["E-1"],
+                    }
+                ],
+            },
+        }
+    )
+    payload.update(overrides)
+    if "candidate_facts" not in overrides:
+        payload["candidate_facts"] = [
+            {
+                "candidate_id": candidate_id,
+                "subject_text": "hepatocyte",
+                "predicate": "expresses",
+                "object_text": "GFP",
+                "endpoint_text": "GFP expression",
+                "qualitative_result": "More than 80% expressed GFP.",
+                "numeric_value": 80.0,
+                "value_text": "More than 80%",
+                "unit": "%",
+                "polarity": "positive",
+                "evidence_ids": ["E-1"],
+            }
+            for candidate_id in payload["candidate_ids"]
+        ]
+    return payload
+
+
+def _v12_task(**overrides):
+    return MissingRecordTask.model_validate(_v12_task_payload(**overrides))
+
+
+def _resolution(candidate_id, **overrides):
+    payload = {
+        "candidate_id": candidate_id,
+        "status": "recovered_existing_experiment",
+        "outcome_ids": ["O2"],
+        "experiment_ids": ["E1"],
+        "reason": None,
+    }
+    payload.update(overrides)
+    return payload
+
+
+def _fragment(
+    *,
+    recovered=None,
+    unresolved=None,
+    experiments=None,
+    outcomes=None,
+    candidate_resolutions=None,
+):
+    recovered = ["OC-1"] if recovered is None else recovered
+    unresolved = ["OC-2"] if unresolved is None else unresolved
+    experiments = [] if experiments is None else experiments
+    outcomes = [_outcome_for("O2", "E1")] if outcomes is None else outcomes
+    candidate_resolutions = (
+        [
+            _resolution("OC-1"),
+            _resolution("OC-2", status="unresolved", outcome_ids=[], experiment_ids=[], reason="Ambiguous."),
+        ]
+        if candidate_resolutions is None
+        else candidate_resolutions
+    )
+    return MissingRecordFragment(
+        disposition="recovered" if recovered else "unresolved",
+        recovered_candidate_ids=recovered,
+        unresolved_candidate_ids=unresolved,
+        experiments=experiments,
+        outcomes=outcomes,
+        unresolved_reason="Ambiguous." if unresolved else None,
+        candidate_resolutions=candidate_resolutions,
     )
 
 
@@ -144,6 +264,137 @@ def test_structural_task_requires_facts_for_every_opaque_candidate():
     payload["task_version"] = "missing-record-task-1.1.0"
     with pytest.raises(ValueError, match="experiment_context"):
         MissingRecordTask.model_validate(payload)
+
+
+def test_v12_task_requires_compact_existing_experiment_summaries():
+    payload = _v12_task_payload()
+    payload["existing_experiment_summaries"] = []
+    with pytest.raises(ValueError, match="summary"):
+        MissingRecordTask.model_validate(payload)
+
+
+def test_v12_task_requires_context_for_every_opaque_candidate():
+    payload = _v12_task_payload()
+    payload["experiment_context"] = None
+    with pytest.raises(ValueError, match="experiment_context"):
+        MissingRecordTask.model_validate(payload)
+
+
+def test_v12_task_requires_facts_for_every_opaque_candidate():
+    payload = _v12_task_payload()
+    payload["candidate_facts"] = []
+    with pytest.raises(ValueError, match="candidate_facts"):
+        MissingRecordTask.model_validate(payload)
+
+
+def test_response_requires_one_resolution_for_every_candidate():
+    response = _fragment(candidate_resolutions=[_resolution("OC-1")])
+    with pytest.raises(ValueError, match="candidate resolution"):
+        validate_response(response, _v12_task())
+
+
+def test_one_candidate_may_resolve_to_distinct_experiment_linked_outcomes():
+    validate_response(
+        _fragment(
+            recovered=["OC-1"],
+            unresolved=[],
+            outcomes=[
+                _outcome_for("O2", "E1"),
+                _outcome_for("O3", "E2"),
+            ],
+            candidate_resolutions=[
+                _resolution(
+                    "OC-1",
+                    status="recovered_existing_experiment",
+                    outcome_ids=["O2", "O3"],
+                    experiment_ids=["E1", "E2"],
+                )
+            ],
+        ),
+        _v12_task(
+            candidate_ids=["OC-1"],
+            existing_experiment_ids=["E1", "E2"],
+            existing_experiment_summaries=[
+                _experiment_summary("E1"),
+                _experiment_summary("E2"),
+            ],
+        ),
+    )
+
+
+def test_unresolved_resolution_cannot_reference_records():
+    response = _fragment(
+        recovered=[],
+        unresolved=["OC-1", "OC-2"],
+        outcomes=[],
+        candidate_resolutions=[
+            _resolution(
+                "OC-1",
+                status="unresolved",
+                outcome_ids=[],
+                experiment_ids=[],
+                reason="Ambiguous.",
+            ),
+            _resolution(
+                "OC-2",
+                status="unresolved",
+                outcome_ids=["O2"],
+                experiment_ids=[],
+                reason="Ambiguous.",
+            ),
+        ],
+    )
+    with pytest.raises(ValueError, match="unresolved"):
+        validate_response(response, _v12_task())
+
+
+def test_recovered_existing_experiment_requires_a_returned_outcome():
+    response = _fragment(
+        recovered=["OC-1"],
+        unresolved=["OC-2"],
+        outcomes=[],
+        candidate_resolutions=[
+            _resolution("OC-1", outcome_ids=["O1"], experiment_ids=["E1"]),
+            _resolution(
+                "OC-2",
+                status="unresolved",
+                outcome_ids=[],
+                experiment_ids=[],
+                reason="Ambiguous.",
+            ),
+        ],
+    )
+    with pytest.raises(ValueError, match="new outcome"):
+        validate_response(response, _v12_task(existing_outcome_ids=["O1"]))
+
+
+def test_recovered_new_experiment_requires_a_returned_outcome_for_that_experiment():
+    response = _fragment(
+        recovered=["OC-1"],
+        unresolved=["OC-2"],
+        experiments=[_experiment()],
+        outcomes=[_outcome_for("O2", "E1")],
+        candidate_resolutions=[
+            _resolution(
+                "OC-1",
+                status="recovered_new_experiment",
+                outcome_ids=["O2"],
+                experiment_ids=["E1", "E2"],
+            ),
+            _resolution(
+                "OC-2",
+                status="unresolved",
+                outcome_ids=[],
+                experiment_ids=[],
+                reason="Ambiguous.",
+            ),
+        ],
+    )
+    with pytest.raises(ValueError, match="new experiment"):
+        validate_response(
+            response,
+            _v12_task(existing_outcome_ids=["O1"]),
+        )
 
 
 def test_whole_response_schema_failure_requires_first_call_not_field_repair():

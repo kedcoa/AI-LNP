@@ -5,9 +5,9 @@ from src.extraction.preflight_missing_record_repairs import strict_schema_issues
 
 
 def test_missing_record_response_schema_is_strict_at_every_object():
-    assert strict_schema_issues(
-        to_strict_json_schema(MissingRecordFragment)
-    ) == []
+    schema = to_strict_json_schema(MissingRecordFragment)
+    assert "candidate_resolutions" in schema["properties"]
+    assert strict_schema_issues(schema) == []
 
 
 def test_schema_audit_rejects_optional_or_open_object_properties():

@@ -42,10 +42,55 @@ class MissingRecordCandidateFact(StrictModel):
     evidence_ids: list[str] = Field(min_length=1)
 
 
+class MissingRecordExperimentSummary(StrictModel):
+    experiment_id: str
+    formulation_id: str
+    payload_type: str | None
+    payload_name: str | None
+    encoded_product: str | None
+    molecular_target: str | None
+    delivery_recipient_cell: str | None
+    therapeutic_target_cell: str | None
+    tissue_or_organ: str | None
+    species: str | None
+    disease_model: str | None
+    experimental_context: str | None
+    dose: float | None
+    dose_unit: str | None
+    route: str | None
+    timepoint: float | None
+    timepoint_unit: str | None
+    outcome_endpoints: list[str]
+    comparator_context: list[str]
+
+
+class MissingRecordOutcomeSummary(StrictModel):
+    outcome_id: str
+    experiment_id: str
+    assay: str | None
+    endpoint: str | None
+    comparator: str | None
+    qualitative_outcome: str | None
+
+
+class MissingRecordCandidateResolution(StrictModel):
+    candidate_id: str
+    status: Literal[
+        "already_represented",
+        "recovered_existing_experiment",
+        "recovered_new_experiment",
+        "unresolved",
+    ]
+    outcome_ids: list[str]
+    experiment_ids: list[str]
+    reason: str | None
+
+
 class MissingRecordTask(StrictModel):
     task_version: Literal[
         "missing-record-task-1.0.0",
         "missing-record-task-1.1.0",
+        "missing-record-task-1.2.0",
     ]
     paper_id: str
     route_ids: list[str] = Field(min_length=1)
@@ -58,6 +103,12 @@ class MissingRecordTask(StrictModel):
     existing_formulation_ids: list[str]
     existing_experiment_ids: list[str]
     existing_outcome_ids: list[str]
+    existing_experiment_summaries: list[MissingRecordExperimentSummary] = Field(
+        default_factory=list
+    )
+    existing_outcome_summaries: list[MissingRecordOutcomeSummary] = Field(
+        default_factory=list
+    )
     permitted_new_experiments: int = Field(ge=0, le=2)
     permitted_new_outcomes: int = Field(ge=1, le=8)
     source_result_sha256: str
@@ -68,7 +119,10 @@ class MissingRecordTask(StrictModel):
     def validate_candidate_facts(self) -> "MissingRecordTask":
         if len(set(self.candidate_ids)) != len(self.candidate_ids):
             raise ValueError("candidate_ids must be unique")
-        if self.task_version == "missing-record-task-1.1.0":
+        if self.task_version in {
+            "missing-record-task-1.1.0",
+            "missing-record-task-1.2.0",
+        }:
             if self.experiment_context is None:
                 raise ValueError(
                     "v1.1 structural tasks require experiment_context"
@@ -98,6 +152,14 @@ class MissingRecordTask(StrictModel):
                         f"{fact.candidate_id} references unavailable task "
                         f"evidence: {sorted(unknown)}"
                     )
+        if self.task_version == "missing-record-task-1.2.0":
+            summary_ids = [row.experiment_id for row in self.existing_experiment_summaries]
+            if set(summary_ids) != set(self.existing_experiment_ids):
+                raise ValueError(
+                    "existing experiment summary IDs must match existing_experiment_ids"
+                )
+            if len(set(summary_ids)) != len(summary_ids):
+                raise ValueError("existing experiment summary IDs must be unique")
         return self
 
 
@@ -108,6 +170,9 @@ class MissingRecordFragment(StrictModel):
     experiments: list[ExperimentRecord] = Field(max_length=2)
     outcomes: list[OutcomeRecord] = Field(max_length=8)
     unresolved_reason: str | None
+    candidate_resolutions: list[MissingRecordCandidateResolution] = Field(
+        default_factory=list
+    )
 
     @model_validator(mode="after")
     def validate_disposition(self) -> "MissingRecordFragment":
@@ -115,7 +180,11 @@ class MissingRecordFragment(StrictModel):
             raise ValueError("recovered_candidate_ids must be unique")
         if len(set(self.unresolved_candidate_ids)) != len(self.unresolved_candidate_ids):
             raise ValueError("unresolved_candidate_ids must be unique")
-        if self.disposition == "recovered" and not self.outcomes:
+        if (
+            self.disposition == "recovered"
+            and not self.outcomes
+            and not self.candidate_resolutions
+        ):
             raise ValueError("Recovered fragment requires at least one outcome")
         if self.unresolved_candidate_ids and not self.unresolved_reason:
             raise ValueError("Unresolved candidates require a reason")

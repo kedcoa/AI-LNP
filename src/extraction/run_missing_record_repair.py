@@ -33,7 +33,9 @@ experiments into a broad record. A candidate is recovered only when at least one
 returned outcome preserves its specific facts and cites its evidence; shared
 evidence alone is not coverage. Do not repeat existing records. Return unresolved
 with a specific reason when evidence is insufficient. Never invent identifiers,
-values, units, comparisons, or evidence labels."""
+values, units, comparisons, or evidence labels. For v1.2 tasks, return one
+candidate resolution for every candidate and explicitly link each returned
+outcome to its resolved candidate and experiment."""
 
 
 def _canonical(value: Any) -> str:
@@ -103,6 +105,92 @@ def validate_response(
                         f"{record.__class__.__name__}.{field_name} cites unknown "
                         f"evidence IDs: {sorted(unknown)}"
                     )
+    if task.task_version != "missing-record-task-1.2.0":
+        return
+
+    resolution_ids = [row.candidate_id for row in response.candidate_resolutions]
+    if len(set(resolution_ids)) != len(resolution_ids):
+        raise ValueError("candidate resolution IDs must be unique")
+    if set(resolution_ids) != expected:
+        raise ValueError("Response must include one candidate resolution per candidate")
+
+    known_outcomes = set(task.existing_outcome_ids) | set(new_outcome_ids)
+    resolution_by_candidate = {
+        row.candidate_id: row for row in response.candidate_resolutions
+    }
+    resolved_candidates = {
+        candidate_id
+        for candidate_id, resolution in resolution_by_candidate.items()
+        if resolution.status != "unresolved"
+    }
+    unresolved_candidates = expected - resolved_candidates
+    if recovered != resolved_candidates or unresolved != unresolved_candidates:
+        raise ValueError(
+            "recovered and unresolved candidate IDs must agree with candidate resolutions"
+        )
+    for resolution in response.candidate_resolutions:
+        outcome_ids = set(resolution.outcome_ids)
+        experiment_ids = set(resolution.experiment_ids)
+        if len(outcome_ids) != len(resolution.outcome_ids):
+            raise ValueError("candidate resolution outcome IDs must be unique")
+        if len(experiment_ids) != len(resolution.experiment_ids):
+            raise ValueError("candidate resolution experiment IDs must be unique")
+        if resolution.status == "unresolved":
+            if outcome_ids or experiment_ids:
+                raise ValueError("unresolved candidate resolutions cannot reference records")
+            if not resolution.reason:
+                raise ValueError("unresolved candidate resolutions require a reason")
+            continue
+        if not outcome_ids or not experiment_ids:
+            raise ValueError(
+                "resolved candidate resolutions require outcome and experiment IDs"
+            )
+        if resolution.reason:
+            raise ValueError(
+                "resolved candidate resolutions cannot include an unresolved reason"
+            )
+        if outcome_ids - known_outcomes:
+            raise ValueError("candidate resolution references an unknown outcome")
+        if experiment_ids - allowed_experiments:
+            raise ValueError("candidate resolution references an unknown experiment")
+        linked_returned_outcomes = [
+            outcome
+            for outcome in response.outcomes
+            if outcome.outcome_id in outcome_ids
+            and outcome.experiment_id in experiment_ids
+        ]
+        if resolution.status == "already_represented":
+            if outcome_ids - set(task.existing_outcome_ids):
+                raise ValueError("already represented candidates require existing outcomes")
+            if experiment_ids - set(task.existing_experiment_ids):
+                raise ValueError("already represented candidates require existing experiments")
+        elif resolution.status == "recovered_existing_experiment":
+            if experiment_ids - set(task.existing_experiment_ids):
+                raise ValueError(
+                    "recovered existing experiment candidates require existing experiments"
+                )
+            if not linked_returned_outcomes:
+                raise ValueError(
+                    "recovered existing experiment candidates require a new outcome"
+                )
+        elif resolution.status == "recovered_new_experiment":
+            if not any(
+                outcome.experiment_id in set(new_experiment_ids)
+                for outcome in linked_returned_outcomes
+            ):
+                raise ValueError(
+                    "recovered new experiment candidates require a new experiment outcome"
+                )
+
+    for outcome in response.outcomes:
+        if not any(
+            outcome.outcome_id in resolution.outcome_ids
+            and outcome.experiment_id in resolution.experiment_ids
+            for resolution in response.candidate_resolutions
+        ):
+            raise ValueError(
+                "Every returned outcome requires an explicit candidate resolution link"
+            )
 
 
 def fingerprint(task: MissingRecordTask, model: str) -> str:
