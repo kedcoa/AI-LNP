@@ -1,5 +1,6 @@
 import hashlib
 import json
+from pathlib import Path
 
 from openai.lib._pydantic import to_strict_json_schema
 
@@ -206,6 +207,30 @@ def test_preflight_reports_exact_paid_call_and_route_totals(
     assert report["image_token_estimate_status"] == "not_configured"
     assert report["server_request_sent"] is False
     assert report["paid_api_requests"] == 0
+
+
+def test_preflight_hashes_exact_persisted_request_bytes(
+    tmp_path, monkeypatch
+):
+    run_root = _prepared_run(tmp_path)
+    monkeypatch.setattr(
+        preflight_module,
+        "audit",
+        lambda root: _passed_audit(),
+    )
+
+    report = preflight_module.preflight(
+        run_root=run_root,
+        output_root=tmp_path / "out",
+        model="test",
+    )
+
+    for row in report["requests"]:
+        request_bytes = Path(row["request_path"]).read_bytes()
+        assert row["request_sha256"] == hashlib.sha256(
+            request_bytes
+        ).hexdigest()
+        assert row["request_bytes"] == len(request_bytes)
 
 
 def test_preflight_rejects_resigned_vision_semantic_tampering(

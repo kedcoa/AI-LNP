@@ -132,9 +132,12 @@ def _request_row(
     estimated_input_tokens = estimate_tokens(
         _canonical(token_estimate_request)
     )
+    persisted_request = (
+        json.dumps(request, ensure_ascii=False, indent=2) + "\n"
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
-        json.dumps(request, ensure_ascii=False, indent=2) + "\n",
+        persisted_request,
         encoding="utf-8",
     )
     return (
@@ -144,10 +147,10 @@ def _request_row(
             "task_path": _display(task_path),
             "request_path": _display(output_path),
             "task_checksum": task.task_checksum,
-            "request_sha256": _sha(serialized),
+            "request_sha256": _sha(persisted_request),
             "candidate_count": len(task.candidate_ids),
             "evidence_count": len(task.evidence),
-            "request_bytes": len(serialized.encode("utf-8")),
+            "request_bytes": len(persisted_request.encode("utf-8")),
             "estimated_input_tokens": estimated_input_tokens,
             "image_input_bytes": image_input_bytes,
             "estimated_image_tokens": None,
