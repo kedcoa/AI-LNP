@@ -445,13 +445,11 @@ def build_core_slot_schema(
             "linked_outcome_ids": {
                 "type": "array",
                 "minItems": 1,
-                "uniqueItems": True,
                 "items": {"type": "string"},
             },
             "evidence_ids": {
                 "type": "array",
                 "minItems": 1,
-                "uniqueItems": True,
                 "items": {"type": "string"},
             },
         },

@@ -307,6 +307,24 @@ def test_dynamic_schema_has_one_strict_no_escape_entry_contract():
     )
 
 
+def test_provider_schema_avoids_unsupported_unique_items_keyword():
+    schema = core_slots.build_core_slot_schema(
+        to_strict_json_schema(CompactExtractionResponse),
+        build_np001_core_slots(qualifying_packet())["qualified_slots"],
+    )
+
+    def mappings(value):
+        if isinstance(value, dict):
+            yield value
+            for child in value.values():
+                yield from mappings(child)
+        elif isinstance(value, list):
+            for child in value:
+                yield from mappings(child)
+
+    assert all("uniqueItems" not in row for row in mappings(schema))
+
+
 def reported(value, *evidence_ids):
     return {
         "value": value,
@@ -550,6 +568,39 @@ def test_valid_extracted_records_are_scientifically_confirmed():
     assert report["confirmed_slot_ids"] == SLOT_IDS
     assert report["rejected_links"] == []
     assert report["errors"] == []
+
+
+@pytest.mark.parametrize(
+    ("field", "duplicate_value", "error_code"),
+    [
+        (
+            "linked_outcome_ids",
+            ["O-HEP-TX", "O-HEP-TX"],
+            "duplicate_linked_outcome_ids",
+        ),
+        (
+            "evidence_ids",
+            ["E-HEPG2-TX", "E-HEPG2-TX"],
+            "duplicate_slot_evidence_ids",
+        ),
+    ],
+)
+def test_local_validator_rejects_duplicates_without_schema_unique_items(
+    field,
+    duplicate_value,
+    error_code,
+):
+    qualified, response = valid_trial_response()
+    response["core_slot_accounting"]["CORE-HEPG2-TRANSFECTION"][
+        field
+    ] = duplicate_value
+
+    report = validate(response, qualified)
+
+    assert error_code in error_codes(report)
+    assert "CORE-HEPG2-TRANSFECTION" not in report[
+        "confirmed_slot_ids"
+    ]
 
 
 def test_validator_requires_exact_slot_key_equality():
