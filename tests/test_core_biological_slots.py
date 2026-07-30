@@ -28,8 +28,8 @@ def qualifying_packet():
         "evidence": [
             evidence(
                 "E-FORM",
-                "The NP-001 LNP formulation contained ionizable lipid, "
-                "helper lipid, cholesterol, and PEG-lipid.",
+                "The DX-loaded LNP formulation contained ALC-0315, "
+                "DSPC or DOPE, cholesterol/DX, and ALC-0159.",
             ),
             evidence(
                 "E-PAYLOAD",
@@ -421,9 +421,9 @@ def valid_trial_response():
         "formulations": [
             {
                 "formulation_id": "F-1",
-                "formulation_name": reported("NP-001", "E-FORM"),
+                "formulation_name": reported("DX-loaded LNP", "E-FORM"),
                 "composition": reported(
-                    "ionizable lipid/helper lipid/cholesterol/PEG-lipid",
+                    "ALC-0315/DSPC/cholesterol/DX/ALC-0159",
                     "E-FORM",
                 ),
                 "composition_basis": missing(),
@@ -844,6 +844,33 @@ def test_generic_lnp_and_one_common_lipid_do_not_match_np001_formulation():
     )
     response["formulations"][0]["composition"] = reported(
         "cholesterol only",
+        "E-FORM",
+    )
+
+    report = validate(response, qualified)
+
+    assert "formulation_semantic_mismatch" in rejection_reasons(report)
+    assert report["scientifically_confirmed"] == 0
+
+
+def test_generic_lnp_cannot_match_real_dx_lnp_evidence_without_paper_id():
+    packet = qualifying_packet()
+    next(
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"] == "E-FORM"
+    )["text"] = (
+        "The DX-loaded LNP formulation used ionizable lipid, "
+        "ALC-0315, DSPC or DOPE, cholesterol/DX, and ALC-0159."
+    )
+    qualified = build_np001_core_slots(packet)["qualified_slots"]
+    _default_qualified, response = valid_trial_response()
+    response["formulations"][0]["formulation_name"] = reported(
+        "Unrelated LNP",
+        "E-FORM",
+    )
+    response["formulations"][0]["composition"] = reported(
+        "ionizable lipid and cholesterol",
         "E-FORM",
     )
 

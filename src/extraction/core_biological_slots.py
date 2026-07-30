@@ -36,20 +36,20 @@ PAYLOAD_KEYWORDS = (
     "egfp",
     "luciferase",
 )
-FORMULATION_IDENTITY_TERMS = (
-    "np-001",
-    "np 001",
-    "lnp",
-    "lipid nanoparticle",
-    "lipid nanoparticles",
-)
 FORMULATION_COMPOSITION_TERMS = (
+    "alc-0315",
+    "dspc",
+    "dope",
     "ionizable lipid",
     "helper lipid",
     "cholesterol",
+    "dx",
+    "dexamethasone",
+    "alc-0159",
     "peg-lipid",
     "peg lipid",
 )
+FORMULATION_ALTERNATIVE_COMPONENTS = (("dspc", "dope"),)
 PAYLOAD_TYPE_TERMS = ("mrna", "sirna", "rna", "dna")
 PAYLOAD_CARGO_TERMS = ("egfp", "gfp", "luciferase")
 IMMUNE_OUTCOME_TERMS = (
@@ -228,6 +228,19 @@ def _matched_terms(
     return [term for term in terms if _contains_term(text, term)]
 
 
+def _has_dx_lnp_group(text: str) -> bool:
+    has_dx = _contains_term(text, "dx") or _contains_term(
+        text, "dexamethasone"
+    )
+    has_lnp = (
+        _contains_term(text, "lnp")
+        or _contains_term(text, "lnps")
+        or _contains_term(text, "lipid nanoparticle")
+        or _contains_term(text, "lipid nanoparticles")
+    )
+    return has_dx and has_lnp
+
+
 def _payload_terms(text: str) -> list[str]:
     if _contains_any(text, BACKGROUND_SIGNALS):
         return []
@@ -327,19 +340,6 @@ def build_np001_core_slots(
             for evidence_id, text in rows
             if evidence_id in formulation_evidence_ids
         ]
-        identity_terms = _ordered_union(
-            *[
-                _matched_terms(text, FORMULATION_IDENTITY_TERMS)
-                for text in formulation_texts
-            ]
-        )
-        specific_identity_terms = [
-            term
-            for term in identity_terms
-            if term in {"np-001", "np 001"}
-        ]
-        if specific_identity_terms:
-            identity_terms = specific_identity_terms
         composition_terms = _ordered_union(
             *[
                 _matched_terms(text, FORMULATION_COMPOSITION_TERMS)
@@ -373,7 +373,14 @@ def build_np001_core_slots(
                 "model_evidence_ids": model_evidence_ids,
                 "outcome_evidence_ids": outcome_evidence_ids,
                 "formulation_signature": {
-                    "identity_terms": identity_terms,
+                    "group_markers": (
+                        ["dx_lnp"]
+                        if any(
+                            _has_dx_lnp_group(text)
+                            for text in formulation_texts
+                        )
+                        else []
+                    ),
                     "composition_terms": composition_terms,
                 },
                 "payload_signature": {
@@ -898,8 +905,8 @@ def validate_core_slot_response(
             formulation_signature = slot.get(
                 "formulation_signature", {}
             )
-            expected_identity_terms = tuple(
-                formulation_signature.get("identity_terms", [])
+            expected_group_markers = tuple(
+                formulation_signature.get("group_markers", [])
             )
             composition_text = _reported_text(
                 formulation_row,
@@ -908,21 +915,40 @@ def validate_core_slot_response(
             expected_composition_terms = tuple(
                 formulation_signature.get("composition_terms", [])
             )
-            identity_matches = (
-                not expected_identity_terms
-                or any(
-                    _contains_term(formulation_name_text, term)
-                    for term in expected_identity_terms
-                )
+            group_matches = (
+                "dx_lnp" not in expected_group_markers
+                or _has_dx_lnp_group(formulation_name_text)
+            )
+            alternative_terms = {
+                term
+                for group in FORMULATION_ALTERNATIVE_COMPONENTS
+                for term in group
+            }
+            required_composition_terms = tuple(
+                term
+                for term in expected_composition_terms
+                if term not in alternative_terms
+                and term not in {"ionizable lipid", "helper lipid"}
             )
             composition_matches = (
-                not expected_composition_terms
+                not required_composition_terms
                 or all(
                     _contains_term(composition_text, term)
-                    for term in expected_composition_terms
+                    for term in required_composition_terms
                 )
             )
-            if not identity_matches or not composition_matches:
+            alternatives_match = all(
+                not any(
+                    term in expected_composition_terms for term in group
+                )
+                or any(_contains_term(composition_text, term) for term in group)
+                for group in FORMULATION_ALTERNATIVE_COMPONENTS
+            )
+            if (
+                not group_matches
+                or not composition_matches
+                or not alternatives_match
+            ):
                 _reject(
                     report,
                     slot_id,
