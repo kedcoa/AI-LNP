@@ -51,6 +51,14 @@ _PERMITTED_TREATMENTS = {
     ("MC3", "Cre mRNA", 1.0),
     ("cKK-E12", "Cre mRNA", 1.0),
 }
+_CANONICAL_CROSS_PRODUCT_ARMS = {
+    "KUP-01": ("MC3", "QUANT DNA", 0.3),
+    "KUP-02": ("cKK-E12", "QUANT DNA", 0.3),
+    "KUP-03": ("MC3", "Cre mRNA", 1.0),
+    "KUP-04": ("cKK-E12", "Cre mRNA", 1.0),
+    "KUP-05": ("MC3", "Cre mRNA", 0.3),
+    "KUP-06": ("cKK-E12", "Cre mRNA", 0.3),
+}
 _ACCOUNTING_ENTRY_FIELDS = {
     "disposition",
     "linked_experiment_ids",
@@ -661,9 +669,75 @@ def _validate_complete_arm(
         return True
 
     if not any(binds_treatment(text) for text in existence_texts):
-        raise ValueError(
-            "arm evidence lacks one explicit formulation-payload-dose binding relationship"
+        treatment = (
+            arm["formulation"],
+            arm["payload"],
+            float(dose),
         )
+        canonical_treatment = _CANONICAL_CROSS_PRODUCT_ARMS.get(
+            arm["candidate_id"]
+        )
+        if (
+            arm["confidence"] == "human_confirmed"
+            and arm["pairing_type"] == "cross_product"
+            and canonical_treatment != treatment
+        ):
+            raise ValueError(
+                "complementary-clause binding is restricted to canonical "
+                "NP-002 cross-product arms"
+            )
+
+        def has_experimental_action(text: str) -> bool:
+            normalized = text.casefold()
+            return any(
+                term in normalized
+                for term in (
+                    "inject",
+                    "administer",
+                    "treat",
+                    "deliver",
+                    "repeat",
+                    "analyz",
+                    "measur",
+                    "observ",
+                    "isolate",
+                )
+            )
+
+        def has_formulation_experiment_context(text: str) -> bool:
+            normalized = text.casefold()
+            return (
+                "mc3" in normalized
+                and "ckk-e12" in normalized
+                and has_experimental_action(text)
+            )
+
+        def has_payload_dose_experiment_context(text: str) -> bool:
+            normalized = text.casefold()
+            return (
+                arm["payload"].casefold() in normalized
+                and dose_token in normalized
+                and "mg/kg" in normalized
+                and has_experimental_action(text)
+            )
+
+        complementary_binding = (
+            arm["confidence"] == "human_confirmed"
+            and arm["pairing_type"] == "cross_product"
+            and canonical_treatment == treatment
+            and any(
+                has_formulation_experiment_context(text)
+                for text in existence_texts
+            )
+            and any(
+                has_payload_dose_experiment_context(text)
+                for text in existence_texts
+            )
+        )
+        if not complementary_binding:
+            raise ValueError(
+                "arm evidence lacks one explicit formulation-payload-dose binding relationship"
+            )
 
     def supports_route(text: str) -> bool:
         normalized = text.casefold()
@@ -866,6 +940,14 @@ def validate_arm_review(
     if set(addition_ids) & set(approved_ids):
         raise ValueError("added arm candidate_id duplicates an approved arm")
     approved_arms.extend(additions)
+    if {arm["candidate_id"] for arm in approved_arms} == set(
+        _CANONICAL_KUPFFER_ARM_IDS
+    ):
+        order = {
+            candidate_id: index
+            for index, candidate_id in enumerate(_CANONICAL_KUPFFER_ARM_IDS)
+        }
+        approved_arms.sort(key=lambda arm: order[arm["candidate_id"]])
     return {
         "status": "valid",
         "review_version": ARM_REVIEW_VERSION,

@@ -662,6 +662,151 @@ def test_review_rejects_aggregate_token_soup_without_one_binding_record():
         validate_arm_review(proposal, review)
 
 
+def test_human_confirmed_canonical_arms_allow_complementary_packet_clauses():
+    packet = np002_packet()
+    packet["evidence"] = [
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"]
+        not in {"E-QUANT-BOUND", "E-CRE-03-COND"}
+    ]
+    packet["evidence"].extend(
+        [
+            _evidence(
+                "E-Q-FORM",
+                "We first analyzed the biodistribution of MC3 and cKK-E12 "
+                "LNPs to Kupffer cells.",
+            ),
+            _evidence(
+                "E-Q-CONDITION",
+                "Six hours after injecting mice with 0.3 mg/kg QUANT DNA, "
+                "we used FACS to isolate Kupffer cells.",
+            ),
+            _evidence(
+                "E-Q-MC3-OUT",
+                "MC3 LNPs had DNA measured in Kupffer cells.",
+            ),
+            _evidence(
+                "E-Q-CKK-OUT",
+                "cKK-E12 LNPs had DNA accumulation measured in Kupffer "
+                "cells.",
+            ),
+            _evidence(
+                "E-CRE-LOW-CONDITION",
+                "We repeated the Cre mRNA experiment at a lower dose of "
+                "0.3 mg/kg.",
+            ),
+            _evidence(
+                "E-CRE-LOW-FORM",
+                "For both cKK-E12 and MC3, we observed a decrease in "
+                "percent tdTomato positive cells.",
+            ),
+        ]
+    )
+    proposal = build_np002_kupffer_arm_proposal(packet)
+    assert [arm["candidate_id"] for arm in proposal["proposed_arms"]] == [
+        "KUP-03",
+        "KUP-04",
+    ]
+    review = _accepted_review(proposal)
+    additions = []
+    for candidate_id, formulation, payload, dose, model, existence_ids, outcome_ids in (
+        (
+            "KUP-01",
+            "MC3",
+            "QUANT DNA",
+            0.3,
+            "mice",
+            ["E-Q-FORM", "E-Q-CONDITION", "E-ROUTE"],
+            ["E-Q-MC3-OUT", "E-Q-CKK-OUT"],
+        ),
+        (
+            "KUP-02",
+            "cKK-E12",
+            "QUANT DNA",
+            0.3,
+            "mice",
+            ["E-Q-FORM", "E-Q-CONDITION", "E-ROUTE"],
+            ["E-Q-MC3-OUT", "E-Q-CKK-OUT"],
+        ),
+        (
+            "KUP-05",
+            "MC3",
+            "Cre mRNA",
+            0.3,
+            "Ai14 Cre-reporter mice",
+            [
+                "E-CRE-LOW-CONDITION",
+                "E-CRE-LOW-FORM",
+                "E-CRE-MODEL",
+                "E-CRE-TARGET",
+                "E-ROUTE",
+            ],
+            ["E-CRE-LOW-FORM", "E-CRE-TARGET"],
+        ),
+        (
+            "KUP-06",
+            "cKK-E12",
+            "Cre mRNA",
+            0.3,
+            "Ai14 Cre-reporter mice",
+            [
+                "E-CRE-LOW-CONDITION",
+                "E-CRE-LOW-FORM",
+                "E-CRE-MODEL",
+                "E-CRE-TARGET",
+                "E-ROUTE",
+            ],
+            ["E-CRE-LOW-FORM", "E-CRE-TARGET"],
+        ),
+    ):
+        additions.append(
+            {
+                "candidate_id": candidate_id,
+                "formulation": formulation,
+                "payload": payload,
+                "dose": dose,
+                "dose_unit": "mg/kg",
+                "route": "intravenous lateral tail vein",
+                "species": "Mus musculus",
+                "model": model,
+                "target_cell": "Kupffer cells",
+                "pairing_type": "cross_product",
+                "existence_evidence_ids": existence_ids,
+                "outcome_evidence_ids": outcome_ids,
+                "confidence": "human_confirmed",
+            }
+        )
+    review["additions"] = additions
+
+    report = validate_arm_review(proposal, review)
+
+    assert [arm["candidate_id"] for arm in report["approved_arms"]] == [
+        "KUP-01",
+        "KUP-02",
+        "KUP-03",
+        "KUP-04",
+        "KUP-05",
+        "KUP-06",
+    ]
+    assert report["added_candidate_ids"] == [
+        "KUP-01",
+        "KUP-02",
+        "KUP-05",
+        "KUP-06",
+    ]
+
+    unconfirmed = copy.deepcopy(review)
+    unconfirmed["additions"][0]["confidence"] = "high"
+    with pytest.raises(ValueError, match="binding|relationship"):
+        validate_arm_review(proposal, unconfirmed)
+
+    noncanonical = copy.deepcopy(review)
+    noncanonical["additions"][0]["candidate_id"] = "KUP-07"
+    with pytest.raises(ValueError, match="canonical|scope"):
+        validate_arm_review(proposal, noncanonical)
+
+
 def test_review_rejects_payload_model_mismatch():
     proposal = build_np002_kupffer_arm_proposal(np002_packet())
     review = _accepted_review(proposal)
