@@ -162,28 +162,37 @@ def _shares_experiment_context(
     }
 
 
-def _treatment_rooted_component(
+def _treatment_rooted_components(
     anchors: Sequence[Mapping[str, Any]],
     evidence: Sequence[Mapping[str, Any]],
-) -> list[dict[str, Any]]:
-    component = {
-        row["evidence_id"]: dict(row)
-        for row in anchors
+) -> list[list[dict[str, Any]]]:
+    remaining_anchor_ids = {
+        row["evidence_id"] for row in anchors
     }
-    changed = True
-    while changed:
-        changed = False
-        for row in evidence:
-            evidence_id = row["evidence_id"]
-            if evidence_id in component:
-                continue
-            if any(
-                _shares_experiment_context(member, row)
-                for member in component.values()
-            ):
-                component[evidence_id] = dict(row)
-                changed = True
-    return list(component.values())
+    components: list[list[dict[str, Any]]] = []
+    while remaining_anchor_ids:
+        root_id = sorted(remaining_anchor_ids)[0]
+        root = next(
+            row for row in anchors
+            if row["evidence_id"] == root_id
+        )
+        component = {root_id: dict(root)}
+        changed = True
+        while changed:
+            changed = False
+            for row in evidence:
+                evidence_id = row["evidence_id"]
+                if evidence_id in component:
+                    continue
+                if any(
+                    _shares_experiment_context(member, row)
+                    for member in component.values()
+                ):
+                    component[evidence_id] = dict(row)
+                    changed = True
+        remaining_anchor_ids -= set(component)
+        components.append(list(component.values()))
+    return components
 
 
 def _rows_in_component(
@@ -293,7 +302,16 @@ def _paired_correspondence(
                 }
             )
             continue
-        outcome_rows = [row, *non_relationship_outcomes]
+        component = _treatment_rooted_components(
+            [row], evidence
+        )[0]
+        outcome_rows = [
+            row,
+            *_rows_in_component(
+                non_relationship_outcomes,
+                component,
+            ),
+        ]
         for index, (formulation, payload, dose) in enumerate(
             pairs, start=1
         ):
@@ -389,17 +407,23 @@ def _np002_six_arm_inventory(
             )
         ),
     )
-    quant_context = _treatment_rooted_component(quant_bound, evidence)
-    quant_outcome_rows = _rows_in_component(
-        quant_outcomes or quant_bound,
-        quant_context,
-    )
-    quant_route_rows = _rows_in_component(route_rows, quant_context)
-    if (
-        quant_route_rows
-        and quant_bound
-        and quant_outcome_rows
+    quant_contexts = []
+    for component in _treatment_rooted_components(
+        quant_bound, evidence
     ):
+        component_outcomes = _rows_in_component(
+            quant_outcomes or quant_bound,
+            component,
+        )
+        component_routes = _rows_in_component(
+            route_rows, component
+        )
+        if component_outcomes and component_routes:
+            quant_contexts.append(
+                (component_outcomes, component_routes)
+            )
+    if quant_bound and len(quant_contexts) == 1:
+        quant_outcome_rows, quant_route_rows = quant_contexts[0]
         quant_existence = [
             *quant_bound,
             *quant_route_rows,
@@ -476,24 +500,36 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("administer", "inject", "treat"))
         ),
     )
-    cre_one_context = _treatment_rooted_component(
+    cre_one_contexts = []
+    for component in _treatment_rooted_components(
         cre_one_bound, evidence
-    )
-    cre_one_target_rows = _rows_in_component(
-        cre_target, cre_one_context
-    )
-    cre_one_route_rows = _rows_in_component(
-        route_rows, cre_one_context
-    )
-    cre_one_model_rows = _rows_in_component(
-        cre_model, cre_one_context
-    )
-    if (
-        cre_one_route_rows
-        and cre_one_model_rows
-        and cre_one_target_rows
-        and cre_one_bound
     ):
+        component_targets = _rows_in_component(
+            cre_target, component
+        )
+        component_routes = _rows_in_component(
+            route_rows, component
+        )
+        component_models = _rows_in_component(
+            cre_model, component
+        )
+        if component_targets and component_routes and component_models:
+            cre_one_contexts.append(
+                (
+                    component_targets,
+                    component_routes,
+                    component_models,
+                )
+            )
+    if (
+        cre_one_bound
+        and len(cre_one_contexts) == 1
+    ):
+        (
+            cre_one_target_rows,
+            cre_one_route_rows,
+            cre_one_model_rows,
+        ) = cre_one_contexts[0]
         cre_one_existence = [
             *cre_one_bound,
             *cre_one_model_rows,
@@ -557,24 +593,36 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("observ", "measur", "delivery"))
         ),
     )
-    cre_low_context = _treatment_rooted_component(
+    cre_low_contexts = []
+    for component in _treatment_rooted_components(
         cre_low_bound, evidence
-    )
-    cre_low_target_rows = _rows_in_component(
-        cre_target, cre_low_context
-    )
-    cre_low_route_rows = _rows_in_component(
-        route_rows, cre_low_context
-    )
-    cre_low_model_rows = _rows_in_component(
-        cre_model, cre_low_context
-    )
-    if (
-        cre_low_route_rows
-        and cre_low_model_rows
-        and cre_low_target_rows
-        and cre_low_bound
     ):
+        component_targets = _rows_in_component(
+            cre_target, component
+        )
+        component_routes = _rows_in_component(
+            route_rows, component
+        )
+        component_models = _rows_in_component(
+            cre_model, component
+        )
+        if component_targets and component_routes and component_models:
+            cre_low_contexts.append(
+                (
+                    component_targets,
+                    component_routes,
+                    component_models,
+                )
+            )
+    if (
+        cre_low_bound
+        and len(cre_low_contexts) == 1
+    ):
+        (
+            cre_low_target_rows,
+            cre_low_route_rows,
+            cre_low_model_rows,
+        ) = cre_low_contexts[0]
         cre_low_existence = [
             *cre_low_bound,
             *cre_low_model_rows,

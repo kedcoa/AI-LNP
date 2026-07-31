@@ -724,12 +724,16 @@ def run_approved_kupffer_benchmark(
             run_dir / "response.json",
             response.model_dump(mode="json"),
         )
-        usage = (
+        candidate_usage = (
             response.usage.model_dump(mode="json")
             if getattr(response, "usage", None)
             else None
         )
-        _, usage_sha256 = _artifact(run_dir / "usage.json", usage)
+        _, candidate_usage_sha256 = _artifact(
+            run_dir / "usage.json", candidate_usage
+        )
+        usage = candidate_usage
+        usage_sha256 = candidate_usage_sha256
     except Exception as exc:
         _write_failure_manifest(
             run_dir=run_dir,

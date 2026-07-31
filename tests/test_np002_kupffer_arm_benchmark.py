@@ -321,6 +321,10 @@ class _SerializationFailureResponse(_FakeResponse):
             self.usage = SimpleNamespace(
                 model_dump=self._raise_serialization_error
             )
+        elif stage == "usage_artifact":
+            self.usage = SimpleNamespace(
+                model_dump=lambda mode="json": {"bad": {1, 2}}
+            )
 
     @staticmethod
     def _raise_serialization_error(mode="json"):
@@ -710,7 +714,10 @@ def test_provider_failure_leaves_marker_and_blocks_redispatch(tmp_path):
     assert len(responses.calls) == 1
 
 
-@pytest.mark.parametrize("stage", ["response", "usage"])
+@pytest.mark.parametrize(
+    "stage",
+    ["response", "usage", "usage_artifact"],
+)
 def test_response_serialization_failure_leaves_terminal_audit(
     tmp_path,
     stage,
@@ -723,7 +730,10 @@ def test_response_serialization_failure_leaves_terminal_audit(
     responses = _SerializationFailingResponses(stage)
     run_dir = tmp_path / "runs" / "NP-002"
 
-    with pytest.raises(TypeError, match="serialization failure"):
+    with pytest.raises(
+        TypeError,
+        match="serialization failure|not JSON serializable",
+    ):
         run_approved_kupffer_benchmark(
             manifest_path=approved.manifest_path,
             approval_sha256=approved.manifest["request_sha256"],
@@ -739,6 +749,7 @@ def test_response_serialization_failure_leaves_terminal_audit(
         assert failure["raw_response_sha256"] is None
     else:
         assert failure["raw_response_sha256"]
+    assert failure["usage"] is None
     assert failure["paid_api_requests"] == 1
     assert len(responses.calls) == 1
 

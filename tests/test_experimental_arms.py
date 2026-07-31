@@ -314,6 +314,67 @@ def test_automatic_cre_arm_uses_treatment_rooted_context_component():
     } == {"Cre mRNA 1.0 mg/kg", "Cre mRNA 0.3 mg/kg"}
 
 
+def test_disconnected_treatment_roots_cannot_union_required_support():
+    packet = {
+        "paper_id": "NP-002",
+        "evidence": [
+            _evidence(
+                "E-CRE-A",
+                "We administered Cre mRNA at 1.0 mg/kg using cKK-E12 "
+                "and MC3.",
+                source_ids=["S-A"],
+            ),
+            _evidence(
+                "E-TARGET-A",
+                "We quantified the percent of Kupffer cells observed to "
+                "be tdTomato positive.",
+                source_ids=["S-A"],
+            ),
+            _evidence(
+                "E-CRE-B",
+                "We administered Cre mRNA at 1.0 mg/kg using cKK-E12 "
+                "and MC3.",
+                source_ids=["S-B"],
+            ),
+            _evidence(
+                "E-ROUTE-B",
+                "Mice were injected intravenously via the lateral tail vein.",
+                source_ids=["S-B"],
+            ),
+            _evidence(
+                "E-MODEL-B",
+                "We utilized Ai14 Cre-reporter mice in these experiments.",
+                source_ids=["S-B"],
+            ),
+        ],
+    }
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert report["proposed_arms"] == []
+    assert report["quarantined_arms"] == [
+        {
+            "family": "Cre mRNA 1.0 mg/kg",
+            "reason": "relationship_not_explicit",
+            "evidence_ids": ["E-CRE-A", "E-CRE-B"],
+        }
+    ]
+
+
+def test_paired_correspondence_excludes_disconnected_outcome_context():
+    packet = respectively_packet()
+    packet["evidence"][0]["source_ids"] = ["S-PAIR"]
+    packet["evidence"][1]["source_ids"] = ["S-OTHER"]
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert len(report["proposed_arms"]) == 2
+    assert all(
+        "E-P2" not in arm["outcome_evidence_ids"]
+        for arm in report["proposed_arms"]
+    )
+
+
 def test_respectively_uses_paired_correspondence_not_cross_product():
     report = build_np002_kupffer_arm_proposal(respectively_packet())
 
