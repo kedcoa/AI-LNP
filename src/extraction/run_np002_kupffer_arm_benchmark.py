@@ -488,21 +488,6 @@ def _artifact(path: Path, value: Any) -> tuple[bytes, str]:
     return data, _sha256(data)
 
 
-def _reported_record_evidence(record: Any) -> set[str]:
-    if not isinstance(record, dict):
-        return set()
-    evidence_ids: set[str] = set()
-    for value in record.values():
-        if not isinstance(value, dict):
-            continue
-        ids = value.get("evidence_ids")
-        if isinstance(ids, list):
-            evidence_ids.update(
-                item for item in ids if isinstance(item, str)
-            )
-    return evidence_ids
-
-
 def _validate_scoped_arm_response(
     response: dict[str, Any],
     approved_arms: list[dict[str, Any]],
@@ -513,6 +498,7 @@ def _validate_scoped_arm_response(
         response,
         approved_arms,
         union_envelope,
+        candidate_evidence_envelopes=arm_evidence,
     )
     structural_valid_ids = set(
         report["structurally_valid_candidate_ids"]
@@ -521,21 +507,6 @@ def _validate_scoped_arm_response(
         report["confirmed_candidate_ids"]
     )
     accounting = response.get("experimental_arm_accounting", {})
-    formulations = {
-        row.get("formulation_id"): row
-        for row in response.get("formulations", [])
-        if isinstance(row, dict)
-    }
-    experiments = {
-        row.get("experiment_id"): row
-        for row in response.get("experiments", [])
-        if isinstance(row, dict)
-    }
-    outcomes = {
-        row.get("outcome_id"): row
-        for row in response.get("outcomes", [])
-        if isinstance(row, dict)
-    }
     for candidate_id, allowed in arm_evidence.items():
         entry = (
             accounting.get(candidate_id)
@@ -544,25 +515,13 @@ def _validate_scoped_arm_response(
         )
         if not isinstance(entry, dict):
             continue
+        if entry.get("disposition") == "extracted":
+            continue
         used = {
             item
             for item in entry.get("evidence_ids", [])
             if isinstance(item, str)
         }
-        if entry.get("disposition") == "extracted":
-            for experiment_id in entry.get("linked_experiment_ids", []):
-                experiment = experiments.get(experiment_id)
-                used.update(_reported_record_evidence(experiment))
-                if isinstance(experiment, dict):
-                    used.update(
-                        _reported_record_evidence(
-                            formulations.get(experiment.get("formulation_id"))
-                        )
-                    )
-            for outcome_id in entry.get("linked_outcome_ids", []):
-                used.update(
-                    _reported_record_evidence(outcomes.get(outcome_id))
-                )
         outside = sorted(used - allowed)
         if outside:
             structural_valid_ids.discard(candidate_id)

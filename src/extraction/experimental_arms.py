@@ -1616,6 +1616,8 @@ def validate_experimental_arm_response(
     response: Mapping[str, Any],
     approved_arms: Sequence[Mapping[str, Any]],
     evidence_envelope: set[str],
+    *,
+    candidate_evidence_envelopes: Mapping[str, set[str]] | None = None,
 ) -> dict[str, Any]:
     """Validate exhaustive approved-arm accounting against returned records."""
 
@@ -1875,22 +1877,46 @@ def validate_experimental_arm_response(
         linked_experiments = [experiments[item] for item in entry["linked_experiment_ids"]]
         linked_outcomes = [outcomes[item] for item in entry["linked_outcome_ids"]]
         accounting_evidence_ids = set(entry["evidence_ids"])
-        if any(
-            not accounting_evidence_ids & evidence_ids
-            for evidence_ids in _scientific_evidence_groups(
-                linked_experiments=linked_experiments,
-                linked_outcomes=linked_outcomes,
-                formulation_records=formulation_records,
+        scientific_evidence_groups = _scientific_evidence_groups(
+            linked_experiments=linked_experiments,
+            linked_outcomes=linked_outcomes,
+            formulation_records=formulation_records,
+        )
+        if candidate_evidence_envelopes is None:
+            if any(
+                not accounting_evidence_ids & evidence_ids
+                for evidence_ids in scientific_evidence_groups
+            ):
+                _append_error(
+                    report,
+                    "accounting_evidence_does_not_cover_scientific_fields",
+                    "accounting evidence must cover every linked scientific field used for confirmation",
+                    candidate_id=candidate_id,
+                )
+                invalid_structural.add(candidate_id)
+                continue
+        else:
+            candidate_envelope = candidate_evidence_envelopes.get(
+                candidate_id,
+                set(),
             )
-        ):
-            _append_error(
-                report,
-                "accounting_evidence_does_not_cover_scientific_fields",
-                "accounting evidence must cover every linked scientific field used for confirmation",
-                candidate_id=candidate_id,
-            )
-            invalid_structural.add(candidate_id)
-            continue
+            unsupported_groups = [
+                sorted(evidence_ids)
+                for evidence_ids in scientific_evidence_groups
+                if not candidate_envelope & evidence_ids
+            ]
+            if unsupported_groups:
+                _append_error(
+                    report,
+                    "candidate_evidence_outside_arm_envelope",
+                    "one or more required scientific fields have no evidence inside the approved arm packet",
+                    candidate_id=candidate_id,
+                    evidence_ids=sorted(
+                        set().union(*map(set, unsupported_groups))
+                    ),
+                )
+                invalid_structural.add(candidate_id)
+                continue
         science_errors: set[str] = set()
         for experiment in linked_experiments:
             experiment_outcomes = [

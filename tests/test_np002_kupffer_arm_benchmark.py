@@ -788,6 +788,59 @@ def test_validation_cannot_confirm_arm_with_another_arms_evidence(tmp_path):
     assert len(responses.calls) == 1
 
 
+def test_scoped_validation_ignores_harmless_extra_shared_record_citation(
+    tmp_path,
+):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        _validate_scoped_arm_response,
+    )
+
+    approved = _preflight(tmp_path)
+    request = json.loads(approved.request_path.read_text())
+    payload = json.loads(request["input"][1]["content"])
+    arm_evidence = {
+        packet["arm"]["candidate_id"]: {
+            row["evidence_id"] for row in packet["evidence"]
+        }
+        for packet in payload["experimental_arm_packets"]
+    }
+    response = _wrong_arm_evidence_response(request)
+    correct = next(iter(arm_evidence["KUP-01"]))
+
+    def replace_evidence(value):
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key == "evidence_ids" and isinstance(item, list):
+                    value[key] = [correct]
+                else:
+                    replace_evidence(item)
+        elif isinstance(value, list):
+            for item in value:
+                replace_evidence(item)
+
+    replace_evidence(response)
+    response["experiments"][0]["payload_role"] = _reported_value(
+        "biodistribution_tracer",
+        correct,
+    )
+    response["formulations"][0]["formulation_name"]["evidence_ids"].append(
+        "E-CRE-03-COND"
+    )
+
+    validation = _validate_scoped_arm_response(
+        response,
+        [packet["arm"] for packet in payload["experimental_arm_packets"]],
+        arm_evidence,
+    )
+
+    assert "KUP-01" in validation["confirmed_candidate_ids"]
+    assert not any(
+        row["code"] == "candidate_evidence_outside_arm_envelope"
+        and row["candidate_id"] == "KUP-01"
+        for row in validation["errors"]
+    )
+
+
 def test_scoped_envelope_double_failure_never_makes_count_negative(
     tmp_path,
 ):

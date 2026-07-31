@@ -1828,6 +1828,48 @@ def test_validator_requires_accounting_evidence_to_cover_linked_scientific_field
     assert "KUP-01" not in report["confirmed_candidate_ids"]
 
 
+def test_candidate_projection_uses_linked_field_evidence_not_accounting_duplication():
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-01"]["evidence_ids"] = [
+        "E-ACCOUNT"
+    ]
+    response["formulations"][0]["formulation_name"]["evidence_ids"] = [
+        "E-RECORD"
+    ]
+    for field in (
+        "payload_type",
+        "payload_name",
+        "payload_role",
+        "dose",
+        "dose_unit",
+        "route",
+        "species",
+        "disease_model",
+        "delivery_recipient_cell",
+        "timepoint",
+        "timepoint_unit",
+    ):
+        response["experiments"][0][field]["evidence_ids"] = ["E-RECORD"]
+    for field in ("assay", "endpoint", "qualitative_outcome"):
+        response["outcomes"][0][field]["evidence_ids"] = ["E-RECORD"]
+
+    report = validate_experimental_arm_response(
+        response,
+        approved_arms(),
+        {"E-ARM", "E-ACCOUNT", "E-RECORD"},
+        candidate_evidence_envelopes={
+            arm["candidate_id"]: {"E-ARM", "E-RECORD"}
+            for arm in approved_arms()
+        },
+    )
+
+    assert "KUP-01" in report["confirmed_candidate_ids"]
+    assert (
+        "accounting_evidence_does_not_cover_scientific_fields"
+        not in _error_codes(report)
+    )
+
+
 def test_validator_requires_one_quant_outcome_to_establish_ddpcr():
     response = _arm_response()
     response["outcomes"][0]["assay"]["value"] = "qPCR"
