@@ -87,13 +87,13 @@ def _sha256(value: Any) -> str:
     return hashlib.sha256(_canonical_json(value).encode("utf-8")).hexdigest()
 
 
-def _packet_evidence(packet: Mapping[str, Any]) -> list[dict[str, str]]:
+def _packet_evidence(packet: Mapping[str, Any]) -> list[dict[str, Any]]:
     if packet.get("paper_id") != "NP-002":
         raise ValueError("Kupffer arm proposal accepts only NP-002")
     raw_evidence = packet.get("evidence")
     if not isinstance(raw_evidence, list):
         raise ValueError("NP-002 packet evidence must be a list")
-    evidence: list[dict[str, str]] = []
+    evidence: list[dict[str, Any]] = []
     for raw in raw_evidence:
         if not isinstance(raw, Mapping):
             raise ValueError("each packet evidence record must be an object")
@@ -103,7 +103,21 @@ def _packet_evidence(packet: Mapping[str, Any]) -> list[dict[str, str]]:
             raise ValueError("each packet evidence record requires an evidence_id")
         if not isinstance(text, str) or not text.strip():
             raise ValueError("each packet evidence record requires text")
-        evidence.append({"evidence_id": evidence_id, "text": text})
+        row = {"evidence_id": evidence_id, "text": text}
+        source_ids = raw.get("source_ids", [])
+        if isinstance(source_ids, list) and all(
+            isinstance(source_id, str) and source_id
+            for source_id in source_ids
+        ):
+            row["source_ids"] = source_ids
+        for field in (
+            "context_before_evidence_id",
+            "context_after_evidence_id",
+        ):
+            context_id = raw.get(field)
+            if isinstance(context_id, str) and context_id:
+                row[field] = context_id
+        evidence.append(row)
     evidence_ids = [row["evidence_id"] for row in evidence]
     if len(evidence_ids) != len(set(evidence_ids)):
         raise ValueError("packet evidence IDs must be unique")
@@ -111,9 +125,9 @@ def _packet_evidence(packet: Mapping[str, Any]) -> list[dict[str, str]]:
 
 
 def _matching(
-    evidence: list[dict[str, str]],
+    evidence: list[dict[str, Any]],
     predicate: Any,
-) -> list[dict[str, str]]:
+) -> list[dict[str, Any]]:
     return [
         row
         for row in evidence
@@ -121,7 +135,7 @@ def _matching(
     ]
 
 
-def _ids(rows: list[dict[str, str]]) -> list[str]:
+def _ids(rows: list[dict[str, Any]]) -> list[str]:
     return list(dict.fromkeys(row["evidence_id"] for row in rows))
 
 
@@ -569,6 +583,7 @@ def _validate_complete_arm(
     arm: Any,
     *,
     packet_evidence: Mapping[str, str],
+    packet_evidence_context: Mapping[str, Mapping[str, Any]],
 ) -> dict[str, Any]:
     if not isinstance(arm, Mapping) or set(arm) != _ARM_FIELDS:
         raise ValueError("corrections and additions require a complete arm")
@@ -721,22 +736,62 @@ def _validate_complete_arm(
                 and has_experimental_action(text)
             )
 
+        def has_shared_or_neighboring_context(
+            formulation_evidence_id: str,
+            condition_evidence_id: str,
+        ) -> bool:
+            formulation_context = packet_evidence_context[
+                formulation_evidence_id
+            ]
+            condition_context = packet_evidence_context[
+                condition_evidence_id
+            ]
+            formulation_sources = set(
+                formulation_context.get("source_ids", [])
+            )
+            condition_sources = set(condition_context.get("source_ids", []))
+            return (
+                bool(formulation_sources & condition_sources)
+                or condition_evidence_id
+                in {
+                    formulation_context.get("context_before_evidence_id"),
+                    formulation_context.get("context_after_evidence_id"),
+                }
+                or formulation_evidence_id
+                in {
+                    condition_context.get("context_before_evidence_id"),
+                    condition_context.get("context_after_evidence_id"),
+                }
+            )
+
+        formulation_evidence_ids = [
+            evidence_id
+            for evidence_id in evidence_lists["existence_evidence_ids"]
+            if has_formulation_experiment_context(
+                packet_evidence[evidence_id]
+            )
+        ]
+        condition_evidence_ids = [
+            evidence_id
+            for evidence_id in evidence_lists["existence_evidence_ids"]
+            if has_payload_dose_experiment_context(packet_evidence[evidence_id])
+        ]
         complementary_binding = (
             arm["confidence"] == "human_confirmed"
             and arm["pairing_type"] == "cross_product"
             and canonical_treatment == treatment
             and any(
-                has_formulation_experiment_context(text)
-                for text in existence_texts
-            )
-            and any(
-                has_payload_dose_experiment_context(text)
-                for text in existence_texts
+                has_shared_or_neighboring_context(
+                    formulation_evidence_id,
+                    condition_evidence_id,
+                )
+                for formulation_evidence_id in formulation_evidence_ids
+                for condition_evidence_id in condition_evidence_ids
             )
         )
         if not complementary_binding:
             raise ValueError(
-                "arm evidence lacks one explicit formulation-payload-dose binding relationship"
+                "arm evidence lacks a shared or neighboring formulation-payload-dose relationship"
             )
 
     def supports_route(text: str) -> bool:
@@ -880,9 +935,30 @@ def validate_arm_review(
         isinstance(row, Mapping)
         and isinstance(row.get("evidence_id"), str)
         and isinstance(row.get("text"), str)
+        and (
+            "source_ids" not in row
+            or (
+                isinstance(row["source_ids"], list)
+                and all(
+                    isinstance(source_id, str) and source_id
+                    for source_id in row["source_ids"]
+                )
+            )
+        )
+        and all(
+            field not in row
+            or (
+                isinstance(row[field], str)
+                and row[field]
+            )
+            for field in (
+                "context_before_evidence_id",
+                "context_after_evidence_id",
+            )
+        )
         for row in packet_evidence_raw
     ):
-        raise ValueError("proposal packet_evidence must contain evidence text")
+        raise ValueError("proposal packet_evidence contains invalid context metadata")
     packet_evidence = {
         str(row["evidence_id"]): str(row["text"])
         for row in packet_evidence_raw
@@ -891,6 +967,28 @@ def validate_arm_review(
         raise ValueError(
             "proposal packet evidence text does not match its evidence ID envelope"
         )
+    packet_evidence_context = {
+        str(row["evidence_id"]): {
+            "source_ids": row.get("source_ids", []),
+            "context_before_evidence_id": row.get(
+                "context_before_evidence_id"
+            ),
+            "context_after_evidence_id": row.get(
+                "context_after_evidence_id"
+            ),
+        }
+        for row in packet_evidence_raw
+    }
+    for context in packet_evidence_context.values():
+        for field in (
+            "context_before_evidence_id",
+            "context_after_evidence_id",
+        ):
+            context_id = context[field]
+            if context_id is not None and context_id not in packet_evidence:
+                raise ValueError(
+                    "proposal packet evidence context points outside its envelope"
+                )
     decisions_by_id = {
         str(decision["candidate_id"]): decision for decision in decisions
     }
@@ -911,6 +1009,7 @@ def validate_arm_review(
             corrected_arm = _validate_complete_arm(
                 decision.get("arm"),
                 packet_evidence=packet_evidence,
+                packet_evidence_context=packet_evidence_context,
             )
             if corrected_arm["candidate_id"] != candidate_id:
                 raise ValueError("corrected arm candidate_id must match its decision")
@@ -928,6 +1027,7 @@ def validate_arm_review(
         _validate_complete_arm(
             arm,
             packet_evidence=packet_evidence,
+            packet_evidence_context=packet_evidence_context,
         )
         for arm in additions_raw
     ]

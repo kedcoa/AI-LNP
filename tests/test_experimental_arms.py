@@ -13,8 +13,8 @@ from src.extraction.experimental_arms import (
 from src.extraction.compact_contracts import CompactExtractionResponse
 
 
-def _evidence(evidence_id, text):
-    return {"evidence_id": evidence_id, "text": text}
+def _evidence(evidence_id, text, **metadata):
+    return {"evidence_id": evidence_id, "text": text, **metadata}
 
 
 def np002_packet():
@@ -676,11 +676,15 @@ def test_human_confirmed_canonical_arms_allow_complementary_packet_clauses():
                 "E-Q-FORM",
                 "We first analyzed the biodistribution of MC3 and cKK-E12 "
                 "LNPs to Kupffer cells.",
+                source_ids=["S-QUANT"],
+                context_after_evidence_id="E-Q-CONDITION",
             ),
             _evidence(
                 "E-Q-CONDITION",
                 "Six hours after injecting mice with 0.3 mg/kg QUANT DNA, "
                 "we used FACS to isolate Kupffer cells.",
+                source_ids=["S-QUANT"],
+                context_before_evidence_id="E-Q-FORM",
             ),
             _evidence(
                 "E-Q-MC3-OUT",
@@ -695,11 +699,13 @@ def test_human_confirmed_canonical_arms_allow_complementary_packet_clauses():
                 "E-CRE-LOW-CONDITION",
                 "We repeated the Cre mRNA experiment at a lower dose of "
                 "0.3 mg/kg.",
+                source_ids=["S-CRE-LOW"],
             ),
             _evidence(
                 "E-CRE-LOW-FORM",
                 "For both cKK-E12 and MC3, we observed a decrease in "
                 "percent tdTomato positive cells.",
+                source_ids=["S-CRE-LOW"],
             ),
         ]
     )
@@ -805,6 +811,62 @@ def test_human_confirmed_canonical_arms_allow_complementary_packet_clauses():
     noncanonical["additions"][0]["candidate_id"] = "KUP-07"
     with pytest.raises(ValueError, match="canonical|scope"):
         validate_arm_review(proposal, noncanonical)
+
+
+def test_human_confirmed_canonical_arm_rejects_unlinked_clause_aggregation():
+    packet = np002_packet()
+    packet["evidence"] = [
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"] != "E-QUANT-BOUND"
+    ]
+    packet["evidence"].extend(
+        [
+            _evidence(
+                "E-Q-FORM-OTHER",
+                "We analyzed the biodistribution of MC3 and cKK-E12 LNPs "
+                "to Kupffer cells.",
+                source_ids=["S-FORMULATION"],
+            ),
+            _evidence(
+                "E-Q-CONDITION-OTHER",
+                "Mice were injected with 0.3 mg/kg QUANT DNA and Kupffer "
+                "cells were isolated.",
+                source_ids=["S-CONDITION"],
+            ),
+            _evidence(
+                "E-Q-OUTCOME-OTHER",
+                "DNA accumulation in Kupffer cells was measured.",
+                source_ids=["S-OUTCOME"],
+            ),
+        ]
+    )
+    proposal = build_np002_kupffer_arm_proposal(packet)
+    review = _accepted_review(proposal)
+    review["additions"] = [
+        {
+            "candidate_id": "KUP-01",
+            "formulation": "MC3",
+            "payload": "QUANT DNA",
+            "dose": 0.3,
+            "dose_unit": "mg/kg",
+            "route": "intravenous lateral tail vein",
+            "species": "Mus musculus",
+            "model": "mice",
+            "target_cell": "Kupffer cells",
+            "pairing_type": "cross_product",
+            "existence_evidence_ids": [
+                "E-Q-FORM-OTHER",
+                "E-Q-CONDITION-OTHER",
+                "E-ROUTE",
+            ],
+            "outcome_evidence_ids": ["E-Q-OUTCOME-OTHER"],
+            "confidence": "human_confirmed",
+        }
+    ]
+
+    with pytest.raises(ValueError, match="shared|neighboring"):
+        validate_arm_review(proposal, review)
 
 
 def test_review_rejects_payload_model_mismatch():
