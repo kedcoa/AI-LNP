@@ -135,6 +135,17 @@
         "payload_name": {
           "$ref": "#/$defs/ReportedField_str_"
         },
+        "payload_role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReportedField_Literal__therapeutic____reporter____biodistribution_tracer____screening_barcode___"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "payload_type": {
           "$ref": "#/$defs/ReportedField_str_"
         },
@@ -362,6 +373,61 @@
         "missing_reason"
       ],
       "title": "ReportedField[Literal['ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid', 'targeting_ligand', 'sort_lipid', 'other']]",
+      "type": "object"
+    },
+    "ReportedField_Literal__therapeutic____reporter____biodistribution_tracer____screening_barcode___": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "missing_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Reason"
+        },
+        "status": {
+          "enum": [
+            "reported",
+            "missing"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "therapeutic",
+                "reporter",
+                "biodistribution_tracer",
+                "screening_barcode"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "missing_reason"
+      ],
+      "title": "ReportedField[Literal['therapeutic', 'reporter', 'biodistribution_tracer', 'screening_barcode']]",
       "type": "object"
     },
     "ReportedField_float_": {

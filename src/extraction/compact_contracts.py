@@ -163,6 +163,17 @@ class ExperimentRecord(StrictContract):
     formulation_id: str
     payload_type: TextField
     payload_name: TextField
+    payload_role: (
+        ReportedField[
+            Literal[
+                "therapeutic",
+                "reporter",
+                "biodistribution_tracer",
+                "screening_barcode",
+            ]
+        ]
+        | None
+    ) = None
     encoded_product: TextField
     molecular_target: TextField
     delivery_recipient_cell: TextField
