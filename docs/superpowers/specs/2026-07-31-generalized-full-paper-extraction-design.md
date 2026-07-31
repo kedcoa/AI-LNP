@@ -38,8 +38,12 @@ the successful forced-accounting design while avoiding one call per arm.
 ### Stage 1: Complete local ingestion
 
 Ingest the full document into section-aware evidence records from body text,
-methods, captions, and tables. Evidence records carry stable IDs, section
-labels, page/locator information, and retrieval tags.
+methods, captions, and tables. Preserve publisher HTML heading structure when
+HTML is available. For PDF-only sources, reuse existing Docling document
+structure. Raw PyMuPDF blocks are a conservative fallback evidence source and
+must not infer headings from sentence wording. Evidence records carry stable
+IDs, section labels when structurally supplied, page/locator information, and
+retrieval tags.
 
 The ingestion completeness gate reports whether the inventory contains
 evidence candidates for:
@@ -174,6 +178,8 @@ shown with exact hashes and estimates before execution.
 - The answer key is never included in prompts or candidate construction.
 - Existing text, table/Docling, selective-vision, evidence merge, and compact
   contract components are reused rather than reimplemented.
+- Section headings come from source-native HTML/Docling structure; production
+  code does not guess headings from numbered prose.
 
 ## Acceptance Criteria
 

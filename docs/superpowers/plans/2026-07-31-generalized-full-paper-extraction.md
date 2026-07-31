@@ -24,12 +24,13 @@
 - Test: `tests/test_full_paper_inventory.py`
 
 **Interfaces:**
-- `build_full_paper_evidence(paper_id: str, pdf_path: Path) -> FullPaperEvidenceInventory`
+- `build_full_paper_evidence(paper_id: str, source_path: Path, *, docling_path: Path | None = None) -> FullPaperEvidenceInventory`
 - Produces section-aware evidence with stable IDs, pages, headings, text, and generic retrieval tags.
 
-- [ ] Write failing synthetic PDF/text-block tests proving that formulation methods, ratios, payload/model/route/cell/outcome passages are retained without domain-name hardcoding.
+- [ ] Write failing synthetic HTML, Docling, and PDF-fallback tests proving that formulation methods, ratios, payload/model/route/cell/outcome passages are retained without domain-name hardcoding.
 - [ ] Run the tests and verify RED.
-- [ ] Implement section-aware block normalization, stable evidence hashing, generic tag rules, and category coverage diagnostics.
+- [ ] Preserve HTML heading hierarchy and existing Docling structural labels; use raw PDF blocks only as conservatively retained unsectioned/page evidence.
+- [ ] Implement block normalization, stable evidence hashing, generic tag rules, and category coverage diagnostics without text-based heading inference.
 - [ ] Run the tests and verify GREEN.
 - [ ] Commit `feat: build generic full-paper evidence inventory`.
 
