@@ -68,7 +68,13 @@ _ARM_IDENTITY_FIELDS = (
     "payload",
     "dose",
     "dose_unit",
+    "route",
+    "species",
+    "experimental_model",
     "recipient_context",
+    "tissue",
+    "timepoint",
+    "timepoint_unit",
 )
 _REQUIRED_GOLD_FIELDS = {
     "gold_id",
@@ -591,12 +597,26 @@ def _compact_facts(
         dose = _reported_value(experiment.get("dose"))
         dose_unit = _reported_value(experiment.get("dose_unit"))
         recipient = _reported_value(experiment.get("delivery_recipient_cell"))
+        route = _reported_value(experiment.get("route"))
+        species = _reported_value(experiment.get("species"))
+        experimental_model = _reported_value(
+            experiment.get("experimental_model")
+        )
+        tissue = _reported_value(experiment.get("tissue_or_organ"))
+        timepoint = _reported_value(experiment.get("timepoint"))
+        timepoint_unit = _reported_value(experiment.get("timepoint_unit"))
         arm = {
             "formulation": formulation,
             "payload": payload,
             "dose": dose,
             "dose_unit": dose_unit,
+            "route": route,
+            "species": species,
+            "experimental_model": experimental_model,
             "recipient_context": recipient,
+            "tissue": tissue,
+            "timepoint": timepoint,
+            "timepoint_unit": timepoint_unit,
         }
         experiment_arms[experiment_id] = arm
         facts.append(
@@ -694,6 +714,63 @@ def _extracted_facts(
     return _compact_facts(artifact, paper_map)
 
 
+def _extracted_fact_identity(fact: Mapping[str, Any]) -> tuple[Any, ...]:
+    namespace = str(fact.get("namespace"))
+    if namespace == "experiment":
+        arm = fact.get("arm")
+        semantic_identity = (
+            "arm",
+            tuple(
+                (
+                    field,
+                    _canonical_value(
+                        arm.get(field) if isinstance(arm, Mapping) else None
+                    ),
+                )
+                for field in _ARM_IDENTITY_FIELDS
+            ),
+        )
+    else:
+        entity = fact.get("entity")
+        semantic_identity = (
+            "entity",
+            _normalize_text(
+                str(
+                    entity.get("entity_type", "")
+                    if isinstance(entity, Mapping)
+                    else ""
+                )
+            ),
+            _canonical_value(
+                entity.get("identity")
+                if isinstance(entity, Mapping)
+                else None
+            ),
+        )
+    return (
+        namespace,
+        semantic_identity,
+        str(fact.get("field")),
+        _canonical_value(fact.get("value")),
+    )
+
+
+def _deduplicate_extracted_facts(
+    facts: Iterable[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], int]:
+    unique: list[dict[str, Any]] = []
+    seen: set[tuple[Any, ...]] = set()
+    duplicate_count = 0
+    for fact in facts:
+        identity = _extracted_fact_identity(fact)
+        if identity in seen:
+            duplicate_count += 1
+            continue
+        seen.add(identity)
+        unique.append(fact)
+    return unique, duplicate_count
+
+
 def evaluate(extraction_dir: Path, gold_path: Path) -> FullPaperScore:
     """Evaluate one local merged artifact against one caller-supplied gold key."""
 
@@ -710,9 +787,11 @@ def evaluate(extraction_dir: Path, gold_path: Path) -> FullPaperScore:
             f"{artifact.get('paper_id')!r} != {paper_id!r}"
         )
 
-    extracted = _extracted_facts(
-        artifact,
-        _paper_map(extraction_dir, artifact),
+    extracted, projection_duplicates = _deduplicate_extracted_facts(
+        _extracted_facts(
+            artifact,
+            _paper_map(extraction_dir, artifact),
+        )
     )
     benchmark_fields = {
         (str(fact["namespace"]), str(fact["field"])) for fact in gold_facts
@@ -728,7 +807,7 @@ def evaluate(extraction_dir: Path, gold_path: Path) -> FullPaperScore:
     correct_extracted = 0
     unsupported = 0
     wrong_links = 0
-    duplicates = 0
+    duplicates = projection_duplicates
 
     for actual in benchmark_extracted:
         namespace = str(actual.get("namespace"))

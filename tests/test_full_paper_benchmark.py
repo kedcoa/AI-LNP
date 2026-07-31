@@ -19,6 +19,12 @@ def _arm(
     payload: str,
     dose: float,
     recipient_context: str,
+    experimental_model: str = "mouse model",
+    route: str = "intravenous",
+    species: str = "mouse",
+    tissue: str = "liver",
+    timepoint: float = 6,
+    timepoint_unit: str = "hour",
 ) -> dict:
     return {
         "arm_id": arm_id,
@@ -27,6 +33,12 @@ def _arm(
         "dose": dose,
         "dose_unit": "mg/kg",
         "recipient_context": recipient_context,
+        "experimental_model": experimental_model,
+        "route": route,
+        "species": species,
+        "tissue": tissue,
+        "timepoint": timepoint,
+        "timepoint_unit": timepoint_unit,
     }
 
 
@@ -281,6 +293,67 @@ def test_wrong_arm_link_is_not_recalled_or_labeled_as_an_invention(
     assert score.precision == pytest.approx(5 / 6)
 
 
+def test_arm_link_requires_model_route_tissue_and_timepoint_identity(
+    tmp_path: Path,
+) -> None:
+    """An endpoint moved between otherwise identical contexts is a wrong link."""
+    early = _arm(
+        "ARM-EARLY",
+        formulation="Zephyr-9",
+        payload="cobalt RNA",
+        dose=0.4,
+        recipient_context="stellate cells",
+        experimental_model="healthy mouse",
+        route="intravenous",
+        tissue="liver",
+        timepoint=6,
+    )
+    late = _arm(
+        "ARM-LATE",
+        formulation="Zephyr-9",
+        payload="cobalt RNA",
+        dose=0.4,
+        recipient_context="stellate cells",
+        experimental_model="fibrotic mouse",
+        route="portal-vein infusion",
+        tissue="fibrotic liver",
+        timepoint=24,
+    )
+    gold = _synthetic_gold()
+    gold["context_inventory"] = [
+        {**early, "supported": True},
+        {**late, "supported": True},
+    ]
+    gold["experiment_facts"] = [
+        _gold_fact(
+            "G-EARLY-ENDPOINT",
+            "experiment",
+            "endpoint",
+            "early cobalt signal",
+            arm=early,
+        ),
+        _gold_fact(
+            "G-LATE-ENDPOINT",
+            "experiment",
+            "endpoint",
+            "late cobalt signal",
+            arm=late,
+        ),
+    ]
+    artifact = _perfect_artifact(gold)
+    artifact["experiment_facts"][0]["arm"] = deepcopy(late)
+    extraction_dir, gold_path = _write_case(tmp_path, gold, artifact)
+
+    score = evaluate(extraction_dir, gold_path)
+
+    assert score.wrong_arm_link_count == 1
+    assert score.unsupported_invention_count == 0
+    assert "G-EARLY-ENDPOINT" in score.missing_gold_ids
+    assert score.experiment_fact_recall == 0.5
+    assert score.complete_arm_recall == 0.5
+    assert score.precision == 0.75
+
+
 def test_unsupported_benchmark_fact_lowers_precision(tmp_path: Path) -> None:
     """A novel value in a benchmark field must count as an invention."""
     gold = _synthetic_gold()
@@ -324,6 +397,195 @@ def test_declared_aliases_match_without_fuzzy_scientific_matching(
 
     assert score.overall_micro_recall == 1.0
     assert score.precision == 1.0
+
+
+def test_perfect_compact_artifact_and_paper_map_deduplicate_shared_facts(
+    tmp_path: Path,
+) -> None:
+    """Two production projections of one fact must not lower precision."""
+    arm = _arm(
+        "ARM-PRODUCTION",
+        formulation="Zephyr-9",
+        payload="cobalt RNA",
+        dose=0.4,
+        recipient_context="stellate cells",
+        experimental_model="healthy mouse",
+        route="intravenous",
+        tissue="liver",
+        timepoint=6,
+    )
+    paper = {
+        "entity_type": "paper",
+        "identity": "SYNTH-77",
+        "aliases": [],
+    }
+    formulation = {
+        "entity_type": "formulation",
+        "identity": "Zephyr-9",
+        "aliases": [],
+    }
+    payload = {
+        "entity_type": "payload",
+        "identity": "cobalt RNA",
+        "aliases": [],
+    }
+    shared_facts = [
+        _gold_fact(
+            "G-PROD-FORM",
+            "shared",
+            "formulation",
+            "Zephyr-9",
+            entity=formulation,
+        ),
+        _gold_fact(
+            "G-PROD-COMP",
+            "shared",
+            "component",
+            "amphiphile A",
+            entity=formulation,
+        ),
+        _gold_fact(
+            "G-PROD-PAYLOAD",
+            "shared",
+            "payload",
+            "cobalt RNA",
+            entity=payload,
+        ),
+        _gold_fact(
+            "G-PROD-ROLE",
+            "shared",
+            "payload_role",
+            "reporter",
+            entity=payload,
+        ),
+    ]
+    shared_facts.extend(
+        _gold_fact(
+            f"G-PROD-{field.upper()}",
+            "shared",
+            field,
+            value,
+            entity=paper,
+        )
+        for field, value in (
+            ("route", "intravenous"),
+            ("species", "mouse"),
+            ("experimental_model", "healthy mouse"),
+            ("tissue", "liver"),
+        )
+    )
+    gold = {
+        "benchmark_version": "full-paper-gold-1.0.0",
+        "paper_id": "SYNTH-77",
+        "sources": [],
+        "context_inventory": [{**arm, "supported": True}],
+        "excluded_contexts": [],
+        "shared_facts": shared_facts,
+        "experiment_facts": [
+            _gold_fact(
+                "G-PROD-ENDPOINT",
+                "experiment",
+                "endpoint",
+                "cobalt signal",
+                arm=arm,
+            )
+        ],
+    }
+    artifact = {
+        "paper_id": "SYNTH-77",
+        "formulations": [
+            {
+                "formulation_id": "FORM-Z9",
+                "formulation_name": {"value": "Zephyr-9", "status": "reported"},
+                "composition": {"value": "amphiphile A", "status": "reported"},
+                "composition_basis": {"value": "molar", "status": "reported"},
+                "np_ratio": {"value": 8, "status": "reported"},
+            }
+        ],
+        "components": [
+            {
+                "component_id": "COMP-A",
+                "formulation_id": "FORM-Z9",
+                "identity": {"value": "amphiphile A", "status": "reported"},
+                "role": {"value": "ionizable_lipid", "status": "reported"},
+            }
+        ],
+        "experiments": [
+            {
+                "experiment_id": "EXP-Z9",
+                "formulation_id": "FORM-Z9",
+                "payload_name": {"value": "cobalt RNA", "status": "reported"},
+                "payload_role": {"value": "reporter", "status": "reported"},
+                "dose": {"value": 0.4, "status": "reported"},
+                "dose_unit": {"value": "mg/kg", "status": "reported"},
+                "delivery_recipient_cell": {
+                    "value": "stellate cells",
+                    "status": "reported",
+                },
+                "route": {"value": "intravenous", "status": "reported"},
+                "species": {"value": "mouse", "status": "reported"},
+                "experimental_model": {
+                    "value": "healthy mouse",
+                    "status": "reported",
+                },
+                "tissue_or_organ": {"value": "liver", "status": "reported"},
+                "timepoint": {"value": 6, "status": "reported"},
+                "timepoint_unit": {"value": "hour", "status": "reported"},
+            }
+        ],
+        "outcomes": [
+            {
+                "outcome_id": "OUT-Z9",
+                "experiment_id": "EXP-Z9",
+                "endpoint": {"value": "cobalt signal", "status": "reported"},
+            }
+        ],
+    }
+    paper_map = {
+        "paper_id": "SYNTH-77",
+        "formulations": [
+            {
+                "formulation_id": "FORM-Z9",
+                "name": {"value": "Zephyr-9"},
+                "components": [
+                    {
+                        "component_id": "COMP-A",
+                        "identity": {"value": "amphiphile A"},
+                        "role": {"value": "ionizable_lipid"},
+                    }
+                ],
+                "ratios": [],
+                "ratio_bases": [],
+            }
+        ],
+        "payloads": [
+            {
+                "payload_id": "PAY-COBALT",
+                "identity": {"value": "cobalt RNA"},
+                "role": {"value": "reporter"},
+            }
+        ],
+        "common_routes": [{"value": "intravenous"}],
+        "common_species": [{"value": "mouse"}],
+        "common_models": [{"value": "healthy mouse"}],
+    }
+    extraction_dir, gold_path = _write_case(tmp_path, gold, artifact)
+    (extraction_dir / "paper_map.json").write_text(
+        json.dumps(paper_map),
+        encoding="utf-8",
+    )
+
+    score = evaluate(extraction_dir, gold_path)
+
+    assert score.overall_micro_recall == 1.0
+    assert score.shared_paper_recall == 1.0
+    assert score.experiment_fact_recall == 1.0
+    assert score.complete_arm_recall == 1.0
+    assert score.precision == 1.0
+    assert score.per_recipient_context_recall == {"stellate cells": 1.0}
+    assert score.unsupported_invention_count == 0
+    assert score.wrong_arm_link_count == 0
+    assert score.missing_gold_ids == []
 
 
 def test_missing_gold_id_is_rejected_before_scoring(tmp_path: Path) -> None:
@@ -421,6 +683,24 @@ def test_np002_key_audits_all_eighteen_supported_contexts() -> None:
         for arm_id in arm_ids
     }
     assert all(facts_by_arm.values())
+    required_arm_identity = {
+        "arm_id",
+        "formulation",
+        "payload",
+        "dose",
+        "dose_unit",
+        "route",
+        "species",
+        "experimental_model",
+        "recipient_context",
+        "tissue",
+        "timepoint",
+        "timepoint_unit",
+    }
+    assert all(
+        required_arm_identity <= set(fact["arm"])
+        for fact in gold["experiment_facts"]
+    )
     assert all(
         {
             "formulation",
@@ -437,6 +717,38 @@ def test_np002_key_audits_all_eighteen_supported_contexts() -> None:
         <= {fact["field"] for fact in arm_facts}
         for arm_facts in facts_by_arm.values()
     )
+
+
+def test_np002_aliases_do_not_merge_distinct_conditions_or_components() -> None:
+    """Scientific aliases must not collapse controls or specific PEG lipids."""
+    gold = json.loads(
+        (
+            ROOT / "data/benchmarks/full_paper/NP-002.json"
+        ).read_text(encoding="utf-8")
+    )
+    component_facts = [
+        row
+        for row in gold["shared_facts"]
+        if row["field"] == "component" and row["expected"] == "C14PEG2000"
+    ]
+    assert component_facts
+    assert all("PEG-lipid" not in row["aliases"] for row in component_facts)
+
+    comparator_facts = [
+        row
+        for row in gold["experiment_facts"]
+        if row["field"] == "comparator"
+    ]
+    assert comparator_facts
+    for row in comparator_facts:
+        if row["arm"]["dose"] == 0.3:
+            assert row["expected"] == "untreated Ai14 control"
+            assert "PBS-treated Ai14 control" not in row["aliases"]
+        else:
+            assert row["expected"] == "PBS-treated Ai14 control"
+            assert not any(
+                "untreated" in alias.casefold() for alias in row["aliases"]
+            )
 
 
 def test_production_full_paper_modules_do_not_reference_hidden_gold() -> None:
