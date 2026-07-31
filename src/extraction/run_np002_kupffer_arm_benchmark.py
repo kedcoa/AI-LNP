@@ -610,6 +610,7 @@ def _write_failure_manifest(
     classification: str,
     message: str,
     trial_response_sha256: str | None = None,
+    result_sha256: str | None = None,
 ) -> None:
     failed_at = datetime.now(timezone.utc)
     failure = {
@@ -629,6 +630,7 @@ def _write_failure_manifest(
         "request_sha256": approval_sha256,
         "raw_response_sha256": raw_response_sha256,
         "trial_response_sha256": trial_response_sha256,
+        "result_sha256": result_sha256,
         "usage_sha256": usage_sha256,
         "preflight_manifest_path": str(manifest_path.resolve()),
         "packet_checksum": packet.packet_checksum,
@@ -714,16 +716,36 @@ def run_approved_kupffer_benchmark(
             message=str(exc),
         )
         raise
-    _, raw_response_sha256 = _artifact(
-        run_dir / "response.json",
-        response.model_dump(mode="json"),
-    )
-    usage = (
-        response.usage.model_dump(mode="json")
-        if getattr(response, "usage", None)
-        else None
-    )
-    _, usage_sha256 = _artifact(run_dir / "usage.json", usage)
+    raw_response_sha256 = None
+    usage = None
+    usage_sha256 = None
+    try:
+        _, raw_response_sha256 = _artifact(
+            run_dir / "response.json",
+            response.model_dump(mode="json"),
+        )
+        usage = (
+            response.usage.model_dump(mode="json")
+            if getattr(response, "usage", None)
+            else None
+        )
+        _, usage_sha256 = _artifact(run_dir / "usage.json", usage)
+    except Exception as exc:
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=response,
+            started_at=started_at,
+            raw_response_sha256=raw_response_sha256,
+            usage=usage,
+            usage_sha256=usage_sha256,
+            classification="response_serialization_exception",
+            message=str(exc),
+        )
+        raise
     if not response.output_text:
         message = "approved benchmark response has no structured output"
         _write_failure_manifest(
@@ -825,26 +847,46 @@ def run_approved_kupffer_benchmark(
             trial_response_sha256=trial_response_sha256,
         )
         raise
-    _, result_sha256 = _artifact(
-        run_dir / "result.json",
-        compact_result.model_dump(mode="json"),
-    )
-    payload = json.loads(final_request["input"][1]["content"])
-    arm_evidence = {
-        arm_packet["arm"]["candidate_id"]: {
-            row["evidence_id"] for row in arm_packet["evidence"]
+    result_sha256 = None
+    try:
+        _, result_sha256 = _artifact(
+            run_dir / "result.json",
+            compact_result.model_dump(mode="json"),
+        )
+        payload = json.loads(final_request["input"][1]["content"])
+        arm_evidence = {
+            arm_packet["arm"]["candidate_id"]: {
+                row["evidence_id"] for row in arm_packet["evidence"]
+            }
+            for arm_packet in payload["experimental_arm_packets"]
         }
-        for arm_packet in payload["experimental_arm_packets"]
-    }
-    validation = _validate_scoped_arm_response(
-        trial_response,
-        approved_arms,
-        arm_evidence,
-    )
-    _, validation_sha256 = _artifact(
-        run_dir / "scientific_validation.json",
-        validation,
-    )
+        validation = _validate_scoped_arm_response(
+            trial_response,
+            approved_arms,
+            arm_evidence,
+        )
+        _, validation_sha256 = _artifact(
+            run_dir / "scientific_validation.json",
+            validation,
+        )
+    except Exception as exc:
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=response,
+            started_at=started_at,
+            raw_response_sha256=raw_response_sha256,
+            usage=usage,
+            usage_sha256=usage_sha256,
+            classification="local_validation_exception",
+            message=str(exc),
+            trial_response_sha256=trial_response_sha256,
+            result_sha256=result_sha256,
+        )
+        raise
     result = {
         "status": "completed_pending_human_review",
         "paper_id": "NP-002",

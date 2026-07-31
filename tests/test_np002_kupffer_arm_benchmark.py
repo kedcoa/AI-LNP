@@ -313,6 +313,38 @@ class _MalformedResponses:
         return _FakeResponse("{not valid JSON")
 
 
+class _SerializationFailureResponse(_FakeResponse):
+    def __init__(self, output_text, stage):
+        super().__init__(output_text)
+        self.stage = stage
+        if stage == "usage":
+            self.usage = SimpleNamespace(
+                model_dump=self._raise_serialization_error
+            )
+
+    @staticmethod
+    def _raise_serialization_error(mode="json"):
+        raise TypeError("synthetic serialization failure")
+
+    def model_dump(self, mode="json"):
+        if self.stage == "response":
+            self._raise_serialization_error(mode)
+        return super().model_dump(mode=mode)
+
+
+class _SerializationFailingResponses:
+    def __init__(self, stage):
+        self.calls = []
+        self.stage = stage
+
+    def create(self, **request):
+        self.calls.append(request)
+        return _SerializationFailureResponse(
+            json.dumps(_compact_arm_response(request)),
+            self.stage,
+        )
+
+
 def test_prepare_review_is_local_pending_and_evidence_readable(tmp_path):
     from src.extraction.run_np002_kupffer_arm_benchmark import (
         prepare_arm_review,
@@ -678,6 +710,39 @@ def test_provider_failure_leaves_marker_and_blocks_redispatch(tmp_path):
     assert len(responses.calls) == 1
 
 
+@pytest.mark.parametrize("stage", ["response", "usage"])
+def test_response_serialization_failure_leaves_terminal_audit(
+    tmp_path,
+    stage,
+):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        run_approved_kupffer_benchmark,
+    )
+
+    approved = _preflight(tmp_path)
+    responses = _SerializationFailingResponses(stage)
+    run_dir = tmp_path / "runs" / "NP-002"
+
+    with pytest.raises(TypeError, match="serialization failure"):
+        run_approved_kupffer_benchmark(
+            manifest_path=approved.manifest_path,
+            approval_sha256=approved.manifest["request_sha256"],
+            output_root=tmp_path / "runs",
+            client=SimpleNamespace(responses=responses),
+        )
+
+    failure = json.loads((run_dir / "manifest.json").read_text())
+    assert failure["failure_classification"] == (
+        "response_serialization_exception"
+    )
+    if stage == "response":
+        assert failure["raw_response_sha256"] is None
+    else:
+        assert failure["raw_response_sha256"]
+    assert failure["paid_api_requests"] == 1
+    assert len(responses.calls) == 1
+
+
 def test_validation_cannot_confirm_arm_with_another_arms_evidence(tmp_path):
     from src.extraction.run_np002_kupffer_arm_benchmark import (
         run_approved_kupffer_benchmark,
@@ -765,6 +830,45 @@ def test_scoped_envelope_double_failure_never_makes_count_negative(
     assert report["structurally_valid_candidate_ids"] == []
     assert report["scientifically_confirmed"] == 0
     assert report["confirmed_candidate_ids"] == []
+
+
+def test_local_validation_exception_preserves_result_hash_and_terminal_audit(
+    tmp_path,
+    monkeypatch,
+):
+    from src.extraction import run_np002_kupffer_arm_benchmark as benchmark
+
+    approved = _preflight(tmp_path)
+    responses = _FakeResponses()
+    run_dir = tmp_path / "runs" / "NP-002"
+
+    def fail_validation(*args, **kwargs):
+        raise RuntimeError("synthetic local validation failure")
+
+    monkeypatch.setattr(
+        benchmark,
+        "_validate_scoped_arm_response",
+        fail_validation,
+    )
+
+    with pytest.raises(RuntimeError, match="local validation failure"):
+        benchmark.run_approved_kupffer_benchmark(
+            manifest_path=approved.manifest_path,
+            approval_sha256=approved.manifest["request_sha256"],
+            output_root=tmp_path / "runs",
+            client=SimpleNamespace(responses=responses),
+        )
+
+    failure = json.loads((run_dir / "manifest.json").read_text())
+    assert failure["failure_classification"] == "local_validation_exception"
+    assert failure["raw_response_sha256"]
+    assert failure["trial_response_sha256"]
+    assert failure["result_sha256"] == hashlib.sha256(
+        (run_dir / "result.json").read_bytes()
+    ).hexdigest()
+    assert failure["usage_sha256"]
+    assert failure["paid_api_requests"] == 1
+    assert len(responses.calls) == 1
 
 
 def test_run_rejects_response_for_another_paper_before_completion(tmp_path):
