@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from copy import deepcopy
 from typing import Any, Mapping
 
@@ -114,17 +115,11 @@ def _arm(
 
 def _paired_correspondence(
     evidence: list[dict[str, str]],
-) -> list[dict[str, Any]]:
-    rows = _matching(
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    respectively_rows = _matching(
         evidence,
         lambda text: (
             "respectively" in text
-            and "mc3" in text
-            and "ckk-e12" in text
-            and "quant dna" in text
-            and "cre mrna" in text
-            and "0.3" in text
-            and "1.0" in text
             and "kupffer" in text
             and "mice" in text
             and "intraven" in text
@@ -134,8 +129,62 @@ def _paired_correspondence(
             )
         ),
     )
-    if not rows:
-        return []
+    if not respectively_rows:
+        return [], []
+    pattern = re.compile(
+        r"(?P<formulation_1>MC3|cKK-E12)\s+carrying\s+"
+        r"(?P<payload_1>QUANT DNA|Cre mRNA)\s+and\s+"
+        r"(?P<formulation_2>MC3|cKK-E12)\s+carrying\s+"
+        r"(?P<payload_2>QUANT DNA|Cre mRNA)\s+at\s+"
+        r"(?P<dose_1>\d+(?:\.\d+)?)\s+and\s+"
+        r"(?P<dose_2>\d+(?:\.\d+)?)\s*mg/kg,\s*respectively",
+        flags=re.IGNORECASE,
+    )
+    row = respectively_rows[0]
+    match = pattern.search(row["text"])
+    quarantine = [
+        {
+            "family": "paired_correspondence",
+            "reason": "relationship_not_explicit",
+            "evidence_ids": _ids(respectively_rows),
+        }
+    ]
+    if match is None:
+        return [], quarantine
+    normalized_formulations = {
+        "mc3": "MC3",
+        "ckk-e12": "cKK-E12",
+    }
+    normalized_payloads = {
+        "quant dna": "QUANT DNA",
+        "cre mrna": "Cre mRNA",
+    }
+    pairs = [
+        (
+            normalized_formulations[match.group("formulation_1").casefold()],
+            normalized_payloads[match.group("payload_1").casefold()],
+            float(match.group("dose_1")),
+        ),
+        (
+            normalized_formulations[match.group("formulation_2").casefold()],
+            normalized_payloads[match.group("payload_2").casefold()],
+            float(match.group("dose_2")),
+        ),
+    ]
+    permitted = {
+        ("MC3", "QUANT DNA", 0.3),
+        ("cKK-E12", "QUANT DNA", 0.3),
+        ("MC3", "Cre mRNA", 0.3),
+        ("cKK-E12", "Cre mRNA", 0.3),
+        ("MC3", "Cre mRNA", 1.0),
+        ("cKK-E12", "Cre mRNA", 1.0),
+    }
+    if (
+        len({pair[0] for pair in pairs}) != 2
+        or len({pair[1] for pair in pairs}) != 2
+        or any(pair not in permitted for pair in pairs)
+    ):
+        return [], quarantine
     outcome_rows = _matching(
         evidence,
         lambda text: (
@@ -147,34 +196,30 @@ def _paired_correspondence(
         ),
     )
     if not outcome_rows:
-        outcome_rows = rows
-    return [
-        _arm(
-            candidate_id="KUP-01",
-            formulation="MC3",
-            payload="QUANT DNA",
-            dose=0.3,
-            model="mice",
-            pairing_type="paired_correspondence",
-            existence_rows=rows,
-            outcome_rows=outcome_rows,
-        ),
-        _arm(
-            candidate_id="KUP-02",
-            formulation="cKK-E12",
-            payload="Cre mRNA",
-            dose=1.0,
-            model="mice",
-            pairing_type="paired_correspondence",
-            existence_rows=rows,
-            outcome_rows=outcome_rows,
-        ),
-    ]
+        outcome_rows = respectively_rows
+    return (
+        [
+            _arm(
+                candidate_id=f"KUP-{index:02d}",
+                formulation=formulation,
+                payload=payload,
+                dose=dose,
+                model="mice",
+                pairing_type="paired_correspondence",
+                existence_rows=[row],
+                outcome_rows=outcome_rows,
+            )
+            for index, (formulation, payload, dose) in enumerate(
+                pairs, start=1
+            )
+        ],
+        [],
+    )
 
 
 def _np002_six_arm_inventory(
     evidence: list[dict[str, str]],
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     route_rows = _matching(
         evidence,
         lambda text: (
@@ -184,19 +229,23 @@ def _np002_six_arm_inventory(
         ),
     )
     if not route_rows:
-        return []
+        route_rows = []
 
     proposed: list[dict[str, Any]] = []
-    quant_relationship = _matching(
+    quarantined: list[dict[str, Any]] = []
+    quant_family_rows = _matching(
         evidence,
         lambda text: (
-            "mc3" in text
-            and "ckk-e12" in text
-            and "kupffer" in text
-            and any(term in text for term in ("biodistribution", "analy"))
+            "quant dna" in text
+            or (
+                "mc3" in text
+                and "ckk-e12" in text
+                and "kupffer" in text
+                and any(term in text for term in ("biodistrib", "distribut"))
+            )
         ),
     )
-    quant_condition = _matching(
+    quant_bound = _matching(
         evidence,
         lambda text: (
             "mice" in text
@@ -204,7 +253,12 @@ def _np002_six_arm_inventory(
             and "mg/kg" in text
             and "quant dna" in text
             and "kupffer" in text
-            and any(term in text for term in ("inject", "administer"))
+            and "mc3" in text
+            and "ckk-e12" in text
+            and any(
+                term in text
+                for term in ("inject", "administer", "treat", "deliver")
+            )
         ),
     )
     quant_outcomes = _matching(
@@ -219,12 +273,11 @@ def _np002_six_arm_inventory(
             )
         ),
     )
-    if quant_relationship and quant_condition:
+    if route_rows and quant_bound:
         if not quant_outcomes:
-            quant_outcomes = [*quant_relationship, *quant_condition]
+            quant_outcomes = quant_bound
         quant_existence = [
-            *quant_relationship,
-            *quant_condition,
+            *quant_bound,
             *route_rows,
         ]
         proposed.extend(
@@ -251,6 +304,14 @@ def _np002_six_arm_inventory(
                 ),
             ]
         )
+    elif quant_family_rows:
+        quarantined.append(
+            {
+                "family": "QUANT DNA 0.3 mg/kg",
+                "reason": "relationship_not_explicit",
+                "evidence_ids": _ids(quant_family_rows),
+            }
+        )
 
     cre_model = _matching(
         evidence,
@@ -268,7 +329,19 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("quantif", "percent", "observ"))
         ),
     )
-    cre_one_condition = _matching(
+    cre_one_family_rows = _matching(
+        evidence,
+        lambda text: (
+            ("cre mrna" in text and "1.0" in text)
+            or (
+                "mc3" in text
+                and "ckk-e12" in text
+                and "1.0" in text
+                and "tdtomato" in text
+            )
+        ),
+    )
+    cre_one_bound = _matching(
         evidence,
         lambda text: (
             "cre mrna" in text
@@ -279,9 +352,9 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("administer", "inject", "treat"))
         ),
     )
-    if cre_model and cre_target and cre_one_condition:
+    if route_rows and cre_model and cre_target and cre_one_bound:
         cre_one_existence = [
-            *cre_one_condition,
+            *cre_one_bound,
             *cre_model,
             *cre_target,
             *route_rows,
@@ -310,20 +383,32 @@ def _np002_six_arm_inventory(
                 ),
             ]
         )
+    elif cre_one_family_rows:
+        quarantined.append(
+            {
+                "family": "Cre mRNA 1.0 mg/kg",
+                "reason": "relationship_not_explicit",
+                "evidence_ids": _ids(cre_one_family_rows),
+            }
+        )
 
-    cre_low_condition = _matching(
+    cre_low_family_rows = _matching(
+        evidence,
+        lambda text: (
+            ("cre mrna" in text and "0.3" in text)
+            or (
+                "mc3" in text
+                and "ckk-e12" in text
+                and "0.3" in text
+                and "tdtomato" in text
+            )
+        ),
+    )
+    cre_low_bound = _matching(
         evidence,
         lambda text: (
             "cre mrna" in text
             and "0.3" in text
-            and "mg/kg" in text
-            and any(term in text for term in ("repeat", "administer", "inject"))
-        ),
-    )
-    cre_low_relationship = _matching(
-        evidence,
-        lambda text: (
-            "0.3" in text
             and "mg/kg" in text
             and "mc3" in text
             and "ckk-e12" in text
@@ -332,19 +417,18 @@ def _np002_six_arm_inventory(
         ),
     )
     if (
-        cre_model
+        route_rows
+        and cre_model
         and cre_target
-        and cre_low_condition
-        and cre_low_relationship
+        and cre_low_bound
     ):
         cre_low_existence = [
-            *cre_low_condition,
-            *cre_low_relationship,
+            *cre_low_bound,
             *cre_model,
             *cre_target,
             *route_rows,
         ]
-        cre_low_outcomes = [*cre_low_relationship, *cre_target]
+        cre_low_outcomes = [*cre_low_bound, *cre_target]
         proposed.extend(
             [
                 _arm(
@@ -369,7 +453,15 @@ def _np002_six_arm_inventory(
                 ),
             ]
         )
-    return proposed
+    elif cre_low_family_rows:
+        quarantined.append(
+            {
+                "family": "Cre mRNA 0.3 mg/kg",
+                "reason": "relationship_not_explicit",
+                "evidence_ids": _ids(cre_low_family_rows),
+            }
+        )
+    return proposed, quarantined
 
 
 def build_np002_kupffer_arm_proposal(
@@ -378,26 +470,15 @@ def build_np002_kupffer_arm_proposal(
     """Propose only arms supported by explicit NP-002 experiment clauses."""
 
     evidence = _packet_evidence(packet)
-    proposed_arms = _paired_correspondence(evidence)
-    if not proposed_arms:
-        proposed_arms = _np002_six_arm_inventory(evidence)
-    quarantined_arms: list[dict[str, Any]] = []
-    if not proposed_arms and any(
-        term in row["text"].casefold()
-        for row in evidence
-        for term in ("mc3", "ckk-e12", "quant dna", "cre mrna")
-    ):
-        quarantined_arms.append(
-            {
-                "reason": "relationship_not_explicit",
-                "evidence_ids": [row["evidence_id"] for row in evidence],
-            }
-        )
+    proposed_arms, quarantined_arms = _paired_correspondence(evidence)
+    if not proposed_arms and not quarantined_arms:
+        proposed_arms, quarantined_arms = _np002_six_arm_inventory(evidence)
     unsigned = {
         "proposal_version": ARM_PROPOSAL_VERSION,
         "paper_id": "NP-002",
         "target_cell": "Kupffer cells",
         "packet_evidence_ids": [row["evidence_id"] for row in evidence],
+        "packet_evidence": evidence,
         "proposed_arms": proposed_arms,
         "quarantined_arms": quarantined_arms,
     }
@@ -407,15 +488,57 @@ def build_np002_kupffer_arm_proposal(
 def _validate_complete_arm(
     arm: Any,
     *,
-    packet_evidence_ids: set[str],
+    packet_evidence: Mapping[str, str],
 ) -> dict[str, Any]:
     if not isinstance(arm, Mapping) or set(arm) != _ARM_FIELDS:
         raise ValueError("corrections and additions require a complete arm")
     candidate_id = arm.get("candidate_id")
     if not isinstance(candidate_id, str) or not candidate_id:
         raise ValueError("complete arm requires a candidate_id")
+    for field in (
+        "formulation",
+        "payload",
+        "dose_unit",
+        "route",
+        "species",
+        "model",
+        "target_cell",
+        "confidence",
+    ):
+        if not isinstance(arm.get(field), str) or not arm[field].strip():
+            raise ValueError(f"complete arm requires a nonempty {field}")
+    if arm["target_cell"] != "Kupffer cells":
+        raise ValueError("corrected and added arms must target Kupffer cells")
+    if arm["formulation"] not in {"MC3", "cKK-E12"}:
+        raise ValueError("arm formulation is outside the NP-002 Kupffer scope")
+    if arm["payload"] not in {"QUANT DNA", "Cre mRNA"}:
+        raise ValueError("arm payload is outside the NP-002 Kupffer scope")
+    if arm["dose_unit"] != "mg/kg":
+        raise ValueError("arm dose_unit is outside the NP-002 Kupffer scope")
+    if arm["route"] != "intravenous lateral tail vein":
+        raise ValueError("arm route is outside the NP-002 Kupffer scope")
+    if arm["species"] != "Mus musculus":
+        raise ValueError("arm species is outside the NP-002 Kupffer scope")
+    if arm["model"] not in {"mice", "Ai14 Cre-reporter mice"}:
+        raise ValueError("arm model is outside the NP-002 Kupffer scope")
+    dose = arm.get("dose")
+    if isinstance(dose, bool) or not isinstance(dose, (int, float)):
+        raise ValueError("arm dose must be numeric")
+    permitted_treatments = {
+        ("MC3", "QUANT DNA", 0.3),
+        ("cKK-E12", "QUANT DNA", 0.3),
+        ("MC3", "Cre mRNA", 0.3),
+        ("cKK-E12", "Cre mRNA", 0.3),
+        ("MC3", "Cre mRNA", 1.0),
+        ("cKK-E12", "Cre mRNA", 1.0),
+    }
+    if (arm["formulation"], arm["payload"], float(dose)) not in (
+        permitted_treatments
+    ):
+        raise ValueError("arm treatment is outside the NP-002 Kupffer scope")
     if arm.get("pairing_type") not in PAIRING_TYPES:
         raise ValueError("complete arm has an invalid pairing_type")
+    evidence_lists: dict[str, list[str]] = {}
     for field in ("existence_evidence_ids", "outcome_evidence_ids"):
         evidence_ids = arm.get(field)
         if (
@@ -424,8 +547,56 @@ def _validate_complete_arm(
             or not all(isinstance(item, str) for item in evidence_ids)
         ):
             raise ValueError("complete arm requires nonempty evidence ID lists")
-        if not set(evidence_ids) <= packet_evidence_ids:
+        if len(evidence_ids) != len(set(evidence_ids)):
+            raise ValueError("complete arm evidence IDs must be unique")
+        if not set(evidence_ids) <= set(packet_evidence):
             raise ValueError("corrected or added arm cites evidence outside packet evidence")
+        evidence_lists[field] = evidence_ids
+    existence_text = " ".join(
+        packet_evidence[evidence_id]
+        for evidence_id in evidence_lists["existence_evidence_ids"]
+    ).casefold()
+    dose_token = "1.0" if float(dose) == 1.0 else "0.3"
+    required_existence_tokens = (
+        arm["formulation"].casefold(),
+        arm["payload"].casefold(),
+        dose_token,
+        "mg/kg",
+        "kupffer",
+        "mice",
+        "intraven",
+    )
+    if not all(token in existence_text for token in required_existence_tokens):
+        raise ValueError(
+            "arm existence evidence does not semantically support its NP-002 scope"
+        )
+    if not any(
+        term in existence_text
+        for term in ("inject", "administer", "treat", "deliver", "repeat")
+    ):
+        raise ValueError(
+            "arm existence evidence lacks an experimental treatment relationship"
+        )
+    outcome_text = " ".join(
+        packet_evidence[evidence_id]
+        for evidence_id in evidence_lists["outcome_evidence_ids"]
+    ).casefold()
+    if "kupffer" not in outcome_text or not any(
+        term in outcome_text
+        for term in (
+            "measur",
+            "quantif",
+            "observ",
+            "outcome",
+            "deliver",
+            "distribut",
+            "accumulat",
+            "tdtomato",
+        )
+    ):
+        raise ValueError(
+            "arm outcome evidence does not semantically support a Kupffer outcome"
+        )
     return deepcopy(dict(arm))
 
 
@@ -484,9 +655,24 @@ def validate_arm_review(
         raise ValueError("review requires exactly one known decision per proposed candidate")
 
     packet_evidence_ids_raw = proposal.get("packet_evidence_ids")
+    packet_evidence_raw = proposal.get("packet_evidence")
     if not isinstance(packet_evidence_ids_raw, list):
         raise ValueError("proposal packet_evidence_ids must be a list")
-    packet_evidence_ids = set(packet_evidence_ids_raw)
+    if not isinstance(packet_evidence_raw, list) or not all(
+        isinstance(row, Mapping)
+        and isinstance(row.get("evidence_id"), str)
+        and isinstance(row.get("text"), str)
+        for row in packet_evidence_raw
+    ):
+        raise ValueError("proposal packet_evidence must contain evidence text")
+    packet_evidence = {
+        str(row["evidence_id"]): str(row["text"])
+        for row in packet_evidence_raw
+    }
+    if list(packet_evidence) != packet_evidence_ids_raw:
+        raise ValueError(
+            "proposal packet evidence text does not match its evidence ID envelope"
+        )
     decisions_by_id = {
         str(decision["candidate_id"]): decision for decision in decisions
     }
@@ -506,7 +692,7 @@ def validate_arm_review(
         elif action == "correct":
             corrected_arm = _validate_complete_arm(
                 decision.get("arm"),
-                packet_evidence_ids=packet_evidence_ids,
+                packet_evidence=packet_evidence,
             )
             if corrected_arm["candidate_id"] != candidate_id:
                 raise ValueError("corrected arm candidate_id must match its decision")
@@ -523,7 +709,7 @@ def validate_arm_review(
     additions = [
         _validate_complete_arm(
             arm,
-            packet_evidence_ids=packet_evidence_ids,
+            packet_evidence=packet_evidence,
         )
         for arm in additions_raw
     ]

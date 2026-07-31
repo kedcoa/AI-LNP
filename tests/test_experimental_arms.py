@@ -31,15 +31,10 @@ def np002_packet():
                 "Mice were injected intravenously via the lateral tail vein.",
             ),
             _evidence(
-                "E-QUANT-REL",
-                "We first analyzed the biodistribution of MC3 and cKK-E12 "
-                "LNPs to liver endothelial cells, Kupffer cells, and hepatocytes.",
-            ),
-            _evidence(
-                "E-QUANT-COND",
-                "Six hours after injecting mice with 0.3 mg/kg QUANT DNA, "
-                "we utilized FACS to isolate endothelial cells, Kupffer cells, "
-                "and hepatocytes.",
+                "E-QUANT-BOUND",
+                "We injected mice intravenously with 0.3 mg/kg QUANT DNA "
+                "carried by either MC3 or cKK-E12 LNPs and measured "
+                "biodistribution to Kupffer cells.",
             ),
             _evidence(
                 "E-QUANT-OUT",
@@ -65,14 +60,9 @@ def np002_packet():
             ),
             _evidence(
                 "E-CRE-03-COND",
-                "We repeated the experiment at a lower dose, 0.3 mg/kg "
-                "Cre mRNA.",
-            ),
-            _evidence(
-                "E-CRE-03-OUT",
-                "We observed the expected decrease in percent tdTomato "
-                "positive cells for both cKK-E12 and MC3 at 0.3 mg/kg, "
-                "compared to the 1.0 mg/kg dose.",
+                "We repeated the Cre mRNA experiment at 0.3 mg/kg using both "
+                "cKK-E12 and MC3 and observed the expected decrease in "
+                "percent tdTomato positive cells.",
             ),
         ],
     }
@@ -213,7 +203,7 @@ def test_respectively_uses_paired_correspondence_not_cross_product():
 
 @pytest.mark.parametrize(
     "removed_evidence_id",
-    ["E-QUANT-COND", "E-CRE-MODEL", "E-CRE-TARGET"],
+    ["E-QUANT-BOUND", "E-CRE-MODEL", "E-CRE-TARGET"],
 )
 def test_requires_direct_target_cell_and_experimental_model_evidence(
     removed_evidence_id,
@@ -233,7 +223,7 @@ def test_requires_direct_target_cell_and_experimental_model_evidence(
 
     report = build_np002_kupffer_arm_proposal(packet)
 
-    if removed_evidence_id == "E-QUANT-COND":
+    if removed_evidence_id == "E-QUANT-BOUND":
         assert all(
             row["payload"] != "QUANT DNA" for row in report["proposed_arms"]
         )
@@ -241,6 +231,117 @@ def test_requires_direct_target_cell_and_experimental_model_evidence(
         assert all(
             row["payload"] != "Cre mRNA" for row in report["proposed_arms"]
         )
+
+
+@pytest.mark.parametrize("same_experiment", [True, False])
+def test_never_joins_separate_formulation_and_dose_clauses(
+    same_experiment,
+):
+    formulation_experiment = ["EXP-1"]
+    condition_experiment = ["EXP-1" if same_experiment else "EXP-2"]
+    packet = {
+        "paper_id": "NP-002",
+        "evidence": [
+            {
+                **_evidence(
+                    "E-X1",
+                    "We analyzed the biodistribution of MC3 and cKK-E12 "
+                    "LNPs to Kupffer cells.",
+                ),
+                "experiment_candidate_ids": formulation_experiment,
+            },
+            {
+                **_evidence(
+                    "E-X2",
+                    "Mice were injected with 0.3 mg/kg QUANT DNA and Kupffer "
+                    "cells were isolated.",
+                ),
+                "experiment_candidate_ids": condition_experiment,
+            },
+            _evidence(
+                "E-X3",
+                "Mice were injected intravenously via the lateral tail vein.",
+            ),
+        ],
+    }
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert report["proposed_arms"] == []
+    assert report["quarantined_arms"][0]["family"] == "QUANT DNA 0.3 mg/kg"
+    assert report["quarantined_arms"][0]["reason"] == (
+        "relationship_not_explicit"
+    )
+
+
+def test_quarantines_unsupported_family_when_other_arms_are_supported():
+    packet = np002_packet()
+    packet["evidence"] = [
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"] != "E-QUANT-BOUND"
+    ]
+    packet["evidence"].extend(
+        [
+            _evidence(
+                "E-MIX-Q1",
+                "We analyzed biodistribution of MC3 and cKK-E12 LNPs to "
+                "Kupffer cells.",
+            ),
+            _evidence(
+                "E-MIX-Q2",
+                "Mice received 0.3 mg/kg QUANT DNA in a separate experiment.",
+            ),
+        ]
+    )
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert {
+        row["payload"] for row in report["proposed_arms"]
+    } == {"Cre mRNA"}
+    assert report["quarantined_arms"] == [
+        {
+            "family": "QUANT DNA 0.3 mg/kg",
+            "reason": "relationship_not_explicit",
+            "evidence_ids": ["E-QUANT-OUT", "E-MIX-Q1", "E-MIX-Q2"],
+        }
+    ]
+
+
+def test_respectively_parses_reversed_formulation_order():
+    packet = respectively_packet()
+    packet["evidence"][0]["text"] = (
+        "Mice were injected intravenously with cKK-E12 carrying QUANT DNA "
+        "and MC3 carrying Cre mRNA at 0.3 and 1.0 mg/kg, respectively; "
+        "delivery to Kupffer cells was measured."
+    )
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert [
+        (row["formulation"], row["payload"], row["dose"])
+        for row in report["proposed_arms"]
+    ] == [
+        ("cKK-E12", "QUANT DNA", 0.3),
+        ("MC3", "Cre mRNA", 1.0),
+    ]
+
+
+def test_respectively_fails_closed_for_mismatched_lists():
+    packet = respectively_packet()
+    packet["evidence"][0]["text"] = (
+        "Mice were injected intravenously with MC3 carrying QUANT DNA and "
+        "cKK-E12 carrying Cre mRNA at 0.1, 0.3, and 1.0 mg/kg, respectively; "
+        "delivery to Kupffer cells was measured."
+    )
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert report["proposed_arms"] == []
+    assert report["quarantined_arms"][0]["family"] == (
+        "paired_correspondence"
+    )
 
 
 def _accepted_review(proposal):
@@ -326,6 +427,28 @@ def test_correction_and_addition_require_complete_arms_with_packet_evidence():
     outside["decisions"][0]["arm"]["existence_evidence_ids"] = ["E-OUTSIDE"]
     with pytest.raises(ValueError, match="packet evidence"):
         validate_arm_review(proposal, outside)
+
+
+def test_review_rejects_non_kupffer_or_semantically_unsupported_additions():
+    proposal = build_np002_kupffer_arm_proposal(np002_packet())
+    review = _accepted_review(proposal)
+    addition = copy.deepcopy(proposal["proposed_arms"][0])
+    addition["candidate_id"] = "KUP-07"
+    addition["target_cell"] = "hepatocytes"
+    review["additions"] = [addition]
+
+    with pytest.raises(ValueError, match="Kupffer"):
+        validate_arm_review(proposal, review)
+
+    arbitrary = copy.deepcopy(addition)
+    arbitrary["target_cell"] = "Kupffer cells"
+    arbitrary["formulation"] = "invented formulation"
+    arbitrary["payload"] = "invented payload"
+    arbitrary["existence_evidence_ids"] = ["E-ROUTE"]
+    arbitrary["outcome_evidence_ids"] = ["E-ROUTE"]
+    review["additions"] = [arbitrary]
+    with pytest.raises(ValueError, match="scope|semantic|support"):
+        validate_arm_review(proposal, review)
 
 
 def test_rejects_wrong_review_version_or_proposal_sha():
