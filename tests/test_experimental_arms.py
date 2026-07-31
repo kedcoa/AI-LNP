@@ -1352,16 +1352,28 @@ def test_dynamic_schema_closes_entries_and_encodes_extracted_and_ambiguous_shape
     schema = build_experimental_arm_schema(base_schema(), approved_arms())
 
     entry = schema["$defs"]["ExperimentalArmAccountingEntry"]
-    assert entry["properties"]["disposition"]["enum"] == [
-        "extracted",
-        "ambiguous",
-    ]
+    assert entry["properties"]["disposition"] == {
+        "type": "string",
+        "enum": ["extracted", "ambiguous"],
+    }
+    assert entry["properties"]["reason_code"] == {
+        "type": "string",
+        "enum": [
+            "extracted",
+            "conflicting_evidence",
+            "candidate_not_grounded",
+        ],
+    }
     assert "oneOf" not in entry
     variants = entry["anyOf"]
     assert [variant["properties"]["disposition"] for variant in variants] == [
-        {"const": "extracted"},
-        {"const": "ambiguous"},
+        {"type": "string", "const": "extracted"},
+        {"type": "string", "const": "ambiguous"},
     ]
+    assert variants[0]["properties"]["reason_code"] == {
+        "type": "string",
+        "const": "extracted",
+    }
     assert variants[0]["properties"]["linked_experiment_ids"]["minItems"] == 1
     assert variants[0]["properties"]["linked_outcome_ids"]["minItems"] == 1
     assert variants[1]["properties"]["linked_experiment_ids"]["maxItems"] == 0

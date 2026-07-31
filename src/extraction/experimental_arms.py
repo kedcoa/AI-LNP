@@ -1282,7 +1282,10 @@ def _entry_variant(
     return {
         "type": "object",
         "properties": {
-            "disposition": {"const": disposition},
+            "disposition": {
+                "type": "string",
+                "const": disposition,
+            },
             "linked_experiment_ids": {
                 "type": "array",
                 "items": {"type": "string"},
@@ -1328,7 +1331,10 @@ def build_experimental_arm_schema(
     definitions["ExperimentalArmAccountingEntry"] = {
         "type": "object",
         "properties": {
-            "disposition": {"enum": ["extracted", "ambiguous"]},
+            "disposition": {
+                "type": "string",
+                "enum": ["extracted", "ambiguous"],
+            },
             "linked_experiment_ids": {
                 "type": "array",
                 "items": {"type": "string"},
@@ -1343,6 +1349,7 @@ def build_experimental_arm_schema(
                 "minItems": 1,
             },
             "reason_code": {
+                "type": "string",
                 "enum": ["extracted", *_AMBIGUOUS_REASON_CODES],
             },
             "explanation": {"type": "string", "minLength": 1},
@@ -1361,13 +1368,19 @@ def build_experimental_arm_schema(
                 disposition="extracted",
                 experiment_constraints={"minItems": 1},
                 outcome_constraints={"minItems": 1},
-                reason_schema={"const": "extracted"},
+                reason_schema={
+                    "type": "string",
+                    "const": "extracted",
+                },
             ),
             _entry_variant(
                 disposition="ambiguous",
                 experiment_constraints={"maxItems": 0},
                 outcome_constraints={"maxItems": 0},
-                reason_schema={"enum": list(_AMBIGUOUS_REASON_CODES)},
+                reason_schema={
+                    "type": "string",
+                    "enum": list(_AMBIGUOUS_REASON_CODES),
+                },
             ),
         ]
     }
