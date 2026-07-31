@@ -1,0 +1,1250 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-002",
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-002-E-b630414e4abef2d1",
+      "NP-002-E-eed49c2f063f485a",
+      "NP-002-E-a7b58e690d38b83c",
+      "NP-002-E-3916e805b2eb204f",
+      "NP-002-E-8db53352513724f5"
+    ],
+    "explanation": "The packet reports in vivo delivery experiments using MC3 and cKK-E12 LNPs with either QUANT DNA biodistribution tracer or Cre mRNA reporter payloads, with cell-resolved Kupffer-cell measurements and linked formulation-specific outcomes."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F-01",
+      "formulation_name": {
+        "value": "MC3",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b630414e4abef2d1",
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The supplied packet identifies MC3 but does not report its component composition."
+      },
+      "composition_basis": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No composition basis is reported in the supplied packet."
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No N/P ratio is reported in the supplied packet."
+      }
+    },
+    {
+      "formulation_id": "F-02",
+      "formulation_name": {
+        "value": "cKK-E12",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b630414e4abef2d1",
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The supplied packet identifies cKK-E12 but does not report its component composition."
+      },
+      "composition_basis": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No composition basis is reported in the supplied packet."
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No N/P ratio is reported in the supplied packet."
+      }
+    }
+  ],
+  "components": [],
+  "experiments": [
+    {
+      "experiment_id": "EXP-01",
+      "formulation_id": "F-01",
+      "payload_type": {
+        "value": "DNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-ea21ecb134cfe604"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "QUANT DNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "payload_role": {
+        "value": "biodistribution_tracer",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-ea21ecb134cfe604",
+          "NP-002-E-5d4feb9758994e6e"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No encoded product is reported for the QUANT DNA tracer."
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b630414e4abef2d1",
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "This is a biodistribution tracer experiment, not a therapeutic targeting experiment."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-5d4feb9758994e6e"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mus musculus",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is reported."
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a",
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 0.3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 6,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "hours",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "experiment_id": "EXP-02",
+      "formulation_id": "F-02",
+      "payload_type": {
+        "value": "DNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-ea21ecb134cfe604"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "QUANT DNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "payload_role": {
+        "value": "biodistribution_tracer",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-ea21ecb134cfe604",
+          "NP-002-E-5d4feb9758994e6e"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No encoded product is reported for the QUANT DNA tracer."
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b630414e4abef2d1",
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "This is a biodistribution tracer experiment, not a therapeutic targeting experiment."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-5d4feb9758994e6e"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mus musculus",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is reported."
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a",
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 0.3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 6,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "hours",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "experiment_id": "EXP-03",
+      "formulation_id": "F-01",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "payload_role": {
+        "value": "reporter",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Cre",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "This is a reporter delivery experiment, not a therapeutic targeting experiment."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mus musculus",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is reported."
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c",
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 1.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "days",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "experiment_id": "EXP-04",
+      "formulation_id": "F-02",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "payload_role": {
+        "value": "reporter",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Cre",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "This is a reporter delivery experiment, not a therapeutic targeting experiment."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mus musculus",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is reported."
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c",
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 1.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "days",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "experiment_id": "EXP-05",
+      "formulation_id": "F-01",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "payload_role": {
+        "value": "reporter",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Cre",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "This is a reporter delivery experiment, not a therapeutic targeting experiment."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mus musculus",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is reported."
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103",
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 0.3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "days",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "experiment_id": "EXP-06",
+      "formulation_id": "F-02",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "payload_role": {
+        "value": "reporter",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Cre",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "This is a reporter delivery experiment, not a therapeutic targeting experiment."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "Mus musculus",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a5694ee259cf978f"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is reported."
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103",
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 0.3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-59fa0ed20f3c3103"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "days",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "OUT-01",
+      "experiment_id": "EXP-01",
+      "assay": {
+        "value": "digital droplet PCR",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-ea21ecb134cfe604",
+          "NP-002-E-5d4feb9758994e6e"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "DNA measured per cell",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-7dba55b961c9fe1a"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "endothelial cells relative to other cell types",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-7dba55b961c9fe1a"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric DNA-per-cell value is reported in the supplied packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome unit is reported."
+      },
+      "qualitative_outcome": {
+        "value": "For MC3 LNPs, less DNA was measured per endothelial cell relative to the other cell types; this result was not statistically significant.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-7dba55b961c9fe1a"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "OUT-02",
+      "experiment_id": "EXP-02",
+      "assay": {
+        "value": "digital droplet PCR",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-ea21ecb134cfe604",
+          "NP-002-E-5d4feb9758994e6e"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "DNA accumulation",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-1c82bf3a77fad899",
+          "NP-002-E-ccc951c9451845e5"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "MC3",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-ccc951c9451845e5"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric DNA-accumulation value is reported in the supplied packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome unit is reported."
+      },
+      "qualitative_outcome": {
+        "value": "cKK-E12 facilitated DNA accumulation in all three cell types, but absolute DNA accumulation was significantly lower with cKK-E12 than with MC3.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-1c82bf3a77fad899",
+          "NP-002-E-ccc951c9451845e5"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "OUT-03",
+      "experiment_id": "EXP-03",
+      "assay": {
+        "value": "flow cytometry",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "percent tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "PBS-treated Ai14 control",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-6596b6d576715530"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric percentage is reported in the supplied packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome unit is reported."
+      },
+      "qualitative_outcome": {
+        "value": "At 1.0 mg/kg, high levels of tdTomato-positive cells were observed across hepatocytes, endothelial cells, and Kupffer cells.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b3a4760121f32ac5"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "OUT-04",
+      "experiment_id": "EXP-04",
+      "assay": {
+        "value": "flow cytometry",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "percent tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "MC3",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3fc62774b28c2dff"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric percentage is reported in the supplied packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome unit is reported."
+      },
+      "qualitative_outcome": {
+        "value": "At 1.0 mg/kg, cKK-E12 performed slightly better than MC3 for delivery.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3fc62774b28c2dff"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "OUT-05",
+      "experiment_id": "EXP-05",
+      "assay": {
+        "value": "flow cytometry",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "percent tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "hepatocytes",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-8db53352513724f5"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric percentage is reported in the supplied packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome unit is reported."
+      },
+      "qualitative_outcome": {
+        "value": "At 0.3 mg/kg, Kupffer cells had a statistically significantly higher percent of tdTomato-positive cells than hepatocytes.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-8db53352513724f5"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "OUT-06",
+      "experiment_id": "EXP-06",
+      "assay": {
+        "value": "flow cytometry",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "percent tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c095e60ebdf5064d",
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "MC3",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3fc62774b28c2dff"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric percentage is reported in the supplied packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome unit is reported."
+      },
+      "qualitative_outcome": {
+        "value": "At 0.3 mg/kg, cKK-E12 delivery was statistically higher than MC3; Kupffer cells had a statistically significantly higher percent of tdTomato-positive cells than hepatocytes.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3fc62774b28c2dff",
+          "NP-002-E-8db53352513724f5"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [
+    "The supplied packet does not report LNP component compositions, composition basis, or N/P ratios for MC3 or cKK-E12.",
+    "The supplied packet does not provide numeric DNA accumulation or tdTomato-positive-cell percentages."
+  ],
+  "experimental_arm_accounting": {
+    "KUP-01": {
+      "disposition": "extracted",
+      "linked_experiment_ids": [
+        "EXP-01"
+      ],
+      "linked_outcome_ids": [
+        "OUT-01"
+      ],
+      "evidence_ids": [
+        "NP-002-E-eed49c2f063f485a",
+        "NP-002-E-7dba55b961c9fe1a"
+      ],
+      "reason_code": "extracted",
+      "explanation": "MC3 QUANT DNA tracer arm at 0.3 mg/kg was extracted with its six-hour cell-resolved biodistribution outcome."
+    },
+    "KUP-02": {
+      "disposition": "extracted",
+      "linked_experiment_ids": [
+        "EXP-02"
+      ],
+      "linked_outcome_ids": [
+        "OUT-02"
+      ],
+      "evidence_ids": [
+        "NP-002-E-eed49c2f063f485a",
+        "NP-002-E-1c82bf3a77fad899",
+        "NP-002-E-ccc951c9451845e5"
+      ],
+      "reason_code": "extracted",
+      "explanation": "cKK-E12 QUANT DNA tracer arm at 0.3 mg/kg was extracted with its reported DNA-accumulation comparison to MC3."
+    },
+    "KUP-03": {
+      "disposition": "extracted",
+      "linked_experiment_ids": [
+        "EXP-03"
+      ],
+      "linked_outcome_ids": [
+        "OUT-03"
+      ],
+      "evidence_ids": [
+        "NP-002-E-a7b58e690d38b83c",
+        "NP-002-E-b3a4760121f32ac5"
+      ],
+      "reason_code": "extracted",
+      "explanation": "MC3 Cre mRNA reporter arm at 1.0 mg/kg was extracted with the reported high tdTomato-positive levels across isolated cell types."
+    },
+    "KUP-04": {
+      "disposition": "extracted",
+      "linked_experiment_ids": [
+        "EXP-04"
+      ],
+      "linked_outcome_ids": [
+        "OUT-04"
+      ],
+      "evidence_ids": [
+        "NP-002-E-a7b58e690d38b83c",
+        "NP-002-E-3fc62774b28c2dff"
+      ],
+      "reason_code": "extracted",
+      "explanation": "cKK-E12 Cre mRNA reporter arm at 1.0 mg/kg was extracted with the reported slight delivery advantage over MC3."
+    },
+    "KUP-05": {
+      "disposition": "extracted",
+      "linked_experiment_ids": [
+        "EXP-05"
+      ],
+      "linked_outcome_ids": [
+        "OUT-05"
+      ],
+      "evidence_ids": [
+        "NP-002-E-59fa0ed20f3c3103",
+        "NP-002-E-8db53352513724f5"
+      ],
+      "reason_code": "extracted",
+      "explanation": "MC3 Cre mRNA reporter arm at 0.3 mg/kg was extracted with the reported Kupffer-cell tdTomato-positive result relative to hepatocytes."
+    },
+    "KUP-06": {
+      "disposition": "extracted",
+      "linked_experiment_ids": [
+        "EXP-06"
+      ],
+      "linked_outcome_ids": [
+        "OUT-06"
+      ],
+      "evidence_ids": [
+        "NP-002-E-59fa0ed20f3c3103",
+        "NP-002-E-3fc62774b28c2dff",
+        "NP-002-E-8db53352513724f5"
+      ],
+      "reason_code": "extracted",
+      "explanation": "cKK-E12 Cre mRNA reporter arm at 0.3 mg/kg was extracted with its reported advantage over MC3 and Kupffer-cell result relative to hepatocytes."
+    }
+  }
+}

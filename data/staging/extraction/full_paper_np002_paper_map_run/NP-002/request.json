@@ -1,0 +1,731 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "low"
+  },
+  "store": false,
+  "prompt_cache_key": "922de09fd1e1b25458a2db798e58327297b0d9a7110eb93dea6c3839c96a0102",
+  "input": [
+    {
+      "role": "system",
+      "content": "Build a shared, evidence-grounded map of this paper. Account for every local\nanchor. Report formulations, components, ratios and bases, payloads, common\nroutes/species/models, recipient contexts, and provisional experiment contexts.\nEvery reported field must cite only supplied evidence IDs. Provisional contexts\nmust not combine facts unless one supplied record directly supports their joint\nmembership or the source explicitly supplies pairing/cross-product metadata.\n"
+    },
+    {
+      "role": "user",
+      "content": "{\"anchor_candidates\":[{\"anchor_id\":\"ANCHOR::FPE-ad06f07673f8363730b0\",\"anchor_types\":[\"cell\",\"outcome\"],\"evidence_id\":\"FPE-ad06f07673f8363730b0\"},{\"anchor_id\":\"ANCHOR::FPE-59e94df8bc2089b73677\",\"anchor_types\":[\"payload\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-59e94df8bc2089b73677\"},{\"anchor_id\":\"ANCHOR::FPE-e0558babe19ca166cb87\",\"anchor_types\":[\"cell\",\"outcome\"],\"evidence_id\":\"FPE-e0558babe19ca166cb87\"},{\"anchor_id\":\"ANCHOR::FPE-2731245bc078d844a803\",\"anchor_types\":[\"payload\",\"model\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-2731245bc078d844a803\"},{\"anchor_id\":\"ANCHOR::FPE-c6d3dc408cd7542cf2b6\",\"anchor_types\":[\"cell\",\"outcome\"],\"evidence_id\":\"FPE-c6d3dc408cd7542cf2b6\"},{\"anchor_id\":\"ANCHOR::FPE-1f829e440dcd18146cc1\",\"anchor_types\":[\"route\",\"outcome\"],\"evidence_id\":\"FPE-1f829e440dcd18146cc1\"},{\"anchor_id\":\"ANCHOR::FPE-79ee5d62351612179d5e\",\"anchor_types\":[\"route\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-79ee5d62351612179d5e\"},{\"anchor_id\":\"ANCHOR::FPE-eaafa6bea5490a6cb80c\",\"anchor_types\":[\"payload\",\"model\",\"species\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-eaafa6bea5490a6cb80c\"},{\"anchor_id\":\"ANCHOR::FPE-bdb64267f7352283aea6\",\"anchor_types\":[\"payload\",\"model\",\"species\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-bdb64267f7352283aea6\"},{\"anchor_id\":\"ANCHOR::FPE-00f99395c2ac784704e8\",\"anchor_types\":[\"formulation\",\"payload\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-00f99395c2ac784704e8\"},{\"anchor_id\":\"ANCHOR::FPE-3efccde05a37ec0b8cd8\",\"anchor_types\":[\"formulation\",\"preparation_method\",\"component_ratio\",\"ratio_basis\",\"payload\",\"model\"],\"evidence_id\":\"FPE-3efccde05a37ec0b8cd8\"},{\"anchor_id\":\"ANCHOR::FPE-bb9c089e0c1044b703c5\",\"anchor_types\":[\"formulation\",\"preparation_method\",\"payload\",\"route\"],\"evidence_id\":\"FPE-bb9c089e0c1044b703c5\"},{\"anchor_id\":\"ANCHOR::FPE-5bec3de875ed9f6a3eb5\",\"anchor_types\":[\"payload\",\"species\",\"route\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-5bec3de875ed9f6a3eb5\"},{\"anchor_id\":\"ANCHOR::FPE-8927a98fd29257ca83e9\",\"anchor_types\":[\"payload\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-8927a98fd29257ca83e9\"},{\"anchor_id\":\"ANCHOR::FPE-cd03383cc19eca6b079d\",\"anchor_types\":[\"species\",\"route\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-cd03383cc19eca6b079d\"},{\"anchor_id\":\"ANCHOR::FPE-883153e4ffbaa31575ea\",\"anchor_types\":[\"payload\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-883153e4ffbaa31575ea\"},{\"anchor_id\":\"ANCHOR::FPE-cae3900b468951836ad3\",\"anchor_types\":[\"route\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-cae3900b468951836ad3\"},{\"anchor_id\":\"ANCHOR::FPE-649ef55028707ffe8082\",\"anchor_types\":[\"payload\",\"species\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-649ef55028707ffe8082\"},{\"anchor_id\":\"ANCHOR::FPE-00c27d4eb3ba578e88f4\",\"anchor_types\":[\"payload\",\"model\",\"species\",\"route\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-00c27d4eb3ba578e88f4\"},{\"anchor_id\":\"ANCHOR::FPE-bc97136f0142d3e9b3b5\",\"anchor_types\":[\"species\",\"route\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-bc97136f0142d3e9b3b5\"},{\"anchor_id\":\"ANCHOR::FPE-05eda0b7b2d6dcf97ac5\",\"anchor_types\":[\"payload\",\"model\",\"species\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-05eda0b7b2d6dcf97ac5\"},{\"anchor_id\":\"ANCHOR::FPE-30f1bb31f376287ae987\",\"anchor_types\":[\"formulation\",\"component_ratio\",\"ratio_basis\",\"payload\"],\"evidence_id\":\"FPE-30f1bb31f376287ae987\"},{\"anchor_id\":\"ANCHOR::FPE-0163147085dca95d3373\",\"anchor_types\":[\"formulation\",\"payload\",\"outcome\"],\"evidence_id\":\"FPE-0163147085dca95d3373\"},{\"anchor_id\":\"ANCHOR::FPE-68a314b484296d9b5eed\",\"anchor_types\":[\"preparation_method\"],\"evidence_id\":\"FPE-68a314b484296d9b5eed\"},{\"anchor_id\":\"ANCHOR::FPE-ae153899d6a894c3a04d\",\"anchor_types\":[\"model\",\"species\",\"route\"],\"evidence_id\":\"FPE-ae153899d6a894c3a04d\"},{\"anchor_id\":\"ANCHOR::FPE-679aa3c1a8f767750d2e\",\"anchor_types\":[\"species\",\"cell\"],\"evidence_id\":\"FPE-679aa3c1a8f767750d2e\"},{\"anchor_id\":\"ANCHOR::FPE-4142b42b7ea5caca50c9\",\"anchor_types\":[\"preparation_method\"],\"evidence_id\":\"FPE-4142b42b7ea5caca50c9\"},{\"anchor_id\":\"ANCHOR::FPE-668e6ad521f593b94056\",\"anchor_types\":[\"formulation\",\"species\",\"route\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-668e6ad521f593b94056\"},{\"anchor_id\":\"ANCHOR::FPE-a0955657ab1853124fbb\",\"anchor_types\":[\"model\",\"species\"],\"evidence_id\":\"FPE-a0955657ab1853124fbb\"},{\"anchor_id\":\"ANCHOR::FPE-6d748d75ed98dffcffe9\",\"anchor_types\":[\"payload\",\"model\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-6d748d75ed98dffcffe9\"},{\"anchor_id\":\"ANCHOR::FPE-4fb10f9e4c5afb3d31f0\",\"anchor_types\":[\"component_ratio\"],\"evidence_id\":\"FPE-4fb10f9e4c5afb3d31f0\"},{\"anchor_id\":\"ANCHOR::FPE-9c81f30fa20ff82936c0\",\"anchor_types\":[\"component_ratio\"],\"evidence_id\":\"FPE-9c81f30fa20ff82936c0\"},{\"anchor_id\":\"ANCHOR::FPE-cd58b20627d1901d69ba\",\"anchor_types\":[\"formulation\",\"component_ratio\"],\"evidence_id\":\"FPE-cd58b20627d1901d69ba\"},{\"anchor_id\":\"ANCHOR::FPE-74fc403428cfb6eaf775\",\"anchor_types\":[\"component_ratio\",\"ratio_basis\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-74fc403428cfb6eaf775\"},{\"anchor_id\":\"ANCHOR::FPE-fcbeacadf3343cc8a452\",\"anchor_types\":[\"component_ratio\",\"outcome\"],\"evidence_id\":\"FPE-fcbeacadf3343cc8a452\"},{\"anchor_id\":\"ANCHOR::FPE-04347ac63f4ce6a4f452\",\"anchor_types\":[\"component_ratio\",\"model\",\"route\",\"cell\"],\"evidence_id\":\"FPE-04347ac63f4ce6a4f452\"},{\"anchor_id\":\"ANCHOR::FPE-c2aae95153fa71061915\",\"anchor_types\":[\"component_ratio\",\"payload\",\"model\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-c2aae95153fa71061915\"},{\"anchor_id\":\"ANCHOR::FPE-1b73b3ebd0beab414a2b\",\"anchor_types\":[\"formulation\",\"component_ratio\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-1b73b3ebd0beab414a2b\"},{\"anchor_id\":\"ANCHOR::FPE-2deb31febb4c01b32b33\",\"anchor_types\":[\"component_ratio\",\"payload\",\"model\",\"species\",\"cell\"],\"evidence_id\":\"FPE-2deb31febb4c01b32b33\"},{\"anchor_id\":\"ANCHOR::FPE-ab4d7926427bc2a7ada7\",\"anchor_types\":[\"component_ratio\",\"outcome\"],\"evidence_id\":\"FPE-ab4d7926427bc2a7ada7\"},{\"anchor_id\":\"ANCHOR::FPE-e09743fd0e82d5da95db\",\"anchor_types\":[\"component_ratio\",\"model\"],\"evidence_id\":\"FPE-e09743fd0e82d5da95db\"},{\"anchor_id\":\"ANCHOR::FPE-ca54eec20ba76f11ee50\",\"anchor_types\":[\"component_ratio\",\"species\",\"outcome\"],\"evidence_id\":\"FPE-ca54eec20ba76f11ee50\"},{\"anchor_id\":\"ANCHOR::FPE-4da649833f3f10bd9851\",\"anchor_types\":[\"component_ratio\",\"payload\",\"species\",\"cell\"],\"evidence_id\":\"FPE-4da649833f3f10bd9851\"},{\"anchor_id\":\"ANCHOR::FPE-412bc96c9390fa12fbd6\",\"anchor_types\":[\"component_ratio\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-412bc96c9390fa12fbd6\"},{\"anchor_id\":\"ANCHOR::FPE-3df9795932573e341e07\",\"anchor_types\":[\"component_ratio\",\"outcome\"],\"evidence_id\":\"FPE-3df9795932573e341e07\"},{\"anchor_id\":\"ANCHOR::FPE-d78e5071c952eee7a04b\",\"anchor_types\":[\"component_ratio\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-d78e5071c952eee7a04b\"},{\"anchor_id\":\"ANCHOR::FPE-0e3631d97d1df6ebebe1\",\"anchor_types\":[\"outcome\"],\"evidence_id\":\"FPE-0e3631d97d1df6ebebe1\"},{\"anchor_id\":\"ANCHOR::FPE-9f92e07cad3512b8ea95\",\"anchor_types\":[\"component_ratio\",\"cell\"],\"evidence_id\":\"FPE-9f92e07cad3512b8ea95\"},{\"anchor_id\":\"ANCHOR::FPE-fe94f464db00375b540f\",\"anchor_types\":[\"component_ratio\",\"species\",\"outcome\"],\"evidence_id\":\"FPE-fe94f464db00375b540f\"},{\"anchor_id\":\"ANCHOR::FPE-5ec6c681445337800688\",\"anchor_types\":[\"component_ratio\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-5ec6c681445337800688\"},{\"anchor_id\":\"ANCHOR::FPE-d249c2a0652796f597d6\",\"anchor_types\":[\"model\",\"cell\",\"outcome\"],\"evidence_id\":\"FPE-d249c2a0652796f597d6\"},{\"anchor_id\":\"ANCHOR::FPE-a577d3f4d2f7e44eac98\",\"anchor_types\":[\"component_ratio\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-a577d3f4d2f7e44eac98\"},{\"anchor_id\":\"ANCHOR::FPE-d03de6ee33c5f0663a89\",\"anchor_types\":[\"component_ratio\",\"model\",\"outcome\"],\"evidence_id\":\"FPE-d03de6ee33c5f0663a89\"},{\"anchor_id\":\"ANCHOR::FPE-f1ea36f92a61b472456b\",\"anchor_types\":[\"component_ratio\",\"outcome\"],\"evidence_id\":\"FPE-f1ea36f92a61b472456b\"},{\"anchor_id\":\"ANCHOR::FPE-eda2cb9b5ba68525ddac\",\"anchor_types\":[\"component_ratio\",\"payload\",\"cell\"],\"evidence_id\":\"FPE-eda2cb9b5ba68525ddac\"},{\"anchor_id\":\"ANCHOR::FPE-91e62b084aa90efd80ea\",\"anchor_types\":[\"cell\",\"outcome\"],\"evidence_id\":\"FPE-91e62b084aa90efd80ea\"},{\"anchor_id\":\"ANCHOR::FPE-c81b501b7e43ea110a41\",\"anchor_types\":[\"component_ratio\"],\"evidence_id\":\"FPE-c81b501b7e43ea110a41\"},{\"anchor_id\":\"ANCHOR::FPE-dd453f43709891045c00\",\"anchor_types\":[\"payload\",\"species\",\"cell\"],\"evidence_id\":\"FPE-dd453f43709891045c00\"},{\"anchor_id\":\"ANCHOR::FPE-196f7bf837b46c217239\",\"anchor_types\":[\"component_ratio\",\"payload\",\"model\"],\"evidence_id\":\"FPE-196f7bf837b46c217239\"},{\"anchor_id\":\"ANCHOR::FPE-2a63da41404f32c755f0\",\"anchor_types\":[\"component_ratio\",\"payload\",\"species\",\"cell\"],\"evidence_id\":\"FPE-2a63da41404f32c755f0\"}],\"coverage_diagnostics\":[{\"category\":\"formulation_preparation\",\"evidence_ids\":[\"FPE-00f99395c2ac784704e8\",\"FPE-3efccde05a37ec0b8cd8\",\"FPE-bb9c089e0c1044b703c5\",\"FPE-30f1bb31f376287ae987\",\"FPE-0163147085dca95d3373\",\"FPE-68a314b484296d9b5eed\",\"FPE-4142b42b7ea5caca50c9\",\"FPE-668e6ad521f593b94056\",\"FPE-cd58b20627d1901d69ba\",\"FPE-1b73b3ebd0beab414a2b\"],\"evidence_ids_by_tag\":{\"formulation\":[\"FPE-00f99395c2ac784704e8\",\"FPE-3efccde05a37ec0b8cd8\",\"FPE-bb9c089e0c1044b703c5\",\"FPE-30f1bb31f376287ae987\",\"FPE-0163147085dca95d3373\",\"FPE-668e6ad521f593b94056\",\"FPE-cd58b20627d1901d69ba\",\"FPE-1b73b3ebd0beab414a2b\"],\"preparation_method\":[\"FPE-3efccde05a37ec0b8cd8\",\"FPE-bb9c089e0c1044b703c5\",\"FPE-68a314b484296d9b5eed\",\"FPE-4142b42b7ea5caca50c9\"]},\"message\":\"Local source evidence was retained for this category.\",\"status\":\"covered\"},{\"category\":\"component_ratios\",\"evidence_ids\":[\"FPE-3efccde05a37ec0b8cd8\",\"FPE-30f1bb31f376287ae987\",\"FPE-4fb10f9e4c5afb3d31f0\",\"FPE-9c81f30fa20ff82936c0\",\"FPE-cd58b20627d1901d69ba\",\"FPE-74fc403428cfb6eaf775\",\"FPE-fcbeacadf3343cc8a452\",\"FPE-04347ac63f4ce6a4f452\",\"FPE-c2aae95153fa71061915\",\"FPE-1b73b3ebd0beab414a2b\",\"FPE-2deb31febb4c01b32b33\",\"FPE-ab4d7926427bc2a7ada7\",\"FPE-e09743fd0e82d5da95db\",\"FPE-ca54eec20ba76f11ee50\",\"FPE-4da649833f3f10bd9851\",\"FPE-412bc96c9390fa12fbd6\",\"FPE-3df9795932573e341e07\",\"FPE-d78e5071c952eee7a04b\",\"FPE-9f92e07cad3512b8ea95\",\"FPE-fe94f464db00375b540f\",\"FPE-5ec6c681445337800688\",\"FPE-a577d3f4d2f7e44eac98\",\"FPE-d03de6ee33c5f0663a89\",\"FPE-f1ea36f92a61b472456b\",\"FPE-eda2cb9b5ba68525ddac\",\"FPE-c81b501b7e43ea110a41\",\"FPE-196f7bf837b46c217239\",\"FPE-2a63da41404f32c755f0\"],\"evidence_ids_by_tag\":{\"component_ratio\":[\"FPE-3efccde05a37ec0b8cd8\",\"FPE-30f1bb31f376287ae987\",\"FPE-4fb10f9e4c5afb3d31f0\",\"FPE-9c81f30fa20ff82936c0\",\"FPE-cd58b20627d1901d69ba\",\"FPE-74fc403428cfb6eaf775\",\"FPE-fcbeacadf3343cc8a452\",\"FPE-04347ac63f4ce6a4f452\",\"FPE-c2aae95153fa71061915\",\"FPE-1b73b3ebd0beab414a2b\",\"FPE-2deb31febb4c01b32b33\",\"FPE-ab4d7926427bc2a7ada7\",\"FPE-e09743fd0e82d5da95db\",\"FPE-ca54eec20ba76f11ee50\",\"FPE-4da649833f3f10bd9851\",\"FPE-412bc96c9390fa12fbd6\",\"FPE-3df9795932573e341e07\",\"FPE-d78e5071c952eee7a04b\",\"FPE-9f92e07cad3512b8ea95\",\"FPE-fe94f464db00375b540f\",\"FPE-5ec6c681445337800688\",\"FPE-a577d3f4d2f7e44eac98\",\"FPE-d03de6ee33c5f0663a89\",\"FPE-f1ea36f92a61b472456b\",\"FPE-eda2cb9b5ba68525ddac\",\"FPE-c81b501b7e43ea110a41\",\"FPE-196f7bf837b46c217239\",\"FPE-2a63da41404f32c755f0\"],\"ratio_basis\":[\"FPE-3efccde05a37ec0b8cd8\",\"FPE-30f1bb31f376287ae987\",\"FPE-74fc403428cfb6eaf775\"]},\"message\":\"Local source evidence was retained for this category.\",\"status\":\"covered\"},{\"category\":\"payload\",\"evidence_ids\":[\"FPE-59e94df8bc2089b73677\",\"FPE-2731245bc078d844a803\",\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-00f99395c2ac784704e8\",\"FPE-3efccde05a37ec0b8cd8\",\"FPE-bb9c089e0c1044b703c5\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-8927a98fd29257ca83e9\",\"FPE-883153e4ffbaa31575ea\",\"FPE-649ef55028707ffe8082\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-30f1bb31f376287ae987\",\"FPE-0163147085dca95d3373\",\"FPE-6d748d75ed98dffcffe9\",\"FPE-c2aae95153fa71061915\",\"FPE-2deb31febb4c01b32b33\",\"FPE-4da649833f3f10bd9851\",\"FPE-eda2cb9b5ba68525ddac\",\"FPE-dd453f43709891045c00\",\"FPE-196f7bf837b46c217239\",\"FPE-2a63da41404f32c755f0\"],\"evidence_ids_by_tag\":{\"payload\":[\"FPE-59e94df8bc2089b73677\",\"FPE-2731245bc078d844a803\",\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-00f99395c2ac784704e8\",\"FPE-3efccde05a37ec0b8cd8\",\"FPE-bb9c089e0c1044b703c5\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-8927a98fd29257ca83e9\",\"FPE-883153e4ffbaa31575ea\",\"FPE-649ef55028707ffe8082\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-30f1bb31f376287ae987\",\"FPE-0163147085dca95d3373\",\"FPE-6d748d75ed98dffcffe9\",\"FPE-c2aae95153fa71061915\",\"FPE-2deb31febb4c01b32b33\",\"FPE-4da649833f3f10bd9851\",\"FPE-eda2cb9b5ba68525ddac\",\"FPE-dd453f43709891045c00\",\"FPE-196f7bf837b46c217239\",\"FPE-2a63da41404f32c755f0\"]},\"message\":\"Local source evidence was retained for this category.\",\"status\":\"covered\"},{\"category\":\"model_species_route_cell\",\"evidence_ids\":[\"FPE-ad06f07673f8363730b0\",\"FPE-59e94df8bc2089b73677\",\"FPE-e0558babe19ca166cb87\",\"FPE-2731245bc078d844a803\",\"FPE-c6d3dc408cd7542cf2b6\",\"FPE-1f829e440dcd18146cc1\",\"FPE-79ee5d62351612179d5e\",\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-00f99395c2ac784704e8\",\"FPE-3efccde05a37ec0b8cd8\",\"FPE-bb9c089e0c1044b703c5\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-8927a98fd29257ca83e9\",\"FPE-cd03383cc19eca6b079d\",\"FPE-883153e4ffbaa31575ea\",\"FPE-cae3900b468951836ad3\",\"FPE-649ef55028707ffe8082\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-bc97136f0142d3e9b3b5\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-ae153899d6a894c3a04d\",\"FPE-679aa3c1a8f767750d2e\",\"FPE-668e6ad521f593b94056\",\"FPE-a0955657ab1853124fbb\",\"FPE-6d748d75ed98dffcffe9\",\"FPE-74fc403428cfb6eaf775\",\"FPE-04347ac63f4ce6a4f452\",\"FPE-c2aae95153fa71061915\",\"FPE-1b73b3ebd0beab414a2b\",\"FPE-2deb31febb4c01b32b33\",\"FPE-e09743fd0e82d5da95db\",\"FPE-ca54eec20ba76f11ee50\",\"FPE-4da649833f3f10bd9851\",\"FPE-412bc96c9390fa12fbd6\",\"FPE-d78e5071c952eee7a04b\",\"FPE-9f92e07cad3512b8ea95\",\"FPE-fe94f464db00375b540f\",\"FPE-5ec6c681445337800688\",\"FPE-d249c2a0652796f597d6\",\"FPE-a577d3f4d2f7e44eac98\",\"FPE-d03de6ee33c5f0663a89\",\"FPE-eda2cb9b5ba68525ddac\",\"FPE-91e62b084aa90efd80ea\",\"FPE-dd453f43709891045c00\",\"FPE-196f7bf837b46c217239\",\"FPE-2a63da41404f32c755f0\"],\"evidence_ids_by_tag\":{\"cell\":[\"FPE-ad06f07673f8363730b0\",\"FPE-e0558babe19ca166cb87\",\"FPE-2731245bc078d844a803\",\"FPE-c6d3dc408cd7542cf2b6\",\"FPE-79ee5d62351612179d5e\",\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-8927a98fd29257ca83e9\",\"FPE-cd03383cc19eca6b079d\",\"FPE-883153e4ffbaa31575ea\",\"FPE-cae3900b468951836ad3\",\"FPE-649ef55028707ffe8082\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-bc97136f0142d3e9b3b5\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-679aa3c1a8f767750d2e\",\"FPE-668e6ad521f593b94056\",\"FPE-6d748d75ed98dffcffe9\",\"FPE-04347ac63f4ce6a4f452\",\"FPE-c2aae95153fa71061915\",\"FPE-2deb31febb4c01b32b33\",\"FPE-4da649833f3f10bd9851\",\"FPE-9f92e07cad3512b8ea95\",\"FPE-d249c2a0652796f597d6\",\"FPE-eda2cb9b5ba68525ddac\",\"FPE-91e62b084aa90efd80ea\",\"FPE-dd453f43709891045c00\",\"FPE-2a63da41404f32c755f0\"],\"model\":[\"FPE-59e94df8bc2089b73677\",\"FPE-2731245bc078d844a803\",\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-00f99395c2ac784704e8\",\"FPE-3efccde05a37ec0b8cd8\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-ae153899d6a894c3a04d\",\"FPE-a0955657ab1853124fbb\",\"FPE-6d748d75ed98dffcffe9\",\"FPE-74fc403428cfb6eaf775\",\"FPE-04347ac63f4ce6a4f452\",\"FPE-c2aae95153fa71061915\",\"FPE-1b73b3ebd0beab414a2b\",\"FPE-2deb31febb4c01b32b33\",\"FPE-e09743fd0e82d5da95db\",\"FPE-412bc96c9390fa12fbd6\",\"FPE-d78e5071c952eee7a04b\",\"FPE-5ec6c681445337800688\",\"FPE-d249c2a0652796f597d6\",\"FPE-a577d3f4d2f7e44eac98\",\"FPE-d03de6ee33c5f0663a89\",\"FPE-196f7bf837b46c217239\"],\"route\":[\"FPE-1f829e440dcd18146cc1\",\"FPE-79ee5d62351612179d5e\",\"FPE-bb9c089e0c1044b703c5\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-cd03383cc19eca6b079d\",\"FPE-cae3900b468951836ad3\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-bc97136f0142d3e9b3b5\",\"FPE-ae153899d6a894c3a04d\",\"FPE-668e6ad521f593b94056\",\"FPE-04347ac63f4ce6a4f452\"],\"species\":[\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-cd03383cc19eca6b079d\",\"FPE-649ef55028707ffe8082\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-bc97136f0142d3e9b3b5\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-ae153899d6a894c3a04d\",\"FPE-679aa3c1a8f767750d2e\",\"FPE-668e6ad521f593b94056\",\"FPE-a0955657ab1853124fbb\",\"FPE-2deb31febb4c01b32b33\",\"FPE-ca54eec20ba76f11ee50\",\"FPE-4da649833f3f10bd9851\",\"FPE-fe94f464db00375b540f\",\"FPE-dd453f43709891045c00\",\"FPE-2a63da41404f32c755f0\"]},\"message\":\"Local source evidence was retained for this category.\",\"status\":\"covered\"},{\"category\":\"outcomes\",\"evidence_ids\":[\"FPE-ad06f07673f8363730b0\",\"FPE-59e94df8bc2089b73677\",\"FPE-e0558babe19ca166cb87\",\"FPE-2731245bc078d844a803\",\"FPE-c6d3dc408cd7542cf2b6\",\"FPE-1f829e440dcd18146cc1\",\"FPE-79ee5d62351612179d5e\",\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-00f99395c2ac784704e8\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-8927a98fd29257ca83e9\",\"FPE-cd03383cc19eca6b079d\",\"FPE-883153e4ffbaa31575ea\",\"FPE-cae3900b468951836ad3\",\"FPE-649ef55028707ffe8082\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-bc97136f0142d3e9b3b5\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-0163147085dca95d3373\",\"FPE-668e6ad521f593b94056\",\"FPE-6d748d75ed98dffcffe9\",\"FPE-74fc403428cfb6eaf775\",\"FPE-fcbeacadf3343cc8a452\",\"FPE-c2aae95153fa71061915\",\"FPE-1b73b3ebd0beab414a2b\",\"FPE-ab4d7926427bc2a7ada7\",\"FPE-ca54eec20ba76f11ee50\",\"FPE-412bc96c9390fa12fbd6\",\"FPE-3df9795932573e341e07\",\"FPE-d78e5071c952eee7a04b\",\"FPE-0e3631d97d1df6ebebe1\",\"FPE-fe94f464db00375b540f\",\"FPE-5ec6c681445337800688\",\"FPE-d249c2a0652796f597d6\",\"FPE-a577d3f4d2f7e44eac98\",\"FPE-d03de6ee33c5f0663a89\",\"FPE-f1ea36f92a61b472456b\",\"FPE-91e62b084aa90efd80ea\"],\"evidence_ids_by_tag\":{\"outcome\":[\"FPE-ad06f07673f8363730b0\",\"FPE-59e94df8bc2089b73677\",\"FPE-e0558babe19ca166cb87\",\"FPE-2731245bc078d844a803\",\"FPE-c6d3dc408cd7542cf2b6\",\"FPE-1f829e440dcd18146cc1\",\"FPE-79ee5d62351612179d5e\",\"FPE-eaafa6bea5490a6cb80c\",\"FPE-bdb64267f7352283aea6\",\"FPE-00f99395c2ac784704e8\",\"FPE-5bec3de875ed9f6a3eb5\",\"FPE-8927a98fd29257ca83e9\",\"FPE-cd03383cc19eca6b079d\",\"FPE-883153e4ffbaa31575ea\",\"FPE-cae3900b468951836ad3\",\"FPE-649ef55028707ffe8082\",\"FPE-00c27d4eb3ba578e88f4\",\"FPE-bc97136f0142d3e9b3b5\",\"FPE-05eda0b7b2d6dcf97ac5\",\"FPE-0163147085dca95d3373\",\"FPE-668e6ad521f593b94056\",\"FPE-6d748d75ed98dffcffe9\",\"FPE-74fc403428cfb6eaf775\",\"FPE-fcbeacadf3343cc8a452\",\"FPE-c2aae95153fa71061915\",\"FPE-1b73b3ebd0beab414a2b\",\"FPE-ab4d7926427bc2a7ada7\",\"FPE-ca54eec20ba76f11ee50\",\"FPE-412bc96c9390fa12fbd6\",\"FPE-3df9795932573e341e07\",\"FPE-d78e5071c952eee7a04b\",\"FPE-0e3631d97d1df6ebebe1\",\"FPE-fe94f464db00375b540f\",\"FPE-5ec6c681445337800688\",\"FPE-d249c2a0652796f597d6\",\"FPE-a577d3f4d2f7e44eac98\",\"FPE-d03de6ee33c5f0663a89\",\"FPE-f1ea36f92a61b472456b\",\"FPE-91e62b084aa90efd80ea\"]},\"message\":\"Local source evidence was retained for this category.\",\"status\":\"covered\"}],\"evidence\":[{\"evidence_id\":\"FPE-fce4ab8ac4df7dd62ee4\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"An official website of the United States government\"},{\"evidence_id\":\"FPE-8721d766373f8f101ec1\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Official websites use .gov A .gov website belongs to an official government organization in the United States.\"},{\"evidence_id\":\"FPE-a3e16531cde277a25e1e\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Secure .gov websites use HTTPS A lock ( Lock Locked padlock icon ) or https:// means you've safely connected to the .gov website. Share sensitive information only on official, secure websites.\"},{\"evidence_id\":\"FPE-210cc9825948fe90df84\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Dashboard\"},{\"evidence_id\":\"FPE-d93d15c16d2640460039\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Publications\"},{\"evidence_id\":\"FPE-9935a83f9afdaf5380e3\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Account settings\"},{\"evidence_id\":\"FPE-3563afdd62e958e416c2\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Log out\"},{\"evidence_id\":\"FPE-1db2536abb9f9ab57ac1\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Primary site navigation\"},{\"evidence_id\":\"FPE-cc9bf5f6ff1908bbc30a\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Logged in as:\"},{\"evidence_id\":\"FPE-3f8d0c0eef4dce32c4c7\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Dashboard\"},{\"evidence_id\":\"FPE-9bbe2572115e8d14b2ff\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Publications\"},{\"evidence_id\":\"FPE-12e46527eae6ecc88f37\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Account settings\"},{\"evidence_id\":\"FPE-7332275efa78df9ac92b\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Journal List\"},{\"evidence_id\":\"FPE-8b0dc64a7f6afcd75c5e\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"User Guide\"},{\"evidence_id\":\"FPE-29591aa1cf46c138aadf\",\"heading\":\"PERMALINK\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Copy\"},{\"evidence_id\":\"FPE-881f1dcdbfe9c6b63343\",\"heading\":\"PERMALINK\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Search in PMC\"},{\"evidence_id\":\"FPE-f3626d4e2eca37ac1d72\",\"heading\":\"PERMALINK\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Search in PubMed\"},{\"evidence_id\":\"FPE-00ef1fcaadd60948b4f2\",\"heading\":\"PERMALINK\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"View in NLM Catalog\"},{\"evidence_id\":\"FPE-edc938b4305e62e7c06f\",\"heading\":\"PERMALINK\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Add to search\"},{\"evidence_id\":\"FPE-8db1a84d098b5be59189\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > James E Dahlman\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Author information\"},{\"evidence_id\":\"FPE-56cdefb0ab9a28aa85eb\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > James E Dahlman\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Article notes\"},{\"evidence_id\":\"FPE-a615b29e654b390ce6ff\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > James E Dahlman\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Copyright and License information\"},{\"evidence_id\":\"FPE-289bc16b585e398483f5\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > James E Dahlman\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Associate Editor Michael R. King oversaw the review of this article.\"},{\"evidence_id\":\"FPE-6776f39e81443a8ac697\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > James E Dahlman\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Corresponding author.\"},{\"evidence_id\":\"FPE-fbf07416a845fcace26c\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > James E Dahlman\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Received 2019 Feb 19; Accepted 2019 May 2; Collection date 2019 Oct.\"},{\"evidence_id\":\"FPE-ad06f07673f8363730b0\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Abstract > Introduction\",\"page_number\":1,\"retrieval_tags\":[\"cell\",\"outcome\"],\"text\":\"Lipid nanoparticles (LNPs) tend to accumulate in the liver due to physiological factors. Whereas the biological mechanisms that promote LNP delivery to hepatocytes have been reported, the mechanisms that promote delivery to other cell types within the liver microenvironment are poorly understood. Single cell profiling studies have recently identified subsets of Kupffer cells and hepatic endothelial cells with distinct gene expression patterns and biological phenotypes; we hypothesized these subtypes would differentially interact with nanoparticles.\"},{\"evidence_id\":\"FPE-59e94df8bc2089b73677\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Abstract > Methods\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"model\",\"outcome\"],\"text\":\"To test the hypothesis, we quantified nucleic acid (i) biodistribution and (ii) functional mRNA delivery within the liver microenvironment using two clinically relevant LNPs in vivo.\"},{\"evidence_id\":\"FPE-e0558babe19ca166cb87\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Abstract > Results\",\"page_number\":1,\"retrieval_tags\":[\"cell\",\"outcome\"],\"text\":\"We found that these LNPs distribute nucleic acids distribute to Kupffer cells and liver endothelial cells as efficiently as they distribute to hepatocytes, yet result in more functional mRNA delivery to endothelial cells. Additionally, we found these LNPs differentially accumulate in Kupffer and endothelial cell subsets.\"},{\"evidence_id\":\"FPE-2731245bc078d844a803\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Abstract > Conclusions\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"model\",\"cell\",\"outcome\"],\"text\":\"These data suggest subsets of liver microenvironmental cells can differentially interact with nanoparticles in vivo, thereby altering LNP delivery. More generally, the data suggest that nucleic acid biodistribution is not sufficient to predict functional nucleic acid delivery in vivo.\"},{\"evidence_id\":\"FPE-c6d3dc408cd7542cf2b6\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Abstract > Conclusions\",\"page_number\":1,\"retrieval_tags\":[\"cell\",\"outcome\"],\"text\":\"Keywords: siRNA, Drug delivery, Microenvironment, Kupffer cell, Endothelial cell\"},{\"evidence_id\":\"FPE-1f829e440dcd18146cc1\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Introduction\",\"page_number\":1,\"retrieval_tags\":[\"route\",\"outcome\"],\"text\":\"In 2018, the first siRNA therapy was approved by the FDA for the treatment of hereditary ATTR amyloidosis. In this therapy, administering a lipid nanoparticle (LNP) carrying siTTR at a dose of 0.3 mg/kg every 3 weeks reversed symptoms in an otherwise fatal disease.1 The LNP is comprised of the ionizable lipid MC3, cholesterol, a PEG-lipid, as well as 1,2-distearylglycero-3-phosphocholine (DSPC); like many other LNPs, it preferentially delivers siRNA hepatocytes in the liver.5,11,23,24\"},{\"evidence_id\":\"FPE-79ee5d62351612179d5e\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Introduction\",\"page_number\":1,\"retrieval_tags\":[\"route\",\"cell\",\"outcome\"],\"text\":\"Clinically relevant functional delivery of siRNAs or other RNAs to cell types other than hepatocytes—even within the liver—remains a significant challenge.10 Yet several lines of evidence suggest other cells within the liver microenvironment can be targeted at low doses. Nanomedicines tend to accumulate in the liver due to discontinuous vasculature, decreased blood flow rates,27 and an abundance of phagocytic cell types lining the hepatic sinusoids.26 For example, it was recently demonstrated that decreased flow rates within the liver led to accumulation of inorganic nanomedicines in the liver, especially to Kupffer and endothelial cells.27 Interestingly, the authors observed relatively little biodistribution of inorganic nanoparticles in hepatocytes. The same group subsequently demonstrated that depleting Kupffer cells from the liver via clodronate liposomes decreased the liver accumulation of gold nanoparticles from 80 to 20% of the injected dose.26 This evidence generated with inorganic nanoparticles is supported by recently reports that (organic) LNPs can deliver RNAs to hepatic endothelial cells16 and Kupffer cells17 at doses as low as 0.05 mg/kg.\"},{\"evidence_id\":\"FPE-eaafa6bea5490a6cb80c\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Introduction\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"model\",\"species\",\"cell\",\"outcome\"],\"text\":\"Our ability to understand which cell types interact with nanoparticles in vivo stands to benefit greatly from advances in RNA sequencing. Cells that were previously thought to be uninform have been shown to cluster into many distinct subtypes25,28,30; these subtypes express different genes and subsequently exhibit different phenotypes. A recent example demonstrated that both Kupffer cells and endothelial cells within the liver microenvironment can be divided into subtypes based on the marker CD74 and CD32, respectively.13 The authors found that CD74High Kupffer cells exhibited inflammatory phenotypes, whereas CD74Low Kupffer cells exhibited tolerogenic phenotypes. Liver endothelial cells that were CD32High were primarily localized on the central venous zone, whereas CD32Low cells were located in the periportal zone. The evidence that (i) nanoparticles directly interact with cells in the liver microenvironment and (ii) different subsets of cells exist in the microenvironment led us to two hypotheses. First, that LNPs currently described as hepatocyte targeting may deliver nucleic acids to additional cell types within the liver microenvironment. Second, that these LNPs may differentially interact with the CD74 and CD32 subtypes. To test these hypotheses, we focused on LNPs formed with lipids that deliver siRNA and mRNA to hepatocytes at low doses. The first lipid—named MC3—was originally reported in 2010, and has safely delivered RNA in mice, non-human primates, and humans.1,24 The second—named cKK-E12—was reported in 2014 and has safely delivered RNA in mice and non-human primates.5\"},{\"evidence_id\":\"FPE-bdb64267f7352283aea6\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Introduction\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"model\",\"species\",\"cell\",\"outcome\"],\"text\":\"We first evaluated in vivo biodistribution within the liver microenvironment using QUANT,20 which is a highly sensitive readout of nucleic acid copy number based on digital droplet PCR. We then quantified the functional delivery of Cre mRNA in vivo using Ai14 reporter mice,21 which contain cells that fluoresce when Cre mRNA is translated into functional Cre protein. Interestingly, we found biodistribution and functional delivery to all tested cell types within the liver; distribution was highest in Kupffer cells, whereas functional mRNA delivery was highest in endothelial cells. We also found that the amount of nanoparticle biodistribution changed with the CD74 or CD32 subtype. These data—which support the hypothesis that LNPs differentially interact with subtypes of cells within the liver—have implications for future studies that seek to understand how biological signaling governs nanomedicine safety and efficacy in vivo. They also provide evidence that the biological pathways active within a cell can affect nanoparticle targeting in vivo.\"},{\"evidence_id\":\"FPE-00f99395c2ac784704e8\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"payload\",\"model\",\"outcome\"],\"text\":\"We first quantified LNP biodistribution within the liver microenvironment in vivo. To do so, we formulated LNPs to carry QUANT DNA sequences using microfluidics (Fig. 1). We recently developed QUANT DNA in order to perform highly sensitive in vivo biodistribution experiments after we found that fluorescent biodistribution experiments did not generate sufficiently consistent or sensitive results.20 By comparing the doses at which a linear dose response was observed after nanoparticle delivery in vitro, we found that QUANT readouts are roughly one billion-fold more sensitive than fluorescence. QUANT DNA barcode sensitivity is achieved by reducing DNA secondary structure, including a binding site for a digital droplet PCR probe, and including 5 phosphorothioated deoxy nucleotides on both the 5′ and 3′ termini22 (Fig. 1a). We included the chemically modified DNA after finding that they can improve the stability of nucleic acids, even when the nucleic acids are delivered by LNPs.\"},{\"evidence_id\":\"FPE-3efccde05a37ec0b8cd8\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 1.\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"preparation_method\",\"component_ratio\",\"ratio_basis\",\"payload\",\"model\"],\"text\":\"QUANT DNA sequences for sensitive in vivo readouts of nanoparticle biodistribution. (a) QUANT barcodes contain a ddPCR probe site flanked by forward and reverse primer sites. (b) Structure of ionizable lipid (MC3 or cKK-E12), cholesterol, PEG-lipid, and DSPC used in each LNP formulation. (c) Molar ratio of each LNP. (d) Nanoparticle biomaterials and QUANT barcodes are formulated into stable LNPs by microfluidic mixing. (e) Hydrodynamic diameter, measured by dynamic light scattering, of MC3 and cKK-E12 LNPs. N = 3/group (f) Polydispersity index (PDI) of MC3 and cKK-E12 LNPs. N = 3/group. Error bars are reported as standard error.\"},{\"evidence_id\":\"FPE-bb9c089e0c1044b703c5\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 1.\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"preparation_method\",\"payload\",\"route\"],\"text\":\"We purchased the ionizable lipid MC3 and synthesized/purified cKK-E12 as previously described5,17 (Fig. 1b). To create LNPs, we diluted either MC3 or cKK-E12 with cholesterol, poly(ethylene glycol) linked to 2 saturated alkyl tails (C14PEG2000) and 1,2-distearoyl-sn-glycero-3-phosphocholine (DSPC) in a syringe containing 100% EtOH (Fig. 1c). We then mixed the contents with QUANT DNA diluted in 10 mM citrate buffer in a microfluidic device3 (Fig. 1d). Finally, we characterized the hydrodynamic diameter of all the LNPs using dynamic light scattering. We recapitulated the previous reports, finding that microfluidic formulation resulted in nanoparticles with diameters between 50–75 nm and low polydispersity index (Figs. 1e and 1f). After dialysis and sterile filtration, the LNPs were intravenously administered at a dose of 0.3 mg/kg QUANT barcode.\"},{\"evidence_id\":\"FPE-5bec3de875ed9f6a3eb5\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 1.\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"species\",\"route\",\"cell\",\"outcome\"],\"text\":\"The liver is a complex tissue consisting of several major cell types, including Kupffer, endothelial cells, and hepatocytes. Kupffer cells are resident macrophages lining the liver sinusoid, while liver endothelial cells form a discontinuous vasculature that enables LNPs to extravasate into the Space of Disse, where they are exposed to hepatocytes (Fig. 2a). Previous work has demonstrated that blood flow rates decrease within the sinusoid, and that this reduction in flow rates can lead to increased nanoparticle accumulation, at least for inorganic nanoparticles.27 We first analyzed the biodistribution of MC3 and cKK-E12 LNPs to liver endothelial cells, Kupffer cells, and hepatocytes. Six hours after injecting mice with 0.3 mg/kg QUANT DNA, we utilized fluorescent activated cell sorting (FACS) to isolate endothelial cells (CD31+CD45−CD68−), Kupffer cells (CD31−CD45+CD68+), and hepatocytes (CD31−CD45−). We observed that cKK-E12 facilitated DNA accumulation in all 3 cell types; the amount of DNA taken up per endothelial cells was less than Kupffer cells (Fig. 2b). MC3 LNPs behaved similarly; less DNA was measured per cell in endothelial cells, relative to the other cell types; these results were not statistically significant (Figs. 2c and 2d). However, we observed significantly lower amounts of DNA accumulation in all three cell types on an absolute scale with cKK-E12, compared to MC3 (Fig. 2e). These data suggested that both cKK-E12 and MC3 distribute broadly to all 3 tested cell types within the liver.\"},{\"evidence_id\":\"FPE-8927a98fd29257ca83e9\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 2.\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"cell\",\"outcome\"],\"text\":\"Biodistribution of MC3 and cKK-E12 within the liver microenvironment. (a) As LNPs travel through the liver, they encounter Kupffer cells, endothelial cells and hepatocytes. (b) DNA delivery as mediated by cKK-E12 to endothelial cells, hepatocytes, and Kupffer cells. *p < 0.05, One-way ANOVA with Tukey’s Multiple Comparison. (c) DNA delivery as mediated by MC3 to endothelial cells, hepatocytes, and Kupffer cells. (d) Normalized DNA delivery (to hepatocytes) by cKK-E12 and MC3 reveals similar intra-hepatic biodistribution patterns. (e) Comparison of DNA delivery by cKK-E12 and MC3 to major liver cell types. *p < 0.05, Two-way ANOVA. Error bars are reported as standard error.\"},{\"evidence_id\":\"FPE-cd03383cc19eca6b079d\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 2.\",\"page_number\":1,\"retrieval_tags\":[\"species\",\"route\",\"cell\",\"outcome\"],\"text\":\"After confirming that nanoparticles distributed to different cells inside the liver, we investigated whether biodistribution varied in the recently reported subsets of Kupffer cells and hepatic endothelial cells. To do so, we first confirmed these subsets existed within the mouse liver using flow cytometry. As reported, we observed distinct populations of CD74High and CD74Low Kupffer cells and CD32High and CD32Low endothelial cells (Fig. 3a). Given that these subsets have only recently been identified, the description of their phenotypes may change; however, the phenotypes of CD74High and CD74Low Kupffer cells are currently classified as inflammatory and tolerogenic, respectively (Fig. 3b). By contrast, the CD32High and CD32Low subsets of endothelial cells likely describes their location within the liver, either in the central venous zone and periportal zone, respectively (Fig. 3c). We observed noticeable (but not statistically significant) decreases in cKK-E12 biodistribution in CD74High cells, relative to CD74Low Kupffer cells (Fig. 3d). The same trends (this time, significant) were observed with MC3 biodistribution (Fig. 3e). These results suggest that result macrophage phenotype is related to the degree with which the cells interact with systemically administered LNPs.\"},{\"evidence_id\":\"FPE-883153e4ffbaa31575ea\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 3.\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"cell\",\"outcome\"],\"text\":\"LNP biodistribution varies within newly reported cellular subsets. (a) FACS markers for two Kupffer and two endothelial cells subsets. (b) Kupffer cells subsets and reported phenotype. (c) Endothelial cell subsets and reported intra-hepatic location. (d) DNA delivery as mediated by cKK-E12 to Kupffer cell subsets. (e) DNA delivery as mediated by MC3 to Kupffer cell subsets. (f) DNA delivery as mediated by cKK-E12 to endothelial cell subsets. (g) DNA delivery as mediated by MC3 to endothelial cell subsets. ***p < 0.001, ****p < 0.0001, Two-Tail T-Test. Error bars are reported as standard error.\"},{\"evidence_id\":\"FPE-cae3900b468951836ad3\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 3.\",\"page_number\":1,\"retrieval_tags\":[\"route\",\"cell\",\"outcome\"],\"text\":\"We then analyzed the biodistribution within CD32 endothelial cell subsets. We made several observations. First, we found that—in general—the biodistribution in endothelial cells was lower than the biodistribution to Kupffer cells. Second, cKK-E12 biodistribution in CD32Low endothelial cells on a per cell basis was higher than CD32High endothelial cells (Fig. 3f). While this could be due to changes in gene expression, one important limitation is that we cannot exclude the possibility that LNPs were interacting with CD32Low cells first. More specifically, since the LNPs were administered intravenously, they interacted with the periportal (CD32Low) endothelial cells before they interacted with the central venous (CD32High) endothelial cells. Interestingly, MC3 biodistribution was low in both CD32High and CD32Low endothelial cells (Fig. 3g).\"},{\"evidence_id\":\"FPE-649ef55028707ffe8082\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 3.\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"species\",\"cell\",\"outcome\"],\"text\":\"Having observed extensive biodistribution to the primary three cell types in the liver (Fig. 2), as well as associated subsets (Fig. 3) we next sought to understand how nucleic acids were functionally delivered into the cytoplasm of target cells by MC3 and cKK-E12. We selected mRNA as our molecule, given it can be used for protein replacement, vaccines,2,18 and gene editing drugs.6,7,14,29 Notably, the delivery of mRNA to the liver is often measured via luminescence19 or a secreted protein8; however, neither methodology can be used to quantify delivery in different cell types within the organ. We utilized Ai14 ‘Cre-reporter’ mice; these mice have been used by our lab and others to quantify mRNA delivery at the cellular level9,17,21 (Fig. 4a). The Ai14 mice contain a Lox-Stop-Lox-tdTomato transgene under the control of a promoter that results in ubiquitous expression. As a result, cells in these mice only become tdTomato+ when Cre mRNA is (i) delivered into the cytoplasm and (ii) translated into Cre protein, which then (iii) translocates into the nucleus and (iv) excises the ‘Stop’ construct from genomic DNA. By quantifying the percentage of cells that are tdTomato+ after treating mice with Cre mRNA, it is possible to quantify the efficiency with which mRNA has been functionally delivered. In these experiments, as we previously reported,17,21 we utilized chemically modified Cre; chemically modified mRNA reduces inflammation and can increase the stability of mRNA contained within LNPs.\"},{\"evidence_id\":\"FPE-00c27d4eb3ba578e88f4\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 4.\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"model\",\"species\",\"route\",\"cell\",\"outcome\"],\"text\":\"Measuring functional delivery of Cre mRNA at the cellular level in vivo. (a) Upon the expression of Cre protein (as mediated by the delivery and expression of Cre mRNA by LNP), the Cre-reporter mice express tdTomato. (b) Percentage tdTomato+ cells of each major cell types after a 1.0 mg/kg administration of cKK-E12 and MC3. (c) Percentage tdTomato+ cells of each major cell types after a 0.3 mg/kg administration of cKK-E12 and MC3. **p < 0.01, ***p < 0.001, Two-way ANOVA. Error bars are reported as standard error.\"},{\"evidence_id\":\"FPE-bc97136f0142d3e9b3b5\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 4.\",\"page_number\":1,\"retrieval_tags\":[\"species\",\"route\",\"cell\",\"outcome\"],\"text\":\"We administered Cre mRNA at a dose of 1.0 mg/kg using cKK-E12 and MC3. Three days later, we sacrificed the mice, and quantified the number of tdTomato+ cells, relative to a PBS-treated Ai14 control (Fig. 4b). More specifically, we isolated cells with flow cytometry, and quantified the percentage of hepatocytes, endothelial cells, or Kupffer cells that were tdTomato+. At this dose, we observed high levels of tdTomato+ across all three cell types. Interestingly, despite the fact the biodistribution to endothelial cells was lower than Kupffer cells or hepatocytes, the functional delivery to endothelial cells was higher than Kupffer cells or hepatocytes, both for mice treated with MC3, and for mice treated with cKK-E12, albeit not significantly. In order to exclude the possibility these results were an artifact of the 1.0 mg/kg dose we used, we repeated the experiment at a lower dose—0.3 mg/kg Cre mRNA. We observed the expected decrease in percent tdTomato+ cells for both cKK-E12 and MC3 at 0.3 mg/kg, compared to the 1.0 mg/kg dose (Fig. 4c). At 1.0 mg/kg, cKK-E12 performed slightly better than MC3; at 0.3 mg/kg, cKK-E12 performed delivery was statistically higher than MC3. At 0.3 mg/kg, liver endothelial and Kupffer cells had a statistically significant higher percent of tdTomato+ cells than hepatocytes.\"},{\"evidence_id\":\"FPE-05eda0b7b2d6dcf97ac5\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Results and Discussion > Figure 4.\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"model\",\"species\",\"cell\",\"outcome\"],\"text\":\"Taken together, our biodistribution and functional delivery data led us to several conclusions. First, we concluded that both MC3 and cKK-E12 interact with different cell types within the liver microenvironment. This conclusion is important, since in many mRNA delivery assays, the delivery is often assumed to primarily occur in hepatocytes. In some cases (e.g., Cas9 gene editing), the final calculated percentage of mutations is based explicitly on this assumption. Our data therefore suggest that—when possible—tissue level delivery readouts should be replaced by cell-level delivery readouts. Second, we found evidence to support our original hypothesis: that subsets of liver microenvironmental cells differentially interact with nanoparticles. In particular, we found that biodistribution to Kupffer cells and endothelial cells seemed to change within the CD74 and CD32 subsets, respectively. Our results substantiate in vitro results from primary human macrophages and Kupffer cells, including the aspect that M2-like polarized cells uptake more nanoparticles.12 The importance of targeting cellular subsets is likely to depend on the cells as well as the specific disease. For example, it may be critical in a disease driven by a specific subset, and relatively less important when the disease is caused by all the subsets. By demonstrating the LNPs can interact with subsets of cells in vivo, we hope to lay the foundation for future studies that evaluate the disease-specific importance of this effect. In addition, we acknowledge that future studies will need to uncover the cell signaling pathways that govern these changes, particularly whether direct re-polarization in vivo can be used to modulate LNP uptake. It remains to be seen whether the functional delivery of siRNA, mRNA, and other therapeutic RNAs changes within these cells. Finally, our data provide evidence that biodistribution data is not sufficient to predict functional delivery. Previous reports have identified endosomal escape as a limiting step in mRNA therapeutic efficacy, with some ionizable lipids facilitating a five-fold higher efficiency in endosomal escape compared to MC3 LNPs.19 This, in turn, suggests that internal cell signaling can alter the fate of RNA drugs after they have reached the target cell. These results are substantiated by data that found nanoparticle biodistribution does not necessarily predict nanoparticle functional delivery of siRNA4 as well as data demonstrating that intracellular metabolic signaling can alter the fate of delivered mRNA.15 Notably, biodistribution data are still critical for many studies, including those used to understand pharmacokinetics and off-target effects. However, biodistribution data may not be able to consistently predict the cells in which intracellular drugs have an active cellular effect. Together, these conclusions help provide evidence that cellular signaling with the liver microenvironment can have a direct role on the biodistribution and efficacy of nucleic acid therapies.\"},{\"evidence_id\":\"FPE-30f1bb31f376287ae987\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > Nanoparticle Formulation\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"component_ratio\",\"ratio_basis\",\"payload\"],\"text\":\"Nanoparticles were formulated using a microfluidic device.8 Nucleic acids (DNA barcodes) were diluted in 10 mM citrate buffer (Teknova) while lipid-amine compounds, alkyl tailed PEG, cholesterol, and helper lipids were diluted in ethanol at a concentration of 10 mg/mL. MC3 was purchased from MedKoo LLC. All PEGs, cholesterol, and helper lipids were purchased from Avanti Lipids. Citrate and ethanol phases were combined in a microfluidic device by syringes (Hamilton Company) at a flow rate of 600 and 200 μL/min, respectively. Specifically, lipids were formulated at a 50:38.5:1.5:10 molar ratio of ionizable lipid:cholesterol:PEG-Lipid:DSPC and a 10:1 mass ratio of lipid to nucleic acid.\"},{\"evidence_id\":\"FPE-0163147085dca95d3373\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > QUANT DNA\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"payload\",\"outcome\"],\"text\":\"For biodistribution experiments, each LNP was formulated to carry a DNA suitable for ddPCR analysis. 95 nucleotide long single stranded DNA sequences were purchased from Integrated DNA Technologies (IDT). Three nucleotides on the 5′ and 3′ ends were modified with 5 phosphorothioates to reduce exonuclease degradation and improve DNA stability. We included universal forward and reverse primer regions on all barcodes. A 26nt probe was purchased from IDT with 5′ FAM as the fluorophore, while internal Zen and 3′ Iowa Black FQ were used as quenchers.\"},{\"evidence_id\":\"FPE-68a314b484296d9b5eed\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > Nanoparticle Characterization\",\"page_number\":1,\"retrieval_tags\":[\"preparation_method\"],\"text\":\"LNP hydrodynamic diameter was measured using high throughput dynamic light scattering (DLS) (Wyatt). LNPs were diluted in sterile 1× PBS to a concentration of ~ 0.06 μg/mL, and analyzed. Particles were dialyzed with 1× phosphate buffered saline (PBS, Invitrogen), and were sterile filtered with a 0.22 μm filter.\"},{\"evidence_id\":\"FPE-ae153899d6a894c3a04d\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > Animal Experiments\",\"page_number\":1,\"retrieval_tags\":[\"model\",\"species\",\"route\"],\"text\":\"All animal experiments were performed in accordance with the Georgia Institute of Technology IACUC. C57BL/6J (#000664) and Ai14 (#007914) mice were purchased from The Jackson Laboratory and used between 5 and 8 weeks of age. In all in vitro and in vivo experiments, we used N = 3–4 per group. Mice were injected intravenously via the lateral tail vein. The nanoparticle concentration was determined using NanoDrop (Thermo Scientific).\"},{\"evidence_id\":\"FPE-679aa3c1a8f767750d2e\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > Cell Isolation and Staining\",\"page_number\":1,\"retrieval_tags\":[\"species\",\"cell\"],\"text\":\"Mice were perfused with 20 mL of 1× PBS through the right atrium. Tissues were finely cut, and then placed in a digestive enzyme solution with Collagenase Type I (Sigma Aldrich), Collagenase XI (Sigma Aldrich) and Hyaluronidase (Sigma Aldrich) at 37 °C at 550 rpm for 45 min. Cell suspension was filtered through 70 μm mesh and red blood cells were lysed. Cells were stained to identify specific cell populations and sorted using the BD FacsFusion in the Georgia Institute of Technology Cellular Analysis Core. The antibody clones used were: anti-CD31 (390, BioLegend), anti-CD45.2 (104, BioLegend), anti-CD68 (FA-11, Biolegend), and anti-CD74 (ln1/CD74, Biolegend), and anti-CD16/32 (93, BioLegend).\"},{\"evidence_id\":\"FPE-4142b42b7ea5caca50c9\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > ddPCR\",\"page_number\":1,\"retrieval_tags\":[\"preparation_method\"],\"text\":\"The QX200TM Droplet DigitalTM PCR System (Bio-Rad) was used to prep and analyze all ddPCR results. All PCR samples were prepared with 10 μL ddPCR with ddPCRTM Supermix for Probes (Bio-Rad), 1 μL of primer and probe mix (solution of 10 μM of target probe and 20 μM of Reverse/Forward Primers), 1 μL of template/TE buffer, and 8 μL water. 20 μL of each reaction and 70 μL of Droplet Generation Oil for Probes were loaded into DG8TM Cartridges and covered with gaskets. Cartridges were placed in the QX200TM Droplet Generator to create water–oil emulsion droplets. Plates were stored at 4 °C until ran on the QX200TM Droplet DigitalTM PCR System. For each biological rep, 3 technical repetitions were completed. In all cases, technical reps were averaged. Technical reps were only excluded if they saturated the detection limit or showed inconsistent positive event amplitudes.\"},{\"evidence_id\":\"FPE-668e6ad521f593b94056\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > Functional mRNA Delivery\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"species\",\"route\",\"cell\",\"outcome\"],\"text\":\"Nanoparticles were formulated using a microfluidic device.8 Nucleic acids (Cre mRNA, TriLink Biotechnologies) were diluted in 10 mM citrate buffer (Teknova) while lipid-amine compounds, alkyl tailed PEG, cholesterol, and helper lipids were diluted in ethanol. MC3 was purchased from MedKoo LLC. All PEGs, cholesterol, and helper lipids were purchased from Avanti Lipids. Citrate and ethanol phases were combined in a microfluidic device by syringes (Hamilton Company) at a flow rate of 600 and 200 μL/min, respectively. Ai14 mice were dosed with 0.3 or 1.0 mg/kg Cre mRNA delivered by either cKK-E12 or MC3. Three days after administration, transfection of the liver (percent tdTomato+ cells) was analyzed via flow cytometry. Critically, we used untreated Ai14 mice—not untreated C57BL/6 mice—as gating controls, since we previously demonstrated that Ai14 mice do have autofluorscence in the tdTomato channels, relative to BL/6 mice.\"},{\"evidence_id\":\"FPE-4ea373b241bca922ff13\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > Data Analysis and Statistics\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Statistical analysis was performed in GraphPad Prism 7. More specifically, 2-tail T test, or One-way ANOVAs were used where appropriate. Data is plotted as mean ± standard error mean unless otherwise stated.\"},{\"evidence_id\":\"FPE-f3f7628374165f5ab72e\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Materials and Methods > Data Access\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"The data used to generate all figures in the paper are available upon request to james.dahlman@bme.gatech.edu.\"},{\"evidence_id\":\"FPE-a1062874be39ea48996d\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Acknowledgments\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"The authors thank Sommer Durham and the Georgia Tech Cellular Analysis and Cytometry Core. Additionally, the authors thank Dalia Arafat and the Genome Analysis Core. J.E.D. thanks Jordan Cattie and Taylor E. Shaw.\"},{\"evidence_id\":\"FPE-31ee64d9b0c8868eb260\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Acknowledgments > Conflict of interest\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Cory D. Sago is co-founder of Guide Therapeutics and an employee at Guide Therapeutics. James E. Dahlman is a co-founder of Guide Therapeutics and consultant for Guide Therapeutics. Brandon R. Krupczak is an employee at Guide Therapeutics. Melissa P. Lokugamage declares no conflict of interest. Zubao Gan declares no conflict of interest.\"},{\"evidence_id\":\"FPE-a0955657ab1853124fbb\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Acknowledgments > Ethical Approval\",\"page_number\":1,\"retrieval_tags\":[\"model\",\"species\"],\"text\":\"All animal studies were carried out in accordance with the institutional and national guidelines, following an animal protocol approved by the Georgia Institute of Technology IACUC committee. No human studies were performed as part of this research.\"},{\"evidence_id\":\"FPE-9d5e7fbaaca440778eb2\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Acknowledgments > Funding\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"C.D.S. and J.E.D. were funded by Georgia Tech startup funds (awarded to J.E.D.). C.D.S. was funded by the NIH-sponsored Research Training Program in Immunoengineering (T32EB021962). M.P.L was funded by the NIH-sponsored Research Training Program in Computational Biology and Predictive Health Genomics (T32GM105490). This content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health.\"},{\"evidence_id\":\"FPE-1b7b73796ded24d61df8\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Author Contributions\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"C.D.S. and J.E.D. designed experiments, performed experiments, and analyzed data. B.Z.K., M.P.L., Z.G. performed experiments. C.D.S. and J.E.D. wrote the paper, which was reviewed by all other authors.\"},{\"evidence_id\":\"FPE-6d748d75ed98dffcffe9\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Footnotes\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"model\",\"cell\",\"outcome\"],\"text\":\"James E. Dahlman is an Assistant Professor in the Wallace H. Coulter Department of Biomedical Engineering at Georgia Tech and Emory. His lab works at the interface of drug delivery, nanotechnology, genomics, and gene editing. James has designed nanoparticles that deliver RNA to blood vessels in the heart and lung; these nanoparticles have been validated by > 20 labs and have been licensed for clinical development. James also uses molecular biology to design the genetic drugs he delivers. He designed ‘dead’ guide RNAs to turn on genes using active Cas9. Similarly, using his background in nanoparticle chemistry, in vivo RNA delivery, and genomics, his lab has designed a series of increasingly sensitive DNA barcoding systems that can measure how > 200 nanoparticles target cells 30 different cell types at once, directly in vivo. James’ nanoparticle barcoding work led to his placement on the MIT Tech Review TR35 list. James has won scientific awards at every stage of his career, including the NSF, NDSEG, NIH OxCam, Whitaker, and LSRF Fellowships, and the Weintraub Graduate Thesis Award. He has been named a young / leading investigator by Bayer, the Parkinson’s Disease Foundation, and the Journal of Materials Chemistry B. At the age of 32, his research has been published in Science, Cell, Nature Nanotechnology, Nature Biotechnology, Nature Cell Bio, Science Translational Medicine, PNAS, Advanced Materials, JACS and other leading journals. He has given > 75 invited talks on drug delivery, gene editing, and nanoparticle DNA barcoding across the world, and is a co-founder of GuideRx.\"},{\"evidence_id\":\"FPE-77a4cfbd825e8a08be45\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Footnotes\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"This article is part of the 2019 CMBE Young Innovators special issue.\"},{\"evidence_id\":\"FPE-2fdd18485e4074eb9e9c\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Footnotes\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Publisher's Note\"},{\"evidence_id\":\"FPE-8cc4b6fd1526f1329736\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Footnotes\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.\"},{\"evidence_id\":\"FPE-4fb10f9e4c5afb3d31f0\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\"],\"text\":\"1.Adams D, et al. Patisiran, an RNAi therapeutic, for hereditary transthyretin amyloidosis. N. Engl. J. Med. 2018;379:11–21. doi: 10.1056/NEJMoa1716153. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-9c81f30fa20ff82936c0\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\"],\"text\":\"2.Bahl K, et al. Preclinical and clinical demonstration of immunogenicity by mRNA vaccines against H10N8 and H7N9 influenza viruses. Mol. Ther. 2017;25:1316–1327. doi: 10.1016/j.ymthe.2017.03.035. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-cd58b20627d1901d69ba\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"component_ratio\"],\"text\":\"3.Chen D, et al. Rapid discovery of potent siRNA-containing lipid nanoparticles enabled by controlled microfluidic formulation. J. Am. Chem. Soc. 2012;134:6948–6951. doi: 10.1021/ja301621z. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-74fc403428cfb6eaf775\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"ratio_basis\",\"model\",\"outcome\"],\"text\":\"4.Dahlman JE, et al. In vivo endothelial siRNA delivery using polymeric nanoparticles with low molecular weight. Nat. Nano. 2014;9:648–655. doi: 10.1038/nnano.2014.84. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-fcbeacadf3343cc8a452\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"outcome\"],\"text\":\"5.Dong Y, et al. Lipopeptide nanoparticles for potent and selective siRNA delivery in rodents and nonhuman primates. Proc. Natl. Acad. Sci. USA. 2014;111:3955–3960. doi: 10.1073/pnas.1322937111. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-04347ac63f4ce6a4f452\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"model\",\"route\",\"cell\"],\"text\":\"6.Finn JD, et al. A single administration of CRISPR/Cas9 lipid nanoparticles achieves robust and persistent in vivo genome editing. Cell Rep. 2018;22:2227–2235. doi: 10.1016/j.celrep.2018.02.014. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-c2aae95153fa71061915\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"payload\",\"model\",\"cell\",\"outcome\"],\"text\":\"7.Jiang C, et al. A non-viral CRISPR/Cas9 delivery system for therapeutically targeting HBV DNA and pcsk9 in vivo. Cell Res. 2017;27:440–443. doi: 10.1038/cr.2017.16. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-1b73b3ebd0beab414a2b\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"component_ratio\",\"model\",\"outcome\"],\"text\":\"8.Kauffman KJ, et al. Optimization of lipid nanoparticle formulations for mRNA delivery in vivo with fractional factorial and definitive screening designs. Nano Lett. 2015;15:7300–7306. doi: 10.1021/acs.nanolett.5b02497. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-2deb31febb4c01b32b33\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"payload\",\"model\",\"species\",\"cell\"],\"text\":\"9.Kauffman KJ, et al. Rapid, single-cell analysis and discovery of vectored mRNA transfection in vivo with a loxP-flanked tdTomato reporter mouse. Mol. Therapy Nucleic Acids. 2018;10:55–63. doi: 10.1016/j.omtn.2017.11.005. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-ab4d7926427bc2a7ada7\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"outcome\"],\"text\":\"10.Lorenzer C, Dirin M, Winkler AM, Baumann V, Winkler J. Going beyond the liver: progress and challenges of targeted delivery of siRNA therapeutics. J. Control Release. 2015;203:1–15. doi: 10.1016/j.jconrel.2015.02.003. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-e09743fd0e82d5da95db\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"model\"],\"text\":\"11.Love KT, et al. Lipid-like materials for low-dose, in vivo gene silencing. Proc. Natl. Acad. Sci. USA. 2010;107:1864–1869. doi: 10.1073/pnas.0910603106. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-ca54eec20ba76f11ee50\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"species\",\"outcome\"],\"text\":\"12.MacParland SA, et al. Phenotype determines nanoparticle uptake by human macrophages from liver and blood. ACS Nano. 2017;11:2428–2443. doi: 10.1021/acsnano.6b06245. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-4da649833f3f10bd9851\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"payload\",\"species\",\"cell\"],\"text\":\"13.MacParland SA, et al. Single cell RNA sequencing of human liver reveals distinct intrahepatic macrophage populations. Nat. Commun. 2018;9:4383. doi: 10.1038/s41467-018-06318-7. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-412bc96c9390fa12fbd6\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"model\",\"outcome\"],\"text\":\"14.Miller JB, et al. Non-viral CRISPR/Cas gene editing in vitro and in vivo enabled by synthetic nanoparticle co-delivery of Cas9 mRNA and sgRNA. Angew. Chem. Int. Ed. Engl. 2017;56:1059–1063. doi: 10.1002/anie.201610209. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-3df9795932573e341e07\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"outcome\"],\"text\":\"15.Patel S, et al. Boosting intracellular delivery of lipid nanoparticle-encapsulated mRNA. Nano Lett. 2017;17:5711–5718. doi: 10.1021/acs.nanolett.7b02664. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-d78e5071c952eee7a04b\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"model\",\"outcome\"],\"text\":\"16.Paunovska K, et al. Analyzing 2000 in vivo drug delivery data points reveals cholesterol structure impacts nanoparticle delivery. ACS Nano. 2018;12:8341–8349. doi: 10.1021/acsnano.8b03640. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-0e3631d97d1df6ebebe1\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"outcome\"],\"text\":\"17.Paunovska K, et al. Nanoparticles containing oxidized cholesterol deliver mRNA to the liver microenvironment at clinically relevant doses. Adv. Mater. 2019;31:e1807748. doi: 10.1002/adma.201807748. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-9f92e07cad3512b8ea95\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"cell\"],\"text\":\"18.Richner JM, et al. Modified mRNA vaccines protect against Zika virus infection. Cell. 2017;168:1114–1125. doi: 10.1016/j.cell.2017.02.017. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-fe94f464db00375b540f\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"species\",\"outcome\"],\"text\":\"19.Sabnis S, et al. A novel amino lipid series for mRNA delivery: improved endosomal escape and sustained pharmacology and safety in non-human primates. Mol. Ther. 2018;26:1509–1519. doi: 10.1016/j.ymthe.2018.03.010. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-5ec6c681445337800688\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"model\",\"outcome\"],\"text\":\"20.Sago CD, et al. Modifying a commonly expressed endocytic receptor retargets nanoparticles in vivo. Nano Lett. 2018;18:7590–7600. doi: 10.1021/acs.nanolett.8b03149. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-d249c2a0652796f597d6\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"model\",\"cell\",\"outcome\"],\"text\":\"21.Sago CD, et al. High-throughput in vivo screen of functional mRNA delivery identifies nanoparticles for endothelial cell gene editing. Proc. Natl. Acad. Sci. 2018;115:e9942–e9952. doi: 10.1073/pnas.1811276115. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-a577d3f4d2f7e44eac98\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"model\",\"outcome\"],\"text\":\"22.Sago CD, et al. Barcoding chemical modifications into nucleic acids improves drug stability in vivo. J. Mater. Chem. B. 2018;6:7197–9203. doi: 10.1039/C8TB01642A. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-d03de6ee33c5f0663a89\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"model\",\"outcome\"],\"text\":\"23.Sato Y, et al. Understanding structure-activity relationships of pH-sensitive cationic lipids facilitates the rational identification of promising lipid nanoparticles for delivering siRNAs in vivo. J. Control Release. 2019;295:140–152. doi: 10.1016/j.jconrel.2019.01.001. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-f1ea36f92a61b472456b\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"outcome\"],\"text\":\"24.Semple SC, et al. Rational design of cationic lipids for siRNA delivery. Nat. Biotechnol. 2010;28:172–176. doi: 10.1038/nbt.1602. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-eda2cb9b5ba68525ddac\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"payload\",\"cell\"],\"text\":\"25.Shalek AK, et al. Single-cell RNA-seq reveals dynamic paracrine control of cellular variation. Nature. 2014;510:363–369. doi: 10.1038/nature13437. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-91e62b084aa90efd80ea\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"cell\",\"outcome\"],\"text\":\"26.Tavares AJ, et al. Effect of removing Kupffer cells on nanoparticle tumor delivery. Proc. Natl. Acad. Sci. USA. 2017;114:e10871–e10880. doi: 10.1073/pnas.1713390114. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-c81b501b7e43ea110a41\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\"],\"text\":\"27.Tsoi KM, et al. Mechanism of hard-nanomaterial clearance by the liver. Nat. Mater. 2016;15:1212–1221. doi: 10.1038/nmat4718. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-dd453f43709891045c00\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"species\",\"cell\"],\"text\":\"28.Villani AC, et al. Single-cell RNA-seq reveals new types of human blood dendritic cells, monocytes, and progenitors. Science. 2017 doi: 10.1126/science.aah4573. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-196f7bf837b46c217239\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"payload\",\"model\"],\"text\":\"29.Yin H, et al. Structure-guided chemical modification of guide RNA enables potent non-viral in vivo genome editing. Nat. Biotechnol. 2017;35:1179–1187. doi: 10.1038/nbt.4005. [DOI] [PMC free article] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-2a63da41404f32c755f0\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[\"component_ratio\",\"payload\",\"species\",\"cell\"],\"text\":\"30.Zeisel A, et al. Brain structure. Cell types in the mouse cortex and hippocampus revealed by single-cell RNA-seq. Science. 2015;347:1138–1142. doi: 10.1126/science.aaa1934. [DOI] [PubMed] [Google Scholar]\"},{\"evidence_id\":\"FPE-1926ab78363a2e7f3b61\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > References\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Articles from Cellular and Molecular Bioengineering are provided here courtesy of Springer\"},{\"evidence_id\":\"FPE-41b9e8436e7c90736707\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > ACTIONS\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"View on publisher site\"},{\"evidence_id\":\"FPE-65afe5592a811c5d7853\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > ACTIONS\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"PDF (1.7 MB)\"},{\"evidence_id\":\"FPE-e19ef034a1f50cc14cca\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > ACTIONS\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Cite\"},{\"evidence_id\":\"FPE-5be5550cbf1da0212cbf\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > ACTIONS\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Collections\"},{\"evidence_id\":\"FPE-1c29bdd9ba3bdf205f64\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > PERMALINK\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Permalink Copy\"},{\"evidence_id\":\"FPE-19002b694cf733e1370a\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Cite\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Copy\"},{\"evidence_id\":\"FPE-ffa1b0eec374e27a142e\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Cite\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Download .nbib .nbib\"},{\"evidence_id\":\"FPE-0eb0bf932c2988ca61da\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Cite\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Format: AMA APA MLA NLM\"},{\"evidence_id\":\"FPE-b5d08078458981452ac8\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Connect with NLM\"},{\"evidence_id\":\"FPE-c70331b993802b193625\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"National Library of Medicine 8600 Rockville Pike Bethesda, MD 20894\"},{\"evidence_id\":\"FPE-53bf2984ba0edd77fb6d\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Web Policies\"},{\"evidence_id\":\"FPE-e6cdfb2fe4e0f71e5435\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"FOIA\"},{\"evidence_id\":\"FPE-5370180b8e8966ae3288\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"HHS Vulnerability Disclosure\"},{\"evidence_id\":\"FPE-fa16475e6072d9611939\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Help\"},{\"evidence_id\":\"FPE-9f6172f5eb2bef0912d6\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Accessibility\"},{\"evidence_id\":\"FPE-e7f554566f245c1cdc68\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"Careers\"},{\"evidence_id\":\"FPE-4336dc16bcb072e08d7e\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"NLM\"},{\"evidence_id\":\"FPE-f427cdedf7a73e7c24dc\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"NIH\"},{\"evidence_id\":\"FPE-dac8ebacfa93610224af\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"HHS\"},{\"evidence_id\":\"FPE-ac21a33f0213fcc59990\",\"heading\":\"Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles > Add to Collections\",\"page_number\":1,\"retrieval_tags\":[],\"text\":\"USA.gov\"}],\"paper_id\":\"NP-002\"}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "FullPaperMapResponse",
+      "schema": {
+        "$defs": {
+          "AnchorAccountingEntry": {
+            "additionalProperties": false,
+            "properties": {
+              "disposition": {
+                "enum": [
+                  "mapped",
+                  "not_supported",
+                  "ambiguous"
+                ],
+                "title": "Disposition",
+                "type": "string"
+              },
+              "record_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Record Ids",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "explanation": {
+                "minLength": 1,
+                "title": "Explanation",
+                "type": "string"
+              }
+            },
+            "required": [
+              "disposition",
+              "record_ids",
+              "evidence_ids",
+              "explanation"
+            ],
+            "title": "AnchorAccountingEntry",
+            "type": "object"
+          },
+          "EvidenceBackedNumber": {
+            "additionalProperties": false,
+            "description": "A source-reported numeric value and its exact local support.",
+            "properties": {
+              "value": {
+                "title": "Value",
+                "type": "number"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              }
+            },
+            "required": [
+              "value",
+              "evidence_ids"
+            ],
+            "title": "EvidenceBackedNumber",
+            "type": "object"
+          },
+          "EvidenceBackedText": {
+            "additionalProperties": false,
+            "description": "A source-reported text value and its exact local support.",
+            "properties": {
+              "value": {
+                "minLength": 1,
+                "title": "Value",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              }
+            },
+            "required": [
+              "value",
+              "evidence_ids"
+            ],
+            "title": "EvidenceBackedText",
+            "type": "object"
+          },
+          "PairingMetadata": {
+            "additionalProperties": false,
+            "description": "Explicit source metadata authorizing a reported joint arm.",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "paired",
+                  "cross_product",
+                  "explicit_pairing"
+                ],
+                "title": "Kind",
+                "type": "string"
+              },
+              "paired_fields": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Paired Fields",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              }
+            },
+            "required": [
+              "kind",
+              "paired_fields",
+              "evidence_ids"
+            ],
+            "title": "PairingMetadata",
+            "type": "object"
+          },
+          "ProvisionalExperimentContext": {
+            "additionalProperties": false,
+            "description": "One source-backed arm hypothesis; never a local Cartesian product.",
+            "properties": {
+              "provisional_context_id": {
+                "minLength": 1,
+                "title": "Provisional Context Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "minLength": 1,
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_id": {
+                "minLength": 1,
+                "title": "Payload Id",
+                "type": "string"
+              },
+              "dose": {
+                "$ref": "#/$defs/EvidenceBackedNumber"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "route": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "species": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "experimental_model": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "recipient_cell": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "organ": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "timepoint": {
+                "$ref": "#/$defs/EvidenceBackedNumber"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "joint_evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Joint Evidence Ids",
+                "type": "array"
+              },
+              "outcome_evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Outcome Evidence Ids",
+                "type": "array"
+              },
+              "pairing_metadata": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/PairingMetadata"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "provisional_context_id",
+              "formulation_id",
+              "payload_id",
+              "dose",
+              "dose_unit",
+              "route",
+              "species",
+              "experimental_model",
+              "recipient_cell",
+              "organ",
+              "timepoint",
+              "timepoint_unit",
+              "joint_evidence_ids",
+              "outcome_evidence_ids",
+              "pairing_metadata"
+            ],
+            "title": "ProvisionalExperimentContext",
+            "type": "object"
+          },
+          "RecipientContext": {
+            "additionalProperties": false,
+            "properties": {
+              "context_id": {
+                "minLength": 1,
+                "title": "Context Id",
+                "type": "string"
+              },
+              "recipient_cell": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "organ": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "context_id",
+              "recipient_cell",
+              "organ"
+            ],
+            "title": "RecipientContext",
+            "type": "object"
+          },
+          "SharedComponent": {
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "minLength": 1,
+                "title": "Component Id",
+                "type": "string"
+              },
+              "identity": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "role": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "component_id",
+              "identity",
+              "role"
+            ],
+            "title": "SharedComponent",
+            "type": "object"
+          },
+          "SharedFormulation": {
+            "additionalProperties": false,
+            "properties": {
+              "formulation_id": {
+                "minLength": 1,
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "name": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "components": {
+                "items": {
+                  "$ref": "#/$defs/SharedComponent"
+                },
+                "title": "Components",
+                "type": "array"
+              },
+              "ratios": {
+                "items": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "title": "Ratios",
+                "type": "array"
+              },
+              "ratio_bases": {
+                "items": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "title": "Ratio Bases",
+                "type": "array"
+              }
+            },
+            "required": [
+              "formulation_id",
+              "name",
+              "components",
+              "ratios",
+              "ratio_bases"
+            ],
+            "title": "SharedFormulation",
+            "type": "object"
+          },
+          "SharedPayload": {
+            "additionalProperties": false,
+            "properties": {
+              "payload_id": {
+                "minLength": 1,
+                "title": "Payload Id",
+                "type": "string"
+              },
+              "identity": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "role": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "payload_id",
+              "identity",
+              "role"
+            ],
+            "title": "SharedPayload",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Shared paper facts and source-backed provisional experiment contexts.",
+        "properties": {
+          "paper_map_version": {
+            "const": "full-paper-map-1.0.0",
+            "title": "Paper Map Version",
+            "type": "string"
+          },
+          "paper_id": {
+            "minLength": 1,
+            "title": "Paper Id",
+            "type": "string"
+          },
+          "formulations": {
+            "items": {
+              "$ref": "#/$defs/SharedFormulation"
+            },
+            "title": "Formulations",
+            "type": "array"
+          },
+          "payloads": {
+            "items": {
+              "$ref": "#/$defs/SharedPayload"
+            },
+            "title": "Payloads",
+            "type": "array"
+          },
+          "common_routes": {
+            "items": {
+              "$ref": "#/$defs/EvidenceBackedText"
+            },
+            "title": "Common Routes",
+            "type": "array"
+          },
+          "common_species": {
+            "items": {
+              "$ref": "#/$defs/EvidenceBackedText"
+            },
+            "title": "Common Species",
+            "type": "array"
+          },
+          "common_models": {
+            "items": {
+              "$ref": "#/$defs/EvidenceBackedText"
+            },
+            "title": "Common Models",
+            "type": "array"
+          },
+          "recipient_contexts": {
+            "items": {
+              "$ref": "#/$defs/RecipientContext"
+            },
+            "title": "Recipient Contexts",
+            "type": "array"
+          },
+          "provisional_experiment_contexts": {
+            "items": {
+              "$ref": "#/$defs/ProvisionalExperimentContext"
+            },
+            "title": "Provisional Experiment Contexts",
+            "type": "array"
+          },
+          "anchor_accounting": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ANCHOR::FPE-ad06f07673f8363730b0": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-59e94df8bc2089b73677": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-e0558babe19ca166cb87": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-2731245bc078d844a803": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-c6d3dc408cd7542cf2b6": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-1f829e440dcd18146cc1": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-79ee5d62351612179d5e": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-eaafa6bea5490a6cb80c": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-bdb64267f7352283aea6": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-00f99395c2ac784704e8": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-3efccde05a37ec0b8cd8": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-bb9c089e0c1044b703c5": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-5bec3de875ed9f6a3eb5": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-8927a98fd29257ca83e9": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-cd03383cc19eca6b079d": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-883153e4ffbaa31575ea": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-cae3900b468951836ad3": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-649ef55028707ffe8082": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-00c27d4eb3ba578e88f4": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-bc97136f0142d3e9b3b5": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-05eda0b7b2d6dcf97ac5": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-30f1bb31f376287ae987": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-0163147085dca95d3373": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-68a314b484296d9b5eed": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-ae153899d6a894c3a04d": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-679aa3c1a8f767750d2e": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-4142b42b7ea5caca50c9": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-668e6ad521f593b94056": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-a0955657ab1853124fbb": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-6d748d75ed98dffcffe9": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-4fb10f9e4c5afb3d31f0": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-9c81f30fa20ff82936c0": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-cd58b20627d1901d69ba": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-74fc403428cfb6eaf775": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-fcbeacadf3343cc8a452": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-04347ac63f4ce6a4f452": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-c2aae95153fa71061915": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-1b73b3ebd0beab414a2b": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-2deb31febb4c01b32b33": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-ab4d7926427bc2a7ada7": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-e09743fd0e82d5da95db": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-ca54eec20ba76f11ee50": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-4da649833f3f10bd9851": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-412bc96c9390fa12fbd6": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-3df9795932573e341e07": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-d78e5071c952eee7a04b": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-0e3631d97d1df6ebebe1": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-9f92e07cad3512b8ea95": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-fe94f464db00375b540f": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-5ec6c681445337800688": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-d249c2a0652796f597d6": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-a577d3f4d2f7e44eac98": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-d03de6ee33c5f0663a89": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-f1ea36f92a61b472456b": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-eda2cb9b5ba68525ddac": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-91e62b084aa90efd80ea": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-c81b501b7e43ea110a41": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-dd453f43709891045c00": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-196f7bf837b46c217239": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              },
+              "ANCHOR::FPE-2a63da41404f32c755f0": {
+                "$ref": "#/$defs/AnchorAccountingEntry"
+              }
+            },
+            "required": [
+              "ANCHOR::FPE-ad06f07673f8363730b0",
+              "ANCHOR::FPE-59e94df8bc2089b73677",
+              "ANCHOR::FPE-e0558babe19ca166cb87",
+              "ANCHOR::FPE-2731245bc078d844a803",
+              "ANCHOR::FPE-c6d3dc408cd7542cf2b6",
+              "ANCHOR::FPE-1f829e440dcd18146cc1",
+              "ANCHOR::FPE-79ee5d62351612179d5e",
+              "ANCHOR::FPE-eaafa6bea5490a6cb80c",
+              "ANCHOR::FPE-bdb64267f7352283aea6",
+              "ANCHOR::FPE-00f99395c2ac784704e8",
+              "ANCHOR::FPE-3efccde05a37ec0b8cd8",
+              "ANCHOR::FPE-bb9c089e0c1044b703c5",
+              "ANCHOR::FPE-5bec3de875ed9f6a3eb5",
+              "ANCHOR::FPE-8927a98fd29257ca83e9",
+              "ANCHOR::FPE-cd03383cc19eca6b079d",
+              "ANCHOR::FPE-883153e4ffbaa31575ea",
+              "ANCHOR::FPE-cae3900b468951836ad3",
+              "ANCHOR::FPE-649ef55028707ffe8082",
+              "ANCHOR::FPE-00c27d4eb3ba578e88f4",
+              "ANCHOR::FPE-bc97136f0142d3e9b3b5",
+              "ANCHOR::FPE-05eda0b7b2d6dcf97ac5",
+              "ANCHOR::FPE-30f1bb31f376287ae987",
+              "ANCHOR::FPE-0163147085dca95d3373",
+              "ANCHOR::FPE-68a314b484296d9b5eed",
+              "ANCHOR::FPE-ae153899d6a894c3a04d",
+              "ANCHOR::FPE-679aa3c1a8f767750d2e",
+              "ANCHOR::FPE-4142b42b7ea5caca50c9",
+              "ANCHOR::FPE-668e6ad521f593b94056",
+              "ANCHOR::FPE-a0955657ab1853124fbb",
+              "ANCHOR::FPE-6d748d75ed98dffcffe9",
+              "ANCHOR::FPE-4fb10f9e4c5afb3d31f0",
+              "ANCHOR::FPE-9c81f30fa20ff82936c0",
+              "ANCHOR::FPE-cd58b20627d1901d69ba",
+              "ANCHOR::FPE-74fc403428cfb6eaf775",
+              "ANCHOR::FPE-fcbeacadf3343cc8a452",
+              "ANCHOR::FPE-04347ac63f4ce6a4f452",
+              "ANCHOR::FPE-c2aae95153fa71061915",
+              "ANCHOR::FPE-1b73b3ebd0beab414a2b",
+              "ANCHOR::FPE-2deb31febb4c01b32b33",
+              "ANCHOR::FPE-ab4d7926427bc2a7ada7",
+              "ANCHOR::FPE-e09743fd0e82d5da95db",
+              "ANCHOR::FPE-ca54eec20ba76f11ee50",
+              "ANCHOR::FPE-4da649833f3f10bd9851",
+              "ANCHOR::FPE-412bc96c9390fa12fbd6",
+              "ANCHOR::FPE-3df9795932573e341e07",
+              "ANCHOR::FPE-d78e5071c952eee7a04b",
+              "ANCHOR::FPE-0e3631d97d1df6ebebe1",
+              "ANCHOR::FPE-9f92e07cad3512b8ea95",
+              "ANCHOR::FPE-fe94f464db00375b540f",
+              "ANCHOR::FPE-5ec6c681445337800688",
+              "ANCHOR::FPE-d249c2a0652796f597d6",
+              "ANCHOR::FPE-a577d3f4d2f7e44eac98",
+              "ANCHOR::FPE-d03de6ee33c5f0663a89",
+              "ANCHOR::FPE-f1ea36f92a61b472456b",
+              "ANCHOR::FPE-eda2cb9b5ba68525ddac",
+              "ANCHOR::FPE-91e62b084aa90efd80ea",
+              "ANCHOR::FPE-c81b501b7e43ea110a41",
+              "ANCHOR::FPE-dd453f43709891045c00",
+              "ANCHOR::FPE-196f7bf837b46c217239",
+              "ANCHOR::FPE-2a63da41404f32c755f0"
+            ]
+          },
+          "unresolved_items": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "paper_map_version",
+          "paper_id",
+          "formulations",
+          "payloads",
+          "common_routes",
+          "common_species",
+          "common_models",
+          "recipient_contexts",
+          "provisional_experiment_contexts",
+          "anchor_accounting",
+          "unresolved_items"
+        ],
+        "title": "PaperMapResponse",
+        "type": "object"
+      },
+      "strict": true
+    }
+  },
+  "max_output_tokens": 16000
+}

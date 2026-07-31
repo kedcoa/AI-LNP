@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-LNP v5.2 Pipeline Summary</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#667085; --line:#d9e0ea; --accent:#2457d6; --good:#16794b; --bad:#b33a3a; --bg:#f6f8fb; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { max-width:960px; margin:32px auto; padding:0 20px 48px; }
+    header, section { background:#fff; border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:16px; }
+    h1 { margin:0 0 4px; font-size:2rem; }
+    h2 { margin:0 0 12px; font-size:1.25rem; }
+    p, ul, ol { margin-top:8px; }
+    .subtitle { color:var(--muted); margin:0; }
+    .metric-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-top:16px; }
+    .metric { border:1px solid var(--line); border-radius:9px; padding:13px; }
+    .metric strong { display:block; font-size:1.4rem; }
+    .good { color:var(--good); } .bad { color:var(--bad); }
+    table { width:100%; border-collapse:collapse; margin-top:12px; }
+    th, td { text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:9px 8px; }
+    th { background:#f8fafc; }
+    code { background:#f1f4f8; border-radius:4px; padding:2px 5px; }
+    .callout { border-left:4px solid var(--accent); padding:10px 14px; background:#f3f6ff; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>AI-LNP extraction pipeline v5.2</h1>
+    <p class="subtitle">31 July 2026 — end-of-day technical and product summary</p>
+    <div class="metric-grid">
+      <div class="metric"><strong>1</strong>paid paper-map call</div>
+      <div class="metric"><strong>35,575</strong>actual total tokens</div>
+      <div class="metric"><strong>60/60</strong>anchors accounted for</div>
+      <div class="metric"><strong class="bad">2.0%</strong>strict current full-paper recall</div>
+    </div>
+  </header>
+
+  <section>
+    <h2>What changed in v5.2</h2>
+    <ul>
+      <li>Replaced unreliable inferred PDF headings with source-native HTML or Docling document structure.</li>
+      <li>Added a generalized full-paper evidence inventory and a shared paper-map contract.</li>
+      <li>Required exact accounting for every locally detected evidence anchor.</li>
+      <li>Added token-bounded experiment-context task preparation and strict evidence-ID validation.</li>
+      <li>Added a hidden, production-isolated NP-002 answer key and evaluator covering 245 atomic facts across 18 expected experiment arms.</li>
+      <li>Made arm identity sensitive to formulation, payload, dose, route, model, tissue, recipient and timepoint.</li>
+      <li>Removed unsafe aliases and hardened precision scoring against duplicate projections.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What worked</h2>
+    <ul>
+      <li>The LLM found both LNP formulations: MC3 and cKK-E12.</li>
+      <li>It extracted the shared components MC3/cKK-E12, cholesterol, C14PEG2000 and DSPC.</li>
+      <li>It recovered the <code>50:38.5:1.5:10</code> lipid molar ratio and <code>10:1</code> lipid-to-nucleic-acid mass ratio.</li>
+      <li>It identified QUANT DNA and Cre mRNA, liver delivery, the main models, doses and timepoints.</li>
+      <li>It accounted for all 60 required anchors and cited only supplied evidence IDs.</li>
+      <li>The paid response completed successfully and passed its structural schema.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What did not work</h2>
+    <ul>
+      <li>The paper-map call was a navigation stage, not a final outcome-extraction stage. It returned outcome evidence pointers rather than database-ready outcome values.</li>
+      <li>The LLM compressed three liver cell types into broad recipient fields instead of producing cell-specific outcome rows.</li>
+      <li>It collapsed the two Cre doses and retained only 0.3 mg/kg structurally; 1.0 mg/kg was mentioned only as unresolved evidence.</li>
+      <li>It produced four provisional contexts rather than the 18 expected formulation × payload/dose × recipient arms.</li>
+      <li>No numerical tdTomato percentages, DNA-copy values, fold changes or p-values were extracted.</li>
+      <li>The workflow stopped before the selective-vision stage, so Figures 2 and 4 were never interpreted for outcomes.</li>
+    </ul>
+    <p class="callout"><strong>Bottom line:</strong> the call was productive as a shared metadata and evidence-mapping component, but it was not a successful end-to-end paper extraction. The strict score is 5/245 facts, or 2.0%; shared recall is 5/35 (14.3%), experiment recall is 0/210, and complete-arm recall is 0/18.</p>
+  </section>
+
+  <section>
+    <h2>What the LLM got wrong today</h2>
+    <ol>
+      <li>It optimized for the smallest schema-valid representation instead of the database granularity needed by the application.</li>
+      <li>It treated several related cell-specific results as one combined context.</li>
+      <li>It used an unresolved note as an escape hatch for the second Cre dose rather than creating the missing contexts.</li>
+      <li>Because the first-stage schema asked for <code>outcome_evidence_ids</code>, not complete outcome objects, it correctly pointed to result evidence but never extracted the measurements.</li>
+      <li>It could not reliably recover graph values because the call received structured HTML text, not selective figure images.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Simplified workflow going forward</h2>
+    <p>The week’s work should support the application rather than turn intermediate accounting into the application. The v5.2 fast path is:</p>
+    <ol>
+      <li>Ingest the PDF/HTML and preserve source-native sections, captions and figures.</li>
+      <li>Extract shared paper-level facts once: formulation, composition, ratios, payloads, doses, route and model.</li>
+      <li>Locate relevant outcome paragraphs, tables and figures.</li>
+      <li>Run selective vision only on relevant figures/tables, with their caption and local method context.</li>
+      <li>Return outcome value, unit, comparison, significance, recipient, evidence source and an exact-versus-visually-estimated flag.</li>
+      <li>Merge shared facts and outcome rows directly, validate provenance, and load the database.</li>
+    </ol>
+    <p>For the MVP, a perfect 18-arm inventory is no longer a prerequisite for vision. Broad experiment containers may generate multiple cell-specific outcome rows downstream.</p>
+  </section>
+
+  <section>
+    <h2>Next test: complete NP-002 with selective vision</h2>
+    <table>
+      <thead><tr><th>Step</th><th>Purpose</th><th>Estimate</th></tr></thead>
+      <tbody>
+        <tr><td>Prepare Figure 2 packet</td><td>QUANT DNA accumulation for two formulations and three liver cell types</td><td>10–15 min including Figure 4 preparation</td></tr>
+        <tr><td>Prepare Figure 4 packet</td><td>tdTomato-positive outcomes for two formulations, two doses and three cell types</td><td>Included above</td></tr>
+        <tr><td>Approval preview</td><td>Show exact request hashes, call count and token estimates</td><td>10–15 min</td></tr>
+        <tr><td>Two sequential vision calls</td><td>Extract numerical/qualitative outcomes and uncertainty</td><td>10–20 min</td></tr>
+        <tr><td>Merge and evaluate</td><td>Create database rows and calculate final recall</td><td>15–25 min</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Total expected time:</strong> approximately 45–75 minutes, with explicit human approval before paid calls and no automatic retries.</p>
+  </section>
+
+  <section>
+    <h2>Accelerated four-week schedule</h2>
+    <table>
+      <thead><tr><th>Week</th><th>Fastest credible target</th></tr></thead>
+      <tbody>
+        <tr><td>Week 1</td><td>Finish the hybrid extraction path; complete NP-002; test 3–5 new papers; freeze the minimal database schema; add database insertion; create a basic Streamlit UI and scikit-learn nearest-neighbor baseline; start a COMET smoke test.</td></tr>
+        <tr><td>Week 2</td><td>Process approximately 25–50 papers; fix only recurring extraction defects; improve selective vision and retrieval features; begin the first meaningful COMET fine-tuning run.</td></tr>
+        <tr><td>Week 3</td><td>Expand toward 50–100 papers; evaluate nearest neighbors; run and compare COMET experiments; integrate evidence, confidence and recommendations in the UI.</td></tr>
+        <tr><td>Week 4</td><td>Freeze features early; complete evaluation and representative demonstrations; fix major bugs only; prepare metrics, comparisons, report and contingency buffer.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Component estimates:</strong> hybrid extraction 4–8 hours for a first complete test and 2–3 days to stabilize; nearest neighbor 4–8 hours for an MVP and 2–3 days for evaluation; Streamlit UI 1–2 days for an MVP and 3–5 days for a stronger prototype; COMET approximately 1–2 weeks if pretrained code and suitable compute are available.</p>
+    <p>The nearest-neighbor baseline should remain the reliable application path while COMET is developed as the higher-risk experimental comparison. UI, retrieval and COMET work should begin before the entire corpus is extracted.</p>
+  </section>
+</main>
+</body>
+</html>
