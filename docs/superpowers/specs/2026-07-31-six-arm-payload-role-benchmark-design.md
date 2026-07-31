@@ -67,6 +67,20 @@ KUP-05/06 must include:
 KUP-01/02 retain the 0.3 mg/kg QUANT-DNA treatment, ddPCR/biodistribution, cell
 isolation, formulation, route, and Kupffer-cell outcome evidence.
 
+Their formulation-specific outcomes must remain separate:
+
+- KUP-01 receives the MC3-specific DNA-measurement outcome evidence.
+- KUP-02 receives the cKK-E12-specific DNA-accumulation outcome evidence.
+- Shared dose, route, model, cell-isolation, and assay evidence may appear in
+  both packets.
+- An outcome paragraph specific to one formulation must not be used to confirm
+  the other formulation merely because both were tested in the same study.
+
+The accounting contract must require KUP-01 and KUP-02 to link their own
+candidate ID to a formulation-specific experiment ID and outcome ID. The
+`biodistribution_tracer` label explains how to interpret QUANT DNA; it does not
+replace evidence-based relationship linkage.
+
 ## Eligibility behavior
 
 The paper remains extractable when it contains original LNP delivery evidence
@@ -77,6 +91,20 @@ separately:
 - DNA tracer records cannot silently qualify as therapeutic RNA evidence.
 - Reporter mRNA records can contribute functional-delivery evidence but are
   still labeled as reporter experiments.
+
+The LLM reports payload identity, payload role, experiment facts, and outcomes.
+It does not make the final platform-policy decision. Normal deterministic
+validation code derives:
+
+- `extractable_delivery_evidence`: true for scientifically supported LNP
+  delivery experiments using an allowed payload role.
+- `rna_recommendation_eligible`: true only when the extracted experiment
+  satisfies the application's RNA recommendation policy.
+
+For NP-002, the validator derives `extractable_delivery_evidence` as true and
+`rna_recommendation_eligible` as false for confirmed KUP-01/02 records. KUP-03
+through KUP-06 are evaluated against the RNA recommendation policy after their
+scientific fields and links pass validation.
 
 No ingestion behavior changes. Ingestion continues to preserve raw evidence;
 payload-role classification occurs in extraction.
@@ -98,11 +126,15 @@ Test-driven regressions will prove:
 
 1. QUANT DNA is accepted as a `biodistribution_tracer` payload.
 2. DNA tracer extraction does not imply RNA therapeutic eligibility.
-3. KUP-03/04 cannot cite 0.3 mg/kg-only outcomes.
-4. KUP-05/06 envelopes contain every evidence record used by their linked
+3. KUP-01 cites only the MC3-specific outcome and KUP-02 cites only the
+   cKK-E12-specific outcome.
+4. Recommendation eligibility is derived by deterministic validation code,
+   not accepted from an LLM policy judgment.
+5. KUP-03/04 cannot cite 0.3 mg/kg-only outcomes.
+6. KUP-05/06 envelopes contain every evidence record used by their linked
    scientific fields.
-5. The regenerated strict schema remains provider-compatible.
-6. The exact six-arm preflight is SHA-bound and makes zero provider calls.
+7. The regenerated strict schema remains provider-compatible.
+8. The exact six-arm preflight is SHA-bound and makes zero provider calls.
 
 ## Scope exclusions
 
