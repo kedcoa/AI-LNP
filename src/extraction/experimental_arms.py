@@ -23,6 +23,7 @@ _ARM_FIELDS = {
     "candidate_id",
     "formulation",
     "payload",
+    "payload_role",
     "dose",
     "dose_unit",
     "route",
@@ -247,6 +248,11 @@ def _arm(
         "candidate_id": candidate_id,
         "formulation": formulation,
         "payload": payload,
+        "payload_role": (
+            "biodistribution_tracer"
+            if payload == "QUANT DNA"
+            else "reporter"
+        ),
         "dose": dose,
         "dose_unit": "mg/kg",
         "route": "intravenous lateral tail vein",
@@ -749,6 +755,7 @@ def _validate_complete_arm(
     for field in (
         "formulation",
         "payload",
+        "payload_role",
         "dose_unit",
         "route",
         "species",
@@ -764,6 +771,13 @@ def _validate_complete_arm(
         raise ValueError("arm formulation is outside the NP-002 Kupffer scope")
     if arm["payload"] not in {"QUANT DNA", "Cre mRNA"}:
         raise ValueError("arm payload is outside the NP-002 Kupffer scope")
+    expected_payload_role = (
+        "biodistribution_tracer"
+        if arm["payload"] == "QUANT DNA"
+        else "reporter"
+    )
+    if arm["payload_role"] != expected_payload_role:
+        raise ValueError("arm payload_role does not match its payload")
     if arm["dose_unit"] != "mg/kg":
         raise ValueError("arm dose_unit is outside the NP-002 Kupffer scope")
     if arm["route"] != "intravenous lateral tail vein":
@@ -1268,6 +1282,15 @@ def _approved_arm_rows(
             raise ValueError(
                 "approved canonical candidate identity does not match its "
                 "KUP arm mapping"
+            )
+        expected_payload_role = (
+            "biodistribution_tracer"
+            if arm["payload"] == "QUANT DNA"
+            else "reporter"
+        )
+        if arm.get("payload_role") != expected_payload_role:
+            raise ValueError(
+                "approved canonical payload_role does not match its KUP arm"
             )
     return rows, candidate_ids
 

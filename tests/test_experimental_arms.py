@@ -143,6 +143,16 @@ def test_builds_six_kupffer_arms_from_explicit_relationships():
         row["target_cell"] == "Kupffer cells"
         for row in report["proposed_arms"]
     )
+    assert [
+        row["payload_role"] for row in report["proposed_arms"]
+    ] == [
+        "biodistribution_tracer",
+        "biodistribution_tracer",
+        "reporter",
+        "reporter",
+        "reporter",
+        "reporter",
+    ]
     assert report["quarantined_arms"] == []
 
 
@@ -154,6 +164,7 @@ def test_every_arm_has_complete_fields_and_packet_evidence_only():
         "candidate_id",
         "formulation",
         "payload",
+        "payload_role",
         "dose",
         "dose_unit",
         "route",
@@ -1011,9 +1022,14 @@ def test_human_confirmed_canonical_arms_allow_complementary_packet_clauses():
         additions.append(
             {
                 "candidate_id": candidate_id,
-                "formulation": formulation,
-                "payload": payload,
-                "dose": dose,
+                    "formulation": formulation,
+                    "payload": payload,
+                    "payload_role": (
+                        "biodistribution_tracer"
+                        if payload == "QUANT DNA"
+                        else "reporter"
+                    ),
+                    "dose": dose,
                 "dose_unit": "mg/kg",
                 "route": "intravenous lateral tail vein",
                 "species": "Mus musculus",
@@ -1088,9 +1104,10 @@ def test_human_confirmed_canonical_arm_rejects_unlinked_clause_aggregation():
     review["additions"] = [
         {
             "candidate_id": "KUP-01",
-            "formulation": "MC3",
-            "payload": "QUANT DNA",
-            "dose": 0.3,
+                "formulation": "MC3",
+                "payload": "QUANT DNA",
+                "payload_role": "biodistribution_tracer",
+                "dose": 0.3,
             "dose_unit": "mg/kg",
             "route": "intravenous lateral tail vein",
             "species": "Mus musculus",
@@ -1158,6 +1175,7 @@ def approved_arms():
             "candidate_id": "KUP-01",
             "formulation": "MC3",
             "payload": "QUANT DNA",
+            "payload_role": "biodistribution_tracer",
             "dose": 0.3,
             "dose_unit": "mg/kg",
             "route": "intravenous lateral tail vein",
@@ -1169,6 +1187,7 @@ def approved_arms():
             "candidate_id": "KUP-02",
             "formulation": "cKK-E12",
             "payload": "QUANT DNA",
+            "payload_role": "biodistribution_tracer",
             "dose": 0.3,
             "dose_unit": "mg/kg",
             "route": "intravenous lateral tail vein",
@@ -1180,6 +1199,7 @@ def approved_arms():
             "candidate_id": "KUP-03",
             "formulation": "MC3",
             "payload": "Cre mRNA",
+            "payload_role": "reporter",
             "dose": 1.0,
             "dose_unit": "mg/kg",
             "route": "intravenous lateral tail vein",
@@ -1191,6 +1211,7 @@ def approved_arms():
             "candidate_id": "KUP-04",
             "formulation": "cKK-E12",
             "payload": "Cre mRNA",
+            "payload_role": "reporter",
             "dose": 1.0,
             "dose_unit": "mg/kg",
             "route": "intravenous lateral tail vein",
@@ -1202,6 +1223,7 @@ def approved_arms():
             "candidate_id": "KUP-05",
             "formulation": "MC3",
             "payload": "Cre mRNA",
+            "payload_role": "reporter",
             "dose": 0.3,
             "dose_unit": "mg/kg",
             "route": "intravenous lateral tail vein",
@@ -1213,6 +1235,7 @@ def approved_arms():
             "candidate_id": "KUP-06",
             "formulation": "cKK-E12",
             "payload": "Cre mRNA",
+            "payload_role": "reporter",
             "dose": 0.3,
             "dose_unit": "mg/kg",
             "route": "intravenous lateral tail vein",
