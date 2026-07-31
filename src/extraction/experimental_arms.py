@@ -420,12 +420,20 @@ def _np002_six_arm_inventory(
         )
         if component_outcomes and component_routes:
             quant_contexts.append(
-                (component_outcomes, component_routes)
+                (
+                    _rows_in_component(quant_bound, component),
+                    component_outcomes,
+                    component_routes,
+                )
             )
     if quant_bound and len(quant_contexts) == 1:
-        quant_outcome_rows, quant_route_rows = quant_contexts[0]
+        (
+            quant_bound_rows,
+            quant_outcome_rows,
+            quant_route_rows,
+        ) = quant_contexts[0]
         quant_existence = [
-            *quant_bound,
+            *quant_bound_rows,
             *quant_route_rows,
         ]
         proposed.extend(
@@ -516,6 +524,7 @@ def _np002_six_arm_inventory(
         if component_targets and component_routes and component_models:
             cre_one_contexts.append(
                 (
+                    _rows_in_component(cre_one_bound, component),
                     component_targets,
                     component_routes,
                     component_models,
@@ -526,12 +535,13 @@ def _np002_six_arm_inventory(
         and len(cre_one_contexts) == 1
     ):
         (
+            cre_one_bound_rows,
             cre_one_target_rows,
             cre_one_route_rows,
             cre_one_model_rows,
         ) = cre_one_contexts[0]
         cre_one_existence = [
-            *cre_one_bound,
+            *cre_one_bound_rows,
             *cre_one_model_rows,
             *cre_one_target_rows,
             *cre_one_route_rows,
@@ -609,6 +619,7 @@ def _np002_six_arm_inventory(
         if component_targets and component_routes and component_models:
             cre_low_contexts.append(
                 (
+                    _rows_in_component(cre_low_bound, component),
                     component_targets,
                     component_routes,
                     component_models,
@@ -619,17 +630,18 @@ def _np002_six_arm_inventory(
         and len(cre_low_contexts) == 1
     ):
         (
+            cre_low_bound_rows,
             cre_low_target_rows,
             cre_low_route_rows,
             cre_low_model_rows,
         ) = cre_low_contexts[0]
         cre_low_existence = [
-            *cre_low_bound,
+            *cre_low_bound_rows,
             *cre_low_model_rows,
             *cre_low_target_rows,
             *cre_low_route_rows,
         ]
-        cre_low_outcomes = [*cre_low_bound, *cre_low_target_rows]
+        cre_low_outcomes = [*cre_low_bound_rows, *cre_low_target_rows]
         proposed.extend(
             [
                 _arm(

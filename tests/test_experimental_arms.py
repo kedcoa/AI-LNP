@@ -361,6 +361,45 @@ def test_disconnected_treatment_roots_cannot_union_required_support():
     ]
 
 
+def test_qualifying_component_excludes_extra_disconnected_treatment_roots():
+    packet = np002_packet()
+    disconnected = [
+        copy.deepcopy(
+            next(
+                row
+                for row in packet["evidence"]
+                if row["evidence_id"] == source_id
+            )
+        )
+        for source_id in (
+            "E-QUANT-BOUND",
+            "E-CRE-1",
+            "E-CRE-03-COND",
+        )
+    ]
+    disconnected_ids = set()
+    for index, row in enumerate(disconnected, start=1):
+        row["evidence_id"] = f"E-DISCONNECTED-{index}"
+        row["source_ids"] = [f"S-DISCONNECTED-{index}"]
+        row["experiment_candidate_ids"] = [f"EXP-DISCONNECTED-{index}"]
+        disconnected_ids.add(row["evidence_id"])
+    disconnected[0]["text"] = (
+        "We injected mice intravenously with 0.3 mg/kg QUANT DNA "
+        "carried by either MC3 or cKK-E12 LNPs to Kupffer cells."
+    )
+    packet["evidence"].extend(disconnected)
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert len(report["proposed_arms"]) == 6
+    assert all(
+        disconnected_ids.isdisjoint(
+            arm["existence_evidence_ids"] + arm["outcome_evidence_ids"]
+        )
+        for arm in report["proposed_arms"]
+    )
+
+
 def test_paired_correspondence_excludes_disconnected_outcome_context():
     packet = respectively_packet()
     packet["evidence"][0]["source_ids"] = ["S-PAIR"]
