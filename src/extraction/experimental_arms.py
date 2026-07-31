@@ -162,28 +162,39 @@ def _shares_experiment_context(
     }
 
 
-def _contextually_connected(
+def _treatment_rooted_component(
     anchors: Sequence[Mapping[str, Any]],
-    support: Sequence[Mapping[str, Any]],
-) -> bool:
-    return any(
-        _shares_experiment_context(anchor, row)
-        for anchor in anchors
-        for row in support
-    )
-
-
-def _connected_support(
-    anchors: Sequence[Mapping[str, Any]],
-    support: Sequence[Mapping[str, Any]],
+    evidence: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
+    component = {
+        row["evidence_id"]: dict(row)
+        for row in anchors
+    }
+    changed = True
+    while changed:
+        changed = False
+        for row in evidence:
+            evidence_id = row["evidence_id"]
+            if evidence_id in component:
+                continue
+            if any(
+                _shares_experiment_context(member, row)
+                for member in component.values()
+            ):
+                component[evidence_id] = dict(row)
+                changed = True
+    return list(component.values())
+
+
+def _rows_in_component(
+    rows: Sequence[Mapping[str, Any]],
+    component: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    component_ids = {row["evidence_id"] for row in component}
     return [
         dict(row)
-        for row in support
-        if any(
-            _shares_experiment_context(anchor, row)
-            for anchor in anchors
-        )
+        for row in rows
+        if row["evidence_id"] in component_ids
     ]
 
 
@@ -378,15 +389,17 @@ def _np002_six_arm_inventory(
             )
         ),
     )
-    quant_context = [*quant_bound, *quant_outcomes]
-    quant_route_rows = _connected_support(quant_context, route_rows)
+    quant_context = _treatment_rooted_component(quant_bound, evidence)
+    quant_outcome_rows = _rows_in_component(
+        quant_outcomes or quant_bound,
+        quant_context,
+    )
+    quant_route_rows = _rows_in_component(route_rows, quant_context)
     if (
         quant_route_rows
         and quant_bound
-        and _contextually_connected(quant_bound, quant_outcomes or quant_bound)
+        and quant_outcome_rows
     ):
-        if not quant_outcomes:
-            quant_outcomes = quant_bound
         quant_existence = [
             *quant_bound,
             *quant_route_rows,
@@ -401,7 +414,7 @@ def _np002_six_arm_inventory(
                     model="mice",
                     pairing_type="cross_product",
                     existence_rows=quant_existence,
-                    outcome_rows=quant_outcomes,
+                    outcome_rows=quant_outcome_rows,
                 ),
                 _arm(
                     candidate_id="KUP-02",
@@ -411,7 +424,7 @@ def _np002_six_arm_inventory(
                     model="mice",
                     pairing_type="cross_product",
                     existence_rows=quant_existence,
-                    outcome_rows=quant_outcomes,
+                    outcome_rows=quant_outcome_rows,
                 ),
             ]
         )
@@ -463,24 +476,28 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("administer", "inject", "treat"))
         ),
     )
-    cre_one_context = [*cre_one_bound, *cre_target]
-    cre_one_route_rows = _connected_support(
-        cre_one_context, route_rows
+    cre_one_context = _treatment_rooted_component(
+        cre_one_bound, evidence
     )
-    cre_one_model_rows = _connected_support(
-        cre_one_context, cre_model
+    cre_one_target_rows = _rows_in_component(
+        cre_target, cre_one_context
+    )
+    cre_one_route_rows = _rows_in_component(
+        route_rows, cre_one_context
+    )
+    cre_one_model_rows = _rows_in_component(
+        cre_model, cre_one_context
     )
     if (
         cre_one_route_rows
         and cre_one_model_rows
-        and cre_target
+        and cre_one_target_rows
         and cre_one_bound
-        and _contextually_connected(cre_one_bound, cre_target)
     ):
         cre_one_existence = [
             *cre_one_bound,
             *cre_one_model_rows,
-            *cre_target,
+            *cre_one_target_rows,
             *cre_one_route_rows,
         ]
         proposed.extend(
@@ -493,7 +510,7 @@ def _np002_six_arm_inventory(
                     model="Ai14 Cre-reporter mice",
                     pairing_type="cross_product",
                     existence_rows=cre_one_existence,
-                    outcome_rows=cre_target,
+                    outcome_rows=cre_one_target_rows,
                 ),
                 _arm(
                     candidate_id="KUP-04",
@@ -503,7 +520,7 @@ def _np002_six_arm_inventory(
                     model="Ai14 Cre-reporter mice",
                     pairing_type="cross_product",
                     existence_rows=cre_one_existence,
-                    outcome_rows=cre_target,
+                    outcome_rows=cre_one_target_rows,
                 ),
             ]
         )
@@ -540,27 +557,31 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("observ", "measur", "delivery"))
         ),
     )
-    cre_low_context = [*cre_low_bound, *cre_target]
-    cre_low_route_rows = _connected_support(
-        cre_low_context, route_rows
+    cre_low_context = _treatment_rooted_component(
+        cre_low_bound, evidence
     )
-    cre_low_model_rows = _connected_support(
-        cre_low_context, cre_model
+    cre_low_target_rows = _rows_in_component(
+        cre_target, cre_low_context
+    )
+    cre_low_route_rows = _rows_in_component(
+        route_rows, cre_low_context
+    )
+    cre_low_model_rows = _rows_in_component(
+        cre_model, cre_low_context
     )
     if (
         cre_low_route_rows
         and cre_low_model_rows
-        and cre_target
+        and cre_low_target_rows
         and cre_low_bound
-        and _contextually_connected(cre_low_bound, cre_target)
     ):
         cre_low_existence = [
             *cre_low_bound,
             *cre_low_model_rows,
-            *cre_target,
+            *cre_low_target_rows,
             *cre_low_route_rows,
         ]
-        cre_low_outcomes = [*cre_low_bound, *cre_target]
+        cre_low_outcomes = [*cre_low_bound, *cre_low_target_rows]
         proposed.extend(
             [
                 _arm(
@@ -1734,7 +1755,7 @@ def validate_experimental_arm_response(
         if (
             not core_evidence_valid
             or candidate_id not in structurally_valid
-            or candidate_id in reused_candidates
+            or candidate_id in invalid_structural
         ):
             continue
         entry = accounting[candidate_id]

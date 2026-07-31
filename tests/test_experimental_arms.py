@@ -276,6 +276,44 @@ def test_automatic_cre_arm_rejects_model_from_disconnected_experiment():
     } == {"Cre mRNA 1.0 mg/kg", "Cre mRNA 0.3 mg/kg"}
 
 
+def test_automatic_cre_arm_uses_treatment_rooted_context_component():
+    packet = np002_packet()
+    packet["evidence"] = [
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"]
+        in {
+            "E-ROUTE",
+            "E-CRE-MODEL",
+            "E-CRE-1",
+            "E-CRE-TARGET",
+            "E-CRE-03-COND",
+        }
+    ]
+    for row in packet["evidence"]:
+        row["source_ids"] = (
+            ["S-TREATMENT"]
+            if row["evidence_id"]
+            in {"E-CRE-1", "E-CRE-TARGET", "E-CRE-03-COND"}
+            else ["S-OTHER"]
+        )
+    packet["evidence"].append(
+        _evidence(
+            "E-CRE-TARGET-OTHER",
+            "In another experiment, the percent of Kupffer cells observed "
+            "to be tdTomato positive was quantified.",
+            source_ids=["S-OTHER"],
+        )
+    )
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert report["proposed_arms"] == []
+    assert {
+        row["family"] for row in report["quarantined_arms"]
+    } == {"Cre mRNA 1.0 mg/kg", "Cre mRNA 0.3 mg/kg"}
+
+
 def test_respectively_uses_paired_correspondence_not_cross_product():
     report = build_np002_kupffer_arm_proposal(respectively_packet())
 
@@ -1476,7 +1514,25 @@ def test_structural_count_excludes_later_duplicate_outcome_failures():
     )
 
     assert report["structurally_valid_extracted"] == 4
+    assert report["scientifically_confirmed"] == 4
+    assert "KUP-01" not in report["confirmed_candidate_ids"]
+    assert "KUP-02" not in report["confirmed_candidate_ids"]
     assert "outcome_reused_across_incompatible_arms" in _error_codes(report)
+
+
+def test_duplicate_returned_outcome_cannot_remain_scientifically_confirmed():
+    response = _arm_response()
+    response["outcomes"].append(copy.deepcopy(response["outcomes"][0]))
+
+    report = validate_experimental_arm_response(
+        response, approved_arms(), {"E-ARM"}
+    )
+
+    assert report["structurally_valid_extracted"] == 5
+    assert report["scientifically_confirmed"] == 5
+    assert "KUP-01" not in report["structurally_valid_candidate_ids"]
+    assert "KUP-01" not in report["confirmed_candidate_ids"]
+    assert "duplicate_returned_outcome_ids" in _error_codes(report)
 
 
 def test_validator_counts_ambiguous_candidate_as_accounted_but_not_confirmed():
