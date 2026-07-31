@@ -592,6 +592,30 @@ def _validate_scoped_arm_response(
     report["scientifically_confirmed"] = len(
         scientifically_confirmed_ids
     )
+    report["extractable_delivery_candidate_ids"] = sorted(
+        scientifically_confirmed_ids
+    )
+    prior_rna_eligible = set(
+        report.get("rna_recommendation_eligible_candidate_ids", [])
+    )
+    final_rna_eligible = sorted(
+        scientifically_confirmed_ids & prior_rna_eligible
+    )
+    report["rna_recommendation_eligible_candidate_ids"] = (
+        final_rna_eligible
+    )
+    final_rna_eligible_set = set(final_rna_eligible)
+    report["candidate_policy_eligibility"] = {
+        candidate_id: {
+            "extractable_delivery_evidence": (
+                candidate_id in scientifically_confirmed_ids
+            ),
+            "rna_recommendation_eligible": (
+                candidate_id in final_rna_eligible_set
+            ),
+        }
+        for candidate_id in arm_evidence
+    }
     return report
 
 

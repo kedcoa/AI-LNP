@@ -1490,6 +1490,7 @@ def _scientific_evidence_groups(
                 (
                     "payload_type",
                     "payload_name",
+                    "payload_role",
                     "dose",
                     "dose_unit",
                     "route",
@@ -1543,6 +1544,13 @@ def _matches_scientific_arm(
         field_name="payload_type",
     ):
         errors.add("scientific_identity_mismatch")
+    expected_payload_role = (
+        "biodistribution_tracer"
+        if arm.get("payload") == "QUANT DNA"
+        else "reporter"
+    )
+    if _field_value(experiment, "payload_role") != expected_payload_role:
+        errors.add("payload_role_mismatch")
     actual_dose = _field_value(experiment, "dose")
     if (
         isinstance(actual_dose, bool)
@@ -1601,6 +1609,15 @@ def validate_experimental_arm_response(
         "ambiguous": 0,
         "structurally_valid_candidate_ids": [],
         "confirmed_candidate_ids": [],
+        "extractable_delivery_candidate_ids": [],
+        "rna_recommendation_eligible_candidate_ids": [],
+        "candidate_policy_eligibility": {
+            candidate_id: {
+                "extractable_delivery_evidence": False,
+                "rna_recommendation_eligible": False,
+            }
+            for candidate_id in candidate_ids
+        },
         "errors": [],
     }
     duplicate_ids = sorted(
@@ -1878,4 +1895,22 @@ def validate_experimental_arm_response(
     report["structurally_valid_candidate_ids"] = sorted(final_structural)
     report["structurally_valid_extracted"] = len(final_structural)
     report["scientifically_confirmed"] = len(report["confirmed_candidate_ids"])
+    confirmed = set(report["confirmed_candidate_ids"])
+    report["extractable_delivery_candidate_ids"] = sorted(confirmed)
+    report["rna_recommendation_eligible_candidate_ids"] = [
+        candidate_id
+        for candidate_id in candidate_ids
+        if candidate_id in confirmed
+        and arm_by_id[candidate_id]["payload"] == "Cre mRNA"
+    ]
+    rna_eligible = set(
+        report["rna_recommendation_eligible_candidate_ids"]
+    )
+    report["candidate_policy_eligibility"] = {
+        candidate_id: {
+            "extractable_delivery_evidence": candidate_id in confirmed,
+            "rna_recommendation_eligible": candidate_id in rna_eligible,
+        }
+        for candidate_id in candidate_ids
+    }
     return report

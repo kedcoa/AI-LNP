@@ -1258,6 +1258,9 @@ def _arm_response():
                 "formulation_id": "F-MC3" if arm["formulation"] == "MC3" else "F-cKK",
                 "payload_type": _reported_value("DNA" if is_quant else "mRNA"),
                 "payload_name": _reported_value(arm["payload"]),
+                "payload_role": _reported_value(
+                    "biodistribution_tracer" if is_quant else "reporter"
+                ),
                 "encoded_product": _reported_value("QUANT" if is_quant else "Cre"),
                 "molecular_target": _reported_value("Kupffer cells"),
                 "delivery_recipient_cell": _reported_value("Kupffer cells"),
@@ -1410,8 +1413,78 @@ def test_validator_confirms_all_six_exact_arm_mappings():
             "KUP-05",
             "KUP-06",
         ],
+        "extractable_delivery_candidate_ids": [
+            "KUP-01",
+            "KUP-02",
+            "KUP-03",
+            "KUP-04",
+            "KUP-05",
+            "KUP-06",
+        ],
+        "rna_recommendation_eligible_candidate_ids": [
+            "KUP-03",
+            "KUP-04",
+            "KUP-05",
+            "KUP-06",
+        ],
+        "candidate_policy_eligibility": {
+            "KUP-01": {
+                "extractable_delivery_evidence": True,
+                "rna_recommendation_eligible": False,
+            },
+            "KUP-02": {
+                "extractable_delivery_evidence": True,
+                "rna_recommendation_eligible": False,
+            },
+            "KUP-03": {
+                "extractable_delivery_evidence": True,
+                "rna_recommendation_eligible": True,
+            },
+            "KUP-04": {
+                "extractable_delivery_evidence": True,
+                "rna_recommendation_eligible": True,
+            },
+            "KUP-05": {
+                "extractable_delivery_evidence": True,
+                "rna_recommendation_eligible": True,
+            },
+            "KUP-06": {
+                "extractable_delivery_evidence": True,
+                "rna_recommendation_eligible": True,
+            },
+        },
         "errors": [],
     }
+
+
+@pytest.mark.parametrize(
+    ("candidate_id", "bad_role"),
+    [
+        ("KUP-01", "therapeutic"),
+        ("KUP-03", "biodistribution_tracer"),
+    ],
+)
+def test_validator_rejects_payload_role_mismatch(candidate_id, bad_role):
+    response = _arm_response()
+    experiment_id = response["experimental_arm_accounting"][candidate_id][
+        "linked_experiment_ids"
+    ][0]
+    experiment = next(
+        row
+        for row in response["experiments"]
+        if row["experiment_id"] == experiment_id
+    )
+    experiment["payload_role"] = _reported_value(bad_role)
+
+    report = validate_experimental_arm_response(
+        response, approved_arms(), {"E-ARM"}
+    )
+
+    assert "payload_role_mismatch" in _error_codes(report)
+    assert candidate_id not in report["confirmed_candidate_ids"]
+    assert candidate_id not in report[
+        "extractable_delivery_candidate_ids"
+    ]
 
 
 @pytest.mark.parametrize("bad_disposition", ["duplicate", "invalid", "not_core", "insufficient_evidence"])
