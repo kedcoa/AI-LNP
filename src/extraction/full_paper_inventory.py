@@ -5,6 +5,8 @@ from __future__ import annotations
 import hashlib
 import re
 import unicodedata
+from collections import Counter
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
@@ -72,6 +74,33 @@ _FIGURE_OR_TABLE_LABEL = re.compile(
 _TITLE_CONNECTORS = frozenset(
     {"a", "an", "and", "as", "at", "for", "in", "of", "on", "or", "the", "to", "via", "with"}
 )
+_FINITE_CLAUSE_AUXILIARY = re.compile(
+    r"\b(?:am|is|are|was|were|be|been|being|has|have|had|do|does|did|"
+    r"will|would|shall|should|can|could|may|might|must)\b",
+    re.IGNORECASE,
+)
+_FINITE_CLAUSE_SUBJECT_PRONOUN = re.compile(
+    r"^(?:he|i|it|she|they|we|you)\b",
+    re.IGNORECASE,
+)
+_FONT_FLAG_BOLD = 1 << 4
+
+
+@dataclass(frozen=True)
+class _TextStyle:
+    font_size: float
+    bold: bool
+
+
+@dataclass(frozen=True)
+class _LineLayout:
+    bbox: tuple[float, float, float, float]
+    style: _TextStyle
+
+
+@dataclass(frozen=True)
+class _BlockLayout:
+    lines: tuple[_LineLayout, ...]
 
 _TAG_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("formulation", re.compile(r"\bformulat\w*\b", re.IGNORECASE)),
@@ -164,7 +193,12 @@ def normalize_block_text(text: str) -> str:
     return re.sub(r"\s+", " ", normalized).strip()
 
 
-def _is_heading(text: str, *, following_text: str = "") -> bool:
+def _is_heading(
+    text: str,
+    *,
+    following_text: str = "",
+    strong_layout_signal: bool = False,
+) -> bool:
     if any(pattern.fullmatch(text) for pattern in _HEADING_PATTERNS):
         return True
     if (
@@ -176,9 +210,9 @@ def _is_heading(text: str, *, following_text: str = "") -> bool:
     numbered_heading = _NUMBERED_HEADING.fullmatch(text)
     if numbered_heading:
         return _is_numbered_heading(
-            text,
             numbered_heading["title"],
             following_text,
+            strong_layout_signal,
         )
     return _is_title_like_heading(text)
 
@@ -192,33 +226,132 @@ def _is_title_like_heading(text: str) -> bool:
 
 
 def _is_numbered_heading(
-    label: str,
     title: str,
     following_text: str,
+    strong_layout_signal: bool,
 ) -> bool:
-    """Use title form or adjacent block structure to identify a numbered label."""
+    """Use title form and source structure to identify a numbered label."""
     if _is_title_like_heading(title):
         return True
     words = re.findall(r"[A-Za-z][A-Za-z'-]*", title)
+    if not words or len(words) > 12 or not words[0][0].isupper():
+        return False
     following_text = normalize_block_text(following_text)
-    has_section_content = bool(following_text) and not _NUMBERED_HEADING.fullmatch(
-        following_text
-    ) and (
-        following_text.endswith((".", "?", "!"))
-        or len(following_text) > len(label)
+    following_is_numbered = bool(_NUMBERED_HEADING.fullmatch(following_text))
+    if strong_layout_signal and following_is_numbered:
+        return True
+    if (
+        _FINITE_CLAUSE_AUXILIARY.search(title)
+        or _FINITE_CLAUSE_SUBJECT_PRONOUN.match(title)
+    ):
+        return False
+    if strong_layout_signal:
+        return True
+    has_section_content = bool(following_text) and not following_is_numbered
+    return has_section_content
+
+
+def _dominant_text_style(spans: list[dict[str, object]]) -> _TextStyle | None:
+    weights: Counter[tuple[float, bool]] = Counter()
+    for span in spans:
+        text = str(span.get("text", ""))
+        if not text.strip():
+            continue
+        size = round(float(span.get("size", 0.0)), 2)
+        flags = int(span.get("flags", 0))
+        weights[(size, bool(flags & _FONT_FLAG_BOLD))] += len(text.strip())
+    if not weights:
+        return None
+    (font_size, bold), _ = max(
+        weights.items(),
+        key=lambda item: (item[1], -item[0][0], not item[0][1]),
     )
-    return (
-        bool(words)
-        and len(words) <= 12
-        and words[0][0].isupper()
-        and has_section_content
+    return _TextStyle(font_size=font_size, bold=bold)
+
+
+def _page_layout(
+    page: fitz.Page,
+) -> tuple[dict[int, _BlockLayout], _TextStyle | None]:
+    layouts: dict[int, _BlockLayout] = {}
+    page_spans: list[dict[str, object]] = []
+    for block in page.get_text("dict", sort=True)["blocks"]:
+        if block.get("type") != 0:
+            continue
+        line_layouts: list[_LineLayout] = []
+        for line in block.get("lines", []):
+            spans = list(line.get("spans", []))
+            page_spans.extend(spans)
+            style = _dominant_text_style(spans)
+            if style is None:
+                continue
+            line_layouts.append(
+                _LineLayout(
+                    bbox=tuple(float(value) for value in line["bbox"]),
+                    style=style,
+                )
+            )
+        if line_layouts:
+            layouts[int(block["number"])] = _BlockLayout(lines=tuple(line_layouts))
+    return layouts, _dominant_text_style(page_spans)
+
+
+def _strong_heading_layout_signal(
+    block_layout: _BlockLayout | None,
+    previous_layout: _BlockLayout | None,
+    following_layout: _BlockLayout | None,
+    body_style: _TextStyle | None,
+) -> bool:
+    """Return true only for typography or geometry that distinguishes a label."""
+    if block_layout is None or not block_layout.lines:
+        return False
+    heading_line = block_layout.lines[0]
+    content_line = (
+        block_layout.lines[1]
+        if len(block_layout.lines) > 1
+        else following_layout.lines[0]
+        if following_layout and following_layout.lines
+        else None
     )
+    comparison_styles = [
+        style
+        for style in (
+            content_line.style if content_line else None,
+            body_style,
+        )
+        if style is not None
+    ]
+    size_deltas = [
+        heading_line.style.font_size - style.font_size
+        for style in comparison_styles
+    ]
+    clearly_larger = any(delta >= 0.75 for delta in size_deltas)
+    distinctly_bold = heading_line.style.bold and any(
+        not style.bold for style in comparison_styles
+    )
+    if clearly_larger or distinctly_bold:
+        return True
+
+    if (
+        previous_layout is None
+        or not previous_layout.lines
+        or content_line is None
+    ):
+        return False
+    previous_line = previous_layout.lines[-1]
+    gap_before = heading_line.bbox[1] - previous_line.bbox[3]
+    gap_after = content_line.bbox[1] - heading_line.bbox[3]
+    line_height = max(heading_line.bbox[3] - heading_line.bbox[1], 1.0)
+    section_spacing = gap_before >= max(gap_after * 1.5, line_height * 0.75)
+    modestly_larger = any(delta >= 0.25 for delta in size_deltas)
+    return section_spacing and modestly_larger
 
 
 def _split_heading(
     block_text: str,
     current_heading: str,
     following_block_text: str = "",
+    *,
+    strong_layout_signal: bool = False,
 ) -> tuple[str, str]:
     """Use a standalone or leading conventional section heading as context."""
     lines = [normalize_block_text(line) for line in block_text.splitlines()]
@@ -229,6 +362,7 @@ def _split_heading(
     if _is_heading(
         lines[0],
         following_text=same_block_text or following_block_text,
+        strong_layout_signal=strong_layout_signal,
     ):
         heading = lines[0]
         return heading, same_block_text
@@ -306,19 +440,37 @@ def build_full_paper_evidence(
     with fitz.open(pdf_path) as document:
         for page_number, page in enumerate(document, start=1):
             page_blocks = page.get_text("blocks", sort=True)
+            page_layouts, body_style = _page_layout(page)
             for block_ordinal, block in enumerate(
                 page_blocks, start=1
             ):
                 raw_text = block[4]
+                block_number = int(block[5])
                 following_block_text = (
                     page_blocks[block_ordinal][4]
                     if block_ordinal < len(page_blocks)
                     else ""
                 )
+                previous_layout = (
+                    page_layouts.get(int(page_blocks[block_ordinal - 2][5]))
+                    if block_ordinal > 1
+                    else None
+                )
+                following_layout = (
+                    page_layouts.get(int(page_blocks[block_ordinal][5]))
+                    if block_ordinal < len(page_blocks)
+                    else None
+                )
                 heading, text = _split_heading(
                     raw_text,
                     current_heading,
                     following_block_text,
+                    strong_layout_signal=_strong_heading_layout_signal(
+                        page_layouts.get(block_number),
+                        previous_layout,
+                        following_layout,
+                        body_style,
+                    ),
                 )
                 current_heading = heading
                 if not text:

@@ -14,6 +14,22 @@ def _write_pdf(path: Path, pages: list[list[str]]) -> None:
     document.save(path)
 
 
+def _write_styled_pdf(
+    path: Path,
+    lines: list[tuple[str, float, str]],
+) -> None:
+    document = fitz.open()
+    page = document.new_page(width=612, height=792)
+    for index, (text, font_size, font_name) in enumerate(lines):
+        page.insert_text(
+            (54, 54 + index * 32),
+            text,
+            fontsize=font_size,
+            fontname=font_name,
+        )
+    document.save(path)
+
+
 def test_inventory_retains_generic_full_paper_evidence_by_section(tmp_path: Path):
     """A dropped category tag or heading association loses usable local evidence."""
     pdf_path = tmp_path / "paper.pdf"
@@ -166,6 +182,34 @@ def test_inventory_retains_numbered_prose_list_item_as_evidence(tmp_path: Path):
     )
 
 
+def test_inventory_retains_numbered_prose_before_following_text_block(
+    tmp_path: Path,
+):
+    """Following prose must not turn a numbered evidence block into a heading."""
+    pdf_path = tmp_path / "multi-block-numbered-list.pdf"
+    _write_pdf(
+        pdf_path,
+        [
+            [
+                "Methods",
+                "1. The formulation was prepared by mixing",
+                "The suspension was then filtered before use.",
+            ],
+        ],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-7B", pdf_path)
+
+    assert [block.text for block in inventory.evidence_blocks] == [
+        "1. The formulation was prepared by mixing",
+        "The suspension was then filtered before use.",
+    ]
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "Methods",
+        "Methods",
+    ]
+
+
 def test_inventory_recognizes_numbered_title_like_section_heading(tmp_path: Path):
     """A numbered title-like label still supplies section context."""
     pdf_path = tmp_path / "numbered-heading.pdf"
@@ -201,6 +245,33 @@ def test_inventory_recognizes_numbered_sentence_case_section_headings(tmp_path: 
     assert [block.heading for block in inventory.evidence_blocks] == [
         "2. Adaptive delivery workflow",
         "2. In vivo evaluation",
+    ]
+
+
+def test_inventory_uses_pdf_style_for_numbered_heading_before_subheading(
+    tmp_path: Path,
+):
+    """Strong source typography distinguishes a parent heading from prose."""
+    pdf_path = tmp_path / "styled-numbered-heading.pdf"
+    _write_styled_pdf(
+        pdf_path,
+        [
+            ("2. Variables were transformed", 14, "hebo"),
+            ("2.1 Outcomes measured", 14, "hebo"),
+            ("Primary cells showed increased expression.", 11, "helv"),
+            ("A second outcome was also reported.", 11, "helv"),
+        ],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-9B", pdf_path)
+
+    assert [block.text for block in inventory.evidence_blocks] == [
+        "Primary cells showed increased expression.",
+        "A second outcome was also reported.",
+    ]
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "2.1 Outcomes measured",
+        "2.1 Outcomes measured",
     ]
 
 
