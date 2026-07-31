@@ -344,6 +344,93 @@ def test_respectively_fails_closed_for_mismatched_lists():
     )
 
 
+def _paired_inventory_packet(*, malformed_pairing):
+    packet = np002_packet()
+    packet["evidence"] = [
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"] not in {"E-QUANT-BOUND", "E-CRE-03-COND"}
+    ]
+    paired = respectively_packet()["evidence"]
+    if malformed_pairing:
+        paired[0]["text"] = (
+            "Mice were injected intravenously with MC3 carrying QUANT DNA "
+            "and cKK-E12 carrying Cre mRNA at 0.1, 0.3, and 1.0 mg/kg, "
+            "respectively; delivery to Kupffer cells was measured."
+        )
+    packet["evidence"].extend(
+        [
+            _evidence(
+                "E-MIX-Q1",
+                "We analyzed biodistribution of MC3 and cKK-E12 LNPs to "
+                "Kupffer cells.",
+            ),
+            _evidence(
+                "E-MIX-Q2",
+                "Mice received 0.3 mg/kg QUANT DNA in another experiment.",
+            ),
+            *paired,
+        ]
+    )
+    return packet
+
+
+def test_valid_paired_relationship_merges_inventory_arms_and_quarantines():
+    report = build_np002_kupffer_arm_proposal(
+        _paired_inventory_packet(malformed_pairing=False)
+    )
+
+    assert [row["candidate_id"] for row in report["proposed_arms"]] == [
+        "KUP-01",
+        "KUP-02",
+        "KUP-03",
+        "KUP-04",
+    ]
+    assert {
+        row["pairing_type"] for row in report["proposed_arms"][:2]
+    } == {"paired_correspondence"}
+    assert any(
+        row["family"] == "QUANT DNA 0.3 mg/kg"
+        for row in report["quarantined_arms"]
+    )
+
+
+def test_malformed_paired_relationship_does_not_suppress_inventory_results():
+    report = build_np002_kupffer_arm_proposal(
+        _paired_inventory_packet(malformed_pairing=True)
+    )
+
+    assert [row["candidate_id"] for row in report["proposed_arms"]] == [
+        "KUP-03",
+        "KUP-04",
+    ]
+    assert {
+        row["family"] for row in report["quarantined_arms"]
+    } == {"paired_correspondence", "QUANT DNA 0.3 mg/kg"}
+
+
+def test_paired_and_inventory_candidate_id_conflicts_fail_closed():
+    packet = np002_packet()
+    packet["evidence"].extend(respectively_packet()["evidence"])
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    candidate_ids = [
+        row["candidate_id"] for row in report["proposed_arms"]
+    ]
+    assert candidate_ids == [f"KUP-{index:02d}" for index in range(1, 7)]
+    assert len(candidate_ids) == len(set(candidate_ids))
+    conflicts = [
+        row
+        for row in report["quarantined_arms"]
+        if row["reason"] == "candidate_id_conflict"
+    ]
+    assert [row["candidate_id"] for row in conflicts] == [
+        "KUP-01",
+        "KUP-02",
+    ]
+
+
 def _accepted_review(proposal):
     return {
         "review_version": "np002-kupffer-arm-review-1.0.0",
@@ -448,6 +535,59 @@ def test_review_rejects_non_kupffer_or_semantically_unsupported_additions():
     arbitrary["outcome_evidence_ids"] = ["E-ROUTE"]
     review["additions"] = [arbitrary]
     with pytest.raises(ValueError, match="scope|semantic|support"):
+        validate_arm_review(proposal, review)
+
+
+def test_review_rejects_aggregate_token_soup_without_one_binding_record():
+    packet = np002_packet()
+    packet["evidence"].extend(
+        [
+            _evidence("E-A1", "MC3 was purchased for formulation work."),
+            _evidence(
+                "E-A2",
+                "Mice in another experiment received 0.3 mg/kg QUANT DNA.",
+            ),
+            _evidence(
+                "E-A3",
+                "Kupffer cells are resident macrophages in the liver.",
+            ),
+            _evidence(
+                "E-A4",
+                "Mice were injected intravenously via the lateral tail vein.",
+            ),
+            _evidence(
+                "E-A5",
+                "An unrelated Kupffer-cell outcome was measured.",
+            ),
+        ]
+    )
+    proposal = build_np002_kupffer_arm_proposal(packet)
+    review = _accepted_review(proposal)
+    addition = copy.deepcopy(proposal["proposed_arms"][0])
+    addition["candidate_id"] = "KUP-07"
+    addition["existence_evidence_ids"] = [
+        "E-A1",
+        "E-A2",
+        "E-A3",
+        "E-A4",
+    ]
+    addition["outcome_evidence_ids"] = ["E-A5"]
+    review["additions"] = [addition]
+
+    with pytest.raises(ValueError, match="binding|relationship"):
+        validate_arm_review(proposal, review)
+
+
+def test_review_rejects_payload_model_mismatch():
+    proposal = build_np002_kupffer_arm_proposal(np002_packet())
+    review = _accepted_review(proposal)
+    addition = copy.deepcopy(proposal["proposed_arms"][0])
+    addition["candidate_id"] = "KUP-07"
+    addition["model"] = "Ai14 Cre-reporter mice"
+    addition["existence_evidence_ids"].append("E-CRE-MODEL")
+    review["additions"] = [addition]
+
+    with pytest.raises(ValueError, match="model|QUANT"):
         validate_arm_review(proposal, review)
 
 
