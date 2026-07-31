@@ -90,3 +90,59 @@ def test_inventory_reports_missing_categories_without_creating_evidence(tmp_path
         for diagnostic in inventory.coverage_diagnostics
         if diagnostic.status == "missing"
     )
+
+
+def test_inventory_requires_every_tag_for_compound_category_coverage(tmp_path: Path):
+    """A ratio without its basis must remain an actionable partial coverage gap."""
+    pdf_path = tmp_path / "partial-ratio.pdf"
+    _write_pdf(
+        pdf_path,
+        [["Ratio Details", "Components were combined at a 3:1 ratio."]],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-4", pdf_path)
+    diagnostic = next(
+        row for row in inventory.coverage_diagnostics
+        if row.category == "component_ratios"
+    )
+
+    assert diagnostic.status == "missing"
+    assert diagnostic.evidence_ids == [inventory.evidence_blocks[0].evidence_id]
+    assert diagnostic.evidence_ids_by_tag == {
+        "component_ratio": [inventory.evidence_blocks[0].evidence_id],
+        "ratio_basis": [],
+    }
+    assert "component_ratios" in inventory.missing_categories
+
+
+def test_inventory_assigns_distinct_ids_to_duplicate_source_blocks(tmp_path: Path):
+    """Two separately located identical blocks need separate provenance IDs."""
+    pdf_path = tmp_path / "duplicates.pdf"
+    _write_pdf(
+        pdf_path,
+        [["Methods", "Payload was prepared by mixing.", "Payload was prepared by mixing."]],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-5", pdf_path)
+
+    assert [block.text for block in inventory.evidence_blocks] == [
+        "Payload was prepared by mixing.", "Payload was prepared by mixing.",
+    ]
+    assert len({block.evidence_id for block in inventory.evidence_blocks}) == 2
+
+
+def test_inventory_retains_non_enumerated_title_like_heading(tmp_path: Path):
+    """Unknown section titles must retain their exact source heading context."""
+    pdf_path = tmp_path / "heading.pdf"
+    _write_pdf(
+        pdf_path,
+        [["Adaptive Delivery Workflow", "Payload was prepared by mixing."]],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-6", pdf_path)
+
+    payload = next(
+        block for block in inventory.evidence_blocks
+        if block.text == "Payload was prepared by mixing."
+    )
+    assert payload.heading == "Adaptive Delivery Workflow"

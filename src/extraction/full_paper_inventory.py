@@ -32,6 +32,7 @@ class CategoryCoverageDiagnostic(StrictModel):
     category: str
     status: Literal["covered", "missing"]
     evidence_ids: list[str]
+    evidence_ids_by_tag: dict[str, list[str]]
     message: str
 
 
@@ -61,6 +62,13 @@ _HEADING_PATTERNS = (
         r"supplement(?:ary)?(?:\s+materials?)?)$",
         re.IGNORECASE,
     ),
+)
+_NUMBERED_HEADING = re.compile(r"^\d+(?:\.\d+)*\.?\s+\S")
+_FIGURE_OR_TABLE_LABEL = re.compile(
+    r"^(?:fig(?:ure)?|table)\s+\S", re.IGNORECASE
+)
+_TITLE_CONNECTORS = frozenset(
+    {"a", "an", "and", "as", "at", "for", "in", "of", "on", "or", "the", "to", "via", "with"}
 )
 
 _TAG_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
@@ -136,15 +144,15 @@ _TAG_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ),
 )
 
-_COVERAGE_REQUIREMENTS: tuple[tuple[str, frozenset[str]], ...] = (
-    ("formulation_preparation", frozenset({"formulation", "preparation_method"})),
-    ("component_ratios", frozenset({"component_ratio", "ratio_basis"})),
-    ("payload", frozenset({"payload"})),
+_COVERAGE_REQUIREMENTS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("formulation_preparation", ("formulation", "preparation_method")),
+    ("component_ratios", ("component_ratio", "ratio_basis")),
+    ("payload", ("payload",)),
     (
         "model_species_route_cell",
-        frozenset({"model", "species", "route", "cell"}),
+        ("model", "species", "route", "cell"),
     ),
-    ("outcomes", frozenset({"outcome"})),
+    ("outcomes", ("outcome",)),
 )
 
 
@@ -155,7 +163,21 @@ def normalize_block_text(text: str) -> str:
 
 
 def _is_heading(text: str) -> bool:
-    return any(pattern.fullmatch(text) for pattern in _HEADING_PATTERNS)
+    if any(pattern.fullmatch(text) for pattern in _HEADING_PATTERNS):
+        return True
+    if (
+        not text
+        or _FIGURE_OR_TABLE_LABEL.match(text)
+        or text.endswith((".", "?", "!"))
+    ):
+        return False
+    if _NUMBERED_HEADING.match(text):
+        return True
+    words = re.findall(r"[A-Za-z][A-Za-z'-]*", text)
+    return bool(words) and len(words) <= 12 and all(
+        word.casefold() in _TITLE_CONNECTORS or word[0].isupper()
+        for word in words
+    )
 
 
 def _split_heading(block_text: str, current_heading: str) -> tuple[str, str]:
@@ -175,8 +197,16 @@ def retrieval_tags(text: str) -> list[str]:
     return [tag for tag, pattern in _TAG_PATTERNS if pattern.search(text)]
 
 
-def _evidence_id(paper_id: str, page_number: int, heading: str, text: str) -> str:
-    payload = "\0".join((paper_id, str(page_number), heading, text))
+def _evidence_id(
+    paper_id: str,
+    page_number: int,
+    block_ordinal: int,
+    heading: str,
+    text: str,
+) -> str:
+    payload = "\0".join(
+        (paper_id, str(page_number), str(block_ordinal), heading, text)
+    )
     return "FPE-" + hashlib.sha256(payload.encode("utf-8")).hexdigest()[:20]
 
 
@@ -186,17 +216,26 @@ def _coverage_diagnostics(
     diagnostics: list[CategoryCoverageDiagnostic] = []
     missing_categories: list[str] = []
     for category, required_tags in _COVERAGE_REQUIREMENTS:
+        evidence_ids_by_tag = {
+            tag: [
+                block.evidence_id
+                for block in evidence_blocks
+                if tag in block.retrieval_tags
+            ]
+            for tag in required_tags
+        }
         evidence_ids = [
             block.evidence_id
             for block in evidence_blocks
-            if required_tags.intersection(block.retrieval_tags)
+            if any(tag in block.retrieval_tags for tag in required_tags)
         ]
-        if evidence_ids:
+        if all(evidence_ids_by_tag.values()):
             diagnostics.append(
                 CategoryCoverageDiagnostic(
                     category=category,
                     status="covered",
                     evidence_ids=evidence_ids,
+                    evidence_ids_by_tag=evidence_ids_by_tag,
                     message="Local PDF evidence was retained for this category.",
                 )
             )
@@ -206,8 +245,9 @@ def _coverage_diagnostics(
                 CategoryCoverageDiagnostic(
                     category=category,
                     status="missing",
-                    evidence_ids=[],
-                    message="No local PDF evidence block was tagged for this category.",
+                    evidence_ids=evidence_ids,
+                    evidence_ids_by_tag=evidence_ids_by_tag,
+                    message="One or more required tags lack local PDF evidence.",
                 )
             )
     return diagnostics, missing_categories
@@ -222,7 +262,9 @@ def build_full_paper_evidence(
     current_heading = "Unsectioned"
     with fitz.open(pdf_path) as document:
         for page_number, page in enumerate(document, start=1):
-            for block in page.get_text("blocks", sort=True):
+            for block_ordinal, block in enumerate(
+                page.get_text("blocks", sort=True), start=1
+            ):
                 raw_text = block[4]
                 heading, text = _split_heading(raw_text, current_heading)
                 if _is_heading(normalize_block_text(raw_text)):
@@ -233,7 +275,9 @@ def build_full_paper_evidence(
                 current_heading = heading
                 evidence_blocks.append(
                     FullPaperEvidenceBlock(
-                        evidence_id=_evidence_id(paper_id, page_number, heading, text),
+                        evidence_id=_evidence_id(
+                            paper_id, page_number, block_ordinal, heading, text
+                        ),
                         page_number=page_number,
                         heading=heading,
                         text=text,
