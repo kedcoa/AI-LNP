@@ -586,6 +586,49 @@ def _validate_scoped_arm_response(
     return report
 
 
+def _write_failure_manifest(
+    *,
+    run_dir: Path,
+    preflight: dict[str, Any],
+    manifest_path: Path,
+    approval_sha256: str,
+    packet: Any,
+    response: Any,
+    started_at: datetime,
+    raw_response_sha256: str,
+    usage: Any,
+    usage_sha256: str,
+    classification: str,
+    message: str,
+) -> None:
+    failed_at = datetime.now(timezone.utc)
+    failure = {
+        "status": "failed_provider_response_validation",
+        "failure_classification": classification,
+        "failure_message": message,
+        "paper_id": "NP-002",
+        "route": BENCHMARK_ROUTE,
+        "route_version": BENCHMARK_ROUTE_VERSION,
+        "paid_api_requests": 1,
+        "repair_calls": 0,
+        "vision_calls": 0,
+        "model_requested": preflight["model"],
+        "model_returned": response.model,
+        "response_id": response.id,
+        "approval_sha256": approval_sha256,
+        "request_sha256": approval_sha256,
+        "raw_response_sha256": raw_response_sha256,
+        "usage_sha256": usage_sha256,
+        "preflight_manifest_path": str(manifest_path.resolve()),
+        "packet_checksum": packet.packet_checksum,
+        "started_at": started_at.isoformat(),
+        "failed_at": failed_at.isoformat(),
+        "elapsed_seconds": (failed_at - started_at).total_seconds(),
+        "usage": usage,
+    }
+    _write_json(run_dir / "manifest.json", failure)
+
+
 def run_approved_kupffer_benchmark(
     *,
     manifest_path: Path,
@@ -643,19 +686,70 @@ def run_approved_kupffer_benchmark(
     _fsync_directory(run_dir)
     provider_client = client if client is not None else OpenAI(max_retries=0)
     response = provider_client.responses.create(**final_request)
-    if not response.output_text:
-        raise RuntimeError("approved benchmark response has no structured output")
-    try:
-        trial_response = json.loads(response.output_text)
-    except json.JSONDecodeError as exc:
-        raise ValueError("approved benchmark response is not valid JSON") from exc
-    if trial_response.get("paper_id") != "NP-002":
-        raise ValueError("response paper_id must be exactly NP-002")
-    completed_at = datetime.now(timezone.utc)
     _, raw_response_sha256 = _artifact(
         run_dir / "response.json",
         response.model_dump(mode="json"),
     )
+    usage = (
+        response.usage.model_dump(mode="json")
+        if getattr(response, "usage", None)
+        else None
+    )
+    _, usage_sha256 = _artifact(run_dir / "usage.json", usage)
+    if not response.output_text:
+        message = "approved benchmark response has no structured output"
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=response,
+            started_at=started_at,
+            raw_response_sha256=raw_response_sha256,
+            usage=usage,
+            usage_sha256=usage_sha256,
+            classification="missing_output_text",
+            message=message,
+        )
+        raise RuntimeError(message)
+    try:
+        trial_response = json.loads(response.output_text)
+    except json.JSONDecodeError as exc:
+        message = "approved benchmark response is not valid JSON"
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=response,
+            started_at=started_at,
+            raw_response_sha256=raw_response_sha256,
+            usage=usage,
+            usage_sha256=usage_sha256,
+            classification="malformed_json",
+            message=message,
+        )
+        raise ValueError(message) from exc
+    if trial_response.get("paper_id") != "NP-002":
+        message = "response paper_id must be exactly NP-002"
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=response,
+            started_at=started_at,
+            raw_response_sha256=raw_response_sha256,
+            usage=usage,
+            usage_sha256=usage_sha256,
+            classification="paper_id_mismatch",
+            message=message,
+        )
+        raise ValueError(message)
+    completed_at = datetime.now(timezone.utc)
     _, trial_response_sha256 = _artifact(
         run_dir / "trial_response.json",
         trial_response,
@@ -686,12 +780,6 @@ def run_approved_kupffer_benchmark(
         run_dir / "scientific_validation.json",
         validation,
     )
-    usage = (
-        response.usage.model_dump(mode="json")
-        if getattr(response, "usage", None)
-        else None
-    )
-    _, usage_sha256 = _artifact(run_dir / "usage.json", usage)
     result = {
         "status": "completed_pending_human_review",
         "paper_id": "NP-002",

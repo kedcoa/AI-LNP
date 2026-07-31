@@ -304,6 +304,15 @@ class _FailingResponses:
         raise TimeoutError("provider outcome is unknown")
 
 
+class _MalformedResponses:
+    def __init__(self):
+        self.calls = []
+
+    def create(self, **request):
+        self.calls.append(request)
+        return _FakeResponse("{not valid JSON")
+
+
 def test_prepare_review_is_local_pending_and_evidence_readable(tmp_path):
     from src.extraction.run_np002_kupffer_arm_benchmark import (
         prepare_arm_review,
@@ -718,10 +727,63 @@ def test_run_rejects_response_for_another_paper_before_completion(tmp_path):
         )
     assert len(responses.calls) == 1
     assert (run_dir / "invocation_started.json").is_file()
-    assert not (run_dir / "response.json").exists()
+    response_bytes = (run_dir / "response.json").read_bytes()
+    usage_bytes = (run_dir / "usage.json").read_bytes()
+    failure = json.loads((run_dir / "manifest.json").read_text())
+    assert failure["status"] == "failed_provider_response_validation"
+    assert failure["failure_classification"] == "paper_id_mismatch"
+    assert failure["request_sha256"] == approved.manifest["request_sha256"]
+    assert failure["raw_response_sha256"] == hashlib.sha256(
+        response_bytes
+    ).hexdigest()
+    assert failure["usage_sha256"] == hashlib.sha256(usage_bytes).hexdigest()
+    assert failure["paid_api_requests"] == 1
     assert not (run_dir / "result.json").exists()
     assert not (run_dir / "scientific_validation.json").exists()
-    assert not (run_dir / "manifest.json").exists()
+    with pytest.raises(FileExistsError, match="invocation|duplicate"):
+        run_approved_kupffer_benchmark(
+            manifest_path=approved.manifest_path,
+            approval_sha256=approved.manifest["request_sha256"],
+            output_root=tmp_path / "runs",
+            client=SimpleNamespace(responses=responses),
+        )
+    assert len(responses.calls) == 1
+
+
+def test_malformed_paid_response_preserves_terminal_audit_artifacts(tmp_path):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        run_approved_kupffer_benchmark,
+    )
+
+    approved = _preflight(tmp_path)
+    responses = _MalformedResponses()
+    run_dir = tmp_path / "runs" / "NP-002"
+    args = {
+        "manifest_path": approved.manifest_path,
+        "approval_sha256": approved.manifest["request_sha256"],
+        "output_root": tmp_path / "runs",
+        "client": SimpleNamespace(responses=responses),
+    }
+    with pytest.raises(ValueError, match="not valid JSON"):
+        run_approved_kupffer_benchmark(**args)
+
+    response_bytes = (run_dir / "response.json").read_bytes()
+    usage_bytes = (run_dir / "usage.json").read_bytes()
+    failure = json.loads((run_dir / "manifest.json").read_text())
+    assert failure["status"] == "failed_provider_response_validation"
+    assert failure["failure_classification"] == "malformed_json"
+    assert failure["request_sha256"] == approved.manifest["request_sha256"]
+    assert failure["raw_response_sha256"] == hashlib.sha256(
+        response_bytes
+    ).hexdigest()
+    assert failure["usage_sha256"] == hashlib.sha256(usage_bytes).hexdigest()
+    assert failure["paid_api_requests"] == 1
+    assert not (run_dir / "trial_response.json").exists()
+    assert not (run_dir / "result.json").exists()
+    assert not (run_dir / "scientific_validation.json").exists()
+    with pytest.raises(FileExistsError, match="invocation|duplicate"):
+        run_approved_kupffer_benchmark(**args)
+    assert len(responses.calls) == 1
 
 
 def test_default_client_disables_retries(tmp_path, monkeypatch):
