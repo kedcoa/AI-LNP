@@ -225,6 +225,57 @@ def test_automatic_builder_quarantines_disconnected_experiment_contexts():
     )
 
 
+def test_automatic_arm_rejects_route_from_disconnected_experiment():
+    packet = np002_packet()
+    quant = next(
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"] == "E-QUANT-BOUND"
+    )
+    quant["text"] = quant["text"].replace(
+        "injected mice intravenously",
+        "treated mice",
+    )
+    route = next(
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"] == "E-ROUTE"
+    )
+    route["source_ids"] = ["S-ROUTE-OTHER"]
+    route["experiment_candidate_ids"] = ["EXP-ROUTE-OTHER"]
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert report["proposed_arms"] == []
+    assert {
+        row["family"] for row in report["quarantined_arms"]
+    } == {
+        "QUANT DNA 0.3 mg/kg",
+        "Cre mRNA 1.0 mg/kg",
+        "Cre mRNA 0.3 mg/kg",
+    }
+
+
+def test_automatic_cre_arm_rejects_model_from_disconnected_experiment():
+    packet = np002_packet()
+    model = next(
+        row
+        for row in packet["evidence"]
+        if row["evidence_id"] == "E-CRE-MODEL"
+    )
+    model["source_ids"] = ["S-MODEL-OTHER"]
+    model["experiment_candidate_ids"] = ["EXP-MODEL-OTHER"]
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert {
+        row["candidate_id"] for row in report["proposed_arms"]
+    } == {"KUP-01", "KUP-02"}
+    assert {
+        row["family"] for row in report["quarantined_arms"]
+    } == {"Cre mRNA 1.0 mg/kg", "Cre mRNA 0.3 mg/kg"}
+
+
 def test_respectively_uses_paired_correspondence_not_cross_product():
     report = build_np002_kupffer_arm_proposal(respectively_packet())
 

@@ -173,6 +173,20 @@ def _contextually_connected(
     )
 
 
+def _connected_support(
+    anchors: Sequence[Mapping[str, Any]],
+    support: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    return [
+        dict(row)
+        for row in support
+        if any(
+            _shares_experiment_context(anchor, row)
+            for anchor in anchors
+        )
+    ]
+
+
 def _parse_paired_treatments(
     text: str,
 ) -> list[tuple[str, str, float]] | None:
@@ -364,8 +378,10 @@ def _np002_six_arm_inventory(
             )
         ),
     )
+    quant_context = [*quant_bound, *quant_outcomes]
+    quant_route_rows = _connected_support(quant_context, route_rows)
     if (
-        route_rows
+        quant_route_rows
         and quant_bound
         and _contextually_connected(quant_bound, quant_outcomes or quant_bound)
     ):
@@ -373,7 +389,7 @@ def _np002_six_arm_inventory(
             quant_outcomes = quant_bound
         quant_existence = [
             *quant_bound,
-            *route_rows,
+            *quant_route_rows,
         ]
         proposed.extend(
             [
@@ -447,18 +463,25 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("administer", "inject", "treat"))
         ),
     )
+    cre_one_context = [*cre_one_bound, *cre_target]
+    cre_one_route_rows = _connected_support(
+        cre_one_context, route_rows
+    )
+    cre_one_model_rows = _connected_support(
+        cre_one_context, cre_model
+    )
     if (
-        route_rows
-        and cre_model
+        cre_one_route_rows
+        and cre_one_model_rows
         and cre_target
         and cre_one_bound
         and _contextually_connected(cre_one_bound, cre_target)
     ):
         cre_one_existence = [
             *cre_one_bound,
-            *cre_model,
+            *cre_one_model_rows,
             *cre_target,
-            *route_rows,
+            *cre_one_route_rows,
         ]
         proposed.extend(
             [
@@ -517,18 +540,25 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("observ", "measur", "delivery"))
         ),
     )
+    cre_low_context = [*cre_low_bound, *cre_target]
+    cre_low_route_rows = _connected_support(
+        cre_low_context, route_rows
+    )
+    cre_low_model_rows = _connected_support(
+        cre_low_context, cre_model
+    )
     if (
-        route_rows
-        and cre_model
+        cre_low_route_rows
+        and cre_low_model_rows
         and cre_target
         and cre_low_bound
         and _contextually_connected(cre_low_bound, cre_target)
     ):
         cre_low_existence = [
             *cre_low_bound,
-            *cre_model,
+            *cre_low_model_rows,
             *cre_target,
-            *route_rows,
+            *cre_low_route_rows,
         ]
         cre_low_outcomes = [*cre_low_bound, *cre_target]
         proposed.extend(
