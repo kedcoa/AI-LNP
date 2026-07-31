@@ -612,3 +612,49 @@ def test_context_response_rejects_evidence_outside_candidate_envelope() -> None:
     report = validate_context_response(response, task)
 
     assert "candidate_evidence_outside_envelope" in _error_codes(report)
+
+
+def test_context_response_rejects_unaccounted_returned_experiment() -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    response = _valid_context_response(task)
+    unaccounted = deepcopy(response["experiments"][0])
+    unaccounted["experiment_id"] = "EXP-UNACCOUNTED"
+    response["experiments"].append(unaccounted)
+
+    report = validate_context_response(response, task)
+
+    finding = next(
+        row
+        for row in report.findings
+        if row.code == "unaccounted_returned_experiment_ids"
+    )
+    assert report.status == "invalid"
+    assert finding.location == ["experiments"]
+    assert "EXP-UNACCOUNTED" in finding.message
+
+
+def test_context_response_rejects_unaccounted_returned_outcome() -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    response = _valid_context_response(task)
+    unaccounted = deepcopy(response["outcomes"][0])
+    unaccounted["outcome_id"] = "OUT-UNACCOUNTED"
+    response["outcomes"].append(unaccounted)
+
+    report = validate_context_response(response, task)
+
+    finding = next(
+        row
+        for row in report.findings
+        if row.code == "unaccounted_returned_outcome_ids"
+    )
+    assert report.status == "invalid"
+    assert finding.location == ["outcomes"]
+    assert "OUT-UNACCOUNTED" in finding.message

@@ -713,6 +713,44 @@ def validate_context_response(
     outcomes = {
         row.outcome_id: row for row in compact_response.outcomes
     }
+    linked_experiment_ids = {
+        experiment_id
+        for entry in accounting.values()
+        for experiment_id in entry.linked_experiment_ids
+    }
+    linked_outcome_ids = {
+        outcome_id
+        for entry in accounting.values()
+        for outcome_id in entry.linked_outcome_ids
+    }
+    unaccounted_experiment_ids = sorted(
+        set(experiments) - linked_experiment_ids
+    )
+    unaccounted_outcome_ids = sorted(set(outcomes) - linked_outcome_ids)
+    if unaccounted_experiment_ids:
+        findings.append(
+            _finding(
+                paper_id=task.paper_id,
+                code="unaccounted_returned_experiment_ids",
+                message=(
+                    "returned experiments must all be linked by candidate "
+                    f"accounting: {unaccounted_experiment_ids}"
+                ),
+                location=["experiments"],
+            )
+        )
+    if unaccounted_outcome_ids:
+        findings.append(
+            _finding(
+                paper_id=task.paper_id,
+                code="unaccounted_returned_outcome_ids",
+                message=(
+                    "returned outcomes must all be linked by candidate "
+                    f"accounting: {unaccounted_outcome_ids}"
+                ),
+                location=["outcomes"],
+            )
+        )
     linked_outcome_users: dict[str, list[str]] = {}
 
     for candidate_id, entry in accounting.items():
