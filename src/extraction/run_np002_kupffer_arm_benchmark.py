@@ -119,6 +119,22 @@ def _review_markdown(proposal: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _proposal_for_packet(packet: Any) -> dict[str, Any]:
+    built = build_np002_kupffer_arm_proposal(
+        packet.model_dump(mode="json", exclude_none=True)
+    )
+    unsigned = {
+        key: value
+        for key, value in built.items()
+        if key != "proposal_sha256"
+    }
+    unsigned["packet_checksum"] = packet.packet_checksum
+    return {
+        **unsigned,
+        "proposal_sha256": _sha256(_canonical_json(unsigned)),
+    }
+
+
 def prepare_arm_review(
     paper_id: str,
     *,
@@ -130,9 +146,7 @@ def prepare_arm_review(
     if paper_id != "NP-002":
         raise ValueError("Kupffer arm review preparation accepts only NP-002")
     packet = load_packet(paper_id, packet_root)
-    proposal = build_np002_kupffer_arm_proposal(
-        packet.model_dump(mode="json", exclude_none=True)
-    )
+    proposal = _proposal_for_packet(packet)
     unsigned_review = {
         "review_version": ARM_REVIEW_VERSION,
         "paper_id": paper_id,
@@ -193,6 +207,17 @@ def _load_signed_review(
         raise ValueError("review SHA-256 does not match the review content")
     validation = validate_arm_review(proposal, review)
     return proposal, review, validation
+
+
+def _require_reviewed_packet(
+    proposal: dict[str, Any],
+    packet: Any,
+) -> None:
+    rebuilt = _proposal_for_packet(packet)
+    if rebuilt != proposal:
+        raise ValueError(
+            "reviewed proposal does not match the exact packet checksum/content"
+        )
 
 
 def _build_benchmark_request(
@@ -291,6 +316,7 @@ def preflight_kupffer_benchmark(
         raise ValueError("Kupffer arm benchmark accepts only NP-002")
     packet = load_packet(paper_id, packet_root)
     proposal, review, validation = _load_signed_review(review_path)
+    _require_reviewed_packet(proposal, packet)
     approved_arms = validation["approved_arms"]
     if len(approved_arms) != 6:
         raise ValueError("Kupffer benchmark requires exactly six approved arms")
@@ -416,6 +442,7 @@ def _approved_request(
     proposal, review, validation = _load_signed_review(
         Path(manifest["review_path"])
     )
+    _require_reviewed_packet(proposal, packet)
     approved_arms = validation["approved_arms"]
     if len(approved_arms) != 6:
         raise ValueError("Kupffer benchmark requires exactly six approved arms")
@@ -460,6 +487,103 @@ def _artifact(path: Path, value: Any) -> tuple[bytes, str]:
     ).encode("utf-8")
     path.write_bytes(data)
     return data, _sha256(data)
+
+
+def _reported_record_evidence(record: Any) -> set[str]:
+    if not isinstance(record, dict):
+        return set()
+    evidence_ids: set[str] = set()
+    for value in record.values():
+        if not isinstance(value, dict):
+            continue
+        ids = value.get("evidence_ids")
+        if isinstance(ids, list):
+            evidence_ids.update(
+                item for item in ids if isinstance(item, str)
+            )
+    return evidence_ids
+
+
+def _validate_scoped_arm_response(
+    response: dict[str, Any],
+    approved_arms: list[dict[str, Any]],
+    arm_evidence: dict[str, set[str]],
+) -> dict[str, Any]:
+    union_envelope = set().union(*arm_evidence.values())
+    report = validate_experimental_arm_response(
+        response,
+        approved_arms,
+        union_envelope,
+    )
+    accounting = response.get("experimental_arm_accounting", {})
+    formulations = {
+        row.get("formulation_id"): row
+        for row in response.get("formulations", [])
+        if isinstance(row, dict)
+    }
+    experiments = {
+        row.get("experiment_id"): row
+        for row in response.get("experiments", [])
+        if isinstance(row, dict)
+    }
+    outcomes = {
+        row.get("outcome_id"): row
+        for row in response.get("outcomes", [])
+        if isinstance(row, dict)
+    }
+    invalid_candidates: set[str] = set()
+    for candidate_id, allowed in arm_evidence.items():
+        entry = (
+            accounting.get(candidate_id)
+            if isinstance(accounting, dict)
+            else None
+        )
+        if not isinstance(entry, dict):
+            continue
+        used = {
+            item
+            for item in entry.get("evidence_ids", [])
+            if isinstance(item, str)
+        }
+        if entry.get("disposition") == "extracted":
+            for experiment_id in entry.get("linked_experiment_ids", []):
+                experiment = experiments.get(experiment_id)
+                used.update(_reported_record_evidence(experiment))
+                if isinstance(experiment, dict):
+                    used.update(
+                        _reported_record_evidence(
+                            formulations.get(experiment.get("formulation_id"))
+                        )
+                    )
+            for outcome_id in entry.get("linked_outcome_ids", []):
+                used.update(
+                    _reported_record_evidence(outcomes.get(outcome_id))
+                )
+        outside = sorted(used - allowed)
+        if outside:
+            invalid_candidates.add(candidate_id)
+            if entry.get("disposition") == "ambiguous":
+                report["ambiguous"] -= 1
+            report["errors"].append(
+                {
+                    "code": "candidate_evidence_outside_arm_envelope",
+                    "message": (
+                        "candidate records cite evidence outside that arm's "
+                        "approved packet"
+                    ),
+                    "candidate_id": candidate_id,
+                    "evidence_ids": outside,
+                }
+            )
+    report["confirmed_candidate_ids"] = [
+        candidate_id
+        for candidate_id in report["confirmed_candidate_ids"]
+        if candidate_id not in invalid_candidates
+    ]
+    report["scientifically_confirmed"] = len(
+        report["confirmed_candidate_ids"]
+    )
+    return report
 
 
 def run_approved_kupffer_benchmark(
@@ -519,17 +643,19 @@ def run_approved_kupffer_benchmark(
     _fsync_directory(run_dir)
     provider_client = client if client is not None else OpenAI(max_retries=0)
     response = provider_client.responses.create(**final_request)
-    completed_at = datetime.now(timezone.utc)
-    _, raw_response_sha256 = _artifact(
-        run_dir / "response.json",
-        response.model_dump(mode="json"),
-    )
     if not response.output_text:
         raise RuntimeError("approved benchmark response has no structured output")
     try:
         trial_response = json.loads(response.output_text)
     except json.JSONDecodeError as exc:
         raise ValueError("approved benchmark response is not valid JSON") from exc
+    if trial_response.get("paper_id") != "NP-002":
+        raise ValueError("response paper_id must be exactly NP-002")
+    completed_at = datetime.now(timezone.utc)
+    _, raw_response_sha256 = _artifact(
+        run_dir / "response.json",
+        response.model_dump(mode="json"),
+    )
     _, trial_response_sha256 = _artifact(
         run_dir / "trial_response.json",
         trial_response,
@@ -545,15 +671,16 @@ def run_approved_kupffer_benchmark(
         compact_result.model_dump(mode="json"),
     )
     payload = json.loads(final_request["input"][1]["content"])
-    evidence_envelope = {
-        row["evidence_id"]
+    arm_evidence = {
+        arm_packet["arm"]["candidate_id"]: {
+            row["evidence_id"] for row in arm_packet["evidence"]
+        }
         for arm_packet in payload["experimental_arm_packets"]
-        for row in arm_packet["evidence"]
     }
-    validation = validate_experimental_arm_response(
+    validation = _validate_scoped_arm_response(
         trial_response,
         approved_arms,
-        evidence_envelope,
+        arm_evidence,
     )
     _, validation_sha256 = _artifact(
         run_dir / "scientific_validation.json",

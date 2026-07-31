@@ -177,6 +177,87 @@ def _compact_arm_response(request):
     }
 
 
+def _reported_value(value, evidence_id):
+    return {
+        "value": value,
+        "status": "reported",
+        "evidence_ids": [evidence_id],
+        "missing_reason": None,
+    }
+
+
+def _wrong_arm_evidence_response(request):
+    response = _compact_arm_response(request)
+    wrong_evidence_id = "E-CRE-03-COND"
+
+    def value(item):
+        return _reported_value(item, wrong_evidence_id)
+
+    response["eligibility"] = {
+        "decision": "eligible",
+        "reason_codes": [
+            "ORIGINAL_EXPERIMENT",
+            "IDENTIFIABLE_LNP",
+            "SUPPORTED_PAYLOAD",
+            "TARGET_CELL_EVIDENCE",
+            "USABLE_FORMULATION_OUTCOME_LINKAGE",
+        ],
+        "evidence_ids": [wrong_evidence_id],
+        "explanation": "A deliberately cross-arm evidence test.",
+    }
+    response["formulations"] = [
+        {
+            "formulation_id": "F-MC3",
+            "formulation_name": value("MC3"),
+            "composition": value("lipids"),
+            "composition_basis": value("reported"),
+            "np_ratio": value(6.0),
+        }
+    ]
+    response["experiments"] = [
+        {
+            "experiment_id": "EXP-KUP-01",
+            "formulation_id": "F-MC3",
+            "payload_type": value("DNA"),
+            "payload_name": value("QUANT DNA"),
+            "encoded_product": value("QUANT"),
+            "molecular_target": value("Kupffer cells"),
+            "delivery_recipient_cell": value("Kupffer cells"),
+            "therapeutic_target_cell": value("Kupffer cells"),
+            "tissue_or_organ": value("liver"),
+            "species": value("Mus musculus"),
+            "disease_model": value("mice"),
+            "experimental_context": value("in_vivo"),
+            "dose": value(0.3),
+            "dose_unit": value("mg/kg"),
+            "route": value("IV"),
+            "timepoint": value(6.0),
+            "timepoint_unit": value("hours"),
+        }
+    ]
+    response["outcomes"] = [
+        {
+            "outcome_id": "OUT-KUP-01",
+            "experiment_id": "EXP-KUP-01",
+            "assay": value("ddPCR"),
+            "endpoint": value("QUANT copies"),
+            "comparator": value("control"),
+            "outcome_value": value(1.0),
+            "outcome_unit": value("percent"),
+            "qualitative_outcome": value("reported Kupffer-cell result"),
+        }
+    ]
+    response["experimental_arm_accounting"]["KUP-01"] = {
+        "disposition": "extracted",
+        "linked_experiment_ids": ["EXP-KUP-01"],
+        "linked_outcome_ids": ["OUT-KUP-01"],
+        "evidence_ids": [wrong_evidence_id],
+        "reason_code": "extracted",
+        "explanation": "The records match but cite another arm's evidence.",
+    }
+    return response
+
+
 class _FakeResponse:
     id = "resp-kupffer"
     model = "gpt-test-returned"
@@ -197,9 +278,10 @@ class _FakeResponse:
 
 
 class _FakeResponses:
-    def __init__(self, *, marker_path=None):
+    def __init__(self, *, marker_path=None, response_builder=None):
         self.calls = []
         self.marker_path = marker_path
+        self.response_builder = response_builder or _compact_arm_response
 
     def create(self, **request):
         if self.marker_path is not None:
@@ -208,7 +290,7 @@ class _FakeResponses:
                 "invocation_started"
             )
         self.calls.append(request)
-        return _FakeResponse(json.dumps(_compact_arm_response(request)))
+        return _FakeResponse(json.dumps(self.response_builder(request)))
 
 
 class _FailingResponses:
@@ -411,6 +493,38 @@ def test_preflight_rejects_modified_proposal_and_wrong_paper(tmp_path):
         )
 
 
+def test_preflight_rejects_rechecksummed_packet_changed_after_review(tmp_path):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        preflight_kupffer_benchmark,
+    )
+
+    packet_root, review_path, _ = _prepared_review(tmp_path)
+    packet_path = packet_root / "NP-002.json"
+    packet = json.loads(packet_path.read_text())
+    packet["evidence"][0]["text"] += " Changed after human review."
+    unsigned = CompactApiPacket.model_validate(
+        {**packet, "packet_checksum": "recomputed"}
+    ).model_dump(
+        mode="json",
+        exclude={"packet_checksum"},
+        exclude_none=True,
+    )
+    packet["packet_checksum"] = hashlib.sha256(
+        _canonical_json(unsigned).encode("utf-8")
+    ).hexdigest()
+    packet_path.write_text(json.dumps(packet), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="packet|proposal"):
+        preflight_kupffer_benchmark(
+            "NP-002",
+            model="gpt-test",
+            review_path=review_path,
+            packet_root=packet_root,
+            output_root=tmp_path / "preflight",
+        )
+    assert not (tmp_path / "preflight" / "NP-002").exists()
+
+
 @pytest.mark.parametrize("approval_sha256", ["", "0" * 64])
 def test_run_refuses_missing_or_wrong_approval_without_a_call(
     tmp_path,
@@ -547,6 +661,67 @@ def test_provider_failure_leaves_marker_and_blocks_redispatch(tmp_path):
     with pytest.raises(FileExistsError, match="invocation|duplicate"):
         run_approved_kupffer_benchmark(**args)
     assert len(responses.calls) == 1
+
+
+def test_validation_cannot_confirm_arm_with_another_arms_evidence(tmp_path):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        run_approved_kupffer_benchmark,
+    )
+
+    approved = _preflight(tmp_path)
+    responses = _FakeResponses(response_builder=_wrong_arm_evidence_response)
+    manifest = run_approved_kupffer_benchmark(
+        manifest_path=approved.manifest_path,
+        approval_sha256=approved.manifest["request_sha256"],
+        output_root=tmp_path / "runs",
+        client=SimpleNamespace(responses=responses),
+    )
+    validation = json.loads(
+        (
+            tmp_path
+            / "runs"
+            / "NP-002"
+            / "scientific_validation.json"
+        ).read_text()
+    )
+    assert "KUP-01" not in validation["confirmed_candidate_ids"]
+    assert validation["scientifically_confirmed"] == 0
+    assert manifest["scientifically_confirmed"] == 0
+    assert any(
+        row["code"] == "candidate_evidence_outside_arm_envelope"
+        and row["candidate_id"] == "KUP-01"
+        for row in validation["errors"]
+    )
+    assert len(responses.calls) == 1
+
+
+def test_run_rejects_response_for_another_paper_before_completion(tmp_path):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        run_approved_kupffer_benchmark,
+    )
+
+    approved = _preflight(tmp_path)
+
+    def wrong_paper(request):
+        response = _compact_arm_response(request)
+        response["paper_id"] = "NP-001"
+        return response
+
+    responses = _FakeResponses(response_builder=wrong_paper)
+    run_dir = tmp_path / "runs" / "NP-002"
+    with pytest.raises(ValueError, match="paper_id.*NP-002"):
+        run_approved_kupffer_benchmark(
+            manifest_path=approved.manifest_path,
+            approval_sha256=approved.manifest["request_sha256"],
+            output_root=tmp_path / "runs",
+            client=SimpleNamespace(responses=responses),
+        )
+    assert len(responses.calls) == 1
+    assert (run_dir / "invocation_started.json").is_file()
+    assert not (run_dir / "response.json").exists()
+    assert not (run_dir / "result.json").exists()
+    assert not (run_dir / "scientific_validation.json").exists()
+    assert not (run_dir / "manifest.json").exists()
 
 
 def test_default_client_disables_retries(tmp_path, monkeypatch):
