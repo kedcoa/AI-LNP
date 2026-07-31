@@ -179,6 +179,78 @@ the raw response and failure analysis preserved.
   usage, and request/response hashes.
 - Never stage or commit `.env`.
 
+## Why the final four-part hardening cycle is required
+
+The first paid call has not occurred. Final code review of the locally prepared
+request found four implementation gaps that could make a real response appear
+better or worse than it actually is, or could leave an attempted call without a
+complete audit. These changes do not add another extraction layer and do not
+change the approved six Kupffer arms. They make the existing benchmark contract
+faithfully enforce this design.
+
+### 1. Connect route and model evidence to the correct experiment
+
+The builder now connects treatment evidence to target/outcome evidence using
+packet-native source or adjacency metadata. However, it can still append a
+route sentence or Ai14-model sentence from a different experiment. That violates
+the existing rule that evidence must not be borrowed across incompatible
+experiment contexts.
+
+The hardening must require route and model evidence to belong to the same
+connected experiment evidence graph as the treatment and outcome, except for a
+clearly identified reusable protocol statement whose packet context explicitly
+links it to that experiment. If that relationship is absent, the automatic
+builder must quarantine the arm. Human review may still approve an arm only
+through exact, SHA-bound packet evidence.
+
+### 2. Audit every malformed or contract-invalid API response
+
+The one-call marker is intentionally written before provider execution so a
+crash cannot accidentally trigger a second paid call. That means every terminal
+path after the marker must also write a terminal failure manifest. Review found
+that JSON objects failing Pydantic validation and provider exceptions are now
+audited, but valid JSON scalars or arrays can fail before the audit handler.
+One validation path also omitted an already-computed response hash.
+
+The hardening must treat every provider exception, invalid JSON response,
+non-object JSON response, and object-shaped contract failure as a terminal,
+non-retryable result. It must preserve every available request, raw-response,
+parsed-response, usage, and validation hash before re-raising the error.
+
+### 3. Separate structural validity from scientific accuracy
+
+The benchmark deliberately reports three different quantities: accounted,
+structurally valid, and scientifically correct. Review found that assay or
+timepoint failures were being subtracted from the structural count. That would
+hide a useful result such as “the model created and linked all six records, but
+two used the wrong assay.”
+
+Structural validity must cover accounting, record linkage, candidate identity,
+evidence-envelope compliance, and incompatible record reuse. Scientific
+accuracy must independently cover assay, timepoint, route, model, target, and
+outcome semantics. A candidate may therefore be structurally valid but
+scientifically incorrect, and both facts must remain visible.
+
+### 4. Prevent negative validity counts
+
+The scoped evidence validator currently adjusts an aggregate structural count
+after the core validator has already removed candidates. The same candidate can
+therefore be subtracted twice, producing an impossible negative result.
+
+Both validators must operate on candidate-ID sets rather than decrementing an
+integer. The final count is the size of the remaining valid-ID set, which
+guarantees a value from zero through six and makes every removed candidate
+traceable to a concrete error.
+
+### Acceptance gate after hardening
+
+The four changes are complete only when focused negative regressions pass, the
+complete credential-cleared suite passes, and independent review finds no
+remaining Critical or Important defect in these paths. The signed six-arm review
+and immutable request must then be regenerated because any code or proposal
+change invalidates the prior SHA-256. The regenerated request still requires a
+separate explicit paid-call approval.
+
 ## Testing
 
 Add focused tests for:
