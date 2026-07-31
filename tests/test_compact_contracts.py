@@ -252,6 +252,9 @@ def test_strict_schema_requires_experimental_model_separately():
     assert "experimental_model" in experiment["required"]
     assert "disease_model" in experiment["required"]
     assert "experimental_model" in experiment["properties"]
+    assert experiment["properties"]["experimental_model"] == {
+        "$ref": "#/$defs/ReportedField_str_"
+    }
 
 
 def test_cross_record_links_must_resolve():

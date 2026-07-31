@@ -1558,9 +1558,15 @@ def _matches_scientific_arm(
     formulation = formulation_names.get(experiment.get("formulation_id"))
     experimental_model_field = experiment.get("experimental_model")
     experimental_model = (
-        experimental_model_field.get("value")
+        _field_value(experiment, "disease_model")
         if isinstance(experimental_model_field, Mapping)
-        else _field_value(experiment, "disease_model")
+        and experimental_model_field.get("missing_reason")
+        == "Legacy response predates experimental_model."
+        else (
+            experimental_model_field.get("value")
+            if isinstance(experimental_model_field, Mapping)
+            else _field_value(experiment, "disease_model")
+        )
     )
     checks = {
         "formulation": formulation,
