@@ -159,7 +159,6 @@ def prepare_arm_review(
             }
             for arm in proposal["proposed_arms"]
         ],
-        "corrections": [],
         "additions": [],
     }
     review = {
@@ -561,9 +560,15 @@ def _validate_scoped_arm_response(
                 )
         outside = sorted(used - allowed)
         if outside:
+            already_invalid = any(
+                error.get("candidate_id") == candidate_id
+                for error in report["errors"]
+            )
             invalid_candidates.add(candidate_id)
             if entry.get("disposition") == "ambiguous":
                 report["ambiguous"] -= 1
+            elif not already_invalid:
+                report["structurally_valid_extracted"] -= 1
             report["errors"].append(
                 {
                     "code": "candidate_evidence_outside_arm_envelope",
@@ -593,11 +598,11 @@ def _write_failure_manifest(
     manifest_path: Path,
     approval_sha256: str,
     packet: Any,
-    response: Any,
+    response: Any | None,
     started_at: datetime,
-    raw_response_sha256: str,
+    raw_response_sha256: str | None,
     usage: Any,
-    usage_sha256: str,
+    usage_sha256: str | None,
     classification: str,
     message: str,
 ) -> None:
@@ -613,8 +618,8 @@ def _write_failure_manifest(
         "repair_calls": 0,
         "vision_calls": 0,
         "model_requested": preflight["model"],
-        "model_returned": response.model,
-        "response_id": response.id,
+        "model_returned": getattr(response, "model", None),
+        "response_id": getattr(response, "id", None),
         "approval_sha256": approval_sha256,
         "request_sha256": approval_sha256,
         "raw_response_sha256": raw_response_sha256,
@@ -685,7 +690,24 @@ def run_approved_kupffer_benchmark(
         ) from exc
     _fsync_directory(run_dir)
     provider_client = client if client is not None else OpenAI(max_retries=0)
-    response = provider_client.responses.create(**final_request)
+    try:
+        response = provider_client.responses.create(**final_request)
+    except Exception as exc:
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=None,
+            started_at=started_at,
+            raw_response_sha256=None,
+            usage=None,
+            usage_sha256=None,
+            classification="provider_exception",
+            message=str(exc),
+        )
+        raise
     _, raw_response_sha256 = _artifact(
         run_dir / "response.json",
         response.model_dump(mode="json"),
@@ -759,7 +781,24 @@ def run_approved_kupffer_benchmark(
         for key, value in trial_response.items()
         if key != "experimental_arm_accounting"
     }
-    compact_result = CompactExtractionResponse.model_validate(compact_body)
+    try:
+        compact_result = CompactExtractionResponse.model_validate(compact_body)
+    except Exception as exc:
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=response,
+            started_at=started_at,
+            raw_response_sha256=raw_response_sha256,
+            usage=usage,
+            usage_sha256=usage_sha256,
+            classification="compact_response_validation",
+            message=str(exc),
+        )
+        raise
     _, result_sha256 = _artifact(
         run_dir / "result.json",
         compact_result.model_dump(mode="json"),

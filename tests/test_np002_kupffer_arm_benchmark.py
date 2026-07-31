@@ -60,7 +60,7 @@ def _write_np002_packet(root: Path) -> None:
                 "text": text,
                 "retrieval_field_tags": [],
                 "experiment_candidate_ids": [],
-                "source_ids": [],
+                "source_ids": ["S-NP002"],
             }
             for evidence_id, text in texts
         ],
@@ -340,6 +340,7 @@ def test_prepare_review_is_local_pending_and_evidence_readable(tmp_path):
     assert report["provider_calls"] == 0
     assert len(proposal["proposed_arms"]) == 6
     assert all(row["decision"] == "pending" for row in review["decisions"])
+    assert "corrections" not in review
     evidence_text = {
         row["evidence_id"]: row["text"]
         for row in proposal["packet_evidence"]
@@ -391,7 +392,7 @@ def test_preflight_persists_one_exact_six_arm_request(tmp_path):
     }
     dispositions = {
         row["properties"]["disposition"]["const"]
-        for row in schema["$defs"]["ExperimentalArmAccountingEntry"]["oneOf"]
+        for row in schema["$defs"]["ExperimentalArmAccountingEntry"]["anyOf"]
     }
     assert dispositions == {"extracted", "ambiguous"}
     assert request["reasoning"] == {"effort": "low"}
@@ -667,6 +668,11 @@ def test_provider_failure_leaves_marker_and_blocks_redispatch(tmp_path):
     with pytest.raises(TimeoutError, match="outcome is unknown"):
         run_approved_kupffer_benchmark(**args)
     assert marker.is_file()
+    failure = json.loads((run_root / "NP-002" / "manifest.json").read_text())
+    assert failure["status"] == "failed_provider_response_validation"
+    assert failure["failure_classification"] == "provider_exception"
+    assert failure["raw_response_sha256"] is None
+    assert failure["usage_sha256"] is None
     with pytest.raises(FileExistsError, match="invocation|duplicate"):
         run_approved_kupffer_benchmark(**args)
     assert len(responses.calls) == 1
@@ -695,6 +701,7 @@ def test_validation_cannot_confirm_arm_with_another_arms_evidence(tmp_path):
     )
     assert "KUP-01" not in validation["confirmed_candidate_ids"]
     assert validation["scientifically_confirmed"] == 0
+    assert validation["structurally_valid_extracted"] == 0
     assert manifest["scientifically_confirmed"] == 0
     assert any(
         row["code"] == "candidate_evidence_outside_arm_envelope"
@@ -784,6 +791,36 @@ def test_malformed_paid_response_preserves_terminal_audit_artifacts(tmp_path):
     with pytest.raises(FileExistsError, match="invocation|duplicate"):
         run_approved_kupffer_benchmark(**args)
     assert len(responses.calls) == 1
+
+
+def test_pydantic_invalid_paid_response_preserves_terminal_audit_artifacts(tmp_path):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        run_approved_kupffer_benchmark,
+    )
+
+    approved = _preflight(tmp_path)
+
+    def invalid_compact_response(request):
+        response = _compact_arm_response(request)
+        response["eligibility"] = {}
+        return response
+
+    responses = _FakeResponses(response_builder=invalid_compact_response)
+    run_dir = tmp_path / "runs" / "NP-002"
+    with pytest.raises(Exception):
+        run_approved_kupffer_benchmark(
+            manifest_path=approved.manifest_path,
+            approval_sha256=approved.manifest["request_sha256"],
+            output_root=tmp_path / "runs",
+            client=SimpleNamespace(responses=responses),
+        )
+
+    failure = json.loads((run_dir / "manifest.json").read_text())
+    assert failure["status"] == "failed_provider_response_validation"
+    assert failure["failure_classification"] == "compact_response_validation"
+    assert failure["raw_response_sha256"] == hashlib.sha256(
+        (run_dir / "response.json").read_bytes()
+    ).hexdigest()
 
 
 def test_default_client_disables_retries(tmp_path, monkeypatch):

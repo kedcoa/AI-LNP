@@ -14,7 +14,12 @@ from src.extraction.compact_contracts import CompactExtractionResponse
 
 
 def _evidence(evidence_id, text, **metadata):
-    return {"evidence_id": evidence_id, "text": text, **metadata}
+    return {
+        "evidence_id": evidence_id,
+        "text": text,
+        "source_ids": ["S-DEFAULT"],
+        **metadata,
+    }
 
 
 def np002_packet():
@@ -185,6 +190,38 @@ def test_does_not_cross_product_unrelated_formulation_and_dose_clauses():
     assert report["proposed_arms"] == []
     assert report["quarantined_arms"][0]["reason"] == (
         "relationship_not_explicit"
+    )
+
+
+def test_automatic_builder_quarantines_disconnected_experiment_contexts():
+    packet = np002_packet()
+    packet["evidence"] = [
+        row for row in packet["evidence"] if row["evidence_id"] != "E-QUANT-BOUND"
+    ]
+    packet["evidence"].extend(
+        [
+            _evidence(
+                "E-Q-DISJOINT-BOUND",
+                "Mice were injected intravenously with 0.3 mg/kg QUANT DNA "
+                "carried by MC3 and cKK-E12 LNPs to Kupffer cells.",
+                source_ids=["S-CONDITION"],
+            ),
+            _evidence(
+                "E-Q-DISJOINT-OUTCOME",
+                "MC3 and cKK-E12 LNP biodistribution to Kupffer cells was "
+                "measured.",
+                source_ids=["S-OUTCOME"],
+            ),
+        ]
+    )
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert all(arm["payload"] != "QUANT DNA" for arm in report["proposed_arms"])
+    assert any(
+        row["family"] == "QUANT DNA 0.3 mg/kg"
+        and row["reason"] == "relationship_not_explicit"
+        for row in report["quarantined_arms"]
     )
 
 
@@ -549,6 +586,22 @@ def test_validates_exact_immutable_human_review():
     modified["proposed_arms"][0]["dose"] = 9.9
     with pytest.raises(ValueError, match="proposal.*SHA|modified"):
         validate_arm_review(modified, review)
+
+
+def test_review_rejects_swapped_canonical_candidate_identity():
+    proposal = build_np002_kupffer_arm_proposal(np002_packet())
+    review = _accepted_review(proposal)
+    swapped = copy.deepcopy(proposal["proposed_arms"][0])
+    swapped["formulation"] = "cKK-E12"
+    review["decisions"][0] = {
+        "candidate_id": "KUP-01",
+        "decision": "correct",
+        "reason": "incorrectly swapped identity",
+        "arm": swapped,
+    }
+
+    with pytest.raises(ValueError, match="canonical.*identity"):
+        validate_arm_review(proposal, review)
 
 
 @pytest.mark.parametrize("problem", ["missing", "duplicate", "unknown"])
@@ -1098,6 +1151,14 @@ def test_dynamic_schema_requires_the_six_approved_arm_keys():
         )
 
 
+def test_schema_rejects_canonical_id_with_swapped_arm_identity():
+    arms = approved_arms()
+    arms[0]["formulation"] = "cKK-E12"
+
+    with pytest.raises(ValueError, match="canonical.*identity"):
+        build_experimental_arm_schema(base_schema(), arms)
+
+
 def test_dynamic_schema_closes_entries_and_encodes_extracted_and_ambiguous_shapes():
     schema = build_experimental_arm_schema(base_schema(), approved_arms())
 
@@ -1106,7 +1167,8 @@ def test_dynamic_schema_closes_entries_and_encodes_extracted_and_ambiguous_shape
         "extracted",
         "ambiguous",
     ]
-    variants = entry["oneOf"]
+    assert "oneOf" not in entry
+    variants = entry["anyOf"]
     assert [variant["properties"]["disposition"] for variant in variants] == [
         {"const": "extracted"},
         {"const": "ambiguous"},
@@ -1211,6 +1273,18 @@ def test_validator_rejects_scientific_identity_mismatches(path, bad_value):
     assert "scientific_identity_mismatch" in _error_codes(report)
 
 
+def test_species_aliases_treat_mus_musculus_as_mouse():
+    response = _arm_response()
+    response["experiments"][0]["species"] = _reported_value("Mus musculus")
+
+    report = validate_experimental_arm_response(
+        response, approved_arms(), {"E-ARM"}
+    )
+
+    assert report["scientifically_confirmed"] == 6
+    assert "scientific_identity_mismatch" not in _error_codes(report)
+
+
 @pytest.mark.parametrize(
     ("candidate_id", "path", "bad_value", "expected_code"),
     [
@@ -1261,6 +1335,23 @@ def test_validator_rejects_one_outcome_reused_across_incompatible_arms():
 
     report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
 
+    assert "outcome_reused_across_incompatible_arms" in _error_codes(report)
+
+
+def test_structural_count_excludes_later_duplicate_outcome_failures():
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-02"][
+        "linked_experiment_ids"
+    ] = ["EXP-1"]
+    response["experimental_arm_accounting"]["KUP-02"]["linked_outcome_ids"] = [
+        "OUT-1"
+    ]
+
+    report = validate_experimental_arm_response(
+        response, approved_arms(), {"E-ARM"}
+    )
+
+    assert report["structurally_valid_extracted"] == 4
     assert "outcome_reused_across_incompatible_arms" in _error_codes(report)
 
 

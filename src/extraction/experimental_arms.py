@@ -110,6 +110,12 @@ def _packet_evidence(packet: Mapping[str, Any]) -> list[dict[str, Any]]:
             for source_id in source_ids
         ):
             row["source_ids"] = source_ids
+        experiment_candidate_ids = raw.get("experiment_candidate_ids", [])
+        if isinstance(experiment_candidate_ids, list) and all(
+            isinstance(candidate_id, str) and candidate_id
+            for candidate_id in experiment_candidate_ids
+        ):
+            row["experiment_candidate_ids"] = experiment_candidate_ids
         for field in (
             "context_before_evidence_id",
             "context_after_evidence_id",
@@ -137,6 +143,34 @@ def _matching(
 
 def _ids(rows: list[dict[str, Any]]) -> list[str]:
     return list(dict.fromkeys(row["evidence_id"] for row in rows))
+
+
+def _shares_experiment_context(
+    left: Mapping[str, Any], right: Mapping[str, Any]
+) -> bool:
+    if left["evidence_id"] == right["evidence_id"]:
+        return True
+    for field in ("source_ids", "experiment_candidate_ids"):
+        if set(left.get(field, [])) & set(right.get(field, [])):
+            return True
+    return right["evidence_id"] in {
+        left.get("context_before_evidence_id"),
+        left.get("context_after_evidence_id"),
+    } or left["evidence_id"] in {
+        right.get("context_before_evidence_id"),
+        right.get("context_after_evidence_id"),
+    }
+
+
+def _contextually_connected(
+    anchors: Sequence[Mapping[str, Any]],
+    support: Sequence[Mapping[str, Any]],
+) -> bool:
+    return any(
+        _shares_experiment_context(anchor, row)
+        for anchor in anchors
+        for row in support
+    )
 
 
 def _parse_paired_treatments(
@@ -330,7 +364,11 @@ def _np002_six_arm_inventory(
             )
         ),
     )
-    if route_rows and quant_bound:
+    if (
+        route_rows
+        and quant_bound
+        and _contextually_connected(quant_bound, quant_outcomes or quant_bound)
+    ):
         if not quant_outcomes:
             quant_outcomes = quant_bound
         quant_existence = [
@@ -409,7 +447,13 @@ def _np002_six_arm_inventory(
             and any(term in text for term in ("administer", "inject", "treat"))
         ),
     )
-    if route_rows and cre_model and cre_target and cre_one_bound:
+    if (
+        route_rows
+        and cre_model
+        and cre_target
+        and cre_one_bound
+        and _contextually_connected(cre_one_bound, cre_target)
+    ):
         cre_one_existence = [
             *cre_one_bound,
             *cre_model,
@@ -478,6 +522,7 @@ def _np002_six_arm_inventory(
         and cre_model
         and cre_target
         and cre_low_bound
+        and _contextually_connected(cre_low_bound, cre_target)
     ):
         cre_low_existence = [
             *cre_low_bound,
@@ -746,12 +791,17 @@ def _validate_complete_arm(
             condition_context = packet_evidence_context[
                 condition_evidence_id
             ]
-            formulation_sources = set(
-                formulation_context.get("source_ids", [])
-            )
+            formulation_sources = set(formulation_context.get("source_ids", []))
             condition_sources = set(condition_context.get("source_ids", []))
+            formulation_experiments = set(
+                formulation_context.get("experiment_candidate_ids", [])
+            )
+            condition_experiments = set(
+                condition_context.get("experiment_candidate_ids", [])
+            )
             return (
                 bool(formulation_sources & condition_sources)
+                or bool(formulation_experiments & condition_experiments)
                 or condition_evidence_id
                 in {
                     formulation_context.get("context_before_evidence_id"),
@@ -945,6 +995,16 @@ def validate_arm_review(
                 )
             )
         )
+        and (
+            "experiment_candidate_ids" not in row
+            or (
+                isinstance(row["experiment_candidate_ids"], list)
+                and all(
+                    isinstance(candidate_id, str) and candidate_id
+                    for candidate_id in row["experiment_candidate_ids"]
+                )
+            )
+        )
         and all(
             field not in row
             or (
@@ -970,6 +1030,9 @@ def validate_arm_review(
     packet_evidence_context = {
         str(row["evidence_id"]): {
             "source_ids": row.get("source_ids", []),
+            "experiment_candidate_ids": row.get(
+                "experiment_candidate_ids", []
+            ),
             "context_before_evidence_id": row.get(
                 "context_before_evidence_id"
             ),
@@ -1048,6 +1111,7 @@ def validate_arm_review(
             for index, candidate_id in enumerate(_CANONICAL_KUPFFER_ARM_IDS)
         }
         approved_arms.sort(key=lambda arm: order[arm["candidate_id"]])
+        _approved_arm_rows(approved_arms)
     return {
         "status": "valid",
         "review_version": ARM_REVIEW_VERSION,
@@ -1079,6 +1143,21 @@ def _approved_arm_rows(
         raise ValueError(
             "approved arms must be the canonical ordered KUP-01 through KUP-06 set"
         )
+    for arm in rows:
+        expected = _CANONICAL_CROSS_PRODUCT_ARMS[arm["candidate_id"]]
+        actual = (
+            arm.get("formulation"),
+            arm.get("payload"),
+            float(arm["dose"])
+            if isinstance(arm.get("dose"), (int, float))
+            and not isinstance(arm.get("dose"), bool)
+            else arm.get("dose"),
+        )
+        if actual != expected:
+            raise ValueError(
+                "approved canonical candidate identity does not match its "
+                "KUP arm mapping"
+            )
     return rows, candidate_ids
 
 
@@ -1166,7 +1245,7 @@ def build_experimental_arm_schema(
             "explanation",
         ],
         "additionalProperties": False,
-        "oneOf": [
+        "anyOf": [
             _entry_variant(
                 disposition="extracted",
                 experiment_constraints={"minItems": 1},
@@ -1216,8 +1295,8 @@ def _canonical_arm_value(value: Any, *, field_name: str) -> str:
         "intravenous lateral tail vein": "intravenous",
         "ckk e12 lnp": "ckk e12",
     }
-    if field_name in {"species", "model"} and text == "mice":
-        return "mouse"
+    if field_name in {"species", "model"}:
+        return aliases.get(text, text)
     if field_name == "route":
         return aliases.get(text, text)
     if field_name == "formulation":
@@ -1595,7 +1674,6 @@ def validate_experimental_arm_response(
         structurally_valid.add(candidate_id)
         candidate_outcomes[candidate_id] = set(linked_outcome_ids)
 
-    report["structurally_valid_extracted"] = len(structurally_valid)
     reused_candidates: set[str] = set()
     for outcome_id in sorted(set().union(*candidate_outcomes.values()) if candidate_outcomes else set()):
         users = [
@@ -1612,6 +1690,14 @@ def validate_experimental_arm_response(
                 outcome_id=outcome_id,
                 candidate_ids=sorted(users),
             )
+
+    invalid_structural = set(reused_candidates)
+    if duplicate_outcomes:
+        for candidate_id, linked_outcome_ids in candidate_outcomes.items():
+            if set(duplicate_outcomes) & linked_outcome_ids:
+                invalid_structural.add(candidate_id)
+    if not core_evidence_valid:
+        invalid_structural.update(structurally_valid)
 
     for candidate_id in candidate_ids:
         if (
@@ -1638,6 +1724,7 @@ def validate_experimental_arm_response(
                 "accounting evidence must cover every linked scientific field used for confirmation",
                 candidate_id=candidate_id,
             )
+            invalid_structural.add(candidate_id)
             continue
         science_errors: set[str] = set()
         for experiment in linked_experiments:
@@ -1660,7 +1747,11 @@ def validate_experimental_arm_response(
                     "linked records do not satisfy the approved arm's scientific constraints",
                     candidate_id=candidate_id,
                 )
+            invalid_structural.add(candidate_id)
             continue
         report["confirmed_candidate_ids"].append(candidate_id)
+    report["structurally_valid_extracted"] = len(
+        structurally_valid - invalid_structural
+    )
     report["scientifically_confirmed"] = len(report["confirmed_candidate_ids"])
     return report
