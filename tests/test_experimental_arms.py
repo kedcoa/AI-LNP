@@ -431,6 +431,87 @@ def test_paired_and_inventory_candidate_id_conflicts_fail_closed():
     ]
 
 
+def _multiple_respectively_packet(*, malformed_first):
+    valid = copy.deepcopy(respectively_packet()["evidence"][0])
+    valid["evidence_id"] = "E-PAIR-VALID"
+    malformed = copy.deepcopy(valid)
+    malformed["evidence_id"] = "E-PAIR-MALFORMED"
+    malformed["text"] = (
+        "Mice were injected intravenously with MC3 carrying QUANT DNA and "
+        "cKK-E12 carrying Cre mRNA at 0.1, 0.3, and 1.0 mg/kg, respectively; "
+        "delivery to Kupffer cells was measured."
+    )
+    rows = [malformed, valid] if malformed_first else [valid, malformed]
+    return {
+        "paper_id": "NP-002",
+        "evidence": [
+            *rows,
+            _evidence(
+                "E-PAIR-OUT",
+                "The corresponding Kupffer-cell outcomes were directly measured.",
+            ),
+        ],
+    }
+
+
+@pytest.mark.parametrize("malformed_first", [False, True])
+def test_every_respectively_row_is_accounted_for_regardless_of_order(
+    malformed_first,
+):
+    report = build_np002_kupffer_arm_proposal(
+        _multiple_respectively_packet(malformed_first=malformed_first)
+    )
+
+    assert [row["candidate_id"] for row in report["proposed_arms"]] == [
+        "KUP-01",
+        "KUP-02",
+    ]
+    malformed = [
+        row
+        for row in report["quarantined_arms"]
+        if row["reason"] == "relationship_not_explicit"
+    ]
+    assert malformed == [
+        {
+            "family": "paired_correspondence",
+            "reason": "relationship_not_explicit",
+            "evidence_ids": ["E-PAIR-MALFORMED"],
+        }
+    ]
+
+
+def test_multiple_valid_respectively_rows_quarantine_candidate_id_conflicts():
+    packet = respectively_packet()
+    packet["evidence"][0]["evidence_id"] = "E-PAIR-FIRST"
+    reversed_row = copy.deepcopy(packet["evidence"][0])
+    reversed_row["evidence_id"] = "E-PAIR-SECOND"
+    reversed_row["text"] = (
+        "Mice were injected intravenously with cKK-E12 carrying QUANT DNA "
+        "and MC3 carrying Cre mRNA at 0.3 and 1.0 mg/kg, respectively; "
+        "delivery to Kupffer cells was measured."
+    )
+    packet["evidence"].insert(1, reversed_row)
+
+    report = build_np002_kupffer_arm_proposal(packet)
+
+    assert [
+        (row["candidate_id"], row["formulation"])
+        for row in report["proposed_arms"]
+    ] == [("KUP-01", "MC3"), ("KUP-02", "cKK-E12")]
+    conflicts = [
+        row
+        for row in report["quarantined_arms"]
+        if row["reason"] == "candidate_id_conflict"
+    ]
+    assert [
+        (row["candidate_id"], row["evidence_ids"])
+        for row in conflicts
+    ] == [
+        ("KUP-01", ["E-PAIR-SECOND", "E-P2"]),
+        ("KUP-02", ["E-PAIR-SECOND", "E-P2"]),
+    ]
+
+
 def _accepted_review(proposal):
     return {
         "review_version": "np002-kupffer-arm-review-1.0.0",

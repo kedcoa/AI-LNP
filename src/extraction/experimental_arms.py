@@ -173,32 +173,35 @@ def _paired_correspondence(
     )
     if not respectively_rows:
         return [], []
-    row = respectively_rows[0]
-    pairs = _parse_paired_treatments(row["text"])
-    quarantine = [
-        {
-            "family": "paired_correspondence",
-            "reason": "relationship_not_explicit",
-            "evidence_ids": _ids(respectively_rows),
-        }
-    ]
-    if pairs is None:
-        return [], quarantine
-    outcome_rows = _matching(
+    non_relationship_outcomes = _matching(
         evidence,
         lambda text: (
-            "kupffer" in text
+            "respectively" not in text
+            and "kupffer" in text
             and any(
                 term in text
                 for term in ("measur", "outcome", "delivery", "accumulation")
             )
         ),
     )
-    if not outcome_rows:
-        outcome_rows = respectively_rows
-    return (
-        [
-            _arm(
+    proposed_by_id: dict[str, dict[str, Any]] = {}
+    quarantined: list[dict[str, Any]] = []
+    for row in respectively_rows:
+        pairs = _parse_paired_treatments(row["text"])
+        if pairs is None:
+            quarantined.append(
+                {
+                    "family": "paired_correspondence",
+                    "reason": "relationship_not_explicit",
+                    "evidence_ids": [row["evidence_id"]],
+                }
+            )
+            continue
+        outcome_rows = [row, *non_relationship_outcomes]
+        for index, (formulation, payload, dose) in enumerate(
+            pairs, start=1
+        ):
+            arm = _arm(
                 candidate_id=f"KUP-{index:02d}",
                 formulation=formulation,
                 payload=payload,
@@ -208,11 +211,29 @@ def _paired_correspondence(
                 existence_rows=[row],
                 outcome_rows=outcome_rows,
             )
-            for index, (formulation, payload, dose) in enumerate(
-                pairs, start=1
-            )
+            candidate_id = arm["candidate_id"]
+            if candidate_id in proposed_by_id:
+                quarantined.append(
+                    {
+                        "family": "paired_correspondence",
+                        "candidate_id": candidate_id,
+                        "reason": "candidate_id_conflict",
+                        "evidence_ids": list(
+                            dict.fromkeys(
+                                arm["existence_evidence_ids"]
+                                + arm["outcome_evidence_ids"]
+                            )
+                        ),
+                    }
+                )
+                continue
+            proposed_by_id[candidate_id] = arm
+    return (
+        [
+            proposed_by_id[candidate_id]
+            for candidate_id in sorted(proposed_by_id)
         ],
-        [],
+        quarantined,
     )
 
 
