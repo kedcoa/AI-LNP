@@ -793,6 +793,40 @@ def test_malformed_paid_response_preserves_terminal_audit_artifacts(tmp_path):
     assert len(responses.calls) == 1
 
 
+@pytest.mark.parametrize("payload", [[], "text", 42, None])
+def test_non_object_json_response_leaves_terminal_audit(
+    tmp_path,
+    payload,
+):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        run_approved_kupffer_benchmark,
+    )
+
+    approved = _preflight(tmp_path)
+    responses = _FakeResponses(response_builder=lambda request: payload)
+    run_dir = tmp_path / "runs" / "NP-002"
+
+    with pytest.raises(ValueError, match="JSON object"):
+        run_approved_kupffer_benchmark(
+            manifest_path=approved.manifest_path,
+            approval_sha256=approved.manifest["request_sha256"],
+            output_root=tmp_path / "runs",
+            client=SimpleNamespace(responses=responses),
+        )
+
+    failure = json.loads((run_dir / "manifest.json").read_text())
+    assert failure["status"] == "failed_provider_response_validation"
+    assert failure["failure_classification"] == "non_object_json"
+    assert failure["raw_response_sha256"] == hashlib.sha256(
+        (run_dir / "response.json").read_bytes()
+    ).hexdigest()
+    assert failure["trial_response_sha256"] == hashlib.sha256(
+        (run_dir / "trial_response.json").read_bytes()
+    ).hexdigest()
+    assert failure["paid_api_requests"] == 1
+    assert len(responses.calls) == 1
+
+
 def test_pydantic_invalid_paid_response_preserves_terminal_audit_artifacts(tmp_path):
     from src.extraction.run_np002_kupffer_arm_benchmark import (
         run_approved_kupffer_benchmark,
@@ -820,6 +854,9 @@ def test_pydantic_invalid_paid_response_preserves_terminal_audit_artifacts(tmp_p
     assert failure["failure_classification"] == "compact_response_validation"
     assert failure["raw_response_sha256"] == hashlib.sha256(
         (run_dir / "response.json").read_bytes()
+    ).hexdigest()
+    assert failure["trial_response_sha256"] == hashlib.sha256(
+        (run_dir / "trial_response.json").read_bytes()
     ).hexdigest()
 
 

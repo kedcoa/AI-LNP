@@ -605,6 +605,7 @@ def _write_failure_manifest(
     usage_sha256: str | None,
     classification: str,
     message: str,
+    trial_response_sha256: str | None = None,
 ) -> None:
     failed_at = datetime.now(timezone.utc)
     failure = {
@@ -623,6 +624,7 @@ def _write_failure_manifest(
         "approval_sha256": approval_sha256,
         "request_sha256": approval_sha256,
         "raw_response_sha256": raw_response_sha256,
+        "trial_response_sha256": trial_response_sha256,
         "usage_sha256": usage_sha256,
         "preflight_manifest_path": str(manifest_path.resolve()),
         "packet_checksum": packet.packet_checksum,
@@ -754,6 +756,28 @@ def run_approved_kupffer_benchmark(
             message=message,
         )
         raise ValueError(message) from exc
+    _, trial_response_sha256 = _artifact(
+        run_dir / "trial_response.json",
+        trial_response,
+    )
+    if not isinstance(trial_response, dict):
+        message = "approved benchmark response must be a JSON object"
+        _write_failure_manifest(
+            run_dir=run_dir,
+            preflight=preflight,
+            manifest_path=manifest_path,
+            approval_sha256=approval_sha256,
+            packet=packet,
+            response=response,
+            started_at=started_at,
+            raw_response_sha256=raw_response_sha256,
+            usage=usage,
+            usage_sha256=usage_sha256,
+            classification="non_object_json",
+            message=message,
+            trial_response_sha256=trial_response_sha256,
+        )
+        raise ValueError(message)
     if trial_response.get("paper_id") != "NP-002":
         message = "response paper_id must be exactly NP-002"
         _write_failure_manifest(
@@ -769,13 +793,10 @@ def run_approved_kupffer_benchmark(
             usage_sha256=usage_sha256,
             classification="paper_id_mismatch",
             message=message,
+            trial_response_sha256=trial_response_sha256,
         )
         raise ValueError(message)
     completed_at = datetime.now(timezone.utc)
-    _, trial_response_sha256 = _artifact(
-        run_dir / "trial_response.json",
-        trial_response,
-    )
     compact_body = {
         key: value
         for key, value in trial_response.items()
@@ -797,6 +818,7 @@ def run_approved_kupffer_benchmark(
             usage_sha256=usage_sha256,
             classification="compact_response_validation",
             message=str(exc),
+            trial_response_sha256=trial_response_sha256,
         )
         raise
     _, result_sha256 = _artifact(
