@@ -72,6 +72,16 @@ _FIGURE_OR_TABLE_LABEL = re.compile(
 _TITLE_CONNECTORS = frozenset(
     {"a", "an", "and", "as", "at", "for", "in", "of", "on", "or", "the", "to", "via", "with"}
 )
+_NUMBERED_PROSE_START = re.compile(
+    r"^(?:a|an|the|this|that|these|those|we|our|their|it|they)\b",
+    re.IGNORECASE,
+)
+_NUMBERED_PROSE_VERB = re.compile(
+    r"\b(?:is|are|was|were|be|been|being|has|have|had|do|does|did|"
+    r"will|would|shall|should|can|could|may|might|must|prepared|mixed|"
+    r"administered|injected|received|showed|demonstrated|measured|used)\b",
+    re.IGNORECASE,
+)
 
 _TAG_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("formulation", re.compile(r"\bformulat\w*\b", re.IGNORECASE)),
@@ -175,7 +185,7 @@ def _is_heading(text: str) -> bool:
         return False
     numbered_heading = _NUMBERED_HEADING.fullmatch(text)
     if numbered_heading:
-        return _is_title_like_heading(numbered_heading["title"])
+        return _is_numbered_heading(numbered_heading["title"])
     return _is_title_like_heading(text)
 
 
@@ -185,6 +195,16 @@ def _is_title_like_heading(text: str) -> bool:
         word.casefold() in _TITLE_CONNECTORS or word[0].isupper()
         for word in words
     )
+
+
+def _is_numbered_heading(title: str) -> bool:
+    """Distinguish numbered section labels from numbered prose/list evidence."""
+    if _is_title_like_heading(title):
+        return True
+    words = re.findall(r"[A-Za-z][A-Za-z'-]*", title)
+    return bool(words) and len(words) <= 12 and not (
+        _NUMBERED_PROSE_START.match(title) or _NUMBERED_PROSE_VERB.search(title)
+    ) and words[0][0].isupper()
 
 
 def _split_heading(block_text: str, current_heading: str) -> tuple[str, str]:
