@@ -959,6 +959,11 @@ def test_validator_rejects_missing_invented_or_repeated_candidate_ids(problem):
     else:
         arms[-1]["candidate_id"] = "KUP-05"
 
+    if problem == "repeated":
+        with pytest.raises(ValueError, match="canonical"):
+            validate_experimental_arm_response(response, arms, {"E-ARM"})
+        return
+
     report = validate_experimental_arm_response(response, arms, {"E-ARM"})
 
     assert f"{problem}_candidate_ids" in _error_codes(report)
@@ -1089,3 +1094,78 @@ def test_validator_requires_evidence_for_extracted_and_ambiguous_entries(candida
     report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
 
     assert "accounting_evidence_required" in _error_codes(report)
+
+
+@pytest.mark.parametrize("problem", ["missing", "extra", "substituted"])
+def test_schema_and_validator_require_the_canonical_six_approved_arms(problem):
+    arms = approved_arms()
+    if problem == "missing":
+        arms.pop()
+    elif problem == "extra":
+        extra = copy.deepcopy(arms[-1])
+        extra["candidate_id"] = "KUP-07"
+        arms.append(extra)
+    else:
+        arms[-1]["candidate_id"] = "KUP-99"
+
+    with pytest.raises(ValueError, match="canonical"):
+        build_experimental_arm_schema(base_schema(), arms)
+    with pytest.raises(ValueError, match="canonical"):
+        validate_experimental_arm_response(_arm_response(), arms, {"E-ARM"})
+
+
+def test_validator_requires_accounting_evidence_to_cover_linked_scientific_fields():
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-01"]["evidence_ids"] = ["E-ACCOUNT"]
+    response["formulations"][0]["formulation_name"]["evidence_ids"] = ["E-RECORD"]
+    for field in (
+        "payload_type",
+        "payload_name",
+        "dose",
+        "dose_unit",
+        "route",
+        "species",
+        "disease_model",
+        "delivery_recipient_cell",
+        "timepoint",
+        "timepoint_unit",
+    ):
+        response["experiments"][0][field]["evidence_ids"] = ["E-RECORD"]
+    for field in ("assay", "endpoint", "qualitative_outcome"):
+        response["outcomes"][0][field]["evidence_ids"] = ["E-RECORD"]
+
+    report = validate_experimental_arm_response(
+        response, approved_arms(), {"E-ARM", "E-ACCOUNT", "E-RECORD"}
+    )
+
+    assert "accounting_evidence_does_not_cover_scientific_fields" in _error_codes(report)
+    assert "KUP-01" not in report["confirmed_candidate_ids"]
+
+
+def test_validator_requires_one_quant_outcome_to_establish_ddpcr():
+    response = _arm_response()
+    response["outcomes"][0]["assay"]["value"] = "qPCR"
+    response["outcomes"][0]["endpoint"]["value"] = "ddPCR copies"
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "quant_ddpcr_required" in _error_codes(report)
+    assert "KUP-01" not in report["confirmed_candidate_ids"]
+
+
+def test_validator_requires_one_cre_outcome_to_establish_flow_cytometry_and_tdtomato():
+    response = _arm_response()
+    response["outcomes"][2]["endpoint"]["value"] = "GFP positive"
+    split_outcome = copy.deepcopy(response["outcomes"][2])
+    split_outcome["outcome_id"] = "OUT-CRE-SPLIT"
+    split_outcome["assay"]["value"] = "qPCR"
+    split_outcome["endpoint"]["value"] = "tdTomato positive"
+    response["outcomes"].append(split_outcome)
+    response["experimental_arm_accounting"]["KUP-03"]["linked_outcome_ids"].append(
+        "OUT-CRE-SPLIT"
+    )
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "cre_tdtomato_flow_required" in _error_codes(report)
+    assert "KUP-03" not in report["confirmed_candidate_ids"]

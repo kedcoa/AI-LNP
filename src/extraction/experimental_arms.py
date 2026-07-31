@@ -63,6 +63,7 @@ _AMBIGUOUS_REASON_CODES = (
     "conflicting_evidence",
     "candidate_not_grounded",
 )
+_CANONICAL_KUPFFER_ARM_IDS = tuple(f"KUP-{index:02d}" for index in range(1, 7))
 
 
 def _canonical_json(value: Any) -> str:
@@ -892,6 +893,10 @@ def _approved_arm_rows(
             raise ValueError("approved arms require nonempty candidate_id values")
         rows.append(deepcopy(dict(arm)))
         candidate_ids.append(candidate_id)
+    if tuple(candidate_ids) != _CANONICAL_KUPFFER_ARM_IDS:
+        raise ValueError(
+            "approved arms must be the canonical ordered KUP-01 through KUP-06 set"
+        )
     return rows, candidate_ids
 
 
@@ -1067,6 +1072,60 @@ def _arm_identity(arm: Mapping[str, Any]) -> tuple[Any, ...]:
     )
 
 
+def _reported_evidence_groups(
+    record: Mapping[str, Any], field_names: Sequence[str]
+) -> list[set[str]]:
+    groups: list[set[str]] = []
+    for field_name in field_names:
+        field = record.get(field_name)
+        if not isinstance(field, Mapping):
+            continue
+        evidence_ids = field.get("evidence_ids")
+        if isinstance(evidence_ids, list) and evidence_ids:
+            groups.append(set(evidence_ids))
+    return groups
+
+
+def _scientific_evidence_groups(
+    *,
+    linked_experiments: Sequence[Mapping[str, Any]],
+    linked_outcomes: Sequence[Mapping[str, Any]],
+    formulation_records: Mapping[str, Mapping[str, Any]],
+) -> list[set[str]]:
+    groups: list[set[str]] = []
+    for experiment in linked_experiments:
+        formulation = formulation_records.get(experiment.get("formulation_id"))
+        if formulation is not None:
+            groups.extend(
+                _reported_evidence_groups(formulation, ("formulation_name",))
+            )
+        groups.extend(
+            _reported_evidence_groups(
+                experiment,
+                (
+                    "payload_type",
+                    "payload_name",
+                    "dose",
+                    "dose_unit",
+                    "route",
+                    "species",
+                    "disease_model",
+                    "delivery_recipient_cell",
+                    "timepoint",
+                    "timepoint_unit",
+                ),
+            )
+        )
+    for outcome in linked_outcomes:
+        groups.extend(
+            _reported_evidence_groups(
+                outcome,
+                ("assay", "endpoint", "qualitative_outcome"),
+            )
+        )
+    return groups
+
+
 def _matches_scientific_arm(
     *,
     arm: Mapping[str, Any],
@@ -1112,20 +1171,27 @@ def _matches_scientific_arm(
     timepoint_unit = _canonical_arm_value(
         _field_value(experiment, "timepoint_unit"), field_name="timepoint_unit"
     )
-    outcome_text = " ".join(
-        str(_field_value(outcome, field_name) or "").casefold()
-        for outcome in outcomes
-        for field_name in ("assay", "endpoint", "qualitative_outcome")
-    )
     if payload == "quant dna":
         if timepoint != 6 and not (isinstance(timepoint, float) and timepoint == 6.0) or timepoint_unit not in {"hour", "hours", "h"}:
             errors.add("quant_timepoint_required")
-        if "ddpcr" not in outcome_text.replace("-", ""):
+        if not any(
+            "ddpcr"
+            in str(_field_value(outcome, "assay") or "").casefold().replace("-", "")
+            for outcome in outcomes
+        ):
             errors.add("quant_ddpcr_required")
     elif payload == "cre mrna":
         if timepoint != 3 and not (isinstance(timepoint, float) and timepoint == 3.0) or timepoint_unit not in {"day", "days", "d"}:
             errors.add("cre_timepoint_required")
-        if "flow cytometry" not in outcome_text or "tdtomato" not in outcome_text:
+        if not any(
+            "flow cytometry" in str(_field_value(outcome, "assay") or "").casefold()
+            and "tdtomato"
+            in " ".join(
+                str(_field_value(outcome, field_name) or "").casefold()
+                for field_name in ("endpoint", "qualitative_outcome")
+            )
+            for outcome in outcomes
+        ):
             errors.add("cre_tdtomato_flow_required")
     return errors
 
@@ -1205,9 +1271,13 @@ def validate_experimental_arm_response(
     accounted_ids = expected_ids & returned_ids
     report["accounted"] = len(accounted_ids)
 
-    formulations = {
-        row.formulation_id: _field_value(row.model_dump(mode="json"), "formulation_name")
+    formulation_records = {
+        row.formulation_id: row.model_dump(mode="json")
         for row in compact_response.formulations
+    }
+    formulations = {
+        formulation_id: _field_value(record, "formulation_name")
+        for formulation_id, record in formulation_records.items()
     }
     experiments = {
         row.experiment_id: row.model_dump(mode="json")
@@ -1371,6 +1441,22 @@ def validate_experimental_arm_response(
         entry = accounting[candidate_id]
         linked_experiments = [experiments[item] for item in entry["linked_experiment_ids"]]
         linked_outcomes = [outcomes[item] for item in entry["linked_outcome_ids"]]
+        accounting_evidence_ids = set(entry["evidence_ids"])
+        if any(
+            not accounting_evidence_ids & evidence_ids
+            for evidence_ids in _scientific_evidence_groups(
+                linked_experiments=linked_experiments,
+                linked_outcomes=linked_outcomes,
+                formulation_records=formulation_records,
+            )
+        ):
+            _append_error(
+                report,
+                "accounting_evidence_does_not_cover_scientific_fields",
+                "accounting evidence must cover every linked scientific field used for confirmation",
+                candidate_id=candidate_id,
+            )
+            continue
         science_errors: set[str] = set()
         for experiment in linked_experiments:
             experiment_outcomes = [
