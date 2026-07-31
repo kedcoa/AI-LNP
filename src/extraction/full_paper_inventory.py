@@ -72,16 +72,6 @@ _FIGURE_OR_TABLE_LABEL = re.compile(
 _TITLE_CONNECTORS = frozenset(
     {"a", "an", "and", "as", "at", "for", "in", "of", "on", "or", "the", "to", "via", "with"}
 )
-_NUMBERED_PROSE_START = re.compile(
-    r"^(?:a|an|the|this|that|these|those|we|our|their|it|they)\b",
-    re.IGNORECASE,
-)
-_NUMBERED_PROSE_VERB = re.compile(
-    r"\b(?:is|are|was|were|be|been|being|has|have|had|do|does|did|"
-    r"will|would|shall|should|can|could|may|might|must|prepared|mixed|"
-    r"administered|injected|received|showed|demonstrated|measured|used)\b",
-    re.IGNORECASE,
-)
 
 _TAG_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("formulation", re.compile(r"\bformulat\w*\b", re.IGNORECASE)),
@@ -174,7 +164,7 @@ def normalize_block_text(text: str) -> str:
     return re.sub(r"\s+", " ", normalized).strip()
 
 
-def _is_heading(text: str) -> bool:
+def _is_heading(text: str, *, following_text: str = "") -> bool:
     if any(pattern.fullmatch(text) for pattern in _HEADING_PATTERNS):
         return True
     if (
@@ -185,7 +175,11 @@ def _is_heading(text: str) -> bool:
         return False
     numbered_heading = _NUMBERED_HEADING.fullmatch(text)
     if numbered_heading:
-        return _is_numbered_heading(numbered_heading["title"])
+        return _is_numbered_heading(
+            text,
+            numbered_heading["title"],
+            following_text,
+        )
     return _is_title_like_heading(text)
 
 
@@ -197,25 +191,47 @@ def _is_title_like_heading(text: str) -> bool:
     )
 
 
-def _is_numbered_heading(title: str) -> bool:
-    """Distinguish numbered section labels from numbered prose/list evidence."""
+def _is_numbered_heading(
+    label: str,
+    title: str,
+    following_text: str,
+) -> bool:
+    """Use title form or adjacent block structure to identify a numbered label."""
     if _is_title_like_heading(title):
         return True
     words = re.findall(r"[A-Za-z][A-Za-z'-]*", title)
-    return bool(words) and len(words) <= 12 and not (
-        _NUMBERED_PROSE_START.match(title) or _NUMBERED_PROSE_VERB.search(title)
-    ) and words[0][0].isupper()
+    following_text = normalize_block_text(following_text)
+    has_section_content = bool(following_text) and not _NUMBERED_HEADING.fullmatch(
+        following_text
+    ) and (
+        following_text.endswith((".", "?", "!"))
+        or len(following_text) > len(label)
+    )
+    return (
+        bool(words)
+        and len(words) <= 12
+        and words[0][0].isupper()
+        and has_section_content
+    )
 
 
-def _split_heading(block_text: str, current_heading: str) -> tuple[str, str]:
+def _split_heading(
+    block_text: str,
+    current_heading: str,
+    following_block_text: str = "",
+) -> tuple[str, str]:
     """Use a standalone or leading conventional section heading as context."""
     lines = [normalize_block_text(line) for line in block_text.splitlines()]
     lines = [line for line in lines if line]
     if not lines:
         return current_heading, ""
-    if _is_heading(lines[0]):
+    same_block_text = normalize_block_text(" ".join(lines[1:]))
+    if _is_heading(
+        lines[0],
+        following_text=same_block_text or following_block_text,
+    ):
         heading = lines[0]
-        return heading, normalize_block_text(" ".join(lines[1:]))
+        return heading, same_block_text
     return current_heading, normalize_block_text(" ".join(lines))
 
 
@@ -289,17 +305,24 @@ def build_full_paper_evidence(
     current_heading = "Unsectioned"
     with fitz.open(pdf_path) as document:
         for page_number, page in enumerate(document, start=1):
+            page_blocks = page.get_text("blocks", sort=True)
             for block_ordinal, block in enumerate(
-                page.get_text("blocks", sort=True), start=1
+                page_blocks, start=1
             ):
                 raw_text = block[4]
-                heading, text = _split_heading(raw_text, current_heading)
-                if _is_heading(normalize_block_text(raw_text)):
-                    current_heading = heading
-                    continue
+                following_block_text = (
+                    page_blocks[block_ordinal][4]
+                    if block_ordinal < len(page_blocks)
+                    else ""
+                )
+                heading, text = _split_heading(
+                    raw_text,
+                    current_heading,
+                    following_block_text,
+                )
+                current_heading = heading
                 if not text:
                     continue
-                current_heading = heading
                 evidence_blocks.append(
                     FullPaperEvidenceBlock(
                         evidence_id=_evidence_id(

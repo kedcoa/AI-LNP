@@ -202,3 +202,31 @@ def test_inventory_recognizes_numbered_sentence_case_section_headings(tmp_path: 
         "2. Adaptive delivery workflow",
         "2. In vivo evaluation",
     ]
+
+
+def test_inventory_recognizes_concise_numbered_labels_without_lexical_vetoes(
+    tmp_path: Path,
+):
+    """Numbered labels remain headings regardless of generic wording."""
+    pdf_path = tmp_path / "concise-numbered-labels.pdf"
+    _write_pdf(
+        pdf_path,
+        [
+            [
+                "2. Materials used",
+                "Payload was prepared by mixing.",
+                "3. Outcomes measured",
+                "Primary cells showed increased expression.",
+                "4. The impact of formulation on delivery",
+                "The animal model received the dose by intravenous route.",
+            ],
+        ],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-10", pdf_path)
+
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "2. Materials used",
+        "3. Outcomes measured",
+        "4. The impact of formulation on delivery",
+    ]
