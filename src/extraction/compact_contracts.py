@@ -180,6 +180,7 @@ class ExperimentRecord(StrictContract):
     therapeutic_target_cell: TextField
     tissue_or_organ: TextField
     species: TextField
+    experimental_model: TextField | None = None
     disease_model: TextField
     experimental_context: ReportedField[
         Literal["in_vitro", "ex_vivo", "in_vivo"]

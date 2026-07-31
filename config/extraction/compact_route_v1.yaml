@@ -2,9 +2,9 @@ route_version: compact-route-1.2.0
 status: v12_recall_support_integrated_pending_main_rerun
 
 prompt:
-  version: compact-prompt-1.3.0
+  version: compact-prompt-1.4.0
   implementation: src.extraction.compact_prompt_v1.COMPACT_EXTRACTION_PROMPT
-  sha256: b441f67f2d9c5c40005497bf4862df90bd4bb9110f1f5cfd0ee9ee847565c9ca
+  sha256: f9b4d141edcec0f3a3057d9ad89f72858535f7ec3c490c64ec18cc0e69e054dd
 
 outcome_recall_support:
   version: main-route-recall-support-1.2.0
@@ -17,7 +17,7 @@ response_contract:
   version: compact-1.1.0
   implementation: src.extraction.compact_contracts.CompactExtractionResponse
   generated_schema: docs/extraction/schemas/compact_v1/compact_extraction_response.schema.json
-  schema_sha256: 14b2265c91943d7a757d9fd4aea2889c2717ba204590a156dfd769e5d5cbc082
+  schema_sha256: 3e85da029c8e2c7974226710a2e0dbe624e689694a438cff597ffa422dfd9013
 
 evidence_packet:
   version: compact-packet-1.0.0

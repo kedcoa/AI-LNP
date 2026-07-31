@@ -1578,6 +1578,29 @@ def test_validator_rejects_scientific_identity_mismatches(path, bad_value):
     assert "scientific_identity_mismatch" in _error_codes(report)
 
 
+def test_validator_matches_arm_model_to_experimental_not_disease_model():
+    response = _arm_response()
+    for index, arm in enumerate(approved_arms()):
+        response["experiments"][index]["experimental_model"] = _reported_value(
+            arm["model"]
+        )
+        response["experiments"][index]["disease_model"] = {
+            "value": None,
+            "status": "missing",
+            "evidence_ids": [],
+            "missing_reason": "No disease model was reported.",
+        }
+
+    report = validate_experimental_arm_response(
+        response,
+        approved_arms(),
+        {"E-ARM"},
+    )
+
+    assert report["scientifically_confirmed"] == 6
+    assert "scientific_identity_mismatch" not in _error_codes(report)
+
+
 def test_species_aliases_treat_mus_musculus_as_mouse():
     response = _arm_response()
     response["experiments"][0]["species"] = _reported_value("Mus musculus")
@@ -1879,6 +1902,24 @@ def test_validator_requires_one_quant_outcome_to_establish_ddpcr():
 
     assert "quant_ddpcr_required" in _error_codes(report)
     assert "KUP-01" not in report["confirmed_candidate_ids"]
+
+
+@pytest.mark.parametrize(
+    "assay_name",
+    ["digital droplet PCR", "droplet digital PCR"],
+)
+def test_validator_accepts_unambiguous_full_ddpcr_names(assay_name):
+    response = _arm_response()
+    response["outcomes"][0]["assay"]["value"] = assay_name
+
+    report = validate_experimental_arm_response(
+        response,
+        approved_arms(),
+        {"E-ARM"},
+    )
+
+    assert "quant_ddpcr_required" not in _error_codes(report)
+    assert "KUP-01" in report["confirmed_candidate_ids"]
 
 
 def test_validator_requires_one_cre_outcome_to_establish_flow_cytometry_and_tdtomato():

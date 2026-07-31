@@ -245,6 +245,15 @@ def test_strict_schema_requires_payload_role():
     }
 
 
+def test_strict_schema_requires_experimental_model_separately():
+    schema = to_strict_json_schema(CompactExtractionResponse)
+    experiment = schema["$defs"]["ExperimentRecord"]
+
+    assert "experimental_model" in experiment["required"]
+    assert "disease_model" in experiment["required"]
+    assert "experimental_model" in experiment["properties"]
+
+
 def test_cross_record_links_must_resolve():
     payload = valid_response()
     payload["outcomes"][0]["experiment_id"] = "UNKNOWN"

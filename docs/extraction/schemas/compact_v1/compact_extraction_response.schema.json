@@ -125,6 +125,17 @@
         "experimental_context": {
           "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
         },
+        "experimental_model": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReportedField_str_"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "formulation_id": {
           "title": "Formulation Id",
           "type": "string"

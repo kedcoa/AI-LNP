@@ -1457,6 +1457,16 @@ def _same_arm_value(actual: Any, expected: Any, *, field_name: str) -> bool:
     )
 
 
+def _is_ddpcr_assay(value: Any) -> bool:
+    canonical = " ".join(
+        str(value or "").casefold().replace("-", " ").split()
+    )
+    return canonical.replace(" ", "") == "ddpcr" or canonical in {
+        "digital droplet pcr",
+        "droplet digital pcr",
+    }
+
+
 def _append_error(
     report: dict[str, Any], code: str, message: str, **details: Any
 ) -> None:
@@ -1518,7 +1528,7 @@ def _scientific_evidence_groups(
                     "dose_unit",
                     "route",
                     "species",
-                    "disease_model",
+                    "experimental_model",
                     "delivery_recipient_cell",
                     "timepoint",
                     "timepoint_unit",
@@ -1546,13 +1556,19 @@ def _matches_scientific_arm(
 
     errors: set[str] = set()
     formulation = formulation_names.get(experiment.get("formulation_id"))
+    experimental_model_field = experiment.get("experimental_model")
+    experimental_model = (
+        experimental_model_field.get("value")
+        if isinstance(experimental_model_field, Mapping)
+        else _field_value(experiment, "disease_model")
+    )
     checks = {
         "formulation": formulation,
         "payload": _field_value(experiment, "payload_name"),
         "dose_unit": _field_value(experiment, "dose_unit"),
         "route": _field_value(experiment, "route"),
         "species": _field_value(experiment, "species"),
-        "model": _field_value(experiment, "disease_model"),
+        "model": experimental_model,
         "target_cell": _field_value(experiment, "delivery_recipient_cell"),
     }
     for field_name, actual in checks.items():
@@ -1591,8 +1607,7 @@ def _matches_scientific_arm(
         if timepoint != 6 and not (isinstance(timepoint, float) and timepoint == 6.0) or timepoint_unit not in {"hour", "hours", "h"}:
             errors.add("quant_timepoint_required")
         if not any(
-            "ddpcr"
-            in str(_field_value(outcome, "assay") or "").casefold().replace("-", "")
+            _is_ddpcr_assay(_field_value(outcome, "assay"))
             for outcome in outcomes
         ):
             errors.add("quant_ddpcr_required")
