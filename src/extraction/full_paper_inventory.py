@@ -63,7 +63,9 @@ _HEADING_PATTERNS = (
         re.IGNORECASE,
     ),
 )
-_NUMBERED_HEADING = re.compile(r"^\d+(?:\.\d+)*\.?\s+\S")
+_NUMBERED_HEADING = re.compile(
+    r"^\d+(?:\.\d+)*\.?\s+(?P<title>\S.*)$"
+)
 _FIGURE_OR_TABLE_LABEL = re.compile(
     r"^(?:fig(?:ure)?|table)\s+\S", re.IGNORECASE
 )
@@ -171,8 +173,13 @@ def _is_heading(text: str) -> bool:
         or text.endswith((".", "?", "!"))
     ):
         return False
-    if _NUMBERED_HEADING.match(text):
-        return True
+    numbered_heading = _NUMBERED_HEADING.fullmatch(text)
+    if numbered_heading:
+        return _is_title_like_heading(numbered_heading["title"])
+    return _is_title_like_heading(text)
+
+
+def _is_title_like_heading(text: str) -> bool:
     words = re.findall(r"[A-Za-z][A-Za-z'-]*", text)
     return bool(words) and len(words) <= 12 and all(
         word.casefold() in _TITLE_CONNECTORS or word[0].isupper()

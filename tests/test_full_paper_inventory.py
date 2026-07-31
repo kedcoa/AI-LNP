@@ -146,3 +146,36 @@ def test_inventory_retains_non_enumerated_title_like_heading(tmp_path: Path):
         if block.text == "Payload was prepared by mixing."
     )
     assert payload.heading == "Adaptive Delivery Workflow"
+
+
+def test_inventory_retains_numbered_prose_list_item_as_evidence(tmp_path: Path):
+    """A numbered list item is evidence, not an automatically inferred section."""
+    pdf_path = tmp_path / "numbered-list.pdf"
+    _write_pdf(
+        pdf_path,
+        [["1. The formulation was prepared by mixing"]],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-7", pdf_path)
+
+    assert [block.text for block in inventory.evidence_blocks] == [
+        "1. The formulation was prepared by mixing",
+    ]
+    assert {"formulation", "preparation_method"} <= set(
+        inventory.evidence_blocks[0].retrieval_tags
+    )
+
+
+def test_inventory_recognizes_numbered_title_like_section_heading(tmp_path: Path):
+    """A numbered title-like label still supplies section context."""
+    pdf_path = tmp_path / "numbered-heading.pdf"
+    _write_pdf(
+        pdf_path,
+        [["2. Adaptive Delivery Workflow", "Payload was prepared by mixing."]],
+    )
+
+    inventory = build_full_paper_evidence("PAPER-8", pdf_path)
+
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "2. Adaptive Delivery Workflow",
+    ]
