@@ -1244,6 +1244,14 @@ def test_validator_confirms_all_six_exact_arm_mappings():
         "structurally_valid_extracted": 6,
         "scientifically_confirmed": 6,
         "ambiguous": 0,
+        "structurally_valid_candidate_ids": [
+            "KUP-01",
+            "KUP-02",
+            "KUP-03",
+            "KUP-04",
+            "KUP-05",
+            "KUP-06",
+        ],
         "confirmed_candidate_ids": [
             "KUP-01",
             "KUP-02",
@@ -1358,6 +1366,71 @@ def test_validator_requires_payload_specific_timepoint_and_measurement(
 
     assert expected_code in _error_codes(report)
     assert candidate_id not in report["confirmed_candidate_ids"]
+
+
+@pytest.mark.parametrize(
+    ("candidate_id", "path", "bad_value", "expected_code"),
+    [
+        (
+            "KUP-01",
+            ("outcomes", 0, "assay", "value"),
+            "qPCR",
+            "quant_ddpcr_required",
+        ),
+        (
+            "KUP-03",
+            ("experiments", 2, "timepoint", "value"),
+            1.0,
+            "cre_timepoint_required",
+        ),
+    ],
+)
+def test_scientific_error_does_not_reduce_structural_count(
+    candidate_id,
+    path,
+    bad_value,
+    expected_code,
+):
+    response = _arm_response()
+    target = response
+    for key in path[:-1]:
+        target = target[key]
+    target[path[-1]] = bad_value
+
+    report = validate_experimental_arm_response(
+        response, approved_arms(), {"E-ARM"}
+    )
+
+    assert report["accounted"] == 6
+    assert report["structurally_valid_extracted"] == 6
+    assert report["structurally_valid_candidate_ids"] == [
+        "KUP-01",
+        "KUP-02",
+        "KUP-03",
+        "KUP-04",
+        "KUP-05",
+        "KUP-06",
+    ]
+    assert report["scientifically_confirmed"] == 5
+    assert candidate_id not in report["confirmed_candidate_ids"]
+    assert expected_code in _error_codes(report)
+
+
+def test_invalid_record_link_reduces_structural_and_scientific_sets():
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-01"][
+        "linked_outcome_ids"
+    ] = ["OUT-UNKNOWN"]
+
+    report = validate_experimental_arm_response(
+        response, approved_arms(), {"E-ARM"}
+    )
+
+    assert report["structurally_valid_extracted"] == 5
+    assert "KUP-01" not in report["structurally_valid_candidate_ids"]
+    assert report["scientifically_confirmed"] == 5
+    assert "KUP-01" not in report["confirmed_candidate_ids"]
+    assert "unknown_linked_record_ids" in _error_codes(report)
 
 
 def test_validator_rejects_citations_outside_the_evidence_envelope():

@@ -1505,6 +1505,7 @@ def validate_experimental_arm_response(
         "structurally_valid_extracted": 0,
         "scientifically_confirmed": 0,
         "ambiguous": 0,
+        "structurally_valid_candidate_ids": [],
         "confirmed_candidate_ids": [],
         "errors": [],
     }
@@ -1777,11 +1778,10 @@ def validate_experimental_arm_response(
                     "linked records do not satisfy the approved arm's scientific constraints",
                     candidate_id=candidate_id,
                 )
-            invalid_structural.add(candidate_id)
             continue
         report["confirmed_candidate_ids"].append(candidate_id)
-    report["structurally_valid_extracted"] = len(
-        structurally_valid - invalid_structural
-    )
+    final_structural = structurally_valid - invalid_structural
+    report["structurally_valid_candidate_ids"] = sorted(final_structural)
+    report["structurally_valid_extracted"] = len(final_structural)
     report["scientifically_confirmed"] = len(report["confirmed_candidate_ids"])
     return report
