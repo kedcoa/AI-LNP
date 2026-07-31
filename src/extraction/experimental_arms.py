@@ -6,7 +6,9 @@ import hashlib
 import json
 import re
 from copy import deepcopy
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
+
+from .compact_contracts import CompactExtractionResponse
 
 
 ARM_PROPOSAL_VERSION = "np002-kupffer-arm-proposal-1.0.0"
@@ -49,6 +51,18 @@ _PERMITTED_TREATMENTS = {
     ("MC3", "Cre mRNA", 1.0),
     ("cKK-E12", "Cre mRNA", 1.0),
 }
+_ACCOUNTING_ENTRY_FIELDS = {
+    "disposition",
+    "linked_experiment_ids",
+    "linked_outcome_ids",
+    "evidence_ids",
+    "reason_code",
+    "explanation",
+}
+_AMBIGUOUS_REASON_CODES = (
+    "conflicting_evidence",
+    "candidate_not_grounded",
+)
 
 
 def _canonical_json(value: Any) -> str:
@@ -861,3 +875,524 @@ def validate_arm_review(
         "removed_candidate_ids": removed,
         "added_candidate_ids": addition_ids,
     }
+
+
+def _approved_arm_rows(
+    approved_arms: Sequence[Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Copy approved arms and return their IDs in request order."""
+
+    rows: list[dict[str, Any]] = []
+    candidate_ids: list[str] = []
+    for arm in approved_arms:
+        if not isinstance(arm, Mapping):
+            raise ValueError("approved arms must be objects")
+        candidate_id = arm.get("candidate_id")
+        if not isinstance(candidate_id, str) or not candidate_id:
+            raise ValueError("approved arms require nonempty candidate_id values")
+        rows.append(deepcopy(dict(arm)))
+        candidate_ids.append(candidate_id)
+    return rows, candidate_ids
+
+
+def _entry_variant(
+    *,
+    disposition: str,
+    experiment_constraints: dict[str, Any],
+    outcome_constraints: dict[str, Any],
+    reason_schema: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "disposition": {"const": disposition},
+            "linked_experiment_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+                **experiment_constraints,
+            },
+            "linked_outcome_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+                **outcome_constraints,
+            },
+            "evidence_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+                "minItems": 1,
+            },
+            "reason_code": reason_schema,
+            "explanation": {"type": "string", "minLength": 1},
+        },
+        "required": [
+            "disposition",
+            "linked_experiment_ids",
+            "linked_outcome_ids",
+            "evidence_ids",
+            "reason_code",
+            "explanation",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def build_experimental_arm_schema(
+    core_schema: Mapping[str, Any],
+    approved_arms: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Add exhaustive, closed approved-arm accounting to a compact schema."""
+
+    _, candidate_ids = _approved_arm_rows(approved_arms)
+    if len(candidate_ids) != len(set(candidate_ids)):
+        raise ValueError("approved arm candidate IDs must be unique")
+    schema = deepcopy(dict(core_schema))
+    properties = dict(schema.get("properties", {}))
+    definitions = dict(schema.get("$defs", {}))
+    definitions["ExperimentalArmAccountingEntry"] = {
+        "type": "object",
+        "properties": {
+            "disposition": {"enum": ["extracted", "ambiguous"]},
+            "linked_experiment_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "linked_outcome_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "evidence_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+                "minItems": 1,
+            },
+            "reason_code": {
+                "enum": ["extracted", *_AMBIGUOUS_REASON_CODES],
+            },
+            "explanation": {"type": "string", "minLength": 1},
+        },
+        "required": [
+            "disposition",
+            "linked_experiment_ids",
+            "linked_outcome_ids",
+            "evidence_ids",
+            "reason_code",
+            "explanation",
+        ],
+        "additionalProperties": False,
+        "oneOf": [
+            _entry_variant(
+                disposition="extracted",
+                experiment_constraints={"minItems": 1},
+                outcome_constraints={"minItems": 1},
+                reason_schema={"const": "extracted"},
+            ),
+            _entry_variant(
+                disposition="ambiguous",
+                experiment_constraints={"maxItems": 0},
+                outcome_constraints={"maxItems": 0},
+                reason_schema={"enum": list(_AMBIGUOUS_REASON_CODES)},
+            ),
+        ]
+    }
+    properties["experimental_arm_accounting"] = {
+        "type": "object",
+        "properties": {
+            candidate_id: {"$ref": "#/$defs/ExperimentalArmAccountingEntry"}
+            for candidate_id in candidate_ids
+        },
+        "required": candidate_ids,
+        "additionalProperties": False,
+    }
+    required = list(schema.get("required", []))
+    if "experimental_arm_accounting" not in required:
+        required.append("experimental_arm_accounting")
+    schema["properties"] = properties
+    schema["required"] = required
+    schema["additionalProperties"] = False
+    schema["$defs"] = definitions
+    return schema
+
+
+def _field_value(record: Mapping[str, Any], field_name: str) -> Any:
+    field = record.get(field_name)
+    if isinstance(field, Mapping):
+        return field.get("value")
+    return None
+
+
+def _canonical_arm_value(value: Any, *, field_name: str) -> str:
+    text = " ".join(str(value).casefold().replace("-", " ").split())
+    aliases = {
+        "mice": "mouse",
+        "mus musculus": "mouse",
+        "iv": "intravenous",
+        "intravenous lateral tail vein": "intravenous",
+        "ckk e12 lnp": "ckk e12",
+    }
+    if field_name in {"species", "model"} and text == "mice":
+        return "mouse"
+    if field_name == "route":
+        return aliases.get(text, text)
+    if field_name == "formulation":
+        return aliases.get(text, text)
+    return text
+
+
+def _same_arm_value(actual: Any, expected: Any, *, field_name: str) -> bool:
+    return _canonical_arm_value(actual, field_name=field_name) == _canonical_arm_value(
+        expected, field_name=field_name
+    )
+
+
+def _append_error(
+    report: dict[str, Any], code: str, message: str, **details: Any
+) -> None:
+    report["errors"].append({"code": code, "message": message, **details})
+
+
+def _string_id_list(value: Any) -> list[str] | None:
+    if not isinstance(value, list) or not all(isinstance(item, str) and item for item in value):
+        return None
+    if len(value) != len(set(value)):
+        return None
+    return value
+
+
+def _arm_identity(arm: Mapping[str, Any]) -> tuple[Any, ...]:
+    return (
+        _canonical_arm_value(arm.get("formulation"), field_name="formulation"),
+        _canonical_arm_value(arm.get("payload"), field_name="payload"),
+        arm.get("dose"),
+        _canonical_arm_value(arm.get("target_cell"), field_name="target_cell"),
+    )
+
+
+def _matches_scientific_arm(
+    *,
+    arm: Mapping[str, Any],
+    experiment: Mapping[str, Any],
+    formulation_names: Mapping[str, Any],
+    outcomes: Sequence[Mapping[str, Any]],
+) -> set[str]:
+    """Return the science checks that fail for one linked arm/record group."""
+
+    errors: set[str] = set()
+    formulation = formulation_names.get(experiment.get("formulation_id"))
+    checks = {
+        "formulation": formulation,
+        "payload": _field_value(experiment, "payload_name"),
+        "dose_unit": _field_value(experiment, "dose_unit"),
+        "route": _field_value(experiment, "route"),
+        "species": _field_value(experiment, "species"),
+        "model": _field_value(experiment, "disease_model"),
+        "target_cell": _field_value(experiment, "delivery_recipient_cell"),
+    }
+    for field_name, actual in checks.items():
+        if not _same_arm_value(actual, arm.get(field_name), field_name=field_name):
+            errors.add("scientific_identity_mismatch")
+    expected_payload_type = (
+        "DNA" if arm.get("payload") == "QUANT DNA" else "mRNA"
+    )
+    if not _same_arm_value(
+        _field_value(experiment, "payload_type"),
+        expected_payload_type,
+        field_name="payload_type",
+    ):
+        errors.add("scientific_identity_mismatch")
+    actual_dose = _field_value(experiment, "dose")
+    if (
+        isinstance(actual_dose, bool)
+        or not isinstance(actual_dose, (int, float))
+        or float(actual_dose) != float(arm.get("dose"))
+    ):
+        errors.add("scientific_identity_mismatch")
+
+    payload = _canonical_arm_value(arm.get("payload"), field_name="payload")
+    timepoint = _field_value(experiment, "timepoint")
+    timepoint_unit = _canonical_arm_value(
+        _field_value(experiment, "timepoint_unit"), field_name="timepoint_unit"
+    )
+    outcome_text = " ".join(
+        str(_field_value(outcome, field_name) or "").casefold()
+        for outcome in outcomes
+        for field_name in ("assay", "endpoint", "qualitative_outcome")
+    )
+    if payload == "quant dna":
+        if timepoint != 6 and not (isinstance(timepoint, float) and timepoint == 6.0) or timepoint_unit not in {"hour", "hours", "h"}:
+            errors.add("quant_timepoint_required")
+        if "ddpcr" not in outcome_text.replace("-", ""):
+            errors.add("quant_ddpcr_required")
+    elif payload == "cre mrna":
+        if timepoint != 3 and not (isinstance(timepoint, float) and timepoint == 3.0) or timepoint_unit not in {"day", "days", "d"}:
+            errors.add("cre_timepoint_required")
+        if "flow cytometry" not in outcome_text or "tdtomato" not in outcome_text:
+            errors.add("cre_tdtomato_flow_required")
+    return errors
+
+
+def validate_experimental_arm_response(
+    response: Mapping[str, Any],
+    approved_arms: Sequence[Mapping[str, Any]],
+    evidence_envelope: set[str],
+) -> dict[str, Any]:
+    """Validate exhaustive approved-arm accounting against returned records."""
+
+    if not isinstance(response, Mapping):
+        raise ValueError("experimental arm response must be an object")
+    arms, candidate_ids = _approved_arm_rows(approved_arms)
+    arm_by_id = {arm["candidate_id"]: arm for arm in arms}
+    expected_ids = set(candidate_ids)
+    report: dict[str, Any] = {
+        "sent": len(candidate_ids),
+        "accounted": 0,
+        "structurally_valid_extracted": 0,
+        "scientifically_confirmed": 0,
+        "ambiguous": 0,
+        "confirmed_candidate_ids": [],
+        "errors": [],
+    }
+    duplicate_ids = sorted(
+        candidate_id
+        for candidate_id in set(candidate_ids)
+        if candidate_ids.count(candidate_id) > 1
+    )
+    if duplicate_ids:
+        _append_error(
+            report,
+            "repeated_candidate_ids",
+            "approved arm candidate IDs must be unique",
+            candidate_ids=duplicate_ids,
+        )
+
+    body = dict(response)
+    accounting = body.pop("experimental_arm_accounting", None)
+    compact_response = CompactExtractionResponse.model_validate(body)
+    core_evidence_valid = True
+    try:
+        compact_response.validate_evidence_ids(set(evidence_envelope))
+    except ValueError as exc:
+        core_evidence_valid = False
+        _append_error(
+            report,
+            "core_evidence_outside_envelope",
+            str(exc),
+        )
+    if not isinstance(accounting, Mapping):
+        _append_error(
+            report,
+            "experimental_arm_accounting_not_object",
+            "experimental_arm_accounting must be an object",
+        )
+        return report
+
+    returned_ids = set(accounting)
+    missing_ids = sorted(expected_ids - returned_ids)
+    invented_ids = sorted(returned_ids - expected_ids)
+    if missing_ids:
+        _append_error(
+            report,
+            "missing_candidate_ids",
+            "experimental_arm_accounting omitted approved candidate IDs",
+            candidate_ids=missing_ids,
+        )
+    if invented_ids:
+        _append_error(
+            report,
+            "invented_candidate_ids",
+            "experimental_arm_accounting included unknown candidate IDs",
+            candidate_ids=invented_ids,
+        )
+    accounted_ids = expected_ids & returned_ids
+    report["accounted"] = len(accounted_ids)
+
+    formulations = {
+        row.formulation_id: _field_value(row.model_dump(mode="json"), "formulation_name")
+        for row in compact_response.formulations
+    }
+    experiments = {
+        row.experiment_id: row.model_dump(mode="json")
+        for row in compact_response.experiments
+    }
+    outcome_rows = [row.model_dump(mode="json") for row in compact_response.outcomes]
+    outcome_ids = [str(row["outcome_id"]) for row in outcome_rows]
+    duplicate_outcomes = sorted(
+        outcome_id for outcome_id in set(outcome_ids) if outcome_ids.count(outcome_id) > 1
+    )
+    if duplicate_outcomes:
+        _append_error(
+            report,
+            "duplicate_returned_outcome_ids",
+            "returned outcome IDs must be unique",
+            outcome_ids=duplicate_outcomes,
+        )
+    outcomes = {row["outcome_id"]: row for row in outcome_rows}
+
+    structurally_valid: set[str] = set()
+    candidate_outcomes: dict[str, set[str]] = {}
+    for candidate_id in candidate_ids:
+        if candidate_id not in accounted_ids:
+            continue
+        entry = accounting[candidate_id]
+        if not isinstance(entry, Mapping):
+            _append_error(
+                report,
+                "invalid_accounting_entry",
+                "each experimental arm accounting entry must be an object",
+                candidate_id=candidate_id,
+            )
+            continue
+        unexpected_fields = sorted(set(entry) - _ACCOUNTING_ENTRY_FIELDS)
+        missing_fields = sorted(_ACCOUNTING_ENTRY_FIELDS - set(entry))
+        if unexpected_fields or missing_fields:
+            _append_error(
+                report,
+                "invalid_accounting_entry",
+                "accounting entries require exactly the closed entry fields",
+                candidate_id=candidate_id,
+                unexpected_fields=unexpected_fields,
+                missing_fields=missing_fields,
+            )
+            continue
+        disposition = entry["disposition"]
+        linked_experiment_ids = _string_id_list(entry["linked_experiment_ids"])
+        linked_outcome_ids = _string_id_list(entry["linked_outcome_ids"])
+        evidence_ids = _string_id_list(entry["evidence_ids"])
+        reason_code = entry["reason_code"]
+        explanation = entry["explanation"]
+        if disposition not in {"extracted", "ambiguous"}:
+            _append_error(
+                report,
+                "invalid_disposition",
+                "accounting disposition must be extracted or ambiguous",
+                candidate_id=candidate_id,
+            )
+            continue
+        if (
+            linked_experiment_ids is None
+            or linked_outcome_ids is None
+            or evidence_ids is None
+            or not isinstance(reason_code, str)
+            or not isinstance(explanation, str)
+            or not explanation.strip()
+        ):
+            _append_error(
+                report,
+                "invalid_accounting_entry",
+                "accounting entry values must be complete and unique string lists",
+                candidate_id=candidate_id,
+            )
+            continue
+        if not evidence_ids:
+            _append_error(
+                report,
+                "accounting_evidence_required",
+                "accounting entries require at least one evidence ID",
+                candidate_id=candidate_id,
+            )
+            continue
+        if set(evidence_ids) - set(evidence_envelope):
+            _append_error(
+                report,
+                "evidence_outside_envelope",
+                "accounting entry cites evidence outside the permitted envelope",
+                candidate_id=candidate_id,
+            )
+            continue
+        if disposition == "ambiguous":
+            if linked_experiment_ids or linked_outcome_ids or reason_code not in _AMBIGUOUS_REASON_CODES:
+                _append_error(
+                    report,
+                    "invalid_ambiguous_entry",
+                    "ambiguous entries require empty record links and a non-extracted reason",
+                    candidate_id=candidate_id,
+                )
+                continue
+            report["ambiguous"] += 1
+            continue
+        if reason_code != "extracted" or not linked_experiment_ids or not linked_outcome_ids:
+            _append_error(
+                report,
+                "extracted_requires_record_links",
+                "extracted entries require linked experiments, outcomes, and extracted reason",
+                candidate_id=candidate_id,
+            )
+            continue
+        unknown_experiments = sorted(set(linked_experiment_ids) - set(experiments))
+        unknown_outcomes = sorted(set(linked_outcome_ids) - set(outcomes))
+        if unknown_experiments or unknown_outcomes:
+            _append_error(
+                report,
+                "unknown_linked_record_ids",
+                "extracted entry links must reference returned records",
+                candidate_id=candidate_id,
+                experiment_ids=unknown_experiments,
+                outcome_ids=unknown_outcomes,
+            )
+            continue
+        if any(
+            outcomes[outcome_id]["experiment_id"] not in linked_experiment_ids
+            for outcome_id in linked_outcome_ids
+        ):
+            _append_error(
+                report,
+                "outcome_experiment_link_mismatch",
+                "linked outcomes must belong to a linked experiment",
+                candidate_id=candidate_id,
+            )
+            continue
+        structurally_valid.add(candidate_id)
+        candidate_outcomes[candidate_id] = set(linked_outcome_ids)
+
+    report["structurally_valid_extracted"] = len(structurally_valid)
+    reused_candidates: set[str] = set()
+    for outcome_id in sorted(set().union(*candidate_outcomes.values()) if candidate_outcomes else set()):
+        users = [
+            candidate_id
+            for candidate_id, outcome_ids_for_candidate in candidate_outcomes.items()
+            if outcome_id in outcome_ids_for_candidate
+        ]
+        if len({_arm_identity(arm_by_id[candidate_id]) for candidate_id in users}) > 1:
+            reused_candidates.update(users)
+            _append_error(
+                report,
+                "outcome_reused_across_incompatible_arms",
+                "one returned outcome cannot confirm incompatible approved arms",
+                outcome_id=outcome_id,
+                candidate_ids=sorted(users),
+            )
+
+    for candidate_id in candidate_ids:
+        if (
+            not core_evidence_valid
+            or candidate_id not in structurally_valid
+            or candidate_id in reused_candidates
+        ):
+            continue
+        entry = accounting[candidate_id]
+        linked_experiments = [experiments[item] for item in entry["linked_experiment_ids"]]
+        linked_outcomes = [outcomes[item] for item in entry["linked_outcome_ids"]]
+        science_errors: set[str] = set()
+        for experiment in linked_experiments:
+            experiment_outcomes = [
+                outcome
+                for outcome in linked_outcomes
+                if outcome["experiment_id"] == experiment["experiment_id"]
+            ]
+            science_errors |= _matches_scientific_arm(
+                arm=arm_by_id[candidate_id],
+                experiment=experiment,
+                formulation_names=formulations,
+                outcomes=experiment_outcomes,
+            )
+        if science_errors:
+            for code in sorted(science_errors):
+                _append_error(
+                    report,
+                    code,
+                    "linked records do not satisfy the approved arm's scientific constraints",
+                    candidate_id=candidate_id,
+                )
+            continue
+        report["confirmed_candidate_ids"].append(candidate_id)
+    report["scientifically_confirmed"] = len(report["confirmed_candidate_ids"])
+    return report

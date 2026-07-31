@@ -5,9 +5,12 @@ import pytest
 from src.extraction.experimental_arms import (
     ARM_PROPOSAL_VERSION,
     PAIRING_TYPES,
+    build_experimental_arm_schema,
     build_np002_kupffer_arm_proposal,
+    validate_experimental_arm_response,
     validate_arm_review,
 )
+from src.extraction.compact_contracts import CompactExtractionResponse
 
 
 def _evidence(evidence_id, text):
@@ -689,3 +692,400 @@ def test_rejects_wrong_review_version_or_proposal_sha():
         "cross_product",
         "paired_correspondence",
     }
+
+
+def _reported_value(value, evidence_id="E-ARM"):
+    return {
+        "value": value,
+        "status": "reported",
+        "evidence_ids": [evidence_id],
+        "missing_reason": None,
+    }
+
+
+def approved_arms():
+    return [
+        {
+            "candidate_id": "KUP-01",
+            "formulation": "MC3",
+            "payload": "QUANT DNA",
+            "dose": 0.3,
+            "dose_unit": "mg/kg",
+            "route": "intravenous lateral tail vein",
+            "species": "mice",
+            "model": "mice",
+            "target_cell": "Kupffer cells",
+        },
+        {
+            "candidate_id": "KUP-02",
+            "formulation": "cKK-E12",
+            "payload": "QUANT DNA",
+            "dose": 0.3,
+            "dose_unit": "mg/kg",
+            "route": "intravenous lateral tail vein",
+            "species": "mice",
+            "model": "mice",
+            "target_cell": "Kupffer cells",
+        },
+        {
+            "candidate_id": "KUP-03",
+            "formulation": "MC3",
+            "payload": "Cre mRNA",
+            "dose": 1.0,
+            "dose_unit": "mg/kg",
+            "route": "intravenous lateral tail vein",
+            "species": "mice",
+            "model": "Ai14 Cre-reporter mice",
+            "target_cell": "Kupffer cells",
+        },
+        {
+            "candidate_id": "KUP-04",
+            "formulation": "cKK-E12",
+            "payload": "Cre mRNA",
+            "dose": 1.0,
+            "dose_unit": "mg/kg",
+            "route": "intravenous lateral tail vein",
+            "species": "mice",
+            "model": "Ai14 Cre-reporter mice",
+            "target_cell": "Kupffer cells",
+        },
+        {
+            "candidate_id": "KUP-05",
+            "formulation": "MC3",
+            "payload": "Cre mRNA",
+            "dose": 0.3,
+            "dose_unit": "mg/kg",
+            "route": "intravenous lateral tail vein",
+            "species": "mice",
+            "model": "Ai14 Cre-reporter mice",
+            "target_cell": "Kupffer cells",
+        },
+        {
+            "candidate_id": "KUP-06",
+            "formulation": "cKK-E12",
+            "payload": "Cre mRNA",
+            "dose": 0.3,
+            "dose_unit": "mg/kg",
+            "route": "intravenous lateral tail vein",
+            "species": "mice",
+            "model": "Ai14 Cre-reporter mice",
+            "target_cell": "Kupffer cells",
+        },
+    ]
+
+
+def base_schema():
+    return CompactExtractionResponse.model_json_schema()
+
+
+def _arm_response():
+    arms = approved_arms()
+    formulations = [
+        {
+            "formulation_id": "F-MC3",
+            "formulation_name": _reported_value("MC3"),
+            "composition": _reported_value("lipids"),
+            "composition_basis": _reported_value("reported"),
+            "np_ratio": _reported_value(6.0),
+        },
+        {
+            "formulation_id": "F-cKK",
+            "formulation_name": _reported_value("cKK-E12 LNP"),
+            "composition": _reported_value("lipids"),
+            "composition_basis": _reported_value("reported"),
+            "np_ratio": _reported_value(6.0),
+        },
+    ]
+    experiments = []
+    outcomes = []
+    accounting = {}
+    for index, arm in enumerate(arms, start=1):
+        experiment_id = f"EXP-{index}"
+        outcome_id = f"OUT-{index}"
+        is_quant = arm["payload"] == "QUANT DNA"
+        experiments.append(
+            {
+                "experiment_id": experiment_id,
+                "formulation_id": "F-MC3" if arm["formulation"] == "MC3" else "F-cKK",
+                "payload_type": _reported_value("DNA" if is_quant else "mRNA"),
+                "payload_name": _reported_value(arm["payload"]),
+                "encoded_product": _reported_value("QUANT" if is_quant else "Cre"),
+                "molecular_target": _reported_value("Kupffer cells"),
+                "delivery_recipient_cell": _reported_value("Kupffer cells"),
+                "therapeutic_target_cell": _reported_value("Kupffer cells"),
+                "tissue_or_organ": _reported_value("liver"),
+                "species": _reported_value("mouse"),
+                "disease_model": _reported_value(arm["model"]),
+                "experimental_context": _reported_value("in_vivo"),
+                "dose": _reported_value(arm["dose"]),
+                "dose_unit": _reported_value("mg/kg"),
+                "route": _reported_value("IV"),
+                "timepoint": _reported_value(6.0 if is_quant else 3.0),
+                "timepoint_unit": _reported_value("hours" if is_quant else "days"),
+            }
+        )
+        outcomes.append(
+            {
+                "outcome_id": outcome_id,
+                "experiment_id": experiment_id,
+                "assay": _reported_value("ddPCR" if is_quant else "flow cytometry"),
+                "endpoint": _reported_value("QUANT copies" if is_quant else "tdTomato positive"),
+                "comparator": _reported_value("control"),
+                "outcome_value": _reported_value(float(index)),
+                "outcome_unit": _reported_value("percent"),
+                "qualitative_outcome": _reported_value("reported Kupffer-cell result"),
+            }
+        )
+        accounting[arm["candidate_id"]] = {
+            "disposition": "extracted",
+            "linked_experiment_ids": [experiment_id],
+            "linked_outcome_ids": [outcome_id],
+            "evidence_ids": ["E-ARM"],
+            "reason_code": "extracted",
+            "explanation": "The returned records match this approved arm.",
+        }
+    return {
+        "contract_version": "compact-1.1.0",
+        "paper_id": "NP-002",
+        "eligibility": {
+            "decision": "eligible",
+            "reason_codes": [
+                "ORIGINAL_EXPERIMENT",
+                "IDENTIFIABLE_LNP",
+                "SUPPORTED_PAYLOAD",
+                "TARGET_CELL_EVIDENCE",
+                "USABLE_FORMULATION_OUTCOME_LINKAGE",
+            ],
+            "evidence_ids": ["E-ARM"],
+            "explanation": "The controlled arm extraction is eligible.",
+        },
+        "formulations": formulations,
+        "components": [],
+        "experiments": experiments,
+        "outcomes": outcomes,
+        "unresolved_items": [],
+        "experimental_arm_accounting": accounting,
+    }
+
+
+def _error_codes(report):
+    return {row["code"] for row in report["errors"]}
+
+
+def test_dynamic_schema_requires_the_six_approved_arm_keys():
+    schema = build_experimental_arm_schema(base_schema(), approved_arms())
+
+    accounting = schema["properties"]["experimental_arm_accounting"]
+    assert accounting["required"] == [
+        "KUP-01",
+        "KUP-02",
+        "KUP-03",
+        "KUP-04",
+        "KUP-05",
+        "KUP-06",
+    ]
+    assert accounting["additionalProperties"] is False
+    for candidate_id in accounting["required"]:
+        assert accounting["properties"][candidate_id]["$ref"].endswith(
+            "ExperimentalArmAccountingEntry"
+        )
+
+
+def test_dynamic_schema_closes_entries_and_encodes_extracted_and_ambiguous_shapes():
+    schema = build_experimental_arm_schema(base_schema(), approved_arms())
+
+    entry = schema["$defs"]["ExperimentalArmAccountingEntry"]
+    assert entry["properties"]["disposition"]["enum"] == [
+        "extracted",
+        "ambiguous",
+    ]
+    variants = entry["oneOf"]
+    assert [variant["properties"]["disposition"] for variant in variants] == [
+        {"const": "extracted"},
+        {"const": "ambiguous"},
+    ]
+    assert variants[0]["properties"]["linked_experiment_ids"]["minItems"] == 1
+    assert variants[0]["properties"]["linked_outcome_ids"]["minItems"] == 1
+    assert variants[1]["properties"]["linked_experiment_ids"]["maxItems"] == 0
+    assert variants[1]["properties"]["reason_code"]["enum"] == [
+        "conflicting_evidence",
+        "candidate_not_grounded",
+    ]
+
+
+def test_validator_confirms_all_six_exact_arm_mappings():
+    report = validate_experimental_arm_response(
+        _arm_response(), approved_arms(), {"E-ARM"}
+    )
+
+    assert report == {
+        "sent": 6,
+        "accounted": 6,
+        "structurally_valid_extracted": 6,
+        "scientifically_confirmed": 6,
+        "ambiguous": 0,
+        "confirmed_candidate_ids": [
+            "KUP-01",
+            "KUP-02",
+            "KUP-03",
+            "KUP-04",
+            "KUP-05",
+            "KUP-06",
+        ],
+        "errors": [],
+    }
+
+
+@pytest.mark.parametrize("bad_disposition", ["duplicate", "invalid", "not_core", "insufficient_evidence"])
+def test_validator_rejects_unsupported_accounting_dispositions(bad_disposition):
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-01"]["disposition"] = bad_disposition
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "invalid_disposition" in _error_codes(report)
+
+
+@pytest.mark.parametrize("problem", ["missing", "invented", "repeated"])
+def test_validator_rejects_missing_invented_or_repeated_candidate_ids(problem):
+    response = _arm_response()
+    arms = approved_arms()
+    if problem == "missing":
+        response["experimental_arm_accounting"].pop("KUP-06")
+    elif problem == "invented":
+        response["experimental_arm_accounting"]["KUP-99"] = response[
+            "experimental_arm_accounting"
+        ]["KUP-06"]
+    else:
+        arms[-1]["candidate_id"] = "KUP-05"
+
+    report = validate_experimental_arm_response(response, arms, {"E-ARM"})
+
+    assert f"{problem}_candidate_ids" in _error_codes(report)
+
+
+def test_validator_rejects_extracted_entry_without_returned_record_links():
+    response = _arm_response()
+    entry = response["experimental_arm_accounting"]["KUP-01"]
+    entry["linked_experiment_ids"] = []
+    entry["linked_outcome_ids"] = []
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "extracted_requires_record_links" in _error_codes(report)
+
+
+@pytest.mark.parametrize(
+    ("path", "bad_value"),
+    [
+        (("formulations", 0, "formulation_name", "value"), "wrong LNP"),
+        (("experiments", 0, "payload_name", "value"), "wrong payload"),
+        (("experiments", 0, "payload_type", "value"), "mRNA"),
+        (("experiments", 0, "dose", "value"), 9.9),
+        (("experiments", 0, "delivery_recipient_cell", "value"), "hepatocyte"),
+        (("experiments", 0, "route", "value"), "intraperitoneal"),
+        (("experiments", 0, "disease_model", "value"), "wrong model"),
+    ],
+)
+def test_validator_rejects_scientific_identity_mismatches(path, bad_value):
+    response = _arm_response()
+    target = response
+    for key in path[:-1]:
+        target = target[key]
+    target[path[-1]] = bad_value
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "scientific_identity_mismatch" in _error_codes(report)
+
+
+@pytest.mark.parametrize(
+    ("candidate_id", "path", "bad_value", "expected_code"),
+    [
+        ("KUP-01", ("experiments", 0, "timepoint", "value"), 24.0, "quant_timepoint_required"),
+        ("KUP-01", ("outcomes", 0, "assay", "value"), "qPCR", "quant_ddpcr_required"),
+        ("KUP-03", ("experiments", 2, "timepoint", "value"), 6.0, "cre_timepoint_required"),
+        ("KUP-03", ("outcomes", 2, "endpoint", "value"), "GFP positive", "cre_tdtomato_flow_required"),
+    ],
+)
+def test_validator_requires_payload_specific_timepoint_and_measurement(
+    candidate_id, path, bad_value, expected_code
+):
+    response = _arm_response()
+    target = response
+    for key in path[:-1]:
+        target = target[key]
+    target[path[-1]] = bad_value
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert expected_code in _error_codes(report)
+    assert candidate_id not in report["confirmed_candidate_ids"]
+
+
+def test_validator_rejects_citations_outside_the_evidence_envelope():
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-01"]["evidence_ids"] = ["E-OUTSIDE"]
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "evidence_outside_envelope" in _error_codes(report)
+
+
+def test_validator_does_not_confirm_an_arm_with_a_core_citation_outside_envelope():
+    response = _arm_response()
+    response["outcomes"][0]["endpoint"]["evidence_ids"] = ["E-OUTSIDE"]
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "core_evidence_outside_envelope" in _error_codes(report)
+    assert "KUP-01" not in report["confirmed_candidate_ids"]
+
+
+def test_validator_rejects_one_outcome_reused_across_incompatible_arms():
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-02"]["linked_outcome_ids"] = ["OUT-1"]
+    response["experimental_arm_accounting"]["KUP-02"]["linked_experiment_ids"] = ["EXP-1"]
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "outcome_reused_across_incompatible_arms" in _error_codes(report)
+
+
+def test_validator_counts_ambiguous_candidate_as_accounted_but_not_confirmed():
+    response = _arm_response()
+    response["experimental_arm_accounting"]["KUP-06"] = {
+        "disposition": "ambiguous",
+        "linked_experiment_ids": [],
+        "linked_outcome_ids": [],
+        "evidence_ids": ["E-ARM"],
+        "reason_code": "candidate_not_grounded",
+        "explanation": "The evidence does not resolve the arm identity.",
+    }
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert report["accounted"] == 6
+    assert report["ambiguous"] == 1
+    assert report["scientifically_confirmed"] == 5
+    assert "KUP-06" not in report["confirmed_candidate_ids"]
+
+
+@pytest.mark.parametrize("candidate_id", ["KUP-01", "KUP-06"])
+def test_validator_requires_evidence_for_extracted_and_ambiguous_entries(candidate_id):
+    response = _arm_response()
+    if candidate_id == "KUP-06":
+        response["experimental_arm_accounting"][candidate_id] = {
+            "disposition": "ambiguous",
+            "linked_experiment_ids": [],
+            "linked_outcome_ids": [],
+            "evidence_ids": [],
+            "reason_code": "candidate_not_grounded",
+            "explanation": "The evidence does not resolve the arm identity.",
+        }
+    else:
+        response["experimental_arm_accounting"][candidate_id]["evidence_ids"] = []
+
+    report = validate_experimental_arm_response(response, approved_arms(), {"E-ARM"})
+
+    assert "accounting_evidence_required" in _error_codes(report)
