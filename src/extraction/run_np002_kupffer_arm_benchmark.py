@@ -514,6 +514,12 @@ def _validate_scoped_arm_response(
         approved_arms,
         union_envelope,
     )
+    structural_valid_ids = set(
+        report["structurally_valid_candidate_ids"]
+    )
+    scientifically_confirmed_ids = set(
+        report["confirmed_candidate_ids"]
+    )
     accounting = response.get("experimental_arm_accounting", {})
     formulations = {
         row.get("formulation_id"): row
@@ -530,7 +536,6 @@ def _validate_scoped_arm_response(
         for row in response.get("outcomes", [])
         if isinstance(row, dict)
     }
-    invalid_candidates: set[str] = set()
     for candidate_id, allowed in arm_evidence.items():
         entry = (
             accounting.get(candidate_id)
@@ -560,15 +565,10 @@ def _validate_scoped_arm_response(
                 )
         outside = sorted(used - allowed)
         if outside:
-            already_invalid = any(
-                error.get("candidate_id") == candidate_id
-                for error in report["errors"]
-            )
-            invalid_candidates.add(candidate_id)
+            structural_valid_ids.discard(candidate_id)
+            scientifically_confirmed_ids.discard(candidate_id)
             if entry.get("disposition") == "ambiguous":
-                report["ambiguous"] -= 1
-            elif not already_invalid:
-                report["structurally_valid_extracted"] -= 1
+                report["ambiguous"] = max(0, report["ambiguous"] - 1)
             report["errors"].append(
                 {
                     "code": "candidate_evidence_outside_arm_envelope",
@@ -580,13 +580,17 @@ def _validate_scoped_arm_response(
                     "evidence_ids": outside,
                 }
             )
-    report["confirmed_candidate_ids"] = [
-        candidate_id
-        for candidate_id in report["confirmed_candidate_ids"]
-        if candidate_id not in invalid_candidates
-    ]
+    report["structurally_valid_candidate_ids"] = sorted(
+        structural_valid_ids
+    )
+    report["structurally_valid_extracted"] = len(
+        structural_valid_ids
+    )
+    report["confirmed_candidate_ids"] = sorted(
+        scientifically_confirmed_ids
+    )
     report["scientifically_confirmed"] = len(
-        report["confirmed_candidate_ids"]
+        scientifically_confirmed_ids
     )
     return report
 

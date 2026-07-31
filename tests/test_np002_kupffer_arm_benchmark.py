@@ -702,6 +702,7 @@ def test_validation_cannot_confirm_arm_with_another_arms_evidence(tmp_path):
     assert "KUP-01" not in validation["confirmed_candidate_ids"]
     assert validation["scientifically_confirmed"] == 0
     assert validation["structurally_valid_extracted"] == 0
+    assert validation["structurally_valid_candidate_ids"] == []
     assert manifest["scientifically_confirmed"] == 0
     assert any(
         row["code"] == "candidate_evidence_outside_arm_envelope"
@@ -709,6 +710,61 @@ def test_validation_cannot_confirm_arm_with_another_arms_evidence(tmp_path):
         for row in validation["errors"]
     )
     assert len(responses.calls) == 1
+
+
+def test_scoped_envelope_double_failure_never_makes_count_negative(
+    tmp_path,
+):
+    from src.extraction.run_np002_kupffer_arm_benchmark import (
+        _validate_scoped_arm_response,
+    )
+
+    approved = _preflight(tmp_path)
+    request = json.loads(approved.request_path.read_text())
+    payload = json.loads(request["input"][1]["content"])
+    response = _wrong_arm_evidence_response(request)
+
+    def replace_evidence(value):
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key == "evidence_ids" and isinstance(item, list):
+                    value[key] = ["E-OUTSIDE"]
+                else:
+                    replace_evidence(item)
+        elif isinstance(value, list):
+            for item in value:
+                replace_evidence(item)
+
+    for key in (
+        "eligibility",
+        "formulations",
+        "components",
+        "experiments",
+        "outcomes",
+        "unresolved_items",
+    ):
+        replace_evidence(response[key])
+    approved_arms = [
+        arm_packet["arm"]
+        for arm_packet in payload["experimental_arm_packets"]
+    ]
+    arm_evidence = {
+        arm_packet["arm"]["candidate_id"]: {
+            row["evidence_id"] for row in arm_packet["evidence"]
+        }
+        for arm_packet in payload["experimental_arm_packets"]
+    }
+
+    report = _validate_scoped_arm_response(
+        response,
+        approved_arms,
+        arm_evidence,
+    )
+
+    assert report["structurally_valid_extracted"] == 0
+    assert report["structurally_valid_candidate_ids"] == []
+    assert report["scientifically_confirmed"] == 0
+    assert report["confirmed_candidate_ids"] == []
 
 
 def test_run_rejects_response_for_another_paper_before_completion(tmp_path):
