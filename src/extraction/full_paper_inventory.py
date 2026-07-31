@@ -163,20 +163,20 @@ def retrieval_tags(text: str) -> list[str]:
     return [tag for tag, pattern in _TAG_PATTERNS if pattern.search(text)]
 
 
-def _heading_path(values: list[str]) -> str:
-    return " > ".join(values) if values else "Unsectioned"
+def _heading_path(values: list[tuple[int, str]]) -> str:
+    return " > ".join(text for _, text in values) if values else "Unsectioned"
 
 
 def _replace_heading(
-    heading_path: list[str],
+    heading_path: list[tuple[int, str]],
     *,
     level: int,
     text: str,
 ) -> None:
     """Replace a source-native heading and retain any available ancestors."""
-    parent_count = max(level - 1, 0)
-    del heading_path[parent_count:]
-    heading_path.append(text)
+    while heading_path and heading_path[-1][0] >= level:
+        heading_path.pop()
+    heading_path.append((level, text))
 
 
 class _FullPaperHTMLParser(HTMLParser):
@@ -185,7 +185,7 @@ class _FullPaperHTMLParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.records: list[tuple[int, str, str]] = []
-        self._headings: list[str] = []
+        self._headings: list[tuple[int, str]] = []
         self._heading_tag: str | None = None
         self._heading_parts: list[str] = []
         self._capture_tag: str | None = None
@@ -372,7 +372,7 @@ def _docling_records(docling_path: Path) -> list[tuple[int, str, str]]:
     if not isinstance(document, dict):
         raise ValueError("Docling JSON root must be an object")
     records: list[tuple[int, str, str]] = []
-    headings: list[str] = []
+    headings: list[tuple[int, str]] = []
     for item in _iter_docling_items(document):
         label = str(item.get("label", "text")).casefold()
         text = normalize_block_text(str(item.get("text", "")))

@@ -19,6 +19,36 @@ def _write_pdf(path: Path, pages: list[list[str]]) -> None:
     document.save(path)
 
 
+def _write_docling(path: Path, text_items: list[dict[str, object]]) -> None:
+    texts = [
+        {
+            "self_ref": f"#/texts/{index}",
+            "prov": [{"page_no": 1}],
+            **item,
+        }
+        for index, item in enumerate(text_items)
+    ]
+    path.write_text(
+        json.dumps(
+            {
+                "schema_name": "DoclingDocument",
+                "version": "1.9.0",
+                "name": "paper",
+                "body": {
+                    "self_ref": "#/body",
+                    "children": [
+                        {"$ref": item["self_ref"]}
+                        for item in texts
+                    ],
+                },
+                "groups": [],
+                "texts": texts,
+                "tables": [],
+            }
+        )
+    )
+
+
 def test_html_preserves_arbitrary_nested_headings_and_content_types(
     tmp_path: Path,
 ):
@@ -78,6 +108,53 @@ def test_html_preserves_arbitrary_nested_headings_and_content_types(
         "Primary cells retained reporter activity.",
     ]
     assert {block.page_number for block in inventory.evidence_blocks} == {1}
+
+
+def test_html_same_level_h2_siblings_replace_without_an_h1_parent(
+    tmp_path: Path,
+):
+    """A compact stack must not treat a second parentless h2 as a child."""
+    html_path = tmp_path / "h2-siblings.html"
+    _write_html(
+        html_path,
+        """
+        <h2>First branch</h2>
+        <p>Evidence in the first branch.</p>
+        <h2>Second branch</h2>
+        <p>Evidence in the second branch.</p>
+        """,
+    )
+
+    inventory = build_full_paper_evidence("PAPER-HTML-H2", html_path)
+
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "First branch",
+        "Second branch",
+    ]
+
+
+def test_html_repeated_skipped_level_headings_replace_their_sibling(
+    tmp_path: Path,
+):
+    """Repeated h4 elements must remain siblings when h2 and h3 are absent."""
+    html_path = tmp_path / "skipped-level-siblings.html"
+    _write_html(
+        html_path,
+        """
+        <h1>Root section</h1>
+        <h4>First skipped-level branch</h4>
+        <p>Evidence in the first skipped-level branch.</p>
+        <h4>Second skipped-level branch</h4>
+        <p>Evidence in the second skipped-level branch.</p>
+        """,
+    )
+
+    inventory = build_full_paper_evidence("PAPER-HTML-SKIP", html_path)
+
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "Root section > First skipped-level branch",
+        "Root section > Second skipped-level branch",
+    ]
 
 
 def test_html_retains_numbered_list_scientific_evidence(tmp_path: Path):
@@ -190,6 +267,73 @@ def test_pdf_reuses_docling_text_order_heading_levels_and_page_provenance(
         "Unconventional Framework > Evaluation in living systems",
     ]
     assert [block.page_number for block in inventory.evidence_blocks] == [1, 3]
+
+
+def test_docling_same_level_h2_siblings_replace_without_a_level_one_parent(
+    tmp_path: Path,
+):
+    """A compact stack must not nest a second parentless level-two heading."""
+    pdf_path = tmp_path / "paper.pdf"
+    pdf_path.write_bytes(b"Docling structure is supplied; PDF is not opened.")
+    docling_path = tmp_path / "paper.docling.json"
+    _write_docling(
+        docling_path,
+        [
+            {"label": "section_header", "level": 2, "text": "First branch"},
+            {"label": "text", "text": "Evidence in the first branch."},
+            {"label": "section_header", "level": 2, "text": "Second branch"},
+            {"label": "text", "text": "Evidence in the second branch."},
+        ],
+    )
+
+    inventory = build_full_paper_evidence(
+        "PAPER-DOCLING-H2",
+        pdf_path,
+        docling_path=docling_path,
+    )
+
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "First branch",
+        "Second branch",
+    ]
+
+
+def test_docling_repeated_skipped_level_headings_replace_their_sibling(
+    tmp_path: Path,
+):
+    """Repeated level-four headings must be siblings without levels two and three."""
+    pdf_path = tmp_path / "paper.pdf"
+    pdf_path.write_bytes(b"Docling structure is supplied; PDF is not opened.")
+    docling_path = tmp_path / "paper.docling.json"
+    _write_docling(
+        docling_path,
+        [
+            {"label": "section_header", "level": 1, "text": "Root section"},
+            {
+                "label": "section_header",
+                "level": 4,
+                "text": "First skipped-level branch",
+            },
+            {"label": "text", "text": "Evidence in the first skipped-level branch."},
+            {
+                "label": "section_header",
+                "level": 4,
+                "text": "Second skipped-level branch",
+            },
+            {"label": "text", "text": "Evidence in the second skipped-level branch."},
+        ],
+    )
+
+    inventory = build_full_paper_evidence(
+        "PAPER-DOCLING-SKIP",
+        pdf_path,
+        docling_path=docling_path,
+    )
+
+    assert [block.heading for block in inventory.evidence_blocks] == [
+        "Root section > First skipped-level branch",
+        "Root section > Second skipped-level branch",
+    ]
 
 
 def test_raw_pdf_retains_numbered_text_without_heading_inference(tmp_path: Path):
