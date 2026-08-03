@@ -6,7 +6,7 @@ import json
 import os
 import stat
 import tempfile
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
@@ -22,6 +22,22 @@ from src.extraction.prepare_application_pilot import (
     _sha256,
 )
 from src.rag.compact_api_packet import estimate_tokens
+
+
+def _has_symlink_component(path: Path) -> bool:
+    """Inspect every existing path component without following symlinks."""
+
+    if not path.is_absolute():
+        return False
+    current = Path(path.anchor)
+    for part in path.parts[1:]:
+        current /= part
+        try:
+            if stat.S_ISLNK(os.lstat(current).st_mode):
+                return True
+        except FileNotFoundError:
+            continue
+    return False
 
 
 def _load_and_verify_manifest(
@@ -44,8 +60,8 @@ def _load_and_verify_manifest(
 
     if not manifest_path.is_absolute():
         raise ValueError("manifest path must be absolute")
-    if manifest_path.is_symlink():
-        raise ValueError("manifest path cannot be a symlink")
+    if _has_symlink_component(manifest_path):
+        raise ValueError("manifest path cannot contain a symlink")
     expected_manifest_path = manifest_path
     request_root = manifest.request_root
     run_root = manifest.run_root
@@ -55,8 +71,8 @@ def _load_and_verify_manifest(
     expected_run_root = manifest_path.parent / "run"
     if request_root != expected_request_root or run_root != expected_run_root:
         raise ValueError("manifest roots must be exact children of its directory")
-    if request_root.is_symlink() or run_root.is_symlink():
-        raise ValueError("manifest roots cannot be symlinks")
+    if _has_symlink_component(request_root) or _has_symlink_component(run_root):
+        raise ValueError("manifest roots cannot contain symlinks")
 
     listed_paths = {row.request_path for row in manifest.requests}
     for entry in request_root.rglob("*"):
@@ -80,8 +96,8 @@ def _load_and_verify_manifest(
             raise ValueError("approved request path must be absolute")
         if request_path.parent != request_root:
             raise ValueError("approved request path is outside the request root")
-        if request_path.is_symlink():
-            raise ValueError("approved request path cannot be a symlink")
+        if _has_symlink_component(request_path):
+            raise ValueError("approved request path cannot contain a symlink")
         try:
             request_bytes = request_path.read_bytes()
             request = json.loads(request_bytes)
@@ -110,6 +126,14 @@ def _load_and_verify_manifest(
                 f"approved request {row.request_id} has an incomplete source binding"
             )
         if row.source_artifact_path is not None:
+            if not row.source_artifact_path.is_absolute():
+                raise ValueError(
+                    f"approved request {row.request_id} source path must be absolute"
+                )
+            if _has_symlink_component(row.source_artifact_path):
+                raise ValueError(
+                    f"approved request {row.request_id} source path contains a symlink"
+                )
             try:
                 source_bytes = row.source_artifact_path.read_bytes()
             except OSError as exc:
@@ -125,8 +149,8 @@ def _load_and_verify_manifest(
     for binding in manifest.source_bindings:
         if not binding.path.is_absolute():
             raise ValueError("manifest source binding path must be absolute")
-        if binding.path.is_symlink():
-            raise ValueError("manifest source binding cannot be a symlink")
+        if _has_symlink_component(binding.path):
+            raise ValueError("manifest source binding cannot contain a symlink")
         try:
             source_bytes = binding.path.read_bytes()
         except OSError as exc:
@@ -202,9 +226,12 @@ def run_approved_manifest(
     approval_hash: str,
     *,
     client: Any | None = None,
+    client_factory: Callable[[], Any] | None = None,
 ) -> RunSummary:
     """Execute every and only approved request once, continuing after failures."""
 
+    if client is not None and client_factory is not None:
+        raise ValueError("provide either client or client_factory, not both")
     manifest, verified = _load_and_verify_manifest(
         Path(manifest_path), approval_hash
     )
@@ -218,13 +245,47 @@ def run_approved_manifest(
             }
         ),
     )
-    provider = client if client is not None else OpenAI(max_retries=0)
     attempted: list[str] = []
     succeeded: list[str] = []
     failed: list[str] = []
     response_paths: dict[str, Path] = {}
     error_paths: dict[str, Path] = {}
     provider_call_count = 0
+
+    if not verified:
+        summary = RunSummary(
+            manifest_path=Path(manifest_path),
+            approval_hash=approval_hash,
+            attempted_request_ids=[],
+            succeeded_request_ids=[],
+            failed_request_ids=[],
+            provider_call_count=0,
+            retry_count=0,
+            repair_count=0,
+            response_artifact_paths={},
+            error_artifact_paths={},
+        )
+        _atomic_create(
+            manifest.run_root / "summary.json",
+            _json_bytes(summary.model_dump(mode="json")),
+        )
+        return summary
+
+    run_marker = manifest.run_root / "run_started.json"
+    try:
+        provider = (
+            client
+            if client is not None
+            else client_factory()
+            if client_factory is not None
+            else OpenAI(max_retries=0)
+        )
+    except Exception:
+        try:
+            run_marker.unlink()
+        except FileNotFoundError:
+            pass
+        raise
 
     for row, request in verified:
         attempted.append(row.request_id)

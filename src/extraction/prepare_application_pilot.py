@@ -22,10 +22,10 @@ from src.extraction.full_paper_tasks import (
 from src.extraction.run_selective_vision import (
     VISION_PROMPT,
     _image_data,
-    load_task,
     response_schema,
     vision_fingerprint,
 )
+from src.extraction.selective_vision_contracts import SelectiveVisionTask
 from src.rag.compact_api_packet import estimate_tokens
 
 
@@ -121,13 +121,81 @@ class ApprovalManifest(StrictModel):
         if self.total_estimated_tokens != input_total + output_total:
             raise ValueError("manifest total estimated tokens do not match requests")
         kinds = {row.request_kind for row in self.requests}
+        bindings_by_kind: dict[
+            str, dict[str, list[SourceArtifactBinding]]
+        ] = {}
+        for binding in self.source_bindings:
+            bindings_by_kind.setdefault(binding.binding_kind, {}).setdefault(
+                binding.paper_id, []
+            ).append(binding)
+
+        def matching_binding(
+            row: ApprovalRequest, binding_kind: str
+        ) -> bool:
+            return any(
+                binding.path == row.source_artifact_path
+                and binding.sha256 == row.source_artifact_sha256
+                for binding in bindings_by_kind.get(binding_kind, {}).get(
+                    row.paper_id, []
+                )
+            )
+
         if self.gate == "map":
             if self.call_count != 3:
                 raise ValueError("map gate requires exactly three requests")
             if kinds != {"paper_map"}:
                 raise ValueError("map gate may contain only paper-map requests")
-        elif "paper_map" in kinds:
-            raise ValueError("downstream gate cannot contain paper-map requests")
+            paper_ids = {row.paper_id for row in self.requests}
+            if set(bindings_by_kind) != {"inventory"} or any(
+                len(rows) != 1
+                for rows in bindings_by_kind["inventory"].values()
+            ) or set(bindings_by_kind["inventory"]) != paper_ids:
+                raise ValueError("map manifest has invalid inventory topology")
+            if any(
+                not matching_binding(row, "inventory")
+                for row in self.requests
+            ):
+                raise ValueError("paper-map request lacks its inventory binding")
+        else:
+            if "paper_map" in kinds:
+                raise ValueError("downstream gate cannot contain paper-map requests")
+            maps = bindings_by_kind.get("map_artifact", {})
+            inventories = bindings_by_kind.get("inventory", {})
+            if (
+                not maps
+                or set(maps) != set(inventories)
+                or any(len(rows) != 1 for rows in maps.values())
+                or any(len(rows) != 1 for rows in inventories.values())
+            ):
+                raise ValueError(
+                    "downstream manifest requires one map and inventory binding "
+                    "per paper"
+                )
+            if any(row.paper_id not in maps for row in self.requests):
+                raise ValueError("downstream request paper lacks map topology")
+            for row in self.requests:
+                expected_kind = (
+                    "vision_task"
+                    if row.request_kind == "selective_vision"
+                    else "map_artifact"
+                )
+                if not matching_binding(row, expected_kind):
+                    raise ValueError(
+                        f"{row.request_kind} request lacks its {expected_kind} binding"
+                    )
+            vision_bindings = bindings_by_kind.get("vision_task", {})
+            vision_sources = {
+                (row.paper_id, row.source_artifact_path, row.source_artifact_sha256)
+                for row in self.requests
+                if row.request_kind == "selective_vision"
+            }
+            bound_vision_sources = {
+                (binding.paper_id, binding.path, binding.sha256)
+                for rows in vision_bindings.values()
+                for binding in rows
+            }
+            if vision_sources != bound_vision_sources:
+                raise ValueError("selective-vision binding topology is not exact")
         return self
 
 
@@ -379,6 +447,11 @@ def _map_artifact_inputs(
         if request_metadata.get("paper_id") != paper_map.paper_id:
             raise ValueError("map artifact paper_id does not match Gate-A binding")
     inventory_value = raw.get("inventory")
+    if request_metadata and inventory_value is not None:
+        raise ValueError(
+            "Gate-A response artifact cannot override its recorded inventory "
+            "with an embedded inventory"
+        )
     inventory_path_value = raw.get(
         "inventory_path", request_metadata.get("source_artifact_path")
     )
@@ -461,9 +534,19 @@ def _context_request(task: Any, model: str, max_output_tokens: int) -> dict[str,
 
 
 def _vision_request(
-    task_path: Path, model: str, expected_paper_id: str
+    task_path: Path,
+    model: str,
+    expected_paper_id: str,
+    *,
+    task_bytes: bytes | None = None,
 ) -> dict[str, Any]:
-    task = load_task(task_path)
+    exact_bytes = task_path.read_bytes() if task_bytes is None else task_bytes
+    task = SelectiveVisionTask.model_validate_json(exact_bytes)
+    unsigned = task.model_dump(mode="json", exclude={"task_checksum"})
+    if _sha256(_canonical_json(unsigned).encode("utf-8")) != task.task_checksum:
+        raise ValueError("Selective-vision task checksum mismatch")
+    if _sha256(Path(task.crop_path).read_bytes()) != task.crop_sha256:
+        raise ValueError("Selective-vision crop checksum mismatch")
     if task.paper_id != expected_paper_id:
         raise ValueError("selective vision task paper_id does not match map paper_id")
     return {
@@ -556,13 +639,20 @@ def prepare_downstream_gate(
                 )
             )
         for task_path in vision_paths:
-            request = _vision_request(task_path, model, paper_map.paper_id)
+            task_bytes = task_path.read_bytes()
+            task_sha256 = _sha256(task_bytes)
+            request = _vision_request(
+                task_path,
+                model,
+                paper_map.paper_id,
+                task_bytes=task_bytes,
+            )
             source_bindings.append(
                 SourceArtifactBinding(
                     binding_kind="vision_task",
                     paper_id=paper_map.paper_id,
                     path=task_path.resolve(),
-                    sha256=_sha256(task_path.read_bytes()),
+                    sha256=task_sha256,
                 )
             )
             requests.append(
@@ -573,9 +663,8 @@ def prepare_downstream_gate(
                     request=request,
                     request_root=request_root,
                     source_artifact_path=task_path,
-                    expected_source_artifact_sha256=(
-                        _sha256(task_path.read_bytes())
-                    ),
+                    expected_source_artifact_sha256=task_sha256,
+                    source_change_label="vision task",
                 )
             )
     return _write_manifest(

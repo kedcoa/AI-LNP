@@ -483,3 +483,343 @@ def test_gate_b_rejects_cross_paper_selective_vision_task(tmp_path: Path) -> Non
 
     with pytest.raises(ValueError, match="vision.*paper"):
         prepare_downstream_gate([map_artifact], tmp_path / "gate-b")
+
+
+def _zero_call_downstream(tmp_path: Path) -> tuple[object, Path, Path]:
+    inventory_path = _inventory(tmp_path / "zero-inventory.json", "ZERO-PAPER")
+    map_artifact = tmp_path / "zero-map.json"
+    map_artifact.write_text(
+        json.dumps(
+            {
+                "paper_map": _empty_paper_map("ZERO-PAPER"),
+                "inventory_path": str(inventory_path),
+                "model": "fake-model",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return (
+        prepare_downstream_gate([map_artifact], tmp_path / "zero-gate"),
+        map_artifact,
+        inventory_path,
+    )
+
+
+def test_gate_a_artifact_cannot_bypass_inventory_hash_with_embedded_inventory(
+    tmp_path: Path,
+) -> None:
+    inventory_path = _inventory(tmp_path / "inventory.json", "P-1")
+    recorded_hash = hashlib.sha256(inventory_path.read_bytes()).hexdigest()
+    embedded = FullPaperEvidenceInventory.model_validate_json(
+        inventory_path.read_text(encoding="utf-8")
+    ).model_copy(update={"source_pdf": "embedded-changed.pdf"})
+    artifact = tmp_path / "response.json"
+    artifact.write_text(
+        json.dumps(
+            {
+                "approval_request": {
+                    "request_id": "REQ-1",
+                    "paper_id": "P-1",
+                    "request_kind": "paper_map",
+                    "request_path": str(tmp_path / "request.json"),
+                    "request_sha256": "1" * 64,
+                    "model": "fake-model",
+                    "estimated_input_tokens": 100,
+                    "max_output_tokens": 500,
+                    "source_artifact_path": str(inventory_path.resolve()),
+                    "source_artifact_sha256": recorded_hash,
+                },
+                "response": {"output_text": json.dumps(_empty_paper_map("P-1"))},
+                "inventory": embedded.model_dump(mode="json"),
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="embedded inventory|Gate-A"):
+        prepare_downstream_gate([artifact], tmp_path / "gate-b")
+
+
+@pytest.mark.parametrize("binding_kind", ["inventory", "vision_task"])
+def test_runner_rejects_removed_required_downstream_binding(
+    tmp_path: Path, binding_kind: str
+) -> None:
+    if binding_kind == "inventory":
+        manifest, _, _ = _zero_call_downstream(tmp_path)
+    else:
+        _build_task(tmp_path)
+        inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+        artifact = tmp_path / "map.json"
+        artifact.write_text(
+            json.dumps(
+                {
+                    "paper_map": _empty_paper_map("GP-TEST"),
+                    "inventory_path": str(inventory_path),
+                    "model": "fake-model",
+                    "selective_vision_task_paths": [
+                        str(
+                            tmp_path
+                            / "tasks"
+                            / "GP-TEST"
+                            / "VF-VISION"
+                            / "task.json"
+                        )
+                    ],
+                }
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        manifest = prepare_downstream_gate([artifact], tmp_path / "gate-b")
+    raw = json.loads(manifest.manifest_path.read_text(encoding="utf-8"))
+    raw["source_bindings"] = [
+        row
+        for row in raw["source_bindings"]
+        if row["binding_kind"] != binding_kind
+    ]
+    approval = _rewrite_approved_manifest(
+        manifest.manifest_path, source_bindings=raw["source_bindings"]
+    )
+    provider = _FakeProvider()
+
+    with pytest.raises(ValueError, match="manifest|topology|binding"):
+        run_approved_manifest(manifest.manifest_path, approval, client=provider)
+    assert provider.responses.calls == []
+
+
+def test_vision_task_mutation_during_request_build_is_rejected(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _build_task(tmp_path)
+    task_path = tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json"
+    inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+    artifact = tmp_path / "map.json"
+    artifact.write_text(
+        json.dumps(
+            {
+                "paper_map": _empty_paper_map("GP-TEST"),
+                "inventory_path": str(inventory_path),
+                "model": "fake-model",
+                "selective_vision_task_paths": [str(task_path)],
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    real_builder = pilot_preparation._vision_request
+
+    def mutating_builder(*args: object, **kwargs: object) -> object:
+        request = real_builder(*args, **kwargs)
+        task_path.write_text("{}\n", encoding="utf-8")
+        return request
+
+    monkeypatch.setattr(pilot_preparation, "_vision_request", mutating_builder)
+
+    with pytest.raises(ValueError, match="vision task bytes changed"):
+        prepare_downstream_gate([artifact], tmp_path / "gate-b")
+
+
+@pytest.mark.parametrize("changed_source", ["map", "inventory", "vision_task"])
+def test_zero_or_vision_only_gate_rechecks_sources_after_preparation(
+    tmp_path: Path, changed_source: str
+) -> None:
+    if changed_source in {"map", "inventory"}:
+        manifest, map_artifact, inventory_path = _zero_call_downstream(tmp_path)
+        changed_path = map_artifact if changed_source == "map" else inventory_path
+    else:
+        _build_task(tmp_path)
+        task_path = tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json"
+        inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+        artifact = tmp_path / "map.json"
+        artifact.write_text(
+            json.dumps(
+                {
+                    "paper_map": _empty_paper_map("GP-TEST"),
+                    "inventory_path": str(inventory_path),
+                    "model": "fake-model",
+                    "selective_vision_task_paths": [str(task_path)],
+                }
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        manifest = prepare_downstream_gate([artifact], tmp_path / "gate-b")
+        changed_path = task_path
+    changed_path.write_text("{}\n", encoding="utf-8")
+    provider = _FakeProvider()
+
+    with pytest.raises(ValueError, match="source artifact changed"):
+        run_approved_manifest(
+            manifest.manifest_path, manifest.approval_hash, client=provider
+        )
+    assert provider.responses.calls == []
+
+
+def test_runner_rejects_manifest_request_root_ancestor_symlink(
+    tmp_path: Path,
+) -> None:
+    real_gate = tmp_path / "real-gate"
+    manifest = prepare_map_gate(_papers(tmp_path), real_gate)
+    alias_gate = tmp_path / "alias-gate"
+    alias_gate.symlink_to(real_gate, target_is_directory=True)
+    raw = json.loads(manifest.manifest_path.read_text(encoding="utf-8"))
+    raw["manifest_path"] = str(alias_gate / "manifest.json")
+    raw["request_root"] = str(alias_gate / "requests")
+    raw["run_root"] = str(alias_gate / "run")
+    for row in raw["requests"]:
+        row["request_path"] = str(alias_gate / "requests" / Path(row["request_path"]).name)
+    approval = _rewrite_approved_manifest(
+        manifest.manifest_path,
+        manifest_path=raw["manifest_path"],
+        request_root=raw["request_root"],
+        run_root=raw["run_root"],
+        requests=raw["requests"],
+    )
+    provider = _FakeProvider()
+
+    with pytest.raises(ValueError, match="symlink"):
+        run_approved_manifest(alias_gate / "manifest.json", approval, client=provider)
+    assert provider.responses.calls == []
+
+
+def test_runner_rejects_source_binding_ancestor_symlink(tmp_path: Path) -> None:
+    inputs = tmp_path / "inputs"
+    inputs.mkdir()
+    papers = _papers(inputs)
+    manifest = prepare_map_gate(papers, tmp_path / "gate-a")
+    alias = tmp_path / "inputs-alias"
+    alias.symlink_to(inputs, target_is_directory=True)
+    raw = json.loads(manifest.manifest_path.read_text(encoding="utf-8"))
+    for binding in raw["source_bindings"]:
+        binding["path"] = str(alias / Path(binding["path"]).name)
+    for row in raw["requests"]:
+        row["source_artifact_path"] = str(
+            alias / Path(row["source_artifact_path"]).name
+        )
+    approval = _rewrite_approved_manifest(
+        manifest.manifest_path,
+        source_bindings=raw["source_bindings"],
+        requests=raw["requests"],
+    )
+    provider = _FakeProvider()
+
+    with pytest.raises(ValueError, match="symlink"):
+        run_approved_manifest(manifest.manifest_path, approval, client=provider)
+    assert provider.responses.calls == []
+
+
+@pytest.mark.parametrize("artifact_name", ["response.json", "error.json", "summary.json"])
+def test_runner_never_overwrites_existing_terminal_artifacts(
+    tmp_path: Path, artifact_name: str
+) -> None:
+    manifest = prepare_map_gate(_papers(tmp_path), tmp_path / "gate-a")
+    collision = (
+        manifest.run_root / artifact_name
+        if artifact_name == "summary.json"
+        else manifest.run_root / "REQ-1" / artifact_name
+    )
+    collision.parent.mkdir(parents=True, exist_ok=True)
+    collision.write_text("sentinel\n", encoding="utf-8")
+    provider = _FakeProvider()
+
+    with pytest.raises(FileExistsError):
+        run_approved_manifest(
+            manifest.manifest_path, manifest.approval_hash, client=provider
+        )
+    assert collision.read_text(encoding="utf-8") == "sentinel\n"
+    assert provider.responses.calls == []
+
+
+def test_zero_call_manifest_writes_summary_without_constructing_client(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    manifest, _, _ = _zero_call_downstream(tmp_path)
+
+    class ProviderMustNotConstruct:
+        def __init__(self, **kwargs: object) -> None:
+            raise AssertionError("zero-call manifest constructed a provider")
+
+    monkeypatch.setattr(pilot_runner, "OpenAI", ProviderMustNotConstruct)
+
+    summary = run_approved_manifest(
+        manifest.manifest_path, manifest.approval_hash
+    )
+
+    assert summary.provider_call_count == 0
+    assert summary.attempted_request_ids == []
+    assert (manifest.run_root / "summary.json").exists()
+
+
+def test_client_construction_failure_releases_zero_attempt_run_marker(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    manifest = prepare_map_gate(_papers(tmp_path), tmp_path / "gate-a")
+    provider = _FakeProvider()
+    constructions = 0
+
+    def client_factory(**kwargs: object) -> object:
+        nonlocal constructions
+        constructions += 1
+        if constructions == 1:
+            raise RuntimeError("client construction failed")
+        return provider
+
+    monkeypatch.setattr(pilot_runner, "OpenAI", client_factory)
+
+    with pytest.raises(RuntimeError, match="client construction failed"):
+        run_approved_manifest(manifest.manifest_path, manifest.approval_hash)
+    assert not (manifest.run_root / "run_started.json").exists()
+
+    summary = run_approved_manifest(manifest.manifest_path, manifest.approval_hash)
+    assert summary.provider_call_count == 3
+    assert len(provider.responses.calls) == 3
+
+
+def test_injected_client_factory_failure_does_not_consume_approval(
+    tmp_path: Path,
+) -> None:
+    manifest = prepare_map_gate(_papers(tmp_path), tmp_path / "gate-a")
+    provider = _FakeProvider()
+    constructions = 0
+
+    def factory() -> object:
+        nonlocal constructions
+        constructions += 1
+        if constructions == 1:
+            raise RuntimeError("injected construction failed")
+        return provider
+
+    with pytest.raises(RuntimeError, match="injected construction failed"):
+        run_approved_manifest(
+            manifest.manifest_path,
+            manifest.approval_hash,
+            client_factory=factory,
+        )
+    assert not (manifest.run_root / "run_started.json").exists()
+
+    summary = run_approved_manifest(
+        manifest.manifest_path,
+        manifest.approval_hash,
+        client_factory=factory,
+    )
+    assert summary.provider_call_count == 3
+
+
+def test_provider_attempt_permanently_consumes_run_marker(tmp_path: Path) -> None:
+    manifest = prepare_map_gate(_papers(tmp_path), tmp_path / "gate-a")
+    provider = _FakeProvider(fail_index=1)
+
+    summary = run_approved_manifest(
+        manifest.manifest_path, manifest.approval_hash, client=provider
+    )
+
+    assert summary.provider_call_count == 3
+    assert (manifest.run_root / "run_started.json").exists()
+    with pytest.raises(FileExistsError):
+        run_approved_manifest(
+            manifest.manifest_path,
+            manifest.approval_hash,
+            client=_FakeProvider(),
+        )
