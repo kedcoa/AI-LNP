@@ -353,6 +353,7 @@ def _issued_experiments(
                     envelopes.get(candidate_id)
                 ),
                 scientific_identity=_scientific_identity(candidate),
+                check_evidence_metadata=True,
                 source=f"paper_map.context_tasks[{task_index}]",
             )
 
@@ -411,6 +412,7 @@ def _issued_experiments(
                     and isinstance(task_inventory.get(experiment_id), Mapping)
                     else None
                 ),
+                check_evidence_metadata=True,
                 source=f"paper_map.visual_tasks[{task_index}]",
             )
             issuance = issued[experiment_id]

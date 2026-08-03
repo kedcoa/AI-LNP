@@ -603,3 +603,105 @@ def test_same_candidate_duplicate_with_conflicting_evidence_is_disabled() -> Non
     assert result.quarantined_conflicts[0].code == (
         "duplicate_issued_experiment_id"
     )
+
+
+def test_context_task_duplicate_with_conflicting_envelope_is_disabled() -> None:
+    candidate = _candidate(
+        experiment_id="EXP-DUP",
+        candidate_id="CTX-A",
+        provisional_context_id="CTX-A",
+    ).model_dump(mode="json")
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "context_tasks": [
+            {
+                "candidates": [candidate],
+                "candidate_evidence_envelopes": {"CTX-A": ["E-A"]},
+            },
+            {
+                "candidates": [candidate],
+                "candidate_evidence_envelopes": {"CTX-A": ["E-B"]},
+            },
+        ],
+    }
+
+    result = merge_full_paper_results(
+        paper_map, [_text_for("EXP-DUP")], []
+    )
+
+    assert result.experiments == []
+    assert result.quarantined_conflicts[0].code == (
+        "duplicate_issued_experiment_id"
+    )
+
+
+def test_visual_task_duplicate_with_conflicting_envelope_is_disabled() -> None:
+    inventory = {
+        "EXP-DUP": {
+            "experiment_id": "EXP-DUP",
+            "candidate_id": "CTX-A",
+        }
+    }
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "visual_tasks": [
+            {
+                "experiment_inventory": inventory,
+                "allowed_evidence_ids": ["E-A"],
+                "experiment_evidence_envelopes": {"EXP-DUP": ["E-A"]},
+            },
+            {
+                "experiment_inventory": inventory,
+                "allowed_evidence_ids": ["E-B"],
+                "experiment_evidence_envelopes": {"EXP-DUP": ["E-B"]},
+            },
+        ],
+    }
+
+    result = merge_full_paper_results(
+        paper_map, [], [_vision_for("EXP-DUP")]
+    )
+
+    assert result.experiments == []
+    assert result.quarantined_conflicts[0].code == (
+        "duplicate_issued_experiment_id"
+    )
+
+
+def test_repeated_identical_task_envelopes_remain_valid() -> None:
+    candidate = _candidate(
+        experiment_id="EXP-A",
+        candidate_id="CTX-A",
+        provisional_context_id="CTX-A",
+    ).model_dump(mode="json")
+    inventory = {
+        "EXP-A": {
+            "experiment_id": "EXP-A",
+            "candidate_id": "CTX-A",
+        }
+    }
+    context_task = {
+        "candidates": [candidate],
+        "candidate_evidence_envelopes": {"CTX-A": ["E-TEXT"]},
+    }
+    visual_task = {
+        "experiment_inventory": inventory,
+        "allowed_evidence_ids": ["E-VISUAL"],
+        "experiment_evidence_envelopes": {"EXP-A": ["E-VISUAL"]},
+    }
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "context_tasks": [deepcopy(context_task), deepcopy(context_task)],
+        "visual_tasks": [deepcopy(visual_task), deepcopy(visual_task)],
+    }
+
+    result = merge_full_paper_results(
+        paper_map, [_text_for("EXP-A")], [_vision_for("EXP-A")]
+    )
+
+    assert len(result.experiments) == 1
+    assert result.experiments[0].facts[0].evidence_ids == [
+        "E-TEXT",
+        "E-VISUAL",
+    ]
+    assert result.quarantined_conflicts == []
