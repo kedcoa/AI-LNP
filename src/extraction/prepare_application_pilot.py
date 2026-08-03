@@ -145,11 +145,18 @@ class ApprovalManifest(StrictModel):
                 raise ValueError("map gate requires exactly three requests")
             if kinds != {"paper_map"}:
                 raise ValueError("map gate may contain only paper-map requests")
-            paper_ids = {row.paper_id for row in self.requests}
+            request_paper_ids = [row.paper_id for row in self.requests]
+            paper_ids = set(request_paper_ids)
+            if len(request_paper_ids) != len(paper_ids):
+                raise ValueError(
+                    "map manifest requires one unique paper per request"
+                )
             if set(bindings_by_kind) != {"inventory"} or any(
                 len(rows) != 1
                 for rows in bindings_by_kind["inventory"].values()
-            ) or set(bindings_by_kind["inventory"]) != paper_ids:
+            ) or len(bindings_by_kind["inventory"]) != len(self.requests) or set(
+                bindings_by_kind["inventory"]
+            ) != paper_ids:
                 raise ValueError("map manifest has invalid inventory topology")
             if any(
                 not matching_binding(row, "inventory")

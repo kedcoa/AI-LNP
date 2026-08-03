@@ -12,6 +12,7 @@ import src.extraction.prepare_application_pilot as pilot_preparation
 import src.extraction.run_application_pilot as pilot_runner
 from src.extraction.full_paper_inventory import FullPaperEvidenceInventory
 from src.extraction.prepare_application_pilot import (
+    ApprovalManifest,
     PilotPaper,
     prepare_downstream_gate,
     prepare_map_gate,
@@ -823,3 +824,21 @@ def test_provider_attempt_permanently_consumes_run_marker(tmp_path: Path) -> Non
             manifest.approval_hash,
             client=_FakeProvider(),
         )
+
+
+def test_gate_a_manifest_rejects_three_requests_for_one_paper(
+    tmp_path: Path,
+) -> None:
+    manifest = prepare_map_gate(_papers(tmp_path), tmp_path / "gate-a")
+    raw = manifest.model_dump(mode="json")
+    first_request = raw["requests"][0]
+    for request in raw["requests"]:
+        request["paper_id"] = first_request["paper_id"]
+        request["source_artifact_path"] = first_request["source_artifact_path"]
+        request["source_artifact_sha256"] = first_request[
+            "source_artifact_sha256"
+        ]
+    raw["source_bindings"] = [raw["source_bindings"][0]]
+
+    with pytest.raises(ValueError, match="unique|one.*one|topology"):
+        ApprovalManifest.model_validate(raw)
