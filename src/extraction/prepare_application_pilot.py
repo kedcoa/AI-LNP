@@ -67,6 +67,15 @@ class ApprovalRequest(StrictModel):
     )
 
 
+class SourceArtifactBinding(StrictModel):
+    """One exact local input independently bound by an approval manifest."""
+
+    binding_kind: Literal["inventory", "map_artifact", "vision_task"]
+    paper_id: str = Field(min_length=1)
+    path: Path
+    sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
 class ApprovalManifest(StrictModel):
     """Complete immutable accounting for one approval gate."""
 
@@ -78,6 +87,7 @@ class ApprovalManifest(StrictModel):
     request_root: Path
     run_root: Path
     requests: list[ApprovalRequest]
+    source_bindings: list[SourceArtifactBinding]
     call_count: int = Field(ge=0)
     total_estimated_input_tokens: int = Field(ge=0)
     total_max_output_tokens: int = Field(ge=0)
@@ -94,6 +104,12 @@ class ApprovalManifest(StrictModel):
             raise ValueError("approval request IDs must be unique")
         if len(request_paths) != len(set(request_paths)):
             raise ValueError("approval request paths must be unique")
+        binding_keys = [
+            (row.binding_kind, row.paper_id, row.path)
+            for row in self.source_bindings
+        ]
+        if len(binding_keys) != len(set(binding_keys)):
+            raise ValueError("manifest source bindings must be unique")
         if self.call_count != len(self.requests):
             raise ValueError("manifest call_count must equal its request count")
         input_total = sum(row.estimated_input_tokens for row in self.requests)
@@ -177,6 +193,7 @@ def _freeze_request(
     request_root: Path,
     source_artifact_path: Path | None,
     expected_source_artifact_sha256: str | None = None,
+    source_change_label: str = "map artifact",
 ) -> ApprovalRequest:
     request_id = f"REQ-{index}"
     request_path = (request_root / f"{request_id}.json").resolve()
@@ -195,7 +212,14 @@ def _freeze_request(
             expected_source_artifact_sha256 is not None
             and source_sha256 != expected_source_artifact_sha256
         ):
-            raise ValueError("map artifact bytes changed during task construction")
+            phase = (
+                "task construction"
+                if source_change_label == "map artifact"
+                else "request construction"
+            )
+            raise ValueError(
+                f"{source_change_label} bytes changed during {phase}"
+            )
     return ApprovalRequest(
         request_id=request_id,
         paper_id=paper_id,
@@ -217,6 +241,7 @@ def _write_manifest(
     gate: Literal["map", "downstream"],
     output_root: Path,
     requests: list[ApprovalRequest],
+    source_bindings: list[SourceArtifactBinding],
 ) -> ApprovalManifest:
     root = output_root.resolve()
     manifest_path = root / "manifest.json"
@@ -227,6 +252,9 @@ def _write_manifest(
         "request_root": root / "requests",
         "run_root": root / "run",
         "requests": [row.model_dump(mode="json") for row in requests],
+        "source_bindings": [
+            row.model_dump(mode="json") for row in source_bindings
+        ],
         "call_count": len(requests),
         "total_estimated_input_tokens": sum(
             row.estimated_input_tokens for row in requests
@@ -265,12 +293,22 @@ def prepare_map_gate(
         raise ValueError("map gate requires three distinct paper IDs")
     request_root = output_root.resolve() / "requests"
     requests: list[ApprovalRequest] = []
+    source_bindings: list[SourceArtifactBinding] = []
     for index, paper in enumerate(parsed_papers, start=1):
-        inventory = FullPaperEvidenceInventory.model_validate_json(
-            paper.inventory_path.read_text(encoding="utf-8")
-        )
+        inventory_path = paper.inventory_path.resolve()
+        inventory_bytes = inventory_path.read_bytes()
+        inventory_sha256 = _sha256(inventory_bytes)
+        inventory = FullPaperEvidenceInventory.model_validate_json(inventory_bytes)
         if inventory.paper_id != paper.paper_id:
             raise ValueError("pilot paper ID does not match its inventory")
+        source_bindings.append(
+            SourceArtifactBinding(
+                binding_kind="inventory",
+                paper_id=paper.paper_id,
+                path=inventory_path,
+                sha256=inventory_sha256,
+            )
+        )
         prepared = build_paper_map_request(
             inventory, model=paper.model, token_budget=paper.token_budget
         )
@@ -282,10 +320,17 @@ def prepare_map_gate(
                 request_kind="paper_map",
                 request=request,
                 request_root=request_root,
-                source_artifact_path=paper.inventory_path,
+                source_artifact_path=inventory_path,
+                expected_source_artifact_sha256=inventory_sha256,
+                source_change_label="inventory",
             )
         )
-    return _write_manifest(gate="map", output_root=output_root, requests=requests)
+    return _write_manifest(
+        gate="map",
+        output_root=output_root,
+        requests=requests,
+        source_bindings=source_bindings,
+    )
 
 
 def _extract_output_text(value: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -317,6 +362,8 @@ def _map_artifact_inputs(
     int,
     list[Path],
     str,
+    Path,
+    str,
 ]:
     artifact_bytes = artifact_path.read_bytes()
     raw = json.loads(artifact_bytes)
@@ -326,16 +373,31 @@ def _map_artifact_inputs(
     request_metadata = raw.get("approval_request", {})
     if not isinstance(request_metadata, Mapping):
         raise ValueError("map artifact approval_request must be an object")
+    if request_metadata:
+        if request_metadata.get("request_kind") != "paper_map":
+            raise ValueError("map artifact is not bound to a paper-map request")
+        if request_metadata.get("paper_id") != paper_map.paper_id:
+            raise ValueError("map artifact paper_id does not match Gate-A binding")
     inventory_value = raw.get("inventory")
     inventory_path_value = raw.get(
         "inventory_path", request_metadata.get("source_artifact_path")
     )
     if inventory_value is not None:
         inventory = FullPaperEvidenceInventory.model_validate(inventory_value)
+        inventory_binding_path = artifact_path.resolve()
+        inventory_sha256 = _sha256(artifact_bytes)
     elif isinstance(inventory_path_value, str) and inventory_path_value:
-        inventory = FullPaperEvidenceInventory.model_validate_json(
-            Path(inventory_path_value).read_text(encoding="utf-8")
-        )
+        inventory_binding_path = Path(inventory_path_value).resolve()
+        inventory_bytes = inventory_binding_path.read_bytes()
+        inventory_sha256 = _sha256(inventory_bytes)
+        recorded_path = request_metadata.get("source_artifact_path")
+        recorded_sha256 = request_metadata.get("source_artifact_sha256")
+        if request_metadata and (
+            recorded_path != str(inventory_binding_path)
+            or recorded_sha256 != inventory_sha256
+        ):
+            raise ValueError("inventory path or hash does not match Gate-A binding")
+        inventory = FullPaperEvidenceInventory.model_validate_json(inventory_bytes)
     else:
         raise ValueError("map artifact is missing its evidence inventory binding")
     if inventory.paper_id != paper_map.paper_id:
@@ -362,6 +424,8 @@ def _map_artifact_inputs(
         max_output_tokens,
         [Path(row) for row in vision_paths],
         _sha256(artifact_bytes),
+        inventory_binding_path,
+        inventory_sha256,
     )
 
 
@@ -396,8 +460,12 @@ def _context_request(task: Any, model: str, max_output_tokens: int) -> dict[str,
     }
 
 
-def _vision_request(task_path: Path, model: str) -> dict[str, Any]:
+def _vision_request(
+    task_path: Path, model: str, expected_paper_id: str
+) -> dict[str, Any]:
     task = load_task(task_path)
+    if task.paper_id != expected_paper_id:
+        raise ValueError("selective vision task paper_id does not match map paper_id")
     return {
         "model": model,
         "reasoning": {"effort": "low"},
@@ -445,6 +513,7 @@ def prepare_downstream_gate(
 
     request_root = output_root.resolve() / "requests"
     requests: list[ApprovalRequest] = []
+    source_bindings: list[SourceArtifactBinding] = []
     for artifact_path in map_artifacts:
         (
             paper_map,
@@ -454,7 +523,25 @@ def prepare_downstream_gate(
             max_output_tokens,
             vision_paths,
             map_artifact_sha256,
+            inventory_binding_path,
+            inventory_sha256,
         ) = _map_artifact_inputs(Path(artifact_path))
+        source_bindings.extend(
+            [
+                SourceArtifactBinding(
+                    binding_kind="map_artifact",
+                    paper_id=paper_map.paper_id,
+                    path=Path(artifact_path).resolve(),
+                    sha256=map_artifact_sha256,
+                ),
+                SourceArtifactBinding(
+                    binding_kind="inventory",
+                    paper_id=paper_map.paper_id,
+                    path=inventory_binding_path,
+                    sha256=inventory_sha256,
+                ),
+            ]
+        )
         for task in build_context_tasks(paper_map, inventory, token_budget):
             request = _context_request(task, model, max_output_tokens)
             requests.append(
@@ -469,7 +556,15 @@ def prepare_downstream_gate(
                 )
             )
         for task_path in vision_paths:
-            request = _vision_request(task_path, model)
+            request = _vision_request(task_path, model, paper_map.paper_id)
+            source_bindings.append(
+                SourceArtifactBinding(
+                    binding_kind="vision_task",
+                    paper_id=paper_map.paper_id,
+                    path=task_path.resolve(),
+                    sha256=_sha256(task_path.read_bytes()),
+                )
+            )
             requests.append(
                 _freeze_request(
                     index=len(requests) + 1,
@@ -484,5 +579,8 @@ def prepare_downstream_gate(
                 )
             )
     return _write_manifest(
-        gate="downstream", output_root=output_root, requests=requests
+        gate="downstream",
+        output_root=output_root,
+        requests=requests,
+        source_bindings=source_bindings,
     )

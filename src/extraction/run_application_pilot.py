@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import os
+import stat
+import tempfile
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -15,7 +17,6 @@ from src.extraction.prepare_application_pilot import (
     ApprovalManifest,
     ApprovalRequest,
     RunSummary,
-    _atomic_write,
     _canonical_json,
     _json_bytes,
     _sha256,
@@ -41,17 +42,31 @@ def _load_and_verify_manifest(
     if approval_hash != manifest.approval_hash or computed_hash != approval_hash:
         raise PermissionError("approval hash does not match canonical manifest content")
 
-    resolved_manifest_path = manifest_path.resolve()
-    request_root = manifest.request_root.resolve()
-    run_root = manifest.run_root.resolve()
-    if manifest.manifest_path.resolve() != resolved_manifest_path:
+    if not manifest_path.is_absolute():
+        raise ValueError("manifest path must be absolute")
+    if manifest_path.is_symlink():
+        raise ValueError("manifest path cannot be a symlink")
+    expected_manifest_path = manifest_path
+    request_root = manifest.request_root
+    run_root = manifest.run_root
+    if manifest.manifest_path != expected_manifest_path:
         raise ValueError("manifest path binding does not match the approved manifest")
-    if not request_root.is_absolute() or not run_root.is_absolute():
-        raise ValueError("manifest request and run roots must be absolute")
+    expected_request_root = manifest_path.parent / "requests"
+    expected_run_root = manifest_path.parent / "run"
+    if request_root != expected_request_root or run_root != expected_run_root:
+        raise ValueError("manifest roots must be exact children of its directory")
+    if request_root.is_symlink() or run_root.is_symlink():
+        raise ValueError("manifest roots cannot be symlinks")
 
-    listed_paths = {row.request_path.resolve() for row in manifest.requests}
+    listed_paths = {row.request_path for row in manifest.requests}
+    for entry in request_root.rglob("*"):
+        try:
+            if stat.S_ISLNK(os.lstat(entry).st_mode):
+                raise ValueError("request directory cannot contain symlinks")
+        except FileNotFoundError as exc:
+            raise ValueError("request directory changed during validation") from exc
     actual_paths = {
-        path.resolve()
+        path
         for path in request_root.rglob("*")
         if path.is_file()
     }
@@ -60,9 +75,13 @@ def _load_and_verify_manifest(
 
     verified: list[tuple[ApprovalRequest, dict[str, Any]]] = []
     for row in manifest.requests:
-        request_path = row.request_path.resolve()
+        request_path = row.request_path
+        if not request_path.is_absolute():
+            raise ValueError("approved request path must be absolute")
         if request_path.parent != request_root:
             raise ValueError("approved request path is outside the request root")
+        if request_path.is_symlink():
+            raise ValueError("approved request path cannot be a symlink")
         try:
             request_bytes = request_path.read_bytes()
             request = json.loads(request_bytes)
@@ -103,6 +122,18 @@ def _load_and_verify_manifest(
                 )
         verified.append((row, request))
 
+    for binding in manifest.source_bindings:
+        if not binding.path.is_absolute():
+            raise ValueError("manifest source binding path must be absolute")
+        if binding.path.is_symlink():
+            raise ValueError("manifest source binding cannot be a symlink")
+        try:
+            source_bytes = binding.path.read_bytes()
+        except OSError as exc:
+            raise ValueError("manifest source artifact is unavailable") from exc
+        if _sha256(source_bytes) != binding.sha256:
+            raise ValueError("manifest source artifact changed")
+
     summary_path = run_root / "summary.json"
     if summary_path.exists():
         raise FileExistsError("approved manifest was already run")
@@ -127,7 +158,32 @@ def _response_payload(response: Any) -> dict[str, Any]:
         raise TypeError("provider response is not serializable as an object")
     if not isinstance(payload, dict):
         raise TypeError("provider response serialization must be an object")
+    output_text = getattr(response, "output_text", None)
+    if isinstance(output_text, str):
+        payload = {**payload, "output_text": output_text}
     return payload
+
+
+def _atomic_create(path: Path, content: bytes) -> None:
+    """Publish complete bytes exactly once without replacing another runner."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{path.name}.", dir=path.parent
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        try:
+            os.link(temporary, path)
+        except FileExistsError as exc:
+            raise FileExistsError(f"artifact already exists: {path}") from exc
+    finally:
+        if temporary.exists():
+            temporary.unlink()
 
 
 def _write_invocation_marker(path: Path, payload: dict[str, Any]) -> None:
@@ -151,6 +207,16 @@ def run_approved_manifest(
 
     manifest, verified = _load_and_verify_manifest(
         Path(manifest_path), approval_hash
+    )
+    _atomic_create(
+        manifest.run_root / "run_started.json",
+        _json_bytes(
+            {
+                "status": "run_started",
+                "manifest_path": str(Path(manifest_path)),
+                "approval_hash": approval_hash,
+            }
+        ),
     )
     provider = client if client is not None else OpenAI(max_retries=0)
     attempted: list[str] = []
@@ -182,7 +248,7 @@ def run_approved_manifest(
             provider_call_count += 1
             response = provider.responses.create(**request)
             payload = _response_payload(response)
-            _atomic_write(
+            _atomic_create(
                 response_path,
                 _json_bytes(
                     {
@@ -197,7 +263,7 @@ def run_approved_manifest(
             response_paths[row.request_id] = response_path
             succeeded.append(row.request_id)
         except Exception as exc:
-            _atomic_write(
+            _atomic_create(
                 error_path,
                 _json_bytes(
                     {
@@ -226,7 +292,7 @@ def run_approved_manifest(
         response_artifact_paths=response_paths,
         error_artifact_paths=error_paths,
     )
-    _atomic_write(
+    _atomic_create(
         manifest.run_root / "summary.json",
         _json_bytes(summary.model_dump(mode="json")),
     )
