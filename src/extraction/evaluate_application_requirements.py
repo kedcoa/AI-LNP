@@ -348,21 +348,7 @@ def _matches_content(actual: _ActualFact, reference: _ReferenceFact) -> bool:
     if actual.paper_id != reference.paper_id:
         return False
     if reference.category == "provenance":
-        leaf = reference.field_name.rsplit(".", 1)[-1]
-        if leaf in {"provenance", "source", "source_type"}:
-            values: tuple[Any, ...] = (
-                (actual.provenance,) if actual.provenance is not None else ()
-            )
-        elif leaf in {"evidence_id", "evidence_ids"}:
-            values = actual.evidence_ids
-        elif leaf in {"arm_link", "experiment_id"}:
-            values = (
-                (actual.experiment_id,)
-                if actual.experiment_id is not None
-                else ()
-            )
-        else:
-            return False
+        values = _provenance_values(actual, reference)
         expected = {
             _canonical_value(reference.field_name, value)
             for value in (reference.expected, *reference.aliases)
@@ -718,6 +704,58 @@ def _category_scores(
     return scores
 
 
+def _provenance_values(
+    actual: _ActualFact, reference: _ReferenceFact
+) -> tuple[Any, ...]:
+    leaf = reference.field_name.rsplit(".", 1)[-1]
+    if leaf in {"provenance", "source", "source_type"}:
+        return (actual.provenance,) if actual.provenance is not None else ()
+    if leaf in {"evidence_id", "evidence_ids"}:
+        return actual.evidence_ids
+    if leaf in {"arm_link", "experiment_id"}:
+        return (
+            (actual.experiment_id,)
+            if actual.experiment_id is not None
+            else ()
+        )
+    return ()
+
+
+def _matching_resources(
+    actual_facts: Sequence[_ActualFact],
+    reference: _ReferenceFact,
+) -> list[tuple[str, int, str, tuple[str, Any] | None]]:
+    resources: list[tuple[str, int, str, tuple[str, Any] | None]] = []
+    if reference.category != "provenance":
+        return [
+            ("fact", index, "", None)
+            for index, actual in enumerate(actual_facts)
+            if _matches(actual, reference)
+        ]
+
+    expected = {
+        _canonical_value(reference.field_name, value)
+        for value in (reference.expected, *reference.aliases)
+    }
+    leaf = reference.field_name.rsplit(".", 1)[-1]
+    for index, actual in enumerate(actual_facts):
+        if (
+            actual.paper_id != reference.paper_id
+            or actual.experiment_id != reference.experiment_id
+        ):
+            continue
+        for value in _provenance_values(actual, reference):
+            canonical = _canonical_value(reference.field_name, value)
+            if canonical in expected:
+                resource_index = (
+                    -1 if leaf in {"evidence_id", "evidence_ids"} else index
+                )
+                resources.append(
+                    ("provenance", resource_index, leaf, canonical)
+                )
+    return resources
+
+
 def _maximum_matches(
     actual_facts: Sequence[_ActualFact],
     reference_facts: Sequence[_ReferenceFact],
@@ -743,44 +781,38 @@ def _maximum_matches(
         )
         adjacency = {
             reference_index: sorted(
-                (
-                    actual_index
-                    for actual_index, actual in enumerate(actual_facts)
-                    if _matches(actual, reference_facts[reference_index])
+                _matching_resources(
+                    actual_facts, reference_facts[reference_index]
                 ),
-                key=lambda index: (
-                    actual_facts[index].field_name,
-                    repr(
-                        tuple(
-                            _canonical_value(actual_facts[index].field_name, value)
-                            for value in actual_facts[index].values
-                        )
-                    ),
-                    index,
-                ),
+                key=repr,
             )
             for reference_index in reference_indices
         }
-        actual_owner: dict[int, int] = {}
+        resource_owner: dict[
+            tuple[str, int, str, tuple[str, Any] | None], int
+        ] = {}
 
-        def augment(reference_index: int, seen: set[int]) -> bool:
-            for actual_index in adjacency[reference_index]:
-                if actual_index in seen:
+        def augment(
+            reference_index: int,
+            seen: set[tuple[str, int, str, tuple[str, Any] | None]],
+        ) -> bool:
+            for resource in adjacency[reference_index]:
+                if resource in seen:
                     continue
-                seen.add(actual_index)
-                owner = actual_owner.get(actual_index)
+                seen.add(resource)
+                owner = resource_owner.get(resource)
                 if owner is None or augment(owner, seen):
-                    actual_owner[actual_index] = reference_index
+                    resource_owner[resource] = reference_index
                     return True
             return False
 
         for reference_index in reference_indices:
             augment(reference_index, set())
-        for actual_index, reference_index in actual_owner.items():
+        for resource, reference_index in resource_owner.items():
             reference = reference_facts[reference_index]
             matched_reference_ids.add(reference.reference_id)
             if reference.category != "provenance":
-                matched_actual_indices.add(actual_index)
+                matched_actual_indices.add(resource[1])
     return matched_reference_ids, matched_actual_indices
 
 

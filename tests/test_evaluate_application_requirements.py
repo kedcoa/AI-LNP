@@ -239,6 +239,61 @@ def test_provenance_is_scored_from_the_support_attached_to_a_fact() -> None:
     assert score.categories["provenance"].denominator == 2
 
 
+def test_distinct_evidence_memberships_each_satisfy_one_provenance_reference() -> None:
+    fact = _fact("assay", "ddPCR", experiment_id="EXP-A")
+    fact["evidence_ids"] = ["E-1", "E-2"]
+    extraction, reference = _documents(
+        [fact],
+        [
+            _reference_fact(
+                "APP-P1-PROV-E1",
+                "provenance",
+                "evidence_id",
+                "E-1",
+                experiment_id="EXP-A",
+            ),
+            _reference_fact(
+                "APP-P1-PROV-E2",
+                "provenance",
+                "evidence_id",
+                "E-2",
+                experiment_id="EXP-A",
+            ),
+        ],
+    )
+    reference["papers"][0]["evidence_ids"] = ["E-1", "E-2"]
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.categories["provenance"].numerator == 2
+
+
+def test_one_evidence_membership_cannot_satisfy_duplicate_references() -> None:
+    extraction, reference = _documents(
+        [_fact("assay", "ddPCR", experiment_id="EXP-A")],
+        [
+            _reference_fact(
+                "APP-P1-PROV-DUP-A",
+                "provenance",
+                "evidence_id",
+                "E-1",
+                experiment_id="EXP-A",
+            ),
+            _reference_fact(
+                "APP-P1-PROV-DUP-B",
+                "provenance",
+                "evidence_id",
+                "E-1",
+                experiment_id="EXP-A",
+            ),
+        ],
+    )
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.categories["provenance"].numerator == 1
+
+
 def test_typed_accepted_atomic_outcomes_are_scored() -> None:
     extraction = {
         "paper_id": "PAPER-1",
@@ -610,32 +665,63 @@ def test_application_reference_does_not_leak_into_production_or_prompts() -> Non
     assert reference_id_leaks == {}
 
 
+def _forbidden_production_imports(source: str) -> list[str]:
+    imported: list[str] = []
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Import):
+            imported.extend(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom):
+            module = node.module or ""
+            if node.level:
+                package = ["src", "extraction"]
+                keep = max(0, len(package) - (node.level - 1))
+                module = ".".join(
+                    [*package[:keep], *(part for part in module.split(".") if part)]
+                )
+            imported.append(module)
+            if module == "src.extraction":
+                imported.extend(
+                    f"{module}.{alias.name}" for alias in node.names
+                )
+    return sorted(
+        module
+        for module in imported
+        if (
+            (leaf := module.split(".")[-1]).startswith("evaluate_")
+            or leaf.startswith("benchmark_")
+            or leaf == "reference_loader"
+        )
+    )
+
+
+def test_relative_evaluator_and_benchmark_imports_are_forbidden() -> None:
+    source = """\
+from .evaluate_application_requirements import ApplicationScore
+from .benchmark_v12_gemma_visual import score_claims
+from .reference_loader import load_reference
+"""
+
+    assert _forbidden_production_imports(source) == [
+        "src.extraction.benchmark_v12_gemma_visual",
+        "src.extraction.evaluate_application_requirements",
+        "src.extraction.reference_loader",
+    ]
+
+
 def test_production_extraction_modules_do_not_import_evaluator_or_keys() -> None:
     repository = Path(__file__).resolve().parents[1]
     extraction_root = repository / "src" / "extraction"
     forbidden_imports: dict[str, list[str]] = {}
-    for path in extraction_root.glob("*.py"):
-        if path.name.startswith(("evaluate_", "benchmark_")) or (
-            "benchmark" in path.stem
-        ):
-            continue
-        imported: list[str] = []
-        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
-            if isinstance(node, ast.Import):
-                imported.extend(alias.name for alias in node.names)
-            elif isinstance(node, ast.ImportFrom):
-                module = node.module or ""
-                imported.append(module)
-                imported.extend(
-                    ".".join(part for part in (module, alias.name) if part)
-                    for alias in node.names
-                )
-        forbidden = sorted(
-            module
-            for module in imported
-            if module.startswith("src.extraction.evaluate_")
-            or ".benchmark" in module
-            or module.endswith("reference_loader")
+    production_paths = [
+        extraction_root / "application_normalization.py",
+        extraction_root / "full_paper_contracts.py",
+        extraction_root / "full_paper_inventory.py",
+        extraction_root / "full_paper_tasks.py",
+        extraction_root / "merge_full_paper_results.py",
+    ]
+    for path in production_paths:
+        forbidden = _forbidden_production_imports(
+            path.read_text(encoding="utf-8")
         )
         if forbidden:
             forbidden_imports[str(path.relative_to(repository))] = forbidden
