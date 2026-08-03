@@ -664,9 +664,11 @@ def test_maximum_matching_is_independent_of_overlapping_alias_order() -> None:
 def test_application_pilot_references_are_satisfiable_by_perfect_extraction() -> None:
     repository = Path(__file__).resolve().parents[1]
     reference_root = repository / "data" / "benchmarks" / "application_pilot"
+    manifest = json.loads((reference_root / "pilot_manifest.json").read_text())
+    assert len(manifest["papers"]) == 3
     references = [
-        json.loads((reference_root / f"PILOT-{index:03d}.json").read_text())
-        for index in range(1, 4)
+        json.loads((repository / paper["reference_path"]).read_text())
+        for paper in manifest["papers"]
     ]
     extraction_papers = []
     for reference in references:
