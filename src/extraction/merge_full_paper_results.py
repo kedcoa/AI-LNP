@@ -100,6 +100,9 @@ class _Issuance:
     candidate_id: str | None
     context_evidence_ids: set[str] = field(default_factory=set)
     visual_evidence_ids: set[str] = field(default_factory=set)
+    visual_slot_evidence_ids: dict[str, set[str]] = field(
+        default_factory=dict
+    )
     scientific_identity: dict[str, Any] = field(default_factory=dict)
 
 
@@ -177,12 +180,14 @@ def _issued_experiments(
 ) -> tuple[
     OrderedDict[str, _Issuance],
     set[str],
-    list[tuple[str, str | None, str | None, str]],
+    list[tuple[str, str | None, str | None, str, str]],
     set[str],
 ]:
     issued: OrderedDict[str, _Issuance] = OrderedDict()
     invalid_ids: set[str] = set()
-    conflicts: list[tuple[str, str | None, str | None, str]] = []
+    conflicts: list[
+        tuple[str, str | None, str | None, str, str]
+    ] = []
 
     def register(
         experiment_id: str,
@@ -191,32 +196,63 @@ def _issued_experiments(
         context_evidence_ids: Iterable[str] = (),
         visual_evidence_ids: Iterable[str] = (),
         scientific_identity: Mapping[str, Any] | None = None,
+        check_evidence_metadata: bool = False,
         source: str,
     ) -> None:
+        context_evidence = set(context_evidence_ids)
+        visual_evidence = set(visual_evidence_ids)
+        incoming_identity = dict(scientific_identity or {})
         existing = issued.get(experiment_id)
         if existing is None:
             existing = _Issuance(candidate_id=candidate_id)
             issued[experiment_id] = existing
-        elif (
-            existing.candidate_id is not None
-            and candidate_id is not None
-            and existing.candidate_id != candidate_id
-        ):
-            invalid_ids.add(experiment_id)
-            conflicts.append(
-                (
-                    experiment_id,
-                    existing.candidate_id,
-                    candidate_id,
-                    source,
+        else:
+            conflict_reasons: list[str] = []
+            if (
+                existing.candidate_id is not None
+                and candidate_id is not None
+                and existing.candidate_id != candidate_id
+            ):
+                conflict_reasons.append("candidate_id")
+            conflict_reasons.extend(
+                f"scientific_identity.{field_name}"
+                for field_name, value in incoming_identity.items()
+                if field_name in existing.scientific_identity
+                and not _same_identity_value(
+                    existing.scientific_identity[field_name], value
                 )
             )
-        elif existing.candidate_id is None and candidate_id is not None:
+            if (
+                check_evidence_metadata
+                and existing.context_evidence_ids
+                and context_evidence
+                and existing.context_evidence_ids != context_evidence
+            ):
+                conflict_reasons.append("context_evidence_ids")
+            if (
+                check_evidence_metadata
+                and existing.visual_evidence_ids
+                and visual_evidence
+                and existing.visual_evidence_ids != visual_evidence
+            ):
+                conflict_reasons.append("visual_evidence_ids")
+            if conflict_reasons:
+                invalid_ids.add(experiment_id)
+                conflicts.append(
+                    (
+                        experiment_id,
+                        existing.candidate_id,
+                        candidate_id,
+                        source,
+                        ", ".join(conflict_reasons),
+                    )
+                )
+        if existing.candidate_id is None and candidate_id is not None:
             existing.candidate_id = candidate_id
-        existing.context_evidence_ids.update(context_evidence_ids)
-        existing.visual_evidence_ids.update(visual_evidence_ids)
-        if scientific_identity:
-            for field_name, value in scientific_identity.items():
+        existing.context_evidence_ids.update(context_evidence)
+        existing.visual_evidence_ids.update(visual_evidence)
+        if incoming_identity:
+            for field_name, value in incoming_identity.items():
                 existing.scientific_identity.setdefault(field_name, value)
 
     if "provisional_experiment_contexts" in paper_map:
@@ -232,6 +268,7 @@ def _issued_experiments(
                 scientific_identity=_scientific_identity(
                     candidate.model_dump(mode="json")
                 ),
+                check_evidence_metadata=True,
                 source="paper_map.provisional_experiment_contexts",
             )
 
@@ -269,6 +306,7 @@ def _issued_experiments(
                 context_evidence_ids=context_allowed,
                 visual_evidence_ids=visual_allowed,
                 scientific_identity=_scientific_identity(row),
+                check_evidence_metadata=True,
                 source=f"paper_map.{key}[{index}]",
             )
 
@@ -293,6 +331,7 @@ def _issued_experiments(
                     value.get("visual_evidence_ids")
                 ),
                 scientific_identity=_scientific_identity(value),
+                check_evidence_metadata=True,
                 source=f"paper_map.experiment_inventory[{inventory_id!r}]",
             )
 
@@ -318,7 +357,7 @@ def _issued_experiments(
             )
 
     for task_index, task in enumerate(_as_rows(paper_map.get("visual_tasks"))):
-        allowed = _task_evidence_ids(task)
+        task_allowed = _task_evidence_ids(task)
         task_candidates: dict[str, str | None] = {
             item: None
             for item in task.get("experiment_ids", [])
@@ -346,11 +385,26 @@ def _issued_experiments(
                         if isinstance(candidate_id, str)
                         else None
                     )
+        experiment_envelopes = task.get("experiment_evidence_envelopes")
+        if not isinstance(experiment_envelopes, Mapping):
+            experiment_envelopes = {}
+        slot_envelopes = task.get("slot_evidence_envelopes")
+        if not isinstance(slot_envelopes, Mapping):
+            slot_envelopes = {}
+        task_slots = _as_rows(task.get("slots"))
         for experiment_id, candidate_id in task_candidates.items():
+            explicit_experiment_evidence = _listed_evidence_ids(
+                experiment_envelopes.get(experiment_id)
+            )
+            if task_allowed and explicit_experiment_evidence:
+                explicit_experiment_evidence &= task_allowed
+            visual_evidence = explicit_experiment_evidence
+            if len(task_candidates) == 1 and not visual_evidence:
+                visual_evidence = task_allowed
             register(
                 experiment_id,
                 candidate_id,
-                visual_evidence_ids=allowed,
+                visual_evidence_ids=visual_evidence,
                 scientific_identity=(
                     _scientific_identity(task_inventory[experiment_id])
                     if isinstance(task_inventory, Mapping)
@@ -359,6 +413,22 @@ def _issued_experiments(
                 ),
                 source=f"paper_map.visual_tasks[{task_index}]",
             )
+            issuance = issued[experiment_id]
+            for slot in task_slots:
+                if slot.get("experiment_id") != experiment_id:
+                    continue
+                slot_id = slot.get("slot_id")
+                if not isinstance(slot_id, str) or not slot_id:
+                    continue
+                slot_evidence = _listed_evidence_ids(
+                    slot_envelopes.get(slot_id)
+                )
+                if task_allowed and slot_evidence:
+                    slot_evidence &= task_allowed
+                if slot_evidence:
+                    issuance.visual_slot_evidence_ids[slot_id] = (
+                        slot_evidence
+                    )
 
     paper_evidence_ids = _listed_evidence_ids(
         paper_map.get("issued_evidence_ids")
@@ -416,6 +486,7 @@ def _selective_outcome_group(
     return {
         "experiment_id": outcome.get("experiment_id"),
         "candidate_id": outcome.get("candidate_id"),
+        "_slot_id": slot_id,
         "facts": facts,
         **{
             field_name: outcome[field_name]
@@ -588,14 +659,19 @@ def merge_full_paper_results(
             allowed_evidence_ids=paper_evidence_ids,
         )
 
-    for experiment_id, first_candidate, second_candidate, source in (
-        issuance_conflicts
-    ):
+    for (
+        experiment_id,
+        first_candidate,
+        second_candidate,
+        source,
+        conflict_reason,
+    ) in issuance_conflicts:
         quarantine(
             code="duplicate_issued_experiment_id",
             message=(
-                "one experiment ID was issued to different candidates: "
-                f"{first_candidate!r} and {second_candidate!r}"
+                "duplicate experiment issuance has conflicting metadata; "
+                f"candidate_ids={first_candidate!r},{second_candidate!r}; "
+                f"fields={conflict_reason}"
             ),
             source=source,
             experiment_id=experiment_id,
@@ -691,17 +767,38 @@ def merge_full_paper_results(
                         evidence_ids=evidence_ids,
                     )
                     continue
+                if source_kind == "visual_results":
+                    slot_id = group.get("_slot_id")
+                    allowed_evidence_ids = (
+                        issuance.visual_slot_evidence_ids.get(slot_id, set())
+                        if isinstance(slot_id, str)
+                        else set()
+                    )
+                    if not allowed_evidence_ids:
+                        allowed_evidence_ids = issuance.visual_evidence_ids
+                    if not allowed_evidence_ids:
+                        quarantine(
+                            code="missing_visual_evidence_envelope",
+                            message=(
+                                "multi-experiment visual results require an "
+                                "explicit experiment or slot evidence envelope"
+                            ),
+                            source=source,
+                            experiment_id=experiment_id,
+                            candidate_id=candidate_id,
+                            raw_values=raw_values,
+                            evidence_ids=evidence_ids,
+                        )
+                        continue
+                else:
+                    allowed_evidence_ids = issuance.context_evidence_ids
                 for fact_offset, fact in enumerate(group_facts):
                     add_fact(
                         fact,
                         experiment_id=experiment_id,
                         candidate_id=candidate_id,
                         source=f"{source}.facts[{fact_offset}]",
-                        allowed_evidence_ids=(
-                            issuance.context_evidence_ids
-                            if source_kind == "context_results"
-                            else issuance.visual_evidence_ids
-                        ),
+                        allowed_evidence_ids=allowed_evidence_ids,
                     )
 
     def finalize(

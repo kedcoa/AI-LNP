@@ -72,6 +72,10 @@ def _paper_map() -> dict:
             {
                 "experiment_ids": ["EXP-A", "EXP-B"],
                 "allowed_evidence_ids": ["E-VISUAL"],
+                "experiment_evidence_envelopes": {
+                    "EXP-A": ["E-VISUAL"],
+                    "EXP-B": ["E-VISUAL"],
+                },
             }
         ],
         "issued_evidence_ids": ["E-FORM", "E-FORM-2"],
@@ -452,4 +456,150 @@ def test_context_task_version_marks_experiment_id_contract_change() -> None:
 
     assert schema["properties"]["context_task_version"]["const"] == (
         "full-paper-context-task-1.1.0"
+    )
+
+
+def test_multi_experiment_visual_task_rejects_task_wide_only_evidence() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {"experiment_id": "EXP-A", "candidate_id": "CTX-A"},
+            {"experiment_id": "EXP-B", "candidate_id": "CTX-B"},
+        ],
+        "visual_tasks": [
+            {
+                "experiment_ids": ["EXP-A", "EXP-B"],
+                "allowed_evidence_ids": ["E-TASK-WIDE"],
+            }
+        ],
+    }
+    fact_without_identity_echo = {
+        "experiment_id": "EXP-A",
+        "field_name": "endpoint",
+        "raw_value": "reporter signal",
+        "evidence_ids": ["E-TASK-WIDE"],
+    }
+
+    result = merge_full_paper_results(
+        paper_map, [], [fact_without_identity_echo]
+    )
+
+    assert result.experiments[0].facts == []
+    assert result.quarantined_conflicts[0].code == (
+        "missing_visual_evidence_envelope"
+    )
+
+
+def test_multi_experiment_visual_task_enforces_per_experiment_envelope() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {"experiment_id": "EXP-A", "candidate_id": "CTX-A"},
+            {"experiment_id": "EXP-B", "candidate_id": "CTX-B"},
+        ],
+        "visual_tasks": [
+            {
+                "experiment_ids": ["EXP-A", "EXP-B"],
+                "allowed_evidence_ids": ["E-A", "E-B"],
+                "experiment_evidence_envelopes": {
+                    "EXP-A": ["E-A"],
+                    "EXP-B": ["E-B"],
+                },
+            }
+        ],
+    }
+    cross_arm = {
+        "experiment_id": "EXP-A",
+        "field_name": "endpoint",
+        "raw_value": "reporter signal",
+        "evidence_ids": ["E-B"],
+    }
+
+    result = merge_full_paper_results(paper_map, [], [cross_arm])
+
+    assert result.experiments[0].facts == []
+    assert result.quarantined_conflicts[0].code == (
+        "evidence_outside_experiment_envelope"
+    )
+
+
+def test_single_experiment_visual_task_can_use_task_wide_envelope() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {"experiment_id": "EXP-A", "candidate_id": "CTX-A"}
+        ],
+        "visual_tasks": [
+            {
+                "experiment_ids": ["EXP-A"],
+                "allowed_evidence_ids": ["E-SINGLE"],
+            }
+        ],
+    }
+    fact = {
+        "experiment_id": "EXP-A",
+        "field_name": "endpoint",
+        "raw_value": "reporter signal",
+        "evidence_ids": ["E-SINGLE"],
+    }
+
+    result = merge_full_paper_results(paper_map, [], [fact])
+
+    assert result.experiments[0].facts[0].evidence_ids == ["E-SINGLE"]
+    assert result.quarantined_conflicts == []
+
+
+def test_same_candidate_duplicate_with_conflicting_identity_is_disabled() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {
+                "experiment_id": "EXP-DUP",
+                "candidate_id": "CTX-A",
+                "formulation": "LNP A",
+                "evidence_ids": ["E-A"],
+            },
+            {
+                "experiment_id": "EXP-DUP",
+                "candidate_id": "CTX-A",
+                "formulation": "LNP B",
+                "evidence_ids": ["E-A"],
+            },
+        ],
+    }
+
+    result = merge_full_paper_results(
+        paper_map, [_text_for("EXP-DUP")], []
+    )
+
+    assert result.experiments == []
+    assert result.quarantined_conflicts[0].code == (
+        "duplicate_issued_experiment_id"
+    )
+
+
+def test_same_candidate_duplicate_with_conflicting_evidence_is_disabled() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {
+                "experiment_id": "EXP-DUP",
+                "candidate_id": "CTX-A",
+                "context_evidence_ids": ["E-A"],
+            },
+            {
+                "experiment_id": "EXP-DUP",
+                "candidate_id": "CTX-A",
+                "context_evidence_ids": ["E-B"],
+            },
+        ],
+    }
+
+    result = merge_full_paper_results(
+        paper_map, [_text_for("EXP-DUP")], []
+    )
+
+    assert result.experiments == []
+    assert result.quarantined_conflicts[0].code == (
+        "duplicate_issued_experiment_id"
     )
