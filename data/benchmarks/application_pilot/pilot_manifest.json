@@ -23,7 +23,7 @@
     "boundary": "Gate A to Gate B",
     "reason": "Paid paper-map outputs do not yet exist. Provisional experiment IDs and arm topology will be checked against the source after the approved Gate-A paper maps are available; none are fabricated here."
   },
-  "evidence_modality_note": "The local Europe PMC JATS sources expose paragraph text and figure captions/printed labels. They contain no inline table-wrap nodes, although the articles cite supplementary tables. The lightweight references therefore use only locally retained text and caption evidence and never estimate graph bars.",
+  "evidence_modality_note": "The local Europe PMC JATS sources expose paragraph text and figure captions/printed labels. Table modality is satisfied by the open PILOT-001 source-data workbook, including the exact Fig 4e!D7 measurement. No graph bars are estimated.",
   "papers": [
     {
       "paper_id": "PILOT-001",
@@ -35,6 +35,17 @@
       "source_path": "data/staging/new_papers/PILOT-001/PMC9845313.html",
       "publication_license": "CC BY 4.0",
       "source_sha256": "74f5c9753888de6396a73609bfa1339e2033e14d6b6453cbabe776d0a0df0b94",
+      "supplementary_sources": [
+        {
+          "source_kind": "source_data_xlsx",
+          "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9845313/supplementaryFiles",
+          "source_path": "data/staging/new_papers/PILOT-001/supplementary/41467_2022_35637_MOESM4_ESM.xlsx",
+          "publication_license": "CC BY 4.0",
+          "source_sha256": "3aef1d3da98a45526b0adbd36067d481be2fd0f84d3bd125aba1620281aacb2e",
+          "verified_table_locator": "Fig 4e!D7",
+          "verified_value": 60.32
+        }
+      ],
       "inventory_path": "data/staging/extraction/application_pilot/PILOT-001/inventory.json",
       "reference_path": "data/benchmarks/application_pilot/PILOT-001.json",
       "inventory_evidence_block_count": 58,

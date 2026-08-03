@@ -8,12 +8,42 @@
   "experiment_ids": [],
   "reference_facts": [
     {
-      "reference_id": "APP-PILOT-001-FORM-001",
+      "reference_id": "APP-PILOT-001-FORM-COMP-001",
       "category": "formulation",
-      "field_name": "formulation_components",
-      "expected": ["AA-T3A-C12", "DSPC", "cholesterol", "C14-PEG2000"],
-      "aliases": ["AA-T3A-C12, DSPC, cholesterol, and C14-PEG"],
+      "field_name": "component_identity",
+      "expected": "AA-T3A-C12",
+      "aliases": [],
       "experiment_scope": "AA-T3A-C12 RNA LNP; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-COMP-002",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "DSPC",
+      "aliases": [],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; phospholipid component",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-COMP-003",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "cholesterol",
+      "aliases": [],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; helper-lipid component",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-COMP-004",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "C14-PEG2000",
+      "aliases": ["C14-PEG"],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; PEG-lipid component",
       "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
       "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
     },
@@ -48,16 +78,6 @@
       "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
       "evidence_text": "mixed at an ionizable lipid:RNA weight ratio of 10:1",
       "numeric_provenance": "exact_reported"
-    },
-    {
-      "reference_id": "APP-PILOT-001-FORM-005",
-      "category": "formulation",
-      "field_name": "preparation_method",
-      "expected": "microfluidic mixing with a staggered herringbone micromixer",
-      "aliases": ["microfluidic mixing"],
-      "experiment_scope": "AA-T3A-C12 RNA LNP; shared formulation fact",
-      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
-      "evidence_text": "using Pump 33 DDS syringe pumps ... in a microfluidic device with a staggered herringbone micromixer design"
     },
     {
       "reference_id": "APP-PILOT-001-PAYLOAD-001",
@@ -159,6 +179,25 @@
       "experiment_scope": "HSP47 knockdown percent for AA-T3A-C12/siHSP47 versus PBS in fibrotic mice",
       "source_locator": {"evidence_id": "FPE-ffb8880ea58448bf3ea4", "source_kind": "results_text", "locator": "in vivo HSP47 results"},
       "evidence_text": "AA-T3A-C12/siHSP47 LNP treatment led to a 65% knockdown of HSP47",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-001-NUM-TABLE-001",
+      "category": "exact_numeric",
+      "field_name": "exact_measurement",
+      "expected": "60.32% HSP47 knockdown",
+      "aliases": [60.32, "60.32%"],
+      "experiment_scope": "Figure 4e primary-HSC Western blot quantification; AA-T3A-C12/siHSP47 LNP column, source-data row 7",
+      "source_locator": {
+        "source_kind": "source_data_xlsx_cell",
+        "workbook_path": "data/staging/new_papers/PILOT-001/supplementary/41467_2022_35637_MOESM4_ESM.xlsx",
+        "sheet": "Fig 4e",
+        "header_cell": "D6",
+        "cell": "D7",
+        "supporting_main_paper_evidence_id": "FPE-177d4f27bcfbf6628b03",
+        "locator": "Fig 4e!D7; D6 header identifies AA-T3A-C12/siHSP47 LNP"
+      },
+      "evidence_text": "Source-data workbook Fig 4e: D6 = AA-T3A-C12/siHSP47 LNP and D7 = 60.32; the related main-paper Figure 4e caption identifies Western blot analysis of HSP47 in primary HSCs.",
       "numeric_provenance": "exact_reported"
     },
     {

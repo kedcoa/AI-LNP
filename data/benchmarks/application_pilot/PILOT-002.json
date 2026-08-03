@@ -8,12 +8,42 @@
   "experiment_ids": [],
   "reference_facts": [
     {
-      "reference_id": "APP-PILOT-002-FORM-001",
+      "reference_id": "APP-PILOT-002-FORM-COMP-001",
       "category": "formulation",
-      "field_name": "formulation_components",
-      "expected": ["246C10", "DOPE", "cholesterol", "C16-PEG2000 ceramide"],
-      "aliases": ["246C10, DOPE, cholesterol, and PEG-lipid"],
+      "field_name": "component_identity",
+      "expected": "246C10",
+      "aliases": [],
       "experiment_scope": "mRNA-loaded 246C10 LNP",
+      "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
+      "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-COMP-002",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "DOPE",
+      "aliases": [],
+      "experiment_scope": "mRNA-loaded 246C10 LNP; helper-lipid component",
+      "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
+      "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-COMP-003",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "cholesterol",
+      "aliases": [],
+      "experiment_scope": "mRNA-loaded 246C10 LNP; helper-lipid component",
+      "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
+      "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-COMP-004",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "C16-PEG2000 ceramide",
+      "aliases": ["PEG-lipid"],
+      "experiment_scope": "mRNA-loaded 246C10 LNP; PEG-lipid component",
       "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
       "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
     },
@@ -50,22 +80,12 @@
       "numeric_provenance": "exact_reported"
     },
     {
-      "reference_id": "APP-PILOT-002-FORM-005",
-      "category": "formulation",
-      "field_name": "preparation_method",
-      "expected": "microfluidic mixing",
-      "aliases": ["microfluidic-based system"],
-      "experiment_scope": "mRNA- and siRNA-loaded LNPs",
-      "source_locator": {"evidence_id": "FPE-730eca03ddf54df52a03", "source_kind": "methods_text", "locator": "ionizable LNP preparation"},
-      "evidence_text": "Prepared solutions were mixed via a microfluidic mixing device"
-    },
-    {
       "reference_id": "APP-PILOT-002-FORM-006",
       "category": "formulation",
-      "field_name": "targeting_ligand",
+      "field_name": "component_identity",
       "expected": "mannose-PEG lipid",
       "aliases": ["mannose", "DSPE-PEG-mannose"],
-      "experiment_scope": "LSEC-targeted formulation",
+      "experiment_scope": "LSEC-targeted formulation; active targeting-ligand component",
       "source_locator": {"evidence_id": "FPE-c45ce63232de803c02d5", "source_kind": "results_text", "locator": "in vivo mannose-LNP formulation paragraph"},
       "evidence_text": "3.0% PEG-lipid (with 2.5% mannose-PEG lipid)"
     },
@@ -137,8 +157,8 @@
       "expected": "histological tdTomato-positive cell counting",
       "aliases": ["MetaMorph histological analysis"],
       "experiment_scope": "mannose-LNP mCre targeting study",
-      "source_locator": {"evidence_id": "FPE-d590abe44c7416153083", "source_kind": "figure_caption", "locator": "Figure 7C caption"},
-      "evidence_text": "Transfection efficiency ... was evaluated ... by histological analysis"
+      "source_locator": {"evidence_id": "FPE-f9e38e7de85203a7cc17", "source_kind": "results_text", "locator": "LSEC gene-editing results"},
+      "evidence_text": "We further quantified this phenomenon by counting tdTomato fluorescence-positive cells with MetaMorph image software."
     },
     {
       "reference_id": "APP-PILOT-002-ASSAY-002",

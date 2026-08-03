@@ -8,12 +8,42 @@
   "experiment_ids": [],
   "reference_facts": [
     {
-      "reference_id": "APP-PILOT-003-FORM-001",
+      "reference_id": "APP-PILOT-003-FORM-COMP-001",
       "category": "formulation",
-      "field_name": "formulation_components",
-      "expected": ["KL-52", "DSPC", "cholesterol", "PEG-c-DOMG"],
-      "aliases": ["KL-52, DSPC, cholesterol, and PEG-c-DOMG"],
+      "field_name": "component_identity",
+      "expected": "KL-52",
+      "aliases": [],
       "experiment_scope": "siJnk2 and siLuc LNPs; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "Stock solutions of KL-52 aminolipid, DSPC, cholesterol, and PEG-c-DOMG"
+    },
+    {
+      "reference_id": "APP-PILOT-003-FORM-COMP-002",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "DSPC",
+      "aliases": [],
+      "experiment_scope": "siJnk2 and siLuc LNPs; phospholipid component",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "Stock solutions of KL-52 aminolipid, DSPC, cholesterol, and PEG-c-DOMG"
+    },
+    {
+      "reference_id": "APP-PILOT-003-FORM-COMP-003",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "cholesterol",
+      "aliases": [],
+      "experiment_scope": "siJnk2 and siLuc LNPs; helper-lipid component",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "Stock solutions of KL-52 aminolipid, DSPC, cholesterol, and PEG-c-DOMG"
+    },
+    {
+      "reference_id": "APP-PILOT-003-FORM-COMP-004",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "PEG-c-DOMG",
+      "aliases": [],
+      "experiment_scope": "siJnk2 and siLuc LNPs; PEG-lipid component",
       "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
       "evidence_text": "Stock solutions of KL-52 aminolipid, DSPC, cholesterol, and PEG-c-DOMG"
     },
@@ -50,24 +80,14 @@
       "numeric_provenance": "exact_reported"
     },
     {
-      "reference_id": "APP-PILOT-003-FORM-005",
-      "category": "formulation",
-      "field_name": "preparation_method",
-      "expected": "T-junction mixing",
-      "aliases": ["T-junction mixer"],
-      "experiment_scope": "siJnk2 and siLuc LNPs; shared formulation fact",
-      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
-      "evidence_text": "mixing the lipid with the siRNA solution ... using a T-junction mixer"
-    },
-    {
       "reference_id": "APP-PILOT-003-PAYLOAD-001",
       "category": "payload_administration",
       "field_name": "payload",
       "expected": "Jnk2 siRNA set 3",
       "aliases": ["siJnk2", "siRNA-Jnk2 set 3"],
       "experiment_scope": "therapeutic hepatocyte-targeted LNP arm",
-      "source_locator": {"evidence_id": "FPE-ee1df941c50f672760e8", "source_kind": "results_text", "locator": "LNP characterization paragraph"},
-      "evidence_text": "The most potent siRNA-JNK2 polymer 3 was encapsulated into LNP"
+      "source_locator": {"evidence_id": "FPE-fbc7cb606ec2ed5a53d9", "source_kind": "results_text", "locator": "organ and cell specificity paragraph"},
+      "evidence_text": "the siRNA-Jnk2 LNP set three downregulated Jnk2 mRNA significantly in the liver"
     },
     {
       "reference_id": "APP-PILOT-003-ADMIN-001",
@@ -161,35 +181,54 @@
       "evidence_text": "significantly reduced Jnk2 mRNA expression in HC, but not in KC or HSC"
     },
     {
-      "reference_id": "APP-PILOT-003-OUT-002",
+      "reference_id": "APP-PILOT-003-OUT-002-HCC",
       "category": "qualitative_outcome",
       "field_name": "comparative_outcome",
-      "expected": "late-stage siJnk2-LNP treatment reduced tumor initiation, collagen accumulation, and serum ALT versus controls",
-      "aliases": ["improved advanced chronic liver disease and HCC outcomes"],
+      "expected": "late-stage siJnk2-LNP reduced well-differentiated HCCs and premalignant dysplastic nodules versus siLuc-LNP-treated NEMOΔHepa mice",
+      "aliases": ["siJnk2-LNP reduced HCC and premalignant nodules versus siLuc-LNP"],
       "experiment_scope": "male NEMOΔHepa mice treated weekly from 44 to 52 weeks",
       "source_locator": {"evidence_id": "FPE-172026ffdff40397135c", "source_kind": "results_text", "locator": "advanced-stage treatment results"},
-      "evidence_text": "reduction of well-differentiated HCCs ... less premalignant dysplastic nodules ... decreased liver serum ALT"
+      "evidence_text": "siJnk2-LNP treatment led to ... a reduction of well-differentiated HCCs and significantly less premalignant dysplastic nodules"
     },
     {
-      "reference_id": "APP-PILOT-003-OUT-003",
+      "reference_id": "APP-PILOT-003-OUT-002-COLLAGEN",
       "category": "qualitative_outcome",
       "field_name": "comparative_outcome",
-      "expected": "early-stage siJnk2-LNP increased apoptosis and proliferation markers versus siLuc-LNP",
-      "aliases": ["stage-dependent early harm"],
-      "experiment_scope": "male NEMOΔHepa mice treated weekly from 8 to 12 weeks",
-      "source_locator": {"evidence_id": "FPE-d29def7f52506bc4ada9", "source_kind": "results_text", "locator": "early-stage treatment results"},
-      "evidence_text": "significantly increased cleaved caspase-3 ... significantly increased ... PCNA ... after siJnk2-LNP treatment"
+      "expected": "late-stage siJnk2-LNP reduced liver collagen accumulation versus siLuc-LNP-treated NEMOΔHepa mice",
+      "aliases": ["siJnk2-LNP reduced Sirius-red collagen versus siLuc-LNP"],
+      "experiment_scope": "male NEMOΔHepa mice treated weekly from 44 to 52 weeks",
+      "source_locator": {"evidence_id": "FPE-3a7c6f94fc2d07588616", "source_kind": "results_text", "locator": "advanced-disease histology results"},
+      "evidence_text": "siJnk2-LNP treatment of NEMOΔHepa livers showed significantly reduced collagen accumulation evidenced by SR analysis"
     },
     {
-      "reference_id": "APP-PILOT-003-NUM-001",
-      "category": "exact_numeric",
-      "field_name": "timepoint",
-      "expected": "168 h",
-      "aliases": ["7 days"],
-      "experiment_scope": "single 0.2 mg/kg dose in wild-type mice",
-      "source_locator": {"evidence_id": "FPE-b05d4c0d7e1f213226a5", "source_kind": "results_text", "locator": "dose and time response paragraph"},
-      "evidence_text": "0.2 mg/kg ... triggered almost undetectable JNK2 protein expression after 168 h",
-      "numeric_provenance": "exact_reported"
+      "reference_id": "APP-PILOT-003-OUT-002-ALT",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "late-stage siJnk2-LNP decreased serum ALT versus siLuc-LNP-treated NEMOΔHepa mice",
+      "aliases": ["siJnk2-LNP reduced serum ALT versus siLuc-LNP"],
+      "experiment_scope": "male NEMOΔHepa mice treated weekly from 44 to 52 weeks",
+      "source_locator": {"evidence_id": "FPE-172026ffdff40397135c", "source_kind": "results_text", "locator": "advanced-stage treatment results"},
+      "evidence_text": "siJnk2-LNP treatment ... [was] associated with significantly decreased liver serum ALT levels"
+    },
+    {
+      "reference_id": "APP-PILOT-003-OUT-003-APOPTOSIS",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "early-stage siJnk2-LNP increased cleaved caspase-3 and apoptosis versus siLuc-LNP-treated NEMOΔHepa mice",
+      "aliases": ["siJnk2-LNP increased apoptosis versus siLuc-LNP"],
+      "experiment_scope": "male NEMOΔHepa mice treated weekly from 8 to 12 weeks",
+      "source_locator": {"evidence_id": "FPE-d29def7f52506bc4ada9", "source_kind": "results_text", "locator": "early-stage treatment results"},
+      "evidence_text": "siJnk2-LNP-treated NEMOΔHepa livers showed significantly increased cleaved caspase-3 levels ... compared to siLuc-LNP treated animals"
+    },
+    {
+      "reference_id": "APP-PILOT-003-OUT-003-PROLIFERATION",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "early-stage siJnk2-LNP increased PCNA and Ki67 proliferation markers versus siLuc-LNP-treated NEMOΔHepa mice",
+      "aliases": ["siJnk2-LNP increased proliferation versus siLuc-LNP"],
+      "experiment_scope": "male NEMOΔHepa mice treated weekly from 8 to 12 weeks",
+      "source_locator": {"evidence_id": "FPE-d29def7f52506bc4ada9", "source_kind": "results_text", "locator": "early-stage treatment results"},
+      "evidence_text": "significantly increased ... PCNA at the protein and mRNA levels ... [and] significantly increased Ki67-positive cells ... after siJnk2-LNP treatment"
     }
   ]
 }
