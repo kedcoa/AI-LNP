@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import json
 from pathlib import Path
 import re
 
@@ -658,6 +659,48 @@ def test_maximum_matching_is_independent_of_overlapping_alias_order() -> None:
 
     assert score.categories["assay"].numerator == 2
     assert score.precision == 1.0
+
+
+def test_application_pilot_references_are_satisfiable_by_perfect_extraction() -> None:
+    repository = Path(__file__).resolve().parents[1]
+    reference_root = repository / "data" / "benchmarks" / "application_pilot"
+    references = [
+        json.loads((reference_root / f"PILOT-{index:03d}.json").read_text())
+        for index in range(1, 4)
+    ]
+    extraction_papers = []
+    for reference in references:
+        facts = []
+        for row in reference["reference_facts"]:
+            raw_value = row["expected"]
+            facts.append(
+                {
+                    "field_name": row["field_name"],
+                    "raw_values": [str(raw_value)],
+                    "canonical_value": str(raw_value),
+                    "evidence_ids": ["SYNTHETIC-EVIDENCE"],
+                    "provenance": "text",
+                }
+            )
+        extraction_papers.append(
+            {
+                "paper_id": reference["paper_id"],
+                "shared_facts": facts,
+                "experiments": [],
+                "quarantined_conflicts": [],
+            }
+        )
+
+    score = evaluate_application_requirements(
+        {"papers": extraction_papers},
+        {"papers": references},
+    )
+
+    assert score.reference_denominator == 62
+    assert score.matched_reference_count == 62
+    assert score.overall_recall == 1.0
+    assert score.precision == 1.0
+    assert score.missing_reference_ids == []
 
 
 def test_application_reference_does_not_leak_into_production_or_prompts() -> None:
