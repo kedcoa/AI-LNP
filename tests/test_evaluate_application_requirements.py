@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import ast
 from pathlib import Path
+import re
 
 from src.extraction.evaluate_application_requirements import (
     evaluate_application_requirements,
@@ -365,14 +367,220 @@ def test_wrong_arm_invented_id_and_unsupported_numeric_counts_are_strict() -> No
     score = evaluate_application_requirements(extraction, reference)
 
     assert score.wrong_arm_link_count == 1
-    assert score.invented_id_count == 1
+    assert score.invented_id_count == 2
     assert score.unsupported_numeric_count == 1
     assert score.precision == 0.0
 
 
+def test_scientifically_matching_fact_on_another_valid_arm_is_wrong_link() -> None:
+    extraction, reference = _documents(
+        [
+            _fact(
+                "comparative_outcome",
+                "higher than control",
+                experiment_id="EXP-B",
+            )
+        ],
+        [
+            _reference_fact(
+                "APP-P1-WRONG-ARM-1",
+                "qualitative_outcome",
+                "comparative_outcome",
+                "higher than control",
+                experiment_id="EXP-A",
+            )
+        ],
+    )
+    reference["papers"][0]["experiment_ids"] = ["EXP-A", "EXP-B"]
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.wrong_arm_link_count == 1
+
+
+def test_detected_wrong_arm_and_its_quarantine_are_counted_once() -> None:
+    extraction, reference = _documents(
+        [
+            _fact(
+                "comparative_outcome",
+                "higher than control",
+                experiment_id="EXP-B",
+            )
+        ],
+        [
+            _reference_fact(
+                "APP-P1-WRONG-ARM-2",
+                "qualitative_outcome",
+                "comparative_outcome",
+                "higher than control",
+                experiment_id="EXP-A",
+            )
+        ],
+    )
+    reference["papers"][0]["experiment_ids"] = ["EXP-A", "EXP-B"]
+    extraction["papers"][0]["quarantined_conflicts"] = [
+        {
+            "code": "candidate_experiment_mismatch",
+            "experiment_id": "EXP-B",
+            "field_name": "comparative_outcome",
+        }
+    ]
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.wrong_arm_link_count == 1
+
+
+def test_same_value_on_multiple_arms_is_not_wrong_when_own_arm_supports_it() -> None:
+    extraction, reference = _documents(
+        [_fact("species", "mouse", experiment_id="EXP-B")],
+        [
+            _reference_fact(
+                "APP-P1-MODEL-ARM-A",
+                "biological_model",
+                "species",
+                "mouse",
+                experiment_id="EXP-A",
+            ),
+            _reference_fact(
+                "APP-P1-MODEL-ARM-B",
+                "biological_model",
+                "species",
+                "mouse",
+                experiment_id="EXP-B",
+            ),
+        ],
+    )
+    reference["papers"][0]["experiment_ids"] = ["EXP-A", "EXP-B"]
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.wrong_arm_link_count == 0
+
+
+def test_only_unreferenced_exact_reported_number_is_unsupported() -> None:
+    extraction, reference = _documents(
+        [
+            _fact(
+                "outcome_value",
+                42,
+                experiment_id="EXP-A",
+                provenance="exact_reported",
+            ),
+            _fact(
+                "numeric_value",
+                99,
+                experiment_id="EXP-A",
+                provenance="exact_reported",
+            ),
+        ],
+        [
+            _reference_fact(
+                "APP-P1-NUM-SUPPORTED",
+                "exact_numeric",
+                "outcome_value",
+                42,
+                experiment_id="EXP-A",
+            )
+        ],
+    )
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.categories["exact_numeric"].numerator == 1
+    assert score.unsupported_numeric_count == 1
+
+
+def test_unknown_experiment_ids_are_found_in_flat_facts_and_atomic_bundles() -> None:
+    extraction = {
+        "paper_id": "PAPER-1",
+        "facts": [
+            {
+                **_fact("species", "mouse"),
+                "experiment_id": "EXP-FLAT-INVENTED",
+            }
+        ],
+        "accepted_candidate_outcomes": {
+            "CTX-X": {
+                "candidate_id": "CTX-X",
+                "experiment_id": "EXP-BUNDLE-INVENTED",
+                "foundational_outcomes": [
+                    {
+                        "raw_text": "expression was present",
+                        "numeric_provenance": "not_reported",
+                        "evidence_ids": ["E-1"],
+                    }
+                ],
+                "comparative_outcomes": [],
+                "exact_measurements": [],
+            }
+        },
+    }
+    reference = {
+        "paper_id": "PAPER-1",
+        "experiment_ids": ["EXP-A"],
+        "evidence_ids": ["E-1"],
+        "reference_facts": [],
+    }
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.invented_id_count == 2
+
+
+def test_anonymous_invented_conflicts_are_added_after_id_deduplication() -> None:
+    extraction, reference = _documents(
+        [_fact("species", "mouse", experiment_id="EXP-INVENTED")],
+        [],
+    )
+    reference["papers"][0]["experiment_ids"] = ["EXP-A"]
+    extraction["papers"][0]["quarantined_conflicts"] = [
+        {"code": "unknown_experiment_id", "experiment_id": "EXP-INVENTED"},
+        {
+            "code": "invented_candidate_ids",
+            "candidate_id": None,
+            "candidate_ids": [],
+        },
+        {
+            "code": "unknown_evidence_id",
+            "evidence_id": None,
+            "evidence_ids": [],
+        },
+    ]
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.invented_id_count == 3
+
+
+def test_maximum_matching_is_independent_of_overlapping_alias_order() -> None:
+    extraction, reference = _documents(
+        [_fact("assay", "alpha"), _fact("assay", "beta")],
+        [
+            _reference_fact(
+                "APP-P1-MATCH-FLEXIBLE",
+                "assay",
+                "assay",
+                "alpha",
+                aliases=["beta"],
+            ),
+            _reference_fact(
+                "APP-P1-MATCH-ONLY-ALPHA",
+                "assay",
+                "assay",
+                "alpha",
+            ),
+        ],
+    )
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.categories["assay"].numerator == 2
+    assert score.precision == 1.0
+
+
 def test_application_reference_does_not_leak_into_production_or_prompts() -> None:
     repository = Path(__file__).resolve().parents[1]
-    forbidden = ("data/benchmarks/application_pilot", "APP-P1-FORM-1")
     production_files = list((repository / "src" / "extraction").rglob("*.py"))
     serialized_prompts = [
         path
@@ -381,11 +589,55 @@ def test_application_reference_does_not_leak_into_production_or_prompts() -> Non
         for path in root.rglob(suffix)
     ]
 
-    leaks = {
-        str(path.relative_to(repository)): token
+    path_leaks = {
+        str(path.relative_to(repository))
         for path in [*production_files, *serialized_prompts]
-        for token in forbidden
-        if token in path.read_text(encoding="utf-8")
+        if "data/benchmarks/application_pilot"
+        in path.read_text(encoding="utf-8")
+    }
+    reference_id_leaks = {
+        str(path.relative_to(repository)): sorted(
+            set(re.findall(r"\bAPP-[A-Z0-9]+(?:-[A-Z0-9]+)+\b", text))
+        )
+        for path in [*production_files, *serialized_prompts]
+        if (
+            text := path.read_text(encoding="utf-8")
+        )
+        and re.search(r"\bAPP-[A-Z0-9]+(?:-[A-Z0-9]+)+\b", text)
     }
 
-    assert leaks == {}
+    assert path_leaks == set()
+    assert reference_id_leaks == {}
+
+
+def test_production_extraction_modules_do_not_import_evaluator_or_keys() -> None:
+    repository = Path(__file__).resolve().parents[1]
+    extraction_root = repository / "src" / "extraction"
+    forbidden_imports: dict[str, list[str]] = {}
+    for path in extraction_root.glob("*.py"):
+        if path.name.startswith(("evaluate_", "benchmark_")) or (
+            "benchmark" in path.stem
+        ):
+            continue
+        imported: list[str] = []
+        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Import):
+                imported.extend(alias.name for alias in node.names)
+            elif isinstance(node, ast.ImportFrom):
+                module = node.module or ""
+                imported.append(module)
+                imported.extend(
+                    ".".join(part for part in (module, alias.name) if part)
+                    for alias in node.names
+                )
+        forbidden = sorted(
+            module
+            for module in imported
+            if module.startswith("src.extraction.evaluate_")
+            or ".benchmark" in module
+            or module.endswith("reference_loader")
+        )
+        if forbidden:
+            forbidden_imports[str(path.relative_to(repository))] = forbidden
+
+    assert forbidden_imports == {}

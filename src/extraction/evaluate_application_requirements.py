@@ -8,6 +8,7 @@ reference.  It never performs fuzzy scientific matching.
 
 from __future__ import annotations
 
+from collections import defaultdict
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
@@ -343,10 +344,8 @@ def _same_field(actual: str, reference: str) -> bool:
     return actual == reference or actual.rsplit(".", 1)[-1] == reference
 
 
-def _matches(actual: _ActualFact, reference: _ReferenceFact) -> bool:
+def _matches_content(actual: _ActualFact, reference: _ReferenceFact) -> bool:
     if actual.paper_id != reference.paper_id:
-        return False
-    if reference.experiment_id != actual.experiment_id:
         return False
     if reference.category == "provenance":
         leaf = reference.field_name.rsplit(".", 1)[-1]
@@ -372,6 +371,8 @@ def _matches(actual: _ActualFact, reference: _ReferenceFact) -> bool:
             _canonical_value(reference.field_name, value) in expected
             for value in values
         )
+    if _category_for_field(actual.field_name) != reference.category:
+        return False
     if not _same_field(actual.field_name, reference.field_name):
         return False
     if actual.reference_ids and reference.reference_id not in actual.reference_ids:
@@ -385,6 +386,13 @@ def _matches(actual: _ActualFact, reference: _ReferenceFact) -> bool:
     return any(
         _canonical_value(reference.field_name, value) in expected
         for value in actual.values
+    )
+
+
+def _matches(actual: _ActualFact, reference: _ReferenceFact) -> bool:
+    return (
+        reference.experiment_id == actual.experiment_id
+        and _matches_content(actual, reference)
     )
 
 
@@ -456,34 +464,195 @@ def _category_for_field(field_name: str) -> str | None:
     return None
 
 
-def _conflicts(document: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+def _conflicts(
+    document: Mapping[str, Any],
+) -> list[tuple[str, Mapping[str, Any]]]:
     return [
-        row
+        (paper_id, row)
         for paper in _papers(document)
+        if (paper_id := _first_text(paper, ("paper_id", "id"))) is not None
         for row in _rows(paper.get("quarantined_conflicts"))
     ]
+
+
+def _reference_papers(
+    document: Mapping[str, Any],
+) -> dict[str, Mapping[str, Any]]:
+    return {
+        paper_id: paper
+        for paper in _papers(document)
+        if (paper_id := _first_text(paper, ("paper_id", "id"))) is not None
+    }
+
+
+def _allowed_experiment_ids(paper: Mapping[str, Any]) -> set[str]:
+    identifiers = _string_ids(paper.get("experiment_ids"))
+    if identifiers:
+        return identifiers
+    return {
+        identifier
+        for row in _reference_rows(paper)
+        if (identifier := _first_text(row, ("experiment_id", "arm_id")))
+    }
+
+
+def _bundle_rows(paper: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    bundles = paper.get("accepted_candidate_outcomes")
+    if not isinstance(bundles, Mapping):
+        bundles = paper.get("candidate_outcomes")
+    if isinstance(bundles, Mapping):
+        return [row for row in bundles.values() if isinstance(row, Mapping)]
+    return _rows(bundles)
+
+
+def _extracted_experiment_ids(
+    paper: Mapping[str, Any],
+    actual_facts: Sequence[_ActualFact],
+    paper_id: str,
+) -> set[str]:
+    identifiers = {
+        fact.experiment_id
+        for fact in actual_facts
+        if fact.paper_id == paper_id and fact.experiment_id is not None
+    }
+    identifiers.update(
+        identifier
+        for row in _rows(paper.get("experiments"))
+        if (identifier := _first_text(row, ("experiment_id", "id")))
+    )
+    identifiers.update(
+        identifier
+        for row in _bundle_rows(paper)
+        if (identifier := _first_text(row, ("experiment_id", "arm_id")))
+    )
+    return identifiers
+
+
+def _wrong_arm_count(
+    extraction: Mapping[str, Any],
+    reference: Mapping[str, Any],
+    actual_facts: Sequence[_ActualFact],
+    reference_facts: Sequence[_ReferenceFact],
+) -> int:
+    reference_papers = _reference_papers(reference)
+    detected: set[tuple[str, str, str, tuple[tuple[str, Any], ...]]] = set()
+    for actual in actual_facts:
+        if actual.experiment_id is None:
+            continue
+        reference_paper = reference_papers.get(actual.paper_id)
+        if reference_paper is None:
+            continue
+        valid_ids = _allowed_experiment_ids(reference_paper)
+        if actual.experiment_id not in valid_ids:
+            continue
+        if any(_matches(actual, expected) for expected in reference_facts):
+            continue
+        if any(
+            expected.experiment_id is not None
+            and expected.experiment_id != actual.experiment_id
+            and expected.experiment_id in valid_ids
+            and _matches_content(actual, expected)
+            for expected in reference_facts
+        ):
+            detected.add(
+                (
+                    actual.paper_id,
+                    actual.experiment_id,
+                    actual.field_name.rsplit(".", 1)[-1],
+                    tuple(
+                        dict.fromkeys(
+                            _canonical_value(actual.field_name, value)
+                            for value in actual.values
+                        )
+                    ),
+                )
+            )
+
+    quarantined: set[tuple[str, str | None, str | None]] = set()
+    anonymous = 0
+    for paper_id, row in _conflicts(extraction):
+        if _first_text(row, ("code", "reason")) not in {
+            "candidate_experiment_mismatch",
+            "wrong_arm_link",
+            "wrong_arm",
+        }:
+            continue
+        experiment_id = _first_text(row, ("experiment_id", "arm_id"))
+        field_name = _first_text(row, ("field_name", "field"))
+        field_leaf = field_name.rsplit(".", 1)[-1] if field_name else None
+        if experiment_id is None and field_leaf is None:
+            anonymous += 1
+        else:
+            quarantined.add((paper_id, experiment_id, field_leaf))
+
+    additional_quarantines = sum(
+        not any(
+            detected_paper == paper_id
+            and (experiment_id is None or detected_experiment == experiment_id)
+            and (field_name is None or detected_field == field_name)
+            for (
+                detected_paper,
+                detected_experiment,
+                detected_field,
+                _,
+            ) in detected
+        )
+        for paper_id, experiment_id, field_name in quarantined
+    )
+    return len(detected) + additional_quarantines + anonymous
+
+
+def _contains_number(fact: _ActualFact) -> bool:
+    return any(
+        _canonical_value(fact.field_name, value)[0] == "number"
+        for value in fact.values
+    )
+
+
+def _unsupported_numeric_count(
+    actual_facts: Sequence[_ActualFact],
+    reference_facts: Sequence[_ReferenceFact],
+) -> int:
+    count = 0
+    for fact in actual_facts:
+        if (
+            _category_for_field(fact.field_name) != "exact_numeric"
+            or not _contains_number(fact)
+        ):
+            continue
+        if _is_graph_estimated(fact):
+            count += 1
+            continue
+        provenance = (fact.provenance or "").casefold().replace("-", "_")
+        if provenance != "exact_reported":
+            continue
+        if not any(
+            reference.category == "exact_numeric"
+            and _matches(fact, reference)
+            for reference in reference_facts
+        ):
+            count += 1
+    return count
 
 
 def _safety_counts(
     extraction: Mapping[str, Any],
     reference: Mapping[str, Any],
     actual_facts: Sequence[_ActualFact],
+    reference_facts: Sequence[_ReferenceFact],
 ) -> tuple[int, int, int]:
     conflicts = _conflicts(extraction)
-    wrong_arm = sum(
-        1
-        for row in conflicts
-        if _first_text(row, ("code", "reason"))
-        in {"candidate_experiment_mismatch", "wrong_arm_link", "wrong_arm"}
+    wrong_arm = _wrong_arm_count(
+        extraction, reference, actual_facts, reference_facts
     )
     explicit_invented: set[str] = set()
     anonymous_invented_conflicts = 0
     for paper in _papers(extraction):
         explicit_invented.update(_string_ids(paper.get("invented_ids")))
-    for row in conflicts:
+    for _, row in conflicts:
         code = _first_text(row, ("code", "reason")) or ""
         if code.startswith("unknown_") or code.startswith("invented_"):
-            explicit_invented.update(
+            row_identifiers = {
                 identifier
                 for name in (
                     "experiment_id",
@@ -492,49 +661,24 @@ def _safety_counts(
                     "identifier",
                 )
                 if isinstance((identifier := row.get(name)), str) and identifier
-            )
+            }
             for name in ("candidate_ids", "evidence_ids", "identifiers"):
-                explicit_invented.update(_string_ids(row.get(name)))
-            if not any(
-                name in row
-                for name in (
-                    "experiment_id",
-                    "candidate_id",
-                    "evidence_id",
-                    "identifier",
-                    "candidate_ids",
-                    "evidence_ids",
-                    "identifiers",
-                )
-            ):
+                row_identifiers.update(_string_ids(row.get(name)))
+            explicit_invented.update(row_identifiers)
+            if not row_identifiers:
                 anonymous_invented_conflicts += 1
 
-    reference_papers = {
-        _first_text(paper, ("paper_id", "id")): paper
-        for paper in _papers(reference)
-    }
+    reference_papers = _reference_papers(reference)
     for paper in _papers(extraction):
         paper_id = _first_text(paper, ("paper_id", "id"))
         reference_paper = reference_papers.get(paper_id)
         if reference_paper is None:
             continue
-        allowed_experiments = _string_ids(reference_paper.get("experiment_ids"))
-        if not allowed_experiments:
-            allowed_experiments = {
-                identifier
-                for row in _reference_rows(reference_paper)
-                if (
-                    identifier := _first_text(
-                        row, ("experiment_id", "arm_id")
-                    )
-                )
-            }
+        allowed_experiments = _allowed_experiment_ids(reference_paper)
         if allowed_experiments:
-            extracted_experiments = {
-                identifier
-                for row in _rows(paper.get("experiments"))
-                if (identifier := _first_text(row, ("experiment_id", "id")))
-            }
+            extracted_experiments = _extracted_experiment_ids(
+                paper, actual_facts, paper_id
+            )
             explicit_invented.update(extracted_experiments - allowed_experiments)
         allowed_evidence = _string_ids(reference_paper.get("evidence_ids"))
         if allowed_evidence:
@@ -546,13 +690,10 @@ def _safety_counts(
             }
             explicit_invented.update(extracted_evidence - allowed_evidence)
 
-    unsupported_numeric = sum(
-        1
-        for fact in actual_facts
-        if _category_for_field(fact.field_name) == "exact_numeric"
-        and _is_graph_estimated(fact)
+    unsupported_numeric = _unsupported_numeric_count(
+        actual_facts, reference_facts
     )
-    invented_count = max(len(explicit_invented), anonymous_invented_conflicts)
+    invented_count = len(explicit_invented) + anonymous_invented_conflicts
     return wrong_arm, invented_count, unsupported_numeric
 
 
@@ -577,6 +718,72 @@ def _category_scores(
     return scores
 
 
+def _maximum_matches(
+    actual_facts: Sequence[_ActualFact],
+    reference_facts: Sequence[_ReferenceFact],
+) -> tuple[set[str], set[int]]:
+    """Return deterministic maximum one-to-one matches within fact groups."""
+
+    groups: dict[tuple[str, str, str, str | None], list[int]] = defaultdict(list)
+    for index, reference in enumerate(reference_facts):
+        groups[
+            (
+                reference.paper_id,
+                reference.category,
+                reference.field_name.rsplit(".", 1)[-1],
+                reference.experiment_id,
+            )
+        ].append(index)
+
+    matched_reference_ids: set[str] = set()
+    matched_actual_indices: set[int] = set()
+    for group in sorted(groups, key=lambda value: tuple(str(item) for item in value)):
+        reference_indices = sorted(
+            groups[group], key=lambda index: reference_facts[index].reference_id
+        )
+        adjacency = {
+            reference_index: sorted(
+                (
+                    actual_index
+                    for actual_index, actual in enumerate(actual_facts)
+                    if _matches(actual, reference_facts[reference_index])
+                ),
+                key=lambda index: (
+                    actual_facts[index].field_name,
+                    repr(
+                        tuple(
+                            _canonical_value(actual_facts[index].field_name, value)
+                            for value in actual_facts[index].values
+                        )
+                    ),
+                    index,
+                ),
+            )
+            for reference_index in reference_indices
+        }
+        actual_owner: dict[int, int] = {}
+
+        def augment(reference_index: int, seen: set[int]) -> bool:
+            for actual_index in adjacency[reference_index]:
+                if actual_index in seen:
+                    continue
+                seen.add(actual_index)
+                owner = actual_owner.get(actual_index)
+                if owner is None or augment(owner, seen):
+                    actual_owner[actual_index] = reference_index
+                    return True
+            return False
+
+        for reference_index in reference_indices:
+            augment(reference_index, set())
+        for actual_index, reference_index in actual_owner.items():
+            reference = reference_facts[reference_index]
+            matched_reference_ids.add(reference.reference_id)
+            if reference.category != "provenance":
+                matched_actual_indices.add(actual_index)
+    return matched_reference_ids, matched_actual_indices
+
+
 def evaluate_application_requirements(
     extraction: Mapping[str, Any],
     reference: Mapping[str, Any],
@@ -585,23 +792,9 @@ def evaluate_application_requirements(
 
     actual = _actual_facts(extraction)
     expected = _reference_facts(reference)
-    used_actual: set[int] = set()
-    matched_reference_ids: set[str] = set()
-    for reference_fact in expected:
-        reusable_actual = reference_fact.category == "provenance"
-        match_index = next(
-            (
-                index
-                for index, actual_fact in enumerate(actual)
-                if (reusable_actual or index not in used_actual)
-                and _matches(actual_fact, reference_fact)
-            ),
-            None,
-        )
-        if match_index is not None:
-            if not reusable_actual:
-                used_actual.add(match_index)
-            matched_reference_ids.add(reference_fact.reference_id)
+    matched_reference_ids, matched_actual_indices = _maximum_matches(
+        actual, expected
+    )
 
     paper_ids = sorted(
         {
@@ -631,12 +824,12 @@ def evaluate_application_requirements(
         fact for fact in actual if _category_for_field(fact.field_name) is not None
     ]
     matched_actual_count = sum(
-        index in used_actual
+        index in matched_actual_indices
         and _category_for_field(fact.field_name) is not None
         for index, fact in enumerate(actual)
     )
     wrong_arm, invented, unsupported = _safety_counts(
-        extraction, reference, actual
+        extraction, reference, actual, expected
     )
     missing = sorted(
         row.reference_id
