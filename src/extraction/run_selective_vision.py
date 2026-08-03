@@ -124,8 +124,14 @@ def response_schema(task: SelectiveVisionTask) -> dict[str, Any]:
                 "experiment-bound vision tasks require both issued IDs"
             )
         properties = {
-            "experiment_id": {"const": task.experiment_id},
-            "candidate_id": {"const": task.candidate_id},
+            "experiment_id": {
+                "type": "string",
+                "const": task.experiment_id,
+            },
+            "candidate_id": {
+                "type": "string",
+                "const": task.candidate_id,
+            },
             **properties,
         }
         required = ["experiment_id", "candidate_id", *required]

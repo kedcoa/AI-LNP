@@ -322,6 +322,13 @@ def run_approved_manifest(
                 ),
             )
             response_paths[row.request_id] = response_path
+            if payload.get("status") != "completed":
+                details = payload.get("incomplete_details")
+                raise RuntimeError(
+                    "provider response is unusable because status is not "
+                    f"completed: status={payload.get('status')!r}, "
+                    f"details={details!r}"
+                )
             succeeded.append(row.request_id)
         except Exception as exc:
             _atomic_create(

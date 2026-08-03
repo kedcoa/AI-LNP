@@ -59,7 +59,11 @@ class _FakeResponses:
         self.calls.append(request)
         if len(self.calls) == self.fail_index:
             raise RuntimeError("provider unavailable")
-        return {"id": f"response-{len(self.calls)}", "output_text": "{}"}
+        return {
+            "id": f"response-{len(self.calls)}",
+            "status": "completed",
+            "output_text": "{}",
+        }
 
 
 class _FakeProvider:
@@ -149,7 +153,7 @@ class _ResponseLike:
         self.output_text = json.dumps(_empty_paper_map(paper_id))
 
     def model_dump(self, mode: str = "json") -> dict[str, object]:
-        return {"id": "resp-real-shape", "output": []}
+        return {"id": "resp-real-shape", "status": "completed", "output": []}
 
 
 class _ResponseLikeProvider:
@@ -200,6 +204,41 @@ def test_runner_continues_after_one_failed_call_without_retry(tmp_path: Path) ->
     assert summary.retry_count == 0
     assert summary.repair_count == 0
     assert len(provider.responses.calls) == 3
+
+
+def test_runner_marks_incomplete_response_failed_and_preserves_raw_response(
+    tmp_path: Path,
+) -> None:
+    manifest = prepare_map_gate(_papers(tmp_path), tmp_path / "gate-a")
+
+    class IncompleteResponses(_FakeResponses):
+        def create(self, **request: object) -> dict[str, object]:
+            response = super().create(**request)
+            if len(self.calls) == 1:
+                response.update(
+                    {
+                        "status": "incomplete",
+                        "incomplete_details": {"reason": "max_output_tokens"},
+                        "output_text": "{\"truncated\":",
+                    }
+                )
+            return response
+
+    provider = _FakeProvider()
+    provider.responses = IncompleteResponses()
+
+    summary = run_approved_manifest(
+        manifest.manifest_path,
+        manifest.approval_hash,
+        client=provider,
+    )
+
+    assert summary.failed_request_ids == ["REQ-1"]
+    assert summary.succeeded_request_ids == ["REQ-2", "REQ-3"]
+    raw_path = manifest.run_root / "REQ-1" / "response.json"
+    assert raw_path.exists()
+    assert json.loads(raw_path.read_text())["response"]["status"] == "incomplete"
+    assert (manifest.run_root / "REQ-1" / "error.json").exists()
 
 
 @pytest.mark.parametrize("mutation", ["wrong_approval", "request", "extra_request"])

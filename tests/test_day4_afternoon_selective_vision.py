@@ -4,6 +4,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from jsonschema import Draft202012Validator
 from PIL import Image
 from pydantic import ValidationError
 
@@ -169,10 +170,17 @@ def test_experiment_bound_task_requires_response_to_echo_issued_ids(tmp_path):
 
     schema = response_schema(task)
 
-    assert schema["properties"]["experiment_id"] == {"const": "EXP-ISSUED"}
-    assert schema["properties"]["candidate_id"] == {"const": "CTX-ISSUED"}
+    assert schema["properties"]["experiment_id"] == {
+        "type": "string",
+        "const": "EXP-ISSUED",
+    }
+    assert schema["properties"]["candidate_id"] == {
+        "type": "string",
+        "const": "CTX-ISSUED",
+    }
     assert "experiment_id" in schema["required"]
     assert "candidate_id" in schema["required"]
+    Draft202012Validator.check_schema(schema)
 
 
 def test_image_data_uses_verified_jpeg_mime_type(tmp_path):
