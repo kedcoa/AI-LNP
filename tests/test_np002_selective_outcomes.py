@@ -33,6 +33,8 @@ def test_prepare_creates_two_source_derived_immutable_figure_tasks(
     tasks = {_read(row["task_path"])["figure"]: _read(row["task_path"]) for row in manifest["requests"]}
     assert set(tasks) == {"Figure 2", "Figure 4"}
     assert len({row["slot_id"] for row in tasks["Figure 2"]["slots"]}) == 6
+    assert all(row["dose"] == 0.3 for row in tasks["Figure 2"]["slots"])
+    assert all("0p3mgkg" not in row["slot_id"] for row in tasks["Figure 2"]["slots"])
     assert len({row["slot_id"] for row in tasks["Figure 4"]["slots"]}) == 12
     assert {row["dose"] for row in tasks["Figure 4"]["slots"]} == {0.3, 1.0}
     assert all(row["payload"] == "Cre mRNA" for row in tasks["Figure 4"]["slots"])
@@ -686,6 +688,73 @@ def test_merge_validated_rejects_response_changed_after_run_validation(
             tmp_path / "run",
             tmp_path / "merged" / "merged_extraction.json",
         )
+
+
+def test_replay_validated_rebinds_authenticated_responses_without_paid_calls(
+    tmp_path: Path,
+) -> None:
+    """Local replay may add predetermined IDs but cannot invoke a provider."""
+    source_manifest, source_manifest_path = _prepared_manifest(tmp_path / "source")
+    approvals = {
+        row["figure"]: row["request_sha256"]
+        for row in source_manifest["requests"]
+    }
+    selective.run_approved(
+        source_manifest_path,
+        approvals,
+        tmp_path / "source_run",
+        _FakeClient(_approved_responses(source_manifest)),
+    )
+    target_manifest, target_manifest_path = _prepared_manifest(tmp_path / "target")
+
+    result = selective.replay_validated(
+        source_manifest_path,
+        tmp_path / "source_run",
+        target_manifest_path,
+        tmp_path / "replay_run",
+    )
+
+    assert result["paid_api_requests"] == 0
+    assert result["source_paid_api_requests"] == 2
+    for entry in target_manifest["requests"]:
+        task = _read(entry["task_path"])
+        response = _read(
+            str(
+                tmp_path
+                / "replay_run"
+                / "NP-002"
+                / task["slug"]
+                / "validated_response.json"
+            )
+        )
+        selective.validate_visual_response(response, task)
+        assert all(row["experiment_id"] for row in response["outcomes"])
+
+
+def test_deterministically_merged_arm_identity_is_evaluator_compatible(
+    tmp_path: Path,
+) -> None:
+    """Verbose paper-map units must not make every correctly joined arm unmatchable."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {
+        row["figure"]: row["request_sha256"] for row in manifest["requests"]
+    }
+    selective.run_approved(
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        _FakeClient(_approved_responses(manifest)),
+    )
+    output_path = tmp_path / "merged" / "merged_extraction.json"
+    selective.merge_validated(manifest_path, tmp_path / "run", output_path)
+
+    score = evaluate(
+        output_path.parent,
+        selective.ROOT / "data/benchmarks/full_paper/NP-002.json",
+    )
+
+    assert score.matched_experiment_fact_count > 0
+    assert score.wrong_arm_link_count < score.extracted_benchmark_fact_count
 
 
 def test_merge_validated_requires_completed_ordered_run_manifest_bound_to_preflight(

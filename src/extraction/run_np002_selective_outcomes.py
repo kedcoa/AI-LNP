@@ -205,11 +205,22 @@ def _experiment_id(formulation: str, payload: str, dose: float | None) -> str:
 
 
 def _slots(
-    *, figure: str, payload: str, doses: list[float | None], assay: str, endpoint: str
+    *,
+    figure: str,
+    payload: str,
+    doses: list[float | None],
+    assay: str,
+    endpoint: str,
+    include_dose_in_slot_id: bool = True,
 ) -> list[dict[str, Any]]:
     return [
         Slot(
-            slot_id=_slot_id(figure, formulation, dose, recipient),
+            slot_id=_slot_id(
+                figure,
+                formulation,
+                dose if include_dose_in_slot_id else None,
+                recipient,
+            ),
             experiment_id=_experiment_id(formulation, payload, dose),
             formulation=formulation,
             payload=payload,
@@ -224,7 +235,9 @@ def _slots(
     ]
 
 
-def _experiment_inventory(paper_map: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
+def _experiment_inventory(
+    paper_map: Mapping[str, Any], html_source: str
+) -> dict[str, dict[str, Any]]:
     contexts = paper_map.get("provisional_experiment_contexts")
     if not isinstance(contexts, list):
         raise ValueError("paper map lacks provisional experiment contexts")
@@ -245,6 +258,9 @@ def _experiment_inventory(paper_map: Mapping[str, Any]) -> dict[str, dict[str, A
         ("MC3", "FORM::MC3_LNP", "Cre mRNA", "PAYLOAD::Cre_mRNA", 1.0),
         ("cKK-E12", "FORM::cKK-E12_LNP", "Cre mRNA", "PAYLOAD::Cre_mRNA", 1.0),
     )
+    animal_methods = _html_element_text(html_source, "Par20")
+    if "intravenously via the lateral tail vein" not in animal_methods:
+        raise ValueError("NP-002 animal methods do not support the normalized route")
     inventory: dict[str, dict[str, Any]] = {}
     for formulation, formulation_id, payload, payload_id, dose in definitions:
         context = by_identity.get((formulation_id, payload_id))
@@ -254,6 +270,9 @@ def _experiment_inventory(paper_map: Mapping[str, Any]) -> dict[str, dict[str, A
         if not isinstance(source_dose, Mapping) or not source_dose.get("evidence_ids"):
             raise ValueError("paper-map experiment dose lacks source evidence")
         experiment_id = _experiment_id(formulation, payload, dose)
+        context_evidence_ids = list(context.get("joint_evidence_ids", []))
+        model = "mice" if payload == "QUANT DNA" else "Ai14 Cre-reporter mice"
+        timepoint_unit = "hour" if payload == "QUANT DNA" else "day"
         inventory[experiment_id] = {
             "experiment_id": experiment_id,
             "provisional_context_id": context.get("provisional_context_id"),
@@ -262,14 +281,23 @@ def _experiment_inventory(paper_map: Mapping[str, Any]) -> dict[str, dict[str, A
             "payload": payload,
             "payload_id": payload_id,
             "dose": {**dict(source_dose), "value": dose},
-            "dose_unit": dict(context["dose_unit"]),
-            "route": dict(context["route"]),
-            "species": dict(context["species"]),
-            "experimental_model": dict(context["experimental_model"]),
+            "dose_unit": {"value": "mg/kg", "evidence_ids": list(source_dose["evidence_ids"])},
+            "route": {
+                "value": "intravenous via the lateral tail vein",
+                "evidence_ids": ["NP002-ANIMAL-METHODS"],
+            },
+            "species": {"value": "mouse", "evidence_ids": ["NP002-ANIMAL-METHODS"]},
+            "experimental_model": {
+                "value": model,
+                "evidence_ids": context_evidence_ids,
+            },
             "organ": dict(context["organ"]),
             "timepoint": dict(context["timepoint"]),
-            "timepoint_unit": dict(context["timepoint_unit"]),
-            "joint_evidence_ids": list(context.get("joint_evidence_ids", [])),
+            "timepoint_unit": {
+                "value": timepoint_unit,
+                "evidence_ids": list(context["timepoint"]["evidence_ids"]),
+            },
+            "joint_evidence_ids": context_evidence_ids,
         }
     return inventory
 
@@ -289,8 +317,10 @@ def _task_specs(html_source: str) -> list[dict[str, Any]]:
                 doses=[0.3],
                 assay="cellular DNA accumulation",
                 endpoint="QUANT DNA accumulation",
+                include_dose_in_slot_id=False,
             ),
             "evidence": [
+                {"evidence_id": "NP002-ANIMAL-METHODS", "source_id": "Par20", "text": _html_element_text(html_source, "Par20")},
                 {"evidence_id": "NP002-FIG2-CAPTION", "source_id": "Fig2", "text": _figure_caption(html_source, "Fig2")},
                 {"evidence_id": "NP002-FIG2-RESULTS", "source_id": "Par11", "text": _html_element_text(html_source, "Par11")},
                 {"evidence_id": "NP002-FIG2-METHODS", "source_id": "Par18", "text": _html_element_text(html_source, "Par18")},
@@ -311,6 +341,7 @@ def _task_specs(html_source: str) -> list[dict[str, Any]]:
                 endpoint="percent tdTomato-positive cells",
             ),
             "evidence": [
+                {"evidence_id": "NP002-ANIMAL-METHODS", "source_id": "Par20", "text": _html_element_text(html_source, "Par20")},
                 {"evidence_id": "NP002-FIG4-CAPTION", "source_id": "Fig4", "text": _figure_caption(html_source, "Fig4")},
                 {"evidence_id": "NP002-FIG4-RESULTS-SETUP", "source_id": "Par14", "text": _html_element_text(html_source, "Par14")},
                 {"evidence_id": "NP002-FIG4-RESULTS-COMPARISON", "source_id": "Par15", "text": _html_element_text(html_source, "Par15")},
@@ -422,16 +453,17 @@ def _build_request(task: dict[str, Any], model: str) -> dict[str, Any]:
 
 
 def _task_validation_envelope(task: Mapping[str, Any]) -> dict[str, Any]:
-    keys = (
+    keys = [
         "paper_id",
         "figure",
         "slots",
-        "experiment_inventory",
         "evidence",
         "allowed_evidence_ids",
         "crop_evidence_id",
         "allowed_exact_numeric_outcomes",
-    )
+    ]
+    if "experiment_inventory" in task:
+        keys.insert(3, "experiment_inventory")
     try:
         return {key: task[key] for key in keys}
     except KeyError as exc:
@@ -448,7 +480,7 @@ def prepare(output_root: Path, model: str) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=True)
     html_source = HTML_PATH.read_text(encoding="utf-8")
     paper_map = _read_json(PAPER_MAP_PATH, label="committed v5.2 paper map")
-    experiment_inventory = _experiment_inventory(paper_map)
+    experiment_inventory = _experiment_inventory(paper_map, html_source)
     requests: list[dict[str, Any]] = []
     for spec in _task_specs(html_source):
         task_dir = root / spec["slug"]
@@ -1219,6 +1251,143 @@ def _reported(value: Any, evidence_ids: list[str]) -> dict[str, Any]:
 
 def _missing(reason: str) -> dict[str, Any]:
     return {"value": None, "status": "missing", "evidence_ids": [], "missing_reason": reason}
+
+
+def _authenticate_source_response(
+    response: Mapping[str, Any], task: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Validate current or legacy output without changing scientific content."""
+    authenticated = json.loads(_canonical_json(response))
+    task_copy = json.loads(_canonical_json(task))
+    outcomes = authenticated.get("outcomes")
+    if not isinstance(outcomes, list):
+        raise ValueError("source validated response lacks outcomes")
+    if all(isinstance(row, Mapping) and row.get("experiment_id") for row in outcomes):
+        validate_visual_response(authenticated, task_copy)
+        return authenticated
+
+    slots = task_copy.get("slots")
+    if not isinstance(slots, list):
+        raise ValueError("legacy source task lacks slots")
+    legacy_ids: dict[str, str] = {}
+    for slot in slots:
+        if not isinstance(slot, dict) or not isinstance(slot.get("slot_id"), str):
+            raise ValueError("legacy source task has an invalid slot")
+        legacy_id = f"LEGACY::{slot['slot_id']}"
+        slot["experiment_id"] = legacy_id
+        legacy_ids[slot["slot_id"]] = legacy_id
+    for outcome in outcomes:
+        if not isinstance(outcome, dict) or outcome.get("slot_id") not in legacy_ids:
+            raise ValueError("legacy source response links an invalid slot")
+        outcome["experiment_id"] = legacy_ids[str(outcome["slot_id"])]
+    validate_visual_response(authenticated, task_copy)
+    return authenticated
+
+
+def replay_validated(
+    source_manifest_path: Path,
+    source_run_root: Path,
+    target_manifest_path: Path,
+    target_run_root: Path,
+) -> dict[str, Any]:
+    """Rebind authenticated responses to a new preflight without provider access."""
+    _, source_entries = _verified_preflight(Path(source_manifest_path))
+    _, target_entries = _verified_preflight(Path(target_manifest_path))
+    source_run_manifest = _read_json(
+        Path(source_run_root) / PAPER_ID / "manifest.json",
+        label="source validated run manifest",
+    )
+    if source_run_manifest.get("status") != "validated":
+        raise ValueError("source replay run is not validated")
+    source_requests = source_run_manifest.get("requests")
+    if not isinstance(source_requests, list) or len(source_requests) != len(source_entries):
+        raise ValueError("source replay manifest request count is invalid")
+
+    replay_requests: list[dict[str, Any]] = []
+    for source_entry, target_entry, source_record in zip(
+        source_entries, target_entries, source_requests, strict=True
+    ):
+        if not isinstance(source_record, Mapping):
+            raise ValueError("source replay request record is invalid")
+        source_task, _, _ = _verified_task_and_request(source_entry)
+        target_task, _, _ = _verified_task_and_request(target_entry)
+        if (
+            source_task.get("figure") != target_task.get("figure")
+            or source_record.get("figure") != source_task.get("figure")
+            or source_record.get("request_sha256") != source_entry.get("request_sha256")
+        ):
+            raise ValueError("source replay request identity is invalid")
+        source_response_path = (
+            Path(source_run_root)
+            / PAPER_ID
+            / str(source_task["slug"])
+            / "validated_response.json"
+        )
+        source_response = _read_json(
+            source_response_path, label="source validated visual response"
+        )
+        if _sha256(_canonical_json(source_response)) != source_record.get("response_sha256"):
+            raise ValueError("source replay response checksum changed")
+        authenticated_source = _authenticate_source_response(
+            source_response, source_task
+        )
+
+        source_slots = {
+            str(slot["slot_id"]): slot for slot in source_task.get("slots", [])
+        }
+        target_slots = {
+            str(slot["slot_id"]): slot for slot in target_task.get("slots", [])
+        }
+        if set(source_slots) != set(target_slots):
+            raise ValueError("source and target replay slots differ")
+        for slot_id in source_slots:
+            for field in (
+                "formulation",
+                "payload",
+                "recipient_cell",
+                "assay",
+                "endpoint",
+            ):
+                if source_slots[slot_id].get(field) != target_slots[slot_id].get(field):
+                    raise ValueError("source and target replay slot identity differs")
+            source_dose = source_slots[slot_id].get("dose")
+            target_dose = target_slots[slot_id].get("dose")
+            if source_dose is not None and source_dose != target_dose:
+                raise ValueError("source and target replay slot dose differs")
+
+        rebound = json.loads(_canonical_json(authenticated_source))
+        for outcome in rebound["outcomes"]:
+            target_slot = target_slots[str(outcome["slot_id"])]
+            outcome["experiment_id"] = target_slot["experiment_id"]
+            outcome["dose"] = target_slot["dose"]
+        validate_visual_response(rebound, target_task)
+
+        target_figure_dir = (
+            Path(target_run_root) / PAPER_ID / str(target_task["slug"])
+        )
+        target_figure_dir.mkdir(parents=True, exist_ok=True)
+        _write_json(target_figure_dir / "validated_response.json", rebound)
+        replay_requests.append(
+            {
+                "figure": target_task["figure"],
+                "slug": target_task["slug"],
+                "request_sha256": target_entry["request_sha256"],
+                "response_sha256": _sha256(_canonical_json(rebound)),
+                "source_response_sha256": source_record["response_sha256"],
+            }
+        )
+
+    result = {
+        "status": "validated",
+        "paper_id": PAPER_ID,
+        "paid_api_requests": 0,
+        "source_paid_api_requests": source_run_manifest.get("paid_api_requests", 0),
+        "replay": True,
+        "requests": replay_requests,
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+    }
+    _write_json(Path(target_run_root) / PAPER_ID / "manifest.json", result)
+    return result
 
 
 def _formulation_id(formulation: str) -> str:
