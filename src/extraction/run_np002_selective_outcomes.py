@@ -39,6 +39,7 @@ class StrictModel(BaseModel):
 
 class Slot(StrictModel):
     slot_id: str = Field(min_length=1)
+    experiment_id: str = Field(min_length=1)
     formulation: str = Field(min_length=1)
     payload: str = Field(min_length=1)
     dose: float | None
@@ -49,6 +50,7 @@ class Slot(StrictModel):
 
 class OutcomeRow(StrictModel):
     slot_id: str = Field(min_length=1)
+    experiment_id: str = Field(min_length=1)
     formulation: str = Field(min_length=1)
     payload: str = Field(min_length=1)
     dose: float | None
@@ -189,12 +191,26 @@ def _slot_id(figure: str, formulation: str, dose: float | None, recipient: str) 
     return "-".join(parts)
 
 
+def _experiment_id(formulation: str, payload: str, dose: float | None) -> str:
+    if dose is None:
+        raise ValueError("experiment identity requires a dose")
+    formulation_keys = {"MC3": "MC3", "cKK-E12": "cKKE12"}
+    payload_keys = {"QUANT DNA": "QUANT", "Cre mRNA": "CRE"}
+    try:
+        formulation_key = formulation_keys[formulation]
+        payload_key = payload_keys[payload]
+    except KeyError as exc:
+        raise ValueError("unknown experiment identity value") from exc
+    return f"EXP::NP002::{payload_key}::{formulation_key}::{float(dose):.1f}"
+
+
 def _slots(
     *, figure: str, payload: str, doses: list[float | None], assay: str, endpoint: str
 ) -> list[dict[str, Any]]:
     return [
         Slot(
             slot_id=_slot_id(figure, formulation, dose, recipient),
+            experiment_id=_experiment_id(formulation, payload, dose),
             formulation=formulation,
             payload=payload,
             dose=dose,
@@ -206,6 +222,56 @@ def _slots(
         for dose in doses
         for recipient in ("Kupffer cells", "liver endothelial cells", "hepatocytes")
     ]
+
+
+def _experiment_inventory(paper_map: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
+    contexts = paper_map.get("provisional_experiment_contexts")
+    if not isinstance(contexts, list):
+        raise ValueError("paper map lacks provisional experiment contexts")
+    by_identity: dict[tuple[str, str], Mapping[str, Any]] = {}
+    for context in contexts:
+        if not isinstance(context, Mapping):
+            raise ValueError("paper-map experiment context must be an object")
+        formulation_id = context.get("formulation_id")
+        payload_id = context.get("payload_id")
+        if isinstance(formulation_id, str) and isinstance(payload_id, str):
+            by_identity[(formulation_id, payload_id)] = context
+
+    definitions = (
+        ("MC3", "FORM::MC3_LNP", "QUANT DNA", "PAYLOAD::QUANT_DNA", 0.3),
+        ("cKK-E12", "FORM::cKK-E12_LNP", "QUANT DNA", "PAYLOAD::QUANT_DNA", 0.3),
+        ("MC3", "FORM::MC3_LNP", "Cre mRNA", "PAYLOAD::Cre_mRNA", 0.3),
+        ("cKK-E12", "FORM::cKK-E12_LNP", "Cre mRNA", "PAYLOAD::Cre_mRNA", 0.3),
+        ("MC3", "FORM::MC3_LNP", "Cre mRNA", "PAYLOAD::Cre_mRNA", 1.0),
+        ("cKK-E12", "FORM::cKK-E12_LNP", "Cre mRNA", "PAYLOAD::Cre_mRNA", 1.0),
+    )
+    inventory: dict[str, dict[str, Any]] = {}
+    for formulation, formulation_id, payload, payload_id, dose in definitions:
+        context = by_identity.get((formulation_id, payload_id))
+        if context is None:
+            raise ValueError("paper map lacks a required source-supported experiment context")
+        source_dose = context.get("dose")
+        if not isinstance(source_dose, Mapping) or not source_dose.get("evidence_ids"):
+            raise ValueError("paper-map experiment dose lacks source evidence")
+        experiment_id = _experiment_id(formulation, payload, dose)
+        inventory[experiment_id] = {
+            "experiment_id": experiment_id,
+            "provisional_context_id": context.get("provisional_context_id"),
+            "formulation": formulation,
+            "formulation_id": formulation_id,
+            "payload": payload,
+            "payload_id": payload_id,
+            "dose": {**dict(source_dose), "value": dose},
+            "dose_unit": dict(context["dose_unit"]),
+            "route": dict(context["route"]),
+            "species": dict(context["species"]),
+            "experimental_model": dict(context["experimental_model"]),
+            "organ": dict(context["organ"]),
+            "timepoint": dict(context["timepoint"]),
+            "timepoint_unit": dict(context["timepoint_unit"]),
+            "joint_evidence_ids": list(context.get("joint_evidence_ids", [])),
+        }
+    return inventory
 
 
 def _task_specs(html_source: str) -> list[dict[str, Any]]:
@@ -220,7 +286,7 @@ def _task_specs(html_source: str) -> list[dict[str, Any]]:
             "slots": _slots(
                 figure="Figure 2",
                 payload="QUANT DNA",
-                doses=[None],
+                doses=[0.3],
                 assay="cellular DNA accumulation",
                 endpoint="QUANT DNA accumulation",
             ),
@@ -267,6 +333,7 @@ def _response_schema(slots: list[dict[str, Any]]) -> dict[str, Any]:
     }
     outcome_fields = {
         "slot_id": {"type": "string", "minLength": 1},
+        "experiment_id": {"type": "string", "minLength": 1},
         "formulation": {"type": "string", "minLength": 1},
         "payload": {"type": "string", "minLength": 1},
         "dose": {"type": ["number", "null"]},
@@ -359,6 +426,7 @@ def _task_validation_envelope(task: Mapping[str, Any]) -> dict[str, Any]:
         "paper_id",
         "figure",
         "slots",
+        "experiment_inventory",
         "evidence",
         "allowed_evidence_ids",
         "crop_evidence_id",
@@ -379,6 +447,8 @@ def prepare(output_root: Path, model: str) -> dict[str, Any]:
     root = (output_root / PAPER_ID).resolve()
     root.mkdir(parents=True, exist_ok=True)
     html_source = HTML_PATH.read_text(encoding="utf-8")
+    paper_map = _read_json(PAPER_MAP_PATH, label="committed v5.2 paper map")
+    experiment_inventory = _experiment_inventory(paper_map)
     requests: list[dict[str, Any]] = []
     for spec in _task_specs(html_source):
         task_dir = root / spec["slug"]
@@ -398,6 +468,12 @@ def prepare(output_root: Path, model: str) -> dict[str, Any]:
             "crop_sha256": crop_sha256,
             "crop_evidence_id": crop_evidence_id,
             "slots": spec["slots"],
+            "experiment_inventory": {
+                experiment_id: experiment_inventory[experiment_id]
+                for experiment_id in sorted(
+                    {slot["experiment_id"] for slot in spec["slots"]}
+                )
+            },
             "evidence": [{"evidence_id": crop_evidence_id, "source_id": "PDF crop", "text": f"Rendered {spec['figure']} crop."}, *spec["evidence"]],
             "allowed_evidence_ids": [crop_evidence_id, *[row["evidence_id"] for row in spec["evidence"]]],
             # Neither requested panel prints a measured outcome value: their bars
@@ -431,7 +507,15 @@ def prepare(output_root: Path, model: str) -> dict[str, Any]:
             "estimated_input_tokens": text_tokens + image_tokens,
             "max_output_tokens": spec["max_output_tokens"],
         })
-    unsigned = {"preflight_version": PREFLIGHT_VERSION, "paper_id": PAPER_ID, "model": model, "provider_calls": 0, "human_approval_required": True, "requests": requests}
+    unsigned = {
+        "preflight_version": PREFLIGHT_VERSION,
+        "paper_id": PAPER_ID,
+        "model": model,
+        "provider_calls": 0,
+        "human_approval_required": True,
+        "experiment_inventory": experiment_inventory,
+        "requests": requests,
+    }
     manifest = {**unsigned, "manifest_sha256": _sha256(_canonical_json(unsigned))}
     _write_json(root / "manifest.json", manifest)
     return manifest
@@ -552,6 +636,8 @@ def validate_visual_response(response: Mapping[str, Any], task: Mapping[str, Any
             raise ValueError("each slot may have exactly once returned outcome")
         outcome_ids.add(outcome.slot_id)
         slot = expected[outcome.slot_id]
+        if outcome.experiment_id != slot.experiment_id:
+            raise ValueError("outcome experiment identity changed")
         for field in ("formulation", "payload", "dose", "recipient_cell", "assay", "endpoint"):
             if getattr(outcome, field) != getattr(slot, field):
                 raise ValueError(f"outcome identity changed {field}")

@@ -44,6 +44,50 @@ def test_prepare_creates_two_source_derived_immutable_figure_tasks(
     } >= {"Fig4", "Par14", "Par15", "Par23"}
 
 
+def test_prepare_builds_six_source_supported_experiments_and_binds_all_slots(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Collapsing the two Figure 4 doses would attach outcomes to the wrong arm."""
+    original_read_text = Path.read_text
+
+    def reject_gold(self: Path, *args: object, **kwargs: object) -> str:
+        if "benchmarks/full_paper" in self.as_posix() or self.name == "NP-002.json":
+            raise AssertionError("experiment inventory must not read the answer key")
+        return original_read_text(self, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", reject_gold)
+    manifest = selective.prepare(tmp_path, model="test-vision-model")
+    tasks = [_read(row["task_path"]) for row in manifest["requests"]]
+
+    expected = {
+        ("MC3", "QUANT DNA", 0.3),
+        ("cKK-E12", "QUANT DNA", 0.3),
+        ("MC3", "Cre mRNA", 0.3),
+        ("cKK-E12", "Cre mRNA", 0.3),
+        ("MC3", "Cre mRNA", 1.0),
+        ("cKK-E12", "Cre mRNA", 1.0),
+    }
+    inventory = manifest["experiment_inventory"]
+    assert {
+        (arm["formulation"], arm["payload"], arm["dose"]["value"])
+        for arm in inventory.values()
+    } == expected
+    slots = [slot for task in tasks for slot in task["slots"]]
+    assert len(slots) == 18
+    assert len({slot["experiment_id"] for slot in slots}) == 6
+    for slot in slots:
+        arm = inventory[slot["experiment_id"]]
+        assert slot["formulation"] == arm["formulation"]
+        assert slot["payload"] == arm["payload"]
+        assert slot["dose"] == arm["dose"]["value"]
+    assert {
+        inventory[slot["experiment_id"]]["dose"]["value"]
+        for slot in slots
+        if slot["payload"] == "Cre mRNA"
+    } == {0.3, 1.0}
+
+
 def test_prepare_persists_deterministic_request_hashes_without_gold_access(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -86,6 +130,7 @@ def test_prepare_embeds_strict_dynamic_schema_for_exact_slot_accounting(
         outcome_item = schema["properties"]["outcomes"]["items"]
         assert outcome_item["additionalProperties"] is False
         assert "exact_printed_support" in outcome_item["required"]
+        assert "experiment_id" in outcome_item["required"]
 
 
 @pytest.fixture
@@ -109,9 +154,10 @@ def figure_2_task() -> dict:
         "slots": [
             {
                 "slot_id": "fig2-mc3-kupffer",
+                "experiment_id": "EXP::NP002::QUANT::MC3::0.3",
                 "formulation": "MC3",
                 "payload": "QUANT DNA",
-                "dose": None,
+                "dose": 0.3,
                 "recipient_cell": "Kupffer cells",
                 "assay": "cellular DNA accumulation",
                 "endpoint": "QUANT DNA accumulation",
@@ -123,9 +169,10 @@ def figure_2_task() -> dict:
 def _valid_response() -> dict:
     slot = {
         "slot_id": "fig2-mc3-kupffer",
+        "experiment_id": "EXP::NP002::QUANT::MC3::0.3",
         "formulation": "MC3",
         "payload": "QUANT DNA",
-        "dose": None,
+        "dose": 0.3,
         "recipient_cell": "Kupffer cells",
         "assay": "cellular DNA accumulation",
         "endpoint": "QUANT DNA accumulation",
@@ -211,6 +258,17 @@ def test_validate_visual_response_accepts_exact_source_grounded_accounting(
 ) -> None:
     """The validator must accept one fully accounted qualitative visual outcome."""
     selective.validate_visual_response(_valid_response(), figure_2_task)
+
+
+def test_validate_visual_response_rejects_swapped_experiment_identity(
+    figure_2_task: dict,
+) -> None:
+    """A model cannot move a valid candidate onto a different experiment."""
+    response = _valid_response()
+    response["outcomes"][0]["experiment_id"] = "EXP::NP002::QUANT::cKKE12::0.3"
+
+    with pytest.raises(ValueError, match="experiment identity"):
+        selective.validate_visual_response(response, figure_2_task)
 
 
 def _allow_exact_numeric_outcome(figure_2_task: dict) -> None:
