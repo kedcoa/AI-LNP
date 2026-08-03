@@ -13,7 +13,9 @@
 - Exactly two independently hashed requests: Figure 2 and Figure 4.
 - Figure 2 has six source-derived slots: two formulations by three recipient cell classes.
 - Figure 4 has twelve source-derived slots: two formulations by two doses by three recipient cell classes.
-- Extract qualitative outcomes and exact values only when explicitly printed; never estimate a number from an axis or bar height.
+- Extract qualitative outcomes and exact values only when they match a local,
+  source-derived per-task allowlist of printed outcome values; never estimate a
+  number from an axis or bar height or trust model-authored numeric support.
 - Every slot is accounted for exactly once as `extracted` or `not_explicit`.
 - Evidence citations are restricted to the crop, caption, referring Results passages, and Methods context supplied in that request.
 - The hidden answer key is never loaded by preparation, execution, validation, or merge code; only the final evaluator loads it.
@@ -63,13 +65,15 @@ forbidden.
 
 Test rejection of missing slots, invented slots, duplicate returned outcome
 links, unaccounted returned rows, changed formulation/payload/dose/recipient,
-unknown evidence IDs, numeric values without `exact_printed_support`, and
+unknown evidence IDs, numeric values absent from a cited local allowlist entry,
+and
 `not_explicit` entries that link outcomes.
 
 - [ ] **Step 5: Implement minimal validation and make tests GREEN**
 
 Validate response schema, exact accounting, identity preservation, evidence
-envelopes, and numeric safety. Persist canonical request bytes, SHA-256, crop
+envelopes, and numeric safety against the local source-derived outcome-value
+allowlist. Persist canonical request bytes, SHA-256, crop
 checksums, estimated text/image input usage, and output caps. Use 4,000 output
 tokens for Figure 2 and 6,000 for Figure 4.
 

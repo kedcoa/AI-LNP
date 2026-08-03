@@ -11,8 +11,9 @@ general orchestration layer.
 
 - Reuse the committed v5.2 paper map; do not repeat the 35,575-token paid call.
 - Make exactly two independently approved calls: Figure 2 and Figure 4.
-- Extract qualitative comparisons and exact values only when explicitly
-  printed in the supplied figure or text.
+- Extract qualitative comparisons and exact values only when a local,
+  source-derived allowlist identifies the printed value and unit in supplied
+  evidence; model-authored support text is never sufficient.
 - Never convert an unlabeled axis position or bar height into a number.
 - Do not use the hidden NP-002 answer key to construct prompts, slots, crops,
   evidence packets, or responses. Load it only after the merged extraction is
@@ -81,7 +82,8 @@ contains:
 - qualitative outcome;
 - comparison target, when reported;
 - significance wording, when reported;
-- exact numeric value and unit only when explicitly printed;
+- exact numeric value and unit only when locally pre-enumerated from an
+  explicitly printed outcome value in supplied evidence;
 - figure and panel;
 - supplied evidence IDs;
 - confidence.
@@ -89,8 +91,12 @@ contains:
 Allowed dispositions are `extracted` and `not_explicit`. `not_explicit` must
 include a source-grounded explanation and cannot link a returned outcome. The
 validator rejects missing slots, invented slots, changed formulation/dose/cell
-identity, unknown evidence IDs, numeric values without visible printed support,
-and unaccounted returned rows.
+identity, unknown evidence IDs, numeric values absent from the local allowlist
+or their cited source text, and unaccounted returned rows. For this NP-002 run,
+both allowlists are empty because the requested outcome bars have no printed
+measured values. Doses, timepoints, ratios, axis labels, and p-threshold
+metadata remain contextual evidence rather than measured `numeric_value`
+outcomes.
 
 ## Merge
 

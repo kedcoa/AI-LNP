@@ -7,6 +7,7 @@ import hashlib
 import html
 import json
 import re
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Literal, Mapping
 
@@ -56,6 +57,8 @@ class OutcomeRow(StrictModel):
     @model_validator(mode="after")
     def numeric_values_require_visible_support(self) -> "OutcomeRow":
         has_number = self.numeric_value is not None or self.numeric_unit is not None
+        if has_number and (self.numeric_value is None or self.numeric_unit is None):
+            raise ValueError("numeric outcomes require both numeric_value and numeric_unit")
         if has_number and not self.exact_printed_support:
             raise ValueError("numeric values require exact_printed_support")
         if self.exact_printed_support and self.numeric_value is None:
@@ -174,6 +177,7 @@ def _task_specs(html_source: str) -> list[dict[str, Any]]:
             "pdf_page": 7,
             "crop_box": (40.0, 70.0, 575.0, 565.0),
             "max_output_tokens": 4_000,
+            "allowed_exact_numeric_outcomes": [],
             "slots": _slots(
                 figure="Figure 2",
                 payload="QUANT DNA",
@@ -193,6 +197,7 @@ def _task_specs(html_source: str) -> list[dict[str, Any]]:
             "pdf_page": 11,
             "crop_box": (40.0, 70.0, 575.0, 470.0),
             "max_output_tokens": 6_000,
+            "allowed_exact_numeric_outcomes": [],
             "slots": _slots(
                 figure="Figure 4",
                 payload="Cre mRNA",
@@ -275,7 +280,8 @@ _INSTRUCTIONS = (
     "printed significance wording are useful. Do not infer, calculate, or report "
     "a number from an axis, a bar height, or any visual estimate: visually "
     "estimated numbers are forbidden. A numeric_value is allowed only when its "
-    "exact_printed_support quotes an explicitly printed number in supplied evidence."
+    "value and unit exactly match an allowed_exact_numeric_outcomes entry and "
+    "its cited evidence contains the printed support."
 )
 
 
@@ -293,7 +299,7 @@ def _estimate_image_tokens(crop_path: Path) -> int:
 def _build_request(task: dict[str, Any], model: str) -> dict[str, Any]:
     crop_bytes = Path(task["crop_path"]).read_bytes()
     crop_url = "data:image/png;base64," + base64.b64encode(crop_bytes).decode("ascii")
-    payload = {key: task[key] for key in ("paper_id", "figure", "slots", "evidence", "crop_evidence_id")}
+    payload = {key: task[key] for key in ("paper_id", "figure", "slots", "evidence", "crop_evidence_id", "allowed_exact_numeric_outcomes")}
     return {
         "model": model,
         "store": False,
@@ -339,6 +345,10 @@ def prepare(output_root: Path, model: str) -> dict[str, Any]:
             "slots": spec["slots"],
             "evidence": [{"evidence_id": crop_evidence_id, "source_id": "PDF crop", "text": f"Rendered {spec['figure']} crop."}, *spec["evidence"]],
             "allowed_evidence_ids": [crop_evidence_id, *[row["evidence_id"] for row in spec["evidence"]]],
+            # Neither requested panel prints a measured outcome value: their bars
+            # are intentionally qualitative-only. This source-derived allowlist
+            # therefore remains empty rather than trusting model-authored prose.
+            "allowed_exact_numeric_outcomes": spec["allowed_exact_numeric_outcomes"],
             "max_output_tokens": spec["max_output_tokens"],
             "slug": spec["slug"],
         }
@@ -380,6 +390,85 @@ def _allowed_ids(task: Mapping[str, Any]) -> set[str]:
     return {row["evidence_id"] for row in evidence if isinstance(row, Mapping) and isinstance(row.get("evidence_id"), str)}
 
 
+def _evidence_text_by_id(task: Mapping[str, Any]) -> dict[str, str]:
+    evidence = task.get("evidence", [])
+    if not isinstance(evidence, list):
+        raise ValueError("task evidence must be a list")
+    result: dict[str, str] = {}
+    for row in evidence:
+        if not isinstance(row, Mapping):
+            raise ValueError("task evidence entries must be objects")
+        evidence_id = row.get("evidence_id")
+        text = row.get("text")
+        if not isinstance(evidence_id, str) or not isinstance(text, str):
+            raise ValueError("task evidence requires ID and text")
+        result[evidence_id] = text
+    return result
+
+
+def _normalized_numeric_key(value: float, unit: str) -> tuple[str, str]:
+    try:
+        normalized_value = Decimal(str(value)).normalize()
+    except (InvalidOperation, ValueError) as exc:
+        raise ValueError("numeric outcome value is invalid") from exc
+    if not normalized_value.is_finite():
+        raise ValueError("numeric outcome value must be finite")
+    normalized_unit = re.sub(r"\s+", "", unit).casefold().replace("μ", "µ")
+    if not normalized_unit:
+        raise ValueError("numeric outcome unit is invalid")
+    return format(normalized_value, "f"), normalized_unit
+
+
+def _printed_support_matches(
+    support: str,
+    value: float,
+    unit: str,
+) -> bool:
+    wanted_value, wanted_unit = _normalized_numeric_key(value, unit)
+    support_unit = re.sub(r"\s+", "", support).casefold().replace("μ", "µ")
+    if wanted_unit not in support_unit:
+        return False
+    for token in re.findall(r"(?<![\w.])-?\d+(?:\.\d+)?(?![\w.])", support):
+        try:
+            if _normalized_numeric_key(float(token), unit)[0] == wanted_value:
+                return True
+        except ValueError:
+            continue
+    return False
+
+
+def _allowed_numeric_keys(
+    task: Mapping[str, Any],
+    evidence_text: Mapping[str, str],
+    allowed_evidence: set[str],
+) -> dict[tuple[str, str], tuple[str, str]]:
+    entries = task.get("allowed_exact_numeric_outcomes", [])
+    if not isinstance(entries, list):
+        raise ValueError("allowed_exact_numeric_outcomes must be a list")
+    result: dict[tuple[str, str], tuple[str, str]] = {}
+    for entry in entries:
+        if not isinstance(entry, Mapping):
+            raise ValueError("numeric outcome allowlist entries must be objects")
+        value = entry.get("numeric_value")
+        unit = entry.get("numeric_unit")
+        evidence_id = entry.get("evidence_id")
+        printed_support = entry.get("printed_support")
+        if (
+            not isinstance(value, (int, float))
+            or isinstance(value, bool)
+            or not isinstance(unit, str)
+            or not isinstance(evidence_id, str)
+            or not isinstance(printed_support, str)
+            or evidence_id not in allowed_evidence
+            or evidence_id not in evidence_text
+            or printed_support not in evidence_text[evidence_id]
+            or not _printed_support_matches(printed_support, float(value), unit)
+        ):
+            raise ValueError("task numeric outcome allowlist is not source-derived")
+        result[_normalized_numeric_key(float(value), unit)] = (evidence_id, printed_support)
+    return result
+
+
 def validate_visual_response(response: Mapping[str, Any], task: Mapping[str, Any]) -> None:
     """Reject all response rows that leave the immutable source slot envelope."""
     try:
@@ -396,6 +485,10 @@ def validate_visual_response(response: Mapping[str, Any], task: Mapping[str, Any
     if accounting_ids != set(expected):
         raise ValueError("slot accounting must contain every task slot and no invented slots")
     allowed_evidence = _allowed_ids(task)
+    evidence_text = _evidence_text_by_id(task)
+    allowed_numeric = _allowed_numeric_keys(
+        task, evidence_text, allowed_evidence
+    )
     outcome_ids: set[str] = set()
     for outcome in parsed.outcomes:
         if outcome.slot_id not in expected:
@@ -410,6 +503,29 @@ def validate_visual_response(response: Mapping[str, Any], task: Mapping[str, Any
         unknown = set(outcome.evidence_ids) - allowed_evidence
         if unknown:
             raise ValueError("outcome cites evidence outside the task envelope")
+        if outcome.numeric_value is not None:
+            assert outcome.numeric_unit is not None
+            assert outcome.exact_printed_support is not None
+            numeric_key = _normalized_numeric_key(
+                outcome.numeric_value, outcome.numeric_unit
+            )
+            allowlisted = allowed_numeric.get(numeric_key)
+            if not allowlisted or allowlisted[0] not in outcome.evidence_ids:
+                raise ValueError(
+                    "numeric outcome is absent from the source-derived allowlist "
+                    "or its cited source evidence"
+                )
+            if (
+                outcome.exact_printed_support not in evidence_text[allowlisted[0]]
+                or not _printed_support_matches(
+                    outcome.exact_printed_support,
+                    outcome.numeric_value,
+                    outcome.numeric_unit,
+                )
+            ):
+                raise ValueError(
+                    "numeric exact_printed_support is not verbatim cited source evidence"
+                )
         entry = parsed.slot_accounting[outcome.slot_id]
         if entry.disposition == "not_explicit":
             raise ValueError("not_explicit accounting cannot link a returned outcome")

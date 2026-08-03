@@ -91,6 +91,19 @@ def figure_2_task() -> dict:
     return {
         "figure": "Figure 2",
         "allowed_evidence_ids": ["FIG2-CROP", "FIG2-CAPTION", "FIG2-RESULTS", "FIG2-METHODS"],
+        "allowed_exact_numeric_outcomes": [],
+        "evidence": [
+            {
+                "evidence_id": "FIG2-CROP",
+                "source_id": "Figure 2 crop",
+                "text": "The Figure 2 bars are unlabeled.",
+            },
+            {
+                "evidence_id": "FIG2-CAPTION",
+                "source_id": "Figure 2 caption",
+                "text": "DNA delivery is shown for major liver cell types.",
+            },
+        ],
         "slots": [
             {
                 "slot_id": "fig2-mc3-kupffer",
@@ -196,3 +209,81 @@ def test_validate_visual_response_accepts_exact_source_grounded_accounting(
 ) -> None:
     """The validator must accept one fully accounted qualitative visual outcome."""
     selective.validate_visual_response(_valid_response(), figure_2_task)
+
+
+def _allow_exact_numeric_outcome(figure_2_task: dict) -> None:
+    figure_2_task["evidence"].append(
+        {
+            "evidence_id": "FIG2-PRINTED",
+            "source_id": "Figure 2 data label",
+            "text": "The printed outcome label is 1.20 copies/cell.",
+        }
+    )
+    figure_2_task["allowed_evidence_ids"].append("FIG2-PRINTED")
+    figure_2_task["allowed_exact_numeric_outcomes"] = [
+        {
+            "numeric_value": 1.2,
+            "numeric_unit": "copies/cell",
+            "evidence_id": "FIG2-PRINTED",
+            "printed_support": "1.20 copies/cell",
+        }
+    ]
+
+
+def _set_numeric_outcome(
+    response: dict,
+    value: float,
+    support: str,
+    evidence_ids: list[str],
+) -> None:
+    response["outcomes"][0].update(
+        {
+            "numeric_value": value,
+            "numeric_unit": "copies/cell",
+            "exact_printed_support": support,
+            "evidence_ids": evidence_ids,
+        }
+    )
+
+
+def test_validate_visual_response_rejects_model_fabricated_numeric_support(
+    figure_2_task: dict,
+) -> None:
+    """Model prose cannot turn an unlabeled bar into an exact printed outcome."""
+    response = _valid_response()
+    _set_numeric_outcome(
+        response,
+        123.0,
+        "123.0 is printed beside the bar.",
+        ["FIG2-CROP"],
+    )
+
+    with pytest.raises(ValueError, match="allowlist"):
+        selective.validate_visual_response(response, figure_2_task)
+
+
+def test_validate_visual_response_rejects_numeric_value_missing_from_allowlist(
+    figure_2_task: dict,
+) -> None:
+    """A different value than the source-derived printed label must be rejected."""
+    _allow_exact_numeric_outcome(figure_2_task)
+    response = _valid_response()
+    _set_numeric_outcome(
+        response, 1.3, "1.30 copies/cell", ["FIG2-CROP", "FIG2-PRINTED"]
+    )
+
+    with pytest.raises(ValueError, match="allowlist"):
+        selective.validate_visual_response(response, figure_2_task)
+
+
+def test_validate_visual_response_accepts_allowlisted_cited_printed_numeric_value(
+    figure_2_task: dict,
+) -> None:
+    """A future explicit data label is accepted only through the local allowlist."""
+    _allow_exact_numeric_outcome(figure_2_task)
+    response = _valid_response()
+    _set_numeric_outcome(
+        response, 1.2, "1.20 copies/cell", ["FIG2-CROP", "FIG2-PRINTED"]
+    )
+
+    selective.validate_visual_response(response, figure_2_task)
