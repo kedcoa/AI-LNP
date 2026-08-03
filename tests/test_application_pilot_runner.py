@@ -11,6 +11,8 @@ import pytest
 import src.extraction.prepare_application_pilot as pilot_preparation
 import src.extraction.run_application_pilot as pilot_runner
 from src.extraction.full_paper_inventory import FullPaperEvidenceInventory
+from src.extraction.full_paper_contracts import PaperMapResponse
+from src.extraction.full_paper_tasks import issue_context_candidates
 from src.extraction.prepare_application_pilot import (
     ApprovalManifest,
     PilotPaper,
@@ -79,6 +81,51 @@ def _empty_paper_map(paper_id: str) -> dict[str, object]:
         "anchor_accounting": {},
         "unresolved_items": [],
     }
+
+
+def _experiment_bound_vision_inputs(tmp_path: Path) -> tuple[Path, Path, dict]:
+    paper_map = _paper_map()
+    paper_map["paper_id"] = "GP-TEST"
+    parsed = PaperMapResponse.model_validate(paper_map)
+    candidate = issue_context_candidates(parsed)[0]
+    _build_task(
+        tmp_path,
+        experiment_id=candidate.experiment_id,
+        candidate_id=candidate.candidate_id,
+    )
+    inventory = full_inventory().model_copy(update={"paper_id": "GP-TEST"})
+    inventory_path = tmp_path / "inventory.json"
+    inventory_path.write_text(inventory.model_dump_json(indent=2) + "\n")
+    task_path = tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json"
+    return task_path, inventory_path, paper_map
+
+
+def test_gate_b_rejects_vision_when_map_issues_zero_contexts(tmp_path: Path) -> None:
+    task = _build_task(
+        tmp_path,
+        experiment_id="EXP-NOT-ISSUED",
+        candidate_id="CTX-NOT-ISSUED",
+    )
+    inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+    map_artifact = tmp_path / "map.json"
+    map_artifact.write_text(
+        json.dumps(
+            {
+                "paper_map": _empty_paper_map("GP-TEST"),
+                "inventory_path": str(inventory_path),
+                "model": "fake-model",
+                "selective_vision_task_paths": [
+                    str(tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json")
+                ],
+            }
+        )
+        + "\n"
+    )
+
+    with pytest.raises(ValueError, match="issued experiment binding"):
+        prepare_downstream_gate([map_artifact], tmp_path / "gate-b")
+
+    assert task.experiment_id == "EXP-NOT-ISSUED"
 
 
 def _rewrite_approved_manifest(path: Path, **updates: object) -> str:
@@ -432,20 +479,19 @@ def test_concurrent_runner_loses_run_marker_before_any_provider_call(
     assert sorted(len(client.responses.calls) for client in clients) == [0, 3]
 
 
-def test_vision_only_gate_b_keeps_map_and_inventory_manifest_bindings(
+def test_experiment_bound_vision_keeps_map_and_inventory_manifest_bindings(
     tmp_path: Path,
 ) -> None:
-    task = _build_task(tmp_path)
-    inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+    task_path, inventory_path, paper_map = _experiment_bound_vision_inputs(tmp_path)
     map_artifact = tmp_path / "map.json"
     map_artifact.write_text(
         json.dumps(
             {
-                "paper_map": _empty_paper_map("GP-TEST"),
+                "paper_map": paper_map,
                 "inventory_path": str(inventory_path),
                 "model": "fake-model",
                 "selective_vision_task_paths": [
-                    str(tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json")
+                    str(task_path)
                 ],
             }
         )
@@ -455,12 +501,13 @@ def test_vision_only_gate_b_keeps_map_and_inventory_manifest_bindings(
 
     manifest = prepare_downstream_gate([map_artifact], tmp_path / "gate-b")
 
-    assert [row.request_kind for row in manifest.requests] == ["selective_vision"]
+    assert [row.request_kind for row in manifest.requests].count("selective_vision") == 1
+    assert "context" in [row.request_kind for row in manifest.requests]
     assert {row.binding_kind for row in manifest.source_bindings} >= {
         "map_artifact",
         "inventory",
     }
-    assert task.paper_id == "GP-TEST"
+    assert json.loads(task_path.read_text())["paper_id"] == "GP-TEST"
 
 
 def test_gate_b_rejects_cross_paper_selective_vision_task(tmp_path: Path) -> None:
@@ -569,22 +616,19 @@ def test_runner_rejects_removed_required_downstream_binding(
     if binding_kind == "inventory":
         manifest, _, _ = _zero_call_downstream(tmp_path)
     else:
-        _build_task(tmp_path)
-        inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+        task_path, inventory_path, paper_map = _experiment_bound_vision_inputs(
+            tmp_path
+        )
         artifact = tmp_path / "map.json"
         artifact.write_text(
             json.dumps(
                 {
-                    "paper_map": _empty_paper_map("GP-TEST"),
+                    "paper_map": paper_map,
                     "inventory_path": str(inventory_path),
                     "model": "fake-model",
                     "selective_vision_task_paths": [
                         str(
-                            tmp_path
-                            / "tasks"
-                            / "GP-TEST"
-                            / "VF-VISION"
-                            / "task.json"
+                            task_path
                         )
                     ],
                 }
@@ -612,14 +656,12 @@ def test_runner_rejects_removed_required_downstream_binding(
 def test_vision_task_mutation_during_request_build_is_rejected(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    _build_task(tmp_path)
-    task_path = tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json"
-    inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+    task_path, inventory_path, paper_map = _experiment_bound_vision_inputs(tmp_path)
     artifact = tmp_path / "map.json"
     artifact.write_text(
         json.dumps(
             {
-                "paper_map": _empty_paper_map("GP-TEST"),
+                "paper_map": paper_map,
                 "inventory_path": str(inventory_path),
                 "model": "fake-model",
                 "selective_vision_task_paths": [str(task_path)],
@@ -649,14 +691,14 @@ def test_zero_or_vision_only_gate_rechecks_sources_after_preparation(
         manifest, map_artifact, inventory_path = _zero_call_downstream(tmp_path)
         changed_path = map_artifact if changed_source == "map" else inventory_path
     else:
-        _build_task(tmp_path)
-        task_path = tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json"
-        inventory_path = _inventory(tmp_path / "inventory.json", "GP-TEST")
+        task_path, inventory_path, paper_map = _experiment_bound_vision_inputs(
+            tmp_path
+        )
         artifact = tmp_path / "map.json"
         artifact.write_text(
             json.dumps(
                 {
-                    "paper_map": _empty_paper_map("GP-TEST"),
+                    "paper_map": paper_map,
                     "inventory_path": str(inventory_path),
                     "model": "fake-model",
                     "selective_vision_task_paths": [str(task_path)],

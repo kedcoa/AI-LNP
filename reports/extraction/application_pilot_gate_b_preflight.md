@@ -8,19 +8,22 @@ vision calls. Automatic retries and unapproved repairs remain forbidden.
 
 Approval hash:
 
-`7c5203847b9066bc1cd01ad9e0d2f5bac4bd70d78e614da052f4e216489d99a4`
+`e577eead81442a0982fb617e9aa573b748364e4070a716a3803ae20d54bd31f1`
 
-Conservative manifest estimate: 238,152 input tokens, 76,000 maximum output
-tokens, 314,152 maximum total tokens. The vision input estimates count the
+The prior hash `7c520384...` is invalid and must not be executed; its JPEG
+assets were incorrectly labeled as PNG data URLs.
+
+Conservative manifest estimate: 238,153 input tokens, 76,000 maximum output
+tokens, 314,153 maximum total tokens. The vision input estimates count the
 base64 image bytes as text and therefore are intentionally conservative; the
 manifest nevertheless freezes and hashes those exact request bytes.
 
 | Paper | Context | Vision | Estimated input | Output cap | Total cap |
 |---|---:|---:|---:|---:|---:|
 | PILOT-001 | 5 | 1 | 101,646 | 27,000 | 128,646 |
-| PILOT-002 | 5 | 1 | 61,649 | 27,000 | 88,649 |
+| PILOT-002 | 5 | 1 | 61,650 | 27,000 | 88,650 |
 | PILOT-003 | 4 | 1 | 74,857 | 22,000 | 96,857 |
-| **Total** | **14** | **3** | **238,152** | **76,000** | **314,152** |
+| **Total** | **14** | **3** | **238,153** | **76,000** | **314,153** |
 
 ## Gate-A validation and scientific audit
 
@@ -58,7 +61,12 @@ exact numbers inferred from graph geometry.
 
 The public PMC asset manifest is SHA-256
 `d729456535444e45ca576f4bfc95b30cb79b3057af53137991502bc0b3eaf0a0`.
-All selected assets passed JPEG magic, dimension, and SHA checks. PILOT-002's
+All selected assets passed JPEG magic, dimension, and SHA checks. Request
+construction independently verifies that `.jpg`/`.jpeg` files have JPEG magic
+and `.png` files have PNG magic, emits the matching media type, and rejects
+unsupported or extension/content-mismatched files. Gate-B also passes an empty
+issued-ID set through unchanged, so a visual task is rejected when its map
+issues zero experiment contexts. PILOT-002's
 Figure 7 is natively only 440 pixels wide, so fine printed details may be
 unresolved; the model must abstain rather than invent them.
 
@@ -71,23 +79,22 @@ unresolved; the model must abstain rather than invent them.
 | REQ-3 | PILOT-001 | context | 7,712 | 5,000 | `202806e5c5031534ade415d0b681777d0f9e093fed366fdf789047c725e43293` |
 | REQ-4 | PILOT-001 | context | 8,157 | 5,000 | `38a9b3f3baad52c8aef7b8c01bf29ad7e78bc735498c0965f29391d5fd44d2a6` |
 | REQ-5 | PILOT-001 | context | 9,381 | 5,000 | `b3340e98162095ded22788c5e3602dd7e5b82c3b80485c0accaf4374a1f239b9` |
-| REQ-6 | PILOT-001 | selective vision | 59,336 | 2,000 | `4fd59a5d917fb7ec25af5d7003aadb9b7f1b957ca4ccf11470de47acd9b2e0f0` |
+| REQ-6 | PILOT-001 | selective vision | 59,336 | 2,000 | `5643e7320d8a19ff12932b51ddfb81cd98360a7de6b09f7ac3800146c0f47f6e` |
 | REQ-7 | PILOT-002 | context | 6,859 | 5,000 | `177adf4ce62e411c395d59df0a34403efecd1420c7d061b613b816926b344c38` |
 | REQ-8 | PILOT-002 | context | 6,614 | 5,000 | `a655ab96ba1b56308ab204084a27bcf39a4a0099edfe73729497dc9e7ea91a08` |
 | REQ-9 | PILOT-002 | context | 6,049 | 5,000 | `231a458093bb4a9eac0e57eb629f920c591edda71109413910f68665029100ca` |
 | REQ-10 | PILOT-002 | context | 7,892 | 5,000 | `76e6f8342d3c64b20998fe29c24c594ff734bcfac7af51e5712e6b8f02a147b6` |
 | REQ-11 | PILOT-002 | context | 7,078 | 5,000 | `f95a183b2eb31949b19861eeb15a5a51627f9a1745dacc1da4a0a070e9c8d0e7` |
-| REQ-12 | PILOT-002 | selective vision | 27,157 | 2,000 | `10737b2a9ce77755701026c35b1fb434161152db336bd0174321f8482a0dfe2a` |
+| REQ-12 | PILOT-002 | selective vision | 27,158 | 2,000 | `5d8acd1e62734156266b42a0d49bc5c3049465e5ee1a90d9930720a5e2ca1bd3` |
 | REQ-13 | PILOT-003 | context | 6,709 | 5,000 | `3c29b19bd801c095b0077b0319d519fe9e1220554a08e72d05787df1152f2f28` |
 | REQ-14 | PILOT-003 | context | 7,041 | 5,000 | `441cb5bfca8125d4d8e76d99a7aef15ce76bf53a11abff57edad584f01b9795c` |
 | REQ-15 | PILOT-003 | context | 8,214 | 5,000 | `f644bb5f2876e7e90ffde6bcb8a9388bc757d8d9d9f0968a8d66a19a7cbdfcbd` |
 | REQ-16 | PILOT-003 | context | 8,472 | 5,000 | `61e7ba16e6e663a5dcc6f56c5c9c065deab35cba04f6f006c32f8de2d007080c` |
-| REQ-17 | PILOT-003 | selective vision | 44,421 | 2,000 | `cdbef9045813449e0520b8bc0ef4b175e0f92deb6133145b25bd9cab18b87fe0` |
+| REQ-17 | PILOT-003 | selective vision | 44,421 | 2,000 | `f2d48d6aa7ae1ee10494790e2943323055c664fa02547016d54ed0824b1c5de0` |
 
 ## Verification
 
 - Manifest and all 17 request/source hashes reloaded successfully with no
   provider client construction.
-- Focused offline suites: 94 passed, 5 pre-existing SWIG deprecation warnings.
+- Focused offline suites: 97 passed, 5 pre-existing SWIG deprecation warnings.
 - Provider calls during validation/preparation: 0.
-

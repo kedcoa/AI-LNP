@@ -10,7 +10,7 @@ from pydantic import ValidationError
 from src.extraction.build_selective_vision_tasks import build_task
 from src.extraction.compact_validation import ValidationFinding, ValidationReport
 from src.extraction.identify_selective_vision_referrals import identify
-from src.extraction.run_selective_vision import response_schema, run_vision
+from src.extraction.run_selective_vision import _image_data, response_schema, run_vision
 from src.extraction.selective_vision_contracts import (
     CropBox,
     SelectiveVisionResponse,
@@ -173,6 +173,23 @@ def test_experiment_bound_task_requires_response_to_echo_issued_ids(tmp_path):
     assert schema["properties"]["candidate_id"] == {"const": "CTX-ISSUED"}
     assert "experiment_id" in schema["required"]
     assert "candidate_id" in schema["required"]
+
+
+def test_image_data_uses_verified_jpeg_mime_type(tmp_path):
+    image_path = tmp_path / "figure.jpg"
+    Image.new("RGB", (12, 10), "white").save(image_path, format="JPEG")
+
+    data_url = _image_data(image_path)
+
+    assert data_url.startswith("data:image/jpeg;base64,")
+
+
+def test_image_data_rejects_extension_magic_mismatch(tmp_path):
+    image_path = tmp_path / "figure.jpg"
+    Image.new("RGB", (12, 10), "white").save(image_path, format="PNG")
+
+    with pytest.raises(ValueError, match="extension.*content|content.*extension"):
+        _image_data(image_path)
 
 
 def test_builder_requires_explicit_visual_source_and_creates_one_crop(tmp_path):

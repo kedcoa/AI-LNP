@@ -186,7 +186,27 @@ def validate_response(
 
 
 def _image_data(path: Path) -> str:
-    return "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode(
+    image_bytes = path.read_bytes()
+    suffix = path.suffix.casefold()
+    expected_mime = (
+        "image/jpeg"
+        if suffix in {".jpg", ".jpeg"}
+        else "image/png"
+        if suffix == ".png"
+        else None
+    )
+    detected_mime = (
+        "image/jpeg"
+        if image_bytes.startswith(b"\xff\xd8\xff")
+        else "image/png"
+        if image_bytes.startswith(b"\x89PNG\r\n\x1a\n")
+        else None
+    )
+    if expected_mime is None or detected_mime is None:
+        raise ValueError("Selective vision supports only verified JPEG or PNG images")
+    if expected_mime != detected_mime:
+        raise ValueError("Image extension does not match verified file content")
+    return f"data:{detected_mime};base64," + base64.b64encode(image_bytes).decode(
         "ascii"
     )
 

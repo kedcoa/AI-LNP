@@ -666,7 +666,7 @@ def prepare_downstream_gate(
                 model,
                 paper_map.paper_id,
                 task_bytes=task_bytes,
-                expected_experiment_bindings=issued_bindings or None,
+                expected_experiment_bindings=issued_bindings,
             )
             source_bindings.append(
                 SourceArtifactBinding(
