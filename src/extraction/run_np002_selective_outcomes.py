@@ -1221,26 +1221,6 @@ def _missing(reason: str) -> dict[str, Any]:
     return {"value": None, "status": "missing", "evidence_ids": [], "missing_reason": reason}
 
 
-def _arm_context(task: Mapping[str, Any], slot: Mapping[str, Any]) -> dict[str, Any]:
-    figure = task.get("figure")
-    if figure == "Figure 2":
-        dose, model, timepoint, unit = 0.3, "C57BL/6J mice", 6, "hours"
-    elif figure == "Figure 4":
-        dose, model, timepoint, unit = slot["dose"], "Ai14 Cre-reporter mice", 3, "days"
-    else:  # pragma: no cover - guarded by the immutable manifest
-        raise ValueError("unknown visual figure")
-    return {
-        "dose": dose,
-        "dose_unit": "mg/kg",
-        "route": "intravenous injection via the lateral tail vein",
-        "species": "mouse",
-        "experimental_model": model,
-        "tissue_or_organ": "liver",
-        "timepoint": timepoint,
-        "timepoint_unit": unit,
-    }
-
-
 def _formulation_id(formulation: str) -> str:
     mapping = {"MC3": "FORM::MC3_LNP", "cKK-E12": "FORM::cKK-E12_LNP"}
     try:
@@ -1251,7 +1231,7 @@ def _formulation_id(formulation: str) -> str:
 
 def merge_validated(manifest_path: Path, run_root: Path, output_path: Path) -> dict[str, Any]:
     """Merge locally validated visual rows with the committed paper-level map."""
-    _, entries = _verified_preflight(Path(manifest_path))
+    preflight, entries = _verified_preflight(Path(manifest_path))
     run_manifest = _read_json(
         Path(run_root) / PAPER_ID / "manifest.json",
         label="validated selective-vision run manifest",
@@ -1277,6 +1257,9 @@ def merge_validated(manifest_path: Path, run_root: Path, output_path: Path) -> d
     paper_map = _read_json(PAPER_MAP_PATH, label="committed v5.2 paper map")
     if paper_map.get("paper_id") != PAPER_ID:
         raise ValueError("committed paper map is not NP-002")
+    inventory = preflight.get("experiment_inventory")
+    if not isinstance(inventory, dict) or not inventory:
+        raise ValueError("preflight lacks a verified experiment inventory")
     experiments: list[dict[str, Any]] = []
     outcomes: list[dict[str, Any]] = []
     slot_accounting: dict[str, Any] = {}
@@ -1296,22 +1279,32 @@ def merge_validated(manifest_path: Path, run_root: Path, output_path: Path) -> d
                 raise ValueError("validated visual rows duplicate a slot across figures")
             seen_slots.add(slot_id)
             evidence_ids = list(row["evidence_ids"])
-            context = _arm_context(task, row)
-            experiment_id = f"VIS::{slot_id}"
+            source_experiment_id = str(row["experiment_id"])
+            arm = inventory.get(source_experiment_id)
+            if not isinstance(arm, Mapping):
+                raise ValueError("visual outcome links an unknown experiment identity")
+            for key in ("formulation", "payload"):
+                if row[key] != arm.get(key):
+                    raise ValueError(f"visual outcome conflicts with experiment {key}")
+            if row.get("dose") != arm.get("dose", {}).get("value"):
+                raise ValueError("visual outcome conflicts with experiment dose")
+            arm_evidence_ids = list(arm.get("joint_evidence_ids", []))
+            experiment_id = f"ROW::{source_experiment_id}::{slot_id}"
             experiments.append(
                 {
                     "experiment_id": experiment_id,
-                    "formulation_id": _formulation_id(str(row["formulation"])),
-                    "payload_name": _reported(row["payload"], evidence_ids),
-                    "dose": _reported(context["dose"], evidence_ids),
-                    "dose_unit": _reported(context["dose_unit"], evidence_ids),
+                    "source_experiment_id": source_experiment_id,
+                    "formulation_id": str(arm["formulation_id"]),
+                    "payload_name": _reported(arm["payload"], arm_evidence_ids),
+                    "dose": dict(arm["dose"]),
+                    "dose_unit": dict(arm["dose_unit"]),
                     "delivery_recipient_cell": _reported(row["recipient_cell"], evidence_ids),
-                    "route": _reported(context["route"], evidence_ids),
-                    "species": _reported(context["species"], evidence_ids),
-                    "experimental_model": _reported(context["experimental_model"], evidence_ids),
-                    "tissue_or_organ": _reported(context["tissue_or_organ"], evidence_ids),
-                    "timepoint": _reported(context["timepoint"], evidence_ids),
-                    "timepoint_unit": _reported(context["timepoint_unit"], evidence_ids),
+                    "route": dict(arm["route"]),
+                    "species": dict(arm["species"]),
+                    "experimental_model": dict(arm["experimental_model"]),
+                    "tissue_or_organ": dict(arm["organ"]),
+                    "timepoint": dict(arm["timepoint"]),
+                    "timepoint_unit": dict(arm["timepoint_unit"]),
                 }
             )
             outcomes.append(

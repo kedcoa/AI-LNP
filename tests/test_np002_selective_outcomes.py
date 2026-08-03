@@ -540,6 +540,16 @@ def test_merge_validated_attaches_qualitative_rows_to_exact_arms_without_gold_ac
     assert output_path.is_file()
     assert artifact["paper_id"] == "NP-002"
     assert len(artifact["outcomes"]) == 2
+    assert {
+        row["source_experiment_id"] for row in artifact["experiments"]
+    } == {
+        "EXP::NP002::QUANT::MC3::0.3",
+        "EXP::NP002::CRE::MC3::0.3",
+    }
+    assert all(
+        not row["experiment_id"].startswith("VIS::")
+        for row in artifact["experiments"]
+    )
     for outcome in artifact["outcomes"]:
         assert outcome["outcome_value"]["value"] is None
         assert outcome["outcome_unit"]["value"] is None
@@ -556,6 +566,8 @@ def test_merge_validated_attaches_qualitative_rows_to_exact_arms_without_gold_ac
             "hepatocytes",
         }
         assert experiment["dose"]["value"] in {0.3, 1.0}
+        assert experiment["dose"]["evidence_ids"]
+        assert experiment["route"]["evidence_ids"]
     assert all("ratios" not in experiment for experiment in artifact["experiments"])
     assert artifact["paper_map"]["formulations"][0]["ratios"]
     synthetic_key = tmp_path / "synthetic-answer-key.json"
