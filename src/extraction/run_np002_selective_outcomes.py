@@ -104,6 +104,34 @@ def _write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _artifact_sha256(path: Path) -> str | None:
+    if not path.is_file():
+        return None
+    return _sha256(path.read_bytes())
+
+
+def _failed_request_artifacts(
+    figure: str,
+    slug: str,
+    figure_dir: Path,
+    request_sha256: str,
+) -> dict[str, Any]:
+    artifacts: dict[str, Any] = {
+        "figure": figure,
+        "slug": slug,
+        "request_sha256": request_sha256,
+    }
+    for key, filename in (
+        ("raw_response_sha256", "response.json"),
+        ("trial_response_sha256", "trial_response.json"),
+        ("usage_sha256", "usage.json"),
+    ):
+        digest = _artifact_sha256(figure_dir / filename)
+        if digest is not None:
+            artifacts[key] = digest
+    return artifacts
+
+
 def _plain_text(fragment: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", fragment))).strip()
 
@@ -824,6 +852,7 @@ def run_approved(
         provider_client = OpenAI(max_retries=0)
     completed: list[dict[str, Any]] = []
     paid_dispatches = 0
+    active_request: dict[str, Any] | None = None
     try:
         for entry in entries:
             figure = str(entry["figure"])
@@ -843,6 +872,12 @@ def run_approved(
                 },
             )
             (figure_dir / "request.json").write_bytes(request_bytes)
+            active_request = {
+                "figure": figure,
+                "slug": str(task["slug"]),
+                "figure_dir": figure_dir,
+                "request_sha256": _sha256(request_bytes),
+            }
             try:
                 paid_dispatches += 1
                 response = provider_client.responses.create(**request)
@@ -853,8 +888,8 @@ def run_approved(
                 )
                 raise
             raw_response = _response_object(response)
-            usage = _usage_object(response)
             _write_json(figure_dir / "response.json", raw_response)
+            usage = _usage_object(response)
             _write_json(figure_dir / "usage.json", usage)
             output_text = getattr(response, "output_text", None)
             if not isinstance(output_text, str) or not output_text.strip():
@@ -872,19 +907,34 @@ def run_approved(
                     "slug": task["slug"],
                     "request_sha256": _sha256(request_bytes),
                     "response_sha256": _sha256(_canonical_json(validated_response)),
+                    "raw_response_sha256": _artifact_sha256(figure_dir / "response.json"),
+                    "trial_response_sha256": _artifact_sha256(figure_dir / "trial_response.json"),
+                    "usage_sha256": _artifact_sha256(figure_dir / "usage.json"),
                     "usage": usage,
                 }
             )
+            active_request = None
     except Exception as exc:
+        failed_request = None
+        if active_request is not None:
+            failed_request = _failed_request_artifacts(
+                str(active_request["figure"]),
+                str(active_request["slug"]),
+                active_request["figure_dir"],
+                str(active_request["request_sha256"]),
+            )
+        failed_manifest = {
+            "status": "failed",
+            "paper_id": PAPER_ID,
+            "paid_api_requests": paid_dispatches,
+            "completed_figures": [row["figure"] for row in completed],
+            "message": str(exc),
+        }
+        if failed_request is not None:
+            failed_manifest["failed_request"] = failed_request
         _write_json(
             run_dir / "manifest.json",
-            {
-                "status": "failed",
-                "paper_id": PAPER_ID,
-                "paid_api_requests": paid_dispatches,
-                "completed_figures": [row["figure"] for row in completed],
-                "message": str(exc),
-            },
+            failed_manifest,
         )
         raise
     result = {
@@ -904,9 +954,11 @@ def resume_failed_figure_2(
     manifest_path: Path,
     approvals: Mapping[str, str],
     output_root: Path,
+    *,
+    figure_2_raw_response_sha256: str,
     client: Any | None = None,
 ) -> dict[str, Any]:
-    """Validate one saved failed Figure 2 response, then dispatch only Figure 4."""
+    """Validate one explicitly approved raw Figure 2 response, then dispatch Figure 4."""
     manifest_path = Path(manifest_path)
     _, entries = _verified_preflight(manifest_path)
     entries_by_figure = {str(entry["figure"]): entry for entry in entries}
@@ -946,14 +998,27 @@ def resume_failed_figure_2(
     saved_request_bytes = (figure_2_dir / "request.json").read_bytes()
     if saved_request_bytes != figure_2_request_bytes or _sha256(saved_request_bytes) != approvals["Figure 2"]:
         raise ValueError("saved Figure 2 request does not match approved preflight")
-    raw_response = _read_json(figure_2_dir / "response.json", label="saved raw Figure 2 response")
-    saved_trial = _read_json(figure_2_dir / "trial_response.json", label="saved Figure 2 trial response")
-    raw_trial = _parse_output_text(_raw_output_text(raw_response), label="saved raw Figure 2 output")
-    if _canonical_json(raw_trial) != _canonical_json(saved_trial):
-        raise ValueError("saved trial response does not match raw response")
-    raw_response_sha256 = _sha256(_canonical_json(raw_response))
-    trial_response_sha256 = _sha256(_canonical_json(saved_trial))
-    validated_figure_2 = _normalize_qualitative_response(saved_trial)
+    if not isinstance(figure_2_raw_response_sha256, str) or re.fullmatch(
+        r"[0-9a-f]{64}", figure_2_raw_response_sha256
+    ) is None:
+        raise ValueError("resume requires an explicit approved Figure 2 raw response SHA-256")
+    raw_response_path = figure_2_dir / "response.json"
+    raw_response_sha256 = _sha256(raw_response_path.read_bytes())
+    if raw_response_sha256 != figure_2_raw_response_sha256:
+        raise ValueError("saved Figure 2 raw response does not match approved Figure 2 raw response SHA-256")
+    failed_request = failed_manifest.get("failed_request")
+    if isinstance(failed_request, Mapping):
+        recorded_raw_sha256 = failed_request.get("raw_response_sha256")
+        if recorded_raw_sha256 is not None and recorded_raw_sha256 != raw_response_sha256:
+            raise ValueError("failed manifest does not match approved Figure 2 raw response")
+    raw_response = _read_json(raw_response_path, label="saved raw Figure 2 response")
+    raw_trial = _parse_output_text(
+        _raw_output_text(raw_response), label="approved raw Figure 2 output"
+    )
+    trial_response_path = figure_2_dir / "trial_response.json"
+    _write_json(trial_response_path, raw_trial)
+    trial_response_sha256 = _sha256(trial_response_path.read_bytes())
+    validated_figure_2 = _normalize_qualitative_response(raw_trial)
     validate_visual_response(validated_figure_2, figure_2_task)
     validated_figure_2_sha256 = _sha256(_canonical_json(validated_figure_2))
     _write_json(figure_2_dir / "validated_response.json", validated_figure_2)
@@ -964,6 +1029,7 @@ def resume_failed_figure_2(
             "figure": "Figure 2",
             "request_sha256": _sha256(saved_request_bytes),
             "raw_response_sha256": raw_response_sha256,
+            "approved_raw_response_sha256": figure_2_raw_response_sha256,
             "trial_response_sha256": trial_response_sha256,
             "validated_response_sha256": validated_figure_2_sha256,
         },
@@ -988,10 +1054,33 @@ def resume_failed_figure_2(
         provider_client = OpenAI(max_retries=0)
     try:
         response = provider_client.responses.create(**figure_4_request)
+        raw_figure_4 = _response_object(response)
+        _write_json(figure_4_dir / "response.json", raw_figure_4)
+        usage_figure_4 = _usage_object(response)
+        _write_json(figure_4_dir / "usage.json", usage_figure_4)
+        output_text = getattr(response, "output_text", None)
+        if not isinstance(output_text, str) or not output_text.strip():
+            raise ValueError("Figure 4 response has no structured output")
+        trial_figure_4 = _parse_output_text(output_text, label="Figure 4 response")
+        _write_json(figure_4_dir / "trial_response.json", trial_figure_4)
+        validated_figure_4 = _normalize_qualitative_response(trial_figure_4)
+        validate_visual_response(validated_figure_4, figure_4_task)
+        _write_json(figure_4_dir / "validated_response.json", validated_figure_4)
     except Exception as exc:
+        failed_request = _failed_request_artifacts(
+            "Figure 4",
+            str(figure_4_task["slug"]),
+            figure_4_dir,
+            _sha256(figure_4_request_bytes),
+        )
         _write_json(
             figure_4_dir / "failure.json",
-            {"status": "provider_exception", "figure": "Figure 4", "message": str(exc)},
+            {
+                "status": "post_dispatch_failure",
+                "figure": "Figure 4",
+                "message": str(exc),
+                "artifacts": failed_request,
+            },
         )
         _write_json(
             run_dir / "manifest.json",
@@ -1000,22 +1089,11 @@ def resume_failed_figure_2(
                 "paper_id": PAPER_ID,
                 "paid_api_requests": 2,
                 "completed_figures": ["Figure 2"],
+                "failed_request": failed_request,
                 "message": str(exc),
             },
         )
         raise
-    raw_figure_4 = _response_object(response)
-    usage_figure_4 = _usage_object(response)
-    _write_json(figure_4_dir / "response.json", raw_figure_4)
-    _write_json(figure_4_dir / "usage.json", usage_figure_4)
-    output_text = getattr(response, "output_text", None)
-    if not isinstance(output_text, str) or not output_text.strip():
-        raise ValueError("Figure 4 response has no structured output")
-    trial_figure_4 = _parse_output_text(output_text, label="Figure 4 response")
-    _write_json(figure_4_dir / "trial_response.json", trial_figure_4)
-    validated_figure_4 = _normalize_qualitative_response(trial_figure_4)
-    validate_visual_response(validated_figure_4, figure_4_task)
-    _write_json(figure_4_dir / "validated_response.json", validated_figure_4)
     result = {
         "status": "validated",
         "paper_id": PAPER_ID,
@@ -1037,6 +1115,9 @@ def resume_failed_figure_2(
                 "slug": figure_4_task["slug"],
                 "request_sha256": _sha256(figure_4_request_bytes),
                 "response_sha256": _sha256(_canonical_json(validated_figure_4)),
+                "raw_response_sha256": _artifact_sha256(figure_4_dir / "response.json"),
+                "trial_response_sha256": _artifact_sha256(figure_4_dir / "trial_response.json"),
+                "usage_sha256": _artifact_sha256(figure_4_dir / "usage.json"),
                 "usage": usage_figure_4,
             },
         ],

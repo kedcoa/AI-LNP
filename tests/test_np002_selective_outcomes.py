@@ -346,6 +346,12 @@ class _FakeProviderResponse:
         return {"id": self.id, "model": self.model, "output_text": self.output_text}
 
 
+class _UnserializableProviderResponse:
+    def __init__(self) -> None:
+        self.usage = _FakeUsage()
+        self.output_text = "{}"
+
+
 class _FakeResponses:
     def __init__(self, responses: list[object]) -> None:
         self.responses = responses
@@ -719,54 +725,54 @@ def test_run_approved_recovers_qualitative_quote_misplaced_as_numeric_support(
 
 def _failed_figure_2_run(
     tmp_path: Path,
-) -> tuple[dict, Path, dict[str, str], dict]:
+    monkeypatch: pytest.MonkeyPatch,
+) -> tuple[dict, Path, dict[str, str], dict, str]:
     manifest, manifest_path = _prepared_manifest(tmp_path)
     approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
     figure_2_entry = manifest["requests"][0]
     figure_2_task = _read(figure_2_entry["task_path"])
     trial = _response_for_task(figure_2_task, extracted_slot_index=0)
     trial["outcomes"][0]["exact_printed_support"] = "qualitative Figure 2 Results quote"
-    run_dir = tmp_path / "run" / "NP-002"
-    figure_dir = run_dir / "figure_2"
-    figure_dir.mkdir(parents=True)
-    (run_dir / "invocation_started.json").write_text(
-        json.dumps({"paper_id": "NP-002", "approval_hashes": approvals}),
-        encoding="utf-8",
-    )
-    (figure_dir / "invocation_started.json").write_text(
-        json.dumps(
-            {
-                "paper_id": "NP-002",
-                "figure": "Figure 2",
-                "approval_sha256": approvals["Figure 2"],
-                "request_sha256": approvals["Figure 2"],
-            }
-        ),
-        encoding="utf-8",
-    )
-    request_bytes = Path(figure_2_entry["request_path"]).read_bytes()
-    (figure_dir / "request.json").write_bytes(request_bytes)
-    raw = {"id": "saved-figure-2", "output_text": json.dumps(trial)}
-    (figure_dir / "response.json").write_text(json.dumps(raw), encoding="utf-8")
-    (figure_dir / "trial_response.json").write_text(json.dumps(trial), encoding="utf-8")
-    (figure_dir / "usage.json").write_text(json.dumps({"total_tokens": 1}), encoding="utf-8")
-    (run_dir / "manifest.json").write_text(
-        json.dumps({"status": "failed", "paper_id": "NP-002", "paid_api_requests": 1}),
-        encoding="utf-8",
-    )
-    return manifest, manifest_path, approvals, trial
+
+    def leave_qualitative_support_unnormalized(response: dict) -> dict:
+        return json.loads(json.dumps(response))
+
+    with monkeypatch.context() as patch:
+        patch.setattr(
+            selective,
+            "_normalize_qualitative_response",
+            leave_qualitative_support_unnormalized,
+        )
+        with pytest.raises(ValueError, match="exact_printed_support"):
+            selective.run_approved(
+                manifest_path,
+                approvals,
+                tmp_path / "run",
+                _FakeClient([_FakeProviderResponse(trial)]),
+            )
+
+    raw_path = tmp_path / "run" / "NP-002" / "figure_2" / "response.json"
+    raw_sha256 = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+    return manifest, manifest_path, approvals, trial, raw_sha256
 
 
 def test_resume_failed_figure_2_validates_saved_artifacts_then_dispatches_only_figure_4(
     tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """A one-call failed run can resume only after proving its saved Figure 2 provenance."""
-    manifest, manifest_path, approvals, _ = _failed_figure_2_run(tmp_path)
+    manifest, manifest_path, approvals, _, raw_sha256 = _failed_figure_2_run(
+        tmp_path, monkeypatch
+    )
     figure_4 = _response_for_task(_read(manifest["requests"][1]["task_path"]), extracted_slot_index=0)
     client = _FakeClient([_FakeProviderResponse(figure_4)])
 
     result = selective.resume_failed_figure_2(
-        manifest_path, approvals, tmp_path / "run", client
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        figure_2_raw_response_sha256=raw_sha256,
+        client=client,
     )
 
     assert result["paid_api_requests"] == 2
@@ -780,17 +786,229 @@ def test_resume_failed_figure_2_validates_saved_artifacts_then_dispatches_only_f
     assert [row["figure"] for row in result["requests"]] == ["Figure 2", "Figure 4"]
 
 
-def test_resume_failed_figure_2_refuses_saved_trial_that_does_not_match_raw_response(
+def test_resume_failed_figure_2_ignores_replaceable_trial_and_parses_authenticated_raw(
     tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A saved response edit cannot be laundered through the no-retry recovery path."""
-    _, manifest_path, approvals, trial = _failed_figure_2_run(tmp_path)
+    """A mutable trial file cannot override output parsed from the approved raw response."""
+    manifest, manifest_path, approvals, trial, raw_sha256 = _failed_figure_2_run(
+        tmp_path, monkeypatch
+    )
     trial["outcomes"][0]["qualitative_outcome"] = "tampered after provider response"
     trial_path = tmp_path / "run" / "NP-002" / "figure_2" / "trial_response.json"
     trial_path.write_text(json.dumps(trial), encoding="utf-8")
-    client = _FakeClient([])
+    figure_4 = _response_for_task(
+        _read(manifest["requests"][1]["task_path"]), extracted_slot_index=0
+    )
 
-    with pytest.raises(ValueError, match="saved trial response does not match raw response"):
-        selective.resume_failed_figure_2(manifest_path, approvals, tmp_path / "run", client)
+    result = selective.resume_failed_figure_2(
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        figure_2_raw_response_sha256=raw_sha256,
+        client=_FakeClient([_FakeProviderResponse(figure_4)]),
+    )
+
+    assert result["requests"][0]["raw_response_sha256"] == raw_sha256
+    recovered_trial = _read(str(trial_path))
+    assert recovered_trial["outcomes"][0]["qualitative_outcome"] == "higher than the matched comparator"
+
+
+def test_resume_failed_figure_2_requires_explicit_raw_response_approval(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Request approvals alone cannot authorize recovery from a mutable provider artifact."""
+    manifest, manifest_path, approvals, _, _ = _failed_figure_2_run(
+        tmp_path, monkeypatch
+    )
+    figure_4 = _response_for_task(
+        _read(manifest["requests"][1]["task_path"]), extracted_slot_index=0
+    )
+    client = _FakeClient([_FakeProviderResponse(figure_4)])
+
+    with pytest.raises(TypeError, match="figure_2_raw_response_sha256"):
+        selective.resume_failed_figure_2(
+            manifest_path, approvals, tmp_path / "run", client=client
+        )
 
     assert client.responses.calls == []
+
+
+def test_resume_failed_figure_2_rejects_joint_raw_and_trial_replacement_before_dispatch(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Matching replacement files cannot satisfy the separately approved raw-response hash."""
+    _, manifest_path, approvals, trial, raw_sha256 = _failed_figure_2_run(
+        tmp_path, monkeypatch
+    )
+    trial["outcomes"][0]["qualitative_outcome"] = "schema-valid joint replacement"
+    trial["outcomes"][0]["exact_printed_support"] = None
+    figure_dir = tmp_path / "run" / "NP-002" / "figure_2"
+    replacement_raw = {"id": "replacement", "output_text": json.dumps(trial)}
+    (figure_dir / "response.json").write_text(json.dumps(replacement_raw), encoding="utf-8")
+    (figure_dir / "trial_response.json").write_text(json.dumps(trial), encoding="utf-8")
+    client = _FakeClient([])
+
+    with pytest.raises(ValueError, match="approved Figure 2 raw response"):
+        selective.resume_failed_figure_2(
+            manifest_path,
+            approvals,
+            tmp_path / "run",
+            figure_2_raw_response_sha256=raw_sha256,
+            client=client,
+        )
+
+    assert client.responses.calls == []
+    assert not (tmp_path / "run" / "NP-002" / "figure_4").exists()
+
+
+def test_run_approved_failure_manifest_hashes_persisted_figure_2_artifacts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A local failure after Figure 2 persistence must bind every available artifact."""
+    _, _, approvals, _, _ = _failed_figure_2_run(tmp_path, monkeypatch)
+    run_dir = tmp_path / "run" / "NP-002"
+    failed = _read(str(run_dir / "manifest.json"))
+    artifacts = failed["failed_request"]
+
+    assert artifacts["figure"] == "Figure 2"
+    assert artifacts["request_sha256"] == approvals["Figure 2"]
+    for field, filename in (
+        ("raw_response_sha256", "response.json"),
+        ("trial_response_sha256", "trial_response.json"),
+        ("usage_sha256", "usage.json"),
+    ):
+        assert artifacts[field] == hashlib.sha256(
+            (run_dir / "figure_2" / filename).read_bytes()
+        ).hexdigest()
+
+
+@pytest.mark.parametrize(
+    "failure_stage",
+    [
+        "serialization",
+        "usage_serialization",
+        "output",
+        "parse",
+        "normalization",
+        "validation",
+    ],
+)
+def test_resume_records_every_postdispatch_figure_4_failure_as_two_paid_calls(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    failure_stage: str,
+) -> None:
+    """Every local failure after resumed dispatch must durably record the second paid call."""
+    manifest, manifest_path, approvals, _, raw_sha256 = _failed_figure_2_run(
+        tmp_path, monkeypatch
+    )
+    figure_4_task = _read(manifest["requests"][1]["task_path"])
+    valid_payload = _response_for_task(figure_4_task, extracted_slot_index=0)
+    response: object
+    if failure_stage == "serialization":
+        response = _UnserializableProviderResponse()
+    elif failure_stage == "usage_serialization":
+        response = _FakeProviderResponse(valid_payload)
+        response.usage = object()
+    elif failure_stage == "output":
+        response = _FakeProviderResponse(valid_payload)
+        response.output_text = ""
+    elif failure_stage == "parse":
+        response = _FakeProviderResponse(valid_payload)
+        response.output_text = "{not-json"
+    elif failure_stage == "validation":
+        invalid_payload = json.loads(json.dumps(valid_payload))
+        invalid_payload["slot_accounting"].pop(next(iter(invalid_payload["slot_accounting"])))
+        response = _FakeProviderResponse(invalid_payload)
+    else:
+        response = _FakeProviderResponse(valid_payload)
+        original_normalize = selective._normalize_qualitative_response
+
+        def fail_figure_4_normalization(payload: dict) -> dict:
+            if payload.get("figure") == "Figure 4":
+                raise RuntimeError("normalization failed")
+            return original_normalize(payload)
+
+        monkeypatch.setattr(
+            selective,
+            "_normalize_qualitative_response",
+            fail_figure_4_normalization,
+        )
+
+    client = _FakeClient([response])
+    with pytest.raises((TypeError, ValueError, RuntimeError)):
+        selective.resume_failed_figure_2(
+            manifest_path,
+            approvals,
+            tmp_path / "run",
+            figure_2_raw_response_sha256=raw_sha256,
+            client=client,
+        )
+
+    assert len(client.responses.calls) == 1
+    run_dir = tmp_path / "run" / "NP-002"
+    failed = _read(str(run_dir / "manifest.json"))
+    assert failed["status"] == "failed"
+    assert failed["paid_api_requests"] == 2
+    assert failed["completed_figures"] == ["Figure 2"]
+    assert failed["failed_request"]["figure"] == "Figure 4"
+    assert (run_dir / "figure_4" / "invocation_started.json").is_file()
+    if failure_stage != "serialization":
+        assert failed["failed_request"]["raw_response_sha256"] == hashlib.sha256(
+            (run_dir / "figure_4" / "response.json").read_bytes()
+        ).hexdigest()
+    if failure_stage not in {"serialization", "usage_serialization"}:
+        assert failed["failed_request"]["usage_sha256"] == hashlib.sha256(
+            (run_dir / "figure_4" / "usage.json").read_bytes()
+        ).hexdigest()
+    if failure_stage in {"normalization", "validation"}:
+        assert failed["failed_request"]["trial_response_sha256"] == hashlib.sha256(
+            (run_dir / "figure_4" / "trial_response.json").read_bytes()
+        ).hexdigest()
+
+    repeat_client = _FakeClient([])
+    with pytest.raises(
+        (FileExistsError, ValueError),
+        match="Figure 4 invocation already started|one-call failed Figure 2 run",
+    ):
+        selective.resume_failed_figure_2(
+            manifest_path,
+            approvals,
+            tmp_path / "run",
+            figure_2_raw_response_sha256=raw_sha256,
+            client=repeat_client,
+        )
+    assert repeat_client.responses.calls == []
+
+
+def test_resume_keeps_one_paid_call_when_figure_4_marker_blocks_predispatch(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A marker conflict before provider dispatch must not increment durable accounting."""
+    _, manifest_path, approvals, _, raw_sha256 = _failed_figure_2_run(
+        tmp_path, monkeypatch
+    )
+    figure_4_marker = (
+        tmp_path / "run" / "NP-002" / "figure_4" / "invocation_started.json"
+    )
+    figure_4_marker.parent.mkdir(parents=True)
+    figure_4_marker.write_text("{}\n", encoding="utf-8")
+    client = _FakeClient([])
+
+    with pytest.raises(FileExistsError, match="Figure 4 invocation already started"):
+        selective.resume_failed_figure_2(
+            manifest_path,
+            approvals,
+            tmp_path / "run",
+            figure_2_raw_response_sha256=raw_sha256,
+            client=client,
+        )
+
+    assert client.responses.calls == []
+    failed = _read(str(tmp_path / "run" / "NP-002" / "manifest.json"))
+    assert failed["paid_api_requests"] == 1
