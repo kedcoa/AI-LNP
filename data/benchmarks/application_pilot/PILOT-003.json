@@ -1,0 +1,195 @@
+{
+  "reference_version": "application-pilot-reference-1.0.0",
+  "paper_id": "PILOT-003",
+  "doi": "10.1038/s41419-020-2571-4",
+  "pmcid": "PMC7214425",
+  "blinding_policy": "Reference content is benchmark-only and must not enter extraction prompts or production requests.",
+  "experiment_id_status": "deferred_pending_gate_a_paper_map",
+  "experiment_ids": [],
+  "reference_facts": [
+    {
+      "reference_id": "APP-PILOT-003-FORM-001",
+      "category": "formulation",
+      "field_name": "formulation_components",
+      "expected": ["KL-52", "DSPC", "cholesterol", "PEG-c-DOMG"],
+      "aliases": ["KL-52, DSPC, cholesterol, and PEG-c-DOMG"],
+      "experiment_scope": "siJnk2 and siLuc LNPs; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "Stock solutions of KL-52 aminolipid, DSPC, cholesterol, and PEG-c-DOMG"
+    },
+    {
+      "reference_id": "APP-PILOT-003-FORM-002",
+      "category": "formulation",
+      "field_name": "molar_ratio",
+      "expected": "50:10:38.5:1.5",
+      "aliases": [],
+      "experiment_scope": "siJnk2 and siLuc LNPs; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "molar ratios of 50:10:38.5:1.5 (KL-52: DSPC: Cholesterol: PEG-c-DOMG)",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-003-FORM-003",
+      "category": "formulation",
+      "field_name": "ratio_basis",
+      "expected": "molar",
+      "aliases": ["mole ratio"],
+      "experiment_scope": "siJnk2 and siLuc LNPs; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "The lipids were mixed in ethanol at molar ratios"
+    },
+    {
+      "reference_id": "APP-PILOT-003-FORM-004",
+      "category": "formulation",
+      "field_name": "mass_ratio",
+      "expected": "7:1",
+      "aliases": ["total lipid to siRNA weight ratio of 7:1"],
+      "experiment_scope": "siJnk2 and siLuc LNPs; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "a total lipid to siRNA weight ratio of 7:1",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-003-FORM-005",
+      "category": "formulation",
+      "field_name": "preparation_method",
+      "expected": "T-junction mixing",
+      "aliases": ["T-junction mixer"],
+      "experiment_scope": "siJnk2 and siLuc LNPs; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-e55df4e8327fce5e5cc0", "source_kind": "methods_text", "locator": "LNP preparation methods"},
+      "evidence_text": "mixing the lipid with the siRNA solution ... using a T-junction mixer"
+    },
+    {
+      "reference_id": "APP-PILOT-003-PAYLOAD-001",
+      "category": "payload_administration",
+      "field_name": "payload",
+      "expected": "Jnk2 siRNA set 3",
+      "aliases": ["siJnk2", "siRNA-Jnk2 set 3"],
+      "experiment_scope": "therapeutic hepatocyte-targeted LNP arm",
+      "source_locator": {"evidence_id": "FPE-ee1df941c50f672760e8", "source_kind": "results_text", "locator": "LNP characterization paragraph"},
+      "evidence_text": "The most potent siRNA-JNK2 polymer 3 was encapsulated into LNP"
+    },
+    {
+      "reference_id": "APP-PILOT-003-ADMIN-001",
+      "category": "payload_administration",
+      "field_name": "route",
+      "expected": "intravenous",
+      "aliases": ["intravenously injected"],
+      "experiment_scope": "in vivo siJnk2 LNP studies",
+      "source_locator": {"evidence_id": "FPE-fbc7cb606ec2ed5a53d9", "source_kind": "results_text", "locator": "organ and cell specificity paragraph"},
+      "evidence_text": "The LNP were injected intravenously into the mice"
+    },
+    {
+      "reference_id": "APP-PILOT-003-ADMIN-002",
+      "category": "payload_administration",
+      "field_name": "dose",
+      "expected": "0.2 mg siRNA/kg body weight",
+      "aliases": ["0.2 mg/kg BW"],
+      "experiment_scope": "single-dose specificity and later therapeutic studies",
+      "source_locator": {"evidence_id": "FPE-b05d4c0d7e1f213226a5", "source_kind": "results_text", "locator": "dose and time response paragraph"},
+      "evidence_text": "a single dose injection of 0.2 mg/kg siJnk2-LNP was used in all further experiments",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-003-MODEL-001",
+      "category": "biological_model",
+      "field_name": "species",
+      "expected": "mouse on a C57BL/6 background",
+      "aliases": ["C57BL/6 mice", "C57BL6J mice"],
+      "experiment_scope": "in vivo studies",
+      "source_locator": {"evidence_id": "FPE-5781e920f6c9f5e60ac1", "source_kind": "methods_text", "locator": "mouse strains"},
+      "evidence_text": "All strains were crossed on a C57BL/6 background"
+    },
+    {
+      "reference_id": "APP-PILOT-003-MODEL-002",
+      "category": "biological_model",
+      "field_name": "model",
+      "expected": "hepatocyte-specific NEMO-deficient chronic liver disease and HCC mouse",
+      "aliases": ["NEMOΔHepa mouse", "NEMO delta Hepa mice"],
+      "experiment_scope": "stage-dependent therapeutic studies",
+      "source_locator": {"evidence_id": "FPE-885c5bf40a41fa43b1ff", "source_kind": "introduction_text", "locator": "experimental model description"},
+      "evidence_text": "experimental model ... is based on the NEMO∆Hepa mice ... deletion ... specifically in hepatocytes"
+    },
+    {
+      "reference_id": "APP-PILOT-003-MODEL-003",
+      "category": "biological_model",
+      "field_name": "recipient_cell",
+      "expected": "hepatocytes",
+      "aliases": ["HC", "liver hepatocytes"],
+      "experiment_scope": "in vivo siJnk2 delivery",
+      "source_locator": {"evidence_id": "FPE-fbc7cb606ec2ed5a53d9", "source_kind": "results_text", "locator": "organ and cell specificity paragraph"},
+      "evidence_text": "siRNA was specifically active in hepatocytes ... but not in KC or HSC"
+    },
+    {
+      "reference_id": "APP-PILOT-003-ASSAY-001",
+      "category": "assay",
+      "field_name": "assay",
+      "expected": "quantitative RT-PCR for Jnk2 mRNA",
+      "aliases": ["qRT-PCR", "qPCR"],
+      "experiment_scope": "organ/cell specificity and therapeutic response",
+      "source_locator": {"evidence_id": "FPE-f26cf128c93f82dd9cb9", "source_kind": "figure_caption", "locator": "Figure 3b-d caption"},
+      "evidence_text": "Quantitative RT-PCR results were displayed as fold induction"
+    },
+    {
+      "reference_id": "APP-PILOT-003-ASSAY-002",
+      "category": "assay",
+      "field_name": "assay",
+      "expected": "JNK2 immunoblotting",
+      "aliases": ["Western blot analysis of JNK2", "immunoblot"],
+      "experiment_scope": "dose response and advanced-disease study",
+      "source_locator": {"evidence_id": "FPE-f26cf128c93f82dd9cb9", "source_kind": "figure_caption", "locator": "Figure 3e caption"},
+      "evidence_text": "Protein levels of JNK2, pJNK, and JNK were analyzed by immunoblotting"
+    },
+    {
+      "reference_id": "APP-PILOT-003-ASSAY-003",
+      "category": "assay",
+      "field_name": "assay",
+      "expected": "Sirius red analysis of collagen accumulation",
+      "aliases": ["SR analysis", "Sirius red staining"],
+      "experiment_scope": "advanced-disease therapeutic study",
+      "source_locator": {"evidence_id": "FPE-3a7c6f94fc2d07588616", "source_kind": "results_text", "locator": "advanced-disease histology results"},
+      "evidence_text": "significantly reduced collagen accumulation evidenced by SR analysis"
+    },
+    {
+      "reference_id": "APP-PILOT-003-OUT-001",
+      "category": "qualitative_outcome",
+      "field_name": "foundational_outcome",
+      "expected": "siJnk2-LNP reduced Jnk2 mRNA in liver hepatocytes but not Kupffer cells or hepatic stellate cells",
+      "aliases": ["hepatocyte-specific Jnk2 knockdown"],
+      "experiment_scope": "single-dose organ and cell specificity study",
+      "source_locator": {"evidence_id": "FPE-fbc7cb606ec2ed5a53d9", "source_kind": "results_text", "locator": "organ and cell specificity paragraph"},
+      "evidence_text": "significantly reduced Jnk2 mRNA expression in HC, but not in KC or HSC"
+    },
+    {
+      "reference_id": "APP-PILOT-003-OUT-002",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "late-stage siJnk2-LNP treatment reduced tumor initiation, collagen accumulation, and serum ALT versus controls",
+      "aliases": ["improved advanced chronic liver disease and HCC outcomes"],
+      "experiment_scope": "male NEMOΔHepa mice treated weekly from 44 to 52 weeks",
+      "source_locator": {"evidence_id": "FPE-172026ffdff40397135c", "source_kind": "results_text", "locator": "advanced-stage treatment results"},
+      "evidence_text": "reduction of well-differentiated HCCs ... less premalignant dysplastic nodules ... decreased liver serum ALT"
+    },
+    {
+      "reference_id": "APP-PILOT-003-OUT-003",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "early-stage siJnk2-LNP increased apoptosis and proliferation markers versus siLuc-LNP",
+      "aliases": ["stage-dependent early harm"],
+      "experiment_scope": "male NEMOΔHepa mice treated weekly from 8 to 12 weeks",
+      "source_locator": {"evidence_id": "FPE-d29def7f52506bc4ada9", "source_kind": "results_text", "locator": "early-stage treatment results"},
+      "evidence_text": "significantly increased cleaved caspase-3 ... significantly increased ... PCNA ... after siJnk2-LNP treatment"
+    },
+    {
+      "reference_id": "APP-PILOT-003-NUM-001",
+      "category": "exact_numeric",
+      "field_name": "timepoint",
+      "expected": "168 h",
+      "aliases": ["7 days"],
+      "experiment_scope": "single 0.2 mg/kg dose in wild-type mice",
+      "source_locator": {"evidence_id": "FPE-b05d4c0d7e1f213226a5", "source_kind": "results_text", "locator": "dose and time response paragraph"},
+      "evidence_text": "0.2 mg/kg ... triggered almost undetectable JNK2 protein expression after 168 h",
+      "numeric_provenance": "exact_reported"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "manifest_version": "application-pilot-selection-1.0.0",
+  "selection_status": "ready_for_gate_a_preparation",
+  "selection_rules": {
+    "non_gold": true,
+    "open_full_text": true,
+    "liver_focused": true,
+    "reports_lnp_formulation": true,
+    "reports_biological_outcome": true
+  },
+  "gold_reference_audit": {
+    "status": "passed",
+    "searched_roots": [
+      "data/benchmarks",
+      "tests/fixtures",
+      "reports"
+    ],
+    "result": "No selected DOI or PMCID was present in existing gold, benchmark, fixture-reference, or report files before these references were created.",
+    "note": "PMC7909888 occurred only in literature-search staging metadata; that discovery metadata is not a gold or reference artifact."
+  },
+  "experiment_inventory_sanity_check": {
+    "status": "deferred",
+    "boundary": "Gate A to Gate B",
+    "reason": "Paid paper-map outputs do not yet exist. Provisional experiment IDs and arm topology will be checked against the source after the approved Gate-A paper maps are available; none are fabricated here."
+  },
+  "evidence_modality_note": "The local Europe PMC JATS sources expose paragraph text and figure captions/printed labels. They contain no inline table-wrap nodes, although the articles cite supplementary tables. The lightweight references therefore use only locally retained text and caption evidence and never estimate graph bars.",
+  "papers": [
+    {
+      "paper_id": "PILOT-001",
+      "citation": "Han et al. (2023)",
+      "title": "Ligand-tethered lipid nanoparticles for targeted RNA delivery to treat liver fibrosis",
+      "doi": "10.1038/s41467-022-35637-z",
+      "pmcid": "PMC9845313",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9845313/fullTextXML",
+      "source_path": "data/staging/new_papers/PILOT-001/PMC9845313.html",
+      "publication_license": "CC BY 4.0",
+      "source_sha256": "74f5c9753888de6396a73609bfa1339e2033e14d6b6453cbabe776d0a0df0b94",
+      "inventory_path": "data/staging/extraction/application_pilot/PILOT-001/inventory.json",
+      "reference_path": "data/benchmarks/application_pilot/PILOT-001.json",
+      "inventory_evidence_block_count": 58,
+      "coverage_status": "covered",
+      "covered_categories": [
+        "formulation_preparation",
+        "component_ratios",
+        "payload",
+        "model_species_route_cell",
+        "outcomes"
+      ],
+      "missing_categories": []
+    },
+    {
+      "paper_id": "PILOT-002",
+      "citation": "Kim et al. (2021)",
+      "title": "Engineered ionizable lipid nanoparticles for targeted delivery of RNA therapeutics into different types of cells in the liver",
+      "doi": "10.1126/sciadv.abf4398",
+      "pmcid": "PMC7909888",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7909888/fullTextXML",
+      "source_path": "data/staging/new_papers/PILOT-002/PMC7909888.html",
+      "publication_license": "CC BY-NC 4.0",
+      "source_sha256": "ca3f29c32d7e84085693e36c0bf409ab09125a2ddbcb5aba2aada052e0866619",
+      "inventory_path": "data/staging/extraction/application_pilot/PILOT-002/inventory.json",
+      "reference_path": "data/benchmarks/application_pilot/PILOT-002.json",
+      "inventory_evidence_block_count": 48,
+      "coverage_status": "covered",
+      "covered_categories": [
+        "formulation_preparation",
+        "component_ratios",
+        "payload",
+        "model_species_route_cell",
+        "outcomes"
+      ],
+      "missing_categories": []
+    },
+    {
+      "paper_id": "PILOT-003",
+      "citation": "Woitok et al. (2020)",
+      "title": "Lipid-encapsulated siRNA for hepatocyte-directed treatment of advanced liver disease",
+      "doi": "10.1038/s41419-020-2571-4",
+      "pmcid": "PMC7214425",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7214425/fullTextXML",
+      "source_path": "data/staging/new_papers/PILOT-003/PMC7214425.html",
+      "publication_license": "CC BY 4.0",
+      "source_sha256": "b27ca7553386ece0179125f7234d68434b9ae5bc7311dd016fc4a35b3980cabf",
+      "inventory_path": "data/staging/extraction/application_pilot/PILOT-003/inventory.json",
+      "reference_path": "data/benchmarks/application_pilot/PILOT-003.json",
+      "inventory_evidence_block_count": 54,
+      "coverage_status": "covered",
+      "covered_categories": [
+        "formulation_preparation",
+        "component_ratios",
+        "payload",
+        "model_species_route_cell",
+        "outcomes"
+      ],
+      "missing_categories": []
+    }
+  ]
+}
