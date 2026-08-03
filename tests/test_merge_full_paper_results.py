@@ -455,7 +455,7 @@ def test_context_task_version_marks_experiment_id_contract_change() -> None:
     schema = ContextTask.model_json_schema()
 
     assert schema["properties"]["context_task_version"]["const"] == (
-        "full-paper-context-task-1.1.0"
+        "full-paper-context-task-1.2.0"
     )
 
 

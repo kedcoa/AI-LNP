@@ -313,6 +313,20 @@ class OutcomeAssertion(StrictModel):
         return self
 
 
+class _FoundationalOutcomeAssertion(OutcomeAssertion):
+    assertion_type: Literal["foundational"]
+
+
+class _ComparativeOutcomeAssertion(OutcomeAssertion):
+    assertion_type: Literal["comparison"]
+
+
+class _ExactMeasurementAssertion(OutcomeAssertion):
+    assertion_type: Literal["measurement"]
+    value: float
+    numeric_provenance: Literal["exact_reported"]
+
+
 class CandidateOutcomeBundle(StrictModel):
     """Atomic outcomes assigned to one locally issued experiment."""
 
@@ -352,6 +366,14 @@ class CandidateOutcomeBundle(StrictModel):
         return self
 
 
+class _CandidateOutcomeBundleSchema(CandidateOutcomeBundle):
+    """Provider schema with group semantics represented structurally."""
+
+    foundational_outcomes: list[_FoundationalOutcomeAssertion]
+    comparative_outcomes: list[_ComparativeOutcomeAssertion]
+    exact_measurements: list[_ExactMeasurementAssertion]
+
+
 class PreparedRequest(StrictModel):
     """A complete local request artifact; no provider is contacted."""
 
@@ -371,7 +393,7 @@ class PreparedRequest(StrictModel):
 class ContextTask(StrictModel):
     """One token-bounded, scientifically compatible context request."""
 
-    context_task_version: Literal["full-paper-context-task-1.1.0"]
+    context_task_version: Literal["full-paper-context-task-1.2.0"]
     task_id: str
     paper_id: str
     context_key: str
@@ -456,17 +478,36 @@ def build_context_response_schema(
         entry_model=ContextAccountingEntry,
         definition_name="ContextAccountingEntry",
     )
-    schema = _exact_accounting_schema(
-        schema,
-        field_name="candidate_outcomes",
-        identifiers=[row.candidate_id for row in candidates],
-        entry_model=CandidateOutcomeBundle,
-        definition_name="CandidateOutcomeBundle",
-    )
+    entry_schema = to_strict_json_schema(_CandidateOutcomeBundleSchema)
+    nested_definitions = entry_schema.pop("$defs", {})
+    definitions = schema.setdefault("$defs", {})
+    definitions.update(nested_definitions)
+    bundle_properties: dict[str, Any] = {}
+    for index, candidate in enumerate(candidates, start=1):
+        definition_name = f"CandidateOutcomeBundle{index}"
+        candidate_schema = deepcopy(entry_schema)
+        candidate_schema["properties"]["candidate_id"] = {
+            "type": "string",
+            "const": candidate.candidate_id,
+        }
+        candidate_schema["properties"]["experiment_id"] = {
+            "type": "string",
+            "const": candidate.experiment_id,
+        }
+        definitions[definition_name] = candidate_schema
+        bundle_properties[candidate.candidate_id] = {
+            "$ref": f"#/$defs/{definition_name}"
+        }
+    schema["properties"]["candidate_outcomes"] = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": bundle_properties,
+        "required": [row.candidate_id for row in candidates],
+    }
+    schema["required"].append("candidate_outcomes")
     issued_ids = list(
         dict.fromkeys(row.experiment_id for row in candidates)
     )
-    definitions = schema["$defs"]
     for definition_name in ("ExperimentRecord", "OutcomeRecord"):
         definitions[definition_name]["properties"]["experiment_id"][
             "enum"

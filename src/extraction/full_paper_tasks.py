@@ -59,6 +59,14 @@ outcome to its experiment and cite only evidence inside that candidate's
 supplied envelope. Never create or alter an experiment ID.
 """
 
+CONTEXT_TASK_VERSION = "full-paper-context-task-1.2.0"
+
+
+class ContextValidationReport(ValidationReport):
+    """Context findings plus bundles safe for downstream consumption."""
+
+    accepted_candidate_outcomes: dict[str, CandidateOutcomeBundle]
+
 
 def _canonical_json(value: Any) -> str:
     return json.dumps(
@@ -494,6 +502,7 @@ def _make_context_task(
     )
     task_id = "FPC-" + _sha256(
         {
+            "context_task_version": CONTEXT_TASK_VERSION,
             "paper_id": inventory.paper_id,
             "context_key": key,
             "candidate_ids": [
@@ -502,10 +511,11 @@ def _make_context_task(
             "experiment_ids": [
                 row.experiment_id for row in candidates
             ],
+            "response_schema_sha256": _sha256(response_schema),
         }
     )[:16]
     return ContextTask(
-        context_task_version="full-paper-context-task-1.1.0",
+        context_task_version=CONTEXT_TASK_VERSION,
         task_id=task_id,
         paper_id=inventory.paper_id,
         context_key=_context_key(key),
@@ -657,7 +667,7 @@ def _record_evidence_ids(records: Iterable[Any]) -> set[str]:
 def validate_context_response(
     response: Mapping[str, Any] | str,
     task: ContextTask,
-) -> ValidationReport:
+) -> ContextValidationReport:
     """Validate compact records and exhaustive candidate-specific accounting."""
 
     findings: list[ValidationFinding] = []
@@ -665,7 +675,7 @@ def validate_context_response(
         try:
             raw = json.loads(response)
         except json.JSONDecodeError as error:
-            return ValidationReport(
+            return ContextValidationReport(
                 paper_id=task.paper_id,
                 status="invalid",
                 findings=[
@@ -676,11 +686,12 @@ def validate_context_response(
                         location=[],
                     )
                 ],
+                accepted_candidate_outcomes={},
             )
     else:
         raw = dict(response)
     if not isinstance(raw, dict):
-        return ValidationReport(
+        return ContextValidationReport(
             paper_id=task.paper_id,
             status="invalid",
             findings=[
@@ -691,6 +702,7 @@ def validate_context_response(
                     location=[],
                 )
             ],
+            accepted_candidate_outcomes={},
         )
 
     accounting_raw = raw.pop("context_candidate_accounting", None)
@@ -779,6 +791,7 @@ def validate_context_response(
                     )
                 )
 
+    candidate_outcomes: dict[str, CandidateOutcomeBundle] = {}
     if not isinstance(candidate_outcomes_raw, Mapping):
         findings.append(
             _finding(
@@ -838,6 +851,7 @@ def validate_context_response(
                     )
                 )
                 continue
+            candidate_outcomes[candidate_id] = bundle
             candidate = candidate_by_id[candidate_id]
             if bundle.candidate_id != candidate_id:
                 findings.append(
@@ -898,10 +912,11 @@ def validate_context_response(
     )
     findings.extend(compact_report.findings)
     if compact_response is None:
-        return ValidationReport(
+        return ContextValidationReport(
             paper_id=task.paper_id,
             status="invalid",
             findings=findings,
+            accepted_candidate_outcomes={},
         )
 
     formulations = {
@@ -1125,8 +1140,12 @@ def validate_context_response(
                 )
             )
 
-    return ValidationReport(
+    status = "invalid" if findings else "valid"
+    return ContextValidationReport(
         paper_id=task.paper_id,
-        status="invalid" if findings else "valid",
+        status=status,
         findings=findings,
+        accepted_candidate_outcomes=(
+            candidate_outcomes if status == "valid" else {}
+        ),
     )

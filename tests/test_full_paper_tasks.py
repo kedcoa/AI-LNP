@@ -3,8 +3,11 @@ from __future__ import annotations
 from copy import deepcopy
 
 import pytest
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
 from pydantic import ValidationError
 
+import src.extraction.full_paper_tasks as full_paper_tasks
 from src.extraction.full_paper_contracts import (
     CandidateOutcomeBundle,
     OutcomeAssertion,
@@ -538,8 +541,97 @@ def test_context_tasks_use_only_supported_candidates_and_exact_evidence() -> Non
         assert "E-UNRELATED" not in allowed
 
 
+def test_context_task_identity_changes_with_response_schema(
+    monkeypatch,
+) -> None:
+    baseline = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    original_builder = full_paper_tasks.build_context_response_schema
+
+    def changed_schema(candidates):
+        schema = original_builder(candidates)
+        schema["$comment"] = "contract changed"
+        return schema
+
+    monkeypatch.setattr(
+        full_paper_tasks,
+        "build_context_response_schema",
+        changed_schema,
+    )
+
+    changed = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+
+    assert baseline.context_task_version == "full-paper-context-task-1.2.0"
+    assert changed.task_id != baseline.task_id
+
+
+@pytest.mark.parametrize(
+    ("path", "replacement"),
+    [
+        (("candidate_id",), "CTX-INVENTED"),
+        (("experiment_id",), "EXP-INVENTED"),
+        (
+            ("foundational_outcomes", 0, "assertion_type"),
+            "comparison",
+        ),
+        (
+            ("exact_measurements", 0, "numeric_provenance"),
+            "graph_estimated",
+        ),
+    ],
+)
+def test_candidate_outcome_schema_enforces_local_semantics(
+    path,
+    replacement,
+) -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    candidate = task.candidates[0]
+    response = _valid_context_response(task)
+    bundle = deepcopy(response["candidate_outcomes"][candidate.candidate_id])
+    bundle["exact_measurements"] = [
+        {
+            "assertion_type": "measurement",
+            "direction": "reported",
+            "subject": "recipient signal",
+            "comparator": None,
+            "raw_text": "Signal was exactly 40%.",
+            "value": 40,
+            "unit": "%",
+            "numeric_provenance": "exact_reported",
+            "evidence_ids": [candidate.outcome_evidence_ids[0]],
+        }
+    ]
+    bundle_ref = task.response_schema["properties"]["candidate_outcomes"][
+        "properties"
+    ][candidate.candidate_id]
+    bundle_schema = {
+        "$ref": bundle_ref["$ref"],
+        "$defs": task.response_schema["$defs"],
+    }
+    validator = Draft202012Validator(bundle_schema)
+    validator.validate(bundle)
+    target = bundle
+    for key in path[:-1]:
+        target = target[key]
+    target[path[-1]] = replacement
+
+    with pytest.raises(JsonSchemaValidationError):
+        validator.validate(bundle)
+
+
 def test_unlabeled_graph_number_cannot_be_exact() -> None:
-    with pytest.raises(ValidationError, match="exact measurements"):
+    with pytest.raises(ValidationError):
         CandidateOutcomeBundle(
             candidate_id="C-1",
             experiment_id="EXP-1",
@@ -615,6 +707,10 @@ def test_valid_context_response_passes_compact_and_candidate_validation() -> Non
 
     assert report.status == "valid"
     assert report.findings == []
+    candidate_id = task.candidates[0].candidate_id
+    accepted = report.accepted_candidate_outcomes[candidate_id]
+    assert isinstance(accepted, CandidateOutcomeBundle)
+    assert accepted.experiment_id == task.candidates[0].experiment_id
 
 
 @pytest.mark.parametrize("mutation", ["missing", "invented"])
@@ -637,6 +733,30 @@ def test_context_response_rejects_inexact_candidate_accounting(mutation) -> None
     report = validate_context_response(response, task)
 
     assert report.status == "invalid"
+    assert expected_code in _error_codes(report)
+
+
+@pytest.mark.parametrize("mutation", ["missing", "invented"])
+def test_context_response_rejects_inexact_candidate_outcomes(mutation) -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    response = _valid_context_response(task)
+    if mutation == "missing":
+        response["candidate_outcomes"].pop("CTX-STELLATE-HIGH")
+        expected_code = "missing_candidate_outcome_ids"
+    else:
+        response["candidate_outcomes"]["CTX-INVENTED"] = deepcopy(
+            response["candidate_outcomes"]["CTX-STELLATE-LOW"]
+        )
+        expected_code = "invented_candidate_outcome_ids"
+
+    report = validate_context_response(response, task)
+
+    assert report.status == "invalid"
+    assert report.accepted_candidate_outcomes == {}
     assert expected_code in _error_codes(report)
 
 
