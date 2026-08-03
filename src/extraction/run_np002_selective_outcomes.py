@@ -6,18 +6,29 @@ import base64
 import hashlib
 import html
 import json
+import os
 import re
+from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Literal, Mapping
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+try:  # Kept optional so zero-call preflight remains locally usable.
+    from openai import OpenAI
+except ImportError:  # pragma: no cover - exercised only in a missing SDK environment
+    OpenAI = None  # type: ignore[assignment,misc]
+
 
 ROOT = Path(__file__).resolve().parents[2]
 PAPER_ID = "NP-002"
 PDF_PATH = ROOT / "data/staging/new_papers/NP-002/PMC6816632.pdf"
 HTML_PATH = ROOT / "data/staging/new_papers/NP-002/PMC6816632.html"
+PAPER_MAP_PATH = (
+    ROOT
+    / "data/staging/extraction/full_paper_np002_paper_map_run/NP-002/paper_map.json"
+)
 PREFLIGHT_VERSION = "np002-selective-outcomes-preflight-1.0.0"
 TASK_VERSION = "np002-selective-outcomes-task-1.0.0"
 
@@ -540,3 +551,332 @@ def validate_visual_response(response: Mapping[str, Any], task: Mapping[str, Any
                 raise ValueError("extracted accounting must link its one returned outcome")
         elif entry.outcome_slot_id is not None:
             raise ValueError("not_explicit accounting cannot link an outcome")
+
+
+def _read_json(path: Path, *, label: str) -> dict[str, Any]:
+    if not path.is_file():
+        raise FileNotFoundError(f"{label} does not exist: {path}")
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{label} is not valid JSON: {path}") from exc
+    if not isinstance(value, dict):
+        raise ValueError(f"{label} must be a JSON object: {path}")
+    return value
+
+
+def _verified_preflight(manifest_path: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    manifest = _read_json(manifest_path, label="preflight manifest")
+    signed = dict(manifest)
+    recorded_manifest_sha = signed.pop("manifest_sha256", None)
+    if not isinstance(recorded_manifest_sha, str) or _sha256(_canonical_json(signed)) != recorded_manifest_sha:
+        raise ValueError("preflight manifest integrity check failed")
+    if manifest.get("paper_id") != PAPER_ID or manifest.get("provider_calls") != 0:
+        raise ValueError("preflight manifest is not a zero-call NP-002 manifest")
+    requests = manifest.get("requests")
+    if not isinstance(requests, list) or [row.get("figure") if isinstance(row, Mapping) else None for row in requests] != ["Figure 2", "Figure 4"]:
+        raise ValueError("preflight manifest must contain Figure 2 then Figure 4")
+    if not all(isinstance(row, dict) for row in requests):
+        raise ValueError("preflight requests must be objects")
+    return manifest, requests
+
+
+def _verified_task_and_request(entry: Mapping[str, Any]) -> tuple[dict[str, Any], bytes, dict[str, Any]]:
+    required_paths = ("task_path", "crop_path", "request_path")
+    if any(not isinstance(entry.get(field), str) for field in required_paths):
+        raise ValueError("preflight request lacks immutable artifact paths")
+    task_path = Path(str(entry["task_path"]))
+    task = _read_json(task_path, label="immutable task")
+    recorded_task_sha = task.get("task_sha256")
+    unsigned_task = dict(task)
+    unsigned_task.pop("task_sha256", None)
+    if not isinstance(recorded_task_sha, str) or _sha256(_canonical_json(unsigned_task)) != recorded_task_sha:
+        raise ValueError("immutable task integrity check failed")
+    if task.get("task_sha256") != entry.get("task_sha256") or task.get("figure") != entry.get("figure"):
+        raise ValueError("immutable task does not match preflight request")
+    crop_path = Path(str(entry["crop_path"]))
+    if task.get("crop_path") != str(crop_path.resolve()) or not crop_path.is_file():
+        raise ValueError("immutable task crop path integrity check failed")
+    if _sha256(crop_path.read_bytes()) != entry.get("crop_sha256") or task.get("crop_sha256") != entry.get("crop_sha256"):
+        raise ValueError("immutable crop checksum changed")
+    request_path = Path(str(entry["request_path"]))
+    request_bytes = request_path.read_bytes()
+    if _sha256(request_bytes) != entry.get("request_sha256"):
+        raise ValueError("immutable request checksum changed")
+    if entry.get("request_bytes") != len(request_bytes):
+        raise ValueError("immutable request byte count changed")
+    try:
+        request = json.loads(request_bytes)
+    except json.JSONDecodeError as exc:
+        raise ValueError("immutable request is not valid JSON") from exc
+    if not isinstance(request, dict):
+        raise ValueError("immutable request must be a JSON object")
+    return task, request_bytes, request
+
+
+def _exclusive_marker(path: Path, payload: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with path.open("x", encoding="utf-8") as marker:
+            marker.write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+            marker.flush()
+            os.fsync(marker.fileno())
+    except FileExistsError as exc:
+        raise FileExistsError("An approved selective-vision invocation already started") from exc
+
+
+def _response_object(value: Any) -> dict[str, Any]:
+    if hasattr(value, "model_dump"):
+        dumped = value.model_dump(mode="json")
+    elif isinstance(value, Mapping):
+        dumped = dict(value)
+    else:
+        raise TypeError("provider response is not serializable")
+    if not isinstance(dumped, dict):
+        raise TypeError("provider response serialization must be an object")
+    return dumped
+
+
+def _usage_object(response: Any) -> dict[str, Any] | None:
+    usage = getattr(response, "usage", None)
+    if usage is None:
+        return None
+    return _response_object(usage)
+
+
+def run_approved(
+    manifest_path: Path,
+    approvals: Mapping[str, str],
+    output_root: Path,
+    client: Any | None = None,
+) -> dict[str, Any]:
+    """Dispatch the two exact approved request bytes once and sequentially."""
+    manifest_path = Path(manifest_path)
+    _, entries = _verified_preflight(manifest_path)
+    required_approvals = {"Figure 2", "Figure 4"}
+    if set(approvals) != required_approvals or any(
+        not isinstance(value, str) for value in approvals.values()
+    ):
+        raise ValueError("approval must name exact hashes for Figure 2 and Figure 4")
+    for entry in entries:
+        figure = str(entry["figure"])
+        if approvals[figure] != entry.get("request_sha256"):
+            raise ValueError(f"approval hash does not match immutable {figure} request")
+
+    run_dir = Path(output_root) / PAPER_ID
+    root_marker = run_dir / "invocation_started.json"
+    if root_marker.exists():
+        raise FileExistsError("An approved selective-vision invocation already started")
+    # Verify both artifact envelopes before the first paid boundary. Each is
+    # re-read again immediately before its dispatch below.
+    for entry in entries:
+        _verified_task_and_request(entry)
+    started_at = datetime.now(timezone.utc)
+    _exclusive_marker(
+        root_marker,
+        {
+            "status": "invocation_started",
+            "paper_id": PAPER_ID,
+            "manifest_path": str(manifest_path.resolve()),
+            "approval_hashes": dict(approvals),
+            "started_at": started_at.isoformat(),
+        },
+    )
+    provider_client = client
+    if provider_client is None:
+        if OpenAI is None:
+            raise RuntimeError("OpenAI SDK is required for an approved provider call")
+        provider_client = OpenAI(max_retries=0)
+    completed: list[dict[str, Any]] = []
+    try:
+        for entry in entries:
+            figure = str(entry["figure"])
+            task, request_bytes, request = _verified_task_and_request(entry)
+            if _sha256(request_bytes) != approvals[figure]:
+                raise ValueError(f"approved {figure} request bytes changed before dispatch")
+            figure_dir = run_dir / str(task["slug"])
+            _exclusive_marker(
+                figure_dir / "invocation_started.json",
+                {
+                    "status": "invocation_started",
+                    "paper_id": PAPER_ID,
+                    "figure": figure,
+                    "approval_sha256": approvals[figure],
+                    "request_sha256": _sha256(request_bytes),
+                    "started_at": datetime.now(timezone.utc).isoformat(),
+                },
+            )
+            (figure_dir / "request.json").write_bytes(request_bytes)
+            try:
+                response = provider_client.responses.create(**request)
+            except Exception as exc:
+                _write_json(
+                    figure_dir / "failure.json",
+                    {"status": "provider_exception", "figure": figure, "message": str(exc)},
+                )
+                raise
+            raw_response = _response_object(response)
+            usage = _usage_object(response)
+            _write_json(figure_dir / "response.json", raw_response)
+            _write_json(figure_dir / "usage.json", usage)
+            output_text = getattr(response, "output_text", None)
+            if not isinstance(output_text, str) or not output_text.strip():
+                raise ValueError(f"{figure} response has no structured output")
+            try:
+                trial_response = json.loads(output_text)
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"{figure} response is not valid JSON") from exc
+            if not isinstance(trial_response, dict):
+                raise ValueError(f"{figure} response must be a JSON object")
+            _write_json(figure_dir / "trial_response.json", trial_response)
+            validate_visual_response(trial_response, task)
+            _write_json(figure_dir / "validated_response.json", trial_response)
+            completed.append(
+                {
+                    "figure": figure,
+                    "slug": task["slug"],
+                    "request_sha256": _sha256(request_bytes),
+                    "response_sha256": _sha256(_canonical_json(trial_response)),
+                    "usage": usage,
+                }
+            )
+    except Exception as exc:
+        _write_json(
+            run_dir / "manifest.json",
+            {
+                "status": "failed",
+                "paper_id": PAPER_ID,
+                "paid_api_requests": len(completed) + 1,
+                "completed_figures": [row["figure"] for row in completed],
+                "message": str(exc),
+            },
+        )
+        raise
+    result = {
+        "status": "validated",
+        "paper_id": PAPER_ID,
+        "paid_api_requests": 2,
+        "repair_calls": 0,
+        "requests": completed,
+        "started_at": started_at.isoformat(),
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+    }
+    _write_json(run_dir / "manifest.json", result)
+    return result
+
+
+def _reported(value: Any, evidence_ids: list[str]) -> dict[str, Any]:
+    return {"value": value, "status": "reported", "evidence_ids": evidence_ids, "missing_reason": None}
+
+
+def _missing(reason: str) -> dict[str, Any]:
+    return {"value": None, "status": "missing", "evidence_ids": [], "missing_reason": reason}
+
+
+def _arm_context(task: Mapping[str, Any], slot: Mapping[str, Any]) -> dict[str, Any]:
+    figure = task.get("figure")
+    if figure == "Figure 2":
+        dose, model, timepoint, unit = 0.3, "C57BL/6J mice", 6, "hours"
+    elif figure == "Figure 4":
+        dose, model, timepoint, unit = slot["dose"], "Ai14 Cre-reporter mice", 3, "days"
+    else:  # pragma: no cover - guarded by the immutable manifest
+        raise ValueError("unknown visual figure")
+    return {
+        "dose": dose,
+        "dose_unit": "mg/kg",
+        "route": "intravenous injection via the lateral tail vein",
+        "species": "mouse",
+        "experimental_model": model,
+        "tissue_or_organ": "liver",
+        "timepoint": timepoint,
+        "timepoint_unit": unit,
+    }
+
+
+def _formulation_id(formulation: str) -> str:
+    mapping = {"MC3": "FORM::MC3_LNP", "cKK-E12": "FORM::cKK-E12_LNP"}
+    try:
+        return mapping[formulation]
+    except KeyError as exc:
+        raise ValueError(f"unknown NP-002 formulation: {formulation}") from exc
+
+
+def merge_validated(manifest_path: Path, run_root: Path, output_path: Path) -> dict[str, Any]:
+    """Merge locally validated visual rows with the committed paper-level map."""
+    _, entries = _verified_preflight(Path(manifest_path))
+    paper_map = _read_json(PAPER_MAP_PATH, label="committed v5.2 paper map")
+    if paper_map.get("paper_id") != PAPER_ID:
+        raise ValueError("committed paper map is not NP-002")
+    experiments: list[dict[str, Any]] = []
+    outcomes: list[dict[str, Any]] = []
+    slot_accounting: dict[str, Any] = {}
+    seen_slots: set[str] = set()
+    for entry in entries:
+        task, _, _ = _verified_task_and_request(entry)
+        figure_dir = Path(run_root) / PAPER_ID / str(task["slug"])
+        response = _read_json(figure_dir / "validated_response.json", label="validated visual response")
+        validate_visual_response(response, task)
+        for slot_id, accounting in response["slot_accounting"].items():
+            slot_accounting[slot_id] = accounting
+        for row in response["outcomes"]:
+            slot_id = str(row["slot_id"])
+            if slot_id in seen_slots:
+                raise ValueError("validated visual rows duplicate a slot across figures")
+            seen_slots.add(slot_id)
+            evidence_ids = list(row["evidence_ids"])
+            context = _arm_context(task, row)
+            experiment_id = f"VIS::{slot_id}"
+            experiments.append(
+                {
+                    "experiment_id": experiment_id,
+                    "formulation_id": _formulation_id(str(row["formulation"])),
+                    "payload_name": _reported(row["payload"], evidence_ids),
+                    "dose": _reported(context["dose"], evidence_ids),
+                    "dose_unit": _reported(context["dose_unit"], evidence_ids),
+                    "delivery_recipient_cell": _reported(row["recipient_cell"], evidence_ids),
+                    "route": _reported(context["route"], evidence_ids),
+                    "species": _reported(context["species"], evidence_ids),
+                    "experimental_model": _reported(context["experimental_model"], evidence_ids),
+                    "tissue_or_organ": _reported(context["tissue_or_organ"], evidence_ids),
+                    "timepoint": _reported(context["timepoint"], evidence_ids),
+                    "timepoint_unit": _reported(context["timepoint_unit"], evidence_ids),
+                }
+            )
+            outcomes.append(
+                {
+                    "outcome_id": f"VIS-OUT::{slot_id}",
+                    "experiment_id": experiment_id,
+                    "slot_id": slot_id,
+                    "figure": task["figure"],
+                    "figure_panel": row["figure_panel"],
+                    "evidence_ids": evidence_ids,
+                    "assay": _reported(row["assay"], evidence_ids),
+                    "endpoint": _reported(row["endpoint"], evidence_ids),
+                    "comparator": _reported(row["comparison_target"], evidence_ids)
+                    if row.get("comparison_target")
+                    else _missing("No source-supported comparator was reported."),
+                    "outcome_value": _missing("The figure bar has no printed measured value."),
+                    "outcome_unit": _missing("The figure bar has no printed measured unit."),
+                    "numeric_value": None,
+                    "numeric_unit": None,
+                    "qualitative_outcome": _reported(row["qualitative_outcome"], evidence_ids),
+                    "significance_wording": row.get("significance_wording"),
+                }
+            )
+    artifact = {
+        "contract_version": "np002-selective-vision-merge-1.0.0",
+        "paper_id": PAPER_ID,
+        "paper_map": paper_map,
+        "formulations": [
+            {"formulation_id": "FORM::MC3_LNP", "formulation_name": _reported("MC3", [])},
+            {"formulation_id": "FORM::cKK-E12_LNP", "formulation_name": _reported("cKK-E12", [])},
+        ],
+        "experiments": experiments,
+        "outcomes": outcomes,
+        "slot_accounting": slot_accounting,
+        "paid_api_requests": 2,
+    }
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    _write_json(output_path, artifact)
+    return artifact

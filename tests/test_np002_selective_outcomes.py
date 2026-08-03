@@ -3,9 +3,11 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 
+from src.extraction.evaluate_full_paper_benchmark import evaluate
 from src.extraction import run_np002_selective_outcomes as selective
 
 
@@ -287,3 +289,214 @@ def test_validate_visual_response_accepts_allowlisted_cited_printed_numeric_valu
     )
 
     selective.validate_visual_response(response, figure_2_task)
+
+
+def _response_for_task(task: dict, *, extracted_slot_index: int | None = None) -> dict:
+    """Make a complete source-envelope response without a provider call."""
+    outcomes = []
+    accounting = {}
+    for index, slot in enumerate(task["slots"]):
+        slot_id = slot["slot_id"]
+        if index == extracted_slot_index:
+            outcomes.append(
+                {
+                    **slot,
+                    "qualitative_outcome": "higher than the matched comparator",
+                    "comparison_target": "matched comparator",
+                    "significance_wording": "significant",
+                    "numeric_value": None,
+                    "numeric_unit": None,
+                    "exact_printed_support": None,
+                    "figure_panel": "A",
+                    "evidence_ids": [task["crop_evidence_id"]],
+                    "confidence": "high",
+                }
+            )
+            accounting[slot_id] = {
+                "disposition": "extracted",
+                "outcome_slot_id": slot_id,
+                "explanation": "The crop explicitly shows this comparison.",
+                "evidence_ids": [task["crop_evidence_id"]],
+            }
+        else:
+            accounting[slot_id] = {
+                "disposition": "not_explicit",
+                "outcome_slot_id": None,
+                "explanation": "No source-supported qualitative comparison is visible.",
+                "evidence_ids": [task["crop_evidence_id"]],
+            }
+    return {"figure": task["figure"], "outcomes": outcomes, "slot_accounting": accounting}
+
+
+class _FakeUsage:
+    def model_dump(self, *, mode: str) -> dict[str, int]:
+        assert mode == "json"
+        return {"input_tokens": 17, "output_tokens": 11, "total_tokens": 28}
+
+
+class _FakeProviderResponse:
+    def __init__(self, payload: dict) -> None:
+        self.id = "fake-response"
+        self.model = "fake-vision-model"
+        self.usage = _FakeUsage()
+        self.output_text = json.dumps(payload)
+
+    def model_dump(self, *, mode: str) -> dict[str, Any]:
+        assert mode == "json"
+        return {"id": self.id, "model": self.model, "output_text": self.output_text}
+
+
+class _FakeResponses:
+    def __init__(self, responses: list[object]) -> None:
+        self.responses = responses
+        self.calls: list[dict[str, Any]] = []
+
+    def create(self, **request: Any) -> object:
+        self.calls.append(request)
+        item = self.responses.pop(0)
+        if isinstance(item, Exception):
+            raise item
+        return item
+
+
+class _FakeClient:
+    def __init__(self, responses: list[object]) -> None:
+        self.responses = _FakeResponses(responses)
+
+
+def _prepared_manifest(tmp_path: Path) -> tuple[dict, Path]:
+    manifest = selective.prepare(tmp_path / "preflight", model="fake-vision-model")
+    return manifest, tmp_path / "preflight" / "NP-002" / "manifest.json"
+
+
+def _approved_responses(manifest: dict) -> list[_FakeProviderResponse]:
+    return [
+        _FakeProviderResponse(
+            _response_for_task(_read(row["task_path"]), extracted_slot_index=0)
+        )
+        for row in manifest["requests"]
+    ]
+
+
+def test_run_approved_requires_the_exact_hash_for_each_immutable_request(
+    tmp_path: Path,
+) -> None:
+    """A stale or substituted approval must stop before any paid dispatch."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    client = _FakeClient(_approved_responses(manifest))
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    approvals["Figure 4"] = "0" * 64
+
+    with pytest.raises(ValueError, match="approval"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert client.responses.calls == []
+
+
+def test_run_approved_dispatches_and_validates_figure_2_before_figure_4(
+    tmp_path: Path,
+) -> None:
+    """A later figure cannot be sent until the prior response is locally valid."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    client = _FakeClient(_approved_responses(manifest))
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+
+    result = selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert result["paid_api_requests"] == 2
+    assert [
+        json.loads(call["input"][1]["content"][0]["text"])["figure"]
+        for call in client.responses.calls
+    ] == ["Figure 2", "Figure 4"]
+    for row in manifest["requests"]:
+        run_dir = tmp_path / "run" / "NP-002" / _read(row["task_path"])["slug"]
+        assert (run_dir / "invocation_started.json").is_file()
+        assert (run_dir / "response.json").is_file()
+        assert (run_dir / "usage.json").is_file()
+        assert (run_dir / "validated_response.json").is_file()
+
+
+def test_run_approved_refuses_duplicate_markers_and_stops_after_figure_2_failure(
+    tmp_path: Path,
+) -> None:
+    """A provider failure is one terminal invocation, never an automatic retry."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    client = _FakeClient([RuntimeError("provider unavailable")])
+
+    with pytest.raises(RuntimeError, match="provider unavailable"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+    with pytest.raises(FileExistsError, match="already started"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert len(client.responses.calls) == 1
+    assert not (tmp_path / "run" / "NP-002" / "figure_4").exists()
+
+
+def test_run_approved_rejects_changed_crop_before_dispatch(
+    tmp_path: Path,
+) -> None:
+    """A request cannot run when the task's committed visual evidence changed."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    crop_path = Path(manifest["requests"][0]["crop_path"])
+    crop_path.write_bytes(crop_path.read_bytes() + b"changed")
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    client = _FakeClient(_approved_responses(manifest))
+
+    with pytest.raises(ValueError, match="crop"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert client.responses.calls == []
+
+
+def test_merge_validated_attaches_qualitative_rows_to_exact_arms_without_gold_access(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Visual outcomes retain arm identity while shared map facts stay paper-level."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    selective.run_approved(
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        _FakeClient(_approved_responses(manifest)),
+    )
+    original_read_text = Path.read_text
+
+    def reject_hidden_key(self: Path, *args: object, **kwargs: object) -> str:
+        if "benchmarks/full_paper" in self.as_posix() or self.name == "NP-002.json":
+            raise AssertionError("merger must not read the hidden answer key")
+        return original_read_text(self, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", reject_hidden_key)
+    output_path = tmp_path / "merged" / "merged_extraction.json"
+    artifact = selective.merge_validated(manifest_path, tmp_path / "run", output_path)
+
+    assert output_path.is_file()
+    assert artifact["paper_id"] == "NP-002"
+    assert len(artifact["outcomes"]) == 2
+    for outcome in artifact["outcomes"]:
+        assert outcome["outcome_value"]["value"] is None
+        assert outcome["outcome_unit"]["value"] is None
+        assert outcome["qualitative_outcome"]["value"] == "higher than the matched comparator"
+        assert outcome["evidence_ids"]
+        experiment = next(
+            row for row in artifact["experiments"] if row["experiment_id"] == outcome["experiment_id"]
+        )
+        assert experiment["formulation_id"] in {"FORM::MC3_LNP", "FORM::cKK-E12_LNP"}
+        assert experiment["payload_name"]["value"] in {"QUANT DNA", "Cre mRNA"}
+        assert experiment["delivery_recipient_cell"]["value"] in {
+            "Kupffer cells",
+            "liver endothelial cells",
+            "hepatocytes",
+        }
+        assert experiment["dose"]["value"] in {0.3, 1.0}
+    assert all("ratios" not in experiment for experiment in artifact["experiments"])
+    assert artifact["paper_map"]["formulations"][0]["ratios"]
+    synthetic_key = tmp_path / "synthetic-answer-key.json"
+    synthetic_key.write_text(
+        json.dumps({"paper_id": "NP-002", "shared_facts": [], "experiment_facts": []}),
+        encoding="utf-8",
+    )
+    assert evaluate(output_path.parent, synthetic_key).total_gold_fact_count == 0
