@@ -294,6 +294,32 @@ def test_one_evidence_membership_cannot_satisfy_duplicate_references() -> None:
     assert score.categories["provenance"].numerator == 1
 
 
+def test_evidence_field_aliases_share_one_scoped_membership() -> None:
+    extraction, reference = _documents(
+        [_fact("assay", "ddPCR", experiment_id="EXP-A")],
+        [
+            _reference_fact(
+                "APP-P1-PROV-ALIAS-SINGULAR",
+                "provenance",
+                "evidence_id",
+                "E-1",
+                experiment_id="EXP-A",
+            ),
+            _reference_fact(
+                "APP-P1-PROV-ALIAS-PLURAL",
+                "provenance",
+                "evidence_ids",
+                "E-1",
+                experiment_id="EXP-A",
+            ),
+        ],
+    )
+
+    score = evaluate_application_requirements(extraction, reference)
+
+    assert score.categories["provenance"].numerator == 1
+
+
 def test_typed_accepted_atomic_outcomes_are_scored() -> None:
     extraction = {
         "paper_id": "PAPER-1",

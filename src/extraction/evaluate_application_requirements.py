@@ -721,6 +721,16 @@ def _provenance_values(
     return ()
 
 
+def _matching_field_name(reference: _ReferenceFact) -> str:
+    leaf = reference.field_name.rsplit(".", 1)[-1]
+    if reference.category == "provenance" and leaf in {
+        "evidence_id",
+        "evidence_ids",
+    }:
+        return "evidence_id"
+    return leaf
+
+
 def _matching_resources(
     actual_facts: Sequence[_ActualFact],
     reference: _ReferenceFact,
@@ -737,7 +747,7 @@ def _matching_resources(
         _canonical_value(reference.field_name, value)
         for value in (reference.expected, *reference.aliases)
     }
-    leaf = reference.field_name.rsplit(".", 1)[-1]
+    leaf = _matching_field_name(reference)
     for index, actual in enumerate(actual_facts):
         if (
             actual.paper_id != reference.paper_id
@@ -747,11 +757,13 @@ def _matching_resources(
         for value in _provenance_values(actual, reference):
             canonical = _canonical_value(reference.field_name, value)
             if canonical in expected:
-                resource_index = (
-                    -1 if leaf in {"evidence_id", "evidence_ids"} else index
+                resource_index = -1 if leaf == "evidence_id" else index
+                resource_scope = (
+                    f"{reference.paper_id}\x1f"
+                    f"{reference.experiment_id or ''}\x1f{leaf}"
                 )
                 resources.append(
-                    ("provenance", resource_index, leaf, canonical)
+                    ("provenance", resource_index, resource_scope, canonical)
                 )
     return resources
 
@@ -768,7 +780,7 @@ def _maximum_matches(
             (
                 reference.paper_id,
                 reference.category,
-                reference.field_name.rsplit(".", 1)[-1],
+                _matching_field_name(reference),
                 reference.experiment_id,
             )
         ].append(index)
