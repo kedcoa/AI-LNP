@@ -731,6 +731,54 @@ def _usage_object(response: Any) -> dict[str, Any] | None:
     return _response_object(usage)
 
 
+def _normalize_qualitative_response(response: Mapping[str, Any]) -> dict[str, Any]:
+    """Remove numeric-only support text from rows that report no numeric value."""
+    normalized = json.loads(_canonical_json(response))
+    if not isinstance(normalized, dict):
+        raise ValueError("visual response must be a JSON object")
+    outcomes = normalized.get("outcomes")
+    if not isinstance(outcomes, list):
+        return normalized
+    for outcome in outcomes:
+        if not isinstance(outcome, dict):
+            continue
+        if (
+            outcome.get("numeric_value") is None
+            and outcome.get("numeric_unit") is None
+        ):
+            outcome["exact_printed_support"] = None
+    return normalized
+
+
+def _raw_output_text(raw_response: Mapping[str, Any]) -> str:
+    direct = raw_response.get("output_text")
+    if isinstance(direct, str):
+        return direct
+    output = raw_response.get("output")
+    if not isinstance(output, list):
+        raise ValueError("saved raw response has no structured output")
+    texts = [
+        content.get("text")
+        for message in output
+        if isinstance(message, Mapping)
+        for content in message.get("content", [])
+        if isinstance(content, Mapping) and content.get("type") == "output_text"
+    ]
+    if len(texts) != 1 or not isinstance(texts[0], str):
+        raise ValueError("saved raw response has no unique structured output")
+    return texts[0]
+
+
+def _parse_output_text(output_text: str, *, label: str) -> dict[str, Any]:
+    try:
+        value = json.loads(output_text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{label} is not valid JSON") from exc
+    if not isinstance(value, dict):
+        raise ValueError(f"{label} must be a JSON object")
+    return value
+
+
 def run_approved(
     manifest_path: Path,
     approvals: Mapping[str, str],
@@ -811,21 +859,19 @@ def run_approved(
             output_text = getattr(response, "output_text", None)
             if not isinstance(output_text, str) or not output_text.strip():
                 raise ValueError(f"{figure} response has no structured output")
-            try:
-                trial_response = json.loads(output_text)
-            except json.JSONDecodeError as exc:
-                raise ValueError(f"{figure} response is not valid JSON") from exc
-            if not isinstance(trial_response, dict):
-                raise ValueError(f"{figure} response must be a JSON object")
+            trial_response = _parse_output_text(
+                output_text, label=f"{figure} response"
+            )
             _write_json(figure_dir / "trial_response.json", trial_response)
-            validate_visual_response(trial_response, task)
-            _write_json(figure_dir / "validated_response.json", trial_response)
+            validated_response = _normalize_qualitative_response(trial_response)
+            validate_visual_response(validated_response, task)
+            _write_json(figure_dir / "validated_response.json", validated_response)
             completed.append(
                 {
                     "figure": figure,
                     "slug": task["slug"],
                     "request_sha256": _sha256(request_bytes),
-                    "response_sha256": _sha256(_canonical_json(trial_response)),
+                    "response_sha256": _sha256(_canonical_json(validated_response)),
                     "usage": usage,
                 }
             )
@@ -848,6 +894,152 @@ def run_approved(
         "repair_calls": 0,
         "requests": completed,
         "started_at": started_at.isoformat(),
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+    }
+    _write_json(run_dir / "manifest.json", result)
+    return result
+
+
+def resume_failed_figure_2(
+    manifest_path: Path,
+    approvals: Mapping[str, str],
+    output_root: Path,
+    client: Any | None = None,
+) -> dict[str, Any]:
+    """Validate one saved failed Figure 2 response, then dispatch only Figure 4."""
+    manifest_path = Path(manifest_path)
+    _, entries = _verified_preflight(manifest_path)
+    entries_by_figure = {str(entry["figure"]): entry for entry in entries}
+    if set(approvals) != {"Figure 2", "Figure 4"} or any(
+        approvals.get(figure) != entry.get("request_sha256")
+        for figure, entry in entries_by_figure.items()
+    ):
+        raise ValueError("resume requires exact Figure 2 and Figure 4 approval hashes")
+    figure_2_entry = entries_by_figure["Figure 2"]
+    figure_4_entry = entries_by_figure["Figure 4"]
+    figure_2_task, figure_2_request_bytes, _ = _verified_task_and_request(figure_2_entry)
+    figure_4_task, figure_4_request_bytes, figure_4_request = _verified_task_and_request(figure_4_entry)
+    run_dir = Path(output_root) / PAPER_ID
+    failed_manifest = _read_json(run_dir / "manifest.json", label="failed selective-vision run manifest")
+    if (
+        failed_manifest.get("status") != "failed"
+        or failed_manifest.get("paper_id") != PAPER_ID
+        or failed_manifest.get("paid_api_requests") != 1
+    ):
+        raise ValueError("resume requires the exact one-call failed Figure 2 run")
+    root_marker = _read_json(run_dir / "invocation_started.json", label="failed run invocation marker")
+    if root_marker.get("paper_id") != PAPER_ID or root_marker.get("approval_hashes") != dict(approvals):
+        raise ValueError("failed run invocation marker does not match approved requests")
+    figure_2_dir = run_dir / str(figure_2_task["slug"])
+    figure_2_marker = _read_json(
+        figure_2_dir / "invocation_started.json", label="Figure 2 invocation marker"
+    )
+    if (
+        figure_2_marker.get("paper_id") != PAPER_ID
+        or figure_2_marker.get("figure") != "Figure 2"
+        or figure_2_marker.get("approval_sha256") != approvals["Figure 2"]
+        or figure_2_marker.get("request_sha256") != figure_2_entry["request_sha256"]
+    ):
+        raise ValueError("Figure 2 invocation marker does not match approved request")
+    if (run_dir / str(figure_4_task["slug"]) / "invocation_started.json").exists():
+        raise FileExistsError("Figure 4 invocation already started; refusing resume")
+    saved_request_bytes = (figure_2_dir / "request.json").read_bytes()
+    if saved_request_bytes != figure_2_request_bytes or _sha256(saved_request_bytes) != approvals["Figure 2"]:
+        raise ValueError("saved Figure 2 request does not match approved preflight")
+    raw_response = _read_json(figure_2_dir / "response.json", label="saved raw Figure 2 response")
+    saved_trial = _read_json(figure_2_dir / "trial_response.json", label="saved Figure 2 trial response")
+    raw_trial = _parse_output_text(_raw_output_text(raw_response), label="saved raw Figure 2 output")
+    if _canonical_json(raw_trial) != _canonical_json(saved_trial):
+        raise ValueError("saved trial response does not match raw response")
+    raw_response_sha256 = _sha256(_canonical_json(raw_response))
+    trial_response_sha256 = _sha256(_canonical_json(saved_trial))
+    validated_figure_2 = _normalize_qualitative_response(saved_trial)
+    validate_visual_response(validated_figure_2, figure_2_task)
+    validated_figure_2_sha256 = _sha256(_canonical_json(validated_figure_2))
+    _write_json(figure_2_dir / "validated_response.json", validated_figure_2)
+    _write_json(
+        figure_2_dir / "recovery_provenance.json",
+        {
+            "status": "validated_saved_figure_2",
+            "figure": "Figure 2",
+            "request_sha256": _sha256(saved_request_bytes),
+            "raw_response_sha256": raw_response_sha256,
+            "trial_response_sha256": trial_response_sha256,
+            "validated_response_sha256": validated_figure_2_sha256,
+        },
+    )
+    figure_4_dir = run_dir / str(figure_4_task["slug"])
+    _exclusive_marker(
+        figure_4_dir / "invocation_started.json",
+        {
+            "status": "invocation_started",
+            "paper_id": PAPER_ID,
+            "figure": "Figure 4",
+            "approval_sha256": approvals["Figure 4"],
+            "request_sha256": _sha256(figure_4_request_bytes),
+            "started_at": datetime.now(timezone.utc).isoformat(),
+        },
+    )
+    (figure_4_dir / "request.json").write_bytes(figure_4_request_bytes)
+    provider_client = client
+    if provider_client is None:
+        if OpenAI is None:
+            raise RuntimeError("OpenAI SDK is required for an approved provider call")
+        provider_client = OpenAI(max_retries=0)
+    try:
+        response = provider_client.responses.create(**figure_4_request)
+    except Exception as exc:
+        _write_json(
+            figure_4_dir / "failure.json",
+            {"status": "provider_exception", "figure": "Figure 4", "message": str(exc)},
+        )
+        _write_json(
+            run_dir / "manifest.json",
+            {
+                "status": "failed",
+                "paper_id": PAPER_ID,
+                "paid_api_requests": 2,
+                "completed_figures": ["Figure 2"],
+                "message": str(exc),
+            },
+        )
+        raise
+    raw_figure_4 = _response_object(response)
+    usage_figure_4 = _usage_object(response)
+    _write_json(figure_4_dir / "response.json", raw_figure_4)
+    _write_json(figure_4_dir / "usage.json", usage_figure_4)
+    output_text = getattr(response, "output_text", None)
+    if not isinstance(output_text, str) or not output_text.strip():
+        raise ValueError("Figure 4 response has no structured output")
+    trial_figure_4 = _parse_output_text(output_text, label="Figure 4 response")
+    _write_json(figure_4_dir / "trial_response.json", trial_figure_4)
+    validated_figure_4 = _normalize_qualitative_response(trial_figure_4)
+    validate_visual_response(validated_figure_4, figure_4_task)
+    _write_json(figure_4_dir / "validated_response.json", validated_figure_4)
+    result = {
+        "status": "validated",
+        "paper_id": PAPER_ID,
+        "paid_api_requests": 2,
+        "repair_calls": 0,
+        "resumed_from_failed_figure": "Figure 2",
+        "requests": [
+            {
+                "figure": "Figure 2",
+                "slug": figure_2_task["slug"],
+                "request_sha256": _sha256(saved_request_bytes),
+                "response_sha256": validated_figure_2_sha256,
+                "raw_response_sha256": raw_response_sha256,
+                "trial_response_sha256": trial_response_sha256,
+                "usage": _read_json(figure_2_dir / "usage.json", label="saved Figure 2 usage"),
+            },
+            {
+                "figure": "Figure 4",
+                "slug": figure_4_task["slug"],
+                "request_sha256": _sha256(figure_4_request_bytes),
+                "response_sha256": _sha256(_canonical_json(validated_figure_4)),
+                "usage": usage_figure_4,
+            },
+        ],
         "completed_at": datetime.now(timezone.utc).isoformat(),
     }
     _write_json(run_dir / "manifest.json", result)

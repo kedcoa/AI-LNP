@@ -690,3 +690,107 @@ def test_run_approved_records_zero_paid_calls_for_predispatch_marker_failure(
 
     assert client.responses.calls == []
     assert _read(str(tmp_path / "run" / "NP-002" / "manifest.json"))["paid_api_requests"] == 0
+
+
+def test_run_approved_recovers_qualitative_quote_misplaced_as_numeric_support(
+    tmp_path: Path,
+) -> None:
+    """A quote on an otherwise qualitative row must not turn into a numeric claim."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    figure_2 = _response_for_task(_read(manifest["requests"][0]["task_path"]), extracted_slot_index=0)
+    figure_2["outcomes"][0]["exact_printed_support"] = "the Results state that cKK-E12 was lower than MC3"
+    figure_4 = _response_for_task(_read(manifest["requests"][1]["task_path"]), extracted_slot_index=0)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+
+    selective.run_approved(
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        _FakeClient([_FakeProviderResponse(figure_2), _FakeProviderResponse(figure_4)]),
+    )
+
+    validated = _read(str(tmp_path / "run" / "NP-002" / "figure_2" / "validated_response.json"))
+    raw_trial = _read(str(tmp_path / "run" / "NP-002" / "figure_2" / "trial_response.json"))
+    assert raw_trial["outcomes"][0]["exact_printed_support"] == "the Results state that cKK-E12 was lower than MC3"
+    assert validated["outcomes"][0]["numeric_value"] is None
+    assert validated["outcomes"][0]["numeric_unit"] is None
+    assert validated["outcomes"][0]["exact_printed_support"] is None
+
+
+def _failed_figure_2_run(
+    tmp_path: Path,
+) -> tuple[dict, Path, dict[str, str], dict]:
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    figure_2_entry = manifest["requests"][0]
+    figure_2_task = _read(figure_2_entry["task_path"])
+    trial = _response_for_task(figure_2_task, extracted_slot_index=0)
+    trial["outcomes"][0]["exact_printed_support"] = "qualitative Figure 2 Results quote"
+    run_dir = tmp_path / "run" / "NP-002"
+    figure_dir = run_dir / "figure_2"
+    figure_dir.mkdir(parents=True)
+    (run_dir / "invocation_started.json").write_text(
+        json.dumps({"paper_id": "NP-002", "approval_hashes": approvals}),
+        encoding="utf-8",
+    )
+    (figure_dir / "invocation_started.json").write_text(
+        json.dumps(
+            {
+                "paper_id": "NP-002",
+                "figure": "Figure 2",
+                "approval_sha256": approvals["Figure 2"],
+                "request_sha256": approvals["Figure 2"],
+            }
+        ),
+        encoding="utf-8",
+    )
+    request_bytes = Path(figure_2_entry["request_path"]).read_bytes()
+    (figure_dir / "request.json").write_bytes(request_bytes)
+    raw = {"id": "saved-figure-2", "output_text": json.dumps(trial)}
+    (figure_dir / "response.json").write_text(json.dumps(raw), encoding="utf-8")
+    (figure_dir / "trial_response.json").write_text(json.dumps(trial), encoding="utf-8")
+    (figure_dir / "usage.json").write_text(json.dumps({"total_tokens": 1}), encoding="utf-8")
+    (run_dir / "manifest.json").write_text(
+        json.dumps({"status": "failed", "paper_id": "NP-002", "paid_api_requests": 1}),
+        encoding="utf-8",
+    )
+    return manifest, manifest_path, approvals, trial
+
+
+def test_resume_failed_figure_2_validates_saved_artifacts_then_dispatches_only_figure_4(
+    tmp_path: Path,
+) -> None:
+    """A one-call failed run can resume only after proving its saved Figure 2 provenance."""
+    manifest, manifest_path, approvals, _ = _failed_figure_2_run(tmp_path)
+    figure_4 = _response_for_task(_read(manifest["requests"][1]["task_path"]), extracted_slot_index=0)
+    client = _FakeClient([_FakeProviderResponse(figure_4)])
+
+    result = selective.resume_failed_figure_2(
+        manifest_path, approvals, tmp_path / "run", client
+    )
+
+    assert result["paid_api_requests"] == 2
+    assert len(client.responses.calls) == 1
+    assert json.loads(client.responses.calls[0]["input"][1]["content"][0]["text"])["figure"] == "Figure 4"
+    validated = _read(str(tmp_path / "run" / "NP-002" / "figure_2" / "validated_response.json"))
+    assert validated["outcomes"][0]["exact_printed_support"] is None
+    provenance = _read(str(tmp_path / "run" / "NP-002" / "figure_2" / "recovery_provenance.json"))
+    assert provenance["raw_response_sha256"]
+    assert provenance["trial_response_sha256"]
+    assert [row["figure"] for row in result["requests"]] == ["Figure 2", "Figure 4"]
+
+
+def test_resume_failed_figure_2_refuses_saved_trial_that_does_not_match_raw_response(
+    tmp_path: Path,
+) -> None:
+    """A saved response edit cannot be laundered through the no-retry recovery path."""
+    _, manifest_path, approvals, trial = _failed_figure_2_run(tmp_path)
+    trial["outcomes"][0]["qualitative_outcome"] = "tampered after provider response"
+    trial_path = tmp_path / "run" / "NP-002" / "figure_2" / "trial_response.json"
+    trial_path.write_text(json.dumps(trial), encoding="utf-8")
+    client = _FakeClient([])
+
+    with pytest.raises(ValueError, match="saved trial response does not match raw response"):
+        selective.resume_failed_figure_2(manifest_path, approvals, tmp_path / "run", client)
+
+    assert client.responses.calls == []
