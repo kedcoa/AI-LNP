@@ -486,6 +486,25 @@ def test_gate_b_rejects_cross_paper_selective_vision_task(tmp_path: Path) -> Non
         prepare_downstream_gate([map_artifact], tmp_path / "gate-b")
 
 
+def test_gate_b_vision_request_rejects_unissued_experiment_binding(
+    tmp_path: Path,
+) -> None:
+    _build_task(
+        tmp_path,
+        experiment_id="EXP-CHANGED",
+        candidate_id="CTX-CHANGED",
+    )
+    task_path = tmp_path / "tasks" / "GP-TEST" / "VF-VISION" / "task.json"
+
+    with pytest.raises(ValueError, match="issued experiment binding"):
+        pilot_preparation._vision_request(
+            task_path,
+            "fake-model",
+            "GP-TEST",
+            expected_experiment_bindings={("EXP-ISSUED", "CTX-ISSUED")},
+        )
+
+
 def _zero_call_downstream(tmp_path: Path) -> tuple[object, Path, Path]:
     inventory_path = _inventory(tmp_path / "zero-inventory.json", "ZERO-PAPER")
     map_artifact = tmp_path / "zero-map.json"

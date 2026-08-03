@@ -54,6 +54,8 @@ class VisionTextEvidence(StrictModel):
 class SelectiveVisionTask(StrictModel):
     task_version: Literal["selective-vision-task-1.0.0"]
     paper_id: str
+    experiment_id: str | None = None
+    candidate_id: str | None = None
     finding: ValidationFinding
     trigger: Literal["unresolved_table", "unresolved_figure"]
     trigger_reason: str
@@ -79,6 +81,8 @@ class SelectiveVisionTask(StrictModel):
         """Return only the text and location context allowed by the timeline."""
         return {
             "paper_id": self.paper_id,
+            "experiment_id": self.experiment_id,
+            "candidate_id": self.candidate_id,
             "finding": self.finding.model_dump(mode="json"),
             "trigger": self.trigger,
             "trigger_reason": self.trigger_reason,
@@ -103,6 +107,8 @@ class SelectiveVisionTask(StrictModel):
 
 
 class SelectiveVisionResponse(StrictModel):
+    experiment_id: str | None = None
+    candidate_id: str | None = None
     finding_id: str
     disposition: Literal["resolved", "missing", "ambiguous", "human_review"]
     field_name: str

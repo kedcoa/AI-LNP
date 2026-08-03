@@ -10,7 +10,7 @@ from pydantic import ValidationError
 from src.extraction.build_selective_vision_tasks import build_task
 from src.extraction.compact_validation import ValidationFinding, ValidationReport
 from src.extraction.identify_selective_vision_referrals import identify
-from src.extraction.run_selective_vision import run_vision
+from src.extraction.run_selective_vision import response_schema, run_vision
 from src.extraction.selective_vision_contracts import (
     CropBox,
     SelectiveVisionResponse,
@@ -140,7 +140,12 @@ def _fake_renderer(pdf_path, page_number, crop_box, output_path):
     Image.new("RGB", (320, 240), "white").save(output_path)
 
 
-def _build_task(tmp_path):
+def _build_task(
+    tmp_path,
+    *,
+    experiment_id: str | None = None,
+    candidate_id: str | None = None,
+):
     pdf_path = tmp_path / "paper.pdf"
     pdf_path.write_bytes(b"%PDF-FAKE-FOR-UNIT-TEST")
     return build_task(
@@ -150,7 +155,24 @@ def _build_task(tmp_path):
         pdf_path=pdf_path,
         output_root=tmp_path / "tasks",
         renderer=_fake_renderer,
+        experiment_id=experiment_id,
+        candidate_id=candidate_id,
     )
+
+
+def test_experiment_bound_task_requires_response_to_echo_issued_ids(tmp_path):
+    task = _build_task(
+        tmp_path,
+        experiment_id="EXP-ISSUED",
+        candidate_id="CTX-ISSUED",
+    )
+
+    schema = response_schema(task)
+
+    assert schema["properties"]["experiment_id"] == {"const": "EXP-ISSUED"}
+    assert schema["properties"]["candidate_id"] == {"const": "CTX-ISSUED"}
+    assert "experiment_id" in schema["required"]
+    assert "candidate_id" in schema["required"]
 
 
 def test_builder_requires_explicit_visual_source_and_creates_one_crop(tmp_path):

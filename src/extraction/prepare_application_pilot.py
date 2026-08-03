@@ -18,6 +18,7 @@ from src.extraction.full_paper_tasks import (
     CONTEXT_PROMPT,
     build_context_tasks,
     build_paper_map_request,
+    issue_context_candidates,
 )
 from src.extraction.run_selective_vision import (
     VISION_PROMPT,
@@ -546,6 +547,7 @@ def _vision_request(
     expected_paper_id: str,
     *,
     task_bytes: bytes | None = None,
+    expected_experiment_bindings: set[tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
     exact_bytes = task_path.read_bytes() if task_bytes is None else task_bytes
     task = SelectiveVisionTask.model_validate_json(exact_bytes)
@@ -556,6 +558,13 @@ def _vision_request(
         raise ValueError("Selective-vision crop checksum mismatch")
     if task.paper_id != expected_paper_id:
         raise ValueError("selective vision task paper_id does not match map paper_id")
+    if expected_experiment_bindings is not None and (
+        task.experiment_id,
+        task.candidate_id,
+    ) not in expected_experiment_bindings:
+        raise ValueError(
+            "selective vision task lacks its issued experiment binding"
+        )
     return {
         "model": model,
         "reasoning": {"effort": "low"},
@@ -648,11 +657,16 @@ def prepare_downstream_gate(
         for task_path in vision_paths:
             task_bytes = task_path.read_bytes()
             task_sha256 = _sha256(task_bytes)
+            issued_bindings = {
+                (candidate.experiment_id, candidate.candidate_id)
+                for candidate in issue_context_candidates(paper_map)
+            }
             request = _vision_request(
                 task_path,
                 model,
                 paper_map.paper_id,
                 task_bytes=task_bytes,
+                expected_experiment_bindings=issued_bindings or None,
             )
             source_bindings.append(
                 SourceArtifactBinding(
