@@ -310,7 +310,7 @@ def _estimate_image_tokens(crop_path: Path) -> int:
 def _build_request(task: dict[str, Any], model: str) -> dict[str, Any]:
     crop_bytes = Path(task["crop_path"]).read_bytes()
     crop_url = "data:image/png;base64," + base64.b64encode(crop_bytes).decode("ascii")
-    payload = {key: task[key] for key in ("paper_id", "figure", "slots", "evidence", "crop_evidence_id", "allowed_exact_numeric_outcomes")}
+    payload = _task_validation_envelope(task)
     return {
         "model": model,
         "store": False,
@@ -324,6 +324,21 @@ def _build_request(task: dict[str, Any], model: str) -> dict[str, Any]:
         ],
         "text": {"format": {"type": "json_schema", "name": f"NP002{task['slug'].title().replace('_', '')}Response", "strict": True, "schema": _response_schema(task["slots"]) }},
     }
+
+
+def _task_validation_envelope(task: Mapping[str, Any]) -> dict[str, Any]:
+    keys = (
+        "paper_id",
+        "figure",
+        "slots",
+        "evidence",
+        "crop_evidence_id",
+        "allowed_exact_numeric_outcomes",
+    )
+    try:
+        return {key: task[key] for key in keys}
+    except KeyError as exc:
+        raise ValueError("immutable task lacks validation envelope fields") from exc
 
 
 def prepare(output_root: Path, model: str) -> dict[str, Any]:
@@ -581,6 +596,64 @@ def _verified_preflight(manifest_path: Path) -> tuple[dict[str, Any], list[dict[
     return manifest, requests
 
 
+def _verified_approved_request_envelope(
+    task: Mapping[str, Any],
+    entry: Mapping[str, Any],
+    request: Mapping[str, Any],
+) -> None:
+    """Bind the approved request's user content to the task used locally."""
+    inputs = request.get("input")
+    if not isinstance(inputs, list) or len(inputs) != 2:
+        raise ValueError("approved request task envelope is malformed")
+    user_message = inputs[1]
+    if not isinstance(user_message, Mapping) or user_message.get("role") != "user":
+        raise ValueError("approved request task envelope is malformed")
+    content = user_message.get("content")
+    if not isinstance(content, list) or len(content) != 2:
+        raise ValueError("approved request task envelope is malformed")
+    text_parts = [
+        row.get("text")
+        for row in content
+        if isinstance(row, Mapping) and row.get("type") == "input_text"
+    ]
+    image_parts = [
+        row.get("image_url")
+        for row in content
+        if isinstance(row, Mapping) and row.get("type") == "input_image"
+    ]
+    if len(text_parts) != 1 or not isinstance(text_parts[0], str):
+        raise ValueError("approved request task envelope lacks canonical text")
+    try:
+        embedded_payload = json.loads(text_parts[0])
+    except json.JSONDecodeError as exc:
+        raise ValueError("approved request task envelope text is not JSON") from exc
+    expected_payload = _task_validation_envelope(task)
+    if (
+        not isinstance(embedded_payload, dict)
+        or text_parts[0] != _canonical_json(embedded_payload)
+        or embedded_payload != expected_payload
+    ):
+        raise ValueError("approved request task envelope differs from immutable task")
+    if len(image_parts) != 1 or not isinstance(image_parts[0], str):
+        raise ValueError("approved request crop envelope lacks one image")
+    image_url = image_parts[0]
+    prefix = "data:image/png;base64,"
+    if not image_url.startswith(prefix):
+        raise ValueError("approved request crop envelope is not a PNG data URL")
+    try:
+        embedded_crop = base64.b64decode(image_url[len(prefix):], validate=True)
+    except ValueError as exc:
+        raise ValueError("approved request crop envelope has invalid base64") from exc
+    embedded_crop_sha = _sha256(embedded_crop)
+    expected_crop_sha = task.get("crop_sha256")
+    if (
+        embedded_crop_sha != expected_crop_sha
+        or embedded_crop_sha != entry.get("crop_sha256")
+        or embedded_crop != Path(str(entry["crop_path"])).read_bytes()
+    ):
+        raise ValueError("approved request crop differs from immutable task crop")
+
+
 def _verified_task_and_request(entry: Mapping[str, Any]) -> tuple[dict[str, Any], bytes, dict[str, Any]]:
     required_paths = ("task_path", "crop_path", "request_path")
     if any(not isinstance(entry.get(field), str) for field in required_paths):
@@ -611,6 +684,7 @@ def _verified_task_and_request(entry: Mapping[str, Any]) -> tuple[dict[str, Any]
         raise ValueError("immutable request is not valid JSON") from exc
     if not isinstance(request, dict):
         raise ValueError("immutable request must be a JSON object")
+    _verified_approved_request_envelope(task, entry, request)
     return task, request_bytes, request
 
 
@@ -688,6 +762,7 @@ def run_approved(
             raise RuntimeError("OpenAI SDK is required for an approved provider call")
         provider_client = OpenAI(max_retries=0)
     completed: list[dict[str, Any]] = []
+    paid_dispatches = 0
     try:
         for entry in entries:
             figure = str(entry["figure"])
@@ -708,6 +783,7 @@ def run_approved(
             )
             (figure_dir / "request.json").write_bytes(request_bytes)
             try:
+                paid_dispatches += 1
                 response = provider_client.responses.create(**request)
             except Exception as exc:
                 _write_json(
@@ -746,7 +822,7 @@ def run_approved(
             {
                 "status": "failed",
                 "paper_id": PAPER_ID,
-                "paid_api_requests": len(completed) + 1,
+                "paid_api_requests": paid_dispatches,
                 "completed_figures": [row["figure"] for row in completed],
                 "message": str(exc),
             },
@@ -804,6 +880,28 @@ def _formulation_id(formulation: str) -> str:
 def merge_validated(manifest_path: Path, run_root: Path, output_path: Path) -> dict[str, Any]:
     """Merge locally validated visual rows with the committed paper-level map."""
     _, entries = _verified_preflight(Path(manifest_path))
+    run_manifest = _read_json(
+        Path(run_root) / PAPER_ID / "manifest.json",
+        label="validated selective-vision run manifest",
+    )
+    if run_manifest.get("status") != "validated":
+        raise ValueError("merge requires a validated selective-vision run manifest")
+    recorded_requests = run_manifest.get("requests")
+    if (
+        not isinstance(recorded_requests, list)
+        or [row.get("figure") if isinstance(row, Mapping) else None for row in recorded_requests]
+        != ["Figure 2", "Figure 4"]
+        or not all(isinstance(row, dict) for row in recorded_requests)
+    ):
+        raise ValueError("run manifest must record Figure 2 then Figure 4")
+    for preflight_entry, recorded_entry in zip(entries, recorded_requests, strict=True):
+        if (
+            recorded_entry.get("figure") != preflight_entry.get("figure")
+            or recorded_entry.get("request_sha256") != preflight_entry.get("request_sha256")
+            or not isinstance(recorded_entry.get("response_sha256"), str)
+        ):
+            raise ValueError("run manifest request hashes do not match preflight")
+    recorded_by_figure = {row["figure"]: row for row in recorded_requests}
     paper_map = _read_json(PAPER_MAP_PATH, label="committed v5.2 paper map")
     if paper_map.get("paper_id") != PAPER_ID:
         raise ValueError("committed paper map is not NP-002")
@@ -815,6 +913,8 @@ def merge_validated(manifest_path: Path, run_root: Path, output_path: Path) -> d
         task, _, _ = _verified_task_and_request(entry)
         figure_dir = Path(run_root) / PAPER_ID / str(task["slug"])
         response = _read_json(figure_dir / "validated_response.json", label="validated visual response")
+        if _sha256(_canonical_json(response)) != recorded_by_figure[task["figure"]]["response_sha256"]:
+            raise ValueError("validated visual response checksum does not match run manifest")
         validate_visual_response(response, task)
         for slot_id, accounting in response["slot_accounting"].items():
             slot_accounting[slot_id] = accounting

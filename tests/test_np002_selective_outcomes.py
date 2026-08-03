@@ -500,3 +500,172 @@ def test_merge_validated_attaches_qualitative_rows_to_exact_arms_without_gold_ac
         encoding="utf-8",
     )
     assert evaluate(output_path.parent, synthetic_key).total_gold_fact_count == 0
+
+
+def _resign_manifest(manifest_path: Path, manifest: dict) -> None:
+    unsigned = dict(manifest)
+    unsigned.pop("manifest_sha256", None)
+    manifest["manifest_sha256"] = hashlib.sha256(
+        json.dumps(unsigned, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+
+def _resign_task(task_path: Path, task: dict) -> None:
+    unsigned = dict(task)
+    unsigned.pop("task_sha256", None)
+    task["task_sha256"] = hashlib.sha256(
+        json.dumps(unsigned, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    task_path.write_text(json.dumps(task, indent=2) + "\n", encoding="utf-8")
+
+
+def test_run_approved_rejects_resigned_task_that_differs_from_approved_request(
+    tmp_path: Path,
+) -> None:
+    """Re-signing local task metadata cannot change the approved validation envelope."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    first = manifest["requests"][0]
+    task_path = Path(first["task_path"])
+    task = _read(str(task_path))
+    task["slots"][0]["endpoint"] = "tampered endpoint"
+    _resign_task(task_path, task)
+    first["task_sha256"] = task["task_sha256"]
+    _resign_manifest(manifest_path, manifest)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    client = _FakeClient(_approved_responses(manifest))
+
+    with pytest.raises(ValueError, match="approved request.*task envelope"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert client.responses.calls == []
+
+
+def test_run_approved_rejects_resigned_crop_that_differs_from_approved_image(
+    tmp_path: Path,
+) -> None:
+    """Re-signing a replacement crop cannot detach local validation from the prompt image."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    first = manifest["requests"][0]
+    task_path = Path(first["task_path"])
+    task = _read(str(task_path))
+    crop_path = Path(first["crop_path"])
+    crop_path.write_bytes(crop_path.read_bytes() + b"replacement")
+    crop_sha = hashlib.sha256(crop_path.read_bytes()).hexdigest()
+    task["crop_sha256"] = crop_sha
+    _resign_task(task_path, task)
+    first["crop_sha256"] = crop_sha
+    first["task_sha256"] = task["task_sha256"]
+    _resign_manifest(manifest_path, manifest)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    client = _FakeClient(_approved_responses(manifest))
+
+    with pytest.raises(ValueError, match="approved request.*crop"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert client.responses.calls == []
+
+
+def test_merge_validated_rejects_response_changed_after_run_validation(
+    tmp_path: Path,
+) -> None:
+    """Schema-valid post-run edits cannot replace the response that was validated."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    selective.run_approved(
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        _FakeClient(_approved_responses(manifest)),
+    )
+    response_path = tmp_path / "run" / "NP-002" / "figure_2" / "validated_response.json"
+    response = _read(str(response_path))
+    response["outcomes"][0]["qualitative_outcome"] = "post-validation invention"
+    response_path.write_text(json.dumps(response, indent=2) + "\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="response checksum"):
+        selective.merge_validated(
+            manifest_path,
+            tmp_path / "run",
+            tmp_path / "merged" / "merged_extraction.json",
+        )
+
+
+def test_merge_validated_requires_completed_ordered_run_manifest_bound_to_preflight(
+    tmp_path: Path,
+) -> None:
+    """A merger accepts only the recorded Figure 2 then Figure 4 completion."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    selective.run_approved(
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        _FakeClient(_approved_responses(manifest)),
+    )
+    run_manifest_path = tmp_path / "run" / "NP-002" / "manifest.json"
+    run_manifest = _read(str(run_manifest_path))
+    run_manifest["requests"] = list(reversed(run_manifest["requests"]))
+    run_manifest_path.write_text(json.dumps(run_manifest, indent=2) + "\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="Figure 2 then Figure 4"):
+        selective.merge_validated(
+            manifest_path,
+            tmp_path / "run",
+            tmp_path / "merged" / "merged_extraction.json",
+        )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        (lambda manifest: manifest.update({"status": "failed"}), "validated selective-vision"),
+        (
+            lambda manifest: manifest["requests"][0].update({"request_sha256": "0" * 64}),
+            "request hashes",
+        ),
+    ],
+)
+def test_merge_validated_rejects_untrusted_run_manifest(
+    tmp_path: Path,
+    mutation,
+    message: str,
+) -> None:
+    """Completion state and both request hashes are provenance, not optional metadata."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    selective.run_approved(
+        manifest_path,
+        approvals,
+        tmp_path / "run",
+        _FakeClient(_approved_responses(manifest)),
+    )
+    run_manifest_path = tmp_path / "run" / "NP-002" / "manifest.json"
+    run_manifest = _read(str(run_manifest_path))
+    mutation(run_manifest)
+    run_manifest_path.write_text(json.dumps(run_manifest, indent=2) + "\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match=message):
+        selective.merge_validated(
+            manifest_path,
+            tmp_path / "run",
+            tmp_path / "merged" / "merged_extraction.json",
+        )
+
+
+def test_run_approved_records_zero_paid_calls_for_predispatch_marker_failure(
+    tmp_path: Path,
+) -> None:
+    """A local exclusive-marker conflict occurs before the paid dispatch boundary."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    marker = tmp_path / "run" / "NP-002" / "figure_2" / "invocation_started.json"
+    marker.parent.mkdir(parents=True)
+    marker.write_text("already started\n", encoding="utf-8")
+    client = _FakeClient(_approved_responses(manifest))
+
+    with pytest.raises(FileExistsError, match="already started"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert client.responses.calls == []
+    assert _read(str(tmp_path / "run" / "NP-002" / "manifest.json"))["paid_api_requests"] == 0
