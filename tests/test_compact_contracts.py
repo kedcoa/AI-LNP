@@ -1,4 +1,5 @@
 import pytest
+from openai.lib._pydantic import to_strict_json_schema
 from pydantic import ValidationError
 
 from src.extraction.compact_contracts import (
@@ -66,6 +67,7 @@ def valid_response():
                 "formulation_id": "F1",
                 "payload_type": reported("mRNA"),
                 "payload_name": reported("Luc mRNA"),
+                "payload_role": reported("reporter"),
                 "encoded_product": reported("luciferase"),
                 "molecular_target": missing(),
                 "delivery_recipient_cell": reported("hepatocyte"),
@@ -194,6 +196,65 @@ def test_payload_is_not_a_formulation_component_role():
     payload["components"][0]["role"] = reported("payload")
     with pytest.raises(ValidationError):
         CompactExtractionResponse.model_validate(payload)
+
+
+@pytest.mark.parametrize(
+    "payload_role",
+    [
+        "therapeutic",
+        "reporter",
+        "biodistribution_tracer",
+        "screening_barcode",
+    ],
+)
+def test_experiment_accepts_closed_payload_roles(payload_role):
+    payload = valid_response()
+    payload["experiments"][0]["payload_role"] = reported(payload_role)
+
+    response = CompactExtractionResponse.model_validate(payload)
+
+    assert response.experiments[0].payload_role.value == payload_role
+
+
+def test_experiment_rejects_invented_payload_role():
+    payload = valid_response()
+    payload["experiments"][0]["payload_role"] = reported("delivery_assay")
+
+    with pytest.raises(ValidationError, match="payload_role"):
+        CompactExtractionResponse.model_validate(payload)
+
+
+def test_strict_schema_requires_payload_role():
+    schema = to_strict_json_schema(CompactExtractionResponse)
+    experiment = schema["$defs"][
+        "ExperimentRecord"
+    ]
+
+    assert "payload_role" in experiment["required"]
+    reported_role_ref = experiment["properties"]["payload_role"]["anyOf"][0][
+        "$ref"
+    ]
+    reported_role = schema["$defs"][reported_role_ref.rsplit("/", 1)[-1]]
+    assert set(
+        reported_role["properties"]["value"]["anyOf"][0]["enum"]
+    ) == {
+        "therapeutic",
+        "reporter",
+        "biodistribution_tracer",
+        "screening_barcode",
+    }
+
+
+def test_strict_schema_requires_experimental_model_separately():
+    schema = to_strict_json_schema(CompactExtractionResponse)
+    experiment = schema["$defs"]["ExperimentRecord"]
+
+    assert "experimental_model" in experiment["required"]
+    assert "disease_model" in experiment["required"]
+    assert "experimental_model" in experiment["properties"]
+    assert experiment["properties"]["experimental_model"] == {
+        "$ref": "#/$defs/ReportedField_str_"
+    }
 
 
 def test_cross_record_links_must_resolve():

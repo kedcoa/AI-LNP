@@ -1,0 +1,504 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-001",
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-001-E-f0dbf2460867f112",
+      "NP-001-E-7b3c625323c08b9c",
+      "NP-001-E-c6658491eb3ce79d"
+    ],
+    "explanation": "The packet reports in-vitro delivery of EGFP-encoding mRNA in named LNP formulations to HepG2 cells, with transfection outcomes linked to LNP, LNP/DX25, and LNP/DX50 formulations."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F1",
+      "formulation_name": {
+        "value": "LNP, LNP/DX25, and LNP/DX50",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": "ALC-0315; DSPC or DOPE; cholesterol or DX; ALC-0159",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "composition_basis": {
+        "value": "Theoretical composition estimated from the precise mass of individual components added to the ethanolic phase",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No N/P ratio reported in the supplied evidence."
+      }
+    }
+  ],
+  "components": [
+    {
+      "component_id": "C1",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "ALC-0315",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "other",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount reported in the supplied evidence."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit reported in the supplied evidence."
+      }
+    },
+    {
+      "component_id": "C2",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "DSPC",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "other",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount reported in the supplied evidence."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit reported in the supplied evidence."
+      }
+    },
+    {
+      "component_id": "C3",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "DOPE",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "other",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount reported in the supplied evidence."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit reported in the supplied evidence."
+      }
+    },
+    {
+      "component_id": "C4",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount reported in the supplied evidence."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit reported in the supplied evidence."
+      }
+    },
+    {
+      "component_id": "C5",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "DX",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "other",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount reported in the supplied evidence."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit reported in the supplied evidence."
+      }
+    },
+    {
+      "component_id": "C6",
+      "formulation_id": "F1",
+      "identity": {
+        "value": "ALC-0159",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "other",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount reported in the supplied evidence."
+      },
+      "amount_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No component amount unit reported in the supplied evidence."
+      }
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP1",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "EGFP-encoding mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "EGFP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target reported in the supplied evidence."
+      },
+      "delivery_recipient_cell": {
+        "value": "HepG2 cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": "HepG2 cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "tissue_or_organ": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No tissue or organ reported for this in-vitro experiment."
+      },
+      "species": {
+        "value": "human",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": "human hepatocellular carcinoma cell line",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "experimental_context": {
+        "value": "in_vitro",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No dose reported in the supplied evidence."
+      },
+      "dose_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No dose unit reported in the supplied evidence."
+      },
+      "route": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No route reported for this in-vitro experiment."
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No timepoint reported in the supplied evidence."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No timepoint unit reported in the supplied evidence."
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "OUT1",
+      "experiment_id": "EXP1",
+      "assay": {
+        "value": "Positive transfection assessment",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Percentage of HepG2 cells with positive EGFP transfection",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No comparator reported for this result."
+      },
+      "outcome_value": {
+        "value": 95,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "outcome_unit": {
+        "value": "% of HepG2 cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": "Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [
+    "The supplied evidence reports alternative component choices (DSPC or DOPE; cholesterol or DX) but does not assign a complete component set to each named formulation (LNP, LNP/DX25, or LNP/DX50).",
+    "The supplied evidence does not expand the abbreviation DX or report component quantities, molar ratios, or N/P ratio.",
+    "The approximately 95% HepG2 transfection result is reported collectively for LNP, LNP/DX25, and LNP/DX50; formulation-specific values are not supplied."
+  ],
+  "core_slot_contract_version": "compact-core-slot-trial-1.0.0",
+  "core_slot_accounting": {
+    "CORE-HEPG2-TRANSFECTION": {
+      "disposition": "extracted",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-f0dbf2460867f112",
+        "NP-001-E-7b3c625323c08b9c",
+        "NP-001-E-c6658491eb3ce79d"
+      ]
+    },
+    "CORE-DC24-TRANSFECTION": {
+      "disposition": "duplicate",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-f0dbf2460867f112",
+        "NP-001-E-1ec1832fdbf78e17",
+        "NP-001-E-7b3c625323c08b9c",
+        "NP-001-E-692db6bd61bb5c3e"
+      ]
+    },
+    "CORE-DC24-IMMUNE": {
+      "disposition": "duplicate",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-f0dbf2460867f112",
+        "NP-001-E-1ec1832fdbf78e17",
+        "NP-001-E-00d75f88ef91e225"
+      ]
+    },
+    "CORE-HPBMC-TRANSFECTION": {
+      "disposition": "duplicate",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-f0dbf2460867f112",
+        "NP-001-E-1ec1832fdbf78e17",
+        "NP-001-E-3c1f7b8b03466436",
+        "NP-001-E-4742f3314a49dd4e",
+        "NP-001-E-59bcd1e6cc278300",
+        "NP-001-E-ca086241f715469b"
+      ]
+    },
+    "CORE-HPBMC-IMMUNE": {
+      "disposition": "duplicate",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-f0dbf2460867f112",
+        "NP-001-E-1ec1832fdbf78e17",
+        "NP-001-E-42290488e94705c6",
+        "NP-001-E-50253f44cc18cd42",
+        "NP-001-E-934be12ec1846ffe"
+      ]
+    },
+    "CORE-MOUSE-BIODISTRIBUTION": {
+      "disposition": "duplicate",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-f0dbf2460867f112",
+        "NP-001-E-1ec1832fdbf78e17",
+        "NP-001-E-637cb9ba7efa2cd3"
+      ]
+    }
+  }
+}

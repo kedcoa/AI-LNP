@@ -23,7 +23,7 @@ from src.extraction.missing_record_contracts import (
 
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_ROOT = ROOT / "data/staging/extraction/missing_record_repair_v1"
-PROMPT_VERSION = "missing-record-repair-prompt-1.0.0"
+PROMPT_VERSION = "missing-record-repair-prompt-1.2.0"
 PROMPT = """Recover only the atomic candidate facts and experiment context in
 the supplied task. Candidate IDs are opaque labels: use candidate_facts as the
 required fact definitions and the supplied evidence as their only support.
@@ -33,7 +33,19 @@ experiments into a broad record. A candidate is recovered only when at least one
 returned outcome preserves its specific facts and cites its evidence; shared
 evidence alone is not coverage. Do not repeat existing records. Return unresolved
 with a specific reason when evidence is insufficient. Never invent identifiers,
-values, units, comparisons, or evidence labels."""
+values, units, comparisons, or evidence labels. For v1.2 tasks, return one
+candidate resolution for every candidate and explicitly link each returned
+outcome to its resolved candidate and experiment. Every candidate receives
+exactly one resolution: already_represented, recovered_existing_experiment,
+recovered_new_experiment, or unresolved. already_represented references only
+existing outcomes and experiments. recovered_existing_experiment references at
+least one new outcome on existing experiments. recovered_new_experiment
+references at least one new outcome on the one permitted new experiment.
+unresolved returns no records and a specific reason. The provisional experiment context is not a binding target:
+use it only as a hint. A candidate may reference several outcomes only when they
+link to genuinely distinct experiments; distinct experiments require distinct outcomes.
+For a multi-arm comparison, produce one
+outcome on the encompassing experiment and preserve the comparator."""
 
 
 def _canonical(value: Any) -> str:
@@ -103,17 +115,133 @@ def validate_response(
                         f"{record.__class__.__name__}.{field_name} cites unknown "
                         f"evidence IDs: {sorted(unknown)}"
                     )
+    if task.task_version != "missing-record-task-1.2.0":
+        return
+
+    resolution_ids = [row.candidate_id for row in response.candidate_resolutions]
+    if len(set(resolution_ids)) != len(resolution_ids):
+        raise ValueError("candidate resolution IDs must be unique")
+    if set(resolution_ids) != expected:
+        raise ValueError("Response must include one candidate resolution per candidate")
+
+    known_outcomes = set(task.existing_outcome_ids) | set(new_outcome_ids)
+    resolution_by_candidate = {
+        row.candidate_id: row for row in response.candidate_resolutions
+    }
+    resolved_candidates = {
+        candidate_id
+        for candidate_id, resolution in resolution_by_candidate.items()
+        if resolution.status != "unresolved"
+    }
+    unresolved_candidates = expected - resolved_candidates
+    if recovered != resolved_candidates or unresolved != unresolved_candidates:
+        raise ValueError(
+            "recovered and unresolved candidate IDs must agree with candidate resolutions"
+        )
+    if (response.disposition == "recovered") != bool(resolved_candidates):
+        raise ValueError(
+            "response disposition must agree with candidate resolutions"
+        )
+    existing_outcome_experiments = {
+        summary.outcome_id: summary.experiment_id
+        for summary in task.existing_outcome_summaries
+    }
+    returned_outcome_experiments = {
+        outcome.outcome_id: outcome.experiment_id for outcome in response.outcomes
+    }
+    for resolution in response.candidate_resolutions:
+        outcome_ids = set(resolution.outcome_ids)
+        experiment_ids = set(resolution.experiment_ids)
+        if len(outcome_ids) != len(resolution.outcome_ids):
+            raise ValueError("candidate resolution outcome IDs must be unique")
+        if len(experiment_ids) != len(resolution.experiment_ids):
+            raise ValueError("candidate resolution experiment IDs must be unique")
+        if resolution.status == "unresolved":
+            if outcome_ids or experiment_ids:
+                raise ValueError("unresolved candidate resolutions cannot reference records")
+            if not resolution.reason:
+                raise ValueError("unresolved candidate resolutions require a reason")
+            continue
+        if not outcome_ids or not experiment_ids:
+            raise ValueError(
+                "resolved candidate resolutions require outcome and experiment IDs"
+            )
+        if resolution.reason:
+            raise ValueError(
+                "resolved candidate resolutions cannot include an unresolved reason"
+            )
+        if outcome_ids - known_outcomes:
+            raise ValueError("candidate resolution references an unknown outcome")
+        if experiment_ids - allowed_experiments:
+            raise ValueError("candidate resolution references an unknown experiment")
+        for outcome_id in outcome_ids:
+            if outcome_id in task.existing_outcome_ids:
+                linked_experiment_id = existing_outcome_experiments.get(outcome_id)
+                if linked_experiment_id is None:
+                    raise ValueError(
+                        "candidate resolution outcome summary is unavailable"
+                    )
+            else:
+                linked_experiment_id = returned_outcome_experiments[outcome_id]
+            if linked_experiment_id not in experiment_ids:
+                raise ValueError(
+                    "candidate resolution outcome summary does not match an experiment"
+                )
+        linked_returned_outcomes = [
+            outcome
+            for outcome in response.outcomes
+            if outcome.outcome_id in outcome_ids
+            and outcome.experiment_id in experiment_ids
+        ]
+        if resolution.status == "already_represented":
+            if outcome_ids - set(task.existing_outcome_ids):
+                raise ValueError("already represented candidates require existing outcomes")
+            if experiment_ids - set(task.existing_experiment_ids):
+                raise ValueError("already represented candidates require existing experiments")
+        elif resolution.status == "recovered_existing_experiment":
+            if experiment_ids - set(task.existing_experiment_ids):
+                raise ValueError(
+                    "recovered existing experiment candidates require existing experiments"
+                )
+            if not linked_returned_outcomes:
+                raise ValueError(
+                    "recovered existing experiment candidates require a new outcome"
+                )
+        elif resolution.status == "recovered_new_experiment":
+            if not any(
+                outcome.experiment_id in set(new_experiment_ids)
+                for outcome in linked_returned_outcomes
+            ):
+                raise ValueError(
+                    "recovered new experiment candidates require a new experiment outcome"
+                )
+
+    for outcome in response.outcomes:
+        if not any(
+            outcome.outcome_id in resolution.outcome_ids
+            and outcome.experiment_id in resolution.experiment_ids
+            for resolution in response.candidate_resolutions
+        ):
+            raise ValueError(
+                "Every returned outcome requires an explicit candidate resolution link"
+            )
 
 
-def fingerprint(task: MissingRecordTask, model: str) -> str:
+def fingerprint(
+    task: MissingRecordTask,
+    *,
+    approved_request_sha256: str,
+    approved_request: dict[str, Any],
+) -> str:
     return _sha(
         _canonical(
             {
                 "task_checksum": task.task_checksum,
                 "prompt_version": PROMPT_VERSION,
                 "prompt_sha256": _sha(PROMPT),
-                "schema": to_strict_json_schema(MissingRecordFragment),
-                "model": model,
+                "approved_request_sha256": approved_request_sha256,
+                "max_output_tokens": approved_request["max_output_tokens"],
+                "model": approved_request["model"],
             }
         )
     )
@@ -151,15 +279,56 @@ def build_openai_request(
     }
 
 
+def persist_raw_response(run_dir: Path, api_response: Any) -> Path:
+    """Persist the provider envelope before inspecting structured output."""
+
+    raw_response_path = run_dir / "response.raw.json"
+    raw_response_path.write_text(
+        json.dumps(
+            api_response.model_dump(mode="json"),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return raw_response_path
+
+
 def run(
     task: MissingRecordTask,
     *,
-    model: str,
     client: OpenAI,
+    approved_request_path: Path,
+    approved_request_sha256: str,
+    confirm_paid_call: bool,
     output_root: Path = OUTPUT_ROOT,
-    max_output_tokens: int = 4_000,
 ) -> dict[str, Any]:
-    run_fingerprint = fingerprint(task, model)
+    if not confirm_paid_call and not approved_request_path.is_file():
+        raise PermissionError(
+            "confirm_paid_call=True is required for a paid provider call"
+        )
+    from src.extraction.preflight_missing_record_repairs import (
+        find_signed_preflight_manifest,
+        load_approved_request,
+    )
+
+    manifest_path = find_signed_preflight_manifest(
+        approved_request_path
+    )
+    approved_request = load_approved_request(
+        approved_request_path,
+        expected_sha256=approved_request_sha256,
+        manifest_path=manifest_path,
+        expected_task_checksum=task.task_checksum,
+        expected_paper_id=task.paper_id,
+        expected_route="text",
+    )
+    run_fingerprint = fingerprint(
+        task,
+        approved_request_sha256=approved_request_sha256,
+        approved_request=approved_request,
+    )
     task_key = _sha(task.task_checksum)[:16]
     run_dir = output_root / task.paper_id / task_key / run_fingerprint
     result_path = run_dir / "result.json"
@@ -174,18 +343,22 @@ def run(
             "cache_hit": True,
             "paid_api_requests_this_run": 0,
         }
+    if not confirm_paid_call:
+        raise PermissionError(
+            "confirm_paid_call=True is required for a paid provider call"
+        )
+    approved_request_bytes = approved_request_path.read_bytes()
+    if _sha(approved_request_bytes) != approved_request_sha256:
+        raise ValueError(
+            "approved request bytes changed after validation"
+        )
     if run_dir.exists():
         raise FileExistsError("Incomplete run exists; refusing an automatic paid retry")
     run_dir.mkdir(parents=True)
-    request = build_openai_request(
-        task, model=model, max_output_tokens=max_output_tokens
-    )
-    (run_dir / "request.json").write_text(
-        json.dumps(request, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    (run_dir / "request.json").write_bytes(approved_request_bytes)
     started = datetime.now(timezone.utc)
-    api_response = client.responses.create(**request)
+    api_response = client.responses.create(**approved_request)
+    persist_raw_response(run_dir, api_response)
     if not api_response.output_text:
         raise RuntimeError("Missing-record request returned no structured output")
     response = MissingRecordFragment.model_validate_json(api_response.output_text)
@@ -201,7 +374,9 @@ def run(
         "paper_id": task.paper_id,
         "candidate_ids": task.candidate_ids,
         "fingerprint": run_fingerprint,
-        "model_requested": model,
+        "model_requested": approved_request["model"],
+        "approved_request_sha256": approved_request_sha256,
+        "max_output_tokens": approved_request["max_output_tokens"],
         "model_returned": api_response.model,
         "response_id": api_response.id,
         "paid_api_requests": 1,
@@ -223,19 +398,54 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--task", type=Path, required=True)
+    parser.add_argument(
+        "--approved-request-path",
+        type=Path,
+        required=True,
+    )
+    parser.add_argument(
+        "--approved-request-sha256",
+        required=True,
+    )
     parser.add_argument("--confirm-paid-call", action="store_true")
     args = parser.parse_args()
     if not args.confirm_paid_call:
         parser.error("--confirm-paid-call is required")
+    from src.extraction.preflight_missing_record_repairs import (
+        find_signed_preflight_manifest,
+        load_approved_request,
+    )
+
+    task = load_task(args.task)
+    load_approved_request(
+        args.approved_request_path,
+        expected_sha256=args.approved_request_sha256,
+        manifest_path=find_signed_preflight_manifest(
+            args.approved_request_path
+        ),
+        expected_task_checksum=task.task_checksum,
+        expected_paper_id=task.paper_id,
+        expected_route="text",
+    )
     load_dotenv(ROOT / ".env")
-    model = os.getenv("MISSING_RECORD_MODEL", "gpt-5.6-terra")
     client = OpenAI(
         api_key=os.environ["OPENAI_API_KEY"],
         base_url=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"),
         timeout=300,
         max_retries=0,
     )
-    print(json.dumps(run(load_task(args.task), model=model, client=client), indent=2))
+    print(
+        json.dumps(
+            run(
+                task,
+                client=client,
+                approved_request_path=args.approved_request_path,
+                approved_request_sha256=args.approved_request_sha256,
+                confirm_paid_call=True,
+            ),
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

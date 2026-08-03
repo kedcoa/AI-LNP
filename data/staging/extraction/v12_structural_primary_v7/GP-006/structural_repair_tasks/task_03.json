@@ -1,0 +1,337 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-006",
+  "route_ids": [
+    "structural:AOC-06e9ee5532c86270",
+    "structural:AOC-1ad805e42de65c53",
+    "structural:AOC-4afe681add34d1ac",
+    "structural:AOC-5bf741348fedbdab",
+    "structural:AOC-5cdf7580c115edce"
+  ],
+  "candidate_ids": [
+    "AOC-06e9ee5532c86270",
+    "AOC-1ad805e42de65c53",
+    "AOC-4afe681add34d1ac",
+    "AOC-5bf741348fedbdab",
+    "AOC-5cdf7580c115edce"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-006-d4cca5a9f0e1",
+    "label": "cas9_sgrna / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "cas9_sgrna",
+        "evidence_ids": [
+          "GP-006-E-ab6a59c6da34953c",
+          "GP-006-FC-626bb1932bd8fc95"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-006-E-ab6a59c6da34953c",
+          "GP-006-FC-626bb1932bd8fc95"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "lsec",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "coagulation_activity",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-06e9ee5532c86270",
+      "subject_text": "Our data showed that the in vivo gene",
+      "predicate": "edited",
+      "object_text": "efficiency of NSGHAsgRNA was comparable to that of mF8sgRNA, with both sgRNAs resulting in a gene",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 5.0,
+      "value_text": "5%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-ab6a59c6da34953c",
+        "GP-006-FC-626bb1932bd8fc95"
+      ]
+    },
+    {
+      "candidate_id": "AOC-1ad805e42de65c53",
+      "subject_text": "LSECs",
+      "predicate": "edited",
+      "object_text": "patterns in LSECs revealed that one base-pair deletions constitute the highest",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 46.5,
+      "value_text": "46.5%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-9c61cae7b3cbdfda",
+        "GP-006-FC-37d97abddfe8a8ff"
+      ]
+    },
+    {
+      "candidate_id": "AOC-4afe681add34d1ac",
+      "subject_text": "four base-pair deletions, which can help rescue the five base-pair",
+      "predicate": "edited",
+      "object_text": "NSG HemA, accounting for 50%–60% of all the deletions",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 50.0,
+      "value_text": "50%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-9c61cae7b3cbdfda",
+        "GP-006-FC-37d97abddfe8a8ff"
+      ]
+    },
+    {
+      "candidate_id": "AOC-5bf741348fedbdab",
+      "subject_text": "We subsequently identified the",
+      "predicate": "edited",
+      "object_text": "pattern at the mutation site via the Sanger sequencing and Tracking of indels by Decomposition (TIDE) online tool, showing",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": 3.5,
+      "value_text": "3.5%",
+      "unit": "%",
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-FC-3d990eb3b5256ae4"
+      ]
+    },
+    {
+      "candidate_id": "AOC-5cdf7580c115edce",
+      "subject_text": "LSECs",
+      "predicate": "decreased",
+      "object_text": "transgene",
+      "endpoint_text": "expression",
+      "qualitative_result": "lower",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-006-E-1d1871fe74140517",
+        "GP-006-FC-47621725376733bb"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-006-E-ab6a59c6da34953c",
+      "text": "Our data showed that the in vivo gene editing efficiency of NSGHAsgRNA was comparable to that of mF8sgRNA, with both sgRNAs resulting in a gene editing efficiency of around 5% in genomic DNA extracted from whole liver (Figure 4B).Figure 4In vivo gene editing efficiency of two specific Cas9/sgRNAs using hydrodynamic injection in NSG HemA mice(A) Plasmid expressing Cas9 and NSGHAsgRNA was delivered to NSG HemA mice through hydrodynamic injection.",
+      "source_ids": [
+        "S-620e08261866"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-626bb1932bd8fc95",
+      "text": "Our data showed that the in vivo gene editing efficiency of NSGHAsgRNA was comparable to that of mF8sgRNA, with both sgRNAs resulting in a gene editing efficiency of around 5% in genomic DNA extracted from whole liver (Figure 4B).",
+      "source_ids": [
+        "FC-S-051e1c2dbbc8ba2a",
+        "FC-S-051e1c2dbbc8ba2a"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-E-9c61cae7b3cbdfda",
+      "text": "The investigation of gene editing patterns in LSECs revealed that one base-pair deletions constitute the highest editing pattern (around 46.5% of total deletions), together with four base-pair deletions, which can help rescue the five base-pair deletion in NSG HemA, accounting for 50%–60% of all the deletions (Figures 6C and 6D).",
+      "source_ids": [
+        "S-5e3078bd8fb5"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-37d97abddfe8a8ff",
+      "text": "The investigation of gene editing patterns in LSECs revealed that one base-pair deletions constitute the highest editing pattern (around 46.5% of total deletions)\nfour base-pair deletions, which can help rescue the five base-pair deletion in NSG HemA, accounting for 50%–60% of all the deletions (Figures 6C and 6D).",
+      "source_ids": [
+        "FC-S-df43cccf8956b818",
+        "FC-S-df43cccf8956b818"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-3d990eb3b5256ae4",
+      "text": "We subsequently identified the indel pattern at the mutation site via the Sanger sequencing and Tracking of indels by Decomposition (TIDE) online tool, showing insertion and deletion rates of 3.5% and 28.5%, respectively.",
+      "source_ids": [
+        "FC-S-10f71fe35d1af996"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-E-1d1871fe74140517",
+      "text": "It was previously demonstrated in our lab that following hydrodynamic injection of plasmid DNA, transfection occurred predominantly in hepatocytes; however, lower transgene expression was also observed in LSECs.",
+      "source_ids": [
+        "S-620e08261866"
+      ]
+    },
+    {
+      "evidence_id": "GP-006-FC-47621725376733bb",
+      "text": "however, lower transgene expression was also observed in LSECs.",
+      "source_ids": [
+        "FC-S-051e1c2dbbc8ba2a",
+        "FC-S-051e1c2dbbc8ba2a"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "Cas9 mRNA and NSGHAsgRNA",
+      "encoded_product": "Cas9",
+      "molecular_target": "mutant F8 gene",
+      "delivery_recipient_cell": "hepatocytes and LSECs",
+      "therapeutic_target_cell": "LSECs",
+      "tissue_or_organ": "liver",
+      "species": "mouse",
+      "disease_model": "NSG HemA mice",
+      "experimental_context": "in_vivo",
+      "dose": 4.0,
+      "dose_unit": "mg/kg of Cas9/sgRNA LNP",
+      "route": "intravenous",
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "F8 gene editing rate in isolated hepatocytes",
+        "F8 gene editing rate in isolated LSECs",
+        "frequency of the +2 F8 insertion pattern",
+        "frequency of the +5 F8 insertion pattern",
+        "endogenous FVIII activity after two Cas9/sgRNA LNP injections",
+        "sustained endogenous FVIII activity after targeted correction of the mutant F8 gene",
+        "frequency of the +1 insertion pattern in LSECs"
+      ],
+      "comparator_context": [
+        "deletion variants"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "luciferase mRNA",
+      "encoded_product": "luciferase",
+      "molecular_target": null,
+      "delivery_recipient_cell": "hepatocytes and LSECs",
+      "therapeutic_target_cell": null,
+      "tissue_or_organ": "liver",
+      "species": "mice",
+      "disease_model": null,
+      "experimental_context": "in_vivo",
+      "dose": 0.2,
+      "dose_unit": "mg/kg Luc LNPs",
+      "route": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "luciferase expression in hepatocytes relative to LSECs"
+      ],
+      "comparator_context": [
+        "LSECs"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "deep sequencing",
+      "endpoint": "F8 gene editing rate in isolated hepatocytes",
+      "comparator": null,
+      "qualitative_outcome": null
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E1",
+      "assay": "deep sequencing",
+      "endpoint": "F8 gene editing rate in isolated LSECs",
+      "comparator": null,
+      "qualitative_outcome": null
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "luciferase assay normalized by total protein",
+      "endpoint": "luciferase expression in hepatocytes relative to LSECs",
+      "comparator": "LSECs",
+      "qualitative_outcome": "Luciferase expression was obtained from both hepatocytes and LSECs."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E1",
+      "assay": "indel-variant analysis by deep sequencing",
+      "endpoint": "frequency of the +2 F8 insertion pattern",
+      "comparator": "deletion variants",
+      "qualitative_outcome": "The +2 insertion pattern was less frequent than deletion variants."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "indel-variant analysis by deep sequencing",
+      "endpoint": "frequency of the +5 F8 insertion pattern",
+      "comparator": "deletion variants",
+      "qualitative_outcome": "The +5 insertion pattern was not detected and was less frequent than deletion variants."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "activated partial thromboplastin time (aPTT) assay",
+      "endpoint": "endogenous FVIII activity after two Cas9/sgRNA LNP injections",
+      "comparator": null,
+      "qualitative_outcome": "LNP treatment significantly improved FVIII activity."
+    },
+    {
+      "outcome_id": "O7",
+      "experiment_id": "E1",
+      "assay": "activated partial thromboplastin time (aPTT) assay",
+      "endpoint": "sustained endogenous FVIII activity after targeted correction of the mutant F8 gene",
+      "comparator": null,
+      "qualitative_outcome": "FVIII activity was sustained over 26 weeks, and targeted F8 correction produced improved coagulation."
+    },
+    {
+      "outcome_id": "O8",
+      "experiment_id": "E1",
+      "assay": "insertion frequency patterns",
+      "endpoint": "frequency of the +1 insertion pattern in LSECs",
+      "comparator": null,
+      "qualitative_outcome": null
+    }
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "787a2c1812271dd79ba5ab474ca67c3b61d0c06680afe02a144327130a5a8998",
+  "source_inventory_sha256": "3fc30210d59e81fd2a6748d65aa3d5d459cc8af0a7c54e73fbed2269a1f012e1",
+  "task_checksum": "bf700f47a6358f678f74a8ec4c9d76d18e6731db63bac93ff61eb1bc7d84fbdc"
+}

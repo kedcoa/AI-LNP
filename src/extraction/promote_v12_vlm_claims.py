@@ -123,10 +123,18 @@ def promote(
             evidence_id = "VLM-" + hashlib.sha256(
                 digest_payload.encode("utf-8")
             ).hexdigest()[:16]
+            image_path = Path(run["image_path"])
+            if not image_path.is_absolute():
+                image_path = ROOT / image_path
+            if not image_path.is_file():
+                raise FileNotFoundError(image_path)
             accepted.append({
                 "evidence_id": evidence_id,
                 "object_id": decision.object_id,
                 "image_path": run["image_path"],
+                "image_sha256": hashlib.sha256(
+                    image_path.read_bytes()
+                ).hexdigest(),
                 "claim": claim_payload,
                 "support_text": " | ".join(claim.visible_support),
             })

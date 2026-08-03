@@ -1,0 +1,264 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-008",
+  "route_ids": [
+    "structural:AOC-23089bb225e891ee",
+    "structural:AOC-486cf8fe3129bf3a",
+    "structural:AOC-b03d712df1a87604",
+    "structural:AOC-f6ff0f2d293c6c36"
+  ],
+  "candidate_ids": [
+    "AOC-23089bb225e891ee",
+    "AOC-486cf8fe3129bf3a",
+    "AOC-b03d712df1a87604",
+    "AOC-f6ff0f2d293c6c36"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-008-08e9104e95dd",
+    "label": "luciferase_zsgreen / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "luciferase_zsgreen",
+        "evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "macrophage",
+        "evidence_ids": [
+          "GP-008-FC-31d1c91359b57ac9"
+        ]
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-23089bb225e891ee",
+      "subject_text": "In the αCD163/LNP-ZsGreen cohort, surface CD163 expression was markedly",
+      "predicate": "reduced",
+      "object_text": "minimal overlap between ZsGreen+ and CD163+ populations",
+      "endpoint_text": "expression",
+      "qualitative_result": "markedly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-72c5d70fe8a4c2a3"
+      ]
+    },
+    {
+      "candidate_id": "AOC-486cf8fe3129bf3a",
+      "subject_text": "macrophages",
+      "predicate": "expressed",
+      "object_text": "ZsGreen protein in macrophages of fibrotic mice, with no detectable",
+      "endpoint_text": "expression",
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "negative",
+      "evidence_ids": [
+        "GP-008-FC-31d1c91359b57ac9"
+      ]
+    },
+    {
+      "candidate_id": "AOC-b03d712df1a87604",
+      "subject_text": "Conversely, unmodified LNP operates independently of CD163-mediated",
+      "predicate": "uptake_by",
+      "object_text": "resulting in substantial ZsGreen/CD163",
+      "endpoint_text": "uptake",
+      "qualitative_result": "colocalization",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-197c0d55a09731fa"
+      ]
+    },
+    {
+      "candidate_id": "AOC-f6ff0f2d293c6c36",
+      "subject_text": "macrophages",
+      "predicate": "reduced",
+      "object_text": "CD163 positivity and a markedly",
+      "endpoint_text": null,
+      "qualitative_result": "reduced",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-008-FC-f945a79d5d56831e"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-008-FC-72c5d70fe8a4c2a3",
+      "text": "In the αCD163/LNP-ZsGreen cohort, surface CD163 expression was markedly diminished, with minimal overlap between ZsGreen+ and CD163+ populations.",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-31d1c91359b57ac9",
+      "text": "In colocalization studies, LNP exhibited specific expression of ZsGreen protein in macrophages of fibrotic mice, with no detectable expression in other hepatic cell types",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-197c0d55a09731fa",
+      "text": "Conversely, unmodified LNP operates independently of CD163-mediated uptake, resulting in substantial ZsGreen/CD163 colocalization, thereby indirectly corroborating the targeting function of conjugated antibodies (SI Appendix, Fig.",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    },
+    {
+      "evidence_id": "GP-008-FC-f945a79d5d56831e",
+      "text": "In stark contrast, the αCD163/LNP-ZsGreen cohort displayed reduced CD163 positivity and a markedly diminished proportion of ZsGreen+/CD163+ double-positive macrophages (SI Appendix, Fig.",
+      "source_ids": [
+        "FC-S-24da017be1cd98f5"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1",
+    "F2"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "FAPCAR mRNA",
+      "encoded_product": "FAP-targeted CAR",
+      "molecular_target": "FAP",
+      "delivery_recipient_cell": "hepatic macrophages",
+      "therapeutic_target_cell": "FAP+ macrophages",
+      "tissue_or_organ": "liver",
+      "species": "mouse",
+      "disease_model": "liver fibrosis",
+      "experimental_context": "in_vivo",
+      "dose": 0.4,
+      "dose_unit": "mg mRNA/kg body weight",
+      "route": "intravenous tail-vein injection",
+      "timepoint": 14.0,
+      "timepoint_unit": "days after treatment",
+      "outcome_endpoints": [
+        "liver fibrosis",
+        "amount of FAP+ macrophages in fibrotic livers",
+        "FAP+ cells in hepatic tissue",
+        "FAPCAR localization in F4/80+ macrophages in liver tissue"
+      ],
+      "comparator_context": [
+        "CCL4 group",
+        "untreated cohort"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F2",
+      "payload_type": "mRNA",
+      "payload_name": "GFP or FAPCAR",
+      "encoded_product": "GFP or FAPCAR",
+      "molecular_target": "CD163",
+      "delivery_recipient_cell": "BMDMs",
+      "therapeutic_target_cell": "BMDMs",
+      "tissue_or_organ": null,
+      "species": null,
+      "disease_model": null,
+      "experimental_context": "in_vitro",
+      "dose": null,
+      "dose_unit": null,
+      "route": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "outcome_endpoints": [
+        "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+        "Target BMDMs receiving mRNA from unmodified LNPs"
+      ],
+      "comparator_context": [
+        "unmodified LNP",
+        "targeted αCD163 LNP"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "histology, Sirius red staining, and Masson's trichrome staining",
+      "endpoint": "liver fibrosis",
+      "comparator": "CCL4 group",
+      "qualitative_outcome": "Treatment with αCD163/LNP-FAPCAR significantly alleviated liver fibrosis."
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E1",
+      "assay": "single-cell RNA sequencing and immunofluorescence colocalization",
+      "endpoint": "amount of FAP+ macrophages in fibrotic livers",
+      "comparator": "untreated cohort",
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment markedly attenuated FAP+ macrophages; FAP/F4/80 double-positive macrophages were virtually eradicated after administration."
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "GFP or FAPCAR expression",
+      "endpoint": "BMDMs expressing GFP or FAPCAR after exposure to αCD163/LNP-GFP or αCD163/LNP-FAPCAR",
+      "comparator": "unmodified LNP",
+      "qualitative_outcome": ">80% of BMDMs expressed GFP or FAPCAR."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E2",
+      "assay": "mRNA delivery",
+      "endpoint": "Target BMDMs receiving mRNA from unmodified LNPs",
+      "comparator": "targeted αCD163 LNP",
+      "qualitative_outcome": "<20% of target BMDMs received mRNA."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "immunohistochemistry of hepatic tissue",
+      "endpoint": "FAP+ cells in hepatic tissue",
+      "comparator": null,
+      "qualitative_outcome": "αCD163/LNP-FAPCAR treatment enabled targeted elimination of FAP+ cells."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "immunofluorescence staining",
+      "endpoint": "FAPCAR localization in F4/80+ macrophages in liver tissue",
+      "comparator": null,
+      "qualitative_outcome": "FAPCAR immunofluorescence staining highlighted F4/80+ macrophages in liver tissues."
+    }
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "64c639cd232aa0274316ff6dc807d80686925828680fb384f3a12932f9a9369b",
+  "source_inventory_sha256": "949d8955943a63a5f314bbe7796cdd528d139a274e34e2f0afa91ec67e1c41ca",
+  "task_checksum": "750ce1dec7d188d7eb0c064ad83464993e06c2d530ba583637dc9fad9acdfc47"
+}

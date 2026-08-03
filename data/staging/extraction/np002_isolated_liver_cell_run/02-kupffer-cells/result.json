@@ -1,0 +1,886 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-002",
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-002-E-a7b58e690d38b83c",
+      "NP-002-E-3916e805b2eb204f",
+      "NP-002-E-6c0bdace69f5e2a1",
+      "NP-002-E-59fa0ed20f3c3103",
+      "NP-002-E-8db53352513724f5",
+      "NP-002-E-daf25dcc25ba1318"
+    ],
+    "explanation": "Original in-vivo mouse experiments administered Cre mRNA in MC3 or cKK-E12 LNPs and measured tdTomato-positive Kupffer cells by flow cytometry. Formulation-specific functional-delivery outcomes are reported at 1.0 mg/kg; a lower-dose outcome is reported but not resolved by formulation."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F-MC3",
+      "formulation_name": {
+        "value": "MC3 LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba",
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": "MC3, cholesterol, C14 PEG 2000, and DSPC; lipids formulated at a 50:38.5:1.5:10 molar ratio of ionizable lipid:cholesterol:PEG-lipid:DSPC.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba",
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "composition_basis": {
+        "value": "Molar ratio of ionizable lipid:cholesterol:PEG-lipid:DSPC; lipid:nucleic-acid mass ratio 10:1.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No N:P ratio was directly reported."
+      }
+    },
+    {
+      "formulation_id": "F-cKK-E12",
+      "formulation_name": {
+        "value": "cKK-E12 LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba",
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": "cKK-E12, cholesterol, C14 PEG 2000, and DSPC; lipids formulated at a 50:38.5:1.5:10 molar ratio of ionizable lipid:cholesterol:PEG-lipid:DSPC.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba",
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "composition_basis": {
+        "value": "Molar ratio of ionizable lipid:cholesterol:PEG-lipid:DSPC; lipid:nucleic-acid mass ratio 10:1.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No N:P ratio was directly reported."
+      }
+    }
+  ],
+  "components": [
+    {
+      "component_id": "C-MC3-ionizable",
+      "formulation_id": "F-MC3",
+      "identity": {
+        "value": "MC3",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "ionizable_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 50.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C-MC3-cholesterol",
+      "formulation_id": "F-MC3",
+      "identity": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 38.5,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C-MC3-PEG",
+      "formulation_id": "F-MC3",
+      "identity": {
+        "value": "C14 PEG 2000",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "peg_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 1.5,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C-MC3-DSPC",
+      "formulation_id": "F-MC3",
+      "identity": {
+        "value": "DSPC",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "helper_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 10.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C-cKK-E12-ionizable",
+      "formulation_id": "F-cKK-E12",
+      "identity": {
+        "value": "cKK-E12",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "ionizable_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 50.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C-cKK-E12-cholesterol",
+      "formulation_id": "F-cKK-E12",
+      "identity": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "cholesterol",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 38.5,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C-cKK-E12-PEG",
+      "formulation_id": "F-cKK-E12",
+      "identity": {
+        "value": "C14 PEG 2000",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "peg_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 1.5,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "component_id": "C-cKK-E12-DSPC",
+      "formulation_id": "F-cKK-E12",
+      "identity": {
+        "value": "DSPC",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-392bafddbd3712ba"
+        ],
+        "missing_reason": null
+      },
+      "role": {
+        "value": "helper_lipid",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount": {
+        "value": 10.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      },
+      "amount_unit": {
+        "value": "mol%",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-dab4da3a493a1db3"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP-Cre-MC3-1.0",
+      "formulation_id": "F-MC3",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Cre protein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-5f88b50e87e74b19"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target was reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No therapeutic target cell was reported."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": "Ai14 reporter mice",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c0a678a9166c0e57"
+        ],
+        "missing_reason": null
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c0a678a9166c0e57"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 1.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous via lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No post-dose measurement timepoint was reported for this Cre-mRNA experiment."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No post-dose measurement timepoint was reported for this Cre-mRNA experiment."
+      }
+    },
+    {
+      "experiment_id": "EXP-Cre-cKK-E12-1.0",
+      "formulation_id": "F-cKK-E12",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "Cre protein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-5f88b50e87e74b19"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target was reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No therapeutic target cell was reported."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": "Ai14 reporter mice",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c0a678a9166c0e57"
+        ],
+        "missing_reason": null
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-c0a678a9166c0e57"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 1.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg Cre mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-a7b58e690d38b83c"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous via lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No post-dose measurement timepoint was reported for this Cre-mRNA experiment."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No post-dose measurement timepoint was reported for this Cre-mRNA experiment."
+      }
+    },
+    {
+      "experiment_id": "EXP-QUANT-DNA-cKK-E12-0.3",
+      "formulation_id": "F-cKK-E12",
+      "payload_type": {
+        "value": "DNA barcode",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b5df172c442bad8b",
+          "NP-002-E-19aeae85206d783d"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "QUANT DNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b5df172c442bad8b"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "QUANT DNA was used for biodistribution; no encoded product was reported."
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target was reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "Kupffer cells (CD31− CD45+ CD68+)",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No therapeutic target cell was reported."
+      },
+      "tissue_or_organ": {
+        "value": "liver",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-b630414e4abef2d1"
+        ],
+        "missing_reason": null
+      },
+      "species": {
+        "value": "mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model was reported."
+      },
+      "experimental_context": {
+        "value": "in_vivo",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": 0.3,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "dose_unit": {
+        "value": "mg/kg QUANT DNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "route": {
+        "value": "intravenous via lateral tail vein",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-f60d9ed4bd08f7e7"
+        ],
+        "missing_reason": null
+      },
+      "timepoint": {
+        "value": 6.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      },
+      "timepoint_unit": {
+        "value": "hours",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "OUT-Cre-MC3-1.0-Kupffer",
+      "experiment_id": "EXP-Cre-MC3-1.0",
+      "assay": {
+        "value": "Flow cytometry quantification of tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Functional Cre-mRNA delivery in Kupffer cells, measured as percentage tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f",
+          "NP-002-E-3b9024cba09e0e0d"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Liver endothelial cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-6c0bdace69f5e2a1"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical percentage was reported in the supplied evidence."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "Functional delivery to endothelial cells was higher than to Kupffer cells for MC3-treated mice; the difference was not significant.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-6c0bdace69f5e2a1"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "OUT-Cre-cKK-E12-1.0-Kupffer",
+      "experiment_id": "EXP-Cre-cKK-E12-1.0",
+      "assay": {
+        "value": "Flow cytometry quantification of tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Functional Cre-mRNA delivery in Kupffer cells, measured as percentage tdTomato-positive cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-3916e805b2eb204f",
+          "NP-002-E-3b9024cba09e0e0d"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Liver endothelial cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-6c0bdace69f5e2a1"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical percentage was reported in the supplied evidence."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "Functional delivery to endothelial cells was higher than to Kupffer cells for cKK-E12-treated mice; the difference was not significant.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-6c0bdace69f5e2a1"
+        ],
+        "missing_reason": null
+      }
+    },
+    {
+      "outcome_id": "OUT-QUANT-DNA-cKK-E12-0.3-Kupffer",
+      "experiment_id": "EXP-QUANT-DNA-cKK-E12-0.3",
+      "assay": {
+        "value": "FACS isolation of Kupffer cells and DNA accumulation measurement",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-eed49c2f063f485a",
+          "NP-002-E-1c82bf3a77fad899"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "QUANT DNA accumulation in Kupffer cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-1c82bf3a77fad899"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "Endothelial cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-1c82bf3a77fad899"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical DNA-accumulation value was reported."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numerical outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "For cKK-E12, DNA accumulated in all three assayed liver cell types; DNA taken up per endothelial cell was less than in Kupffer cells.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-002-E-1c82bf3a77fad899"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": []
+}

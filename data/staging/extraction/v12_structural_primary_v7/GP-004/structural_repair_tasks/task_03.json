@@ -1,0 +1,297 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-29d56a9f2824b4ae",
+    "structural:AOC-3e51accdc676fb1d",
+    "structural:AOC-522a5dab8c0d1f14",
+    "structural:AOC-a6b5ecbf468f2cd4"
+  ],
+  "candidate_ids": [
+    "AOC-29d56a9f2824b4ae",
+    "AOC-3e51accdc676fb1d",
+    "AOC-522a5dab8c0d1f14",
+    "AOC-a6b5ecbf468f2cd4"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-415d753e7b0e",
+    "label": "luciferase_zsgreen / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "luciferase_zsgreen",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-29d56a9f2824b4ae",
+      "subject_text": "Both IV",
+      "predicate": "delivered_to",
+      "object_text": "routes resulted in similar protein",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-aa1c2885867bfc0a",
+        "GP-004-FC-2249bd15d7493e40"
+      ]
+    },
+    {
+      "candidate_id": "AOC-3e51accdc676fb1d",
+      "subject_text": "Both",
+      "predicate": "delivered_to",
+      "object_text": "methods led to liver restricted Luc mRNA-LNP",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-525e4ad8fb4e4525",
+        "GP-004-FC-bb226d88dafd1041"
+      ]
+    },
+    {
+      "candidate_id": "AOC-522a5dab8c0d1f14",
+      "subject_text": "Thereafter, bioluminescence",
+      "predicate": "decreased",
+      "object_text": "progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection",
+      "endpoint_text": "activity",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-440906cb169c4960",
+        "GP-004-FC-79cd6ce9072c0e6f"
+      ]
+    },
+    {
+      "candidate_id": "AOC-a6b5ecbf468f2cd4",
+      "subject_text": "Both IV delivery routes resulted in similar protein",
+      "predicate": "expressed",
+      "object_text": "levels and kinetics, indicating either approach can be employed for transient",
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-E-aa1c2885867bfc0a",
+        "GP-004-FC-2249bd15d7493e40"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-E-aa1c2885867bfc0a",
+      "text": "Both IV delivery routes resulted in similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver.Fig.",
+      "source_ids": [
+        "S-6206e3e3ebaa"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-2249bd15d7493e40",
+      "text": "Both IV delivery routes resulted in similar protein expression levels and kinetics, indicating either approach can be employed for transient expression of proteins into the liver.Fig.",
+      "source_ids": [
+        "FC-S-2e7faf7e803b8ce8",
+        "FC-S-2e7faf7e803b8ce8"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-525e4ad8fb4e4525",
+      "text": "Both delivery methods led to liver restricted Luc mRNA-LNP expression as measured by bioluminescence (Fig.",
+      "source_ids": [
+        "S-6206e3e3ebaa"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-bb226d88dafd1041",
+      "text": "Both delivery methods led to liver restricted Luc mRNA-LNP expression as measured by bioluminescence (Fig.",
+      "source_ids": [
+        "FC-S-2e7faf7e803b8ce8",
+        "FC-S-2e7faf7e803b8ce8"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-E-440906cb169c4960",
+      "text": "Thereafter, bioluminescence decreased progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection (Fig.",
+      "source_ids": [
+        "S-6206e3e3ebaa"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-79cd6ce9072c0e6f",
+      "text": "Thereafter, bioluminescence decreased progressively with an average rate of one log per day to finally reach baseline activity at day 8 post-injection (Fig.",
+      "source_ids": [
+        "FC-S-2e7faf7e803b8ce8",
+        "FC-S-2e7faf7e803b8ce8"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "eGFP mRNA",
+      "encoded_product": "enhanced green fluorescent protein (eGFP)",
+      "molecular_target": null,
+      "delivery_recipient_cell": "Hepatocytes; subpopulations of endothelial cells and Kupffer cells",
+      "therapeutic_target_cell": null,
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "Homeostasis",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg eGFP mRNA-LNP per 20 g body weight",
+      "route": "Intravenous",
+      "timepoint": 5.0,
+      "timepoint_unit": "h after injection",
+      "outcome_endpoints": [
+        "Percentage of eGFP-positive CD31-positive endothelial cells",
+        "Percentage of eGFP-positive CD11b-positive cells",
+        "Percentage of eGFP-positive CD45-positive cells"
+      ],
+      "comparator_context": [
+        "None reported for this numerical value"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "Combined HGF and EGF mRNA",
+      "encoded_product": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+      "molecular_target": null,
+      "delivery_recipient_cell": "Hepatocytes",
+      "therapeutic_target_cell": "Hepatocytes",
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "CDE diet-induced chronic liver injury",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+      "route": "Intravenous (retro-orbital or tail vein)",
+      "timepoint": 2.0,
+      "timepoint_unit": "days after first injection",
+      "outcome_endpoints": [
+        "Hepatocyte lipid accumulation (steatosis)",
+        "Serum ALT level"
+      ],
+      "comparator_context": [
+        "Poly(C) RNA-LNP treatment",
+        "Poly(C) RNA-LNP and Luc mRNA-LNP controls"
+      ]
+    },
+    {
+      "experiment_id": "E3",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "Combined HGF and EGF mRNA",
+      "encoded_product": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+      "molecular_target": null,
+      "delivery_recipient_cell": null,
+      "therapeutic_target_cell": "Hepatocytes",
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "Acetaminophen (APAP)-induced acute liver injury",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+      "route": "Intravenous (retro-orbital or tail vein)",
+      "timepoint": 24.0,
+      "timepoint_unit": "h after mRNA-LNP administration",
+      "outcome_endpoints": [
+        "Central-vein necrotic areas"
+      ],
+      "comparator_context": [
+        "Poly(C) RNA-LNP-treated control group"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD31-positive endothelial cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "Significant percentages of endothelial and immune-cell populations expressed eGFP."
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E2",
+      "assay": "Oil Red O staining of liver sections",
+      "endpoint": "Hepatocyte lipid accumulation (steatosis)",
+      "comparator": "Poly(C) RNA-LNP treatment",
+      "qualitative_outcome": "Single injections of either HGF or EGF mRNA-LNP decreased steatosis; combined HGF/EGF mRNA-LNP produced more efficient steatosis reversal. A sharp decrease was observed 2 days after the first combined injection, while steatosis was maintained in Poly(C) RNA-LNP-treated mice."
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "Serum ALT measurement",
+      "endpoint": "Serum ALT level",
+      "comparator": "Poly(C) RNA-LNP and Luc mRNA-LNP controls",
+      "qualitative_outcome": "ALT was restored to normal levels at T2 after HGF/EGF mRNA-LNP; control ALT levels remained significantly greater."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E3",
+      "assay": "H&E staining",
+      "endpoint": "Central-vein necrotic areas",
+      "comparator": "Poly(C) RNA-LNP-treated control group",
+      "qualitative_outcome": "At 24 h after HGF/EGF mRNA-LNP administration, necrotic areas had accelerated disappearance versus Poly(C) RNA-LNP controls; at 8 h there was no significant improvement."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD11b-positive cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "A significant percentage of CD11b-positive cells expressed eGFP (41.5 ± 14.6%)."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD45-positive cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "A significant percentage of CD45-positive cells expressed eGFP (34.1 ± 2.2%)."
+    }
+  ],
+  "permitted_new_experiments": 1,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "2678588b644045c5ba9903c265a7468e7acbcfc68480dbbd334837cecbfccdcb",
+  "task_checksum": "03d6cc2007cd8fbc6034beb613b7161a524963f626239ffe1bf1fc8fa1f292d9"
+}

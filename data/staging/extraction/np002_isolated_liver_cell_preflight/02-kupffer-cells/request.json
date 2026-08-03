@@ -1,0 +1,565 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "low"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_cache_key": "e437582e5eaecfccc6fe6c7e3913e6b365288e2f81292bc97ae4441f5a021387",
+  "input": [
+    {
+      "role": "system",
+      "content": "Extract only directly reported LNP evidence from the supplied packet. Use no outside knowledge. For each scientific field, return a reported value with valid supplied evidence IDs, or missing with a reason and no evidence IDs. Set eligibility to eligible only for original experimental LNP delivery of supported RNA involving an eligible liver cell and a linked formulation, experiment, and outcome. Failed criteria are ineligible; insufficient evidence is uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep record types and links separate. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. Treat recall-support candidates as navigation aids, not facts: verify cited evidence, preserve experiment boundaries, keep distinct relationships separate, and deduplicate. A reported negative result is an outcome, not missing. List ambiguities. Return only the required structured response. Extract only in-vivo experiments and outcomes for Kupffer cells in NP-002. Preserve MC3 versus cKK-E12 formulation identity, QUANT-DNA biodistribution versus Cre-mRNA functional delivery, dose, route, timepoint, assay, and comparators. Do not infer other cell types."
+    },
+    {
+      "role": "user",
+      "content": "{\"evidence_packet\":{\"evidence\":[{\"evidence_id\":\"NP-002-E-392bafddbd3712ba\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\"],\"source_ids\":[\"S-a843d6d4f84f\"],\"text\":\"To create LNPs, we diluted either MC3 or cKK-E12 with cholesterol, poly(ethylene glycol) linked to 2 saturated alkyl tails (C 14 PEG 2000 ) and 1,2-distearoyl-sn-glycero-3-phosphocholine (DSPC) in a syringe containing 100% EtOH (Fig.\"},{\"evidence_id\":\"NP-002-E-b5df172c442bad8b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\"],\"source_ids\":[\"S-a843d6d4f84f\"],\"text\":\"We then mixed the contents with QUANT DNA diluted in 10 mM citrate buffer in a microfluidic device 3 (Fig.\"},{\"context_after_evidence_id\":\"NP-002-E-251ec9ebbe8decd9\",\"evidence_id\":\"NP-002-E-4ef8616dda3567b5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-0f067642d0be\"],\"text\":\"The liver is a complex tissue consisting of several major cell types, including Kupffer, endothelial cells, and hepatocytes.\"},{\"context_before_evidence_id\":\"NP-002-E-4ef8616dda3567b5\",\"evidence_id\":\"NP-002-E-251ec9ebbe8decd9\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-0f067642d0be\"],\"text\":\"Kupffer cells are resident macrophages lining the liver sinusoid, while liver endothelial cells form a discontinuous vasculature that enables LNPs to extravasate into the Space of Disse, where they are exposed to hepatocytes (Fig.\"},{\"context_after_evidence_id\":\"NP-002-E-eed49c2f063f485a\",\"evidence_id\":\"NP-002-E-b630414e4abef2d1\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-0f067642d0be\"],\"text\":\"27 We first analyzed the biodistribution of MC3 and cKK-E12 LNPs to liver endothelial cells, Kupffer cells, and hepatocytes.\"},{\"context_after_evidence_id\":\"NP-002-E-1c82bf3a77fad899\",\"context_before_evidence_id\":\"NP-002-E-b630414e4abef2d1\",\"evidence_id\":\"NP-002-E-eed49c2f063f485a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-0f067642d0be\"],\"text\":\"Six hours after injecting mice with 0.3 mg/kg QUANT DNA, we utilized fluorescent activated cell sorting (FACS) to isolate endothelial cells (CD31 + CD45 \u2212 CD68 \u2212 ), Kupffer cells (CD31 \u2212 CD45 + CD68 + ), and hepatocytes (CD31 \u2212 CD45 \u2212 ).\"},{\"context_before_evidence_id\":\"NP-002-E-eed49c2f063f485a\",\"evidence_id\":\"NP-002-E-1c82bf3a77fad899\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-0f067642d0be\"],\"text\":\"We observed that cKK-E12 facilitated DNA accumulation in all 3 cell types; the amount of DNA taken up per endothelial cells was less than Kupffer cells (Fig.\"},{\"evidence_id\":\"NP-002-E-993533c2a984f73d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-407cb405c365\"],\"text\":\"After confirming that nanoparticles distributed to different cells inside the liver, we investigated whether biodistribution varied in the recently reported subsets of Kupffer cells and hepatic endothelial cells.\"},{\"evidence_id\":\"NP-002-E-7f8f276664f475c7\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-407cb405c365\"],\"text\":\"As reported, we observed distinct populations of CD74 High and CD74 Low Kupffer cells and CD32 High and CD32 Low endothelial cells (Fig.\"},{\"evidence_id\":\"NP-002-E-48e8f6e69fce7279\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-407cb405c365\"],\"text\":\"Given that these subsets have only recently been identified, the description of their phenotypes may change; however, the phenotypes of CD74 High and CD74 Low Kupffer cells are currently classified as inflammatory and tolerogenic, respectively (Fig.\"},{\"evidence_id\":\"NP-002-E-43e8d8af0912203a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-407cb405c365\"],\"text\":\"We observed noticeable (but not statistically significant) decreases in cKK-E12 biodistribution in CD74 High cells, relative to CD74 Low Kupffer cells (Fig.\"},{\"context_after_evidence_id\":\"NP-002-E-2bcddf66587160eb\",\"evidence_id\":\"NP-002-E-8a5c15270ce7fe76\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-dda7e1afd070\"],\"text\":\"First, we found that\u2014in general\u2014the biodistribution in endothelial cells was lower than the biodistribution to Kupffer cells.\"},{\"evidence_id\":\"NP-002-E-5f88b50e87e74b19\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"payload\"],\"source_ids\":[\"S-3144ea1ce68c\"],\"text\":\"As a result, cells in these mice only become tdTomato + when Cre mRNA is (i) delivered into the cytoplasm and (ii) translated into Cre protein, which then (iii) translocates into the nucleus and (iv) excises the \u2018Stop\u2019 construct from genomic DNA.\"},{\"evidence_id\":\"NP-002-E-3b9024cba09e0e0d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"payload\"],\"source_ids\":[\"S-3144ea1ce68c\"],\"text\":\"By quantifying the percentage of cells that are tdTomato + after treating mice with Cre mRNA, it is possible to quantify the efficiency with which mRNA has been functionally delivered.\"},{\"evidence_id\":\"NP-002-E-a7b58e690d38b83c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-c88e821dc503\"],\"text\":\"We administered Cre mRNA at a dose of 1.0 mg/kg using cKK-E12 and MC3.\"},{\"evidence_id\":\"NP-002-E-3916e805b2eb204f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-c88e821dc503\"],\"text\":\"More specifically, we isolated cells with flow cytometry, and quantified the percentage of hepatocytes, endothelial cells, or Kupffer cells that were tdTomato + .\"},{\"evidence_id\":\"NP-002-E-6c0bdace69f5e2a1\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-c88e821dc503\"],\"text\":\"Interestingly, despite the fact the biodistribution to endothelial cells was lower than Kupffer cells or hepatocytes, the functional delivery to endothelial cells was higher than Kupffer cells or hepatocytes, both for mice treated with MC3, and for mice treated with cKK-E12, albeit not significantly.\"},{\"evidence_id\":\"NP-002-E-59fa0ed20f3c3103\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-c88e821dc503\"],\"text\":\"In order to exclude the possibility these results were an artifact of the 1.0 mg/kg dose we used, we repeated the experiment at a lower dose\u20140.3 mg/kg Cre mRNA.\"},{\"evidence_id\":\"NP-002-E-8db53352513724f5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-c88e821dc503\"],\"text\":\"At 0.3 mg/kg, liver endothelial and Kupffer cells had a statistically significant higher percent of tdTomato + cells than hepatocytes.\"},{\"evidence_id\":\"NP-002-E-dab4da3a493a1db3\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\"],\"source_ids\":[\"S-04c10916f0ae\"],\"text\":\"Specifically, lipids were formulated at a 50:38.5:1.5:10 molar ratio of ionizable lipid:cholesterol:PEG-Lipid:DSPC and a 10:1 mass ratio of lipid to nucleic acid.\"},{\"evidence_id\":\"NP-002-E-f60d9ed4bd08f7e7\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\"],\"source_ids\":[\"S-95e13010a46b\"],\"text\":\"Mice were injected intravenously via the lateral tail vein.\"},{\"evidence_id\":\"NP-002-E-afb46c2849902af1\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"recipient_cell\"],\"source_ids\":[\"S-23eb5c62d542\"],\"text\":\"The antibody clones used were: anti-CD31 (390, BioLegend), anti-CD45.2 (104, BioLegend), anti-CD68 (FA-11, Biolegend), and anti-CD74 (ln1/CD74, Biolegend), and anti-CD16/32 (93, BioLegend).\"},{\"evidence_id\":\"NP-002-E-9c03b85d13dc448b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\",\"model_context\",\"payload\"],\"source_ids\":[\"S-e5c74179a455\"],\"text\":\"8 Nucleic acids (Cre mRNA, TriLink Biotechnologies) were diluted in 10 mM citrate buffer (Teknova) while lipid-amine compounds, alkyl tailed PEG, cholesterol, and helper lipids were diluted in ethanol.\"},{\"evidence_id\":\"NP-002-E-daf25dcc25ba1318\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\",\"model_context\",\"payload\"],\"source_ids\":[\"S-e5c74179a455\"],\"text\":\"Ai14 mice were dosed with 0.3 or 1.0 mg/kg Cre mRNA delivered by either cKK-E12 or MC3.\"},{\"context_after_evidence_id\":\"NP-002-E-60082b0b79459d7a\",\"evidence_id\":\"NP-002-E-5f7911e67ee4ab04\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-106bcd0b3430\"],\"text\":\"We found that these LNPs distribute nucleic acids distribute to Kupffer cells and liver endothelial cells as efficiently as they distribute to hepatocytes, yet result in more functional mRNA delivery to endothelial cells.\"},{\"context_before_evidence_id\":\"NP-002-E-5f7911e67ee4ab04\",\"evidence_id\":\"NP-002-E-60082b0b79459d7a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-106bcd0b3430\"],\"text\":\"Additionally, we found these LNPs differentially accumulate in Kupffer and endothelial cell subsets.\"},{\"context_after_evidence_id\":\"NP-002-E-56e0257af2b659dc\",\"evidence_id\":\"NP-002-E-c0a678a9166c0e57\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-f0dc1ad95dbb\"],\"text\":\"We then quantified the functional delivery of Cre mRNA in vivo using Ai14 reporter mice, 21 which contain cells that fluoresce when Cre mRNA is translated into functional Cre protein.\"},{\"context_before_evidence_id\":\"NP-002-E-c0a678a9166c0e57\",\"evidence_id\":\"NP-002-E-56e0257af2b659dc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-f0dc1ad95dbb\"],\"text\":\"Interestingly, we found biodistribution and functional delivery to all tested cell types within the liver; distribution was highest in Kupffer cells, whereas functional mRNA delivery was highest in endothelial cells.\"},{\"context_after_evidence_id\":\"NP-002-E-22fcd212f74a21e9\",\"evidence_id\":\"NP-002-E-5be7f2ea5bf3a57a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"outcome\",\"recipient_cell\"],\"source_ids\":[\"S-f0dc1ad95dbb\"],\"text\":\"We also found that the amount of nanoparticle biodistribution changed with the CD74 or CD32 subtype.\"},{\"evidence_id\":\"NP-002-E-b6b671924d192f6d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"payload\"],\"source_ids\":[\"S-9358f05adcac\"],\"text\":\"To do so, we formulated LNPs to carry QUANT DNA sequences using microfluidics (Fig.\"},{\"evidence_id\":\"NP-002-E-19aeae85206d783d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"payload\"],\"source_ids\":[\"S-9358f05adcac\"],\"text\":\"We recently developed QUANT DNA in order to perform highly sensitive in vivo biodistribution experiments after we found that fluorescent biodistribution experiments did not generate sufficiently consistent or sensitive results.\"},{\"evidence_id\":\"NP-002-E-9858213abab45758\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"model_context\",\"payload\"],\"source_ids\":[\"S-9358f05adcac\"],\"text\":\"QUANT DNA barcode sensitivity is achieved by reducing DNA secondary structure, including a binding site for a digital droplet PCR probe, and including 5 phosphorothioated deoxy nucleotides on both the 5\u2032 and 3\u2032 termini 22 (Fig.\"}],\"packet_version\":\"compact-api-packet-1.0.0\",\"paper_id\":\"NP-002\",\"source_packet_checksum\":\"39b3317b5429ca054fc73c2d3ff0865218191647decd73e5fda0f22fbcc298a1\"},\"paper_id\":\"NP-002\",\"pmcid\":\"PMC6816632\",\"target_liver_cell\":\"Kupffer cells\"}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "NP002IsolatedLiverCellResponse",
+      "schema": {
+        "$defs": {
+          "ComponentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "title": "Component Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "identity": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "role": {
+                "$ref": "#/$defs/ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___"
+              },
+              "amount": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "amount_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "component_id",
+              "formulation_id",
+              "identity",
+              "role",
+              "amount",
+              "amount_unit"
+            ],
+            "title": "ComponentRecord",
+            "type": "object"
+          },
+          "EligibilityRecord": {
+            "additionalProperties": false,
+            "description": "Evidence-grounded final paper disposition for the extraction task.",
+            "properties": {
+              "decision": {
+                "enum": [
+                  "eligible",
+                  "ineligible",
+                  "uncertain"
+                ],
+                "title": "Decision",
+                "type": "string"
+              },
+              "reason_codes": {
+                "items": {
+                  "enum": [
+                    "ORIGINAL_EXPERIMENT",
+                    "IDENTIFIABLE_LNP",
+                    "SUPPORTED_PAYLOAD",
+                    "TARGET_CELL_EVIDENCE",
+                    "USABLE_FORMULATION_OUTCOME_LINKAGE",
+                    "NOT_ORIGINAL_RESEARCH",
+                    "NOT_ELIGIBLE_LNP",
+                    "UNSUPPORTED_PAYLOAD",
+                    "NO_TARGET_CELL_EVIDENCE",
+                    "NO_FORMULATION_OUTCOME_LINKAGE",
+                    "DUPLICATE_SCIENTIFIC_REPORT",
+                    "RETRACTED_OR_INVALID",
+                    "FULL_TEXT_REQUIRED",
+                    "PUBLICATION_TYPE_AMBIGUOUS",
+                    "LNP_IDENTITY_AMBIGUOUS",
+                    "PAYLOAD_AMBIGUOUS",
+                    "TARGET_CELL_AMBIGUOUS",
+                    "FORMULATION_INCOMPLETE",
+                    "OUTCOME_LINKAGE_AMBIGUOUS",
+                    "CHEMISTRY_AMBIGUOUS"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Reason Codes",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "explanation": {
+                "maxLength": 500,
+                "minLength": 1,
+                "title": "Explanation",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision",
+              "reason_codes",
+              "evidence_ids",
+              "explanation"
+            ],
+            "title": "EligibilityRecord",
+            "type": "object"
+          },
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "FormulationRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "formulation_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition_basis": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "np_ratio": {
+                "$ref": "#/$defs/ReportedField_float_"
+              }
+            },
+            "required": [
+              "formulation_id",
+              "formulation_name",
+              "composition",
+              "composition_basis",
+              "np_ratio"
+            ],
+            "title": "FormulationRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "ionizable_lipid",
+                      "helper_lipid",
+                      "cholesterol",
+                      "peg_lipid",
+                      "targeting_ligand",
+                      "sort_lipid",
+                      "other"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid', 'targeting_ligand', 'sort_lipid', 'other']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One paper response joined to a local evidence packet after validation.",
+        "properties": {
+          "contract_version": {
+            "const": "compact-1.1.0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "paper_id": {
+            "title": "Paper Id",
+            "type": "string"
+          },
+          "eligibility": {
+            "$ref": "#/$defs/EligibilityRecord"
+          },
+          "formulations": {
+            "items": {
+              "$ref": "#/$defs/FormulationRecord"
+            },
+            "title": "Formulations",
+            "type": "array",
+            "minItems": 1
+          },
+          "components": {
+            "items": {
+              "$ref": "#/$defs/ComponentRecord"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "title": "Experiments",
+            "type": "array",
+            "minItems": 1
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "title": "Outcomes",
+            "type": "array",
+            "minItems": 1
+          },
+          "unresolved_items": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Items",
+            "type": "array",
+            "maxItems": 0
+          }
+        },
+        "required": [
+          "contract_version",
+          "paper_id",
+          "eligibility",
+          "formulations",
+          "components",
+          "experiments",
+          "outcomes",
+          "unresolved_items"
+        ],
+        "title": "CompactExtractionResponse",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}

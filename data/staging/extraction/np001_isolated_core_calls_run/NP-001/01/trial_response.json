@@ -1,0 +1,230 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-001",
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-001-E-7b3c625323c08b9c",
+      "NP-001-E-c6658491eb3ce79d"
+    ],
+    "explanation": "An in-vitro evaluation assessed EGFP-mRNA LNP transfection in HepG2 cells, with a reported positive-transfection outcome for the named LNP/DX25 formulation."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F-001",
+      "formulation_name": {
+        "value": "LNP/DX25",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The packet identifies LNP/DX25 by name but does not directly report its specific component composition."
+      },
+      "composition_basis": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No composition basis for LNP/DX25 is directly reported."
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No N/P ratio is directly reported."
+      }
+    }
+  ],
+  "components": [],
+  "experiments": [
+    {
+      "experiment_id": "EXP-001",
+      "formulation_id": "F-001",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "EGFP-encoding mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "EGFP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target is reported for the reporter mRNA."
+      },
+      "delivery_recipient_cell": {
+        "value": "HepG2 cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The packet reports a reporter-transfection experiment and does not identify a therapeutic target cell."
+      },
+      "tissue_or_organ": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No tissue or organ experimental context is directly reported."
+      },
+      "species": {
+        "value": "human",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model is directly reported."
+      },
+      "experimental_context": {
+        "value": "in_vitro",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No dose is directly reported."
+      },
+      "dose_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No dose unit is directly reported."
+      },
+      "route": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No administration route is applicable or reported for this in-vitro experiment."
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No assessment timepoint is directly reported."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No timepoint unit is directly reported."
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "OUT-001",
+      "experiment_id": "EXP-001",
+      "assay": {
+        "value": "EGFP positive-transfection assessment",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "HepG2 cells positive for EGFP transfection",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No comparator is directly reported."
+      },
+      "outcome_value": {
+        "value": 95.0,
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "outcome_unit": {
+        "value": "% of HepG2 cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      },
+      "qualitative_outcome": {
+        "value": "Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP/DX25.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-c6658491eb3ce79d"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [],
+  "core_slot_contract_version": "compact-core-slot-trial-1.0.0",
+  "core_slot_accounting": {
+    "CORE-HEPG2-TRANSFECTION": {
+      "disposition": "extracted",
+      "linked_experiment_id": "EXP-001",
+      "linked_outcome_ids": [
+        "OUT-001"
+      ],
+      "evidence_ids": [
+        "NP-001-E-7b3c625323c08b9c",
+        "NP-001-E-c6658491eb3ce79d"
+      ]
+    }
+  }
+}

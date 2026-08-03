@@ -1,0 +1,230 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-001",
+  "eligibility": {
+    "decision": "eligible",
+    "reason_codes": [
+      "ORIGINAL_EXPERIMENT",
+      "IDENTIFIABLE_LNP",
+      "SUPPORTED_PAYLOAD",
+      "TARGET_CELL_EVIDENCE",
+      "USABLE_FORMULATION_OUTCOME_LINKAGE"
+    ],
+    "evidence_ids": [
+      "NP-001-E-f0dbf2460867f112",
+      "NP-001-E-7b3c625323c08b9c",
+      "NP-001-E-692db6bd61bb5c3e"
+    ],
+    "explanation": "The packet reports in-vitro evaluation of EGFP mRNA encapsulated in LNP formulations in DC2.4 cells, with a DC2.4 transfection comparison between LNP and LNP/DX25."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F1",
+      "formulation_name": {
+        "value": "LNP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-692db6bd61bb5c3e"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": "ALC-0315; DSPC or DOPE; cholesterol or DX; ALC-0159",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "composition_basis": {
+        "value": "Theoretical composition estimated from the precise mass of individual components added to the ethanolic phase",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported in the supplied evidence packet."
+      }
+    }
+  ],
+  "components": [],
+  "experiments": [
+    {
+      "experiment_id": "EXP1",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "EGFP-encoding mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "EGFP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target was reported in the supplied evidence packet."
+      },
+      "delivery_recipient_cell": {
+        "value": "DC2.4 mouse dendritic cell line",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c",
+          "NP-001-E-692db6bd61bb5c3e"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No therapeutic target cell was reported; DC2.4 is the reported delivery recipient cell line."
+      },
+      "tissue_or_organ": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported in the supplied evidence packet."
+      },
+      "species": {
+        "value": "mouse",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model was reported in the supplied evidence packet."
+      },
+      "experimental_context": {
+        "value": "in_vitro",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "dose": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported in the supplied evidence packet."
+      },
+      "dose_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Dose was not reported in the supplied evidence packet."
+      },
+      "route": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No administration route applies or was reported for this in-vitro experiment."
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported in the supplied evidence packet."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Timepoint was not reported in the supplied evidence packet."
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "OUT1",
+      "experiment_id": "EXP1",
+      "assay": {
+        "value": "Transfection efficiency evaluation",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-7b3c625323c08b9c"
+        ],
+        "missing_reason": null
+      },
+      "endpoint": {
+        "value": "Total percentage of transfected DC2.4 cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-692db6bd61bb5c3e"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": "LNP/DX25",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-692db6bd61bb5c3e"
+        ],
+        "missing_reason": null
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No exact DC2.4 transfection percentage was reported in the supplied evidence packet."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No exact DC2.4 transfection percentage was reported in the supplied evidence packet."
+      },
+      "qualitative_outcome": {
+        "value": "No significant difference (p > 0.05) in total percentage of transfected cells between LNP and LNP/DX25.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-692db6bd61bb5c3e"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [],
+  "core_slot_contract_version": "compact-core-slot-trial-1.0.0",
+  "core_slot_accounting": {
+    "CORE-DC24-TRANSFECTION": {
+      "disposition": "extracted",
+      "linked_experiment_id": "EXP1",
+      "linked_outcome_ids": [
+        "OUT1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-7b3c625323c08b9c",
+        "NP-001-E-692db6bd61bb5c3e"
+      ]
+    }
+  }
+}

@@ -163,12 +163,24 @@ class ExperimentRecord(StrictContract):
     formulation_id: str
     payload_type: TextField
     payload_name: TextField
+    payload_role: (
+        ReportedField[
+            Literal[
+                "therapeutic",
+                "reporter",
+                "biodistribution_tracer",
+                "screening_barcode",
+            ]
+        ]
+        | None
+    ) = None
     encoded_product: TextField
     molecular_target: TextField
     delivery_recipient_cell: TextField
     therapeutic_target_cell: TextField
     tissue_or_organ: TextField
     species: TextField
+    experimental_model: TextField
     disease_model: TextField
     experimental_context: ReportedField[
         Literal["in_vitro", "ex_vivo", "in_vivo"]
@@ -178,6 +190,23 @@ class ExperimentRecord(StrictContract):
     route: TextField
     timepoint: NumberField
     timepoint_unit: TextField
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_legacy_missing_experimental_model(cls, value):
+        if isinstance(value, dict) and "experimental_model" not in value:
+            value = {
+                **value,
+                "experimental_model": {
+                    "value": None,
+                    "status": "missing",
+                    "evidence_ids": [],
+                    "missing_reason": (
+                        "Legacy response predates experimental_model."
+                    ),
+                },
+            }
+        return value
 
 
 class OutcomeRecord(StrictContract):

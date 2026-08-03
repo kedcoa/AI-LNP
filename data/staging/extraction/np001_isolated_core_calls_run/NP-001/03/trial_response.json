@@ -1,0 +1,219 @@
+{
+  "contract_version": "compact-1.1.0",
+  "paper_id": "NP-001",
+  "eligibility": {
+    "decision": "uncertain",
+    "reason_codes": [
+      "PAYLOAD_AMBIGUOUS",
+      "TARGET_CELL_AMBIGUOUS",
+      "FORMULATION_INCOMPLETE",
+      "OUTCOME_LINKAGE_AMBIGUOUS"
+    ],
+    "evidence_ids": [
+      "NP-001-E-f0dbf2460867f112",
+      "NP-001-E-1ec1832fdbf78e17",
+      "NP-001-E-00d75f88ef91e225"
+    ],
+    "explanation": "The packet reports mRNA-encoded EGFP transfection and a DX-LNP-associated reduction in surface MHC II, but does not directly establish that the MHC II outcome was produced by the mRNA-EGFP formulation in an eligible liver cell population or provide a complete DX-LNP composition."
+  },
+  "formulations": [
+    {
+      "formulation_id": "F1",
+      "formulation_name": {
+        "value": "DX-LNPs",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-00d75f88ef91e225"
+        ],
+        "missing_reason": null
+      },
+      "composition": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "The reported theoretical component alternatives are not directly assigned to DX-LNPs."
+      },
+      "composition_basis": {
+        "value": "theoretical composition estimated from the precise mass of individual components added to the ethanolic phase",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-f0dbf2460867f112"
+        ],
+        "missing_reason": null
+      },
+      "np_ratio": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Not reported in the supplied evidence."
+      }
+    }
+  ],
+  "components": [],
+  "experiments": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F1",
+      "payload_type": {
+        "value": "mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "payload_name": {
+        "value": "EGFP mRNA",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "encoded_product": {
+        "value": "EGFP",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-1ec1832fdbf78e17"
+        ],
+        "missing_reason": null
+      },
+      "molecular_target": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No molecular target was reported."
+      },
+      "delivery_recipient_cell": {
+        "value": "dendritic cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-00d75f88ef91e225"
+        ],
+        "missing_reason": null
+      },
+      "therapeutic_target_cell": {
+        "value": "dendritic cells",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-00d75f88ef91e225"
+        ],
+        "missing_reason": null
+      },
+      "tissue_or_organ": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No tissue or organ was reported."
+      },
+      "species": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No species was reported."
+      },
+      "disease_model": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No disease model was reported."
+      },
+      "experimental_context": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Experimental context was not reported."
+      },
+      "dose": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Dose was not reported."
+      },
+      "dose_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Dose unit was not reported."
+      },
+      "route": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Administration route was not reported."
+      },
+      "timepoint": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Timepoint was not reported."
+      },
+      "timepoint_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Timepoint unit was not reported."
+      }
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Assay method was not reported."
+      },
+      "endpoint": {
+        "value": "MHC II molecule expression on the cell surface",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-00d75f88ef91e225"
+        ],
+        "missing_reason": null
+      },
+      "comparator": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "Comparator was not explicitly reported."
+      },
+      "outcome_value": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric MHC II outcome value was reported."
+      },
+      "outcome_unit": {
+        "value": null,
+        "status": "missing",
+        "evidence_ids": [],
+        "missing_reason": "No numeric outcome unit was reported."
+      },
+      "qualitative_outcome": {
+        "value": "Treatment with DX-LNPs led to a reduction in cell-surface MHC II expression.",
+        "status": "reported",
+        "evidence_ids": [
+          "NP-001-E-00d75f88ef91e225"
+        ],
+        "missing_reason": null
+      }
+    }
+  ],
+  "unresolved_items": [],
+  "core_slot_contract_version": "compact-core-slot-trial-1.0.0",
+  "core_slot_accounting": {
+    "CORE-DC24-IMMUNE": {
+      "disposition": "extracted",
+      "linked_experiment_id": "E1",
+      "linked_outcome_ids": [
+        "O1"
+      ],
+      "evidence_ids": [
+        "NP-001-E-00d75f88ef91e225"
+      ]
+    }
+  }
+}

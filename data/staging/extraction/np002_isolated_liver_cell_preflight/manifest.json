@@ -1,0 +1,49 @@
+{
+  "paper_id": "NP-002",
+  "pmcid": "PMC6816632",
+  "title": "Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles",
+  "corpus_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/rag/gold_v1/NP-002.blocks.jsonl",
+  "retrieval_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/rag/retrieval_packets/NP-002.json",
+  "compact_packet_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/rag/compact_packets_v1/NP-002.json",
+  "compact_api_packet_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/rag/compact_api_packets_v1/NP-002.json",
+  "compact_api_manifest_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/rag/compact_api_packets_v1/NP-002.manifest.json",
+  "packet_checksum": "39b3317b5429ca054fc73c2d3ff0865218191647decd73e5fda0f22fbcc298a1",
+  "evidence_count": 108,
+  "proposed_calls": 3,
+  "provider_calls": 0,
+  "requests": [
+    {
+      "sequence": 1,
+      "target_liver_cell": "hepatocytes",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np002_isolated_liver_cell_preflight/01-hepatocytes/request.json",
+      "request_sha256": "6fdc8e37931be64d5a6d4312c47d3644f1f7deb75b07694a5fa28fed19b81819",
+      "request_bytes": 27006,
+      "estimated_input_tokens": 4542,
+      "max_output_tokens": 12000,
+      "provider_calls": 0,
+      "evidence_count": 22
+    },
+    {
+      "sequence": 2,
+      "target_liver_cell": "Kupffer cells",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np002_isolated_liver_cell_preflight/02-kupffer-cells/request.json",
+      "request_sha256": "69cd8a3de43de6d212f1b9e9c1736edf12ad768ee3bbbb3eb6dc16bafca594ab",
+      "request_bytes": 30885,
+      "estimated_input_tokens": 5510,
+      "max_output_tokens": 12000,
+      "provider_calls": 0,
+      "evidence_count": 32
+    },
+    {
+      "sequence": 3,
+      "target_liver_cell": "hepatic endothelial cells",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/extraction/np002_isolated_liver_cell_preflight/03-hepatic-endothelial-cells/request.json",
+      "request_sha256": "bea70dedd04412146debfbf8d792246e84215086f853684f23ef1063d54fdde9",
+      "request_bytes": 32815,
+      "estimated_input_tokens": 5993,
+      "max_output_tokens": 12000,
+      "provider_calls": 0,
+      "evidence_count": 37
+    }
+  ]
+}

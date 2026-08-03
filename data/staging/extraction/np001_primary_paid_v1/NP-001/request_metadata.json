@@ -1,0 +1,3878 @@
+{
+  "paper_id": "NP-001",
+  "model": "gpt-5.6-terra",
+  "reasoning_effort": "low",
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_version": "compact-prompt-1.2.0",
+  "prompt_checksum": "4b7f700b4c84a571a4da15de01ed045328d35c9bc2768c9df229e35c8aa67697",
+  "schema_checksum": "205c4ac5e8b8b97ea5fca523da4cc31dc10fcb7c616435a345c28d51fd31775e",
+  "packet_checksum": "d36f9479bb109650dccf6117d7da784057e2beaf2c69a797d347f9d1b382f593",
+  "recall_support_version": "main-route-recall-support-1.2.0",
+  "recall_support_estimated_tokens": 9513,
+  "request_fingerprint": "3e28ccb396703a351bbbe621ffc809d700ded7f8d9274ee996de32e4be3b661e",
+  "system_prompt": "Extract only directly reported LNP evidence from the supplied packet. Use no outside knowledge. For each scientific field, return a reported value with valid supplied evidence IDs, or missing with a reason and no evidence IDs. Set eligibility to eligible only for original experimental LNP delivery of supported RNA involving an eligible liver cell and a linked formulation, experiment, and outcome. Failed criteria are ineligible; insufficient evidence is uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep record types and links separate. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. Treat recall-support candidates as navigation aids, not facts: verify cited evidence, preserve experiment boundaries, keep distinct relationships separate, and deduplicate. A reported negative result is an outcome, not missing. List ambiguities. Return only the required structured response.",
+  "request_payload": {
+    "evidence_packet": {
+      "blocked_fields": [],
+      "evidence": [
+        {
+          "evidence_id": "NP-001-E-78f184d8e6e83e27",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay"
+          ],
+          "source_ids": [
+            "S-666b525cf268"
+          ],
+          "text": "To investigate the structural difference between formulations, a polydisperse multi-shell spherical particle model was used to account for the mean electron density difference from the outer shells of each product [27]."
+        },
+        {
+          "evidence_id": "NP-001-E-ceb699cd1e262d6a",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay"
+          ],
+          "source_ids": [
+            "S-666b525cf268"
+          ],
+          "text": "The form factor (P) of a single particle was expressed according to the following equation:P(q,R)=ρ1A(R1,q)+∑i=2N(ρi−ρi−1)A(Ri,q)2/ ρ1V(R1)+∑i=2N(ρi−ρi−1)V(Ri)2 where A is the volume weighted amplitude of a homogeneous particle of radius Ri A(Ri,q)=4πsin(Rq)−Rqcos(Rq)q³"
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-2321e0f317cd65b7",
+          "evidence_id": "NP-001-E-e487bdfceed18efb",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-40e98c312d26",
+            "S-e2cce81e3271"
+          ],
+          "text": "The present study investigated the potential of DX-LNPs as a dual system for exerting anti-inflammatory properties while effectively delivering mRNA."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-e487bdfceed18efb",
+          "evidence_id": "NP-001-E-2321e0f317cd65b7",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-40e98c312d26",
+            "S-e2cce81e3271"
+          ],
+          "text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects."
+        },
+        {
+          "evidence_id": "NP-001-E-9d556d23c65ff815",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-58f6bb190019",
+            "S-e2cce81e3271"
+          ],
+          "text": "Although DX and cholesterol are structurally related, both belonging to the steroid family, slight differences in their functional groups inherit the potential to induce distinct effects on the LNP structure."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-7a109fbeac6b8dac",
+          "evidence_id": "NP-001-E-fac604be251acd65",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-58f6bb190019",
+            "S-e2cce81e3271"
+          ],
+          "text": "proposed cholesterol replacement with 10% and 20% DX as optimal for mRNA delivery [1,10]."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-d0a9c062b2219795",
+          "context_before_evidence_id": "NP-001-E-fac604be251acd65",
+          "evidence_id": "NP-001-E-7a109fbeac6b8dac",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-58f6bb190019",
+            "S-e2cce81e3271"
+          ],
+          "text": "However, release kinetics and encapsulation efficiency of DX within the LNPs remain to be elucidated, along with further evaluation of this formulation in human cells."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-7a109fbeac6b8dac",
+          "evidence_id": "NP-001-E-d0a9c062b2219795",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-58f6bb190019",
+            "S-e2cce81e3271"
+          ],
+          "text": "Notably, human cells are (1) more sensitive to inflammation than those of mice, and (2) they also differ in their responsiveness to DX formulations [20]."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-37b20782cf3f7e95",
+          "evidence_id": "NP-001-E-b960b12092273aec",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-0b7026e65338",
+            "S-e2cce81e3271"
+          ],
+          "text": "In our study, we identified that a 25% replacement of cholesterol with DX served as the most optimal formulation and demonstrated that increasing DX concentrations not only affected mRNA encapsulation efficiency but also impacted mRNA expression after transfection."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-3539a4a0adfa30bc",
+          "context_before_evidence_id": "NP-001-E-b960b12092273aec",
+          "evidence_id": "NP-001-E-37b20782cf3f7e95",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-0b7026e65338",
+            "S-e2cce81e3271"
+          ],
+          "text": "Importantly, we determined the actual DX load by calculating the encapsulation efficiency (approximately 60%), which was not reported in other studies."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-37b20782cf3f7e95",
+          "evidence_id": "NP-001-E-3539a4a0adfa30bc",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-0b7026e65338",
+            "S-e2cce81e3271"
+          ],
+          "text": "These effects could be attributed to differences in hydrophobicity; cholesterol has a logP of 7.02, while DX has a logP of 1.87, indicating that cholesterol is around 140,000 times more soluble in organic solvents than DX."
+        },
+        {
+          "evidence_id": "NP-001-E-e0aba4776a776afb",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-0b7026e65338",
+            "S-e2cce81e3271"
+          ],
+          "text": "Additionally, maintaining cholesterol’s role within the LNP architecture is crucial, as it significantly enhances LNP stability and the ability to fuse with membranes by regulating membrane integrity and rigidity [9]."
+        },
+        {
+          "evidence_id": "NP-001-E-a505e43196ce3b35",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-4edc4536caa7",
+            "S-e2cce81e3271"
+          ],
+          "text": "We delineated to our knowledge for the first time how DX is integrated into the LNP structure."
+        },
+        {
+          "evidence_id": "NP-001-E-3e91aab53db6e8cc",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-4edc4536caa7",
+            "S-e2cce81e3271"
+          ],
+          "text": "SAXS analysis revealed that DX is incorporated primarily into the LNP core."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-401f50938c52101f",
+          "evidence_id": "NP-001-E-1bff75ae0a3322ab",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-4edc4536caa7",
+            "S-e2cce81e3271"
+          ],
+          "text": "Furthermore, we observed that the encapsulation efficiency for DX was approximately 60% for both the DSPC and the DOPE."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-a421d7df010fa6b5",
+          "context_before_evidence_id": "NP-001-E-1bff75ae0a3322ab",
+          "evidence_id": "NP-001-E-401f50938c52101f",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-4edc4536caa7",
+            "S-e2cce81e3271"
+          ],
+          "text": "These findings indicate that LNPs are unable to accommodate the full range of DX initially added into the lipid phase."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-401f50938c52101f",
+          "evidence_id": "NP-001-E-a421d7df010fa6b5",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-4edc4536caa7",
+            "S-e2cce81e3271"
+          ],
+          "text": "This suggests that the subtle variations in chemical structure associated with cholesterol may exert an influence on LNP integrity."
+        },
+        {
+          "evidence_id": "NP-001-E-3c1f7b8b03466436",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-4edc4536caa7",
+            "S-e2cce81e3271"
+          ],
+          "text": "Importantly, stable DX-containing LNPs were synthesized, which demonstrated the ability to transfect different cell types, including HepG2, DCs, and hPBMCs."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-313c0d34e067afdd",
+          "evidence_id": "NP-001-E-8ec852defeffe08a",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-aa0c7fe73736",
+            "S-e2cce81e3271"
+          ],
+          "text": "In our approach, we demonstrated for the first time that negligible DX release occurs during the first hour, suggesting that DX is not just a cargo molecule but also an integral part of the LNP architecture."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-e15990a5d6fb5f68",
+          "evidence_id": "NP-001-E-4742f3314a49dd4e",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-23aa1bf18a3c"
+          ],
+          "text": "The LNPs achieved high mRNA encapsulation efficiency (95–100%) and effectively transfected HepG2 cells, dendritic cells, and hPBMCs."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-4742f3314a49dd4e",
+          "evidence_id": "NP-001-E-e15990a5d6fb5f68",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-23aa1bf18a3c"
+          ],
+          "text": "While LNPs increased cytokine release (IL-1β, TNF-α, MCP-1), LNPs-DX significantly reduced cytokine levels, demonstrating enhanced anti-inflammatory properties while maintaining mRNA expression levels."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-eaec05bc7a89fe4c",
+          "evidence_id": "NP-001-E-0a12e98f7888736e",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Finally, it was observed that most of the DX-LNPs accumulated in the liver."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-0a12e98f7888736e",
+          "evidence_id": "NP-001-E-eaec05bc7a89fe4c",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "These results align with findings by Cheng et al., who also reported similar biodistribution patterns [10]."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-aa023b5b12dead39",
+          "evidence_id": "NP-001-E-28adfc0d14752219",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Although some studies have suggested that DX could enhance mRNA expression by reducing inflammation, we observed no enhancement in expression levels; instead, the expression levels were comparable to those of non-DX-loaded LNPs [1]."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-28adfc0d14752219",
+          "evidence_id": "NP-001-E-aa023b5b12dead39",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "This indicates that DX does not interfere with the translation of the reporter mRNA."
+        },
+        {
+          "evidence_id": "NP-001-E-82aa6b458fbcd817",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Despite modifying the LNP composition by replacing DSPC with DOPE, the biodistribution did not change after intramuscular injection."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-509d40aad3f0bb81",
+          "evidence_id": "NP-001-E-637cb9ba7efa2cd3",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Mice treated with both LNPs and DX-loaded LNPs primarily showed accumulation in the liver, with expression levels 100 times higher than in other organs."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-9618e711fb7b8f58",
+          "context_before_evidence_id": "NP-001-E-637cb9ba7efa2cd3",
+          "evidence_id": "NP-001-E-509d40aad3f0bb81",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "These findings are consistent with a study by Pateev et al., which demonstrated that after administering LNPs containing Luc mRNA, bioluminescence was primarily observed in the liver, with additional signals detected in the spleen [24]."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-68309fa925812aa8",
+          "context_before_evidence_id": "NP-001-E-509d40aad3f0bb81",
+          "evidence_id": "NP-001-E-9618e711fb7b8f58",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "This is in contrast to observations after intravenous injection, where DSPC-based LNPs typically target the spleen, and DOPE-based LNPs target the liver [17]."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-9618e711fb7b8f58",
+          "evidence_id": "NP-001-E-68309fa925812aa8",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "However, changes in physicochemical properties were observed with DOPE formulations, characterized by a more relaxed structure and the absence of blebs."
+        },
+        {
+          "evidence_id": "NP-001-E-ecca47c112a207da",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "text": "DOPE, unlike DSPC, can still form electron-dense non-bilayer structures even when excluded from mRNA-ionizable lipid assemblies [6,25]."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-03f54d8c3edd9ddf",
+          "evidence_id": "NP-001-E-49a5456a7ba50678",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-13dc37f6b994",
+            "S-ee10356a9bf3"
+          ],
+          "text": "The reduction in mRNA expression observed in DX-LNPs, particularly in vitro, raised additional questions."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-c066f3357c333141",
+          "context_before_evidence_id": "NP-001-E-03f54d8c3edd9ddf",
+          "evidence_id": "NP-001-E-7d40b4c183dca0e4",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-13dc37f6b994",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Therefore, adjustment of the cholesterol-to-DX replacement ratio is necessary to avoid a significant reduction in expression."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-7d40b4c183dca0e4",
+          "evidence_id": "NP-001-E-c066f3357c333141",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-13dc37f6b994",
+            "S-ee10356a9bf3"
+          ],
+          "text": "This observation was further supported by the study of activation markers in DCs."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-131e1834c8dc5084",
+          "evidence_id": "NP-001-E-00d75f88ef91e225",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-13dc37f6b994",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Since dendritic cells, B cells, and macrophages constitutively express MHC class II molecules and are considered “professional” antigen-presenting cells (APCs) of the immune system, it was observed that treatment with DX-LNPs led to a reduction in MHC II molecule expression on the cell surface."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-00d75f88ef91e225",
+          "evidence_id": "NP-001-E-131e1834c8dc5084",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-13dc37f6b994",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Despite DX being integrated into the core of the synthesized LNPs, DX-LNPs suppressed he secretion of pro-inflammatory cytokines from DCs and hPBMCs."
+        },
+        {
+          "evidence_id": "NP-001-E-afc2ee522b2a6504",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-13dc37f6b994",
+            "S-ee10356a9bf3"
+          ],
+          "text": "In accordance, previous studies demonstrated that the release of TNF-α can be reduced with LNP-DX treatment in vivo."
+        },
+        {
+          "evidence_id": "NP-001-E-3f1926841510163a",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-aa0c7fe73736",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Considering that the LNP circulation time is relatively short, specific organs can be targeted within seconds, thus avoiding systemic distribution and side effects of DX [22]."
+        },
+        {
+          "evidence_id": "NP-001-E-0a318b647abaed61",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-c9c46f14ad9b",
+            "S-ee10356a9bf3"
+          ],
+          "text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response."
+        },
+        {
+          "evidence_id": "NP-001-E-b884f242c64d36cf",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-c9c46f14ad9b",
+            "S-ee10356a9bf3"
+          ],
+          "text": "Additionally, the DX-LNPs represent a novel formulation that can be applied in enzyme replacement therapies, e.g., for inborn errors of metabolism affecting the liver, such as PKU or Tyrosinemia [14,15]."
+        },
+        {
+          "evidence_id": "NP-001-E-58b000a4974b7932",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-c9c46f14ad9b",
+            "S-ee10356a9bf3"
+          ],
+          "text": "The required lifelong treatment with frequent dosing inherently carries the risk of sensitization against the delivered protein and LNP components, which can potentially be mitigated through the strategy presented herein."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-a288f42045cd9856",
+          "context_before_evidence_id": "NP-001-E-7b65625812037164",
+          "evidence_id": "NP-001-E-f0dbf2460867f112",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation",
+            "payload"
+          ],
+          "source_ids": [
+            "S-6d8947200817",
+            "S-7c04c69fe801"
+          ],
+          "text": "The theoretical composition of the LNPs is estimated based on the precise mass of individual components (ALC-0315, DSPC, or DOPE; cholesterol or DX; ALC-0159) added to the ethanolic phase."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-f0dbf2460867f112",
+          "evidence_id": "NP-001-E-a288f42045cd9856",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation",
+            "payload"
+          ],
+          "source_ids": [
+            "S-6d8947200817",
+            "S-7c04c69fe801"
+          ],
+          "text": "Since LNPs were then produced using the nanoprecipitation method, all initial components were expected to remain encapsulated, and the molar ratios were assumed to match those of the lipid mixture."
+        },
+        {
+          "evidence_id": "NP-001-E-296fb66067244694",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation",
+            "payload"
+          ],
+          "source_ids": [
+            "S-4d49802a298d",
+            "S-6d8947200817"
+          ],
+          "text": "Due to its hydrophobic nature (logP of 7.02 and 1.87 for cholesterol and DX, respectively), DX is well-suited for LNP formulation, facilitating co-assembly with other lipids through hydrophobic interactions [10]."
+        },
+        {
+          "evidence_id": "NP-001-E-0c83dfdfa956ca07",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay"
+          ],
+          "source_ids": [
+            "S-5409fd82e30c"
+          ],
+          "text": "The intensity was expressed as a function of the scattering momentum transfer q ((q=4π/λ sin(θ)), which is dependent on the incoming wavelength (λ) and the scattering angle (2 θ)."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-17507a2cc94a6989",
+          "evidence_id": "NP-001-E-fb181a9e0dcc6566",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-6ed48531232c"
+          ],
+          "text": "The average hydrodynamic diameter and size distribution (PDI) of the LNP formulations were assessed in triplicate using dynamic light scattering (DLS) on a Nano ZS Zetasizer (Malvern Instruments Corp., Malvern, UK) in ZEN0040 disposable cells (Brand, Wertheim, Germany)."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-fb181a9e0dcc6566",
+          "evidence_id": "NP-001-E-d1a7699585db5121",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint"
+          ],
+          "source_ids": [
+            "S-6ed48531232c"
+          ],
+          "text": "Zeta potentials (Z pot) of the various LNP formulations were measured with the same instrument using DTS1080 disposable capillary cells (Malvern Instruments Corp., Malvern, UK)."
+        },
+        {
+          "evidence_id": "NP-001-E-3d8a882ef3bf38e9",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint"
+          ],
+          "source_ids": [
+            "S-6ed48531232c"
+          ],
+          "text": "The stability of the formulations was monitored for changes in particle size, Z pot, and encapsulation efficiency (EE) after storage at 4 °C for up to one month."
+        },
+        {
+          "evidence_id": "NP-001-E-2fd95b0635e79b27",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-15f538607a1d",
+            "S-ff38523a4dfe"
+          ],
+          "text": "Meanwhile, a 5-fold reduction of each cytokine and chemokine measured was observed after treatment with DX-loaded LNPs."
+        },
+        {
+          "evidence_id": "NP-001-E-3a25ae4fb9c46356",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-15f538607a1d",
+            "S-ff38523a4dfe"
+          ],
+          "text": "A reduction in MCP-1 levels by about two times was observed with the treatment of DX-LNPs."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-b808e156d18d1cec",
+          "evidence_id": "NP-001-E-31581dac8542dd6a",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-15f538607a1d",
+            "S-ff38523a4dfe"
+          ],
+          "text": "An approximately 2.5- to 3-fold increase was observed for the LNP-based formulations, while the same reduction rate was produced with DX-loaded LNPs."
+        },
+        {
+          "evidence_id": "NP-001-E-42290488e94705c6",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-ff38523a4dfe"
+          ],
+          "text": "Immune stimulation of hPBMCs by LNP formulations induced the secretion of inflammatory cytokines and chemokines, such as TNF-α, MCP-1, and IL-1β (Figure 9b)."
+        },
+        {
+          "evidence_id": "NP-001-E-50253f44cc18cd42",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-ff38523a4dfe"
+          ],
+          "text": "Regardless of the presence of DSPC or DOPE, TNF-α levels increased approximately 2.5-fold compared to untreated hPBMCs."
+        },
+        {
+          "evidence_id": "NP-001-E-d0660dbc5d2984c2",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-ff38523a4dfe"
+          ],
+          "text": "Similarly, the LNP formulations exhibited a 3- to 4-fold increase in the chemokine MCP-1, a cytokine related to the inflammatory process that attracts and enhances the expression of other inflammatory factors and cells [18]."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-31581dac8542dd6a",
+          "evidence_id": "NP-001-E-aceeed2e726ae2f6",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-ff38523a4dfe"
+          ],
+          "text": "These results confirmed that treatment with DX-loaded LNPs reduced the levels of these cytokines and chemokines, suggesting that DX acts as an immunoregulator even when integrated into the LNP structure."
+        },
+        {
+          "evidence_id": "NP-001-E-3589e84855aeee81",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-4a2abd421dea",
+            "S-7f90236deaea"
+          ],
+          "text": "The present study investigates the role of DX co-loaded into LNPs and the effects of this LNP formulation on mRNA expression."
+        },
+        {
+          "evidence_id": "NP-001-E-6a409c9614b05563",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-4a2abd421dea",
+            "S-7f90236deaea"
+          ],
+          "text": "A rational study was conducted on the physicochemical properties, encapsulation, and pharmacokinetics of DX released from different LNP formulations, which was not previously explored in other publications."
+        },
+        {
+          "evidence_id": "NP-001-E-31be4a9ef67e777c",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-4a2abd421dea",
+            "S-7f90236deaea"
+          ],
+          "text": "The incorporation of DX into stable LNPs was confirmed by SAXS studies."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-93b1d740326beeac",
+          "evidence_id": "NP-001-E-bebf078a2823b5eb",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-4a2abd421dea",
+            "S-7f90236deaea"
+          ],
+          "text": "Several reports have studied the effects of similar DX-LNP systems in mouse models [1,10]."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-644bbaa3ce81dd73",
+          "context_before_evidence_id": "NP-001-E-bebf078a2823b5eb",
+          "evidence_id": "NP-001-E-93b1d740326beeac",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-4a2abd421dea",
+            "S-7f90236deaea"
+          ],
+          "text": "However, our work additionally investigates the effects of DX-mRNA co-loaded LNPs on human primary peripheral blood mononuclear cells (hPBMCs) and assesses hemotoxicity in human blood samples."
+        },
+        {
+          "evidence_id": "NP-001-E-f44d022b2d7c32a8",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-4a2abd421dea",
+            "S-7f90236deaea"
+          ],
+          "text": "Furthermore, it potentially offers an optimized approach for mRNA-based protein replacement therapies, as previously reported for tyrosinemia and phenylketonuria [14,15]."
+        },
+        {
+          "evidence_id": "NP-001-E-c5f6294f1cd7f495",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-4a2abd421dea",
+            "S-7f90236deaea"
+          ],
+          "text": "Repeated dosing in these therapies could potentially lead to reactogenicity issues due to immune responses against the encoded proteins and/or the LNP components, which could compromise the efficacy of the therapy."
+        },
+        {
+          "evidence_id": "NP-001-E-59bcd1e6cc278300",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-4d643722c2fa"
+          ],
+          "text": "The transfection efficiency of LNP/DX formulations was also evaluated in human hPBMC cultures by FACS analysis (Figure 9 and Figure S2)."
+        },
+        {
+          "evidence_id": "NP-001-E-934be12ec1846ffe",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-8c769fa48b95"
+          ],
+          "text": "hPBMCs are a diverse mixture of immune cells, making them a relevant target cell population to evaluate the immunosuppressive effects of LNP-formulated DX."
+        },
+        {
+          "evidence_id": "NP-001-E-1ec1832fdbf78e17",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-8c769fa48b95"
+          ],
+          "text": "Analysis with mRNA-encoded EGFP showed that all formulations were able to transfect cells in the range of 30% to 40% (Figure 9a)."
+        },
+        {
+          "evidence_id": "NP-001-E-66aa73012c21ab9d",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-8c769fa48b95"
+          ],
+          "text": "There was no significant difference between LNP(DSPC) and LNP/DX(DSPC) in the percentage of transfected cells and mean EGFP expression per cell."
+        },
+        {
+          "evidence_id": "NP-001-E-0b3359df57b7f6b0",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-8c769fa48b95"
+          ],
+          "text": "In the case of LNP(DOPE), the incorporation of DX into LNP resulted in a slight decrease in transfection efficiency, but still with expression levels comparable to LNP/DX(DSPC)."
+        },
+        {
+          "evidence_id": "NP-001-E-41989f77e7adbcde",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint",
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-8c769fa48b95"
+          ],
+          "text": "EGFP expression was statistically significant (p < 0.05) compared to the negative control."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-ce701a737af65c43",
+          "evidence_id": "NP-001-E-d401f3b6088ab427",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "text": "To further evaluate the immunogenicity of LNPs, the expression of activation markers was assessed (Figure 8b)."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-d6d62d92d6b530ad",
+          "evidence_id": "NP-001-E-fb44e14f6b55fb22",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "text": "The presence of the MHC class II molecule, which is relevant in the antigen presentation process, was constitutively expressed in the dendritic cells, and the total population of DCs expressing this cell marker was not affected by the presence of LNP or LNP/DX."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-168fad5f9b847b6f",
+          "context_before_evidence_id": "NP-001-E-fb44e14f6b55fb22",
+          "evidence_id": "NP-001-E-d6d62d92d6b530ad",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "text": "However, a significant decrease in the expression of MHC II molecules on the DC surface was observed after treatment with DX-loaded LNPs."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-5b62c49a25472093",
+          "context_before_evidence_id": "NP-001-E-d6d62d92d6b530ad",
+          "evidence_id": "NP-001-E-168fad5f9b847b6f",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "text": "A 30% to 50% reduction was observed at the maximum dose for both DSPC and DOPE LNPs."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-07d074481468b5ea",
+          "context_before_evidence_id": "NP-001-E-168fad5f9b847b6f",
+          "evidence_id": "NP-001-E-5b62c49a25472093",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "text": "Moreover, stimulation of DCs by LNPs resulted in a significant release of TNF-α compared to non-treated cells (Figure 8c)."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-5b62c49a25472093",
+          "evidence_id": "NP-001-E-07d074481468b5ea",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "text": "However, after treatment with DSPC and DOPE LNPs loaded with DX, a decrease in TNF-α concentration of approximately fourfold was observed, with levels falling below the baseline of non-treated cells."
+        },
+        {
+          "evidence_id": "NP-001-E-cb3dca1380a00085",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-2eded70f206f"
+          ],
+          "text": "The mRNA translation efficiency was tested in DC 2.4 cells at increasing doses of total mRNA, with the concomitant increase in DX dose, for the DX-LNP formulations containing either DOPE or DSPC (Figure 8)."
+        },
+        {
+          "evidence_id": "NP-001-E-9bb123b4191feb68",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f"
+          ],
+          "text": "The expression of EGFP was assessed, with 100% of the cells being effectively transfected."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-a087eca3e3a63589",
+          "evidence_id": "NP-001-E-223e0a6b26a4a92d",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f"
+          ],
+          "text": "Based on the mean fluorescence intensity per cell, an increase in mRNA expression was observed as the amount of LNP (and total mRNA) increased for all formulations."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-ce701a737af65c43",
+          "context_before_evidence_id": "NP-001-E-223e0a6b26a4a92d",
+          "evidence_id": "NP-001-E-a087eca3e3a63589",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f"
+          ],
+          "text": "A significantly higher GFP expression was observed for the DSPC formulation compared to DOPE, with values approximately four times higher for the DSPC LNPs."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-d401f3b6088ab427",
+          "context_before_evidence_id": "NP-001-E-a087eca3e3a63589",
+          "evidence_id": "NP-001-E-ce701a737af65c43",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes",
+            "recipient_cell",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f"
+          ],
+          "text": "On the other hand, a half decrease in expression was observed in the DX-loaded LNPs compared to their respective unloaded LNPs (Figure 8a)."
+        },
+        {
+          "evidence_id": "NP-001-E-33428fc466ed0c6a",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint"
+          ],
+          "source_ids": [
+            "S-bf912ff151f9"
+          ],
+          "text": "The mRNA was quantified by fluorescence intensity using Ribogreen reagent (Thermo-Fisher, Waltham, MA, USA) at an emission wavelength of 535 nm and an excitation wavelength of 485 nm, utilizing a TECAN Spark® plate reader (Männedorf, Switzerland)."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-31e4715c5ad0827f",
+          "evidence_id": "NP-001-E-2df1e202c462554b",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "endpoint"
+          ],
+          "source_ids": [
+            "S-bf912ff151f9"
+          ],
+          "text": "To determine mRNA encapsulation efficiency, the mRNA concentration in the LNP samples was measured under two conditions: with and without incubation in 2% Triton X-100 (Merck, Darmstadt, Germany) at 37 °C for 10 min."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-f120132b602aaaa5",
+          "context_before_evidence_id": "NP-001-E-16127574c70eca96",
+          "evidence_id": "NP-001-E-31e4715c5ad0827f",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-bf912ff151f9"
+          ],
+          "text": "These conditions measured total mRNA and unencapsulated mRNA, respectively."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-31e4715c5ad0827f",
+          "evidence_id": "NP-001-E-f120132b602aaaa5",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-bf912ff151f9"
+          ],
+          "text": "The encapsulated mRNA was calculated by subtracting the unencapsulated mRNA value from the total mRNA value."
+        },
+        {
+          "evidence_id": "NP-001-E-caaab3e6dabbfe5e",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-afaf707799e9"
+          ],
+          "text": "The ethanol (AppliChem, Darmstadt, Germany) and aqueous phases were mixed at an N/P ratio of 6 and flow rate ratio (FRR) of 2:1 (aqueous: organic)."
+        },
+        {
+          "evidence_id": "NP-001-E-61593212b823b3a9",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-afaf707799e9"
+          ],
+          "text": "Setting 3 was selected for the preparation with load volumes of 48 µL, 48 µL, and 24 µL of PBS, mRNA phase, and lipid phase, respectively."
+        },
+        {
+          "evidence_id": "NP-001-E-932f717f3f87dc10",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-afaf707799e9"
+          ],
+          "text": "After synthesis, LNPs were diluted 1:20 (for in vitro) in 1X phosphate-buffered saline (PBS) and concentrated in Amicon® Ultra-0.5 mL centrifugal filters of 10,000 MWCO (Merck, Darmstadt, Germany) at 1000× g for 10 min per fraction."
+        },
+        {
+          "evidence_id": "NP-001-E-185e83931e14a9e8",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-7c894c664a57"
+          ],
+          "text": "The ethanol and aqueous phases were mixed at a total flow rate of 12 mL/min, with a N/P ratio of 6 and an FRR of 3:1 (aqueous to organic)."
+        },
+        {
+          "evidence_id": "NP-001-E-de39ee66b31c4c6a",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118",
+            "S-7c894c664a57"
+          ],
+          "text": "Various LNPs were synthesized by modifying the type of phosphatidylcholine used (DSPC or DOPE)."
+        },
+        {
+          "evidence_id": "NP-001-E-e22ce03dcf190120",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation"
+          ],
+          "source_ids": [
+            "S-7c894c664a57"
+          ],
+          "text": "LNPs were formulated using an aqueous mRNA solution at a concentration of 120 µg/mL (EGFP mRNA or Luc mRNA), combined with a lipid-containing ethanolic phase at 12.5 mM, employing the NanoAssemblr® system (Precision NanoSystems Inc., Vancouver, BC, Canada)."
+        },
+        {
+          "evidence_id": "NP-001-E-a18557af32b12d9e",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation"
+          ],
+          "source_ids": [
+            "S-7c894c664a57"
+          ],
+          "text": "Post-synthesis, the LNPs were diluted at ratios of 1:20 for in vitro and 1:40 for in vivo use in 1X PBS, then concentrated using Amicon® centrifugal filters of 50,000 MWCO(Merck, Darmstadt, Germany) at 2000× g for 5 min per fraction."
+        },
+        {
+          "evidence_id": "NP-001-E-c1fc060ce8564aca",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation"
+          ],
+          "source_ids": [
+            "S-afaf707799e9"
+          ],
+          "text": "As a first in vitro approach, LNPs were prepared by mixing an aqueous solution of the mRNA at 350 µg/mL with an ethanolic phase containing the lipids at 25.0 mM using the NanoAssemblr® Spark™ (Precision NanoSystems Inc., Vancouver, BC, Canada)."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-f0dbf2460867f112",
+          "evidence_id": "NP-001-E-7b65625812037164",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation"
+          ],
+          "source_ids": [
+            "S-7c04c69fe801"
+          ],
+          "text": "LNPs were formulated by mixing an aqueous solution containing the mRNA constructs (EGFP or Luc) with an ethanolic phase containing the lipids using the NanoAssemblr® microfluidic platform from Precision NanoSystems Inc.(Vancouver, BC, Canada) [6]."
+        },
+        {
+          "evidence_id": "NP-001-E-280884bbf3b96c49",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-e2cce81e3271"
+          ],
+          "text": "Discussion The rapidly advancing field of mRNA therapeutics faces the critical challenge of bal- ancing the broader goal of enhancing therapeutic efficacy while minimizing the side effects of the formulation [1]."
+        },
+        {
+          "evidence_id": "NP-001-E-0be0332b5cbad416",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-e2cce81e3271"
+          ],
+          "text": "A common component of LNPs is polyethylene glycol (PEG), which is well known to induce anti-PEG antibodies [4,5]."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-f6809165e033115d",
+          "evidence_id": "NP-001-E-4fe75d121f068a6f",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-e2cce81e3271"
+          ],
+          "text": "Recently, we demonstrated the efficacy of mRNA-based treatment of tyrosinemia and phenylketonuria in a mouse model, underlining the enormous potential of this therapeutic approach [14,15]."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-4fe75d121f068a6f",
+          "evidence_id": "NP-001-E-f6809165e033115d",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-e2cce81e3271"
+          ],
+          "text": "Thus, the design of LNPs formulated with immunosuppressive drugs is a promising approach capable of avoiding sensitization against the expressed antigen and components of the LNP formulation [3]."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-8ec852defeffe08a",
+          "evidence_id": "NP-001-E-313c0d34e067afdd",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "formulation",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-e2cce81e3271"
+          ],
+          "text": "However, when LNP stability is"
+        },
+        {
+          "evidence_id": "NP-001-E-42414740eea4a1e9",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "In Vitro Release Studies of DX from LNPs The analytical protocol for detecting DX concentration was initially established at λmax = 242 nm using a UV–Vis TECAN Spark® plate reader (Männedorf, Switzerland)."
+        },
+        {
+          "evidence_id": "NP-001-E-6ac2496045203f30",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "A linear relationship was observed within the range of 0.25 to 30 µg/mL (r2 = 0.99)."
+        },
+        {
+          "evidence_id": "NP-001-E-5616c99948d8dd44",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "Each device was filled with 500 µL of the respective formulation and immersed in 3.5 mL of PBS at pH 7.4 and 37 ◦C, with continuous shaking at 100 rpm [21]."
+        },
+        {
+          "evidence_id": "NP-001-E-bb801f6da6579926",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "For the free drug release study, a stock solution of 80 µg/mL was prepared in PBS, and 0.5 mL was transferred to the release device."
+        },
+        {
+          "evidence_id": "NP-001-E-65fd47c41c324b8d",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "Samples of 200 µL were taken at regular intervals over a period of 48 h, and the DX concentration was measured by UV–Vis spectroscopy at λmax = 242 nm."
+        },
+        {
+          "evidence_id": "NP-001-E-7b3c625323c08b9c",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4)."
+        },
+        {
+          "evidence_id": "NP-001-E-5670f3a91a9acfc1",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "HepG2 cells were grown in RPMI 1640 medium supplemented with 10% heat-inactivated fetal bovine serum (iFBS), 1% antibiotics (100 U/mL penicillin and 100 µg/mL streptomycin), 1% (2mM) L-glutamine, and 5 mM HEPES."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-99c7c7c43535081e",
+          "evidence_id": "NP-001-E-8168ea1d9d0ddc65",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "The cells were maintained at 37 ◦C in a humidified atmosphere containing 5% CO2."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-8168ea1d9d0ddc65",
+          "evidence_id": "NP-001-E-99c7c7c43535081e",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "They were seeded in 24-well culture plates at a density of 2.5 × 105 cells per well and allowed to grow for 24 h."
+        },
+        {
+          "evidence_id": "NP-001-E-dc987f88b78fcdf1",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "Transfection with LNPs was performed using 500 ng of total mRNA per well (1 µg/mL) for 24 h."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-4f0ebb6396d54bfd",
+          "evidence_id": "NP-001-E-c86c158802ebb316",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "The supernatant and cells (washed with PBS and treated with trypsin) were collected and washed with 2 mL fluorescence-activated cell sorting (FACS) buffer (1X PBS with 2% iFBS) to neutralize trypsin (TrpLE™Express 1X, Gibco, ThermoFisher, Waltham, MA, USA)."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-c86c158802ebb316",
+          "evidence_id": "NP-001-E-4f0ebb6396d54bfd",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "Fol- lowing centrifugation at 400× g at 4 ◦C for 10 min, the cells were resuspended in 70 µL of FACS buffer and stained with 3 µL of 7-Amino-Actinomycin D (7-AAD) to assess viability."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-b06302025ca8ff9a",
+          "evidence_id": "NP-001-E-12edcdb19ae094df",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "DC2.4 cells were cultured in RPMI-1640 medium supplemented with 10% heat- inactivated fetal bovine serum (iFBS), 100 U/mL penicillin, 100 µg/mL streptomycin, 2 mM L-glutamine, 1X non-essential amino acids, 1 mM HEPES, and 0.0054X β-mercaptoethanol."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-12edcdb19ae094df",
+          "evidence_id": "NP-001-E-b06302025ca8ff9a",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "They were seeded in 24-well culture plates at a density of 4 × 104 cells per well and incubated for 24 h."
+        },
+        {
+          "evidence_id": "NP-001-E-d25693a6187fa1ad",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "The cells were then treated with LNPs at a dose of 500 ng of total mRNA per well (1 µg/mL) for 24 h."
+        },
+        {
+          "evidence_id": "NP-001-E-0b13c7354c2be18e",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-79c8279abfae"
+          ],
+          "text": "As a control, mRNA premixed with LipofectamineTM MessengerMAX Reagent (Invitrogen, Carlsbad, CA, USA) was used according to the manufacturer’s instructions."
+        },
+        {
+          "evidence_id": "NP-001-E-0e9fec3a667c7597",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay"
+          ],
+          "source_ids": [
+            "S-7e743dec1476"
+          ],
+          "text": "The heparinized blood was aliquoted into 24-well culture plates and cultured in an X-vivo medium supplemented with 1% antibiotics."
+        },
+        {
+          "evidence_id": "NP-001-E-3ed6afae868cbab3",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay"
+          ],
+          "source_ids": [
+            "S-7e743dec1476"
+          ],
+          "text": "To establish a baseline for complete hemolysis (100%), erythrocytes were treated with 1.0% Triton X-100, while the negative control consisted of erythrocytes incubated in PBS."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-7d40b4c183dca0e4",
+          "context_before_evidence_id": "NP-001-E-49a5456a7ba50678",
+          "evidence_id": "NP-001-E-03f54d8c3edd9ddf",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes",
+            "payload",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-ee10356a9bf3"
+          ],
+          "text": "It has been reported that DX can reduce cellular metabolism, po- tentially slowing down the process of mRNA translation [23]."
+        },
+        {
+          "evidence_id": "NP-001-E-6b5884faa8448a93",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-65e799e6a725"
+          ],
+          "text": "The intensity was expressed as a function of the scattering momentum transfer q ((q = 4π/λ sin(θ)), which is dependent on the incoming wavelength (λ) and the scattering angle (2 θ)."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-4fb197646a897f55",
+          "evidence_id": "NP-001-E-661463c7ad6037f4",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-65e799e6a725"
+          ],
+          "text": "To investigate the structural difference between formulations, a polydisperse multi- shell spherical particle model was used to account for the mean electron density difference from the outer shells of each product [27]."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-661463c7ad6037f4",
+          "evidence_id": "NP-001-E-4fb197646a897f55",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-65e799e6a725"
+          ],
+          "text": "The form factor (P) of a single particle was expressed according to the following equation: \" N #2 \" N #2 P(q, R) = ρ1A(R1, q) + ∑ (ρi −ρi−1)A(Ri, q) / ρ1V(R1) + ∑ (ρi −ρi−1)V(Ri) i = 2 i = 2 where A is the volume weighted amplitude of a homogeneous particle of radius Ri sin(Rq) −Rqcos(Rq) A(Ri, q) = 4π q³ V is the volume of a sphere (4π/3 R³), and ρi is the average electron density of region i of the particle."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-3a2c829f28a7c0a4",
+          "evidence_id": "NP-001-E-22b7726c02dea63d",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-65e799e6a725"
+          ],
+          "text": "For this study, we considered a bilayer nanoparticle with a homogeneous core."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-22b7726c02dea63d",
+          "evidence_id": "NP-001-E-3a2c829f28a7c0a4",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-65e799e6a725"
+          ],
+          "text": "These particles are characterized by an average radius (Rav) with a standard deviation (σ) set at 20% using a Gaussian distribution function (D)."
+        },
+        {
+          "evidence_id": "NP-001-E-2c387fe0bfce9699",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "biological_model",
+            "endpoint",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-65e799e6a725"
+          ],
+          "text": "The total scattering intensity can be expressed with the following equation: Z ∞ I (q) = cte1 + cte2Se f f (q) D(R, Rav, σ)P q, R, →ρ dRback 0"
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-7484864b9360083c",
+          "evidence_id": "NP-001-E-c6658491eb3ce79d",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-29890832daf9"
+          ],
+          "text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b)."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-c6658491eb3ce79d",
+          "evidence_id": "NP-001-E-7484864b9360083c",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-29890832daf9"
+          ],
+          "text": "In contrast, only 54% of EGFP-positive cells were observed after treatment with the highest dose of DX (LNP/DX75)."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-4c123f38ab156fd5",
+          "evidence_id": "NP-001-E-dc0dc9353f6873b6",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-29890832daf9"
+          ],
+          "text": "In terms of mean fluorescence intensity (MFI), there was a nearly linear decrease in mRNA expression as the amount of DX in the LNP increased."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-dc0dc9353f6873b6",
+          "evidence_id": "NP-001-E-4c123f38ab156fd5",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-29890832daf9"
+          ],
+          "text": "This could be explained by considering the EE of the different formulations, which decreased as much as the DX replacement was raised."
+        },
+        {
+          "evidence_id": "NP-001-E-692db6bd61bb5c3e",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-29890832daf9"
+          ],
+          "text": "A similar trend was observed in the case of DC 2.4 cells, where no significant differences (p > 0.05) were found in the total percentage of transfected cells between LNP and LNP/DX25."
+        },
+        {
+          "evidence_id": "NP-001-E-dc33d661ca943a03",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-29890832daf9"
+          ],
+          "text": "In addition, the mRNA expressed per cell (MFI) showed a linear decrease as the proportion of DX in the LNP increased."
+        },
+        {
+          "evidence_id": "NP-001-E-852ced59d6e3a6fd",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-15f538607a1d"
+          ],
+          "text": "Simi- larly, the LNP formulations exhibited a 3- to 4-fold increase in the chemokine MCP-1, a cytokine related to the inflammatory process that attracts and enhances the expression of other inflammatory factors and cells [18]."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-31581dac8542dd6a",
+          "evidence_id": "NP-001-E-b808e156d18d1cec",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-15f538607a1d"
+          ],
+          "text": "These"
+        },
+        {
+          "evidence_id": "NP-001-E-598debe18d1001ff",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "biological_model",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-39436c50ba76"
+          ],
+          "text": "Results are expressed as mean ± SD (n = 3)."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-93b1d740326beeac",
+          "evidence_id": "NP-001-E-644bbaa3ce81dd73",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation",
+            "payload",
+            "recipient_cell"
+          ],
+          "source_ids": [
+            "S-7f90236deaea"
+          ],
+          "text": "This research provides valuable insights into the ability of DX-LNPs to deliver mRNA and the potential to treat inflammatory dis- eases."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-16127574c70eca96",
+          "evidence_id": "NP-001-E-843cdfdf9ce136e0",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118"
+          ],
+          "text": "Determination of mRNA Encapsulation Efficiency (EE) by Ribogreen Assay The mRNA was quantified by fluorescence intensity using Ribogreen reagent (Thermo- Fisher, Waltham, MA, USA) at an emission wavelength of 535 nm and an excitation wave- length of 485 nm, utilizing a TECAN Spark® plate reader (Männedorf, Switzerland)."
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-31e4715c5ad0827f",
+          "context_before_evidence_id": "NP-001-E-843cdfdf9ce136e0",
+          "evidence_id": "NP-001-E-16127574c70eca96",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118"
+          ],
+          "text": "To determine mRNA encapsulation efficiency, the mRNA concentration in the LNP samples was measured under two conditions: with and without incubation in 2% Triton X-100 (Merck, Darmstadt, Germany) at 37 ◦C for 10 min."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-fb181a9e0dcc6566",
+          "evidence_id": "NP-001-E-17507a2cc94a6989",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "assay",
+            "endpoint",
+            "formulation",
+            "outcomes"
+          ],
+          "source_ids": [
+            "S-18b5a5487118"
+          ],
+          "text": "Zeta potentials (Z pot) of the various LNP formulations were measured with the same instrument using DTS1080 disposable capillary cells (Malvern Instruments Corp., Malvern,"
+        },
+        {
+          "context_after_evidence_id": "NP-001-E-294d3258b20447f9",
+          "evidence_id": "NP-001-E-ca086241f715469b",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-95ff584cd576"
+          ],
+          "text": "The LNPs achieved high mRNA encap- Approach for the Development of sulation efficiency (95–100%) and effectively transfected HepG2 cells, dendritic cells, and hPBMCs."
+        },
+        {
+          "context_before_evidence_id": "NP-001-E-ca086241f715469b",
+          "evidence_id": "NP-001-E-294d3258b20447f9",
+          "experiment_candidate_ids": [],
+          "retrieval_field_tags": [
+            "formulation",
+            "therapeutic_target"
+          ],
+          "source_ids": [
+            "S-95ff584cd576"
+          ],
+          "text": "Liver-Targeted Anti-Inflammatory While LNPs increased cytokine release (IL-1β, TNF-α, MCP-1), LNPs-DX significantly reduced Therapies."
+        }
+      ],
+      "packet_checksum": "d36f9479bb109650dccf6117d7da784057e2beaf2c69a797d347f9d1b382f593",
+      "packet_version": "compact-api-packet-1.0.0",
+      "paper_id": "NP-001",
+      "sources": [
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-806156c78f2cf81bc9bb",
+          "section": "3. Discussion",
+          "source_id": "S-0b7026e65338",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-3764b08e27b97a0b3572",
+          "section": "3. Discussion",
+          "source_id": "S-13dc37f6b994",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-ee7237a07764039b58c1",
+          "page_number": 10,
+          "section": "Supplement page 10",
+          "source_id": "S-14e1edf5c49a",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-7d86f1cfe17f903237b6",
+          "page_number": 11,
+          "section": "Supplement page 11",
+          "source_id": "S-15f538607a1d",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-dcf58bafe9daed2d74f9",
+          "page_number": 17,
+          "section": "Supplement page 17",
+          "source_id": "S-18b5a5487118",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-2047fcfd8b91f6019a4d",
+          "section": "3. Discussion",
+          "source_id": "S-208bd4fc13a6",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "abstract",
+          "chunk_id": "NP-001-B-17051e23d0fb66fa0187",
+          "section": "Abstract",
+          "source_id": "S-23aa1bf18a3c",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+          "page_number": 5,
+          "section": "Supplement page 5",
+          "source_id": "S-29890832daf9",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-c80679db8ceae0824805",
+          "section": "2. Results",
+          "source_id": "S-2eded70f206f",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "2.4. In Vitro mRNA Transfection Efficiency of DX-Loaded LNPs"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-9179d4f24eb5cdd20a1d",
+          "page_number": 9,
+          "section": "Supplement page 9",
+          "source_id": "S-39436c50ba76",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
+          "section": "3. Discussion",
+          "source_id": "S-40e98c312d26",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-a3da7688aa09c93fe77b",
+          "section": "1. Introduction",
+          "source_id": "S-4a2abd421dea",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-bf2cd4efe5aa969ed36d",
+          "section": "2. Results",
+          "source_id": "S-4a2f4da1de2a",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "2.4. In Vitro mRNA Transfection Efficiency of DX-Loaded LNPs"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-7be8647586796e0d284f",
+          "section": "2. Results",
+          "source_id": "S-4d49802a298d",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "2.1. Effects of Increasing DX Concentrations on LNP Characteristics and Biological Properties"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-a8ebc5ed794d310d246e",
+          "section": "2. Results",
+          "source_id": "S-4d643722c2fa",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "2.4. In Vitro mRNA Transfection Efficiency of DX-Loaded LNPs"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-e512067d767a63741868",
+          "section": "3. Discussion",
+          "source_id": "S-4edc4536caa7",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-55599895fc72485a55f1",
+          "section": "4. Materials and Methods",
+          "source_id": "S-5409fd82e30c",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "4.6. Small-Angle X-Ray Scattering (SAXS)"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-b50a9c0d65c9b39f2ca5",
+          "section": "3. Discussion",
+          "source_id": "S-58f6bb190019",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-4be95808606a29fe5719",
+          "page_number": 18,
+          "section": "Supplement page 18",
+          "source_id": "S-65e799e6a725",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-00e26d31ce42ee36cec2",
+          "section": "4. Materials and Methods",
+          "source_id": "S-666b525cf268",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "4.6. Small-Angle X-Ray Scattering (SAXS)"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-49a2101bb0a78a4a57e9",
+          "page_number": 3,
+          "section": "Supplement page 3",
+          "source_id": "S-6d8947200817",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-5591b622ad19ee972eb2",
+          "section": "4. Materials and Methods",
+          "source_id": "S-6ed48531232c",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "4.4. Particle Size, Zeta Potential (Z Pot), and Polydispersity Index (PDI)"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-20775a55df40c4600692",
+          "page_number": 19,
+          "section": "Supplement page 19",
+          "source_id": "S-79c8279abfae",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-f8aeb38da82145142183",
+          "section": "2. Results",
+          "source_id": "S-7c04c69fe801",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "2.1. Effects of Increasing DX Concentrations on LNP Characteristics and Biological Properties"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-e794f19ce6a4f72da9d0",
+          "section": "4. Materials and Methods",
+          "source_id": "S-7c894c664a57",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "4.2. Synthesis of LNP Formulations > 4.2.2. DX-Loaded LNPs Composed of DSPC and DOPE Using the NanoAssemblr® Ignite™"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-3a949c86b45bca011f53",
+          "page_number": 20,
+          "section": "Supplement page 20",
+          "source_id": "S-7e743dec1476",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-da2b7a67f5a2d42f0ef8",
+          "page_number": 2,
+          "section": "Supplement page 2",
+          "source_id": "S-7f90236deaea",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-a9bc5d8b6e2441fcbc1b",
+          "section": "2. Results",
+          "source_id": "S-8c769fa48b95",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "2.4. In Vitro mRNA Transfection Efficiency of DX-Loaded LNPs"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-ea1ba565b78648fb7460",
+          "page_number": 1,
+          "section": "Supplement page 1",
+          "source_id": "S-95ff584cd576",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-5ff96cb68be5a08f844b",
+          "section": "3. Discussion",
+          "source_id": "S-aa0c7fe73736",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-f01e81f5c195f519b8f3",
+          "section": "4. Materials and Methods",
+          "source_id": "S-afaf707799e9",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "4.2. Synthesis of LNP Formulations > 4.2.1. DX-Loaded LNPs with NanoAssemblr® Spark™"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-c8a235a1548c0a5bc49d",
+          "section": "4. Materials and Methods",
+          "source_id": "S-bf912ff151f9",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "4.3. Determination of mRNA Encapsulation Efficiency (EE) by Ribogreen Assay"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+          "section": "3. Discussion",
+          "source_id": "S-c9c46f14ad9b",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-0626573462e29c02049d",
+          "page_number": 15,
+          "section": "Supplement page 15",
+          "source_id": "S-e2cce81e3271",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "pdf_page",
+          "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+          "page_number": 16,
+          "section": "Supplement page 16",
+          "source_id": "S-ee10356a9bf3",
+          "source_kind": "pdf",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        },
+        {
+          "block_type": "paragraph",
+          "chunk_id": "NP-001-B-a10851d1610fbc3642c0",
+          "section": "2. Results",
+          "source_id": "S-ff38523a4dfe",
+          "source_kind": "pmc_xml",
+          "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "subsection": "2.4. In Vitro mRNA Transfection Efficiency of DX-Loaded LNPs"
+        }
+      ]
+    },
+    "outcome_recall_support": {
+      "accepted_visual_claims": [],
+      "atomic_outcome_candidates": [
+        {
+          "candidate_id": "AOC-10eba350735a69e1",
+          "claim_ids": [
+            "ACL-6c2b6a5930881e21",
+            "ACL-553bc5f537163f40"
+          ],
+          "confidence": "high",
+          "endpoint_text": "expression",
+          "evidence_ids": [
+            "NP-001-E-9bb123b4191feb68",
+            "NP-001-FC-90c33335a62d7b15"
+          ],
+          "numeric_value": 100.0,
+          "object_text": "EGFP was assessed, with 100% of the cells being effectively transfected",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "expressed",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f",
+            "FC-S-bb2c59d25fea67b1"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"expressed\",\"positive\",\"egfp_gfp\",\"\",\"expression\",\"100\",\"\",\"\"]",
+          "subject_text": "The",
+          "unit": "%",
+          "value_text": "100%"
+        },
+        {
+          "candidate_id": "AOC-a0f5b95d07c91732",
+          "claim_ids": [
+            "ACL-de0281e7b2f65d7e",
+            "ACL-2c6692d8e54c70cf"
+          ],
+          "confidence": "high",
+          "endpoint_text": "GFP expression",
+          "evidence_ids": [
+            "NP-001-E-a087eca3e3a63589",
+            "NP-001-FC-b686917aece69651"
+          ],
+          "numeric_value": null,
+          "object_text": "for the DSPC LNPs",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "increased",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": "higher",
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f",
+            "FC-S-bb2c59d25fea67b1"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"increased\",\"positive\",\"egfp_gfp\",\"\",\"gfp expression\",\"\",\"\",\"higher\"]",
+          "subject_text": "DSPC formulation compared to DOPE, with values approximately four times",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-fe1d24b4b61d2cd3",
+          "claim_ids": [
+            "ACL-8f836c8ecefbb959"
+          ],
+          "confidence": "medium",
+          "endpoint_text": "expression",
+          "evidence_ids": [
+            "NP-001-FC-53d628e38fc684db"
+          ],
+          "numeric_value": null,
+          "object_text": "Luc",
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "decreased",
+          "provisional_experiment_id": null,
+          "qualitative_result": "lower",
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-0196fe00d5951b74"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"decreased\",\"negative\",\"generic_lnp\",\"\",\"expression\",\"\",\"\",\"lower\"]",
+          "subject_text": "Although a",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-61e82a63f5aeed1c",
+          "claim_ids": [
+            "ACL-1d48ecad6a8896f8"
+          ],
+          "confidence": "medium",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-FC-ded04b21baa26113"
+          ],
+          "numeric_value": null,
+          "object_text": "after its encapsulation in LNPs, the release of TNF-α from DC 2",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "maintained",
+          "provisional_experiment_id": null,
+          "qualitative_result": "maintained",
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-9adbb3def4456ac7"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"maintained\",\"positive\",\"\",\"\",\"\",\"\",\"\",\"maintained\",\"effects of dx and to verify whether these properties were\",\"after its encapsulation in lnps the release of tnf from dc 2\"]",
+          "subject_text": "effects of DX and to verify whether these properties were",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-42a82cd74e0572eb",
+          "claim_ids": [
+            "ACL-68b24dc37ede1e4f",
+            "ACL-e4a76d1845089595"
+          ],
+          "confidence": "high",
+          "endpoint_text": "EGFP expression",
+          "evidence_ids": [
+            "NP-001-E-66aa73012c21ab9d",
+            "NP-001-FC-9cfaf8e145cc16d0"
+          ],
+          "numeric_value": null,
+          "object_text": "per cell",
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "expressed",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": "significant",
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-8c769fa48b95",
+            "FC-S-81a296ba1d75c3c8"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"expressed\",\"negative\",\"egfp_gfp\",\"\",\"egfp expression\",\"\",\"\",\"significant\"]",
+          "subject_text": "LNP/DX(DSPC) in the percentage of transfected cells and mean EGFP",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-42ae3cfb0a690038",
+          "claim_ids": [
+            "ACL-dc5bf8259aba5ad7",
+            "ACL-e5ccaafcaab6729d"
+          ],
+          "confidence": "high",
+          "endpoint_text": "EGFP expression",
+          "evidence_ids": [
+            "NP-001-E-41989f77e7adbcde",
+            "NP-001-FC-8bc2d969df4e20e4"
+          ],
+          "numeric_value": null,
+          "object_text": "was statistically significant (p < 0",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "expressed",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": "significant",
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-8c769fa48b95",
+            "FC-S-81a296ba1d75c3c8"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"expressed\",\"positive\",\"egfp_gfp\",\"\",\"egfp expression\",\"\",\"\",\"significant\"]",
+          "subject_text": "EGFP",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-262cdd400cd5a877",
+          "claim_ids": [
+            "ACL-bece6db30a9603e2",
+            "ACL-556373d4e5f07c31"
+          ],
+          "confidence": "high",
+          "endpoint_text": "GFP expression",
+          "evidence_ids": [
+            "NP-001-E-a087eca3e3a63589",
+            "NP-001-FC-b686917aece69651"
+          ],
+          "numeric_value": null,
+          "object_text": "GFP",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "increased",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": "significantly",
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f",
+            "FC-S-bb2c59d25fea67b1"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"increased\",\"positive\",\"egfp_gfp\",\"\",\"gfp expression\",\"\",\"\",\"significantly\"]",
+          "subject_text": "A significantly",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-f4b10cbf5db500f9",
+          "claim_ids": [
+            "ACL-87d1940fc7c85204"
+          ],
+          "confidence": "medium",
+          "endpoint_text": "expression",
+          "evidence_ids": [
+            "NP-001-FC-53d628e38fc684db"
+          ],
+          "numeric_value": null,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "increased",
+          "provisional_experiment_id": null,
+          "qualitative_result": "higher",
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-0196fe00d5951b74"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"increased\",\"negative\",\"generic_lnp\",\"\",\"expression\",\"\",\"\",\"higher\"]",
+          "subject_text": "different compared to liver values, which were nearly 100 times",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-e44aa7db96a672d9",
+          "claim_ids": [
+            "ACL-3a34622f01809f72",
+            "ACL-2ad6fd6c09ef9316"
+          ],
+          "confidence": "medium",
+          "endpoint_text": "expression",
+          "evidence_ids": [
+            "NP-001-E-00d75f88ef91e225"
+          ],
+          "numeric_value": null,
+          "object_text": "MHC class II molecules and are considered “professional” antigen-presenting cells (APCs) of the immune system, it was observed that treatment with DX-LNPs led to a reduction in MHC II molecule",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "expressed",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "S-13dc37f6b994",
+            "S-ee10356a9bf3"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"expressed\",\"positive\",\"generic_lnp\",\"macrophage\",\"expression\",\"\",\"\",\"\"]",
+          "subject_text": "macrophages",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-9851a3d49ab929d6",
+          "claim_ids": [
+            "ACL-458b01fe30d591a0"
+          ],
+          "confidence": "medium",
+          "endpoint_text": "expression",
+          "evidence_ids": [
+            "NP-001-E-637cb9ba7efa2cd3"
+          ],
+          "numeric_value": null,
+          "object_text": "than in other organs",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "increased",
+          "provisional_experiment_id": null,
+          "qualitative_result": "higher",
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "S-208bd4fc13a6",
+            "S-ee10356a9bf3"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"increased\",\"positive\",\"generic_lnp\",\"\",\"expression\",\"\",\"\",\"higher\"]",
+          "subject_text": "showed accumulation in the liver, with expression levels 100 times",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-9c21e310ff7da532",
+          "claim_ids": [
+            "ACL-9903f3d54745be17",
+            "ACL-8efa90ebc8cf95f1"
+          ],
+          "confidence": "high",
+          "endpoint_text": "expression",
+          "evidence_ids": [
+            "NP-001-E-223e0a6b26a4a92d",
+            "NP-001-FC-9c4a91c377698d3f"
+          ],
+          "numeric_value": null,
+          "object_text": "for all formulations",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "increased",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-2eded70f206f",
+            "FC-S-bb2c59d25fea67b1"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"increased\",\"positive\",\"generic_lnp\",\"\",\"expression\",\"\",\"\",\"\"]",
+          "subject_text": "was observed as the amount of LNP (and total mRNA)",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-a59819bf07f8d249",
+          "claim_ids": [
+            "ACL-ded01d77c68a90c9"
+          ],
+          "confidence": "high",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-E-fb44e14f6b55fb22"
+          ],
+          "numeric_value": null,
+          "object_text": "the dendritic cells, and the total population of DCs",
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "expressed",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"expressed\",\"negative\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"which is relevant in the antigen presentation process was constitutively\",\"the dendritic cells and the total population of dcs\"]",
+          "subject_text": "which is relevant in the antigen presentation process, was constitutively",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-79ae650ce8c33eda",
+          "claim_ids": [
+            "ACL-482eae4e2dc2dd9b"
+          ],
+          "confidence": "high",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-E-fb44e14f6b55fb22"
+          ],
+          "numeric_value": null,
+          "object_text": "this cell marker was not affected by the presence of LNP or LNP/DX",
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "expressed",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "S-14e1edf5c49a",
+            "S-4a2f4da1de2a"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"expressed\",\"negative\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"in the dendritic cells and the total population of dcs\",\"this cell marker was not affected by the presence of lnp or lnp dx\"]",
+          "subject_text": "in the dendritic cells, and the total population of DCs",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-2e08b81493fa81a4",
+          "claim_ids": [
+            "ACL-d3d715821453effc",
+            "ACL-c619e25a70acc0e7",
+            "ACL-d0736fcd455dd578"
+          ],
+          "confidence": "medium",
+          "endpoint_text": "expression",
+          "evidence_ids": [
+            "NP-001-E-d0660dbc5d2984c2",
+            "NP-001-FC-6781a3a001912091",
+            "NP-001-FC-cd6222f2fda26e1c"
+          ],
+          "numeric_value": null,
+          "object_text": "other inflammatory factors and cells [18]",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "expressed",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "S-ff38523a4dfe",
+            "FC-S-f083e7655ffe66cf",
+            "FC-S-250ad363d4637118"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"expressed\",\"positive\",\"generic_lnp\",\"\",\"expression\",\"\",\"\",\"\"]",
+          "subject_text": "related to the inflammatory process that attracts and enhances the",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-00f2300659cf77ba",
+          "claim_ids": [
+            "ACL-02207d907410dfd3"
+          ],
+          "confidence": "high",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-FC-de6b45258bfe7492"
+          ],
+          "numeric_value": null,
+          "object_text": "per cell (MFI) showed a linear decrease as the proportion of DX in the LNP",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "expressed",
+          "provisional_experiment_id": "PEX-NP-001-682724960865",
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-e9c6f7a63607ba1e"
+          ],
+          "structural_signature": "[\"PEX-NP-001-682724960865\",\"expressed\",\"positive\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"in addition the mrna\",\"per cell mfi showed a linear decrease as the proportion of dx in the lnp\"]",
+          "subject_text": "In addition, the mRNA",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-e96414d7a327a407",
+          "claim_ids": [
+            "ACL-e775a110cca674eb"
+          ],
+          "confidence": "medium",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-FC-355646197a2b5e0a"
+          ],
+          "numeric_value": null,
+          "object_text": "this cell marker was not affected by the presence of LNP or LNP/DX",
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "expressed",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-c32fa2d229aead25"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"expressed\",\"negative\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"in the dendritic cells and the total population of dcs\",\"this cell marker was not affected by the presence of lnp or lnp dx\"]",
+          "subject_text": "in the dendritic cells, and the total population of DCs",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-cdcef04b260fbd52",
+          "claim_ids": [
+            "ACL-0853ae71812db73e"
+          ],
+          "confidence": "medium",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-FC-355646197a2b5e0a"
+          ],
+          "numeric_value": null,
+          "object_text": "the dendritic cells, and the total population of DCs",
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "expressed",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-c32fa2d229aead25"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"expressed\",\"negative\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"which is relevant in the antigen presentation process was constitutively\",\"the dendritic cells and the total population of dcs\"]",
+          "subject_text": "which is relevant in the antigen presentation process, was constitutively",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-ce31eb863d6ec903",
+          "claim_ids": [
+            "ACL-bcc076a0ca894dc7"
+          ],
+          "confidence": "medium",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-FC-25d28b81b7b29e89"
+          ],
+          "numeric_value": null,
+          "object_text": "target proteins and potentially reducing inflammatory effects associated with liver-related pathologies",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "expressed",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-0196fe00d5951b74"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"expressed\",\"positive\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"lnps target liver tissues making them a promising tool for\",\"target proteins and potentially reducing inflammatory effects associated with liver related pathologies\"]",
+          "subject_text": "LNPs target liver tissues, making them a promising tool for",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-56e1007897125db1",
+          "claim_ids": [
+            "ACL-5fdf783c5d63fa78"
+          ],
+          "confidence": "medium",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-FC-fa1c42828abd315c"
+          ],
+          "numeric_value": null,
+          "object_text": "approximately fourfold when cells were treated with all DX-containing LNPs",
+          "paper_id": "NP-001",
+          "polarity": "positive",
+          "predicate": "decreased",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-9adbb3def4456ac7"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"decreased\",\"positive\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"however tnf release\",\"approximately fourfold when cells were treated with all dx containing lnps\"]",
+          "subject_text": "However, TNF-α release",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-77c7d1a0096902af",
+          "claim_ids": [
+            "ACL-da71515dfcdedc41"
+          ],
+          "confidence": "medium",
+          "endpoint_text": null,
+          "evidence_ids": [
+            "NP-001-FC-0ee4d909bd9678e7"
+          ],
+          "numeric_value": null,
+          "object_text": "bioactive DX rather than to a loss of cell viability",
+          "paper_id": "NP-001",
+          "polarity": "negative",
+          "predicate": "delivered_to",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [
+            "experiment_assignment_unresolved",
+            "claim_requires_review"
+          ],
+          "route_hint": "text",
+          "source_ids": [
+            "FC-S-25d3e919c0bfc5a5"
+          ],
+          "structural_signature": "[\"UNASSIGNED\",\"delivered_to\",\"negative\",\"generic_lnp\",\"\",\"\",\"\",\"\",\"\",\"the inhibition of cytokine release can be attributed to the\",\"bioactive dx rather than to a loss of cell viability\"]",
+          "subject_text": "the inhibition of cytokine release can be attributed to the",
+          "unit": null,
+          "value_text": null
+        },
+        {
+          "candidate_id": "AOC-VIS-a8a25ab2496bd765",
+          "claim_ids": [
+            "ACL-VIS-eb0d80873ab25844"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Diameter (nm)",
+          "evidence_ids": [
+            "VIS-eb0d80873ab25844"
+          ],
+          "numeric_value": 91.8,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c1"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)|reached|diameter (nm)|91.8 ± 0.1",
+          "subject_text": "LNP(DSPC)",
+          "unit": null,
+          "value_text": "91.8 ± 0.1"
+        },
+        {
+          "candidate_id": "AOC-VIS-5bfdfa4bf2ca2074",
+          "claim_ids": [
+            "ACL-VIS-20ff011b323cbd76"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Multilayer (%)",
+          "evidence_ids": [
+            "VIS-20ff011b323cbd76"
+          ],
+          "numeric_value": 55.9,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c2"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)|reached|multilayer (%)|55.9",
+          "subject_text": "LNP(DSPC)",
+          "unit": null,
+          "value_text": "55.9"
+        },
+        {
+          "candidate_id": "AOC-VIS-7185be3650c8aff2",
+          "claim_ids": [
+            "ACL-VIS-11bcdda5784d40a3"
+          ],
+          "confidence": "high",
+          "endpoint_text": "N_av",
+          "evidence_ids": [
+            "VIS-11bcdda5784d40a3"
+          ],
+          "numeric_value": 1.3,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c3"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)|reached|n_av|1.3 ± 0.3",
+          "subject_text": "LNP(DSPC)",
+          "unit": null,
+          "value_text": "1.3 ± 0.3"
+        },
+        {
+          "candidate_id": "AOC-VIS-0aa414e8297bcd5c",
+          "claim_ids": [
+            "ACL-VIS-4195b003bece11fe"
+          ],
+          "confidence": "high",
+          "endpoint_text": "x²",
+          "evidence_ids": [
+            "VIS-4195b003bece11fe"
+          ],
+          "numeric_value": 0.77,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c4"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)|reached|x²|0.77",
+          "subject_text": "LNP(DSPC)",
+          "unit": null,
+          "value_text": "0.77"
+        },
+        {
+          "candidate_id": "AOC-VIS-de8f42b584f3130f",
+          "claim_ids": [
+            "ACL-VIS-cb8c60cd5486802b"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Diameter (nm)",
+          "evidence_ids": [
+            "VIS-cb8c60cd5486802b"
+          ],
+          "numeric_value": 111.0,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c1"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)/dx25|reached|diameter (nm)|111.0 ± 0.2",
+          "subject_text": "LNP(DSPC)/DX25",
+          "unit": null,
+          "value_text": "111.0 ± 0.2"
+        },
+        {
+          "candidate_id": "AOC-VIS-aea4056fd79e6e4e",
+          "claim_ids": [
+            "ACL-VIS-3e09b89b17565682"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Multilayer (%)",
+          "evidence_ids": [
+            "VIS-3e09b89b17565682"
+          ],
+          "numeric_value": 66.72,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c2"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)/dx25|reached|multilayer (%)|66.72",
+          "subject_text": "LNP(DSPC)/DX25",
+          "unit": null,
+          "value_text": "66.72"
+        },
+        {
+          "candidate_id": "AOC-VIS-8057f86ddd65825e",
+          "claim_ids": [
+            "ACL-VIS-6f591489d54905af"
+          ],
+          "confidence": "high",
+          "endpoint_text": "N_av",
+          "evidence_ids": [
+            "VIS-6f591489d54905af"
+          ],
+          "numeric_value": 1.4,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c3"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)/dx25|reached|n_av|1.4 ± 0.3",
+          "subject_text": "LNP(DSPC)/DX25",
+          "unit": null,
+          "value_text": "1.4 ± 0.3"
+        },
+        {
+          "candidate_id": "AOC-VIS-6d2332d243478417",
+          "claim_ids": [
+            "ACL-VIS-67aaf8b965210277"
+          ],
+          "confidence": "high",
+          "endpoint_text": "x²",
+          "evidence_ids": [
+            "VIS-67aaf8b965210277"
+          ],
+          "numeric_value": 1.31,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c4"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dspc)/dx25|reached|x²|1.31",
+          "subject_text": "LNP(DSPC)/DX25",
+          "unit": null,
+          "value_text": "1.31"
+        },
+        {
+          "candidate_id": "AOC-VIS-24257dd230d4a636",
+          "claim_ids": [
+            "ACL-VIS-449da2133a8a1d36"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Diameter (nm)",
+          "evidence_ids": [
+            "VIS-449da2133a8a1d36"
+          ],
+          "numeric_value": 103.0,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c1"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)|reached|diameter (nm)|103.0 ± 0.2",
+          "subject_text": "LNP(DOPE)",
+          "unit": null,
+          "value_text": "103.0 ± 0.2"
+        },
+        {
+          "candidate_id": "AOC-VIS-c8a7a109da063a73",
+          "claim_ids": [
+            "ACL-VIS-ca96394f67d13bcb"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Multilayer (%)",
+          "evidence_ids": [
+            "VIS-ca96394f67d13bcb"
+          ],
+          "numeric_value": 96.3,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c2"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)|reached|multilayer (%)|96.3",
+          "subject_text": "LNP(DOPE)",
+          "unit": null,
+          "value_text": "96.3"
+        },
+        {
+          "candidate_id": "AOC-VIS-991ad46f665b2fdc",
+          "claim_ids": [
+            "ACL-VIS-05fb95f32fcbbd12"
+          ],
+          "confidence": "high",
+          "endpoint_text": "N_av",
+          "evidence_ids": [
+            "VIS-05fb95f32fcbbd12"
+          ],
+          "numeric_value": 2.57,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c3"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)|reached|n_av|2.57± 0.01",
+          "subject_text": "LNP(DOPE)",
+          "unit": null,
+          "value_text": "2.57± 0.01"
+        },
+        {
+          "candidate_id": "AOC-VIS-5e2382f602ae6ff7",
+          "claim_ids": [
+            "ACL-VIS-a2ad4db86b03d45a"
+          ],
+          "confidence": "high",
+          "endpoint_text": "x²",
+          "evidence_ids": [
+            "VIS-a2ad4db86b03d45a"
+          ],
+          "numeric_value": 0.53,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c4"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)|reached|x²|0.53",
+          "subject_text": "LNP(DOPE)",
+          "unit": null,
+          "value_text": "0.53"
+        },
+        {
+          "candidate_id": "AOC-VIS-5c61ea14cb15945b",
+          "claim_ids": [
+            "ACL-VIS-3bc8245ce3af64fd"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Diameter (nm)",
+          "evidence_ids": [
+            "VIS-3bc8245ce3af64fd"
+          ],
+          "numeric_value": 106.8,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c1"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)/dx25|reached|diameter (nm)|106.8 ± 0.2",
+          "subject_text": "LNP(DOPE)/DX25",
+          "unit": null,
+          "value_text": "106.8 ± 0.2"
+        },
+        {
+          "candidate_id": "AOC-VIS-3f909924ef592500",
+          "claim_ids": [
+            "ACL-VIS-56ab9571f3e1823d"
+          ],
+          "confidence": "high",
+          "endpoint_text": "Multilayer (%)",
+          "evidence_ids": [
+            "VIS-56ab9571f3e1823d"
+          ],
+          "numeric_value": 99.0,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c2"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)/dx25|reached|multilayer (%)|99.0",
+          "subject_text": "LNP(DOPE)/DX25",
+          "unit": null,
+          "value_text": "99.0"
+        },
+        {
+          "candidate_id": "AOC-VIS-3028c2c36bac97cb",
+          "claim_ids": [
+            "ACL-VIS-a55b5e75c7b7c17b"
+          ],
+          "confidence": "high",
+          "endpoint_text": "N_av",
+          "evidence_ids": [
+            "VIS-a55b5e75c7b7c17b"
+          ],
+          "numeric_value": 2.58,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c3"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)/dx25|reached|n_av|2.58 ± 0.01",
+          "subject_text": "LNP(DOPE)/DX25",
+          "unit": null,
+          "value_text": "2.58 ± 0.01"
+        },
+        {
+          "candidate_id": "AOC-VIS-77130af22074d0d7",
+          "claim_ids": [
+            "ACL-VIS-e285ff352209e22e"
+          ],
+          "confidence": "high",
+          "endpoint_text": "x²",
+          "evidence_ids": [
+            "VIS-e285ff352209e22e"
+          ],
+          "numeric_value": 1.05,
+          "object_text": null,
+          "paper_id": "NP-001",
+          "polarity": "neutral",
+          "predicate": "reached",
+          "provisional_experiment_id": null,
+          "qualitative_result": null,
+          "review_reasons": [],
+          "route_hint": "vision",
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c4"
+          ],
+          "structural_signature": "NP-001|unassigned|lnp(dope)/dx25|reached|x²|1.05",
+          "subject_text": "LNP(DOPE)/DX25",
+          "unit": null,
+          "value_text": "1.05"
+        }
+      ],
+      "estimated_tokens": 9513,
+      "instructions": [
+        "Candidates are navigation aids, not verified final outcomes.",
+        "Create a final record only when its cited evidence directly supports it.",
+        "Keep distinct provisional experiments and atomic relationships separate.",
+        "Deduplicate candidates against outcomes already supported by the packet.",
+        "Use only evidence IDs present in the packet or local_evidence below."
+      ],
+      "local_evidence": [
+        {
+          "evidence_id": "NP-001-FC-90c33335a62d7b15",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-90c33335a62d7b15",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-bb2c59d25fea67b1"
+          },
+          "source_ids": [
+            "FC-S-bb2c59d25fea67b1",
+            "FC-S-bb2c59d25fea67b1",
+            "FC-S-bb2c59d25fea67b1"
+          ],
+          "source_kind": "text",
+          "text": "The expression of EGFP was assessed, with 100% of the cells being effectively transfected."
+        },
+        {
+          "evidence_id": "NP-001-FC-b686917aece69651",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-b686917aece69651",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-bb2c59d25fea67b1"
+          },
+          "source_ids": [
+            "FC-S-bb2c59d25fea67b1",
+            "FC-S-bb2c59d25fea67b1",
+            "FC-S-bb2c59d25fea67b1"
+          ],
+          "source_kind": "text",
+          "text": "A significantly higher GFP expression was observed for the DSPC formulation compared to DOPE, with values approximately four times higher for the DSPC LNPs."
+        },
+        {
+          "evidence_id": "NP-001-FC-53d628e38fc684db",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-53d628e38fc684db",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-0196fe00d5951b74"
+          },
+          "source_ids": [
+            "FC-S-0196fe00d5951b74"
+          ],
+          "source_kind": "text",
+          "text": "Although a lower Luc expression on the order of 5 × 105 luminescent units was observed in the spleen and inguinal lymph nodes of mice treated with both LNP and DX-loaded LNPs, these values were not significantly different compared to liver values, which were nearly 100 times higher."
+        },
+        {
+          "evidence_id": "NP-001-FC-ded04b21baa26113",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-ded04b21baa26113",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-9adbb3def4456ac7"
+          },
+          "source_ids": [
+            "FC-S-9adbb3def4456ac7"
+          ],
+          "source_kind": "text",
+          "text": "To evaluate the anti-inflammatory effects of DX and to verify whether these properties were maintained after its encapsulation in LNPs, the release of TNF-α from DC 2.4 cells was quantified (Figure 2e)."
+        },
+        {
+          "evidence_id": "NP-001-FC-9cfaf8e145cc16d0",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-9cfaf8e145cc16d0",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-81a296ba1d75c3c8"
+          },
+          "source_ids": [
+            "FC-S-81a296ba1d75c3c8",
+            "FC-S-81a296ba1d75c3c8",
+            "FC-S-81a296ba1d75c3c8"
+          ],
+          "source_kind": "text",
+          "text": "There was no significant difference between LNP(DSPC) and LNP/DX(DSPC) in the percentage of transfected cells and mean EGFP expression per cell."
+        },
+        {
+          "evidence_id": "NP-001-FC-8bc2d969df4e20e4",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-8bc2d969df4e20e4",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-81a296ba1d75c3c8"
+          },
+          "source_ids": [
+            "FC-S-81a296ba1d75c3c8",
+            "FC-S-81a296ba1d75c3c8",
+            "FC-S-81a296ba1d75c3c8"
+          ],
+          "source_kind": "text",
+          "text": "EGFP expression was statistically significant (p < 0.05) compared to the negative control."
+        },
+        {
+          "evidence_id": "NP-001-FC-9c4a91c377698d3f",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-9c4a91c377698d3f",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-bb2c59d25fea67b1"
+          },
+          "source_ids": [
+            "FC-S-bb2c59d25fea67b1",
+            "FC-S-bb2c59d25fea67b1",
+            "FC-S-bb2c59d25fea67b1"
+          ],
+          "source_kind": "text",
+          "text": "Based on the mean fluorescence intensity per cell, an increase in mRNA expression was observed as the amount of LNP (and total mRNA) increased for all formulations."
+        },
+        {
+          "evidence_id": "NP-001-FC-6781a3a001912091",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-6781a3a001912091",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-f083e7655ffe66cf"
+          },
+          "source_ids": [
+            "FC-S-f083e7655ffe66cf",
+            "FC-S-f083e7655ffe66cf",
+            "FC-S-f083e7655ffe66cf"
+          ],
+          "source_kind": "text",
+          "text": "Similarly, the LNP formulations exhibited a 3- to 4-fold increase in the chemokine MCP-1, a cytokine related to the inflammatory process that attracts and enhances the expression of other inflammatory factors and cells [18]."
+        },
+        {
+          "evidence_id": "NP-001-FC-cd6222f2fda26e1c",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-cd6222f2fda26e1c",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-250ad363d4637118"
+          },
+          "source_ids": [
+            "FC-S-250ad363d4637118",
+            "FC-S-250ad363d4637118",
+            "FC-S-250ad363d4637118"
+          ],
+          "source_kind": "text",
+          "text": "LNP/DX25 exhibited the highest percentage of transfected cells and the highest mRNA expression"
+        },
+        {
+          "evidence_id": "NP-001-FC-de6b45258bfe7492",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-de6b45258bfe7492",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-e9c6f7a63607ba1e"
+          },
+          "source_ids": [
+            "FC-S-e9c6f7a63607ba1e"
+          ],
+          "source_kind": "text",
+          "text": "In addition, the mRNA expressed per cell (MFI) showed a linear decrease as the proportion of DX in the LNP increased."
+        },
+        {
+          "evidence_id": "NP-001-FC-355646197a2b5e0a",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-355646197a2b5e0a",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-c32fa2d229aead25"
+          },
+          "source_ids": [
+            "FC-S-c32fa2d229aead25"
+          ],
+          "source_kind": "text",
+          "text": "The presence of the MHC class II molecule, which is relevant in the antigen presentation process, was constitutively expressed in the dendritic cells, and the total population of DCs expressing this cell marker was not affected by the presence of LNP or LNP/DX."
+        },
+        {
+          "evidence_id": "NP-001-FC-25d28b81b7b29e89",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-25d28b81b7b29e89",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-0196fe00d5951b74"
+          },
+          "source_ids": [
+            "FC-S-0196fe00d5951b74"
+          ],
+          "source_kind": "text",
+          "text": "These results suggest that almost all the DX-loaded LNPs target liver tissues, making them a promising tool for expressing target proteins and potentially reducing inflammatory effects associated with liver-related pathologies."
+        },
+        {
+          "evidence_id": "NP-001-FC-fa1c42828abd315c",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-fa1c42828abd315c",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-9adbb3def4456ac7"
+          },
+          "source_ids": [
+            "FC-S-9adbb3def4456ac7"
+          ],
+          "source_kind": "text",
+          "text": "However, TNF-α release decreased approximately fourfold when cells were treated with all DX-containing LNPs."
+        },
+        {
+          "evidence_id": "NP-001-FC-0ee4d909bd9678e7",
+          "provenance": {
+            "column_label": null,
+            "evidence_id": "NP-001-FC-0ee4d909bd9678e7",
+            "locator_type": "text",
+            "panel_label": null,
+            "row_label": null,
+            "source_id": "FC-S-25d3e919c0bfc5a5"
+          },
+          "source_ids": [
+            "FC-S-25d3e919c0bfc5a5"
+          ],
+          "source_kind": "text",
+          "text": "The preservation of cell viability following treatment with DX-LNP provides further evidence that the inhibition of cytokine release can be attributed to the delivery of bioactive DX rather than to a loss of cell viability."
+        },
+        {
+          "evidence_id": "VIS-eb0d80873ab25844",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r1:c1"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c1"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC) | Diameter (nm) | 91.8 ± 0.1"
+        },
+        {
+          "evidence_id": "VIS-20ff011b323cbd76",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r1:c2"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c2"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC) | Multilayer (%) | 55.9"
+        },
+        {
+          "evidence_id": "VIS-11bcdda5784d40a3",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r1:c3"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c3"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC) | N_av | 1.3 ± 0.3"
+        },
+        {
+          "evidence_id": "VIS-4195b003bece11fe",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r1:c4"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r1:c4"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC) | x² | 0.77"
+        },
+        {
+          "evidence_id": "VIS-cb8c60cd5486802b",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r2:c1"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c1"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC)/DX25 | Diameter (nm) | 111.0 ± 0.2"
+        },
+        {
+          "evidence_id": "VIS-3e09b89b17565682",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r2:c2"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c2"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC)/DX25 | Multilayer (%) | 66.72"
+        },
+        {
+          "evidence_id": "VIS-6f591489d54905af",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r2:c3"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c3"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC)/DX25 | N_av | 1.4 ± 0.3"
+        },
+        {
+          "evidence_id": "VIS-67aaf8b965210277",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r2:c4"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r2:c4"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DSPC)/DX25 | x² | 1.31"
+        },
+        {
+          "evidence_id": "VIS-449da2133a8a1d36",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r3:c1"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c1"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE) | Diameter (nm) | 103.0 ± 0.2"
+        },
+        {
+          "evidence_id": "VIS-ca96394f67d13bcb",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r3:c2"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c2"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE) | Multilayer (%) | 96.3"
+        },
+        {
+          "evidence_id": "VIS-05fb95f32fcbbd12",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r3:c3"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c3"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE) | N_av | 2.57± 0.01"
+        },
+        {
+          "evidence_id": "VIS-a2ad4db86b03d45a",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r3:c4"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r3:c4"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE) | x² | 0.53"
+        },
+        {
+          "evidence_id": "VIS-3bc8245ce3af64fd",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r4:c1"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c1"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE)/DX25 | Diameter (nm) | 106.8 ± 0.2"
+        },
+        {
+          "evidence_id": "VIS-56ab9571f3e1823d",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r4:c2"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c2"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE)/DX25 | Multilayer (%) | 99.0"
+        },
+        {
+          "evidence_id": "VIS-a55b5e75c7b7c17b",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r4:c3"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c3"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE)/DX25 | N_av | 2.58 ± 0.01"
+        },
+        {
+          "evidence_id": "VIS-e285ff352209e22e",
+          "provenance": [
+            "NP-001-main-p008-table-02:table-0:r4:c4"
+          ],
+          "source_ids": [
+            "NP-001-main-p008-table-02:table-0:r4:c4"
+          ],
+          "source_kind": "docling_table_cell",
+          "text": "LNP(DOPE)/DX25 | x² | 1.05"
+        }
+      ],
+      "paper_id": "NP-001",
+      "provisional_experiments": [
+        {
+          "anchors": [
+            {
+              "anchor_type": "payload",
+              "evidence_ids": [
+                "NP-001-E-1ec1832fdbf78e17",
+                "NP-001-E-2703afe55479f86a",
+                "NP-001-E-41989f77e7adbcde",
+                "NP-001-E-66aa73012c21ab9d",
+                "NP-001-E-7484864b9360083c",
+                "NP-001-E-7b3c625323c08b9c",
+                "NP-001-E-9bb123b4191feb68",
+                "NP-001-E-9c55026e2d4b9713",
+                "NP-001-E-a087eca3e3a63589",
+                "NP-001-E-c6658491eb3ce79d",
+                "NP-001-FC-0b4ad62127552309",
+                "NP-001-FC-1824c7ac484965de",
+                "NP-001-FC-1ab6ca63a94a7dbf",
+                "NP-001-FC-27d1d034d716b3aa",
+                "NP-001-FC-3c482e914f406c68",
+                "NP-001-FC-5584fe233c29bcb0",
+                "NP-001-FC-6a6835cf68944636",
+                "NP-001-FC-77b4f58650dd24a4",
+                "NP-001-FC-7cf1676420a6d44b",
+                "NP-001-FC-8bc2d969df4e20e4",
+                "NP-001-FC-90c33335a62d7b15",
+                "NP-001-FC-9b6199e63d84fb26",
+                "NP-001-FC-9cfaf8e145cc16d0",
+                "NP-001-FC-9d1e48a4ef57b5b8",
+                "NP-001-FC-a94da6a778ca7b31",
+                "NP-001-FC-b237c1785cfb82d5",
+                "NP-001-FC-b686917aece69651",
+                "NP-001-FC-c9d42bd8d07a7b66",
+                "NP-001-FC-d3c378e593531489",
+                "NP-001-FC-ec7b168c68a2607e",
+                "NP-001-FC-ffcda17d9fe36190"
+              ],
+              "value": "egfp_gfp"
+            },
+            {
+              "anchor_type": "assay",
+              "evidence_ids": [
+                "NP-001-E-9c55026e2d4b9713",
+                "NP-001-FC-1824c7ac484965de",
+                "NP-001-FC-1ab6ca63a94a7dbf"
+              ],
+              "value": "flow_cytometry"
+            }
+          ],
+          "boundary_reason": "Grouped by a distinct payload/intervention signature and experimental context; atomic claims are assigned later.",
+          "boundary_status": "ambiguous",
+          "confidence": "low",
+          "label": "egfp_gfp / unknown",
+          "provisional_experiment_id": "PEX-NP-001-682724960865"
+        }
+      ],
+      "support_version": "main-route-recall-support-1.2.0"
+    }
+  },
+  "approved_request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/new_papers/NP-001/primary_exact_preflight/NP-001/request.json",
+  "approved_request_sha256": "4539b5bb876f8bd6321a73c9c8b1fc1f2f9f0ff3e82d022661e25b07670dee46",
+  "preflight_manifest_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/cohesive-morning/data/staging/new_papers/NP-001/primary_exact_preflight/NP-001/manifest.json"
+}

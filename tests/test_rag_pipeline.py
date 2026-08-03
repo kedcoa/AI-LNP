@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from src.rag.entities import regex_candidates
 from src.rag.benchmark import source_match
 from src.rag.index import HybridIndex, TfidfVectorBackend
@@ -52,6 +54,30 @@ def test_cell_candidates_are_separate():
     assert "hepatocytes" in values
     assert "endothelial cells" in values
     assert "kupffer cells" in values
+
+
+@pytest.mark.parametrize(
+    ("term", "expected"),
+    [
+        ("HepG2", "hepg2"),
+        ("HEPG2 CELLS", "hepg2 cells"),
+        ("DENDRITIC CELLS", "dendritic cells"),
+        ("dc2.4", "dc2.4"),
+        ("PBMCS", "pbmcs"),
+        ("hPBMCs", "hpbmcs"),
+    ],
+)
+def test_experimentally_named_recipient_cells_are_cell_candidates(
+    term: str, expected: str,
+):
+    """Protects recipient-cell routing when an experimental model name is used."""
+    candidates = regex_candidates([block("B1", f"LNPs were tested in {term}.")])
+
+    assert expected in {
+        candidate.text.casefold()
+        for candidate in candidates
+        if candidate.entity_type == "cell"
+    }
 
 
 def test_familiar_mc3_formulation_passes_gate(tmp_path: Path):

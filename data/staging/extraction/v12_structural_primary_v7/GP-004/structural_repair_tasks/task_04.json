@@ -1,0 +1,322 @@
+{
+  "task_version": "missing-record-task-1.2.0",
+  "paper_id": "GP-004",
+  "route_ids": [
+    "structural:AOC-443efba50d243225",
+    "structural:AOC-4509d8cef342fbfa",
+    "structural:AOC-8c8f546f56920316",
+    "structural:AOC-ac71595c5469604b",
+    "structural:AOC-f48424355c407385"
+  ],
+  "candidate_ids": [
+    "AOC-443efba50d243225",
+    "AOC-4509d8cef342fbfa",
+    "AOC-8c8f546f56920316",
+    "AOC-ac71595c5469604b",
+    "AOC-f48424355c407385"
+  ],
+  "experiment_context": {
+    "provisional_experiment_id": "PEX-GP-004-65c3dda2c00c",
+    "label": "hgf_egf / in_vivo",
+    "anchors": [
+      {
+        "anchor_type": "payload",
+        "value": "hgf_egf",
+        "evidence_ids": [
+          "GP-004-FC-5be151239bc4ecc1"
+        ]
+      },
+      {
+        "anchor_type": "model",
+        "value": "in_vivo",
+        "evidence_ids": [
+          "GP-004-FC-5be151239bc4ecc1"
+        ]
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "kupffer_cell",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "cell_context",
+        "value": "hepatocyte",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "immunostaining",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "flow_cytometry",
+        "evidence_ids": []
+      },
+      {
+        "anchor_type": "assay",
+        "value": "sequencing",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "candidate_facts": [
+    {
+      "candidate_id": "AOC-443efba50d243225",
+      "subject_text": "mRNA-LNP significantly released cholesterol into the serum, diminished steatosis, and",
+      "predicate": "decreased",
+      "object_text": "serum ALT levels at T8",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-aaef2b0838c071e4"
+      ]
+    },
+    {
+      "candidate_id": "AOC-4509d8cef342fbfa",
+      "subject_text": "RNA-LNP-treated mice were as high as T0 levels and slightly",
+      "predicate": "decreased",
+      "object_text": "the control Luc mRNA-LNP-treated group, yet significantly greater than those in the HGF/EGF mRNA-LNP-treated group",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-5be151239bc4ecc1"
+      ]
+    },
+    {
+      "candidate_id": "AOC-8c8f546f56920316",
+      "subject_text": "hepatocytes",
+      "predicate": "expressed",
+      "object_text": null,
+      "endpoint_text": "expression",
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-543ca93b67c8c533"
+      ]
+    },
+    {
+      "candidate_id": "AOC-ac71595c5469604b",
+      "subject_text": "injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum",
+      "predicate": "reduced",
+      "object_text": "steatosis, and",
+      "endpoint_text": null,
+      "qualitative_result": "significantly",
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-aaef2b0838c071e4"
+      ]
+    },
+    {
+      "candidate_id": "AOC-f48424355c407385",
+      "subject_text": "hepatocyte",
+      "predicate": "delivered_to",
+      "object_text": "tool to",
+      "endpoint_text": null,
+      "qualitative_result": null,
+      "numeric_value": null,
+      "value_text": null,
+      "unit": null,
+      "polarity": "positive",
+      "evidence_ids": [
+        "GP-004-FC-c4461a1442793d2d"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "GP-004-FC-aaef2b0838c071e4",
+      "text": "However, a second injection of HGF/EGF mRNA-LNP significantly released cholesterol into the serum, diminished steatosis, and decreased serum ALT levels at T8",
+      "source_ids": [
+        "FC-S-910df540c2d91e5a"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-5be151239bc4ecc1",
+      "text": "ALT levels in control Poly(C) RNA-LNP-treated mice were as high as T0 levels and slightly decreased in the control Luc mRNA-LNP-treated group, yet significantly greater than those in the HGF/EGF mRNA-LNP-treated group (Fig.",
+      "source_ids": [
+        "FC-S-fbed1caf43ce7c87"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-543ca93b67c8c533",
+      "text": "3b, e) that were mainly comprised of hepatocytes identified with HNF4α expression (Fig.",
+      "source_ids": [
+        "FC-S-25c9196c495f7972"
+      ]
+    },
+    {
+      "evidence_id": "GP-004-FC-c4461a1442793d2d",
+      "text": "To demonstrate that the mRNA-LNP platform is an ideal delivery tool to express hepatocyte mitogens for proliferation, we examined the potential of a single IV injection of mRNA-LNP encoding the mitogen HGF to induce DNA synthesis and cell proliferation by assessing 5-ethynyl-2′-deoxyuridine (EdU) incorporation in hepatocytes in a homeostatic context (Fig.",
+      "source_ids": [
+        "FC-S-25c9196c495f7972"
+      ]
+    }
+  ],
+  "existing_formulation_ids": [
+    "F1"
+  ],
+  "existing_experiment_ids": [
+    "E1",
+    "E2",
+    "E3"
+  ],
+  "existing_outcome_ids": [
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+  ],
+  "existing_experiment_summaries": [
+    {
+      "experiment_id": "E1",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "eGFP mRNA",
+      "encoded_product": "enhanced green fluorescent protein (eGFP)",
+      "molecular_target": null,
+      "delivery_recipient_cell": "Hepatocytes; subpopulations of endothelial cells and Kupffer cells",
+      "therapeutic_target_cell": null,
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "Homeostasis",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg eGFP mRNA-LNP per 20 g body weight",
+      "route": "Intravenous",
+      "timepoint": 5.0,
+      "timepoint_unit": "h after injection",
+      "outcome_endpoints": [
+        "Percentage of eGFP-positive CD31-positive endothelial cells",
+        "Percentage of eGFP-positive CD11b-positive cells",
+        "Percentage of eGFP-positive CD45-positive cells"
+      ],
+      "comparator_context": [
+        "None reported for this numerical value"
+      ]
+    },
+    {
+      "experiment_id": "E2",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "Combined HGF and EGF mRNA",
+      "encoded_product": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+      "molecular_target": null,
+      "delivery_recipient_cell": "Hepatocytes",
+      "therapeutic_target_cell": "Hepatocytes",
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "CDE diet-induced chronic liver injury",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+      "route": "Intravenous (retro-orbital or tail vein)",
+      "timepoint": 2.0,
+      "timepoint_unit": "days after first injection",
+      "outcome_endpoints": [
+        "Hepatocyte lipid accumulation (steatosis)",
+        "Serum ALT level"
+      ],
+      "comparator_context": [
+        "Poly(C) RNA-LNP treatment",
+        "Poly(C) RNA-LNP and Luc mRNA-LNP controls"
+      ]
+    },
+    {
+      "experiment_id": "E3",
+      "formulation_id": "F1",
+      "payload_type": "mRNA",
+      "payload_name": "Combined HGF and EGF mRNA",
+      "encoded_product": "Hepatocyte growth factor (HGF) and epidermal growth factor (EGF)",
+      "molecular_target": null,
+      "delivery_recipient_cell": null,
+      "therapeutic_target_cell": "Hepatocytes",
+      "tissue_or_organ": "Liver",
+      "species": "Mouse",
+      "disease_model": "Acetaminophen (APAP)-induced acute liver injury",
+      "experimental_context": "in_vivo",
+      "dose": 10.0,
+      "dose_unit": "μg total mRNA-LNP (5 μg HGF + 5 μg EGF)",
+      "route": "Intravenous (retro-orbital or tail vein)",
+      "timepoint": 24.0,
+      "timepoint_unit": "h after mRNA-LNP administration",
+      "outcome_endpoints": [
+        "Central-vein necrotic areas"
+      ],
+      "comparator_context": [
+        "Poly(C) RNA-LNP-treated control group"
+      ]
+    }
+  ],
+  "existing_outcome_summaries": [
+    {
+      "outcome_id": "O1",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD31-positive endothelial cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "Significant percentages of endothelial and immune-cell populations expressed eGFP."
+    },
+    {
+      "outcome_id": "O2",
+      "experiment_id": "E2",
+      "assay": "Oil Red O staining of liver sections",
+      "endpoint": "Hepatocyte lipid accumulation (steatosis)",
+      "comparator": "Poly(C) RNA-LNP treatment",
+      "qualitative_outcome": "Single injections of either HGF or EGF mRNA-LNP decreased steatosis; combined HGF/EGF mRNA-LNP produced more efficient steatosis reversal. A sharp decrease was observed 2 days after the first combined injection, while steatosis was maintained in Poly(C) RNA-LNP-treated mice."
+    },
+    {
+      "outcome_id": "O3",
+      "experiment_id": "E2",
+      "assay": "Serum ALT measurement",
+      "endpoint": "Serum ALT level",
+      "comparator": "Poly(C) RNA-LNP and Luc mRNA-LNP controls",
+      "qualitative_outcome": "ALT was restored to normal levels at T2 after HGF/EGF mRNA-LNP; control ALT levels remained significantly greater."
+    },
+    {
+      "outcome_id": "O4",
+      "experiment_id": "E3",
+      "assay": "H&E staining",
+      "endpoint": "Central-vein necrotic areas",
+      "comparator": "Poly(C) RNA-LNP-treated control group",
+      "qualitative_outcome": "At 24 h after HGF/EGF mRNA-LNP administration, necrotic areas had accelerated disappearance versus Poly(C) RNA-LNP controls; at 8 h there was no significant improvement."
+    },
+    {
+      "outcome_id": "O5",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD11b-positive cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "A significant percentage of CD11b-positive cells expressed eGFP (41.5 ± 14.6%)."
+    },
+    {
+      "outcome_id": "O6",
+      "experiment_id": "E1",
+      "assay": "Flow cytometry of liver non-parenchymal cell fractions",
+      "endpoint": "Percentage of eGFP-positive CD45-positive cells",
+      "comparator": "None reported for this numerical value",
+      "qualitative_outcome": "A significant percentage of CD45-positive cells expressed eGFP (34.1 ± 2.2%)."
+    }
+  ],
+  "permitted_new_experiments": 0,
+  "permitted_new_outcomes": 8,
+  "source_result_sha256": "4132dc4f011458584908e16a06e92195a8be14296ebf1c776c82a0b7bef84e97",
+  "source_inventory_sha256": "2678588b644045c5ba9903c265a7468e7acbcfc68480dbbd334837cecbfccdcb",
+  "task_checksum": "dd65452866c764b493704e96d3d3c5edf0611c41ac0ed6a30b332992fe39ab24"
+}

@@ -2,7 +2,11 @@ from src.extraction.evaluate_v12_combined_recall import match_go006
 from src.extraction.v12_structure_contracts import AtomicOutcomeCandidateV12
 
 
-def candidate(value=1.01, endpoint="total insertion frequency"):
+def candidate(
+    value=1.01,
+    endpoint="total insertion frequency",
+    uncertainty="0.38",
+):
     return AtomicOutcomeCandidateV12.model_validate({
         "candidate_id": "AOC-VIS-test",
         "paper_id": "GP-006",
@@ -12,7 +16,7 @@ def candidate(value=1.01, endpoint="total insertion frequency"):
         "predicate": "reached",
         "endpoint_text": endpoint,
         "numeric_value": value,
-        "value_text": f"{value} ± 0.38 %",
+        "value_text": f"{value} ± {uncertainty} %",
         "unit": "%",
         "polarity": "neutral",
         "evidence_ids": ["VIS-test"],
@@ -28,3 +32,4 @@ def test_go006_match_requires_subject_endpoint_value_and_uncertainty():
     assert match_go006([candidate()]) is not None
     assert match_go006([candidate(value=1.02)]) is None
     assert match_go006([candidate(endpoint="total deletion frequency")]) is None
+    assert match_go006([candidate(uncertainty="0.39")]) is None

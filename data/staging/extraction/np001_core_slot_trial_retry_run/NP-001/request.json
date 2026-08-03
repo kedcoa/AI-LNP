@@ -1,0 +1,636 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "low"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_cache_key": "c6d0e7b2a78c750acb95b52c84a3171295c83c78e251c287999bd03b0ee0f233",
+  "input": [
+    {
+      "role": "system",
+      "content": "Extract only directly reported LNP evidence from the supplied packet. Use no outside knowledge. For each scientific field, return a reported value with valid supplied evidence IDs, or missing with a reason and no evidence IDs. Set eligibility to eligible only for original experimental LNP delivery of supported RNA involving an eligible liver cell and a linked formulation, experiment, and outcome. Failed criteria are ineligible; insufficient evidence is uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep record types and links separate. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. Treat recall-support candidates as navigation aids, not facts: verify cited evidence, preserve experiment boundaries, keep distinct relationships separate, and deduplicate. A reported negative result is an outcome, not missing. List ambiguities. Return only the required structured response. Return exactly one core_slot_accounting entry for every supplied qualified core biological slot. Link only records and evidence IDs present in that slot's compact evidence packet."
+    },
+    {
+      "role": "user",
+      "content": "{\"core_slot_packets\":[{\"evidence_ids\":[\"NP-001-E-f0dbf2460867f112\",\"NP-001-E-1ec1832fdbf78e17\",\"NP-001-E-3c1f7b8b03466436\",\"NP-001-E-4742f3314a49dd4e\",\"NP-001-E-7b3c625323c08b9c\",\"NP-001-E-c6658491eb3ce79d\",\"NP-001-E-ca086241f715469b\"],\"model_family\":\"hepg2\",\"outcome_family\":\"transfection_expression\",\"slot_id\":\"CORE-HEPG2-TRANSFECTION\"},{\"evidence_ids\":[\"NP-001-E-f0dbf2460867f112\",\"NP-001-E-1ec1832fdbf78e17\",\"NP-001-E-7b3c625323c08b9c\",\"NP-001-E-692db6bd61bb5c3e\"],\"model_family\":\"dc2.4\",\"outcome_family\":\"transfection_expression\",\"slot_id\":\"CORE-DC24-TRANSFECTION\"},{\"evidence_ids\":[\"NP-001-E-f0dbf2460867f112\",\"NP-001-E-1ec1832fdbf78e17\",\"NP-001-E-00d75f88ef91e225\"],\"model_family\":\"dc2.4\",\"outcome_family\":\"cytokine_immune\",\"slot_id\":\"CORE-DC24-IMMUNE\"},{\"evidence_ids\":[\"NP-001-E-f0dbf2460867f112\",\"NP-001-E-1ec1832fdbf78e17\",\"NP-001-E-3c1f7b8b03466436\",\"NP-001-E-4742f3314a49dd4e\",\"NP-001-E-59bcd1e6cc278300\",\"NP-001-E-ca086241f715469b\"],\"model_family\":\"hpbmc\",\"outcome_family\":\"transfection_expression\",\"slot_id\":\"CORE-HPBMC-TRANSFECTION\"},{\"evidence_ids\":[\"NP-001-E-f0dbf2460867f112\",\"NP-001-E-1ec1832fdbf78e17\",\"NP-001-E-42290488e94705c6\",\"NP-001-E-50253f44cc18cd42\",\"NP-001-E-934be12ec1846ffe\"],\"model_family\":\"hpbmc\",\"outcome_family\":\"cytokine_immune\",\"slot_id\":\"CORE-HPBMC-IMMUNE\"},{\"evidence_ids\":[\"NP-001-E-f0dbf2460867f112\",\"NP-001-E-1ec1832fdbf78e17\",\"NP-001-E-637cb9ba7efa2cd3\"],\"model_family\":\"mouse_in_vivo\",\"outcome_family\":\"biodistribution_expression\",\"slot_id\":\"CORE-MOUSE-BIODISTRIBUTION\"}],\"evidence\":[{\"context_after_evidence_id\":\"NP-001-E-a288f42045cd9856\",\"context_before_evidence_id\":\"NP-001-E-7b65625812037164\",\"evidence_id\":\"NP-001-E-f0dbf2460867f112\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\",\"payload\"],\"source_ids\":[\"S-6d8947200817\",\"S-7c04c69fe801\"],\"text\":\"The theoretical composition of the LNPs is estimated based on the precise mass of individual components (ALC-0315, DSPC, or DOPE; cholesterol or DX; ALC-0159) added to the ethanolic phase.\"},{\"evidence_id\":\"NP-001-E-1ec1832fdbf78e17\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-14e1edf5c49a\",\"S-8c769fa48b95\"],\"text\":\"Analysis with mRNA-encoded EGFP showed that all formulations were able to transfect cells in the range of 30% to 40% (Figure 9a).\"},{\"evidence_id\":\"NP-001-E-3c1f7b8b03466436\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"formulation\",\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-4edc4536caa7\",\"S-e2cce81e3271\"],\"text\":\"Importantly, stable DX-containing LNPs were synthesized, which demonstrated the ability to transfect different cell types, including HepG2, DCs, and hPBMCs.\"},{\"context_after_evidence_id\":\"NP-001-E-e15990a5d6fb5f68\",\"evidence_id\":\"NP-001-E-4742f3314a49dd4e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"therapeutic_target\"],\"source_ids\":[\"S-23aa1bf18a3c\"],\"text\":\"The LNPs achieved high mRNA encapsulation efficiency (95–100%) and effectively transfected HepG2 cells, dendritic cells, and hPBMCs.\"},{\"evidence_id\":\"NP-001-E-7b3c625323c08b9c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\"],\"source_ids\":[\"S-79c8279abfae\"],\"text\":\"Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).\"},{\"context_after_evidence_id\":\"NP-001-E-7484864b9360083c\",\"evidence_id\":\"NP-001-E-c6658491eb3ce79d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"recipient_cell\"],\"source_ids\":[\"S-29890832daf9\"],\"text\":\"2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).\"},{\"context_after_evidence_id\":\"NP-001-E-294d3258b20447f9\",\"evidence_id\":\"NP-001-E-ca086241f715469b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\",\"therapeutic_target\"],\"source_ids\":[\"S-95ff584cd576\"],\"text\":\"The LNPs achieved high mRNA encap- Approach for the Development of sulation efficiency (95–100%) and effectively transfected HepG2 cells, dendritic cells, and hPBMCs.\"},{\"evidence_id\":\"NP-001-E-692db6bd61bb5c3e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"recipient_cell\"],\"source_ids\":[\"S-29890832daf9\"],\"text\":\"A similar trend was observed in the case of DC 2.4 cells, where no significant differences (p > 0.05) were found in the total percentage of transfected cells between LNP and LNP/DX25.\"},{\"context_after_evidence_id\":\"NP-001-E-131e1834c8dc5084\",\"evidence_id\":\"NP-001-E-00d75f88ef91e225\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-13dc37f6b994\",\"S-ee10356a9bf3\"],\"text\":\"Since dendritic cells, B cells, and macrophages constitutively express MHC class II molecules and are considered “professional” antigen-presenting cells (APCs) of the immune system, it was observed that treatment with DX-LNPs led to a reduction in MHC II molecule expression on the cell surface.\"},{\"evidence_id\":\"NP-001-E-59bcd1e6cc278300\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-4d643722c2fa\"],\"text\":\"The transfection efficiency of LNP/DX formulations was also evaluated in human hPBMC cultures by FACS analysis (Figure 9 and Figure S2).\"},{\"evidence_id\":\"NP-001-E-42290488e94705c6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"therapeutic_target\"],\"source_ids\":[\"S-ff38523a4dfe\"],\"text\":\"Immune stimulation of hPBMCs by LNP formulations induced the secretion of inflammatory cytokines and chemokines, such as TNF-α, MCP-1, and IL-1β (Figure 9b).\"},{\"evidence_id\":\"NP-001-E-50253f44cc18cd42\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"therapeutic_target\"],\"source_ids\":[\"S-ff38523a4dfe\"],\"text\":\"Regardless of the presence of DSPC or DOPE, TNF-α levels increased approximately 2.5-fold compared to untreated hPBMCs.\"},{\"evidence_id\":\"NP-001-E-934be12ec1846ffe\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-14e1edf5c49a\",\"S-8c769fa48b95\"],\"text\":\"hPBMCs are a diverse mixture of immune cells, making them a relevant target cell population to evaluate the immunosuppressive effects of LNP-formulated DX.\"},{\"context_after_evidence_id\":\"NP-001-E-509d40aad3f0bb81\",\"evidence_id\":\"NP-001-E-637cb9ba7efa2cd3\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-208bd4fc13a6\",\"S-ee10356a9bf3\"],\"text\":\"Mice treated with both LNPs and DX-loaded LNPs primarily showed accumulation in the liver, with expression levels 100 times higher than in other organs.\"}],\"paper_id\":\"NP-001\",\"shared_evidence_ids\":[\"NP-001-E-f0dbf2460867f112\",\"NP-001-E-1ec1832fdbf78e17\"]}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "CoreBiologicalSlotTrialResponse",
+      "schema": {
+        "$defs": {
+          "ComponentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "title": "Component Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "identity": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "role": {
+                "$ref": "#/$defs/ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___"
+              },
+              "amount": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "amount_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "component_id",
+              "formulation_id",
+              "identity",
+              "role",
+              "amount",
+              "amount_unit"
+            ],
+            "title": "ComponentRecord",
+            "type": "object"
+          },
+          "EligibilityRecord": {
+            "additionalProperties": false,
+            "description": "Evidence-grounded final paper disposition for the extraction task.",
+            "properties": {
+              "decision": {
+                "enum": [
+                  "eligible",
+                  "ineligible",
+                  "uncertain"
+                ],
+                "title": "Decision",
+                "type": "string"
+              },
+              "reason_codes": {
+                "items": {
+                  "enum": [
+                    "ORIGINAL_EXPERIMENT",
+                    "IDENTIFIABLE_LNP",
+                    "SUPPORTED_PAYLOAD",
+                    "TARGET_CELL_EVIDENCE",
+                    "USABLE_FORMULATION_OUTCOME_LINKAGE",
+                    "NOT_ORIGINAL_RESEARCH",
+                    "NOT_ELIGIBLE_LNP",
+                    "UNSUPPORTED_PAYLOAD",
+                    "NO_TARGET_CELL_EVIDENCE",
+                    "NO_FORMULATION_OUTCOME_LINKAGE",
+                    "DUPLICATE_SCIENTIFIC_REPORT",
+                    "RETRACTED_OR_INVALID",
+                    "FULL_TEXT_REQUIRED",
+                    "PUBLICATION_TYPE_AMBIGUOUS",
+                    "LNP_IDENTITY_AMBIGUOUS",
+                    "PAYLOAD_AMBIGUOUS",
+                    "TARGET_CELL_AMBIGUOUS",
+                    "FORMULATION_INCOMPLETE",
+                    "OUTCOME_LINKAGE_AMBIGUOUS",
+                    "CHEMISTRY_AMBIGUOUS"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Reason Codes",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "explanation": {
+                "maxLength": 500,
+                "minLength": 1,
+                "title": "Explanation",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision",
+              "reason_codes",
+              "evidence_ids",
+              "explanation"
+            ],
+            "title": "EligibilityRecord",
+            "type": "object"
+          },
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "FormulationRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "formulation_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition_basis": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "np_ratio": {
+                "$ref": "#/$defs/ReportedField_float_"
+              }
+            },
+            "required": [
+              "formulation_id",
+              "formulation_name",
+              "composition",
+              "composition_basis",
+              "np_ratio"
+            ],
+            "title": "FormulationRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "ionizable_lipid",
+                      "helper_lipid",
+                      "cholesterol",
+                      "peg_lipid",
+                      "targeting_ligand",
+                      "sort_lipid",
+                      "other"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid', 'targeting_ligand', 'sort_lipid', 'other']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          },
+          "CoreSlotAccountingEntry": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "disposition": {
+                "type": "string",
+                "enum": [
+                  "extracted",
+                  "duplicate"
+                ]
+              },
+              "linked_experiment_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "linked_outcome_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidence_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "disposition",
+              "linked_experiment_id",
+              "linked_outcome_ids",
+              "evidence_ids"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "description": "One paper response joined to a local evidence packet after validation.",
+        "properties": {
+          "contract_version": {
+            "const": "compact-1.1.0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "paper_id": {
+            "title": "Paper Id",
+            "type": "string"
+          },
+          "eligibility": {
+            "$ref": "#/$defs/EligibilityRecord"
+          },
+          "formulations": {
+            "items": {
+              "$ref": "#/$defs/FormulationRecord"
+            },
+            "title": "Formulations",
+            "type": "array"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/$defs/ComponentRecord"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_items": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Items",
+            "type": "array"
+          },
+          "core_slot_contract_version": {
+            "type": "string",
+            "const": "compact-core-slot-trial-1.0.0"
+          },
+          "core_slot_accounting": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "CORE-HEPG2-TRANSFECTION": {
+                "$ref": "#/$defs/CoreSlotAccountingEntry"
+              },
+              "CORE-DC24-TRANSFECTION": {
+                "$ref": "#/$defs/CoreSlotAccountingEntry"
+              },
+              "CORE-DC24-IMMUNE": {
+                "$ref": "#/$defs/CoreSlotAccountingEntry"
+              },
+              "CORE-HPBMC-TRANSFECTION": {
+                "$ref": "#/$defs/CoreSlotAccountingEntry"
+              },
+              "CORE-HPBMC-IMMUNE": {
+                "$ref": "#/$defs/CoreSlotAccountingEntry"
+              },
+              "CORE-MOUSE-BIODISTRIBUTION": {
+                "$ref": "#/$defs/CoreSlotAccountingEntry"
+              }
+            },
+            "required": [
+              "CORE-HEPG2-TRANSFECTION",
+              "CORE-DC24-TRANSFECTION",
+              "CORE-DC24-IMMUNE",
+              "CORE-HPBMC-TRANSFECTION",
+              "CORE-HPBMC-IMMUNE",
+              "CORE-MOUSE-BIODISTRIBUTION"
+            ]
+          }
+        },
+        "required": [
+          "contract_version",
+          "paper_id",
+          "eligibility",
+          "formulations",
+          "components",
+          "experiments",
+          "outcomes",
+          "unresolved_items",
+          "core_slot_contract_version",
+          "core_slot_accounting"
+        ],
+        "title": "CompactExtractionResponse",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}
