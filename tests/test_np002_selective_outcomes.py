@@ -566,6 +566,27 @@ def test_run_approved_rejects_resigned_crop_that_differs_from_approved_image(
     assert client.responses.calls == []
 
 
+def test_run_approved_rejects_resigned_task_that_widens_evidence_authorization(
+    tmp_path: Path,
+) -> None:
+    """A response cannot cite an ID that was absent from the approved evidence packet."""
+    manifest, manifest_path = _prepared_manifest(tmp_path)
+    first = manifest["requests"][0]
+    task_path = Path(first["task_path"])
+    task = _read(str(task_path))
+    task["allowed_evidence_ids"].append("FABRICATED-EVIDENCE-ID")
+    _resign_task(task_path, task)
+    first["task_sha256"] = task["task_sha256"]
+    _resign_manifest(manifest_path, manifest)
+    approvals = {row["figure"]: row["request_sha256"] for row in manifest["requests"]}
+    client = _FakeClient(_approved_responses(manifest))
+
+    with pytest.raises(ValueError, match="allowed evidence"):
+        selective.run_approved(manifest_path, approvals, tmp_path / "run", client)
+
+    assert client.responses.calls == []
+
+
 def test_merge_validated_rejects_response_changed_after_run_validation(
     tmp_path: Path,
 ) -> None:

@@ -332,6 +332,7 @@ def _task_validation_envelope(task: Mapping[str, Any]) -> dict[str, Any]:
         "figure",
         "slots",
         "evidence",
+        "allowed_evidence_ids",
         "crop_evidence_id",
         "allowed_exact_numeric_outcomes",
     )
@@ -667,6 +668,18 @@ def _verified_task_and_request(entry: Mapping[str, Any]) -> tuple[dict[str, Any]
         raise ValueError("immutable task integrity check failed")
     if task.get("task_sha256") != entry.get("task_sha256") or task.get("figure") != entry.get("figure"):
         raise ValueError("immutable task does not match preflight request")
+    evidence = task.get("evidence")
+    if not isinstance(evidence, list) or not all(
+        isinstance(row, Mapping) and isinstance(row.get("evidence_id"), str)
+        for row in evidence
+    ):
+        raise ValueError("immutable task evidence records are invalid")
+    derived_allowed_evidence_ids = [str(row["evidence_id"]) for row in evidence]
+    if (
+        len(set(derived_allowed_evidence_ids)) != len(derived_allowed_evidence_ids)
+        or task.get("allowed_evidence_ids") != derived_allowed_evidence_ids
+    ):
+        raise ValueError("immutable task allowed evidence IDs differ from supplied evidence")
     crop_path = Path(str(entry["crop_path"]))
     if task.get("crop_path") != str(crop_path.resolve()) or not crop_path.is_file():
         raise ValueError("immutable task crop path integrity check failed")
