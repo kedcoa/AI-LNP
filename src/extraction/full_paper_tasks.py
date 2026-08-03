@@ -18,6 +18,7 @@ from src.extraction.compact_validation import (
 )
 from src.extraction.full_paper_contracts import (
     AnchorCandidate,
+    CandidateOutcomeBundle,
     ContextAccountingEntry,
     ContextCandidate,
     ContextTask,
@@ -47,11 +48,15 @@ membership or the source explicitly supplies pairing/cross-product metadata.
 
 CONTEXT_PROMPT = """\
 Extract the supplied experiment-context candidates using the compact response
-contract. Account for every candidate ID exactly once. Preserve the candidate
-formulation, payload, dose/unit, route, species, model, recipient, and
-timepoint/unit identity and its locally issued experiment ID; link each
-extracted outcome to its experiment and cite only evidence inside that
-candidate's supplied envelope. Never create or alter an experiment ID.
+contract. Account for every candidate ID exactly once in both candidate
+accounting and candidate outcomes. Preserve the candidate formulation, payload,
+dose/unit, route, species, model, recipient, timepoint/unit identity, and its
+locally issued experiment ID. Decompose source claims into atomic foundational,
+comparative, and exact-measurement assertions without inventing assertions.
+Treat a number as exact only when it is printed in source text, a table, or a
+figure label; graph-height estimates are not exact measurements. Link each
+outcome to its experiment and cite only evidence inside that candidate's
+supplied envelope. Never create or alter an experiment ID.
 """
 
 
@@ -689,6 +694,7 @@ def validate_context_response(
         )
 
     accounting_raw = raw.pop("context_candidate_accounting", None)
+    candidate_outcomes_raw = raw.pop("candidate_outcomes", None)
     expected_ids = {row.candidate_id for row in task.candidates}
     candidate_by_id = {
         row.candidate_id: row for row in task.candidates
@@ -769,6 +775,115 @@ def validate_context_response(
                             candidate_id,
                             "evidence_ids",
                         ],
+                        evidence_ids=outside,
+                    )
+                )
+
+    if not isinstance(candidate_outcomes_raw, Mapping):
+        findings.append(
+            _finding(
+                paper_id=task.paper_id,
+                code="candidate_outcomes_not_object",
+                message="candidate_outcomes must be an object",
+                location=["candidate_outcomes"],
+            )
+        )
+        returned_outcome_candidate_ids: set[str] = set()
+    else:
+        returned_outcome_candidate_ids = {
+            str(item) for item in candidate_outcomes_raw
+        }
+    missing_outcome_candidate_ids = sorted(
+        expected_ids - returned_outcome_candidate_ids
+    )
+    invented_outcome_candidate_ids = sorted(
+        returned_outcome_candidate_ids - expected_ids
+    )
+    if missing_outcome_candidate_ids:
+        findings.append(
+            _finding(
+                paper_id=task.paper_id,
+                code="missing_candidate_outcome_ids",
+                message="candidate outcomes omitted task candidate IDs",
+                location=["candidate_outcomes"],
+            )
+        )
+    if invented_outcome_candidate_ids:
+        findings.append(
+            _finding(
+                paper_id=task.paper_id,
+                code="invented_candidate_outcome_ids",
+                message="candidate outcomes included unknown candidate IDs",
+                location=["candidate_outcomes"],
+            )
+        )
+    if isinstance(candidate_outcomes_raw, Mapping):
+        for candidate_id in sorted(
+            expected_ids & returned_outcome_candidate_ids
+        ):
+            try:
+                bundle = CandidateOutcomeBundle.model_validate(
+                    candidate_outcomes_raw[candidate_id]
+                )
+            except ValidationError as error:
+                findings.append(
+                    _finding(
+                        paper_id=task.paper_id,
+                        code="invalid_candidate_outcome_bundle",
+                        message=str(error),
+                        location=["candidate_outcomes", candidate_id],
+                        evidence_ids=_all_evidence_ids(
+                            candidate_outcomes_raw[candidate_id]
+                        ),
+                    )
+                )
+                continue
+            candidate = candidate_by_id[candidate_id]
+            if bundle.candidate_id != candidate_id:
+                findings.append(
+                    _finding(
+                        paper_id=task.paper_id,
+                        code="candidate_outcome_id_mismatch",
+                        message="outcome bundle key must match candidate_id",
+                        location=[
+                            "candidate_outcomes",
+                            candidate_id,
+                            "candidate_id",
+                        ],
+                    )
+                )
+            if bundle.experiment_id != candidate.experiment_id:
+                findings.append(
+                    _finding(
+                        paper_id=task.paper_id,
+                        code="candidate_outcome_experiment_id_mismatch",
+                        message=(
+                            "outcome bundle must preserve the locally issued "
+                            "experiment_id"
+                        ),
+                        location=[
+                            "candidate_outcomes",
+                            candidate_id,
+                            "experiment_id",
+                        ],
+                    )
+                )
+            candidate_envelope = set(
+                task.candidate_evidence_envelopes[candidate_id]
+            )
+            outside = sorted(
+                set(_all_evidence_ids(bundle)) - candidate_envelope
+            )
+            if outside:
+                findings.append(
+                    _finding(
+                        paper_id=task.paper_id,
+                        code="candidate_outcome_evidence_outside_envelope",
+                        message=(
+                            "candidate outcomes cite evidence outside their "
+                            f"envelope: {outside}"
+                        ),
+                        location=["candidate_outcomes", candidate_id],
                         evidence_ids=outside,
                     )
                 )

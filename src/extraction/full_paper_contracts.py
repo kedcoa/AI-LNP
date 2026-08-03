@@ -273,6 +273,85 @@ class ContextAccountingEntry(StrictModel):
         return self
 
 
+AssertionType = Literal["foundational", "comparison", "measurement"]
+Direction = Literal[
+    "present",
+    "higher",
+    "lower",
+    "similar",
+    "no_significant_difference",
+    "reported",
+]
+NumericProvenance = Literal[
+    "exact_reported",
+    "graph_estimated",
+    "not_reported",
+]
+
+
+class OutcomeAssertion(StrictModel):
+    """One evidence-backed scientific outcome assertion."""
+
+    assertion_type: AssertionType
+    direction: Direction
+    subject: str = Field(min_length=1)
+    comparator: str | None
+    raw_text: str = Field(min_length=1)
+    value: float | None
+    unit: str | None
+    numeric_provenance: NumericProvenance
+    evidence_ids: list[str] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_numeric_provenance(self) -> "OutcomeAssertion":
+        if self.numeric_provenance == "exact_reported" and self.value is None:
+            raise ValueError("exact_reported assertions require a value")
+        if self.numeric_provenance == "not_reported" and self.value is not None:
+            raise ValueError("not_reported assertions cannot include a value")
+        if len(self.evidence_ids) != len(set(self.evidence_ids)):
+            raise ValueError("assertion evidence IDs must be unique")
+        return self
+
+
+class CandidateOutcomeBundle(StrictModel):
+    """Atomic outcomes assigned to one locally issued experiment."""
+
+    candidate_id: str = Field(min_length=1)
+    experiment_id: str = Field(min_length=1)
+    foundational_outcomes: list[OutcomeAssertion]
+    comparative_outcomes: list[OutcomeAssertion]
+    exact_measurements: list[OutcomeAssertion]
+
+    @model_validator(mode="after")
+    def validate_assertion_groups(self) -> "CandidateOutcomeBundle":
+        wrong_foundational = any(
+            assertion.assertion_type != "foundational"
+            for assertion in self.foundational_outcomes
+        )
+        wrong_comparative = any(
+            assertion.assertion_type != "comparison"
+            for assertion in self.comparative_outcomes
+        )
+        wrong_measurement = any(
+            assertion.assertion_type != "measurement"
+            or assertion.numeric_provenance != "exact_reported"
+            for assertion in self.exact_measurements
+        )
+        if wrong_foundational:
+            raise ValueError(
+                "foundational outcomes require foundational assertions"
+            )
+        if wrong_comparative:
+            raise ValueError(
+                "comparative outcomes require comparison assertions"
+            )
+        if wrong_measurement:
+            raise ValueError(
+                "exact measurements require exact_reported measurement assertions"
+            )
+        return self
+
+
 class PreparedRequest(StrictModel):
     """A complete local request artifact; no provider is contacted."""
 
@@ -376,6 +455,13 @@ def build_context_response_schema(
         identifiers=[row.candidate_id for row in candidates],
         entry_model=ContextAccountingEntry,
         definition_name="ContextAccountingEntry",
+    )
+    schema = _exact_accounting_schema(
+        schema,
+        field_name="candidate_outcomes",
+        identifiers=[row.candidate_id for row in candidates],
+        entry_model=CandidateOutcomeBundle,
+        definition_name="CandidateOutcomeBundle",
     )
     issued_ids = list(
         dict.fromkeys(row.experiment_id for row in candidates)
