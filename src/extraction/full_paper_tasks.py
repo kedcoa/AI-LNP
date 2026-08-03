@@ -49,8 +49,9 @@ CONTEXT_PROMPT = """\
 Extract the supplied experiment-context candidates using the compact response
 contract. Account for every candidate ID exactly once. Preserve the candidate
 formulation, payload, dose/unit, route, species, model, recipient, and
-timepoint/unit identity; link each extracted outcome to its experiment and cite
-only evidence inside that candidate's supplied envelope.
+timepoint/unit identity and its locally issued experiment ID; link each
+extracted outcome to its experiment and cite only evidence inside that
+candidate's supplied envelope. Never create or alter an experiment ID.
 """
 
 
@@ -269,35 +270,75 @@ def _field_evidence(
 
 
 def _context_candidate(
+    paper_id: str,
     context: ProvisionalExperimentContext,
     formulation: SharedFormulation,
     payload: SharedPayload,
 ) -> ContextCandidate:
-    return ContextCandidate(
-        candidate_id=context.provisional_context_id,
-        provisional_context_id=context.provisional_context_id,
-        formulation_id=formulation.formulation_id,
-        formulation=formulation.name.value,
-        payload_id=payload.payload_id,
-        payload=payload.identity.value,
-        dose=context.dose.value,
-        dose_unit=context.dose_unit.value,
-        route=context.route.value,
-        species=context.species.value,
-        experimental_model=context.experimental_model.value,
-        recipient_cell=context.recipient_cell.value,
-        organ=context.organ.value if context.organ is not None else None,
-        timepoint=context.timepoint.value,
-        timepoint_unit=context.timepoint_unit.value,
-        field_evidence_ids=_field_evidence(
+    values = {
+        "candidate_id": context.provisional_context_id,
+        "provisional_context_id": context.provisional_context_id,
+        "formulation_id": formulation.formulation_id,
+        "formulation": formulation.name.value,
+        "payload_id": payload.payload_id,
+        "payload": payload.identity.value,
+        "dose": context.dose.value,
+        "dose_unit": context.dose_unit.value,
+        "route": context.route.value,
+        "species": context.species.value,
+        "experimental_model": context.experimental_model.value,
+        "recipient_cell": context.recipient_cell.value,
+        "organ": context.organ.value if context.organ is not None else None,
+        "timepoint": context.timepoint.value,
+        "timepoint_unit": context.timepoint_unit.value,
+        "field_evidence_ids": _field_evidence(
             context,
             formulation,
             payload,
         ),
-        joint_evidence_ids=list(context.joint_evidence_ids),
-        outcome_evidence_ids=list(context.outcome_evidence_ids),
-        pairing_metadata=context.pairing_metadata,
+        "joint_evidence_ids": list(context.joint_evidence_ids),
+        "outcome_evidence_ids": list(context.outcome_evidence_ids),
+        "pairing_metadata": context.pairing_metadata,
+    }
+    provisional = ContextCandidate(
+        experiment_id="locally-issued-after-validation",
+        **values,
     )
+    return ContextCandidate(
+        experiment_id=stable_experiment_id(paper_id, provisional),
+        **values,
+    )
+
+
+def stable_experiment_id(
+    paper_id: str,
+    candidate: ContextCandidate,
+) -> str:
+    """Issue an experiment ID from validated scientific and evidence identity."""
+
+    if not paper_id.strip():
+        raise ValueError("paper_id cannot be empty")
+    evidence_identity = {
+        "field_evidence_ids": {
+            field_name: sorted(set(evidence_ids))
+            for field_name, evidence_ids in sorted(
+                candidate.field_evidence_ids.items()
+            )
+        },
+        "joint_evidence_ids": sorted(set(candidate.joint_evidence_ids)),
+        "pairing_evidence_ids": sorted(
+            set(candidate.pairing_metadata.evidence_ids)
+            if candidate.pairing_metadata is not None
+            else set()
+        ),
+    }
+    return "EXP-" + _sha256(
+        {
+            "paper_id": paper_id,
+            "scientific_identity": candidate.identity,
+            "evidence_identity": evidence_identity,
+        }
+    )[:20]
 
 
 def _compatibility_key(candidate: ContextCandidate) -> tuple[str, ...]:
@@ -399,6 +440,9 @@ def _make_context_task(
             "candidate_ids": [
                 row.candidate_id for row in candidates
             ],
+            "experiment_ids": [
+                row.experiment_id for row in candidates
+            ],
         }
     )[:16]
     return ContextTask(
@@ -441,6 +485,7 @@ def build_context_tasks(
     }
     candidates = [
         _context_candidate(
+            parsed_map.paper_id,
             context,
             formulations_by_id[context.formulation_id],
             payloads_by_id[context.payload_id],

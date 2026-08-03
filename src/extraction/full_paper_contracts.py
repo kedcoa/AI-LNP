@@ -169,6 +169,7 @@ class AnchorCandidate(StrictModel):
 class ContextCandidate(StrictModel):
     """Resolved, data-driven arm identity with candidate-specific provenance."""
 
+    experiment_id: str = Field(min_length=1)
     candidate_id: str = Field(min_length=1)
     provisional_context_id: str = Field(min_length=1)
     formulation_id: str = Field(min_length=1)
@@ -367,12 +368,21 @@ def build_paper_map_schema(
 def build_context_response_schema(
     candidates: list[ContextCandidate],
 ) -> dict[str, Any]:
-    """Add exact candidate accounting to the existing compact contract."""
+    """Add exact candidate accounting and locally issued experiment IDs."""
 
-    return _exact_accounting_schema(
+    schema = _exact_accounting_schema(
         to_strict_json_schema(CompactExtractionResponse),
         field_name="context_candidate_accounting",
         identifiers=[row.candidate_id for row in candidates],
         entry_model=ContextAccountingEntry,
         definition_name="ContextAccountingEntry",
     )
+    issued_ids = list(
+        dict.fromkeys(row.experiment_id for row in candidates)
+    )
+    definitions = schema["$defs"]
+    for definition_name in ("ExperimentRecord", "OutcomeRecord"):
+        definitions[definition_name]["properties"]["experiment_id"][
+            "enum"
+        ] = issued_ids
+    return schema
