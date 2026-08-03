@@ -320,12 +320,19 @@ def test_real_paper_map_deterministically_issues_experiments() -> None:
         ],
         "anchor_accounting": {},
         "unresolved_items": [],
+        "visual_tasks": [
+            {
+                "experiment_id": "EXP-NOT-USED-BY-MAP-ISSUANCE",
+                "candidate_id": "CTX-VISUAL",
+                "crop_evidence_id": "E-VISUAL",
+            }
+        ],
     }
 
     issued = merge_full_paper_results(paper_map, [], [])
     repeated = merge_full_paper_results(deepcopy(paper_map), [], [])
 
-    assert len(issued.experiments) == 1
+    assert len(issued.experiments) == 2
     assert issued.experiments[0].candidate_id == "CTX-REAL"
     assert issued.experiments[0].experiment_id.startswith("EXP-")
     assert repeated.experiments[0].experiment_id == issued.experiments[0].experiment_id
@@ -398,6 +405,231 @@ def test_saved_selective_vision_outcomes_are_ingested_as_scoped_facts() -> None:
         "outcome.figure-2-mc3-hepatocytes.endpoint",
         "outcome.figure-2-mc3-hepatocytes.qualitative_outcome",
     }
+
+
+def test_resolved_selective_vision_fragment_is_ingested_with_issued_ids() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {"experiment_id": "EXP-A", "candidate_id": "CTX-A"}
+        ],
+        "visual_tasks": [
+            {
+                "experiment_ids": ["EXP-A"],
+                "allowed_evidence_ids": ["E-CAPTION", "E-CROP"],
+            }
+        ],
+    }
+    response = {
+        "experiment_id": "EXP-A",
+        "candidate_id": "CTX-A",
+        "finding_id": "VF-1",
+        "disposition": "resolved",
+        "field_name": "qualitative_outcome",
+        "corrected_fragment": {
+            "qualitative_outcome": {
+                "value": "lower fibrosis than comparator",
+                "status": "reported",
+                "evidence_ids": ["E-CAPTION", "E-CROP"],
+                "missing_reason": None,
+            }
+        },
+        "supporting_evidence_ids": ["E-CAPTION", "E-CROP"],
+    }
+
+    result = merge_full_paper_results(paper_map, [], [response])
+
+    assert result.quarantined_conflicts == []
+    fact = result.experiments[0].facts[0]
+    assert fact.field_name == "vision.VF-1.qualitative_outcome"
+    assert fact.raw_values == ["lower fibrosis than comparator"]
+    assert fact.evidence_ids == ["E-CAPTION", "E-CROP"]
+
+
+def test_raw_selective_vision_task_rejects_unissued_finding_id() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {"experiment_id": "EXP-A", "candidate_id": "CTX-A"}
+        ],
+        "visual_tasks": [
+            {
+                "experiment_id": "EXP-A",
+                "candidate_id": "CTX-A",
+                "finding": {
+                    "finding_id": "VF-ISSUED",
+                    "field_name": "qualitative_outcome",
+                },
+                "crop_evidence_id": "E-CROP",
+                "caption": {"evidence_id": "E-CAPTION"},
+                "referring_results_passages": [],
+                "methods_context": [],
+            }
+        ],
+    }
+    response = {
+        "experiment_id": "EXP-A",
+        "candidate_id": "CTX-A",
+        "finding_id": "VF-INVENTED",
+        "disposition": "resolved",
+        "field_name": "qualitative_outcome",
+        "corrected_fragment": {
+            "qualitative_outcome": {
+                "value": "lower fibrosis than comparator",
+                "status": "reported",
+                "evidence_ids": ["E-CAPTION", "E-CROP"],
+                "missing_reason": None,
+            }
+        },
+        "supporting_evidence_ids": ["E-CAPTION", "E-CROP"],
+    }
+
+    result = merge_full_paper_results(paper_map, [], [response])
+
+    assert result.experiments[0].facts == []
+    assert [row.code for row in result.quarantined_conflicts] == [
+        "visual_contract_mismatch"
+    ]
+
+
+def test_compact_context_reported_fields_are_ingested_as_experiment_facts() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {
+                "experiment_id": "EXP-A",
+                "candidate_id": "CTX-A",
+                "context_evidence_ids": ["E-TEXT"],
+            }
+        ],
+    }
+    reported = lambda value: {
+        "value": value,
+        "status": "reported",
+        "evidence_ids": ["E-TEXT"],
+        "missing_reason": None,
+    }
+    response = {
+        "formulations": [
+            {
+                "formulation_id": "FORM-A",
+                "formulation_name": reported("LNP A"),
+            }
+        ],
+        "components": [
+            {
+                "component_id": "COMP-A",
+                "formulation_id": "FORM-A",
+                "identity": reported("DSPC"),
+            }
+        ],
+        "experiments": [
+            {
+                "experiment_id": "EXP-A",
+                "formulation_id": "FORM-A",
+                "payload_name": reported("Cre mRNA"),
+                "species": reported("mouse"),
+                "delivery_recipient_cell": reported("hepatocyte"),
+                "dose": reported(0.5),
+                "dose_unit": reported("mg/kg"),
+            }
+        ],
+        "outcomes": [
+            {
+                "outcome_id": "OUT-1",
+                "experiment_id": "EXP-A",
+                "assay": reported("histology"),
+                "qualitative_outcome": reported("higher signal than control"),
+            }
+        ],
+    }
+
+    result = merge_full_paper_results(paper_map, [response], [])
+
+    assert result.quarantined_conflicts == []
+    facts = {row.field_name: row.canonical_value for row in result.experiments[0].facts}
+    assert facts["payload"] == "cre mrna"
+    assert facts["recipient_cell"] == "hepatocyte"
+    assert facts["dose"] == "0.5 mg/kg"
+    assert facts["outcome.OUT-1.assay"] == "histology"
+    assert facts["outcome.OUT-1.qualitative_outcome"] == "higher signal than control"
+    assert any(
+        row.field_name == "component.FORM-A.COMP-A.component_identity"
+        and row.canonical_value == "dspc"
+        for row in result.shared_facts
+    )
+
+
+def test_native_paper_map_components_remain_repeatable_shared_facts() -> None:
+    paper_map = _paper_map()
+    paper_map["formulations"] = [
+        {
+            "formulation_id": "FORM-A",
+            "name": {"value": "LNP A", "evidence_ids": ["E-FORM"]},
+            "components": [
+                {
+                    "component_id": "C-1",
+                    "identity": {"value": "Lipid A", "evidence_ids": ["E-FORM"]},
+                    "role": None,
+                },
+                {
+                    "component_id": "C-2",
+                    "identity": {"value": "DSPC", "evidence_ids": ["E-FORM"]},
+                    "role": None,
+                },
+            ],
+            "ratios": [
+                {"value": "50:10:38.5:1.5", "evidence_ids": ["E-FORM"]}
+            ],
+            "ratio_bases": [
+                {"value": "molar", "evidence_ids": ["E-FORM"]}
+            ],
+        }
+    ]
+
+    result = merge_full_paper_results(paper_map, [], [])
+
+    components = [
+        row.canonical_value
+        for row in result.shared_facts
+        if row.field_name.endswith(".component_identity")
+    ]
+    assert components == ["lipid a", "dspc"]
+    assert result.quarantined_conflicts == []
+
+
+def test_literal_weight_ratio_in_basis_emits_mass_ratio_fact() -> None:
+    paper_map = _paper_map()
+    paper_map["issued_evidence_ids"] = ["E-FORM", "E-MOLAR", "E-MASS"]
+    paper_map["formulations"] = [
+        {
+            "formulation_id": "FORM-A",
+            "name": {"value": "LNP A", "evidence_ids": ["E-FORM"]},
+            "components": [],
+            "ratios": [
+                {"value": "26.5:20:52:1.5", "evidence_ids": ["E-MOLAR"]}
+            ],
+            "ratio_bases": [
+                {
+                    "value": "Molar ratio of lipid components",
+                    "evidence_ids": ["E-MOLAR"],
+                },
+                {
+                    "value": "Ionizable lipid:mRNA weight ratio 10:1",
+                    "evidence_ids": ["E-MASS"],
+                },
+            ],
+        }
+    ]
+
+    result = merge_full_paper_results(paper_map, [], [])
+
+    assert any(
+        row.field_name == "formulation.FORM-A.mass_ratio"
+        and row.canonical_value == "10:1"
+        and row.evidence_ids == ["E-MASS"]
+        for row in result.shared_facts
+    )
 
 
 def test_saved_visual_outcome_with_wrong_arm_identity_is_quarantined() -> None:

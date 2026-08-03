@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections import OrderedDict
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
@@ -10,6 +11,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 from src.extraction.application_normalization import canonicalize_fact
+from src.extraction.full_paper_contracts import PaperMapResponse
 from src.extraction.full_paper_tasks import (
     context_candidate_evidence_envelopes,
     issue_context_candidates,
@@ -145,6 +147,19 @@ def _task_evidence_ids(task: Mapping[str, Any]) -> set[str]:
         evidence_id = row.get("evidence_id")
         if isinstance(evidence_id, str) and evidence_id:
             allowed.add(evidence_id)
+    crop_evidence_id = task.get("crop_evidence_id")
+    if isinstance(crop_evidence_id, str) and crop_evidence_id:
+        allowed.add(crop_evidence_id)
+    caption = task.get("caption")
+    if isinstance(caption, Mapping):
+        evidence_id = caption.get("evidence_id")
+        if isinstance(evidence_id, str) and evidence_id:
+            allowed.add(evidence_id)
+    for key in ("referring_results_passages", "methods_context"):
+        for row in _as_rows(task.get(key)):
+            evidence_id = row.get("evidence_id")
+            if isinstance(evidence_id, str) and evidence_id:
+                allowed.add(evidence_id)
     return allowed
 
 
@@ -256,9 +271,14 @@ def _issued_experiments(
                 existing.scientific_identity.setdefault(field_name, value)
 
     if "provisional_experiment_contexts" in paper_map:
-        candidates = issue_context_candidates(paper_map)
+        canonical_map = {
+            field_name: paper_map[field_name]
+            for field_name in PaperMapResponse.model_fields
+            if field_name in paper_map
+        }
+        candidates = issue_context_candidates(canonical_map)
         envelopes = context_candidate_evidence_envelopes(
-            paper_map, candidates
+            canonical_map, candidates
         )
         for candidate in candidates:
             register(
@@ -364,6 +384,12 @@ def _issued_experiments(
             for item in task.get("experiment_ids", [])
             if isinstance(item, str) and item
         }
+        top_experiment_id = task.get("experiment_id")
+        top_candidate_id = task.get("candidate_id")
+        if isinstance(top_experiment_id, str) and top_experiment_id:
+            task_candidates[top_experiment_id] = (
+                top_candidate_id if isinstance(top_candidate_id, str) else None
+            )
         for row in _as_rows(task.get("candidates")):
             experiment_id = row.get("experiment_id")
             candidate_id = row.get("candidate_id")
@@ -452,6 +478,129 @@ def _facts(row: Mapping[str, Any]) -> list[Mapping[str, Any]]:
     return [row] if "field_name" in row else []
 
 
+_FIELD_ALIASES = {
+    "payload_name": "payload",
+    "delivery_recipient_cell": "recipient_cell",
+    "tissue_or_organ": "organ",
+    "experimental_model": "model",
+}
+
+
+def _reported_fact(field_name: str, value: Any) -> Mapping[str, Any] | None:
+    if not isinstance(value, Mapping) or value.get("status") != "reported":
+        return None
+    raw_value = value.get("value")
+    evidence_ids = value.get("evidence_ids")
+    if raw_value is None or not isinstance(evidence_ids, list) or not evidence_ids:
+        return None
+    return {
+        "field_name": _FIELD_ALIASES.get(field_name, field_name),
+        "raw_value": raw_value,
+        "evidence_ids": evidence_ids,
+    }
+
+
+def _compact_experiment_group(row: Mapping[str, Any]) -> Mapping[str, Any]:
+    facts = [
+        fact
+        for field_name, value in row.items()
+        if field_name not in {
+            "experiment_id",
+            "candidate_id",
+            "formulation_id",
+            "dose",
+        }
+        if (fact := _reported_fact(field_name, value)) is not None
+    ]
+    dose = _reported_fact("dose", row.get("dose"))
+    dose_unit = _reported_fact("dose_unit", row.get("dose_unit"))
+    if dose is not None:
+        raw_dose = dose["raw_value"]
+        rendered_dose = (
+            f"{raw_dose:g}"
+            if isinstance(raw_dose, (int, float)) and not isinstance(raw_dose, bool)
+            else str(raw_dose)
+        )
+        facts.append(
+            {
+                "field_name": "dose",
+                "raw_value": (
+                    f"{rendered_dose} {dose_unit['raw_value']}"
+                    if dose_unit is not None
+                    else rendered_dose
+                ),
+                "evidence_ids": list(
+                    dict.fromkeys(
+                        [
+                            *dose["evidence_ids"],
+                            *(dose_unit["evidence_ids"] if dose_unit else []),
+                        ]
+                    )
+                ),
+            }
+        )
+    return {
+        "experiment_id": row.get("experiment_id"),
+        "candidate_id": row.get("candidate_id"),
+        "facts": facts,
+    }
+
+
+def _resolved_visual_group(result: Mapping[str, Any]) -> Mapping[str, Any] | None:
+    if "corrected_fragment" not in result:
+        return None
+    if result.get("disposition") in {"missing", "ambiguous", "human_review"}:
+        return None
+    field_name = result.get("field_name")
+    fragment = result.get("corrected_fragment")
+    if (
+        not isinstance(field_name, str)
+        or not isinstance(fragment, Mapping)
+        or set(fragment) != {field_name}
+    ):
+        return {}
+    fact = _reported_fact(field_name, fragment[field_name])
+    if fact is None:
+        return {}
+    return {
+        "experiment_id": result.get("experiment_id"),
+        "candidate_id": result.get("candidate_id"),
+        "facts": [
+            {
+                **fact,
+                "field_name": (
+                    f"vision.{result.get('finding_id', 'unscoped')}."
+                    f"{fact['field_name']}"
+                ),
+            }
+        ],
+    }
+
+
+def _visual_response_contracts(
+    paper_map: Mapping[str, Any],
+) -> dict[str, set[tuple[str | None, str, str]]]:
+    contracts: dict[str, set[tuple[str | None, str, str]]] = {}
+    for task in _as_rows(paper_map.get("visual_tasks")):
+        experiment_id = task.get("experiment_id")
+        finding = task.get("finding")
+        if not isinstance(experiment_id, str) or not isinstance(finding, Mapping):
+            continue
+        candidate_id = task.get("candidate_id")
+        finding_id = finding.get("finding_id")
+        field_name = finding.get("field_name")
+        if not isinstance(finding_id, str) or not isinstance(field_name, str):
+            continue
+        contracts.setdefault(experiment_id, set()).add(
+            (
+                candidate_id if isinstance(candidate_id, str) else None,
+                finding_id,
+                field_name,
+            )
+        )
+    return contracts
+
+
 _SELECTIVE_OUTCOME_FIELDS = (
     "assay",
     "endpoint",
@@ -475,16 +624,28 @@ def _selective_outcome_group(
 ) -> Mapping[str, Any]:
     slot = outcome.get("slot_id", outcome.get("outcome_id"))
     slot_id = str(slot) if slot is not None else "unscoped"
-    evidence_ids = outcome.get("evidence_ids")
-    facts = [
-        {
-            "field_name": f"outcome.{slot_id}.{field_name}",
-            "raw_value": outcome[field_name],
-            "evidence_ids": evidence_ids,
-        }
-        for field_name in _SELECTIVE_OUTCOME_FIELDS
-        if outcome.get(field_name) is not None
-    ]
+    fallback_evidence_ids = outcome.get("evidence_ids")
+    facts: list[Mapping[str, Any]] = []
+    for field_name in _SELECTIVE_OUTCOME_FIELDS:
+        value = outcome.get(field_name)
+        if value is None:
+            continue
+        reported = _reported_fact(field_name, value)
+        if reported is not None:
+            facts.append(
+                {
+                    **reported,
+                    "field_name": f"outcome.{slot_id}.{reported['field_name']}",
+                }
+            )
+        elif not isinstance(value, Mapping):
+            facts.append(
+                {
+                    "field_name": f"outcome.{slot_id}.{field_name}",
+                    "raw_value": value,
+                    "evidence_ids": fallback_evidence_ids,
+                }
+            )
     return {
         "experiment_id": outcome.get("experiment_id"),
         "candidate_id": outcome.get("candidate_id"),
@@ -500,15 +661,192 @@ def _selective_outcome_group(
 
 def _experiment_groups(result: Mapping[str, Any]) -> list[Mapping[str, Any]]:
     rows: list[Mapping[str, Any]] = []
-    for key in ("experiment_facts", "experiments"):
-        rows.extend(_as_rows(result.get(key)))
+    rows.extend(_as_rows(result.get("experiment_facts")))
+    for row in _as_rows(result.get("experiments")):
+        rows.append(row if _facts(row) else _compact_experiment_group(row))
     rows.extend(
         _selective_outcome_group(row)
         for row in _as_rows(result.get("outcomes"))
     )
+    for bundle in (
+        result.get("candidate_outcomes", {}).values()
+        if isinstance(result.get("candidate_outcomes"), Mapping)
+        else []
+    ):
+        if not isinstance(bundle, Mapping):
+            continue
+        assertion_facts: list[Mapping[str, Any]] = []
+        assertion_index = 0
+        for collection, field_name in (
+            ("foundational_outcomes", "foundational_outcome"),
+            ("comparative_outcomes", "comparative_outcome"),
+            ("exact_measurements", "outcome_value"),
+        ):
+            for assertion in _as_rows(bundle.get(collection)):
+                assertion_index += 1
+                raw_value = assertion.get("raw_text")
+                if collection == "exact_measurements" and assertion.get("value") is not None:
+                    raw_value = assertion.get("value")
+                assertion_facts.append(
+                    {
+                        "field_name": (
+                            f"assertion.{bundle.get('candidate_id', 'unscoped')}."
+                            f"{assertion_index}.{field_name}"
+                        ),
+                        "raw_value": raw_value,
+                        "evidence_ids": assertion.get("evidence_ids"),
+                    }
+                )
+                if (
+                    collection == "exact_measurements"
+                    and assertion.get("unit") is not None
+                ):
+                    assertion_facts.append(
+                        {
+                            "field_name": (
+                                f"assertion.{bundle.get('candidate_id', 'unscoped')}."
+                                f"{assertion_index}.outcome_unit"
+                            ),
+                            "raw_value": assertion.get("unit"),
+                            "evidence_ids": assertion.get("evidence_ids"),
+                        }
+                    )
+        rows.append(
+            {
+                "experiment_id": bundle.get("experiment_id"),
+                "candidate_id": bundle.get("candidate_id"),
+                "facts": assertion_facts,
+            }
+        )
+    visual_group = _resolved_visual_group(result)
+    if visual_group:
+        rows.append(visual_group)
     if "experiment_id" in result:
-        rows.append(result)
+        if "corrected_fragment" not in result:
+            rows.append(result)
     return rows
+
+
+_RATIO_PATTERN = re.compile(
+    r"\d+(?:\.\d+)?(?:\s*:\s*\d+(?:\.\d+)?)+"
+)
+
+
+def _native_paper_map_shared_facts(
+    paper_map: Mapping[str, Any],
+) -> list[Mapping[str, Any]]:
+    facts: list[Mapping[str, Any]] = []
+    for formulation in _as_rows(paper_map.get("formulations")):
+        name = formulation.get("name")
+        formulation_id = str(formulation.get("formulation_id", "unscoped"))
+        if (fact := _reported_fact("formulation", {**name, "status": "reported"} if isinstance(name, Mapping) else name)) is not None:
+            fact = {**fact, "field_name": f"formulation.{formulation_id}.formulation"}
+            facts.append(fact)
+        for component in _as_rows(formulation.get("components")):
+            identity = component.get("identity")
+            if (fact := _reported_fact("component_identity", {**identity, "status": "reported"} if isinstance(identity, Mapping) else identity)) is not None:
+                facts.append(
+                    {
+                        **fact,
+                        "field_name": (
+                            f"component.{formulation_id}."
+                            f"{component.get('component_id', 'unscoped')}."
+                            "component_identity"
+                        ),
+                    }
+                )
+        ratios = _as_rows(formulation.get("ratios"))
+        bases = _as_rows(formulation.get("ratio_bases"))
+        for index, ratio in enumerate(ratios):
+            raw = ratio.get("value")
+            if not isinstance(raw, str):
+                continue
+            basis = bases[index].get("value") if index < len(bases) else ""
+            description = f"{raw} {basis}".casefold()
+            field_name = (
+                "molar_ratio"
+                if "molar" in description or "mole" in description
+                else "mass_ratio"
+                if "weight" in description or "mass" in description
+                else "component_ratio"
+            )
+            match = _RATIO_PATTERN.search(raw)
+            if match:
+                facts.append(
+                    {
+                        "field_name": f"formulation.{formulation_id}.{field_name}",
+                        "raw_value": match.group(0),
+                        "evidence_ids": ratio.get("evidence_ids"),
+                    }
+                )
+        for basis in bases:
+            value = basis.get("value")
+            if isinstance(value, str):
+                ratio_match = _RATIO_PATTERN.search(value)
+                if ratio_match and (
+                    "weight" in value.casefold() or "mass" in value.casefold()
+                ):
+                    facts.append(
+                        {
+                            "field_name": (
+                                f"formulation.{formulation_id}.mass_ratio"
+                            ),
+                            "raw_value": ratio_match.group(0),
+                            "evidence_ids": basis.get("evidence_ids"),
+                        }
+                    )
+            canonical = (
+                "molar"
+                if isinstance(value, str)
+                and ("molar" in value.casefold() or "mole" in value.casefold())
+                else "mass"
+                if isinstance(value, str)
+                and ("weight" in value.casefold() or "mass" in value.casefold())
+                else value
+            )
+            if canonical is not None:
+                facts.append(
+                    {
+                        "field_name": (
+                            f"formulation.{formulation_id}.basis-{len(facts)}."
+                            "ratio_basis"
+                        ),
+                        "raw_value": canonical,
+                        "evidence_ids": basis.get("evidence_ids"),
+                    }
+                )
+    return facts
+
+
+def _compact_shared_facts(result: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    facts: list[Mapping[str, Any]] = []
+    for formulation in _as_rows(result.get("formulations")):
+        formulation_id = str(formulation.get("formulation_id", "unscoped"))
+        fact = _reported_fact(
+            "formulation", formulation.get("formulation_name")
+        )
+        if fact is not None:
+            facts.append(
+                {
+                    **fact,
+                    "field_name": f"formulation.{formulation_id}.formulation",
+                }
+            )
+    for component in _as_rows(result.get("components")):
+        formulation_id = str(component.get("formulation_id", "unscoped"))
+        component_id = str(component.get("component_id", "unscoped"))
+        fact = _reported_fact("component_identity", component.get("identity"))
+        if fact is not None:
+            facts.append(
+                {
+                    **fact,
+                    "field_name": (
+                        f"component.{formulation_id}.{component_id}."
+                        "component_identity"
+                    ),
+                }
+            )
+    return facts
 
 
 def _all_fact_values(
@@ -539,6 +877,7 @@ def merge_full_paper_results(
     issued, invalid_ids, issuance_conflicts, paper_evidence_ids = (
         _issued_experiments(paper_map)
     )
+    visual_response_contracts = _visual_response_contracts(paper_map)
     fact_tables: dict[
         str | None,
         OrderedDict[str, OrderedDict[str, _FactAccumulator]],
@@ -652,7 +991,11 @@ def merge_full_paper_results(
             source=source,
         )
 
-    for index, row in enumerate(_as_rows(paper_map.get("shared_facts"))):
+    shared_rows = [
+        *_as_rows(paper_map.get("shared_facts")),
+        *_native_paper_map_shared_facts(paper_map),
+    ]
+    for index, row in enumerate(shared_rows):
         add_fact(
             row,
             experiment_id=None,
@@ -687,6 +1030,75 @@ def merge_full_paper_results(
     for source_kind, results in sources:
         for result_index, result in enumerate(results):
             source_root = f"{source_kind}[{result_index}]"
+            if source_kind == "visual_results":
+                response_experiment_id = result.get("experiment_id")
+                contracts = visual_response_contracts.get(
+                    response_experiment_id
+                    if isinstance(response_experiment_id, str)
+                    else ""
+                )
+                if contracts and (
+                    result.get("candidate_id"),
+                    result.get("finding_id"),
+                    result.get("field_name"),
+                ) not in contracts:
+                    quarantine(
+                        code="visual_contract_mismatch",
+                        message=(
+                            "selective-vision response finding, field, or "
+                            "candidate does not match its issued task"
+                        ),
+                        source=source_root,
+                        experiment_id=response_experiment_id,
+                        candidate_id=(
+                            result.get("candidate_id")
+                            if isinstance(result.get("candidate_id"), str)
+                            else None
+                        ),
+                    )
+                    continue
+            if source_kind == "visual_results" and "corrected_fragment" in result:
+                if result.get("disposition") in {
+                    "missing",
+                    "ambiguous",
+                    "human_review",
+                }:
+                    continue
+                visual_group = _resolved_visual_group(result)
+                if visual_group == {}:
+                    quarantine(
+                        code="invalid_selective_vision_fragment",
+                        message=(
+                            "selective-vision response must be resolved and "
+                            "return exactly its requested reported field"
+                        ),
+                        source=source_root,
+                        experiment_id=(
+                            result.get("experiment_id")
+                            if isinstance(result.get("experiment_id"), str)
+                            else None
+                        ),
+                        candidate_id=(
+                            result.get("candidate_id")
+                            if isinstance(result.get("candidate_id"), str)
+                            else None
+                        ),
+                    )
+                    continue
+            if (
+                source_kind == "context_results"
+                and not _as_rows(paper_map.get("formulations"))
+            ):
+                for fact_index, fact in enumerate(
+                    _compact_shared_facts(result)
+                ):
+                    add_fact(
+                        fact,
+                        experiment_id=None,
+                        candidate_id=None,
+                        source=f"{source_root}.compact_shared[{fact_index}]",
+                        allowed_evidence_ids=paper_evidence_ids,
+                    )
             for fact_index, fact in enumerate(
                 _as_rows(result.get("shared_facts"))
             ):

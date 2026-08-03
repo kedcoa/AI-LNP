@@ -1,9 +1,11 @@
 """Deterministically score application-required extraction facts.
 
 The evaluator is deliberately gold-blind and provider-free.  Reference facts
-are supplied by the caller and are matched only by exact identifiers, field
-scope, conservative canonicalization, and aliases explicitly listed in the
-reference.  It never performs fuzzy scientific matching.
+are supplied by the caller. The default score uses exact identifiers, field
+scope, conservative canonicalization, and explicit reference aliases. An
+optional evidence-grounded score additionally permits narrow text variants
+when the paper, experiment, field, evidence IDs, and distinctive entity or
+endpoint tokens agree. It never performs unconstrained fuzzy matching.
 """
 
 from __future__ import annotations
@@ -12,6 +14,7 @@ from collections import defaultdict
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
+import re
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -79,6 +82,7 @@ class _ReferenceFact:
     field_name: str
     expected: Any
     aliases: tuple[Any, ...]
+    evidence_ids: tuple[str, ...]
 
 
 def _rate(numerator: int, denominator: int) -> float:
@@ -316,6 +320,26 @@ def _reference_facts(document: Mapping[str, Any]) -> list[_ReferenceFact]:
                     field_name=field_name,
                     expected=row.get("expected", row.get("value")),
                     aliases=tuple(aliases),
+                    evidence_ids=tuple(
+                        sorted(
+                            {
+                                *_string_ids(row.get("evidence_ids")),
+                                *(
+                                    [locator_evidence]
+                                    if isinstance(
+                                        (locator := row.get("source_locator")),
+                                        Mapping,
+                                    )
+                                    and isinstance(
+                                        (locator_evidence := locator.get("evidence_id")),
+                                        str,
+                                    )
+                                    and locator_evidence
+                                    else []
+                                ),
+                            }
+                        )
+                    ),
                 )
             )
     return facts
@@ -344,7 +368,122 @@ def _same_field(actual: str, reference: str) -> bool:
     return actual == reference or actual.rsplit(".", 1)[-1] == reference
 
 
-def _matches_content(actual: _ActualFact, reference: _ReferenceFact) -> bool:
+_EVIDENCE_GROUNDED_FIELDS = {
+    "payload",
+    "route",
+    "species",
+    "model",
+    "experimental_model",
+    "recipient_cell",
+    "assay",
+    "foundational_outcome",
+    "comparative_outcome",
+    "qualitative_outcome",
+}
+_NON_DISTINCTIVE_TOKENS = {
+    "a", "an", "and", "the", "to", "of", "in", "for", "with",
+    "than", "versus", "vs", "after", "before", "from", "by", "on",
+    "lnp", "lnps", "mrna", "sirna", "rna", "treatment", "treated",
+    "mouse", "mice", "cell", "cells", "assay", "analysis", "expression",
+    "delivery", "reported", "significant", "significantly",
+    "increase", "increased", "increases", "decrease", "decreased",
+    "decreases", "reduce", "reduced", "reduces", "higher", "lower",
+    "level", "levels", "outcome", "outcomes", "improve", "improved",
+    "improves", "worsen", "worsened", "worsens",
+}
+
+
+def _distinctive_tokens(value: Any) -> set[str]:
+    return {
+        token
+        for token in re.findall(r"[a-z0-9]+", str(value).casefold())
+        if len(token) > 1 and token not in _NON_DISTINCTIVE_TOKENS
+    }
+
+
+_OUTCOME_DIRECTION_TOKENS = {
+    "increase", "increased", "increases", "decrease", "decreased",
+    "decreases", "reduce", "reduced", "reduces", "higher", "lower",
+    "greater", "less", "improve", "improved", "worsen", "worsened",
+    "favored", "preferentially",
+}
+_OUTCOME_COMPARISON_BOUNDARIES = {
+    "versus", "vs", "than", "compared", "relative", "whereas",
+}
+_ASSAY_CONTEXT_TOKENS = {
+    "liver", "hepatic", "section", "sections", "tissue", "tissues",
+    "positive", "sample", "samples",
+}
+
+
+def _outcome_endpoint_tokens(value: Any) -> set[str]:
+    tokens = re.findall(r"[a-z0-9]+", str(value).casefold())
+    endpoints: set[str] = set()
+    for index, token in enumerate(tokens):
+        if token not in _OUTCOME_DIRECTION_TOKENS:
+            continue
+        for candidate in tokens[index + 1:index + 8]:
+            if candidate in _OUTCOME_COMPARISON_BOUNDARIES:
+                break
+            if (
+                len(candidate) > 1
+                and candidate not in _NON_DISTINCTIVE_TOKENS
+                and not re.fullmatch(r"si[a-z0-9]+", candidate)
+                and candidate not in {"fold", "potent", "more"}
+            ):
+                endpoints.add(candidate)
+    return endpoints
+
+
+def _evidence_grounded_text_match(
+    actual: _ActualFact, reference: _ReferenceFact
+) -> bool:
+    leaf = reference.field_name.rsplit(".", 1)[-1]
+    if leaf not in _EVIDENCE_GROUNDED_FIELDS:
+        return False
+    if not set(actual.evidence_ids).intersection(reference.evidence_ids):
+        return False
+    expected_tokens = set().union(
+        *(
+            _distinctive_tokens(value)
+            for value in (reference.expected, *reference.aliases)
+        )
+    )
+    actual_tokens = set().union(
+        *(_distinctive_tokens(value) for value in actual.values)
+    )
+    if not expected_tokens.intersection(actual_tokens):
+        return False
+    if leaf in {
+        "foundational_outcome",
+        "comparative_outcome",
+        "qualitative_outcome",
+    }:
+        expected_endpoints = set().union(
+            *(
+                _outcome_endpoint_tokens(value)
+                for value in (reference.expected, *reference.aliases)
+            )
+        )
+        actual_endpoints = set().union(
+            *(_outcome_endpoint_tokens(value) for value in actual.values)
+        )
+        return bool(expected_endpoints.intersection(actual_endpoints))
+    if leaf == "assay":
+        return bool(
+            (expected_tokens - _ASSAY_CONTEXT_TOKENS).intersection(
+                actual_tokens - _ASSAY_CONTEXT_TOKENS
+            )
+        )
+    return True
+
+
+def _matches_content(
+    actual: _ActualFact,
+    reference: _ReferenceFact,
+    *,
+    evidence_grounded: bool = False,
+) -> bool:
     if actual.paper_id != reference.paper_id:
         return False
     if reference.category == "provenance":
@@ -369,16 +508,27 @@ def _matches_content(actual: _ActualFact, reference: _ReferenceFact) -> bool:
         _canonical_value(reference.field_name, value)
         for value in (reference.expected, *reference.aliases)
     }
-    return any(
+    exact_match = any(
         _canonical_value(reference.field_name, value) in expected
         for value in actual.values
     )
+    return exact_match or (
+        evidence_grounded
+        and _evidence_grounded_text_match(actual, reference)
+    )
 
 
-def _matches(actual: _ActualFact, reference: _ReferenceFact) -> bool:
+def _matches(
+    actual: _ActualFact,
+    reference: _ReferenceFact,
+    *,
+    evidence_grounded: bool = False,
+) -> bool:
     return (
         reference.experiment_id == actual.experiment_id
-        and _matches_content(actual, reference)
+        and _matches_content(
+            actual, reference, evidence_grounded=evidence_grounded
+        )
     )
 
 
@@ -519,6 +669,8 @@ def _wrong_arm_count(
     reference: Mapping[str, Any],
     actual_facts: Sequence[_ActualFact],
     reference_facts: Sequence[_ReferenceFact],
+    *,
+    evidence_grounded: bool = False,
 ) -> int:
     reference_papers = _reference_papers(reference)
     detected: set[tuple[str, str, str, tuple[tuple[str, Any], ...]]] = set()
@@ -531,13 +683,20 @@ def _wrong_arm_count(
         valid_ids = _allowed_experiment_ids(reference_paper)
         if actual.experiment_id not in valid_ids:
             continue
-        if any(_matches(actual, expected) for expected in reference_facts):
+        if any(
+            _matches(
+                actual, expected, evidence_grounded=evidence_grounded
+            )
+            for expected in reference_facts
+        ):
             continue
         if any(
             expected.experiment_id is not None
             and expected.experiment_id != actual.experiment_id
             and expected.experiment_id in valid_ids
-            and _matches_content(actual, expected)
+            and _matches_content(
+                actual, expected, evidence_grounded=evidence_grounded
+            )
             for expected in reference_facts
         ):
             detected.add(
@@ -626,10 +785,16 @@ def _safety_counts(
     reference: Mapping[str, Any],
     actual_facts: Sequence[_ActualFact],
     reference_facts: Sequence[_ReferenceFact],
+    *,
+    evidence_grounded: bool = False,
 ) -> tuple[int, int, int]:
     conflicts = _conflicts(extraction)
     wrong_arm = _wrong_arm_count(
-        extraction, reference, actual_facts, reference_facts
+        extraction,
+        reference,
+        actual_facts,
+        reference_facts,
+        evidence_grounded=evidence_grounded,
     )
     explicit_invented: set[str] = set()
     anonymous_invented_conflicts = 0
@@ -734,13 +899,17 @@ def _matching_field_name(reference: _ReferenceFact) -> str:
 def _matching_resources(
     actual_facts: Sequence[_ActualFact],
     reference: _ReferenceFact,
+    *,
+    evidence_grounded: bool = False,
 ) -> list[tuple[str, int, str, tuple[str, Any] | None]]:
     resources: list[tuple[str, int, str, tuple[str, Any] | None]] = []
     if reference.category != "provenance":
         return [
             ("fact", index, "", None)
             for index, actual in enumerate(actual_facts)
-            if _matches(actual, reference)
+            if _matches(
+                actual, reference, evidence_grounded=evidence_grounded
+            )
         ]
 
     expected = {
@@ -771,6 +940,8 @@ def _matching_resources(
 def _maximum_matches(
     actual_facts: Sequence[_ActualFact],
     reference_facts: Sequence[_ReferenceFact],
+    *,
+    evidence_grounded: bool = False,
 ) -> tuple[set[str], set[int]]:
     """Return deterministic maximum one-to-one matches within fact groups."""
 
@@ -794,7 +965,9 @@ def _maximum_matches(
         adjacency = {
             reference_index: sorted(
                 _matching_resources(
-                    actual_facts, reference_facts[reference_index]
+                    actual_facts,
+                    reference_facts[reference_index],
+                    evidence_grounded=evidence_grounded,
                 ),
                 key=repr,
             )
@@ -831,13 +1004,15 @@ def _maximum_matches(
 def evaluate_application_requirements(
     extraction: Mapping[str, Any],
     reference: Mapping[str, Any],
+    *,
+    evidence_grounded: bool = False,
 ) -> ApplicationScore:
     """Score merged extraction facts against a separately supplied reference."""
 
     actual = _actual_facts(extraction)
     expected = _reference_facts(reference)
     matched_reference_ids, matched_actual_indices = _maximum_matches(
-        actual, expected
+        actual, expected, evidence_grounded=evidence_grounded
     )
 
     paper_ids = sorted(
@@ -873,7 +1048,11 @@ def evaluate_application_requirements(
         for index, fact in enumerate(actual)
     )
     wrong_arm, invented, unsupported = _safety_counts(
-        extraction, reference, actual, expected
+        extraction,
+        reference,
+        actual,
+        expected,
+        evidence_grounded=evidence_grounded,
     )
     missing = sorted(
         row.reference_id

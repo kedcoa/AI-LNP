@@ -186,6 +186,197 @@ def test_contradictory_comparison_does_not_match() -> None:
     assert score.missing_reference_ids == ["APP-P1-OUT-2"]
 
 
+def test_evidence_grounded_mode_matches_safe_text_variant_on_same_arm() -> None:
+    extraction, reference = _documents(
+        [_fact("payload", "HSP47 siRNA (siHSP47)", experiment_id="EXP-A")],
+        [
+            {
+                **_reference_fact(
+                    "APP-P1-PAYLOAD-EVIDENCE",
+                    "payload_administration",
+                    "payload",
+                    "HSP47 siRNA",
+                    experiment_id="EXP-A",
+                ),
+                "source_locator": {"evidence_id": "E-1"},
+            }
+        ],
+    )
+
+    strict = evaluate_application_requirements(extraction, reference)
+    grounded = evaluate_application_requirements(
+        extraction, reference, evidence_grounded=True
+    )
+
+    assert strict.overall_recall == 0.0
+    assert grounded.overall_recall == 1.0
+
+
+def test_evidence_grounded_mode_does_not_match_wrong_value_or_field() -> None:
+    extraction, reference = _documents(
+        [
+            _fact("payload", "luciferase mRNA", experiment_id="EXP-A"),
+            _fact("model", "Cre mRNA", experiment_id="EXP-A"),
+        ],
+        [
+            {
+                **_reference_fact(
+                    "APP-P1-PAYLOAD-CRE",
+                    "payload_administration",
+                    "payload",
+                    "Cre mRNA",
+                    experiment_id="EXP-A",
+                ),
+                "source_locator": {"evidence_id": "E-1"},
+            }
+        ],
+    )
+
+    score = evaluate_application_requirements(
+        extraction, reference, evidence_grounded=True
+    )
+
+    assert score.overall_recall == 0.0
+
+
+def test_evidence_grounded_mode_requires_matching_outcome_endpoint() -> None:
+    extraction, reference = _documents(
+        [
+            _fact(
+                "comparative_outcome",
+                "collagen levels decreased",
+                experiment_id="EXP-A",
+            )
+        ],
+        [
+            {
+                **_reference_fact(
+                    "APP-P1-OUTCOME-ALT",
+                    "qualitative_outcome",
+                    "comparative_outcome",
+                    "ALT levels decreased",
+                    experiment_id="EXP-A",
+                ),
+                "source_locator": {"evidence_id": "E-1"},
+            }
+        ],
+    )
+
+    score = evaluate_application_requirements(
+        extraction, reference, evidence_grounded=True
+    )
+
+    assert score.overall_recall == 0.0
+
+
+def test_evidence_grounded_outcomes_ignore_shared_treatment_and_comparator() -> None:
+    extraction, reference = _documents(
+        [
+            _fact(
+                "comparative_outcome",
+                "siJnk2-LNP reduced collagen versus siLuc-LNP",
+                experiment_id="EXP-A",
+            )
+        ],
+        [
+            {
+                **_reference_fact(
+                    "APP-P1-OUTCOME-ALT-SIJNK2",
+                    "qualitative_outcome",
+                    "comparative_outcome",
+                    "siJnk2-LNP decreased serum ALT versus siLuc-LNP",
+                    experiment_id="EXP-A",
+                ),
+                "source_locator": {"evidence_id": "E-1"},
+            }
+        ],
+    )
+
+    score = evaluate_application_requirements(
+        extraction, reference, evidence_grounded=True
+    )
+
+    assert score.overall_recall == 0.0
+
+
+def test_evidence_grounded_outcomes_match_same_endpoint_paraphrase() -> None:
+    extraction, reference = _documents(
+        [
+            _fact(
+                "comparative_outcome",
+                "siJnk2-LNP reduced serum ALT relative to siLuc-LNP",
+                experiment_id="EXP-A",
+            )
+        ],
+        [
+            {
+                **_reference_fact(
+                    "APP-P1-OUTCOME-ALT-PARAPHRASE",
+                    "qualitative_outcome",
+                    "comparative_outcome",
+                    "siJnk2-LNP decreased serum ALT versus siLuc-LNP",
+                    experiment_id="EXP-A",
+                ),
+                "source_locator": {"evidence_id": "E-1"},
+            }
+        ],
+    )
+
+    score = evaluate_application_requirements(
+        extraction, reference, evidence_grounded=True
+    )
+
+    assert score.overall_recall == 1.0
+
+
+def test_evidence_grounded_mode_keeps_exact_numeric_values_strict() -> None:
+    extraction, reference = _documents(
+        [_fact("outcome_value", 13, experiment_id="EXP-A")],
+        [
+            {
+                **_reference_fact(
+                    "APP-P1-NUMERIC-14",
+                    "exact_numeric",
+                    "outcome_value",
+                    14,
+                    experiment_id="EXP-A",
+                ),
+                "source_locator": {"evidence_id": "E-1"},
+            }
+        ],
+    )
+
+    score = evaluate_application_requirements(
+        extraction, reference, evidence_grounded=True
+    )
+
+    assert score.overall_recall == 0.0
+
+
+def test_evidence_grounded_assays_do_not_match_only_on_tissue_word() -> None:
+    extraction, reference = _documents(
+        [_fact("assay", "histological analysis of liver sections", experiment_id="EXP-A")],
+        [
+            {
+                **_reference_fact(
+                    "APP-P1-ASSAY-FLOW",
+                    "assay",
+                    "assay",
+                    "flow cytometry of tdTomato-positive liver cells",
+                    experiment_id="EXP-A",
+                ),
+                "source_locator": {"evidence_id": "E-1"},
+            }
+        ],
+    )
+
+    score = evaluate_application_requirements(
+        extraction, reference, evidence_grounded=True
+    )
+
+    assert score.overall_recall == 0.0
+
+
 def test_graph_estimate_cannot_satisfy_exact_numeric_expectation() -> None:
     extraction, reference = _documents(
         [
