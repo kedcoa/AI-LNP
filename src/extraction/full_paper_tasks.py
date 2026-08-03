@@ -375,6 +375,60 @@ def _candidate_envelope(
     return evidence_ids
 
 
+def issue_context_candidates(
+    paper_map: PaperMapResponse | Mapping[str, Any],
+) -> list[ContextCandidate]:
+    """Issue deterministic IDs for every validated provisional context."""
+
+    parsed_map = (
+        paper_map
+        if isinstance(paper_map, PaperMapResponse)
+        else PaperMapResponse.model_validate(paper_map)
+    )
+    formulations_by_id = {
+        row.formulation_id: row for row in parsed_map.formulations
+    }
+    payloads_by_id = {
+        row.payload_id: row for row in parsed_map.payloads
+    }
+    return [
+        _context_candidate(
+            parsed_map.paper_id,
+            context,
+            formulations_by_id[context.formulation_id],
+            payloads_by_id[context.payload_id],
+        )
+        for context in parsed_map.provisional_experiment_contexts
+    ]
+
+
+def context_candidate_evidence_envelopes(
+    paper_map: PaperMapResponse | Mapping[str, Any],
+    candidates: Iterable[ContextCandidate],
+) -> dict[str, set[str]]:
+    """Return the complete source-backed envelope for issued candidates."""
+
+    parsed_map = (
+        paper_map
+        if isinstance(paper_map, PaperMapResponse)
+        else PaperMapResponse.model_validate(paper_map)
+    )
+    formulations_by_id = {
+        row.formulation_id: row for row in parsed_map.formulations
+    }
+    payloads_by_id = {
+        row.payload_id: row for row in parsed_map.payloads
+    }
+    return {
+        candidate.candidate_id: _candidate_envelope(
+            candidate=candidate,
+            formulation=formulations_by_id[candidate.formulation_id],
+            payload=payloads_by_id[candidate.payload_id],
+        )
+        for candidate in candidates
+    }
+
+
 def _make_context_task(
     *,
     key: tuple[str, ...],
@@ -446,7 +500,7 @@ def _make_context_task(
         }
     )[:16]
     return ContextTask(
-        context_task_version="full-paper-context-task-1.0.0",
+        context_task_version="full-paper-context-task-1.1.0",
         task_id=task_id,
         paper_id=inventory.paper_id,
         context_key=_context_key(key),
@@ -483,15 +537,7 @@ def build_context_tasks(
     payloads_by_id = {
         row.payload_id: row for row in parsed_map.payloads
     }
-    candidates = [
-        _context_candidate(
-            parsed_map.paper_id,
-            context,
-            formulations_by_id[context.formulation_id],
-            payloads_by_id[context.payload_id],
-        )
-        for context in parsed_map.provisional_experiment_contexts
-    ]
+    candidates = issue_context_candidates(parsed_map)
     grouped: OrderedDict[tuple[str, ...], list[ContextCandidate]] = (
         OrderedDict()
     )

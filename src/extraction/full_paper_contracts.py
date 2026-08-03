@@ -292,7 +292,7 @@ class PreparedRequest(StrictModel):
 class ContextTask(StrictModel):
     """One token-bounded, scientifically compatible context request."""
 
-    context_task_version: Literal["full-paper-context-task-1.0.0"]
+    context_task_version: Literal["full-paper-context-task-1.1.0"]
     task_id: str
     paper_id: str
     context_key: str

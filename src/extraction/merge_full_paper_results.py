@@ -4,11 +4,16 @@ from __future__ import annotations
 
 from collections import OrderedDict
 from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass, field
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
 from src.extraction.application_normalization import canonicalize_fact
+from src.extraction.full_paper_tasks import (
+    context_candidate_evidence_envelopes,
+    issue_context_candidates,
+)
 
 
 class _StrictModel(BaseModel):
@@ -90,6 +95,14 @@ class _FactAccumulator:
         )
 
 
+@dataclass
+class _Issuance:
+    candidate_id: str | None
+    context_evidence_ids: set[str] = field(default_factory=set)
+    visual_evidence_ids: set[str] = field(default_factory=set)
+    scientific_identity: dict[str, Any] = field(default_factory=dict)
+
+
 def _extend_unique(target: list[str], values: Iterable[str]) -> None:
     for value in values:
         if value not in target:
@@ -102,45 +115,262 @@ def _as_rows(value: Any) -> list[Mapping[str, Any]]:
     return [row for row in value if isinstance(row, Mapping)]
 
 
+def _all_evidence_ids(value: Any) -> set[str]:
+    if isinstance(value, Mapping):
+        found: set[str] = set()
+        for key, child in value.items():
+            if key.endswith("evidence_ids") and isinstance(child, list):
+                found.update(item for item in child if isinstance(item, str))
+            else:
+                found.update(_all_evidence_ids(child))
+        return found
+    if isinstance(value, list):
+        return set().union(*(_all_evidence_ids(row) for row in value), set())
+    return set()
+
+
+def _listed_evidence_ids(value: Any) -> set[str]:
+    if not isinstance(value, list):
+        return set()
+    return {item for item in value if isinstance(item, str) and item}
+
+
+def _task_evidence_ids(task: Mapping[str, Any]) -> set[str]:
+    allowed = _listed_evidence_ids(task.get("allowed_evidence_ids"))
+    allowed.update(_listed_evidence_ids(task.get("evidence_ids")))
+    for row in _as_rows(task.get("evidence")):
+        evidence_id = row.get("evidence_id")
+        if isinstance(evidence_id, str) and evidence_id:
+            allowed.add(evidence_id)
+    return allowed
+
+
+def _reported_value(value: Any) -> Any:
+    if isinstance(value, Mapping) and "value" in value:
+        return value["value"]
+    return value
+
+
+def _scientific_identity(value: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        field_name: _reported_value(value[field_name])
+        for field_name in ("formulation", "payload", "dose")
+        if value.get(field_name) is not None
+    }
+
+
+def _same_identity_value(left: Any, right: Any) -> bool:
+    if (
+        not isinstance(left, bool)
+        and not isinstance(right, bool)
+        and isinstance(left, (int, float))
+        and isinstance(right, (int, float))
+    ):
+        return float(left) == float(right)
+    return " ".join(str(left).casefold().split()) == " ".join(
+        str(right).casefold().split()
+    )
+
+
 def _issued_experiments(
     paper_map: Mapping[str, Any],
-) -> OrderedDict[str, str | None]:
-    issued: OrderedDict[str, str | None] = OrderedDict()
+) -> tuple[
+    OrderedDict[str, _Issuance],
+    set[str],
+    list[tuple[str, str | None, str | None, str]],
+    set[str],
+]:
+    issued: OrderedDict[str, _Issuance] = OrderedDict()
+    invalid_ids: set[str] = set()
+    conflicts: list[tuple[str, str | None, str | None, str]] = []
 
-    def collect(container: Mapping[str, Any]) -> None:
-        for key in (
-            "experiments",
-            "candidates",
-            "context_candidates",
-            "issued_experiments",
+    def register(
+        experiment_id: str,
+        candidate_id: str | None,
+        *,
+        context_evidence_ids: Iterable[str] = (),
+        visual_evidence_ids: Iterable[str] = (),
+        scientific_identity: Mapping[str, Any] | None = None,
+        source: str,
+    ) -> None:
+        existing = issued.get(experiment_id)
+        if existing is None:
+            existing = _Issuance(candidate_id=candidate_id)
+            issued[experiment_id] = existing
+        elif (
+            existing.candidate_id is not None
+            and candidate_id is not None
+            and existing.candidate_id != candidate_id
         ):
-            for row in _as_rows(container.get(key)):
-                experiment_id = row.get("experiment_id")
-                if not isinstance(experiment_id, str) or not experiment_id:
-                    continue
-                candidate = row.get("candidate_id")
-                candidate_id = candidate if isinstance(candidate, str) else None
-                if experiment_id not in issued:
-                    issued[experiment_id] = candidate_id
-        inventory = container.get("experiment_inventory")
-        if isinstance(inventory, Mapping):
-            for inventory_id, value in inventory.items():
-                if not isinstance(value, Mapping):
-                    continue
-                experiment = value.get("experiment_id", inventory_id)
-                if not isinstance(experiment, str) or not experiment:
-                    continue
-                candidate = value.get(
-                    "candidate_id", value.get("provisional_context_id")
+            invalid_ids.add(experiment_id)
+            conflicts.append(
+                (
+                    experiment_id,
+                    existing.candidate_id,
+                    candidate_id,
+                    source,
                 )
-                candidate_id = candidate if isinstance(candidate, str) else None
-                if experiment not in issued:
-                    issued[experiment] = candidate_id
-        for task in _as_rows(container.get("context_tasks")):
-            collect(task)
+            )
+        elif existing.candidate_id is None and candidate_id is not None:
+            existing.candidate_id = candidate_id
+        existing.context_evidence_ids.update(context_evidence_ids)
+        existing.visual_evidence_ids.update(visual_evidence_ids)
+        if scientific_identity:
+            for field_name, value in scientific_identity.items():
+                existing.scientific_identity.setdefault(field_name, value)
 
-    collect(paper_map)
-    return issued
+    if "provisional_experiment_contexts" in paper_map:
+        candidates = issue_context_candidates(paper_map)
+        envelopes = context_candidate_evidence_envelopes(
+            paper_map, candidates
+        )
+        for candidate in candidates:
+            register(
+                candidate.experiment_id,
+                candidate.candidate_id,
+                context_evidence_ids=envelopes[candidate.candidate_id],
+                scientific_identity=_scientific_identity(
+                    candidate.model_dump(mode="json")
+                ),
+                source="paper_map.provisional_experiment_contexts",
+            )
+
+    top_envelopes = paper_map.get("candidate_evidence_envelopes")
+    if not isinstance(top_envelopes, Mapping):
+        top_envelopes = {}
+    for key in (
+        "experiments",
+        "candidates",
+        "context_candidates",
+        "issued_experiments",
+    ):
+        for index, row in enumerate(_as_rows(paper_map.get(key))):
+            experiment = row.get("experiment_id")
+            if not isinstance(experiment, str) or not experiment:
+                continue
+            candidate = row.get(
+                "candidate_id", row.get("provisional_context_id")
+            )
+            candidate_id = candidate if isinstance(candidate, str) else None
+            generic = _listed_evidence_ids(row.get("evidence_ids"))
+            context_allowed = generic | _listed_evidence_ids(
+                row.get("context_evidence_ids")
+            )
+            if candidate_id is not None:
+                context_allowed.update(
+                    _listed_evidence_ids(top_envelopes.get(candidate_id))
+                )
+            visual_allowed = generic | _listed_evidence_ids(
+                row.get("visual_evidence_ids")
+            )
+            register(
+                experiment,
+                candidate_id,
+                context_evidence_ids=context_allowed,
+                visual_evidence_ids=visual_allowed,
+                scientific_identity=_scientific_identity(row),
+                source=f"paper_map.{key}[{index}]",
+            )
+
+    inventory = paper_map.get("experiment_inventory")
+    if isinstance(inventory, Mapping):
+        for inventory_id, value in inventory.items():
+            if not isinstance(value, Mapping):
+                continue
+            experiment = value.get("experiment_id", inventory_id)
+            if not isinstance(experiment, str) or not experiment:
+                continue
+            candidate = value.get(
+                "candidate_id", value.get("provisional_context_id")
+            )
+            candidate_id = candidate if isinstance(candidate, str) else None
+            generic = _all_evidence_ids(value)
+            register(
+                experiment,
+                candidate_id,
+                context_evidence_ids=generic,
+                visual_evidence_ids=_listed_evidence_ids(
+                    value.get("visual_evidence_ids")
+                ),
+                scientific_identity=_scientific_identity(value),
+                source=f"paper_map.experiment_inventory[{inventory_id!r}]",
+            )
+
+    for task_index, task in enumerate(_as_rows(paper_map.get("context_tasks"))):
+        envelopes = task.get("candidate_evidence_envelopes")
+        if not isinstance(envelopes, Mapping):
+            envelopes = {}
+        for candidate in _as_rows(task.get("candidates")):
+            experiment = candidate.get("experiment_id")
+            candidate_id = candidate.get("candidate_id")
+            if not isinstance(experiment, str) or not experiment:
+                continue
+            if not isinstance(candidate_id, str):
+                candidate_id = None
+            register(
+                experiment,
+                candidate_id,
+                context_evidence_ids=_listed_evidence_ids(
+                    envelopes.get(candidate_id)
+                ),
+                scientific_identity=_scientific_identity(candidate),
+                source=f"paper_map.context_tasks[{task_index}]",
+            )
+
+    for task_index, task in enumerate(_as_rows(paper_map.get("visual_tasks"))):
+        allowed = _task_evidence_ids(task)
+        task_candidates: dict[str, str | None] = {
+            item: None
+            for item in task.get("experiment_ids", [])
+            if isinstance(item, str) and item
+        }
+        for row in _as_rows(task.get("candidates")):
+            experiment_id = row.get("experiment_id")
+            candidate_id = row.get("candidate_id")
+            if isinstance(experiment_id, str) and experiment_id:
+                task_candidates[experiment_id] = (
+                    candidate_id if isinstance(candidate_id, str) else None
+                )
+        task_inventory = task.get("experiment_inventory")
+        if isinstance(task_inventory, Mapping):
+            for inventory_id, row in task_inventory.items():
+                if not isinstance(row, Mapping):
+                    continue
+                experiment_id = row.get("experiment_id", inventory_id)
+                candidate_id = row.get(
+                    "candidate_id", row.get("provisional_context_id")
+                )
+                if isinstance(experiment_id, str) and experiment_id:
+                    task_candidates[experiment_id] = (
+                        candidate_id
+                        if isinstance(candidate_id, str)
+                        else None
+                    )
+        for experiment_id, candidate_id in task_candidates.items():
+            register(
+                experiment_id,
+                candidate_id,
+                visual_evidence_ids=allowed,
+                scientific_identity=(
+                    _scientific_identity(task_inventory[experiment_id])
+                    if isinstance(task_inventory, Mapping)
+                    and isinstance(task_inventory.get(experiment_id), Mapping)
+                    else None
+                ),
+                source=f"paper_map.visual_tasks[{task_index}]",
+            )
+
+    paper_evidence_ids = _listed_evidence_ids(
+        paper_map.get("issued_evidence_ids")
+    )
+    paper_evidence_ids.update(
+        evidence_id
+        for row in issued.values()
+        for evidence_id in (
+            row.context_evidence_ids | row.visual_evidence_ids
+        )
+    )
+    return issued, invalid_ids, conflicts, paper_evidence_ids
 
 
 def _facts(row: Mapping[str, Any]) -> list[Mapping[str, Any]]:
@@ -150,10 +380,59 @@ def _facts(row: Mapping[str, Any]) -> list[Mapping[str, Any]]:
     return [row] if "field_name" in row else []
 
 
+_SELECTIVE_OUTCOME_FIELDS = (
+    "assay",
+    "endpoint",
+    "comparison_target",
+    "comparator",
+    "outcome_value",
+    "outcome_unit",
+    "numeric_value",
+    "numeric_unit",
+    "qualitative_outcome",
+    "significance_wording",
+    "recipient_cell",
+    "formulation",
+    "payload",
+    "dose",
+)
+
+
+def _selective_outcome_group(
+    outcome: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    slot = outcome.get("slot_id", outcome.get("outcome_id"))
+    slot_id = str(slot) if slot is not None else "unscoped"
+    evidence_ids = outcome.get("evidence_ids")
+    facts = [
+        {
+            "field_name": f"outcome.{slot_id}.{field_name}",
+            "raw_value": outcome[field_name],
+            "evidence_ids": evidence_ids,
+        }
+        for field_name in _SELECTIVE_OUTCOME_FIELDS
+        if outcome.get(field_name) is not None
+    ]
+    return {
+        "experiment_id": outcome.get("experiment_id"),
+        "candidate_id": outcome.get("candidate_id"),
+        "facts": facts,
+        **{
+            field_name: outcome[field_name]
+            for field_name in ("formulation", "payload", "dose")
+            if outcome.get(field_name) is not None
+        },
+    }
+
+
 def _experiment_groups(result: Mapping[str, Any]) -> list[Mapping[str, Any]]:
     rows: list[Mapping[str, Any]] = []
     for key in ("experiment_facts", "experiments"):
         rows.extend(_as_rows(result.get(key)))
+    rows.extend(
+        _selective_outcome_group(row)
+        for row in _as_rows(result.get("outcomes"))
+    )
     if "experiment_id" in result:
         rows.append(result)
     return rows
@@ -184,13 +463,17 @@ def merge_full_paper_results(
 ) -> MergeResult:
     """Merge supported facts without reassigning IDs or selecting conflicts."""
 
-    issued = _issued_experiments(paper_map)
+    issued, invalid_ids, issuance_conflicts, paper_evidence_ids = (
+        _issued_experiments(paper_map)
+    )
     fact_tables: dict[
         str | None,
         OrderedDict[str, OrderedDict[str, _FactAccumulator]],
     ] = {None: OrderedDict()}
     fact_tables.update(
-        (experiment_id, OrderedDict()) for experiment_id in issued
+        (experiment_id, OrderedDict())
+        for experiment_id in issued
+        if experiment_id not in invalid_ids
     )
     quarantined: list[QuarantinedConflict] = []
     findings: list[MergeValidationFinding] = []
@@ -237,6 +520,7 @@ def merge_full_paper_results(
         experiment_id: str | None,
         candidate_id: str | None,
         source: str,
+        allowed_evidence_ids: set[str],
     ) -> None:
         field_name = row.get("field_name")
         raw_value = row.get("raw_value", row.get("value"))
@@ -261,6 +545,26 @@ def merge_full_paper_results(
                 evidence_ids=evidence_ids,
             )
             return
+        outside = [
+            evidence_id
+            for evidence_id in dict.fromkeys(evidence)
+            if evidence_id not in allowed_evidence_ids
+        ]
+        if outside:
+            quarantine(
+                code="evidence_outside_experiment_envelope",
+                message=(
+                    "fact cites evidence outside its locally issued "
+                    "evidence envelope"
+                ),
+                source=source,
+                experiment_id=experiment_id,
+                candidate_id=candidate_id,
+                field_name=field_name,
+                raw_values=[str(raw_value)],
+                evidence_ids=outside,
+            )
+            return
         canonical = canonicalize_fact(field_name, str(raw_value), evidence)
         by_field = fact_tables[experiment_id]
         by_canonical = by_field.setdefault(field_name, OrderedDict())
@@ -281,6 +585,21 @@ def merge_full_paper_results(
             experiment_id=None,
             candidate_id=None,
             source=f"paper_map.shared_facts[{index}]",
+            allowed_evidence_ids=paper_evidence_ids,
+        )
+
+    for experiment_id, first_candidate, second_candidate, source in (
+        issuance_conflicts
+    ):
+        quarantine(
+            code="duplicate_issued_experiment_id",
+            message=(
+                "one experiment ID was issued to different candidates: "
+                f"{first_candidate!r} and {second_candidate!r}"
+            ),
+            source=source,
+            experiment_id=experiment_id,
+            candidate_id=second_candidate,
         )
 
     sources = (
@@ -298,6 +617,7 @@ def merge_full_paper_results(
                     experiment_id=None,
                     candidate_id=None,
                     source=f"{source_root}.shared_facts[{fact_index}]",
+                    allowed_evidence_ids=paper_evidence_ids,
                 )
             for group_index, group in enumerate(_experiment_groups(result)):
                 source = f"{source_root}.experiment_facts[{group_index}]"
@@ -323,17 +643,46 @@ def merge_full_paper_results(
                         evidence_ids=evidence_ids,
                     )
                     continue
-                expected_candidate_id = issued[experiment_id]
+                if experiment_id in invalid_ids:
+                    quarantine(
+                        code="ambiguous_issued_experiment_id",
+                        message=(
+                            "result references an experiment ID disabled by "
+                            "conflicting local issuance"
+                        ),
+                        source=source,
+                        experiment_id=experiment_id,
+                        candidate_id=candidate_id,
+                        raw_values=raw_values,
+                        evidence_ids=evidence_ids,
+                    )
+                    continue
+                issuance = issued[experiment_id]
+                expected_candidate_id = issuance.candidate_id
+                identity_mismatches = [
+                    field_name
+                    for field_name, expected_value in (
+                        issuance.scientific_identity.items()
+                    )
+                    if group.get(field_name) is not None
+                    and not _same_identity_value(
+                        _reported_value(group[field_name]), expected_value
+                    )
+                ]
                 if (
-                    expected_candidate_id is not None
-                    and candidate_id is not None
-                    and candidate_id != expected_candidate_id
+                    (
+                        expected_candidate_id is not None
+                        and candidate_id is not None
+                        and candidate_id != expected_candidate_id
+                    )
+                    or identity_mismatches
                 ):
                     quarantine(
                         code="candidate_experiment_mismatch",
                         message=(
-                            "result candidate ID does not match the locally issued "
-                            "experiment ID"
+                            "result candidate or scientific identity does not "
+                            "match the locally issued experiment ID; fields="
+                            f"{identity_mismatches}"
                         ),
                         source=source,
                         experiment_id=experiment_id,
@@ -348,6 +697,11 @@ def merge_full_paper_results(
                         experiment_id=experiment_id,
                         candidate_id=candidate_id,
                         source=f"{source}.facts[{fact_offset}]",
+                        allowed_evidence_ids=(
+                            issuance.context_evidence_ids
+                            if source_kind == "context_results"
+                            else issuance.visual_evidence_ids
+                        ),
                     )
 
     def finalize(
@@ -371,7 +725,11 @@ def merge_full_paper_results(
                     )
                 ),
                 experiment_id=experiment_id,
-                candidate_id=issued.get(experiment_id),
+                candidate_id=(
+                    issued[experiment_id].candidate_id
+                    if experiment_id in issued
+                    else None
+                ),
                 field_name=field_name,
                 canonical_values=[row.canonical_value for row in accumulators],
                 raw_values=[
@@ -394,7 +752,9 @@ def merge_full_paper_results(
             candidate_id=candidate_id,
             facts=finalize(experiment_id, fact_tables[experiment_id]),
         )
-        for experiment_id, candidate_id in issued.items()
+        for experiment_id, issuance in issued.items()
+        if experiment_id not in invalid_ids
+        for candidate_id in [issuance.candidate_id]
     ]
     return MergeResult(
         shared_facts=shared_facts,

@@ -4,6 +4,7 @@ from copy import deepcopy
 
 from src.extraction.full_paper_contracts import (
     ContextCandidate,
+    ContextTask,
     build_context_response_schema,
 )
 from src.extraction.full_paper_tasks import stable_experiment_id
@@ -63,6 +64,17 @@ def _paper_map() -> dict:
             {"experiment_id": "EXP-A", "candidate_id": "CTX-A"},
             {"experiment_id": "EXP-B", "candidate_id": "CTX-B"},
         ],
+        "candidate_evidence_envelopes": {
+            "CTX-A": ["E-TEXT"],
+            "CTX-B": ["E-OTHER-ARM"],
+        },
+        "visual_tasks": [
+            {
+                "experiment_ids": ["EXP-A", "EXP-B"],
+                "allowed_evidence_ids": ["E-VISUAL"],
+            }
+        ],
+        "issued_evidence_ids": ["E-FORM", "E-FORM-2"],
     }
 
 
@@ -212,6 +224,7 @@ def test_flat_fact_can_join_inventory_issued_id_without_candidate_echo() -> None
             "EXP-A": {
                 "experiment_id": "EXP-A",
                 "candidate_id": "CTX-A",
+                "visual_evidence_ids": ["E-VISUAL"],
             }
         },
     }
@@ -227,3 +240,216 @@ def test_flat_fact_can_join_inventory_issued_id_without_candidate_echo() -> None
     assert result.experiments[0].experiment_id == "EXP-A"
     assert result.experiments[0].facts[0].field_name == "endpoint"
     assert result.quarantined_conflicts == []
+
+
+def test_out_of_envelope_fact_is_quarantined_before_accumulation() -> None:
+    paper_map = _paper_map()
+    paper_map["candidate_evidence_envelopes"] = {
+        "CTX-A": ["E-TEXT"],
+        "CTX-B": ["E-OTHER-ARM"],
+    }
+    invented = _text_for("EXP-A")
+    invented["experiment_facts"][0]["facts"][0]["evidence_ids"] = [
+        "E-INVENTED"
+    ]
+
+    result = merge_full_paper_results(paper_map, [invented], [])
+
+    assert result.experiments[0].facts == []
+    assert result.quarantined_conflicts[0].code == (
+        "evidence_outside_experiment_envelope"
+    )
+    assert result.quarantined_conflicts[0].evidence_ids == ["E-INVENTED"]
+
+
+def test_real_paper_map_deterministically_issues_experiments() -> None:
+    paper_map = {
+        "paper_map_version": "full-paper-map-1.0.0",
+        "paper_id": "PAPER-REAL",
+        "formulations": [
+            {
+                "formulation_id": "FORM-A",
+                "name": {"value": "LNP A", "evidence_ids": ["E-FORM"]},
+                "components": [],
+                "ratios": [],
+                "ratio_bases": [],
+            }
+        ],
+        "payloads": [
+            {
+                "payload_id": "PAY-A",
+                "identity": {"value": "mRNA A", "evidence_ids": ["E-PAY"]},
+                "role": None,
+            }
+        ],
+        "common_routes": [],
+        "common_species": [],
+        "common_models": [],
+        "recipient_contexts": [],
+        "provisional_experiment_contexts": [
+            {
+                "provisional_context_id": "CTX-REAL",
+                "formulation_id": "FORM-A",
+                "payload_id": "PAY-A",
+                "dose": {"value": 1.0, "evidence_ids": ["E-JOINT"]},
+                "dose_unit": {"value": "mg/kg", "evidence_ids": ["E-JOINT"]},
+                "route": {"value": "intravenous", "evidence_ids": ["E-JOINT"]},
+                "species": {"value": "mouse", "evidence_ids": ["E-JOINT"]},
+                "experimental_model": {
+                    "value": "healthy mouse",
+                    "evidence_ids": ["E-JOINT"],
+                },
+                "recipient_cell": {
+                    "value": "hepatocyte",
+                    "evidence_ids": ["E-JOINT"],
+                },
+                "organ": {"value": "liver", "evidence_ids": ["E-JOINT"]},
+                "timepoint": {"value": 24.0, "evidence_ids": ["E-JOINT"]},
+                "timepoint_unit": {
+                    "value": "hour",
+                    "evidence_ids": ["E-JOINT"],
+                },
+                "joint_evidence_ids": ["E-JOINT"],
+                "outcome_evidence_ids": ["E-OUT"],
+                "pairing_metadata": None,
+            }
+        ],
+        "anchor_accounting": {},
+        "unresolved_items": [],
+    }
+
+    issued = merge_full_paper_results(paper_map, [], [])
+    repeated = merge_full_paper_results(deepcopy(paper_map), [], [])
+
+    assert len(issued.experiments) == 1
+    assert issued.experiments[0].candidate_id == "CTX-REAL"
+    assert issued.experiments[0].experiment_id.startswith("EXP-")
+    assert repeated.experiments[0].experiment_id == issued.experiments[0].experiment_id
+
+
+def test_duplicate_experiment_issuance_is_quarantined_and_disabled() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {
+                "experiment_id": "EXP-DUP",
+                "candidate_id": "CTX-A",
+                "evidence_ids": ["E-TEXT"],
+            },
+            {
+                "experiment_id": "EXP-DUP",
+                "candidate_id": "CTX-B",
+                "evidence_ids": ["E-TEXT"],
+            },
+        ],
+    }
+
+    result = merge_full_paper_results(
+        paper_map, [_text_for("EXP-DUP")], []
+    )
+
+    assert result.experiments == []
+    assert "duplicate_issued_experiment_id" in {
+        row.code for row in result.quarantined_conflicts
+    }
+
+
+def test_saved_selective_vision_outcomes_are_ingested_as_scoped_facts() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiments": [
+            {"experiment_id": "EXP-A", "candidate_id": "CTX-A"}
+        ],
+        "visual_tasks": [
+            {
+                "experiment_inventory": {
+                    "EXP-A": {
+                        "experiment_id": "EXP-A",
+                        "candidate_id": "CTX-A",
+                    }
+                },
+                "allowed_evidence_ids": ["E-FIGURE"],
+            }
+        ],
+    }
+    saved_response = {
+        "paper_id": "PAPER-1",
+        "outcomes": [
+            {
+                "slot_id": "figure-2-mc3-hepatocytes",
+                "experiment_id": "EXP-A",
+                "assay": "cellular DNA accumulation",
+                "endpoint": "QUANT DNA accumulation",
+                "qualitative_outcome": "higher than comparator",
+                "evidence_ids": ["E-FIGURE"],
+            }
+        ],
+    }
+
+    result = merge_full_paper_results(paper_map, [], [saved_response])
+
+    assert result.quarantined_conflicts == []
+    assert {row.field_name for row in result.experiments[0].facts} == {
+        "outcome.figure-2-mc3-hepatocytes.assay",
+        "outcome.figure-2-mc3-hepatocytes.endpoint",
+        "outcome.figure-2-mc3-hepatocytes.qualitative_outcome",
+    }
+
+
+def test_saved_visual_outcome_with_wrong_arm_identity_is_quarantined() -> None:
+    paper_map = {
+        "paper_id": "PAPER-1",
+        "experiment_inventory": {
+            "EXP-A": {
+                "experiment_id": "EXP-A",
+                "candidate_id": "CTX-A",
+                "formulation": "LNP A",
+                "payload": "mRNA A",
+                "dose": {"value": 1.0, "evidence_ids": ["E-JOINT-A"]},
+            },
+            "EXP-B": {
+                "experiment_id": "EXP-B",
+                "candidate_id": "CTX-B",
+                "formulation": "LNP B",
+                "payload": "mRNA A",
+                "dose": {"value": 1.0, "evidence_ids": ["E-JOINT-B"]},
+            },
+        },
+        "visual_tasks": [
+            {
+                "experiment_inventory": {
+                    "EXP-A": {"experiment_id": "EXP-A"},
+                    "EXP-B": {"experiment_id": "EXP-B"},
+                },
+                "allowed_evidence_ids": ["E-FIGURE"],
+            }
+        ],
+    }
+    wrong_arm = {
+        "outcomes": [
+            {
+                "slot_id": "slot-a",
+                "experiment_id": "EXP-B",
+                "formulation": "LNP A",
+                "payload": "mRNA A",
+                "dose": 1.0,
+                "endpoint": "reporter signal",
+                "evidence_ids": ["E-FIGURE"],
+            }
+        ]
+    }
+
+    result = merge_full_paper_results(paper_map, [], [wrong_arm])
+
+    assert result.experiments[1].facts == []
+    assert result.quarantined_conflicts[0].code == (
+        "candidate_experiment_mismatch"
+    )
+
+
+def test_context_task_version_marks_experiment_id_contract_change() -> None:
+    schema = ContextTask.model_json_schema()
+
+    assert schema["properties"]["context_task_version"]["const"] == (
+        "full-paper-context-task-1.1.0"
+    )
