@@ -50,6 +50,48 @@ def _hard_safety_failure(safety: Mapping[str, Any]) -> bool:
     return isinstance(systemic, int) and not isinstance(systemic, bool) and systemic >= 3
 
 
+_EVIDENCE_STATUSES = {"full": 2, "partial": 1, "absent": 0}
+_REQUIREMENT_COUNT = 62
+
+
+def _result_inventory(result: Mapping[str, Any]) -> tuple[dict[str, str], dict[str, bool]] | None:
+    """Validate a complete, internally consistent fixed 62-item result."""
+
+    required_counts = ("automated_full", "evidence_full", "evidence_partial", "evidence_absent")
+    if any(
+        not isinstance(result.get(name), int) or isinstance(result.get(name), bool)
+        for name in required_counts
+    ):
+        return None
+    if any(result[name] < 0 or result[name] > _REQUIREMENT_COUNT for name in required_counts):
+        return None
+    evidence_statuses = result.get("evidence_statuses")
+    automated_statuses = result.get("automated_statuses")
+    if not isinstance(evidence_statuses, Mapping) or not isinstance(automated_statuses, Mapping):
+        return None
+    if len(evidence_statuses) != _REQUIREMENT_COUNT or set(evidence_statuses) != set(automated_statuses):
+        return None
+    if not all(isinstance(key, str) and value in _EVIDENCE_STATUSES for key, value in evidence_statuses.items()):
+        return None
+    if not all(isinstance(value, bool) for value in automated_statuses.values()):
+        return None
+    full = sum(value == "full" for value in evidence_statuses.values())
+    partial = sum(value == "partial" for value in evidence_statuses.values())
+    absent = sum(value == "absent" for value in evidence_statuses.values())
+    if (full, partial, absent) != (
+        result["evidence_full"], result["evidence_partial"], result["evidence_absent"]
+    ) or full + partial + absent != _REQUIREMENT_COUNT:
+        return None
+    if sum(automated_statuses.values()) != result["automated_full"]:
+        return None
+    return dict(evidence_statuses), dict(automated_statuses)
+
+
+def _counter(result: Mapping[str, Any], name: str) -> int | None:
+    value = result.get(name)
+    return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
+
+
 def classify_result(
     before: Mapping[str, Any], after: Mapping[str, Any], safety: Mapping[str, Any]
 ) -> Literal["works", "promising_but_inconclusive", "does_not_work"]:
@@ -62,25 +104,56 @@ def classify_result(
 
     if _hard_safety_failure(safety):
         return "does_not_work"
-    before_score = _integer(before, "automated_full")
-    after_score = _integer(after, "automated_full")
+    before_inventory = _result_inventory(before)
+    after_inventory = _result_inventory(after)
+    if before_inventory is None or after_inventory is None:
+        return "does_not_work"
+    before_evidence, before_automated = before_inventory
+    after_evidence, after_automated = after_inventory
+    if (
+        before["automated_full"],
+        before["evidence_full"],
+        before["evidence_partial"],
+        before["evidence_absent"],
+    ) != (40, 57, 3, 2):
+        return "does_not_work"
+    before_score = before["automated_full"]
+    after_score = after["automated_full"]
     supported_improvement = after_score > before_score
     if not supported_improvement:
         return "does_not_work"
 
-    no_evidence_regression = (
-        _integer(after, "evidence_full") >= _integer(before, "evidence_full")
-        and (
-            _integer(after, "evidence_full") + _integer(after, "evidence_partial")
-            >= _integer(before, "evidence_full") + _integer(before, "evidence_partial")
-        )
-        and _integer(after, "evidence_absent") <= _integer(before, "evidence_absent")
+    no_evidence_regression = all(
+        _EVIDENCE_STATUSES[after_evidence[requirement_id]]
+        >= _EVIDENCE_STATUSES[before_status]
+        for requirement_id, before_status in before_evidence.items()
     )
+    recovered_partial_or_absent = sum(
+        before_status in {"partial", "absent"}
+        and after_evidence[requirement_id] == "full"
+        for requirement_id, before_status in before_evidence.items()
+    )
+    recovered_absent = sum(
+        before_status == "absent" and after_evidence[requirement_id] == "full"
+        for requirement_id, before_status in before_evidence.items()
+    )
+    deterministic_undercounts_recovered = sum(
+        not before_automated[requirement_id] and after_automated[requirement_id]
+        for requirement_id in before_automated
+    )
+    counters_match = (
+        _counter(after, "recovered_partial_or_absent") == recovered_partial_or_absent
+        and _counter(after, "recovered_absent") == recovered_absent
+        and _counter(after, "deterministic_undercounts_recovered")
+        == deterministic_undercounts_recovered
+    )
+    if not counters_match:
+        return "does_not_work"
     recovery_gate = (
-        _integer(after, "recovered_partial_or_absent") >= 2
+        recovered_partial_or_absent >= 2
         or (
-            _integer(after, "recovered_absent") >= 1
-            and _integer(after, "deterministic_undercounts_recovered") >= 5
+            recovered_absent >= 1
+            and deterministic_undercounts_recovered >= 5
         )
     )
     if after_score >= 45 and no_evidence_regression and recovery_gate:

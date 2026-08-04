@@ -8,7 +8,7 @@ import re
 from typing import Any
 
 
-_PROPOSAL_FIELDS = {
+_REQUIRED_PROPOSAL_FIELDS = {
     "proposal_id",
     "proposal_type",
     "experiment_id",
@@ -18,8 +18,12 @@ _PROPOSAL_FIELDS = {
     "evidence_ids",
     "quoted_support",
 }
+_OPTIONAL_PROPOSAL_FIELDS = {"record_id", "fact_id", "entity_ids", "arm_id"}
 _PROPOSAL_TYPES = {"add_fact", "replace_fact", "flag_record"}
-_NUMBER = re.compile(r"(?<![A-Za-z0-9])[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?")
+_MEASUREMENT = re.compile(
+    r"(?<![A-Za-z0-9])(?P<number>[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)"
+    r"(?![A-Za-z0-9])(?:\s*(?P<unit>[A-Za-zµμ%][A-Za-zµμ%0-9/^.-]*))?"
+)
 
 
 def _string_list(value: Any) -> bool:
@@ -31,7 +35,9 @@ def _string_list(value: Any) -> bool:
 
 
 def _proposal_issues(proposal: Mapping[str, Any]) -> list[str]:
-    if set(proposal) != _PROPOSAL_FIELDS:
+    if not _REQUIRED_PROPOSAL_FIELDS <= set(proposal) or not set(proposal) <= (
+        _REQUIRED_PROPOSAL_FIELDS | _OPTIONAL_PROPOSAL_FIELDS
+    ):
         return ["malformed_proposal"]
     if not isinstance(proposal.get("proposal_id"), str) or not proposal["proposal_id"]:
         return ["malformed_proposal"]
@@ -48,6 +54,17 @@ def _proposal_issues(proposal: Mapping[str, Any]) -> list[str]:
         return ["malformed_proposal"]
     if not isinstance(proposal.get("quoted_support"), str) or not proposal["quoted_support"]:
         return ["malformed_proposal"]
+    for name in ("record_id", "fact_id", "arm_id"):
+        if name in proposal and (
+            not isinstance(proposal[name], str) or not proposal[name]
+        ):
+            return ["malformed_proposal"]
+    if "entity_ids" in proposal and not _string_list(proposal["entity_ids"]):
+        return ["malformed_proposal"]
+    if proposal["proposal_type"] == "replace_fact" and (
+        "record_id" not in proposal or "fact_id" not in proposal
+    ):
+        return ["missing_replacement_target"]
     return []
 
 
@@ -111,6 +128,28 @@ def _unique_reasons(reasons: list[str]) -> list[str]:
     return list(dict.fromkeys(reasons))
 
 
+def _measurements(value: str) -> list[tuple[str, str | None]]:
+    """Extract boundary-aware number/unit pairs, preserving exact numeric text."""
+
+    return [
+        (match.group("number"), match.group("unit").rstrip(".") if match.group("unit") else None)
+        for match in _MEASUREMENT.finditer(value)
+    ]
+
+
+def _numeric_values_supported(raw_values: Sequence[str], quote: str) -> bool:
+    quote_measurements = _measurements(quote)
+    for raw_value in raw_values:
+        for number, unit in _measurements(raw_value):
+            if not any(
+                number == quoted_number
+                and unit == quoted_unit
+                for quoted_number, quoted_unit in quote_measurements
+            ):
+                return False
+    return True
+
+
 def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) -> dict[str, Any]:
     """Return an acceptance decision without reading reference or gold artifacts.
 
@@ -127,8 +166,6 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
         }
     proposed = deepcopy(dict(proposal))
     reasons = _proposal_issues(proposal)
-    if "record_id" in proposal:
-        reasons.append("unknown_record_id")
     if reasons:
         return {
             "accepted": False,
@@ -152,8 +189,30 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
         reasons.append("unknown_experiment_id")
     if candidate_id is not None and candidate_id not in candidate_ids:
         reasons.append("unknown_candidate_id")
+    for field_name, issued_name, reason in (
+        ("record_id", "record_ids", "unknown_record_id"),
+        ("fact_id", "fact_ids", "unknown_fact_id"),
+        ("arm_id", "arm_ids", "unknown_arm_id"),
+    ):
+        if field_name in proposal and proposal[field_name] not in _issued_strings(packet, issued_name):
+            reasons.append(reason)
+    if "entity_ids" in proposal:
+        issued_entities = _issued_strings(packet, "entity_ids")
+        if any(entity_id not in issued_entities for entity_id in proposal["entity_ids"]):
+            reasons.append("unknown_entity_id")
     if candidate_id is not None and experiment_id is None:
         reasons.append("wrong_arm_link")
+
+    arm_id = proposal.get("arm_id")
+    if isinstance(arm_id, str):
+        issued = packet.get("issued_ids")
+        arm_links = issued.get("arm_links") if isinstance(issued, Mapping) else None
+        arm_link = arm_links.get(arm_id) if isinstance(arm_links, Mapping) else None
+        if isinstance(arm_link, Mapping) and (
+            arm_link.get("experiment_id") != experiment_id
+            or arm_link.get("candidate_id") != candidate_id
+        ):
+            reasons.append("wrong_arm_link")
 
     pairs = _experiment_candidate_pairs(packet.get("current_merged_facts"))
     if experiment_id is not None and experiment_id in pairs:
@@ -161,27 +220,38 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
         if expected_candidate != candidate_id:
             reasons.append("wrong_arm_link")
 
+    quote = proposal["quoted_support"]
+    supporters: list[str] = []
+    has_quote_match = False
+    for evidence_id in proposal["evidence_ids"]:
+        row = evidence_by_id.get(evidence_id)
+        if row is None:
+            continue
+        excerpt = row["excerpt"]
+        if quote in excerpt:
+            has_quote_match = True
+            if _numeric_values_supported(proposal["raw_values"], quote):
+                supporters.append(evidence_id)
+    if not has_quote_match:
+        reasons.append("quote_mismatch")
+    elif not supporters:
+        reasons.append("unsupported_exact_number")
+    else:
+        proposed["evidence_ids"] = supporters
+
     if experiment_id is not None:
-        for evidence_id in proposal["evidence_ids"]:
+        single_experiment_scope = (
+            packet.get("packet_type") == "experiment" and len(experiment_ids) == 1
+        )
+        for evidence_id in supporters:
             row = evidence_by_id.get(evidence_id)
             if row is None:
                 continue
             declared_experiments = _declared_evidence_experiments(row)
-            if declared_experiments and experiment_id not in declared_experiments:
+            if declared_experiments and declared_experiments != {experiment_id}:
                 reasons.append("cross_experiment_evidence")
-
-    quote = proposal["quoted_support"]
-    cited_excerpts = [
-        evidence_by_id[evidence_id]["excerpt"]
-        for evidence_id in proposal["evidence_ids"]
-        if evidence_id in evidence_by_id
-    ]
-    if cited_excerpts and not any(quote in excerpt for excerpt in cited_excerpts):
-        reasons.append("quote_mismatch")
-    for raw_value in proposal["raw_values"]:
-        for number in _NUMBER.findall(raw_value):
-            if number not in quote:
-                reasons.append("unsupported_exact_number")
+            elif not declared_experiments and not single_experiment_scope:
+                reasons.append("cross_experiment_evidence")
 
     reasons = _unique_reasons(reasons)
     return {
@@ -206,6 +276,8 @@ def _fact_from_proposal(proposal: Mapping[str, Any]) -> dict[str, Any]:
         "raw_values": list(proposal["raw_values"]),
         "evidence_ids": list(proposal["evidence_ids"]),
         "audit_provenance": _proposal_provenance(proposal),
+        **({"record_id": proposal["record_id"]} if "record_id" in proposal else {}),
+        **({"fact_id": proposal["fact_id"]} if "fact_id" in proposal else {}),
     }
 
 
@@ -237,11 +309,17 @@ def _apply_fact_proposal(audited: dict[str, Any], proposal: Mapping[str, Any]) -
         facts.append(_fact_from_proposal(proposal))
         return
     if proposal["proposal_type"] == "replace_fact":
-        for index, fact in enumerate(facts):
-            if isinstance(fact, Mapping) and fact.get("field_name") == proposal["field_name"]:
-                facts[index] = _fact_from_proposal(proposal)
-                return
-        raise ValueError("accepted replacement targets no baseline fact")
+        targets = [
+            index
+            for index, fact in enumerate(facts)
+            if isinstance(fact, Mapping)
+            and fact.get("fact_id") == proposal["fact_id"]
+            and fact.get("record_id") == proposal["record_id"]
+        ]
+        if len(targets) != 1:
+            raise ValueError("accepted replacement must target one unique baseline fact")
+        facts[targets[0]] = _fact_from_proposal(proposal)
+        return
     findings = audited.setdefault("validation_findings", [])
     if not isinstance(findings, list):
         raise ValueError("baseline validation_findings must be a list")
