@@ -19,6 +19,11 @@ Automatic invocation for future papers, generalized manifests, database integrat
 5. Merge accepted patches into a copy of the baseline; never modify accepted production artifacts.
 6. After all model calls finish, score baseline and corrected results against the same hidden benchmark.
 
+Retained-run finalization is provider-free. It must verify that the sealed packet
+manifest and every issued packet have terminal results before loading hidden
+reference files. The scorer applies the saved requirement-to-experiment bindings
+to both baseline and audited copies so the fixed 62-item inventory is identical.
+
 ## Test Decision
 
 - **Works:** no hard safety failure, no evidence-level regression from 57 full / 3 partial / 2 absent, automated score reaches at least 45/62 from 40/62, and at least two partial/absent requirements become fully supported or one absence plus five deterministic undercounts are recovered.
@@ -30,6 +35,11 @@ The classification is evidence for the next engineering decision; it does not au
 ## Safety and Failure Handling
 
 Codex receives read-only inputs and returns proposals only. Every proposal is validated locally. Unsupported or malformed output is rejected without changing the baseline. Each attempted packet receives a terminal status. A CLI failure preserves the raw attempt and the original merged record. The benchmark makes zero new OpenAI API extraction calls.
+
+With concurrency two, the three-consecutive-systemic-failure breaker can have at
+most one terminal overshoot: one packet already issued alongside the third
+ordered failure may finish before issuance stops. No further packet is submitted
+after the breaker trips.
 
 ## Deliverables
 

@@ -1,0 +1,67 @@
+{
+  "run_id": "2026-08-04-codex-audit-e2e-v4",
+  "issued_packets": 28,
+  "terminal_packets": 28,
+  "terminal_dispositions": {
+    "accepted": 27,
+    "schema_failure": 1
+  },
+  "proposal_accounting": {
+    "proposed": 88,
+    "accepted": 46,
+    "rejected": 42,
+    "rejection_reasons": {
+      "cross_experiment_evidence": 5,
+      "posthoc_raw_value_mismatch": 12,
+      "quote_mismatch": 5,
+      "unsupported_exact_number": 23,
+      "wrong_arm_link": 5
+    }
+  },
+  "posthoc_raw_value_review": {
+    "mismatch_count": 12,
+    "mismatch_only_count": 9,
+    "classification": "posthoc_raw_value_mismatch",
+    "hard_safety_count": 0,
+    "interpretation": "Literal raw-value absence from quoted support is not proof of an unsupported or invented scientific fact."
+  },
+  "usage": {
+    "input_tokens": 559386,
+    "output_tokens": 23444,
+    "cached_input_tokens": 60160,
+    "attempts_missing_token_measurement": 0,
+    "attempt_count": 28,
+    "latency_seconds": 702.6902099172585
+  },
+  "model_telemetry": {
+    "selector": "hosted-default",
+    "actual_model": null,
+    "codex_cli_version": "codex-cli-0.146.0-alpha.3.1",
+    "reason": "Codex JSONL did not report the resolved model; retained runner selection was hosted-default."
+  },
+  "gold_isolation": {
+    "passed": true,
+    "checked_after_terminal_gate": true,
+    "sealed_packet_manifest_hash_verified": true,
+    "sealed_packet_hashes_verified": true,
+    "output_schema_bytes_verified": true,
+    "persisted_attempt_and_final_message_consistency_verified": true,
+    "recorded_proof_file_hashes_verified": true,
+    "recursive_key_scan": true,
+    "recursive_model_visible_string_scan": true,
+    "marker_policy": "exact_forbidden_marker_families"
+  },
+  "safety": {
+    "gold_leakage": 0,
+    "accepted_unsupported_or_invented_fact": 0,
+    "accepted_wrong_relationship": 0,
+    "three_consecutive_systemic_failures": 0,
+    "production_writes": 0,
+    "paid_api_requests": 0
+  },
+  "concurrency_two_circuit_breaker": {
+    "consecutive_failure_threshold": 3,
+    "maximum_terminal_overshoot": 1,
+    "reason": "one already-issued packet may finish after the third ordered failure"
+  }
+}

@@ -989,3 +989,41 @@ def test_production_extraction_modules_do_not_import_evaluator_or_keys() -> None
             forbidden_imports[str(path.relative_to(repository))] = forbidden
 
     assert forbidden_imports == {}
+
+
+def test_bound_scorer_reproduces_authoritative_cached_requirement_inventory():
+    repository = Path(__file__).resolve().parents[1]
+    report = json.loads(
+        (repository / "reports/extraction/application_pilot_final.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    reference = {
+        "papers": [
+            json.loads(path.read_text(encoding="utf-8"))
+            for path in sorted(
+                (repository / "data/benchmarks/application_pilot").glob(
+                    "PILOT-*.json"
+                )
+            )
+        ]
+    }
+
+    score = evaluate_application_requirements(
+        report["extraction"],
+        reference,
+        evidence_grounded=True,
+        reference_bindings=report["reference_bindings"],
+    )
+
+    authoritative = report["evidence_grounded_score"]
+    assert score.matched_reference_count == 40
+    assert score.reference_denominator == 62
+    assert score.missing_reference_ids == authoritative["missing_reference_ids"]
+    assert {
+        name: (row.numerator, row.denominator)
+        for name, row in score.categories.items()
+    } == {
+        name: (row["numerator"], row["denominator"])
+        for name, row in authoritative["categories"].items()
+    }

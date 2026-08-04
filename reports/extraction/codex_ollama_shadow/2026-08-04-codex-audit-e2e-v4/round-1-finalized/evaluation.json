@@ -1,0 +1,869 @@
+{
+  "run_id": "2026-08-04-codex-audit-e2e-v4",
+  "authoritative_requirement_count": 62,
+  "scorer": {
+    "binding_count": 39,
+    "same_requirement_inventory_before_after": true,
+    "cached_extraction": {
+      "evaluation_version": "application-requirements-score-1.0.0",
+      "categories": {
+        "formulation": {
+          "numerator": 18,
+          "denominator": 22,
+          "recall": 0.8181818181818182
+        },
+        "payload_administration": {
+          "numerator": 4,
+          "denominator": 10,
+          "recall": 0.4
+        },
+        "biological_model": {
+          "numerator": 6,
+          "denominator": 9,
+          "recall": 0.6666666666666666
+        },
+        "assay": {
+          "numerator": 3,
+          "denominator": 7,
+          "recall": 0.42857142857142855
+        },
+        "qualitative_outcome": {
+          "numerator": 6,
+          "denominator": 10,
+          "recall": 0.6
+        },
+        "exact_numeric": {
+          "numerator": 3,
+          "denominator": 4,
+          "recall": 0.75
+        },
+        "provenance": {
+          "numerator": 0,
+          "denominator": 0,
+          "recall": 0.0
+        }
+      },
+      "per_paper_categories": {
+        "PILOT-001": {
+          "formulation": {
+            "numerator": 6,
+            "denominator": 7,
+            "recall": 0.8571428571428571
+          },
+          "payload_administration": {
+            "numerator": 2,
+            "denominator": 3,
+            "recall": 0.6666666666666666
+          },
+          "biological_model": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "qualitative_outcome": {
+            "numerator": 2,
+            "denominator": 2,
+            "recall": 1.0
+          },
+          "exact_numeric": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        },
+        "PILOT-002": {
+          "formulation": {
+            "numerator": 7,
+            "denominator": 8,
+            "recall": 0.875
+          },
+          "payload_administration": {
+            "numerator": 1,
+            "denominator": 4,
+            "recall": 0.25
+          },
+          "biological_model": {
+            "numerator": 3,
+            "denominator": 3,
+            "recall": 1.0
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "qualitative_outcome": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "exact_numeric": {
+            "numerator": 2,
+            "denominator": 2,
+            "recall": 1.0
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        },
+        "PILOT-003": {
+          "formulation": {
+            "numerator": 5,
+            "denominator": 7,
+            "recall": 0.7142857142857143
+          },
+          "payload_administration": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "biological_model": {
+            "numerator": 2,
+            "denominator": 3,
+            "recall": 0.6666666666666666
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "qualitative_outcome": {
+            "numerator": 3,
+            "denominator": 6,
+            "recall": 0.5
+          },
+          "exact_numeric": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        }
+      },
+      "per_paper_recall": {
+        "PILOT-001": 0.6842105263157895,
+        "PILOT-002": 0.7142857142857143,
+        "PILOT-003": 0.5454545454545454
+      },
+      "overall_recall": 0.6451612903225806,
+      "precision": 0.091324200913242,
+      "matched_reference_count": 40,
+      "reference_denominator": 62,
+      "matched_extracted_fact_count": 40,
+      "extracted_fact_count": 438,
+      "wrong_arm_link_count": 5,
+      "invented_id_count": 7,
+      "unsupported_numeric_count": 0,
+      "missing_reference_ids": [
+        "APP-PILOT-001-ADMIN-002",
+        "APP-PILOT-001-ASSAY-001",
+        "APP-PILOT-001-FORM-COMP-001",
+        "APP-PILOT-001-MODEL-001",
+        "APP-PILOT-001-MODEL-002",
+        "APP-PILOT-001-NUM-TABLE-001",
+        "APP-PILOT-002-ADMIN-001",
+        "APP-PILOT-002-ADMIN-002",
+        "APP-PILOT-002-ASSAY-002",
+        "APP-PILOT-002-FORM-COMP-001",
+        "APP-PILOT-002-OUT-001",
+        "APP-PILOT-002-PAYLOAD-001",
+        "APP-PILOT-003-ADMIN-002",
+        "APP-PILOT-003-ASSAY-002",
+        "APP-PILOT-003-ASSAY-003",
+        "APP-PILOT-003-FORM-COMP-001",
+        "APP-PILOT-003-FORM-COMP-002",
+        "APP-PILOT-003-MODEL-002",
+        "APP-PILOT-003-OUT-001",
+        "APP-PILOT-003-OUT-002-ALT",
+        "APP-PILOT-003-OUT-002-HCC",
+        "APP-PILOT-003-PAYLOAD-001"
+      ]
+    },
+    "clean_replay": {
+      "evaluation_version": "application-requirements-score-1.0.0",
+      "categories": {
+        "formulation": {
+          "numerator": 18,
+          "denominator": 22,
+          "recall": 0.8181818181818182
+        },
+        "payload_administration": {
+          "numerator": 4,
+          "denominator": 10,
+          "recall": 0.4
+        },
+        "biological_model": {
+          "numerator": 6,
+          "denominator": 9,
+          "recall": 0.6666666666666666
+        },
+        "assay": {
+          "numerator": 3,
+          "denominator": 7,
+          "recall": 0.42857142857142855
+        },
+        "qualitative_outcome": {
+          "numerator": 6,
+          "denominator": 10,
+          "recall": 0.6
+        },
+        "exact_numeric": {
+          "numerator": 3,
+          "denominator": 4,
+          "recall": 0.75
+        },
+        "provenance": {
+          "numerator": 0,
+          "denominator": 0,
+          "recall": 0.0
+        }
+      },
+      "per_paper_categories": {
+        "PILOT-001": {
+          "formulation": {
+            "numerator": 6,
+            "denominator": 7,
+            "recall": 0.8571428571428571
+          },
+          "payload_administration": {
+            "numerator": 2,
+            "denominator": 3,
+            "recall": 0.6666666666666666
+          },
+          "biological_model": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "qualitative_outcome": {
+            "numerator": 2,
+            "denominator": 2,
+            "recall": 1.0
+          },
+          "exact_numeric": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        },
+        "PILOT-002": {
+          "formulation": {
+            "numerator": 7,
+            "denominator": 8,
+            "recall": 0.875
+          },
+          "payload_administration": {
+            "numerator": 1,
+            "denominator": 4,
+            "recall": 0.25
+          },
+          "biological_model": {
+            "numerator": 3,
+            "denominator": 3,
+            "recall": 1.0
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "qualitative_outcome": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "exact_numeric": {
+            "numerator": 2,
+            "denominator": 2,
+            "recall": 1.0
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        },
+        "PILOT-003": {
+          "formulation": {
+            "numerator": 5,
+            "denominator": 7,
+            "recall": 0.7142857142857143
+          },
+          "payload_administration": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "biological_model": {
+            "numerator": 2,
+            "denominator": 3,
+            "recall": 0.6666666666666666
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "qualitative_outcome": {
+            "numerator": 3,
+            "denominator": 6,
+            "recall": 0.5
+          },
+          "exact_numeric": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        }
+      },
+      "per_paper_recall": {
+        "PILOT-001": 0.6842105263157895,
+        "PILOT-002": 0.7142857142857143,
+        "PILOT-003": 0.5454545454545454
+      },
+      "overall_recall": 0.6451612903225806,
+      "precision": 0.09153318077803203,
+      "matched_reference_count": 40,
+      "reference_denominator": 62,
+      "matched_extracted_fact_count": 40,
+      "extracted_fact_count": 437,
+      "wrong_arm_link_count": 5,
+      "invented_id_count": 7,
+      "unsupported_numeric_count": 0,
+      "missing_reference_ids": [
+        "APP-PILOT-001-ADMIN-002",
+        "APP-PILOT-001-ASSAY-001",
+        "APP-PILOT-001-FORM-COMP-001",
+        "APP-PILOT-001-MODEL-001",
+        "APP-PILOT-001-MODEL-002",
+        "APP-PILOT-001-NUM-TABLE-001",
+        "APP-PILOT-002-ADMIN-001",
+        "APP-PILOT-002-ADMIN-002",
+        "APP-PILOT-002-ASSAY-002",
+        "APP-PILOT-002-FORM-COMP-001",
+        "APP-PILOT-002-OUT-001",
+        "APP-PILOT-002-PAYLOAD-001",
+        "APP-PILOT-003-ADMIN-002",
+        "APP-PILOT-003-ASSAY-002",
+        "APP-PILOT-003-ASSAY-003",
+        "APP-PILOT-003-FORM-COMP-001",
+        "APP-PILOT-003-FORM-COMP-002",
+        "APP-PILOT-003-MODEL-002",
+        "APP-PILOT-003-OUT-001",
+        "APP-PILOT-003-OUT-002-ALT",
+        "APP-PILOT-003-OUT-002-HCC",
+        "APP-PILOT-003-PAYLOAD-001"
+      ]
+    },
+    "audited_copy": {
+      "evaluation_version": "application-requirements-score-1.0.0",
+      "categories": {
+        "formulation": {
+          "numerator": 18,
+          "denominator": 22,
+          "recall": 0.8181818181818182
+        },
+        "payload_administration": {
+          "numerator": 5,
+          "denominator": 10,
+          "recall": 0.5
+        },
+        "biological_model": {
+          "numerator": 6,
+          "denominator": 9,
+          "recall": 0.6666666666666666
+        },
+        "assay": {
+          "numerator": 3,
+          "denominator": 7,
+          "recall": 0.42857142857142855
+        },
+        "qualitative_outcome": {
+          "numerator": 6,
+          "denominator": 10,
+          "recall": 0.6
+        },
+        "exact_numeric": {
+          "numerator": 3,
+          "denominator": 4,
+          "recall": 0.75
+        },
+        "provenance": {
+          "numerator": 0,
+          "denominator": 0,
+          "recall": 0.0
+        }
+      },
+      "per_paper_categories": {
+        "PILOT-001": {
+          "formulation": {
+            "numerator": 6,
+            "denominator": 7,
+            "recall": 0.8571428571428571
+          },
+          "payload_administration": {
+            "numerator": 2,
+            "denominator": 3,
+            "recall": 0.6666666666666666
+          },
+          "biological_model": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "qualitative_outcome": {
+            "numerator": 2,
+            "denominator": 2,
+            "recall": 1.0
+          },
+          "exact_numeric": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        },
+        "PILOT-002": {
+          "formulation": {
+            "numerator": 7,
+            "denominator": 8,
+            "recall": 0.875
+          },
+          "payload_administration": {
+            "numerator": 2,
+            "denominator": 4,
+            "recall": 0.5
+          },
+          "biological_model": {
+            "numerator": 3,
+            "denominator": 3,
+            "recall": 1.0
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "qualitative_outcome": {
+            "numerator": 1,
+            "denominator": 2,
+            "recall": 0.5
+          },
+          "exact_numeric": {
+            "numerator": 2,
+            "denominator": 2,
+            "recall": 1.0
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        },
+        "PILOT-003": {
+          "formulation": {
+            "numerator": 5,
+            "denominator": 7,
+            "recall": 0.7142857142857143
+          },
+          "payload_administration": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "biological_model": {
+            "numerator": 2,
+            "denominator": 3,
+            "recall": 0.6666666666666666
+          },
+          "assay": {
+            "numerator": 1,
+            "denominator": 3,
+            "recall": 0.3333333333333333
+          },
+          "qualitative_outcome": {
+            "numerator": 3,
+            "denominator": 6,
+            "recall": 0.5
+          },
+          "exact_numeric": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          },
+          "provenance": {
+            "numerator": 0,
+            "denominator": 0,
+            "recall": 0.0
+          }
+        }
+      },
+      "per_paper_recall": {
+        "PILOT-001": 0.6842105263157895,
+        "PILOT-002": 0.7619047619047619,
+        "PILOT-003": 0.5454545454545454
+      },
+      "overall_recall": 0.6612903225806451,
+      "precision": 0.09297052154195011,
+      "matched_reference_count": 41,
+      "reference_denominator": 62,
+      "matched_extracted_fact_count": 41,
+      "extracted_fact_count": 441,
+      "wrong_arm_link_count": 5,
+      "invented_id_count": 7,
+      "unsupported_numeric_count": 0,
+      "missing_reference_ids": [
+        "APP-PILOT-001-ADMIN-002",
+        "APP-PILOT-001-ASSAY-001",
+        "APP-PILOT-001-FORM-COMP-001",
+        "APP-PILOT-001-MODEL-001",
+        "APP-PILOT-001-MODEL-002",
+        "APP-PILOT-001-NUM-TABLE-001",
+        "APP-PILOT-002-ADMIN-002",
+        "APP-PILOT-002-ASSAY-002",
+        "APP-PILOT-002-FORM-COMP-001",
+        "APP-PILOT-002-OUT-001",
+        "APP-PILOT-002-PAYLOAD-001",
+        "APP-PILOT-003-ADMIN-002",
+        "APP-PILOT-003-ASSAY-002",
+        "APP-PILOT-003-ASSAY-003",
+        "APP-PILOT-003-FORM-COMP-001",
+        "APP-PILOT-003-FORM-COMP-002",
+        "APP-PILOT-003-MODEL-002",
+        "APP-PILOT-003-OUT-001",
+        "APP-PILOT-003-OUT-002-ALT",
+        "APP-PILOT-003-OUT-002-HCC",
+        "APP-PILOT-003-PAYLOAD-001"
+      ]
+    }
+  },
+  "before": {
+    "automated_full": 40,
+    "evidence_full": 57,
+    "evidence_partial": 3,
+    "evidence_absent": 2,
+    "recovered_partial_or_absent": 0,
+    "recovered_absent": 0,
+    "deterministic_undercounts_recovered": 0,
+    "evidence_statuses": {
+      "APP-PILOT-001-FORM-COMP-001": "full",
+      "APP-PILOT-001-FORM-COMP-002": "full",
+      "APP-PILOT-001-FORM-COMP-003": "full",
+      "APP-PILOT-001-FORM-COMP-004": "full",
+      "APP-PILOT-001-FORM-002": "full",
+      "APP-PILOT-001-FORM-003": "full",
+      "APP-PILOT-001-FORM-004": "full",
+      "APP-PILOT-001-PAYLOAD-001": "full",
+      "APP-PILOT-001-ADMIN-001": "full",
+      "APP-PILOT-001-ADMIN-002": "partial",
+      "APP-PILOT-001-MODEL-001": "full",
+      "APP-PILOT-001-MODEL-002": "full",
+      "APP-PILOT-001-MODEL-003": "full",
+      "APP-PILOT-001-ASSAY-001": "full",
+      "APP-PILOT-001-ASSAY-002": "full",
+      "APP-PILOT-001-OUT-001": "full",
+      "APP-PILOT-001-NUM-001": "full",
+      "APP-PILOT-001-NUM-TABLE-001": "absent",
+      "APP-PILOT-001-OUT-002": "full",
+      "APP-PILOT-002-FORM-COMP-001": "partial",
+      "APP-PILOT-002-FORM-COMP-002": "full",
+      "APP-PILOT-002-FORM-COMP-003": "full",
+      "APP-PILOT-002-FORM-COMP-004": "full",
+      "APP-PILOT-002-FORM-002": "full",
+      "APP-PILOT-002-FORM-003": "full",
+      "APP-PILOT-002-FORM-004": "full",
+      "APP-PILOT-002-FORM-006": "full",
+      "APP-PILOT-002-PAYLOAD-001": "full",
+      "APP-PILOT-002-ADMIN-001": "partial",
+      "APP-PILOT-002-ADMIN-002": "full",
+      "APP-PILOT-002-MODEL-001": "full",
+      "APP-PILOT-002-MODEL-002": "full",
+      "APP-PILOT-002-MODEL-003": "full",
+      "APP-PILOT-002-ASSAY-001": "full",
+      "APP-PILOT-002-ASSAY-002": "absent",
+      "APP-PILOT-002-OUT-001": "full",
+      "APP-PILOT-002-NUM-001": "full",
+      "APP-PILOT-002-NUM-002": "full",
+      "APP-PILOT-002-PAYLOAD-002": "full",
+      "APP-PILOT-002-OUT-002": "full",
+      "APP-PILOT-003-FORM-COMP-001": "full",
+      "APP-PILOT-003-FORM-COMP-002": "full",
+      "APP-PILOT-003-FORM-COMP-003": "full",
+      "APP-PILOT-003-FORM-COMP-004": "full",
+      "APP-PILOT-003-FORM-002": "full",
+      "APP-PILOT-003-FORM-003": "full",
+      "APP-PILOT-003-FORM-004": "full",
+      "APP-PILOT-003-PAYLOAD-001": "full",
+      "APP-PILOT-003-ADMIN-001": "full",
+      "APP-PILOT-003-ADMIN-002": "full",
+      "APP-PILOT-003-MODEL-001": "full",
+      "APP-PILOT-003-MODEL-002": "full",
+      "APP-PILOT-003-MODEL-003": "full",
+      "APP-PILOT-003-ASSAY-001": "full",
+      "APP-PILOT-003-ASSAY-002": "full",
+      "APP-PILOT-003-ASSAY-003": "full",
+      "APP-PILOT-003-OUT-001": "full",
+      "APP-PILOT-003-OUT-002-HCC": "full",
+      "APP-PILOT-003-OUT-002-COLLAGEN": "full",
+      "APP-PILOT-003-OUT-002-ALT": "full",
+      "APP-PILOT-003-OUT-003-APOPTOSIS": "full",
+      "APP-PILOT-003-OUT-003-PROLIFERATION": "full"
+    },
+    "automated_statuses": {
+      "APP-PILOT-001-ADMIN-001": true,
+      "APP-PILOT-001-ADMIN-002": false,
+      "APP-PILOT-001-ASSAY-001": false,
+      "APP-PILOT-001-ASSAY-002": true,
+      "APP-PILOT-001-FORM-002": true,
+      "APP-PILOT-001-FORM-003": true,
+      "APP-PILOT-001-FORM-004": true,
+      "APP-PILOT-001-FORM-COMP-001": false,
+      "APP-PILOT-001-FORM-COMP-002": true,
+      "APP-PILOT-001-FORM-COMP-003": true,
+      "APP-PILOT-001-FORM-COMP-004": true,
+      "APP-PILOT-001-MODEL-001": false,
+      "APP-PILOT-001-MODEL-002": false,
+      "APP-PILOT-001-MODEL-003": true,
+      "APP-PILOT-001-NUM-001": true,
+      "APP-PILOT-001-NUM-TABLE-001": false,
+      "APP-PILOT-001-OUT-001": true,
+      "APP-PILOT-001-OUT-002": true,
+      "APP-PILOT-001-PAYLOAD-001": true,
+      "APP-PILOT-002-ADMIN-001": false,
+      "APP-PILOT-002-ADMIN-002": false,
+      "APP-PILOT-002-ASSAY-001": true,
+      "APP-PILOT-002-ASSAY-002": false,
+      "APP-PILOT-002-FORM-002": true,
+      "APP-PILOT-002-FORM-003": true,
+      "APP-PILOT-002-FORM-004": true,
+      "APP-PILOT-002-FORM-006": true,
+      "APP-PILOT-002-FORM-COMP-001": false,
+      "APP-PILOT-002-FORM-COMP-002": true,
+      "APP-PILOT-002-FORM-COMP-003": true,
+      "APP-PILOT-002-FORM-COMP-004": true,
+      "APP-PILOT-002-MODEL-001": true,
+      "APP-PILOT-002-MODEL-002": true,
+      "APP-PILOT-002-MODEL-003": true,
+      "APP-PILOT-002-NUM-001": true,
+      "APP-PILOT-002-NUM-002": true,
+      "APP-PILOT-002-OUT-001": false,
+      "APP-PILOT-002-OUT-002": true,
+      "APP-PILOT-002-PAYLOAD-001": false,
+      "APP-PILOT-002-PAYLOAD-002": true,
+      "APP-PILOT-003-ADMIN-001": true,
+      "APP-PILOT-003-ADMIN-002": false,
+      "APP-PILOT-003-ASSAY-001": true,
+      "APP-PILOT-003-ASSAY-002": false,
+      "APP-PILOT-003-ASSAY-003": false,
+      "APP-PILOT-003-FORM-002": true,
+      "APP-PILOT-003-FORM-003": true,
+      "APP-PILOT-003-FORM-004": true,
+      "APP-PILOT-003-FORM-COMP-001": false,
+      "APP-PILOT-003-FORM-COMP-002": false,
+      "APP-PILOT-003-FORM-COMP-003": true,
+      "APP-PILOT-003-FORM-COMP-004": true,
+      "APP-PILOT-003-MODEL-001": true,
+      "APP-PILOT-003-MODEL-002": false,
+      "APP-PILOT-003-MODEL-003": true,
+      "APP-PILOT-003-OUT-001": false,
+      "APP-PILOT-003-OUT-002-ALT": false,
+      "APP-PILOT-003-OUT-002-COLLAGEN": true,
+      "APP-PILOT-003-OUT-002-HCC": false,
+      "APP-PILOT-003-OUT-003-APOPTOSIS": true,
+      "APP-PILOT-003-OUT-003-PROLIFERATION": true,
+      "APP-PILOT-003-PAYLOAD-001": false
+    }
+  },
+  "after": {
+    "deterministic_undercounts_recovered": 1,
+    "automated_full": 41,
+    "evidence_full": 58,
+    "evidence_partial": 2,
+    "evidence_absent": 2,
+    "recovered_partial_or_absent": 1,
+    "recovered_absent": 0,
+    "evidence_statuses": {
+      "APP-PILOT-001-FORM-COMP-001": "full",
+      "APP-PILOT-001-FORM-COMP-002": "full",
+      "APP-PILOT-001-FORM-COMP-003": "full",
+      "APP-PILOT-001-FORM-COMP-004": "full",
+      "APP-PILOT-001-FORM-002": "full",
+      "APP-PILOT-001-FORM-003": "full",
+      "APP-PILOT-001-FORM-004": "full",
+      "APP-PILOT-001-PAYLOAD-001": "full",
+      "APP-PILOT-001-ADMIN-001": "full",
+      "APP-PILOT-001-ADMIN-002": "partial",
+      "APP-PILOT-001-MODEL-001": "full",
+      "APP-PILOT-001-MODEL-002": "full",
+      "APP-PILOT-001-MODEL-003": "full",
+      "APP-PILOT-001-ASSAY-001": "full",
+      "APP-PILOT-001-ASSAY-002": "full",
+      "APP-PILOT-001-OUT-001": "full",
+      "APP-PILOT-001-NUM-001": "full",
+      "APP-PILOT-001-NUM-TABLE-001": "absent",
+      "APP-PILOT-001-OUT-002": "full",
+      "APP-PILOT-002-FORM-COMP-001": "partial",
+      "APP-PILOT-002-FORM-COMP-002": "full",
+      "APP-PILOT-002-FORM-COMP-003": "full",
+      "APP-PILOT-002-FORM-COMP-004": "full",
+      "APP-PILOT-002-FORM-002": "full",
+      "APP-PILOT-002-FORM-003": "full",
+      "APP-PILOT-002-FORM-004": "full",
+      "APP-PILOT-002-FORM-006": "full",
+      "APP-PILOT-002-PAYLOAD-001": "full",
+      "APP-PILOT-002-ADMIN-001": "full",
+      "APP-PILOT-002-ADMIN-002": "full",
+      "APP-PILOT-002-MODEL-001": "full",
+      "APP-PILOT-002-MODEL-002": "full",
+      "APP-PILOT-002-MODEL-003": "full",
+      "APP-PILOT-002-ASSAY-001": "full",
+      "APP-PILOT-002-ASSAY-002": "absent",
+      "APP-PILOT-002-OUT-001": "full",
+      "APP-PILOT-002-NUM-001": "full",
+      "APP-PILOT-002-NUM-002": "full",
+      "APP-PILOT-002-PAYLOAD-002": "full",
+      "APP-PILOT-002-OUT-002": "full",
+      "APP-PILOT-003-FORM-COMP-001": "full",
+      "APP-PILOT-003-FORM-COMP-002": "full",
+      "APP-PILOT-003-FORM-COMP-003": "full",
+      "APP-PILOT-003-FORM-COMP-004": "full",
+      "APP-PILOT-003-FORM-002": "full",
+      "APP-PILOT-003-FORM-003": "full",
+      "APP-PILOT-003-FORM-004": "full",
+      "APP-PILOT-003-PAYLOAD-001": "full",
+      "APP-PILOT-003-ADMIN-001": "full",
+      "APP-PILOT-003-ADMIN-002": "full",
+      "APP-PILOT-003-MODEL-001": "full",
+      "APP-PILOT-003-MODEL-002": "full",
+      "APP-PILOT-003-MODEL-003": "full",
+      "APP-PILOT-003-ASSAY-001": "full",
+      "APP-PILOT-003-ASSAY-002": "full",
+      "APP-PILOT-003-ASSAY-003": "full",
+      "APP-PILOT-003-OUT-001": "full",
+      "APP-PILOT-003-OUT-002-HCC": "full",
+      "APP-PILOT-003-OUT-002-COLLAGEN": "full",
+      "APP-PILOT-003-OUT-002-ALT": "full",
+      "APP-PILOT-003-OUT-003-APOPTOSIS": "full",
+      "APP-PILOT-003-OUT-003-PROLIFERATION": "full"
+    },
+    "automated_statuses": {
+      "APP-PILOT-001-ADMIN-001": true,
+      "APP-PILOT-001-ADMIN-002": false,
+      "APP-PILOT-001-ASSAY-001": false,
+      "APP-PILOT-001-ASSAY-002": true,
+      "APP-PILOT-001-FORM-002": true,
+      "APP-PILOT-001-FORM-003": true,
+      "APP-PILOT-001-FORM-004": true,
+      "APP-PILOT-001-FORM-COMP-001": false,
+      "APP-PILOT-001-FORM-COMP-002": true,
+      "APP-PILOT-001-FORM-COMP-003": true,
+      "APP-PILOT-001-FORM-COMP-004": true,
+      "APP-PILOT-001-MODEL-001": false,
+      "APP-PILOT-001-MODEL-002": false,
+      "APP-PILOT-001-MODEL-003": true,
+      "APP-PILOT-001-NUM-001": true,
+      "APP-PILOT-001-NUM-TABLE-001": false,
+      "APP-PILOT-001-OUT-001": true,
+      "APP-PILOT-001-OUT-002": true,
+      "APP-PILOT-001-PAYLOAD-001": true,
+      "APP-PILOT-002-ADMIN-001": true,
+      "APP-PILOT-002-ADMIN-002": false,
+      "APP-PILOT-002-ASSAY-001": true,
+      "APP-PILOT-002-ASSAY-002": false,
+      "APP-PILOT-002-FORM-002": true,
+      "APP-PILOT-002-FORM-003": true,
+      "APP-PILOT-002-FORM-004": true,
+      "APP-PILOT-002-FORM-006": true,
+      "APP-PILOT-002-FORM-COMP-001": false,
+      "APP-PILOT-002-FORM-COMP-002": true,
+      "APP-PILOT-002-FORM-COMP-003": true,
+      "APP-PILOT-002-FORM-COMP-004": true,
+      "APP-PILOT-002-MODEL-001": true,
+      "APP-PILOT-002-MODEL-002": true,
+      "APP-PILOT-002-MODEL-003": true,
+      "APP-PILOT-002-NUM-001": true,
+      "APP-PILOT-002-NUM-002": true,
+      "APP-PILOT-002-OUT-001": false,
+      "APP-PILOT-002-OUT-002": true,
+      "APP-PILOT-002-PAYLOAD-001": false,
+      "APP-PILOT-002-PAYLOAD-002": true,
+      "APP-PILOT-003-ADMIN-001": true,
+      "APP-PILOT-003-ADMIN-002": false,
+      "APP-PILOT-003-ASSAY-001": true,
+      "APP-PILOT-003-ASSAY-002": false,
+      "APP-PILOT-003-ASSAY-003": false,
+      "APP-PILOT-003-FORM-002": true,
+      "APP-PILOT-003-FORM-003": true,
+      "APP-PILOT-003-FORM-004": true,
+      "APP-PILOT-003-FORM-COMP-001": false,
+      "APP-PILOT-003-FORM-COMP-002": false,
+      "APP-PILOT-003-FORM-COMP-003": true,
+      "APP-PILOT-003-FORM-COMP-004": true,
+      "APP-PILOT-003-MODEL-001": true,
+      "APP-PILOT-003-MODEL-002": false,
+      "APP-PILOT-003-MODEL-003": true,
+      "APP-PILOT-003-OUT-001": false,
+      "APP-PILOT-003-OUT-002-ALT": false,
+      "APP-PILOT-003-OUT-002-COLLAGEN": true,
+      "APP-PILOT-003-OUT-002-HCC": false,
+      "APP-PILOT-003-OUT-003-APOPTOSIS": true,
+      "APP-PILOT-003-OUT-003-PROLIFERATION": true,
+      "APP-PILOT-003-PAYLOAD-001": false
+    }
+  },
+  "complete_arms": {
+    "before": 2,
+    "after": 2,
+    "total": 7
+  },
+  "evidence_promotion_policy": "A previously partial/absent requirement becomes full only when it changes from unmatched to matched under the same binding-aware, evidence-grounded 62-item scorer.",
+  "safety": {
+    "gold_leakage": 0,
+    "accepted_unsupported_or_invented_fact": 0,
+    "accepted_wrong_relationship": 0,
+    "three_consecutive_systemic_failures": 0,
+    "production_writes": 0,
+    "paid_api_requests": 0
+  },
+  "decision": "promising_but_inconclusive"
+}

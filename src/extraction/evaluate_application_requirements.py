@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from collections.abc import Iterable, Mapping, Sequence
+from copy import deepcopy
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 import re
@@ -343,6 +344,49 @@ def _reference_facts(document: Mapping[str, Any]) -> list[_ReferenceFact]:
                 )
             )
     return facts
+
+
+def bind_reference_experiments(
+    reference: Mapping[str, Any],
+    reference_bindings: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Return a copy whose requirement scopes use saved canonical bindings."""
+
+    bound = deepcopy(dict(reference))
+    rows_by_id: dict[str, tuple[str, dict[str, Any]]] = {}
+    for paper in _papers(bound):
+        paper_id = _first_text(paper, ("paper_id", "id"))
+        if paper_id is None:
+            raise ValueError("each reference paper requires a paper_id")
+        for row in _reference_rows(paper):
+            reference_id = _first_text(
+                row, ("reference_id", "requirement_id", "gold_id", "id")
+            )
+            if reference_id is not None and isinstance(row, dict):
+                rows_by_id[reference_id] = (paper_id, row)
+
+    seen: set[str] = set()
+    for binding in reference_bindings:
+        reference_id = _first_text(binding, ("reference_id", "requirement_id"))
+        paper_id = _first_text(binding, ("paper_id",))
+        experiment_id = _first_text(binding, ("experiment_id", "arm_id"))
+        if reference_id is None or paper_id is None or experiment_id is None:
+            raise ValueError(
+                "each reference binding requires reference_id, paper_id, and experiment_id"
+            )
+        if reference_id in seen:
+            raise ValueError(f"duplicate reference binding: {reference_id}")
+        seen.add(reference_id)
+        target = rows_by_id.get(reference_id)
+        if target is None:
+            raise ValueError(f"unknown bound reference_id: {reference_id}")
+        target_paper_id, target_row = target
+        if target_paper_id != paper_id:
+            raise ValueError(
+                f"reference binding paper mismatch for {reference_id}: {paper_id}"
+            )
+        target_row["experiment_id"] = experiment_id
+    return bound
 
 
 def _canonical_value(field_name: str, value: Any) -> tuple[str, Any]:
@@ -1006,9 +1050,12 @@ def evaluate_application_requirements(
     reference: Mapping[str, Any],
     *,
     evidence_grounded: bool = False,
+    reference_bindings: Sequence[Mapping[str, Any]] | None = None,
 ) -> ApplicationScore:
     """Score merged extraction facts against a separately supplied reference."""
 
+    if reference_bindings is not None:
+        reference = bind_reference_experiments(reference, reference_bindings)
     actual = _actual_facts(extraction)
     expected = _reference_facts(reference)
     matched_reference_ids, matched_actual_indices = _maximum_matches(

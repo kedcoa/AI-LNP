@@ -4,8 +4,15 @@ import json
 from copy import deepcopy
 from pathlib import Path
 
+import pytest
+
 from src.extraction.build_shadow_benchmark import build_audit_packets
 from src.extraction.finalize_shadow_audit import finalize_audit_results
+from src.extraction.finalize_shadow_audit import (
+    _promote_evidence_statuses,
+    build_proposal_ledger,
+    finalize_retained_run,
+)
 
 
 def _packet() -> dict:
@@ -184,3 +191,137 @@ def test_finalize_audit_results_issues_live_replay_replacement_targets(tmp_path)
     fact = audited["PILOT-900"]["experiments"][0]["facts"][0]
     assert fact["canonical_value"] == "2 mg/kg"
     assert baseline["experiments"][0]["facts"][0]["canonical_value"] == "1 mg/kg"
+
+
+def test_retained_finalizer_refuses_incomplete_packets_before_loading_gold(tmp_path):
+    run_root = tmp_path / "run"
+    audit_root = run_root / "audit-codex"
+    packet_root = audit_root / "audit_packets"
+    packet_root.mkdir(parents=True)
+    (packet_root / "manifest.json").write_text(
+        json.dumps(
+            {
+                "packet_count": 1,
+                "packets": [
+                    {"packet_id": "PILOT-900:shared-paper", "packet_sha256": "0" * 64}
+                ],
+                "manifest_sha256": "0" * 64,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (audit_root / "packet_results.json").write_text(
+        json.dumps({"packet_count": 1, "results": []}), encoding="utf-8"
+    )
+    (audit_root / "run_manifest.json").write_text(
+        json.dumps({"unattempted_packet_paths": [], "attempt_count": 0}),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="all issued packets are terminal"):
+        finalize_retained_run(
+            run_root=run_root,
+            artifact_root=tmp_path / "missing-artifacts",
+            reference_root=tmp_path / "missing-gold",
+            report_path=tmp_path / "missing-report.json",
+            output_root=tmp_path / "output",
+            codex_cli_version="codex-cli test",
+        )
+
+
+def test_proposal_ledger_contains_only_ids_decision_and_exact_reason_codes():
+    summary = {
+        "packets": [
+            {
+                "packet_id": "PILOT-900:shared-paper",
+                "paper_id": "PILOT-900",
+                "validations": [
+                    {
+                        "accepted": False,
+                        "rejection_reasons": ["posthoc_raw_value_mismatch"],
+                        "proposal": {
+                            "proposal_id": "PROP-PILOT-900-001",
+                            "raw_values": ["provider-only raw value"],
+                            "quoted_support": "provider-only quotation",
+                        },
+                    }
+                ],
+            }
+        ]
+    }
+
+    ledger = build_proposal_ledger(summary)
+
+    assert ledger == [
+        {
+            "proposal_id": "PROP-PILOT-900-001",
+            "packet_id": "PILOT-900:shared-paper",
+            "accepted": False,
+            "reason_codes": ["posthoc_raw_value_mismatch"],
+        }
+    ]
+    assert "provider-only" not in json.dumps(ledger)
+
+
+def test_proposal_ledger_rejects_model_text_disguised_as_an_identifier():
+    summary = {
+        "packets": [
+            {
+                "packet_id": "PILOT-900:shared-paper",
+                "paper_id": "PILOT-900",
+                "validations": [
+                    {
+                        "accepted": True,
+                        "rejection_reasons": [],
+                        "proposal": {
+                            "proposal_id": "This proposal says the secret raw value"
+                        },
+                    }
+                ],
+            }
+        ]
+    }
+
+    with pytest.raises(ValueError, match="safe identifier grammar"):
+        build_proposal_ledger(summary)
+
+
+def test_supported_automated_recovery_promotes_partial_evidence_inventory():
+    before_evidence = {"REQ-1": "full", "REQ-2": "partial", "REQ-3": "absent"}
+    before_automated = {"REQ-1": True, "REQ-2": False, "REQ-3": False}
+    after_automated = {"REQ-1": True, "REQ-2": True, "REQ-3": False}
+
+    promoted, recovered_partial_or_absent, recovered_absent = (
+        _promote_evidence_statuses(
+            before_evidence, before_automated, after_automated
+        )
+    )
+
+    assert promoted == {"REQ-1": "full", "REQ-2": "full", "REQ-3": "absent"}
+    assert recovered_partial_or_absent == 1
+    assert recovered_absent == 0
+
+
+def test_nonaccepted_terminal_result_never_applies_embedded_proposals(tmp_path):
+    packet_path = tmp_path / "packet.json"
+    packet_path.write_text(json.dumps(_packet()), encoding="utf-8")
+    result = _result(packet_path, [_proposal()], 1)
+    result["terminal_disposition"] = "schema_failure"
+    baseline = {
+        "paper_id": "PILOT-900",
+        "shared_facts": [],
+        "experiments": [
+            {
+                "experiment_id": "EXP-900-1",
+                "candidate_id": "PEC-900-1",
+                "facts": [],
+            }
+        ],
+    }
+
+    summary, audited = finalize_audit_results(
+        [result], {"PILOT-900": baseline}
+    )
+
+    assert summary["proposal_accounting"]["proposed"] == 0
+    assert audited["PILOT-900"]["experiments"][0]["facts"] == []

@@ -101,7 +101,7 @@ def test_validator_rejects_invented_nonnumeric_value_with_unrelated_quote(
     validation = validate_proposal(invented, packet)
 
     assert validation["accepted"] is False
-    assert "unsupported_raw_value" in validation["rejection_reasons"]
+    assert "posthoc_raw_value_mismatch" in validation["rejection_reasons"]
 
 
 @pytest.mark.parametrize(

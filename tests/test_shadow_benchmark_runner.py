@@ -420,6 +420,30 @@ def test_run_codex_packets_treats_repeated_schema_failures_as_systemic(tmp_path)
     assert unattempted == [packets_and_schemas[3][0]]
 
 
+def test_concurrency_two_circuit_breaker_has_at_most_one_terminal_overshoot(
+    tmp_path,
+):
+    packets_and_schemas = [
+        _packet_and_schema(tmp_path, f"packet-{number}") for number in range(6)
+    ]
+
+    def malformed_runner(command, **kwargs):
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        output_path.write_text(_fixture("malformed_final.json"), encoding="utf-8")
+        return subprocess.CompletedProcess(command, 0, _fixture("success.jsonl"), "")
+
+    results, unattempted = run_codex_packets(
+        packets_and_schemas,
+        timeout_seconds=30,
+        concurrency=2,
+        runner=malformed_runner,
+    )
+
+    assert 3 <= len(results) <= 4
+    assert all(row["terminal_disposition"] == "schema_failure" for row in results)
+    assert len(results) + len(unattempted) == len(packets_and_schemas)
+
+
 def test_run_codex_packets_executes_at_most_two_packets_concurrently(tmp_path):
     packets_and_schemas = [
         _packet_and_schema(tmp_path, f"packet-{number}") for number in range(4)

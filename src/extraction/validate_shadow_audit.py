@@ -278,7 +278,7 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
     elif not supporters:
         reasons.append("unsupported_exact_number")
     elif not _raw_values_supported(proposal["raw_values"], quote):
-        reasons.append("unsupported_raw_value")
+        reasons.append("posthoc_raw_value_mismatch")
     else:
         proposed["evidence_ids"] = supporters
 

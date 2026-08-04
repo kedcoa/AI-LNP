@@ -317,8 +317,12 @@ def evaluate_auditor(
         for paper_id, observations in observations_by_paper.items()
     ]
     reference = _reference_document(reference_root)
+    report = _load(report_path)
     score = evaluate_application_requirements(
-        {"papers": papers}, reference, evidence_grounded=True
+        {"papers": papers},
+        reference,
+        evidence_grounded=True,
+        reference_bindings=report["reference_bindings"],
     )
     requirements = build_requirements(reference_root)
     return _route_evaluation(
@@ -327,7 +331,7 @@ def evaluate_auditor(
         expected_attempts=3,
         score=score,
         requirements=requirements,
-        report=_load(report_path),
+        report=report,
     )
 
 
@@ -352,8 +356,12 @@ def evaluate_extractor(
         merged = merge_full_paper_results(paper_map, by_paper[paper_id], [])
         papers.append({"paper_id": paper_id, **merged.model_dump(mode="json")})
     reference = _reference_document(reference_root)
+    report = _load(report_path)
     score = evaluate_application_requirements(
-        {"papers": papers}, reference, evidence_grounded=True
+        {"papers": papers},
+        reference,
+        evidence_grounded=True,
+        reference_bindings=report["reference_bindings"],
     )
     requirements = build_requirements(reference_root)
     return _route_evaluation(
@@ -362,7 +370,7 @@ def evaluate_extractor(
         expected_attempts=14,
         score=score,
         requirements=requirements,
-        report=_load(report_path),
+        report=report,
     )
 
 

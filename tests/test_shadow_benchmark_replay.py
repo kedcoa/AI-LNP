@@ -82,6 +82,34 @@ def test_gold_blind_payload_rejects_prohibited_keys(forbidden_key):
         assert_gold_blind({"nested": {forbidden_key: "forbidden"}})
 
 
+@pytest.mark.parametrize(
+    "forbidden_value",
+    [
+        "application_pilot_final.json",
+        "scientific_reference_audit",
+        "reference_bindings",
+        "human_audit_corrections",
+        "/data/benchmarks/application_pilot/PILOT-001.json",
+    ],
+)
+def test_gold_blind_payload_rejects_exact_model_visible_marker_families(
+    forbidden_value,
+):
+    with pytest.raises(ValueError, match="forbidden string marker"):
+        assert_gold_blind({"instructions": f"Do not expose {forbidden_value}"})
+
+
+def test_gold_blind_payload_allows_benign_audit_and_reference_language():
+    assert_gold_blind(
+        {
+            "instructions": (
+                "Act as a scientific auditor and cite the reference method "
+                "described inside this sealed evidence packet."
+            )
+        }
+    )
+
+
 def test_audit_case_fingerprint_includes_saved_replay_dependencies():
     case = build_audit_cases(ROOT, artifact_root=ARTIFACT_ROOT)[0]
 

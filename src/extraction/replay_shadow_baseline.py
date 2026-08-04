@@ -24,6 +24,14 @@ _FORBIDDEN_KEY_PARTS = (
     "human_correction",
 )
 
+_FORBIDDEN_STRING_MARKERS = (
+    "application_pilot_final.json",
+    "scientific_reference_audit",
+    "reference_bindings",
+    "human_audit_corrections",
+    "/data/benchmarks/" "application_pilot/",
+)
+
 
 def _load(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
@@ -320,5 +328,11 @@ def assert_gold_blind(payload: Mapping[str, Any]) -> None:
         elif isinstance(value, list):
             for child in value:
                 visit(child)
+        elif isinstance(value, str):
+            normalized = value.casefold().replace("\\", "/")
+            if any(marker in normalized for marker in _FORBIDDEN_STRING_MARKERS):
+                raise ValueError(
+                    "gold-blind payload contains forbidden string marker"
+                )
 
     visit(payload)
