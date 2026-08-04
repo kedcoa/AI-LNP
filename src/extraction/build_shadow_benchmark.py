@@ -10,6 +10,11 @@ from pathlib import Path
 from typing import Any
 
 from src.extraction.full_paper_contracts import ContextTask
+from src.extraction.replay_shadow_baseline import (
+    assert_gold_blind,
+    build_evidence_inventory,
+    replay_pilot_paper,
+)
 from src.extraction.shadow_benchmark_contracts import (
     AuditResponse,
     BenchmarkCase,
@@ -51,7 +56,10 @@ def _load(path: Path) -> Any:
 
 
 def _relative(root: Path, path: Path) -> str:
-    return str(path.relative_to(root))
+    try:
+        return str(path.relative_to(root))
+    except ValueError:
+        return str(path)
 
 
 def _combined_source_sha(root: Path, paths: list[Path]) -> str:
@@ -62,22 +70,25 @@ def _combined_source_sha(root: Path, paths: list[Path]) -> str:
     return _sha_bytes(_canonical(rows).encode("utf-8"))
 
 
-def build_audit_cases(root: Path = ROOT) -> list[BenchmarkCase]:
+def build_audit_cases(
+    root: Path = ROOT,
+    *,
+    artifact_root: Path | None = None,
+) -> list[BenchmarkCase]:
+    """Build audit inputs by replaying saved post-merge artifacts."""
+
     report_path = root / PILOT_REPORT.relative_to(ROOT)
-    report = _load(report_path)
-    extraction_by_paper = {
-        row["paper_id"]: row for row in report["extraction"]["papers"]
-    }
+    replay_root = artifact_root or (root.parent / "np002-selective-vision")
     cases = []
     for paper_id in PAPERS:
         paths = [report_path]
+        replayed = replay_pilot_paper(paper_id, replay_root)
         payload = {
             "paper_id": paper_id,
-            "merged_extraction": extraction_by_paper[paper_id],
-            "validation": [
-                row for row in report["validation"] if row["paper_id"] == paper_id
-            ],
+            "merged_extraction": replayed,
+            "evidence_inventory": build_evidence_inventory(replayed),
         }
+        assert_gold_blind(payload)
         cases.append(
             BenchmarkCase(
                 case_id=f"audit-{paper_id}",
@@ -140,8 +151,15 @@ def build_gate_b_cases(root: Path = ROOT) -> list[BenchmarkCase]:
     return cases
 
 
-def build_all_cases(root: Path = ROOT) -> list[BenchmarkCase]:
-    cases = [*build_audit_cases(root), *build_gate_b_cases(root)]
+def build_all_cases(
+    root: Path = ROOT,
+    *,
+    artifact_root: Path | None = None,
+) -> list[BenchmarkCase]:
+    cases = [
+        *build_audit_cases(root, artifact_root=artifact_root),
+        *build_gate_b_cases(root),
+    ]
     ids = [row.case_id for row in cases]
     if len(ids) != len(set(ids)):
         raise ValueError("Benchmark case IDs must be unique")
