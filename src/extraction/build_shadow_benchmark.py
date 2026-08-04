@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 from collections import Counter
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -38,6 +39,21 @@ field name, raw value, experiment scope, and evidence IDs. Also report audit
 findings. Do not rewrite records, estimate missing numbers, or claim evidence that
 is not supplied. Return only JSON matching the provided schema."""
 
+AUDIT_PACKET_INSTRUCTIONS = """You are a read-only scientific audit agent. Review only
+the current merged facts and evidence excerpts supplied in this packet. Use only
+issued paper, experiment, candidate, record, and evidence IDs. Identify likely
+omissions, unsupported relationships, wrong-arm associations, incomplete
+application-critical fields, and consistency gaps within the supplied scope. Do not
+rewrite records, estimate missing values, use outside knowledge, or cite evidence
+that is not supplied. Return only the required structured response."""
+AUDIT_PACKET_ABSTENTION = (
+    "If the supplied scope cannot support a finding, abstain and state the "
+    "unresolved reason rather than inferring a fact."
+)
+MAX_AUDIT_PACKET_CHARACTERS = 45_000
+MAX_AUDIT_PACKET_EVIDENCE_ITEMS = 15
+MAX_AUDIT_EVIDENCE_EXCERPT_CHARACTERS = 1_800
+
 
 def _canonical(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
@@ -68,6 +84,247 @@ def _combined_source_sha(root: Path, paths: list[Path]) -> str:
         for path in paths
     ]
     return _sha_bytes(_canonical(rows).encode("utf-8"))
+
+
+def _evidence_ids(value: Any) -> list[str]:
+    """Return de-duplicated evidence IDs in their first-seen deterministic order."""
+
+    found: list[str] = []
+
+    def visit(child: Any) -> None:
+        if isinstance(child, Mapping):
+            evidence_ids = child.get("evidence_ids")
+            if isinstance(evidence_ids, list):
+                for evidence_id in evidence_ids:
+                    if isinstance(evidence_id, str) and evidence_id not in found:
+                        found.append(evidence_id)
+            for nested in child.values():
+                visit(nested)
+        elif isinstance(child, list):
+            for nested in child:
+                visit(nested)
+
+    visit(value)
+    return found
+
+
+def _excerpt(text: str) -> str:
+    if len(text) <= MAX_AUDIT_EVIDENCE_EXCERPT_CHARACTERS:
+        return text
+    return text[: MAX_AUDIT_EVIDENCE_EXCERPT_CHARACTERS - 1] + "…"
+
+
+def _evidence_lookup(evidence: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
+    by_id: dict[str, dict[str, Any]] = {}
+    for row in evidence:
+        evidence_id = row.get("evidence_id")
+        text = row.get("text")
+        if not isinstance(evidence_id, str) or not isinstance(text, str):
+            raise ValueError("audit packet evidence requires string evidence_id and text")
+        normalized = {
+            "evidence_id": evidence_id,
+            "excerpt": _excerpt(text),
+            "source": row.get("source"),
+            "page_number": row.get("page_number"),
+            "heading": row.get("heading"),
+            "table_or_figure": row.get("table_or_figure"),
+            "used_by_merged_records": row.get("used_by_merged_records") is True,
+        }
+        existing = by_id.get(evidence_id)
+        if existing is not None and existing != normalized:
+            raise ValueError(f"conflicting evidence inventory rows for {evidence_id}")
+        by_id[evidence_id] = normalized
+    return by_id
+
+
+def _packet_evidence(
+    evidence_by_id: Mapping[str, dict[str, Any]], evidence_ids: Sequence[str]
+) -> list[dict[str, Any]]:
+    if len(evidence_ids) > MAX_AUDIT_PACKET_EVIDENCE_ITEMS:
+        raise ValueError("audit packet scope exceeds 15 evidence items")
+    missing = [evidence_id for evidence_id in evidence_ids if evidence_id not in evidence_by_id]
+    if missing:
+        raise ValueError(f"audit packet references evidence absent from inventory: {missing[0]}")
+    return [dict(evidence_by_id[evidence_id]) for evidence_id in evidence_ids]
+
+
+def _issued_ids(
+    paper_id: str,
+    *,
+    experiment_ids: Sequence[str],
+    candidate_ids: Sequence[str],
+    evidence_ids: Sequence[str],
+) -> dict[str, list[str]]:
+    return {
+        "paper_ids": [paper_id],
+        "experiment_ids": list(experiment_ids),
+        "candidate_ids": list(candidate_ids),
+        "evidence_ids": list(evidence_ids),
+    }
+
+
+def _seal_packet(packet: dict[str, Any]) -> dict[str, Any]:
+    assert_gold_blind(packet)
+    sealed = dict(packet)
+    sealed["packet_sha256"] = _sha_bytes(_canonical(packet).encode("utf-8"))
+    if len(sealed["evidence"]) > MAX_AUDIT_PACKET_EVIDENCE_ITEMS:
+        raise ValueError("audit packet contains more than 15 evidence items")
+    if len(json.dumps(sealed, ensure_ascii=False)) >= MAX_AUDIT_PACKET_CHARACTERS:
+        raise ValueError("audit packet exceeds the 45,000-character limit")
+    return sealed
+
+
+def _build_packet(
+    *,
+    packet_id: str,
+    packet_type: str,
+    paper_id: str,
+    current_merged_facts: Any,
+    evidence_by_id: Mapping[str, dict[str, Any]],
+    evidence_ids: Sequence[str],
+    experiment_ids: Sequence[str] = (),
+    candidate_ids: Sequence[str] = (),
+) -> dict[str, Any]:
+    return _seal_packet(
+        {
+            "packet_id": packet_id,
+            "packet_type": packet_type,
+            "paper_id": paper_id,
+            "instructions": AUDIT_PACKET_INSTRUCTIONS,
+            "abstention": AUDIT_PACKET_ABSTENTION,
+            "issued_ids": _issued_ids(
+                paper_id,
+                experiment_ids=experiment_ids,
+                candidate_ids=candidate_ids,
+                evidence_ids=evidence_ids,
+            ),
+            "current_merged_facts": current_merged_facts,
+            "evidence": _packet_evidence(evidence_by_id, evidence_ids),
+        }
+    )
+
+
+def build_audit_packets(
+    replayed: Mapping[str, Any], evidence: Sequence[Mapping[str, Any]]
+) -> list[dict[str, Any]]:
+    """Build bounded, gold-blind audit packets for one replayed paper."""
+
+    paper_id = replayed.get("paper_id")
+    shared_facts = replayed.get("shared_facts")
+    experiments = replayed.get("experiments")
+    if not isinstance(paper_id, str):
+        raise ValueError("replayed paper is missing paper_id")
+    if not isinstance(shared_facts, list) or not isinstance(experiments, list):
+        raise ValueError("replayed paper is missing shared_facts or experiments")
+    assert_gold_blind(replayed)
+    evidence_by_id = _evidence_lookup(evidence)
+    packets = [
+        _build_packet(
+            packet_id=f"{paper_id}:shared-paper",
+            packet_type="shared_paper",
+            paper_id=paper_id,
+            current_merged_facts=shared_facts,
+            evidence_by_id=evidence_by_id,
+            evidence_ids=_evidence_ids(shared_facts),
+        )
+    ]
+    experiment_ids: list[str] = []
+    for experiment in experiments:
+        if not isinstance(experiment, Mapping) or not isinstance(
+            experiment.get("experiment_id"), str
+        ):
+            raise ValueError("replayed experiments require experiment_id")
+        experiment_id = experiment["experiment_id"]
+        candidate_id = experiment.get("candidate_id")
+        candidate_ids = [candidate_id] if isinstance(candidate_id, str) else []
+        experiment_ids.append(experiment_id)
+        packets.append(
+            _build_packet(
+                packet_id=f"{paper_id}:experiment:{experiment_id}",
+                packet_type="experiment",
+                paper_id=paper_id,
+                current_merged_facts=dict(experiment),
+                evidence_by_id=evidence_by_id,
+                evidence_ids=_evidence_ids(experiment),
+                experiment_ids=[experiment_id],
+                candidate_ids=candidate_ids,
+            )
+        )
+    unused_evidence = [
+        row["evidence_id"]
+        for row in evidence_by_id.values()
+        if not row["used_by_merged_records"]
+    ]
+    for index in range(0, len(unused_evidence), MAX_AUDIT_PACKET_EVIDENCE_ITEMS):
+        chunk = unused_evidence[index : index + MAX_AUDIT_PACKET_EVIDENCE_ITEMS]
+        packets.append(
+            _build_packet(
+                packet_id=f"{paper_id}:unused-evidence:{index // MAX_AUDIT_PACKET_EVIDENCE_ITEMS + 1:03d}",
+                packet_type="unused_evidence",
+                paper_id=paper_id,
+                current_merged_facts={
+                    "paper_id": paper_id,
+                    "experiment_ids": experiment_ids,
+                    "scope": "evidence not yet used by the merged records",
+                },
+                evidence_by_id=evidence_by_id,
+                evidence_ids=chunk,
+                experiment_ids=experiment_ids,
+            )
+        )
+    final_facts = {
+        "quarantined_conflicts": replayed.get("quarantined_conflicts", []),
+        "validation_findings": replayed.get("validation_findings", []),
+        "experiment_ids": experiment_ids,
+    }
+    packets.append(
+        _build_packet(
+            packet_id=f"{paper_id}:final-consistency",
+            packet_type="final_consistency",
+            paper_id=paper_id,
+            current_merged_facts=final_facts,
+            evidence_by_id=evidence_by_id,
+            evidence_ids=_evidence_ids(final_facts),
+            experiment_ids=experiment_ids,
+        )
+    )
+    return packets
+
+
+def write_audit_packet_manifest(
+    packets: Sequence[Mapping[str, Any]], destination: Path
+) -> Path:
+    """Write an append-only packet-hash manifest without source or gold paths."""
+
+    if destination.exists():
+        raise FileExistsError(f"Refusing to overwrite {destination}")
+    entries: list[dict[str, str]] = []
+    for packet in packets:
+        packet_id = packet.get("packet_id")
+        packet_sha256 = packet.get("packet_sha256")
+        if not isinstance(packet_id, str) or not isinstance(packet_sha256, str):
+            raise ValueError("sealed packets require packet_id and packet_sha256")
+        expected = _sha_bytes(
+            _canonical(
+                {key: value for key, value in packet.items() if key != "packet_sha256"}
+            ).encode("utf-8")
+        )
+        if packet_sha256 != expected:
+            raise ValueError(f"packet hash does not match contents: {packet_id}")
+        entries.append({"packet_id": packet_id, "packet_sha256": packet_sha256})
+    if len({entry["packet_id"] for entry in entries}) != len(entries):
+        raise ValueError("packet IDs must be unique")
+    manifest = {
+        "packet_count": len(entries),
+        "packets": entries,
+        "manifest_sha256": _sha_bytes(_canonical(entries).encode("utf-8")),
+    }
+    assert_gold_blind(manifest)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return destination
 
 
 def build_audit_cases(

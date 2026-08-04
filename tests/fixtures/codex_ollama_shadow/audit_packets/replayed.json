@@ -1,0 +1,39 @@
+{
+  "paper_id": "PILOT-900",
+  "shared_facts": [
+    {
+      "field_name": "formulation.lipid",
+      "canonical_value": "Lipid A",
+      "raw_values": ["Lipid A"],
+      "evidence_ids": ["EV-shared"]
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP-900-1",
+      "candidate_id": "PEC-900-1",
+      "facts": [
+        {
+          "field_name": "dose",
+          "canonical_value": "1 mg/kg",
+          "raw_values": ["1 mg/kg"],
+          "evidence_ids": ["EV-experiment"]
+        }
+      ]
+    }
+  ],
+  "quarantined_conflicts": [
+    {
+      "conflict_id": "QC-900-1",
+      "reason": "Competing dose values",
+      "evidence_ids": ["EV-unused-01"]
+    }
+  ],
+  "validation_findings": [
+    {
+      "finding_id": "VF-900-1",
+      "severity": "medium",
+      "evidence_ids": ["EV-experiment"]
+    }
+  ]
+}
