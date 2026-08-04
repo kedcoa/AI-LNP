@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import subprocess
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from time import monotonic
@@ -12,11 +14,8 @@ from typing import Callable
 
 from pydantic import ValidationError
 
-from src.extraction.missing_record_contracts import (
-    MissingRecordFragment,
-    MissingRecordTask,
-)
-from src.extraction.run_missing_record_repair import validate_response
+from src.extraction.full_paper_contracts import ContextTask
+from src.extraction.full_paper_tasks import validate_context_response
 from src.extraction.shadow_benchmark_contracts import (
     AttemptResult,
     AuditResponse,
@@ -25,6 +24,11 @@ from src.extraction.shadow_benchmark_contracts import (
 
 
 Runner = Callable[..., subprocess.CompletedProcess[str]]
+ROOT = Path(__file__).resolve().parents[2]
+CASE_ROOT = ROOT / "data/staging/extraction/codex_ollama_shadow"
+REPORT_ROOT = ROOT / "reports/extraction/codex_ollama_shadow"
+OLLAMA_TAGS = "http://127.0.0.1:11434/api/tags"
+MODEL_PREFERENCE = ("qwen3:8b", "qwen3:4b", "gemma3:12b", "gemma3:4b")
 
 
 def _canonical(value) -> str:
@@ -36,7 +40,32 @@ def _sha_text(value: str) -> str:
 
 
 def _model_prompt(case: BenchmarkCase) -> str:
-    return f"{case.prompt}\n\nCASE PAYLOAD:\n{_canonical(case.payload)}"
+    payload = (
+        case.payload["payload"]
+        if case.route == "gate_b" and "payload" in case.payload
+        else case.payload
+    )
+    return f"{case.prompt}\n\nCASE PAYLOAD:\n{_canonical(payload)}"
+
+
+def select_installed_model(tags: dict) -> tuple[str, str]:
+    installed = {
+        row["name"]: str(row.get("digest") or "")
+        for row in tags.get("models", [])
+        if isinstance(row, dict) and isinstance(row.get("name"), str)
+    }
+    if not installed:
+        raise RuntimeError("Ollama reported no installed models")
+    for preferred in MODEL_PREFERENCE:
+        if preferred in installed:
+            return preferred, installed[preferred]
+    name = sorted(installed)[0]
+    return name, installed[name]
+
+
+def fetch_ollama_tags(timeout_seconds: int = 30) -> dict:
+    with urllib.request.urlopen(OLLAMA_TAGS, timeout=timeout_seconds) as response:
+        return json.loads(response.read().decode("utf-8"))
 
 
 def codex_command(
@@ -142,19 +171,26 @@ def run_case(
                         else "accepted"
                     )
                 else:
-                    response = MissingRecordFragment.model_validate(raw)
-                    parsed_result = response.model_dump(mode="json")
-                    try:
-                        validate_response(
-                            response, MissingRecordTask.model_validate(case.payload)
-                        )
-                    except ValueError as exc:
+                    parsed_result = raw
+                    report = validate_context_response(
+                        raw, ContextTask.model_validate(case.payload)
+                    )
+                    if report.status != "valid":
                         disposition = "rejected_by_validation"
-                        issues.append(str(exc))
+                        issues.extend(
+                            f"{finding.code}: {finding.message}"
+                            for finding in report.findings
+                        )
                     else:
+                        accounting = raw.get("context_candidate_accounting", {})
+                        extracted = any(
+                            isinstance(row, dict)
+                            and row.get("disposition") == "extracted"
+                            for row in accounting.values()
+                        )
                         disposition = (
                             "model_abstained"
-                            if response.disposition == "unresolved"
+                            if not extracted
                             else "accepted"
                         )
             except (json.JSONDecodeError, ValidationError) as exc:
@@ -241,3 +277,73 @@ def run_cases(
         if consecutive_count == 3:
             return attempts, [row.case_id for row in cases[index + 1 :]]
     return attempts, []
+
+
+def _load_cases(run_id: str, route: str) -> list[BenchmarkCase]:
+    path = CASE_ROOT / run_id / "case_manifest.json"
+    manifest = _load_json(path)
+    return [
+        BenchmarkCase.model_validate(row)
+        for row in manifest["cases"]
+        if row["route"] == route
+    ]
+
+
+def _load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--route", choices=("audit", "gate-b"), required=True)
+    parser.add_argument("--backend", choices=("codex", "ollama"), required=True)
+    parser.add_argument("--model", default="auto-installed")
+    parser.add_argument("--timeout-seconds", type=int, default=300)
+    args = parser.parse_args()
+    route = args.route.replace("-", "_")
+    model = args.model
+    model_digest = None
+    if args.backend == "ollama" and model == "auto-installed":
+        model, model_digest = select_installed_model(fetch_ollama_tags())
+    elif args.backend == "codex" and model == "auto-installed":
+        model = "hosted-default"
+    run_root = REPORT_ROOT / args.run_id / f"{route}-{args.backend}"
+    if run_root.exists():
+        raise FileExistsError(f"Refusing to overwrite {run_root}")
+    run_root.mkdir(parents=True)
+    attempts, unattempted = run_cases(
+        _load_cases(args.run_id, route),
+        backend=args.backend,
+        model=model,
+        run_root=run_root,
+        timeout_seconds=args.timeout_seconds,
+    )
+    manifest = {
+        "run_id": args.run_id,
+        "route": route,
+        "backend": args.backend,
+        "model": model,
+        "model_digest": model_digest,
+        "attempt_count": len(attempts),
+        "unattempted_case_ids": unattempted,
+        "terminal_dispositions": {
+            disposition: sum(
+                row.terminal_disposition == disposition for row in attempts
+            )
+            for disposition in sorted(
+                {row.terminal_disposition for row in attempts}
+            )
+        },
+        "paid_api_requests": 0,
+        "production_writes": sum(row.production_writes for row in attempts),
+    }
+    (run_root / "run_manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(manifest, indent=2))
+
+
+if __name__ == "__main__":
+    main()

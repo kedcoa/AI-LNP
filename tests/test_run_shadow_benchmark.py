@@ -12,6 +12,7 @@ from src.extraction.run_shadow_benchmark import (
     codex_command,
     run_case,
     run_cases,
+    select_installed_model,
 )
 
 
@@ -25,17 +26,10 @@ def _completed(stdout: str, returncode: int = 0):
     return runner
 
 
-def _valid_gate_b_json(case) -> str:
-    return json.dumps(
-        {
-            "disposition": "unresolved",
-            "recovered_candidate_ids": [],
-            "unresolved_candidate_ids": case.payload["candidate_ids"],
-            "experiments": [],
-            "outcomes": [],
-            "unresolved_reason": "Evidence is insufficient for safe recovery.",
-        }
-    )
+def _valid_audit_json() -> str:
+    return (
+        ROOT / "tests/fixtures/codex_ollama_shadow/fake_audit_response.json"
+    ).read_text(encoding="utf-8")
 
 
 def test_ollama_command_is_ephemeral_read_only_and_local(tmp_path):
@@ -65,19 +59,19 @@ def test_ollama_command_is_ephemeral_read_only_and_local(tmp_path):
     assert command[-1] == "-"
 
 
-def test_valid_unresolved_gate_b_output_is_recorded_as_model_abstention(tmp_path):
-    case = build_gate_b_cases(ROOT)[0]
+def test_valid_audit_output_is_accepted(tmp_path):
+    case = build_audit_cases(ROOT)[0]
 
     result = run_case(
         case,
-        backend="ollama",
-        model="qwen3:8b",
+        backend="codex",
+        model="hosted-default",
         run_root=tmp_path,
         timeout_seconds=30,
-        runner=_completed(_valid_gate_b_json(case)),
+        runner=_completed(_valid_audit_json()),
     )
 
-    assert result.terminal_disposition == "model_abstained"
+    assert result.terminal_disposition == "accepted"
     assert result.exit_code == 0
     assert result.paid_api_requests == 0
     assert result.production_writes == 0
@@ -98,6 +92,22 @@ def test_malformed_output_is_a_schema_failure(tmp_path):
     assert result.terminal_disposition == "schema_failure"
     assert result.parsed_result is None
     assert result.validation_issues
+
+
+def test_schema_json_that_violates_gate_b_rules_is_rejected_by_validation(tmp_path):
+    case = build_gate_b_cases(ROOT)[0]
+
+    result = run_case(
+        case,
+        backend="ollama",
+        model="qwen3:8b",
+        run_root=tmp_path,
+        timeout_seconds=30,
+        runner=_completed("{}"),
+    )
+
+    assert result.terminal_disposition == "rejected_by_validation"
+    assert any("candidate" in issue.lower() for issue in result.validation_issues)
 
 
 def test_nonzero_exit_is_a_runtime_failure(tmp_path):
@@ -136,13 +146,13 @@ def test_timeout_is_a_runtime_failure(tmp_path):
 
 
 def test_case_output_is_append_only(tmp_path):
-    case = build_gate_b_cases(ROOT)[0]
+    case = build_audit_cases(ROOT)[0]
     kwargs = {
-        "backend": "ollama",
-        "model": "qwen3:8b",
+        "backend": "codex",
+        "model": "hosted-default",
         "run_root": tmp_path,
         "timeout_seconds": 30,
-        "runner": _completed(_valid_gate_b_json(case)),
+        "runner": _completed(_valid_audit_json()),
     }
     run_case(case, **kwargs)
 
@@ -169,3 +179,20 @@ def test_three_consecutive_schema_failures_stop_remaining_cases(tmp_path):
         "schema_failure",
     ]
     assert unattempted == [row.case_id for row in cases[3:]]
+
+
+def test_installed_model_selection_uses_fixed_preference_order():
+    tags = {
+        "models": [
+            {"name": "zeta:latest", "digest": "z" * 64},
+            {"name": "gemma3:4b", "digest": "g" * 64},
+            {"name": "qwen3:8b", "digest": "q" * 64},
+        ]
+    }
+
+    assert select_installed_model(tags) == ("qwen3:8b", "q" * 64)
+
+
+def test_installed_model_selection_fails_when_ollama_has_no_models():
+    with pytest.raises(RuntimeError, match="no installed models"):
+        select_installed_model({"models": []})

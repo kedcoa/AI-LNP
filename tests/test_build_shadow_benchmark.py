@@ -67,31 +67,18 @@ def test_attempt_rejects_non_sha256_source_digest():
         AttemptResult.model_validate(payload)
 
 
-def test_arm_fixture_has_seven_unique_requirements():
-    rows = json.loads(
-        (
-            ROOT
-            / "tests/fixtures/codex_ollama_shadow/arm_requirements.json"
-        ).read_text(encoding="utf-8")
-    )
-
-    assert len(rows) == 7
-    assert len({row["requirement_id"] for row in rows}) == 7
-    assert {row["paper_id"] for row in rows} == {"GP-004", "GP-006", "GP-008"}
-
-
-def test_builds_three_audit_and_twelve_gate_b_cases():
+def test_builds_three_pilot_audits_and_fourteen_text_gate_b_cases():
     assert [row.paper_id for row in build_audit_cases(ROOT)] == [
-        "GP-004",
-        "GP-006",
-        "GP-008",
+        "PILOT-001",
+        "PILOT-002",
+        "PILOT-003",
     ]
     gate_b = build_gate_b_cases(ROOT)
-    assert len(gate_b) == 12
+    assert len(gate_b) == 14
     assert Counter(row.paper_id for row in gate_b) == {
-        "GP-004": 4,
-        "GP-006": 4,
-        "GP-008": 4,
+        "PILOT-001": 5,
+        "PILOT-002": 5,
+        "PILOT-003": 4,
     }
 
 
@@ -111,8 +98,8 @@ def test_case_manifest_is_append_only_and_records_zero_paid_calls(tmp_path):
 
     assert write_case_manifest(cases, destination) == destination
     manifest = json.loads(destination.read_text(encoding="utf-8"))
-    assert manifest["case_count"] == 15
-    assert manifest["route_counts"] == {"audit": 3, "gate_b": 12}
+    assert manifest["case_count"] == 17
+    assert manifest["route_counts"] == {"audit": 3, "gate_b": 14}
     assert manifest["paid_api_requests"] == 0
     with pytest.raises(FileExistsError):
         write_case_manifest(cases, destination)

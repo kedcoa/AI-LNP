@@ -25,7 +25,7 @@ class StrictModel(BaseModel):
 class BenchmarkCase(StrictModel):
     case_id: str = Field(min_length=1)
     route: Literal["audit", "gate_b"]
-    paper_id: str = Field(pattern=r"^GP-\d{3}$")
+    paper_id: str = Field(pattern=r"^(?:GP|PILOT)-\d{3}$")
     source_paths: list[str] = Field(min_length=1)
     source_sha256: str = Field(min_length=64, max_length=64, pattern=r"^[0-9a-f]{64}$")
     prompt: str = Field(min_length=1)
@@ -49,8 +49,18 @@ class AuditFinding(StrictModel):
     suggested_disposition: Literal["accept", "flag", "quarantine", "human_review"]
 
 
+class AuditObservation(StrictModel):
+    observation_id: str = Field(min_length=1)
+    experiment_id: str | None
+    field_name: str = Field(min_length=1)
+    raw_values: list[Any] = Field(min_length=1)
+    evidence_ids: list[str] = Field(min_length=1)
+    provenance: str | None
+
+
 class AuditResponse(StrictModel):
     disposition: Literal["completed", "abstained"]
+    observations: list[AuditObservation]
     findings: list[AuditFinding]
     checked_requirement_categories: list[str]
     unresolved_reason: str | None
@@ -103,7 +113,12 @@ class AttemptResult(StrictModel):
 class ApplicationRequirement(StrictModel):
     requirement_id: str
     requirement_type: Literal[
-        "component", "formulation", "experiment", "outcome", "arm"
+        "formulation",
+        "payload_administration",
+        "biological_model",
+        "assay",
+        "qualitative_outcome",
+        "exact_numeric",
     ]
     paper_id: str
     evidence_ids: list[str]

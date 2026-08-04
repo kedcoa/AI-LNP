@@ -1,0 +1,785 @@
+{
+  "status": "completed",
+  "request_id": "REQ-2",
+  "request_sha256": "634ce959babb85c176d3b9bf4a28605cd4657c21acceaf01ed12e77d8c328010",
+  "approval_request": {
+    "request_id": "REQ-2",
+    "paper_id": "PILOT-002",
+    "request_kind": "paper_map",
+    "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/map_gate/requests/REQ-2.json",
+    "request_sha256": "634ce959babb85c176d3b9bf4a28605cd4657c21acceaf01ed12e77d8c328010",
+    "model": "gpt-5.6-terra",
+    "estimated_input_tokens": 21070,
+    "max_output_tokens": 12000,
+    "source_artifact_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/PILOT-002/inventory.json",
+    "source_artifact_sha256": "37f67b111abfb978b9291fc67fad430f613f94995cfaad3f95de77794c270e5d"
+  },
+  "response": {
+    "id": "resp_0567b71ecefe6055016a704cb318a4819990ac44a0c5dfc734",
+    "created_at": 1785744563.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "gpt-5.6-terra",
+    "object": "response",
+    "output": [
+      {
+        "id": "rs_0567b71ecefe6055016a704cb448448199a175ca877df0ce50",
+        "summary": [],
+        "type": "reasoning",
+        "content": [],
+        "encrypted_content": "gAAAAABqcEznAVJOLu1-qbI_qc2AAMalNgWMPYDcnqMomeRxwpsLVeCtHTjoOt6qIvrwIqDPQRxkchJBb1olT_cZgj4B0tLdjiP_UNtlyvRPesGhrVSeIm1jSw6eIR_WI3WsgzvO41CrwclNgQyBNDvknd4it2VMNrckfsJ_QBRjGrWM-5kdmooi77Kb32Gyer7ProIUxDbERCLv5KeC-tLBUCWkyXSNVo0mVUX0dLI1_8HCh-jxwqWk0luOL7M3vec-1VkrFe0Nz7aZUmZel4Qx75dnZA-c0R6z-tgCYPGa6EjKm1-LwxSTISH4AoIELWimPdS_LMP0_vY1bxPTglZaGUKeVWs7eBE4hdXjwR0vybmSc4vjZBwolHE4gGv4rDZcrbR72hXi-woptRRDe2ota2SSlaNfy4IEQ8WZHy5M-JrIefrXSXmxUJTdJoes2X8UhwM3-2APkOK6zJwJzaa7gcbYfItwtBNwIPlv3J_PXrr05ywemGah0NdkikXIJkKXRN4Ma0Mjj6VWiTw3bJmfJWQOxOLzkJGVxQW661qfvLku5KB0zxrChe0Y0dKd79IE_NVmeyCfh5pPWQ0ssSrMIQQ4LNOw0sNqE8eLdZi0CbpM5IDcjBv9VGWzOBFOQTSaQp1qt-iPoWcXYaihTkNMsh7pNoGFgfbSvqpiaY8ExAmElRL-KeKQ-iitSaxe-1MbTmFTWxdMFBKYrxVuKjalSs8gcBeqeOjmA-_CkRJoB0g-xFSvhrDBf6kbeaDZpfqzBMFUUpYg2N3iFRdq83F9a4bB6BlD04-Va-d5yfmdbOiKPOISWbwGinAWpKk79fv-a5panhL6RoCykCzSCjhLepewni1q6T5M4hGfNV8A19S9pciolUEbmcbEyp6N7WGCiMfQjPRboPm4zl-ImqMadJI9eqei9QLNGPEpTwMHtLd0SKZGZvYoNkF8quPgSxadbe4cYfZhThXUUIMLrAtFjIyvMCkJPV8gc28arLhY5bjvZ4muUBx9okOydRnxGEdq-cOkajiYdL_87EFl7IEJEZ4dEAUV5d8UqMcSnwDtn3TxcBKe1QsIWeQnHwbeulL0zG23L6R1T9BiPAjxnMI35_ojkGFh-oTmZW4Ogl2_C_JAxchNLrqURYqnqeIITDHmW5U8I7hWgu_CAH4D1q7nXzugUugJlKKYf-GoTxmvth6Fz-2xlR6B-Cp_P8TTX0SfB0go4nRNlcj-bGbPSPSSJUqlbVh2QKrfETjrG7Yg-YMkJZrr2KTkqXz7IwJitx-OKMwcVbGLUt-ktlbkd_X4P5CBxuzSKlBxTZY1EBVS9Rh7Z4oT9YenlifPNVDsxI7vMd1d5pBuFWQulMYysR1zocliPbsgccqNQzWtZSuQpUHx5aIp5Sy3ZP8s_sI5olH1BBh-ZwJyHx0dbzE7Mzn9sBHAiSaEjeS-P1PDP6tWWI7Z4Jn5VfkpWYxMDLxferA11flGM0Rwg_MnZJjMtaMHIRs5UuZU2hFF5PumWmU391OQcqgJmpY7OY2kZiTHYJpYSItxFAwizAWJIyyy14wlLpQbWtw6nsQEwTJObzgsGJXC5j-Lzlz1By8tt1VhMvFPMR8Kbb9Gx-e5GQBrVZr15oFEsap-iZCKSGXvXznFMQqPp06h_vouXvDKosaNHqdDSvnfBbtCm8hLnvTonIUJCpCHWO6rfZWhSNMJIARwJdfybnmN51QuL1fxEwN2uVu04VlfrRJRookAq6nqOwUN8IKKqS04xAXuqwSR8LzR1rVzlNfk90xs1cnkVdxpopMswAe7VmxRuRU7EznxE59HZzLZ6_AcBfeZz48yIo96vGorGqXjvU_1ifweWYSBlW5AXfQ90bWs1pz4CnpulUhWldTfTiQx55wK7BZgfPeW1IcANwuz5LzFeKrWhSxwR_ecn5lG8auB3dWaKBr0WqGEfrgpEmrp1gjgr4NRigV5NkPlmsVhwgmoCjSIVmb8P6g_P7Gc222e1jBcf-OU9geH4_CuKi6NHqjqm2HBscEzhXsVNkMhdrjj7qK--7NxfhHpBRkL-G_82uFHKFZSX9Ph_HFwGAf45do0sPPKYDymASdaWwBAdOdWlmZuA_GyllWnSQWLNaB3li7OOBAR7xQH0_hqhDkk3UOZsKH73iGqAVQt31oANE2TSZ_Q-OVOLw_aLq6IN1khBP1Eu8sQkhOa2DEml-XL7HwYsiJQ8Q2eoh3kPKuVaw8m5dvSVazCxAdLi-89fm4Z2ISFeU6xFW30QqvqO9MI5XTYrGfsIsmEvH3x4MO49dvXM8oBLf05_yFQ_5j7ea8D9hkevwv5TyQuKTNIhhnadNW2zvkeC-qfiNUKDhPJKGZQ6Px1ohTK3Jb3U3LeL8WYPHYfHJe42EZvKVynvVps7xiWTobyEYZeV5TK2NBxlxExjYknNyhoeiJxZVQjGgopCGgxC5nkL9093D3J4cIGgsSFKxm7tX7CC_TDlE4S6xXAQNarJf5TO58eTHJoxOT9QPCOkLE1N2hGSF4aiedTkEXOsAM9HoA3LNMSoG9H3A3OsIxPudEo62nUSwE0AiiTELjYVfSOriNttQQFQIUxGU45WVgCxYw0ntqxMee-WGd6PZ1vEVH3wtOGRm0bqhWmj8kRbxKtmno_EjGsR08BBkRTXeoIqhhR8JeEGLcUZI0Zsd929xXeyVxX0a5PdQpbdSJbxGLxcGVDZH0NGuWtg_EiQqv6bjCniPrfr1TDUJVMpVOWf8WEbBhZ6MB0NKX9-VKetWYMVymuwKIbgxexRm8FbmHHORWa4wKyfuLUmJ17ZI9XuP8aAsFUZb8m_tETzewZjB0El2aw_nmDmTbk9Kr_5KqI0l_R7qbIbtKgN2NHed_UbmPYdiW4UesNKcqPlAuKL0nNh_3ucyWx0tVWwYCACNgLlISUwnd8JmZgt0UPLkGCNwCjkpE_nr3GT4F6AWhWg8ZFsVVEMW1wyn7OS_jsX-SZBs3_jtee97OtZq1_WnAq-_4tsjc90aLRDIDJxANgPiXUk2ndsr38xL6cgXNCnq65UaC4bunU4Y6VOWWkN7jkaM4DYPO_3WeoyZIF1Bz5L2kLRyxmmpx78lqySvoAM4eVMYySpQqDh0g6wageVvJ1vDMsjzZGGS1MuwzRjv9tg48wlc0VqM_CaDB1KhqYEzcTQ1tswxNZpxcogI0zhSYHsSBDI4Qw0A_AUdrMDBuU1OqLpkB5MNVlxwyop4Z-raVkZ9yNUFcR0Uk_WFi3-vXvt0XaReNPli_lpft738X69RV6WKNeZV0sQ8QYoBiLFO4ROPU1IfxzLDPim8JC25MYdKrp_tHbzbD1mNcOHPxPxrI65G9WF4niyixj9cyqG35NAhYNv0IYB6_Uz8DFOwitdKCFfHWeOhtIC6UCJ_oCyvvN27wh5jEmTkYVkXP5ds1NuTgCQqQs0uEF7Pdh2M066TuFxnV4iWy1INoUfdCF92_kb53ZPOhGjuBAUA9uH0zGuZOK76f1wyHv3V4lVNvuLNF-GXFJgXz3JBCA9T7Z-UB4JSUYha0OHJ-xvOeQ3ukhYVuCcExS6dKvAIzerOI94jM_FMAJhiaAHOXLWvvkZS2DdqCym-rhUok9wtzmn2zn2whveUf4GqshB2rlXAZiGDrVL9UHRyHHE8vauQDBuBqeJeT7amvzrdPfUST9M5rjWYxV74fh9cOUzLqDUiRM6UsJI5FQWdOwHWdxtU_0URe7-wJGcQThjDlr6ILGN9I17403MpVDuZuaq5-9gySaYErfaWPgYJi1sp5y4MPqs3e-IM29YXmHB3sPBXvazFquxTnBbpUCtl80icsbKSGnT87-ofRYAm9Pozm7lv-xhVOczTisuMxNh2_cUPz2Plk_8uRruMM6inSWDmJI1yNLJtqNkqvTeX4MDZVX",
+        "status": null
+      },
+      {
+        "id": "rs_0567b71ecefe6055016a704cbb0ef48199aef3d6f0b4ad08d8",
+        "summary": [],
+        "type": "reasoning",
+        "content": [],
+        "encrypted_content": "gAAAAABqcEznSFSX-qgpi0_CMxskQyH6bTdPe52KIt0eggnud1mCrIyiSWNhB-QYXfGt-9nHHezRD-tIo5Xy-7Ytn9OdTpkwJzCyozuQ-zDI8g4XNMW6fiOpZ4bWG-wC7IK2g2YqQ6T15tU-0fGnuBN_NXNIuQJCgDqNztGPQ5eXVimqmg-G5A5Ub4sR1n-7V7mmZkOOAb_OZiOoV3ZNL-dPekt30W_ITMUmwsJocZxtrtfuH4sGWbnE60ypKSHKU9v1q_QwanJ4PkQOIL8GxGAGgfhQ7El-NNxa_5SosyfcwnQGsZVwPQ0wWcVxKKxcqBhI7pKQ6bYS3XiwAqG254s5zHmP2TQrkkSmipS0807tSp7IXQ-9QpTdNe-FRvMVW4z23TkBGmNdxxUUAWuMCEMaJoYHSfbwy8E4c9wEHvl4sqar-PBlTE0OUP-FbyZX1QFJauWTraWG8U4Z1jKao9RskdaFcL8a8HbWIDo48RhH5tDIz6bsqkHDbUzM0oU7-SbK8LlW9I9a2tEFqiTgHDkM63T2dAoxkXbzq65yopTUp5Ia_tYphqwvipG7yuiLDtF3andKg1c6oDlhGVl7Bn8dLGVF3wpuqzsIbYXUv88in0MSkbtmRDbqzr3Lex0suQUJWHpIEbnVP-6KE4RIuaUHntUj7GO-Hj2yM2rn8S9iMmDOkeXb_0oi80XOZS5pdyNGlV9pfXGBGbAVtQIQ6K8jCBdUECf_joaBpkOUOgQgH_u65jVBhZ7BJYX0-XqHM37PY1mPwK5yhuSvukzMvOTC8YcQJj1wTnLxTxkoO4vcUtgpgELiSzwaYG4jgLX8H9KuKuc9WkfyjNtRjhxX9ufi1anazjyN9jdVDVofBcq16sYL25_QF3iDW8xeSOT1u3lt9qKqlqptLl8K4rJNh3J9swU-wwhFlhS3HTfkMijt03tIJRqqKec2hsZlZ25zamCGuRUHnAcDxeLbTdZMAQCNsx_iUgzoy-xZvbJGcfnfjY9Dl0BJae5Y6MuqH5bd3bd8tk8ElSG-YANG2QLrN_6ZpqlQEW7sHX1-c8MxLn14clT6jy5VSxh0qJGidj_TJyPkkUPzmL_TnZ2vis3tP7tBTWuiOSEoDCmBIcsU1oUXc00o95WKfZfN9EBJtkwIpAgYSO7VhLtvn-QHUcW3vdZduD8CIsal06ZXK7jD3X2aFvN4ogZgUz0dB2hJXXX_W2Bn5YaAgyuAnEebvxu20EgUfR2mkRBnBFC6IX_rw1omKZeNPhbB_kOb2MdV1HBRiazODZMq5p2w7Rmccp7eM8EYm8_06qv8R2KraxtQpAWkQLnRhhsKbcnta4zNi65YObXHO7x4HUzPfOhzZdIeCCUO2c5z-sp3nZvCizoIgAUCTgyytcG4ZTsls5pd8ssKIrdEmmglU1IdtDuCQuzPhnTGhIjFEodjSA==",
+        "status": null
+      },
+      {
+        "id": "msg_0567b71ecefe6055016a704cbc2ce08199a155fbb9addd15e1",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"paper_map_version\":\"full-paper-map-1.0.0\",\"paper_id\":\"PILOT-002\",\"formulations\":[{\"formulation_id\":\"FORM::MRNA_CORE\",\"name\":{\"value\":\"mRNA-loaded ionizable LNP\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"components\":[{\"component_id\":\"COMP::IONIZABLE_LIPID\",\"identity\":{\"value\":\"Ionizable lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":{\"value\":\"Ionizable component\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]}},{\"component_id\":\"COMP::DOPE\",\"identity\":{\"value\":\"DOPE\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":{\"value\":\"Helper lipid\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]}},{\"component_id\":\"COMP::CHOLESTEROL\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::PEG_LIPID\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null}],\"ratios\":[{\"value\":\"26.5:20:52:1.5\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\",\"FPE-9cb6853bc486c138f930\"]}],\"ratio_bases\":[{\"value\":\"Molar ratio of ionizable lipid:DOPE:cholesterol:PEG-lipid\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},{\"value\":\"Ionizable lipid:mRNA weight ratio 10:1\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\",\"FPE-0000ddcd2870f4090a96\"]}]},{\"formulation_id\":\"FORM::IONIZABLE_C10_SERIES\",\"name\":{\"value\":\"241C10 to 246C10 ionizable-lipid LNPs\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\",\"FPE-5b01d8dbda3f40a29d10\"]},\"components\":[{\"component_id\":\"COMP::C10_IONIZABLE\",\"identity\":{\"value\":\"Newly synthesized ionizable lipids 241C10 to 246C10\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":{\"value\":\"Ionizable component\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]}},{\"component_id\":\"COMP::DOPE_SERIES\",\"identity\":{\"value\":\"DOPE\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":{\"value\":\"Helper lipid\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]}},{\"component_id\":\"COMP::CHOLESTEROL_SERIES\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":null},{\"component_id\":\"COMP::C16_PEG2000_CERAMIDE\",\"identity\":{\"value\":\"C16-PEG2000 ceramide (PEG-lipid)\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":null}],\"ratios\":[],\"ratio_bases\":[]},{\"formulation_id\":\"FORM::PEG_TUNED_MCRE\",\"name\":{\"value\":\"PEG-lipid-tuned mCre-loaded LNP\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\",\"FPE-7435d24f75ccef4f33c7\"]},\"components\":[{\"component_id\":\"COMP::PEG_TUNED_PEG\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\"]},\"role\":null},{\"component_id\":\"COMP::PEG_TUNED_CHOL\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\"]},\"role\":null}],\"ratios\":[{\"value\":\"PEG-lipid 1.0% to 3.0%\",\"evidence_ids\":[\"FPE-7435d24f75ccef4f33c7\"]}],\"ratio_bases\":[{\"value\":\"PEG-lipid mole ratio was varied by changing cholesterol mole ratio\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\",\"FPE-7435d24f75ccef4f33c7\"]}]},{\"formulation_id\":\"FORM::MANNOSE_LNP\",\"name\":{\"value\":\"Mannose-PEG-lipid-incorporated LNP\",\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\",\"FPE-c45ce63232de803c02d5\"]},\"components\":[{\"component_id\":\"COMP::MANNOSE_PEG\",\"identity\":{\"value\":\"Mannose-PEG lipid\",\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\"]},\"role\":{\"value\":\"Active targeting ligand component\",\"evidence_ids\":[\"FPE-ab1d504880ad3c68e9d0\"]}},{\"component_id\":\"COMP::PEG_LIPID_MANNOSE\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"]},\"role\":null}],\"ratios\":[{\"value\":\"Total PEG-lipid 3.0%, including 2.5% mannose-PEG lipid\",\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"]},{\"value\":\"Mannose-PEG lipid 0.5% to 4.5% at total PEG-lipid contents of 1.5%, 3.0%, and 5.0%\",\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\"]}],\"ratio_bases\":[{\"value\":\"Mole percent\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]}]},{\"formulation_id\":\"FORM::SIRNA_CORE\",\"name\":{\"value\":\"siRNA-loaded ionizable LNP\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\",\"FPE-52baf59e1cdb57b399f0\"]},\"components\":[{\"component_id\":\"COMP::IONIZABLE_LIPID_SIRNA\",\"identity\":{\"value\":\"Ionizable lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::DSPC\",\"identity\":{\"value\":\"DSPC\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::CHOLESTEROL_SIRNA\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::PEG_LIPID_SIRNA\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null}],\"ratios\":[{\"value\":\"42.5:13:42.5:3\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]},{\"value\":\"PEG-lipid decreased to 1.5% by changing cholesterol\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]}],\"ratio_bases\":[{\"value\":\"Molar ratio of ionizable lipid:DSPC:cholesterol:PEG-lipid\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]},{\"value\":\"Ionizable lipid:siRNA weight ratio 7.5:1\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]}]}],\"payloads\":[{\"payload_id\":\"PAYLOAD::MFLUC\",\"identity\":{\"value\":\"mRNA encoding firefly luciferase (mFLuc)\",\"evidence_ids\":[\"FPE-403dea08dbfd8eb42883\",\"FPE-0000ddcd2870f4090a96\"]},\"role\":{\"value\":\"Reporter mRNA\",\"evidence_ids\":[\"FPE-403dea08dbfd8eb42883\"]}},{\"payload_id\":\"PAYLOAD::MCRE\",\"identity\":{\"value\":\"Cre mRNA (mCre)\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\",\"FPE-7810a24e4c2a968c140c\"]},\"role\":{\"value\":\"Gene-editing readout payload in LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]}},{\"payload_id\":\"PAYLOAD::SIFVIII\",\"identity\":{\"value\":\"siRNA against FVIII (siFVIII)\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-52baf59e1cdb57b399f0\"]},\"role\":{\"value\":\"Gene-silencing payload\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]}},{\"payload_id\":\"PAYLOAD::SIFVII\",\"identity\":{\"value\":\"siRNA against FVII (siFVII)\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-52baf59e1cdb57b399f0\"]},\"role\":{\"value\":\"Gene-silencing payload\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]}}],\"common_routes\":[{\"value\":\"Intravenous injection\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\",\"FPE-7810a24e4c2a968c140c\",\"FPE-52baf59e1cdb57b399f0\"]}],\"common_species\":[{\"value\":\"Mouse\",\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\",\"FPE-7810a24e4c2a968c140c\"]},{\"value\":\"C57BL/6 mouse\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},{\"value\":\"LSL-tdTomato mouse\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]}],\"common_models\":[{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\",\"FPE-9cb6853bc486c138f930\"]},{\"value\":\"HepG2 cells\",\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\",\"FPE-eb65bc560a18ddf984bf\"]},{\"value\":\"C57BL/6 mice\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},{\"value\":\"LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-78f5bdd8e531d94f8387\",\"FPE-7810a24e4c2a968c140c\"]}],\"recipient_contexts\":[{\"context_id\":\"RECIPIENT::HELA\",\"recipient_cell\":{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\"]},\"organ\":null},{\"context_id\":\"RECIPIENT::HEPG2\",\"recipient_cell\":{\"value\":\"HepG2 cells\",\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\"]},\"organ\":null},{\"context_id\":\"RECIPIENT::HEPATOCYTE\",\"recipient_cell\":{\"value\":\"Hepatocytes\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]}},{\"context_id\":\"RECIPIENT::LSEC\",\"recipient_cell\":{\"value\":\"Liver sinusoidal endothelial cells (LSECs)\",\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"]}},{\"context_id\":\"RECIPIENT::KUPFFER\",\"recipient_cell\":{\"value\":\"Kupffer cells\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]}}],\"provisional_experiment_contexts\":[{\"provisional_context_id\":\"CTX::HELA_MFLUC\",\"formulation_id\":\"FORM::MRNA_CORE\",\"payload_id\":\"PAYLOAD::MFLUC\",\"dose\":{\"value\":0.25,\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"dose_unit\":{\"value\":\"μg/ml mRNA\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"route\":{\"value\":\"Cell treatment\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"species\":{\"value\":\"Human\",\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\"]},\"experimental_model\":{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"recipient_cell\":{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"organ\":null,\"timepoint\":{\"value\":6,\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"timepoint_unit\":{\"value\":\"hours\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"joint_evidence_ids\":[\"FPE-9cb6853bc486c138f930\"],\"outcome_evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\",\"FPE-041d700e6ab85dbcef74\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::C57BL6_MFLUC\",\"formulation_id\":\"FORM::MRNA_CORE\",\"payload_id\":\"PAYLOAD::MFLUC\",\"dose\":{\"value\":0.1,\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"dose_unit\":{\"value\":\"mg/kg mRNA\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"route\":{\"value\":\"Intravenous\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"species\":{\"value\":\"C57BL/6 mouse\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"experimental_model\":{\"value\":\"C57BL/6 mice\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"recipient_cell\":{\"value\":\"Liver cells\",\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\"]},\"timepoint\":{\"value\":3,\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"timepoint_unit\":{\"value\":\"hours\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"joint_evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"],\"outcome_evidence_ids\":[\"FPE-00a7ca91d16d157a680b\",\"FPE-8485944cb09926b93342\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::LSL_MCRE\",\"formulation_id\":\"FORM::PEG_TUNED_MCRE\",\"payload_id\":\"PAYLOAD::MCRE\",\"dose\":{\"value\":0.5,\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"route\":{\"value\":\"Intravenous\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"species\":{\"value\":\"Mouse\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"experimental_model\":{\"value\":\"LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"recipient_cell\":{\"value\":\"Hepatocytes, LSECs, and Kupffer cells\",\"evidence_ids\":[\"FPE-78f5bdd8e531d94f8387\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"timepoint\":{\"value\":2,\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"timepoint_unit\":{\"value\":\"days\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"joint_evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"],\"outcome_evidence_ids\":[\"FPE-85a2f2243f98488d06e6\",\"FPE-78f5bdd8e531d94f8387\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::MANNOSE_MCRE_LSEC\",\"formulation_id\":\"FORM::MANNOSE_LNP\",\"payload_id\":\"PAYLOAD::MCRE\",\"dose\":{\"value\":0.5,\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"dose_unit\":{\"value\":\"mg/kg mRNA\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"route\":{\"value\":\"Injected\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"species\":{\"value\":\"Mouse\",\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"]},\"experimental_model\":{\"value\":\"LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"recipient_cell\":{\"value\":\"LSECs\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"timepoint\":{\"value\":2,\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"timepoint_unit\":{\"value\":\"days\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"joint_evidence_ids\":[\"FPE-d590abe44c7416153083\"],\"outcome_evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\",\"FPE-d590abe44c7416153083\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::C57BL6_SIFVIII_MANNOSE\",\"formulation_id\":\"FORM::MANNOSE_LNP\",\"payload_id\":\"PAYLOAD::SIFVIII\",\"dose\":{\"value\":0.5,\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"route\":{\"value\":\"Injected\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"species\":{\"value\":\"C57BL/6 mouse\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"experimental_model\":{\"value\":\"C57BL/6 mice\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"recipient_cell\":{\"value\":\"LSECs\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"organ\":null,\"timepoint\":{\"value\":2,\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"timepoint_unit\":{\"value\":\"days\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"joint_evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"],\"outcome_evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-0d429b7e50aafec4676f\"],\"pairing_metadata\":null}],\"anchor_accounting\":{\"ANCHOR::FPE-f0da6564019505794d81\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MFLUC\",\"PAYLOAD::MCRE\",\"PAYLOAD::SIFVIII\",\"PAYLOAD::SIFVII\"],\"evidence_ids\":[\"FPE-f0da6564019505794d81\"],\"explanation\":\"Supports the paper-level RNA-therapeutic payload scope and LSEC-targeted LNP outcome.\"},\"ANCHOR::FPE-c074b9acd9e663d80867\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-c074b9acd9e663d80867\"],\"explanation\":\"Supports engineered LNP, mRNA, hepatocyte, and LSEC scope.\"},\"ANCHOR::FPE-964ffd5c6568b4a91cd2\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MFLUC\",\"PAYLOAD::MCRE\",\"PAYLOAD::SIFVIII\",\"PAYLOAD::SIFVII\"],\"evidence_ids\":[\"FPE-964ffd5c6568b4a91cd2\"],\"explanation\":\"Supports contextual RNA payload classes only.\"},\"ANCHOR::FPE-d887cb926f838526687d\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"FORM::SIRNA_CORE\"],\"evidence_ids\":[\"FPE-d887cb926f838526687d\"],\"explanation\":\"Supports generic LNP composition and RNA-delivery scope.\"},\"ANCHOR::FPE-68655cba33f4ef52571e\":{\"disposition\":\"mapped\",\"record_ids\":[\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\"],\"evidence_ids\":[\"FPE-68655cba33f4ef52571e\"],\"explanation\":\"Supports liver-cell recipient scope.\"},\"ANCHOR::FPE-74350429aa52da097f09\":{\"disposition\":\"mapped\",\"record_ids\":[\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\"],\"evidence_ids\":[\"FPE-74350429aa52da097f09\"],\"explanation\":\"Supports LSEC/Kupffer delivery context and ligand-targeting rationale.\"},\"ANCHOR::FPE-403dea08dbfd8eb42883\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"PAYLOAD::MFLUC\",\"PAYLOAD::MCRE\"],\"evidence_ids\":[\"FPE-403dea08dbfd8eb42883\"],\"explanation\":\"Supports study formulations and reporter payloads.\"},\"ANCHOR::FPE-6974fd8b45b30f3fd885\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\"],\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"],\"explanation\":\"Supports C10-series LNP components and microfluidic preparation.\"},\"ANCHOR::FPE-cfc3db7a3961127fa4f1\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\"],\"evidence_ids\":[\"FPE-cfc3db7a3961127fa4f1\"],\"explanation\":\"Supports microfluidic LNP preparation and component classes.\"},\"ANCHOR::FPE-c3df2dfeebc1801c0957\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\"],\"evidence_ids\":[\"FPE-c3df2dfeebc1801c0957\"],\"explanation\":\"Supports mRNA-formulated LNP characterization.\"},\"ANCHOR::FPE-5b01d8dbda3f40a29d10\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\",\"PAYLOAD::MFLUC\",\"RECIPIENT::HELA\",\"CTX::HELA_MFLUC\"],\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\"],\"explanation\":\"Supports mFLuc C10-series testing in HeLa cells.\"},\"ANCHOR::FPE-041d700e6ab85dbcef74\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::HELA_MFLUC\"],\"evidence_ids\":[\"FPE-041d700e6ab85dbcef74\"],\"explanation\":\"Supports the HeLa mFLuc outcome.\"},\"ANCHOR::FPE-00a7ca91d16d157a680b\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\"],\"explanation\":\"Supports IV mFLuc LNP delivery in C57BL/6 mice.\"},\"ANCHOR::FPE-8485944cb09926b93342\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-8485944cb09926b93342\"],\"explanation\":\"Supports 0.1 mg/kg mFLuc LNP dosing and 3-hour outcome.\"},\"ANCHOR::FPE-b437e09f26650f2d946e\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-b437e09f26650f2d946e\"],\"explanation\":\"Supports ApoE-associated 246C10 in vivo liver-delivery outcome.\"},\"ANCHOR::FPE-85a2f2243f98488d06e6\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MCRE\",\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"],\"explanation\":\"Supports mCre liver-cell transfection outcomes.\"},\"ANCHOR::FPE-78f5bdd8e531d94f8387\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-78f5bdd8e531d94f8387\"],\"explanation\":\"Supports LSL-tdTomato mCre experiment and recipient-cell outcomes.\"},\"ANCHOR::FPE-13de24a06d9819730ed6\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\"],\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\"],\"explanation\":\"Supports PEG/cholesterol mole-ratio tuning in mCre LNPs.\"},\"ANCHOR::FPE-7435d24f75ccef4f33c7\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-7435d24f75ccef4f33c7\"],\"explanation\":\"Supports PEG range and IV 0.5 mg/kg mCre LSL-tdTomato experiment.\"},\"ANCHOR::FPE-5184b0e0b9f3b81cec87\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-5184b0e0b9f3b81cec87\"],\"explanation\":\"Supports PEG/size-dependent hepatocyte delivery outcome.\"},\"ANCHOR::FPE-b7d823aff4c4ff2f86ad\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-b7d823aff4c4ff2f86ad\"],\"explanation\":\"Supports 1.0%-PEG, 100-nm LSEC-associated outcome.\"},\"ANCHOR::FPE-8fec4a2f75c5f8580833\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-8fec4a2f75c5f8580833\"],\"explanation\":\"Supports high-PEG ligand-targeting rationale.\"},\"ANCHOR::FPE-9b43f7da80efa63a02e3\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\"],\"explanation\":\"Supports mannose-PEG lipid and LSEC targeting rationale.\"},\"ANCHOR::FPE-f44a542a6aae2ac6361e\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPG2\"],\"evidence_ids\":[\"FPE-f44a542a6aae2ac6361e\"],\"explanation\":\"Supports mannose-LNP testing in HepG2 cells.\"},\"ANCHOR::FPE-22a6253b499df98fedcb\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPG2\"],\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\"],\"explanation\":\"Supports mannose-PEG incorporation range and HepG2 outcomes.\"},\"ANCHOR::FPE-c45ce63232de803c02d5\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"],\"explanation\":\"Supports 3.0% total PEG/2.5% mannose-PEG formulation and IV C57BL/6 mFLuc study.\"},\"ANCHOR::FPE-f9e38e7de85203a7cc17\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::MANNOSE_MCRE_LSEC\"],\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"],\"explanation\":\"Supports mannose-mCre LSEC gene-editing outcome.\"},\"ANCHOR::FPE-d590abe44c7416153083\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"CTX::MANNOSE_MCRE_LSEC\"],\"evidence_ids\":[\"FPE-d590abe44c7416153083\"],\"explanation\":\"Directly supports mannose-LNP/mCre/LSL-tdTomato joint context.\"},\"ANCHOR::FPE-a4bea94b24b806dc3995\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"PAYLOAD::SIFVIII\",\"PAYLOAD::SIFVII\",\"CTX::C57BL6_SIFVIII_MANNOSE\"],\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"],\"explanation\":\"Directly supports mannose-LNP siRNA experiments in C57BL/6 mice.\"},\"ANCHOR::FPE-0d429b7e50aafec4676f\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_SIFVIII_MANNOSE\"],\"evidence_ids\":[\"FPE-0d429b7e50aafec4676f\"],\"explanation\":\"Supports siFVII/siFVIII dosing and LSEC/hepatocyte silencing outcomes.\"},\"ANCHOR::FPE-72046ac8ba89916ed7a2\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-72046ac8ba89916ed7a2\"],\"explanation\":\"Supports LSEC-targeting platform context.\"},\"ANCHOR::FPE-ab1d504880ad3c68e9d0\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-ab1d504880ad3c68e9d0\"],\"explanation\":\"Supports mannose-CD206 active targeting to LSECs.\"},\"ANCHOR::FPE-ad5dfce30d4c82b97d86\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\"],\"evidence_ids\":[\"FPE-ad5dfce30d4c82b97d86\"],\"explanation\":\"Supports synthesis reagent ratio for C10 ionizable lipids.\"},\"ANCHOR::FPE-730eca03ddf54df52a03\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"FORM::SIRNA_CORE\"],\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"],\"explanation\":\"Supports mRNA/siRNA LNP components, phase ratio, and payload weight ratios.\"},\"ANCHOR::FPE-4651a539acdbcbd35a6d\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"FORM::SIRNA_CORE\"],\"evidence_ids\":[\"FPE-4651a539acdbcbd35a6d\"],\"explanation\":\"Supports LNP characterization procedure.\"},\"ANCHOR::FPE-511b92e98aca38d5dd6e\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\"],\"evidence_ids\":[\"FPE-511b92e98aca38d5dd6e\"],\"explanation\":\"Supports formulated-LNP pKa characterization.\"},\"ANCHOR::FPE-9cb6853bc486c138f930\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"CTX::HELA_MFLUC\"],\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"],\"explanation\":\"Directly supports mRNA-core composition and HeLa mFLuc context.\"},\"ANCHOR::FPE-eb65bc560a18ddf984bf\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPG2\"],\"evidence_ids\":[\"FPE-eb65bc560a18ddf984bf\"],\"explanation\":\"Supports 246C10 mannose-PEG mFLuc LNP testing in HepG2 cells.\"},\"ANCHOR::FPE-0000ddcd2870f4090a96\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"PAYLOAD::MFLUC\",\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"],\"explanation\":\"Directly supports mFluc LNP ratio, C57BL/6 IV dose, and imaging timepoint.\"},\"ANCHOR::FPE-a69882162d958de28294\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-a69882162d958de28294\"],\"explanation\":\"Supports ApoE-knockout mouse mFLuc-LNP uptake experiment.\"},\"ANCHOR::FPE-7810a24e4c2a968c140c\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MCRE\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"],\"explanation\":\"Directly supports mCre LSL-tdTomato IV study and two-day endpoint.\"},\"ANCHOR::FPE-f3cea8a29a2a149660bf\":{\"disposition\":\"mapped\",\"record_ids\":[\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\"],\"evidence_ids\":[\"FPE-f3cea8a29a2a149660bf\"],\"explanation\":\"Supports liver-cell immunofluorescence identification method.\"},\"ANCHOR::FPE-52baf59e1cdb57b399f0\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::SIRNA_CORE\",\"PAYLOAD::SIFVII\",\"PAYLOAD::SIFVIII\"],\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"],\"explanation\":\"Supports siRNA-core composition, mannose-PEG range, IV route, and assay timings.\"},\"ANCHOR::FPE-4ef14a50a9f91dea3c00\":{\"disposition\":\"not_supported\",\"record_ids\":[],\"evidence_ids\":[\"FPE-4ef14a50a9f91dea3c00\"],\"explanation\":\"Funding and author-contribution text does not provide a reportable formulation, payload, recipient, or experiment field.\"},\"ANCHOR::FPE-15d307016ad24a50ba2f\":{\"disposition\":\"not_supported\",\"record_ids\":[],\"evidence_ids\":[\"FPE-15d307016ad24a50ba2f\"],\"explanation\":\"Supplementary-material URL contains no local component-ratio value.\"}},\"unresolved_items\":[\"No source-supported full lipid-component ratio was supplied for the mannose-LNP formulations beyond total PEG-lipid and mannose-PEG-lipid percentages.\",\"The exact 1.0% PEG-lipid mCre LNP component ratio is not fully specified in the supplied text.\",\"Preparation-method details are retained in anchor accounting but have no dedicated preparation-method field in this response schema.\"]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 0.98,
+    "background": false,
+    "completed_at": 1785744615.0,
+    "conversation": null,
+    "max_output_tokens": 12000,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": "4eff76ebf3f1f0692ae58bc3ad6c273797378a40b3e6a6dbbb8898f6df0a1bc5",
+    "prompt_cache_options": null,
+    "prompt_cache_retention": "24h",
+    "reasoning": {
+      "context": "all_turns",
+      "effort": "low",
+      "generate_summary": null,
+      "mode": "standard",
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "FullPaperMapResponse",
+        "schema_": {
+          "$defs": {
+            "AnchorAccountingEntry": {
+              "additionalProperties": false,
+              "properties": {
+                "disposition": {
+                  "enum": [
+                    "mapped",
+                    "not_supported",
+                    "ambiguous"
+                  ],
+                  "title": "Disposition",
+                  "type": "string"
+                },
+                "record_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Record Ids",
+                  "type": "array"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                },
+                "explanation": {
+                  "minLength": 1,
+                  "title": "Explanation",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "disposition",
+                "record_ids",
+                "evidence_ids",
+                "explanation"
+              ],
+              "title": "AnchorAccountingEntry",
+              "type": "object"
+            },
+            "EvidenceBackedNumber": {
+              "additionalProperties": false,
+              "description": "A source-reported numeric value and its exact local support.",
+              "properties": {
+                "value": {
+                  "title": "Value",
+                  "type": "number"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "value",
+                "evidence_ids"
+              ],
+              "title": "EvidenceBackedNumber",
+              "type": "object"
+            },
+            "EvidenceBackedText": {
+              "additionalProperties": false,
+              "description": "A source-reported text value and its exact local support.",
+              "properties": {
+                "value": {
+                  "minLength": 1,
+                  "title": "Value",
+                  "type": "string"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "value",
+                "evidence_ids"
+              ],
+              "title": "EvidenceBackedText",
+              "type": "object"
+            },
+            "PairingMetadata": {
+              "additionalProperties": false,
+              "description": "Explicit source metadata authorizing a reported joint arm.",
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "paired",
+                    "cross_product",
+                    "explicit_pairing"
+                  ],
+                  "title": "Kind",
+                  "type": "string"
+                },
+                "paired_fields": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Paired Fields",
+                  "type": "array"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "kind",
+                "paired_fields",
+                "evidence_ids"
+              ],
+              "title": "PairingMetadata",
+              "type": "object"
+            },
+            "ProvisionalExperimentContext": {
+              "additionalProperties": false,
+              "description": "One source-backed arm hypothesis; never a local Cartesian product.",
+              "properties": {
+                "provisional_context_id": {
+                  "minLength": 1,
+                  "title": "Provisional Context Id",
+                  "type": "string"
+                },
+                "formulation_id": {
+                  "minLength": 1,
+                  "title": "Formulation Id",
+                  "type": "string"
+                },
+                "payload_id": {
+                  "minLength": 1,
+                  "title": "Payload Id",
+                  "type": "string"
+                },
+                "dose": {
+                  "$ref": "#/$defs/EvidenceBackedNumber"
+                },
+                "dose_unit": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "route": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "species": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "experimental_model": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "recipient_cell": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "organ": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "timepoint": {
+                  "$ref": "#/$defs/EvidenceBackedNumber"
+                },
+                "timepoint_unit": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "joint_evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Joint Evidence Ids",
+                  "type": "array"
+                },
+                "outcome_evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Outcome Evidence Ids",
+                  "type": "array"
+                },
+                "pairing_metadata": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/PairingMetadata"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "provisional_context_id",
+                "formulation_id",
+                "payload_id",
+                "dose",
+                "dose_unit",
+                "route",
+                "species",
+                "experimental_model",
+                "recipient_cell",
+                "organ",
+                "timepoint",
+                "timepoint_unit",
+                "joint_evidence_ids",
+                "outcome_evidence_ids",
+                "pairing_metadata"
+              ],
+              "title": "ProvisionalExperimentContext",
+              "type": "object"
+            },
+            "RecipientContext": {
+              "additionalProperties": false,
+              "properties": {
+                "context_id": {
+                  "minLength": 1,
+                  "title": "Context Id",
+                  "type": "string"
+                },
+                "recipient_cell": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "organ": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "context_id",
+                "recipient_cell",
+                "organ"
+              ],
+              "title": "RecipientContext",
+              "type": "object"
+            },
+            "SharedComponent": {
+              "additionalProperties": false,
+              "properties": {
+                "component_id": {
+                  "minLength": 1,
+                  "title": "Component Id",
+                  "type": "string"
+                },
+                "identity": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "role": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "component_id",
+                "identity",
+                "role"
+              ],
+              "title": "SharedComponent",
+              "type": "object"
+            },
+            "SharedFormulation": {
+              "additionalProperties": false,
+              "properties": {
+                "formulation_id": {
+                  "minLength": 1,
+                  "title": "Formulation Id",
+                  "type": "string"
+                },
+                "name": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "components": {
+                  "items": {
+                    "$ref": "#/$defs/SharedComponent"
+                  },
+                  "title": "Components",
+                  "type": "array"
+                },
+                "ratios": {
+                  "items": {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  "title": "Ratios",
+                  "type": "array"
+                },
+                "ratio_bases": {
+                  "items": {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  "title": "Ratio Bases",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "formulation_id",
+                "name",
+                "components",
+                "ratios",
+                "ratio_bases"
+              ],
+              "title": "SharedFormulation",
+              "type": "object"
+            },
+            "SharedPayload": {
+              "additionalProperties": false,
+              "properties": {
+                "payload_id": {
+                  "minLength": 1,
+                  "title": "Payload Id",
+                  "type": "string"
+                },
+                "identity": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "role": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "payload_id",
+                "identity",
+                "role"
+              ],
+              "title": "SharedPayload",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Shared paper facts and source-backed provisional experiment contexts.",
+          "properties": {
+            "paper_map_version": {
+              "const": "full-paper-map-1.0.0",
+              "title": "Paper Map Version",
+              "type": "string"
+            },
+            "paper_id": {
+              "minLength": 1,
+              "title": "Paper Id",
+              "type": "string"
+            },
+            "formulations": {
+              "items": {
+                "$ref": "#/$defs/SharedFormulation"
+              },
+              "title": "Formulations",
+              "type": "array"
+            },
+            "payloads": {
+              "items": {
+                "$ref": "#/$defs/SharedPayload"
+              },
+              "title": "Payloads",
+              "type": "array"
+            },
+            "common_routes": {
+              "items": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "title": "Common Routes",
+              "type": "array"
+            },
+            "common_species": {
+              "items": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "title": "Common Species",
+              "type": "array"
+            },
+            "common_models": {
+              "items": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "title": "Common Models",
+              "type": "array"
+            },
+            "recipient_contexts": {
+              "items": {
+                "$ref": "#/$defs/RecipientContext"
+              },
+              "title": "Recipient Contexts",
+              "type": "array"
+            },
+            "provisional_experiment_contexts": {
+              "items": {
+                "$ref": "#/$defs/ProvisionalExperimentContext"
+              },
+              "title": "Provisional Experiment Contexts",
+              "type": "array"
+            },
+            "anchor_accounting": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "ANCHOR::FPE-f0da6564019505794d81": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-c074b9acd9e663d80867": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-964ffd5c6568b4a91cd2": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-d887cb926f838526687d": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-68655cba33f4ef52571e": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-74350429aa52da097f09": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-403dea08dbfd8eb42883": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-6974fd8b45b30f3fd885": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-cfc3db7a3961127fa4f1": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-c3df2dfeebc1801c0957": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-5b01d8dbda3f40a29d10": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-041d700e6ab85dbcef74": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-00a7ca91d16d157a680b": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-8485944cb09926b93342": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-b437e09f26650f2d946e": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-85a2f2243f98488d06e6": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-78f5bdd8e531d94f8387": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-13de24a06d9819730ed6": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-7435d24f75ccef4f33c7": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-5184b0e0b9f3b81cec87": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-b7d823aff4c4ff2f86ad": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-8fec4a2f75c5f8580833": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-9b43f7da80efa63a02e3": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-f44a542a6aae2ac6361e": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-22a6253b499df98fedcb": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-c45ce63232de803c02d5": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-f9e38e7de85203a7cc17": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-d590abe44c7416153083": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-a4bea94b24b806dc3995": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-0d429b7e50aafec4676f": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-72046ac8ba89916ed7a2": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-ab1d504880ad3c68e9d0": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-ad5dfce30d4c82b97d86": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-730eca03ddf54df52a03": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-4651a539acdbcbd35a6d": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-511b92e98aca38d5dd6e": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-9cb6853bc486c138f930": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-eb65bc560a18ddf984bf": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-0000ddcd2870f4090a96": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-a69882162d958de28294": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-7810a24e4c2a968c140c": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-f3cea8a29a2a149660bf": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-52baf59e1cdb57b399f0": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-4ef14a50a9f91dea3c00": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-15d307016ad24a50ba2f": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                }
+              },
+              "required": [
+                "ANCHOR::FPE-f0da6564019505794d81",
+                "ANCHOR::FPE-c074b9acd9e663d80867",
+                "ANCHOR::FPE-964ffd5c6568b4a91cd2",
+                "ANCHOR::FPE-d887cb926f838526687d",
+                "ANCHOR::FPE-68655cba33f4ef52571e",
+                "ANCHOR::FPE-74350429aa52da097f09",
+                "ANCHOR::FPE-403dea08dbfd8eb42883",
+                "ANCHOR::FPE-6974fd8b45b30f3fd885",
+                "ANCHOR::FPE-cfc3db7a3961127fa4f1",
+                "ANCHOR::FPE-c3df2dfeebc1801c0957",
+                "ANCHOR::FPE-5b01d8dbda3f40a29d10",
+                "ANCHOR::FPE-041d700e6ab85dbcef74",
+                "ANCHOR::FPE-00a7ca91d16d157a680b",
+                "ANCHOR::FPE-8485944cb09926b93342",
+                "ANCHOR::FPE-b437e09f26650f2d946e",
+                "ANCHOR::FPE-85a2f2243f98488d06e6",
+                "ANCHOR::FPE-78f5bdd8e531d94f8387",
+                "ANCHOR::FPE-13de24a06d9819730ed6",
+                "ANCHOR::FPE-7435d24f75ccef4f33c7",
+                "ANCHOR::FPE-5184b0e0b9f3b81cec87",
+                "ANCHOR::FPE-b7d823aff4c4ff2f86ad",
+                "ANCHOR::FPE-8fec4a2f75c5f8580833",
+                "ANCHOR::FPE-9b43f7da80efa63a02e3",
+                "ANCHOR::FPE-f44a542a6aae2ac6361e",
+                "ANCHOR::FPE-22a6253b499df98fedcb",
+                "ANCHOR::FPE-c45ce63232de803c02d5",
+                "ANCHOR::FPE-f9e38e7de85203a7cc17",
+                "ANCHOR::FPE-d590abe44c7416153083",
+                "ANCHOR::FPE-a4bea94b24b806dc3995",
+                "ANCHOR::FPE-0d429b7e50aafec4676f",
+                "ANCHOR::FPE-72046ac8ba89916ed7a2",
+                "ANCHOR::FPE-ab1d504880ad3c68e9d0",
+                "ANCHOR::FPE-ad5dfce30d4c82b97d86",
+                "ANCHOR::FPE-730eca03ddf54df52a03",
+                "ANCHOR::FPE-4651a539acdbcbd35a6d",
+                "ANCHOR::FPE-511b92e98aca38d5dd6e",
+                "ANCHOR::FPE-9cb6853bc486c138f930",
+                "ANCHOR::FPE-eb65bc560a18ddf984bf",
+                "ANCHOR::FPE-0000ddcd2870f4090a96",
+                "ANCHOR::FPE-a69882162d958de28294",
+                "ANCHOR::FPE-7810a24e4c2a968c140c",
+                "ANCHOR::FPE-f3cea8a29a2a149660bf",
+                "ANCHOR::FPE-52baf59e1cdb57b399f0",
+                "ANCHOR::FPE-4ef14a50a9f91dea3c00",
+                "ANCHOR::FPE-15d307016ad24a50ba2f"
+              ]
+            },
+            "unresolved_items": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Unresolved Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "paper_map_version",
+            "paper_id",
+            "formulations",
+            "payloads",
+            "common_routes",
+            "common_species",
+            "common_models",
+            "recipient_contexts",
+            "provisional_experiment_contexts",
+            "anchor_accounting",
+            "unresolved_items"
+          ],
+          "title": "PaperMapResponse",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": true
+      },
+      "verbosity": "medium"
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 23701,
+      "input_tokens_details": {
+        "cache_write_tokens": 23698,
+        "cached_tokens": 0
+      },
+      "output_tokens": 8876,
+      "output_tokens_details": {
+        "reasoning_tokens": 596
+      },
+      "total_tokens": 32577
+    },
+    "user": null,
+    "billing": {
+      "payer": "openai"
+    },
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "tool_usage": {
+      "image_gen": {
+        "input_tokens": 0,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 0
+        },
+        "output_tokens": 0,
+        "output_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 0
+        },
+        "total_tokens": 0
+      },
+      "web_search": {
+        "num_requests": 0
+      }
+    },
+    "output_text": "{\"paper_map_version\":\"full-paper-map-1.0.0\",\"paper_id\":\"PILOT-002\",\"formulations\":[{\"formulation_id\":\"FORM::MRNA_CORE\",\"name\":{\"value\":\"mRNA-loaded ionizable LNP\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"components\":[{\"component_id\":\"COMP::IONIZABLE_LIPID\",\"identity\":{\"value\":\"Ionizable lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":{\"value\":\"Ionizable component\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]}},{\"component_id\":\"COMP::DOPE\",\"identity\":{\"value\":\"DOPE\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":{\"value\":\"Helper lipid\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]}},{\"component_id\":\"COMP::CHOLESTEROL\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::PEG_LIPID\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null}],\"ratios\":[{\"value\":\"26.5:20:52:1.5\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\",\"FPE-9cb6853bc486c138f930\"]}],\"ratio_bases\":[{\"value\":\"Molar ratio of ionizable lipid:DOPE:cholesterol:PEG-lipid\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},{\"value\":\"Ionizable lipid:mRNA weight ratio 10:1\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\",\"FPE-0000ddcd2870f4090a96\"]}]},{\"formulation_id\":\"FORM::IONIZABLE_C10_SERIES\",\"name\":{\"value\":\"241C10 to 246C10 ionizable-lipid LNPs\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\",\"FPE-5b01d8dbda3f40a29d10\"]},\"components\":[{\"component_id\":\"COMP::C10_IONIZABLE\",\"identity\":{\"value\":\"Newly synthesized ionizable lipids 241C10 to 246C10\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":{\"value\":\"Ionizable component\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]}},{\"component_id\":\"COMP::DOPE_SERIES\",\"identity\":{\"value\":\"DOPE\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":{\"value\":\"Helper lipid\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]}},{\"component_id\":\"COMP::CHOLESTEROL_SERIES\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":null},{\"component_id\":\"COMP::C16_PEG2000_CERAMIDE\",\"identity\":{\"value\":\"C16-PEG2000 ceramide (PEG-lipid)\",\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"]},\"role\":null}],\"ratios\":[],\"ratio_bases\":[]},{\"formulation_id\":\"FORM::PEG_TUNED_MCRE\",\"name\":{\"value\":\"PEG-lipid-tuned mCre-loaded LNP\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\",\"FPE-7435d24f75ccef4f33c7\"]},\"components\":[{\"component_id\":\"COMP::PEG_TUNED_PEG\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\"]},\"role\":null},{\"component_id\":\"COMP::PEG_TUNED_CHOL\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\"]},\"role\":null}],\"ratios\":[{\"value\":\"PEG-lipid 1.0% to 3.0%\",\"evidence_ids\":[\"FPE-7435d24f75ccef4f33c7\"]}],\"ratio_bases\":[{\"value\":\"PEG-lipid mole ratio was varied by changing cholesterol mole ratio\",\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\",\"FPE-7435d24f75ccef4f33c7\"]}]},{\"formulation_id\":\"FORM::MANNOSE_LNP\",\"name\":{\"value\":\"Mannose-PEG-lipid-incorporated LNP\",\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\",\"FPE-c45ce63232de803c02d5\"]},\"components\":[{\"component_id\":\"COMP::MANNOSE_PEG\",\"identity\":{\"value\":\"Mannose-PEG lipid\",\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\"]},\"role\":{\"value\":\"Active targeting ligand component\",\"evidence_ids\":[\"FPE-ab1d504880ad3c68e9d0\"]}},{\"component_id\":\"COMP::PEG_LIPID_MANNOSE\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"]},\"role\":null}],\"ratios\":[{\"value\":\"Total PEG-lipid 3.0%, including 2.5% mannose-PEG lipid\",\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"]},{\"value\":\"Mannose-PEG lipid 0.5% to 4.5% at total PEG-lipid contents of 1.5%, 3.0%, and 5.0%\",\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\"]}],\"ratio_bases\":[{\"value\":\"Mole percent\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]}]},{\"formulation_id\":\"FORM::SIRNA_CORE\",\"name\":{\"value\":\"siRNA-loaded ionizable LNP\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\",\"FPE-52baf59e1cdb57b399f0\"]},\"components\":[{\"component_id\":\"COMP::IONIZABLE_LIPID_SIRNA\",\"identity\":{\"value\":\"Ionizable lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::DSPC\",\"identity\":{\"value\":\"DSPC\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::CHOLESTEROL_SIRNA\",\"identity\":{\"value\":\"Cholesterol\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null},{\"component_id\":\"COMP::PEG_LIPID_SIRNA\",\"identity\":{\"value\":\"PEG-lipid\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]},\"role\":null}],\"ratios\":[{\"value\":\"42.5:13:42.5:3\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]},{\"value\":\"PEG-lipid decreased to 1.5% by changing cholesterol\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]}],\"ratio_bases\":[{\"value\":\"Molar ratio of ionizable lipid:DSPC:cholesterol:PEG-lipid\",\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"]},{\"value\":\"Ionizable lipid:siRNA weight ratio 7.5:1\",\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"]}]}],\"payloads\":[{\"payload_id\":\"PAYLOAD::MFLUC\",\"identity\":{\"value\":\"mRNA encoding firefly luciferase (mFLuc)\",\"evidence_ids\":[\"FPE-403dea08dbfd8eb42883\",\"FPE-0000ddcd2870f4090a96\"]},\"role\":{\"value\":\"Reporter mRNA\",\"evidence_ids\":[\"FPE-403dea08dbfd8eb42883\"]}},{\"payload_id\":\"PAYLOAD::MCRE\",\"identity\":{\"value\":\"Cre mRNA (mCre)\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\",\"FPE-7810a24e4c2a968c140c\"]},\"role\":{\"value\":\"Gene-editing readout payload in LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]}},{\"payload_id\":\"PAYLOAD::SIFVIII\",\"identity\":{\"value\":\"siRNA against FVIII (siFVIII)\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-52baf59e1cdb57b399f0\"]},\"role\":{\"value\":\"Gene-silencing payload\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]}},{\"payload_id\":\"PAYLOAD::SIFVII\",\"identity\":{\"value\":\"siRNA against FVII (siFVII)\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-52baf59e1cdb57b399f0\"]},\"role\":{\"value\":\"Gene-silencing payload\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]}}],\"common_routes\":[{\"value\":\"Intravenous injection\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\",\"FPE-7810a24e4c2a968c140c\",\"FPE-52baf59e1cdb57b399f0\"]}],\"common_species\":[{\"value\":\"Mouse\",\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\",\"FPE-7810a24e4c2a968c140c\"]},{\"value\":\"C57BL/6 mouse\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},{\"value\":\"LSL-tdTomato mouse\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]}],\"common_models\":[{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\",\"FPE-9cb6853bc486c138f930\"]},{\"value\":\"HepG2 cells\",\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\",\"FPE-eb65bc560a18ddf984bf\"]},{\"value\":\"C57BL/6 mice\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},{\"value\":\"LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-78f5bdd8e531d94f8387\",\"FPE-7810a24e4c2a968c140c\"]}],\"recipient_contexts\":[{\"context_id\":\"RECIPIENT::HELA\",\"recipient_cell\":{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\"]},\"organ\":null},{\"context_id\":\"RECIPIENT::HEPG2\",\"recipient_cell\":{\"value\":\"HepG2 cells\",\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\"]},\"organ\":null},{\"context_id\":\"RECIPIENT::HEPATOCYTE\",\"recipient_cell\":{\"value\":\"Hepatocytes\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]}},{\"context_id\":\"RECIPIENT::LSEC\",\"recipient_cell\":{\"value\":\"Liver sinusoidal endothelial cells (LSECs)\",\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"]}},{\"context_id\":\"RECIPIENT::KUPFFER\",\"recipient_cell\":{\"value\":\"Kupffer cells\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"]}}],\"provisional_experiment_contexts\":[{\"provisional_context_id\":\"CTX::HELA_MFLUC\",\"formulation_id\":\"FORM::MRNA_CORE\",\"payload_id\":\"PAYLOAD::MFLUC\",\"dose\":{\"value\":0.25,\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"dose_unit\":{\"value\":\"μg/ml mRNA\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"route\":{\"value\":\"Cell treatment\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"species\":{\"value\":\"Human\",\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\"]},\"experimental_model\":{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"recipient_cell\":{\"value\":\"HeLa cells\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"organ\":null,\"timepoint\":{\"value\":6.0,\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"timepoint_unit\":{\"value\":\"hours\",\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"]},\"joint_evidence_ids\":[\"FPE-9cb6853bc486c138f930\"],\"outcome_evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\",\"FPE-041d700e6ab85dbcef74\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::C57BL6_MFLUC\",\"formulation_id\":\"FORM::MRNA_CORE\",\"payload_id\":\"PAYLOAD::MFLUC\",\"dose\":{\"value\":0.1,\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"dose_unit\":{\"value\":\"mg/kg mRNA\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"route\":{\"value\":\"Intravenous\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"species\":{\"value\":\"C57BL/6 mouse\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"experimental_model\":{\"value\":\"C57BL/6 mice\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"recipient_cell\":{\"value\":\"Liver cells\",\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\"]},\"timepoint\":{\"value\":3.0,\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"timepoint_unit\":{\"value\":\"hours\",\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"]},\"joint_evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"],\"outcome_evidence_ids\":[\"FPE-00a7ca91d16d157a680b\",\"FPE-8485944cb09926b93342\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::LSL_MCRE\",\"formulation_id\":\"FORM::PEG_TUNED_MCRE\",\"payload_id\":\"PAYLOAD::MCRE\",\"dose\":{\"value\":0.5,\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"route\":{\"value\":\"Intravenous\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"species\":{\"value\":\"Mouse\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"experimental_model\":{\"value\":\"LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"recipient_cell\":{\"value\":\"Hepatocytes, LSECs, and Kupffer cells\",\"evidence_ids\":[\"FPE-78f5bdd8e531d94f8387\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"timepoint\":{\"value\":2.0,\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"timepoint_unit\":{\"value\":\"days\",\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"]},\"joint_evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"],\"outcome_evidence_ids\":[\"FPE-85a2f2243f98488d06e6\",\"FPE-78f5bdd8e531d94f8387\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::MANNOSE_MCRE_LSEC\",\"formulation_id\":\"FORM::MANNOSE_LNP\",\"payload_id\":\"PAYLOAD::MCRE\",\"dose\":{\"value\":0.5,\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"dose_unit\":{\"value\":\"mg/kg mRNA\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"route\":{\"value\":\"Injected\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"species\":{\"value\":\"Mouse\",\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"]},\"experimental_model\":{\"value\":\"LSL-tdTomato mice\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"recipient_cell\":{\"value\":\"LSECs\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"organ\":{\"value\":\"Liver\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"timepoint\":{\"value\":2.0,\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"timepoint_unit\":{\"value\":\"days\",\"evidence_ids\":[\"FPE-d590abe44c7416153083\"]},\"joint_evidence_ids\":[\"FPE-d590abe44c7416153083\"],\"outcome_evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\",\"FPE-d590abe44c7416153083\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX::C57BL6_SIFVIII_MANNOSE\",\"formulation_id\":\"FORM::MANNOSE_LNP\",\"payload_id\":\"PAYLOAD::SIFVIII\",\"dose\":{\"value\":0.5,\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"route\":{\"value\":\"Injected\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"species\":{\"value\":\"C57BL/6 mouse\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"experimental_model\":{\"value\":\"C57BL/6 mice\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"recipient_cell\":{\"value\":\"LSECs\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"organ\":null,\"timepoint\":{\"value\":2.0,\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"timepoint_unit\":{\"value\":\"days\",\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"]},\"joint_evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"],\"outcome_evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-0d429b7e50aafec4676f\"],\"pairing_metadata\":null}],\"anchor_accounting\":{\"ANCHOR::FPE-f0da6564019505794d81\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MFLUC\",\"PAYLOAD::MCRE\",\"PAYLOAD::SIFVIII\",\"PAYLOAD::SIFVII\"],\"evidence_ids\":[\"FPE-f0da6564019505794d81\"],\"explanation\":\"Supports the paper-level RNA-therapeutic payload scope and LSEC-targeted LNP outcome.\"},\"ANCHOR::FPE-c074b9acd9e663d80867\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-c074b9acd9e663d80867\"],\"explanation\":\"Supports engineered LNP, mRNA, hepatocyte, and LSEC scope.\"},\"ANCHOR::FPE-964ffd5c6568b4a91cd2\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MFLUC\",\"PAYLOAD::MCRE\",\"PAYLOAD::SIFVIII\",\"PAYLOAD::SIFVII\"],\"evidence_ids\":[\"FPE-964ffd5c6568b4a91cd2\"],\"explanation\":\"Supports contextual RNA payload classes only.\"},\"ANCHOR::FPE-d887cb926f838526687d\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"FORM::SIRNA_CORE\"],\"evidence_ids\":[\"FPE-d887cb926f838526687d\"],\"explanation\":\"Supports generic LNP composition and RNA-delivery scope.\"},\"ANCHOR::FPE-68655cba33f4ef52571e\":{\"disposition\":\"mapped\",\"record_ids\":[\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\"],\"evidence_ids\":[\"FPE-68655cba33f4ef52571e\"],\"explanation\":\"Supports liver-cell recipient scope.\"},\"ANCHOR::FPE-74350429aa52da097f09\":{\"disposition\":\"mapped\",\"record_ids\":[\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\"],\"evidence_ids\":[\"FPE-74350429aa52da097f09\"],\"explanation\":\"Supports LSEC/Kupffer delivery context and ligand-targeting rationale.\"},\"ANCHOR::FPE-403dea08dbfd8eb42883\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"PAYLOAD::MFLUC\",\"PAYLOAD::MCRE\"],\"evidence_ids\":[\"FPE-403dea08dbfd8eb42883\"],\"explanation\":\"Supports study formulations and reporter payloads.\"},\"ANCHOR::FPE-6974fd8b45b30f3fd885\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\"],\"evidence_ids\":[\"FPE-6974fd8b45b30f3fd885\"],\"explanation\":\"Supports C10-series LNP components and microfluidic preparation.\"},\"ANCHOR::FPE-cfc3db7a3961127fa4f1\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\"],\"evidence_ids\":[\"FPE-cfc3db7a3961127fa4f1\"],\"explanation\":\"Supports microfluidic LNP preparation and component classes.\"},\"ANCHOR::FPE-c3df2dfeebc1801c0957\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\"],\"evidence_ids\":[\"FPE-c3df2dfeebc1801c0957\"],\"explanation\":\"Supports mRNA-formulated LNP characterization.\"},\"ANCHOR::FPE-5b01d8dbda3f40a29d10\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\",\"PAYLOAD::MFLUC\",\"RECIPIENT::HELA\",\"CTX::HELA_MFLUC\"],\"evidence_ids\":[\"FPE-5b01d8dbda3f40a29d10\"],\"explanation\":\"Supports mFLuc C10-series testing in HeLa cells.\"},\"ANCHOR::FPE-041d700e6ab85dbcef74\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::HELA_MFLUC\"],\"evidence_ids\":[\"FPE-041d700e6ab85dbcef74\"],\"explanation\":\"Supports the HeLa mFLuc outcome.\"},\"ANCHOR::FPE-00a7ca91d16d157a680b\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-00a7ca91d16d157a680b\"],\"explanation\":\"Supports IV mFLuc LNP delivery in C57BL/6 mice.\"},\"ANCHOR::FPE-8485944cb09926b93342\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-8485944cb09926b93342\"],\"explanation\":\"Supports 0.1 mg/kg mFLuc LNP dosing and 3-hour outcome.\"},\"ANCHOR::FPE-b437e09f26650f2d946e\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-b437e09f26650f2d946e\"],\"explanation\":\"Supports ApoE-associated 246C10 in vivo liver-delivery outcome.\"},\"ANCHOR::FPE-85a2f2243f98488d06e6\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MCRE\",\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-85a2f2243f98488d06e6\"],\"explanation\":\"Supports mCre liver-cell transfection outcomes.\"},\"ANCHOR::FPE-78f5bdd8e531d94f8387\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-78f5bdd8e531d94f8387\"],\"explanation\":\"Supports LSL-tdTomato mCre experiment and recipient-cell outcomes.\"},\"ANCHOR::FPE-13de24a06d9819730ed6\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\"],\"evidence_ids\":[\"FPE-13de24a06d9819730ed6\"],\"explanation\":\"Supports PEG/cholesterol mole-ratio tuning in mCre LNPs.\"},\"ANCHOR::FPE-7435d24f75ccef4f33c7\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-7435d24f75ccef4f33c7\"],\"explanation\":\"Supports PEG range and IV 0.5 mg/kg mCre LSL-tdTomato experiment.\"},\"ANCHOR::FPE-5184b0e0b9f3b81cec87\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-5184b0e0b9f3b81cec87\"],\"explanation\":\"Supports PEG/size-dependent hepatocyte delivery outcome.\"},\"ANCHOR::FPE-b7d823aff4c4ff2f86ad\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::PEG_TUNED_MCRE\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-b7d823aff4c4ff2f86ad\"],\"explanation\":\"Supports 1.0%-PEG, 100-nm LSEC-associated outcome.\"},\"ANCHOR::FPE-8fec4a2f75c5f8580833\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-8fec4a2f75c5f8580833\"],\"explanation\":\"Supports high-PEG ligand-targeting rationale.\"},\"ANCHOR::FPE-9b43f7da80efa63a02e3\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\"],\"explanation\":\"Supports mannose-PEG lipid and LSEC targeting rationale.\"},\"ANCHOR::FPE-f44a542a6aae2ac6361e\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPG2\"],\"evidence_ids\":[\"FPE-f44a542a6aae2ac6361e\"],\"explanation\":\"Supports mannose-LNP testing in HepG2 cells.\"},\"ANCHOR::FPE-22a6253b499df98fedcb\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPG2\"],\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\"],\"explanation\":\"Supports mannose-PEG incorporation range and HepG2 outcomes.\"},\"ANCHOR::FPE-c45ce63232de803c02d5\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"],\"explanation\":\"Supports 3.0% total PEG/2.5% mannose-PEG formulation and IV C57BL/6 mFLuc study.\"},\"ANCHOR::FPE-f9e38e7de85203a7cc17\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::MANNOSE_MCRE_LSEC\"],\"evidence_ids\":[\"FPE-f9e38e7de85203a7cc17\"],\"explanation\":\"Supports mannose-mCre LSEC gene-editing outcome.\"},\"ANCHOR::FPE-d590abe44c7416153083\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"CTX::MANNOSE_MCRE_LSEC\"],\"evidence_ids\":[\"FPE-d590abe44c7416153083\"],\"explanation\":\"Directly supports mannose-LNP/mCre/LSL-tdTomato joint context.\"},\"ANCHOR::FPE-a4bea94b24b806dc3995\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"PAYLOAD::SIFVIII\",\"PAYLOAD::SIFVII\",\"CTX::C57BL6_SIFVIII_MANNOSE\"],\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"],\"explanation\":\"Directly supports mannose-LNP siRNA experiments in C57BL/6 mice.\"},\"ANCHOR::FPE-0d429b7e50aafec4676f\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_SIFVIII_MANNOSE\"],\"evidence_ids\":[\"FPE-0d429b7e50aafec4676f\"],\"explanation\":\"Supports siFVII/siFVIII dosing and LSEC/hepatocyte silencing outcomes.\"},\"ANCHOR::FPE-72046ac8ba89916ed7a2\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-72046ac8ba89916ed7a2\"],\"explanation\":\"Supports LSEC-targeting platform context.\"},\"ANCHOR::FPE-ab1d504880ad3c68e9d0\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::LSEC\"],\"evidence_ids\":[\"FPE-ab1d504880ad3c68e9d0\"],\"explanation\":\"Supports mannose-CD206 active targeting to LSECs.\"},\"ANCHOR::FPE-ad5dfce30d4c82b97d86\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::IONIZABLE_C10_SERIES\"],\"evidence_ids\":[\"FPE-ad5dfce30d4c82b97d86\"],\"explanation\":\"Supports synthesis reagent ratio for C10 ionizable lipids.\"},\"ANCHOR::FPE-730eca03ddf54df52a03\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"FORM::SIRNA_CORE\"],\"evidence_ids\":[\"FPE-730eca03ddf54df52a03\"],\"explanation\":\"Supports mRNA/siRNA LNP components, phase ratio, and payload weight ratios.\"},\"ANCHOR::FPE-4651a539acdbcbd35a6d\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"FORM::SIRNA_CORE\"],\"evidence_ids\":[\"FPE-4651a539acdbcbd35a6d\"],\"explanation\":\"Supports LNP characterization procedure.\"},\"ANCHOR::FPE-511b92e98aca38d5dd6e\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\"],\"evidence_ids\":[\"FPE-511b92e98aca38d5dd6e\"],\"explanation\":\"Supports formulated-LNP pKa characterization.\"},\"ANCHOR::FPE-9cb6853bc486c138f930\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"CTX::HELA_MFLUC\"],\"evidence_ids\":[\"FPE-9cb6853bc486c138f930\"],\"explanation\":\"Directly supports mRNA-core composition and HeLa mFLuc context.\"},\"ANCHOR::FPE-eb65bc560a18ddf984bf\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MANNOSE_LNP\",\"RECIPIENT::HEPG2\"],\"evidence_ids\":[\"FPE-eb65bc560a18ddf984bf\"],\"explanation\":\"Supports 246C10 mannose-PEG mFLuc LNP testing in HepG2 cells.\"},\"ANCHOR::FPE-0000ddcd2870f4090a96\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::MRNA_CORE\",\"PAYLOAD::MFLUC\",\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-0000ddcd2870f4090a96\"],\"explanation\":\"Directly supports mFluc LNP ratio, C57BL/6 IV dose, and imaging timepoint.\"},\"ANCHOR::FPE-a69882162d958de28294\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX::C57BL6_MFLUC\"],\"evidence_ids\":[\"FPE-a69882162d958de28294\"],\"explanation\":\"Supports ApoE-knockout mouse mFLuc-LNP uptake experiment.\"},\"ANCHOR::FPE-7810a24e4c2a968c140c\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAYLOAD::MCRE\",\"CTX::LSL_MCRE\"],\"evidence_ids\":[\"FPE-7810a24e4c2a968c140c\"],\"explanation\":\"Directly supports mCre LSL-tdTomato IV study and two-day endpoint.\"},\"ANCHOR::FPE-f3cea8a29a2a149660bf\":{\"disposition\":\"mapped\",\"record_ids\":[\"RECIPIENT::HEPATOCYTE\",\"RECIPIENT::LSEC\",\"RECIPIENT::KUPFFER\"],\"evidence_ids\":[\"FPE-f3cea8a29a2a149660bf\"],\"explanation\":\"Supports liver-cell immunofluorescence identification method.\"},\"ANCHOR::FPE-52baf59e1cdb57b399f0\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM::SIRNA_CORE\",\"PAYLOAD::SIFVII\",\"PAYLOAD::SIFVIII\"],\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"],\"explanation\":\"Supports siRNA-core composition, mannose-PEG range, IV route, and assay timings.\"},\"ANCHOR::FPE-4ef14a50a9f91dea3c00\":{\"disposition\":\"not_supported\",\"record_ids\":[],\"evidence_ids\":[\"FPE-4ef14a50a9f91dea3c00\"],\"explanation\":\"Funding and author-contribution text does not provide a reportable formulation, payload, recipient, or experiment field.\"},\"ANCHOR::FPE-15d307016ad24a50ba2f\":{\"disposition\":\"not_supported\",\"record_ids\":[],\"evidence_ids\":[\"FPE-15d307016ad24a50ba2f\"],\"explanation\":\"Supplementary-material URL contains no local component-ratio value.\"}},\"unresolved_items\":[\"No source-supported full lipid-component ratio was supplied for the mannose-LNP formulations beyond total PEG-lipid and mannose-PEG-lipid percentages.\",\"The exact 1.0% PEG-lipid mCre LNP component ratio is not fully specified in the supplied text.\",\"Preparation-method details are retained in anchor accounting but have no dedicated preparation-method field in this response schema.\"]}"
+  },
+  "selective_vision_task_paths": [
+    "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/vision_tasks/PILOT-002/CTX__MANNOSE_MCRE_LSEC.json"
+  ],
+  "token_budget": 100000,
+  "max_output_tokens": 5000
+}

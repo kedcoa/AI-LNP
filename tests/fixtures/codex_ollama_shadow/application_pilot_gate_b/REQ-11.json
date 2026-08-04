@@ -1,0 +1,1038 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "low"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 5000,
+  "prompt_cache_key": "FPC-54070c940d4af580",
+  "input": [
+    {
+      "role": "system",
+      "content": "Extract the supplied experiment-context candidates using the compact response\ncontract. Account for every candidate ID exactly once in both candidate\naccounting and candidate outcomes. Preserve the candidate formulation, payload,\ndose/unit, route, species, model, recipient, timepoint/unit identity, and its\nlocally issued experiment ID. Decompose source claims into atomic foundational,\ncomparative, and exact-measurement assertions without inventing assertions.\nTreat a number as exact only when it is printed in source text, a table, or a\nfigure label; graph-height estimates are not exact measurements. Link each\noutcome to its experiment and cite only evidence inside that candidate's\nsupplied envelope. Never create or alter an experiment ID.\n"
+    },
+    {
+      "role": "user",
+      "content": "{\"candidate_evidence_envelopes\":{\"CTX::C57BL6_SIFVIII_MANNOSE\":[\"FPE-9b43f7da80efa63a02e3\",\"FPE-22a6253b499df98fedcb\",\"FPE-c45ce63232de803c02d5\",\"FPE-a4bea94b24b806dc3995\",\"FPE-0d429b7e50aafec4676f\",\"FPE-ab1d504880ad3c68e9d0\",\"FPE-52baf59e1cdb57b399f0\"]},\"candidates\":[{\"candidate_id\":\"CTX::C57BL6_SIFVIII_MANNOSE\",\"dose\":0.5,\"dose_unit\":\"mg/kg\",\"experiment_id\":\"EXP-b04aebc2e938af215cb9\",\"experimental_model\":\"C57BL/6 mice\",\"field_evidence_ids\":{\"dose\":[\"FPE-a4bea94b24b806dc3995\"],\"dose_unit\":[\"FPE-a4bea94b24b806dc3995\"],\"experimental_model\":[\"FPE-a4bea94b24b806dc3995\"],\"formulation\":[\"FPE-9b43f7da80efa63a02e3\",\"FPE-c45ce63232de803c02d5\",\"FPE-a4bea94b24b806dc3995\"],\"payload\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-52baf59e1cdb57b399f0\"],\"recipient_cell\":[\"FPE-a4bea94b24b806dc3995\"],\"route\":[\"FPE-a4bea94b24b806dc3995\"],\"species\":[\"FPE-a4bea94b24b806dc3995\"],\"timepoint\":[\"FPE-a4bea94b24b806dc3995\"],\"timepoint_unit\":[\"FPE-a4bea94b24b806dc3995\"]},\"formulation\":\"Mannose-PEG-lipid-incorporated LNP\",\"formulation_id\":\"FORM::MANNOSE_LNP\",\"joint_evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"],\"organ\":null,\"outcome_evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-0d429b7e50aafec4676f\"],\"pairing_metadata\":null,\"payload\":\"siRNA against FVIII (siFVIII)\",\"payload_id\":\"PAYLOAD::SIFVIII\",\"provisional_context_id\":\"CTX::C57BL6_SIFVIII_MANNOSE\",\"recipient_cell\":\"LSECs\",\"route\":\"Injected\",\"species\":\"C57BL/6 mouse\",\"timepoint\":2.0,\"timepoint_unit\":\"days\"}],\"context_key\":\"lsecs|unspecified|injected|c57bl/6 mouse|c57bl/6 mice\",\"evidence\":[{\"evidence_id\":\"FPE-9b43f7da80efa63a02e3\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"payload\",\"species\",\"cell\",\"outcome\"],\"text\":\"Among various liver cells, LSECs are substantial targets for RNA therapeutics because LSECs are closely related to fetal liver diseases resulting from LSECs-derived gene products (17, 19). To achieve the selective delivery of LNPs to LSECs, we introduced LSEC-specific ligands to highly PEGylated LNPs. Mannose receptor is one of the receptors that specifically expressed on human and mice LSECs (17). Mannose-conjugated nanoparticles have been investigated in various targeted delivery studies, and these nanoparticles have been proven to be safe (37, 38). To introduce mannose moieties on the surface of LNPs, we used mannose-PEG lipid (Fig. 6A). Since mannose is conjugated to PEG, when mannose-PEG lipid is formulated into LNPs together with other lipid components, mannose can be exposed to the outer layer of LNPs. First, we formulated LNPs with mannose-PEG lipid with different content and tested whether introduction of mannose-PEG lipid can alter the cellular uptake of LNPs as compared to that of original LNPs in the absence of ApoE.\"},{\"evidence_id\":\"FPE-22a6253b499df98fedcb\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[\"preparation_method\",\"cell\",\"outcome\"],\"text\":\"Mannose-PEG lipid was incorporated from 0.5 to 4.5% to LNPs with total 1.5, 3.0, and 5.0% PEG-lipid (Fig. 6B). Prepared LNPs with mFLuc were treated to the HepG2 cells with serum-containing media or serum-free media. Luciferase level was evaluated after 24 hours. Since HepG2 cells are known to express mannose receptor (CD206), mannose-mediated cellular uptake can be quantitatively evaluated (39, 40). Figure 6C shows that the uptake of mannose-incorporated LNPs into HepG2 cells via CD206 was enhanced with increasing the content of mannose-PEG lipid in LNPs. Incorporation of mannose increased LNP uptake into HepG2 in the presence or absence of serum. To further evaluate the role of mannose incorporation in the uptake of LNPs by HepG2 cells, the mRNA expression level of mannose-incorporated LNPs was divided by that of LNPs with PEG-lipid only (Fig. 6D). Unexpectedly, incorporation of mannose to LNPs with 3.0% PEG-lipid showed a similar increase in mRNA expression level in the presence or absence of serum. On the contrary, for 1.5% PEG-lipid, incorporation of mannose did not result in an increase in mRNA expression level in the presence of serum compared to that in the absence of serum. In the presence of serum, uptake of mannose-incorporated LNPs with 1.5% of PEG-lipid could be simultaneously internalized by ApoE- and mannose-mediated pathway. Therefore, mannose/CD206-mediated LNP uptake was less significant. However, higher PEG-lipid content (3%) could allow reduced absorption of ApoE and mediate LNP uptake mainly by mannose and CD206 interaction. To further figure out whether LNPs with mannose were internalized via CD206-mediated pathway, we performed a cellular uptake inhibition experiment (Fig. 6, E and F). Anti-CD206 antibody was pretreated to the cells, and LNPs with mannose-PEG lipid or galactose-PEG lipid were incubated with HepG2 cells. Galactose is the one of mannose enantiomers and adopted as a control. The significant decrease in luciferase expression was confirmed when LNPs were incorporated with mannose-PEG. In contrast, mRNA expression of LNPs with galactose moieties was not inhibited by anti-LDLR antibody. This result indicated that mannose moieties could play an important role in CD206-mediated intracellular uptake of LNPs.\"},{\"evidence_id\":\"FPE-c45ce63232de803c02d5\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"preparation_method\",\"model\",\"species\",\"route\",\"cell\",\"outcome\"],\"text\":\"Next, to evaluate the selective targeting of mannose-incorporated LNPs to LSECs, we performed in vivo evaluation with two different mRNAs (mFLuc and mCre). LNPs were formulated with 3.0% PEG-lipid (with 2.5% mannose-PEG lipid). Since extrahepatic macrophages also express CD206, we first confirmed the liver-specific delivery of mFLuc-loaded LNPs with mannose. In addition, we compared a ligand-dependent mRNA delivery efficiency of LNPs using mannose-PEG lipid with that of galactose-PEG lipid. As shown in fig. S8, LNPs with mannose-PEG lipid and galactose-PEG lipid resulted in slightly bigger size than LNPs with PEG-lipid only. This phenomenon was previously reported among saccharide-conjugated nanoparticles (41, 42). The prepared mFLuc-loaded LNPs were injected intravenously into C57BL/6 mice at a dose of 0.1 mg/kg. Whole-body image showed substantial bioluminescence in the mice liver with mannose-incorporated LNPs and supported the liver tissue–specific expression of mFLuc.\"},{\"evidence_id\":\"FPE-a4bea94b24b806dc3995\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"preparation_method\",\"payload\",\"model\",\"species\",\"route\",\"outcome\"],\"text\":\"Next, we confirmed the selective targeting of siRNA-loaded LNPs with mannose to LSECs. LNPs were formulated with 1.5% PEG-lipid (with 1.0% mannose-PEG lipid) and 3.0% PEG-lipid (with 2.5% mannose-PEG lipid) for targeting LSECs and compared the FVIII gene silencing efficiency to that of LNPs with PEG-lipid only. As shown in Fig. 8 (A and C), similar to that of mRNA-loaded LNPs, LNPs with mannose-PEG lipid resulted in slightly bigger size than LNPs with PEG-lipid only. The prepared LNPs with siFVIII were injected into C57BL/6 mice at the dose of 0.5 mg/kg. After 2 days of injection, blood was collected and the level of FVIII protein in serum was validated. As shown in Fig. 8B, addition of mannose-PEG lipid into LNPs with 3% total PEG-lipid content showed a more enhanced FVIII inhibition in LSECs. On the contrary, for 1.5% PEG-lipid, incorporation of mannose to LNPs was less significant. This could be due to high ApoE adsorption at lower PEG content that facilitated the ApoE/LDLR-mediated uptake of LNPs. In addition, we further compared the LNP uptake using mannose-PEG lipid with that of galactose-PEG lipid. As expected, galactose-incorporated LNPs showed similar diameter of mannose-incorporated LNPs. However, in vivo study revealed that significant FVIII inhibition was only observed in mannose-incorporated LNPs. To determine whether addition of mannose-PEG lipid could decrease the LNP uptake into hepatocytes, LNPs were formulated with siFVII and injected into C57BL/6 mice at the dose of 0.2 mg/kg. As shown in Fig. 8D, addition of mannose-PEG lipid reduced the uptake of LNPs with 1.5 and 3.0% PEG-lipid, whereas addition of galactose-PEG lipid was less significant.\"},{\"evidence_id\":\"FPE-0d429b7e50aafec4676f\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"model\",\"species\",\"route\",\"outcome\"],\"text\":\"Selective in vivo gene silencing in LSECs using mannose-LNPs.C57BL/6 mice were injected with siFVII (0.2 mg/kg) or siFVIII (0.5 mg/kg; n = 3 to 5). (A and C) Formulation details. (B) Incorporation of mannose to LNPs with 3.0% of PEG-lipid increased the delivery of siRNA to LSECs but incorporation of galactose did not. (D) Incorporation of mannose to LNPs with 1.5 and 3.0% PEG-lipid reduced the delivery of siRNA to hepatocytes, whereas incorporation of galactose to LNPs with 3.0% PEG-lipid did not. (****P < 0.0001 as compared between sugar moiety–incorporated LNPs and LNPs with PEG-lipid only; ns: P > 0.05).\"},{\"evidence_id\":\"FPE-ab1d504880ad3c68e9d0\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[\"payload\",\"cell\",\"outcome\"],\"text\":\"To translate the targeted delivery to LSECs, ApoE-dependent cellular uptake must be replaced by alternative ligand selection and incorporation. Upon entering blood circulation system, LNPs can be readily delivered to hepatocytes and LSECs by ApoE-dependent cellular uptake. However, delivery efficacy of LNPs in LSECs is significantly less than that of hepatocytes (23). Here, we demonstrated a targeted delivery of RNA to LSECs by incorporating active ligands to LNPs. The mannose ligand can interact with specific receptors (CD206) expressed on LSECs. We have shown that incorporation of mannose to LNPs with high PEG-lipid content (3%) allowed selective delivery of mRNA/siRNA only to LSECs through mannose-CD206 interaction. It is likely that, when PEG-lipid content is high enough, the ApoE-mediated cellular uptake is mostly reduced, while mannose-CD206 interaction becomes predominant for the cellular entry of LNPs. Moreover, mannose-incorporated LNPs showed bigger physical size than the diameter of the fenestrae. This additionally reduced the uptake of LNPs to hepatocytes and allowed more selective uptake into the LSECs. Collectively, our results successfully demonstrated the targeted delivery of RNA into different types of cells in the liver by controlling physical size of LNPs, PEG-lipid content, and incorporation of active targeting ligands. Overall, this approach may offer new strategies to develop cell type–specific delivery of RNA in the liver and other tissues.\"},{\"evidence_id\":\"FPE-52baf59e1cdb57b399f0\",\"heading\":\"Unsectioned\",\"page_number\":1,\"retrieval_tags\":[\"formulation\",\"preparation_method\",\"component_ratio\",\"ratio_basis\",\"species\",\"route\",\"cell\",\"outcome\"],\"text\":\"To study size-dependent LNP delivery to specific liver cells, we prepared siRNA against FVII-loaded (gift from Alnylam) and FVIII-loaded (ON-TARGETPlus SMARTpool siRNA, purchased from Dharmacon) LNPs. LNPs were complexed together with siRNA and lipid components. Ionizable lipids:DSPC:cholesterol:PEG-lipid molar ratio was 42.5:13:42.5:3, and PEG-lipid mole percent was decreased to 1.5% by expending that of cholesterol. For exogenous ligand-dependent targeting study, mannose-PEG lipid was added in 0.5 to 2.5 mole percent to formulation. siRNA-loaded LNPs were injected intravenously, and 2 days (siFVIII) or 3 days (siFVII) later, blood was collected via cheek bleeding. Blood was mixed with 0.1 M sodium citrate, and the plasma was separated from the cells. FVII or FVIII levels in blood were determined using the Coaset FVII or Coaset FVIII chromogenic assay (Chromogenix, MA) according to the manufacturer’s protocol with a standard curve obtained from PBS-injected mice.\"}],\"paper_id\":\"PILOT-002\",\"shared_formulations\":[{\"components\":[{\"component_id\":\"COMP::MANNOSE_PEG\",\"identity\":{\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\"],\"value\":\"Mannose-PEG lipid\"},\"role\":{\"evidence_ids\":[\"FPE-ab1d504880ad3c68e9d0\"],\"value\":\"Active targeting ligand component\"}},{\"component_id\":\"COMP::PEG_LIPID_MANNOSE\",\"identity\":{\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"],\"value\":\"PEG-lipid\"},\"role\":null}],\"formulation_id\":\"FORM::MANNOSE_LNP\",\"name\":{\"evidence_ids\":[\"FPE-9b43f7da80efa63a02e3\",\"FPE-c45ce63232de803c02d5\"],\"value\":\"Mannose-PEG-lipid-incorporated LNP\"},\"ratio_bases\":[{\"evidence_ids\":[\"FPE-52baf59e1cdb57b399f0\"],\"value\":\"Mole percent\"}],\"ratios\":[{\"evidence_ids\":[\"FPE-c45ce63232de803c02d5\"],\"value\":\"Total PEG-lipid 3.0%, including 2.5% mannose-PEG lipid\"},{\"evidence_ids\":[\"FPE-22a6253b499df98fedcb\"],\"value\":\"Mannose-PEG lipid 0.5% to 4.5% at total PEG-lipid contents of 1.5%, 3.0%, and 5.0%\"}]}],\"shared_payloads\":[{\"identity\":{\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\",\"FPE-52baf59e1cdb57b399f0\"],\"value\":\"siRNA against FVIII (siFVIII)\"},\"payload_id\":\"PAYLOAD::SIFVIII\",\"role\":{\"evidence_ids\":[\"FPE-a4bea94b24b806dc3995\"],\"value\":\"Gene-silencing payload\"}}]}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "FullPaperContextResponse",
+      "schema": {
+        "$defs": {
+          "ComponentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "title": "Component Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "identity": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "role": {
+                "$ref": "#/$defs/ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___"
+              },
+              "amount": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "amount_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "component_id",
+              "formulation_id",
+              "identity",
+              "role",
+              "amount",
+              "amount_unit"
+            ],
+            "title": "ComponentRecord",
+            "type": "object"
+          },
+          "EligibilityRecord": {
+            "additionalProperties": false,
+            "description": "Evidence-grounded final paper disposition for the extraction task.",
+            "properties": {
+              "decision": {
+                "enum": [
+                  "eligible",
+                  "ineligible",
+                  "uncertain"
+                ],
+                "title": "Decision",
+                "type": "string"
+              },
+              "reason_codes": {
+                "items": {
+                  "enum": [
+                    "ORIGINAL_EXPERIMENT",
+                    "IDENTIFIABLE_LNP",
+                    "SUPPORTED_PAYLOAD",
+                    "TARGET_CELL_EVIDENCE",
+                    "USABLE_FORMULATION_OUTCOME_LINKAGE",
+                    "NOT_ORIGINAL_RESEARCH",
+                    "NOT_ELIGIBLE_LNP",
+                    "UNSUPPORTED_PAYLOAD",
+                    "NO_TARGET_CELL_EVIDENCE",
+                    "NO_FORMULATION_OUTCOME_LINKAGE",
+                    "DUPLICATE_SCIENTIFIC_REPORT",
+                    "RETRACTED_OR_INVALID",
+                    "FULL_TEXT_REQUIRED",
+                    "PUBLICATION_TYPE_AMBIGUOUS",
+                    "LNP_IDENTITY_AMBIGUOUS",
+                    "PAYLOAD_AMBIGUOUS",
+                    "TARGET_CELL_AMBIGUOUS",
+                    "FORMULATION_INCOMPLETE",
+                    "OUTCOME_LINKAGE_AMBIGUOUS",
+                    "CHEMISTRY_AMBIGUOUS"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Reason Codes",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "explanation": {
+                "maxLength": 500,
+                "minLength": 1,
+                "title": "Explanation",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision",
+              "reason_codes",
+              "evidence_ids",
+              "explanation"
+            ],
+            "title": "EligibilityRecord",
+            "type": "object"
+          },
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string",
+                "enum": [
+                  "EXP-b04aebc2e938af215cb9"
+                ]
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_role": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/ReportedField_Literal__therapeutic____reporter____biodistribution_tracer____screening_barcode___"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "payload_role",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "experimental_model",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "FormulationRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "formulation_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition_basis": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "np_ratio": {
+                "$ref": "#/$defs/ReportedField_float_"
+              }
+            },
+            "required": [
+              "formulation_id",
+              "formulation_name",
+              "composition",
+              "composition_basis",
+              "np_ratio"
+            ],
+            "title": "FormulationRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string",
+                "enum": [
+                  "EXP-b04aebc2e938af215cb9"
+                ]
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "ionizable_lipid",
+                      "helper_lipid",
+                      "cholesterol",
+                      "peg_lipid",
+                      "targeting_ligand",
+                      "sort_lipid",
+                      "other"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid', 'targeting_ligand', 'sort_lipid', 'other']]",
+            "type": "object"
+          },
+          "ReportedField_Literal__therapeutic____reporter____biodistribution_tracer____screening_barcode___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "therapeutic",
+                      "reporter",
+                      "biodistribution_tracer",
+                      "screening_barcode"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['therapeutic', 'reporter', 'biodistribution_tracer', 'screening_barcode']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          },
+          "ContextAccountingEntry": {
+            "additionalProperties": false,
+            "properties": {
+              "disposition": {
+                "enum": [
+                  "extracted",
+                  "ambiguous",
+                  "insufficient_evidence"
+                ],
+                "title": "Disposition",
+                "type": "string"
+              },
+              "linked_experiment_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Linked Experiment Ids",
+                "type": "array"
+              },
+              "linked_outcome_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Linked Outcome Ids",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "reason_code": {
+                "minLength": 1,
+                "title": "Reason Code",
+                "type": "string"
+              },
+              "explanation": {
+                "minLength": 1,
+                "title": "Explanation",
+                "type": "string"
+              }
+            },
+            "required": [
+              "disposition",
+              "linked_experiment_ids",
+              "linked_outcome_ids",
+              "evidence_ids",
+              "reason_code",
+              "explanation"
+            ],
+            "title": "ContextAccountingEntry",
+            "type": "object"
+          },
+          "_ComparativeOutcomeAssertion": {
+            "additionalProperties": false,
+            "properties": {
+              "assertion_type": {
+                "const": "comparison",
+                "title": "Assertion Type",
+                "type": "string"
+              },
+              "direction": {
+                "enum": [
+                  "present",
+                  "higher",
+                  "lower",
+                  "similar",
+                  "no_significant_difference",
+                  "reported"
+                ],
+                "title": "Direction",
+                "type": "string"
+              },
+              "subject": {
+                "minLength": 1,
+                "title": "Subject",
+                "type": "string"
+              },
+              "comparator": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Comparator"
+              },
+              "raw_text": {
+                "minLength": 1,
+                "title": "Raw Text",
+                "type": "string"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "unit": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Unit"
+              },
+              "numeric_provenance": {
+                "enum": [
+                  "exact_reported",
+                  "graph_estimated",
+                  "not_reported"
+                ],
+                "title": "Numeric Provenance",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              }
+            },
+            "required": [
+              "assertion_type",
+              "direction",
+              "subject",
+              "comparator",
+              "raw_text",
+              "value",
+              "unit",
+              "numeric_provenance",
+              "evidence_ids"
+            ],
+            "title": "_ComparativeOutcomeAssertion",
+            "type": "object"
+          },
+          "_ExactMeasurementAssertion": {
+            "additionalProperties": false,
+            "properties": {
+              "assertion_type": {
+                "const": "measurement",
+                "title": "Assertion Type",
+                "type": "string"
+              },
+              "direction": {
+                "enum": [
+                  "present",
+                  "higher",
+                  "lower",
+                  "similar",
+                  "no_significant_difference",
+                  "reported"
+                ],
+                "title": "Direction",
+                "type": "string"
+              },
+              "subject": {
+                "minLength": 1,
+                "title": "Subject",
+                "type": "string"
+              },
+              "comparator": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Comparator"
+              },
+              "raw_text": {
+                "minLength": 1,
+                "title": "Raw Text",
+                "type": "string"
+              },
+              "value": {
+                "title": "Value",
+                "type": "number"
+              },
+              "unit": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Unit"
+              },
+              "numeric_provenance": {
+                "const": "exact_reported",
+                "title": "Numeric Provenance",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              }
+            },
+            "required": [
+              "assertion_type",
+              "direction",
+              "subject",
+              "comparator",
+              "raw_text",
+              "value",
+              "unit",
+              "numeric_provenance",
+              "evidence_ids"
+            ],
+            "title": "_ExactMeasurementAssertion",
+            "type": "object"
+          },
+          "_FoundationalOutcomeAssertion": {
+            "additionalProperties": false,
+            "properties": {
+              "assertion_type": {
+                "const": "foundational",
+                "title": "Assertion Type",
+                "type": "string"
+              },
+              "direction": {
+                "enum": [
+                  "present",
+                  "higher",
+                  "lower",
+                  "similar",
+                  "no_significant_difference",
+                  "reported"
+                ],
+                "title": "Direction",
+                "type": "string"
+              },
+              "subject": {
+                "minLength": 1,
+                "title": "Subject",
+                "type": "string"
+              },
+              "comparator": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Comparator"
+              },
+              "raw_text": {
+                "minLength": 1,
+                "title": "Raw Text",
+                "type": "string"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "unit": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Unit"
+              },
+              "numeric_provenance": {
+                "enum": [
+                  "exact_reported",
+                  "graph_estimated",
+                  "not_reported"
+                ],
+                "title": "Numeric Provenance",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Evidence Ids",
+                "type": "array"
+              }
+            },
+            "required": [
+              "assertion_type",
+              "direction",
+              "subject",
+              "comparator",
+              "raw_text",
+              "value",
+              "unit",
+              "numeric_provenance",
+              "evidence_ids"
+            ],
+            "title": "_FoundationalOutcomeAssertion",
+            "type": "object"
+          },
+          "CandidateOutcomeBundle1": {
+            "additionalProperties": false,
+            "description": "Provider schema with group semantics represented structurally.",
+            "properties": {
+              "candidate_id": {
+                "type": "string",
+                "const": "CTX::C57BL6_SIFVIII_MANNOSE"
+              },
+              "experiment_id": {
+                "type": "string",
+                "const": "EXP-b04aebc2e938af215cb9"
+              },
+              "foundational_outcomes": {
+                "items": {
+                  "$ref": "#/$defs/_FoundationalOutcomeAssertion"
+                },
+                "title": "Foundational Outcomes",
+                "type": "array"
+              },
+              "comparative_outcomes": {
+                "items": {
+                  "$ref": "#/$defs/_ComparativeOutcomeAssertion"
+                },
+                "title": "Comparative Outcomes",
+                "type": "array"
+              },
+              "exact_measurements": {
+                "items": {
+                  "$ref": "#/$defs/_ExactMeasurementAssertion"
+                },
+                "title": "Exact Measurements",
+                "type": "array"
+              }
+            },
+            "required": [
+              "candidate_id",
+              "experiment_id",
+              "foundational_outcomes",
+              "comparative_outcomes",
+              "exact_measurements"
+            ],
+            "title": "_CandidateOutcomeBundleSchema",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One paper response joined to a local evidence packet after validation.",
+        "properties": {
+          "contract_version": {
+            "const": "compact-1.1.0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "paper_id": {
+            "title": "Paper Id",
+            "type": "string"
+          },
+          "eligibility": {
+            "$ref": "#/$defs/EligibilityRecord"
+          },
+          "formulations": {
+            "items": {
+              "$ref": "#/$defs/FormulationRecord"
+            },
+            "title": "Formulations",
+            "type": "array"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/$defs/ComponentRecord"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_items": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Items",
+            "type": "array"
+          },
+          "context_candidate_accounting": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "CTX::C57BL6_SIFVIII_MANNOSE": {
+                "$ref": "#/$defs/ContextAccountingEntry"
+              }
+            },
+            "required": [
+              "CTX::C57BL6_SIFVIII_MANNOSE"
+            ]
+          },
+          "candidate_outcomes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "CTX::C57BL6_SIFVIII_MANNOSE": {
+                "$ref": "#/$defs/CandidateOutcomeBundle1"
+              }
+            },
+            "required": [
+              "CTX::C57BL6_SIFVIII_MANNOSE"
+            ]
+          }
+        },
+        "required": [
+          "contract_version",
+          "paper_id",
+          "eligibility",
+          "formulations",
+          "components",
+          "experiments",
+          "outcomes",
+          "unresolved_items",
+          "context_candidate_accounting",
+          "candidate_outcomes"
+        ],
+        "title": "CompactExtractionResponse",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}

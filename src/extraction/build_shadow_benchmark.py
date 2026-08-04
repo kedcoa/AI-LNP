@@ -9,11 +9,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from src.extraction.missing_record_contracts import (
-    MissingRecordFragment,
-    MissingRecordTask,
-)
-from src.extraction.run_missing_record_repair import PROMPT as GATE_B_PROMPT
+from src.extraction.full_paper_contracts import ContextTask
 from src.extraction.shadow_benchmark_contracts import (
     AuditResponse,
     BenchmarkCase,
@@ -21,18 +17,21 @@ from src.extraction.shadow_benchmark_contracts import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PAPERS = ("GP-004", "GP-006", "GP-008")
-STRUCTURAL_ROOT = ROOT / "data/staging/extraction/v12_structural_primary_v6"
-ACCEPTED_ROOT = ROOT / "data/staging/extraction/g1_fulltext_rag"
-TASK_AUDIT = ROOT / "reports/extraction/v12_structural_primary_v6/task_audit.json"
+PAPERS = ("PILOT-001", "PILOT-002", "PILOT-003")
+PILOT_REPORT = ROOT / "reports/extraction/application_pilot_final.json"
+GATE_B_FIXTURE_ROOT = (
+    ROOT / "tests/fixtures/codex_ollama_shadow/application_pilot_gate_b"
+)
 OUTPUT_ROOT = ROOT / "data/staging/extraction/codex_ollama_shadow"
 
 AUDIT_PROMPT = """You are a read-only scientific audit agent. Review only the supplied
 paper artifacts. Identify likely omissions, unsupported relationships, wrong-arm
 associations, incomplete application-critical fields, and COMET-readiness gaps.
-Use only record and evidence IDs present in the payload. Do not rewrite records,
-estimate missing numbers, or claim evidence that is not supplied. Return only JSON
-matching the provided schema."""
+Use only experiment, candidate, record, and evidence IDs present in the payload.
+Inventory every supported application-relevant fact as an observation with its
+field name, raw value, experiment scope, and evidence IDs. Also report audit
+findings. Do not rewrite records, estimate missing numbers, or claim evidence that
+is not supplied. Return only JSON matching the provided schema."""
 
 
 def _canonical(value: Any) -> str:
@@ -63,28 +62,21 @@ def _combined_source_sha(root: Path, paths: list[Path]) -> str:
     return _sha_bytes(_canonical(rows).encode("utf-8"))
 
 
-def _task_audit_by_paper(root: Path) -> dict[str, dict[str, Any]]:
-    report = _load(root / TASK_AUDIT.relative_to(ROOT))
-    return {row["paper_id"]: row for row in report["papers"]}
-
-
 def build_audit_cases(root: Path = ROOT) -> list[BenchmarkCase]:
-    audit_rows = _task_audit_by_paper(root)
+    report_path = root / PILOT_REPORT.relative_to(ROOT)
+    report = _load(report_path)
+    extraction_by_paper = {
+        row["paper_id"]: row for row in report["extraction"]["papers"]
+    }
     cases = []
     for paper_id in PAPERS:
-        accepted = root / ACCEPTED_ROOT.relative_to(ROOT) / paper_id / "accepted_graph.json"
-        coverage = (
-            root
-            / STRUCTURAL_ROOT.relative_to(ROOT)
-            / paper_id
-            / "v12_structural_coverage.json"
-        )
-        paths = [accepted, coverage, root / TASK_AUDIT.relative_to(ROOT)]
+        paths = [report_path]
         payload = {
             "paper_id": paper_id,
-            "accepted_graph": _load(accepted),
-            "structural_coverage": _load(coverage),
-            "task_audit": audit_rows[paper_id],
+            "merged_extraction": extraction_by_paper[paper_id],
+            "validation": [
+                row for row in report["validation"] if row["paper_id"] == paper_id
+            ],
         }
         cases.append(
             BenchmarkCase(
@@ -103,24 +95,46 @@ def build_audit_cases(root: Path = ROOT) -> list[BenchmarkCase]:
 
 def build_gate_b_cases(root: Path = ROOT) -> list[BenchmarkCase]:
     cases = []
-    structural_root = root / STRUCTURAL_ROOT.relative_to(ROOT)
-    for path in sorted(structural_root.glob("GP-*/structural_repair_tasks/task_*.json")):
-        task = MissingRecordTask.model_validate_json(path.read_text(encoding="utf-8"))
-        if task.paper_id not in PAPERS:
-            continue
+    fixture_root = root / GATE_B_FIXTURE_ROOT.relative_to(ROOT)
+    paths = sorted(
+        fixture_root.glob("REQ-*.json"),
+        key=lambda path: int(path.stem.split("-")[1]),
+    )
+    for path in paths:
+        request = _load(path)
+        messages = request["input"]
+        prompt = messages[0]["content"]
+        task_payload = json.loads(messages[1]["content"])
+        paper_id = task_payload["paper_id"]
+        response_schema = request["text"]["format"]["schema"]
+        task = ContextTask(
+            context_task_version="full-paper-context-task-1.2.0",
+            task_id=path.stem,
+            paper_id=paper_id,
+            context_key=task_payload["context_key"],
+            token_budget=100_000,
+            estimated_input_tokens=0,
+            shared_formulations=task_payload["shared_formulations"],
+            shared_payloads=task_payload["shared_payloads"],
+            candidates=task_payload["candidates"],
+            evidence=task_payload["evidence"],
+            candidate_evidence_envelopes=task_payload[
+                "candidate_evidence_envelopes"
+            ],
+            payload=task_payload,
+            response_schema=response_schema,
+        )
         relative = _relative(root, path)
         cases.append(
             BenchmarkCase(
-                case_id=(
-                    f"gate-b-{task.paper_id}-{path.stem.replace('_', '-')}"
-                ),
+                case_id=f"gate-b-{paper_id}-{path.stem.lower()}",
                 route="gate_b",
-                paper_id=task.paper_id,
+                paper_id=paper_id,
                 source_paths=[relative],
                 source_sha256=_sha_path(path),
-                prompt=GATE_B_PROMPT,
+                prompt=prompt,
                 payload=task.model_dump(mode="json"),
-                output_schema=MissingRecordFragment.model_json_schema(),
+                output_schema=response_schema,
             )
         )
     return cases

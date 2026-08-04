@@ -1,0 +1,789 @@
+{
+  "status": "completed",
+  "request_id": "REQ-3",
+  "request_sha256": "8aae537495e7a0660e348fa930487d99623be93c89e2d339c05e4b22eea1c092",
+  "approval_request": {
+    "request_id": "REQ-3",
+    "paper_id": "PILOT-003",
+    "request_kind": "paper_map",
+    "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/map_gate/requests/REQ-3.json",
+    "request_sha256": "8aae537495e7a0660e348fa930487d99623be93c89e2d339c05e4b22eea1c092",
+    "model": "gpt-5.6-terra",
+    "estimated_input_tokens": 20368,
+    "max_output_tokens": 12000,
+    "source_artifact_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/PILOT-003/inventory.json",
+    "source_artifact_sha256": "a32678f5b3c5cb7cef2bcb35541de70013962e74c8e6c857863cc16bb06f2e77"
+  },
+  "response": {
+    "id": "resp_061e07d39a3f5303016a704ce8549c8199a1c68b7027c69ca5",
+    "created_at": 1785744616.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "gpt-5.6-terra",
+    "object": "response",
+    "output": [
+      {
+        "id": "rs_061e07d39a3f5303016a704ce928bc8199a9aa3b6671ce46b2",
+        "summary": [],
+        "type": "reasoning",
+        "content": [],
+        "encrypted_content": "gAAAAABqcE0bIeuKLqDj-TYMUoXeCDiSVozQv1sZ_QPVI2-KXKLjkUEi1WfdMoE911rIlEOm4QPxW0rL3zXEFmJDaZh2ulfHHfeGpX9O3oHFKASLT-P14GQDi68AGhqJks0wf5-d2SaPmIgGT4BSaqAL0g6y2_hnZgwT-35fklyANVJSvShSSqcB-Iv8fV3hNtj6RwiM4gAG5bKAKwSX-SsKz7ZDfkxENudmcchuqW30yuSzTRiYtWte2TyD28qIaVf-QaBZArcqnjRbZsteld58JevCKDcCZ_a2kIQadVa1FRR2x332AQw5-JIQP4uw5XwIl88GtQ0p1fLaOg3Uk4oX1SpWSHEQEyvYXBOTpEMrw9fghiGii_Yq1C3MLQK5Hb8VPxAM6aV_lIOhl_waqnb0_N4wYPhhIdmtCnXkUmAG4NKJ-p_yDItpvPu6uX0JVyvTyqRjzknPtH7IoAlBI_MttTiLQuzpA_m2aA_NlEX1iNZqDr6g5aUGPHogw2McW_rBvz9C32KwS4My8YCkB0fzdCyV-wBMxlPVSuyjG_4vTE0UsI5gaLj1xJFrPPid-XabvLmnX5gFBHEKWfgbhW8k9md3gNg2aEYAIqS1aTmnGMPpDIZbVexhdz9qwBebuSEKU35zc7b_DyfoXd_JskcSXOcrWtL9-8x6WrKZJ8s8f9eoxZr0vurLYYr2k4zsifip7MdaQy8nxc0BrICVzondklk_bcWC5Z0vC2AKv7tAl1zWyKEyfqqp1qxpMriX9aVtyAJZtnqmVoJTpjyPIKavw0Lb8xS8OVmsaYCQfyAuSRigZeQJt1ajWkz0TgzmV45iDDjoc-upoFHoj8S8sVc-piFtUgjQwwe_fNN8KCP0VvVX-dEo1RKtSqXsQKkmuyl0aR4Z-L8aVKWpfmAMEl7UBkZGB5blPnf2acZXBN1cLENo-O_wVWHmNLnX3Vb_ytuh9A2soGanxPwYNJwsgUBX3Lo9ZWGcli7b6RqMdXdOUgb5CRnpEjGoamFB5u9LycV7QpecJUXsVyok9VBs1f8XkgFSWL_UuLg7Uz5fuIAFLxFp7kD0hxC7buG3B2kCR6LhjLbVR6f1fBDk09x12Eo2C7lFTmTMUTuZWl8V2QKlyFDdtFc3p4-Q91pkIU9FwVd9gFL4mnLKt_TY9JRI2XKLOAGNmorequQaKZJicQLg46j3aoezak_VH1RJiYdIsPBcE649vkcX_odaYwv3SjMFSIcCfm64VBatVpnlmJUZbs6TrrAGqYsC3mIAZVqbHve_TD-ijzdcuKtmilM3sxlEAxaTbIDAsu52ljG0yH3zdOgbIzdO2tjYjrHDLfnAVpLYBZHTo1YHJc5ztUbs9jpA8L1kAzP3bUUO4JDac6zHZDyqitFxZHpw99yzdTZaeu6kEG1meifeCnGLqEsFcLyrv_QLJ8ltT7o1m9-AoOqvZPqbtRaDFQ6-yEUpyRxQbNWBT-U_sJDqnuJGPdZGVWOCbhm2okFsF4dFsHWZt1F0giGF6GByBIOJo-gmuVUFfbz5C-oGjAzOTIK10XGyFi9qBqcRLbQnSZtPTMGz4ipVYHsZnVPLt0GKStd6aIvJ6OqsBTodZVBlIl-uAxUnGgp15I2wV-mXwv-Iml30BFYh5lAu2Gp7lbBvKWntD2NqUcyooEz7ApvdxBEN_GxHg7I22h-KJEtpdChTx4nTMJ7DvV-FhwyKFpmdLCNhcdl6SvfWOD3ofdCc4MwmX7b2oN_lNzmapr8jjq4o8uqoJyjj0CN7Q4c5_PWKMC6LLaU6DXwJdnS_ZR9Ad96Dclv7STS6Ee4R0Jk6Hjc26ixXvoke2_WyBIQ5Nca8fvYTCRK0cLgQZdDZAVGTePXZlIVk8vn0gnbWvv6QUzxIrppsn3UMWdLa_2RMj_DlrMef8ObNDLnOi-G2LHvtacuQdj_jSqbmLUH2BxHs0mjMzJPaO5zCAdNQjRmENwJ-dcPMXwPuSQdAanhUZges5HhvI597QFU0IXpRQI1Nf5kTzvQ9XjrSBR1-YV5zXsMoMCXyLpP4AF2VQhKoK50C3owu--ctGIeeSJPyLgW-7gHZTROd6DesW5rqHQLl9vdTTOFdZH9kXyNrmf4Bt6LahR725mhMi3xWxwOylx0-k7yqSJ0aCNirrtamQ-RMvLqqz5TauVbsfYhP0l2lE_SzeG2DpmJLzZIHYUzSZ08v3hD7xbCR-QXLlqIt6i6UQq2MSksMk1gcGV4s8Ovjil7Bx_sjRwYSTwqTGSq64KAmKJlBqYbANg1TuVo6oKqyO6b6pCZyFgenagH04nNiSTERZI8oS6zTu_emCPv3YOU6YN4Fo-9cA9q_bd9j_sn_ePZ5WM1qmwz2RTjWJlLOzOX6c1lLbrjTcIu_YLJEm9m9MmoyH2XT8enVpvQOMOKVm8vfLGh1hFHL1jB2lvx_OKgEDQW__VAGKvUneowJq99pAr5X-GZn-w8EqBRF7BwS8YdmgjNQTxv316t0rgdzclwGrM3PXKyZ62_WkiF-hX6sAOkMYQYQtOnRoS4j-6WImsaBKXIvfe17okVv2Bwsw5c-Bvwt2XpuIpWM7pMvyKO6sAbf10NLOQaEeSQjTAbJeBt5uzCC3qIsPTVB0lpnGwJmImYNudTODv2b4RcM5ZytZN9L39pqE-n9q2YUjbLHodfE2GWOL5ECXfnhxpEtIMx_ojjIx4C7vvAqc_xz6g0DeY01geMRIvKVPGh97MxjlnYgKQQ0Pv87gtT78iMXWngYlCjsU8bSLT81ItU9PSq-VtsEb9wucU1Zk0wajS3ktsBiquxLRb7pGg9-OcuWxm_XtHVIBf_omOq8D2eiGZgTKIVmBdG1clMpO1M-iyBrLyeaMabhsrv9Ux55b6po1faIG0djwJCXgLaZHXpLOSmwXMXJru_sQ0D7siDOrrLGJbQOViPwfaUe6uZK5pbGhQIg9t8QfjNGzU6ydOGYdUjeYQZcHcxo5FqpNUEkKlTdb53U-3U_0c4QCBT4RYOyZamdUwiKmoYNUpSwjgnX2cNQKYdRpCJS08LzF8tgTvJtOxmHC5JtXcDTfwMCDuoNBhJdNwCxGEH-yvFu5Wah3tUW491eDxVrRyxoHbCGmxg12pBG0J_rnfRGt1qmQgpcIJWDJl8lR7Ce3lA22yHQMaTeX5Czd9l7jiv4KxVvu3ofSUYjxiVLi3EIVcNWwC13XB_ZtVGQrvEcSYnEU0bZaYcn987yxvukdQpYloohgjDfegfN0NxxrEFtUjqrkHgV--f0wNmEdV6aGiwNcKD5b92xuRlXQS9JRqFaWj8DybA9lmqEzUclpAvQv3uv6ClHbD7jaZJFNLrPwsc2LuKUiQsuUuIPSvyPwXh1IEZbAHhA6UbzLAPXmZtbU_90JnyOIPOGD-2YgFXPXT0RyXKuIomD1lV2R9qFz8Jl3fAU8rRgWcknYoJUMLVB9eqPa8ub71UZMYccX4Lm99XlMB1hxrmWiv9gWEBtBupzSK3_mjxDwgPzuzqDI9ENBw133YkZgeV73QegBRo8kiqvhDx_UUW-XxRaYQ_F5x1_RKEQzGFDrppbutWI6dhmR0qoC0ulM56hjH7juWc4mZZhq5_-X9KZTFP9v5EKaYL2J8IT-ozNVinq0hVgio7SHvkFsPnhr4Jn4jeqbBu-I9_Tp0aHWx31WMezbntIX5LehIQOCFbpmaLDWbDZ8lZs-4AjmrW0Xm_nRPPfdFLJ4gUohvclZDf7OGlvKIvpJlBLZVgz9TOsg-DoRpPKGjNKftUaVUEIJymIe3OoNEN4CQt-ky-pf1sXqq97ips2KG3KJk0W1NY6PpHavgFZGocHISulchcW1M0b",
+        "status": null
+      },
+      {
+        "id": "rs_061e07d39a3f5303016a704cef891c819982190da86e74a913",
+        "summary": [],
+        "type": "reasoning",
+        "content": [],
+        "encrypted_content": "gAAAAABqcE0bNfx2T2I7imzGOHJQytpLEOaFC069Q13Cv6YrFfrX6QLH7QCaKG5uo6u4fZ8mG4B0FsS6d5IJdGQSQot_7UALv-p8UgXdh7C6nUpLt_9Xh4tBl-jd-7Mpmfhp6HGGhQkBr_uA06jARNK2ygubXdXjYZ0qMi_0rEzuI38gh-yHtuWIhak7ORQds9g19ro2euTvQfhgKztQViKwX5ESSmx5CqohWOXfTkoMQw5FUq_K6uB5cmEJfDGbBKVjd-Wd5e4bKL6E50YlDrBjMbmZAvos7DfCsZBsvha5niF5BhCXwQ7qCv095PhctyDg55HkTXVCmxSwpAjN7t3zo1GWjyrS5q-IYfeL8TTXI2t3F4OnXsmT4tPGEb2g3EABHJcAFM3yaOQIPQPw8c1VXSa5TT6pnNKsW5h4rEivdcEVv2ngLTHgFZ2jtC_G2iU0fAOMAktf9HXtt4DwZC4dUojDcBUswxTwqLlnR63itvxiA6jZI2_cB7P1Ox0OlaKJIq07Lyy62-hQgkltBE2rWXJDJ5cXyYRmrDbd2c9Q9Indl6VB0XDkQ9tOHsTiIflYagD24ixM0dum1xHouLgnbon_2Ip9V6Q52k1R2mKaaNMsQafe_pMMvcHtkoQ_tDE8WYkGzsuVO3GZfhyd8VuHuMo3Cs0Ozrzx820Av6Dvr13muP9jE_ioWnE_kSTZJ-kh5U7D97PSW2u1Od2kOEzxZfL_ElPzL-Di6wAoYt_l5SQRaMNkYJK2ERbIFA5xkU4iQER8UpFifuiGrrUyzgEeZbxafOoXuNV3hLXtKBRoeqO0grf66csCXTKuT4F1O2Yaj78lUIB9WCTfRO8920t7qiUA5jYQEGLFSf_Kb0pFSu0nqJhvZhKPnP3s-PBr1fMN8r_bNGyQz9MtTjZoY9i5qGh8rWGXYTXwHtnIcCqPp_3H2qw7ooLAUWpQ8CgYjWzClH89jjymljy9zaRHEp2Xghmw67eeRn5AKzsqC7QiKchcQdFVvPvpoo3jUdnfpHvJ3yilHg8UFpYBldGr8s2y5-alkDOS4mYlmbF2yJRlmXHV1IGhqnDDTq16XHK3oB2K32yUj5szxAJWKwj1dGVLL-395mi7YPOIrhQlq4Lz-h7FjX5sfD5DPMEMd9jfPzcVts0ml3EWs4co5FSw8bCgc39OexrYTh0HEeLffmPgKJva9-7Q_fCgHhkD7r6pEwFhhW3K8fo22WgIx8Bp_5wiLd0ptrBkPuY34Ms4iDLkBo0qyFfHpDAO60ZIuGfGQRNrnPGNJCB96WC8eFQHaRNrlkUKpReoj9Z8vp_LS5_tzUd0kIYWE5umWN9Tt4nQDW5JMMoprLQOwad8jQJrQo71XCPM4PJ_wY_L0KHmD_GpfMoSb0XDNtWf1c_klR5Ofeovw3jbY9Za8oLLm8RI0zQfhy3QDFjjZroosqaBe5Zb5EjnoFAp04lXXKawyz7FnrW_Dfw9kfjgWQtAEZxQKUHHTpgbiv8jb7-IiPt0-wJbU6GaE7Jk3tKDp3gump9YjALm8KqakI-DeevvvymsLsoxpKDPdT_GvJL-Hxz50rhV6sAO1jYMbn98C5_lAqUkM5hCX80j2N_AE2ZZDvY1OgheHeH_69GlRYjkGo9iXbChr8V0w0OrngMUFeLJ2P7exD4dgFhf-1lpcC9M_kWzLYz7O0mPmqh1yaxQV9ELn9IkU2MkCbmh7N2rF7AWlGRNgELrinllQlRuppefzutbCIfx_Rrrakctt4yfUarwFRW_-P8ejbLIRbNMlP4Qdk3fl5YM_HrpYDH2vqiI6JoitelLbyFiZo2lJOu3XVpwDP7-8T0mLFE3wfzX8wYBLZNQn5L0m1al1thWUrRdpQqbca9tAElzZd8B9lgMTGg8tv0va5mZs65rfH1LeLLawG2YotPJwc54ptaeIkSJdePU7O_aiY62RHjfGsPodAXVdVcG1EHw1enZQQ3OxIygWq-Y3hp58kaRP4Q9d-ZR255JCuTmppr2O7NVJV7P8RyhmAAclTw0VdN15DkyR2nI8PDGQKTJDgYI0vkDEZJie48tftL5MitzLc0F1NVDkVVsz5GOt3gI6Ap9b8AIG7GOxEwfSgvpNDP2banOprj6pt_HV37mGkRDHe_ootpirmrU8uev5nQQNGHemk_cHotu4cdGfUl6sW29t_ncu0BuPrQJVP-gPylmVbc-UTFYjIc-wFFeA5O61seN7aGjWZrlQLFELn4r_42W1hRxE8G9yAOUh4OxHtzQ9aOQAU3VC_tpcujHL6_bvoUFk-GC8B0JaXu50tbhn4Dbh93efjFPjSaj93zUrlyjy9Zd_Qa6rtJwVf-VqTe0VLvtE_GfdetL0gwYX5ZMKvAmjEEaU22FcusGubXqrhbHMd93cFqDBv0koCmC_lI_KOFll31aAEqeSQhTQt-xYFBinedNFlFFKPrPiTBYsgjYyzsra-28UDbJn5hrGSvI_vPnn-2xpaGAZcdp1knVzXi7fOlStPsGR7VpiNjVIiHk-20cupFN89DApdmpnjTk9rMv0nJ5n4KK9oodKI787M3aNs6hw0qGaQhPT6O4aLJnUpka3UUydIQQngyrinXeFvL74qN83T2hIqhfxhaWQbPjg8ddOWl_jtL0I6vGh8h-66IFdjieZheVznghSpo0wOetCTaJKOoGGn1ffUmRL_3W77qPWKLeKjvePiypB_d1VDP87nrq5803-ZYiRniqKm2lYZ-EOlbl0t6bkWF4uu3BsmpG4nj7P4xE8HNSVuLL7sB8tpGBdHZGFKDBK68xoOM9bV1xg2VRcaWUXCTxvdvWGbafwHF7mF_8UQE5AKYEwaBuY0mSsuskVgO_gNWxd9M0l2GCA-ieu5vwWe5tSvXf9_HS6wtUgnhtMjR1xylSumlj5OLKJQ4qOclMCPuENNGMT1gmees59QfCGv5TvlNrkYR6soDSGZdq37btDtvTc92d3zZrTVUb7q5IIfyIn4ZZEaIxzjF1umeTvgX6gecIYY19HHK23S02-edT2c7PK6xgNTcDvFAZhmL7mg0pWgoNCJ_vMFJe2Kc1F66RPJuClFy0L4WWAOnFaBRP7yTS6NZC_CjTLmVWqPk6vS6dAyQev2qevvu9RLCAFOVtOXWsjg5RhdQs4aKCxvkp-qhdBKSiV3O9QoBFKL2vWgZADwEqbzGfzQT-DcmdA9XTH9wHA28Dv7qYDpCu8Z3C39M5ne5HLregY4ZbfanJC9wCXi85ZJenInNru4XHXW2KsEQzpIhO94BMbC2DSHkut-B7NSEw4-rxsZi5mBd77_OutcM24l8kU1VhZQaOcjB1QRMoORsepTjOl95GcVBz2cfVRq5OYrIjfNnO1tsv7t3-pSob_Hxm1hKnFwg2o-PUIFi0hRVeaa-6N2RueIazVwhNjYwSQTPwBq_XoddZpcku6eFzchB8oQbd8UIVmYuMEfB2RRzMZtHlpah-iY0SCqKNhWobkf1l6tpzM1O_y_JcQbvFiNXzsyieO_oDrcnmKiw21vOwcItc1X17e_B0rivB9rJPhq49Igv4i4JmhQTiSwjEN87lwOz7K7lf4b7SbmJf6NJNFevRBr8PCFftv0w88lD-XHFbmPVKBnILJmu4FbRkW3b9LCROmyAtKT5cYLIbgEcbPICeIxU-Pwj9AnscG9WkUlsqeapBEjb3m_8NR-bmGiIgldbBjjeCNZ9iiMCw8pr-",
+        "status": null
+      },
+      {
+        "id": "msg_061e07d39a3f5303016a704cf571b08199b4f8d8d4d2c72d10",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"paper_map_version\":\"full-paper-map-1.0.0\",\"paper_id\":\"PILOT-003\",\"formulations\":[{\"formulation_id\":\"FORM-1\",\"name\":{\"value\":\"KL-52-containing lipid nanoparticle (LNP)\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"components\":[{\"component_id\":\"COMP-1\",\"identity\":{\"value\":\"KL-52 cationic aminolipid\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":{\"value\":\"cationic aminolipid\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]}},{\"component_id\":\"COMP-2\",\"identity\":{\"value\":\"1,2-distearoyl-3-phosphatidylcholine (DSPC)\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":null},{\"component_id\":\"COMP-3\",\"identity\":{\"value\":\"cholesterol\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":null},{\"component_id\":\"COMP-4\",\"identity\":{\"value\":\"PEG-c-DOMG\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":null}],\"ratios\":[{\"value\":\"KL-52:DSPC:cholesterol:PEG-c-DOMG = 50:10:38.5:1.5\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},{\"value\":\"total lipid:siRNA = 7:1\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]}],\"ratio_bases\":[{\"value\":\"molar ratio for KL-52:DSPC:cholesterol:PEG-c-DOMG\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},{\"value\":\"weight ratio for total lipid:siRNA\",\"evidence_ids\":[\"FPE-e55df4e8327fce5e5cc0\"]}]}],\"payloads\":[{\"payload_id\":\"PAY-1\",\"identity\":{\"value\":\"siRNA directed against Jnk2 (siJnk2; selected set 3 for in-vivo LNP experiments)\",\"evidence_ids\":[\"FPE-885c5bf40a41fa43b1ff\",\"FPE-ee1df941c50f672760e8\"]},\"role\":{\"value\":\"Jnk2 knockdown payload\",\"evidence_ids\":[\"FPE-1ed3ff6a5da2d0d0a23b\",\"FPE-885c5bf40a41fa43b1ff\"]}},{\"payload_id\":\"PAY-2\",\"identity\":{\"value\":\"luciferase-targeting siRNA (siLuc)\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\",\"FPE-f26cf128c93f82dd9cb9\"]},\"role\":{\"value\":\"negative/control siRNA payload\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]}}],\"common_routes\":[{\"value\":\"intravenous injection\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]}],\"common_species\":[{\"value\":\"mouse\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-885c5bf40a41fa43b1ff\"]}],\"common_models\":[{\"value\":\"NEMOΔHepa mouse model of chronic liver disease and end-stage hepatocarcinogenesis\",\"evidence_ids\":[\"FPE-885c5bf40a41fa43b1ff\"]},{\"value\":\"C57BL/6-background mice\",\"evidence_ids\":[\"FPE-5781e920f6c9f5e60ac1\"]},{\"value\":\"Hepa 1–6 mouse hepatoma cells\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\",\"FPE-0ff7481eba873ba5ed84\"]}],\"recipient_contexts\":[{\"context_id\":\"REC-1\",\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]}},{\"context_id\":\"REC-2\",\"recipient_cell\":{\"value\":\"Hepa 1–6 mouse hepatoma cells\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"organ\":null},{\"context_id\":\"REC-3\",\"recipient_cell\":{\"value\":\"primary murine hepatocytes\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\",\"FPE-0ff7481eba873ba5ed84\"]},\"organ\":null}],\"provisional_experiment_contexts\":[{\"provisional_context_id\":\"CTX-1\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]},\"dose_unit\":{\"value\":\"mg/kg body weight\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]},\"route\":{\"value\":\"intravenous injection\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"species\":{\"value\":\"C57BL6J mice\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]},\"experimental_model\":{\"value\":\"in-vivo tissue-specificity study\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-fbc7cb606ec2ed5a53d9\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"timepoint\":{\"value\":6,\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-fbc7cb606ec2ed5a53d9\"]},\"timepoint_unit\":{\"value\":\"h\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-fbc7cb606ec2ed5a53d9\"]},\"joint_evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"],\"outcome_evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX-2\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"dose_unit\":{\"value\":\"mg/kg mouse body weight\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"route\":{\"value\":\"intravenous injection\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"species\":{\"value\":\"WT mice\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"experimental_model\":{\"value\":\"dose- and time-dependent Jnk2 expression study\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"timepoint\":{\"value\":168,\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"timepoint_unit\":{\"value\":\"h\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"joint_evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"],\"outcome_evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX-3\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"route\":{\"value\":\"weekly injection\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"species\":{\"value\":\"male mice\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"experimental_model\":{\"value\":\"8-week-old NEMOΔHepa mice at an early stage of liver disease\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"timepoint\":{\"value\":4,\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"timepoint_unit\":{\"value\":\"weeks of treatment\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"joint_evidence_ids\":[\"FPE-c395705624ee5d0c856c\"],\"outcome_evidence_ids\":[\"FPE-d2ba84e188f943e315a8\",\"FPE-d29def7f52506bc4ada9\",\"FPE-ed86cf1a0d5598c17399\",\"FPE-cdf0f46e5b1a3223f7b9\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX-4\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"route\":{\"value\":\"weekly injection\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"species\":{\"value\":\"male mice\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"experimental_model\":{\"value\":\"44-week-old NEMOΔHepa mice with advanced liver tumors\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"timepoint\":{\"value\":8,\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"timepoint_unit\":{\"value\":\"weeks of treatment\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"joint_evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"],\"outcome_evidence_ids\":[\"FPE-172026ffdff40397135c\",\"FPE-3a7c6f94fc2d07588616\",\"FPE-bba916e43adcb66f1e0a\",\"FPE-eb626bfbde296bcade89\",\"FPE-e04b132bdff087656159\",\"FPE-e457ae870cfa4d3629a7\",\"FPE-360b3d2729040dc3fc82\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX-5\",\"formulation_id\": \"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\": {\"value\":1,\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"dose_unit\":{\"value\":\"nmol\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"route\":{\"value\":\"Lipofectamine transfection\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"species\":{\"value\":\"mouse\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"experimental_model\":{\"value\":\"Hepa 1–6 cell-culture siRNA sequence screen\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"recipient_cell\":{\"value\":\"Hepa 1–6 mouse hepatoma cells\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"organ\":null,\"timepoint\":{\"value\":24,\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"timepoint_unit\":{\"value\":\"h\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"joint_evidence_ids\":[\"FPE-13b0c3baafac82268008\"],\"outcome_evidence_ids\":[\"FPE-5eb851577a91682a40dc\"],\"pairing_metadata\":null}],\"anchor_accounting\":{\"ANCHOR::FPE-1ed3ff6a5da2d0d0a23b\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\",\"REC-1\"],\"evidence_ids\":[\"FPE-1ed3ff6a5da2d0d0a23b\"],\"explanation\":\"Mapped as study-level support for siJnk2 delivery to hepatocytes and liver-disease outcomes.\"},\"ANCHOR::FPE-d6f0adfbf2d17049a2d9\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\"],\"evidence_ids\":[\"FPE-d6f0adfbf2d17049a2d9\"],\"explanation\":\"Mapped as RNA-delivery payload background.\"},\"ANCHOR::FPE-aa98aed46c239289541d\":{\"disposition\":\"mapped\",\"record_ids\":[\"REC-1\"],\"evidence_ids\":[\"FPE-aa98aed46c239289541d\"],\"explanation\":\"Mapped as hepatocyte-targeting background.\"},\"ANCHOR::FPE-cc60142595a8a25b58fe\":{\"disposition\":\"mapped\",\"record_ids\":[\"REC-1\"],\"evidence_ids\":[\"FPE-cc60142595a8a25b58fe\"],\"explanation\":\"Mapped as LDLR-mediated hepatocyte uptake background.\"},\"ANCHOR::FPE-ad79bcf40913a5c39f32\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-ad79bcf40913a5c39f32\"],\"explanation\":\"Mapped as NEMO hepatocyte-deletion model background.\"},\"ANCHOR::FPE-abc0141d92f5b9c6ac38\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-abc0141d92f5b9c6ac38\"],\"explanation\":\"Mapped as disease-mechanism background for the NEMO model.\"},\"ANCHOR::FPE-885c5bf40a41fa43b1ff\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\",\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-885c5bf40a41fa43b1ff\"],\"explanation\":\"Mapped to the NEMOΔHepa model and siJnk2-LNP study intervention.\"},\"ANCHOR::FPE-735021130c6786b41cd6\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-735021130c6786b41cd6\"],\"explanation\":\"Mapped as clinically applicable LNP/Jnk2-targeting study background.\"},\"ANCHOR::FPE-13b0c3baafac82268008\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\",\"PAY-2\",\"CTX-5\",\"REC-2\",\"REC-3\"],\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"],\"explanation\":\"Mapped to in-vitro siJnk2 sequence screening and recipient-cell contexts.\"},\"ANCHOR::FPE-5eb851577a91682a40dc\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-5\"],\"evidence_ids\":[\"FPE-5eb851577a91682a40dc\"],\"explanation\":\"Mapped as sequence-screening outcome evidence.\"},\"ANCHOR::FPE-bc25cb80d854e7d9ad62\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-bc25cb80d854e7d9ad62\"],\"explanation\":\"Mapped as stage-dependent siJnk2-LNP outcome background.\"},\"ANCHOR::FPE-290af49d0e7894e15840\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-290af49d0e7894e15840\"],\"explanation\":\"Mapped as genetic JNK2/NEMO deletion comparator evidence.\"},\"ANCHOR::FPE-f26cf128c93f82dd9cb9\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"CTX-1\"],\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"],\"explanation\":\"Mapped to LNP composition, ratios, preparation, and 0.2 mg/kg in-vivo context.\"},\"ANCHOR::FPE-ee1df941c50f672760e8\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\"],\"evidence_ids\":[\"FPE-ee1df941c50f672760e8\"],\"explanation\":\"Mapped as support that siRNA-JNK2 set 3 was encapsulated for in-vivo experiments.\"},\"ANCHOR::FPE-fbc7cb606ec2ed5a53d9\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-1\",\"REC-1\"],\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"],\"explanation\":\"Mapped to intravenous LNP administration and hepatocyte-specific liver activity.\"},\"ANCHOR::FPE-b05d4c0d7e1f213226a5\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-2\"],\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"],\"explanation\":\"Mapped to dose/time-dependent siJnk2-LNP activity in WT mice.\"},\"ANCHOR::FPE-c395705624ee5d0c856c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"],\"explanation\":\"Mapped to the early-stage NEMOΔHepa treatment context.\"},\"ANCHOR::FPE-d2ba84e188f943e315a8\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-d2ba84e188f943e315a8\"],\"explanation\":\"Mapped as early-stage treatment outcome evidence.\"},\"ANCHOR::FPE-d29def7f52506bc4ada9\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-d29def7f52506bc4ada9\"],\"explanation\":\"Mapped as early-stage apoptosis/proliferation outcome evidence.\"},\"ANCHOR::FPE-24b564b7cf721e0d546c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"],\"explanation\":\"Mapped to the advanced-stage NEMOΔHepa treatment context.\"},\"ANCHOR::FPE-172026ffdff40397135c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-172026ffdff40397135c\"],\"explanation\":\"Mapped as advanced-stage disease outcome evidence.\"},\"ANCHOR::FPE-3a7c6f94fc2d07588616\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-3a7c6f94fc2d07588616\"],\"explanation\":\"Mapped as advanced-stage tumor and fibrosis outcome evidence.\"},\"ANCHOR::FPE-bba916e43adcb66f1e0a\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-bba916e43adcb66f1e0a\"],\"explanation\":\"Mapped as JNK2/survivin knockdown outcome evidence.\"},\"ANCHOR::FPE-eb626bfbde296bcade89\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-eb626bfbde296bcade89\"],\"explanation\":\"Mapped as advanced-stage apoptosis-imaging outcome evidence.\"},\"ANCHOR::FPE-e04b132bdff087656159\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-e04b132bdff087656159\"],\"explanation\":\"Mapped as advanced-stage apoptosis and proliferation outcome evidence.\"},\"ANCHOR::FPE-e457ae870cfa4d3629a7\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-e457ae870cfa4d3629a7\"],\"explanation\":\"Mapped as advanced-stage immune-cell outcome evidence.\"},\"ANCHOR::FPE-f73518dbc77d29de60ea\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\"],\"evidence_ids\":[\"FPE-f73518dbc77d29de60ea\"],\"explanation\":\"Mapped as lipid/RNA liver-delivery background.\"},\"ANCHOR::FPE-68a01c3c6d6befde6808\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\",\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-68a01c3c6d6befde6808\"],\"explanation\":\"Mapped as study-design support for siRNA knockdown and genetic-comparator approaches.\"},\"ANCHOR::FPE-463343a913bac40f09c6\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-463343a913bac40f09c6\"],\"explanation\":\"Mapped as genetic comparator and hepatocyte-targeted LNP outcome support.\"},\"ANCHOR::FPE-360b3d2729040dc3fc82\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-360b3d2729040dc3fc82\"],\"explanation\":\"Mapped as late-stage CLD outcome evidence.\"},\"ANCHOR::FPE-60afc3c7a4784a9e6f99\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-60afc3c7a4784a9e6f99\"],\"explanation\":\"Mapped as immune-subpopulation outcome context.\"},\"ANCHOR::FPE-ed86cf1a0d5598c17399\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-ed86cf1a0d5598c17399\"],\"explanation\":\"Mapped as early-stage adverse inflammatory phenotype evidence.\"},\"ANCHOR::FPE-cdf0f46e5b1a3223f7b9\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-cdf0f46e5b1a3223f7b9\"],\"explanation\":\"Mapped as early-stage macrophage/apoptosis outcome evidence.\"},\"ANCHOR::FPE-8f60bca9793574baafbd\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\",\"REC-1\"],\"evidence_ids\":[\"FPE-8f60bca9793574baafbd\"],\"explanation\":\"Mapped as cationic-lipid siRNA hepatocyte-delivery conclusion.\"},\"ANCHOR::FPE-122dca2d2eb5213d5b6c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-122dca2d2eb5213d5b6c\"],\"explanation\":\"Mapped as advanced NEMO-model clinical-translation context.\"},\"ANCHOR::FPE-13c7fdacfc7eef2e5bfd\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"CTX-4\"],\"evidence_ids\":[\"FPE-13c7fdacfc7eef2e5bfd\"],\"explanation\":\"Mapped as advanced-cancer hepatocytic Jnk2-inhibition conclusion.\"},\"ANCHOR::FPE-38561c927862a6b60256\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\"],\"evidence_ids\":[\"FPE-38561c927862a6b60256\"],\"explanation\":\"Mapped as material and mouse-targeting design support.\"},\"ANCHOR::FPE-e55df4e8327fce5e5cc0\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\"],\"evidence_ids\":[\"FPE-e55df4e8327fce5e5cc0\"],\"explanation\":\"Mapped to exact LNP preparation and ratio bases.\"},\"ANCHOR::FPE-bca9009dd043c104c617\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\"],\"evidence_ids\":[\"FPE-bca9009dd043c104c617\"],\"explanation\":\"Mapped as downstream formulation processing evidence.\"},\"ANCHOR::FPE-e3cb20baa5f342612447\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\"],\"evidence_ids\":[\"FPE-e3cb20baa5f342612447\"],\"explanation\":\"Mapped as formulation characterization and encapsulated-siRNA evidence.\"},\"ANCHOR::FPE-5781e920f6c9f5e60ac1\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-5781e920f6c9f5e60ac1\"],\"explanation\":\"Mapped as C57BL/6-background mouse-model support.\"},\"ANCHOR::FPE-9f3ab144d3527ec9cb76\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-9f3ab144d3527ec9cb76\"],\"explanation\":\"Mapped as intravenously administered apoptosis-probe imaging support.\"},\"ANCHOR::FPE-0ff7481eba873ba5ed84\":{\"disposition\":\"mapped\",\"record_ids\":[\"REC-2\",\"REC-3\"],\"evidence_ids\":[\"FPE-0ff7481eba873ba5ed84\"],\"explanation\":\"Mapped to Hepa 1–6 and primary-hepatocyte recipient contexts.\"},\"ANCHOR::FPE-6693f18cc0d716fc51ff\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-5\"],\"evidence_ids\":[\"FPE-6693f18cc0d716fc51ff\"],\"explanation\":\"Mapped as Lipofectamine siRNA transfection-method support.\"},\"ANCHOR::FPE-bccdc386f35b691ff95e\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\",\"CTX-5\"],\"evidence_ids\":[\"FPE-bccdc386f35b691ff95e\"],\"explanation\":\"Mapped as common statistical-analysis context for reported outcomes.\"},\"ANCHOR::FPE-f1eb0493fd67dfc59759\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-f1eb0493fd67dfc59759\"],\"explanation\":\"Mapped as study support/funding record; it does not add an experimental arm field.\"}},\"unresolved_items\":[\"No source record explicitly authorizes merging the 0.2 mg/kg C57BL6J dosing details in FPE-f26cf128c93f82dd9cb9 with the intravenous route stated separately in FPE-fbc7cb606ec2ed5a53d9; both facts are retained in CTX-1 but no pairing metadata is asserted.\",\"The source describes several siJnk2 sequences/sets. The shared payload is identified as Jnk2-directed siRNA, with set 3 specifically supported for LNP in-vivo use; no sequence-level identity was provided in the supplied evidence.\",\"Several anchors are background, methods, or outcome-only passages and therefore support mapped records without defining additional independently reportable formulation or experimental-arm fields.\"]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 0.98,
+    "background": false,
+    "completed_at": 1785744667.0,
+    "conversation": null,
+    "max_output_tokens": 12000,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": "48ea38971c90634adbc608a7f0f12648529af003d772eae67363ab4401f2a3b9",
+    "prompt_cache_options": null,
+    "prompt_cache_retention": "24h",
+    "reasoning": {
+      "context": "all_turns",
+      "effort": "low",
+      "generate_summary": null,
+      "mode": "standard",
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "FullPaperMapResponse",
+        "schema_": {
+          "$defs": {
+            "AnchorAccountingEntry": {
+              "additionalProperties": false,
+              "properties": {
+                "disposition": {
+                  "enum": [
+                    "mapped",
+                    "not_supported",
+                    "ambiguous"
+                  ],
+                  "title": "Disposition",
+                  "type": "string"
+                },
+                "record_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Record Ids",
+                  "type": "array"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                },
+                "explanation": {
+                  "minLength": 1,
+                  "title": "Explanation",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "disposition",
+                "record_ids",
+                "evidence_ids",
+                "explanation"
+              ],
+              "title": "AnchorAccountingEntry",
+              "type": "object"
+            },
+            "EvidenceBackedNumber": {
+              "additionalProperties": false,
+              "description": "A source-reported numeric value and its exact local support.",
+              "properties": {
+                "value": {
+                  "title": "Value",
+                  "type": "number"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "value",
+                "evidence_ids"
+              ],
+              "title": "EvidenceBackedNumber",
+              "type": "object"
+            },
+            "EvidenceBackedText": {
+              "additionalProperties": false,
+              "description": "A source-reported text value and its exact local support.",
+              "properties": {
+                "value": {
+                  "minLength": 1,
+                  "title": "Value",
+                  "type": "string"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "value",
+                "evidence_ids"
+              ],
+              "title": "EvidenceBackedText",
+              "type": "object"
+            },
+            "PairingMetadata": {
+              "additionalProperties": false,
+              "description": "Explicit source metadata authorizing a reported joint arm.",
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "paired",
+                    "cross_product",
+                    "explicit_pairing"
+                  ],
+                  "title": "Kind",
+                  "type": "string"
+                },
+                "paired_fields": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Paired Fields",
+                  "type": "array"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "kind",
+                "paired_fields",
+                "evidence_ids"
+              ],
+              "title": "PairingMetadata",
+              "type": "object"
+            },
+            "ProvisionalExperimentContext": {
+              "additionalProperties": false,
+              "description": "One source-backed arm hypothesis; never a local Cartesian product.",
+              "properties": {
+                "provisional_context_id": {
+                  "minLength": 1,
+                  "title": "Provisional Context Id",
+                  "type": "string"
+                },
+                "formulation_id": {
+                  "minLength": 1,
+                  "title": "Formulation Id",
+                  "type": "string"
+                },
+                "payload_id": {
+                  "minLength": 1,
+                  "title": "Payload Id",
+                  "type": "string"
+                },
+                "dose": {
+                  "$ref": "#/$defs/EvidenceBackedNumber"
+                },
+                "dose_unit": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "route": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "species": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "experimental_model": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "recipient_cell": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "organ": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "timepoint": {
+                  "$ref": "#/$defs/EvidenceBackedNumber"
+                },
+                "timepoint_unit": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "joint_evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Joint Evidence Ids",
+                  "type": "array"
+                },
+                "outcome_evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "title": "Outcome Evidence Ids",
+                  "type": "array"
+                },
+                "pairing_metadata": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/PairingMetadata"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "provisional_context_id",
+                "formulation_id",
+                "payload_id",
+                "dose",
+                "dose_unit",
+                "route",
+                "species",
+                "experimental_model",
+                "recipient_cell",
+                "organ",
+                "timepoint",
+                "timepoint_unit",
+                "joint_evidence_ids",
+                "outcome_evidence_ids",
+                "pairing_metadata"
+              ],
+              "title": "ProvisionalExperimentContext",
+              "type": "object"
+            },
+            "RecipientContext": {
+              "additionalProperties": false,
+              "properties": {
+                "context_id": {
+                  "minLength": 1,
+                  "title": "Context Id",
+                  "type": "string"
+                },
+                "recipient_cell": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "organ": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "context_id",
+                "recipient_cell",
+                "organ"
+              ],
+              "title": "RecipientContext",
+              "type": "object"
+            },
+            "SharedComponent": {
+              "additionalProperties": false,
+              "properties": {
+                "component_id": {
+                  "minLength": 1,
+                  "title": "Component Id",
+                  "type": "string"
+                },
+                "identity": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "role": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "component_id",
+                "identity",
+                "role"
+              ],
+              "title": "SharedComponent",
+              "type": "object"
+            },
+            "SharedFormulation": {
+              "additionalProperties": false,
+              "properties": {
+                "formulation_id": {
+                  "minLength": 1,
+                  "title": "Formulation Id",
+                  "type": "string"
+                },
+                "name": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "components": {
+                  "items": {
+                    "$ref": "#/$defs/SharedComponent"
+                  },
+                  "title": "Components",
+                  "type": "array"
+                },
+                "ratios": {
+                  "items": {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  "title": "Ratios",
+                  "type": "array"
+                },
+                "ratio_bases": {
+                  "items": {
+                    "$ref": "#/$defs/EvidenceBackedText"
+                  },
+                  "title": "Ratio Bases",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "formulation_id",
+                "name",
+                "components",
+                "ratios",
+                "ratio_bases"
+              ],
+              "title": "SharedFormulation",
+              "type": "object"
+            },
+            "SharedPayload": {
+              "additionalProperties": false,
+              "properties": {
+                "payload_id": {
+                  "minLength": 1,
+                  "title": "Payload Id",
+                  "type": "string"
+                },
+                "identity": {
+                  "$ref": "#/$defs/EvidenceBackedText"
+                },
+                "role": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/EvidenceBackedText"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "payload_id",
+                "identity",
+                "role"
+              ],
+              "title": "SharedPayload",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Shared paper facts and source-backed provisional experiment contexts.",
+          "properties": {
+            "paper_map_version": {
+              "const": "full-paper-map-1.0.0",
+              "title": "Paper Map Version",
+              "type": "string"
+            },
+            "paper_id": {
+              "minLength": 1,
+              "title": "Paper Id",
+              "type": "string"
+            },
+            "formulations": {
+              "items": {
+                "$ref": "#/$defs/SharedFormulation"
+              },
+              "title": "Formulations",
+              "type": "array"
+            },
+            "payloads": {
+              "items": {
+                "$ref": "#/$defs/SharedPayload"
+              },
+              "title": "Payloads",
+              "type": "array"
+            },
+            "common_routes": {
+              "items": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "title": "Common Routes",
+              "type": "array"
+            },
+            "common_species": {
+              "items": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "title": "Common Species",
+              "type": "array"
+            },
+            "common_models": {
+              "items": {
+                "$ref": "#/$defs/EvidenceBackedText"
+              },
+              "title": "Common Models",
+              "type": "array"
+            },
+            "recipient_contexts": {
+              "items": {
+                "$ref": "#/$defs/RecipientContext"
+              },
+              "title": "Recipient Contexts",
+              "type": "array"
+            },
+            "provisional_experiment_contexts": {
+              "items": {
+                "$ref": "#/$defs/ProvisionalExperimentContext"
+              },
+              "title": "Provisional Experiment Contexts",
+              "type": "array"
+            },
+            "anchor_accounting": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "ANCHOR::FPE-1ed3ff6a5da2d0d0a23b": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-d6f0adfbf2d17049a2d9": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-aa98aed46c239289541d": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-cc60142595a8a25b58fe": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-ad79bcf40913a5c39f32": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-abc0141d92f5b9c6ac38": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-885c5bf40a41fa43b1ff": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-735021130c6786b41cd6": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-13b0c3baafac82268008": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-5eb851577a91682a40dc": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-bc25cb80d854e7d9ad62": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-290af49d0e7894e15840": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-f26cf128c93f82dd9cb9": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-ee1df941c50f672760e8": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-fbc7cb606ec2ed5a53d9": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-b05d4c0d7e1f213226a5": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-c395705624ee5d0c856c": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-d2ba84e188f943e315a8": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-d29def7f52506bc4ada9": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-24b564b7cf721e0d546c": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-172026ffdff40397135c": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-3a7c6f94fc2d07588616": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-bba916e43adcb66f1e0a": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-eb626bfbde296bcade89": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-e04b132bdff087656159": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-e457ae870cfa4d3629a7": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-f73518dbc77d29de60ea": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-68a01c3c6d6befde6808": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-463343a913bac40f09c6": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-360b3d2729040dc3fc82": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-60afc3c7a4784a9e6f99": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-ed86cf1a0d5598c17399": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-cdf0f46e5b1a3223f7b9": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-8f60bca9793574baafbd": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-122dca2d2eb5213d5b6c": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-13c7fdacfc7eef2e5bfd": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-38561c927862a6b60256": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-e55df4e8327fce5e5cc0": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-bca9009dd043c104c617": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-e3cb20baa5f342612447": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-5781e920f6c9f5e60ac1": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-9f3ab144d3527ec9cb76": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-0ff7481eba873ba5ed84": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-6693f18cc0d716fc51ff": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-bccdc386f35b691ff95e": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                },
+                "ANCHOR::FPE-f1eb0493fd67dfc59759": {
+                  "$ref": "#/$defs/AnchorAccountingEntry"
+                }
+              },
+              "required": [
+                "ANCHOR::FPE-1ed3ff6a5da2d0d0a23b",
+                "ANCHOR::FPE-d6f0adfbf2d17049a2d9",
+                "ANCHOR::FPE-aa98aed46c239289541d",
+                "ANCHOR::FPE-cc60142595a8a25b58fe",
+                "ANCHOR::FPE-ad79bcf40913a5c39f32",
+                "ANCHOR::FPE-abc0141d92f5b9c6ac38",
+                "ANCHOR::FPE-885c5bf40a41fa43b1ff",
+                "ANCHOR::FPE-735021130c6786b41cd6",
+                "ANCHOR::FPE-13b0c3baafac82268008",
+                "ANCHOR::FPE-5eb851577a91682a40dc",
+                "ANCHOR::FPE-bc25cb80d854e7d9ad62",
+                "ANCHOR::FPE-290af49d0e7894e15840",
+                "ANCHOR::FPE-f26cf128c93f82dd9cb9",
+                "ANCHOR::FPE-ee1df941c50f672760e8",
+                "ANCHOR::FPE-fbc7cb606ec2ed5a53d9",
+                "ANCHOR::FPE-b05d4c0d7e1f213226a5",
+                "ANCHOR::FPE-c395705624ee5d0c856c",
+                "ANCHOR::FPE-d2ba84e188f943e315a8",
+                "ANCHOR::FPE-d29def7f52506bc4ada9",
+                "ANCHOR::FPE-24b564b7cf721e0d546c",
+                "ANCHOR::FPE-172026ffdff40397135c",
+                "ANCHOR::FPE-3a7c6f94fc2d07588616",
+                "ANCHOR::FPE-bba916e43adcb66f1e0a",
+                "ANCHOR::FPE-eb626bfbde296bcade89",
+                "ANCHOR::FPE-e04b132bdff087656159",
+                "ANCHOR::FPE-e457ae870cfa4d3629a7",
+                "ANCHOR::FPE-f73518dbc77d29de60ea",
+                "ANCHOR::FPE-68a01c3c6d6befde6808",
+                "ANCHOR::FPE-463343a913bac40f09c6",
+                "ANCHOR::FPE-360b3d2729040dc3fc82",
+                "ANCHOR::FPE-60afc3c7a4784a9e6f99",
+                "ANCHOR::FPE-ed86cf1a0d5598c17399",
+                "ANCHOR::FPE-cdf0f46e5b1a3223f7b9",
+                "ANCHOR::FPE-8f60bca9793574baafbd",
+                "ANCHOR::FPE-122dca2d2eb5213d5b6c",
+                "ANCHOR::FPE-13c7fdacfc7eef2e5bfd",
+                "ANCHOR::FPE-38561c927862a6b60256",
+                "ANCHOR::FPE-e55df4e8327fce5e5cc0",
+                "ANCHOR::FPE-bca9009dd043c104c617",
+                "ANCHOR::FPE-e3cb20baa5f342612447",
+                "ANCHOR::FPE-5781e920f6c9f5e60ac1",
+                "ANCHOR::FPE-9f3ab144d3527ec9cb76",
+                "ANCHOR::FPE-0ff7481eba873ba5ed84",
+                "ANCHOR::FPE-6693f18cc0d716fc51ff",
+                "ANCHOR::FPE-bccdc386f35b691ff95e",
+                "ANCHOR::FPE-f1eb0493fd67dfc59759"
+              ]
+            },
+            "unresolved_items": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Unresolved Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "paper_map_version",
+            "paper_id",
+            "formulations",
+            "payloads",
+            "common_routes",
+            "common_species",
+            "common_models",
+            "recipient_contexts",
+            "provisional_experiment_contexts",
+            "anchor_accounting",
+            "unresolved_items"
+          ],
+          "title": "PaperMapResponse",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": true
+      },
+      "verbosity": "medium"
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 22480,
+      "input_tokens_details": {
+        "cache_write_tokens": 22477,
+        "cached_tokens": 0
+      },
+      "output_tokens": 7424,
+      "output_tokens_details": {
+        "reasoning_tokens": 920
+      },
+      "total_tokens": 29904
+    },
+    "user": null,
+    "billing": {
+      "payer": "openai"
+    },
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "tool_usage": {
+      "image_gen": {
+        "input_tokens": 0,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 0
+        },
+        "output_tokens": 0,
+        "output_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 0
+        },
+        "total_tokens": 0
+      },
+      "web_search": {
+        "num_requests": 0
+      }
+    },
+    "output_text": "{\"paper_map_version\":\"full-paper-map-1.0.0\",\"paper_id\":\"PILOT-003\",\"formulations\":[{\"formulation_id\":\"FORM-1\",\"name\":{\"value\":\"KL-52-containing lipid nanoparticle (LNP)\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"components\":[{\"component_id\":\"COMP-1\",\"identity\":{\"value\":\"KL-52 cationic aminolipid\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":{\"value\":\"cationic aminolipid\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]}},{\"component_id\":\"COMP-2\",\"identity\":{\"value\":\"1,2-distearoyl-3-phosphatidylcholine (DSPC)\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":null},{\"component_id\":\"COMP-3\",\"identity\":{\"value\":\"cholesterol\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":null},{\"component_id\":\"COMP-4\",\"identity\":{\"value\":\"PEG-c-DOMG\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},\"role\":null}],\"ratios\":[{\"value\":\"KL-52:DSPC:cholesterol:PEG-c-DOMG = 50:10:38.5:1.5\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},{\"value\":\"total lipid:siRNA = 7:1\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]}],\"ratio_bases\":[{\"value\":\"molar ratio for KL-52:DSPC:cholesterol:PEG-c-DOMG\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-e55df4e8327fce5e5cc0\"]},{\"value\":\"weight ratio for total lipid:siRNA\",\"evidence_ids\":[\"FPE-e55df4e8327fce5e5cc0\"]}]}],\"payloads\":[{\"payload_id\":\"PAY-1\",\"identity\":{\"value\":\"siRNA directed against Jnk2 (siJnk2; selected set 3 for in-vivo LNP experiments)\",\"evidence_ids\":[\"FPE-885c5bf40a41fa43b1ff\",\"FPE-ee1df941c50f672760e8\"]},\"role\":{\"value\":\"Jnk2 knockdown payload\",\"evidence_ids\":[\"FPE-1ed3ff6a5da2d0d0a23b\",\"FPE-885c5bf40a41fa43b1ff\"]}},{\"payload_id\":\"PAY-2\",\"identity\":{\"value\":\"luciferase-targeting siRNA (siLuc)\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\",\"FPE-f26cf128c93f82dd9cb9\"]},\"role\":{\"value\":\"negative/control siRNA payload\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]}}],\"common_routes\":[{\"value\":\"intravenous injection\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]}],\"common_species\":[{\"value\":\"mouse\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-885c5bf40a41fa43b1ff\"]}],\"common_models\":[{\"value\":\"NEMOΔHepa mouse model of chronic liver disease and end-stage hepatocarcinogenesis\",\"evidence_ids\":[\"FPE-885c5bf40a41fa43b1ff\"]},{\"value\":\"C57BL/6-background mice\",\"evidence_ids\":[\"FPE-5781e920f6c9f5e60ac1\"]},{\"value\":\"Hepa 1–6 mouse hepatoma cells\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\",\"FPE-0ff7481eba873ba5ed84\"]}],\"recipient_contexts\":[{\"context_id\":\"REC-1\",\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]}},{\"context_id\":\"REC-2\",\"recipient_cell\":{\"value\":\"Hepa 1–6 mouse hepatoma cells\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"]},\"organ\":null},{\"context_id\":\"REC-3\",\"recipient_cell\":{\"value\":\"primary murine hepatocytes\",\"evidence_ids\":[\"FPE-13b0c3baafac82268008\",\"FPE-0ff7481eba873ba5ed84\"]},\"organ\":null}],\"provisional_experiment_contexts\":[{\"provisional_context_id\":\"CTX-1\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]},\"dose_unit\":{\"value\":\"mg/kg body weight\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]},\"route\":{\"value\":\"intravenous injection\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"species\":{\"value\":\"C57BL6J mice\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"]},\"experimental_model\":{\"value\":\"in-vivo tissue-specificity study\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-fbc7cb606ec2ed5a53d9\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"timepoint\":{\"value\":6.0,\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-fbc7cb606ec2ed5a53d9\"]},\"timepoint_unit\":{\"value\":\"h\",\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\",\"FPE-fbc7cb606ec2ed5a53d9\"]},\"joint_evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"],\"outcome_evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX-2\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"dose_unit\":{\"value\":\"mg/kg mouse body weight\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"route\":{\"value\":\"intravenous injection\",\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"]},\"species\":{\"value\":\"WT mice\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"experimental_model\":{\"value\":\"dose- and time-dependent Jnk2 expression study\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"timepoint\":{\"value\":168.0,\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"timepoint_unit\":{\"value\":\"h\",\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"]},\"joint_evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"],\"outcome_evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX-3\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"route\":{\"value\":\"weekly injection\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"species\":{\"value\":\"male mice\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"experimental_model\":{\"value\":\"8-week-old NEMOΔHepa mice at an early stage of liver disease\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"timepoint\":{\"value\":4.0,\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"timepoint_unit\":{\"value\":\"weeks of treatment\",\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"]},\"joint_evidence_ids\":[\"FPE-c395705624ee5d0c856c\"],\"outcome_evidence_ids\":[\"FPE-d2ba84e188f943e315a8\",\"FPE-d29def7f52506bc4ada9\",\"FPE-ed86cf1a0d5598c17399\",\"FPE-cdf0f46e5b1a3223f7b9\"],\"pairing_metadata\":null},{\"provisional_context_id\":\"CTX-4\",\"formulation_id\":\"FORM-1\",\"payload_id\":\"PAY-1\",\"dose\":{\"value\":0.2,\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"dose_unit\":{\"value\":\"mg/kg\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"route\":{\"value\":\"weekly injection\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"species\":{\"value\":\"male mice\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"experimental_model\":{\"value\":\"44-week-old NEMOΔHepa mice with advanced liver tumors\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"recipient_cell\":{\"value\":\"hepatocytes\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"organ\":{\"value\":\"liver\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"timepoint\":{\"value\":8.0,\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"timepoint_unit\":{\"value\":\"weeks of treatment\",\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"]},\"joint_evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"],\"outcome_evidence_ids\":[\"FPE-172026ffdff40397135c\",\"FPE-3a7c6f94fc2d07588616\",\"FPE-bba916e43adcb66f1e0a\",\"FPE-eb626bfbde296bcade89\",\"FPE-e04b132bdff087656159\",\"FPE-e457ae870cfa4d3629a7\",\"FPE-360b3d2729040dc3fc82\"],\"pairing_metadata\":null}],\"anchor_accounting\":{\"ANCHOR::FPE-1ed3ff6a5da2d0d0a23b\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\",\"REC-1\"],\"evidence_ids\":[\"FPE-1ed3ff6a5da2d0d0a23b\"],\"explanation\":\"Mapped as study-level support for siJnk2 delivery to hepatocytes and liver-disease outcomes.\"},\"ANCHOR::FPE-d6f0adfbf2d17049a2d9\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\"],\"evidence_ids\":[\"FPE-d6f0adfbf2d17049a2d9\"],\"explanation\":\"Mapped as RNA-delivery payload background.\"},\"ANCHOR::FPE-aa98aed46c239289541d\":{\"disposition\":\"mapped\",\"record_ids\":[\"REC-1\"],\"evidence_ids\":[\"FPE-aa98aed46c239289541d\"],\"explanation\":\"Mapped as hepatocyte-targeting background.\"},\"ANCHOR::FPE-cc60142595a8a25b58fe\":{\"disposition\":\"mapped\",\"record_ids\":[\"REC-1\"],\"evidence_ids\":[\"FPE-cc60142595a8a25b58fe\"],\"explanation\":\"Mapped as LDLR-mediated hepatocyte uptake background.\"},\"ANCHOR::FPE-ad79bcf40913a5c39f32\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-ad79bcf40913a5c39f32\"],\"explanation\":\"Mapped as NEMO hepatocyte-deletion model background.\"},\"ANCHOR::FPE-abc0141d92f5b9c6ac38\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-abc0141d92f5b9c6ac38\"],\"explanation\":\"Mapped as disease-mechanism background for the NEMO model.\"},\"ANCHOR::FPE-885c5bf40a41fa43b1ff\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\",\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-885c5bf40a41fa43b1ff\"],\"explanation\":\"Mapped to the NEMOΔHepa model and siJnk2-LNP study intervention.\"},\"ANCHOR::FPE-735021130c6786b41cd6\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-735021130c6786b41cd6\"],\"explanation\":\"Mapped as clinically applicable LNP/Jnk2-targeting study background.\"},\"ANCHOR::FPE-13b0c3baafac82268008\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\",\"PAY-2\",\"REC-2\",\"REC-3\"],\"evidence_ids\":[\"FPE-13b0c3baafac82268008\"],\"explanation\":\"Mapped to in-vitro siJnk2 sequence screening and recipient-cell contexts. Human Gate-A audit quarantined CTX-5 because its Lipofectamine screen was incorrectly bound to the KL-52 LNP.\"},\"ANCHOR::FPE-5eb851577a91682a40dc\":{\"disposition\":\"not_supported\",\"record_ids\":[],\"evidence_ids\":[\"FPE-5eb851577a91682a40dc\"],\"explanation\":\"Mapped as sequence-screening outcome evidence. Human Gate-A audit quarantined CTX-5 because its Lipofectamine screen was incorrectly bound to the KL-52 LNP.\"},\"ANCHOR::FPE-bc25cb80d854e7d9ad62\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-bc25cb80d854e7d9ad62\"],\"explanation\":\"Mapped as stage-dependent siJnk2-LNP outcome background.\"},\"ANCHOR::FPE-290af49d0e7894e15840\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-290af49d0e7894e15840\"],\"explanation\":\"Mapped as genetic JNK2/NEMO deletion comparator evidence.\"},\"ANCHOR::FPE-f26cf128c93f82dd9cb9\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"CTX-1\"],\"evidence_ids\":[\"FPE-f26cf128c93f82dd9cb9\"],\"explanation\":\"Mapped to LNP composition, ratios, preparation, and 0.2 mg/kg in-vivo context.\"},\"ANCHOR::FPE-ee1df941c50f672760e8\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\"],\"evidence_ids\":[\"FPE-ee1df941c50f672760e8\"],\"explanation\":\"Mapped as support that siRNA-JNK2 set 3 was encapsulated for in-vivo experiments.\"},\"ANCHOR::FPE-fbc7cb606ec2ed5a53d9\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-1\",\"REC-1\"],\"evidence_ids\":[\"FPE-fbc7cb606ec2ed5a53d9\"],\"explanation\":\"Mapped to intravenous LNP administration and hepatocyte-specific liver activity.\"},\"ANCHOR::FPE-b05d4c0d7e1f213226a5\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-2\"],\"evidence_ids\":[\"FPE-b05d4c0d7e1f213226a5\"],\"explanation\":\"Mapped to dose/time-dependent siJnk2-LNP activity in WT mice.\"},\"ANCHOR::FPE-c395705624ee5d0c856c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-c395705624ee5d0c856c\"],\"explanation\":\"Mapped to the early-stage NEMOΔHepa treatment context.\"},\"ANCHOR::FPE-d2ba84e188f943e315a8\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-d2ba84e188f943e315a8\"],\"explanation\":\"Mapped as early-stage treatment outcome evidence.\"},\"ANCHOR::FPE-d29def7f52506bc4ada9\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-d29def7f52506bc4ada9\"],\"explanation\":\"Mapped as early-stage apoptosis/proliferation outcome evidence.\"},\"ANCHOR::FPE-24b564b7cf721e0d546c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-24b564b7cf721e0d546c\"],\"explanation\":\"Mapped to the advanced-stage NEMOΔHepa treatment context.\"},\"ANCHOR::FPE-172026ffdff40397135c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-172026ffdff40397135c\"],\"explanation\":\"Mapped as advanced-stage disease outcome evidence.\"},\"ANCHOR::FPE-3a7c6f94fc2d07588616\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-3a7c6f94fc2d07588616\"],\"explanation\":\"Mapped as advanced-stage tumor and fibrosis outcome evidence.\"},\"ANCHOR::FPE-bba916e43adcb66f1e0a\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-bba916e43adcb66f1e0a\"],\"explanation\":\"Mapped as JNK2/survivin knockdown outcome evidence.\"},\"ANCHOR::FPE-eb626bfbde296bcade89\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-eb626bfbde296bcade89\"],\"explanation\":\"Mapped as advanced-stage apoptosis-imaging outcome evidence.\"},\"ANCHOR::FPE-e04b132bdff087656159\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-e04b132bdff087656159\"],\"explanation\":\"Mapped as advanced-stage apoptosis and proliferation outcome evidence.\"},\"ANCHOR::FPE-e457ae870cfa4d3629a7\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-e457ae870cfa4d3629a7\"],\"explanation\":\"Mapped as advanced-stage immune-cell outcome evidence.\"},\"ANCHOR::FPE-f73518dbc77d29de60ea\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\"],\"evidence_ids\":[\"FPE-f73518dbc77d29de60ea\"],\"explanation\":\"Mapped as lipid/RNA liver-delivery background.\"},\"ANCHOR::FPE-68a01c3c6d6befde6808\":{\"disposition\":\"mapped\",\"record_ids\":[\"PAY-1\",\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-68a01c3c6d6befde6808\"],\"explanation\":\"Mapped as study-design support for siRNA knockdown and genetic-comparator approaches.\"},\"ANCHOR::FPE-463343a913bac40f09c6\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-463343a913bac40f09c6\"],\"explanation\":\"Mapped as genetic comparator and hepatocyte-targeted LNP outcome support.\"},\"ANCHOR::FPE-360b3d2729040dc3fc82\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-360b3d2729040dc3fc82\"],\"explanation\":\"Mapped as late-stage CLD outcome evidence.\"},\"ANCHOR::FPE-60afc3c7a4784a9e6f99\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-60afc3c7a4784a9e6f99\"],\"explanation\":\"Mapped as immune-subpopulation outcome context.\"},\"ANCHOR::FPE-ed86cf1a0d5598c17399\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-ed86cf1a0d5598c17399\"],\"explanation\":\"Mapped as early-stage adverse inflammatory phenotype evidence.\"},\"ANCHOR::FPE-cdf0f46e5b1a3223f7b9\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\"],\"evidence_ids\":[\"FPE-cdf0f46e5b1a3223f7b9\"],\"explanation\":\"Mapped as early-stage macrophage/apoptosis outcome evidence.\"},\"ANCHOR::FPE-8f60bca9793574baafbd\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\",\"REC-1\"],\"evidence_ids\":[\"FPE-8f60bca9793574baafbd\"],\"explanation\":\"Mapped as cationic-lipid siRNA hepatocyte-delivery conclusion.\"},\"ANCHOR::FPE-122dca2d2eb5213d5b6c\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-122dca2d2eb5213d5b6c\"],\"explanation\":\"Mapped as advanced NEMO-model clinical-translation context.\"},\"ANCHOR::FPE-13c7fdacfc7eef2e5bfd\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"CTX-4\"],\"evidence_ids\":[\"FPE-13c7fdacfc7eef2e5bfd\"],\"explanation\":\"Mapped as advanced-cancer hepatocytic Jnk2-inhibition conclusion.\"},\"ANCHOR::FPE-38561c927862a6b60256\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\"],\"evidence_ids\":[\"FPE-38561c927862a6b60256\"],\"explanation\":\"Mapped as material and mouse-targeting design support.\"},\"ANCHOR::FPE-e55df4e8327fce5e5cc0\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\"],\"evidence_ids\":[\"FPE-e55df4e8327fce5e5cc0\"],\"explanation\":\"Mapped to exact LNP preparation and ratio bases.\"},\"ANCHOR::FPE-bca9009dd043c104c617\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\"],\"evidence_ids\":[\"FPE-bca9009dd043c104c617\"],\"explanation\":\"Mapped as downstream formulation processing evidence.\"},\"ANCHOR::FPE-e3cb20baa5f342612447\":{\"disposition\":\"mapped\",\"record_ids\":[\"FORM-1\",\"PAY-1\"],\"evidence_ids\":[\"FPE-e3cb20baa5f342612447\"],\"explanation\":\"Mapped as formulation characterization and encapsulated-siRNA evidence.\"},\"ANCHOR::FPE-5781e920f6c9f5e60ac1\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-5781e920f6c9f5e60ac1\"],\"explanation\":\"Mapped as C57BL/6-background mouse-model support.\"},\"ANCHOR::FPE-9f3ab144d3527ec9cb76\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-4\"],\"evidence_ids\":[\"FPE-9f3ab144d3527ec9cb76\"],\"explanation\":\"Mapped as intravenously administered apoptosis-probe imaging support.\"},\"ANCHOR::FPE-0ff7481eba873ba5ed84\":{\"disposition\":\"mapped\",\"record_ids\":[\"REC-2\",\"REC-3\"],\"evidence_ids\":[\"FPE-0ff7481eba873ba5ed84\"],\"explanation\":\"Mapped to Hepa 1–6 and primary-hepatocyte recipient contexts.\"},\"ANCHOR::FPE-6693f18cc0d716fc51ff\":{\"disposition\":\"not_supported\",\"record_ids\":[],\"evidence_ids\":[\"FPE-6693f18cc0d716fc51ff\"],\"explanation\":\"Mapped as Lipofectamine siRNA transfection-method support. Human Gate-A audit quarantined CTX-5 because its Lipofectamine screen was incorrectly bound to the KL-52 LNP.\"},\"ANCHOR::FPE-bccdc386f35b691ff95e\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-bccdc386f35b691ff95e\"],\"explanation\":\"Mapped as common statistical-analysis context for reported outcomes. Human Gate-A audit quarantined CTX-5 because its Lipofectamine screen was incorrectly bound to the KL-52 LNP.\"},\"ANCHOR::FPE-f1eb0493fd67dfc59759\":{\"disposition\":\"mapped\",\"record_ids\":[\"CTX-3\",\"CTX-4\"],\"evidence_ids\":[\"FPE-f1eb0493fd67dfc59759\"],\"explanation\":\"Mapped as study support/funding record; it does not add an experimental arm field.\"}},\"unresolved_items\":[\"No source record explicitly authorizes merging the 0.2 mg/kg C57BL6J dosing details in FPE-f26cf128c93f82dd9cb9 with the intravenous route stated separately in FPE-fbc7cb606ec2ed5a53d9; both facts are retained in CTX-1 but no pairing metadata is asserted.\",\"The source describes several siJnk2 sequences/sets. The shared payload is identified as Jnk2-directed siRNA, with set 3 specifically supported for LNP in-vivo use; no sequence-level identity was provided in the supplied evidence.\",\"Several anchors are background, methods, or outcome-only passages and therefore support mapped records without defining additional independently reportable formulation or experimental-arm fields.\",\"CTX-5 quarantined: Lipofectamine screening is not a KL-52 LNP arm, and the 12-sequence screen cannot be represented as selected set 3.\"]}"
+  },
+  "selective_vision_task_paths": [
+    "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/vision_tasks/PILOT-003/CTX-4.json"
+  ],
+  "token_budget": 100000,
+  "max_output_tokens": 5000
+}
