@@ -92,6 +92,18 @@ def test_validator_accepts_nullable_unset_optional_schema_fields(packet, proposa
     assert validation["rejection_reasons"] == []
 
 
+def test_validator_rejects_invented_nonnumeric_value_with_unrelated_quote(
+    packet, proposal
+):
+    invented = deepcopy(proposal)
+    invented["raw_values"] = ["invented-drug"]
+
+    validation = validate_proposal(invented, packet)
+
+    assert validation["accepted"] is False
+    assert "unsupported_raw_value" in validation["rejection_reasons"]
+
+
 @pytest.mark.parametrize(
     ("change", "reason"),
     [

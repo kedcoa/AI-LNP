@@ -290,12 +290,13 @@
   },
   "safety": {
     "gold_leakage": 0,
-    "accepted_unsupported_or_invented_fact": 0,
+    "accepted_unsupported_or_invented_fact": 9,
     "accepted_wrong_relationship": 0,
     "three_consecutive_systemic_failures": 0,
     "schema_failures": 1,
     "production_writes": 0,
     "paid_api_requests": 0
   },
-  "decision": "does_not_work"
+  "decision": "does_not_work",
+  "hard_safety_basis": "Nine proposals accepted by the benchmark-time validator were rejected by strict post-review revalidation because their nonnumeric raw values were not supported by the quoted evidence."
 }

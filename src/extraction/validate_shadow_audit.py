@@ -168,6 +168,20 @@ def _numeric_values_supported(
     return True
 
 
+def _normalized_support_text(value: str) -> str:
+    normalized = re.sub(r"[^\w%µμ.+/-]+", " ", value.casefold())
+    return " ".join(normalized.split())
+
+
+def _raw_values_supported(raw_values: Sequence[str], quote: str) -> bool:
+    normalized_quote = _normalized_support_text(quote)
+    return all(
+        bool(normalized := _normalized_support_text(raw_value))
+        and normalized in normalized_quote
+        for raw_value in raw_values
+    )
+
+
 def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) -> dict[str, Any]:
     """Return an acceptance decision without reading reference or gold artifacts.
 
@@ -263,6 +277,8 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
         reasons.append("quote_mismatch")
     elif not supporters:
         reasons.append("unsupported_exact_number")
+    elif not _raw_values_supported(proposal["raw_values"], quote):
+        reasons.append("unsupported_raw_value")
     else:
         proposed["evidence_ids"] = supporters
 

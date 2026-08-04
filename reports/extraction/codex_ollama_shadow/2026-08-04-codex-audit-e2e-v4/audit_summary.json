@@ -15,6 +15,19 @@
       "wrong_arm_link": 5
     }
   },
+  "strict_revalidation": {
+    "proposed": 88,
+    "accepted": 46,
+    "rejected": 42,
+    "previously_accepted_now_rejected_as_unsupported_raw_value": 9,
+    "rejection_reasons": {
+      "cross_experiment_evidence": 5,
+      "quote_mismatch": 5,
+      "unsupported_exact_number": 23,
+      "unsupported_raw_value": 12,
+      "wrong_arm_link": 5
+    }
+  },
   "usage": {
     "models": [],
     "input_tokens": 559386,
@@ -39,7 +52,7 @@
   },
   "paid_api_requests": 0,
   "production_writes": 0,
-  "per_paper": {
+  "per_paper_benchmark_time": {
     "PILOT-001": {
       "packets": 10,
       "accepted_proposals": 17,
@@ -56,6 +69,23 @@
       "rejected_proposals": 13
     }
   },
+  "per_paper_strict_revalidation": {
+    "PILOT-001": {
+      "packets": 10,
+      "accepted_proposals": 13,
+      "rejected_proposals": 15
+    },
+    "PILOT-002": {
+      "packets": 9,
+      "accepted_proposals": 13,
+      "rejected_proposals": 13
+    },
+    "PILOT-003": {
+      "packets": 9,
+      "accepted_proposals": 20,
+      "rejected_proposals": 14
+    }
+  },
   "schema_failures": [
     {
       "packet_id": "PILOT-003:unused-evidence:001",
@@ -64,7 +94,7 @@
   ],
   "safety": {
     "gold_leakage": 0,
-    "accepted_unsupported_or_invented_fact": 0,
+    "accepted_unsupported_or_invented_fact": 9,
     "accepted_wrong_relationship": 0,
     "three_consecutive_systemic_failures": 0,
     "production_writes": 0,
