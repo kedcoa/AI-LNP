@@ -20,6 +20,13 @@ _REQUIRED_PROPOSAL_FIELDS = {
 }
 _OPTIONAL_PROPOSAL_FIELDS = {"record_id", "fact_id", "entity_ids", "arm_id"}
 _PROPOSAL_TYPES = {"add_fact", "replace_fact", "flag_record"}
+_DIMENSIONLESS_NUMERIC_FIELDS = {
+    "animal_count",
+    "count",
+    "p_value",
+    "replicate_count",
+    "sample_size",
+}
 _MEASUREMENT = re.compile(
     r"(?<![A-Za-z0-9])(?P<number>[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)"
     r"(?![A-Za-z0-9])(?:\s*(?P<unit>[A-Za-zµμ%][A-Za-zµμ%0-9/^.-]*))?"
@@ -137,10 +144,18 @@ def _measurements(value: str) -> list[tuple[str, str | None]]:
     ]
 
 
-def _numeric_values_supported(raw_values: Sequence[str], quote: str) -> bool:
+def _numeric_values_supported(
+    raw_values: Sequence[str], quote: str, field_name: str
+) -> bool:
     quote_measurements = _measurements(quote)
     for raw_value in raw_values:
         for number, unit in _measurements(raw_value):
+            if unit is None:
+                if field_name not in _DIMENSIONLESS_NUMERIC_FIELDS:
+                    return False
+                if re.search(rf"(?<![A-Za-z0-9_-]){re.escape(number)}(?![A-Za-z0-9_-])", quote) is None:
+                    return False
+                continue
             if not any(
                 number == quoted_number
                 and unit == quoted_unit
@@ -208,9 +223,14 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
         issued = packet.get("issued_ids")
         arm_links = issued.get("arm_links") if isinstance(issued, Mapping) else None
         arm_link = arm_links.get(arm_id) if isinstance(arm_links, Mapping) else None
-        if isinstance(arm_link, Mapping) and (
-            arm_link.get("experiment_id") != experiment_id
-            or arm_link.get("candidate_id") != candidate_id
+        if not isinstance(arm_link, Mapping) or not all(
+            isinstance(arm_link.get(name), str)
+            for name in ("experiment_id", "candidate_id")
+        ):
+            reasons.append("invalid_arm_link")
+        elif (
+            arm_link["experiment_id"] != experiment_id
+            or arm_link["candidate_id"] != candidate_id
         ):
             reasons.append("wrong_arm_link")
 
@@ -230,7 +250,9 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
         excerpt = row["excerpt"]
         if quote in excerpt:
             has_quote_match = True
-            if _numeric_values_supported(proposal["raw_values"], quote):
+            if _numeric_values_supported(
+                proposal["raw_values"], quote, proposal["field_name"]
+            ):
                 supporters.append(evidence_id)
     if not has_quote_match:
         reasons.append("quote_mismatch")

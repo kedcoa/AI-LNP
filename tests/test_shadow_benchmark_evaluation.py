@@ -155,6 +155,23 @@ def test_classify_result_does_not_hide_full_to_partial_with_equal_aggregate_coun
     assert classify_result(_result(automated_full=40), after, {}) != "works"
 
 
+def test_classify_result_does_not_hide_automated_requirement_regression():
+    after = _result(
+        automated_full=45,
+        recovered_partial_or_absent=2,
+        deterministic_undercounts_recovered=6,
+    )
+    after["evidence_statuses"]["REQ-058"] = "full"
+    after["evidence_statuses"]["REQ-059"] = "full"
+    after["evidence_full"] = 59
+    after["evidence_partial"] = 1
+    after["automated_statuses"]["REQ-001"] = False
+    for requirement_id in [f"REQ-{number:03d}" for number in range(41, 47)]:
+        after["automated_statuses"][requirement_id] = True
+
+    assert classify_result(_result(automated_full=40), after, {}) != "works"
+
+
 @pytest.mark.parametrize(
     "before",
     [

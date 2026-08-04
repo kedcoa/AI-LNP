@@ -36,7 +36,10 @@ def test_build_audit_packets_includes_shared_paper_facts_with_issued_evidence(pa
 
     assert packet["packet_id"] == "PILOT-900:shared-paper"
     assert packet["packet_type"] == "shared_paper"
-    assert packet["current_merged_facts"] == replayed["shared_facts"]
+    assert [
+        {key: value for key, value in fact.items() if key not in {"record_id", "fact_id", "entity_ids"}}
+        for fact in packet["current_merged_facts"]
+    ] == replayed["shared_facts"]
     assert packet["issued_ids"]["evidence_ids"] == ["EV-shared"]
 
 
@@ -49,7 +52,13 @@ def test_build_audit_packets_scopes_each_experiment_to_its_issued_ids(packet_inp
 
     assert packet["packet_id"] == "PILOT-900:experiment:EXP-900-1"
     assert packet["packet_type"] == "experiment"
-    assert packet["current_merged_facts"] == replayed["experiments"][0]
+    assert {
+        **{key: value for key, value in packet["current_merged_facts"].items() if key != "facts"},
+        "facts": [
+            {key: value for key, value in fact.items() if key not in {"record_id", "fact_id", "entity_ids"}}
+            for fact in packet["current_merged_facts"]["facts"]
+        ],
+    } == replayed["experiments"][0]
     assert packet["issued_ids"]["experiment_ids"] == ["EXP-900-1"]
     assert packet["issued_ids"]["candidate_ids"] == ["PEC-900-1"]
     assert packet["issued_ids"]["evidence_ids"] == ["EV-experiment"]
@@ -167,7 +176,10 @@ def test_build_audit_packets_projects_only_scientific_current_facts(packet_input
 
     packets = build_audit_packets(replayed, evidence)
 
-    assert packets[0]["current_merged_facts"] == [
+    assert [
+        {key: value for key, value in fact.items() if key not in {"record_id", "fact_id", "entity_ids"}}
+        for fact in packets[0]["current_merged_facts"]
+    ] == [
         {
             "field_name": "formulation.lipid",
             "canonical_value": "Lipid A",
@@ -175,7 +187,13 @@ def test_build_audit_packets_projects_only_scientific_current_facts(packet_input
             "evidence_ids": ["EV-shared"],
         }
     ]
-    assert packets[1]["current_merged_facts"] == {
+    assert {
+        **{key: value for key, value in packets[1]["current_merged_facts"].items() if key != "facts"},
+        "facts": [
+            {key: value for key, value in fact.items() if key not in {"record_id", "fact_id", "entity_ids"}}
+            for fact in packets[1]["current_merged_facts"]["facts"]
+        ],
+    } == {
         "experiment_id": "EXP-900-1",
         "candidate_id": "PEC-900-1",
         "facts": [
@@ -296,6 +314,30 @@ def test_build_audit_packets_includes_proposal_only_output_contract(packet_input
     assert schema["additionalProperties"] is False
     assert "observations" not in schema["properties"]
     assert "findings" not in schema["properties"]
+
+
+def test_build_audit_packets_issues_stable_target_and_arm_namespaces(packet_inputs):
+    replayed, evidence = packet_inputs
+
+    first = build_audit_packets(replayed, evidence)[1]
+    repeated = build_audit_packets(replayed, evidence)[1]
+    proposal_schema = first["output_schema"]["properties"]["proposals"]["items"]
+
+    assert first["issued_ids"]["record_ids"] == repeated["issued_ids"]["record_ids"]
+    assert first["issued_ids"]["fact_ids"] == repeated["issued_ids"]["fact_ids"]
+    assert first["issued_ids"]["entity_ids"] == repeated["issued_ids"]["entity_ids"]
+    assert first["issued_ids"]["arm_ids"] == repeated["issued_ids"]["arm_ids"]
+    assert first["issued_ids"]["arm_links"] == repeated["issued_ids"]["arm_links"]
+    fact = first["current_merged_facts"]["facts"][0]
+    assert fact["record_id"] in first["issued_ids"]["record_ids"]
+    assert fact["fact_id"] in first["issued_ids"]["fact_ids"]
+    assert first["issued_ids"]["arm_links"][first["issued_ids"]["arm_ids"][0]] == {
+        "experiment_id": "EXP-900-1",
+        "candidate_id": "PEC-900-1",
+    }
+    assert {"record_id", "fact_id", "entity_ids", "arm_id"} <= set(
+        proposal_schema["properties"]
+    )
 
 
 def test_build_audit_packets_rejects_duplicate_full_evidence_before_excerpt_truncation(

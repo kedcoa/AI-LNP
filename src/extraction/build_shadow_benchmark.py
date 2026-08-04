@@ -7,6 +7,7 @@ import hashlib
 import json
 from collections import Counter
 from collections.abc import Callable, Mapping, Sequence
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -94,7 +95,23 @@ AUDIT_PACKET_OUTPUT_SCHEMA = {
                         "items": {"type": "string"},
                     },
                     "quoted_support": {"type": "string", "minLength": 1},
+                    "record_id": {"type": "string", "minLength": 1},
+                    "fact_id": {"type": "string", "minLength": 1},
+                    "entity_ids": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "arm_id": {"type": "string", "minLength": 1},
                 },
+                "allOf": [
+                    {
+                        "if": {
+                            "properties": {"proposal_type": {"const": "replace_fact"}}
+                        },
+                        "then": {"required": ["record_id", "fact_id"]},
+                    }
+                ],
             },
         },
         "unresolved_reason": {"type": ["string", "null"]},
@@ -237,13 +254,49 @@ def _issued_ids(
     experiment_ids: Sequence[str],
     candidate_ids: Sequence[str],
     evidence_ids: Sequence[str],
-) -> dict[str, list[str]]:
-    return {
+    current_merged_facts: Any,
+) -> dict[str, Any]:
+    def target_ids(value: Any, key: str) -> list[str]:
+        found: list[str] = []
+        if isinstance(value, Mapping):
+            candidate = value.get(key)
+            if isinstance(candidate, str) and candidate not in found:
+                found.append(candidate)
+            if key == "entity_ids" and isinstance(candidate, list):
+                for item in candidate:
+                    if isinstance(item, str) and item not in found:
+                        found.append(item)
+            for child in value.values():
+                for item in target_ids(child, key):
+                    if item not in found:
+                        found.append(item)
+        elif isinstance(value, list):
+            for child in value:
+                for item in target_ids(child, key):
+                    if item not in found:
+                        found.append(item)
+        return found
+
+    issued: dict[str, Any] = {
         "paper_ids": [paper_id],
         "experiment_ids": list(experiment_ids),
         "candidate_ids": list(candidate_ids),
         "evidence_ids": list(evidence_ids),
+        "record_ids": target_ids(current_merged_facts, "record_id"),
+        "fact_ids": target_ids(current_merged_facts, "fact_id"),
+        "entity_ids": target_ids(current_merged_facts, "entity_ids"),
+        "arm_ids": [],
+        "arm_links": {},
     }
+    if len(experiment_ids) == len(candidate_ids):
+        for experiment_id, candidate_id in zip(experiment_ids, candidate_ids):
+            arm_id = f"ARM-{_sha_bytes(_canonical([paper_id, experiment_id, candidate_id]).encode())[:16]}"
+            issued["arm_ids"].append(arm_id)
+            issued["arm_links"][arm_id] = {
+                "experiment_id": experiment_id,
+                "candidate_id": candidate_id,
+            }
+    return issued
 
 
 def _seal_packet(packet: dict[str, Any]) -> dict[str, Any]:
@@ -281,6 +334,7 @@ def _build_packet(
                 experiment_ids=experiment_ids,
                 candidate_ids=candidate_ids,
                 evidence_ids=evidence_ids,
+                current_merged_facts=current_merged_facts,
             ),
             "current_merged_facts": current_merged_facts,
             "evidence": _packet_evidence(evidence_by_id, evidence_ids),
@@ -316,7 +370,75 @@ def _project_fact(
         if value is not None:
             projected[key] = value
     projected["evidence_ids"] = selected_evidence_ids
+    for key in ("record_id", "fact_id", "entity_ids"):
+        if key in fact:
+            projected[key] = fact[key]
     return projected
+
+
+def _stable_target_id(prefix: str, value: Any) -> str:
+    return f"{prefix}-{_sha_bytes(_canonical(value).encode())[:16]}"
+
+
+def _issue_replayed_target_ids(replayed: Mapping[str, Any]) -> dict[str, Any]:
+    """Copy replayed facts and attach deterministic model-visible target IDs."""
+
+    issued = deepcopy(dict(replayed))
+    paper_id = issued.get("paper_id")
+    if not isinstance(paper_id, str):
+        raise ValueError("replayed paper is missing paper_id")
+
+    def issue_facts(facts: Any, record_id: str) -> None:
+        if not isinstance(facts, list):
+            raise ValueError("replayed facts must be a list")
+        for fact in facts:
+            if not isinstance(fact, dict):
+                raise ValueError("replayed facts must contain objects")
+            field_name = fact.get("field_name")
+            if not isinstance(field_name, str):
+                raise ValueError("replayed facts require field_name")
+            fact.setdefault("record_id", record_id)
+            fact.setdefault(
+                "fact_id",
+                _stable_target_id(
+                    "FACT",
+                    [
+                        paper_id,
+                        record_id,
+                        field_name,
+                        fact.get("canonical_value"),
+                        fact.get("raw_values"),
+                        fact.get("evidence_ids"),
+                    ],
+                ),
+            )
+            fact.setdefault(
+                "entity_ids",
+                [
+                    _stable_target_id(
+                        "ENT",
+                        [paper_id, record_id, field_name, fact.get("canonical_value")],
+                    )
+                ],
+            )
+
+    shared_record_id = _stable_target_id("REC", [paper_id, "shared"])
+    issue_facts(issued.get("shared_facts"), shared_record_id)
+    experiments = issued.get("experiments")
+    if not isinstance(experiments, list):
+        raise ValueError("replayed paper is missing experiments")
+    for experiment in experiments:
+        if not isinstance(experiment, dict):
+            raise ValueError("replayed experiments must contain objects")
+        experiment_id = experiment.get("experiment_id")
+        if not isinstance(experiment_id, str):
+            raise ValueError("replayed experiments require experiment_id")
+        candidate_id = experiment.get("candidate_id")
+        record_id = _stable_target_id(
+            "REC", [paper_id, experiment_id, candidate_id if isinstance(candidate_id, str) else None]
+        )
+        issue_facts(experiment.get("facts"), record_id)
+    return issued
 
 
 def _project_facts(
@@ -486,6 +608,7 @@ def build_audit_packets(
 ) -> list[dict[str, Any]]:
     """Build bounded, gold-blind audit packets for one replayed paper."""
 
+    replayed = _issue_replayed_target_ids(replayed)
     paper_id = replayed.get("paper_id")
     shared_facts = replayed.get("shared_facts")
     experiments = replayed.get("experiments")

@@ -247,3 +247,28 @@ def test_validator_rejects_known_arm_linked_to_a_different_candidate(packet, pro
 
     assert validation["accepted"] is False
     assert "wrong_arm_link" in validation["rejection_reasons"]
+
+
+def test_validator_rejects_known_arm_without_a_resolvable_issued_link(packet, proposal):
+    proposed = deepcopy(proposal)
+    proposed["arm_id"] = "ARM-900-1"
+    packet = deepcopy(packet)
+    del packet["issued_ids"]["arm_links"]
+
+    validation = validate_proposal(proposed, packet)
+
+    assert validation["accepted"] is False
+    assert "invalid_arm_link" in validation["rejection_reasons"]
+
+
+def test_validator_rejects_unitless_dose_number_matching_only_an_identifier(packet, proposal):
+    proposed = deepcopy(proposal)
+    proposed["raw_values"] = ["1"]
+    proposed["quoted_support"] = "Experiment EXP-900-1 used a dose of 2 mg/kg."
+    packet = deepcopy(packet)
+    packet["evidence"][0]["excerpt"] = proposed["quoted_support"]
+
+    validation = validate_proposal(proposed, packet)
+
+    assert validation["accepted"] is False
+    assert "unsupported_exact_number" in validation["rejection_reasons"]

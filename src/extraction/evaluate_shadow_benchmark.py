@@ -128,6 +128,10 @@ def classify_result(
         >= _EVIDENCE_STATUSES[before_status]
         for requirement_id, before_status in before_evidence.items()
     )
+    no_automated_regression = all(
+        not before_automated[requirement_id] or after_automated[requirement_id]
+        for requirement_id in before_automated
+    )
     recovered_partial_or_absent = sum(
         before_status in {"partial", "absent"}
         and after_evidence[requirement_id] == "full"
@@ -156,7 +160,12 @@ def classify_result(
             and deterministic_undercounts_recovered >= 5
         )
     )
-    if after_score >= 45 and no_evidence_regression and recovery_gate:
+    if (
+        after_score >= 45
+        and no_evidence_regression
+        and no_automated_regression
+        and recovery_gate
+    ):
         return "works"
     return "promising_but_inconclusive"
 
