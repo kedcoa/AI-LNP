@@ -6,7 +6,7 @@ import argparse
 import hashlib
 import json
 from collections import Counter
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -53,6 +53,73 @@ AUDIT_PACKET_ABSTENTION = (
 MAX_AUDIT_PACKET_CHARACTERS = 45_000
 MAX_AUDIT_PACKET_EVIDENCE_ITEMS = 15
 MAX_AUDIT_EVIDENCE_EXCERPT_CHARACTERS = 1_800
+AUDIT_PACKET_OUTPUT_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": ["disposition", "proposals", "unresolved_reason"],
+    "properties": {
+        "disposition": {"type": "string", "enum": ["proposals", "abstained"]},
+        "proposals": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "required": [
+                    "proposal_id",
+                    "proposal_type",
+                    "experiment_id",
+                    "candidate_id",
+                    "field_name",
+                    "raw_values",
+                    "evidence_ids",
+                    "quoted_support",
+                ],
+                "properties": {
+                    "proposal_id": {"type": "string", "minLength": 1},
+                    "proposal_type": {
+                        "type": "string",
+                        "enum": ["add_fact", "replace_fact", "flag_record"],
+                    },
+                    "experiment_id": {"type": ["string", "null"]},
+                    "candidate_id": {"type": ["string", "null"]},
+                    "field_name": {"type": "string", "minLength": 1},
+                    "raw_values": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {"type": "string"},
+                    },
+                    "evidence_ids": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {"type": "string"},
+                    },
+                    "quoted_support": {"type": "string", "minLength": 1},
+                },
+            },
+        },
+        "unresolved_reason": {"type": ["string", "null"]},
+    },
+    "allOf": [
+        {
+            "if": {"properties": {"disposition": {"const": "proposals"}}},
+            "then": {
+                "properties": {
+                    "proposals": {"minItems": 1},
+                    "unresolved_reason": {"type": "null"},
+                }
+            },
+        },
+        {
+            "if": {"properties": {"disposition": {"const": "abstained"}}},
+            "then": {
+                "properties": {
+                    "proposals": {"maxItems": 0},
+                    "unresolved_reason": {"type": "string", "minLength": 1},
+                }
+            },
+        },
+    ],
+}
 
 
 def _canonical(value: Any) -> str:
@@ -121,9 +188,9 @@ def _evidence_lookup(evidence: Sequence[Mapping[str, Any]]) -> dict[str, dict[st
         text = row.get("text")
         if not isinstance(evidence_id, str) or not isinstance(text, str):
             raise ValueError("audit packet evidence requires string evidence_id and text")
-        normalized = {
+        full_normalized = {
             "evidence_id": evidence_id,
-            "excerpt": _excerpt(text),
+            "text": text,
             "source": row.get("source"),
             "page_number": row.get("page_number"),
             "heading": row.get("heading"),
@@ -131,9 +198,18 @@ def _evidence_lookup(evidence: Sequence[Mapping[str, Any]]) -> dict[str, dict[st
             "used_by_merged_records": row.get("used_by_merged_records") is True,
         }
         existing = by_id.get(evidence_id)
-        if existing is not None and existing != normalized:
+        if existing is not None and existing["_full"] != full_normalized:
             raise ValueError(f"conflicting evidence inventory rows for {evidence_id}")
-        by_id[evidence_id] = normalized
+        by_id[evidence_id] = {
+            "evidence_id": evidence_id,
+            "excerpt": _excerpt(text),
+            "source": full_normalized["source"],
+            "page_number": full_normalized["page_number"],
+            "heading": full_normalized["heading"],
+            "table_or_figure": full_normalized["table_or_figure"],
+            "used_by_merged_records": full_normalized["used_by_merged_records"],
+            "_full": full_normalized,
+        }
     return by_id
 
 
@@ -145,7 +221,14 @@ def _packet_evidence(
     missing = [evidence_id for evidence_id in evidence_ids if evidence_id not in evidence_by_id]
     if missing:
         raise ValueError(f"audit packet references evidence absent from inventory: {missing[0]}")
-    return [dict(evidence_by_id[evidence_id]) for evidence_id in evidence_ids]
+    return [
+        {
+            key: value
+            for key, value in evidence_by_id[evidence_id].items()
+            if key != "_full"
+        }
+        for evidence_id in evidence_ids
+    ]
 
 
 def _issued_ids(
@@ -192,6 +275,7 @@ def _build_packet(
             "paper_id": paper_id,
             "instructions": AUDIT_PACKET_INSTRUCTIONS,
             "abstention": AUDIT_PACKET_ABSTENTION,
+            "output_schema": json.loads(_canonical(AUDIT_PACKET_OUTPUT_SCHEMA)),
             "issued_ids": _issued_ids(
                 paper_id,
                 experiment_ids=experiment_ids,
@@ -202,6 +286,199 @@ def _build_packet(
             "evidence": _packet_evidence(evidence_by_id, evidence_ids),
         }
     )
+
+
+def _project_fact(
+    fact: Mapping[str, Any],
+    allowed_evidence_ids: set[str] | None = None,
+    *,
+    include_evidence_free: bool = True,
+) -> dict[str, Any] | None:
+    field_name = fact.get("field_name")
+    if not isinstance(field_name, str):
+        raise ValueError("replayed facts require field_name")
+    fact_evidence_ids = _evidence_ids(fact)
+    if allowed_evidence_ids is not None:
+        selected_evidence_ids = [
+            evidence_id
+            for evidence_id in fact_evidence_ids
+            if evidence_id in allowed_evidence_ids
+        ]
+        if fact_evidence_ids and not selected_evidence_ids:
+            return None
+        if not fact_evidence_ids and not include_evidence_free:
+            return None
+    else:
+        selected_evidence_ids = fact_evidence_ids
+    projected: dict[str, Any] = {"field_name": field_name}
+    for key in ("canonical_value", "raw_values"):
+        value = fact.get(key)
+        if value is not None:
+            projected[key] = value
+    projected["evidence_ids"] = selected_evidence_ids
+    return projected
+
+
+def _project_facts(
+    facts: Any,
+    allowed_evidence_ids: set[str] | None = None,
+    *,
+    include_evidence_free: bool = True,
+) -> list[dict[str, Any]]:
+    if not isinstance(facts, list):
+        raise ValueError("replayed facts must be a list")
+    projected = [
+        _project_fact(
+            fact,
+            allowed_evidence_ids,
+            include_evidence_free=include_evidence_free,
+        )
+        for fact in facts
+        if isinstance(fact, Mapping)
+    ]
+    if len(projected) != len(facts):
+        raise ValueError("replayed facts must contain objects")
+    return [fact for fact in projected if fact is not None]
+
+
+def _project_experiment(
+    experiment: Mapping[str, Any],
+    allowed_evidence_ids: set[str] | None = None,
+    *,
+    include_evidence_free: bool = True,
+) -> dict[str, Any]:
+    experiment_id = experiment.get("experiment_id")
+    if not isinstance(experiment_id, str):
+        raise ValueError("replayed experiments require experiment_id")
+    projected = {
+        "experiment_id": experiment_id,
+        "facts": _project_facts(
+            experiment.get("facts"),
+            allowed_evidence_ids,
+            include_evidence_free=include_evidence_free,
+        ),
+    }
+    candidate_id = experiment.get("candidate_id")
+    if isinstance(candidate_id, str):
+        projected["candidate_id"] = candidate_id
+    return projected
+
+
+def _project_final_entry(
+    entry: Mapping[str, Any],
+    allowed_evidence_ids: set[str] | None = None,
+    *,
+    include_evidence_free: bool = True,
+) -> dict[str, Any] | None:
+    entry_evidence_ids = _evidence_ids(entry)
+    if allowed_evidence_ids is not None:
+        selected_evidence_ids = [
+            evidence_id
+            for evidence_id in entry_evidence_ids
+            if evidence_id in allowed_evidence_ids
+        ]
+        if entry_evidence_ids and not selected_evidence_ids:
+            return None
+        if not entry_evidence_ids and not include_evidence_free:
+            return None
+    else:
+        selected_evidence_ids = entry_evidence_ids
+    projected = {
+        key: entry[key]
+        for key in (
+            "conflict_id",
+            "finding_id",
+            "code",
+            "reason",
+            "message",
+            "severity",
+            "experiment_id",
+            "candidate_id",
+            "field_name",
+            "canonical_value",
+            "canonical_values",
+            "raw_values",
+        )
+        if key in entry
+    }
+    projected["evidence_ids"] = selected_evidence_ids
+    return projected
+
+
+def _project_final_entries(
+    entries: Any,
+    allowed_evidence_ids: set[str] | None = None,
+    *,
+    include_evidence_free: bool = True,
+) -> list[dict[str, Any]]:
+    if not isinstance(entries, list):
+        raise ValueError("final consistency entries must be a list")
+    projected = [
+        _project_final_entry(
+            entry,
+            allowed_evidence_ids,
+            include_evidence_free=include_evidence_free,
+        )
+        for entry in entries
+        if isinstance(entry, Mapping)
+    ]
+    if len(projected) != len(entries):
+        raise ValueError("final consistency entries must contain objects")
+    return [entry for entry in projected if entry is not None]
+
+
+def _evidence_chunks(evidence_ids: Sequence[str]) -> list[list[str]]:
+    if not evidence_ids:
+        return [[]]
+    return [
+        list(evidence_ids[index : index + MAX_AUDIT_PACKET_EVIDENCE_ITEMS])
+        for index in range(0, len(evidence_ids), MAX_AUDIT_PACKET_EVIDENCE_ITEMS)
+    ]
+
+
+def _build_scoped_packets(
+    *,
+    packet_id: str,
+    packet_type: str,
+    paper_id: str,
+    evidence_by_id: Mapping[str, dict[str, Any]],
+    evidence_ids: Sequence[str],
+    current_facts: Callable[[set[str], bool], Any],
+    experiment_ids: Sequence[str] = (),
+    candidate_ids: Sequence[str] = (),
+    always_index: bool = False,
+) -> list[dict[str, Any]]:
+    """Partition a complete scope until every serialized packet is bounded."""
+
+    chunks = _evidence_chunks(evidence_ids)
+    while True:
+        packets: list[dict[str, Any]] = []
+        for index, chunk in enumerate(chunks):
+            suffix = f":{index + 1:03d}" if always_index or len(chunks) > 1 else ""
+            try:
+                packets.append(
+                    _build_packet(
+                        packet_id=f"{packet_id}{suffix}",
+                        packet_type=packet_type,
+                        paper_id=paper_id,
+                        current_merged_facts=current_facts(set(chunk), index == 0),
+                        evidence_by_id=evidence_by_id,
+                        evidence_ids=chunk,
+                        experiment_ids=experiment_ids,
+                        candidate_ids=candidate_ids,
+                    )
+                )
+            except ValueError as exc:
+                if (
+                    str(exc) != "audit packet exceeds the 45,000-character limit"
+                    or len(chunk) <= 1
+                ):
+                    raise
+                midpoint = len(chunk) // 2
+                chunks[index : index + 1] = [chunk[:midpoint], chunk[midpoint:]]
+                break
+        else:
+            return packets
 
 
 def build_audit_packets(
@@ -218,16 +495,18 @@ def build_audit_packets(
         raise ValueError("replayed paper is missing shared_facts or experiments")
     assert_gold_blind(replayed)
     evidence_by_id = _evidence_lookup(evidence)
-    packets = [
-        _build_packet(
-            packet_id=f"{paper_id}:shared-paper",
-            packet_type="shared_paper",
-            paper_id=paper_id,
-            current_merged_facts=shared_facts,
-            evidence_by_id=evidence_by_id,
-            evidence_ids=_evidence_ids(shared_facts),
-        )
-    ]
+    packets = _build_scoped_packets(
+        packet_id=f"{paper_id}:shared-paper",
+        packet_type="shared_paper",
+        paper_id=paper_id,
+        evidence_by_id=evidence_by_id,
+        evidence_ids=_evidence_ids(shared_facts),
+        current_facts=lambda selected, first: _project_facts(
+            shared_facts,
+            selected,
+            include_evidence_free=first,
+        ),
+    )
     experiment_ids: list[str] = []
     for experiment in experiments:
         if not isinstance(experiment, Mapping) or not isinstance(
@@ -238,14 +517,18 @@ def build_audit_packets(
         candidate_id = experiment.get("candidate_id")
         candidate_ids = [candidate_id] if isinstance(candidate_id, str) else []
         experiment_ids.append(experiment_id)
-        packets.append(
-            _build_packet(
+        packets.extend(
+            _build_scoped_packets(
                 packet_id=f"{paper_id}:experiment:{experiment_id}",
                 packet_type="experiment",
                 paper_id=paper_id,
-                current_merged_facts=dict(experiment),
                 evidence_by_id=evidence_by_id,
                 evidence_ids=_evidence_ids(experiment),
+                current_facts=lambda selected, first, experiment=experiment: _project_experiment(
+                    experiment,
+                    selected,
+                    include_evidence_free=first,
+                ),
                 experiment_ids=[experiment_id],
                 candidate_ids=candidate_ids,
             )
@@ -255,36 +538,47 @@ def build_audit_packets(
         for row in evidence_by_id.values()
         if not row["used_by_merged_records"]
     ]
-    for index in range(0, len(unused_evidence), MAX_AUDIT_PACKET_EVIDENCE_ITEMS):
-        chunk = unused_evidence[index : index + MAX_AUDIT_PACKET_EVIDENCE_ITEMS]
-        packets.append(
-            _build_packet(
-                packet_id=f"{paper_id}:unused-evidence:{index // MAX_AUDIT_PACKET_EVIDENCE_ITEMS + 1:03d}",
-                packet_type="unused_evidence",
-                paper_id=paper_id,
-                current_merged_facts={
-                    "paper_id": paper_id,
-                    "experiment_ids": experiment_ids,
-                    "scope": "evidence not yet used by the merged records",
-                },
-                evidence_by_id=evidence_by_id,
-                evidence_ids=chunk,
-                experiment_ids=experiment_ids,
-            )
+    packets.extend(
+        _build_scoped_packets(
+            packet_id=f"{paper_id}:unused-evidence",
+            packet_type="unused_evidence",
+            paper_id=paper_id,
+            evidence_by_id=evidence_by_id,
+            evidence_ids=unused_evidence,
+            current_facts=lambda _selected, _first: {
+                "paper_id": paper_id,
+                "experiment_ids": experiment_ids,
+                "scope": "evidence not yet used by the merged records",
+            },
+            experiment_ids=experiment_ids,
+            always_index=True,
         )
+    )
     final_facts = {
         "quarantined_conflicts": replayed.get("quarantined_conflicts", []),
         "validation_findings": replayed.get("validation_findings", []),
         "experiment_ids": experiment_ids,
     }
-    packets.append(
-        _build_packet(
+    packets.extend(
+        _build_scoped_packets(
             packet_id=f"{paper_id}:final-consistency",
             packet_type="final_consistency",
             paper_id=paper_id,
-            current_merged_facts=final_facts,
             evidence_by_id=evidence_by_id,
             evidence_ids=_evidence_ids(final_facts),
+            current_facts=lambda selected, first: {
+                "quarantined_conflicts": _project_final_entries(
+                    final_facts["quarantined_conflicts"],
+                    selected,
+                    include_evidence_free=first,
+                ),
+                "validation_findings": _project_final_entries(
+                    final_facts["validation_findings"],
+                    selected,
+                    include_evidence_free=first,
+                ),
+                "experiment_ids": experiment_ids,
+            },
             experiment_ids=experiment_ids,
         )
     )
