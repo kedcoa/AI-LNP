@@ -36,10 +36,14 @@ The classification is evidence for the next engineering decision; it does not au
 
 Codex receives read-only inputs and returns proposals only. Every proposal is validated locally. Unsupported or malformed output is rejected without changing the baseline. Each attempted packet receives a terminal status. A CLI failure preserves the raw attempt and the original merged record. The benchmark makes zero new OpenAI API extraction calls.
 
-With concurrency two, the three-consecutive-systemic-failure breaker can have at
-most one terminal overshoot: one packet already issued alongside the third
-ordered failure may finish before issuance stops. No further packet is submitted
-after the breaker trips.
+The circuit breaker counts schema/runtime failures in completion-processing
+order, which is persisted on every new packet result. A success completion resets
+the streak. Submission stops immediately when the third consecutive systemic
+completion is processed. At concurrency two, at most one packet already in flight
+can finish afterward; no new packet is submitted after the breaker trips. Legacy
+retained runs without completion ordinals use their persisted result-list order.
+The sealed audit entrypoint and retained finalizer both require concurrency two,
+so this one-packet overshoot bound cannot be applied to a differently sized pool.
 
 ## Deliverables
 

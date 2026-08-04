@@ -19,6 +19,7 @@ from src.extraction.evaluate_application_requirements import (
 )
 from src.extraction.evaluate_shadow_benchmark import classify_result
 from src.extraction.replay_shadow_baseline import assert_gold_blind, replay_pilot_paper
+from src.extraction.run_shadow_benchmark import max_consecutive_systemic_failures
 from src.extraction.validate_shadow_audit import (
     merge_validated_proposals,
     validate_proposal,
@@ -178,6 +179,11 @@ def _canonical_sha256(value: Any) -> str:
     ).hexdigest()
 
 
+def _require_concurrency_two(run_manifest: Mapping[str, Any]) -> None:
+    if run_manifest.get("concurrency") != 2:
+        raise ValueError("sealed audit finalization requires concurrency exactly two")
+
+
 def _load_terminal_sealed_results(
     run_root: Path,
 ) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]]]:
@@ -210,6 +216,7 @@ def _load_terminal_sealed_results(
         raise ValueError(
             "hidden scoring is refused until all issued packets are terminal"
         )
+    _require_concurrency_two(run_manifest)
 
     expected_manifest_sha = _canonical_sha256(manifest_rows)
     if packet_manifest.get("manifest_sha256") != expected_manifest_sha:
@@ -279,6 +286,7 @@ def _load_terminal_sealed_results(
                 "raw_jsonl_paths",
                 "stderr_paths",
                 "last_message_paths",
+                "completion_order",
             }
         }:
             raise ValueError("aggregate result differs from terminal attempt")
@@ -406,6 +414,51 @@ def _promote_evidence_statuses(
         promoted,
         len(recovered),
         sum(before_evidence[item] == "absent" for item in recovered),
+    )
+
+
+def _safety_from_results(
+    results: Sequence[Mapping[str, Any]],
+    *,
+    production_writes: Any,
+    paid_api_requests: Any,
+) -> dict[str, int]:
+    """Derive retained-run safety counters from persisted terminal ordering."""
+
+    return {
+        "gold_leakage": 0,
+        "accepted_unsupported_or_invented_fact": 0,
+        "accepted_wrong_relationship": 0,
+        "three_consecutive_systemic_failures": (
+            max_consecutive_systemic_failures(results)
+        ),
+        "production_writes": (
+            production_writes
+            if isinstance(production_writes, int)
+            and not isinstance(production_writes, bool)
+            else 0
+        ),
+        "paid_api_requests": (
+            paid_api_requests
+            if isinstance(paid_api_requests, int)
+            and not isinstance(paid_api_requests, bool)
+            else 0
+        ),
+    }
+
+
+def _model_telemetry_prose(telemetry: Mapping[str, Any]) -> str:
+    selector = telemetry.get("selector")
+    actual_model = telemetry.get("actual_model")
+    cli_version = telemetry.get("codex_cli_version")
+    if isinstance(actual_model, str) and actual_model:
+        return (
+            f"Resolved model `{actual_model}`; selector `{selector}`; "
+            f"CLI `{cli_version}`."
+        )
+    return (
+        f"Model telemetry unavailable: selector `{selector}`; CLI `{cli_version}`. "
+        f"Reason: {telemetry.get('reason')}"
     )
 
 
@@ -564,14 +617,11 @@ def finalize_retained_run(
     mismatch_only_count = sum(
         row["reason_codes"] == ["posthoc_raw_value_mismatch"] for row in ledger
     )
-    safety = {
-        "gold_leakage": 0,
-        "accepted_unsupported_or_invented_fact": 0,
-        "accepted_wrong_relationship": 0,
-        "three_consecutive_systemic_failures": 0,
-        "production_writes": run_manifest.get("production_writes", 0),
-        "paid_api_requests": run_manifest.get("paid_api_requests", 0),
-    }
+    safety = _safety_from_results(
+        results,
+        production_writes=run_manifest.get("production_writes", 0),
+        paid_api_requests=run_manifest.get("paid_api_requests", 0),
+    )
     decision = classify_result(before, after, safety)
     before_arms, total_arms = _complete_arms(cached_score, bindings)
     after_arms, after_total_arms = _complete_arms(audited_score, bindings)
@@ -625,9 +675,17 @@ def finalize_retained_run(
         },
         "safety": safety,
         "concurrency_two_circuit_breaker": {
+            "ordering": "persisted_completion_order",
             "consecutive_failure_threshold": 3,
             "maximum_terminal_overshoot": 1,
-            "reason": "one already-issued packet may finish after the third ordered failure",
+            "observed_maximum_consecutive_systemic_failures": safety[
+                "three_consecutive_systemic_failures"
+            ],
+            "tripped": safety["three_consecutive_systemic_failures"] >= 3,
+            "reason": (
+                "submission stops on the third systemic completion; one packet "
+                "already in flight may still finish"
+            ),
         },
     }
     evaluation = {
@@ -668,6 +726,7 @@ def finalize_retained_run(
 
     automated_delta = audited_score.matched_reference_count - cached_score.matched_reference_count
     recovery_label = "recovery" if automated_delta == 1 else "recoveries"
+    telemetry_prose = _model_telemetry_prose(telemetry)
     decision_text = f"""# Codex auditor benchmark decision
 
 Run: `{sanitized_summary['run_id']}`
@@ -678,7 +737,7 @@ The canonical bound scorer reproduces 40/62 for both the untouched cached extrac
 
 Strict validation accepted {raw_summary['proposal_accounting']['accepted']} of {raw_summary['proposal_accounting']['proposed']} proposals and rejected {raw_summary['proposal_accounting']['rejected']}. Exact rejection-reason counts are recorded in `audit_summary.json` and proposal-level decisions in `proposal_ledger.json`. The {mismatch_only_count} proposals rejected solely for literal raw-value mismatch are conservatively classified as `posthoc_raw_value_mismatch`; literal mismatch is not counted as a hard safety failure or proof of unsupported science.
 
-All {len(results)} issued packets were terminal before hidden gold was loaded. Model telemetry is unavailable: selector `{selector}`, CLI `{codex_cli_version}`; Codex JSONL did not report the resolved model. Retained usage was {usage['input_tokens']:,} input, {usage['output_tokens']:,} output, and {usage['cached_input_tokens']:,} cached-input tokens across {usage['attempt_count']} attempts, with {usage['latency_seconds']:.3f} aggregate seconds. No new provider or model calls were made by this finalizer.
+All {len(results)} issued packets were terminal before hidden gold was loaded. {telemetry_prose} Retained usage was {usage['input_tokens']:,} input, {usage['output_tokens']:,} output, and {usage['cached_input_tokens']:,} cached-input tokens across {usage['attempt_count']} attempts, with {usage['latency_seconds']:.3f} aggregate seconds. No new provider or model calls were made by this finalizer.
 """
     (output_root / "decision.md").write_text(decision_text, encoding="utf-8")
     if decision in {"works", "promising_but_inconclusive"}:

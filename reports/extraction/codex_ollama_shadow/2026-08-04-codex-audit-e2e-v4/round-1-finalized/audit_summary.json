@@ -55,13 +55,16 @@
     "gold_leakage": 0,
     "accepted_unsupported_or_invented_fact": 0,
     "accepted_wrong_relationship": 0,
-    "three_consecutive_systemic_failures": 0,
+    "three_consecutive_systemic_failures": 1,
     "production_writes": 0,
     "paid_api_requests": 0
   },
   "concurrency_two_circuit_breaker": {
+    "ordering": "persisted_completion_order",
     "consecutive_failure_threshold": 3,
     "maximum_terminal_overshoot": 1,
-    "reason": "one already-issued packet may finish after the third ordered failure"
+    "observed_maximum_consecutive_systemic_failures": 1,
+    "tripped": false,
+    "reason": "submission stops on the third systemic completion; one packet already in flight may still finish"
   }
 }

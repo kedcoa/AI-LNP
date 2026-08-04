@@ -5,6 +5,8 @@ import threading
 import time
 from pathlib import Path
 
+import pytest
+
 from src.extraction import run_shadow_benchmark as benchmark_runner
 from src.extraction.run_shadow_benchmark import (
     parse_codex_jsonl,
@@ -442,6 +444,61 @@ def test_concurrency_two_circuit_breaker_has_at_most_one_terminal_overshoot(
     assert 3 <= len(results) <= 4
     assert all(row["terminal_disposition"] == "schema_failure" for row in results)
     assert len(results) + len(unattempted) == len(packets_and_schemas)
+
+
+def test_slow_first_packet_cannot_hide_three_fast_completion_order_failures(
+    tmp_path,
+):
+    packets_and_schemas = [
+        _packet_and_schema(tmp_path, f"packet-{number}") for number in range(8)
+    ]
+    three_fast_failures = threading.Event()
+    lock = threading.Lock()
+    fast_failure_count = 0
+
+    def slow_first_runner(command, **kwargs):
+        nonlocal fast_failure_count
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        if "packet-0.codex_exec" in str(output_path):
+            assert three_fast_failures.wait(timeout=2)
+            time.sleep(0.05)
+            output_path.write_text(_fixture("valid_final.json"), encoding="utf-8")
+        else:
+            output_path.write_text(
+                _fixture("malformed_final.json"), encoding="utf-8"
+            )
+            with lock:
+                fast_failure_count += 1
+                if fast_failure_count == 3:
+                    three_fast_failures.set()
+        return subprocess.CompletedProcess(command, 0, _fixture("success.jsonl"), "")
+
+    results, unattempted = run_codex_packets(
+        packets_and_schemas,
+        timeout_seconds=30,
+        concurrency=2,
+        runner=slow_first_runner,
+    )
+
+    assert len(results) == 4
+    assert len(unattempted) == 4
+    completion_order = sorted(results, key=lambda row: row["completion_order"])
+    assert [row["terminal_disposition"] for row in completion_order[:3]] == [
+        "schema_failure",
+        "schema_failure",
+        "schema_failure",
+    ]
+    assert completion_order[3]["terminal_disposition"] == "accepted"
+
+
+def test_sealed_audit_benchmark_requires_concurrency_two(tmp_path):
+    with pytest.raises(ValueError, match="concurrency exactly two"):
+        run_audit_packet_benchmark(
+            [_sealed_packet()],
+            run_root=tmp_path / "audit",
+            timeout_seconds=30,
+            concurrency=3,
+        )
 
 
 def test_run_codex_packets_executes_at_most_two_packets_concurrently(tmp_path):

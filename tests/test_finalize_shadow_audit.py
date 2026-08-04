@@ -9,10 +9,14 @@ import pytest
 from src.extraction.build_shadow_benchmark import build_audit_packets
 from src.extraction.finalize_shadow_audit import finalize_audit_results
 from src.extraction.finalize_shadow_audit import (
+    _model_telemetry_prose,
     _promote_evidence_statuses,
+    _require_concurrency_two,
+    _safety_from_results,
     build_proposal_ledger,
     finalize_retained_run,
 )
+from src.extraction.evaluate_shadow_benchmark import classify_result
 
 
 def _packet() -> dict:
@@ -325,3 +329,54 @@ def test_nonaccepted_terminal_result_never_applies_embedded_proposals(tmp_path):
 
     assert summary["proposal_accounting"]["proposed"] == 0
     assert audited["PILOT-900"]["experiments"][0]["facts"] == []
+
+
+def test_persisted_three_failure_completion_streak_forces_does_not_work():
+    results = [
+        {"completion_order": 4, "terminal_disposition": "accepted"},
+        {"completion_order": 1, "terminal_disposition": "schema_failure"},
+        {
+            "completion_order": 2,
+            "terminal_disposition": "timeout_or_runtime_failure",
+        },
+        {"completion_order": 3, "terminal_disposition": "schema_failure"},
+    ]
+
+    safety = _safety_from_results(results, production_writes=0, paid_api_requests=0)
+
+    assert safety["three_consecutive_systemic_failures"] == 3
+    assert classify_result({}, {}, safety) == "does_not_work"
+
+
+def test_model_telemetry_prose_reports_resolved_model_when_present():
+    prose = _model_telemetry_prose(
+        {
+            "selector": "hosted-default",
+            "actual_model": "gpt-5.6-codex",
+            "codex_cli_version": "codex-cli 1.2.3",
+            "reason": "Resolved model was reported.",
+        }
+    )
+
+    assert "Resolved model `gpt-5.6-codex`" in prose
+    assert "unavailable" not in prose.casefold()
+    assert "Codex JSONL did not report" not in prose
+
+
+def test_model_telemetry_prose_reports_reason_only_when_model_is_absent():
+    prose = _model_telemetry_prose(
+        {
+            "selector": "hosted-default",
+            "actual_model": None,
+            "codex_cli_version": "codex-cli 1.2.3",
+            "reason": "Codex JSONL did not report the resolved model.",
+        }
+    )
+
+    assert "Model telemetry unavailable" in prose
+    assert "Codex JSONL did not report the resolved model." in prose
+
+
+def test_retained_finalizer_rejects_non_two_concurrency_manifest():
+    with pytest.raises(ValueError, match="concurrency exactly two"):
+        _require_concurrency_two({"concurrency": 3})

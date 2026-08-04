@@ -9,9 +9,10 @@ import math
 import subprocess
 import urllib.request
 from collections.abc import Iterable, Mapping, Sequence
-from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
+from concurrent.futures import Future, ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
+from queue import Queue
 from time import monotonic
 from typing import Any, Callable
 
@@ -393,7 +394,6 @@ def run_codex_packets(
     )
     results_by_index: dict[int, dict[str, Any]] = {}
     next_index = 0
-    checked_index = 0
     consecutive_systemic_failures = 0
     breaker_tripped = False
 
@@ -402,6 +402,7 @@ def run_codex_packets(
 
     with ThreadPoolExecutor(max_workers=concurrency) as executor:
         pending: dict[Future[dict[str, Any]], int] = {}
+        completion_queue: Queue[tuple[int, Future[dict[str, Any]]]] = Queue()
 
         def submit_available() -> None:
             nonlocal next_index
@@ -421,24 +422,27 @@ def run_codex_packets(
                     deadline_monotonic=deadline,
                 )
                 pending[future] = next_index
+                future.add_done_callback(
+                    lambda completed, index=next_index: completion_queue.put(
+                        (index, completed)
+                    )
+                )
                 next_index += 1
 
         submit_available()
         while pending:
-            completed, _ = wait(pending, return_when=FIRST_COMPLETED)
-            for future in completed:
-                index = pending.pop(future)
-                results_by_index[index] = future.result()
-            while checked_index in results_by_index:
-                disposition = results_by_index[checked_index]["terminal_disposition"]
-                if disposition in {"schema_failure", "timeout_or_runtime_failure"}:
-                    consecutive_systemic_failures += 1
-                else:
-                    consecutive_systemic_failures = 0
-                checked_index += 1
-                if consecutive_systemic_failures == 3:
-                    breaker_tripped = True
-                    break
+            index, future = completion_queue.get()
+            pending.pop(future)
+            result = future.result()
+            result["completion_order"] = len(results_by_index) + 1
+            results_by_index[index] = result
+            disposition = result["terminal_disposition"]
+            if disposition in {"schema_failure", "timeout_or_runtime_failure"}:
+                consecutive_systemic_failures += 1
+            else:
+                consecutive_systemic_failures = 0
+            if consecutive_systemic_failures == 3:
+                breaker_tripped = True
             submit_available()
 
     results = [results_by_index[index] for index in sorted(results_by_index)]
@@ -448,6 +452,49 @@ def run_codex_packets(
         if index not in results_by_index
     ]
     return results, unattempted
+
+
+def max_consecutive_systemic_failures(
+    results: Sequence[Mapping[str, Any]],
+) -> int:
+    """Return the maximum failure streak in persisted completion order.
+
+    New runs persist a one-based ``completion_order`` on every result. Retained
+    legacy runs without that field use their persisted result-list ordering.
+    Partially present, duplicate, or non-contiguous completion orders are invalid.
+    """
+
+    completion_orders = [result.get("completion_order") for result in results]
+    if all(order is None for order in completion_orders):
+        ordered = list(results)
+    elif (
+        not all(
+            isinstance(order, int) and not isinstance(order, bool)
+            for order in completion_orders
+        )
+        or sorted(completion_orders) != list(range(1, len(results) + 1))
+    ):
+        raise ValueError("persisted completion orders must be unique and contiguous")
+    else:
+        ordered = [
+            result
+            for _, result in sorted(
+                zip(completion_orders, results, strict=True),
+                key=lambda item: item[0],
+            )
+        ]
+
+    maximum = current = 0
+    for result in ordered:
+        if result.get("terminal_disposition") in {
+            "schema_failure",
+            "timeout_or_runtime_failure",
+        }:
+            current += 1
+            maximum = max(maximum, current)
+        else:
+            current = 0
+    return maximum
 
 
 def _write_sealed_audit_packets(
@@ -522,6 +569,8 @@ def run_audit_packet_benchmark(
 ) -> tuple[list[dict[str, Any]], list[Path]]:
     """Persist sealed packets and execute them only through the JSONL runner."""
 
+    if concurrency != 2:
+        raise ValueError("sealed audit benchmark requires concurrency exactly two")
     packet_schemas = _write_sealed_audit_packets(packets, run_root)
     _write_gold_isolation_proof(packet_schemas)
     return run_codex_packets(
@@ -844,6 +893,9 @@ def main(*, packet_runner: PacketRunner = subprocess.run) -> None:
         unattempted_values = unattempted
         terminal_dispositions = [row.terminal_disposition for row in attempts]
         production_writes = sum(row.production_writes for row in attempts)
+    maximum_failure_streak = (
+        max_consecutive_systemic_failures(attempts) if route == "audit" else 0
+    )
     manifest = {
         "run_id": args.run_id,
         "route": route,
@@ -858,6 +910,19 @@ def main(*, packet_runner: PacketRunner = subprocess.run) -> None:
             disposition: terminal_dispositions.count(disposition)
             for disposition in sorted(set(terminal_dispositions))
         },
+        "circuit_breaker": (
+            {
+                "ordering": "persisted_completion_order",
+                "consecutive_systemic_failure_threshold": 3,
+                "maximum_consecutive_systemic_failures": maximum_failure_streak,
+                "tripped": maximum_failure_streak >= 3,
+                "maximum_post_trip_terminal_overshoot": max(
+                    0, args.concurrency - 1
+                ),
+            }
+            if route == "audit"
+            else None
+        ),
         "paid_api_requests": 0,
         "production_writes": production_writes,
     }
