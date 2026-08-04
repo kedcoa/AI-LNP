@@ -12,7 +12,7 @@ from src.extraction.build_shadow_benchmark import (
     build_gate_b_cases,
     write_case_manifest,
 )
-from src.extraction.shadow_benchmark_contracts import AttemptResult
+from src.extraction.shadow_benchmark_contracts import AttemptResult, AuditResponse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +65,15 @@ def test_attempt_rejects_non_sha256_source_digest():
 
     with pytest.raises(ValidationError, match="64 characters"):
         AttemptResult.model_validate(payload)
+
+
+def test_audit_observation_values_have_a_typed_output_schema():
+    schema = AuditResponse.model_json_schema()
+    observation = schema["$defs"]["AuditObservation"]
+
+    assert observation["properties"]["raw_values"]["items"] == {
+        "type": "string"
+    }
 
 
 def test_builds_three_pilot_audits_and_fourteen_text_gate_b_cases():

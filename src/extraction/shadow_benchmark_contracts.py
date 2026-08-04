@@ -53,7 +53,7 @@ class AuditObservation(StrictModel):
     observation_id: str = Field(min_length=1)
     experiment_id: str | None
     field_name: str = Field(min_length=1)
-    raw_values: list[Any] = Field(min_length=1)
+    raw_values: list[str] = Field(min_length=1)
     evidence_ids: list[str] = Field(min_length=1)
     provenance: str | None
 

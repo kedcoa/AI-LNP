@@ -158,3 +158,15 @@ Local preparation and preflight must show `server_request_sent: false`,
 token estimates remain explicitly unconfigured rather than guessed. No request
 may be executed until a human reviews that exact manifest and separately
 invokes each runner with `--confirm-paid-call`.
+
+## Codex and local-Ollama shadow checkpoint
+
+The 2026-08-04 shadow benchmark is isolated under
+`data/staging/extraction/codex_ollama_shadow` and
+`reports/extraction/codex_ollama_shadow`. It reuses the 62-fact application pilot
+without exposing reference answers to either candidate. The current decision is
+to retain OpenAI for Gate B: `qwen3-vl:8b-instruct` produced three consecutive
+schema failures and triggered the planned early stop. Codex CLI remains
+unapproved as an audit gate because its first bounded hosted audit timed out and
+the run was stopped rather than consuming the rest of the day's timebox. Neither
+route may write production extraction artifacts.

@@ -5,6 +5,7 @@ from src.extraction.evaluate_shadow_benchmark import (
     aggregate_usage,
     build_requirements,
     decide,
+    evaluate_auditor,
 )
 from src.extraction.shadow_benchmark_contracts import (
     AttemptResult,
@@ -135,3 +136,23 @@ def test_incomplete_ollama_run_is_insufficient_evidence():
     )
 
     assert decision.extractor_recommendation == "insufficient_evidence"
+
+
+def test_failed_audit_attempt_scores_zero_without_losing_paper_denominator():
+    failed = _attempt(None, None).model_copy(
+        update={
+            "parsed_result": None,
+            "terminal_disposition": "timeout_or_runtime_failure",
+            "exit_code": None,
+        }
+    )
+
+    result = evaluate_auditor(
+        [failed],
+        reference_root=REFERENCE_ROOT,
+        report_path=ROOT / "reports/extraction/application_pilot_final.json",
+    )
+
+    assert result.full_requirements == 0
+    assert result.total_requirements == 62
+    assert result.infrastructure_complete is False

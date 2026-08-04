@@ -159,20 +159,24 @@ def evaluate_auditor(
     reference_root: Path,
     report_path: Path = PILOT_REPORT,
 ) -> RouteEvaluation:
-    papers = []
+    observations_by_paper: dict[str, list[dict[str, Any]]] = {
+        "PILOT-001": [],
+        "PILOT-002": [],
+        "PILOT-003": [],
+    }
     for attempt in attempts:
         if attempt.parsed_result is None:
             continue
         response = AuditResponse.model_validate(attempt.parsed_result)
-        papers.append(
-            {
-                "paper_id": attempt.case_id.removeprefix("audit-"),
-                "facts": [
-                    observation.model_dump(mode="json")
-                    for observation in response.observations
-                ],
-            }
+        paper_id = attempt.case_id.removeprefix("audit-")
+        observations_by_paper[paper_id].extend(
+            observation.model_dump(mode="json")
+            for observation in response.observations
         )
+    papers = [
+        {"paper_id": paper_id, "facts": observations}
+        for paper_id, observations in observations_by_paper.items()
+    ]
     reference = _reference_document(reference_root)
     score = evaluate_application_requirements(
         {"papers": papers}, reference, evidence_grounded=True
