@@ -6,7 +6,7 @@ import argparse
 import json
 from collections import defaultdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, Mapping
 
 from src.extraction.evaluate_application_requirements import (
     ApplicationScore,
@@ -29,6 +29,63 @@ MAP_FIXTURE_ROOT = (
     ROOT / "tests/fixtures/codex_ollama_shadow/application_pilot_maps"
 )
 SHADOW_REPORT_ROOT = ROOT / "reports/extraction/codex_ollama_shadow"
+
+
+def _integer(result: Mapping[str, Any], name: str, default: int = 0) -> int:
+    value = result.get(name, default)
+    return value if isinstance(value, int) and not isinstance(value, bool) else default
+
+
+def _hard_safety_failure(safety: Mapping[str, Any]) -> bool:
+    """Recognize the design's four terminal safety conditions."""
+
+    for name in (
+        "gold_leakage",
+        "accepted_unsupported_or_invented_fact",
+        "accepted_wrong_relationship",
+    ):
+        if bool(safety.get(name)):
+            return True
+    systemic = safety.get("three_consecutive_systemic_failures")
+    return isinstance(systemic, int) and not isinstance(systemic, bool) and systemic >= 3
+
+
+def classify_result(
+    before: Mapping[str, Any], after: Mapping[str, Any], safety: Mapping[str, Any]
+) -> Literal["works", "promising_but_inconclusive", "does_not_work"]:
+    """Classify the hidden before/after result using the approved design gates.
+
+    ``automated_full`` is the 62-item scorer result.  The evidence-level fields
+    separately protect the 57/3/2 pre-audit record inventory from a regression.
+    Callers compute both only after inference has completed.
+    """
+
+    if _hard_safety_failure(safety):
+        return "does_not_work"
+    before_score = _integer(before, "automated_full")
+    after_score = _integer(after, "automated_full")
+    supported_improvement = after_score > before_score
+    if not supported_improvement:
+        return "does_not_work"
+
+    no_evidence_regression = (
+        _integer(after, "evidence_full") >= _integer(before, "evidence_full")
+        and (
+            _integer(after, "evidence_full") + _integer(after, "evidence_partial")
+            >= _integer(before, "evidence_full") + _integer(before, "evidence_partial")
+        )
+        and _integer(after, "evidence_absent") <= _integer(before, "evidence_absent")
+    )
+    recovery_gate = (
+        _integer(after, "recovered_partial_or_absent") >= 2
+        or (
+            _integer(after, "recovered_absent") >= 1
+            and _integer(after, "deterministic_undercounts_recovered") >= 5
+        )
+    )
+    if after_score >= 45 and no_evidence_regression and recovery_gate:
+        return "works"
+    return "promising_but_inconclusive"
 
 
 def _load(path: Path) -> dict[str, Any]:
