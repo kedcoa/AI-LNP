@@ -169,6 +169,7 @@ class AnchorCandidate(StrictModel):
 class ContextCandidate(StrictModel):
     """Resolved, data-driven arm identity with candidate-specific provenance."""
 
+    experiment_id: str = Field(min_length=1)
     candidate_id: str = Field(min_length=1)
     provisional_context_id: str = Field(min_length=1)
     formulation_id: str = Field(min_length=1)
@@ -272,6 +273,107 @@ class ContextAccountingEntry(StrictModel):
         return self
 
 
+AssertionType = Literal["foundational", "comparison", "measurement"]
+Direction = Literal[
+    "present",
+    "higher",
+    "lower",
+    "similar",
+    "no_significant_difference",
+    "reported",
+]
+NumericProvenance = Literal[
+    "exact_reported",
+    "graph_estimated",
+    "not_reported",
+]
+
+
+class OutcomeAssertion(StrictModel):
+    """One evidence-backed scientific outcome assertion."""
+
+    assertion_type: AssertionType
+    direction: Direction
+    subject: str = Field(min_length=1)
+    comparator: str | None
+    raw_text: str = Field(min_length=1)
+    value: float | None
+    unit: str | None
+    numeric_provenance: NumericProvenance
+    evidence_ids: list[str] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_numeric_provenance(self) -> "OutcomeAssertion":
+        if self.numeric_provenance == "exact_reported" and self.value is None:
+            raise ValueError("exact_reported assertions require a value")
+        if self.numeric_provenance == "not_reported" and self.value is not None:
+            raise ValueError("not_reported assertions cannot include a value")
+        if len(self.evidence_ids) != len(set(self.evidence_ids)):
+            raise ValueError("assertion evidence IDs must be unique")
+        return self
+
+
+class _FoundationalOutcomeAssertion(OutcomeAssertion):
+    assertion_type: Literal["foundational"]
+
+
+class _ComparativeOutcomeAssertion(OutcomeAssertion):
+    assertion_type: Literal["comparison"]
+
+
+class _ExactMeasurementAssertion(OutcomeAssertion):
+    assertion_type: Literal["measurement"]
+    value: float
+    numeric_provenance: Literal["exact_reported"]
+
+
+class CandidateOutcomeBundle(StrictModel):
+    """Atomic outcomes assigned to one locally issued experiment."""
+
+    candidate_id: str = Field(min_length=1)
+    experiment_id: str = Field(min_length=1)
+    foundational_outcomes: list[OutcomeAssertion]
+    comparative_outcomes: list[OutcomeAssertion]
+    exact_measurements: list[OutcomeAssertion]
+
+    @model_validator(mode="after")
+    def validate_assertion_groups(self) -> "CandidateOutcomeBundle":
+        wrong_foundational = any(
+            assertion.assertion_type != "foundational"
+            for assertion in self.foundational_outcomes
+        )
+        wrong_comparative = any(
+            assertion.assertion_type != "comparison"
+            for assertion in self.comparative_outcomes
+        )
+        wrong_measurement = any(
+            assertion.assertion_type != "measurement"
+            or assertion.numeric_provenance != "exact_reported"
+            for assertion in self.exact_measurements
+        )
+        if wrong_foundational:
+            raise ValueError(
+                "foundational outcomes require foundational assertions"
+            )
+        if wrong_comparative:
+            raise ValueError(
+                "comparative outcomes require comparison assertions"
+            )
+        if wrong_measurement:
+            raise ValueError(
+                "exact measurements require exact_reported measurement assertions"
+            )
+        return self
+
+
+class _CandidateOutcomeBundleSchema(CandidateOutcomeBundle):
+    """Provider schema with group semantics represented structurally."""
+
+    foundational_outcomes: list[_FoundationalOutcomeAssertion]
+    comparative_outcomes: list[_ComparativeOutcomeAssertion]
+    exact_measurements: list[_ExactMeasurementAssertion]
+
+
 class PreparedRequest(StrictModel):
     """A complete local request artifact; no provider is contacted."""
 
@@ -291,7 +393,7 @@ class PreparedRequest(StrictModel):
 class ContextTask(StrictModel):
     """One token-bounded, scientifically compatible context request."""
 
-    context_task_version: Literal["full-paper-context-task-1.0.0"]
+    context_task_version: Literal["full-paper-context-task-1.2.0"]
     task_id: str
     paper_id: str
     context_key: str
@@ -367,12 +469,47 @@ def build_paper_map_schema(
 def build_context_response_schema(
     candidates: list[ContextCandidate],
 ) -> dict[str, Any]:
-    """Add exact candidate accounting to the existing compact contract."""
+    """Add exact candidate accounting and locally issued experiment IDs."""
 
-    return _exact_accounting_schema(
+    schema = _exact_accounting_schema(
         to_strict_json_schema(CompactExtractionResponse),
         field_name="context_candidate_accounting",
         identifiers=[row.candidate_id for row in candidates],
         entry_model=ContextAccountingEntry,
         definition_name="ContextAccountingEntry",
     )
+    entry_schema = to_strict_json_schema(_CandidateOutcomeBundleSchema)
+    nested_definitions = entry_schema.pop("$defs", {})
+    definitions = schema.setdefault("$defs", {})
+    definitions.update(nested_definitions)
+    bundle_properties: dict[str, Any] = {}
+    for index, candidate in enumerate(candidates, start=1):
+        definition_name = f"CandidateOutcomeBundle{index}"
+        candidate_schema = deepcopy(entry_schema)
+        candidate_schema["properties"]["candidate_id"] = {
+            "type": "string",
+            "const": candidate.candidate_id,
+        }
+        candidate_schema["properties"]["experiment_id"] = {
+            "type": "string",
+            "const": candidate.experiment_id,
+        }
+        definitions[definition_name] = candidate_schema
+        bundle_properties[candidate.candidate_id] = {
+            "$ref": f"#/$defs/{definition_name}"
+        }
+    schema["properties"]["candidate_outcomes"] = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": bundle_properties,
+        "required": [row.candidate_id for row in candidates],
+    }
+    schema["required"].append("candidate_outcomes")
+    issued_ids = list(
+        dict.fromkeys(row.experiment_id for row in candidates)
+    )
+    for definition_name in ("ExperimentRecord", "OutcomeRecord"):
+        definitions[definition_name]["properties"]["experiment_id"][
+            "enum"
+        ] = issued_ids
+    return schema

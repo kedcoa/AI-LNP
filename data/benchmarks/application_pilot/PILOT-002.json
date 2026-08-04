@@ -1,0 +1,226 @@
+{
+  "reference_version": "application-pilot-reference-1.0.0",
+  "paper_id": "PILOT-002",
+  "doi": "10.1126/sciadv.abf4398",
+  "pmcid": "PMC7909888",
+  "blinding_policy": "Reference content is benchmark-only and must not enter extraction prompts or production requests.",
+  "experiment_id_status": "deferred_pending_gate_a_paper_map",
+  "experiment_ids": [],
+  "reference_facts": [
+    {
+      "reference_id": "APP-PILOT-002-FORM-COMP-001",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "246C10",
+      "aliases": [],
+      "experiment_scope": "mRNA-loaded 246C10 LNP",
+      "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
+      "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-COMP-002",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "DOPE",
+      "aliases": [],
+      "experiment_scope": "mRNA-loaded 246C10 LNP; helper-lipid component",
+      "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
+      "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-COMP-003",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "cholesterol",
+      "aliases": [],
+      "experiment_scope": "mRNA-loaded 246C10 LNP; helper-lipid component",
+      "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
+      "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-COMP-004",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "C16-PEG2000 ceramide",
+      "aliases": ["PEG-lipid"],
+      "experiment_scope": "mRNA-loaded 246C10 LNP; PEG-lipid component",
+      "source_locator": {"evidence_id": "FPE-6974fd8b45b30f3fd885", "source_kind": "results_text", "locator": "ionizable-lipid formulation paragraph"},
+      "evidence_text": "246C10 ... formulated into LNPs with ... DOPE, cholesterol, and C16-PEG2000 ceramide"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-002",
+      "category": "formulation",
+      "field_name": "molar_ratio",
+      "expected": "26.5:20:52:1.5",
+      "aliases": [],
+      "experiment_scope": "standard mRNA-loaded 246C10 LNP",
+      "source_locator": {"evidence_id": "FPE-0000ddcd2870f4090a96", "source_kind": "methods_text", "locator": "in vivo imaging methods"},
+      "evidence_text": "molar ratio between lipids was 26.5:20:52:1.5 (ionizable lipid, DOPE, cholesterol, and PEG-lipid)",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-003",
+      "category": "formulation",
+      "field_name": "ratio_basis",
+      "expected": "molar",
+      "aliases": ["mole ratio"],
+      "experiment_scope": "standard mRNA-loaded 246C10 LNP",
+      "source_locator": {"evidence_id": "FPE-0000ddcd2870f4090a96", "source_kind": "methods_text", "locator": "in vivo imaging methods"},
+      "evidence_text": "molar ratio between lipids"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-004",
+      "category": "formulation",
+      "field_name": "mass_ratio",
+      "expected": "10:1",
+      "aliases": ["ionizable lipid:mRNA weight ratio of 10:1"],
+      "experiment_scope": "mRNA-loaded 246C10 LNP",
+      "source_locator": {"evidence_id": "FPE-730eca03ddf54df52a03", "source_kind": "methods_text", "locator": "ionizable LNP preparation"},
+      "evidence_text": "The final ionizable lipids:mRNA weight ratio was 10:1",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-002-FORM-006",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "mannose-PEG lipid",
+      "aliases": ["mannose", "DSPE-PEG-mannose"],
+      "experiment_scope": "LSEC-targeted formulation; active targeting-ligand component",
+      "source_locator": {"evidence_id": "FPE-c45ce63232de803c02d5", "source_kind": "results_text", "locator": "in vivo mannose-LNP formulation paragraph"},
+      "evidence_text": "3.0% PEG-lipid (with 2.5% mannose-PEG lipid)"
+    },
+    {
+      "reference_id": "APP-PILOT-002-PAYLOAD-001",
+      "category": "payload_administration",
+      "field_name": "payload",
+      "expected": "Cre mRNA",
+      "aliases": ["mCre"],
+      "experiment_scope": "LSL-tdTomato reporter study",
+      "source_locator": {"evidence_id": "FPE-78f5bdd8e531d94f8387", "source_kind": "figure_caption", "locator": "Figure 4 caption"},
+      "evidence_text": "Ionizable lipid candidates were formulated with mCre"
+    },
+    {
+      "reference_id": "APP-PILOT-002-ADMIN-001",
+      "category": "payload_administration",
+      "field_name": "route",
+      "expected": "intravenous",
+      "aliases": ["intravenously injected"],
+      "experiment_scope": "mCre LSL-tdTomato reporter study",
+      "source_locator": {"evidence_id": "FPE-7810a24e4c2a968c140c", "source_kind": "methods_text", "locator": "LSL-tdTomato animal methods"},
+      "evidence_text": "Eight-week-old mice were intravenously injected"
+    },
+    {
+      "reference_id": "APP-PILOT-002-ADMIN-002",
+      "category": "payload_administration",
+      "field_name": "dose",
+      "expected": "0.5 mg mCre/kg",
+      "aliases": ["mRNA dose of 0.5 mg/kg"],
+      "experiment_scope": "mCre LSL-tdTomato reporter study",
+      "source_locator": {"evidence_id": "FPE-d590abe44c7416153083", "source_kind": "figure_caption", "locator": "Figure 7 caption"},
+      "evidence_text": "mCre-loaded LNPs were injected ... at mRNA dose of 0.5 mg/kg",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-002-MODEL-001",
+      "category": "biological_model",
+      "field_name": "species",
+      "expected": "mouse",
+      "aliases": ["mice"],
+      "experiment_scope": "in vivo mRNA targeting studies",
+      "source_locator": {"evidence_id": "FPE-7810a24e4c2a968c140c", "source_kind": "methods_text", "locator": "LSL-tdTomato animal methods"},
+      "evidence_text": "LSL-tdTomato mice ... Eight-week-old mice"
+    },
+    {
+      "reference_id": "APP-PILOT-002-MODEL-002",
+      "category": "biological_model",
+      "field_name": "model",
+      "expected": "LSL-tdTomato Cre-reporter mouse",
+      "aliases": ["LSL-tdTomato mice"],
+      "experiment_scope": "cell-type-specific functional mCre delivery study",
+      "source_locator": {"evidence_id": "FPE-85a2f2243f98488d06e6", "source_kind": "results_text", "locator": "mCre reporter study description"},
+      "evidence_text": "mCre ... injected into mice carrying a loxP-flanked stop cassette"
+    },
+    {
+      "reference_id": "APP-PILOT-002-MODEL-003",
+      "category": "biological_model",
+      "field_name": "recipient_cell",
+      "expected": "liver sinusoidal endothelial cells",
+      "aliases": ["LSECs"],
+      "experiment_scope": "mannose-LNP mCre targeting study",
+      "source_locator": {"evidence_id": "FPE-f9e38e7de85203a7cc17", "source_kind": "results_text", "locator": "LSEC gene-editing results"},
+      "evidence_text": "Notable tdTomato fluorescence was detected along the liver vessel (LSECs)"
+    },
+    {
+      "reference_id": "APP-PILOT-002-ASSAY-001",
+      "category": "assay",
+      "field_name": "assay",
+      "expected": "histological tdTomato-positive cell counting",
+      "aliases": ["MetaMorph histological analysis"],
+      "experiment_scope": "mannose-LNP mCre targeting study",
+      "source_locator": {"evidence_id": "FPE-f9e38e7de85203a7cc17", "source_kind": "results_text", "locator": "LSEC gene-editing results"},
+      "evidence_text": "We further quantified this phenomenon by counting tdTomato fluorescence-positive cells with MetaMorph image software."
+    },
+    {
+      "reference_id": "APP-PILOT-002-ASSAY-002",
+      "category": "assay",
+      "field_name": "assay",
+      "expected": "flow cytometry of tdTomato-positive liver cells",
+      "aliases": ["flow cytometry"],
+      "experiment_scope": "mannose-LNP mCre targeting study",
+      "source_locator": {"evidence_id": "FPE-f9e38e7de85203a7cc17", "source_kind": "results_text", "locator": "LSEC gene-editing results"},
+      "evidence_text": "tdTomato fluorescence-positive cells were also confirmed by flow cytometry analysis"
+    },
+    {
+      "reference_id": "APP-PILOT-002-OUT-001",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "mannose-LNP favored LSEC transfection while reducing hepatocyte transfection",
+      "aliases": ["selective delivery to LSECs over hepatocytes"],
+      "experiment_scope": "mannose-LNP mCre targeting study",
+      "source_locator": {"evidence_id": "FPE-f9e38e7de85203a7cc17", "source_kind": "results_text", "locator": "LSEC gene-editing results"},
+      "evidence_text": "70% of LSECs ... tdTomato fluorescence positive ... substantial decrease ... in hepatocytes"
+    },
+    {
+      "reference_id": "APP-PILOT-002-NUM-001",
+      "category": "exact_numeric",
+      "field_name": "outcome_value",
+      "expected": 70,
+      "aliases": [],
+      "experiment_scope": "percent tdTomato-positive LSECs after mannose-LNP mCre",
+      "source_locator": {"evidence_id": "FPE-f9e38e7de85203a7cc17", "source_kind": "results_text", "locator": "LSEC gene-editing results"},
+      "evidence_text": "70% of LSECs ... were tdTomato fluorescence positive",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-002-NUM-002",
+      "category": "exact_numeric",
+      "field_name": "outcome_value",
+      "expected": 15,
+      "aliases": [],
+      "experiment_scope": "percent tdTomato-positive hepatocytes after mannose-LNP mCre",
+      "source_locator": {"evidence_id": "FPE-f9e38e7de85203a7cc17", "source_kind": "results_text", "locator": "LSEC gene-editing results"},
+      "evidence_text": "15% of hepatocytes ... were tdTomato fluorescence positive",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-002-PAYLOAD-002",
+      "category": "payload_administration",
+      "field_name": "payload",
+      "expected": "factor VIII siRNA",
+      "aliases": ["siFVIII"],
+      "experiment_scope": "LSEC gene-silencing confirmation study",
+      "source_locator": {"evidence_id": "FPE-a4bea94b24b806dc3995", "source_kind": "results_text", "locator": "siFVIII mannose-LNP study"},
+      "evidence_text": "prepared LNPs with siFVIII"
+    },
+    {
+      "reference_id": "APP-PILOT-002-OUT-002",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "mannose incorporation at 3% total PEG enhanced FVIII inhibition in LSECs versus PEG-only or galactose controls",
+      "aliases": ["mannose increased siRNA delivery to LSECs"],
+      "experiment_scope": "siFVIII LSEC gene-silencing study",
+      "source_locator": {"evidence_id": "FPE-0d429b7e50aafec4676f", "source_kind": "figure_caption", "locator": "Figure 8 caption"},
+      "evidence_text": "Incorporation of mannose to LNPs with 3.0% of PEG-lipid increased the delivery of siRNA to LSECs but incorporation of galactose did not"
+    }
+  ]
+}

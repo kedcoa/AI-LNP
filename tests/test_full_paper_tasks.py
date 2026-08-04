@@ -3,8 +3,16 @@ from __future__ import annotations
 from copy import deepcopy
 
 import pytest
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
+from pydantic import ValidationError
 
-from src.extraction.full_paper_contracts import PaperMapResponse
+import src.extraction.full_paper_tasks as full_paper_tasks
+from src.extraction.full_paper_contracts import (
+    CandidateOutcomeBundle,
+    OutcomeAssertion,
+    PaperMapResponse,
+)
 from src.extraction.full_paper_inventory import (
     FullPaperEvidenceBlock,
     FullPaperEvidenceInventory,
@@ -329,6 +337,7 @@ def _valid_context_response(task) -> dict:
     experiments = []
     outcomes = []
     accounting = {}
+    candidate_outcomes = {}
     for index, candidate in enumerate(task.candidates, start=1):
         evidence_id = candidate.joint_evidence_ids[0]
         outcome_evidence_id = candidate.outcome_evidence_ids[0]
@@ -389,6 +398,25 @@ def _valid_context_response(task) -> dict:
             "reason_code": "directly_reported",
             "explanation": "The arm and outcome are directly reported.",
         }
+        candidate_outcomes[candidate.candidate_id] = {
+            "candidate_id": candidate.candidate_id,
+            "experiment_id": candidate.experiment_id,
+            "foundational_outcomes": [
+                {
+                    "assertion_type": "foundational",
+                    "direction": "present",
+                    "subject": candidate.recipient_cell,
+                    "comparator": None,
+                    "raw_text": "Reporter signal was present.",
+                    "value": None,
+                    "unit": None,
+                    "numeric_provenance": "not_reported",
+                    "evidence_ids": [outcome_evidence_id],
+                }
+            ],
+            "comparative_outcomes": [],
+            "exact_measurements": [],
+        }
     return {
         "contract_version": "compact-1.1.0",
         "paper_id": task.paper_id,
@@ -410,6 +438,7 @@ def _valid_context_response(task) -> dict:
         "outcomes": outcomes,
         "unresolved_items": [],
         "context_candidate_accounting": accounting,
+        "candidate_outcomes": candidate_outcomes,
     }
 
 
@@ -495,6 +524,12 @@ def test_context_tasks_use_only_supported_candidates_and_exact_evidence() -> Non
         assert schema["required"] == candidate_ids
         assert set(schema["properties"]) == set(candidate_ids)
         assert schema["additionalProperties"] is False
+        outcomes_schema = task.response_schema["properties"][
+            "candidate_outcomes"
+        ]
+        assert outcomes_schema["required"] == candidate_ids
+        assert set(outcomes_schema["properties"]) == set(candidate_ids)
+        assert outcomes_schema["additionalProperties"] is False
         assert task.estimated_input_tokens <= task.token_budget
         allowed = set().union(
             *(
@@ -504,6 +539,140 @@ def test_context_tasks_use_only_supported_candidates_and_exact_evidence() -> Non
         )
         assert {row.evidence_id for row in task.evidence} == allowed
         assert "E-UNRELATED" not in allowed
+
+
+def test_context_task_identity_changes_with_response_schema(
+    monkeypatch,
+) -> None:
+    baseline = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    original_builder = full_paper_tasks.build_context_response_schema
+
+    def changed_schema(candidates):
+        schema = original_builder(candidates)
+        schema["$comment"] = "contract changed"
+        return schema
+
+    monkeypatch.setattr(
+        full_paper_tasks,
+        "build_context_response_schema",
+        changed_schema,
+    )
+
+    changed = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+
+    assert baseline.context_task_version == "full-paper-context-task-1.2.0"
+    assert changed.task_id != baseline.task_id
+
+
+@pytest.mark.parametrize(
+    ("path", "replacement"),
+    [
+        (("candidate_id",), "CTX-INVENTED"),
+        (("experiment_id",), "EXP-INVENTED"),
+        (
+            ("foundational_outcomes", 0, "assertion_type"),
+            "comparison",
+        ),
+        (
+            ("exact_measurements", 0, "numeric_provenance"),
+            "graph_estimated",
+        ),
+    ],
+)
+def test_candidate_outcome_schema_enforces_local_semantics(
+    path,
+    replacement,
+) -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    candidate = task.candidates[0]
+    response = _valid_context_response(task)
+    bundle = deepcopy(response["candidate_outcomes"][candidate.candidate_id])
+    bundle["exact_measurements"] = [
+        {
+            "assertion_type": "measurement",
+            "direction": "reported",
+            "subject": "recipient signal",
+            "comparator": None,
+            "raw_text": "Signal was exactly 40%.",
+            "value": 40,
+            "unit": "%",
+            "numeric_provenance": "exact_reported",
+            "evidence_ids": [candidate.outcome_evidence_ids[0]],
+        }
+    ]
+    bundle_ref = task.response_schema["properties"]["candidate_outcomes"][
+        "properties"
+    ][candidate.candidate_id]
+    bundle_schema = {
+        "$ref": bundle_ref["$ref"],
+        "$defs": task.response_schema["$defs"],
+    }
+    validator = Draft202012Validator(bundle_schema)
+    validator.validate(bundle)
+    target = bundle
+    for key in path[:-1]:
+        target = target[key]
+    target[path[-1]] = replacement
+
+    with pytest.raises(JsonSchemaValidationError):
+        validator.validate(bundle)
+
+
+def test_unlabeled_graph_number_cannot_be_exact() -> None:
+    with pytest.raises(ValidationError):
+        CandidateOutcomeBundle(
+            candidate_id="C-1",
+            experiment_id="EXP-1",
+            foundational_outcomes=[],
+            comparative_outcomes=[],
+            exact_measurements=[
+                OutcomeAssertion(
+                    assertion_type="measurement",
+                    direction="reported",
+                    subject="C-1",
+                    comparator=None,
+                    raw_text="bar appears near 40",
+                    value=40,
+                    unit="%",
+                    numeric_provenance="graph_estimated",
+                    evidence_ids=["FIG-2"],
+                )
+            ],
+        )
+
+
+@pytest.mark.parametrize(
+    ("numeric_provenance", "value"),
+    [("exact_reported", None), ("not_reported", 40)],
+)
+def test_outcome_assertion_value_matches_numeric_provenance(
+    numeric_provenance,
+    value,
+) -> None:
+    with pytest.raises(ValidationError):
+        OutcomeAssertion(
+            assertion_type="measurement",
+            direction="reported",
+            subject="recipient signal",
+            comparator=None,
+            raw_text="A numeric result was discussed.",
+            value=value,
+            unit="%",
+            numeric_provenance=numeric_provenance,
+            evidence_ids=["E-OUT-1"],
+        )
 
 
 def test_context_task_packing_starts_new_task_before_budget_overflow() -> None:
@@ -538,6 +707,10 @@ def test_valid_context_response_passes_compact_and_candidate_validation() -> Non
 
     assert report.status == "valid"
     assert report.findings == []
+    candidate_id = task.candidates[0].candidate_id
+    accepted = report.accepted_candidate_outcomes[candidate_id]
+    assert isinstance(accepted, CandidateOutcomeBundle)
+    assert accepted.experiment_id == task.candidates[0].experiment_id
 
 
 @pytest.mark.parametrize("mutation", ["missing", "invented"])
@@ -560,6 +733,30 @@ def test_context_response_rejects_inexact_candidate_accounting(mutation) -> None
     report = validate_context_response(response, task)
 
     assert report.status == "invalid"
+    assert expected_code in _error_codes(report)
+
+
+@pytest.mark.parametrize("mutation", ["missing", "invented"])
+def test_context_response_rejects_inexact_candidate_outcomes(mutation) -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    response = _valid_context_response(task)
+    if mutation == "missing":
+        response["candidate_outcomes"].pop("CTX-STELLATE-HIGH")
+        expected_code = "missing_candidate_outcome_ids"
+    else:
+        response["candidate_outcomes"]["CTX-INVENTED"] = deepcopy(
+            response["candidate_outcomes"]["CTX-STELLATE-LOW"]
+        )
+        expected_code = "invented_candidate_outcome_ids"
+
+    report = validate_context_response(response, task)
+
+    assert report.status == "invalid"
+    assert report.accepted_candidate_outcomes == {}
     assert expected_code in _error_codes(report)
 
 
@@ -612,6 +809,52 @@ def test_context_response_rejects_evidence_outside_candidate_envelope() -> None:
     report = validate_context_response(response, task)
 
     assert "candidate_evidence_outside_envelope" in _error_codes(report)
+
+
+@pytest.mark.parametrize(
+    ("field_name", "replacement", "expected_code"),
+    [
+        ("candidate_id", "CTX-INVENTED", "candidate_outcome_id_mismatch"),
+        (
+            "experiment_id",
+            "EXP-INVENTED",
+            "candidate_outcome_experiment_id_mismatch",
+        ),
+    ],
+)
+def test_context_response_rejects_wrong_outcome_bundle_identity(
+    field_name,
+    replacement,
+    expected_code,
+) -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    response = _valid_context_response(task)
+    response["candidate_outcomes"]["CTX-STELLATE-LOW"][field_name] = replacement
+
+    report = validate_context_response(response, task)
+
+    assert expected_code in _error_codes(report)
+
+
+def test_context_response_rejects_outcome_assertion_evidence_outside_envelope(
+) -> None:
+    task = build_context_tasks(
+        _paper_map(include_second_context=False),
+        _inventory(),
+        token_budget=100_000,
+    )[0]
+    response = _valid_context_response(task)
+    response["candidate_outcomes"]["CTX-STELLATE-LOW"][
+        "foundational_outcomes"
+    ][0]["evidence_ids"] = ["E-JOINT-2"]
+
+    report = validate_context_response(response, task)
+
+    assert "candidate_outcome_evidence_outside_envelope" in _error_codes(report)
 
 
 def test_context_response_rejects_unaccounted_returned_experiment() -> None:

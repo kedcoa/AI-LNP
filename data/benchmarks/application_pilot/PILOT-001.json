@@ -1,0 +1,214 @@
+{
+  "reference_version": "application-pilot-reference-1.0.0",
+  "paper_id": "PILOT-001",
+  "doi": "10.1038/s41467-022-35637-z",
+  "pmcid": "PMC9845313",
+  "blinding_policy": "Reference content is benchmark-only and must not enter extraction prompts or production requests.",
+  "experiment_id_status": "deferred_pending_gate_a_paper_map",
+  "experiment_ids": [],
+  "reference_facts": [
+    {
+      "reference_id": "APP-PILOT-001-FORM-COMP-001",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "AA-T3A-C12",
+      "aliases": [],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-COMP-002",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "DSPC",
+      "aliases": [],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; phospholipid component",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-COMP-003",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "cholesterol",
+      "aliases": [],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; helper-lipid component",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-COMP-004",
+      "category": "formulation",
+      "field_name": "component_identity",
+      "expected": "C14-PEG2000",
+      "aliases": ["C14-PEG"],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; PEG-lipid component",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "An organic phase was prepared in ethanol by solubilizing ionizable lipid ... DSPC, cholesterol, and C14-PEG2000."
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-002",
+      "category": "formulation",
+      "field_name": "molar_ratio",
+      "expected": "50:10:38.5:1.5",
+      "aliases": [],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "ionizable lipid (lipidoid, AA-lipidoid, or MC3), DSPC, cholesterol, and C14-PEG2000 at a molar ratio of 50:10:38.5:1.5",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-003",
+      "category": "formulation",
+      "field_name": "ratio_basis",
+      "expected": "molar",
+      "aliases": ["mole ratio"],
+      "experiment_scope": "AA-T3A-C12 RNA LNP; shared formulation fact",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "at a molar ratio of 50:10:38.5:1.5"
+    },
+    {
+      "reference_id": "APP-PILOT-001-FORM-004",
+      "category": "formulation",
+      "field_name": "mass_ratio",
+      "expected": "10:1",
+      "aliases": ["ionizable lipid:RNA weight ratio of 10:1"],
+      "experiment_scope": "AA-T3A-C12 siRNA or luciferase-mRNA LNP",
+      "source_locator": {"evidence_id": "FPE-ea759d1d9f375844bbb8", "source_kind": "methods_text", "locator": "LNP formulation methods"},
+      "evidence_text": "mixed at an ionizable lipid:RNA weight ratio of 10:1",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-001-PAYLOAD-001",
+      "category": "payload_administration",
+      "field_name": "payload",
+      "expected": "HSP47 siRNA",
+      "aliases": ["siHSP47"],
+      "experiment_scope": "therapeutic in vivo fibrosis arm",
+      "source_locator": {"evidence_id": "FPE-31dfcf610e6b969f9afe", "source_kind": "figure_caption", "locator": "Figure 1a caption"},
+      "evidence_text": "an acidic aqueous solution containing HSP47 siRNA"
+    },
+    {
+      "reference_id": "APP-PILOT-001-ADMIN-001",
+      "category": "payload_administration",
+      "field_name": "route",
+      "expected": "intravenous",
+      "aliases": ["i.v.", "tail vein injection"],
+      "experiment_scope": "CCl4-induced fibrosis efficacy study",
+      "source_locator": {"evidence_id": "FPE-1fa0700cfd0c77653706", "source_kind": "figure_caption", "locator": "Figure 5b caption"},
+      "evidence_text": "LNPs were intravenously (i.v.) administered"
+    },
+    {
+      "reference_id": "APP-PILOT-001-ADMIN-002",
+      "category": "payload_administration",
+      "field_name": "dose",
+      "expected": "5 μg siRNA/mouse (0.2 mg/kg) per injection",
+      "aliases": ["5 μg/mouse", "0.2 mg/kg"],
+      "experiment_scope": "twice-weekly CCl4-induced fibrosis efficacy study",
+      "source_locator": {"evidence_id": "FPE-64e58a2f0eaf37352130", "source_kind": "results_text", "locator": "therapeutic study dosing paragraph"},
+      "evidence_text": "The siRNA dose was pre-determined to be 5 μg (0.2 mg/kg) for each injection",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-001-MODEL-001",
+      "category": "biological_model",
+      "field_name": "species",
+      "expected": "Balb/c mouse",
+      "aliases": ["BALB/c mice"],
+      "experiment_scope": "in vivo fibrosis studies",
+      "source_locator": {"evidence_id": "FPE-2f08e9449e0bef120b39", "source_kind": "methods_text", "locator": "animal methods"},
+      "evidence_text": "Balb/c male mice (6–8 weeks age, 22–25 g body weight)"
+    },
+    {
+      "reference_id": "APP-PILOT-001-MODEL-002",
+      "category": "biological_model",
+      "field_name": "model",
+      "expected": "carbon tetrachloride-induced liver fibrosis",
+      "aliases": ["CCl4-induced liver fibrosis"],
+      "experiment_scope": "in vivo fibrosis studies",
+      "source_locator": {"evidence_id": "FPE-2f08e9449e0bef120b39", "source_kind": "methods_text", "locator": "animal methods"},
+      "evidence_text": "Liver fibrosis was induced by intraperitoneal (i.p.) injection of 20% CCl4"
+    },
+    {
+      "reference_id": "APP-PILOT-001-MODEL-003",
+      "category": "biological_model",
+      "field_name": "recipient_cell",
+      "expected": "activated hepatic stellate cells",
+      "aliases": ["activated HSCs", "activated liver-resident fibroblasts"],
+      "experiment_scope": "target-cell scope across efficacy studies",
+      "source_locator": {"evidence_id": "FPE-2c7e6c2e33174abea741", "source_kind": "results_text", "locator": "study overview"},
+      "evidence_text": "targeted siRNA-LNP delivery to ... activated HSCs"
+    },
+    {
+      "reference_id": "APP-PILOT-001-ASSAY-001",
+      "category": "assay",
+      "field_name": "assay",
+      "expected": "Western blot analysis of HSP47 in liver lysates",
+      "aliases": ["HSP47 Western blot"],
+      "experiment_scope": "in vivo HSP47 knockdown study",
+      "source_locator": {"evidence_id": "FPE-1fa0700cfd0c77653706", "source_kind": "figure_caption", "locator": "Figure 5f caption"},
+      "evidence_text": "Western blot analysis of HSP47 expression in liver lysates"
+    },
+    {
+      "reference_id": "APP-PILOT-001-ASSAY-002",
+      "category": "assay",
+      "field_name": "assay",
+      "expected": "Picrosirius red staining with morphometric quantification",
+      "aliases": ["Picrosirius red", "Sirius red staining"],
+      "experiment_scope": "in vivo antifibrotic efficacy study",
+      "source_locator": {"evidence_id": "FPE-1b245d7503848e56a81a", "source_kind": "figure_caption", "locator": "Figure 6b caption"},
+      "evidence_text": "Morphometric quantification of Picrosirius red stained areas by ImageJ software"
+    },
+    {
+      "reference_id": "APP-PILOT-001-OUT-001",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "AA-T3A-C12/siHSP47 produced greater HSP47 knockdown than MC3/siHSP47 in fibrotic mice",
+      "aliases": ["AA-T3A-C12 outperformed MC3 for HSP47 silencing"],
+      "experiment_scope": "CCl4-induced fibrosis efficacy study",
+      "source_locator": {"evidence_id": "FPE-ffb8880ea58448bf3ea4", "source_kind": "results_text", "locator": "in vivo HSP47 results"},
+      "evidence_text": "65% knockdown ... >2-fold more potent than the 31% knockdown achieved by MC3/siHSP47 LNP"
+    },
+    {
+      "reference_id": "APP-PILOT-001-NUM-001",
+      "category": "exact_numeric",
+      "field_name": "outcome_value",
+      "expected": 65,
+      "aliases": [],
+      "experiment_scope": "HSP47 knockdown percent for AA-T3A-C12/siHSP47 versus PBS in fibrotic mice",
+      "source_locator": {"evidence_id": "FPE-ffb8880ea58448bf3ea4", "source_kind": "results_text", "locator": "in vivo HSP47 results"},
+      "evidence_text": "AA-T3A-C12/siHSP47 LNP treatment led to a 65% knockdown of HSP47",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-001-NUM-TABLE-001",
+      "category": "exact_numeric",
+      "field_name": "outcome_value",
+      "expected": 60.32,
+      "aliases": ["60.32%", "60.32% HSP47 knockdown"],
+      "experiment_scope": "Figure 4e primary-HSC Western blot quantification; AA-T3A-C12/siHSP47 LNP column, source-data row 7",
+      "source_locator": {
+        "source_kind": "source_data_xlsx_cell",
+        "workbook_path": "data/staging/new_papers/PILOT-001/supplementary/41467_2022_35637_MOESM4_ESM.xlsx",
+        "sheet": "Fig 4e",
+        "header_cell": "D6",
+        "cell": "D7",
+        "supporting_main_paper_evidence_id": "FPE-177d4f27bcfbf6628b03",
+        "locator": "Fig 4e!D7; D6 header identifies AA-T3A-C12/siHSP47 LNP"
+      },
+      "evidence_text": "Source-data workbook Fig 4e: D6 = AA-T3A-C12/siHSP47 LNP and D7 = 60.32; the related main-paper Figure 4e caption identifies Western blot analysis of HSP47 in primary HSCs.",
+      "numeric_provenance": "exact_reported"
+    },
+    {
+      "reference_id": "APP-PILOT-001-OUT-002",
+      "category": "qualitative_outcome",
+      "field_name": "comparative_outcome",
+      "expected": "AA-T3A-C12/siHSP47 reduced collagen deposition more than MC3/siHSP47",
+      "aliases": ["greater antifibrotic efficacy than MC3"],
+      "experiment_scope": "CCl4-induced fibrosis efficacy study",
+      "source_locator": {"evidence_id": "FPE-1b245d7503848e56a81a", "source_kind": "results_text", "locator": "histopathology results and Figure 6 caption"},
+      "evidence_text": "significantly decreased collagen deposition ... more significant than that of the MC3/siHSP47 LNP-treated group"
+    }
+  ]
+}

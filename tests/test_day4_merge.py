@@ -162,6 +162,8 @@ def _vision_pair(tmp_path, candidate_path, *, human_review=False):
     unsigned = {
         "task_version": "selective-vision-task-1.0.0",
         "paper_id": "GP-MERGE",
+        "experiment_id": None,
+        "candidate_id": None,
         "finding": _finding().model_dump(mode="json"),
         "trigger": "unresolved_table",
         "trigger_reason": "Exact value is only in the table.",

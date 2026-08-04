@@ -106,6 +106,8 @@ def build_task(
     pdf_path: Path,
     output_root: Path = OUTPUT_ROOT,
     renderer: Renderer = render_pdf_region,
+    experiment_id: str | None = None,
+    candidate_id: str | None = None,
 ) -> SelectiveVisionTask:
     if referral.paper_id != report.paper_id or referral.paper_id != packet.paper_id:
         raise ValueError("Referral, validation report, and packet paper IDs must match")
@@ -155,6 +157,8 @@ def build_task(
     unsigned = {
         "task_version": "selective-vision-task-1.0.0",
         "paper_id": referral.paper_id,
+        "experiment_id": experiment_id,
+        "candidate_id": candidate_id,
         "finding": finding.model_dump(mode="json"),
         "trigger": referral.trigger,
         "trigger_reason": referral.reason,

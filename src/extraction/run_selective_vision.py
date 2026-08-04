@@ -63,9 +63,7 @@ def response_schema(task: SelectiveVisionTask) -> dict[str, Any]:
     field_name = task.finding.field_name
     assert field_name is not None
     fragment = task.expected_schema_fragment
-    return {
-        "type": "object",
-        "properties": {
+    properties: dict[str, Any] = {
             "finding_id": {"type": "string"},
             "disposition": {
                 "type": "string",
@@ -105,8 +103,8 @@ def response_schema(task: SelectiveVisionTask) -> dict[str, Any]:
                 "enum": ["high", "medium", "low"],
             },
             "requires_human_review": {"type": "boolean"},
-        },
-        "required": [
+        }
+    required = [
             "finding_id",
             "disposition",
             "field_name",
@@ -119,7 +117,28 @@ def response_schema(task: SelectiveVisionTask) -> dict[str, Any]:
             "derivation",
             "confidence",
             "requires_human_review",
-        ],
+        ]
+    if task.experiment_id is not None or task.candidate_id is not None:
+        if not task.experiment_id or not task.candidate_id:
+            raise ValueError(
+                "experiment-bound vision tasks require both issued IDs"
+            )
+        properties = {
+            "experiment_id": {
+                "type": "string",
+                "const": task.experiment_id,
+            },
+            "candidate_id": {
+                "type": "string",
+                "const": task.candidate_id,
+            },
+            **properties,
+        }
+        required = ["experiment_id", "candidate_id", *required]
+    return {
+        "type": "object",
+        "properties": properties,
+        "required": required,
         "additionalProperties": False,
         "$defs": fragment.get("$defs", {}),
     }
@@ -129,6 +148,11 @@ def validate_response(
     response: SelectiveVisionResponse, task: SelectiveVisionTask
 ) -> None:
     finding = task.finding
+    if task.experiment_id is not None and (
+        response.experiment_id != task.experiment_id
+        or response.candidate_id != task.candidate_id
+    ):
+        raise ValueError("Vision response changed its issued experiment binding")
     if response.finding_id != finding.finding_id:
         raise ValueError("Vision response finding_id does not match its task")
     if response.field_name != finding.field_name:
@@ -168,7 +192,27 @@ def validate_response(
 
 
 def _image_data(path: Path) -> str:
-    return "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode(
+    image_bytes = path.read_bytes()
+    suffix = path.suffix.casefold()
+    expected_mime = (
+        "image/jpeg"
+        if suffix in {".jpg", ".jpeg"}
+        else "image/png"
+        if suffix == ".png"
+        else None
+    )
+    detected_mime = (
+        "image/jpeg"
+        if image_bytes.startswith(b"\xff\xd8\xff")
+        else "image/png"
+        if image_bytes.startswith(b"\x89PNG\r\n\x1a\n")
+        else None
+    )
+    if expected_mime is None or detected_mime is None:
+        raise ValueError("Selective vision supports only verified JPEG or PNG images")
+    if expected_mime != detected_mime:
+        raise ValueError("Image extension does not match verified file content")
+    return f"data:{detected_mime};base64," + base64.b64encode(image_bytes).decode(
         "ascii"
     )
 
