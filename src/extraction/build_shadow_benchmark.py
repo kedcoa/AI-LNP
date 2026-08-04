@@ -14,6 +14,7 @@ from src.extraction.replay_shadow_baseline import (
     assert_gold_blind,
     build_evidence_inventory,
     replay_pilot_paper,
+    replay_source_paths,
 )
 from src.extraction.shadow_benchmark_contracts import (
     AuditResponse,
@@ -23,7 +24,6 @@ from src.extraction.shadow_benchmark_contracts import (
 
 ROOT = Path(__file__).resolve().parents[2]
 PAPERS = ("PILOT-001", "PILOT-002", "PILOT-003")
-PILOT_REPORT = ROOT / "reports/extraction/application_pilot_final.json"
 GATE_B_FIXTURE_ROOT = (
     ROOT / "tests/fixtures/codex_ollama_shadow/application_pilot_gate_b"
 )
@@ -77,11 +77,10 @@ def build_audit_cases(
 ) -> list[BenchmarkCase]:
     """Build audit inputs by replaying saved post-merge artifacts."""
 
-    report_path = root / PILOT_REPORT.relative_to(ROOT)
     replay_root = artifact_root or (root.parent / "np002-selective-vision")
     cases = []
     for paper_id in PAPERS:
-        paths = [report_path]
+        paths = replay_source_paths(paper_id, replay_root)
         replayed = replay_pilot_paper(paper_id, replay_root)
         payload = {
             "paper_id": paper_id,

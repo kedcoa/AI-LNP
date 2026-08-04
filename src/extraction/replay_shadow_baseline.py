@@ -15,7 +15,14 @@ from src.extraction.prepare_application_pilot import _extract_output_text
 from src.extraction.selective_vision_contracts import SelectiveVisionResponse
 
 
-_FORBIDDEN_KEY_PARTS = ("gold", "reference", "audit")
+_FORBIDDEN_KEY_PARTS = (
+    "gold",
+    "reference",
+    "audit",
+    "benchmark_score",
+    "known_miss",
+    "human_correction",
+)
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -85,10 +92,52 @@ def _selected_response_paths(
     return selected
 
 
-def _context_task(pilot_root: Path, response_path: Path) -> ContextTask:
-    request_path = (
-        response_path.parents[2] / "requests" / f"{response_path.parent.name}.json"
+def _request_path(response_path: Path) -> Path:
+    return (
+        response_path.parents[2]
+        / "requests"
+        / f"{response_path.parent.name}.json"
     )
+
+
+def replay_source_paths(paper_id: str, artifact_root: Path) -> list[Path]:
+    """Return every saved artifact whose bytes can affect a paper replay."""
+
+    pilot_root = _pilot_root(Path(artifact_root))
+    project_root = _project_root(Path(artifact_root), pilot_root)
+    report_path = project_root / "reports/extraction/application_pilot_final.json"
+    report = _load(report_path)
+    context_paths = _selected_response_paths(
+        report, pilot_root, paper_id, "context"
+    )
+    vision_paths = _selected_response_paths(report, pilot_root, paper_id, "vision")
+    context_gates = {
+        str(row["gate"])
+        for row in _sources_for_paper(report, paper_id=paper_id, kind="context")
+    }
+    vision_gates = {
+        str(row["gate"])
+        for row in _sources_for_paper(report, paper_id=paper_id, kind="vision")
+    }
+    paths = [
+        report_path,
+        pilot_root / "validated_maps" / f"{paper_id}.json",
+        pilot_root / paper_id / "inventory.json",
+        *(
+            pilot_root / gate / "manifest.json"
+            for gate in sorted(context_gates | vision_gates)
+        ),
+        *(
+            path
+            for response_path in [*context_paths, *vision_paths]
+            for path in (response_path, _request_path(response_path))
+        ),
+    ]
+    return list(dict.fromkeys(paths))
+
+
+def _context_task(pilot_root: Path, response_path: Path) -> ContextTask:
+    request_path = _request_path(response_path)
     request = _load(request_path)
     messages = request.get("input")
     if not isinstance(messages, list) or len(messages) < 2:
@@ -149,9 +198,7 @@ def _vision_evidence_rows(
     rows: list[dict[str, Any]] = []
     for response_path in response_paths:
         response = SelectiveVisionResponse.model_validate(_response_payload(response_path))
-        request = _load(
-            response_path.parents[2] / "requests" / f"{response_path.parent.name}.json"
-        )
+        request = _load(_request_path(response_path))
         inputs = request.get("input")
         if not isinstance(inputs, list) or len(inputs) < 2:
             raise ValueError(f"vision request has no user input: {response_path}")
@@ -237,8 +284,21 @@ def build_evidence_inventory(replayed: dict[str, Any]) -> list[dict[str, Any]]:
         evidence_id = row["evidence_id"]
         normalized = dict(row)
         existing = by_id.get(evidence_id)
-        if existing is not None and existing.get("text") != normalized.get("text"):
-            raise ValueError(f"conflicting duplicate evidence text for {evidence_id}")
+        if existing is not None:
+            if existing.get("text") != normalized.get("text"):
+                raise ValueError(
+                    f"conflicting duplicate evidence text for {evidence_id}"
+                )
+            provenance = (
+                "source",
+                "page_number",
+                "heading",
+                "table_or_figure",
+            )
+            if any(existing.get(key) != normalized.get(key) for key in provenance):
+                raise ValueError(
+                    f"conflicting duplicate evidence provenance for {evidence_id}"
+                )
         by_id.setdefault(evidence_id, normalized)
     return [
         {**row, "used_by_merged_records": evidence_id in used_evidence_ids}

@@ -9,6 +9,7 @@ from src.extraction.replay_shadow_baseline import (
     build_evidence_inventory,
     replay_pilot_paper,
 )
+from src.extraction.build_shadow_benchmark import build_audit_cases
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,7 +40,54 @@ def test_evidence_inventory_deduplicates_marks_used_evidence_and_preserves_prove
     assert visual["source"] == "PMC9845313.html"
 
 
-@pytest.mark.parametrize("forbidden_key", ["reference_facts", "audit_findings", "gold_id"])
-def test_gold_blind_payload_rejects_reference_and_audit_keys(forbidden_key):
+def test_evidence_inventory_rejects_conflicting_duplicate_provenance():
+    with pytest.raises(ValueError, match="conflicting duplicate evidence provenance"):
+        build_evidence_inventory(
+            {
+                "evidence_sources": [
+                    {
+                        "evidence_id": "FPE-1",
+                        "text": "same source text",
+                        "source": "paper.html",
+                        "page_number": 1,
+                        "heading": "Results",
+                        "table_or_figure": None,
+                    },
+                    {
+                        "evidence_id": "FPE-1",
+                        "text": "same source text",
+                        "source": "paper.html",
+                        "page_number": 2,
+                        "heading": "Results",
+                        "table_or_figure": None,
+                    },
+                ]
+            }
+        )
+
+
+@pytest.mark.parametrize(
+    "forbidden_key",
+    [
+        "reference_facts",
+        "audit_findings",
+        "gold_id",
+        "benchmark_score",
+        "known_miss_prose",
+        "human_correction",
+    ],
+)
+def test_gold_blind_payload_rejects_prohibited_keys(forbidden_key):
     with pytest.raises(ValueError, match="gold-blind"):
         assert_gold_blind({"nested": {forbidden_key: "forbidden"}})
+
+
+def test_audit_case_fingerprint_includes_saved_replay_dependencies():
+    case = build_audit_cases(ROOT, artifact_root=ARTIFACT_ROOT)[0]
+
+    source_paths = "\n".join(case.source_paths)
+    assert "application_pilot_final.json" in source_paths
+    assert "validated_maps/PILOT-001.json" in source_paths
+    assert "PILOT-001/inventory.json" in source_paths
+    assert "downstream_gate/requests/REQ-1.json" in source_paths
+    assert "downstream_gate/run/REQ-1/response.json" in source_paths
