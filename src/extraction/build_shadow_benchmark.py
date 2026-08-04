@@ -74,6 +74,10 @@ AUDIT_PACKET_OUTPUT_SCHEMA = {
                     "raw_values",
                     "evidence_ids",
                     "quoted_support",
+                    "record_id",
+                    "fact_id",
+                    "entity_ids",
+                    "arm_id",
                 ],
                 "properties": {
                     "proposal_id": {"type": "string", "minLength": 1},
@@ -95,47 +99,19 @@ AUDIT_PACKET_OUTPUT_SCHEMA = {
                         "items": {"type": "string"},
                     },
                     "quoted_support": {"type": "string", "minLength": 1},
-                    "record_id": {"type": "string", "minLength": 1},
-                    "fact_id": {"type": "string", "minLength": 1},
+                    "record_id": {"type": ["string", "null"], "minLength": 1},
+                    "fact_id": {"type": ["string", "null"], "minLength": 1},
                     "entity_ids": {
-                        "type": "array",
+                        "type": ["array", "null"],
                         "minItems": 1,
                         "items": {"type": "string", "minLength": 1},
                     },
-                    "arm_id": {"type": "string", "minLength": 1},
+                    "arm_id": {"type": ["string", "null"], "minLength": 1},
                 },
-                "allOf": [
-                    {
-                        "if": {
-                            "properties": {"proposal_type": {"const": "replace_fact"}}
-                        },
-                        "then": {"required": ["record_id", "fact_id"]},
-                    }
-                ],
             },
         },
         "unresolved_reason": {"type": ["string", "null"]},
     },
-    "allOf": [
-        {
-            "if": {"properties": {"disposition": {"const": "proposals"}}},
-            "then": {
-                "properties": {
-                    "proposals": {"minItems": 1},
-                    "unresolved_reason": {"type": "null"},
-                }
-            },
-        },
-        {
-            "if": {"properties": {"disposition": {"const": "abstained"}}},
-            "then": {
-                "properties": {
-                    "proposals": {"maxItems": 0},
-                    "unresolved_reason": {"type": "string", "minLength": 1},
-                }
-            },
-        },
-    ],
 }
 
 

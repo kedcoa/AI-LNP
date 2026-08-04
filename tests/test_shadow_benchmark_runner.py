@@ -1,6 +1,8 @@
 import json
 import subprocess
 import sys
+import threading
+import time
 from pathlib import Path
 
 from src.extraction import run_shadow_benchmark as benchmark_runner
@@ -110,6 +112,42 @@ def test_run_codex_packet_rejects_final_output_that_violates_packet_schema(tmp_p
     assert result["terminal_disposition"] == "schema_failure"
     assert result["parsed_result"] is None
     assert any("unresolved_reason" in issue for issue in result["validation_issues"])
+
+
+def test_run_codex_packet_rejects_incoherent_disposition_after_schema_validation(
+    tmp_path,
+):
+    sealed = _sealed_packet()
+    packet = tmp_path / "packet.json"
+    schema = tmp_path / "schema.json"
+    packet.write_text(json.dumps(sealed), encoding="utf-8")
+    schema.write_text(json.dumps(sealed["output_schema"]), encoding="utf-8")
+    invalid = {
+        "disposition": "abstained",
+        "proposals": [
+            {
+                "proposal_id": "AP-1",
+                "proposal_type": "add_fact",
+                "experiment_id": None,
+                "candidate_id": None,
+                "field_name": "formulation_name",
+                "raw_values": ["Lipid A"],
+                "evidence_ids": [sealed["issued_ids"]["evidence_ids"][0]],
+                "quoted_support": "Lipid A",
+            }
+        ],
+        "unresolved_reason": "not enough evidence",
+    }
+
+    result = run_codex_packet(
+        packet,
+        schema,
+        30,
+        runner=_completed_with_final(_fixture("success.jsonl"), json.dumps(invalid)),
+    )
+
+    assert result["terminal_disposition"] == "schema_failure"
+    assert any("Abstained disposition" in issue for issue in result["validation_issues"])
 
 
 def test_run_codex_packet_retries_timeout_once_and_records_each_raw_stream(tmp_path):
@@ -228,6 +266,11 @@ def test_run_audit_packet_benchmark_executes_sealed_packet_with_its_schema(tmp_p
 
     assert not unattempted
     assert results[0]["terminal_disposition"] == "accepted"
+    isolation = json.loads(
+        (tmp_path / "audit_packets/gold_isolation.json").read_text(encoding="utf-8")
+    )
+    assert isolation["passed"] is True
+    assert isolation["checked_file_count"] == 3
     command = commands[0]
     assert "--json" in command
     schema_path = Path(command[command.index("--output-schema") + 1])
@@ -276,6 +319,14 @@ def test_main_audit_route_uses_sealed_packet_runner_not_legacy_audit_path(
     )
     assert manifest["attempt_count"] == 1
     assert manifest["terminal_dispositions"] == {"accepted": 1}
+    packet_results = json.loads(
+        (tmp_path / "fixture-audit/audit-codex/packet_results.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert packet_results["packet_count"] == 1
+    assert packet_results["results"][0]["parsed_result"]["disposition"] == "abstained"
+    assert packet_results["results"][0]["packet_path"].endswith("packet.json")
 
 
 def test_run_codex_packet_retries_cli_launch_failure_and_persists_error(tmp_path):
@@ -367,3 +418,70 @@ def test_run_codex_packets_treats_repeated_schema_failures_as_systemic(tmp_path)
     assert calls == 3
     assert len(results) == 3
     assert unattempted == [packets_and_schemas[3][0]]
+
+
+def test_run_codex_packets_executes_at_most_two_packets_concurrently(tmp_path):
+    packets_and_schemas = [
+        _packet_and_schema(tmp_path, f"packet-{number}") for number in range(4)
+    ]
+    barrier = threading.Barrier(2)
+    lock = threading.Lock()
+    active = 0
+    maximum_active = 0
+
+    def concurrent_runner(command, **kwargs):
+        nonlocal active, maximum_active
+        with lock:
+            active += 1
+            maximum_active = max(maximum_active, active)
+        barrier.wait(timeout=2)
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        output_path.write_text(_fixture("valid_final.json"), encoding="utf-8")
+        with lock:
+            active -= 1
+        return subprocess.CompletedProcess(
+            command, 0, _fixture("success.jsonl").encode(), b""
+        )
+
+    results, unattempted = run_codex_packets(
+        packets_and_schemas,
+        timeout_seconds=30,
+        concurrency=2,
+        max_wall_seconds=60,
+        runner=concurrent_runner,
+    )
+
+    assert maximum_active == 2
+    assert [Path(result["packet_path"]).stem for result in results] == [
+        f"packet-{number}" for number in range(4)
+    ]
+    assert unattempted == []
+
+
+def test_run_codex_packets_stops_issuing_work_after_wall_clock_cutoff(tmp_path):
+    packets_and_schemas = [
+        _packet_and_schema(tmp_path, f"packet-{number}") for number in range(4)
+    ]
+    calls = 0
+
+    def slow_runner(command, **kwargs):
+        nonlocal calls
+        calls += 1
+        time.sleep(0.03)
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        output_path.write_text(_fixture("valid_final.json"), encoding="utf-8")
+        return subprocess.CompletedProcess(
+            command, 0, _fixture("success.jsonl").encode(), b""
+        )
+
+    results, unattempted = run_codex_packets(
+        packets_and_schemas,
+        timeout_seconds=30,
+        concurrency=2,
+        max_wall_seconds=0.01,
+        runner=slow_runner,
+    )
+
+    assert calls == 2
+    assert len(results) == 2
+    assert unattempted == [path for path, _schema in packets_and_schemas[2:]]

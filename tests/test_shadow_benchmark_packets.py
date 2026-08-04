@@ -316,6 +316,24 @@ def test_build_audit_packets_includes_proposal_only_output_contract(packet_input
     assert "findings" not in schema["properties"]
 
 
+def test_audit_packet_output_schema_uses_hosted_supported_keywords(packet_inputs):
+    replayed, evidence = packet_inputs
+    schema = build_audit_packets(replayed, evidence)[0]["output_schema"]
+
+    def keys(value):
+        if isinstance(value, dict):
+            return set(value) | set().union(*(keys(child) for child in value.values()))
+        if isinstance(value, list):
+            return set().union(*(keys(child) for child in value))
+        return set()
+
+    assert "allOf" not in keys(schema)
+    assert "if" not in keys(schema)
+    assert "then" not in keys(schema)
+    proposal_schema = schema["properties"]["proposals"]["items"]
+    assert set(proposal_schema["required"]) == set(proposal_schema["properties"])
+
+
 def test_build_audit_packets_issues_stable_target_and_arm_namespaces(packet_inputs):
     replayed, evidence = packet_inputs
 

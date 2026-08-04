@@ -1,0 +1,73 @@
+{
+  "terminal_packets": 28,
+  "terminal_dispositions": {
+    "accepted": 27,
+    "schema_failure": 1
+  },
+  "proposal_accounting": {
+    "proposed": 88,
+    "accepted": 55,
+    "rejected": 33,
+    "rejection_reasons": {
+      "cross_experiment_evidence": 5,
+      "quote_mismatch": 5,
+      "unsupported_exact_number": 23,
+      "wrong_arm_link": 5
+    }
+  },
+  "usage": {
+    "models": [],
+    "input_tokens": 559386,
+    "output_tokens": 23444,
+    "cached_input_tokens": 60160,
+    "attempts_missing_token_measurement": 0,
+    "attempt_count": 28,
+    "latency_seconds": 702.6902099172585,
+    "actual_model": null,
+    "model_measurement_reason": "Codex JSONL did not report the resolved model; runner selection was hosted-default.",
+    "runner_model_selection": "hosted-default",
+    "mean_latency_seconds": 25.096078925616375
+  },
+  "run_id": "2026-08-04-codex-audit-e2e-v4",
+  "issued_packets": 28,
+  "unattempted_packets": 0,
+  "retry_count": 0,
+  "gold_isolation": {
+    "passed": true,
+    "checked_file_count": 57,
+    "proof_path": "audit-codex/audit_packets/gold_isolation.json"
+  },
+  "paid_api_requests": 0,
+  "production_writes": 0,
+  "per_paper": {
+    "PILOT-001": {
+      "packets": 10,
+      "accepted_proposals": 17,
+      "rejected_proposals": 11
+    },
+    "PILOT-002": {
+      "packets": 9,
+      "accepted_proposals": 17,
+      "rejected_proposals": 9
+    },
+    "PILOT-003": {
+      "packets": 9,
+      "accepted_proposals": 21,
+      "rejected_proposals": 13
+    }
+  },
+  "schema_failures": [
+    {
+      "packet_id": "PILOT-003:unused-evidence:001",
+      "reason": "Proposal disposition requires one or more proposals and a null unresolved_reason"
+    }
+  ],
+  "safety": {
+    "gold_leakage": 0,
+    "accepted_unsupported_or_invented_fact": 0,
+    "accepted_wrong_relationship": 0,
+    "three_consecutive_systemic_failures": 0,
+    "production_writes": 0,
+    "paid_api_requests": 0
+  }
+}

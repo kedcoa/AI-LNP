@@ -77,6 +77,21 @@ def test_validator_accepts_supported_proposal_with_issued_arm(packet, proposal):
     assert validation["proposal"] == proposal
 
 
+def test_validator_accepts_nullable_unset_optional_schema_fields(packet, proposal):
+    nullable = {
+        **proposal,
+        "record_id": None,
+        "fact_id": None,
+        "entity_ids": None,
+        "arm_id": None,
+    }
+
+    validation = validate_proposal(nullable, packet)
+
+    assert validation["accepted"] is True
+    assert validation["rejection_reasons"] == []
+
+
 @pytest.mark.parametrize(
     ("change", "reason"),
     [

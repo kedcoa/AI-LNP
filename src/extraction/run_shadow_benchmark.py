@@ -5,9 +5,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import subprocess
 import urllib.request
 from collections.abc import Iterable, Mapping, Sequence
+from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from datetime import datetime, timezone
 from pathlib import Path
 from time import monotonic
@@ -19,6 +21,7 @@ from pydantic import ValidationError
 
 from src.extraction.full_paper_contracts import ContextTask
 from src.extraction.full_paper_tasks import validate_context_response
+from src.extraction.replay_shadow_baseline import assert_gold_blind
 from src.extraction.build_shadow_benchmark import (
     build_audit_cases,
     build_audit_packets,
@@ -178,6 +181,25 @@ def _validate_packet_final_message(
     except SchemaError as exc:
         return None, [f"Invalid packet output schema: {exc.message}"]
     issues = [error.message for error in sorted(validator.iter_errors(parsed), key=str)]
+    disposition = parsed.get("disposition")
+    proposals = parsed.get("proposals")
+    unresolved_reason = parsed.get("unresolved_reason")
+    if disposition == "proposals" and (
+        not isinstance(proposals, list)
+        or not proposals
+        or unresolved_reason is not None
+    ):
+        issues.append(
+            "Proposal disposition requires one or more proposals and a null unresolved_reason"
+        )
+    if disposition == "abstained" and (
+        proposals != []
+        or not isinstance(unresolved_reason, str)
+        or not unresolved_reason
+    ):
+        issues.append(
+            "Abstained disposition requires no proposals and a non-empty unresolved_reason"
+        )
     return (parsed if not issues else None), issues
 
 
@@ -301,6 +323,7 @@ def run_codex_packet(
     timeout_seconds: int,
     *,
     runner: PacketRunner = subprocess.run,
+    deadline_monotonic: float | None = None,
 ) -> dict[str, Any]:
     """Run one sealed audit packet, retrying one runtime failure at most once."""
 
@@ -318,17 +341,25 @@ def run_codex_packet(
     schema_text = output_schema.read_text(encoding="utf-8")
     attempts: list[dict[str, Any]] = []
     for attempt_number in (1, 2):
+        attempt_timeout = timeout_seconds
+        if deadline_monotonic is not None:
+            remaining_seconds = deadline_monotonic - monotonic()
+            if remaining_seconds <= 0:
+                break
+            attempt_timeout = min(timeout_seconds, max(1, math.ceil(remaining_seconds)))
         attempt = _run_codex_packet_attempt(
             packet_text,
             schema_text,
             execution_root=execution_root,
             attempt_number=attempt_number,
-            timeout_seconds=timeout_seconds,
+            timeout_seconds=attempt_timeout,
             runner=runner,
         )
         attempts.append(attempt)
         if attempt["terminal_disposition"] != "timeout_or_runtime_failure":
             break
+    if not attempts:
+        raise TimeoutError("Benchmark wall-clock cutoff reached before packet dispatch")
     terminal = attempts[-1]
     return {
         **terminal,
@@ -347,30 +378,76 @@ def run_codex_packets(
     packet_schemas: Sequence[tuple[Path, Path]],
     *,
     timeout_seconds: int,
+    concurrency: int = 1,
+    max_wall_seconds: float | None = None,
     runner: PacketRunner = subprocess.run,
 ) -> tuple[list[dict[str, Any]], list[Path]]:
-    """Run packets until three consecutive systemic failures trip the breaker."""
+    """Run packets with bounded concurrency, failures, retries, and wall time."""
 
-    results: list[dict[str, Any]] = []
+    if concurrency < 1:
+        raise ValueError("concurrency must be at least one")
+    if max_wall_seconds is not None and max_wall_seconds <= 0:
+        raise ValueError("max_wall_seconds must be positive")
+    deadline = (
+        monotonic() + max_wall_seconds if max_wall_seconds is not None else None
+    )
+    results_by_index: dict[int, dict[str, Any]] = {}
+    next_index = 0
+    checked_index = 0
     consecutive_systemic_failures = 0
-    for index, (packet_path, output_schema) in enumerate(packet_schemas):
-        result = run_codex_packet(
-            packet_path,
-            output_schema,
-            timeout_seconds,
-            runner=runner,
-        )
-        results.append(result)
-        if result["terminal_disposition"] in {
-            "schema_failure",
-            "timeout_or_runtime_failure",
-        }:
-            consecutive_systemic_failures += 1
-        else:
-            consecutive_systemic_failures = 0
-        if consecutive_systemic_failures == 3:
-            return results, [path for path, _schema in packet_schemas[index + 1 :]]
-    return results, []
+    breaker_tripped = False
+
+    def time_remains() -> bool:
+        return deadline is None or monotonic() < deadline
+
+    with ThreadPoolExecutor(max_workers=concurrency) as executor:
+        pending: dict[Future[dict[str, Any]], int] = {}
+
+        def submit_available() -> None:
+            nonlocal next_index
+            while (
+                not breaker_tripped
+                and time_remains()
+                and len(pending) < concurrency
+                and next_index < len(packet_schemas)
+            ):
+                packet_path, output_schema = packet_schemas[next_index]
+                future = executor.submit(
+                    run_codex_packet,
+                    packet_path,
+                    output_schema,
+                    timeout_seconds,
+                    runner=runner,
+                    deadline_monotonic=deadline,
+                )
+                pending[future] = next_index
+                next_index += 1
+
+        submit_available()
+        while pending:
+            completed, _ = wait(pending, return_when=FIRST_COMPLETED)
+            for future in completed:
+                index = pending.pop(future)
+                results_by_index[index] = future.result()
+            while checked_index in results_by_index:
+                disposition = results_by_index[checked_index]["terminal_disposition"]
+                if disposition in {"schema_failure", "timeout_or_runtime_failure"}:
+                    consecutive_systemic_failures += 1
+                else:
+                    consecutive_systemic_failures = 0
+                checked_index += 1
+                if consecutive_systemic_failures == 3:
+                    breaker_tripped = True
+                    break
+            submit_available()
+
+    results = [results_by_index[index] for index in sorted(results_by_index)]
+    unattempted = [
+        packet_path
+        for index, (packet_path, _schema) in enumerate(packet_schemas)
+        if index not in results_by_index
+    ]
+    return results, unattempted
 
 
 def _write_sealed_audit_packets(
@@ -399,18 +476,59 @@ def _write_sealed_audit_packets(
     return packet_schemas
 
 
+def _write_gold_isolation_proof(packet_schemas: Sequence[tuple[Path, Path]]) -> Path:
+    packet_root = packet_schemas[0][0].parents[1]
+    checked_paths = [packet_root / "manifest.json"]
+    checked_paths.extend(
+        path for packet_schema in packet_schemas for path in packet_schema
+    )
+    checked: list[dict[str, str]] = []
+    for path in checked_paths:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(payload, Mapping):
+            raise ValueError(f"model-readable JSON must be an object: {path}")
+        assert_gold_blind(payload)
+        checked.append(
+            {
+                "path": str(path.relative_to(packet_root)),
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+        )
+    proof_path = packet_root / "gold_isolation.json"
+    proof_path.write_text(
+        json.dumps(
+            {
+                "passed": True,
+                "checked_file_count": len(checked),
+                "checked_files": checked,
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return proof_path
+
+
 def run_audit_packet_benchmark(
     packets: Sequence[Mapping[str, Any]],
     *,
     run_root: Path,
     timeout_seconds: int,
+    concurrency: int = 2,
+    max_wall_seconds: float = 7_200,
     runner: PacketRunner = subprocess.run,
 ) -> tuple[list[dict[str, Any]], list[Path]]:
     """Persist sealed packets and execute them only through the JSONL runner."""
 
+    packet_schemas = _write_sealed_audit_packets(packets, run_root)
+    _write_gold_isolation_proof(packet_schemas)
     return run_codex_packets(
-        _write_sealed_audit_packets(packets, run_root),
+        packet_schemas,
         timeout_seconds=timeout_seconds,
+        concurrency=concurrency,
+        max_wall_seconds=max_wall_seconds,
         runner=runner,
     )
 
@@ -676,6 +794,8 @@ def main(*, packet_runner: PacketRunner = subprocess.run) -> None:
     parser.add_argument("--backend", choices=("codex", "ollama"), required=True)
     parser.add_argument("--model", default="auto-installed")
     parser.add_argument("--timeout-seconds", type=int, default=300)
+    parser.add_argument("--concurrency", type=int, default=2)
+    parser.add_argument("--max-wall-seconds", type=float, default=7_200)
     args = parser.parse_args()
     route = args.route.replace("-", "_")
     model = args.model
@@ -695,12 +815,23 @@ def main(*, packet_runner: PacketRunner = subprocess.run) -> None:
             _build_executable_audit_packets(),
             run_root=run_root,
             timeout_seconds=args.timeout_seconds,
+            concurrency=args.concurrency,
+            max_wall_seconds=args.max_wall_seconds,
             runner=packet_runner,
         )
         unattempted_key = "unattempted_packet_paths"
         unattempted_values = [str(path.relative_to(run_root)) for path in unattempted]
         terminal_dispositions = [row["terminal_disposition"] for row in attempts]
         production_writes = 0
+        (run_root / "packet_results.json").write_text(
+            json.dumps(
+                {"packet_count": len(attempts), "results": attempts},
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
     else:
         attempts, unattempted = run_cases(
             _load_cases(args.run_id, route),
@@ -719,6 +850,8 @@ def main(*, packet_runner: PacketRunner = subprocess.run) -> None:
         "backend": args.backend,
         "model": model,
         "model_digest": model_digest,
+        "concurrency": args.concurrency if route == "audit" else 1,
+        "max_wall_seconds": args.max_wall_seconds if route == "audit" else None,
         "attempt_count": len(attempts),
         unattempted_key: unattempted_values,
         "terminal_dispositions": {

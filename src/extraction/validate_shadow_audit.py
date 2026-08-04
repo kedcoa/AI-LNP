@@ -62,14 +62,17 @@ def _proposal_issues(proposal: Mapping[str, Any]) -> list[str]:
     if not isinstance(proposal.get("quoted_support"), str) or not proposal["quoted_support"]:
         return ["malformed_proposal"]
     for name in ("record_id", "fact_id", "arm_id"):
-        if name in proposal and (
+        if proposal.get(name) is not None and (
             not isinstance(proposal[name], str) or not proposal[name]
         ):
             return ["malformed_proposal"]
-    if "entity_ids" in proposal and not _string_list(proposal["entity_ids"]):
+    if proposal.get("entity_ids") is not None and not _string_list(
+        proposal["entity_ids"]
+    ):
         return ["malformed_proposal"]
     if proposal["proposal_type"] == "replace_fact" and (
-        "record_id" not in proposal or "fact_id" not in proposal
+        not isinstance(proposal.get("record_id"), str)
+        or not isinstance(proposal.get("fact_id"), str)
     ):
         return ["missing_replacement_target"]
     return []
@@ -209,9 +212,11 @@ def validate_proposal(proposal: Mapping[str, Any], packet: Mapping[str, Any]) ->
         ("fact_id", "fact_ids", "unknown_fact_id"),
         ("arm_id", "arm_ids", "unknown_arm_id"),
     ):
-        if field_name in proposal and proposal[field_name] not in _issued_strings(packet, issued_name):
+        if isinstance(proposal.get(field_name), str) and proposal[
+            field_name
+        ] not in _issued_strings(packet, issued_name):
             reasons.append(reason)
-    if "entity_ids" in proposal:
+    if isinstance(proposal.get("entity_ids"), list):
         issued_entities = _issued_strings(packet, "entity_ids")
         if any(entity_id not in issued_entities for entity_id in proposal["entity_ids"]):
             reasons.append("unknown_entity_id")
@@ -298,8 +303,16 @@ def _fact_from_proposal(proposal: Mapping[str, Any]) -> dict[str, Any]:
         "raw_values": list(proposal["raw_values"]),
         "evidence_ids": list(proposal["evidence_ids"]),
         "audit_provenance": _proposal_provenance(proposal),
-        **({"record_id": proposal["record_id"]} if "record_id" in proposal else {}),
-        **({"fact_id": proposal["fact_id"]} if "fact_id" in proposal else {}),
+        **(
+            {"record_id": proposal["record_id"]}
+            if isinstance(proposal.get("record_id"), str)
+            else {}
+        ),
+        **(
+            {"fact_id": proposal["fact_id"]}
+            if isinstance(proposal.get("fact_id"), str)
+            else {}
+        ),
     }
 
 
