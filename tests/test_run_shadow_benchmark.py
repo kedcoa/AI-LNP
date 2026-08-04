@@ -59,26 +59,22 @@ def test_ollama_command_is_ephemeral_read_only_and_local(tmp_path):
     assert command[-1] == "-"
 
 
-def test_valid_audit_output_is_accepted(tmp_path):
+def test_legacy_runner_rejects_audit_cases(tmp_path):
     case = build_audit_cases(ROOT)[0]
 
-    result = run_case(
-        case,
-        backend="codex",
-        model="hosted-default",
-        run_root=tmp_path,
-        timeout_seconds=30,
-        runner=_completed(_valid_audit_json()),
-    )
-
-    assert result.terminal_disposition == "accepted"
-    assert result.exit_code == 0
-    assert result.paid_api_requests == 0
-    assert result.production_writes == 0
+    with pytest.raises(ValueError, match="sealed audit packets"):
+        run_case(
+            case,
+            backend="codex",
+            model="hosted-default",
+            run_root=tmp_path,
+            timeout_seconds=30,
+            runner=_completed(_valid_audit_json()),
+        )
 
 
 def test_malformed_output_is_a_schema_failure(tmp_path):
-    case = build_audit_cases(ROOT)[0]
+    case = build_gate_b_cases(ROOT)[0]
 
     result = run_case(
         case,
@@ -111,7 +107,7 @@ def test_schema_json_that_violates_gate_b_rules_is_rejected_by_validation(tmp_pa
 
 
 def test_nonzero_exit_is_a_runtime_failure(tmp_path):
-    case = build_audit_cases(ROOT)[0]
+    case = build_gate_b_cases(ROOT)[0]
 
     result = run_case(
         case,
@@ -127,7 +123,7 @@ def test_nonzero_exit_is_a_runtime_failure(tmp_path):
 
 
 def test_timeout_is_a_runtime_failure(tmp_path):
-    case = build_audit_cases(ROOT)[0]
+    case = build_gate_b_cases(ROOT)[0]
 
     def timeout_runner(*args, **kwargs):
         raise subprocess.TimeoutExpired(args[0], kwargs["timeout"])
@@ -146,7 +142,7 @@ def test_timeout_is_a_runtime_failure(tmp_path):
 
 
 def test_case_output_is_append_only(tmp_path):
-    case = build_audit_cases(ROOT)[0]
+    case = build_gate_b_cases(ROOT)[0]
     kwargs = {
         "backend": "codex",
         "model": "hosted-default",
@@ -161,7 +157,7 @@ def test_case_output_is_append_only(tmp_path):
 
 
 def test_three_consecutive_schema_failures_stop_remaining_cases(tmp_path):
-    cases = build_audit_cases(ROOT) + build_gate_b_cases(ROOT)[:2]
+    cases = build_gate_b_cases(ROOT)[:5]
 
     attempts, unattempted = run_cases(
         cases,

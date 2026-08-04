@@ -19,14 +19,19 @@ from pydantic import ValidationError
 
 from src.extraction.full_paper_contracts import ContextTask
 from src.extraction.full_paper_tasks import validate_context_response
+from src.extraction.build_shadow_benchmark import (
+    build_audit_cases,
+    build_audit_packets,
+    write_audit_packet_manifest,
+)
 from src.extraction.shadow_benchmark_contracts import (
     AttemptResult,
-    AuditResponse,
     BenchmarkCase,
 )
 
 
 Runner = Callable[..., subprocess.CompletedProcess[str]]
+PacketRunner = Callable[..., subprocess.CompletedProcess[bytes]]
 ROOT = Path(__file__).resolve().parents[2]
 CASE_ROOT = ROOT / "data/staging/extraction/codex_ollama_shadow"
 REPORT_ROOT = ROOT / "reports/extraction/codex_ollama_shadow"
@@ -46,6 +51,22 @@ def _as_text(value: str | bytes | None) -> str:
     if isinstance(value, bytes):
         return value.decode("utf-8", errors="replace")
     return value or ""
+
+
+def _as_bytes(value: str | bytes | None) -> bytes:
+    if isinstance(value, bytes):
+        return value
+    return (value or "").encode("utf-8")
+
+
+def _decode_jsonl(raw_jsonl: bytes) -> tuple[str, list[str]]:
+    try:
+        return raw_jsonl.decode("utf-8"), []
+    except UnicodeDecodeError as exc:
+        return (
+            raw_jsonl.decode("utf-8", errors="replace"),
+            [f"Codex JSONL is not valid UTF-8: {exc}"],
+        )
 
 
 def _first_number(value: Mapping[str, Any], *keys: str) -> float | None:
@@ -167,7 +188,7 @@ def _run_codex_packet_attempt(
     execution_root: Path,
     attempt_number: int,
     timeout_seconds: int,
-    runner: Runner,
+    runner: PacketRunner,
 ) -> dict[str, Any]:
     attempt_dir = execution_root / f"attempt-{attempt_number:02d}"
     attempt_dir.mkdir(parents=True)
@@ -184,23 +205,25 @@ def _run_codex_packet_attempt(
         workdir=attempt_dir,
     )
     started = monotonic()
-    stdout = ""
-    stderr = ""
+    raw_jsonl = b""
+    stderr = b""
     exit_code: int | None = None
     disposition = "timeout_or_runtime_failure"
     parsed_result: dict[str, Any] | None = None
     validation_issues: list[str] = []
+    timed_out = False
+    runtime_error: str | None = None
     try:
         completed = runner(
             command,
-            input=packet_text,
-            text=True,
+            input=packet_text.encode("utf-8"),
+            text=False,
             capture_output=True,
             timeout=timeout_seconds,
             check=False,
         )
-        stdout = _as_text(completed.stdout)
-        stderr = _as_text(completed.stderr)
+        raw_jsonl = _as_bytes(completed.stdout)
+        stderr = _as_bytes(completed.stderr)
         exit_code = completed.returncode
         if exit_code != 0:
             validation_issues.append(f"Codex CLI exited with status {exit_code}")
@@ -215,18 +238,26 @@ def _run_codex_packet_attempt(
                     last_message_path, output_schema
                 )
                 disposition = "accepted" if parsed_result is not None else "schema_failure"
+            else:
+                disposition = "schema_failure"
+                validation_issues.append("Packet output schema must be a JSON object")
     except subprocess.TimeoutExpired as exc:
-        stdout = _as_text(getattr(exc, "stdout", None) or exc.output)
-        stderr = _as_text(getattr(exc, "stderr", None))
+        raw_jsonl = _as_bytes(getattr(exc, "stdout", None) or exc.output)
+        stderr = _as_bytes(getattr(exc, "stderr", None))
+        timed_out = True
+        runtime_error = f"Codex CLI timed out after {timeout_seconds} seconds"
         validation_issues.append(f"Codex CLI timed out after {timeout_seconds} seconds")
     except OSError as exc:
-        stderr = str(exc)
-        validation_issues.append(f"Codex CLI could not start: {exc}")
-    raw_jsonl_path.write_text(stdout, encoding="utf-8")
-    stderr_path.write_text(stderr, encoding="utf-8")
-    telemetry = parse_codex_jsonl(stdout.splitlines())
+        runtime_error = f"Codex CLI could not start: {exc}"
+        stderr = runtime_error.encode("utf-8")
+        validation_issues.append(runtime_error)
+    raw_jsonl_path.write_bytes(raw_jsonl)
+    stderr_path.write_bytes(stderr)
+    decoded_jsonl, decode_issues = _decode_jsonl(raw_jsonl)
+    telemetry = parse_codex_jsonl(decoded_jsonl.splitlines())
+    validation_issues.extend(decode_issues)
     validation_issues.extend(telemetry["parse_issues"])
-    if telemetry["parse_issues"] and disposition == "accepted":
+    if (decode_issues or telemetry["parse_issues"]) and disposition == "accepted":
         disposition = "schema_failure"
         parsed_result = None
     latency_seconds = telemetry["latency_seconds"]
@@ -235,7 +266,11 @@ def _run_codex_packet_attempt(
     missing_usage = (
         telemetry["input_tokens"] is None or telemetry["output_tokens"] is None
     )
-    return {
+    attempt = {
+        "attempt_number": attempt_number,
+        "timeout_seconds": timeout_seconds,
+        "timed_out": timed_out,
+        "runtime_error": runtime_error,
         "exit_code": exit_code,
         "terminal_disposition": disposition,
         "parsed_result": parsed_result,
@@ -252,6 +287,12 @@ def _run_codex_packet_attempt(
         "stderr_path": str(stderr_path),
         "last_message_path": str(last_message_path),
     }
+    attempt_record_path = attempt_dir / "attempt.json"
+    attempt["attempt_record_path"] = str(attempt_record_path)
+    attempt_record_path.write_text(
+        json.dumps(attempt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return attempt
 
 
 def run_codex_packet(
@@ -259,7 +300,7 @@ def run_codex_packet(
     output_schema: Path,
     timeout_seconds: int,
     *,
-    runner: Runner = subprocess.run,
+    runner: PacketRunner = subprocess.run,
 ) -> dict[str, Any]:
     """Run one sealed audit packet, retrying one runtime failure at most once."""
 
@@ -295,6 +336,7 @@ def run_codex_packet(
         "output_schema_path": str(output_schema),
         "attempt_count": len(attempts),
         "retry_count": len(attempts) - 1,
+        "attempts": attempts,
         "raw_jsonl_paths": [attempt["raw_jsonl_path"] for attempt in attempts],
         "stderr_paths": [attempt["stderr_path"] for attempt in attempts],
         "last_message_paths": [attempt["last_message_path"] for attempt in attempts],
@@ -305,7 +347,7 @@ def run_codex_packets(
     packet_schemas: Sequence[tuple[Path, Path]],
     *,
     timeout_seconds: int,
-    runner: Runner = subprocess.run,
+    runner: PacketRunner = subprocess.run,
 ) -> tuple[list[dict[str, Any]], list[Path]]:
     """Run packets until three consecutive systemic failures trip the breaker."""
 
@@ -329,6 +371,57 @@ def run_codex_packets(
         if consecutive_systemic_failures == 3:
             return results, [path for path, _schema in packet_schemas[index + 1 :]]
     return results, []
+
+
+def _write_sealed_audit_packets(
+    packets: Sequence[Mapping[str, Any]], run_root: Path
+) -> list[tuple[Path, Path]]:
+    packet_root = run_root / "audit_packets"
+    packet_root.mkdir()
+    write_audit_packet_manifest(packets, packet_root / "manifest.json")
+    packet_schemas: list[tuple[Path, Path]] = []
+    for index, packet in enumerate(packets, start=1):
+        output_schema = packet.get("output_schema")
+        if not isinstance(output_schema, Mapping):
+            raise ValueError("sealed audit packet is missing an output schema")
+        packet_dir = packet_root / f"packet-{index:03d}"
+        packet_dir.mkdir()
+        packet_path = packet_dir / "packet.json"
+        schema_path = packet_dir / "output_schema.json"
+        packet_path.write_text(
+            json.dumps(packet, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        schema_path.write_text(
+            json.dumps(output_schema, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        packet_schemas.append((packet_path, schema_path))
+    return packet_schemas
+
+
+def run_audit_packet_benchmark(
+    packets: Sequence[Mapping[str, Any]],
+    *,
+    run_root: Path,
+    timeout_seconds: int,
+    runner: PacketRunner = subprocess.run,
+) -> tuple[list[dict[str, Any]], list[Path]]:
+    """Persist sealed packets and execute them only through the JSONL runner."""
+
+    return run_codex_packets(
+        _write_sealed_audit_packets(packets, run_root),
+        timeout_seconds=timeout_seconds,
+        runner=runner,
+    )
+
+
+def _build_executable_audit_packets() -> list[dict[str, Any]]:
+    packets: list[dict[str, Any]] = []
+    for case in build_audit_cases(ROOT):
+        replayed = case.payload["merged_extraction"]
+        evidence = case.payload["evidence_inventory"]
+        packets.extend(build_audit_packets(replayed, evidence))
+    return packets
 
 
 def _model_prompt(case: BenchmarkCase) -> str:
@@ -408,6 +501,10 @@ def run_case(
     timeout_seconds: int,
     runner: Runner = subprocess.run,
 ) -> AttemptResult:
+    if case.route == "audit":
+        raise ValueError(
+            "Audit benchmark cases must run through sealed audit packets, not run_case"
+        )
     attempt_dir = run_root / "attempts" / case.case_id
     if attempt_dir.exists():
         raise FileExistsError(f"Refusing to overwrite {attempt_dir}")
@@ -454,37 +551,24 @@ def run_case(
         else:
             try:
                 raw = json.loads(stdout)
-                if case.route == "audit":
-                    response = AuditResponse.model_validate(raw)
-                    parsed_result = response.model_dump(mode="json")
-                    disposition = (
-                        "model_abstained"
-                        if response.disposition == "abstained"
-                        else "accepted"
+                parsed_result = raw
+                report = validate_context_response(
+                    raw, ContextTask.model_validate(case.payload)
+                )
+                if report.status != "valid":
+                    disposition = "rejected_by_validation"
+                    issues.extend(
+                        f"{finding.code}: {finding.message}"
+                        for finding in report.findings
                     )
                 else:
-                    parsed_result = raw
-                    report = validate_context_response(
-                        raw, ContextTask.model_validate(case.payload)
+                    accounting = raw.get("context_candidate_accounting", {})
+                    extracted = any(
+                        isinstance(row, dict)
+                        and row.get("disposition") == "extracted"
+                        for row in accounting.values()
                     )
-                    if report.status != "valid":
-                        disposition = "rejected_by_validation"
-                        issues.extend(
-                            f"{finding.code}: {finding.message}"
-                            for finding in report.findings
-                        )
-                    else:
-                        accounting = raw.get("context_candidate_accounting", {})
-                        extracted = any(
-                            isinstance(row, dict)
-                            and row.get("disposition") == "extracted"
-                            for row in accounting.values()
-                        )
-                        disposition = (
-                            "model_abstained"
-                            if not extracted
-                            else "accepted"
-                        )
+                    disposition = "model_abstained" if not extracted else "accepted"
             except (json.JSONDecodeError, ValidationError) as exc:
                 disposition = "schema_failure"
                 issues.append(str(exc))
@@ -585,7 +669,7 @@ def _load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def main() -> None:
+def main(*, packet_runner: PacketRunner = subprocess.run) -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--route", choices=("audit", "gate-b"), required=True)
@@ -604,13 +688,31 @@ def main() -> None:
     if run_root.exists():
         raise FileExistsError(f"Refusing to overwrite {run_root}")
     run_root.mkdir(parents=True)
-    attempts, unattempted = run_cases(
-        _load_cases(args.run_id, route),
-        backend=args.backend,
-        model=model,
-        run_root=run_root,
-        timeout_seconds=args.timeout_seconds,
-    )
+    if route == "audit":
+        if args.backend != "codex":
+            raise ValueError("The sealed audit benchmark requires the Codex backend")
+        attempts, unattempted = run_audit_packet_benchmark(
+            _build_executable_audit_packets(),
+            run_root=run_root,
+            timeout_seconds=args.timeout_seconds,
+            runner=packet_runner,
+        )
+        unattempted_key = "unattempted_packet_paths"
+        unattempted_values = [str(path.relative_to(run_root)) for path in unattempted]
+        terminal_dispositions = [row["terminal_disposition"] for row in attempts]
+        production_writes = 0
+    else:
+        attempts, unattempted = run_cases(
+            _load_cases(args.run_id, route),
+            backend=args.backend,
+            model=model,
+            run_root=run_root,
+            timeout_seconds=args.timeout_seconds,
+        )
+        unattempted_key = "unattempted_case_ids"
+        unattempted_values = unattempted
+        terminal_dispositions = [row.terminal_disposition for row in attempts]
+        production_writes = sum(row.production_writes for row in attempts)
     manifest = {
         "run_id": args.run_id,
         "route": route,
@@ -618,17 +720,13 @@ def main() -> None:
         "model": model,
         "model_digest": model_digest,
         "attempt_count": len(attempts),
-        "unattempted_case_ids": unattempted,
+        unattempted_key: unattempted_values,
         "terminal_dispositions": {
-            disposition: sum(
-                row.terminal_disposition == disposition for row in attempts
-            )
-            for disposition in sorted(
-                {row.terminal_disposition for row in attempts}
-            )
+            disposition: terminal_dispositions.count(disposition)
+            for disposition in sorted(set(terminal_dispositions))
         },
         "paid_api_requests": 0,
-        "production_writes": sum(row.production_writes for row in attempts),
+        "production_writes": production_writes,
     }
     (run_root / "run_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",

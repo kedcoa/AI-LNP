@@ -1,12 +1,16 @@
 import json
 import subprocess
+import sys
 from pathlib import Path
 
+from src.extraction import run_shadow_benchmark as benchmark_runner
 from src.extraction.run_shadow_benchmark import (
     parse_codex_jsonl,
+    run_audit_packet_benchmark,
     run_codex_packet,
     run_codex_packets,
 )
+from src.extraction.build_shadow_benchmark import build_audit_packets
 
 
 FIXTURE_ROOT = (
@@ -24,6 +28,14 @@ def _packet_and_schema(tmp_path: Path, name: str = "packet") -> tuple[Path, Path
     schema = tmp_path / f"{name}.schema.json"
     schema.write_text(_fixture("audit_packet_output_schema.json"), encoding="utf-8")
     return packet, schema
+
+
+def _sealed_packet() -> dict:
+    packet_root = FIXTURE_ROOT.parent / "audit_packets"
+    return build_audit_packets(
+        json.loads((packet_root / "replayed.json").read_text(encoding="utf-8")),
+        json.loads((packet_root / "evidence.json").read_text(encoding="utf-8")),
+    )[0]
 
 
 def _completed_with_final(jsonl: str, final: str, returncode: int = 0):
@@ -103,11 +115,12 @@ def test_run_codex_packet_rejects_final_output_that_violates_packet_schema(tmp_p
 def test_run_codex_packet_retries_timeout_once_and_records_each_raw_stream(tmp_path):
     packet, schema = _packet_and_schema(tmp_path)
     calls = 0
+    timed_out_raw_jsonl = _fixture("success.jsonl").encode("utf-8") + b"\xff\n"
 
     def timeout_runner(command, **kwargs):
         nonlocal calls
         calls += 1
-        raise subprocess.TimeoutExpired(command, kwargs["timeout"], output=_fixture("success.jsonl"))
+        raise subprocess.TimeoutExpired(command, kwargs["timeout"], output=timed_out_raw_jsonl)
 
     result = run_codex_packet(packet, schema, 30, runner=timeout_runner)
 
@@ -116,7 +129,10 @@ def test_run_codex_packet_retries_timeout_once_and_records_each_raw_stream(tmp_p
     assert result["attempt_count"] == 2
     assert result["retry_count"] == 1
     assert len(result["raw_jsonl_paths"]) == 2
-    assert all(Path(path).read_text(encoding="utf-8") == _fixture("success.jsonl") for path in result["raw_jsonl_paths"])
+    assert all(
+        Path(path).read_bytes() == timed_out_raw_jsonl
+        for path in result["raw_jsonl_paths"]
+    )
 
 
 def test_run_codex_packet_retries_nonzero_exit_once(tmp_path):
@@ -135,6 +151,131 @@ def test_run_codex_packet_retries_nonzero_exit_once(tmp_path):
     assert result["exit_code"] == 17
     assert result["attempt_count"] == 2
     assert result["retry_count"] == 1
+
+
+def test_run_codex_packet_preserves_complete_records_for_both_attempts(tmp_path):
+    packet, schema = _packet_and_schema(tmp_path)
+    calls = 0
+
+    def eventually_successful_runner(command, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return subprocess.CompletedProcess(
+                command, 17, _fixture("success.jsonl").encode(), b"first failed"
+            )
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        output_path.write_text(_fixture("valid_final.json"), encoding="utf-8")
+        return subprocess.CompletedProcess(
+            command, 0, _fixture("success.jsonl").encode(), b""
+        )
+
+    result = run_codex_packet(packet, schema, 30, runner=eventually_successful_runner)
+
+    assert result["terminal_disposition"] == "accepted"
+    assert result["attempt_count"] == 2
+    assert len(result["attempts"]) == 2
+    first, second = result["attempts"]
+    assert first["terminal_disposition"] == "timeout_or_runtime_failure"
+    assert first["exit_code"] == 17
+    assert first["model"] == "gpt-5-codex"
+    assert first["input_tokens"] == 120
+    assert first["output_tokens"] == 30
+    assert first["cached_input_tokens"] == 40
+    assert "status 17" in first["validation_issues"][0]
+    assert Path(first["attempt_record_path"]).is_file()
+    persisted_first = json.loads(
+        Path(first["attempt_record_path"]).read_text(encoding="utf-8")
+    )
+    assert persisted_first == first
+    assert second["terminal_disposition"] == "accepted"
+    assert second["exit_code"] == 0
+    assert second["token_measurement_reason"] is None
+
+
+def test_run_codex_packet_preserves_raw_jsonl_bytes_and_reports_decode_failure(tmp_path):
+    packet, schema = _packet_and_schema(tmp_path)
+    raw_jsonl = b'{"type":"thread.started","model":"gpt-5-codex"}\r\n\xff\n'
+    command_kwargs: list[dict] = []
+
+    def non_utf8_runner(command, **kwargs):
+        command_kwargs.append(kwargs)
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        output_path.write_text(_fixture("valid_final.json"), encoding="utf-8")
+        return subprocess.CompletedProcess(command, 0, raw_jsonl, b"")
+
+    result = run_codex_packet(packet, schema, 30, runner=non_utf8_runner)
+
+    assert command_kwargs[0]["text"] is False
+    assert result["terminal_disposition"] == "schema_failure"
+    assert Path(result["raw_jsonl_paths"][0]).read_bytes() == raw_jsonl
+    assert any("not valid UTF-8" in issue for issue in result["validation_issues"])
+
+
+def test_run_audit_packet_benchmark_executes_sealed_packet_with_its_schema(tmp_path):
+    packet = _sealed_packet()
+    commands: list[list[str]] = []
+
+    def runner(command, **kwargs):
+        commands.append(command)
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        output_path.write_text(_fixture("valid_final.json"), encoding="utf-8")
+        return subprocess.CompletedProcess(command, 0, _fixture("success.jsonl").encode(), b"")
+
+    results, unattempted = run_audit_packet_benchmark(
+        [packet], run_root=tmp_path, timeout_seconds=30, runner=runner
+    )
+
+    assert not unattempted
+    assert results[0]["terminal_disposition"] == "accepted"
+    command = commands[0]
+    assert "--json" in command
+    schema_path = Path(command[command.index("--output-schema") + 1])
+    assert json.loads(schema_path.read_text(encoding="utf-8")) == packet["output_schema"]
+
+
+def test_main_audit_route_uses_sealed_packet_runner_not_legacy_audit_path(
+    tmp_path, monkeypatch
+):
+    packet = _sealed_packet()
+
+    def runner(command, **kwargs):
+        output_path = Path(command[command.index("--output-last-message") + 1])
+        output_path.write_text(_fixture("valid_final.json"), encoding="utf-8")
+        return subprocess.CompletedProcess(command, 0, _fixture("success.jsonl").encode(), b"")
+
+    monkeypatch.setattr(benchmark_runner, "REPORT_ROOT", tmp_path)
+    monkeypatch.setattr(benchmark_runner, "_build_executable_audit_packets", lambda: [packet])
+    monkeypatch.setattr(
+        benchmark_runner,
+        "run_cases",
+        lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("legacy route used")),
+    )
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "run_shadow_benchmark.py",
+            "--run-id",
+            "fixture-audit",
+            "--route",
+            "audit",
+            "--backend",
+            "codex",
+            "--model",
+            "hosted-default",
+        ],
+    )
+
+    benchmark_runner.main(packet_runner=runner)
+
+    manifest = json.loads(
+        (tmp_path / "fixture-audit/audit-codex/run_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert manifest["attempt_count"] == 1
+    assert manifest["terminal_dispositions"] == {"accepted": 1}
 
 
 def test_run_codex_packet_retries_cli_launch_failure_and_persists_error(tmp_path):
