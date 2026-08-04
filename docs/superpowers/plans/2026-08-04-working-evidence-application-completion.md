@@ -27,11 +27,11 @@
 | Week | Working result |
 |---|---|
 | 1 | Existing evidence database populated; selective reruns and four-cell discovery staged |
-| 2 | First 16-22 new papers extracted, subject to eligibility and access |
-| 3 | Up to approximately 40 new eligible papers processed; Evidence Dataset v1 frozen |
-| 4 | Exact, partial, and nearest-neighbor search frozen |
-| 5 | COMET, simpler baseline, or disabled model state registered |
-| 6 | Streamlit UI, exports, refresh workflow, end-to-end tests, and release complete |
+| 2 | Approximately 20-30 high-value new papers processed; Evidence Dataset v1 frozen |
+| 3 | Exact, partial, and nearest-neighbor search frozen; COMET go/no-go and model registry completed |
+| 4 | Streamlit UI, exports, refresh workflow, end-to-end tests, and release complete |
+
+The four-week route is the recommended completion schedule. A three-week fallback freezes COMET as `integration_only` or `no_go`, stops extraction after the highest-value cohort, and preserves the same evidence, similarity, UI, and testing requirements.
 
 ---
 
@@ -817,7 +817,7 @@ Run the preflight command only. Present exact calls, hashes, and tokens to the u
 
 - [ ] **Step 4: Execute only approved batches and import validated results**
 
-Use the Week 1-3 cadence in `LNP_Liver_Tool_v8_Completion_Timeline.pdf`. After each batch, run validators, import accepted records, and write paper-level failures without silent retries.
+Use the Week 1-2 cadence in `LNP_Liver_Tool_v9_4_Week_Completion_Timeline.pdf`. After each batch, run validators, import accepted records, and write paper-level failures without silent retries.
 
 - [ ] **Step 5: Apply dataset readiness gates**
 

@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en" data-language="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A bilingual decision brief explaining the AI-LNP v5.2 pipeline, the Codex audit experiments, and the path forward for the database and UI.">
+  <title>AI-LNP v5.2 — Codex Audit Decision Brief</title>
+  <style>
+    :root {
+      --ink: #14201d;
+      --muted: #5c6b66;
+      --paper: #f4f1e8;
+      --card: #fffdf8;
+      --line: #d5ddd7;
+      --green: #176b54;
+      --green-soft: #deeee7;
+      --amber: #a8611f;
+      --amber-soft: #faead5;
+      --red: #a54540;
+      --red-soft: #f7e2df;
+      --blue: #315f8b;
+      --blue-soft: #e2edf7;
+      --violet: #67508a;
+      --violet-soft: #ece7f5;
+      --shadow: 0 18px 55px rgba(24, 42, 36, .08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 2%, rgba(23, 107, 84, .12), transparent 28rem),
+        radial-gradient(circle at 96% 25%, rgba(168, 97, 31, .09), transparent 26rem),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    button { font: inherit; }
+    code { padding: .12em .35em; border-radius: .35em; background: rgba(21,33,30,.07); font-size: .92em; }
+    .page { width: min(1180px, calc(100% - 34px)); margin: 0 auto; padding: 25px 0 76px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px;
+      border: 1px solid #a8c8bd; border-radius: 999px; color: var(--green);
+      background: rgba(255,255,255,.62); font-size: .78rem; font-weight: 850;
+      letter-spacing: .07em; text-transform: uppercase;
+    }
+    .status::before { width: 8px; height: 8px; border-radius: 50%; background: var(--green); content: ""; }
+    .language-switch {
+      display: flex; padding: 4px; border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(255,255,255,.72); backdrop-filter: blur(9px);
+    }
+    .language-switch button {
+      min-width: 76px; padding: 8px 15px; border: 0; border-radius: 999px;
+      color: var(--muted); background: transparent; cursor: pointer; font-weight: 780;
+    }
+    .language-switch button[aria-pressed="true"] { color: #fff; background: var(--ink); }
+    .hero { display: grid; grid-template-columns: 1.35fr .65fr; gap: 42px; align-items: end; padding: 72px 0 38px; }
+    .eyebrow { margin: 0 0 11px; color: var(--green); font-size: .8rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", "Songti SC", serif; font-weight: 500; }
+    h1 { margin: 0; max-width: 900px; font-size: clamp(2.55rem, 6vw, 5.5rem); letter-spacing: -.055em; line-height: .98; }
+    h2 { margin: 0; font-size: clamp(1.85rem, 3.5vw, 2.8rem); letter-spacing: -.035em; line-height: 1.1; }
+    h3 { margin: 0; font-size: clamp(1.35rem, 2.6vw, 2rem); letter-spacing: -.025em; line-height: 1.15; }
+    .hero-copy { max-width: 790px; margin: 25px 0 0; color: var(--muted); font-size: clamp(1rem,1.6vw,1.2rem); }
+    .hero-note { padding: 22px; border-left: 4px solid var(--green); border-radius: 0 18px 18px 0; background: rgba(255,253,248,.78); color: var(--muted); }
+    .hero-note strong { display: block; margin-bottom: 5px; color: var(--ink); }
+
+    .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; margin: 22px 0 68px; }
+    .metric { min-height: 150px; padding: 22px; border: 1px solid rgba(21,33,30,.09); border-radius: var(--radius); background: rgba(255,253,248,.82); box-shadow: var(--shadow); }
+    .metric-number { display: block; margin-bottom: 8px; color: var(--green); font-family: Georgia,serif; font-size: 2.75rem; line-height: 1; }
+    .metric.red .metric-number { color: var(--red); }
+    .metric.amber .metric-number { color: var(--amber); }
+    .metric strong { display: block; }
+    .metric small { color: var(--muted); }
+
+    section { margin-bottom: 70px; }
+    .section-heading { display: grid; grid-template-columns: 58px 1fr; gap: 17px; align-items: start; margin-bottom: 25px; }
+    .section-number { display: grid; width: 49px; height: 49px; place-items: center; border-radius: 15px; color: #fff; background: var(--ink); font-weight: 900; }
+    .section-intro { max-width: 880px; margin: 8px 0 0; color: var(--muted); }
+    .card { padding: clamp(23px,4vw,39px); border: 1px solid rgba(21,33,30,.09); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+    .card + .card { margin-top: 17px; }
+    .badge { display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: .74rem; font-weight: 850; }
+    .badge.good { color: var(--green); background: var(--green-soft); }
+    .badge.warn { color: var(--amber); background: var(--amber-soft); }
+    .badge.fail { color: var(--red); background: var(--red-soft); }
+    .badge.info { color: var(--blue); background: var(--blue-soft); }
+    .lede { margin: 13px 0 0; color: var(--muted); }
+    .callout { margin-top: 20px; padding: 18px 20px; border-radius: 16px; background: var(--green-soft); }
+    .callout.warning { color: #673b13; background: var(--amber-soft); }
+    .callout.danger { color: #672b28; background: var(--red-soft); }
+    .callout strong { display: block; margin-bottom: 4px; }
+
+    .pipeline { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; }
+    .pipe-step { position: relative; min-height: 160px; padding: 18px; border: 1px solid var(--line); border-radius: 17px; background: #fff; }
+    .pipe-step:not(:last-child)::after { position: absolute; top: 50%; right: -10px; z-index: 2; color: var(--green); content: "→"; font-weight: 900; }
+    .pipe-step span { color: var(--green); font-size: .73rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .pipe-step strong { display: block; margin: 8px 0 5px; }
+    .pipe-step small { color: var(--muted); }
+
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; }
+    .triad { display: grid; grid-template-columns: repeat(3,1fr); gap: 13px; }
+    .panel { padding: 20px; border: 1px solid var(--line); border-radius: 17px; background: #fff; }
+    .panel h3 { margin-bottom: 10px; }
+    .panel p { margin: 0; color: var(--muted); }
+    .panel ul { margin-bottom: 0; }
+    ul { margin: 10px 0 0; padding-left: 1.2rem; }
+    li + li { margin-top: 6px; }
+
+    .analogy { display: grid; grid-template-columns: .72fr 1.28fr; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+    .analogy-art { display: grid; place-items: center; min-height: 280px; padding: 30px; color: #fff; background: linear-gradient(145deg,#153b31,#1f785e); text-align: center; }
+    .analogy-icon { font-size: 5rem; line-height: 1; }
+    .analogy-art strong { display: block; margin-top: 15px; font-size: 1.1rem; }
+    .analogy-copy { padding: clamp(24px,4vw,42px); }
+    .analogy-copy p { color: var(--muted); }
+
+    .attempts { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; }
+    .attempt { padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+    .attempt-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+    .attempt-stat { margin: 20px 0; padding: 17px; border-radius: 15px; background: var(--red-soft); }
+    .attempt-stat strong { display: block; color: var(--red); font-family: Georgia,serif; font-size: 2rem; }
+    .attempt:nth-child(2) .attempt-stat { background: var(--amber-soft); }
+    .attempt:nth-child(2) .attempt-stat strong { color: var(--amber); }
+    .why-list { margin-top: 15px; }
+
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 17px; background: #fff; }
+    th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); background: #f0f3f0; font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+
+    .roadmap { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; }
+    .roadmap-item { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+    .roadmap-item span { display: grid; width: 38px; height: 38px; place-items: center; margin-bottom: 13px; border-radius: 12px; color: #fff; background: var(--green); font-weight: 900; }
+    .roadmap-item p { margin: 7px 0 0; color: var(--muted); }
+
+    .decision { padding: clamp(29px,5vw,50px); border-radius: 28px; color: #fff; background: var(--ink); box-shadow: var(--shadow); }
+    .decision h2 { max-width: 930px; }
+    .decision > p { max-width: 940px; color: #cad6d1; }
+    .decision-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 26px; }
+    .decision-panel { padding: 21px; border: 1px solid rgba(255,255,255,.14); border-radius: 17px; background: rgba(255,255,255,.055); }
+    .decision-panel strong { display: block; margin-bottom: 7px; }
+    .decision-panel span { color: #cad6d1; }
+    footer { margin-top: 44px; color: var(--muted); font-size: .82rem; text-align: center; }
+
+    [data-lang] { display: none; }
+    html[data-language="en"] [data-lang="en"],
+    html[data-language="zh"] [data-lang="zh"] { display: revert; }
+
+    @media (max-width: 980px) {
+      .pipeline { grid-template-columns: repeat(3,1fr); }
+      .pipe-step:not(:last-child)::after { display: none; }
+      .roadmap { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 820px) {
+      .hero, .analogy, .split, .attempts { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: repeat(2,1fr); }
+      .triad, .decision-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .page { width: min(100% - 22px,1180px); }
+      .hero { padding-top: 48px; }
+      .metrics, .pipeline, .roadmap { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; }
+      .status { max-width: 58%; }
+      th, td { padding: 10px; font-size: .88rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <span class="status">
+        <span data-lang="en">AI-LNP decision brief · v5.2</span>
+        <span data-lang="zh">AI-LNP 决策简报 · v5.2</span>
+      </span>
+      <div class="language-switch" aria-label="Language">
+        <button type="button" data-set-language="en" aria-pressed="true">English</button>
+        <button type="button" data-set-language="zh" aria-pressed="false">中文</button>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow" data-lang="en">Extraction reality, Codex audit lessons, and the path forward</p>
+        <p class="eyebrow" data-lang="zh">提取现状、Codex 审计经验与下一步</p>
+        <h1 data-lang="en">Move forward with v5.2—without pretending the gaps are solved</h1>
+        <h1 data-lang="zh">继续推进 v5.2——但不假装问题已经解决</h1>
+        <p class="hero-copy" data-lang="en">The current pipeline autonomously satisfies 40 of 62 application requirements. Codex can be invoked automatically, but the audit experiments did not prove enough scientific improvement to justify delaying the database and UI.</p>
+        <p class="hero-copy" data-lang="zh">当前管线能够自动满足 62 项应用要求中的 40 项。Codex 可以被自动调用，但审计实验并未证明足够的科学改进，因此不应继续推迟数据库和 UI。</p>
+      </div>
+      <aside class="hero-note">
+        <strong data-lang="en">The decision in one sentence</strong>
+        <strong data-lang="zh">一句话决策</strong>
+        <span data-lang="en">Freeze v5.2, accept 64.5% as the measured baseline, extract more papers, and make verification status visible throughout the database and UI.</span>
+        <span data-lang="zh">冻结 v5.2，以 64.5% 作为当前实测基线，开始提取更多论文，并在数据库与 UI 中始终显示验证状态。</span>
+      </aside>
+    </header>
+
+    <section class="metrics" aria-label="Measured outcomes">
+      <article class="metric"><span class="metric-number">40/62</span><strong data-lang="en">autonomous extraction</strong><strong data-lang="zh">自动提取</strong><small data-lang="en">64.5% of application requirements.</small><small data-lang="zh">满足 64.5% 的应用要求。</small></article>
+      <article class="metric amber"><span class="metric-number">57/62</span><strong data-lang="en">evidence recognized in gold-aware review</strong><strong data-lang="zh">金标准知情审查识别的证据</strong><small data-lang="en">Evidence availability—not autonomous extraction.</small><small data-lang="zh">代表证据可用性，不等于自动提取率。</small></article>
+      <article class="metric red"><span class="metric-number">2/7</span><strong data-lang="en">complete automated arms</strong><strong data-lang="zh">自动完成的实验组</strong><small data-lang="en">The key constraint for COMET.</small><small data-lang="zh">这是 COMET 的关键瓶颈。</small></article>
+      <article class="metric red"><span class="metric-number">+1</span><strong data-lang="en">28-packet Codex gain</strong><strong data-lang="zh">28 包 Codex 增益</strong><small data-lang="en">40/62 → 41/62 in the exploratory rescore.</small><small data-lang="zh">探索性重评分中从 40/62 升至 41/62。</small></article>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="section-number">1</span>
+        <div><h2 data-lang="en">What v5.2 actually does</h2><h2 data-lang="zh">v5.2 实际做什么</h2><p class="section-intro" data-lang="en">The pipeline is not one prompt. It is a chain that maps the paper, constructs experiment tasks, extracts focused facts, retrieves visual evidence, validates IDs and numbers, and merges records by relationships.</p><p class="section-intro" data-lang="zh">这不是一个提示词，而是一条完整链路：映射论文、构建实验任务、提取聚焦事实、获取视觉证据、验证 ID 与数值，并按关系合并记录。</p></div>
+      </div>
+      <div class="pipeline">
+        <div class="pipe-step"><span>01</span><strong data-lang="en">Ingest</strong><strong data-lang="zh">摄取</strong><small data-lang="en">Parse text, tables, figures and provenance.</small><small data-lang="zh">解析文本、表格、图像与来源。</small></div>
+        <div class="pipe-step"><span>02</span><strong data-lang="en">Gate A</strong><strong data-lang="zh">Gate A</strong><small data-lang="en">Map formulations, experiments and evidence locations.</small><small data-lang="zh">映射配方、实验和证据位置。</small></div>
+        <div class="pipe-step"><span>03</span><strong data-lang="en">Task builder</strong><strong data-lang="zh">任务构建</strong><small data-lang="en">Issue stable experiment and candidate IDs.</small><small data-lang="zh">签发稳定的实验和候选 ID。</small></div>
+        <div class="pipe-step"><span>04</span><strong data-lang="en">Gate B + vision</strong><strong data-lang="zh">Gate B＋视觉</strong><small data-lang="en">Extract details from focused text and selected visuals.</small><small data-lang="zh">从聚焦文本和选择性视觉中提取细节。</small></div>
+        <div class="pipe-step"><span>05</span><strong data-lang="en">Validate</strong><strong data-lang="zh">验证</strong><small data-lang="en">Check schemas, evidence, exact numbers and issued IDs.</small><small data-lang="zh">检查结构、证据、精确数值与已签发 ID。</small></div>
+        <div class="pipe-step"><span>06</span><strong data-lang="en">Merge</strong><strong data-lang="zh">合并</strong><small data-lang="en">Link formulations, arms and outcomes; quarantine uncertainty.</small><small data-lang="zh">关联配方、实验组和结果；隔离不确定项。</small></div>
+      </div>
+      <div class="callout warning"><strong data-lang="en">The core shortfall</strong><strong data-lang="zh">核心不足</strong><span data-lang="en">The pipeline finds many correct facts, but it does not reliably assemble all of them into complete formulation–experiment–arm–outcome records.</span><span data-lang="zh">管线能找到许多正确事实，但无法稳定地把它们组装成完整的“配方—实验—实验组—结果”记录。</span></div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="section-number">2</span>
+        <div><h2 data-lang="en">Why cloning OpenAI/Codex would not solve extraction</h2><h2 data-lang="zh">为什么克隆 OpenAI/Codex 不能解决提取问题</h2><p class="section-intro" data-lang="en">This was the most important architectural misunderstanding to resolve. The open-source repository is the agent software—the carrier—not the hosted intelligence.</p><p class="section-intro" data-lang="zh">这是最需要澄清的架构误区。开源仓库只是代理软件和载体，并不是托管模型本身。</p></div>
+      </div>
+      <div class="analogy">
+        <div class="analogy-art"><div><div class="analogy-icon">🚕</div><strong data-lang="en">Downloading the taxi app does not give you a driver</strong><strong data-lang="zh">下载打车软件并不会给你一名司机</strong></div></div>
+        <div class="analogy-copy">
+          <h3 data-lang="en">The repository coordinates work; the model performs the reasoning</h3>
+          <h3 data-lang="zh">仓库负责协调工作，模型负责推理</h3>
+          <p data-lang="en">Cloning <code>openai/codex</code> into AI-LNP would provide the CLI source, tool loop and provider connections. It would not provide GPT model weights, free hosted inference, unlimited plan tokens or better scientific recall.</p>
+          <p data-lang="zh">把 <code>openai/codex</code> 克隆进 AI-LNP，只会得到 CLI 源码、工具循环和模型服务连接。它不会提供 GPT 模型权重、免费托管推理、无限计划额度，也不会自动提高科学召回率。</p>
+          <ul data-lang="en"><li>Hosted Codex would still call OpenAI under the authenticated Codex plan.</li><li>API authentication would still use paid API inference.</li><li>Ollama would use a local model whose quality must be benchmarked separately.</li><li>A nested repository would add dependencies, upgrades and security surface without changing the scientific model.</li></ul>
+          <ul data-lang="zh"><li>托管 Codex 仍会通过已登录的 Codex 计划调用 OpenAI。</li><li>API 鉴权仍然意味着付费 API 推理。</li><li>Ollama 使用的是本地模型，其质量必须另行验证。</li><li>嵌套仓库只会增加依赖、升级和安全负担，不会改变科学推理模型。</li></ul>
+          <div class="callout"><strong data-lang="en">Correct integration</strong><strong data-lang="zh">正确集成方式</strong><span data-lang="en">AI-LNP Python pipeline → installed <code>codex exec</code> → hosted Codex-plan model or a separately benchmarked local model.</span><span data-lang="zh">AI-LNP Python 管线 → 已安装的 <code>codex exec</code> → 托管 Codex 计划模型，或另行验证的本地模型。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="section-number">3</span>
+        <div><h2 data-lang="en">Why the Codex audit attempts did not justify integration</h2><h2 data-lang="zh">为什么 Codex 审计尝试不足以支持集成</h2><p class="section-intro" data-lang="en">Two designs sat on opposite sides of the same context problem: too fragmented loses relationships; too large becomes expensive and difficult to validate.</p><p class="section-intro" data-lang="zh">两种设计处于同一个上下文问题的两端：过度切分会丢失关系；过大的上下文则成本高、难验证。</p></div>
+      </div>
+      <div class="attempts">
+        <article class="attempt">
+          <div class="attempt-head"><div><span class="badge fail" data-lang="en">Completed · underperformed</span><span class="badge fail" data-lang="zh">已完成 · 表现不足</span><h3 data-lang="en">The 28 evidence packets</h3><h3 data-lang="zh">28 个证据包</h3></div></div>
+          <p class="lede" data-lang="en">The three papers were divided into 10, 9 and 9 packets. Packets separately covered shared facts, individual experiments, unused evidence and final consistency.</p>
+          <p class="lede" data-lang="zh">三篇论文分别被拆为 10、9、9 个包，单独处理共享事实、单个实验、未使用证据和最终一致性。</p>
+          <div class="attempt-stat"><strong>40/62 → 41/62</strong><span data-lang="en">Only one exploratory requirement recovered.</span><span data-lang="zh">探索性结果仅恢复一项要求。</span></div>
+          <ul class="why-list" data-lang="en"><li>Evidence was separated from the experiment, candidate or arm that gave it meaning.</li><li>Unused-evidence packets often lacked the mappings needed to assign an omission safely.</li><li>Codex sometimes abstained because it could see useful evidence but could not prove where it belonged.</li><li>Scientific relationships were fragmented even though individual excerpts remained accurate.</li></ul>
+          <ul class="why-list" data-lang="zh"><li>证据与赋予其意义的实验、候选项或实验组被分开。</li><li>未使用证据包经常缺少安全归属所需的映射。</li><li>Codex 能看到有用证据，却无法证明其应归属何处，因此选择弃权。</li><li>即使单个摘录准确，科学关系仍被切碎。</li></ul>
+        </article>
+
+        <article class="attempt">
+          <div class="attempt-head"><div><span class="badge warn" data-lang="en">Stopped · not proven</span><span class="badge warn" data-lang="zh">已停止 · 未验证</span><h3 data-lang="en">The proposed 2–4 packets per paper</h3><h3 data-lang="zh">每篇论文 2–4 个包的提案</h3></div></div>
+          <p class="lede" data-lang="en">The middle-ground design would keep complete experiment groups together and repeat a compact paper map. It was scientifically more sensible, but it did not reach a trustworthy completed benchmark.</p>
+          <p class="lede" data-lang="zh">中间方案会保留完整实验组，并重复紧凑论文地图。它在科学上更合理，但没有完成可信的基准验证。</p>
+          <div class="attempt-stat"><strong data-lang="en">Unproven—not a measured failure</strong><strong data-lang="zh">未验证——不是实测失败</strong><span data-lang="en">The effort was stopped before another expensive engineering cycle.</span><span data-lang="zh">在进入又一轮昂贵工程循环前被停止。</span></div>
+          <ul class="why-list" data-lang="en"><li>Larger packets reintroduced token cost and long-context attention risk.</li><li>True gold isolation required a separate filesystem boundary, not merely a read-only folder.</li><li>The validator needed field-specific semantic rules before corrections could be trusted.</li><li>The test was becoming another integration project instead of a quick hypothesis test.</li></ul>
+          <ul class="why-list" data-lang="zh"><li>更大的包重新带来 token 成本和长上下文注意力风险。</li><li>真正的金标准隔离需要独立文件系统边界，而不只是只读文件夹。</li><li>验证器需要字段专用语义规则，才能信任修正结果。</li><li>测试再次变成集成工程，而不是快速假设检验。</li></ul>
+        </article>
+      </div>
+      <div class="callout danger"><strong data-lang="en">What was proven</strong><strong data-lang="zh">已经证明什么</strong><span data-lang="en">Codex CLI can be automated and can return structured scientific proposals. What was not proven is that the auditor improves extraction enough to justify routine use.</span><span data-lang="zh">Codex CLI 可以自动调用，也能返回结构化科学建议；但尚未证明它能把提取质量提高到值得常规使用的程度。</span></div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="section-number">4</span>
+        <div><h2 data-lang="en">Why 57/62 did not mean the pipeline was already at 91.9%</h2><h2 data-lang="zh">为什么 57/62 不代表管线已经达到 91.9%</h2><p class="section-intro" data-lang="en">The earlier Codex-assisted review knew the 62 expected requirements and checked the saved evidence against them. It mainly recovered recognition and linking—not 17 newly discovered passages.</p><p class="section-intro" data-lang="zh">早期 Codex 辅助审查知道 62 项预期要求，并逐项检查已保存证据。它主要恢复的是识别和关联，而不是发现 17 段全新证据。</p></div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th><span data-lang="en">Measurement</span><span data-lang="zh">指标</span></th><th><span data-lang="en">Meaning</span><span data-lang="zh">含义</span></th><th><span data-lang="en">Correct use</span><span data-lang="zh">正确用途</span></th></tr></thead>
+          <tbody>
+            <tr><td><strong>40/62 · 64.5%</strong></td><td><span data-lang="en">Requirements autonomously recognized by v5.2.</span><span data-lang="zh">v5.2 自动识别的要求。</span></td><td><span data-lang="en">Operational extraction baseline.</span><span data-lang="zh">当前运行基线。</span></td></tr>
+            <tr><td><strong>57 full + 3 partial + 2 absent</strong></td><td><span data-lang="en">Gold-aware review found that more support existed in the evidence artifacts.</span><span data-lang="zh">金标准知情审查发现证据工件中存在更多支持。</span></td><td><span data-lang="en">Evidence-availability ceiling and error analysis.</span><span data-lang="zh">证据可用性上限和误差分析。</span></td></tr>
+            <tr><td><strong>2/7 complete arms</strong></td><td><span data-lang="en">Only two automated formulation–arm–outcome records met full completeness.</span><span data-lang="zh">只有两个自动“配方—实验组—结果”记录满足完整性。</span></td><td><span data-lang="en">Primary capacity metric for COMET.</span><span data-lang="zh">COMET 的首要容量指标。</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout warning"><strong data-lang="en">The 17-requirement gap</strong><strong data-lang="zh">17 项差距</strong><span data-lang="en">Much of 57 − 40 came from evidence that existed but was not classified under the right variable, propagated to the right experiment, linked to the right arm, or recognized by the evaluator.</span><span data-lang="zh">57 − 40 的大部分差距来自已经存在的证据：它没有被归入正确变量、传播到正确实验、关联到正确实验组，或被评估器识别。</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="section-number">5</span>
+        <div><h2 data-lang="en">The plan now: scale the evidence base, not the audit experiment</h2><h2 data-lang="zh">当前计划：扩大证据库，而不是继续扩大审计实验</h2><p class="section-intro" data-lang="en">The product can move forward without claiming complete extraction. Missingness and uncertainty become explicit data states rather than hidden failures.</p><p class="section-intro" data-lang="zh">产品可以继续推进，但不宣称提取完整。缺失和不确定性将成为明确的数据状态，而不是隐藏失败。</p></div>
+      </div>
+      <div class="roadmap">
+        <article class="roadmap-item"><span>1</span><h3 data-lang="en">Freeze v5.2</h3><h3 data-lang="zh">冻结 v5.2</h3><p data-lang="en">Use 40/62 as the measured baseline. Do not make Codex audit a dependency.</p><p data-lang="zh">以 40/62 作为实测基线，不让 Codex 审计成为依赖。</p></article>
+        <article class="roadmap-item"><span>2</span><h3 data-lang="en">Extract more papers</h3><h3 data-lang="zh">提取更多论文</h3><p data-lang="en">Process papers independently and preserve evidence, validation and failure provenance.</p><p data-lang="zh">独立处理每篇论文，并保留证据、验证和失败来源。</p></article>
+        <article class="roadmap-item"><span>3</span><h3 data-lang="en">Build the database</h3><h3 data-lang="zh">构建数据库</h3><p data-lang="en">Store full, partial and quarantined records separately; never silently impute missing facts.</p><p data-lang="zh">分别存储完整、部分和隔离记录；绝不静默填补缺失事实。</p></article>
+        <article class="roadmap-item"><span>4</span><h3 data-lang="en">Build the UI</h3><h3 data-lang="zh">构建 UI</h3><p data-lang="en">Show provenance, missing fields, verification status and unresolved relationships to users.</p><p data-lang="zh">向用户展示来源、缺失字段、验证状态和未解决关系。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="section-number">6</span>
+        <div><h2 data-lang="en">Database and UI guardrails</h2><h2 data-lang="zh">数据库与 UI 防护栏</h2><p class="section-intro" data-lang="en">The architecture must prevent incomplete extraction from silently becoming confident recommendations or training data.</p><p class="section-intro" data-lang="zh">架构必须防止不完整提取静默变成高置信推荐或训练数据。</p></div>
+      </div>
+      <div class="triad">
+        <article class="panel"><span class="badge good" data-lang="en">Database</span><span class="badge good" data-lang="zh">数据库</span><h3 data-lang="en">Verification is a field, not a footnote</h3><h3 data-lang="zh">验证状态是字段，不是脚注</h3><ul data-lang="en"><li><code>fully_verified</code></li><li><code>partial</code></li><li><code>quarantined</code></li><li>Evidence IDs and exact provenance</li><li>Explicit missing fields</li></ul><ul data-lang="zh"><li><code>fully_verified</code></li><li><code>partial</code></li><li><code>quarantined</code></li><li>证据 ID 与精确来源</li><li>明确缺失字段</li></ul></article>
+        <article class="panel"><span class="badge info" data-lang="en">Nearest neighbor</span><span class="badge info" data-lang="zh">最近邻</span><h3 data-lang="en">Unknown is not different</h3><h3 data-lang="zh">未知不等于不同</h3><p data-lang="en">Sparse records must not be scored as dissimilar merely because values are missing. Similarity should expose feature coverage and rely on verified dimensions.</p><p data-lang="zh">稀疏记录不能仅因字段缺失就被判为不相似。相似度必须展示特征覆盖，并依赖已验证维度。</p></article>
+        <article class="panel"><span class="badge warn">COMET</span><h3 data-lang="en">Train only on trustworthy arms</h3><h3 data-lang="zh">只用可信实验组训练</h3><p data-lang="en">Fully verified formulation–experiment–outcome rows may enter training. Partial rows remain weak-signal or excluded; they must not be silently imputed.</p><p data-lang="zh">只有完全验证的“配方—实验—结果”记录可进入训练。部分记录只能作为弱信号或被排除，不能静默插补。</p></article>
+      </div>
+      <div class="callout"><strong data-lang="en">First-class scaling metric</strong><strong data-lang="zh">首要扩展指标</strong><span data-lang="en">Track complete-arm percentage alongside field recall. If arm completion stays near 2/7, COMET capacity—not paper count—becomes the bottleneck.</span><span data-lang="zh">除了字段召回率，还要跟踪完整实验组比例。如果完整度长期接近 2/7，COMET 的瓶颈将是可信样本容量，而不是论文数量。</span></div>
+    </section>
+
+    <section class="decision">
+      <p class="eyebrow" data-lang="en" style="color:#8fd0b9">Final operating decision</p>
+      <p class="eyebrow" data-lang="zh" style="color:#8fd0b9">最终运行决策</p>
+      <h2 data-lang="en">Use v5.2 to build a transparent evidence product—not an imaginary 100%-complete dataset</h2>
+      <h2 data-lang="zh">用 v5.2 构建透明的证据产品，而不是假想的 100% 完整数据集</h2>
+      <p data-lang="en">The pipeline is useful today if the system preserves uncertainty. Codex remains an optional future investigation for genuinely poor papers, but the current audit designs should not block paper discovery, database construction or UI delivery.</p>
+      <p data-lang="zh">只要系统保留不确定性，这条管线今天就有用。Codex 可以作为未来针对低质量提取论文的可选研究，但当前审计设计不应阻碍论文发现、数据库构建或 UI 交付。</p>
+      <div class="decision-grid">
+        <div class="decision-panel"><strong data-lang="en">Accept</strong><strong data-lang="zh">接受</strong><span data-lang="en">40/62 is the honest autonomous baseline.</span><span data-lang="zh">40/62 是诚实的自动提取基线。</span></div>
+        <div class="decision-panel"><strong data-lang="en">Protect</strong><strong data-lang="zh">保护</strong><span data-lang="en">Only verified arms enter strict similarity and COMET training.</span><span data-lang="zh">只有已验证实验组进入严格相似度与 COMET 训练。</span></div>
+        <div class="decision-panel"><strong data-lang="en">Proceed</strong><strong data-lang="zh">推进</strong><span data-lang="en">Extract papers, build the database, and make uncertainty visible in the UI.</span><span data-lang="zh">提取论文、构建数据库，并在 UI 中显示不确定性。</span></div>
+      </div>
+    </section>
+
+    <footer>
+      <span data-lang="en">Prepared from the v5.2 three-paper pilot, gold-aware evidence review, Codex CLI audit experiments, and current AI-LNP product decision.</span>
+      <span data-lang="zh">依据 v5.2 三论文试点、金标准知情证据审查、Codex CLI 审计实验及当前 AI-LNP 产品决策整理。</span>
+    </footer>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const buttons = [...document.querySelectorAll("[data-set-language]")];
+    function setLanguage(language) {
+      root.dataset.language = language;
+      root.lang = language === "zh" ? "zh-CN" : "en";
+      buttons.forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.setLanguage === language));
+      });
+      try { localStorage.setItem("mentor-v52-language", language); } catch (_) {}
+    }
+    buttons.forEach(button => button.addEventListener("click", () => setLanguage(button.dataset.setLanguage)));
+    let saved = "en";
+    try { saved = localStorage.getItem("mentor-v52-language") || "en"; } catch (_) {}
+    setLanguage(saved === "zh" ? "zh" : "en");
+  </script>
+</body>
+</html>
