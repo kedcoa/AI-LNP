@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["disposition", "proposals", "unresolved_reason"],
+  "properties": {
+    "disposition": {"type": "string", "enum": ["proposals", "abstained"]},
+    "proposals": {"type": "array"},
+    "unresolved_reason": {"type": ["string", "null"]}
+  }
+}
