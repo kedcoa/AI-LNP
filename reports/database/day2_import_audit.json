@@ -1,0 +1,1115 @@
+{
+  "audit": {
+    "bundle_hashes": {
+      "GP-002": "e95505e61c3a531060b3a545f12304e506c784d45e62c514b3113df74c843c48",
+      "GP-004": "b7e210fd0a9f85da0e95678c279fe0897d8bf6369149c6094782bbebcd5f060e",
+      "GP-005": "0db03d2f21d11f4c61fda2c892b7808bf597b8e28ad5cff8ecddb7416715fd12",
+      "GP-006": "581a1728a90da3a9169788c254a174f4c1886b8acb723ab7b182d7b4680c40ae",
+      "GP-007": "df6dce50c9f08fef145cc84631460ad2c09101cf5034d4f8bc6cda82df1e30bc",
+      "GP-008": "2593b0373fd3dda77931589d9fe2d39ee2d6be9e8594a498aef3d82de452f876",
+      "NP-001": "727d5837f6c53b5f8566f9d7875a21e988e0171601ca8d1042743582a2f94bcd",
+      "NP-002": "6f856e670d33ace73a3f169cc48151e2cb100bf6fda0cfd5e3edb7780c21958e",
+      "PILOT-001": "e4bf680c183527719580bae6f79823340b3b9871f2a6fff809d796c53800084e",
+      "PILOT-002": "06cf2a8ac7f0539f6e81c1602e0caa703aa04ebc645fbdfff5c671197edbff08",
+      "PILOT-003": "6b5e7357f5193c4b6aa0fb290fd27265a7624e28e95ec6baf5ec3d43b999ce24"
+    },
+    "checks": {
+      "bundle_hash_mismatches": [],
+      "eligibility_inconsistencies": [],
+      "evidence_coverage": {
+        "arms_without_evidence": [],
+        "outcomes_without_evidence": []
+      },
+      "exact_duplicate_natural_keys": [],
+      "foreign_key_violations": [],
+      "manifest_disposition_mismatches": [],
+      "manifest_dispositions": {
+        "expected": 14,
+        "missing": [],
+        "present": 14,
+        "unexpected": []
+      },
+      "manifest_hash_matches": true,
+      "normalized_identity_sets": {
+        "content_hash_mismatches": [],
+        "content_shape_mismatches": [],
+        "field_evidence_links": {
+          "actual": 672,
+          "expected_canonical": 672,
+          "missing": [],
+          "raw_references": 673,
+          "unexpected": []
+        },
+        "generation_errors": [],
+        "record_identities": {
+          "actual": 929,
+          "expected": 929,
+          "missing": [],
+          "unexpected": []
+        }
+      },
+      "orphan_counts": {},
+      "review_tag_gaps": [],
+      "sqlite_integrity": "ok"
+    },
+    "database_kind": "authoritative",
+    "database_path": "/Users/renemilywei/Desktop/AI-LNP/data/curated/lnp_evidence.db",
+    "database_sha256": "c19b9daea072d24fa57d8424d164568323ea8bbf332444bb5feb66b4f32d8c18",
+    "manifest_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day1-current-corpus/config/database/current_corpus_v1.json",
+    "manifest_sha256": "4fa16f6d62c061889dc8378bf36ea80e9ce79178f73a0c45419460f2125d952a",
+    "paid_calls": 0,
+    "papers": [
+      {
+        "arms": 0,
+        "conflicts": 0,
+        "disposition": "screening_only",
+        "eligible_arms": 0,
+        "evidence": 0,
+        "formulations": 0,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 0,
+        "paper_id": "GP-001",
+        "quarantined": 0
+      },
+      {
+        "arms": 6,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 62,
+        "formulations": 1,
+        "likely_evidence_inaccessible": false,
+        "missing": 2,
+        "outcomes": 6,
+        "paper_id": "GP-002",
+        "quarantined": 6
+      },
+      {
+        "arms": 0,
+        "conflicts": 0,
+        "disposition": "screening_only",
+        "eligible_arms": 0,
+        "evidence": 0,
+        "formulations": 0,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 0,
+        "paper_id": "GP-003",
+        "quarantined": 0
+      },
+      {
+        "arms": 3,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 49,
+        "formulations": 1,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 7,
+        "paper_id": "GP-004",
+        "quarantined": 2
+      },
+      {
+        "arms": 4,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 40,
+        "formulations": 5,
+        "likely_evidence_inaccessible": false,
+        "missing": 3,
+        "outcomes": 4,
+        "paper_id": "GP-005",
+        "quarantined": 4
+      },
+      {
+        "arms": 1,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 17,
+        "formulations": 1,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 5,
+        "paper_id": "GP-006",
+        "quarantined": 1
+      },
+      {
+        "arms": 1,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 30,
+        "formulations": 1,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 7,
+        "paper_id": "GP-007",
+        "quarantined": 1
+      },
+      {
+        "arms": 3,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 30,
+        "formulations": 4,
+        "likely_evidence_inaccessible": false,
+        "missing": 1,
+        "outcomes": 2,
+        "paper_id": "GP-008",
+        "quarantined": 2
+      },
+      {
+        "arms": 0,
+        "conflicts": 0,
+        "disposition": "screening_only",
+        "eligible_arms": 0,
+        "evidence": 0,
+        "formulations": 0,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 0,
+        "paper_id": "GP-009",
+        "quarantined": 0
+      },
+      {
+        "arms": 1,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 42,
+        "formulations": 1,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 1,
+        "paper_id": "NP-001",
+        "quarantined": 1
+      },
+      {
+        "arms": 13,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 347,
+        "formulations": 2,
+        "likely_evidence_inaccessible": false,
+        "missing": 0,
+        "outcomes": 13,
+        "paper_id": "NP-002",
+        "quarantined": 13
+      },
+      {
+        "arms": 0,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 58,
+        "formulations": 0,
+        "inaccessible_reason": "Evidence was recovered, but no supported arm mapping is accessible locally.",
+        "likely_evidence_inaccessible": true,
+        "missing": 0,
+        "outcomes": 0,
+        "paper_id": "PILOT-001",
+        "quarantined": 0
+      },
+      {
+        "arms": 0,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 48,
+        "formulations": 0,
+        "inaccessible_reason": "Evidence was recovered, but no supported arm mapping is accessible locally.",
+        "likely_evidence_inaccessible": true,
+        "missing": 0,
+        "outcomes": 0,
+        "paper_id": "PILOT-002",
+        "quarantined": 0
+      },
+      {
+        "arms": 0,
+        "conflicts": 0,
+        "disposition": "needs_review",
+        "eligible_arms": 0,
+        "evidence": 54,
+        "formulations": 0,
+        "inaccessible_reason": "Evidence was recovered, but no supported arm mapping is accessible locally.",
+        "likely_evidence_inaccessible": true,
+        "missing": 0,
+        "outcomes": 0,
+        "paper_id": "PILOT-003",
+        "quarantined": 0
+      }
+    ],
+    "passed": true,
+    "schema_version": "day2-database-audit/v1"
+  },
+  "authoritative_database": {
+    "migration_versions": [
+      1,
+      2,
+      3
+    ],
+    "path": "/Users/renemilywei/Desktop/AI-LNP/data/curated/lnp_evidence.db",
+    "sha256": "c19b9daea072d24fa57d8424d164568323ea8bbf332444bb5feb66b4f32d8c18"
+  },
+  "backups": [
+    {
+      "integrity": "ok",
+      "path": "/Users/renemilywei/Documents/AI-LNP Database Backups/lnp_evidence-pre-day2-20260806T064543Z.db",
+      "sha256": "d88b1b4071bb4bd44b2b2a6f662f9fef38c6f926e2b6eb7f9386722f41b34b69"
+    },
+    {
+      "integrity": "ok",
+      "path": "/Users/renemilywei/Documents/AI-LNP Database Backups/lnp_evidence-pre-day2-20260806T065032Z.db",
+      "sha256": "d88b1b4071bb4bd44b2b2a6f662f9fef38c6f926e2b6eb7f9386722f41b34b69"
+    }
+  ],
+  "execution": {
+    "final_verification": {
+      "database_counts": {
+        "chemical_component": 45,
+        "evidence": 777,
+        "experiment": 32,
+        "formulation": 16,
+        "outcome": 45,
+        "paper": 14
+      },
+      "dispositions": [
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-001",
+          "quarantined": 0,
+          "review_tags": [],
+          "status": "committed",
+          "unchanged": 1
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-002",
+          "quarantined": 5,
+          "review_tags": [
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 80
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-003",
+          "quarantined": 0,
+          "review_tags": [],
+          "status": "committed",
+          "unchanged": 1
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-004",
+          "quarantined": 0,
+          "review_tags": [
+            "Needs human verification",
+            "Missing evidence excerpt",
+            "Experiment link unclear"
+          ],
+          "status": "committed",
+          "unchanged": 65
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-005",
+          "quarantined": 0,
+          "review_tags": [
+            "Needs human verification",
+            "Experiment link unclear"
+          ],
+          "status": "committed",
+          "unchanged": 58
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-006",
+          "quarantined": 0,
+          "review_tags": [
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 26
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-007",
+          "quarantined": 1,
+          "review_tags": [
+            "Experiment link unclear",
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 43
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-008",
+          "quarantined": 0,
+          "review_tags": [
+            "Missing dose",
+            "Needs human verification",
+            "Experiment link unclear"
+          ],
+          "status": "committed",
+          "unchanged": 40
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "GP-009",
+          "quarantined": 0,
+          "review_tags": [],
+          "status": "committed",
+          "unchanged": 1
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "NP-001",
+          "quarantined": 1,
+          "review_tags": [
+            "Unsupported value",
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 51
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "NP-002",
+          "quarantined": 13,
+          "review_tags": [
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 400
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "PILOT-001",
+          "quarantined": 0,
+          "review_tags": [
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 59
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "PILOT-002",
+          "quarantined": 0,
+          "review_tags": [
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 49
+        },
+        {
+          "conflicts": 0,
+          "inserted": 0,
+          "paper_id": "PILOT-003",
+          "quarantined": 0,
+          "review_tags": [
+            "Needs human verification"
+          ],
+          "status": "committed",
+          "unchanged": 55
+        }
+      ],
+      "eligibility": [
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 1,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined"
+          ],
+          "paper_id": "GP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 2,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined"
+          ],
+          "paper_id": "GP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "outcome",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 3,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "outcome",
+            "quarantined"
+          ],
+          "paper_id": "GP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined",
+            "species"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 4,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined",
+            "species"
+          ],
+          "paper_id": "GP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 5,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined"
+          ],
+          "paper_id": "GP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "outcome",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 6,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "outcome",
+            "quarantined"
+          ],
+          "paper_id": "GP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 7,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined"
+          ],
+          "paper_id": "GP-004",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "manually_verified"
+          ],
+          "completeness_status": "complete",
+          "experiment_id": 8,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo"
+          ],
+          "paper_id": "GP-004",
+          "verification_status": "unreviewed"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 9,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined"
+          ],
+          "paper_id": "GP-004",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "outcome",
+            "payload_type",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 10,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "outcome",
+            "payload_type",
+            "quarantined"
+          ],
+          "paper_id": "GP-005",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined",
+            "species"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 11,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "quarantined",
+            "species"
+          ],
+          "paper_id": "GP-005",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined",
+            "species"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 12,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "quarantined",
+            "species"
+          ],
+          "paper_id": "GP-005",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "outcome",
+            "quarantined",
+            "species"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 13,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "outcome",
+            "quarantined",
+            "species"
+          ],
+          "paper_id": "GP-005",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 14,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined"
+          ],
+          "paper_id": "GP-006",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 15,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "in_vitro_in_vivo",
+            "quarantined"
+          ],
+          "paper_id": "GP-007",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "species"
+          ],
+          "completeness_status": "complete",
+          "experiment_id": 16,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "species"
+          ],
+          "paper_id": "GP-008",
+          "verification_status": "unreviewed"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "outcome",
+            "quarantined",
+            "species"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 17,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "outcome",
+            "quarantined",
+            "species"
+          ],
+          "paper_id": "GP-008",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "dose",
+            "dose_unit",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "manually_verified",
+            "quarantined",
+            "species"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 18,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "formulation_composition",
+            "in_vitro_in_vivo",
+            "quarantined",
+            "species"
+          ],
+          "paper_id": "GP-008",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "assay",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 19,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-001",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 20,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 21,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 22,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 23,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 24,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 25,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 26,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 27,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 28,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 29,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 30,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 31,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        },
+        {
+          "comet_eligible": false,
+          "comet_reasons": [
+            "accepted_evidence",
+            "manually_verified",
+            "quarantined"
+          ],
+          "completeness_status": "quarantined",
+          "experiment_id": 32,
+          "nearest_neighbor_eligible": false,
+          "nearest_neighbor_reasons": [
+            "accepted_evidence",
+            "quarantined"
+          ],
+          "paper_id": "NP-002",
+          "verification_status": "rejected"
+        }
+      ],
+      "expected_counts": {
+        "arms": 32,
+        "components": 45,
+        "evidence": 777,
+        "field_evidence_references": 672,
+        "formulations": 16,
+        "outcomes": 45,
+        "papers": 14,
+        "reviews": 50
+      },
+      "paid_calls": 0
+    },
+    "first_attempt": "stopped before migration because lifecycle transaction ownership conflicted with migration",
+    "second_attempt": "migrated and imported 14 dispositions; verification exposed one-time trigger schema-order churn",
+    "state_idempotent": true
+  },
+  "paid_calls": 0,
+  "schema_version": "day2-authoritative-import-audit/v1"
+}
