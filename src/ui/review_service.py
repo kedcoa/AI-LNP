@@ -298,14 +298,16 @@ def list_review_arms() -> tuple[ReviewArm, ...]:
     def priority(arm: ReviewArm) -> int:
         if arm.completeness_status == 'complete' and arm.verification_status != 'manually_verified':
             return 0
+        if arm.completeness_status == 'quarantined' or arm.review_status == 'blocked':
+            return 4
+        if arm.completeness_status == 'conflict' or arm.review_status == 'conflict':
+            return 3
         if 1 <= len(arm.comet_blockers) <= 2:
             return 1
         if arm.review_reason_code and (
             'target_cell' in arm.review_reason_code or 'experiment_link' in arm.review_reason_code
         ):
             return 2
-        if arm.completeness_status == 'conflict' or arm.review_status == 'conflict':
-            return 3
         return 4
     return tuple(sorted(arms, key=lambda arm: (priority(arm), arm.paper_id, arm.experiment_id)))
 

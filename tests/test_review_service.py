@@ -306,11 +306,15 @@ def test_review_arms_follow_the_specified_review_priority(
             ) VALUES (1, ?, ?, ?, ?, ?, '[]', ?)""",
             (key, arm_id, key, status, tag, _hash(key)),
             )
-    connection.execute(
+    connection.executemany(
         """INSERT INTO eligibility_result (
             experiment_id, profile, eligible, reasons_json, rules_version, evaluated_at
-        ) VALUES (?, 'comet', 0, '["normalization_basis"]', ?, '2026-08-06T12:00:00Z')""",
-        (extra_arms[0], RULES_VERSION),
+        ) VALUES (?, 'comet', 0, ?, ?, '2026-08-06T12:00:00Z')""",
+        [
+            (extra_arms[0], '["normalization_basis"]', RULES_VERSION),
+            (2, '["dose"]', RULES_VERSION),
+            (extra_arms[2], '["dose"]', RULES_VERSION),
+        ],
     )
     connection.commit()
     connection.close()
