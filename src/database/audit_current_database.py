@@ -17,9 +17,68 @@ from src.database.status import (
 
 DATABASE_KINDS = frozenset({"explicit_fixture", "authoritative"})
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+
+
+def resolve_common_checkout_root(checkout_root: Path | str) -> Path:
+    """Resolve the main checkout from Git metadata without invoking Git."""
+
+    checkout = Path(checkout_root).resolve()
+    dot_git = checkout / ".git"
+    if dot_git.is_dir():
+        return checkout
+    if not dot_git.is_file():
+        raise RuntimeError(f"Missing Git metadata at {dot_git}")
+    lines = dot_git.read_text(encoding="utf-8").splitlines()
+    if len(lines) != 1 or not lines[0].startswith("gitdir: "):
+        raise RuntimeError(f"Malformed worktree .git file: {dot_git}")
+    raw_git_dir = lines[0].removeprefix("gitdir: ").strip()
+    if not raw_git_dir:
+        raise RuntimeError(f"Malformed worktree .git file: {dot_git}")
+    git_dir = Path(raw_git_dir)
+    if not git_dir.is_absolute():
+        git_dir = dot_git.parent / git_dir
+    git_dir = git_dir.resolve()
+    commondir_file = git_dir / "commondir"
+    if not commondir_file.is_file():
+        raise RuntimeError(f"Missing worktree commondir: {commondir_file}")
+    common_text = commondir_file.read_text(encoding="utf-8").strip()
+    if not common_text:
+        raise RuntimeError(f"Malformed worktree commondir: {commondir_file}")
+    common_git = Path(common_text)
+    if not common_git.is_absolute():
+        common_git = git_dir / common_git
+    common_git = common_git.resolve()
+    if (
+        common_git.name != ".git"
+        or not common_git.is_dir()
+        or len(git_dir.parents) < 2
+        or git_dir.parents[1] != common_git
+    ):
+        raise RuntimeError(
+            f"Worktree commondir does not resolve to a common .git directory: {commondir_file}"
+        )
+    return common_git.parent.resolve()
+
+
+COMMON_CHECKOUT_ROOT = resolve_common_checkout_root(REPOSITORY_ROOT)
 CANONICAL_AUTHORITATIVE_DATABASE = (
-    REPOSITORY_ROOT / "data/curated/lnp_evidence.db"
+    COMMON_CHECKOUT_ROOT / "data/curated/lnp_evidence.db"
 ).resolve()
+
+
+def validate_database_kind(database_path: Path | str, database_kind: str) -> None:
+    """Validate a database label against the single canonical shared path."""
+
+    if database_kind not in DATABASE_KINDS:
+        raise ValueError(f"database_kind must be one of {sorted(DATABASE_KINDS)}")
+    if (
+        database_kind == "authoritative"
+        and Path(database_path).resolve() != CANONICAL_AUTHORITATIVE_DATABASE
+    ):
+        raise ValueError(
+            "authoritative database path must equal "
+            f"{CANONICAL_AUTHORITATIVE_DATABASE}"
+        )
 
 
 def _sha256(path: Path) -> str:
@@ -308,14 +367,7 @@ def audit_current_database(
     database_path = Path(database_path).resolve()
     manifest_path = Path(manifest_path).resolve()
     bundle_root = Path(bundle_root).resolve()
-    if database_kind not in DATABASE_KINDS:
-        raise ValueError(f"database_kind must be one of {sorted(DATABASE_KINDS)}")
-    if database_kind == "authoritative":
-        if database_path != CANONICAL_AUTHORITATIVE_DATABASE:
-            raise ValueError(
-                "authoritative database path must equal "
-                f"{CANONICAL_AUTHORITATIVE_DATABASE}"
-            )
+    validate_database_kind(database_path, database_kind)
     if not database_path.is_file():
         raise FileNotFoundError(database_path)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -527,4 +579,11 @@ def build_selective_call_preflight(
     return result
 
 
-__all__ = ["audit_current_database", "build_selective_call_preflight", "render_audit_report"]
+__all__ = [
+    "CANONICAL_AUTHORITATIVE_DATABASE",
+    "audit_current_database",
+    "build_selective_call_preflight",
+    "render_audit_report",
+    "resolve_common_checkout_root",
+    "validate_database_kind",
+]

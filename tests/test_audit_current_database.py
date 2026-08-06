@@ -180,7 +180,11 @@ def test_audit_rejects_polymorphic_entity_ids_with_wrong_ownership(
 
 
 def test_authoritative_label_requires_exact_expected_path(tmp_path: Path) -> None:
-    from src.database.audit_current_database import audit_current_database
+    from src.database.audit_current_database import (
+        CANONICAL_AUTHORITATIVE_DATABASE,
+        audit_current_database,
+        validate_database_kind,
+    )
 
     database = _populated_database(tmp_path)
     with pytest.raises(ValueError, match="authoritative database path"):
@@ -196,6 +200,44 @@ def test_authoritative_label_requires_exact_expected_path(tmp_path: Path) -> Non
         audit_current_database(
             database, MANIFEST, BUNDLES, database_kind="authoratative"
         )
+    validate_database_kind(CANONICAL_AUTHORITATIVE_DATABASE, "authoritative")
+
+
+def test_common_checkout_root_resolves_normal_git_directory(tmp_path: Path) -> None:
+    from src.database.audit_current_database import resolve_common_checkout_root
+
+    checkout = tmp_path / "main"
+    (checkout / ".git").mkdir(parents=True)
+
+    assert resolve_common_checkout_root(checkout) == checkout.resolve()
+
+
+def test_common_checkout_root_resolves_realistic_linked_worktree(tmp_path: Path) -> None:
+    from src.database.audit_current_database import resolve_common_checkout_root
+
+    main = tmp_path / "main"
+    git_dir = main / ".git"
+    worktree_git_dir = git_dir / "worktrees/audit"
+    worktree_git_dir.mkdir(parents=True)
+    (worktree_git_dir / "commondir").write_text("../..\n")
+    checkout = main / ".worktrees/audit"
+    checkout.mkdir(parents=True)
+    (checkout / ".git").write_text(f"gitdir: {worktree_git_dir}\n")
+
+    assert resolve_common_checkout_root(checkout) == main.resolve()
+
+
+def test_common_checkout_root_fails_closed_on_malformed_metadata(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import resolve_common_checkout_root
+
+    checkout = tmp_path / "broken"
+    checkout.mkdir()
+    (checkout / ".git").write_text("not-a-gitdir\n")
+
+    with pytest.raises(RuntimeError, match="Malformed worktree .git file"):
+        resolve_common_checkout_root(checkout)
 
 
 
