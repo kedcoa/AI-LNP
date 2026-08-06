@@ -6,143 +6,1051 @@
   },
   "entries": [
     {
+      "candidate_artifacts": [],
       "doi": "10.1080/10717544.2026.2682976",
       "import_artifact": null,
       "import_status": "screening_only",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-001",
+      "pipeline_lineage": [],
+      "pmcid": "PMC13244520",
       "pmid": "42249613",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": null,
       "rerun_status": "none",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived packet retained for screening provenance only.",
+          "path": "data/staging/rag/compact_packets_v1/GP-001.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "No artifact is eligible because the screening ledger excludes this non-RNA-payload paper.",
       "title": null
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "accepted_graph",
+          "notes": null,
+          "path": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "selection_status": "selected",
+          "sha256": "ae26ecbed9127a17b94022e1dac45fd1069ea14106f609f0ce3e2ede679a1548",
+          "validation_status": "accepted_zero_audit_findings"
+        }
+      ],
       "doi": "10.1016/j.omtn.2026.102989",
       "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json",
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-002",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json",
+          "notes": "Compact routing retains two selective gaps.",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "status": "selected",
+          "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-002/final_audit.json"
+        }
+      ],
+      "pmcid": "PMC13334401",
       "pmid": "42440881",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": "The compact routing artifact marks two first-call-required gaps; import only the accepted full-text graph and route those gaps for selective Day 2-3 handling.",
       "rerun_status": "selective",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/GP-002.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected the evidence-linked accepted full-text graph with zero final-audit findings; unresolved compact gaps remain selective review work.",
       "title": null
     },
     {
+      "candidate_artifacts": [],
       "doi": "10.34133/research.1288",
       "import_artifact": null,
       "import_status": "screening_only",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-003",
+      "pipeline_lineage": [],
+      "pmcid": "PMC13184955",
       "pmid": "42164756",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": null,
       "rerun_status": "none",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived packet retained for screening provenance only.",
+          "path": "data/staging/rag/compact_packets_v1/GP-003.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "No artifact is eligible because the screening ledger identifies this publication as a review article.",
       "title": null
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "accepted_graph",
+          "notes": null,
+          "path": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "selection_status": "selected",
+          "sha256": "39fab437cd3467fe48a3e990c3c17040d113915c00581f3b212b01da31d866d2",
+          "validation_status": "accepted_zero_audit_findings"
+        }
+      ],
       "doi": "10.1038/s41467-021-20903-3",
       "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json",
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-004",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json",
+          "notes": "Full-text-with-supplement graph; compact routing retains bounded gaps.",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "status": "selected",
+          "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-004/final_audit.json"
+        }
+      ],
+      "pmcid": "PMC7840919",
       "pmid": "33504774",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": "The selected accepted graph is supported, but compact routing records six missing-record-text gaps and incomplete formulation context; do not broaden import beyond the accepted graph.",
       "rerun_status": "selective",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/GP-004.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked full-text-with-supplement graph; six missing-record-text gaps and formulation context remain review-bound.",
       "title": null
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "accepted_graph",
+          "notes": null,
+          "path": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "selection_status": "selected",
+          "sha256": "a999f6d38d73aea10f6d2232c368cbed5bbaab579165ff1b30e27ed2d3e3ce4b",
+          "validation_status": "accepted_zero_audit_findings"
+        }
+      ],
       "doi": "10.1002/advs.202409729",
       "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json",
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-005",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json",
+          "notes": "Compact routing retains one vision gap and endpoint adjudication.",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "status": "selected",
+          "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-005/final_audit.json"
+        }
+      ],
+      "pmcid": "PMC11884593",
       "pmid": "39792811",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": "The accepted graph is the strongest validated merge, while compact routing retains one selective-vision gap and unresolved endpoint adjudication.",
       "rerun_status": "selective",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/GP-005.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked graph as the strongest validated merge; the remaining vision gap and endpoint adjudication prevent automatic readiness.",
       "title": null
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "accepted_graph",
+          "notes": null,
+          "path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "selection_status": "selected",
+          "sha256": "a2f63ee4a98314668a1452806a329e96011f3c3dfae086bdc139ce59a3a08c96",
+          "validation_status": "accepted_zero_audit_findings"
+        }
+      ],
       "doi": "10.1016/j.omtn.2024.102383",
       "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-006",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
+          "notes": "Compact routing retains vision and missing-record-text gaps.",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "status": "selected",
+          "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-006/final_audit.json"
+        }
+      ],
+      "pmcid": "PMC11617921",
       "pmid": "39640016",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": "The accepted graph is importable as supported evidence, but compact routing retains six selective-vision and fourteen missing-record-text gaps, including supplemental evidence.",
       "rerun_status": "selective",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/GP-006.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked graph with zero final-audit findings; supplemental, vision, and missing-record-text gaps remain selective work.",
       "title": null
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "accepted_graph",
+          "notes": null,
+          "path": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "selection_status": "selected",
+          "sha256": "28ecf42ef8b06e160ee199f6a80a36b9c57c94af9e6be6cceab6267759763142",
+          "validation_status": "accepted_zero_audit_findings"
+        }
+      ],
       "doi": "10.7150/ijbs.126332",
       "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json",
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-007",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json",
+          "notes": "Full-text-with-supplement graph; human review items remain.",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "status": "selected",
+          "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-007/final_audit.json"
+        }
+      ],
+      "pmcid": "PMC13137855",
       "pmid": "42088421",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": null,
       "rerun_status": "none",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/GP-007.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked full-text-with-supplement graph; no broader artifact is needed for the Day 1 routing decision.",
       "title": null
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "accepted_graph",
+          "notes": null,
+          "path": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "selection_status": "selected",
+          "sha256": "5c8ccb74f0d3c95038d9314d70c7e64746223a37a478aba9a9a7d4f2693b506e",
+          "validation_status": "accepted_zero_audit_findings"
+        }
+      ],
       "doi": "10.1073/pnas.2534673123",
       "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json",
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-008",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json",
+          "notes": "Manual screening review and compact gaps remain.",
+          "pipeline_name": "g1_fulltext_rag",
+          "pipeline_version": null,
+          "status": "selected",
+          "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-008/final_audit.json"
+        }
+      ],
+      "pmcid": "PMC13229182",
       "pmid": "42213756",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": "The screening ledger retains manual review and compact routing retains seven selective-vision plus three missing-record-text gaps; import only the accepted graph pending review.",
       "rerun_status": "selective",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/GP-008.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked graph, but retained manual screening review and bounded vision/text gaps rather than claiming automatic readiness.",
       "title": null
     },
     {
+      "candidate_artifacts": [],
       "doi": "10.1016/j.ymthe.2025.03.018",
       "import_artifact": null,
       "import_status": "screening_only",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/manifests/gold_source_manifest_v1.json"
+        },
+        {
+          "fields": [
+            "title",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "GP-009",
+      "pipeline_lineage": [],
+      "pmcid": "PMC12265960",
       "pmid": "40087866",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": null,
       "rerun_status": "none",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Local source-derived packet retained for screening provenance only.",
+          "path": "data/staging/rag/compact_packets_v1/GP-009.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "No artifact is eligible because the screening ledger shows HSC refers to out-of-scope hematopoietic stem cells.",
       "title": null
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "validated_primary_result",
+          "notes": "Three declared unresolved items remain.",
+          "path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
+          "pipeline_name": "compact",
+          "pipeline_version": "1.1.0",
+          "selection_status": "selected",
+          "sha256": "6ad0acdc54379dca715b9514d1acf3a54ad3f890d5121ce0d83cb4f85a7c56f4",
+          "validation_status": "valid_pending_outcome_coverage_review"
+        }
+      ],
       "doi": "10.3390/ijms252011254",
       "import_artifact": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "title",
+            "doi",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/staging/rag/compact_packets_v1/NP-001.json"
+        },
+        {
+          "fields": [
+            "pmid",
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "NP-001",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
+          "notes": "Later accounting/core-slot trials do not supersede the validated primary result.",
+          "pipeline_name": "compact",
+          "pipeline_version": "1.1.0",
+          "status": "selected",
+          "validation_path": "data/staging/extraction/np001_primary_paid_v1/NP-001/validation_report.json"
+        }
+      ],
+      "pmcid": "PMC11508592",
       "pmid": null,
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": "First perform field-level review of the validated primary result. If the three declared gaps remain material, run only source-bounded repairs for formulation-specific transfection, formulation composition, and the HepG2 assay; do not repeat the primary extraction.",
       "rerun_status": "selective",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Committed local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/NP-001.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        },
+        {
+          "access_status": "missing",
+          "notes": "Named by the compact packet but absent from the committed worktree.",
+          "path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "sha256": null,
+          "source_kind": "full_text_xml"
+        },
+        {
+          "access_status": "missing",
+          "notes": "Named by the compact packet but absent from the committed worktree.",
+          "path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf",
+          "sha256": null,
+          "source_kind": "full_text_pdf"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected the validated compact 1.1.0 primary result because it preserves evidence links and superseding trials do not provide a stronger valid artifact.",
       "title": "Encapsulation of Dexamethasone into mRNA-Lipid Nanoparticles Is a Promising Approach for the Development of Liver-Targeted Anti-Inflammatory Therapies"
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "available",
+          "artifact_kind": "recipient_cell_slice",
+          "notes": "Overlaps other cell-scoped candidates and is not a full-paper import source.",
+          "path": "data/staging/extraction/np002_isolated_liver_cell_run/01-hepatocytes/result.json",
+          "pipeline_name": "np002_isolated_liver_cell",
+          "pipeline_version": null,
+          "selection_status": "candidate",
+          "sha256": "d15bc2aea412ab6cb08a9867a883724af233900fbb342e080dfb9be0648c889d",
+          "validation_status": "valid_scoped_slice"
+        },
+        {
+          "access_status": "available",
+          "artifact_kind": "recipient_cell_slice",
+          "notes": "Overlaps other cell-scoped candidates and is not a full-paper import source.",
+          "path": "data/staging/extraction/np002_isolated_liver_cell_run/02-kupffer-cells/result.json",
+          "pipeline_name": "np002_isolated_liver_cell",
+          "pipeline_version": null,
+          "selection_status": "candidate",
+          "sha256": "dc7efbf00836f0f792ce5a7c99c3580624f2747176ca3d1fc27f5e3153335959",
+          "validation_status": "valid_scoped_slice"
+        },
+        {
+          "access_status": "available",
+          "artifact_kind": "recipient_cell_slice",
+          "notes": "Overlaps other cell-scoped candidates and is not a full-paper import source.",
+          "path": "data/staging/extraction/np002_isolated_liver_cell_run/03-hepatic-endothelial-cells/result.json",
+          "pipeline_name": "np002_isolated_liver_cell",
+          "pipeline_version": null,
+          "selection_status": "candidate",
+          "sha256": "50c4e0167178c19522f68079e945b3cba1e0600952d9279f84d7ce1ae0bd06f4",
+          "validation_status": "valid_scoped_slice"
+        },
+        {
+          "access_status": "missing",
+          "artifact_kind": "merged_extraction",
+          "notes": "Named by a merge report but absent from the current worktree.",
+          "path": "data/staging/extraction/np002_experiment_id_merged/NP-002/merged_extraction.json",
+          "pipeline_name": "np002_experiment_id_merge",
+          "pipeline_version": null,
+          "selection_status": "unavailable",
+          "sha256": null,
+          "validation_status": null
+        }
+      ],
       "doi": "10.1007/s12195-019-00573-4",
       "import_artifact": null,
       "import_status": "needs_review",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "title",
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/staging/rag/compact_packets_v1/NP-002.json"
+        },
+        {
+          "fields": [
+            "publication_metadata"
+          ],
+          "method": "unresolved",
+          "source": null
+        }
+      ],
       "paper_id": "NP-002",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "data/staging/extraction/full_paper_np002_paper_map_run/NP-002/paper_map.json",
+          "notes": "Source map preceded cell-scoped selective results.",
+          "pipeline_name": "full_paper_map",
+          "pipeline_version": null,
+          "status": "superseded",
+          "validation_path": null
+        },
+        {
+          "artifact_path": null,
+          "notes": "Three locally valid recipient-cell-scoped results require deterministic reconciliation.",
+          "pipeline_name": "np002_isolated_liver_cell",
+          "pipeline_version": null,
+          "status": "candidate",
+          "validation_path": null
+        },
+        {
+          "artifact_path": "data/staging/extraction/np002_experiment_id_merged/NP-002/merged_extraction.json",
+          "notes": "The referenced unified artifact is absent.",
+          "pipeline_name": "np002_experiment_id_merge",
+          "pipeline_version": null,
+          "status": "unresolved",
+          "validation_path": null
+        }
+      ],
+      "pmcid": "PMC6816632",
       "pmid": "31719922",
+      "publication_metadata": {
+        "citation": null,
+        "journal": null,
+        "publication_date": null,
+        "publication_year": null
+      },
       "rerun_reason": "High priority: deterministically reconcile the three validated, recipient-cell-scoped results into one source-evidence-preserving artifact, then repair only the missing assay, endpoint, qualitative-outcome, and comparator fields. No new extraction request is authorized by this inventory.",
       "rerun_status": "selective",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Committed local full-text source copy.",
+          "path": "data/staging/new_papers/NP-002/PMC6816632.html",
+          "sha256": null,
+          "source_kind": "full_text_html"
+        },
+        {
+          "access_status": "available",
+          "notes": "Committed local full-text source copy.",
+          "path": "data/staging/new_papers/NP-002/PMC6816632.pdf",
+          "sha256": null,
+          "source_kind": "full_text_pdf"
+        },
+        {
+          "access_status": "available",
+          "notes": "Committed local source-derived evidence packet.",
+          "path": "data/staging/rag/compact_packets_v1/NP-002.json",
+          "sha256": null,
+          "source_kind": "compact_packet"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected no artifact because the available valid results are overlapping recipient-cell slices and the referenced unified merge is absent; choosing one would discard supported records.",
       "title": "Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles"
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "missing",
+          "artifact_kind": "source_inventory",
+          "notes": "Named by the selection manifest but absent.",
+          "path": "data/staging/extraction/application_pilot/PILOT-001/inventory.json",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "selection_status": "unavailable",
+          "sha256": null,
+          "validation_status": null
+        },
+        {
+          "access_status": "available",
+          "artifact_kind": "consolidated_replay",
+          "notes": "Provider-free replay is not an importable supported artifact.",
+          "path": "reports/extraction/application_pilot_final.json",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "selection_status": "rejected",
+          "sha256": "931182178fab1f23d449ff1cc16005cd87c602c91e456092c8e7d38c9b2bcf89",
+          "validation_status": "formal_acceptance_failed"
+        }
+      ],
       "doi": "10.1038/s41467-022-35637-z",
       "import_artifact": null,
       "import_status": "blocked",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "title",
+            "doi",
+            "pmcid",
+            "publication_metadata"
+          ],
+          "method": "local_artifact",
+          "source": "reports/database/day1_lane_pilot.md"
+        },
+        {
+          "fields": [
+            "pmid"
+          ],
+          "method": "free_bibliographic_lookup",
+          "source": "https://pubmed.ncbi.nlm.nih.gov/36650129/"
+        }
+      ],
       "paper_id": "PILOT-001",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "reports/extraction/application_pilot_final.json",
+          "notes": "Formal acceptance failed; expected paper inventory is missing.",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "status": "rejected",
+          "validation_path": "reports/extraction/application_pilot_final.json"
+        }
+      ],
+      "pmcid": "PMC9845313",
       "pmid": "36650129",
+      "publication_metadata": {
+        "citation": "Han et al. (2023)",
+        "journal": null,
+        "publication_date": null,
+        "publication_year": 2023
+      },
       "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
       "rerun_status": "blocked_pending_access",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
+          "path": "reports/database/day1_lane_pilot.md",
+          "sha256": null,
+          "source_kind": "reviewed_inventory_report"
+        },
+        {
+          "access_status": "missing",
+          "notes": "Expected OA source path is absent from the committed worktree.",
+          "path": "data/staging/new_papers/PILOT-001/PMC9845313.html",
+          "sha256": "74f5c9753888de6396a73609bfa1339e2033e14d6b6453cbabe776d0a0df0b94",
+          "source_kind": "full_text_html"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected no artifact because the expected source-derived inventory is missing and the only available consolidated replay failed formal acceptance.",
       "title": "Ligand-tethered lipid nanoparticles for targeted RNA delivery to treat liver fibrosis"
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "missing",
+          "artifact_kind": "source_inventory",
+          "notes": "Named by the selection manifest but absent.",
+          "path": "data/staging/extraction/application_pilot/PILOT-002/inventory.json",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "selection_status": "unavailable",
+          "sha256": null,
+          "validation_status": null
+        },
+        {
+          "access_status": "available",
+          "artifact_kind": "consolidated_replay",
+          "notes": "Provider-free replay is not an importable supported artifact.",
+          "path": "reports/extraction/application_pilot_final.json",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "selection_status": "rejected",
+          "sha256": "931182178fab1f23d449ff1cc16005cd87c602c91e456092c8e7d38c9b2bcf89",
+          "validation_status": "formal_acceptance_failed"
+        }
+      ],
       "doi": "10.1126/sciadv.abf4398",
       "import_artifact": null,
       "import_status": "blocked",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "title",
+            "doi",
+            "pmid",
+            "pmcid"
+          ],
+          "method": "local_artifact",
+          "source": "data/staging/searches/deduplicated_papers.jsonl (candidate_00106)"
+        },
+        {
+          "fields": [
+            "publication_metadata"
+          ],
+          "method": "local_artifact",
+          "source": "data/staging/searches/screening_metadata.jsonl (candidate_00106)"
+        }
+      ],
       "paper_id": "PILOT-002",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "reports/extraction/application_pilot_final.json",
+          "notes": "Formal acceptance failed; expected paper inventory is missing.",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "status": "rejected",
+          "validation_path": "reports/extraction/application_pilot_final.json"
+        }
+      ],
+      "pmcid": "PMC7909888",
       "pmid": "33637537",
+      "publication_metadata": {
+        "citation": "Kim et al. (2021)",
+        "journal": null,
+        "publication_date": null,
+        "publication_year": 2021
+      },
       "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
       "rerun_status": "blocked_pending_access",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
+          "path": "reports/database/day1_lane_pilot.md",
+          "sha256": null,
+          "source_kind": "reviewed_inventory_report"
+        },
+        {
+          "access_status": "missing",
+          "notes": "Expected OA source path is absent from the committed worktree.",
+          "path": "data/staging/new_papers/PILOT-002/PMC7909888.html",
+          "sha256": "ca3f29c32d7e84085693e36c0bf409ab09125a2ddbcb5aba2aada052e0866619",
+          "source_kind": "full_text_html"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected no artifact because the expected source-derived inventory is missing and the only available consolidated replay failed formal acceptance.",
       "title": "Engineered ionizable lipid nanoparticles for targeted delivery of RNA therapeutics into different types of cells in the liver"
     },
     {
+      "candidate_artifacts": [
+        {
+          "access_status": "missing",
+          "artifact_kind": "source_inventory",
+          "notes": "Named by the selection manifest but absent.",
+          "path": "data/staging/extraction/application_pilot/PILOT-003/inventory.json",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "selection_status": "unavailable",
+          "sha256": null,
+          "validation_status": null
+        },
+        {
+          "access_status": "available",
+          "artifact_kind": "consolidated_replay",
+          "notes": "Provider-free replay is not an importable supported artifact.",
+          "path": "reports/extraction/application_pilot_final.json",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "selection_status": "rejected",
+          "sha256": "931182178fab1f23d449ff1cc16005cd87c602c91e456092c8e7d38c9b2bcf89",
+          "validation_status": "formal_acceptance_failed"
+        }
+      ],
       "doi": "10.1038/s41419-020-2571-4",
       "import_artifact": null,
       "import_status": "blocked",
+      "last_checked": "2026-08-06",
+      "metadata_provenance": [
+        {
+          "fields": [
+            "title",
+            "doi",
+            "pmcid",
+            "publication_metadata"
+          ],
+          "method": "local_artifact",
+          "source": "reports/database/day1_lane_pilot.md"
+        },
+        {
+          "fields": [
+            "pmid"
+          ],
+          "method": "free_bibliographic_lookup",
+          "source": "https://pubmed.ncbi.nlm.nih.gov/32393755/"
+        }
+      ],
       "paper_id": "PILOT-003",
+      "pipeline_lineage": [
+        {
+          "artifact_path": "reports/extraction/application_pilot_final.json",
+          "notes": "Formal acceptance failed; expected paper inventory is missing.",
+          "pipeline_name": "application_pilot",
+          "pipeline_version": null,
+          "status": "rejected",
+          "validation_path": "reports/extraction/application_pilot_final.json"
+        }
+      ],
+      "pmcid": "PMC7214425",
       "pmid": "32393755",
+      "publication_metadata": {
+        "citation": "Woitok et al. (2020)",
+        "journal": null,
+        "publication_date": null,
+        "publication_year": 2020
+      },
       "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
       "rerun_status": "blocked_pending_access",
+      "source_access_records": [
+        {
+          "access_status": "available",
+          "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
+          "path": "reports/database/day1_lane_pilot.md",
+          "sha256": null,
+          "source_kind": "reviewed_inventory_report"
+        },
+        {
+          "access_status": "missing",
+          "notes": "Expected OA source path is absent from the committed worktree.",
+          "path": "data/staging/new_papers/PILOT-003/PMC7214425.html",
+          "sha256": "b27ca7553386ece0179125f7234d68434b9ae5bc7311dd016fc4a35b3980cabf",
+          "source_kind": "full_text_html"
+        }
+      ],
+      "strongest_artifact_rationale": "Selected no artifact because the expected source-derived inventory is missing and the only available consolidated replay failed formal acceptance.",
       "title": "Lipid-encapsulated siRNA for hepatocyte-directed treatment of advanced liver disease"
     }
   ],
@@ -152,51 +1060,72 @@
     {
       "paper_id": "GP-002",
       "path": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json",
+      "pipeline_name": "g1_fulltext_rag",
+      "pipeline_version": null,
+      "rationale": "Selected the evidence-linked accepted full-text graph with zero final-audit findings; unresolved compact gaps remain selective review work.",
       "sha256": "ae26ecbed9127a17b94022e1dac45fd1069ea14106f609f0ce3e2ede679a1548"
     },
     {
       "paper_id": "GP-004",
       "path": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json",
+      "pipeline_name": "g1_fulltext_rag",
+      "pipeline_version": null,
+      "rationale": "Selected the accepted evidence-linked full-text-with-supplement graph; six missing-record-text gaps and formulation context remain review-bound.",
       "sha256": "39fab437cd3467fe48a3e990c3c17040d113915c00581f3b212b01da31d866d2"
     },
     {
       "paper_id": "GP-005",
       "path": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json",
+      "pipeline_name": "g1_fulltext_rag",
+      "pipeline_version": null,
+      "rationale": "Selected the accepted evidence-linked graph as the strongest validated merge; the remaining vision gap and endpoint adjudication prevent automatic readiness.",
       "sha256": "a999f6d38d73aea10f6d2232c368cbed5bbaab579165ff1b30e27ed2d3e3ce4b"
     },
     {
       "paper_id": "GP-006",
       "path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
+      "pipeline_name": "g1_fulltext_rag",
+      "pipeline_version": null,
+      "rationale": "Selected the accepted evidence-linked graph with zero final-audit findings; supplemental, vision, and missing-record-text gaps remain selective work.",
       "sha256": "a2f63ee4a98314668a1452806a329e96011f3c3dfae086bdc139ce59a3a08c96"
     },
     {
       "paper_id": "GP-007",
       "path": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json",
+      "pipeline_name": "g1_fulltext_rag",
+      "pipeline_version": null,
+      "rationale": "Selected the accepted evidence-linked full-text-with-supplement graph; no broader artifact is needed for the Day 1 routing decision.",
       "sha256": "28ecf42ef8b06e160ee199f6a80a36b9c57c94af9e6be6cceab6267759763142"
     },
     {
       "paper_id": "GP-008",
       "path": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json",
+      "pipeline_name": "g1_fulltext_rag",
+      "pipeline_version": null,
+      "rationale": "Selected the accepted evidence-linked graph, but retained manual screening review and bounded vision/text gaps rather than claiming automatic readiness.",
       "sha256": "5c8ccb74f0d3c95038d9314d70c7e64746223a37a478aba9a9a7d4f2693b506e"
     },
     {
       "paper_id": "NP-001",
       "path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
+      "pipeline_name": "compact",
+      "pipeline_version": "1.1.0",
+      "rationale": "Selected the validated compact 1.1.0 primary result because it preserves evidence links and superseding trials do not provide a stronger valid artifact.",
       "sha256": "6ad0acdc54379dca715b9514d1acf3a54ad3f890d5121ce0d83cb4f85a7c56f4"
     }
   ],
   "source_lanes": [
     {
       "path": "data/manifests/current_corpus_lanes/gp_v1.json",
-      "sha256": "decf13d83e59d2c557d896858edd16a43677b173213690494c8d0ba21ca622bf"
+      "sha256": "31120b2132149ca97b674b666c7bd515296f3c2ef232f105a26a028f6fb54a91"
     },
     {
       "path": "data/manifests/current_corpus_lanes/np_v1.json",
-      "sha256": "77d840652d509135593d4bb96bd9ca44297a1a731b6fd3fe936fb0bfa01863fb"
+      "sha256": "3520d7ef5caa76e5299fe6d0ac09e4da120f6201609263bdea8823b40e3350e1"
     },
     {
       "path": "data/manifests/current_corpus_lanes/pilot_v1.json",
-      "sha256": "98e065a7ac0ec157b373d634606b59ca49b08a3decf2e485ff95dc81e06f21f0"
+      "sha256": "e66eef6791ad4632c171521c8369dfe0f0f70c679418691b5af0ffbc102279d0"
     }
   ],
   "summary": {

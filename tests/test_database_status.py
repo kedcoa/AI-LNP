@@ -125,7 +125,9 @@ def test_conflict_takes_precedence_over_incomplete(arm_database) -> None:
     assert result.verification_status == "conflict"
 
 
-def test_persisted_relation_conflict_is_not_silently_cleared(arm_database) -> None:
+def test_cached_conflict_without_current_relational_support_is_recomputed(
+    arm_database,
+) -> None:
     connection, experiment_id = arm_database
     connection.execute(
         """
@@ -139,8 +141,39 @@ def test_persisted_relation_conflict_is_not_silently_cleared(arm_database) -> No
 
     result = evaluate_arm_status(connection, experiment_id)
 
-    assert result.completeness_status == "conflict"
-    assert result.verification_status == "conflict"
+    assert result.completeness_status == "complete"
+    assert result.verification_status == "manually_verified"
+
+
+def test_resolved_field_conflict_recomputes_to_complete(arm_database) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        """
+        INSERT INTO field_verification (
+            experiment_id, field_name, verification_status, notes, verified_at
+        ) VALUES (?, 'species', 'conflict', 'mouse and rat both supported',
+                  '2026-08-06T10:00:00Z')
+        """,
+        (experiment_id,),
+    )
+    assert evaluate_arm_status(
+        connection, experiment_id
+    ).completeness_status == "conflict"
+
+    connection.execute(
+        """
+        INSERT INTO field_verification (
+            experiment_id, field_name, verification_status, notes, verified_at
+        ) VALUES (?, 'species', 'manually_verified', 'resolved to mouse',
+                  '2026-08-06T11:00:00Z')
+        """,
+        (experiment_id,),
+    )
+
+    result = evaluate_arm_status(connection, experiment_id)
+
+    assert result.completeness_status == "complete"
+    assert result.verification_status == "manually_verified"
 
 
 def test_explicit_quarantine_takes_highest_precedence(arm_database) -> None:
@@ -176,6 +209,18 @@ def test_nearest_neighbor_and_comet_have_distinct_evidence_gates(
     assert comet.reasons == ()
 
 
+def test_eligibility_records_the_coherent_outcome_rules_version(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+
+    result = evaluate_eligibility(
+        connection, experiment_id, "nearest_neighbor"
+    )
+
+    assert result.rules_version == "working-evidence-v2"
+
+
 def test_ambiguous_evidence_is_not_similarity_eligible(arm_database) -> None:
     connection, experiment_id = arm_database
     connection.execute(
@@ -191,6 +236,99 @@ def test_ambiguous_evidence_is_not_similarity_eligible(arm_database) -> None:
 
     assert nearest.eligible is False
     assert "accepted_evidence" in nearest.reasons
+
+
+def test_outcome_without_usable_value_is_not_eligible(arm_database) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        """
+        UPDATE outcome
+        SET outcome_value = NULL,
+            qualitative_outcome = NULL,
+            value_status = 'missing'
+        WHERE experiment_id = ?
+        """,
+        (experiment_id,),
+    )
+
+    result = evaluate_eligibility(
+        connection, experiment_id, "nearest_neighbor"
+    )
+
+    assert result.eligible is False
+    assert "usable_outcome" in result.reasons
+
+
+def test_experiment_evidence_must_link_to_the_usable_outcome(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        "UPDATE evidence SET outcome_id = NULL WHERE experiment_id = ?",
+        (experiment_id,),
+    )
+
+    result = evaluate_eligibility(
+        connection, experiment_id, "nearest_neighbor"
+    )
+
+    assert result.eligible is False
+    assert "accepted_evidence" in result.reasons
+
+
+def test_usable_value_and_accepted_evidence_cannot_be_split_across_outcomes(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+    unsupported_outcome_id = connection.execute(
+        "SELECT outcome_id FROM outcome WHERE experiment_id = ?",
+        (experiment_id,),
+    ).fetchone()[0]
+    valueless_outcome_id = connection.execute(
+        """
+        INSERT INTO outcome (
+            experiment_id, endpoint_family, endpoint_name,
+            value_status
+        ) VALUES (?, 'uptake', 'secondary endpoint', 'missing')
+        """,
+        (experiment_id,),
+    ).lastrowid
+    connection.execute(
+        "UPDATE evidence SET outcome_id = ? WHERE outcome_id = ?",
+        (valueless_outcome_id, unsupported_outcome_id),
+    )
+
+    result = evaluate_eligibility(
+        connection, experiment_id, "nearest_neighbor"
+    )
+
+    assert result.eligible is False
+    assert "accepted_evidence" in result.reasons
+
+
+def test_supported_qualitative_outcome_is_similarity_eligible(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        """
+        UPDATE outcome
+        SET outcome_value = NULL,
+            outcome_unit = NULL,
+            normalization_basis = NULL,
+            qualitative_outcome = 'Expression increased relative to control.',
+            value_status = 'qualitative_only'
+        WHERE experiment_id = ?
+        """,
+        (experiment_id,),
+    )
+
+    result = evaluate_eligibility(
+        connection, experiment_id, "nearest_neighbor"
+    )
+
+    assert result.eligible is True
+    assert result.reasons == ()
 
 
 def test_evidence_backed_human_correction_changes_comet_eligibility(

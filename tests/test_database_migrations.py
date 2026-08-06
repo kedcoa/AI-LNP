@@ -4,7 +4,27 @@ import sqlite3
 
 import pytest
 
+from src.database import migrations as migrations_module
 from src.database.migrations import migrate_database
+
+
+PAPER_STATE_CASES = [
+    ("include", "ready", True),
+    ("include", "ready_with_missing_fields", True),
+    ("include", "needs_review", True),
+    ("include", "blocked", True),
+    ("include", "screening_only", False),
+    ("manual_review", "ready", True),
+    ("manual_review", "ready_with_missing_fields", True),
+    ("manual_review", "needs_review", True),
+    ("manual_review", "blocked", True),
+    ("manual_review", "screening_only", False),
+    ("exclude", "ready", False),
+    ("exclude", "ready_with_missing_fields", False),
+    ("exclude", "needs_review", False),
+    ("exclude", "blocked", False),
+    ("exclude", "screening_only", True),
+]
 
 
 def _legacy_connection() -> sqlite3.Connection:
@@ -90,8 +110,139 @@ def test_migration_preserves_legacy_rows_and_is_idempotent() -> None:
     ).fetchall() == [(13, "mRNA")]
     assert connection.execute(
         "SELECT version FROM schema_migration ORDER BY version"
-    ).fetchall() == [(1,), (2,)]
+    ).fetchall() == [(1,), (2,), (3,)]
     assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
+
+
+def test_migration_backfills_legacy_excluded_papers_to_screening_only() -> None:
+    connection = _legacy_connection()
+    connection.execute(
+        """
+        INSERT INTO paper (
+            paper_id, title, source_type, retrieval_date, screening_status
+        ) VALUES (8, 'Legacy excluded paper', 'fixture', '2026-08-01', 'exclude')
+        """
+    )
+    connection.commit()
+
+    migrate_database(connection)
+
+    assert connection.execute(
+        "SELECT screening_status, import_status FROM paper WHERE paper_id = 8"
+    ).fetchone() == ("exclude", "screening_only")
+
+
+@pytest.mark.parametrize(
+    ("screening_status", "import_status", "allowed"), PAPER_STATE_CASES
+)
+def test_paper_insert_enforces_screening_and_import_state_pair(
+    screening_status: str,
+    import_status: str,
+    allowed: bool,
+) -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    statement = """
+        INSERT INTO paper (
+            title, source_type, retrieval_date, screening_status, import_status
+        ) VALUES ('New paper', 'fixture', '2026-08-06', ?, ?)
+    """
+
+    if allowed:
+        connection.execute(statement, (screening_status, import_status))
+        assert connection.execute(
+            """
+            SELECT screening_status, import_status
+            FROM paper
+            WHERE title = 'New paper'
+            """
+        ).fetchone() == (screening_status, import_status)
+    else:
+        with pytest.raises(sqlite3.IntegrityError, match="screening exclusion"):
+            connection.execute(statement, (screening_status, import_status))
+
+
+@pytest.mark.parametrize(
+    ("screening_status", "import_status", "allowed"), PAPER_STATE_CASES
+)
+@pytest.mark.parametrize("starting_excluded", [False, True])
+def test_paper_update_enforces_screening_and_import_state_pair(
+    screening_status: str,
+    import_status: str,
+    allowed: bool,
+    starting_excluded: bool,
+) -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    if starting_excluded:
+        connection.execute(
+            """
+            UPDATE paper
+            SET screening_status = 'exclude', import_status = 'screening_only'
+            WHERE paper_id = 7
+            """
+        )
+    statement = """
+        UPDATE paper
+        SET screening_status = ?, import_status = ?
+        WHERE paper_id = 7
+    """
+
+    if allowed:
+        connection.execute(statement, (screening_status, import_status))
+        assert connection.execute(
+            "SELECT screening_status, import_status FROM paper WHERE paper_id = 7"
+        ).fetchone() == (screening_status, import_status)
+    else:
+        with pytest.raises(sqlite3.IntegrityError, match="screening exclusion"):
+            connection.execute(statement, (screening_status, import_status))
+
+
+def test_screening_only_exit_requires_same_statement_screening_reversal() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    connection.execute(
+        """
+        UPDATE paper
+        SET screening_status = 'exclude', import_status = 'screening_only'
+        WHERE paper_id = 7
+        """
+    )
+
+    with pytest.raises(sqlite3.IntegrityError, match="screening exclusion"):
+        connection.execute(
+            "UPDATE paper SET import_status = 'needs_review' WHERE paper_id = 7"
+        )
+
+    connection.execute(
+        """
+        UPDATE paper
+        SET screening_status = 'include', import_status = 'needs_review'
+        WHERE paper_id = 7
+        """
+    )
+    assert connection.execute(
+        "SELECT screening_status, import_status FROM paper WHERE paper_id = 7"
+    ).fetchone() == ("include", "needs_review")
+
+
+def test_migration_rolls_back_every_change_after_late_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    connection = _legacy_connection()
+    before = tuple(connection.iterdump())
+    monkeypatch.setattr(
+        migrations_module,
+        "INTEGRITY_SCHEMA_SQL",
+        migrations_module.INTEGRITY_SCHEMA_SQL
+        + "\nSELECT definitely_missing_migration_function();\n",
+    )
+
+    with pytest.raises(sqlite3.OperationalError):
+        migrate_database(connection)
+
+    assert tuple(connection.iterdump()) == before
+    assert connection.in_transaction is False
 
 
 def test_provenance_missing_fields_and_verification_have_foreign_keys() -> None:
@@ -250,7 +401,11 @@ def test_screening_only_paper_cannot_be_marked_import_ready() -> None:
     migrate_database(connection)
 
     connection.execute(
-        "UPDATE paper SET import_status = 'screening_only' WHERE paper_id = 7"
+        """
+        UPDATE paper
+        SET screening_status = 'exclude', import_status = 'screening_only'
+        WHERE paper_id = 7
+        """
     )
     with pytest.raises(sqlite3.IntegrityError):
         connection.execute(

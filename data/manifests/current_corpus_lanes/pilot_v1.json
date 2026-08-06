@@ -1,25 +1,27 @@
 {
-  "metadata_provenance": {
-    "last_checked": "2026-08-06",
-    "PILOT-001": {
-      "title_doi_pmcid_year": "data/benchmarks/application_pilot/pilot_manifest.json",
-      "pmid": "Free PubMed bibliographic lookup: https://pubmed.ncbi.nlm.nih.gov/36650129/"
-    },
-    "PILOT-002": {
-      "title_doi_pmid_pmcid": "data/staging/searches/deduplicated_papers.jsonl (candidate_00106)",
-      "year": "data/benchmarks/application_pilot/pilot_manifest.json"
-    },
-    "PILOT-003": {
-      "title_doi_pmcid_year": "data/benchmarks/application_pilot/pilot_manifest.json",
-      "pmid": "Free PubMed bibliographic lookup: https://pubmed.ncbi.nlm.nih.gov/32393755/"
-    }
-  },
   "entries": [
     {
       "paper_id": "PILOT-001",
       "title": "Ligand-tethered lipid nanoparticles for targeted RNA delivery to treat liver fibrosis",
       "doi": "10.1038/s41467-022-35637-z",
       "pmid": "36650129",
+      "pmcid": "PMC9845313",
+      "publication_metadata": {"citation": "Han et al. (2023)", "journal": null, "publication_year": 2023, "publication_date": null},
+      "source_access_records": [
+        {"path": "reports/database/day1_lane_pilot.md", "source_kind": "reviewed_inventory_report", "access_status": "available", "sha256": null, "notes": "Reviewed local bibliography and expected-source inventory; not human gold."},
+        {"path": "data/staging/new_papers/PILOT-001/PMC9845313.html", "source_kind": "full_text_html", "access_status": "missing", "sha256": "74f5c9753888de6396a73609bfa1339e2033e14d6b6453cbabe776d0a0df0b94", "notes": "Expected OA source path is absent from the committed worktree."}
+      ],
+      "candidate_artifacts": [
+        {"path": "data/staging/extraction/application_pilot/PILOT-001/inventory.json", "artifact_kind": "source_inventory", "access_status": "missing", "selection_status": "unavailable", "sha256": null, "pipeline_name": "application_pilot", "pipeline_version": null, "validation_status": null, "notes": "Named by the selection manifest but absent."},
+        {"path": "reports/extraction/application_pilot_final.json", "artifact_kind": "consolidated_replay", "access_status": "available", "selection_status": "rejected", "sha256": "931182178fab1f23d449ff1cc16005cd87c602c91e456092c8e7d38c9b2bcf89", "pipeline_name": "application_pilot", "pipeline_version": null, "validation_status": "formal_acceptance_failed", "notes": "Provider-free replay is not an importable supported artifact."}
+      ],
+      "pipeline_lineage": [{"pipeline_name": "application_pilot", "pipeline_version": null, "artifact_path": "reports/extraction/application_pilot_final.json", "status": "rejected", "validation_path": "reports/extraction/application_pilot_final.json", "notes": "Formal acceptance failed; expected paper inventory is missing."}],
+      "metadata_provenance": [
+        {"fields": ["title", "doi", "pmcid", "publication_metadata"], "source": "reports/database/day1_lane_pilot.md", "method": "local_artifact"},
+        {"fields": ["pmid"], "source": "https://pubmed.ncbi.nlm.nih.gov/36650129/", "method": "free_bibliographic_lookup"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected no artifact because the expected source-derived inventory is missing and the only available consolidated replay failed formal acceptance.",
       "import_status": "blocked",
       "rerun_status": "blocked_pending_access",
       "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
@@ -30,6 +32,23 @@
       "title": "Engineered ionizable lipid nanoparticles for targeted delivery of RNA therapeutics into different types of cells in the liver",
       "doi": "10.1126/sciadv.abf4398",
       "pmid": "33637537",
+      "pmcid": "PMC7909888",
+      "publication_metadata": {"citation": "Kim et al. (2021)", "journal": null, "publication_year": 2021, "publication_date": null},
+      "source_access_records": [
+        {"path": "reports/database/day1_lane_pilot.md", "source_kind": "reviewed_inventory_report", "access_status": "available", "sha256": null, "notes": "Reviewed local bibliography and expected-source inventory; not human gold."},
+        {"path": "data/staging/new_papers/PILOT-002/PMC7909888.html", "source_kind": "full_text_html", "access_status": "missing", "sha256": "ca3f29c32d7e84085693e36c0bf409ab09125a2ddbcb5aba2aada052e0866619", "notes": "Expected OA source path is absent from the committed worktree."}
+      ],
+      "candidate_artifacts": [
+        {"path": "data/staging/extraction/application_pilot/PILOT-002/inventory.json", "artifact_kind": "source_inventory", "access_status": "missing", "selection_status": "unavailable", "sha256": null, "pipeline_name": "application_pilot", "pipeline_version": null, "validation_status": null, "notes": "Named by the selection manifest but absent."},
+        {"path": "reports/extraction/application_pilot_final.json", "artifact_kind": "consolidated_replay", "access_status": "available", "selection_status": "rejected", "sha256": "931182178fab1f23d449ff1cc16005cd87c602c91e456092c8e7d38c9b2bcf89", "pipeline_name": "application_pilot", "pipeline_version": null, "validation_status": "formal_acceptance_failed", "notes": "Provider-free replay is not an importable supported artifact."}
+      ],
+      "pipeline_lineage": [{"pipeline_name": "application_pilot", "pipeline_version": null, "artifact_path": "reports/extraction/application_pilot_final.json", "status": "rejected", "validation_path": "reports/extraction/application_pilot_final.json", "notes": "Formal acceptance failed; expected paper inventory is missing."}],
+      "metadata_provenance": [
+        {"fields": ["title", "doi", "pmid", "pmcid"], "source": "data/staging/searches/deduplicated_papers.jsonl (candidate_00106)", "method": "local_artifact"},
+        {"fields": ["publication_metadata"], "source": "data/staging/searches/screening_metadata.jsonl (candidate_00106)", "method": "local_artifact"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected no artifact because the expected source-derived inventory is missing and the only available consolidated replay failed formal acceptance.",
       "import_status": "blocked",
       "rerun_status": "blocked_pending_access",
       "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
@@ -40,6 +59,23 @@
       "title": "Lipid-encapsulated siRNA for hepatocyte-directed treatment of advanced liver disease",
       "doi": "10.1038/s41419-020-2571-4",
       "pmid": "32393755",
+      "pmcid": "PMC7214425",
+      "publication_metadata": {"citation": "Woitok et al. (2020)", "journal": null, "publication_year": 2020, "publication_date": null},
+      "source_access_records": [
+        {"path": "reports/database/day1_lane_pilot.md", "source_kind": "reviewed_inventory_report", "access_status": "available", "sha256": null, "notes": "Reviewed local bibliography and expected-source inventory; not human gold."},
+        {"path": "data/staging/new_papers/PILOT-003/PMC7214425.html", "source_kind": "full_text_html", "access_status": "missing", "sha256": "b27ca7553386ece0179125f7234d68434b9ae5bc7311dd016fc4a35b3980cabf", "notes": "Expected OA source path is absent from the committed worktree."}
+      ],
+      "candidate_artifacts": [
+        {"path": "data/staging/extraction/application_pilot/PILOT-003/inventory.json", "artifact_kind": "source_inventory", "access_status": "missing", "selection_status": "unavailable", "sha256": null, "pipeline_name": "application_pilot", "pipeline_version": null, "validation_status": null, "notes": "Named by the selection manifest but absent."},
+        {"path": "reports/extraction/application_pilot_final.json", "artifact_kind": "consolidated_replay", "access_status": "available", "selection_status": "rejected", "sha256": "931182178fab1f23d449ff1cc16005cd87c602c91e456092c8e7d38c9b2bcf89", "pipeline_name": "application_pilot", "pipeline_version": null, "validation_status": "formal_acceptance_failed", "notes": "Provider-free replay is not an importable supported artifact."}
+      ],
+      "pipeline_lineage": [{"pipeline_name": "application_pilot", "pipeline_version": null, "artifact_path": "reports/extraction/application_pilot_final.json", "status": "rejected", "validation_path": "reports/extraction/application_pilot_final.json", "notes": "Formal acceptance failed; expected paper inventory is missing."}],
+      "metadata_provenance": [
+        {"fields": ["title", "doi", "pmcid", "publication_metadata"], "source": "reports/database/day1_lane_pilot.md", "method": "local_artifact"},
+        {"fields": ["pmid"], "source": "https://pubmed.ncbi.nlm.nih.gov/32393755/", "method": "free_bibliographic_lookup"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected no artifact because the expected source-derived inventory is missing and the only available consolidated replay failed formal acceptance.",
       "import_status": "blocked",
       "rerun_status": "blocked_pending_access",
       "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",

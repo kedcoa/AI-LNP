@@ -20,7 +20,10 @@ The local pilot-selection manifest supplied the three titles, DOIs, PMCIDs, and 
 - PILOT-002: local `candidate_00106` (`PMID 33637537`); no new lookup used
 - PILOT-003: [PubMed 32393755](https://pubmed.ncbi.nlm.nih.gov/32393755/)
 
-`pmcid` and publication metadata are documented here because the committed `CorpusEntry` contract stores only `title`, `doi`, and `pmid` bibliographic fields. The lane manifest passes those contract-supported identifiers through and records source attribution in its top-level `metadata_provenance` block, which `load_lane()` safely ignores while validating the strict entry schema.
+The lane manifest records PMCID and publication metadata directly on each
+typed entry, together with per-entry source attribution and last-checked date.
+Unavailable journal and publication-date values remain explicit `null` rather
+than being inferred.
 
 ## Reference and artifact policy
 

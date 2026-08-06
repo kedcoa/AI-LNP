@@ -5,7 +5,7 @@ from __future__ import annotations
 import sqlite3
 
 
-MIGRATION_VERSION = 2
+MIGRATION_VERSION = 3
 
 PAPER_COLUMNS = {
     "source_paper_id": "TEXT",
@@ -250,6 +250,53 @@ INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
 VALUES (2, 'review_and_screening_integrity', '2026-08-06T01:00:00Z');
 """
 
+SCREENING_STATE_SCHEMA_SQL = """
+DROP TRIGGER IF EXISTS trg_screening_only_not_ready;
+DROP TRIGGER IF EXISTS trg_excluded_paper_not_ready_insert;
+DROP TRIGGER IF EXISTS trg_excluded_paper_not_ready_update;
+DROP TRIGGER IF EXISTS trg_paper_screening_state_insert;
+DROP TRIGGER IF EXISTS trg_paper_screening_state_update;
+
+UPDATE paper
+SET import_status = 'screening_only'
+WHERE screening_status = 'exclude';
+
+CREATE TRIGGER trg_paper_screening_state_insert
+BEFORE INSERT ON paper
+WHEN (
+    NEW.screening_status = 'exclude'
+    AND NEW.import_status != 'screening_only'
+) OR (
+    NEW.screening_status != 'exclude'
+    AND NEW.import_status = 'screening_only'
+)
+BEGIN
+    SELECT RAISE(
+        ABORT,
+        'screening exclusion requires screening_only import status'
+    );
+END;
+
+CREATE TRIGGER trg_paper_screening_state_update
+BEFORE UPDATE OF screening_status, import_status ON paper
+WHEN (
+    NEW.screening_status = 'exclude'
+    AND NEW.import_status != 'screening_only'
+) OR (
+    NEW.screening_status != 'exclude'
+    AND NEW.import_status = 'screening_only'
+)
+BEGIN
+    SELECT RAISE(
+        ABORT,
+        'screening exclusion requires screening_only import status'
+    );
+END;
+
+INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
+VALUES (3, 'screening_state_and_atomic_migration', '2026-08-06T02:00:00Z');
+"""
+
 
 def _add_missing_columns(
     connection: sqlite3.Connection,
@@ -268,6 +315,21 @@ def _add_missing_columns(
             )
 
 
+def _execute_sql_script(connection: sqlite3.Connection, script: str) -> None:
+    """Execute one complete SQL statement at a time without implicit commits."""
+
+    pending: list[str] = []
+    for line in script.splitlines(keepends=True):
+        pending.append(line)
+        statement = "".join(pending)
+        if sqlite3.complete_statement(statement):
+            if statement.strip():
+                connection.execute(statement)
+            pending.clear()
+    if "".join(pending).strip():
+        raise sqlite3.OperationalError("incomplete migration SQL statement")
+
+
 def migrate_database(connection: sqlite3.Connection) -> None:
     """Upgrade a legacy six-table database without replacing existing rows.
 
@@ -275,17 +337,27 @@ def migrate_database(connection: sqlite3.Connection) -> None:
     same schema and single migration-version record.
     """
 
-    connection.execute("PRAGMA foreign_keys = ON")
+    if not connection.in_transaction:
+        connection.execute("PRAGMA foreign_keys = ON")
     if connection.execute("PRAGMA foreign_keys").fetchone() != (1,):
         raise RuntimeError(
             "SQLite foreign-key enforcement must be enabled before migration"
         )
-    _add_missing_columns(connection, "paper", PAPER_COLUMNS)
-    _add_missing_columns(connection, "experiment", EXPERIMENT_COLUMNS)
-    connection.executescript(ADDITIVE_SCHEMA_SQL)
-    _add_missing_columns(
-        connection,
-        "review_revision",
-        REVIEW_REVISION_COLUMNS,
-    )
-    connection.executescript(INTEGRITY_SCHEMA_SQL)
+    savepoint = "working_evidence_database_migration"
+    connection.execute(f"SAVEPOINT {savepoint}")
+    try:
+        _add_missing_columns(connection, "paper", PAPER_COLUMNS)
+        _add_missing_columns(connection, "experiment", EXPERIMENT_COLUMNS)
+        _execute_sql_script(connection, ADDITIVE_SCHEMA_SQL)
+        _add_missing_columns(
+            connection,
+            "review_revision",
+            REVIEW_REVISION_COLUMNS,
+        )
+        _execute_sql_script(connection, INTEGRITY_SCHEMA_SQL)
+        _execute_sql_script(connection, SCREENING_STATE_SCHEMA_SQL)
+    except BaseException:
+        connection.execute(f"ROLLBACK TO SAVEPOINT {savepoint}")
+        connection.execute(f"RELEASE SAVEPOINT {savepoint}")
+        raise
+    connection.execute(f"RELEASE SAVEPOINT {savepoint}")

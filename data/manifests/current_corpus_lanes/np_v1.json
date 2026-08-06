@@ -5,6 +5,21 @@
       "title": "Encapsulation of Dexamethasone into mRNA-Lipid Nanoparticles Is a Promising Approach for the Development of Liver-Targeted Anti-Inflammatory Therapies",
       "doi": "10.3390/ijms252011254",
       "pmid": null,
+      "pmcid": "PMC11508592",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [
+        {"path": "data/staging/rag/compact_packets_v1/NP-001.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Committed local source-derived evidence packet."},
+        {"path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml", "source_kind": "full_text_xml", "access_status": "missing", "sha256": null, "notes": "Named by the compact packet but absent from the committed worktree."},
+        {"path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf", "source_kind": "full_text_pdf", "access_status": "missing", "sha256": null, "notes": "Named by the compact packet but absent from the committed worktree."}
+      ],
+      "candidate_artifacts": [{"path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json", "artifact_kind": "validated_primary_result", "access_status": "available", "selection_status": "selected", "sha256": "6ad0acdc54379dca715b9514d1acf3a54ad3f890d5121ce0d83cb4f85a7c56f4", "pipeline_name": "compact", "pipeline_version": "1.1.0", "validation_status": "valid_pending_outcome_coverage_review", "notes": "Three declared unresolved items remain."}],
+      "pipeline_lineage": [{"pipeline_name": "compact", "pipeline_version": "1.1.0", "artifact_path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json", "status": "selected", "validation_path": "data/staging/extraction/np001_primary_paid_v1/NP-001/validation_report.json", "notes": "Later accounting/core-slot trials do not supersede the validated primary result."}],
+      "metadata_provenance": [
+        {"fields": ["title", "doi", "pmcid"], "source": "data/staging/rag/compact_packets_v1/NP-001.json", "method": "local_artifact"},
+        {"fields": ["pmid", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected the validated compact 1.1.0 primary result because it preserves evidence links and superseding trials do not provide a stronger valid artifact.",
       "import_status": "needs_review",
       "rerun_status": "selective",
       "rerun_reason": "First perform field-level review of the validated primary result. If the three declared gaps remain material, run only source-bounded repairs for formulation-specific transfection, formulation composition, and the HepG2 assay; do not repeat the primary extraction.",
@@ -15,6 +30,30 @@
       "title": "Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles",
       "doi": "10.1007/s12195-019-00573-4",
       "pmid": "31719922",
+      "pmcid": "PMC6816632",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [
+        {"path": "data/staging/new_papers/NP-002/PMC6816632.html", "source_kind": "full_text_html", "access_status": "available", "sha256": null, "notes": "Committed local full-text source copy."},
+        {"path": "data/staging/new_papers/NP-002/PMC6816632.pdf", "source_kind": "full_text_pdf", "access_status": "available", "sha256": null, "notes": "Committed local full-text source copy."},
+        {"path": "data/staging/rag/compact_packets_v1/NP-002.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Committed local source-derived evidence packet."}
+      ],
+      "candidate_artifacts": [
+        {"path": "data/staging/extraction/np002_isolated_liver_cell_run/01-hepatocytes/result.json", "artifact_kind": "recipient_cell_slice", "access_status": "available", "selection_status": "candidate", "sha256": "d15bc2aea412ab6cb08a9867a883724af233900fbb342e080dfb9be0648c889d", "pipeline_name": "np002_isolated_liver_cell", "pipeline_version": null, "validation_status": "valid_scoped_slice", "notes": "Overlaps other cell-scoped candidates and is not a full-paper import source."},
+        {"path": "data/staging/extraction/np002_isolated_liver_cell_run/02-kupffer-cells/result.json", "artifact_kind": "recipient_cell_slice", "access_status": "available", "selection_status": "candidate", "sha256": "dc7efbf00836f0f792ce5a7c99c3580624f2747176ca3d1fc27f5e3153335959", "pipeline_name": "np002_isolated_liver_cell", "pipeline_version": null, "validation_status": "valid_scoped_slice", "notes": "Overlaps other cell-scoped candidates and is not a full-paper import source."},
+        {"path": "data/staging/extraction/np002_isolated_liver_cell_run/03-hepatic-endothelial-cells/result.json", "artifact_kind": "recipient_cell_slice", "access_status": "available", "selection_status": "candidate", "sha256": "50c4e0167178c19522f68079e945b3cba1e0600952d9279f84d7ce1ae0bd06f4", "pipeline_name": "np002_isolated_liver_cell", "pipeline_version": null, "validation_status": "valid_scoped_slice", "notes": "Overlaps other cell-scoped candidates and is not a full-paper import source."},
+        {"path": "data/staging/extraction/np002_experiment_id_merged/NP-002/merged_extraction.json", "artifact_kind": "merged_extraction", "access_status": "missing", "selection_status": "unavailable", "sha256": null, "pipeline_name": "np002_experiment_id_merge", "pipeline_version": null, "validation_status": null, "notes": "Named by a merge report but absent from the current worktree."}
+      ],
+      "pipeline_lineage": [
+        {"pipeline_name": "full_paper_map", "pipeline_version": null, "artifact_path": "data/staging/extraction/full_paper_np002_paper_map_run/NP-002/paper_map.json", "status": "superseded", "validation_path": null, "notes": "Source map preceded cell-scoped selective results."},
+        {"pipeline_name": "np002_isolated_liver_cell", "pipeline_version": null, "artifact_path": null, "status": "candidate", "validation_path": null, "notes": "Three locally valid recipient-cell-scoped results require deterministic reconciliation."},
+        {"pipeline_name": "np002_experiment_id_merge", "pipeline_version": null, "artifact_path": "data/staging/extraction/np002_experiment_id_merged/NP-002/merged_extraction.json", "status": "unresolved", "validation_path": null, "notes": "The referenced unified artifact is absent."}
+      ],
+      "metadata_provenance": [
+        {"fields": ["title", "doi", "pmid", "pmcid"], "source": "data/staging/rag/compact_packets_v1/NP-002.json", "method": "local_artifact"},
+        {"fields": ["publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected no artifact because the available valid results are overlapping recipient-cell slices and the referenced unified merge is absent; choosing one would discard supported records.",
       "import_status": "needs_review",
       "rerun_status": "selective",
       "rerun_reason": "High priority: deterministically reconcile the three validated, recipient-cell-scoped results into one source-evidence-preserving artifact, then repair only the missing assay, endpoint, qualitative-outcome, and comparator fields. No new extraction request is authorized by this inventory.",

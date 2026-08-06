@@ -9,7 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Iterable, Literal, Mapping, Sequence
 
@@ -22,6 +22,60 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class PublicationMetadata(StrictModel):
+    """Bibliographic fields that may remain explicitly unresolved."""
+
+    citation: str | None
+    journal: str | None
+    publication_year: int | None
+    publication_date: str | None
+
+
+class SourceAccessRecord(StrictModel):
+    """One known source locator and its checked local access state."""
+
+    path: str = Field(min_length=1)
+    source_kind: str = Field(min_length=1)
+    access_status: Literal["available", "missing", "restricted", "unresolved"]
+    sha256: str | None = Field(pattern=r"^[0-9a-f]{64}$")
+    notes: str | None
+
+
+class CandidateArtifactRecord(StrictModel):
+    """One considered extraction artifact, including rejected candidates."""
+
+    path: str = Field(min_length=1)
+    artifact_kind: str = Field(min_length=1)
+    access_status: Literal["available", "missing", "restricted", "unresolved"]
+    selection_status: Literal[
+        "selected", "candidate", "rejected", "superseded", "unavailable"
+    ]
+    sha256: str | None = Field(pattern=r"^[0-9a-f]{64}$")
+    pipeline_name: str = Field(min_length=1)
+    pipeline_version: str | None
+    validation_status: str | None
+    notes: str | None
+
+
+class PipelineLineageRecord(StrictModel):
+    """A pipeline/version stage that produced or evaluated a candidate."""
+
+    pipeline_name: str = Field(min_length=1)
+    pipeline_version: str | None
+    artifact_path: str | None
+    status: Literal["selected", "candidate", "rejected", "superseded", "unresolved"]
+    validation_path: str | None
+    notes: str | None
+
+
+class MetadataProvenanceRecord(StrictModel):
+    """Source attribution for one or more bibliographic fields."""
+
+    fields: list[str] = Field(min_length=1)
+    source: str | None
+    method: Literal["local_artifact", "free_bibliographic_lookup", "unresolved"]
+
+
 class CorpusEntry(StrictModel):
     """One paper's explicit corpus and rerun routing state."""
 
@@ -29,6 +83,14 @@ class CorpusEntry(StrictModel):
     title: str | None = None
     doi: str | None = None
     pmid: str | None = None
+    pmcid: str | None
+    publication_metadata: PublicationMetadata
+    source_access_records: list[SourceAccessRecord] = Field(min_length=1)
+    candidate_artifacts: list[CandidateArtifactRecord]
+    pipeline_lineage: list[PipelineLineageRecord]
+    metadata_provenance: list[MetadataProvenanceRecord] = Field(min_length=1)
+    last_checked: date
+    strongest_artifact_rationale: str = Field(min_length=1)
     import_status: Literal[
         "ready",
         "ready_with_missing_fields",
@@ -46,6 +108,27 @@ class CorpusEntry(StrictModel):
             raise ValueError("screening_only entries cannot select an import artifact")
         if self.rerun_status != "none" and not (self.rerun_reason or "").strip():
             raise ValueError("non-none rerun status requires a rerun reason")
+        if not self.strongest_artifact_rationale.strip():
+            raise ValueError("strongest artifact rationale cannot be blank")
+        selected = [
+            candidate
+            for candidate in self.candidate_artifacts
+            if candidate.selection_status == "selected"
+        ]
+        if self.import_artifact is None:
+            if selected:
+                raise ValueError(
+                    "candidate artifact cannot be selected without an import artifact"
+                )
+        elif (
+            len(selected) != 1
+            or selected[0].path != self.import_artifact
+            or selected[0].access_status != "available"
+            or selected[0].sha256 is None
+        ):
+            raise ValueError(
+                "import artifact requires one matching available selected candidate with SHA-256"
+            )
         return self
 
     @property
@@ -92,9 +175,11 @@ _EXCLUDED_DIRECTORY_NAMES = frozenset(
         "raw",
     }
 )
-_EXCLUDED_FILE_NAMES = frozenset({".env", ".env.local", ".env.production"})
+_EXCLUDED_FILE_NAMES = frozenset(
+    {".env", ".env.local", ".env.production", ".envrc", "id_rsa"}
+)
 _SENSITIVE_PATH_COMPONENT = re.compile(
-    r"(?:^|[._-])(?:access[._-]?token|api[._-]?key|credential(?:s)?|"
+    r"(?:^|[._-])(?:access[._-]?token|token(?:s)?|api[._-]?key|credential(?:s)?|"
     r"password(?:s)?|private[._-]?key|secret(?:s)?|raw|provider|licensed)(?:[._-]|$)",
     re.IGNORECASE,
 )
@@ -110,6 +195,14 @@ _ARTIFACT_KINDS = {
     ".yaml": "yaml",
     ".yml": "yaml",
 }
+_ALLOWED_ARTIFACT_ROOTS = (
+    Path("data/staging/extraction"),
+    Path("data/staging/rag"),
+    Path("reports/extraction"),
+)
+_ALLOWED_ARTIFACT_SUFFIXES = frozenset(
+    {".csv", ".json", ".jsonl", ".md", ".tsv", ".txt", ".xml", ".yaml", ".yml"}
+)
 _PIPELINE_CLUE = re.compile(
     r"(?<![a-z0-9])(?:v\d+(?:[._-]\d+)*|day\d+|g\d+)(?![a-z0-9])",
     re.IGNORECASE,
@@ -152,7 +245,10 @@ def validate_corpus(
         if entry.import_artifact is None:
             continue
         artifact_path = _resolve_within_root(corpus_root, entry.import_artifact)
-        if _is_excluded(artifact_path.relative_to(corpus_root)):
+        relative_path = artifact_path.relative_to(corpus_root)
+        if _is_excluded(relative_path) or not _is_allowlisted_artifact(
+            relative_path
+        ):
             raise ValueError(
                 "selected import artifact is excluded by local safety policy: "
                 f"{entry.import_artifact}"
@@ -181,12 +277,20 @@ def scan_artifact_candidates(
     if not known_paper_ids:
         return []
 
+    paths = (
+        path
+        for relative_root in _ALLOWED_ARTIFACT_ROOTS
+        if (artifact_root / relative_root).is_dir()
+        for path in (artifact_root / relative_root).rglob("*")
+    )
     candidates: list[ArtifactCandidate] = []
-    for path in sorted(artifact_root.rglob("*"), key=lambda item: item.as_posix()):
+    for path in sorted(paths, key=lambda item: item.as_posix()):
         if not path.is_file() or path.is_symlink():
             continue
         relative_path = path.relative_to(artifact_root)
-        if _is_excluded(relative_path):
+        if _is_excluded(relative_path) or not _is_allowlisted_artifact(
+            relative_path
+        ):
             continue
         paper_id = _paper_id_for(relative_path.as_posix(), known_paper_ids)
         if paper_id is None:
@@ -237,6 +341,16 @@ def _is_excluded(relative_path: Path) -> bool:
         filename in _EXCLUDED_FILE_NAMES
         or filename.startswith(".env.")
         or _SENSITIVE_PATH_COMPONENT.search(filename) is not None
+    )
+
+
+def _is_allowlisted_artifact(relative_path: Path) -> bool:
+    return (
+        relative_path.suffix.casefold() in _ALLOWED_ARTIFACT_SUFFIXES
+        and any(
+            relative_path.is_relative_to(allowed_root)
+            for allowed_root in _ALLOWED_ARTIFACT_ROOTS
+        )
     )
 
 

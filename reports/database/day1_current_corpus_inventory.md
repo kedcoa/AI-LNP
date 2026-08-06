@@ -35,17 +35,22 @@ No evidence was imported and no scientific extraction was performed.
 
 This inventory selects or defers local artifacts only. Field- and arm-level validation, evidence import, and any authorized selective repair remain Day 2-3 work.
 
-## Final verification (2026-08-06)
+## Final reviewer-fix verification (2026-08-06)
 
-- The canonical manifest contains **14** paper dispositions: **11** import candidates, **3** screening-only records, **7** selected supported artifacts, and **4** included records with explicit unresolved reasons. It records **0** paid/API/LLM calls.
-- Recomputed SHA-256 digests for all **7/7** selected artifact paths matched the canonical manifest; no selected path was missing.
-- A temporary legacy six-table SQLite database preserved its seeded `paper` and `experiment` rows through migration. Within the same run, the first and second post-migration schema-and-data dumps were identical; the migrated database had 14 tables, migration versions 1 and 2 only, enabled foreign keys, and no `PRAGMA foreign_key_check` rows.
-- With `OPENAI_API_KEY` and `SENSENOVA_API_KEY` blank and the RAG site-packages on `PYTHONPATH`, the complete offline suite reported **889 passed, 7 skipped** (5 warnings).
-- The worktree has no curated database file (only the tracked placeholder). The repository working database at `data/curated/lnp_evidence.db` remained byte-identical before and after the suite: `87a77275f8c524e70747bff92f247cf78d9907b5a6059d0fcadb38dfb1eca675`.
-- The Git index was empty, so no raw provider response, licensed source, credential, or other sensitive file was staged.
-
-### Outstanding handoff
-
-Day 2 imports only the seven selected artifacts and preserves the four explicit unresolved routes (NP-002 plus PILOT-001 through PILOT-003). Day 3 performs field/arm validation, the scoped selective repairs, and the blocked-source follow-up.
-
-All local gates recorded here passed. The controller-owned independent whole-branch review remains pending; Day 1 must not be called complete until that review passes.
+- The canonical manifest contains **14** paper dispositions: **11** import
+  candidates, **3** screening-only records, **7** selected supported artifacts,
+  and **4** included records with explicit unresolved reasons. It records
+  **0** paid/API/LLM calls.
+- Every entry now preserves PMCID, explicit-null publication metadata,
+  source/access records, candidate artifacts, pipeline/version lineage,
+  metadata provenance, last-checked date, and a structural strongest-artifact
+  rationale.
+- Excluded-paper backfill/state invariants, atomic migration rollback,
+  conflict recomputation, and coherent evidence-linked outcome eligibility are
+  covered by the focused suite: **137 passed**.
+- With paid credentials blank, the complete offline suite reported
+  **958 passed, 7 skipped** (5 pre-existing deprecation warnings).
+- The curated database remained byte-identical to its previously recorded
+  SHA-256:
+  `87a77275f8c524e70747bff92f247cf78d9907b5a6059d0fcadb38dfb1eca675`.
+- No raw/provider/licensed/credential file is among the changed paths.

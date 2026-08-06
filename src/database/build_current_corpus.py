@@ -75,15 +75,25 @@ def build_current_corpus_manifest(
     validate_corpus(entries, corpus_root)
     _validate_import_decisions(entries)
 
-    selected_artifacts = [
-        {
-            "paper_id": entry.paper_id,
-            "path": entry.import_artifact,
-            "sha256": _sha256(corpus_root / entry.import_artifact),
-        }
-        for entry in entries
-        if entry.import_artifact is not None
-    ]
+    selected_artifacts = []
+    for entry in entries:
+        if entry.import_artifact is None:
+            continue
+        selected_candidate = next(
+            candidate
+            for candidate in entry.candidate_artifacts
+            if candidate.selection_status == "selected"
+        )
+        selected_artifacts.append(
+            {
+                "paper_id": entry.paper_id,
+                "path": entry.import_artifact,
+                "sha256": _sha256(corpus_root / entry.import_artifact),
+                "rationale": entry.strongest_artifact_rationale,
+                "pipeline_name": selected_candidate.pipeline_name,
+                "pipeline_version": selected_candidate.pipeline_version,
+            }
+        )
     manifest: dict[str, object] = {
         "schema_version": "current-corpus/v1",
         "purpose": "Day 2 supported-evidence import routing",

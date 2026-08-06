@@ -68,10 +68,31 @@ def test_manifest_records_local_hashes_without_selecting_raw_provider_data(
     assert len(manifest["selected_artifacts"]) == 7
     assert all(
         len(artifact["sha256"]) == 64
+        and artifact["rationale"].strip()
+        and artifact["pipeline_name"].strip()
+        and "pipeline_version" in artifact
         and "raw" not in artifact["path"].casefold()
         and "provider" not in artifact["path"].casefold()
         for artifact in manifest["selected_artifacts"]
     )
+
+
+def test_canonical_entries_preserve_complete_lane_inventory(
+    tmp_path: Path,
+) -> None:
+    manifest = build_current_corpus_manifest(
+        ROOT, LANE_PATHS, tmp_path / "manifest.json"
+    )
+
+    entries = manifest["entries"]
+    assert all(entry["pmcid"] is not None for entry in entries)
+    assert all(entry["publication_metadata"] for entry in entries)
+    assert all(entry["source_access_records"] for entry in entries)
+    assert all(entry["metadata_provenance"] for entry in entries)
+    assert all(entry["last_checked"] == "2026-08-06" for entry in entries)
+    assert all(entry["strongest_artifact_rationale"].strip() for entry in entries)
+    assert all("candidate_artifacts" in entry for entry in entries)
+    assert all("pipeline_lineage" in entry for entry in entries)
 
 
 def test_every_import_candidate_has_an_artifact_or_explicit_reason(
@@ -95,23 +116,18 @@ def test_every_import_candidate_has_an_artifact_or_explicit_reason(
 
 def test_conflicting_cross_lane_claims_are_rejected(tmp_path: Path) -> None:
     conflicting_lane = tmp_path / "conflicting.json"
+    conflicting_entry = json.loads(LANE_PATHS[0].read_text(encoding="utf-8"))[
+        "entries"
+    ][0]
+    conflicting_entry.update(
+        {
+            "import_status": "blocked",
+            "rerun_status": "blocked_pending_access",
+            "rerun_reason": "Conflicting route from a second lane.",
+        }
+    )
     conflicting_lane.write_text(
-        json.dumps(
-            {
-                "entries": [
-                    {
-                        "paper_id": "GP-001",
-                        "title": None,
-                        "doi": "10.1080/10717544.2026.2682976",
-                        "pmid": "42249613",
-                        "import_status": "blocked",
-                        "rerun_status": "blocked_pending_access",
-                        "rerun_reason": "Conflicting route from a second lane.",
-                        "import_artifact": None,
-                    }
-                ]
-            }
-        ),
+        json.dumps({"entries": [conflicting_entry]}),
         encoding="utf-8",
     )
 

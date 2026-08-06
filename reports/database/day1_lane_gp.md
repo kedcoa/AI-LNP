@@ -26,10 +26,11 @@ coverage gaps listed below.
 ## Local provenance and caveats
 
 - Bibliographic IDs and ledger dispositions come from
-  `data/manifests/gold_source_manifest_v1.json`. The committed lane contract
-  has no PMCID, publication-date, source-path, or provenance fields; titles
-  are retained as explicit `null` because no title-bearing local metadata was
-  promoted into that contract.
+  `data/manifests/gold_source_manifest_v1.json`. The lane now records PMCIDs,
+  explicit-null publication metadata, checked source access, candidate and
+  pipeline lineage, field-level metadata provenance, and the artifact-selection
+  rationale. Titles remain explicit `null` because no title-bearing local
+  metadata was promoted into the contract.
 - Candidate inventories are in
   `data/staging/extraction/v12_atomic_inventory/GP-00{1..9}/manifest.json`.
   All report `paid_api_requests: 0`.

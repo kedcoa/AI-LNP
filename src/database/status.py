@@ -13,7 +13,7 @@ from typing import Literal
 CompletenessStatus = Literal["complete", "incomplete", "conflict", "quarantined"]
 EligibilityProfile = Literal["nearest_neighbor", "comet"]
 
-RULES_VERSION = "working-evidence-v1"
+RULES_VERSION = "working-evidence-v2"
 
 BASE_REQUIRED_FIELDS = ("formulation_id", "cell_type", "payload_type")
 PROFILE_REQUIRED_FIELDS = {
@@ -173,6 +173,59 @@ def _linked_outcomes(
         connection.row_factory = previous_factory
 
 
+def _usable_outcomes(
+    connection: sqlite3.Connection,
+    experiment_id: int,
+) -> list[sqlite3.Row]:
+    previous_factory = connection.row_factory
+    connection.row_factory = sqlite3.Row
+    try:
+        outcomes = connection.execute(
+            """
+            SELECT outcome.*,
+                   EXISTS (
+                       SELECT 1
+                       FROM evidence
+                       WHERE evidence.experiment_id = outcome.experiment_id
+                         AND evidence.outcome_id = outcome.outcome_id
+                         AND evidence.evidence_review_status IN (
+                             'automatically_validated', 'manually_verified'
+                         )
+                   ) AS has_accepted_evidence,
+                   EXISTS (
+                       SELECT 1
+                       FROM evidence
+                       WHERE evidence.experiment_id = outcome.experiment_id
+                         AND evidence.outcome_id = outcome.outcome_id
+                         AND evidence.evidence_review_status = 'manually_verified'
+                   ) AS has_manually_verified_evidence
+            FROM outcome
+            WHERE outcome.experiment_id = ?
+            ORDER BY outcome.outcome_id
+            """,
+            (experiment_id,),
+        ).fetchall()
+    finally:
+        connection.row_factory = previous_factory
+
+    usable: list[sqlite3.Row] = []
+    for outcome in outcomes:
+        value = outcome["outcome_value"]
+        numeric_result = False
+        if outcome["value_status"] in {"reported", "normalized"}:
+            try:
+                numeric_result = value is not None and math.isfinite(float(value))
+            except (TypeError, ValueError):
+                numeric_result = False
+        qualitative_result = (
+            outcome["value_status"] == "qualitative_only"
+            and bool((outcome["qualitative_outcome"] or "").strip())
+        )
+        if numeric_result or qualitative_result:
+            usable.append(outcome)
+    return usable
+
+
 def _evidence_statuses(
     connection: sqlite3.Connection,
     experiment_id: int,
@@ -199,10 +252,17 @@ def _field_statuses(
         row[0]
         for row in connection.execute(
             """
-            SELECT verification_status
-            FROM field_verification
-            WHERE experiment_id = ?
-            ORDER BY field_verification_id
+            SELECT current.verification_status
+            FROM field_verification AS current
+            WHERE current.experiment_id = ?
+              AND NOT EXISTS (
+                  SELECT 1
+                  FROM field_verification AS later
+                  WHERE later.experiment_id = current.experiment_id
+                    AND later.field_name = current.field_name
+                    AND later.field_verification_id > current.field_verification_id
+              )
+            ORDER BY current.field_verification_id
             """,
             (experiment_id,),
         )
@@ -249,11 +309,6 @@ def evaluate_arm_status(
         if stored is not None and stored[0] == "quarantined"
         else None
     )
-    stored_conflict = (
-        stored is not None
-        and (stored[0] == "conflict" or stored[1] == "conflict")
-    )
-
     missing = _unresolved_missing_fields(connection, experiment_id)
     missing.update(
         field_name
@@ -273,7 +328,7 @@ def evaluate_arm_status(
     if quarantine_reason:
         status: CompletenessStatus = "quarantined"
         verification = "rejected"
-    elif stored_conflict or "conflict" in statuses:
+    elif "conflict" in statuses:
         status = "conflict"
         verification = "conflict"
     elif missing:
@@ -345,26 +400,41 @@ def _profile_reasons(
         reasons.add("formulation_composition")
 
     outcomes = _linked_outcomes(connection, experiment_id)
+    usable_outcomes = _usable_outcomes(connection, experiment_id)
+    accepted_outcomes = [
+        outcome for outcome in usable_outcomes if outcome["has_accepted_evidence"]
+    ]
     if not outcomes:
         reasons.add("outcome")
-    elif profile == "comet":
-        if not any((row["outcome_unit"] or "").strip() for row in outcomes):
-            reasons.add("outcome_unit")
-        if not any((row["normalization_basis"] or "").strip() for row in outcomes):
-            reasons.add("normalization_basis")
-
-    evidence_statuses = _evidence_statuses(connection, experiment_id)
-    if not evidence_statuses:
-        reasons.add("evidence")
-    elif any(
-        status not in {"automatically_validated", "manually_verified"}
-        for status in evidence_statuses
-    ):
+    elif not usable_outcomes:
+        reasons.add("usable_outcome")
+    if not accepted_outcomes:
         reasons.add("accepted_evidence")
-    elif profile == "comet" and not all(
-        status == "manually_verified" for status in evidence_statuses
-    ):
-        reasons.add("manually_verified_evidence")
+    if profile == "comet" and accepted_outcomes:
+        if not any(
+            (row["outcome_unit"] or "").strip() for row in accepted_outcomes
+        ):
+            reasons.add("outcome_unit")
+        if not any(
+            (row["normalization_basis"] or "").strip()
+            for row in accepted_outcomes
+        ):
+            reasons.add("normalization_basis")
+        coherent_outcomes = [
+            row
+            for row in accepted_outcomes
+            if (row["outcome_unit"] or "").strip()
+            and (row["normalization_basis"] or "").strip()
+        ]
+        if not coherent_outcomes:
+            reasons.add("coherent_outcome")
+        elif not any(
+            row["has_manually_verified_evidence"] for row in coherent_outcomes
+        ):
+            reasons.add("manually_verified_evidence")
+
+    if not _evidence_statuses(connection, experiment_id):
+        reasons.add("evidence")
     return reasons
 
 
