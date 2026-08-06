@@ -82,6 +82,9 @@ def test_review_app_includes_workspace_review_controls_and_post_save_eligibility
     ):
         assert label in source
     assert "disabled=not can_submit" in source
+    assert "shown_evidence = matching_evidence +" in source
+    assert "excerpt.outcome_id" in source
+    assert "excerpt.experiment_id" in source
 
 
 def test_review_app_renders_fixture_workspace_and_requires_verified_readiness(

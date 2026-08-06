@@ -227,12 +227,25 @@ def main() -> None:
             "Choose a field", field_names,
             format_func=lambda name: field_by_name[name].label,
         )
-        matching_evidence = [item for item in workspace.evidence if item.field_name == selected_field]
-        shown_evidence = matching_evidence or list(workspace.evidence)
+        selected_workspace_field = field_by_name[selected_field]
+        matching_evidence = [
+            item for item in workspace.evidence
+            if item.field_name == selected_workspace_field.field_name
+            and (
+                selected_workspace_field.entity_type != 'outcome'
+                or item.outcome_id == selected_workspace_field.entity_id
+            )
+        ]
+        shown_evidence = matching_evidence + [
+            item for item in workspace.evidence if item not in matching_evidence
+        ]
         evidence_id = st.selectbox(
             "Supporting evidence", [None] + [item.evidence_id for item in shown_evidence],
             format_func=lambda item: "Choose evidence" if item is None else next(
-                f"#{excerpt.evidence_id} · {excerpt.location or excerpt.location_type}"
+                f"#{excerpt.evidence_id} · "
+                f"{'arm #' + str(excerpt.experiment_id) + ' · ' if excerpt.experiment_id else ''}"
+                f"{'outcome #' + str(excerpt.outcome_id) + ' · ' if excerpt.outcome_id else ''}"
+                f"{excerpt.location or excerpt.location_type}"
                 for excerpt in shown_evidence if excerpt.evidence_id == item
             ),
         )
@@ -247,7 +260,10 @@ def main() -> None:
             {"When": item.reviewed_at, "Decision": item.review_action,
              "Previous value": item.previous_value or "—", "Reviewed value": item.corrected_value,
              "Reviewer": item.reviewer, "Note": item.reviewer_notes or "—"}
-            for item in workspace.history if item.field_name == selected_field
+            for item in workspace.history
+            if item.field_name == selected_workspace_field.field_name
+            and item.entity_type == selected_workspace_field.entity_type
+            and item.entity_id == selected_workspace_field.entity_id
         ], hide_index=True, width="stretch")
 
     st.divider()
@@ -276,7 +292,10 @@ def main() -> None:
         )
         if st.button("Submit review decision", type="primary", disabled=not can_submit):
             request = ReviewDecision(
-                experiment_id=workspace.arm.experiment_id, field_name=selected_field,
+                experiment_id=workspace.arm.experiment_id,
+                entity_type=selected_workspace_field.entity_type,
+                entity_id=selected_workspace_field.entity_id,
+                field_name=selected_workspace_field.field_name,
                 decision=decision, reviewer=reviewer, reviewer_notes=reviewer_notes,
                 expected_review_revision_id=max(
                     (item.review_revision_id for item in workspace.history), default=0

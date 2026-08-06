@@ -124,7 +124,7 @@ def test_migration_preserves_legacy_rows_and_is_idempotent() -> None:
     ).fetchall() == [(13, "mRNA")]
     assert connection.execute(
         "SELECT version FROM schema_migration ORDER BY version"
-    ).fetchall() == [(1,), (2,), (3,)]
+    ).fetchall() == [(1,), (2,), (3,), (4,), (5,)]
     assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
 
 
@@ -446,6 +446,159 @@ def test_review_history_is_additive_and_screening_events_are_retained() -> None:
         )
 
 
+def test_migration_adds_entity_action_and_evidence_context_to_review_history() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+
+    columns = {row[1] for row in connection.execute('PRAGMA table_info(review_revision)')}
+    assert {'entity_type', 'entity_id', 'review_action', 'evidence_id'} <= columns
+    assert connection.execute(
+        "SELECT version FROM schema_migration ORDER BY version"
+    ).fetchall() == [(1,), (2,), (3,), (4,), (5,)]
+
+    revision_id = connection.execute(
+        """INSERT INTO review_revision (
+               experiment_id, entity_type, entity_id, field_name, corrected_value,
+               evidence_excerpt, evidence_location, reviewer, decision, review_action,
+               reviewer_notes, reviewed_at
+           ) VALUES (13, 'arm', 13, 'dose', 'not reported', 'Human review action',
+                     'human review record', 'reviewer-a', 'rejected', 'not_reported',
+                     'No supported value.', '2026-08-06T11:00:00Z')"""
+    ).lastrowid
+
+    assert connection.execute(
+        "SELECT entity_type, entity_id, review_action FROM review_revision WHERE review_revision_id = ?",
+        (revision_id,),
+    ).fetchone() == ('arm', 13, 'not_reported')
+    with pytest.raises(sqlite3.IntegrityError, match='immutable'):
+        connection.execute(
+            "UPDATE review_revision SET reviewer_notes = 'changed' WHERE review_revision_id = ?",
+            (revision_id,),
+        )
+
+
+def test_v5_repairs_v4_missing_field_triggers_for_shared_formulations() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    connection.execute('DELETE FROM schema_migration WHERE version = 5')
+    connection.execute('DROP TRIGGER trg_missing_field_resolution_matches_insert')
+    connection.execute('DROP TRIGGER trg_missing_field_resolution_matches_update')
+    migrations_module._execute_sql_script(connection, migrations_module.INTEGRITY_SCHEMA_SQL)
+    connection.execute(
+        """INSERT INTO experiment (
+               experiment_id, paper_id, formulation_id, cell_type, payload_type
+           ) VALUES (14, 7, 11, 'hepatocyte', 'mRNA')"""
+    )
+    missing_id = connection.execute(
+        """INSERT INTO missing_field (experiment_id, field_name, reason, recorded_at)
+           VALUES (14, 'formulation_name', 'not extracted', '2026-08-06T10:00:00Z')"""
+    ).lastrowid
+    revision_id = connection.execute(
+        """INSERT INTO review_revision (
+               experiment_id, entity_type, entity_id, field_name, corrected_value,
+               evidence_excerpt, evidence_location, reviewer, decision, review_action,
+               reviewed_at
+           ) VALUES (13, 'formulation', 11, 'formulation_name', 'Reviewed LNP',
+                     'Shared formulation name.', 'table 1', 'reviewer-a', 'accepted',
+                     'correct', '2026-08-06T11:00:00Z')"""
+    ).lastrowid
+    connection.execute(
+        """INSERT INTO outcome (
+               outcome_id, experiment_id, endpoint_family, endpoint_name, value_status
+           ) VALUES (21, 13, 'expression', 'luciferase', 'reported')"""
+    )
+    outcome_revision_id = connection.execute(
+        """INSERT INTO review_revision (
+               experiment_id, entity_type, entity_id, field_name, corrected_value,
+               evidence_excerpt, evidence_location, reviewer, decision, review_action,
+               reviewed_at
+               ) VALUES (13, 'outcome', 21, 'outcome_value', '14',
+                     'Outcome review.', 'figure 1', 'reviewer-a', 'accepted',
+                     'correct', '2026-08-06T11:05:00Z')"""
+    ).lastrowid
+    connection.execute(
+        """INSERT INTO field_verification (
+               experiment_id, field_name, review_revision_id, verification_status, verified_at
+           ) VALUES (13, 'outcome_value', ?, 'rejected', '2026-08-06T11:05:00Z')""",
+        (outcome_revision_id,),
+    )
+    connection.execute(
+        """INSERT INTO missing_field (experiment_id, field_name, reason, recorded_at)
+           VALUES (13, 'outcome_value', 'not reported', '2026-08-06T11:05:00Z')"""
+    )
+    for outcome_id in (22, 23):
+        connection.execute(
+            """INSERT INTO outcome (
+                   outcome_id, experiment_id, endpoint_family, endpoint_name, value_status
+               ) VALUES (?, 14, 'expression', ?, 'reported')""",
+            (outcome_id, f'endpoint-{outcome_id}'),
+        )
+        connection.execute(
+            """INSERT INTO review_revision (
+                   experiment_id, entity_type, entity_id, field_name, corrected_value,
+                   evidence_excerpt, evidence_location, reviewer, decision, review_action,
+                   reviewed_at
+               ) VALUES (14, 'outcome', ?, 'outcome_value', '10', 'Outcome review.',
+                         'figure 2', 'reviewer-a', 'accepted', 'correct',
+                         '2026-08-06T11:06:00Z')""",
+            (outcome_id,),
+        )
+    connection.execute(
+        """INSERT INTO missing_field (experiment_id, field_name, reason, recorded_at)
+           VALUES (14, 'outcome_value', 'not reported', '2026-08-06T11:06:00Z')"""
+    )
+    connection.commit()
+
+    with pytest.raises(sqlite3.IntegrityError, match='matching experiment and field'):
+        connection.execute(
+            """UPDATE missing_field SET resolved_by_review_revision_id = ?,
+                      resolved_at = '2026-08-06T11:00:00Z'
+               WHERE missing_field_id = ?""",
+            (revision_id, missing_id),
+        )
+    migrate_database(connection)
+    connection.execute(
+        """UPDATE missing_field SET resolved_by_review_revision_id = ?,
+                  resolved_at = '2026-08-06T11:00:00Z'
+           WHERE missing_field_id = ?""",
+        (revision_id, missing_id),
+    )
+
+    assert connection.execute(
+        'SELECT version FROM schema_migration ORDER BY version DESC LIMIT 1'
+    ).fetchone() == (5,)
+    assert connection.execute(
+        'SELECT field_name FROM field_verification WHERE review_revision_id = ?',
+        (outcome_revision_id,),
+    ).fetchone() == ('outcome:21:outcome_value',)
+    assert connection.execute(
+        "SELECT field_name FROM missing_field WHERE experiment_id = 13 AND reason = 'not reported'"
+    ).fetchone() == ('outcome:21:outcome_value',)
+    assert connection.execute(
+        "SELECT field_name, reason FROM missing_field WHERE experiment_id = 14 AND field_name LIKE 'outcome:ambiguous:%'"
+    ).fetchone() == (
+        'outcome:ambiguous:outcome_value',
+        'ambiguous outcome ownership; not reported',
+    )
+
+
+def test_legacy_experiment_entity_alias_remains_insertable_after_upgrade() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+
+    revision_id = connection.execute(
+        """INSERT INTO review_revision (
+               experiment_id, entity_type, field_name, corrected_value,
+               evidence_excerpt, evidence_location, reviewer, decision, review_action,
+               reviewed_at
+           ) VALUES (13, 'experiment', 'dose', '0.75', 'Reported dose.',
+                     'methods', 'reviewer-a', 'accepted', 'correct',
+                     '2026-08-06T11:00:00Z')"""
+    ).lastrowid
+
+    assert revision_id == 1
+
+
 def test_missing_field_rejects_resolution_from_another_field() -> None:
     connection = _legacy_connection()
     migrate_database(connection)
@@ -459,7 +612,7 @@ def test_missing_field_rejects_resolution_from_another_field() -> None:
         """
     ).lastrowid
 
-    with pytest.raises(sqlite3.IntegrityError, match="matching experiment and field"):
+    with pytest.raises(sqlite3.IntegrityError, match="matching entity and field"):
         connection.execute(
             """
             INSERT INTO missing_field (
@@ -499,7 +652,7 @@ def test_missing_field_rejects_resolution_from_another_arm() -> None:
         """
     ).lastrowid
 
-    with pytest.raises(sqlite3.IntegrityError, match="matching experiment and field"):
+    with pytest.raises(sqlite3.IntegrityError, match="matching entity and field"):
         connection.execute(
             """
             UPDATE missing_field

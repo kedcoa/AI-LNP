@@ -81,11 +81,23 @@ def _accepted_correction(
     experiment_id: int,
     field_name: str,
 ) -> str | None:
+    return _accepted_entity_correction(
+        connection, "arm", experiment_id, field_name
+    )
+
+
+def _accepted_entity_correction(
+    connection: sqlite3.Connection,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+) -> str | None:
     row = connection.execute(
         """
         SELECT current.corrected_value
         FROM review_revision AS current
-        WHERE current.experiment_id = ?
+        WHERE (current.entity_type = ? OR (? = 'arm' AND current.entity_type = 'experiment'))
+          AND coalesce(current.entity_id, current.experiment_id) = ?
           AND current.field_name = ?
           AND current.decision = 'accepted'
           AND length(trim(current.evidence_excerpt)) > 0
@@ -98,7 +110,7 @@ def _accepted_correction(
         ORDER BY current.review_revision_id DESC
         LIMIT 1
         """,
-        (experiment_id, field_name),
+        (entity_type, entity_type, entity_id, field_name),
     ).fetchone()
     if row is None:
         return None
@@ -111,6 +123,60 @@ def _accepted_correction(
         if not math.isfinite(numeric_value) or numeric_value < 0:
             return None
     return value
+
+
+def _latest_entity_action(
+    connection: sqlite3.Connection,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+) -> str | None:
+    row = connection.execute(
+        """SELECT review_action FROM review_revision
+           WHERE entity_type = ? AND entity_id = ? AND field_name = ?
+           ORDER BY review_revision_id DESC LIMIT 1""",
+        (entity_type, entity_id, field_name),
+    ).fetchone()
+    return row[0] if row is not None else None
+
+
+def _has_canonical_outcome_evidence(
+    connection: sqlite3.Connection, outcome_id: int, status: str
+) -> bool:
+    if connection.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'import_field_evidence'"
+    ).fetchone() is None:
+        return False
+    return connection.execute(
+        """SELECT 1 FROM import_field_evidence AS link
+           WHERE link.entity_type = 'outcome' AND link.entity_id = ?
+             AND link.verification_status = ?
+             AND NOT EXISTS (
+                 SELECT 1 FROM import_field_evidence AS later
+                 WHERE later.paper_id = link.paper_id
+                   AND later.entity_type = link.entity_type
+                   AND later.entity_id = link.entity_id
+                   AND later.field_name = link.field_name
+                   AND later.evidence_id = link.evidence_id
+                   AND later.import_field_evidence_id > link.import_field_evidence_id
+             )
+             AND (
+                 json_extract(link.content_json, '$.review_revision_id') IS NULL
+                 OR EXISTS (
+                     SELECT 1 FROM review_revision AS revision
+                     WHERE revision.review_revision_id = json_extract(
+                               link.content_json, '$.review_revision_id'
+                           )
+                       AND revision.decision = 'accepted'
+                       AND NOT EXISTS (
+                           SELECT 1 FROM review_revision AS later_revision
+                           WHERE later_revision.supersedes_review_revision_id = revision.review_revision_id
+                       )
+                 )
+             )
+           LIMIT 1""",
+        (outcome_id, status),
+    ).fetchone() is not None
 
 
 def _has_value(
@@ -142,8 +208,18 @@ def _unresolved_missing_fields(
                   OR NOT EXISTS (
                       SELECT 1
                       FROM review_revision AS active
-                      WHERE active.experiment_id = missing.experiment_id
-                        AND active.field_name = missing.field_name
+                      WHERE (
+                            (active.entity_type IN ('arm', 'experiment')
+                             AND coalesce(active.entity_id, active.experiment_id) = missing.experiment_id
+                             AND active.field_name = missing.field_name)
+                            OR (active.entity_type = 'formulation' AND active.entity_id = (
+                                SELECT formulation_id FROM experiment
+                                WHERE experiment_id = missing.experiment_id
+                            ) AND active.field_name = missing.field_name)
+                            OR (active.entity_type = 'outcome'
+                                AND active.experiment_id = missing.experiment_id
+                                AND missing.field_name = 'outcome:' || active.entity_id || ':' || active.field_name)
+                        )
                         AND active.decision = 'accepted'
                         AND NOT EXISTS (
                             SELECT 1
@@ -176,7 +252,7 @@ def _linked_outcomes(
 def _usable_outcomes(
     connection: sqlite3.Connection,
     experiment_id: int,
-) -> list[sqlite3.Row]:
+) -> list[dict[str, object]]:
     previous_factory = connection.row_factory
     connection.row_factory = sqlite3.Row
     try:
@@ -208,8 +284,36 @@ def _usable_outcomes(
     finally:
         connection.row_factory = previous_factory
 
-    usable: list[sqlite3.Row] = []
-    for outcome in outcomes:
+    usable: list[dict[str, object]] = []
+    for source_outcome in outcomes:
+        outcome = dict(source_outcome)
+        outcome_id = int(outcome["outcome_id"])
+        if _has_canonical_outcome_evidence(
+            connection, outcome_id, "automatically_validated"
+        ) or _has_canonical_outcome_evidence(
+            connection, outcome_id, "manually_verified"
+        ):
+            outcome["has_accepted_evidence"] = 1
+        if _has_canonical_outcome_evidence(
+            connection, outcome_id, "manually_verified"
+        ):
+            outcome["has_manually_verified_evidence"] = 1
+        for field_name in (
+            "endpoint_family", "endpoint_name", "outcome_value", "outcome_unit",
+            "normalization_basis", "uncertainty_value", "uncertainty_type",
+            "qualitative_outcome", "value_status",
+        ):
+            correction = _accepted_entity_correction(
+                connection, "outcome", outcome_id, field_name
+            )
+            if correction is not None:
+                outcome[field_name] = correction
+        if any(
+            _latest_entity_action(connection, "outcome", outcome_id, field_name)
+            in {"not_reported", "wrong_arm"}
+            for field_name in ("outcome_value", "qualitative_outcome", "value_status")
+        ):
+            continue
         value = outcome["outcome_value"]
         numeric_result = False
         if outcome["value_status"] in {"reported", "normalized"}:
@@ -392,15 +496,25 @@ def _profile_reasons(
         """,
         (experiment["formulation_id"],),
     ).fetchone()
-    if formulation is None or not (formulation[0] or "").strip():
+    formulation_name = (
+        _accepted_entity_correction(
+            connection, "formulation", experiment["formulation_id"], "formulation_name"
+        )
+        or (formulation[0] if formulation is not None else None)
+    )
+    composition_raw = (
+        _accepted_entity_correction(
+            connection, "formulation", experiment["formulation_id"], "composition_raw"
+        )
+        or (formulation[1] if formulation is not None else None)
+    )
+    if not (formulation_name or "").strip():
         reasons.add("formulation_identity")
     component_count = connection.execute(
         "SELECT COUNT(*) FROM chemical_component WHERE formulation_id = ?",
         (experiment["formulation_id"],),
     ).fetchone()[0]
-    if formulation is None or (
-        not (formulation[1] or "").strip() and component_count == 0
-    ):
+    if not (composition_raw or "").strip() and component_count == 0:
         reasons.add("formulation_composition")
 
     outcomes = _linked_outcomes(connection, experiment_id)

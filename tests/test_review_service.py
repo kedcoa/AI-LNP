@@ -399,7 +399,7 @@ def test_prepare_writes_requires_a_current_schema_and_verified_external_backup(
     readiness = _write_readiness(monkeypatch, review_database, tmp_path)
 
     assert readiness.database_path == review_database
-    assert readiness.schema_version == 3
+    assert readiness.schema_version == 5
     assert readiness.backup_path.parent == (tmp_path / 'review-backups').resolve()
     assert readiness.backup_sha256
 
@@ -474,6 +474,45 @@ def test_formulation_field_correction_reads_the_formulation_entity_not_experimen
     assert fields['composition_ratio'] == '50:10:38:2'
 
 
+def test_formulation_correction_is_active_for_every_arm_sharing_the_entity(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """An entity correction must not disappear when a sibling arm is selected."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, list_review_arms, load_arm_workspace
+
+    connection = sqlite3.connect(review_database)
+    connection.execute('UPDATE formulation SET formulation_name = NULL WHERE formulation_id = 1')
+    connection.execute(
+        """INSERT INTO missing_field (experiment_id, field_name, reason, recorded_at)
+           VALUES (2, 'formulation_name', 'not extracted', '2026-08-06T09:00:00Z')"""
+    )
+    connection.commit()
+    connection.close()
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='formulation', decision='correct',
+        corrected_value='LNP-A reviewed', evidence_id=4, reviewer='reviewer-b',
+        reviewer_notes='The table identifies the shared formulation.', expected_review_revision_id=2,
+        expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+
+    sibling_fields = {field.name: field.value for field in load_arm_workspace(2).fields}
+    sibling_arm = next(arm for arm in list_review_arms() if arm.experiment_id == 2)
+    sibling_assessment = sqlite3.connect(review_database).execute(
+        'SELECT missing_fields_json FROM arm_assessment WHERE experiment_id = 2'
+    ).fetchone()
+    sibling_comet_reasons = json.loads(sqlite3.connect(review_database).execute(
+        "SELECT reasons_json FROM eligibility_result WHERE experiment_id = 2 AND profile = 'comet'"
+    ).fetchone()[0])
+
+    assert sibling_fields['formulation'] == 'LNP-A reviewed'
+    assert sibling_arm.formulation == 'LNP-A reviewed'
+    assert sibling_assessment is not None
+    assert 'formulation_name' not in json.loads(sibling_assessment[0])
+    assert 'formulation_identity' not in sibling_comet_reasons
+
+
 def test_correction_resolves_a_not_reported_missing_state_without_leaving_a_blocker(
     monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
 ) -> None:
@@ -503,11 +542,12 @@ def test_correction_resolves_a_not_reported_missing_state_without_leaving_a_bloc
         experiment_id=1, field_name='dose', decision='correct', corrected_value='0.75',
         evidence_id=dose_evidence, reviewer='reviewer-c',
         reviewer_notes='A later source review found the dosing statement.',
-        expected_review_revision_id=2, expected_state_token=workspace.state_token,
+        expected_review_revision_id=max(item.review_revision_id for item in workspace.history),
+        expected_state_token=workspace.state_token,
         write_readiness=readiness,
     ))
 
-    assert result.review_revision_id == 3
+    assert result.review_revision_id == 4
     assert 'dose' not in result.arm_status.missing_fields
 
 
@@ -576,11 +616,64 @@ def test_nonfinal_field_decisions_preserve_value_and_leave_an_explicit_missing_r
     assert value == 1
     assert missing == (None,)
     assert verification == verification_status
-    if decision == 'not_reported':
-        assert history == []
-        assert {field.name: field.value for field in load_arm_workspace(1).fields}['dose'] == '1.0'
-    else:
-        assert history == []
+    assert len(history) == 1
+    assert history[0][1] == 'The dosing detail cannot be supported by the reviewed source.'
+    assert {field.name: field.value for field in load_arm_workspace(1).fields}['dose'] == '1.0'
+
+
+@pytest.mark.parametrize('decision', ['accept', 'correct', 'not_reported', 'reject', 'wrong_arm', 'unresolved'])
+def test_every_submitted_action_appends_complete_immutable_history(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path, decision: str
+) -> None:
+    """No final review action may exist only in mutable verification or queue state."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision
+
+    connection = sqlite3.connect(review_database)
+    foreign_arm_evidence = connection.execute(
+        """INSERT INTO evidence (
+               paper_id, experiment_id, field_name, evidence_text, evidence_location_type,
+               extraction_method, extraction_confidence
+           ) VALUES (1, 2, 'payload_name', 'Arm 2 used siRNA.', 'methods', 'manual', 'high')"""
+    ).lastrowid
+    original_evidence = connection.execute(
+        """INSERT INTO evidence (
+               paper_id, experiment_id, field_name, evidence_text, evidence_location_type,
+               extraction_method, extraction_confidence
+           ) VALUES (1, 1, 'dose', 'The dose statement is disputed.', 'methods', 'manual', 'high')"""
+    ).lastrowid
+    connection.commit()
+    connection.close()
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    evidence_id = {
+        'accept': 1, 'correct': 1, 'reject': original_evidence,
+        'wrong_arm': foreign_arm_evidence,
+    }.get(decision)
+    field_name = 'payload_name' if decision in {'accept', 'correct', 'wrong_arm'} else 'dose'
+
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name=field_name, decision=decision,
+        corrected_value='LUC mRNA' if decision == 'correct' else None,
+        evidence_id=evidence_id, reviewer='reviewer-history',
+        reviewer_notes=f'History for {decision}.', expected_review_revision_id=2,
+        expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+
+    connection = sqlite3.connect(review_database)
+    row = connection.execute(
+        """SELECT review_action, entity_type, entity_id, field_name, evidence_id,
+                  reviewer, reviewer_notes, reviewed_at
+           FROM review_revision WHERE review_revision_id = ?""",
+        (result.review_revision_id,),
+    ).fetchone()
+    connection.close()
+
+    assert result.review_revision_id is not None
+    assert row[:4] == (decision, 'arm', 1, field_name)
+    assert row[4] == evidence_id
+    assert row[5] == 'reviewer-history'
+    assert row[6] == f'History for {decision}.'
+    assert row[7]
 
 
 def test_rejected_correction_supersedes_the_active_history_without_deleting_it(
@@ -665,7 +758,7 @@ def test_rejecting_original_evidence_needs_no_prior_accepted_correction(
     preserved = connection.execute('SELECT evidence_text FROM evidence WHERE evidence_id = ?', (evidence_id,)).fetchone()[0]
     connection.close()
 
-    assert result.review_revision_id is None
+    assert result.review_revision_id is not None
     assert verification == 'rejected'
     assert missing == 'rejected during human review'
     assert preserved == 'This evidence is unsupported.'
@@ -740,7 +833,7 @@ def test_wrong_arm_marks_same_paper_foreign_arm_evidence_conflicted(
     evidence_arm = connection.execute('SELECT experiment_id FROM evidence WHERE evidence_id = 1').fetchone()[0]
     connection.close()
 
-    assert result.review_revision_id is None
+    assert result.review_revision_id is not None
     assert review == ('conflict', 'wrong_arm_evidence')
     assert evidence_arm == 1
 
@@ -750,7 +843,7 @@ def test_wrong_arm_retracts_an_active_correction_with_an_immutable_rejected_revi
 ) -> None:
     """A wrong-arm finding against an active correction must be auditable as a retraction."""
 
-    from src.ui.review_service import ReviewDecision, apply_review_decision
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace
 
     connection = sqlite3.connect(review_database)
     foreign_arm_evidence = connection.execute(
@@ -762,6 +855,11 @@ def test_wrong_arm_retracts_an_active_correction_with_an_immutable_rejected_revi
     connection.commit()
     connection.close()
     readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    foreign_candidate = next(
+        item for item in load_arm_workspace(1).evidence
+        if item.evidence_id == foreign_arm_evidence
+    )
+    assert foreign_candidate.experiment_id == 2
 
     result = apply_review_decision(ReviewDecision(
         experiment_id=1, field_name='payload_name', decision='wrong_arm', evidence_id=foreign_arm_evidence,
@@ -776,7 +874,7 @@ def test_wrong_arm_retracts_an_active_correction_with_an_immutable_rejected_revi
     connection.close()
 
     assert result.decision == 'wrong_arm'
-    assert revision == ('rejected', 2, '[wrong_arm] The correction was supported only by arm 2.')
+    assert revision == ('rejected', 2, 'The correction was supported only by arm 2.')
 
 
 def test_stale_cross_paper_and_failing_decisions_roll_back_without_partial_history(
@@ -833,3 +931,104 @@ def test_unresolved_decision_advances_the_workspace_token_and_rejects_a_stale_re
     apply_review_decision(request)
     with pytest.raises(ValueError, match='stale'):
         apply_review_decision(request)
+
+
+def test_not_reported_and_wrong_arm_invalidate_prior_canonical_fact_status(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Terminal negative actions must remove the selected fact from usable metrics."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace, load_dashboard
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    assert load_dashboard().automatically_validated_usable_facts == 3
+    apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='composition_ratio', decision='not_reported',
+        reviewer='reviewer-b', reviewer_notes='The ratio is not reported in the source.',
+        expected_review_revision_id=2, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+    assert load_dashboard().automatically_validated_usable_facts == 2
+
+    unresolved_workspace = load_arm_workspace(1)
+    apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='composition_ratio', decision='unresolved',
+        reviewer='reviewer-b', reviewer_notes='A second review still found no usable ratio.',
+        expected_review_revision_id=max(
+            item.review_revision_id for item in unresolved_workspace.history
+        ), expected_state_token=unresolved_workspace.state_token, write_readiness=readiness,
+    ))
+    assert load_dashboard().automatically_validated_usable_facts == 2
+
+    connection = sqlite3.connect(review_database)
+    foreign_arm_evidence = connection.execute(
+        """INSERT INTO evidence (
+               paper_id, experiment_id, field_name, evidence_text, evidence_location_type,
+               extraction_method, extraction_confidence
+           ) VALUES (1, 2, 'payload_name', 'Arm 2 used this payload.', 'methods', 'manual', 'high')"""
+    ).lastrowid
+    connection.commit()
+    connection.close()
+    workspace = load_arm_workspace(1)
+    apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='payload_name', decision='wrong_arm', evidence_id=foreign_arm_evidence,
+        reviewer='reviewer-c', reviewer_notes='The payload excerpt belongs to arm 2.',
+        expected_review_revision_id=max(item.review_revision_id for item in workspace.history),
+        expected_state_token=workspace.state_token, write_readiness=readiness,
+    ))
+    assert load_dashboard().automatically_validated_usable_facts == 1
+
+
+def test_outcome_fields_are_reviewable_with_owned_evidence_and_history(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Outcome values use the same evidence-owned immutable review path as arm fields."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace
+
+    connection = sqlite3.connect(review_database)
+    connection.execute("UPDATE evidence SET evidence_review_status = 'unreviewed' WHERE evidence_id = 2")
+    connection.execute("DELETE FROM import_field_evidence WHERE entity_type = 'outcome' AND entity_id = 1")
+    connection.commit()
+    connection.close()
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    workspace = load_arm_workspace(1)
+    outcome_field = next(field for field in workspace.fields if field.name == 'outcome:1:outcome_value')
+    assert outcome_field.value == '12'
+    assert outcome_field.entity_type == 'outcome'
+    assert outcome_field.entity_id == 1
+    assert any(item.evidence_id == 2 and item.field_name == 'outcome_value' for item in workspace.evidence)
+
+    not_reported_result = apply_review_decision(ReviewDecision(
+        experiment_id=1, entity_type='outcome', entity_id=1, field_name='outcome_value',
+        decision='not_reported', reviewer='reviewer-outcome',
+        reviewer_notes='The first pass could not confirm the plotted value.',
+        expected_review_revision_id=2, expected_state_token=workspace.state_token,
+        write_readiness=readiness,
+    ))
+    connection = sqlite3.connect(review_database)
+    assert connection.execute(
+        "SELECT field_name FROM missing_field WHERE experiment_id = 1 ORDER BY missing_field_id DESC LIMIT 1"
+    ).fetchone() == ('outcome:1:outcome_value',)
+    connection.close()
+    assert not_reported_result.comet.eligible is False
+    assert 'usable_outcome' in not_reported_result.comet.reasons
+    workspace = load_arm_workspace(1)
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, entity_type='outcome', entity_id=1, field_name='outcome_value',
+        decision='correct', corrected_value='14', evidence_id=2, reviewer='reviewer-outcome',
+        reviewer_notes='Figure 2 supports 14 ng/mL.',
+        expected_review_revision_id=max(item.review_revision_id for item in workspace.history),
+        expected_state_token=workspace.state_token, write_readiness=readiness,
+    ))
+
+    revised = load_arm_workspace(1)
+    corrected = next(field for field in revised.fields if field.name == 'outcome:1:outcome_value')
+    history = next(item for item in revised.history if item.review_revision_id == result.review_revision_id)
+    source_value = sqlite3.connect(review_database).execute(
+        'SELECT outcome_value FROM outcome WHERE outcome_id = 1'
+    ).fetchone()[0]
+
+    assert corrected.value == '14'
+    assert source_value == 12
+    assert (history.entity_type, history.entity_id, history.field_name) == ('outcome', 1, 'outcome_value')
+    assert result.comet.eligible is True

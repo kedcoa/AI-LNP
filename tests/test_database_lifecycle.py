@@ -341,14 +341,14 @@ def test_migration_runs_against_the_preflighted_database_and_verifies_integrity(
     result = migrate_authoritative_database(database_path)
 
     assert result.preflight.original_sha256 == original_hash
-    assert result.migration_versions == (1, 2, 3)
+    assert result.migration_versions == (1, 2, 3, 4, 5)
     assert result.foreign_keys_enabled is True
     connection = sqlite3.connect(database_path)
     try:
         assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
         assert connection.execute(
             "SELECT version FROM schema_migration ORDER BY version"
-        ).fetchall() == [(1,), (2,), (3,)]
+        ).fetchall() == [(1,), (2,), (3,), (4,), (5,)]
     finally:
         connection.close()
 
@@ -370,7 +370,7 @@ def test_composed_lifecycle_binds_preflight_backup_and_migration_digests(
     assert result.source_state_sha256_before_migration == (
         result.preflight.source_state_sha256
     )
-    assert result.migration.migration_versions == (1, 2, 3)
+    assert result.migration.migration_versions == (1, 2, 3, 4, 5)
 
 
 def test_composed_lifecycle_migrates_legacy_four_cell_schema_without_outer_transaction(

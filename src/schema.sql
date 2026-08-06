@@ -349,7 +349,7 @@ CREATE TABLE IF NOT EXISTS record_source (
 CREATE TABLE IF NOT EXISTS review_revision (
     review_revision_id INTEGER PRIMARY KEY,
     experiment_id INTEGER NOT NULL,
-    entity_type TEXT NOT NULL DEFAULT 'experiment',
+    entity_type TEXT NOT NULL DEFAULT 'arm',
     entity_id INTEGER,
     field_name TEXT NOT NULL CHECK (length(trim(field_name)) > 0),
     previous_value TEXT,

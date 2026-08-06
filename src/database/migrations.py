@@ -6,7 +6,7 @@ import re
 import sqlite3
 
 
-MIGRATION_VERSION = 3
+MIGRATION_VERSION = 5
 
 PAPER_COLUMNS = {
     "source_paper_id": "TEXT",
@@ -24,6 +24,13 @@ REVIEW_REVISION_COLUMNS = {
     "supersedes_review_revision_id": (
         "INTEGER REFERENCES review_revision(review_revision_id) "
         "ON UPDATE CASCADE ON DELETE RESTRICT"
+    ),
+    "review_action": (
+        "TEXT CHECK (review_action IN "
+        "('accept', 'correct', 'not_reported', 'reject', 'wrong_arm', 'unresolved'))"
+    ),
+    "evidence_id": (
+        "INTEGER REFERENCES evidence(evidence_id) ON UPDATE CASCADE ON DELETE RESTRICT"
     ),
 }
 
@@ -51,7 +58,7 @@ CREATE TABLE IF NOT EXISTS record_source (
 CREATE TABLE IF NOT EXISTS review_revision (
     review_revision_id INTEGER PRIMARY KEY,
     experiment_id INTEGER NOT NULL,
-    entity_type TEXT NOT NULL DEFAULT 'experiment',
+    entity_type TEXT NOT NULL DEFAULT 'arm',
     entity_id INTEGER,
     field_name TEXT NOT NULL CHECK (length(trim(field_name)) > 0),
     previous_value TEXT,
@@ -64,8 +71,11 @@ CREATE TABLE IF NOT EXISTS review_revision (
     supersedes_review_revision_id INTEGER,
     reviewer_notes TEXT,
     reviewed_at TEXT NOT NULL,
+    review_action TEXT CHECK (review_action IN ('accept', 'correct', 'not_reported', 'reject', 'wrong_arm', 'unresolved')),
+    evidence_id INTEGER,
     FOREIGN KEY (experiment_id) REFERENCES experiment(experiment_id) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (supersedes_review_revision_id) REFERENCES review_revision(review_revision_id) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (supersedes_review_revision_id) REFERENCES review_revision(review_revision_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (evidence_id) REFERENCES evidence(evidence_id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS missing_field (
@@ -266,6 +276,111 @@ INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
 VALUES (3, 'screening_state_and_atomic_migration', '2026-08-06T02:00:00Z');
 """
 
+REVIEW_ENTITY_SCHEMA_SQL = """
+DROP TRIGGER IF EXISTS trg_review_revision_supersession_matches;
+DROP TRIGGER IF EXISTS trg_review_revision_retraction_requires_target;
+DROP TRIGGER IF EXISTS trg_review_revision_entity_ownership;
+DROP TRIGGER IF EXISTS trg_missing_field_resolution_matches_insert;
+DROP TRIGGER IF EXISTS trg_missing_field_resolution_matches_update;
+
+CREATE TRIGGER trg_missing_field_resolution_matches_insert
+BEFORE INSERT ON missing_field
+WHEN NEW.resolved_by_review_revision_id IS NOT NULL
+ AND NOT EXISTS (
+    SELECT 1 FROM review_revision AS revision
+    WHERE revision.review_revision_id = NEW.resolved_by_review_revision_id
+      AND (
+          revision.field_name = NEW.field_name
+          OR (revision.entity_type = 'outcome' AND NEW.field_name =
+              'outcome:' || revision.entity_id || ':' || revision.field_name)
+      )
+      AND revision.decision = 'accepted'
+      AND (
+          (revision.entity_type IN ('arm', 'experiment')
+           AND coalesce(revision.entity_id, revision.experiment_id) = NEW.experiment_id)
+          OR (revision.entity_type = 'formulation' AND EXISTS (
+              SELECT 1 FROM experiment
+              WHERE experiment.experiment_id = NEW.experiment_id
+                AND experiment.formulation_id = revision.entity_id
+          ))
+          OR (revision.entity_type = 'outcome' AND revision.experiment_id = NEW.experiment_id)
+      )
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'missing field resolution requires matching entity and field');
+END;
+
+CREATE TRIGGER trg_missing_field_resolution_matches_update
+BEFORE UPDATE OF experiment_id, field_name, resolved_by_review_revision_id
+ON missing_field
+WHEN NEW.resolved_by_review_revision_id IS NOT NULL
+ AND NOT EXISTS (
+    SELECT 1 FROM review_revision AS revision
+    WHERE revision.review_revision_id = NEW.resolved_by_review_revision_id
+      AND (
+          revision.field_name = NEW.field_name
+          OR (revision.entity_type = 'outcome' AND NEW.field_name =
+              'outcome:' || revision.entity_id || ':' || revision.field_name)
+      )
+      AND revision.decision = 'accepted'
+      AND (
+          (revision.entity_type IN ('arm', 'experiment')
+           AND coalesce(revision.entity_id, revision.experiment_id) = NEW.experiment_id)
+          OR (revision.entity_type = 'formulation' AND EXISTS (
+              SELECT 1 FROM experiment
+              WHERE experiment.experiment_id = NEW.experiment_id
+                AND experiment.formulation_id = revision.entity_id
+          ))
+          OR (revision.entity_type = 'outcome' AND revision.experiment_id = NEW.experiment_id)
+      )
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'missing field resolution requires matching entity and field');
+END;
+
+CREATE TRIGGER trg_review_revision_supersession_matches
+BEFORE INSERT ON review_revision
+WHEN NEW.supersedes_review_revision_id IS NOT NULL
+ AND NOT EXISTS (
+    SELECT 1
+    FROM review_revision
+    WHERE review_revision_id = NEW.supersedes_review_revision_id
+      AND (
+          entity_type = NEW.entity_type
+          OR (entity_type IN ('arm', 'experiment') AND NEW.entity_type IN ('arm', 'experiment'))
+      )
+      AND coalesce(entity_id, experiment_id) = coalesce(NEW.entity_id, NEW.experiment_id)
+      AND field_name = NEW.field_name
+      AND decision = 'accepted'
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'supersession requires an accepted revision for the same entity and field');
+END;
+
+CREATE TRIGGER trg_review_revision_entity_ownership
+BEFORE INSERT ON review_revision
+WHEN NOT (
+    (NEW.entity_type IN ('arm', 'experiment')
+     AND coalesce(NEW.entity_id, NEW.experiment_id) = NEW.experiment_id)
+    OR (NEW.entity_type = 'formulation' AND EXISTS (
+        SELECT 1 FROM experiment
+        WHERE experiment_id = NEW.experiment_id
+          AND formulation_id = NEW.entity_id
+    ))
+    OR (NEW.entity_type = 'outcome' AND EXISTS (
+        SELECT 1 FROM outcome
+        WHERE outcome_id = NEW.entity_id
+          AND experiment_id = NEW.experiment_id
+    ))
+)
+BEGIN
+    SELECT RAISE(ABORT, 'review revision entity must belong to the selected experiment');
+END;
+
+INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
+VALUES (4, 'entity_scoped_review_history', '2026-08-06T03:00:00Z');
+"""
+
 SCREENING_STATE_TRIGGER_SQL = {
     "trg_paper_screening_state_insert": """CREATE TRIGGER trg_paper_screening_state_insert
 BEFORE INSERT ON paper
@@ -389,6 +504,111 @@ def migrate_database(connection: sqlite3.Connection) -> None:
         _execute_sql_script(connection, SCREENING_TRIGGER_CLEANUP_SQL)
         _ensure_screening_state_triggers(connection)
         _execute_sql_script(connection, SCREENING_STATE_SCHEMA_SQL)
+        version_four_applied = connection.execute(
+            "SELECT 1 FROM schema_migration WHERE version = 4"
+        ).fetchone() is not None
+        if not version_four_applied:
+            connection.execute("DROP TRIGGER IF EXISTS trg_review_revision_no_update")
+            _add_missing_columns(connection, "review_revision", REVIEW_REVISION_COLUMNS)
+            connection.execute(
+                """UPDATE review_revision
+                   SET entity_type = CASE
+                       WHEN field_name IN ('formulation_name', 'composition_raw')
+                       THEN 'formulation' ELSE 'arm' END,
+                       entity_id = CASE
+                       WHEN field_name IN ('formulation_name', 'composition_raw')
+                       THEN (SELECT formulation_id FROM experiment
+                             WHERE experiment.experiment_id = review_revision.experiment_id)
+                       ELSE experiment_id END,
+                       review_action = coalesce(
+                           CASE
+                               WHEN reviewer_notes LIKE '[accept]%' THEN 'accept'
+                               WHEN reviewer_notes LIKE '[correct]%' THEN 'correct'
+                               WHEN reviewer_notes LIKE '[not_reported]%' THEN 'not_reported'
+                               WHEN reviewer_notes LIKE '[reject]%' THEN 'reject'
+                               WHEN reviewer_notes LIKE '[wrong_arm]%' THEN 'wrong_arm'
+                               WHEN reviewer_notes LIKE '[unresolved]%' THEN 'unresolved'
+                           END,
+                           CASE
+                               WHEN decision = 'accepted' AND coalesce(previous_value, '') = corrected_value
+                               THEN 'accept'
+                               WHEN decision = 'accepted' THEN 'correct'
+                               ELSE 'reject'
+                           END
+                       ),
+                       evidence_id = coalesce(
+                           evidence_id,
+                           (SELECT verification.evidence_id
+                            FROM field_verification AS verification
+                            WHERE verification.review_revision_id = review_revision.review_revision_id
+                              AND verification.evidence_id IS NOT NULL
+                            ORDER BY verification.field_verification_id DESC LIMIT 1)
+                       )"""
+            )
+            connection.execute(
+                """CREATE TRIGGER trg_review_revision_no_update
+                   BEFORE UPDATE ON review_revision
+                   BEGIN
+                       SELECT RAISE(ABORT, 'review revisions are immutable');
+                   END"""
+            )
+            _execute_sql_script(connection, REVIEW_ENTITY_SCHEMA_SQL)
+        version_five_applied = connection.execute(
+            "SELECT 1 FROM schema_migration WHERE version = 5"
+        ).fetchone() is not None
+        if not version_five_applied:
+            connection.execute(
+                """UPDATE field_verification
+                   SET field_name = (
+                       SELECT 'outcome:' || revision.entity_id || ':' || revision.field_name
+                       FROM review_revision AS revision
+                       WHERE revision.review_revision_id = field_verification.review_revision_id
+                         AND revision.entity_type = 'outcome'
+                   )
+                   WHERE field_name NOT LIKE 'outcome:%'
+                     AND EXISTS (
+                       SELECT 1 FROM review_revision AS revision
+                       WHERE revision.review_revision_id = field_verification.review_revision_id
+                         AND revision.entity_type = 'outcome'
+                     )"""
+            )
+            connection.execute(
+                """UPDATE missing_field
+                   SET field_name = (
+                       SELECT 'outcome:' || revision.entity_id || ':' || revision.field_name
+                       FROM review_revision AS revision
+                       WHERE revision.experiment_id = missing_field.experiment_id
+                         AND revision.entity_type = 'outcome'
+                         AND revision.field_name = missing_field.field_name
+                       ORDER BY revision.review_revision_id DESC LIMIT 1
+                   )
+                   WHERE field_name NOT LIKE 'outcome:%'
+                     AND 1 = (
+                       SELECT count(DISTINCT revision.entity_id)
+                       FROM review_revision AS revision
+                       WHERE revision.experiment_id = missing_field.experiment_id
+                         AND revision.entity_type = 'outcome'
+                         AND revision.field_name = missing_field.field_name
+                     )"""
+            )
+            connection.execute(
+                """UPDATE missing_field
+                   SET field_name = 'outcome:ambiguous:' || field_name,
+                       reason = 'ambiguous outcome ownership; ' || reason
+                   WHERE field_name NOT LIKE 'outcome:%'
+                     AND 1 < (
+                       SELECT count(DISTINCT revision.entity_id)
+                       FROM review_revision AS revision
+                       WHERE revision.experiment_id = missing_field.experiment_id
+                         AND revision.entity_type = 'outcome'
+                         AND revision.field_name = missing_field.field_name
+                     )"""
+            )
+            _execute_sql_script(connection, REVIEW_ENTITY_SCHEMA_SQL)
+            connection.execute(
+                """INSERT INTO schema_migration (version, name, applied_at)
+                   VALUES (5, 'entity_review_trigger_repair', '2026-08-06T04:00:00Z')"""
+            )
         if connection.execute("PRAGMA foreign_key_check").fetchall():
             raise RuntimeError("foreign-key violations during migration")
     except BaseException:
