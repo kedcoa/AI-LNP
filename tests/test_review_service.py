@@ -650,6 +650,26 @@ def test_rejecting_original_evidence_needs_no_prior_accepted_correction(
     assert preserved == 'This evidence is unsupported.'
 
 
+def test_rejecting_original_canonical_evidence_removes_it_from_usable_fact_metrics(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """A rejected source link must supersede its prior automatic usable-fact status."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_dashboard
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    assert load_dashboard().automatically_validated_usable_facts == 3
+    apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='composition_ratio', decision='reject', evidence_id=4,
+        reviewer='reviewer-b', reviewer_notes='The table excerpt does not support this ratio.',
+        expected_review_revision_id=2, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+
+    dashboard = load_dashboard()
+    assert dashboard.automatically_validated_usable_facts == 2
+    assert dashboard.manually_verified_usable_facts == 1
+
+
 @pytest.mark.parametrize(
     'sql',
     [

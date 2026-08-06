@@ -693,8 +693,8 @@ def _evidence_location(evidence: sqlite3.Row) -> str:
 def _insert_verification(
     connection: sqlite3.Connection, request: ReviewDecision, field_name: str,
     status: str, review_revision_id: int | None,
-) -> None:
-    connection.execute(
+) -> int:
+    cursor = connection.execute(
         """INSERT INTO field_verification (
                experiment_id, field_name, evidence_id, review_revision_id,
                verification_status, notes, verified_at
@@ -702,6 +702,18 @@ def _insert_verification(
         (request.experiment_id, field_name, request.evidence_id, review_revision_id,
          status, request.reviewer_notes.strip(), _utc_now()),
     )
+    return int(cursor.lastrowid)
+
+
+def _canonical_entity(
+    connection: sqlite3.Connection, experiment_id: int, field_name: str
+) -> tuple[str, int]:
+    if field_name in _FORMULATION_COLUMNS:
+        formulation_id = connection.execute(
+            'SELECT formulation_id FROM experiment WHERE experiment_id = ?', (experiment_id,)
+        ).fetchone()[0]
+        return 'formulation', int(formulation_id)
+    return 'arm', experiment_id
 
 
 def _record_canonical_field_evidence(
@@ -710,14 +722,7 @@ def _record_canonical_field_evidence(
 ) -> None:
     """Promote one human-verified arm/evidence link into dashboard fact accounting."""
 
-    formulation_field = field_name in _FORMULATION_COLUMNS
-    entity_type = 'formulation' if formulation_field else 'arm'
-    entity_id = (
-        connection.execute(
-            'SELECT formulation_id FROM experiment WHERE experiment_id = ?', (request.experiment_id,)
-        ).fetchone()[0]
-        if formulation_field else request.experiment_id
-    )
+    entity_type, entity_id = _canonical_entity(connection, request.experiment_id, field_name)
     payload = json.dumps({
         'evidence_id': evidence_id,
         'field_name': field_name,
@@ -731,6 +736,29 @@ def _record_canonical_field_evidence(
            ) VALUES (?, ?, ?, ?, ?, 'manually_verified', ?, ?, ?, ?)""",
         (paper_id, entity_type, entity_id, field_name, evidence_id, request.reviewer_notes.strip(),
          f'human-review:{review_revision_id}', hashlib.sha256(payload.encode()).hexdigest(), payload),
+    )
+
+
+def _record_rejected_field_evidence(
+    connection: sqlite3.Connection, request: ReviewDecision, paper_id: int,
+    field_name: str, evidence_id: int, verification_id: int,
+) -> None:
+    """Append a rejected canonical link so it supersedes the prior field/evidence status."""
+
+    entity_type, entity_id = _canonical_entity(connection, request.experiment_id, field_name)
+    payload = json.dumps({
+        'evidence_id': evidence_id,
+        'field_name': field_name,
+        'field_verification_id': verification_id,
+        'verification_status': 'rejected',
+    }, sort_keys=True)
+    connection.execute(
+        """INSERT INTO import_field_evidence (
+               paper_id, entity_type, entity_id, field_name, evidence_id,
+               verification_status, notes, natural_key, content_sha256, content_json
+           ) VALUES (?, ?, ?, ?, ?, 'rejected', ?, ?, ?, ?)""",
+        (paper_id, entity_type, entity_id, field_name, evidence_id, request.reviewer_notes.strip(),
+         f'human-review-rejection:{verification_id}', hashlib.sha256(payload.encode()).hexdigest(), payload),
     )
 
 
@@ -894,7 +922,14 @@ def apply_review_decision(request: ReviewDecision) -> ReviewResult:
                     connection, request, field_name, active['corrected_value'], active['corrected_value'],
                     evidence, 'rejected', int(active['review_revision_id']),
                 )
-            _insert_verification(connection, request, field_name, 'rejected', revision_id)
+            verification_id = _insert_verification(
+                connection, request, field_name, 'rejected', revision_id
+            )
+            if request.evidence_id is not None:
+                _record_rejected_field_evidence(
+                    connection, request, experiment['paper_id'], field_name,
+                    request.evidence_id, verification_id,
+                )
             _mark_missing(connection, request.experiment_id, field_name, 'rejected during human review', None)
         elif request.decision == 'not_reported':
             _insert_verification(connection, request, field_name, 'rejected', None)
