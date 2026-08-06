@@ -1,7 +1,7 @@
 {
   "arms": [
     {
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "assay": null,
       "cell_source": "HepG2 human hepatocellular carcinoma cells",
       "cell_type": "HepG2 human hepatocellular carcinoma cells",
@@ -35,18 +35,36 @@
   ],
   "artifacts": [
     {
-      "artifact_id": "artifact::NP-001",
-      "extraction_run_identifier": "NP-001",
-      "path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day2-np/data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
+      "extraction_run_identifier": null,
+      "path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
       "pipeline_name": "compact",
-      "pipeline_version": "1.1.0",
+      "pipeline_version": null,
       "sha256": "6ad0acdc54379dca715b9514d1acf3a54ad3f890d5121ce0d83cb4f85a7c56f4",
       "source_kind": "validated_extraction"
+    },
+    {
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "extraction_run_identifier": null,
+      "path": "data/staging/rag/compact_api_packets_v1/NP-001.json",
+      "pipeline_name": "compact_packet",
+      "pipeline_version": null,
+      "sha256": "5906e86f5923c8a97a4133370df6da496d2b444ba657c887345ceea51a1b93a4",
+      "source_kind": "source_inventory"
+    },
+    {
+      "artifact_id": "artifact::table::3cd5bf6a6544b29d",
+      "extraction_run_identifier": null,
+      "path": "data/staging/extraction/v12_docling_candidates/NP-001-main-p008-table-02/claims.json",
+      "pipeline_name": "docling_supported_claims",
+      "pipeline_version": null,
+      "sha256": "3cd5bf6a6544b29d8f2eac9d016fcde1cbfbba027a95b13cb962563bec72778c",
+      "source_kind": "table"
     }
   ],
   "components": [
     {
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "component_name_normalized": null,
       "component_name_reported": "ALC-0315",
       "component_review_status": "unreviewed",
@@ -61,7 +79,7 @@
       "record_id": "NP-001::component::C1"
     },
     {
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "component_name_normalized": null,
       "component_name_reported": "DSPC",
       "component_review_status": "unreviewed",
@@ -76,7 +94,7 @@
       "record_id": "NP-001::component::C2"
     },
     {
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "component_name_normalized": null,
       "component_name_reported": "cholesterol",
       "component_review_status": "unreviewed",
@@ -91,7 +109,7 @@
       "record_id": "NP-001::component::C3"
     },
     {
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "component_name_normalized": null,
       "component_name_reported": "DX",
       "component_review_status": "unreviewed",
@@ -106,7 +124,7 @@
       "record_id": "NP-001::component::C4"
     },
     {
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "component_name_normalized": null,
       "component_name_reported": "ALC-0159",
       "component_review_status": "unreviewed",
@@ -124,7 +142,7 @@
   "evidence": [
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::table::3cd5bf6a6544b29d",
       "evidence_location_type": "table_cell",
       "evidence_text": "LNP(DSPC)/DX25 | Diameter (nm) | 111.0 ± 0.2",
       "extraction_confidence": "requires_review",
@@ -134,17 +152,25 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::formulation::NP-001::formulation::F1::VIS-cb8c60cd5486802b",
+      "record_id": "NP-001::formulation::NP-001::formulation::F1::formulation_name::VIS-cb8c60cd5486802b",
       "reviewer_notes": "Source slice: NP-001; packet evidence: VIS-cb8c60cd5486802b",
       "section_name": "Table 1.",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "table_cell",
+            "section": "Table 1.",
+            "source_id": "NP-001-main-p008-table-02:table-0:r2:c1"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
       "extraction_confidence": "requires_review",
@@ -154,17 +180,33 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::formulation::NP-001::formulation::F1::NP-001-E-0a318b647abaed61",
+      "record_id": "NP-001::formulation::NP-001::formulation::F1::composition_raw::NP-001-E-0a318b647abaed61",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
       "extraction_confidence": "requires_review",
@@ -174,17 +216,33 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::formulation::NP-001::formulation::F1::NP-001-E-2321e0f317cd65b7",
+      "record_id": "NP-001::formulation::NP-001::formulation::F1::composition_raw::NP-001-E-2321e0f317cd65b7",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
+            "section": "3. Discussion",
+            "source_id": "S-40e98c312d26"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-0626573462e29c02049d",
+            "page_number": 15,
+            "section": "Supplement page 15",
+            "source_id": "S-e2cce81e3271"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "The theoretical composition of the LNPs is estimated based on the precise mass of individual components (ALC-0315, DSPC, or DOPE; cholesterol or DX; ALC-0159) added to the ethanolic phase.",
       "extraction_confidence": "requires_review",
@@ -194,17 +252,33 @@
       "outcome_id": null,
       "page_number": "3",
       "paper_id": "NP-001",
-      "record_id": "NP-001::formulation::NP-001::formulation::F1::NP-001-E-f0dbf2460867f112",
+      "record_id": "NP-001::formulation::NP-001::formulation::F1::composition_basis::NP-001-E-f0dbf2460867f112",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-f0dbf2460867f112",
       "section_name": "Supplement page 3",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-49a2101bb0a78a4a57e9",
+            "page_number": 3,
+            "section": "Supplement page 3",
+            "source_id": "S-6d8947200817"
+          },
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-f8aeb38da82145142183",
+            "section": "2. Results",
+            "source_id": "S-7c04c69fe801"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "Since LNPs were then produced using the nanoprecipitation method, all initial components were expected to remain encapsulated, and the molar ratios were assumed to match those of the lipid mixture.",
       "extraction_confidence": "requires_review",
@@ -214,17 +288,33 @@
       "outcome_id": null,
       "page_number": "3",
       "paper_id": "NP-001",
-      "record_id": "NP-001::formulation::NP-001::formulation::F1::NP-001-E-a288f42045cd9856",
+      "record_id": "NP-001::formulation::NP-001::formulation::F1::composition_basis::NP-001-E-a288f42045cd9856",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-a288f42045cd9856",
       "section_name": "Supplement page 3",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-49a2101bb0a78a4a57e9",
+            "page_number": 3,
+            "section": "Supplement page 3",
+            "source_id": "S-6d8947200817"
+          },
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-f8aeb38da82145142183",
+            "section": "2. Results",
+            "source_id": "S-7c04c69fe801"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "The ethanol (AppliChem, Darmstadt, Germany) and aqueous phases were mixed at an N/P ratio of 6 and flow rate ratio (FRR) of 2:1 (aqueous: organic).",
       "extraction_confidence": "requires_review",
@@ -234,17 +324,33 @@
       "outcome_id": null,
       "page_number": "17",
       "paper_id": "NP-001",
-      "record_id": "NP-001::formulation::NP-001::formulation::F1::NP-001-E-caaab3e6dabbfe5e",
+      "record_id": "NP-001::formulation::NP-001::formulation::F1::np_ratio::NP-001-E-caaab3e6dabbfe5e",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-caaab3e6dabbfe5e",
       "section_name": "Supplement page 17",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-dcf58bafe9daed2d74f9",
+            "page_number": 17,
+            "section": "Supplement page 17",
+            "source_id": "S-18b5a5487118"
+          },
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-f01e81f5c195f519b8f3",
+            "section": "4. Materials and Methods",
+            "source_id": "S-afaf707799e9"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
       "extraction_confidence": "requires_review",
@@ -254,17 +360,69 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C1::NP-001-E-0a318b647abaed61",
+      "record_id": "NP-001::component::NP-001::component::C1::component_name_reported::NP-001-E-0a318b647abaed61",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "paragraph",
+      "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "component_role",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C1::component_role::NP-001-E-0a318b647abaed61",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
+      "section_name": "3. Discussion",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
       "extraction_confidence": "requires_review",
@@ -274,17 +432,33 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C2::NP-001-E-0a318b647abaed61",
+      "record_id": "NP-001::component::NP-001::component::C2::component_name_reported::NP-001-E-0a318b647abaed61",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::table::3cd5bf6a6544b29d",
       "evidence_location_type": "table_cell",
       "evidence_text": "LNP(DSPC)/DX25 | Diameter (nm) | 111.0 ± 0.2",
       "extraction_confidence": "requires_review",
@@ -294,17 +468,61 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C2::VIS-cb8c60cd5486802b",
+      "record_id": "NP-001::component::NP-001::component::C2::component_name_reported::VIS-cb8c60cd5486802b",
       "reviewer_notes": "Source slice: NP-001; packet evidence: VIS-cb8c60cd5486802b",
       "section_name": "Table 1.",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "table_cell",
+            "section": "Table 1.",
+            "source_id": "NP-001-main-p008-table-02:table-0:r2:c1"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "paragraph",
+      "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "component_role",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C2::component_role::NP-001-E-0a318b647abaed61",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
+      "section_name": "3. Discussion",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
       "extraction_confidence": "requires_review",
@@ -314,17 +532,33 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C3::NP-001-E-0a318b647abaed61",
+      "record_id": "NP-001::component::NP-001::component::C3::component_name_reported::NP-001-E-0a318b647abaed61",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
       "extraction_confidence": "requires_review",
@@ -334,17 +568,69 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C3::NP-001-E-2321e0f317cd65b7",
+      "record_id": "NP-001::component::NP-001::component::C3::component_name_reported::NP-001-E-2321e0f317cd65b7",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
+            "section": "3. Discussion",
+            "source_id": "S-40e98c312d26"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-0626573462e29c02049d",
+            "page_number": 15,
+            "section": "Supplement page 15",
+            "source_id": "S-e2cce81e3271"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "paragraph",
+      "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "component_role",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C3::component_role::NP-001-E-0a318b647abaed61",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
+      "section_name": "3. Discussion",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
       "extraction_confidence": "requires_review",
@@ -354,17 +640,33 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C4::NP-001-E-2321e0f317cd65b7",
+      "record_id": "NP-001::component::NP-001::component::C4::component_name_reported::NP-001-E-2321e0f317cd65b7",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
+            "section": "3. Discussion",
+            "source_id": "S-40e98c312d26"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-0626573462e29c02049d",
+            "page_number": 15,
+            "section": "Supplement page 15",
+            "source_id": "S-e2cce81e3271"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::table::3cd5bf6a6544b29d",
       "evidence_location_type": "table_cell",
       "evidence_text": "LNP(DSPC)/DX25 | Diameter (nm) | 111.0 ± 0.2",
       "extraction_confidence": "requires_review",
@@ -374,17 +676,161 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C4::VIS-cb8c60cd5486802b",
+      "record_id": "NP-001::component::NP-001::component::C4::component_name_reported::VIS-cb8c60cd5486802b",
       "reviewer_notes": "Source slice: NP-001; packet evidence: VIS-cb8c60cd5486802b",
       "section_name": "Table 1.",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "table_cell",
+            "section": "Table 1.",
+            "source_id": "NP-001-main-p008-table-02:table-0:r2:c1"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "paragraph",
+      "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "component_role",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C4::component_role::NP-001-E-2321e0f317cd65b7",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
+      "section_name": "3. Discussion",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
+            "section": "3. Discussion",
+            "source_id": "S-40e98c312d26"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-0626573462e29c02049d",
+            "page_number": 15,
+            "section": "Supplement page 15",
+            "source_id": "S-e2cce81e3271"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "paragraph",
+      "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "molar_percentage",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C4::molar_percentage::NP-001-E-2321e0f317cd65b7",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
+      "section_name": "3. Discussion",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
+            "section": "3. Discussion",
+            "source_id": "S-40e98c312d26"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-0626573462e29c02049d",
+            "page_number": 15,
+            "section": "Supplement page 15",
+            "source_id": "S-e2cce81e3271"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::table::3cd5bf6a6544b29d",
+      "evidence_location_type": "table_cell",
+      "evidence_text": "LNP(DSPC)/DX25 | Diameter (nm) | 111.0 ± 0.2",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "molar_percentage",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C4::molar_percentage::VIS-cb8c60cd5486802b",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: VIS-cb8c60cd5486802b",
+      "section_name": "Table 1.",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "table_cell",
+            "section": "Table 1.",
+            "source_id": "NP-001-main-p008-table-02:table-0:r2:c1"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "paragraph",
+      "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "percentage_unit",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C4::percentage_unit::NP-001-E-2321e0f317cd65b7",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
+      "section_name": "3. Discussion",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
+            "section": "3. Discussion",
+            "source_id": "S-40e98c312d26"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-0626573462e29c02049d",
+            "page_number": 15,
+            "section": "Supplement page 15",
+            "source_id": "S-e2cce81e3271"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "paragraph",
       "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
       "extraction_confidence": "requires_review",
@@ -394,17 +840,69 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C5::NP-001-E-0a318b647abaed61",
+      "record_id": "NP-001::component::NP-001::component::C5::component_name_reported::NP-001-E-0a318b647abaed61",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
       "section_name": "3. Discussion",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "paragraph",
+      "evidence_text": "In summary, the outlined observations demonstrate the promising properties of LNPs composed of ALC-0315, DSPC/DOPE, cholesterol/DX, and ALC-0159 for improving mRNA delivery with low reactogenicity and reduced inflammatory response.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "component_role",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "NP-001",
+      "record_id": "NP-001::component::NP-001::component::C5::component_role::NP-001-E-0a318b647abaed61",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-0a318b647abaed61",
+      "section_name": "3. Discussion",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "paragraph",
+            "chunk_id": "NP-001-B-e6b21d4e47eb3a6fe9e4",
+            "section": "3. Discussion",
+            "source_id": "S-c9c46f14ad9b"
+          },
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-3fa7217a3e119d64cb51",
+            "page_number": 16,
+            "section": "Supplement page 16",
+            "source_id": "S-ee10356a9bf3"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": "NP-001::arm::EX1",
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).",
       "extraction_confidence": "requires_review",
@@ -414,17 +912,27 @@
       "outcome_id": null,
       "page_number": "19",
       "paper_id": "NP-001",
-      "record_id": "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::cell_type::NP-001-E-7b3c625323c08b9c",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-7b3c625323c08b9c",
       "section_name": "Supplement page 19",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": "NP-001::arm::EX1",
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "HepG2 cells were grown in RPMI 1640 medium supplemented with 10% heat-inactivated fetal bovine serum (iFBS), 1% antibiotics (100 U/mL penicillin and 100 µg/mL streptomycin), 1% (2mM) L-glutamine, and 5 mM HEPES.",
       "extraction_confidence": "requires_review",
@@ -434,17 +942,147 @@
       "outcome_id": null,
       "page_number": "19",
       "paper_id": "NP-001",
-      "record_id": "NP-001::arm::NP-001::arm::EX1::NP-001-E-5670f3a91a9acfc1",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::cell_type::NP-001-E-5670f3a91a9acfc1",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-5670f3a91a9acfc1",
       "section_name": "Supplement page 19",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": "NP-001::arm::EX1",
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "cell_source",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::cell_source::NP-001-E-7b3c625323c08b9c",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-7b3c625323c08b9c",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "HepG2 cells were grown in RPMI 1640 medium supplemented with 10% heat-inactivated fetal bovine serum (iFBS), 1% antibiotics (100 U/mL penicillin and 100 µg/mL streptomycin), 1% (2mM) L-glutamine, and 5 mM HEPES.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "cell_source",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::cell_source::NP-001-E-5670f3a91a9acfc1",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-5670f3a91a9acfc1",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "species",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::species::NP-001-E-7b3c625323c08b9c",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-7b3c625323c08b9c",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "in_vitro_in_vivo",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::in_vitro_in_vivo::NP-001-E-7b3c625323c08b9c",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-7b3c625323c08b9c",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "Transfection with LNPs was performed using 500 ng of total mRNA per well (1 µg/mL) for 24 h.",
       "extraction_confidence": "requires_review",
@@ -454,17 +1092,57 @@
       "outcome_id": null,
       "page_number": "19",
       "paper_id": "NP-001",
-      "record_id": "NP-001::arm::NP-001::arm::EX1::NP-001-E-dc987f88b78fcdf1",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::in_vitro_in_vivo::NP-001-E-dc987f88b78fcdf1",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-dc987f88b78fcdf1",
       "section_name": "Supplement page 19",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": "NP-001::arm::EX1",
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "payload_type",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::payload_type::NP-001-E-7b3c625323c08b9c",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-7b3c625323c08b9c",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).",
       "extraction_confidence": "requires_review",
@@ -474,17 +1152,237 @@
       "outcome_id": null,
       "page_number": "5",
       "paper_id": "NP-001",
-      "record_id": "NP-001::arm::NP-001::arm::EX1::NP-001-E-c6658491eb3ce79d",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::payload_type::NP-001-E-c6658491eb3ce79d",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-c6658491eb3ce79d",
       "section_name": "Supplement page 5",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+            "page_number": 5,
+            "section": "Supplement page 5",
+            "source_id": "S-29890832daf9"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
       "arm_id": "NP-001::arm::EX1",
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "payload_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::payload_name::NP-001-E-7b3c625323c08b9c",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-7b3c625323c08b9c",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "payload_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "5",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::payload_name::NP-001-E-c6658491eb3ce79d",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-c6658491eb3ce79d",
+      "section_name": "Supplement page 5",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+            "page_number": 5,
+            "section": "Supplement page 5",
+            "source_id": "S-29890832daf9"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Evaluation of Transfection Efficiency In Vitro The expression of the reporter EGFP-encoding mRNA encapsulated within differ- ent LNP formulations was assessed using a human hepatocellular carcinoma cell line (HepG2) and a mouse dendritic cell line (DC2.4).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "payload_encoded_product",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::payload_encoded_product::NP-001-E-7b3c625323c08b9c",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-7b3c625323c08b9c",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Transfection with LNPs was performed using 500 ng of total mRNA per well (1 µg/mL) for 24 h.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "dose",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::dose::NP-001-E-dc987f88b78fcdf1",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-dc987f88b78fcdf1",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Transfection with LNPs was performed using 500 ng of total mRNA per well (1 µg/mL) for 24 h.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "dose_unit",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::dose_unit::NP-001-E-dc987f88b78fcdf1",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-dc987f88b78fcdf1",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Transfection with LNPs was performed using 500 ng of total mRNA per well (1 µg/mL) for 24 h.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "timepoint",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::timepoint::NP-001-E-dc987f88b78fcdf1",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-dc987f88b78fcdf1",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "Transfection with LNPs was performed using 500 ng of total mRNA per well (1 µg/mL) for 24 h.",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "timepoint_unit",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": "19",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::arm::NP-001::arm::EX1::timepoint_unit::NP-001-E-dc987f88b78fcdf1",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-dc987f88b78fcdf1",
+      "section_name": "Supplement page 19",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-20775a55df40c4600692",
+            "page_number": 19,
+            "section": "Supplement page 19",
+            "source_id": "S-79c8279abfae"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
       "evidence_location_type": "pdf_page",
       "evidence_text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).",
       "extraction_confidence": "requires_review",
@@ -494,10 +1392,140 @@
       "outcome_id": "NP-001::outcome::O1",
       "page_number": "5",
       "paper_id": "NP-001",
-      "record_id": "NP-001::outcome::NP-001::outcome::O1::NP-001-E-c6658491eb3ce79d",
+      "record_id": "NP-001::outcome::NP-001::outcome::O1::endpoint_family::NP-001-E-c6658491eb3ce79d",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-c6658491eb3ce79d",
       "section_name": "Supplement page 5",
-      "structured_evidence": null,
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+            "page_number": 5,
+            "section": "Supplement page 5",
+            "source_id": "S-29890832daf9"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "NP-001::outcome::O1",
+      "page_number": "5",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::outcome::NP-001::outcome::O1::endpoint_name::NP-001-E-c6658491eb3ce79d",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-c6658491eb3ce79d",
+      "section_name": "Supplement page 5",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+            "page_number": 5,
+            "section": "Supplement page 5",
+            "source_id": "S-29890832daf9"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "outcome_value",
+      "figure_number": null,
+      "outcome_id": "NP-001::outcome::O1",
+      "page_number": "5",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::outcome::NP-001::outcome::O1::outcome_value::NP-001-E-c6658491eb3ce79d",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-c6658491eb3ce79d",
+      "section_name": "Supplement page 5",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+            "page_number": 5,
+            "section": "Supplement page 5",
+            "source_id": "S-29890832daf9"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "outcome_unit",
+      "figure_number": null,
+      "outcome_id": "NP-001::outcome::O1",
+      "page_number": "5",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::outcome::NP-001::outcome::O1::outcome_unit::NP-001-E-c6658491eb3ce79d",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-c6658491eb3ce79d",
+      "section_name": "Supplement page 5",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+            "page_number": 5,
+            "section": "Supplement page 5",
+            "source_id": "S-29890832daf9"
+          }
+        ]
+      },
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "NP-001::arm::EX1",
+      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
+      "evidence_location_type": "pdf_page",
+      "evidence_text": "2024, 25, 11254 5 of 23 Approximately 95% of HepG2 cells showed positive transfection with EGFP-encoding mRNA loaded into LNP, LNP/DX25, and LNP/DX50 (Figure 2a,b).",
+      "extraction_confidence": "requires_review",
+      "extraction_method": "validated_extraction",
+      "field_name": "qualitative_outcome",
+      "figure_number": null,
+      "outcome_id": "NP-001::outcome::O1",
+      "page_number": "5",
+      "paper_id": "NP-001",
+      "record_id": "NP-001::outcome::NP-001::outcome::O1::qualitative_outcome::NP-001-E-c6658491eb3ce79d",
+      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-c6658491eb3ce79d",
+      "section_name": "Supplement page 5",
+      "structured_evidence": {
+        "source_locators": [
+          {
+            "block_type": "pdf_page",
+            "chunk_id": "NP-001-B-5cbe4fd517ae02767229",
+            "page_number": 5,
+            "section": "Supplement page 5",
+            "source_id": "S-29890832daf9"
+          }
+        ]
+      },
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
@@ -508,7 +1536,7 @@
       "entity_id": "NP-001::formulation::F1",
       "entity_type": "formulation",
       "evidence_ids": [
-        "NP-001::formulation::NP-001::formulation::F1::VIS-cb8c60cd5486802b"
+        "NP-001::formulation::NP-001::formulation::F1::formulation_name::VIS-cb8c60cd5486802b"
       ],
       "field_name": "formulation_name",
       "notes": "Source slice: NP-001",
@@ -519,8 +1547,8 @@
       "entity_id": "NP-001::formulation::F1",
       "entity_type": "formulation",
       "evidence_ids": [
-        "NP-001::formulation::NP-001::formulation::F1::NP-001-E-0a318b647abaed61",
-        "NP-001::formulation::NP-001::formulation::F1::NP-001-E-2321e0f317cd65b7"
+        "NP-001::formulation::NP-001::formulation::F1::composition_raw::NP-001-E-0a318b647abaed61",
+        "NP-001::formulation::NP-001::formulation::F1::composition_raw::NP-001-E-2321e0f317cd65b7"
       ],
       "field_name": "composition_raw",
       "notes": "Source slice: NP-001",
@@ -531,8 +1559,8 @@
       "entity_id": "NP-001::formulation::F1",
       "entity_type": "formulation",
       "evidence_ids": [
-        "NP-001::formulation::NP-001::formulation::F1::NP-001-E-f0dbf2460867f112",
-        "NP-001::formulation::NP-001::formulation::F1::NP-001-E-a288f42045cd9856"
+        "NP-001::formulation::NP-001::formulation::F1::composition_basis::NP-001-E-f0dbf2460867f112",
+        "NP-001::formulation::NP-001::formulation::F1::composition_basis::NP-001-E-a288f42045cd9856"
       ],
       "field_name": "composition_basis",
       "notes": "Source slice: NP-001",
@@ -543,7 +1571,7 @@
       "entity_id": "NP-001::formulation::F1",
       "entity_type": "formulation",
       "evidence_ids": [
-        "NP-001::formulation::NP-001::formulation::F1::NP-001-E-caaab3e6dabbfe5e"
+        "NP-001::formulation::NP-001::formulation::F1::np_ratio::NP-001-E-caaab3e6dabbfe5e"
       ],
       "field_name": "np_ratio",
       "notes": "Source slice: NP-001",
@@ -554,7 +1582,7 @@
       "entity_id": "NP-001::component::C1",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C1::NP-001-E-0a318b647abaed61"
+        "NP-001::component::NP-001::component::C1::component_name_reported::NP-001-E-0a318b647abaed61"
       ],
       "field_name": "component_name_reported",
       "notes": "Source slice: NP-001",
@@ -565,7 +1593,7 @@
       "entity_id": "NP-001::component::C1",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C1::NP-001-E-0a318b647abaed61"
+        "NP-001::component::NP-001::component::C1::component_role::NP-001-E-0a318b647abaed61"
       ],
       "field_name": "component_role",
       "notes": "Source slice: NP-001",
@@ -576,8 +1604,8 @@
       "entity_id": "NP-001::component::C2",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C2::NP-001-E-0a318b647abaed61",
-        "NP-001::component::NP-001::component::C2::VIS-cb8c60cd5486802b"
+        "NP-001::component::NP-001::component::C2::component_name_reported::NP-001-E-0a318b647abaed61",
+        "NP-001::component::NP-001::component::C2::component_name_reported::VIS-cb8c60cd5486802b"
       ],
       "field_name": "component_name_reported",
       "notes": "Source slice: NP-001",
@@ -588,7 +1616,7 @@
       "entity_id": "NP-001::component::C2",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C2::NP-001-E-0a318b647abaed61"
+        "NP-001::component::NP-001::component::C2::component_role::NP-001-E-0a318b647abaed61"
       ],
       "field_name": "component_role",
       "notes": "Source slice: NP-001",
@@ -599,8 +1627,8 @@
       "entity_id": "NP-001::component::C3",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C3::NP-001-E-0a318b647abaed61",
-        "NP-001::component::NP-001::component::C3::NP-001-E-2321e0f317cd65b7"
+        "NP-001::component::NP-001::component::C3::component_name_reported::NP-001-E-0a318b647abaed61",
+        "NP-001::component::NP-001::component::C3::component_name_reported::NP-001-E-2321e0f317cd65b7"
       ],
       "field_name": "component_name_reported",
       "notes": "Source slice: NP-001",
@@ -611,7 +1639,7 @@
       "entity_id": "NP-001::component::C3",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C3::NP-001-E-0a318b647abaed61"
+        "NP-001::component::NP-001::component::C3::component_role::NP-001-E-0a318b647abaed61"
       ],
       "field_name": "component_role",
       "notes": "Source slice: NP-001",
@@ -622,8 +1650,8 @@
       "entity_id": "NP-001::component::C4",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C4::NP-001-E-2321e0f317cd65b7",
-        "NP-001::component::NP-001::component::C4::VIS-cb8c60cd5486802b"
+        "NP-001::component::NP-001::component::C4::component_name_reported::NP-001-E-2321e0f317cd65b7",
+        "NP-001::component::NP-001::component::C4::component_name_reported::VIS-cb8c60cd5486802b"
       ],
       "field_name": "component_name_reported",
       "notes": "Source slice: NP-001",
@@ -634,7 +1662,7 @@
       "entity_id": "NP-001::component::C4",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C4::NP-001-E-2321e0f317cd65b7"
+        "NP-001::component::NP-001::component::C4::component_role::NP-001-E-2321e0f317cd65b7"
       ],
       "field_name": "component_role",
       "notes": "Source slice: NP-001",
@@ -645,8 +1673,8 @@
       "entity_id": "NP-001::component::C4",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C4::NP-001-E-2321e0f317cd65b7",
-        "NP-001::component::NP-001::component::C4::VIS-cb8c60cd5486802b"
+        "NP-001::component::NP-001::component::C4::molar_percentage::NP-001-E-2321e0f317cd65b7",
+        "NP-001::component::NP-001::component::C4::molar_percentage::VIS-cb8c60cd5486802b"
       ],
       "field_name": "molar_percentage",
       "notes": "Source slice: NP-001",
@@ -657,7 +1685,7 @@
       "entity_id": "NP-001::component::C4",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C4::NP-001-E-2321e0f317cd65b7"
+        "NP-001::component::NP-001::component::C4::percentage_unit::NP-001-E-2321e0f317cd65b7"
       ],
       "field_name": "percentage_unit",
       "notes": "Source slice: NP-001",
@@ -668,7 +1696,7 @@
       "entity_id": "NP-001::component::C5",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C5::NP-001-E-0a318b647abaed61"
+        "NP-001::component::NP-001::component::C5::component_name_reported::NP-001-E-0a318b647abaed61"
       ],
       "field_name": "component_name_reported",
       "notes": "Source slice: NP-001",
@@ -679,7 +1707,7 @@
       "entity_id": "NP-001::component::C5",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C5::NP-001-E-0a318b647abaed61"
+        "NP-001::component::NP-001::component::C5::component_role::NP-001-E-0a318b647abaed61"
       ],
       "field_name": "component_role",
       "notes": "Source slice: NP-001",
@@ -690,8 +1718,8 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-5670f3a91a9acfc1"
+        "NP-001::arm::NP-001::arm::EX1::cell_type::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::cell_type::NP-001-E-5670f3a91a9acfc1"
       ],
       "field_name": "cell_type",
       "notes": "Source slice: NP-001",
@@ -702,8 +1730,8 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-5670f3a91a9acfc1"
+        "NP-001::arm::NP-001::arm::EX1::cell_source::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::cell_source::NP-001-E-5670f3a91a9acfc1"
       ],
       "field_name": "cell_source",
       "notes": "Source slice: NP-001",
@@ -714,7 +1742,7 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c"
+        "NP-001::arm::NP-001::arm::EX1::species::NP-001-E-7b3c625323c08b9c"
       ],
       "field_name": "species",
       "notes": "Source slice: NP-001",
@@ -725,8 +1753,8 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-dc987f88b78fcdf1"
+        "NP-001::arm::NP-001::arm::EX1::in_vitro_in_vivo::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::in_vitro_in_vivo::NP-001-E-dc987f88b78fcdf1"
       ],
       "field_name": "in_vitro_in_vivo",
       "notes": "Source slice: NP-001",
@@ -737,8 +1765,8 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::arm::NP-001::arm::EX1::payload_type::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::payload_type::NP-001-E-c6658491eb3ce79d"
       ],
       "field_name": "payload_type",
       "notes": "Source slice: NP-001",
@@ -749,8 +1777,8 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::arm::NP-001::arm::EX1::payload_name::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::payload_name::NP-001-E-c6658491eb3ce79d"
       ],
       "field_name": "payload_name",
       "notes": "Source slice: NP-001",
@@ -761,7 +1789,7 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c"
+        "NP-001::arm::NP-001::arm::EX1::payload_encoded_product::NP-001-E-7b3c625323c08b9c"
       ],
       "field_name": "payload_encoded_product",
       "notes": "Source slice: NP-001",
@@ -772,7 +1800,7 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-dc987f88b78fcdf1"
+        "NP-001::arm::NP-001::arm::EX1::dose::NP-001-E-dc987f88b78fcdf1"
       ],
       "field_name": "dose",
       "notes": "Source slice: NP-001",
@@ -783,7 +1811,7 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-dc987f88b78fcdf1"
+        "NP-001::arm::NP-001::arm::EX1::dose_unit::NP-001-E-dc987f88b78fcdf1"
       ],
       "field_name": "dose_unit",
       "notes": "Source slice: NP-001",
@@ -794,7 +1822,7 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-dc987f88b78fcdf1"
+        "NP-001::arm::NP-001::arm::EX1::timepoint::NP-001-E-dc987f88b78fcdf1"
       ],
       "field_name": "timepoint",
       "notes": "Source slice: NP-001",
@@ -805,7 +1833,7 @@
       "entity_id": "NP-001::arm::EX1",
       "entity_type": "arm",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-dc987f88b78fcdf1"
+        "NP-001::arm::NP-001::arm::EX1::timepoint_unit::NP-001-E-dc987f88b78fcdf1"
       ],
       "field_name": "timepoint_unit",
       "notes": "Source slice: NP-001",
@@ -816,7 +1844,7 @@
       "entity_id": "NP-001::outcome::O1",
       "entity_type": "outcome",
       "evidence_ids": [
-        "NP-001::outcome::NP-001::outcome::O1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::outcome::NP-001::outcome::O1::endpoint_family::NP-001-E-c6658491eb3ce79d"
       ],
       "field_name": "endpoint_family",
       "notes": "Source slice: NP-001",
@@ -827,7 +1855,7 @@
       "entity_id": "NP-001::outcome::O1",
       "entity_type": "outcome",
       "evidence_ids": [
-        "NP-001::outcome::NP-001::outcome::O1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::outcome::NP-001::outcome::O1::endpoint_name::NP-001-E-c6658491eb3ce79d"
       ],
       "field_name": "endpoint_name",
       "notes": "Source slice: NP-001",
@@ -838,7 +1866,7 @@
       "entity_id": "NP-001::outcome::O1",
       "entity_type": "outcome",
       "evidence_ids": [
-        "NP-001::outcome::NP-001::outcome::O1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::outcome::NP-001::outcome::O1::outcome_value::NP-001-E-c6658491eb3ce79d"
       ],
       "field_name": "outcome_value",
       "notes": "Source slice: NP-001",
@@ -849,7 +1877,7 @@
       "entity_id": "NP-001::outcome::O1",
       "entity_type": "outcome",
       "evidence_ids": [
-        "NP-001::outcome::NP-001::outcome::O1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::outcome::NP-001::outcome::O1::outcome_unit::NP-001-E-c6658491eb3ce79d"
       ],
       "field_name": "outcome_unit",
       "notes": "Source slice: NP-001",
@@ -860,7 +1888,7 @@
       "entity_id": "NP-001::outcome::O1",
       "entity_type": "outcome",
       "evidence_ids": [
-        "NP-001::outcome::NP-001::outcome::O1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::outcome::NP-001::outcome::O1::qualitative_outcome::NP-001-E-c6658491eb3ce79d"
       ],
       "field_name": "qualitative_outcome",
       "notes": "Source slice: NP-001",
@@ -870,7 +1898,7 @@
   ],
   "formulations": [
     {
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "composition_basis": "Theoretical composition based on the precise masses of components added to the ethanolic phase; molar ratios assumed to match the lipid mixture.",
       "composition_raw": "ALC-0315, DSPC, cholesterol/DX, and ALC-0159; DX25 denotes 25% cholesterol replacement with DX.",
       "formulation_name": "LNP(DSPC)/DX25",
@@ -884,7 +1912,7 @@
   "outcomes": [
     {
       "arm_id": "NP-001::arm::EX1",
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "endpoint_family": "reported outcome",
       "endpoint_name": "EGFP-positive transfection",
       "normalization_basis": null,
@@ -900,7 +1928,7 @@
     }
   ],
   "paper": {
-    "artifact_id": "artifact::NP-001",
+    "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
     "authors": null,
     "doi": "10.3390/ijms252011254",
     "full_text_status": "available",
@@ -921,12 +1949,24 @@
   "reviews": [
     {
       "arm_id": "NP-001::arm::EX1",
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "evidence_ids": [
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-7b3c625323c08b9c",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-5670f3a91a9acfc1",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-dc987f88b78fcdf1",
-        "NP-001::arm::NP-001::arm::EX1::NP-001-E-c6658491eb3ce79d"
+        "NP-001::arm::NP-001::arm::EX1::cell_type::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::cell_type::NP-001-E-5670f3a91a9acfc1",
+        "NP-001::arm::NP-001::arm::EX1::cell_source::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::cell_source::NP-001-E-5670f3a91a9acfc1",
+        "NP-001::arm::NP-001::arm::EX1::species::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::in_vitro_in_vivo::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::in_vitro_in_vivo::NP-001-E-dc987f88b78fcdf1",
+        "NP-001::arm::NP-001::arm::EX1::payload_type::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::payload_type::NP-001-E-c6658491eb3ce79d",
+        "NP-001::arm::NP-001::arm::EX1::payload_name::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::payload_name::NP-001-E-c6658491eb3ce79d",
+        "NP-001::arm::NP-001::arm::EX1::payload_encoded_product::NP-001-E-7b3c625323c08b9c",
+        "NP-001::arm::NP-001::arm::EX1::dose::NP-001-E-dc987f88b78fcdf1",
+        "NP-001::arm::NP-001::arm::EX1::dose_unit::NP-001-E-dc987f88b78fcdf1",
+        "NP-001::arm::NP-001::arm::EX1::timepoint::NP-001-E-dc987f88b78fcdf1",
+        "NP-001::arm::NP-001::arm::EX1::timepoint_unit::NP-001-E-dc987f88b78fcdf1"
       ],
       "field_name": null,
       "notes": null,
@@ -938,7 +1978,7 @@
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "evidence_ids": [],
       "field_name": null,
       "notes": "The approximately 95% positive-transfection result is reported jointly for LNP, LNP/DX25, and LNP/DX50; the packet does not provide a formulation-specific percentage for LNP(DSPC)/DX25.",
@@ -950,7 +1990,7 @@
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "evidence_ids": [],
       "field_name": null,
       "notes": "Exact molar or mass amounts of ALC-0315, DSPC, cholesterol, and ALC-0159 in LNP(DSPC)/DX25 are not directly reported in the supplied text.",
@@ -962,7 +2002,7 @@
     },
     {
       "arm_id": null,
-      "artifact_id": "artifact::NP-001",
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
       "evidence_ids": [],
       "field_name": null,
       "notes": "The HepG2 outcome evidence does not explicitly name the quantification assay.",

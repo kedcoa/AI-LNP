@@ -39,6 +39,33 @@ def _record_id(paper_id: str, kind: str, raw_id: str) -> str:
     return f"{paper_id}::{kind}::{raw_id}"
 
 
+def _repo_root(path: Path) -> Path | None:
+    for parent in (path.resolve(), *path.resolve().parents):
+        if (parent / "src/database").is_dir() and (parent / "data").is_dir():
+            return parent
+    return None
+
+
+def _canonical_path(path: Path, repo_root: Path | None) -> str:
+    resolved = path.resolve()
+    if repo_root is not None:
+        try:
+            return resolved.relative_to(repo_root).as_posix()
+        except ValueError:
+            pass
+    return path.name
+
+
+def _source_artifact(path: Path, kind: str, pipeline_name: str) -> SourceArtifactRecord:
+    digest = _sha(path)
+    root = _repo_root(path)
+    return SourceArtifactRecord(
+        artifact_id=f"artifact::{kind}::{digest[:16]}",
+        path=_canonical_path(path, root), sha256=digest, source_kind=kind,
+        pipeline_name=pipeline_name,
+    )
+
+
 def build_np_bundle(
     *,
     result_paths: Iterable[Path],
@@ -55,18 +82,28 @@ def build_np_bundle(
     if len(paper_ids) != 1:
         raise ValueError("result paths must belong to one paper")
     paper_id = str(next(iter(paper_ids)))
-    default_slice = paths[0].parent.name
+    default_slice = paper_id if len(paths) == 1 else paths[0].parent.name
     merged = load_and_reconcile(paths) if len(paths) > 1 else _single(payloads[0], default_slice)
 
     packet = json.loads(Path(packet_path).read_text(encoding="utf-8"))
     packet_evidence = {row["evidence_id"]: row for row in packet.get("evidence", [])}
     packet_sources = {row["source_id"]: row for row in packet.get("sources", [])}
-    repo_root = Path(packet_path).resolve().parents[4]
-    for claims_path in sorted(
-        (repo_root / "data/staging/extraction/v12_docling_candidates").glob(
-            f"{paper_id}-*/claims.json"
+    repo_root = _repo_root(Path(packet_path))
+    supplemental_claim_paths: list[Path] = []
+    if repo_root is not None:
+        supplemental_claim_paths = sorted(
+            (repo_root / "data/staging/extraction/v12_docling_candidates").glob(
+                f"{paper_id}-*/claims.json"
+            )
         )
-    ):
+    packet_artifact = _source_artifact(Path(packet_path), "source_inventory", "compact_packet")
+    evidence_artifact: dict[str, str] = {
+        evidence_id: packet_artifact.artifact_id for evidence_id in packet_evidence
+    }
+    docling_artifacts: list[SourceArtifactRecord] = []
+    for claims_path in supplemental_claim_paths:
+        claims_artifact = _source_artifact(claims_path, "table", "docling_supported_claims")
+        docling_artifacts.append(claims_artifact)
         for claim in json.loads(claims_path.read_text(encoding="utf-8")):
             for item in claim.get("evidence", []):
                 packet_evidence.setdefault(
@@ -85,19 +122,20 @@ def build_np_bundle(
                         "section": item.get("panel_label"),
                     },
                 )
+                evidence_artifact.setdefault(item["evidence_id"], claims_artifact.artifact_id)
 
-    artifacts = tuple(
-        SourceArtifactRecord(
-            artifact_id=_artifact_id(path.parent.name),
-            path=str(path),
-            sha256=_sha(path),
-            source_kind="validated_extraction",
-            pipeline_name="compact" if paper_id == "NP-001" else "isolated_liver_cell",
-            pipeline_version="1.1.0" if paper_id == "NP-001" else None,
-            extraction_run_identifier=path.parent.name,
+    result_artifacts = tuple(
+        _source_artifact(
+            path, "validated_extraction",
+            "compact" if paper_id == "NP-001" else "isolated_liver_cell",
         ) for path in paths
     )
-    artifact_by_slice = {path.parent.name: _artifact_id(path.parent.name) for path in paths}
+    artifacts = result_artifacts + (packet_artifact,) + tuple(docling_artifacts)
+    slice_names = [paper_id] if len(paths) == 1 else [path.parent.name for path in paths]
+    artifact_by_slice = {
+        slice_name: artifact.artifact_id
+        for slice_name, artifact in zip(slice_names, result_artifacts, strict=True)
+    }
     primary_artifact = artifacts[0].artifact_id
 
     evidence_records: dict[str, EvidenceRecord] = {}
@@ -111,20 +149,38 @@ def build_np_bundle(
         for raw_eid in ids:
             if raw_eid not in packet_evidence:
                 raise ValueError(f"unknown packet evidence: {raw_eid}")
-            eid = f"{slice_name}::{entity_type}::{entity_id}::{raw_eid}"
+            eid = f"{slice_name}::{entity_type}::{entity_id}::{field_name}::{raw_eid}"
             namespaced.append(eid)
             if eid not in evidence_records:
                 item = packet_evidence[raw_eid]
-                source = packet_sources.get((item.get("source_ids") or [None])[0], {})
+                sources = [
+                    packet_sources.get(source_id, {"source_id": source_id})
+                    for source_id in item.get("source_ids", [])
+                ]
+                source = sources[0] if sources else {}
+                locators = [
+                    {
+                        key: value for key, value in {
+                            "source_id": row.get("source_id"),
+                            "section": row.get("section"),
+                            "page_number": row.get("page_number"),
+                            "block_type": row.get("block_type"),
+                            "chunk_id": row.get("chunk_id"),
+                            "xml_element_id": row.get("xml_element_id"),
+                        }.items() if value is not None
+                    }
+                    for row in sources
+                ]
                 evidence_records[eid] = EvidenceRecord(
                     record_id=eid,
                     paper_id=paper_id,
-                    artifact_id=artifact_by_slice[slice_name],
+                    artifact_id=evidence_artifact[raw_eid],
                     field_name=field_name,
                     evidence_location_type=str(source.get("block_type") or "text"),
                     extraction_method="validated_extraction",
                     extraction_confidence="requires_review",
                     evidence_text=item.get("text"),
+                    structured_evidence={"source_locators": locators},
                     arm_id=arm_id,
                     outcome_id=outcome_id,
                     section_name=source.get("section"),

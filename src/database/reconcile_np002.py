@@ -4,12 +4,35 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 from pathlib import Path
 from typing import Any, Iterable
 
 
 def _canonical(value: Any) -> str:
     return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+
+
+def _reported(field: Any) -> Any:
+    return field.get("value") if isinstance(field, dict) else field
+
+
+def _normalized_name(raw: dict[str, Any]) -> str:
+    name = str(_reported(raw.get("formulation_name")) or "").lower()
+    return re.sub(r"\blnp\b|[^a-z0-9]+", "", name)
+
+
+def _scientific_identity(raw: dict[str, Any]) -> tuple[Any, ...]:
+    composition = str(_reported(raw.get("composition")) or "").lower()
+    supported_components = tuple(
+        component for component in ("mc3", "ckke12", "cholesterol", "c14peg2000", "dspc")
+        if component in re.sub(r"[^a-z0-9]+", "", composition)
+    )
+    ratios = tuple(re.findall(r"\d+(?:\.\d+)?", composition))
+    return (
+        _normalized_name(raw), supported_components, ratios,
+        _reported(raw.get("np_ratio")),
+    )
 
 
 def reconcile_slices(
@@ -34,24 +57,26 @@ def reconcile_slices(
         "conflicts": [],
         "source_slices": [name for name, _ in ordered],
     }
-    formulation_variants: dict[str, list[dict[str, Any]]] = {}
+    formulations_by_identity: dict[tuple[Any, ...], dict[str, Any]] = {}
+    formulations_by_name: dict[str, list[dict[str, Any]]] = {}
 
     for slice_name, payload in ordered:
         formulation_map: dict[str, str] = {}
         for raw in payload.get("formulations", []):
             original_id = raw["formulation_id"]
-            content = {key: value for key, value in raw.items() if key != "formulation_id"}
-            variants = formulation_variants.setdefault(original_id, [])
-            match = next((row for row in variants if row["canonical"] == _canonical(content)), None)
+            identity = _scientific_identity(raw)
+            name = _normalized_name(raw)
+            variants = formulations_by_name.setdefault(name, [])
+            match = formulations_by_identity.get(identity)
             if match is None:
                 variant_id = original_id if not variants else f"{original_id}::conflict-{len(variants) + 1}"
                 record = copy.deepcopy(raw)
                 record["formulation_id"] = variant_id
                 record["source_slices"] = [slice_name]
                 merged["formulations"].append(record)
-                match = {"canonical": _canonical(content), "id": variant_id, "record": record}
+                match = {"identity": identity, "id": variant_id, "record": record}
                 if variants:
-                    for field_name in sorted(content):
+                    for field_name in ("formulation_name", "composition", "composition_basis", "np_ratio"):
                         if any(_canonical(row["record"].get(field_name)) != _canonical(raw.get(field_name)) for row in variants):
                             merged["conflicts"].append({
                                 "entity_type": "formulation",
@@ -60,6 +85,7 @@ def reconcile_slices(
                                 "source_slices": [slice_name],
                             })
                 variants.append(match)
+                formulations_by_identity[identity] = match
             elif slice_name not in match["record"]["source_slices"]:
                 match["record"]["source_slices"].append(slice_name)
             formulation_map[original_id] = match["id"]
