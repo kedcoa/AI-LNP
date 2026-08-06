@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from src.database.import_bundle import _IMPORT_SCHEMA
+from src.database.status import RULES_VERSION
 from src.init_db import initialize_database
 
 
@@ -48,14 +49,14 @@ def review_database(tmp_path: Path) -> Path:
         """,
         (first_paper,),
     ).lastrowid
-    connection.execute(
+    component_id = connection.execute(
         """
         INSERT INTO chemical_component (
             formulation_id, component_name_reported, component_role, molar_percentage, percentage_unit
         ) VALUES (?, 'Lipid A', 'ionizable_lipid', 50, 'mol%')
         """,
         (formulation_id,),
-    )
+    ).lastrowid
     ready_arm = connection.execute(
         """
         INSERT INTO experiment (
@@ -114,11 +115,31 @@ def review_database(tmp_path: Path) -> Path:
         """,
         (second_paper,),
     ).lastrowid
+    formulation_evidence = connection.execute(
+        """
+        INSERT INTO evidence (
+            paper_id, field_name, evidence_text, evidence_location_type,
+            extraction_method, extraction_confidence
+        ) VALUES (?, 'composition_raw', 'The formulation ratio was 50:10:38.5:1.5.',
+                  'table', 'structured_table', 'high')
+        """, (first_paper,)
+    ).lastrowid
+    component_evidence = connection.execute(
+        """
+        INSERT INTO evidence (
+            paper_id, field_name, evidence_text, evidence_location_type,
+            extraction_method, extraction_confidence
+        ) VALUES (?, 'component_name_reported', 'Lipid A was the ionizable lipid.',
+                  'methods', 'text_extraction', 'high')
+        """, (first_paper,)
+    ).lastrowid
     for entity_type, entity_id, field_name, evidence_id, status, key, note in (
         ('arm', ready_arm, 'payload_name', auto_evidence, 'automatically_validated', 'payload', 'first'),
         ('arm', ready_arm, 'payload_name', auto_evidence, 'automatically_validated', 'payload', 'duplicate excerpt'),
         ('outcome', outcome_id, 'outcome_value', manual_evidence, 'manually_verified', 'outcome', 'manual'),
         ('arm', ready_arm, 'species', foreign_evidence, 'manually_verified', 'foreign', 'invalid ownership'),
+        ('formulation', formulation_id, 'composition_raw', formulation_evidence, 'automatically_validated', 'formulation', 'formulation link'),
+        ('component', component_id, 'component_name_reported', component_evidence, 'automatically_validated', 'component', 'component link'),
     ):
         content = json.dumps({'status': status, 'key': key, 'note': note}, sort_keys=True)
         connection.execute(
@@ -140,18 +161,18 @@ def review_database(tmp_path: Path) -> Path:
             """
             INSERT INTO eligibility_result (
                 experiment_id, profile, eligible, reasons_json, rules_version, evaluated_at
-            ) VALUES (?, ?, ?, '[]', 'test-v1', ?)
+            ) VALUES (?, ?, ?, '[]', ?, ?)
             ON CONFLICT(experiment_id, profile) DO UPDATE SET
                 eligible=excluded.eligible, evaluated_at=excluded.evaluated_at
             """,
-            (ready_arm, profile, eligible, evaluated_at),
+            (ready_arm, profile, eligible, RULES_VERSION, evaluated_at),
         )
     connection.execute(
         """
         INSERT INTO import_review (
             paper_id, natural_key, arm_id, reason_code, review_status, review_tag,
             field_name, notes, evidence_ids_json, content_sha256
-        ) VALUES (?, 'target-cell', ?, 'target_cell_confirmation', 'incomplete',
+        ) VALUES (?, 'target-cell', ?, 'needs_human_verification', 'incomplete',
                   'Needs human verification', 'cell_type', 'Confirm target cell', '[]', ?)
         """,
         (first_paper, incomplete_arm, _hash('target-cell')),
@@ -201,9 +222,9 @@ def test_dashboard_counts_latest_eligible_arms_and_deduplicated_usable_facts(
 
     assert dashboard.nearest_neighbor_ready_arms == 1
     assert dashboard.comet_ready_arms == 1
-    assert dashboard.automatically_validated_usable_facts == 1
+    assert dashboard.automatically_validated_usable_facts == 3
     assert dashboard.manually_verified_usable_facts == 1
-    assert dashboard.usable_field_facts == 2
+    assert dashboard.usable_field_facts == 4
 
 
 def test_paper_summaries_report_physical_rows_exactly(
@@ -222,14 +243,32 @@ def test_paper_summaries_report_physical_rows_exactly(
     assert first.row_counts.chemical_components == 1
     assert first.row_counts.experimental_arms == 2
     assert first.row_counts.outcomes == 1
-    assert first.row_counts.evidence_excerpts == 2
-    assert first.row_counts.usable_field_facts == 2
+    assert first.row_counts.evidence_excerpts == 4
+    assert first.row_counts.usable_field_facts == 4
     assert first.row_counts.open_review_items == 1
     assert first.row_counts.review_history_revisions == 2
     assert summaries[1].row_counts.evidence_excerpts == 1
 
 
-def test_review_arms_prioritize_near_complete_then_review_records(
+def test_dashboard_ignores_eligibility_from_an_obsolete_rules_version(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path
+) -> None:
+    from src import ui
+    from src.ui.review_service import load_dashboard
+
+    connection = sqlite3.connect(review_database)
+    connection.execute("UPDATE eligibility_result SET rules_version = 'obsolete-rules'")
+    connection.commit()
+    connection.close()
+    monkeypatch.setattr(ui.review_service, 'authoritative_database_path', lambda: review_database)
+
+    dashboard = load_dashboard()
+
+    assert dashboard.nearest_neighbor_ready_arms == 0
+    assert dashboard.comet_ready_arms == 0
+
+
+def test_review_arms_follow_the_specified_review_priority(
     monkeypatch: pytest.MonkeyPatch, review_database: Path
 ) -> None:
     from src import ui
@@ -237,11 +276,42 @@ def test_review_arms_prioritize_near_complete_then_review_records(
 
     monkeypatch.setattr(ui.review_service, 'authoritative_database_path', lambda: review_database)
 
+    connection = sqlite3.connect(review_database)
+    extra_arms = [
+        connection.execute(
+            "INSERT INTO experiment (paper_id, formulation_id, cell_type, payload_type) VALUES (1, 1, 'hepatocyte', 'mRNA')"
+        ).lastrowid
+        for _ in range(3)
+    ]
+    connection.executemany(
+        """INSERT INTO arm_assessment (
+            experiment_id, completeness_status, missing_fields_json, verification_status, updated_at
+        ) VALUES (?, ?, ?, ?, '2026-08-06T12:00:00Z')""",
+        [
+            (1, 'complete', '[]', 'unreviewed'),
+            (2, 'conflict', '[]', 'conflict'),
+            (extra_arms[0], 'incomplete', '["dose"]', 'unreviewed'),
+            (extra_arms[1], 'incomplete', '[]', 'unreviewed'),
+            (extra_arms[2], 'incomplete', '["species", "assay", "dose"]', 'unreviewed'),
+        ],
+    )
+    for arm_id, status, tag, key in (
+            (extra_arms[1], 'incomplete', 'Needs human verification', 'target_cell_confirmation'),
+        (extra_arms[2], 'blocked', 'Source file unavailable', 'blocked'),
+    ):
+        connection.execute(
+            """INSERT INTO import_review (
+                paper_id, natural_key, arm_id, reason_code, review_status, review_tag,
+                evidence_ids_json, content_sha256
+            ) VALUES (1, ?, ?, ?, ?, ?, '[]', ?)""",
+            (key, arm_id, key, status, tag, _hash(key)),
+        )
+    connection.commit()
+    connection.close()
     arms = list_review_arms()
 
-    assert [arm.experiment_id for arm in arms] == [1, 2]
-    assert arms[0].comet_eligible is True
-    assert arms[1].review_reason == 'Needs human verification'
+    assert {arm.experiment_id: arm.review_reason_code for arm in arms}[extra_arms[1]] == 'target_cell_confirmation'
+    assert [arm.experiment_id for arm in arms] == [1, extra_arms[0], extra_arms[1], 2, extra_arms[2]]
 
 
 def test_arm_workspace_exposes_explicit_blanks_owned_evidence_and_history(
@@ -258,7 +328,7 @@ def test_arm_workspace_exposes_explicit_blanks_owned_evidence_and_history(
     assert fields['payload_name'].value == 'Luciferase mRNA'
     assert fields['delivery_cell'].value == ''
     assert fields['delivery_cell'].is_blank is True
-    assert [evidence.evidence_id for evidence in workspace.evidence] == [1, 2]
+    assert [evidence.evidence_id for evidence in workspace.evidence] == [1, 2, 4, 5]
     assert [revision.corrected_value for revision in workspace.history] == [
         'Luciferase mRNA', 'mRNA-LUC'
     ]

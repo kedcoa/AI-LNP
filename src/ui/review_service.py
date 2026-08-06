@@ -7,6 +7,7 @@ from pathlib import Path
 import sqlite3
 
 from src.database.audit_current_database import CANONICAL_AUTHORITATIVE_DATABASE
+from src.database.status import PROFILE_REQUIRED_FIELDS, RULES_VERSION
 
 
 @dataclass(frozen=True)
@@ -55,6 +56,9 @@ class ReviewArm:
     payload: str
     review_reason: str | None
     review_status: str | None
+    review_reason_code: str | None
+    completeness_status: str
+    verification_status: str
     missing_fields: tuple[str, ...]
     nearest_neighbor_eligible: bool
     comet_eligible: bool
@@ -118,10 +122,12 @@ def _connect() -> sqlite3.Connection:
 def _latest_eligibility_condition(profile: str) -> str:
     return """
         eligibility.profile = ?
+        AND eligibility.rules_version = ?
         AND NOT EXISTS (
             SELECT 1 FROM eligibility_result AS later
             WHERE later.experiment_id = eligibility.experiment_id
               AND later.profile = eligibility.profile
+              AND later.rules_version = eligibility.rules_version
               AND (later.evaluated_at > eligibility.evaluated_at
                    OR (later.evaluated_at = eligibility.evaluated_at
                        AND later.rowid > eligibility.rowid))
@@ -177,11 +183,11 @@ def load_dashboard() -> DashboardMetrics:
     with _connect() as connection:
         nearest = connection.execute(
             f"SELECT count(DISTINCT experiment_id) FROM eligibility_result AS eligibility WHERE {_latest_eligibility_condition('nearest_neighbor')} AND eligible = 1",
-            ('nearest_neighbor',),
+            ('nearest_neighbor', RULES_VERSION),
         ).fetchone()[0]
         comet = connection.execute(
             f"SELECT count(DISTINCT experiment_id) FROM eligibility_result AS eligibility WHERE {_latest_eligibility_condition('comet')} AND eligible = 1",
-            ('comet',),
+            ('comet', RULES_VERSION),
         ).fetchone()[0]
         facts = connection.execute(
             _VALID_FACTS_CTE + """
@@ -237,26 +243,30 @@ def _latest_eligible(connection: sqlite3.Connection, experiment_id: int, profile
     row = connection.execute(
         """SELECT eligible FROM eligibility_result AS eligibility
            WHERE experiment_id = ? AND """ + _latest_eligibility_condition(profile),
-        (experiment_id, profile),
+        (experiment_id, profile, RULES_VERSION),
     ).fetchone()
     return bool(row['eligible']) if row else False
 
 
 def _review_arm(connection: sqlite3.Connection, row: sqlite3.Row) -> ReviewArm:
     review = connection.execute(
-        """SELECT review_tag, review_status FROM import_review
+        """SELECT review_tag, review_status, reason_code, field_name FROM import_review
            WHERE arm_id = ? AND review_status IN ('incomplete', 'conflict', 'quarantined', 'blocked')
            ORDER BY import_review_id DESC LIMIT 1""", (row['experiment_id'],)
     ).fetchone()
     assessment = connection.execute(
-        "SELECT missing_fields_json FROM arm_assessment WHERE experiment_id = ?", (row['experiment_id'],)
+        """SELECT missing_fields_json, completeness_status, verification_status
+           FROM arm_assessment WHERE experiment_id = ?""", (row['experiment_id'],)
     ).fetchone()
     import json
     missing = tuple(json.loads(assessment['missing_fields_json'])) if assessment else ()
     return ReviewArm(
         int(row['experiment_id']), int(row['paper_id']), row['source_paper_id'], row['title'],
         row['formulation_name'] or '', row['cell_type'] or '', row['species'] or '', row['payload_type'] or '',
-        review['review_tag'] if review else None, review['review_status'] if review else None, missing,
+        review['review_tag'] if review else None, review['review_status'] if review else None,
+        review['reason_code'] if review else None,
+        assessment['completeness_status'] if assessment else 'incomplete',
+        assessment['verification_status'] if assessment else 'unreviewed', missing,
         _latest_eligible(connection, row['experiment_id'], 'nearest_neighbor'),
         _latest_eligible(connection, row['experiment_id'], 'comet'),
     )
@@ -269,10 +279,20 @@ def list_review_arms() -> tuple[ReviewArm, ...]:
                FROM experiment JOIN paper USING (paper_id) JOIN formulation USING (formulation_id)"""
         ).fetchall()
         arms = [_review_arm(connection, row) for row in rows]
-    return tuple(sorted(arms, key=lambda arm: (
-        0 if arm.comet_eligible else 1 if arm.nearest_neighbor_eligible else 2,
-        0 if arm.review_reason else 1, arm.paper_id, arm.experiment_id,
-    )))
+    def priority(arm: ReviewArm) -> int:
+        if arm.completeness_status == 'complete' and arm.verification_status != 'manually_verified':
+            return 0
+        comet_missing = set(arm.missing_fields).intersection(PROFILE_REQUIRED_FIELDS['comet'])
+        if 1 <= len(comet_missing) <= 2:
+            return 1
+        if arm.review_reason_code and (
+            'target_cell' in arm.review_reason_code or 'experiment_link' in arm.review_reason_code
+        ):
+            return 2
+        if arm.completeness_status == 'conflict' or arm.review_status == 'conflict':
+            return 3
+        return 4
+    return tuple(sorted(arms, key=lambda arm: (priority(arm), arm.paper_id, arm.experiment_id)))
 
 
 _FIELD_COLUMNS = (
@@ -324,12 +344,23 @@ def load_arm_workspace(experiment_id: int) -> ArmWorkspace:
                WHERE evidence.paper_id = ? AND (
                    evidence.experiment_id = ? OR evidence.outcome_id IN (
                        SELECT outcome_id FROM outcome WHERE experiment_id = ?
-                   ) OR evidence.evidence_id IN (
-                       SELECT evidence_id FROM import_field_evidence
-                       WHERE paper_id = ? AND entity_type = 'arm' AND entity_id = ?
+                   ) OR EXISTS (
+                       SELECT 1 FROM import_field_evidence AS field_link
+                       WHERE field_link.paper_id = ? AND field_link.evidence_id = evidence.evidence_id
+                         AND (
+                             (field_link.entity_type = 'arm' AND field_link.entity_id = ?) OR
+                             (field_link.entity_type = 'outcome' AND field_link.entity_id IN (
+                                 SELECT outcome_id FROM outcome WHERE experiment_id = ?
+                             )) OR
+                             (field_link.entity_type = 'formulation' AND field_link.entity_id = ?) OR
+                             (field_link.entity_type = 'component' AND field_link.entity_id IN (
+                                 SELECT component_id FROM chemical_component WHERE formulation_id = ?
+                             ))
+                         )
                    )
                ) ORDER BY evidence.evidence_id""",
-            (row['paper_id'], experiment_id, experiment_id, row['paper_id'], experiment_id),
+            (row['paper_id'], experiment_id, experiment_id, row['paper_id'], experiment_id,
+             experiment_id, row['formulation_id'], row['formulation_id']),
         ).fetchall()
         evidence = tuple(EvidenceExcerpt(
             int(item['evidence_id']), item['field_name'], item['evidence_text'], item['evidence_location_type'],
