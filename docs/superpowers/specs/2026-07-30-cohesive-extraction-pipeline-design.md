@@ -7,8 +7,11 @@
 Make the existing AI-LNP extraction stages operate as one cohesive pipeline
 without introducing another extraction, vision, coverage, or merge
 implementation. The first acceptance run uses GP-004, GP-006, and GP-008 to
-prove verified 15/15 development recall. The same code path must then run on a
-new non-gold paper.
+attempt verified 15/15 development recall; verified recall from 13/15 through
+15/15 is acceptable when all precision and safety gates pass. Work is divided
+into a streamlined morning attempt and a conditional fuller afternoon
+implementation. After the development gate passes, the unchanged path must run
+on a newly retrieved, non-gold paper.
 
 ## Current Failure
 
@@ -45,10 +48,10 @@ persisted only after schema parsing, the truncated response was not retained.
    selective-vision repair path.
 5. Require human approval and `--confirm-paid-call` for every paid primary,
    text-repair, or selective-vision batch.
-6. Provide one resumable command that coordinates existing stages and treats
-   their current artifacts as the source of truth.
-7. Prove the path first on GP-004, GP-006, and GP-008, then run the unchanged
-   path on a new non-gold paper.
+6. Attempt the smallest cohesive repair-path change first, then build the full
+   resumable command only if the bounded attempt fails its acceptance gate.
+7. Prove verified recall of at least 13/15 on GP-004, GP-006, and GP-008, then
+   run the unchanged path on a newly retrieved non-gold paper.
 
 ## Non-goals
 
@@ -58,15 +61,17 @@ persisted only after schema parsing, the truncated response was not retained.
 - Do not automatically retry failed, invalid, or truncated paid responses.
 - Do not use gold outcome IDs or gold answers in extraction-time inputs.
 - Do not delete legacy scripts as part of this improvement.
-- Do not claim 15/15 from candidate detection alone; only verified merged
-  outcomes count.
+- Do not claim recall success from candidate detection alone; only verified
+  merged outcomes count.
 
 ## Design Principles
 
-- **One active route:** documentation and the new command identify one
-  authoritative path even if legacy scripts remain available.
-- **Thin coordination:** the orchestrator calls existing stage functions and
-  checks their artifacts; it does not reproduce their scientific logic.
+- **One active route:** Strategy 1 updates the existing repair entry points;
+  Strategy 2 conditionally replaces manual coordination with one documented
+  command. Legacy scripts may remain available but are not competing routes.
+- **Thin coordination:** if Strategy 2 is invoked, its orchestrator calls
+  existing stage functions and checks their artifacts; it does not reproduce
+  their scientific logic.
 - **Fail closed:** ambiguous identity, invalid schema, missing candidate
   disposition, unsupported evidence, or wrong experiment linkage cannot merge.
   Scientific ambiguity quarantines only the affected candidate group; corrupted
@@ -78,9 +83,13 @@ persisted only after schema parsing, the truncated response was not retained.
 
 ## Architecture
 
+The following stages describe the complete scientific data flow. Strategy 1
+implements the bounded repair subset through existing entry points. Strategy 2
+adds the thin orchestrator over the entire sequence.
+
 ### 1. Local pre-call preparation
 
-The orchestrator invokes or verifies the existing stages for:
+The active preparation entry point invokes or verifies the existing stages for:
 
 1. paper ingestion and compact packet construction;
 2. provisional experiment construction;
@@ -91,14 +100,14 @@ The orchestrator invokes or verifies the existing stages for:
 7. promotion of accepted visual claims into the same candidate inventory;
 8. exact request and schema preflight.
 
-These stages make no paid API calls. The orchestrator reports candidate counts,
+These stages make no paid API calls. Preparation reports candidate counts,
 evidence counts, visual routes, estimated tokens, and all experiment-routing
 decisions before stopping at the primary-call approval gate.
 
 ### 2. Paid primary extraction
 
 The primary call remains the existing compact extraction implementation. The
-orchestrator may execute it only when:
+active paid entry point may execute it only when:
 
 - local preparation and preflight pass;
 - the user has reviewed the exact request summary;
@@ -175,9 +184,9 @@ use the existing selective-vision runner with only the relevant crop, caption,
 local visual context, candidate facts, and relevant compact experiment
 summaries.
 
-The orchestrator prepares repair batches locally and stops. Each text or vision
-batch requires human review plus `--confirm-paid-call`. A primary-call approval
-does not authorize repair calls.
+The active preparation entry point prepares repair batches locally and stops.
+Each text or vision batch requires human review plus `--confirm-paid-call`. A
+primary-call approval does not authorize repair calls.
 
 Repair tasks are dynamically packed, not assigned a fixed candidate count. The
 builder groups candidates by route, experimental context, and overlapping
@@ -218,7 +227,71 @@ repair fragment can merge:
 Only after these checks does the existing additive merge write the proposed
 result.
 
-## Thin Orchestrator
+## Strategy 1: Streamlined Morning Attempt
+
+The morning block is a two-to-three-hour attempt to validate the core repair
+design before building the full coordinator. It changes only the existing
+repair contract, task builder, text and visual repair runners, preflight, and
+merge verification needed to support:
+
+- compact semantic summaries for all plausibly relevant experiments;
+- explicit candidate-to-outcome-to-experiment resolutions;
+- dynamic input- and output-aware batching;
+- separate text and visual repair tasks;
+- raw-response persistence before parsing;
+- deterministic validation of completeness, evidence, IDs, and experiment
+  linkage.
+
+Focused contract, builder, runner, routing, and merge tests must pass. Each
+implementation task receives an independent code review, followed by a final
+whole-change review. The workflow then prepares the frozen GP-004, GP-006, and
+GP-008 repair requests and prints an approval report such as:
+
+```text
+12 missing candidates
+3 local matches — no call
+6 text candidates — 2 repair calls
+3 visual candidates across 2 figures — 2 vision calls
+
+Total paid repair calls: 4
+Estimated input/output tokens: ...
+Estimated cost: ...
+```
+
+The preflight entry point stops at this point. It may execute the batch only
+after the user reviews the exact requests and explicitly approves the paid
+calls.
+
+After merge and evaluation, Strategy 1 passes when verified recall is 13/15,
+14/15, or 15/15 and every precision and safety requirement in the acceptance
+section passes.
+
+If Strategy 1 fails, systematic debugging must classify the failure before any
+fix:
+
+- **Small isolated defect:** a reproducible, localized contract,
+  serialization, batching, routing, validation, persistence, or ID-handling
+  bug that can be corrected with one focused regression test and without
+  changing stage boundaries.
+- **Architectural failure:** a new processing layer, replacement or removal of
+  an existing stage, broad restructuring, repeated prompt adjustment without a
+  demonstrated root cause, or another change that exceeds the streamlined
+  design.
+
+One small isolated defect may receive one bounded fix, review, local rerun, and
+new paid-call preflight. The paid rerun still requires separate user approval.
+If that rerun remains below 13/15, violates a safety gate, or exposes an
+architectural failure, Strategy 1 ends and Strategy 2 begins. An architectural
+failure skips the bounded rerun and moves directly to Strategy 2.
+
+## Strategy 2: Fuller Afternoon Workflow
+
+The afternoon block begins only when the Strategy 1 escalation rule is met. It
+implements the complete coordinator and end-to-end workflow described below.
+“Afternoon” denotes the second execution phase, not a promise to bypass tests,
+reviews, or approval gates to finish within a fixed clock window.
+
+### Thin orchestrator
 
 Add one orchestration module, tentatively
 `src/extraction/run_cohesive_pipeline.py`. It owns stage ordering, readiness
@@ -246,8 +319,10 @@ Before any paid stage, the command prints:
 - stage name;
 - model;
 - task and candidate counts;
+- local matches requiring no call and candidate counts by repair route;
+- total paid-call count;
 - relevant experiment summaries and proposed candidate scope;
-- input and output token limits;
+- input and output token limits plus estimated token usage and cost;
 - exact prepared request paths;
 - cache status.
 
@@ -262,13 +337,14 @@ only the affected candidate group; other verified groups may continue.
 
 ## Acceptance Strategy
 
-### Stage 1: frozen development proof
+### Development proof
 
-Use GP-004, GP-006, and GP-008 through the general command.
+Use GP-004, GP-006, and GP-008 through Strategy 1 first and Strategy 2 only if
+the escalation gate is met.
 
 Before paid calls:
 
-- all local tests pass;
+- all affected focused local tests pass;
 - all task schemas and checksums pass;
 - every task contains the exact fact and evidence for every requested
   candidate;
@@ -285,7 +361,7 @@ Before paid calls:
 
 After approved calls and local merge:
 
-- final verified recall is 15/15;
+- final verified recall is at least 13/15, with 15/15 retained as the target;
 - all previously recovered 10 outcomes remain recovered;
 - unsupported accepted outcomes equal `0`;
 - wrong experiment links equal `0`;
@@ -293,12 +369,21 @@ After approved calls and local merge:
 - no invalid or truncated response is merged;
 - precision meets the existing minimum of `0.9`.
 
-If 15/15 is not reached, the run is considered diagnostic evidence. The system
-must stop without broadening scopes or automatically repeating calls.
+Verified recall from 13/15 through 15/15 passes. A result of 12/15 or lower, or
+any failure of the precision and safety requirements, invokes the Strategy 1
+debugging and escalation rule. No paid rerun is automatic.
 
-### Stage 2: generalization proof
+### New-paper generalization proof
 
-Run the unchanged command on one new non-gold paper. Success requires:
+After the development proof passes, retrieve one entirely new paper through
+PubMed or Europe PMC. It must be absent from the gold set and current corpus,
+report original LNP experiments, expose enough accessible full text for the
+pipeline, and contain identifiable formulation, payload, experiment, and
+outcome evidence. Record its PMID, PMCID or Europe PMC identifier, source URL,
+retrieval date, full-text availability, and corpus-overlap check before
+processing it.
+
+Run the unchanged successful path on that paper. Success requires:
 
 - raw source through local candidate and visual preparation completes;
 - the primary paid gate presents a valid request;
@@ -309,8 +394,9 @@ Run the unchanged command on one new non-gold paper. Success requires:
 - a human can inspect one concise end-to-end report without reconstructing the
   route from multiple directories.
 
-This stage does not use 15/15 as its metric because the paper is outside the
-development gold set.
+This proof does not use a recall denominator because the paper is outside the
+development gold set. It evaluates route completion, auditability, evidence
+support, and experiment linkage instead.
 
 ## Limitation Matrix
 
@@ -332,7 +418,8 @@ The design explicitly covers the known ways the route can fail:
 | Development answers leak into extraction | Gold IDs and answers are excluded from extraction-time requests |
 | A local preparation unexpectedly spends money | Every paid batch requires a separate reviewed summary and `--confirm-paid-call` |
 | Cached artifacts are stale or mismatched | Source identity, checksum, schema, and cache validation before reuse |
-| The route works only on the development set | The unchanged pipeline is run on a new non-gold paper in Stage 2 |
+| The streamlined change hides an architectural problem | One root-cause classification, at most one bounded correction, then automatic escalation to Strategy 2 |
+| The route works only on the development set | The unchanged successful path is run on a newly retrieved non-gold paper |
 
 ## Test Strategy
 
@@ -395,11 +482,18 @@ The design explicitly covers the known ways the route can fail:
 - GP-008 covers local visual promotion and targeted selective-vision fallback.
 - The development acceptance run evaluates verified merged recall, not merely
   candidate detection.
+- A 13/15, 14/15, or 15/15 safe result passes the development gate; 12/15 or a
+  safety failure invokes the documented debugging and escalation rule.
+- The new-paper run records its external identifier and proves it is absent
+  from both the gold set and existing corpus before ingestion.
 
 ## Implementation Method
 
 Implementation must use `superpowers:subagent-driven-development`. Each
-implementation task receives an independent review before the next task. Tests
-are written before production changes, and no paid test call occurs until all
-local tasks, reviews, and exact-request preflights pass and the user gives
-explicit approval.
+implementation task receives an independent review through
+`superpowers:requesting-code-review` before the next task, followed by a final
+whole-change review. Tests are written before production changes.
+`superpowers:systematic-debugging` is mandatory for every test failure,
+unexpected result, or below-threshold paid evaluation before a fix is proposed.
+No paid test call or rerun occurs until all applicable local tasks, reviews, and
+exact-request preflights pass and the user gives explicit approval.

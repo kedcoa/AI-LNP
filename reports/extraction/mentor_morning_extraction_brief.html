@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A bilingual account of the AI-LNP pipeline's progression from incomplete extraction to liver-cell-specific formulation–experiment–outcome records.">
+  <title>Liver LNP Evidence Extraction — From Papers to Linked Records</title>
+  <style>
+    :root {
+      --ink: #15211e;
+      --muted: #5e6c68;
+      --paper: #f5f2e9;
+      --card: #fffdf8;
+      --line: #d6ddd8;
+      --green: #176b54;
+      --green-soft: #deeee7;
+      --amber: #a8611f;
+      --amber-soft: #faead5;
+      --red: #a54540;
+      --red-soft: #f7e2df;
+      --blue: #315f8b;
+      --blue-soft: #e2edf7;
+      --violet: #67508a;
+      --violet-soft: #ece7f5;
+      --shadow: 0 18px 55px rgba(24, 42, 36, .08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 2%, rgba(23, 107, 84, .12), transparent 28rem),
+        radial-gradient(circle at 96% 25%, rgba(168, 97, 31, .09), transparent 26rem),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    button { font: inherit; }
+    a { color: var(--green); }
+    .page { width: min(1180px, calc(100% - 34px)); margin: 0 auto; padding: 25px 0 76px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px;
+      border: 1px solid #a8c8bd; border-radius: 999px; color: var(--green);
+      background: rgba(255,255,255,.62); font-size: .78rem; font-weight: 850;
+      letter-spacing: .07em; text-transform: uppercase;
+    }
+    .status::before { width: 8px; height: 8px; border-radius: 50%; background: var(--green); content: ""; }
+    .language-switch {
+      display: flex; padding: 4px; border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(255,255,255,.72); backdrop-filter: blur(9px);
+    }
+    .language-switch button {
+      min-width: 76px; padding: 8px 15px; border: 0; border-radius: 999px;
+      color: var(--muted); background: transparent; cursor: pointer; font-weight: 780;
+    }
+    .language-switch button[aria-pressed="true"] { color: #fff; background: var(--ink); }
+    .hero { display: grid; grid-template-columns: 1.35fr .65fr; gap: 42px; align-items: end; padding: 72px 0 38px; }
+    .eyebrow { margin: 0 0 11px; color: var(--green); font-size: .8rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    h1 {
+      margin: 0; max-width: 900px; font-family: Georgia, "Times New Roman", "Songti SC", serif;
+      font-size: clamp(2.55rem, 6vw, 5.75rem); font-weight: 500; letter-spacing: -.055em; line-height: .98;
+    }
+    .hero-copy { max-width: 780px; margin: 25px 0 0; color: var(--muted); font-size: clamp(1rem,1.6vw,1.2rem); }
+    .hero-note {
+      padding: 22px; border-left: 4px solid var(--green); border-radius: 0 18px 18px 0;
+      background: rgba(255,253,248,.74); color: var(--muted);
+    }
+    .hero-note strong { display: block; margin-bottom: 5px; color: var(--ink); }
+    .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; margin: 22px 0 65px; }
+    .metric {
+      min-height: 145px; padding: 22px; border: 1px solid rgba(21,33,30,.09);
+      border-radius: var(--radius); background: rgba(255,253,248,.8); box-shadow: var(--shadow);
+    }
+    .metric-number { display: block; margin-bottom: 8px; color: var(--green); font-family: Georgia,serif; font-size: 2.75rem; line-height: 1; }
+    .metric strong { display: block; }
+    .metric small { color: var(--muted); }
+    .section-heading { display: grid; grid-template-columns: 58px 1fr; gap: 17px; align-items: start; margin-bottom: 23px; }
+    .section-number { display: grid; width: 49px; height: 49px; place-items: center; border-radius: 15px; color: #fff; background: var(--ink); font-weight: 900; }
+    h2 { margin: 0; font-family: Georgia, "Times New Roman", "Songti SC", serif; font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.1; }
+    .section-intro { max-width: 850px; margin: 7px 0 0; color: var(--muted); }
+    .overview { margin-bottom: 66px; }
+    .flow { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
+    .flow-step { position: relative; min-height: 150px; padding: 19px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+    .flow-step:not(:last-child)::after { position: absolute; top: 50%; right: -11px; z-index: 2; color: var(--green); content: "→"; font-weight: 900; }
+    .flow-step span { color: var(--green); font-size: .75rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .flow-step strong { display: block; margin: 8px 0 5px; }
+    .flow-step small { color: var(--muted); }
+    .timeline { position: relative; margin-left: 23px; padding-left: 39px; border-left: 1px solid #b8c7c1; }
+    .attempt { position: relative; margin-bottom: 68px; }
+    .attempt::before {
+      position: absolute; top: 15px; left: -47px; width: 15px; height: 15px;
+      border: 5px solid var(--paper); border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 0 1px #93a9a1; content: "";
+    }
+    .card { padding: clamp(23px,4vw,39px); border: 1px solid rgba(21,33,30,.09); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+    .attempt-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 25px; }
+    .attempt-index { margin: 0 0 4px; color: var(--green); font-size: .76rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    h3 { margin: 0; font-family: Georgia, "Times New Roman", "Songti SC", serif; font-size: clamp(1.55rem,3vw,2.35rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.12; }
+    .nickname { display: inline-block; margin-top: 8px; color: var(--muted); font-style: italic; }
+    .badge { flex: 0 0 auto; padding: 7px 11px; border-radius: 999px; font-size: .76rem; font-weight: 850; }
+    .badge.fail { color: var(--red); background: var(--red-soft); }
+    .badge.partial { color: var(--amber); background: var(--amber-soft); }
+    .badge.progress { color: var(--blue); background: var(--blue-soft); }
+    .badge.current { color: var(--green); background: var(--green-soft); }
+    .triad { display: grid; grid-template-columns: repeat(3,1fr); gap: 13px; margin: 20px 0; }
+    .panel { padding: 19px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+    .panel h4 { margin: 0 0 8px; font-size: .79rem; letter-spacing: .075em; text-transform: uppercase; }
+    .panel.problem h4 { color: var(--red); }
+    .panel.solution h4 { color: var(--blue); }
+    .panel.result h4 { color: var(--green); }
+    .panel p { margin: 0; color: var(--muted); }
+    .extract { margin-top: 22px; padding: 20px; border-radius: 17px; background: var(--green-soft); }
+    .extract h4 { margin: 0 0 10px; color: var(--green); }
+    ul { margin: 8px 0 0; padding-left: 1.2rem; }
+    li + li { margin-top: 5px; }
+    .warning { margin-top: 18px; padding: 17px 19px; border-radius: 15px; color: #673b13; background: var(--amber-soft); }
+    .warning strong { color: #704012; }
+    .comparison { width: 100%; margin-top: 20px; border-collapse: collapse; overflow: hidden; border-radius: 16px; background: #fff; }
+    .comparison th, .comparison td { padding: 13px 15px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .comparison th { color: var(--muted); background: #f1f4f1; font-size: .77rem; letter-spacing: .06em; text-transform: uppercase; }
+    .comparison tr:last-child td { border-bottom: 0; }
+    .coverage-hero {
+      display: grid; grid-template-columns: .75fr 1.25fr; gap: 24px; align-items: center;
+      margin: 26px 0; padding: 27px; border-radius: 20px; color: #fff;
+      background: linear-gradient(135deg,#125944,#1f7c62);
+    }
+    .coverage-number { font-family: Georgia,serif; font-size: clamp(4rem,9vw,7.5rem); line-height: .85; letter-spacing: -.06em; }
+    .coverage-copy strong { display: block; margin-bottom: 7px; font-size: 1.25rem; }
+    .coverage-copy p { margin: 0; color: rgba(255,255,255,.83); }
+    .call-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 13px; margin: 22px 0; }
+    .call { padding: 21px; border: 1px solid var(--line); border-radius: 17px; background: #fff; }
+    .call strong { display: block; font-size: 1.08rem; }
+    .rating { display: inline-block; margin: 7px 0 11px; padding: 4px 9px; border-radius: 999px; font-size: .75rem; font-weight: 850; }
+    .rating.strong { color: var(--green); background: var(--green-soft); }
+    .rating.partial { color: var(--red); background: var(--red-soft); }
+    .rating.useful { color: var(--amber); background: var(--amber-soft); }
+    .call p { margin: 0; color: var(--muted); }
+    .conclusion { padding: clamp(27px,5vw,48px); border-radius: 26px; color: #fff; background: var(--ink); box-shadow: var(--shadow); }
+    .conclusion h2 { max-width: 850px; }
+    .conclusion p { max-width: 900px; color: #cbd6d2; }
+    .conclusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 24px; }
+    .conclusion-panel { padding: 20px; border: 1px solid rgba(255,255,255,.14); border-radius: 17px; background: rgba(255,255,255,.055); }
+    .conclusion-panel strong { display: block; margin-bottom: 6px; color: #fff; }
+    footer { margin-top: 42px; color: var(--muted); font-size: .82rem; text-align: center; }
+    [data-lang] { display: none; }
+    html[data-language="en"] [data-lang="en"],
+    html[data-language="zh"] [data-lang="zh"] { display: revert; }
+
+    @media (max-width: 900px) {
+      .hero, .coverage-hero { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: repeat(2,1fr); }
+      .flow { grid-template-columns: 1fr; }
+      .flow-step:not(:last-child)::after { top: auto; right: 50%; bottom: -17px; content: "↓"; }
+      .triad, .call-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .page { width: min(100% - 22px,1180px); }
+      .hero { padding-top: 48px; }
+      .metrics { grid-template-columns: 1fr; }
+      .timeline { margin-left: 7px; padding-left: 25px; }
+      .attempt::before { left: -33px; }
+      .attempt-head, .topbar { align-items: flex-start; }
+      .attempt-head { flex-direction: column; }
+      .comparison { font-size: .88rem; }
+      .comparison th, .comparison td { padding: 10px; }
+      .conclusion-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <span class="status">
+        <span data-lang="en">Current application brief · 30 July 2026</span>
+        <span data-lang="zh">当前应用简报 · 2026年7月30日</span>
+      </span>
+      <div class="language-switch" aria-label="Language">
+        <button type="button" data-set-language="en" aria-pressed="true">English</button>
+        <button type="button" data-set-language="zh" aria-pressed="false"><span data-lang="en">Chinese</span><span data-lang="zh">中文</span></button>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow" data-lang="en">AI-LNP extraction application</p>
+        <p class="eyebrow" data-lang="zh">AI-LNP 提取应用</p>
+        <h1 data-lang="en">Liver LNP evidence extraction: from papers to linked records</h1>
+        <h1 data-lang="zh">肝脏 LNP 证据提取：从论文到关联记录</h1>
+        <p class="hero-copy" data-lang="en">
+          The application converts research papers into evidence-backed links between an LNP formulation,
+          an experimental arm, a liver-cell recipient and a measured outcome. This report follows every
+          major attempt made on 30 July, including what the LLM actually extracted and why each design changed.
+        </p>
+        <p class="hero-copy" data-lang="zh">
+          本应用把研究论文转化为有证据支持的关联记录：LNP 配方、实验组、肝细胞受体和测量结果。
+          本报告按时间回顾 7 月 30 日的每次主要尝试，包括 LLM 实际提取了什么，以及每次设计为何改变。
+        </p>
+      </div>
+      <aside class="hero-note">
+        <strong data-lang="en">Where the application stands now</strong>
+        <strong data-lang="zh">应用目前所处阶段</strong>
+        <span data-lang="en">It no longer collapses a whole paper into one record. It can return many correctly linked records, but it still needs deterministic arm-level completeness checking.</span>
+        <span data-lang="zh">它已不再把整篇论文压缩成一条记录，能够返回多条正确关联的记录；但仍需要确定性的实验组完整性检查。</span>
+      </aside>
+    </header>
+
+    <section class="metrics" aria-label="Current summary">
+      <article class="metric"><span class="metric-number">5</span><strong data-lang="en">pipeline generations</strong><strong data-lang="zh">代管线</strong><small data-lang="en">Each addressed a specific observed failure.</small><small data-lang="zh">每一代都针对一次实际失败。</small></article>
+      <article class="metric"><span class="metric-number">3</span><strong data-lang="en">NP-002 liver-cell calls</strong><strong data-lang="zh">次 NP-002 肝细胞调用</strong><small data-lang="en">Hepatocytes, Kupffer cells and endothelial cells.</small><small data-lang="zh">肝细胞、Kupffer 细胞和肝内皮细胞。</small></article>
+      <article class="metric"><span class="metric-number">13/18</span><strong data-lang="en">experimental arms represented</strong><strong data-lang="zh">个实验组被表示</strong><small data-lang="en">Five entire arms were still absent.</small><small data-lang="zh">仍有五个完整实验组缺失。</small></article>
+      <article class="metric"><span class="metric-number">72.2%</span><strong data-lang="en">current arm-level recall</strong><strong data-lang="zh">当前实验组级召回率</strong><small data-lang="en">Useful progress, not complete extraction.</small><small data-lang="zh">进展明显，但并非完整提取。</small></article>
+    </section>
+
+    <section class="overview">
+      <div class="section-heading">
+        <span class="section-number">→</span>
+        <div>
+          <h2 data-lang="en">The actual progression</h2>
+          <h2 data-lang="zh">实际演进顺序</h2>
+          <p class="section-intro" data-lang="en">The planning documents were directionally correct, but the executed history contains separate global and isolated NP-001 trials before the liver-only NP-002 test.</p>
+          <p class="section-intro" data-lang="zh">规划文档的大方向正确，但实际执行历史中，在肝脏专用 NP-002 测试之前，还有彼此独立的 NP-001 全局试验和隔离试验。</p>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><span>01</span><strong data-lang="en">Cohesive extraction</strong><strong data-lang="zh">统一提取</strong><small data-lang="en">Restore semantic experiment context.</small><small data-lang="zh">恢复实验语义上下文。</small></div>
+        <div class="flow-step"><span>02</span><strong data-lang="en">Primary + forced accounting</strong><strong data-lang="zh">主调用＋强制核算</strong><small data-lang="en">1/36 became 36/36 dispositions.</small><small data-lang="zh">从 1/36 变成 36/36 个处置。</small></div>
+        <div class="flow-step"><span>03</span><strong data-lang="en">Six global core slots</strong><strong data-lang="zh">六个全局核心槽位</strong><small data-lang="en">Reduce noise; expose duplicate misuse.</small><small data-lang="zh">减少噪声；暴露重复项滥用。</small></div>
+        <div class="flow-step"><span>04</span><strong data-lang="en">Six isolated calls</strong><strong data-lang="zh">六个隔离调用</strong><small data-lang="en">One scientific question per request.</small><small data-lang="zh">每次请求只问一个科学问题。</small></div>
+        <div class="flow-step"><span>05</span><strong data-lang="en">NP-002 liver field test</strong><strong data-lang="zh">NP-002 肝脏实测</strong><small data-lang="en">13/18 arms; 72.2% recall.</small><small data-lang="zh">13/18 个实验组；72.2% 召回率。</small></div>
+      </div>
+    </section>
+
+    <section class="timeline">
+      <article class="attempt">
+        <div class="card">
+          <div class="attempt-head">
+            <div><p class="attempt-index" data-lang="en">Attempt 1 · Morning foundation</p><p class="attempt-index" data-lang="zh">尝试 1 · 上午基础</p><h3 data-lang="en">The Missing Map</h3><h3 data-lang="zh">“缺失的地图”</h3><span class="nickname" data-lang="en">Cohesive extraction strategy</span><span class="nickname" data-lang="zh">统一提取策略</span></div>
+            <span class="badge progress" data-lang="en">Design correction</span><span class="badge progress" data-lang="zh">设计纠正</span>
+          </div>
+          <div class="triad">
+            <div class="panel problem"><h4 data-lang="en">Previous problem</h4><h4 data-lang="zh">之前的问题</h4><p data-lang="en">Repair tasks carried opaque candidate and experiment IDs but not enough compact scientific meaning. A provisional association could also set <code>permitted_new_experiments</code> to zero.</p><p data-lang="zh">修复任务带有不透明的候选 ID 和实验 ID，却缺少足够的紧凑科学语义。临时关联还可能把 <code>permitted_new_experiments</code> 设为 0。</p></div>
+            <div class="panel solution"><h4 data-lang="en">Pipeline solution</h4><h4 data-lang="zh">管线方案</h4><p data-lang="en">Carry exact candidate facts, evidence and compact experiment summaries; explicitly link candidate → outcome → experiment; permit one bounded new experiment; route text and visual repairs separately.</p><p data-lang="zh">携带精确候选事实、证据和紧凑实验摘要；明确关联候选→结果→实验；允许一个受限新实验；把文本修复和视觉修复分开。</p></div>
+            <div class="panel result"><h4 data-lang="en">What this established</h4><h4 data-lang="zh">这一阶段确定了什么</h4><p data-lang="en">The pipeline needed one coordinated contract over existing ingestion, Docling, local candidate, vision, validation and merge stages—not another independent extractor.</p><p data-lang="zh">需要的是一个协调现有摄取、Docling、本地候选、视觉、验证与合并阶段的契约，而不是再造一个独立提取器。</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="attempt">
+        <div class="card">
+          <div class="attempt-head">
+            <div><p class="attempt-index" data-lang="en">Attempt 2 · NP-001 primary and forced trial</p><p class="attempt-index" data-lang="zh">尝试 2 · NP-001 主调用与强制试验</p><h3 data-lang="en">One Good Record, Thirty-Five Silences</h3><h3 data-lang="zh">“一条好记录，三十五次沉默”</h3><span class="nickname" data-lang="en">Primary extraction → The Forced Census</span><span class="nickname" data-lang="zh">主提取 → “强制人口普查”</span></div>
+            <span class="badge fail" data-lang="en">1/36 → 36/36, still failed</span><span class="badge fail" data-lang="zh">1/36 → 36/36，仍失败</span>
+          </div>
+          <div class="triad">
+            <div class="panel problem"><h4 data-lang="en">Why the first call failed</h4><h4 data-lang="zh">第一次调用为何失败</h4><p data-lang="en">The prompt showed 36 candidate outcomes, but the answer format did not force an individual decision for each. The model produced one easy, complete HepG2 record and silently stopped.</p><p data-lang="zh">提示中有 36 个候选结果，但答案格式没有强制逐项决定。模型生成了一条容易且完整的 HepG2 记录后便停止。</p></div>
+            <div class="panel solution"><h4 data-lang="en">Forced-accounting solution</h4><h4 data-lang="zh">强制核算方案</h4><p data-lang="en">Make every candidate ID a required response item so all 36 must receive a disposition and a candidate–outcome–experiment link.</p><p data-lang="zh">把每个候选 ID 设为必答项，使全部 36 个候选都必须获得处置以及候选—结果—实验关联。</p></div>
+            <div class="panel result"><h4 data-lang="en">Why that also failed</h4><h4 data-lang="zh">为何仍然失败</h4><p data-lang="en">Completeness of labels is not scientific completeness. The model accounted for 36/36 by dismissing most candidates as “not outcome” or “insufficient evidence,” even though it could form one valid outcome.</p><p data-lang="zh">标签完整不等于科学完整。模型虽然核算了 36/36，却把大部分候选判为“不是结果”或“证据不足”，尽管它能够形成一条有效结果。</p></div>
+          </div>
+          <div class="extract">
+            <h4 data-lang="en">What the original LLM call successfully extracted</h4><h4 data-lang="zh">原始 LLM 调用成功提取的内容</h4>
+            <ul data-lang="en"><li>LNP(DSPC)/DX25 with ALC-0315, DSPC, cholesterol, DX and ALC-0159.</li><li>DX replaced 25% of cholesterol; N/P ratio 6.</li><li>EGFP-encoding mRNA delivered to human HepG2 cells in vitro.</li><li>500 ng total mRNA per well, measured at 24 h.</li><li>Approximately 95% of HepG2 cells were EGFP-positive.</li></ul>
+            <ul data-lang="zh"><li>LNP(DSPC)/DX25，组分包括 ALC-0315、DSPC、胆固醇、DX 和 ALC-0159。</li><li>DX 替代 25% 胆固醇；N/P 比为 6。</li><li>在体外向人 HepG2 细胞递送编码 EGFP 的 mRNA。</li><li>每孔总 mRNA 500 ng，24 小时测量。</li><li>约 95% 的 HepG2 细胞呈 EGFP 阳性。</li></ul>
+          </div>
+          <div class="warning"><strong data-lang="en">Important nuance:</strong><strong data-lang="zh">重要区别：</strong> <span data-lang="en">the one record was scientifically useful, but it did not prove paper-level recall. The 95% result was also reported collectively across LNP, LNP/DX25 and LNP/DX50 rather than as a clean DX25-only value.</span><span data-lang="zh">这条记录具有科学价值，但不能证明论文级召回完整；而且 95% 的结果是对 LNP、LNP/DX25 和 LNP/DX50 的整体描述，并非清晰的 DX25 单独数值。</span></div>
+        </div>
+      </article>
+
+      <article class="attempt">
+        <div class="card">
+          <div class="attempt-head">
+            <div><p class="attempt-index" data-lang="en">Attempt 3 · NP-001 global core-slot trial</p><p class="attempt-index" data-lang="zh">尝试 3 · NP-001 全局核心槽位试验</p><h3 data-lang="en">The Duplicate Escape Hatch</h3><h3 data-lang="zh">“重复项逃生口”</h3><span class="nickname" data-lang="en">Six core biological contexts in one call</span><span class="nickname" data-lang="zh">一次调用中的六个核心生物学情境</span></div>
+            <span class="badge fail" data-lang="en">Schema complete, science invalid</span><span class="badge fail" data-lang="zh">格式完整，科学无效</span>
+          </div>
+          <div class="triad">
+            <div class="panel problem"><h4 data-lang="en">Previous problem</h4><h4 data-lang="zh">之前的问题</h4><p data-lang="en">Thirty-six low-level candidates mixed real delivery outcomes with morphology, SAXS, stability, cytokines and repeated wording. Forcing all 36 encouraged easy dismissals rather than scientific synthesis.</p><p data-lang="zh">36 个低层候选混合了真实递送结果、形态、SAXS、稳定性、细胞因子及重复表述。强迫处理全部候选反而鼓励简单驳回，而不是科学整合。</p></div>
+            <div class="panel solution"><h4 data-lang="en">Pipeline solution</h4><h4 data-lang="zh">管线方案</h4><p data-lang="en">Pre-qualify six biological slots: HepG2 transfection; DC2.4 transfection and immune response; hPBMC transfection and immune response; mouse biodistribution. Require each to be extracted or a legitimate duplicate.</p><p data-lang="zh">预先确定六个生物学槽位：HepG2 转染；DC2.4 转染和免疫反应；hPBMC 转染和免疫反应；小鼠生物分布。要求每项被提取或成为合理重复项。</p></div>
+            <div class="panel result"><h4 data-lang="en">Actual result</h4><h4 data-lang="zh">实际结果</h4><p data-lang="en">The model produced one HepG2 experiment and reused it as the “duplicate” answer for the other five contexts. The local scientific validator correctly rejected cross-cell and cross-outcome-family links.</p><p data-lang="zh">模型生成一个 HepG2 实验，并把它当作其他五个情境的“重复”答案。本地科学验证器正确拒绝了跨细胞和跨结果类别的错误关联。</p></div>
+          </div>
+          <div class="warning"><strong data-lang="en">Lesson:</strong><strong data-lang="zh">结论：</strong> <span data-lang="en">removing “insufficient evidence” closed one escape route, but “duplicate” became the new escape route. A global response still let the model satisfy the schema without doing six independent scientific analyses.</span><span data-lang="zh">删除“证据不足”堵住了一个逃生口，但“重复”成了新的逃生口。全局响应仍允许模型在不做六次独立科学分析的情况下满足格式。</span></div>
+        </div>
+      </article>
+
+      <article class="attempt">
+        <div class="card">
+          <div class="attempt-head">
+            <div><p class="attempt-index" data-lang="en">Attempt 4 · NP-001 isolated contexts</p><p class="attempt-index" data-lang="zh">尝试 4 · NP-001 隔离情境</p><h3 data-lang="en">One Scientist per Question</h3><h3 data-lang="zh">“每个问题一位科学家”</h3><span class="nickname" data-lang="en">Six isolated, sequential calls</span><span class="nickname" data-lang="zh">六个隔离、顺序调用</span></div>
+            <span class="badge partial" data-lang="en">Better records, wrong paper scope</span><span class="badge partial" data-lang="zh">记录更好，论文范围不合适</span>
+          </div>
+          <div class="triad">
+            <div class="panel problem"><h4 data-lang="en">Previous problem</h4><h4 data-lang="zh">之前的问题</h4><p data-lang="en">One six-slot answer allowed record reuse. The model could avoid reasoning separately about HepG2, DC2.4, hPBMC and mouse contexts.</p><p data-lang="zh">一个包含六槽位的答案允许重复利用记录，模型可以绕过对 HepG2、DC2.4、hPBMC 和小鼠情境的分别推理。</p></div>
+            <div class="panel solution"><h4 data-lang="en">Pipeline solution</h4><h4 data-lang="zh">管线方案</h4><p data-lang="en">Send one slot and only its relevant evidence per request. Require exactly one extracted record; forbid duplicate, unresolved and automatic retries.</p><p data-lang="zh">每次请求只发送一个槽位及其相关证据。强制返回一条提取记录；禁止重复项、未解决项和自动重试。</p></div>
+            <div class="panel result"><h4 data-lang="en">Actual result</h4><h4 data-lang="zh">实际结果</h4><p data-lang="en">HepG2 and DC2.4 transfection calls produced distinct, useful records. A later call became ambiguous, and the inherited liver-target requirement conflicted with non-liver DC2.4/hPBMC contexts.</p><p data-lang="zh">HepG2 和 DC2.4 转染调用生成了不同且有用的记录。后续调用出现歧义，同时继承的肝细胞目标要求与非肝脏 DC2.4/hPBMC 情境冲突。</p></div>
+          </div>
+          <div class="extract"><h4 data-lang="en">What this proved</h4><h4 data-lang="zh">这一阶段证明了什么</h4><p data-lang="en">Narrow, context-specific calls materially improved scientific focus. But NP-001 was a poor final validation paper for a liver-only application because it intentionally contained non-liver cell lines. The next test therefore changed the paper, not merely the prompt.</p><p data-lang="zh">狭窄、情境专一的调用显著提高了科学聚焦度。但 NP-001 包含非肝脏细胞系，不适合作为肝脏专用应用的最终验证论文。因此下一次测试改变的是论文，而不只是提示词。</p></div>
+        </div>
+      </article>
+
+      <article class="attempt">
+        <div class="card">
+          <div class="attempt-head">
+            <div><p class="attempt-index" data-lang="en">Attempt 5 · Current version · NP-002</p><p class="attempt-index" data-lang="zh">尝试 5 · 当前版本 · NP-002</p><h3 data-lang="en">The Liver-Only Field Test</h3><h3 data-lang="zh">“肝脏专用实测”</h3><span class="nickname" data-lang="en">Three isolated liver-cell extraction calls</span><span class="nickname" data-lang="zh">三个隔离的肝细胞提取调用</span></div>
+            <span class="badge current" data-lang="en">Current · 72.2% recall</span><span class="badge current" data-lang="zh">当前 · 72.2% 召回率</span>
+          </div>
+          <p data-lang="en"><strong>Paper:</strong> “Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles” (PMCID PMC6816632). Three calls separately targeted hepatocytes, Kupffer cells and hepatic endothelial cells.</p>
+          <p data-lang="zh"><strong>论文：</strong>《Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles》（PMCID PMC6816632）。三个调用分别针对肝细胞、Kupffer 细胞和肝内皮细胞。</p>
+
+          <div class="triad">
+            <div class="panel problem"><h4 data-lang="en">Previous problem</h4><h4 data-lang="zh">之前的问题</h4><p data-lang="en">NP-001 mixed liver and non-liver contexts. Even an accurate isolated call could be irrelevant to the current product scope.</p><p data-lang="zh">NP-001 混合了肝脏和非肝脏情境。即使隔离调用准确，也可能与当前产品范围无关。</p></div>
+            <div class="panel solution"><h4 data-lang="en">Pipeline solution</h4><h4 data-lang="zh">管线方案</h4><p data-lang="en">Use a new paper whose experimental outcomes concern liver-resident cells, then ask one bounded liver-cell question per call while retaining formulation, payload, dose, route, model, assay and comparative evidence.</p><p data-lang="zh">使用一篇实验结果聚焦肝脏驻留细胞的新论文；每次调用只问一个受限的肝细胞问题，同时保留配方、载荷、剂量、途径、模型、检测和比较证据。</p></div>
+            <div class="panel result"><h4 data-lang="en">Actual result</h4><h4 data-lang="zh">实际结果</h4><p data-lang="en">The LLM returned multiple correctly linked experiments instead of one global record: six hepatocyte, three Kupffer-cell and four endothelial-cell arms—13 represented arms in total.</p><p data-lang="zh">LLM 不再只返回一条全局记录，而是返回多条正确关联的实验：6 个肝细胞组、3 个 Kupffer 细胞组和 4 个内皮细胞组，共表示 13 个实验组。</p></div>
+          </div>
+
+          <div class="extract">
+            <h4 data-lang="en">Human-readable extraction: the foundational story was captured</h4><h4 data-lang="zh">人类可读提取：基础科学故事已被捕捉</h4>
+            <ul data-lang="en">
+              <li><strong>Formulations:</strong> MC3 LNP and cKK-E12 LNP.</li>
+              <li><strong>Composition:</strong> ionizable lipid : cholesterol : C14 PEG 2000 : DSPC = 50 : 38.5 : 1.5 : 10 molar ratio.</li>
+              <li><strong>Payloads:</strong> QUANT DNA for biodistribution and Cre mRNA for functional delivery.</li>
+              <li><strong>Model and route:</strong> mouse/Ai14 in vivo experiments; intravenous lateral-tail-vein administration.</li>
+              <li><strong>Doses:</strong> 0.3 mg/kg QUANT DNA; 0.3 and 1.0 mg/kg Cre mRNA where extracted.</li>
+              <li><strong>Targets and assays:</strong> hepatocytes, Kupffer cells and hepatic endothelial cells measured by FACS/flow cytometry.</li>
+              <li><strong>Major findings:</strong> nucleic-acid distribution across liver cell types and comparative tdTomato-positive functional Cre delivery.</li>
+            </ul>
+            <ul data-lang="zh">
+              <li><strong>配方：</strong>MC3 LNP 和 cKK-E12 LNP。</li>
+              <li><strong>组成：</strong>可电离脂质 : 胆固醇 : C14 PEG 2000 : DSPC 的摩尔比为 50 : 38.5 : 1.5 : 10。</li>
+              <li><strong>载荷：</strong>用于生物分布的 QUANT DNA，以及用于功能递送的 Cre mRNA。</li>
+              <li><strong>模型和途径：</strong>小鼠/Ai14 体内实验；经尾静脉静脉注射。</li>
+              <li><strong>剂量：</strong>0.3 mg/kg QUANT DNA；在已提取记录中包括 0.3 和 1.0 mg/kg Cre mRNA。</li>
+              <li><strong>细胞目标和检测：</strong>通过 FACS/流式细胞术测量肝细胞、Kupffer 细胞和肝内皮细胞。</li>
+              <li><strong>主要发现：</strong>核酸在不同肝细胞类型中的分布，以及 tdTomato 阳性的功能性 Cre 递送比较。</li>
+            </ul>
+          </div>
+
+          <div class="coverage-hero">
+            <div class="coverage-number">72.2%</div>
+            <div class="coverage-copy">
+              <strong data-lang="en">Arm-level recall: 13 of 18 expected experimental arms</strong>
+              <strong data-lang="zh">实验组级召回率：18 个预期实验组中提取了 13 个</strong>
+              <p data-lang="en">This is the key current metric. The pipeline now extracts many linked records, but five entire arms were silently omitted.</p>
+              <p data-lang="zh">这是当前最关键的指标。管线现在能提取多条关联记录，但仍静默遗漏了五个完整实验组。</p>
+            </div>
+          </div>
+
+          <table class="comparison">
+            <thead><tr><th><span data-lang="en">Measurement</span><span data-lang="zh">衡量项目</span></th><th><span data-lang="en">Result</span><span data-lang="zh">结果</span></th></tr></thead>
+            <tbody>
+              <tr><td><span data-lang="en">Expected experimental arms</span><span data-lang="zh">预期实验组</span></td><td>18</td></tr>
+              <tr><td><span data-lang="en">Arms represented by the LLM</span><span data-lang="zh">LLM 表示的实验组</span></td><td>13</td></tr>
+              <tr><td><span data-lang="en">Entirely missing arms</span><span data-lang="zh">完全缺失的实验组</span></td><td>5</td></tr>
+              <tr><td><strong data-lang="en">Arm-level recall</strong><strong data-lang="zh">实验组级召回率</strong></td><td><strong>72.2%</strong></td></tr>
+              <tr><td><span data-lang="en">Records with some lost secondary detail</span><span data-lang="zh">丢失部分次要细节的记录</span></td><td>≥ 4</td></tr>
+              <tr><td><span data-lang="en">Three-day timepoints recorded</span><span data-lang="zh">记录三天时间点</span></td><td><strong>0/12 Cre records</strong></td></tr>
+              <tr><td><span data-lang="en">Extracted QUANT records explicitly identifying ddPCR</span><span data-lang="zh">明确标识 ddPCR 的已提取 QUANT 记录</span></td><td><strong>0/5</strong></td></tr>
+            </tbody>
+          </table>
+
+          <div class="call-grid">
+            <div class="call"><strong data-lang="en">Hepatocyte call</strong><strong data-lang="zh">肝细胞调用</strong><span class="rating strong" data-lang="en">Strong</span><span class="rating strong" data-lang="zh">强</span><p data-lang="en">Captured both formulations, composition, payloads, liver-cell target, route, doses and major biodistribution/functional-delivery outcomes. Sufficient for a basic recommendation record, despite missing three-day timing and some comparisons.</p><p data-lang="zh">提取了两种配方、组成、载荷、肝细胞目标、途径、剂量以及主要生物分布和功能递送结果。虽缺少三天时间点及部分比较，但足以形成基础推荐记录。</p></div>
+            <div class="call"><strong data-lang="en">Kupffer-cell call</strong><strong data-lang="zh">Kupffer 细胞调用</strong><span class="rating partial" data-lang="en">Insufficiently complete</span><span class="rating partial" data-lang="zh">完整性不足</span><p data-lang="en">Captured both formulations and useful outcomes, but omitted half the expected arms—including all 0.3 mg/kg Cre results. Used alone, it could support a misleading dose-response recommendation.</p><p data-lang="zh">提取了两种配方和一些有用结果，但遗漏了一半预期实验组，包括全部 0.3 mg/kg Cre 结果。单独使用可能产生误导性的剂量反应推荐。</p></div>
+            <div class="call"><strong data-lang="en">Endothelial-cell call</strong><strong data-lang="zh">内皮细胞调用</strong><span class="rating useful" data-lang="en">Useful but incomplete</span><span class="rating useful" data-lang="zh">有用但不完整</span><p data-lang="en">Captured both formulations, biodistribution and 1.0 mg/kg functional delivery, but omitted both 0.3 mg/kg arms—including the significant lower-dose advantage over hepatocytes.</p><p data-lang="zh">提取了两种配方、生物分布和 1.0 mg/kg 功能递送，但遗漏两个 0.3 mg/kg 实验组，包括低剂量下相对肝细胞的显著优势。</p></div>
+          </div>
+
+          <div class="warning">
+            <strong data-lang="en">The central problem has changed:</strong><strong data-lang="zh">核心问题已经改变：</strong>
+            <span data-lang="en"> it is no longer “the LLM returned only one result.” It now returns multiple correctly linked records, but still silently omits entire experimental arms and sometimes simplifies multi-part comparative findings.</span>
+            <span data-lang="zh">问题已不再是“LLM 只返回一个结果”。它现在会返回多条正确关联的记录，但仍会静默遗漏完整实验组，并且有时会简化多部分比较结果。</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="conclusion">
+      <p class="eyebrow" data-lang="en" style="color:#8fd0b9">What this application is now</p>
+      <p class="eyebrow" data-lang="zh" style="color:#8fd0b9">这个应用现在是什么</p>
+      <h2 data-lang="en">A useful liver-LNP evidence builder that still requires arm-level completeness enforcement</h2>
+      <h2 data-lang="zh">一个有用的肝脏 LNP 证据构建器，但仍需实验组级完整性约束</h2>
+      <p data-lang="en">The combined NP-002 output is useful for a foundational formulation database: it captures compositions, payloads, liver-cell recipients, administration, dose and major delivery outcomes. It is not yet reliable enough to claim complete dose-response or cell-targeting coverage without comparing the returned records against a deterministic inventory of expected experimental arms.</p>
+      <p data-lang="zh">NP-002 的合并输出已适合构建基础配方数据库：它捕捉了组成、载荷、肝细胞受体、给药方式、剂量和主要递送结果。但在将返回记录与确定性的预期实验组清单比较之前，它还不足以宣称完整的剂量反应或细胞靶向覆盖。</p>
+      <div class="conclusion-grid">
+        <div class="conclusion-panel"><strong data-lang="en">What now works</strong><strong data-lang="zh">现在有效的部分</strong><span data-lang="en">Context-isolated calls produce multiple scientifically linked formulation–experiment–outcome records.</span><span data-lang="zh">情境隔离调用能够生成多条科学关联的配方—实验—结果记录。</span></div>
+        <div class="conclusion-panel"><strong data-lang="en">What must come next</strong><strong data-lang="zh">下一步必须做什么</strong><span data-lang="en">Build the expected arm checklist locally, require a disposition for every arm, and reject “complete” status when any arm or required secondary field is absent.</span><span data-lang="zh">在本地建立预期实验组清单，要求每组都有处置；任何实验组或必需次级字段缺失时，都不得判定为“完整”。</span></div>
+      </div>
+    </section>
+
+    <footer>
+      <span data-lang="en">Evidence reconstructed from the 30 July planning documents and persisted NP-001 / NP-002 request, response, validation and manifest artifacts.</span>
+      <span data-lang="zh">本报告依据 7 月 30 日规划文档以及已保存的 NP-001 / NP-002 请求、响应、验证和清单文件重建。</span>
+    </footer>
+  </main>
+  <script>
+    const root = document.documentElement;
+    const buttons = [...document.querySelectorAll("[data-set-language]")];
+    function setLanguage(language) {
+      root.dataset.language = language;
+      root.lang = language === "zh" ? "zh-CN" : "en";
+      buttons.forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.setLanguage === language));
+      });
+      try { localStorage.setItem("mentor-brief-language", language); } catch (_) {}
+    }
+    buttons.forEach(button => button.addEventListener("click", () => setLanguage(button.dataset.setLanguage)));
+    let saved = "en";
+    try { saved = localStorage.getItem("mentor-brief-language") || "en"; } catch (_) {}
+    setLanguage(saved === "zh" ? "zh" : "en");
+  </script>
+</body>
+</html>
