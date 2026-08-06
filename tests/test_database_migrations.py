@@ -1,12 +1,17 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
 import sqlite3
 from pathlib import Path
 
 import pytest
 
 from src.database import migrations as migrations_module
+from src.database.import_bundle import import_bundle
+from src.database.import_contracts import ImportBundle
 from src.database.migrations import migrate_database
+from src.init_db import initialize_database
 
 
 PAPER_STATE_CASES = [
@@ -26,6 +31,14 @@ PAPER_STATE_CASES = [
     ("exclude", "blocked", False),
     ("exclude", "screening_only", True),
 ]
+
+IMPORT_BUNDLE_FIXTURE = (
+    Path(__file__).parent
+    / "fixtures"
+    / "database"
+    / "import_bundle"
+    / "valid_bundle.json"
+)
 
 
 def _legacy_connection() -> sqlite3.Connection:
@@ -113,6 +126,79 @@ def test_migration_preserves_legacy_rows_and_is_idempotent() -> None:
         "SELECT version FROM schema_migration ORDER BY version"
     ).fetchall() == [(1,), (2,), (3,)]
     assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
+
+
+def test_migration_and_first_bundle_import_converge_in_one_pass(
+    tmp_path: Path,
+) -> None:
+    database_path = tmp_path / "clean-legacy.db"
+    initialize_database(database_path)
+    connection = sqlite3.connect(database_path)
+    connection.execute("PRAGMA foreign_keys = ON")
+    bundle = ImportBundle.from_dict(
+        json.loads(IMPORT_BUNDLE_FIXTURE.read_text(encoding="utf-8"))
+    )
+    try:
+        migrate_database(connection)
+        connection.commit()
+        first = import_bundle(connection, bundle)
+        connection.commit()
+        first_dump = tuple(connection.iterdump())
+
+        migrate_database(connection)
+        connection.commit()
+        second = import_bundle(connection, bundle)
+        connection.commit()
+        second_dump = tuple(connection.iterdump())
+
+        assert first.inserted == 6
+        assert second.unchanged == 6
+        assert second_dump == first_dump
+    finally:
+        connection.close()
+
+
+def test_migration_replaces_legacy_screening_trigger_once() -> None:
+    connection = _legacy_connection()
+    connection.executescript(
+        """
+        CREATE TRIGGER trg_paper_screening_state_insert
+        BEFORE INSERT ON paper
+        BEGIN
+            SELECT RAISE(ABORT, 'legacy screening trigger');
+        END;
+        """
+    )
+    try:
+        migrate_database(connection)
+        connection.commit()
+        first = connection.execute(
+            """
+            SELECT rowid, sql FROM sqlite_master
+            WHERE type = 'trigger'
+              AND name = 'trg_paper_screening_state_insert'
+            """
+        ).fetchone()
+        connection.execute(
+            "CREATE INDEX migration_order_marker ON paper(title)"
+        )
+        connection.commit()
+
+        migrate_database(connection)
+        connection.commit()
+        second = connection.execute(
+            """
+            SELECT rowid, sql FROM sqlite_master
+            WHERE type = 'trigger'
+              AND name = 'trg_paper_screening_state_insert'
+            """
+        ).fetchone()
+
+        assert "legacy screening trigger" not in first[1]
+        assert "screening exclusion requires screening_only" in first[1]
+        assert second == first
+    finally:
+        connection.close()
 
 
 def test_migration_backfills_legacy_excluded_papers_to_screening_only() -> None:
@@ -237,6 +323,34 @@ def test_migration_rolls_back_every_change_after_late_failure(
         "INTEGRITY_SCHEMA_SQL",
         migrations_module.INTEGRITY_SCHEMA_SQL
         + "\nSELECT definitely_missing_migration_function();\n",
+    )
+
+    with pytest.raises(sqlite3.OperationalError):
+        migrate_database(connection)
+
+    assert tuple(connection.iterdump()) == before
+    assert connection.in_transaction is False
+
+
+def test_screening_trigger_repair_rolls_back_after_late_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    connection = _legacy_connection()
+    connection.executescript(
+        """
+        CREATE TRIGGER trg_paper_screening_state_insert
+        BEFORE INSERT ON paper
+        BEGIN
+            SELECT RAISE(ABORT, 'legacy screening trigger');
+        END;
+        """
+    )
+    before = tuple(connection.iterdump())
+    monkeypatch.setattr(
+        migrations_module,
+        "SCREENING_STATE_SCHEMA_SQL",
+        migrations_module.SCREENING_STATE_SCHEMA_SQL
+        + "\nSELECT definitely_missing_screening_migration_function();\n",
     )
 
     with pytest.raises(sqlite3.OperationalError):

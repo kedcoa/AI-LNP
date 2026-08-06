@@ -251,18 +251,23 @@ INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
 VALUES (2, 'review_and_screening_integrity', '2026-08-06T01:00:00Z');
 """
 
-SCREENING_STATE_SCHEMA_SQL = """
+SCREENING_TRIGGER_CLEANUP_SQL = """
 DROP TRIGGER IF EXISTS trg_screening_only_not_ready;
 DROP TRIGGER IF EXISTS trg_excluded_paper_not_ready_insert;
 DROP TRIGGER IF EXISTS trg_excluded_paper_not_ready_update;
-DROP TRIGGER IF EXISTS trg_paper_screening_state_insert;
-DROP TRIGGER IF EXISTS trg_paper_screening_state_update;
+"""
 
+SCREENING_STATE_SCHEMA_SQL = """
 UPDATE paper
 SET import_status = 'screening_only'
 WHERE screening_status = 'exclude';
 
-CREATE TRIGGER trg_paper_screening_state_insert
+INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
+VALUES (3, 'screening_state_and_atomic_migration', '2026-08-06T02:00:00Z');
+"""
+
+SCREENING_STATE_TRIGGER_SQL = {
+    "trg_paper_screening_state_insert": """CREATE TRIGGER trg_paper_screening_state_insert
 BEFORE INSERT ON paper
 WHEN (
     NEW.screening_status = 'exclude'
@@ -276,9 +281,8 @@ BEGIN
         ABORT,
         'screening exclusion requires screening_only import status'
     );
-END;
-
-CREATE TRIGGER trg_paper_screening_state_update
+END""",
+    "trg_paper_screening_state_update": """CREATE TRIGGER trg_paper_screening_state_update
 BEFORE UPDATE OF screening_status, import_status ON paper
 WHEN (
     NEW.screening_status = 'exclude'
@@ -292,11 +296,8 @@ BEGIN
         ABORT,
         'screening exclusion requires screening_only import status'
     );
-END;
-
-INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
-VALUES (3, 'screening_state_and_atomic_migration', '2026-08-06T02:00:00Z');
-"""
+END""",
+}
 
 
 def _add_missing_columns(
@@ -329,6 +330,27 @@ def _execute_sql_script(connection: sqlite3.Connection, script: str) -> None:
             pending.clear()
     if "".join(pending).strip():
         raise sqlite3.OperationalError("incomplete migration SQL statement")
+
+
+def _normalized_schema_sql(sql: str) -> str:
+    return " ".join(sql.rstrip(";\n ").split())
+
+
+def _ensure_screening_state_triggers(
+    connection: sqlite3.Connection,
+) -> None:
+    for name, definition in SCREENING_STATE_TRIGGER_SQL.items():
+        row = connection.execute(
+            "SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name = ?",
+            (name,),
+        ).fetchone()
+        if row is not None and _normalized_schema_sql(
+            row[0]
+        ) == _normalized_schema_sql(definition):
+            continue
+        quoted_name = name.replace('"', '""')
+        connection.execute(f'DROP TRIGGER IF EXISTS "{quoted_name}"')
+        connection.execute(definition)
 
 
 def migrate_database(connection: sqlite3.Connection) -> None:
@@ -364,6 +386,8 @@ def migrate_database(connection: sqlite3.Connection) -> None:
             REVIEW_REVISION_COLUMNS,
         )
         _execute_sql_script(connection, INTEGRITY_SCHEMA_SQL)
+        _execute_sql_script(connection, SCREENING_TRIGGER_CLEANUP_SQL)
+        _ensure_screening_state_triggers(connection)
         _execute_sql_script(connection, SCREENING_STATE_SCHEMA_SQL)
         if connection.execute("PRAGMA foreign_key_check").fetchall():
             raise RuntimeError("foreign-key violations during migration")
