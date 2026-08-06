@@ -44,9 +44,11 @@ outcome. All papers remain ineligible for nearest-neighbor and COMET use.
 - Recovery rejects non-registered roots and normalizes path components before
   rejecting benchmark, answer-key, raw-provider, response, and invocation path
   variants.
-- Recovery rejects symlinks in both source and inventory paths, requires the
-  resolved regular files to remain inside the registered worktree, and opens
-  final files with no-follow semantics where supported.
+- Recovery walks every source and inventory path relative to a held registered-
+  worktree descriptor. Each intermediate directory and final file is opened
+  with no-follow semantics, and parent descriptors remain open through the
+  read. An intermediate-directory swap therefore cannot redirect the final
+  open. Platforms without secure descriptor-relative support fail closed.
 - The adapter consumes the exact inventory bytes read and hashed during
   recovery, then rechecks those bytes against the recorded SHA-256. Later disk
   mutation cannot alter bundle evidence (and mismatched bound bytes fail).

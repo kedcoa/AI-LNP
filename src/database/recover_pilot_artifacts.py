@@ -10,7 +10,7 @@ import stat
 import subprocess
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Literal
+from typing import Callable, Literal
 
 
 _FORBIDDEN_TOKENS = (
@@ -140,21 +140,48 @@ def _sha256_bytes(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
-def _read_regular_file_without_symlinks(root: Path, relative: Path) -> bytes:
-    """Read one contained regular file while rejecting symlink path components."""
+def _read_regular_file_descriptor_relative(
+    root: Path,
+    relative: Path,
+    *,
+    before_component_open: Callable[[int], None] | None = None,
+) -> bytes:
+    """Read through held directory FDs, failing closed without openat support."""
 
-    root = root.resolve(strict=True)
-    current = root
-    for component in relative.parts:
-        current = current / component
-        if current.is_symlink():
-            raise ValueError("symlink artifact path rejected")
-    resolved = current.resolve(strict=True)
-    if not resolved.is_relative_to(root):
-        raise ValueError("artifact path escapes registered worktree")
-    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
-    descriptor = os.open(current, flags)
+    if (
+        not hasattr(os, "O_DIRECTORY")
+        or not hasattr(os, "O_NOFOLLOW")
+        or os.open not in os.supports_dir_fd
+    ):
+        raise ValueError("secure descriptor-relative file access is unsupported")
+    if relative.is_absolute() or not relative.parts or ".." in relative.parts:
+        raise ValueError("artifact path must be contained and relative")
+    directory_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
+    if hasattr(os, "O_CLOEXEC"):
+        directory_flags |= os.O_CLOEXEC
+    file_flags = os.O_RDONLY | os.O_NOFOLLOW
+    if hasattr(os, "O_CLOEXEC"):
+        file_flags |= os.O_CLOEXEC
+    descriptors: list[int] = []
     try:
+        descriptors.append(os.open(root, directory_flags))
+        for index, component in enumerate(relative.parts[:-1]):
+            if before_component_open is not None:
+                before_component_open(index)
+            descriptors.append(
+                os.open(
+                    component,
+                    directory_flags,
+                    dir_fd=descriptors[-1],
+                )
+            )
+        final_index = len(relative.parts) - 1
+        if before_component_open is not None:
+            before_component_open(final_index)
+        descriptor = os.open(
+            relative.parts[-1], file_flags, dir_fd=descriptors[-1]
+        )
+        descriptors.append(descriptor)
         metadata = os.fstat(descriptor)
         if not stat.S_ISREG(metadata.st_mode):
             raise ValueError("artifact path is not a regular file")
@@ -165,8 +192,11 @@ def _read_regular_file_without_symlinks(root: Path, relative: Path) -> bytes:
                 break
             chunks.append(chunk)
         return b"".join(chunks)
+    except OSError as exc:
+        raise ValueError("symlink or non-directory artifact path rejected") from exc
     finally:
-        os.close(descriptor)
+        for descriptor in reversed(descriptors):
+            os.close(descriptor)
 
 
 def recover_pilot_sources(
@@ -194,10 +224,10 @@ def recover_pilot_sources(
         if not source.exists() or not inventory.exists():
             continue
         try:
-            source_bytes = _read_regular_file_without_symlinks(
+            source_bytes = _read_regular_file_descriptor_relative(
                 root, expectation.source_relative_path
             )
-            inventory_bytes = _read_regular_file_without_symlinks(
+            inventory_bytes = _read_regular_file_descriptor_relative(
                 root, expectation.inventory_relative_path
             )
         except ValueError as exc:

@@ -10,6 +10,7 @@ from src.database.adapters.pilot_results import build_blocked_pilot_bundle
 from src.database.import_contracts import ImportBundle
 from src.database.recover_pilot_artifacts import (
     PilotArtifactExpectation,
+    _read_regular_file_descriptor_relative,
     prepare_pilot_bundles,
     recover_pilot_sources,
 )
@@ -239,7 +240,7 @@ def test_recovery_rejects_inventory_symlink_to_outside_content(
     )
 
     assert result.status == "blocked"
-    assert result.reason == "symlink artifact path rejected"
+    assert "artifact path rejected" in result.reason
 
 
 def test_recovery_rejects_source_symlink_to_outside_content(tmp_path: Path) -> None:
@@ -277,7 +278,7 @@ def test_recovery_rejects_source_symlink_to_outside_content(tmp_path: Path) -> N
     )
 
     assert result.status == "blocked"
-    assert result.reason == "symlink artifact path rejected"
+    assert "artifact path rejected" in result.reason
 
 
 def test_adapter_uses_recovery_bound_inventory_bytes_after_disk_mutation(
@@ -335,6 +336,43 @@ def test_adapter_uses_recovery_bound_inventory_bytes_after_disk_mutation(
         build_blocked_pilot_bundle(
             replace(recovery, inventory_bytes=b"tampered"), entry
         )
+
+
+def test_descriptor_relative_read_survives_intermediate_directory_swap(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "root"
+    outside = tmp_path / "outside"
+    _write(root / "safe/file.txt", b"inside")
+    _write(outside / "file.txt", b"outside")
+    swapped = False
+
+    def swap_after_safe_directory_open(component_index: int) -> None:
+        nonlocal swapped
+        if component_index != 1 or swapped:
+            return
+        (root / "safe").rename(root / "held-safe")
+        (root / "safe").symlink_to(outside, target_is_directory=True)
+        swapped = True
+
+    content = _read_regular_file_descriptor_relative(
+        root,
+        Path("safe/file.txt"),
+        before_component_open=swap_after_safe_directory_open,
+    )
+
+    assert swapped
+    assert content == b"inside"
+
+
+def test_descriptor_relative_read_fails_closed_without_openat_support(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _write(tmp_path / "file.txt", b"content")
+    monkeypatch.setattr("os.supports_dir_fd", set())
+
+    with pytest.raises(ValueError, match="unsupported"):
+        _read_regular_file_descriptor_relative(tmp_path, Path("file.txt"))
 
 
 def test_adapter_preserves_source_evidence_without_unsupported_experimental_rows(
