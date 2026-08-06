@@ -115,12 +115,12 @@
       "component_review_status": "unreviewed",
       "component_role": "other",
       "formulation_id": "NP-001::formulation::F1",
-      "identity_notes": null,
+      "identity_notes": "Reported amount: 25.0 % cholesterol replacement",
       "identity_source": null,
       "inchikey": null,
-      "molar_percentage": 25.0,
+      "molar_percentage": null,
       "paper_id": "NP-001",
-      "percentage_unit": "% cholesterol replacement",
+      "percentage_unit": null,
       "record_id": "NP-001::component::C4"
     },
     {
@@ -887,12 +887,12 @@
       "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
       "extraction_confidence": "requires_review",
       "extraction_method": "validated_extraction",
-      "field_name": "molar_percentage",
+      "field_name": "identity_notes",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C4::molar_percentage::NP-001-E-2321e0f317cd65b7",
+      "record_id": "NP-001::component::NP-001::component::C4::identity_notes::NP-001-E-2321e0f317cd65b7",
       "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
       "section_name": "3. Discussion",
       "structured_evidence": {
@@ -933,12 +933,12 @@
       "evidence_text": "LNP(DSPC)/DX25 | Diameter (nm) | 111.0 ± 0.2",
       "extraction_confidence": "requires_review",
       "extraction_method": "validated_extraction",
-      "field_name": "molar_percentage",
+      "field_name": "identity_notes",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
       "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C4::molar_percentage::VIS-cb8c60cd5486802b",
+      "record_id": "NP-001::component::NP-001::component::C4::identity_notes::VIS-cb8c60cd5486802b",
       "reviewer_notes": "Source slice: NP-001; packet evidence: VIS-cb8c60cd5486802b",
       "section_name": "Table 1.",
       "structured_evidence": {
@@ -952,52 +952,6 @@
           }
         ],
         "unverified_source_paths": []
-      },
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": null,
-      "artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
-      "evidence_location_type": "paragraph",
-      "evidence_text": "The initial screening of LNPs with varying compositions and increasing DX concentrations, achieved through partial cholesterol replacement, demonstrated that a 25% cholesterol substitution with DX represented the most promising ratio for the intended effects.",
-      "extraction_confidence": "requires_review",
-      "extraction_method": "validated_extraction",
-      "field_name": "percentage_unit",
-      "figure_number": null,
-      "outcome_id": null,
-      "page_number": null,
-      "paper_id": "NP-001",
-      "record_id": "NP-001::component::NP-001::component::C4::percentage_unit::NP-001-E-2321e0f317cd65b7",
-      "reviewer_notes": "Source slice: NP-001; packet evidence: NP-001-E-2321e0f317cd65b7",
-      "section_name": "3. Discussion",
-      "structured_evidence": {
-        "available_local_source_artifact_ids": [],
-        "immediate_artifact_id": "artifact::source_inventory::5906e86f5923c8a9",
-        "source_locators": [
-          {
-            "block_type": "paragraph",
-            "chunk_id": "NP-001-B-c6bfbaccd75b05b281c3",
-            "section": "3. Discussion",
-            "source_id": "S-40e98c312d26",
-            "source_kind": "pmc_xml",
-            "source_path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
-          },
-          {
-            "block_type": "pdf_page",
-            "chunk_id": "NP-001-B-0626573462e29c02049d",
-            "page_number": 15,
-            "section": "Supplement page 15",
-            "source_id": "S-e2cce81e3271",
-            "source_kind": "pdf",
-            "source_path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
-          }
-        ],
-        "unverified_source_paths": [
-          "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
-          "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
-        ]
       },
       "supplement_identifier": null,
       "table_number": null,
@@ -2015,10 +1969,10 @@
       "entity_id": "NP-001::component::C4",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C4::molar_percentage::NP-001-E-2321e0f317cd65b7",
-        "NP-001::component::NP-001::component::C4::molar_percentage::VIS-cb8c60cd5486802b"
+        "NP-001::component::NP-001::component::C4::identity_notes::NP-001-E-2321e0f317cd65b7",
+        "NP-001::component::NP-001::component::C4::identity_notes::VIS-cb8c60cd5486802b"
       ],
-      "field_name": "molar_percentage",
+      "field_name": "identity_notes",
       "notes": "Source slice: NP-001",
       "paper_id": "NP-001",
       "verification_status": "unreviewed"
@@ -2027,9 +1981,9 @@
       "entity_id": "NP-001::component::C4",
       "entity_type": "component",
       "evidence_ids": [
-        "NP-001::component::NP-001::component::C4::percentage_unit::NP-001-E-2321e0f317cd65b7"
+        "NP-001::component::NP-001::component::C4::identity_notes::NP-001-E-2321e0f317cd65b7"
       ],
-      "field_name": "percentage_unit",
+      "field_name": "identity_notes",
       "notes": "Source slice: NP-001",
       "paper_id": "NP-001",
       "verification_status": "unreviewed"
@@ -2289,6 +2243,21 @@
     "title": "Encapsulation of Dexamethasone into mRNA-Lipid Nanoparticles Is a Promising Approach for the Development of Liver-Targeted Anti-Inflammatory Therapies"
   },
   "reviews": [
+    {
+      "arm_id": null,
+      "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",
+      "evidence_ids": [
+        "NP-001::component::NP-001::component::C4::identity_notes::NP-001-E-2321e0f317cd65b7",
+        "NP-001::component::NP-001::component::C4::identity_notes::VIS-cb8c60cd5486802b"
+      ],
+      "field_name": "identity_notes",
+      "notes": "Reported amount: 25.0 % cholesterol replacement",
+      "outcome_id": null,
+      "paper_id": "NP-001",
+      "reason_code": "unsupported_value",
+      "record_id": "NP-001::component::C4::review::reported-amount",
+      "status": "incomplete"
+    },
     {
       "arm_id": "NP-001::arm::EX1",
       "artifact_id": "artifact::validated_extraction::6ad0acdc54379dca",

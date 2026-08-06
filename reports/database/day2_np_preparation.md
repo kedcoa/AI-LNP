@@ -8,14 +8,16 @@ made, and the authoritative SQLite database was not opened or modified.
 - Bundle: `data/staging/database/day2_bundles/np/NP-001.json`
 - Source result: `data/staging/extraction/np001_primary_paid_v1/NP-001/result.json`
 - Imported candidates: 1 formulation, 5 components, 1 experimental arm, 1
-  outcome, and 43 entity-and-field-scoped evidence records.
+  outcome, and 42 entity-and-field-scoped evidence records.
 - Review state: the arm is visible but quarantined and is ineligible for nearest
-  neighbor and COMET. The bundle contains one quarantined arm review and three
-  incomplete paper-level reviews. User-facing tags are `Needs human
+  neighbor and COMET. The bundle contains one quarantined arm review and four
+  incomplete reviews. User-facing tags are `Needs human
   verification` and `Unsupported value`.
 - Unresolved: the formulation-specific interpretation of the approximately 95%
   result, exact amounts for four lipid components, and the unnamed HepG2 assay
-  remain unresolved. No values were imputed.
+  remain unresolved. DX's reported `25% cholesterol replacement` is preserved
+  verbatim in component notes and evidence with a visible review; it is not
+  mislabeled as 25 mol% of the whole formulation. No values were imputed.
 
 ## NP-002
 
@@ -43,6 +45,9 @@ made, and the authoritative SQLite database was not opened or modified.
   under an explicit semantic representation; no scientific value is selected
   by string length. Conflict provenance remains grouped into left and right
   evidence sets, and a missing side is visibly blocked rather than accepted.
+  Component `molar_percentage` is populated only for explicit `mol%` or for a
+  complete set of molar-ratio parts that deterministically sums to 100. Other
+  percentage meanings remain raw evidence/notes with review.
   This avoids both duplicate formulations and invented cross-slice links.
 - Review state: all 13 arms are visible but quarantined and ineligible for
   nearest neighbor and COMET. The bundle contains 13 quarantined arm reviews

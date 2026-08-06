@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -240,21 +241,74 @@ def build_np_bundle(
         for dst, src in (("formulation_name", "formulation_name"), ("composition_raw", "composition"), ("composition_basis", "composition_basis"), ("np_ratio", "np_ratio")):
             link("formulation", rid, dst, raw.get(src) if _eids(raw.get(src)) else None, slice_name)
 
+    reviews: list[ReviewRecord] = []
     components = []
+    molar_ratio_totals: dict[tuple[str, str], float] = {}
+    for raw in merged["components"]:
+        unit = _value(raw.get("amount_unit"))
+        amount = _value(raw.get("amount"))
+        if (
+            isinstance(unit, str)
+            and re.fullmatch(r"\s*molar[- ]ratio parts\s*", unit, re.IGNORECASE)
+            and isinstance(amount, (int, float))
+            and not isinstance(amount, bool)
+        ):
+            key = (_slice_of(raw, default_slice), raw["formulation_id"])
+            molar_ratio_totals[key] = molar_ratio_totals.get(key, 0.0) + float(amount)
     for raw in merged["components"]:
         slice_name = _slice_of(raw, default_slice)
         rid = _record_id(paper_id, "component", raw["component_id"])
         amount = _value(raw.get("amount"))
+        amount_unit = _value(raw.get("amount_unit"))
+        explicit_mol_percent = bool(
+            amount is not None
+            and isinstance(amount_unit, str)
+            and re.fullmatch(r"\s*mol\s*%\s*", amount_unit, re.IGNORECASE)
+        )
+        ratio_key = (slice_name, raw["formulation_id"])
+        safe_molar_ratio_parts = bool(
+            amount is not None
+            and isinstance(amount_unit, str)
+            and re.fullmatch(
+                r"\s*molar[- ]ratio parts\s*", amount_unit, re.IGNORECASE
+            )
+            and abs(molar_ratio_totals.get(ratio_key, float("nan")) - 100.0) < 1e-9
+        )
+        is_molar_percentage = explicit_mol_percent or safe_molar_ratio_parts
+        raw_amount_note = (
+            f"Reported amount: {amount} {amount_unit}"
+            if amount is not None and amount_unit is not None and not is_molar_percentage
+            else None
+        )
         record = ComponentRecord(
             record_id=rid, paper_id=paper_id, artifact_id=artifact_by_slice[slice_name],
             formulation_id=formulation_ids[raw["formulation_id"]],
             component_name_reported=_value(raw.get("identity")),
-            component_role=_value(raw.get("role")), molar_percentage=amount,
-            percentage_unit=_value(raw.get("amount_unit")), component_review_status="unreviewed",
+            component_role=_value(raw.get("role")),
+            molar_percentage=amount if is_molar_percentage else None,
+            percentage_unit="mol%" if is_molar_percentage else None,
+            component_review_status="unreviewed", identity_notes=raw_amount_note,
         )
         components.append(record)
-        for dst, src in (("component_name_reported", "identity"), ("component_role", "role"), ("molar_percentage", "amount"), ("percentage_unit", "amount_unit")):
+        for dst, src in (("component_name_reported", "identity"), ("component_role", "role")):
             link("component", rid, dst, raw.get(src), slice_name)
+        if is_molar_percentage:
+            link("component", rid, "molar_percentage", raw.get("amount"), slice_name)
+            link("component", rid, "percentage_unit", raw.get("amount_unit"), slice_name)
+        elif raw_amount_note:
+            link("component", rid, "identity_notes", raw.get("amount"), slice_name)
+            link("component", rid, "identity_notes", raw.get("amount_unit"), slice_name)
+            note_evidence = tuple(
+                evidence_id for evidence_id, evidence_record in evidence_records.items()
+                if evidence_record.field_name == "identity_notes"
+                and f"::{rid}::" in evidence_id
+            )
+            reviews.append(ReviewRecord(
+                record_id=f"{rid}::review::reported-amount", paper_id=paper_id,
+                artifact_id=artifact_by_slice[slice_name], reason_code="unsupported_value",
+                status="incomplete", evidence_ids=note_evidence,
+                field_name="identity_notes", notes=raw_amount_note,
+            ))
 
     outcomes_by_experiment: dict[str, list[dict[str, Any]]] = {}
     for raw in merged["outcomes"]:
@@ -262,7 +316,6 @@ def build_np_bundle(
 
     arms = []
     arm_ids = {}
-    reviews: list[ReviewRecord] = []
     for raw in merged["experiments"]:
         slice_name = _slice_of(raw, default_slice)
         rid = _record_id(paper_id, "arm", raw["experiment_id"])

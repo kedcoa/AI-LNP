@@ -428,8 +428,21 @@ def test_real_np_artifacts_generate_deterministic_valid_bundles(tmp_path):
     )
 
     assert (len(np1.formulations), len(np1.arms), len(np1.outcomes)) == (1, 1, 1)
+    dx = next(row for row in np1.components if row.component_name_reported == "DX")
+    assert dx.molar_percentage is None
+    assert dx.percentage_unit is None
+    assert dx.identity_notes == "Reported amount: 25.0 % cholesterol replacement"
+    assert any(
+        review.field_name == "identity_notes" and review.reason_code == "unsupported_value"
+        for review in np1.reviews
+    )
     assert (len(np2.arms), len(np2.outcomes)) == (13, 13)
     assert len(np2.formulations) == 2
+    assert all(
+        row.molar_percentage is None or (row.percentage_unit or "").lower() == "mol%"
+        for row in (*np1.components, *np2.components)
+    )
+    assert all(row.molar_percentage is not None for row in np2.components)
     assert all("10:1" in row.composition_basis for row in np2.formulations)
     artifact_paths = {row.path for row in np2.artifacts}
     assert "data/staging/new_papers/NP-002/PMC6816632.html" in artifact_paths
