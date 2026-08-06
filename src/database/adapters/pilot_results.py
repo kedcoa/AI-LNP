@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
+import hashlib
 from typing import Any
 
 from src.database.import_contracts import (
@@ -65,11 +65,14 @@ def build_blocked_pilot_bundle(
             "its excerpts are quarantined and no experimental rows were imported."
         )
         full_text_status = "available"
-        if recovery.inventory_path is None:
-            raise ValueError("recovered inventory has no local validation path")
-        inventory = json.loads(
-            Path(recovery.inventory_path).read_text(encoding="utf-8")
-        )
+        if recovery.inventory_bytes is None:
+            raise ValueError("recovered inventory has no bound validation bytes")
+        if (
+            hashlib.sha256(recovery.inventory_bytes).hexdigest()
+            != recovery.inventory_sha256
+        ):
+            raise ValueError("inventory content does not match recorded SHA-256")
+        inventory = json.loads(recovery.inventory_bytes.decode("utf-8"))
         for block in inventory["evidence_blocks"]:
             evidence_id = str(block.get("evidence_id", "")).strip()
             evidence_text = str(block.get("text", "")).strip()

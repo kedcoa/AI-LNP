@@ -2,6 +2,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+from dataclasses import replace
 
 import pytest
 
@@ -198,6 +199,141 @@ def test_recovery_rejects_arbitrary_unregistered_root(tmp_path: Path) -> None:
             ),
             repo,
             (arbitrary,),
+        )
+
+
+def test_recovery_rejects_inventory_symlink_to_outside_content(
+    tmp_path: Path,
+) -> None:
+    repo, root, _ = _registered_worktree(tmp_path)
+    source_rel = Path("data/staging/new_papers/PILOT-001/PMC1.html")
+    inventory_rel = Path(
+        "data/staging/extraction/application_pilot/PILOT-001/inventory.json"
+    )
+    source_hash = _write(root / source_rel, b"source")
+    outside = tmp_path / "Answer-Key.json"
+    _write(
+        outside,
+        json.dumps(
+            {
+                "inventory_version": "full-paper-evidence-1.0.0",
+                "paper_id": "PILOT-001",
+                "source_pdf": "PMC1.html",
+                "evidence_blocks": [],
+            }
+        ).encode(),
+    )
+    inventory = root / inventory_rel
+    inventory.parent.mkdir(parents=True, exist_ok=True)
+    inventory.symlink_to(outside)
+
+    result = recover_pilot_sources(
+        PilotArtifactExpectation(
+            paper_id="PILOT-001",
+            source_relative_path=source_rel,
+            source_sha256=source_hash,
+            inventory_relative_path=inventory_rel,
+        ),
+        repo,
+        (root,),
+    )
+
+    assert result.status == "blocked"
+    assert result.reason == "symlink artifact path rejected"
+
+
+def test_recovery_rejects_source_symlink_to_outside_content(tmp_path: Path) -> None:
+    repo, root, _ = _registered_worktree(tmp_path)
+    source_rel = Path("data/staging/new_papers/PILOT-001/PMC1.html")
+    inventory_rel = Path(
+        "data/staging/extraction/application_pilot/PILOT-001/inventory.json"
+    )
+    outside = tmp_path / "outside.html"
+    expected_hash = _write(outside, b"source")
+    source = root / source_rel
+    source.parent.mkdir(parents=True, exist_ok=True)
+    source.symlink_to(outside)
+    _write(
+        root / inventory_rel,
+        json.dumps(
+            {
+                "inventory_version": "full-paper-evidence-1.0.0",
+                "paper_id": "PILOT-001",
+                "source_pdf": "PMC1.html",
+                "evidence_blocks": [],
+            }
+        ).encode(),
+    )
+
+    result = recover_pilot_sources(
+        PilotArtifactExpectation(
+            paper_id="PILOT-001",
+            source_relative_path=source_rel,
+            source_sha256=expected_hash,
+            inventory_relative_path=inventory_rel,
+        ),
+        repo,
+        (root,),
+    )
+
+    assert result.status == "blocked"
+    assert result.reason == "symlink artifact path rejected"
+
+
+def test_adapter_uses_recovery_bound_inventory_bytes_after_disk_mutation(
+    tmp_path: Path,
+) -> None:
+    repo, root, _ = _registered_worktree(tmp_path)
+    source_rel = Path("data/staging/new_papers/PILOT-001/PMC1.html")
+    inventory_rel = Path(
+        "data/staging/extraction/application_pilot/PILOT-001/inventory.json"
+    )
+    source_hash = _write(root / source_rel, b"source")
+    inventory_path = root / inventory_rel
+    _write(
+        inventory_path,
+        json.dumps(
+            {
+                "inventory_version": "full-paper-evidence-1.0.0",
+                "paper_id": "PILOT-001",
+                "source_pdf": "PMC1.html",
+                "evidence_blocks": [{"evidence_id": "FPE-1", "text": "original"}],
+            }
+        ).encode(),
+    )
+    recovery = recover_pilot_sources(
+        PilotArtifactExpectation(
+            paper_id="PILOT-001",
+            source_relative_path=source_rel,
+            source_sha256=source_hash,
+            inventory_relative_path=inventory_rel,
+        ),
+        repo,
+        (root,),
+    )
+    _write(
+        inventory_path,
+        json.dumps(
+            {
+                "inventory_version": "full-paper-evidence-1.0.0",
+                "paper_id": "PILOT-001",
+                "source_pdf": "PMC1.html",
+                "evidence_blocks": [{"evidence_id": "FPE-1", "text": "mutated"}],
+            }
+        ).encode(),
+    )
+    entry = {
+        "paper_id": "PILOT-001",
+        "title": "A paper",
+        "publication_metadata": {"publication_year": 2020},
+    }
+
+    bundle = build_blocked_pilot_bundle(recovery, entry)
+
+    assert bundle.evidence[0].evidence_text == "original"
+    with pytest.raises(ValueError, match="does not match recorded SHA-256"):
+        build_blocked_pilot_bundle(
+            replace(recovery, inventory_bytes=b"tampered"), entry
         )
 
 

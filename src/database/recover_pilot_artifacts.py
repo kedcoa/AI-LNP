@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import stat
 import subprocess
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -78,6 +80,7 @@ class PilotRecoveryResult:
     inventory_sha256: str | None = None
     source_path: str | None = None
     inventory_path: str | None = None
+    inventory_bytes: bytes | None = None
     inventory_version: str | None = None
     evidence_block_count: int = 0
     recovery_worktree_root: str | None = None
@@ -88,7 +91,7 @@ class PilotRecoveryResult:
 
     def to_dict(self) -> dict[str, object]:
         payload = asdict(self)
-        for local_only in ("source_path", "inventory_path"):
+        for local_only in ("source_path", "inventory_path", "inventory_bytes"):
             payload.pop(local_only)
         return payload
 
@@ -133,6 +136,39 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _sha256_bytes(payload: bytes) -> str:
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _read_regular_file_without_symlinks(root: Path, relative: Path) -> bytes:
+    """Read one contained regular file while rejecting symlink path components."""
+
+    root = root.resolve(strict=True)
+    current = root
+    for component in relative.parts:
+        current = current / component
+        if current.is_symlink():
+            raise ValueError("symlink artifact path rejected")
+    resolved = current.resolve(strict=True)
+    if not resolved.is_relative_to(root):
+        raise ValueError("artifact path escapes registered worktree")
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(current, flags)
+    try:
+        metadata = os.fstat(descriptor)
+        if not stat.S_ISREG(metadata.st_mode):
+            raise ValueError("artifact path is not a regular file")
+        chunks: list[bytes] = []
+        while True:
+            chunk = os.read(descriptor, 1024 * 1024)
+            if not chunk:
+                break
+            chunks.append(chunk)
+        return b"".join(chunks)
+    finally:
+        os.close(descriptor)
+
+
 def recover_pilot_sources(
     expectation: PilotArtifactExpectation,
     repository_root: Path,
@@ -155,15 +191,25 @@ def recover_pilot_sources(
     for root in sorted(candidates, key=str):
         source = root / expectation.source_relative_path
         inventory = root / expectation.inventory_relative_path
-        if not source.is_file() or not inventory.is_file():
+        if not source.exists() or not inventory.exists():
             continue
-        source_hash = sha256_file(source)
+        try:
+            source_bytes = _read_regular_file_without_symlinks(
+                root, expectation.source_relative_path
+            )
+            inventory_bytes = _read_regular_file_without_symlinks(
+                root, expectation.inventory_relative_path
+            )
+        except ValueError as exc:
+            failures.append(str(exc))
+            continue
+        source_hash = _sha256_bytes(source_bytes)
         if source_hash != expectation.source_sha256.lower():
             failures.append("source hash mismatch")
             continue
         try:
-            payload = json.loads(inventory.read_text(encoding="utf-8"))
-        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            payload = json.loads(inventory_bytes.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError):
             failures.append("inventory is not valid JSON")
             continue
         if payload.get("paper_id") != expectation.paper_id:
@@ -182,9 +228,10 @@ def recover_pilot_sources(
             source_logical_path=logical_source,
             inventory_logical_path=logical_inventory,
             source_sha256=source_hash,
-            inventory_sha256=sha256_file(inventory),
+            inventory_sha256=_sha256_bytes(inventory_bytes),
             source_path=str(source.resolve()),
             inventory_path=str(inventory.resolve()),
+            inventory_bytes=inventory_bytes,
             inventory_version=payload.get("inventory_version"),
             evidence_block_count=len(blocks),
             recovery_worktree_root=str(root),
