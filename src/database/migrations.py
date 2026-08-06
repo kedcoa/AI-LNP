@@ -341,12 +341,12 @@ def migrate_database(connection: sqlite3.Connection) -> None:
     rebuild_cell_type = _experiment_needs_cell_type_rebuild(connection)
     if rebuild_cell_type and connection.in_transaction:
         raise RuntimeError("cell-type migration requires no active transaction")
-    if not connection.in_transaction:
-        connection.execute("PRAGMA foreign_keys = ON")
     if connection.execute("PRAGMA foreign_keys").fetchone() != (1,):
         raise RuntimeError(
             "SQLite foreign-key enforcement must be enabled before migration"
         )
+    if connection.execute("PRAGMA foreign_key_check").fetchall():
+        raise RuntimeError("foreign-key violations before migration")
     if rebuild_cell_type:
         connection.execute("PRAGMA foreign_keys = OFF")
         connection.execute("PRAGMA legacy_alter_table = ON")
@@ -365,6 +365,8 @@ def migrate_database(connection: sqlite3.Connection) -> None:
         )
         _execute_sql_script(connection, INTEGRITY_SCHEMA_SQL)
         _execute_sql_script(connection, SCREENING_STATE_SCHEMA_SQL)
+        if connection.execute("PRAGMA foreign_key_check").fetchall():
+            raise RuntimeError("foreign-key violations during migration")
     except BaseException:
         connection.execute(f"ROLLBACK TO SAVEPOINT {savepoint}")
         connection.execute(f"RELEASE SAVEPOINT {savepoint}")

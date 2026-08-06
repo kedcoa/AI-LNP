@@ -542,3 +542,54 @@ def test_cell_type_rebuild_rolls_back_with_later_migration_failure(
     assert connection.execute("PRAGMA schema_version").fetchone()[0] == before_schema_version
     assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
     connection.close()
+
+
+def test_cell_type_migration_rejects_preexisting_orphan_without_mutation(
+    tmp_path: Path,
+) -> None:
+    database_path = tmp_path / "legacy-orphan.db"
+    connection = sqlite3.connect(database_path)
+    schema_path = Path(__file__).resolve().parents[1] / "src/schema.sql"
+    legacy_schema = schema_path.read_text(encoding="utf-8").replace(
+        "'hsc',\n                'not_reported',\n                'other'",
+        "'hsc'",
+        1,
+    )
+    connection.executescript(legacy_schema)
+    connection.execute("PRAGMA foreign_keys = OFF")
+    connection.execute(
+        "INSERT INTO paper (paper_id, title, source_type, retrieval_date) "
+        "VALUES (1, 'paper', 'fixture', '2026-08-06')"
+    )
+    connection.execute("INSERT INTO formulation (formulation_id, paper_id) VALUES (1, 1)")
+    connection.execute(
+        "INSERT INTO experiment (experiment_id, paper_id, formulation_id, cell_type) "
+        "VALUES (1, 999, 1, 'hepatocyte')"
+    )
+    connection.commit()
+    connection.execute("PRAGMA foreign_keys = ON")
+    before_dump = "\n".join(connection.iterdump())
+    before_schema_version = connection.execute("PRAGMA schema_version").fetchone()[0]
+    before_ledger = connection.execute(
+        "SELECT version, name, applied_at FROM schema_migration ORDER BY version"
+    ).fetchall()
+    before_experiment_sql = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='experiment'"
+    ).fetchone()[0]
+
+    with pytest.raises(RuntimeError, match="foreign-key violations before migration"):
+        migrate_database(connection)
+
+    assert "\n".join(connection.iterdump()) == before_dump
+    assert connection.execute("PRAGMA schema_version").fetchone()[0] == before_schema_version
+    assert connection.execute(
+        "SELECT version, name, applied_at FROM schema_migration ORDER BY version"
+    ).fetchall() == before_ledger
+    assert connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='experiment'"
+    ).fetchone()[0] == before_experiment_sql
+    assert "'not_reported'" not in before_experiment_sql.split("cell_type", 1)[1].split(
+        "cell_source", 1
+    )[0]
+    assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
+    connection.close()
