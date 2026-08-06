@@ -290,7 +290,7 @@ def test_review_arms_follow_the_specified_review_priority(
         [
             (1, 'complete', '[]', 'unreviewed'),
             (2, 'conflict', '[]', 'conflict'),
-            (extra_arms[0], 'incomplete', '["dose"]', 'unreviewed'),
+                (extra_arms[0], 'incomplete', '[]', 'unreviewed'),
             (extra_arms[1], 'incomplete', '[]', 'unreviewed'),
             (extra_arms[2], 'incomplete', '["species", "assay", "dose"]', 'unreviewed'),
         ],
@@ -305,12 +305,19 @@ def test_review_arms_follow_the_specified_review_priority(
                 evidence_ids_json, content_sha256
             ) VALUES (1, ?, ?, ?, ?, ?, '[]', ?)""",
             (key, arm_id, key, status, tag, _hash(key)),
-        )
+            )
+    connection.execute(
+        """INSERT INTO eligibility_result (
+            experiment_id, profile, eligible, reasons_json, rules_version, evaluated_at
+        ) VALUES (?, 'comet', 0, '["normalization_basis"]', ?, '2026-08-06T12:00:00Z')""",
+        (extra_arms[0], RULES_VERSION),
+    )
     connection.commit()
     connection.close()
     arms = list_review_arms()
 
     assert {arm.experiment_id: arm.review_reason_code for arm in arms}[extra_arms[1]] == 'target_cell_confirmation'
+    assert arms[1].experiment_id == extra_arms[0]
     assert [arm.experiment_id for arm in arms] == [1, extra_arms[0], extra_arms[1], 2, extra_arms[2]]
 
 

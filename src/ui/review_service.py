@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 from pathlib import Path
 import sqlite3
 
 from src.database.audit_current_database import CANONICAL_AUTHORITATIVE_DATABASE
-from src.database.status import PROFILE_REQUIRED_FIELDS, RULES_VERSION
+from src.database.status import RULES_VERSION
 
 
 @dataclass(frozen=True)
@@ -60,6 +61,7 @@ class ReviewArm:
     completeness_status: str
     verification_status: str
     missing_fields: tuple[str, ...]
+    comet_blockers: tuple[str, ...]
     nearest_neighbor_eligible: bool
     comet_eligible: bool
 
@@ -248,6 +250,20 @@ def _latest_eligible(connection: sqlite3.Connection, experiment_id: int, profile
     return bool(row['eligible']) if row else False
 
 
+def _current_eligibility_reasons(
+    connection: sqlite3.Connection, experiment_id: int, profile: str
+) -> tuple[str, ...]:
+    row = connection.execute(
+        """SELECT reasons_json FROM eligibility_result AS eligibility
+           WHERE experiment_id = ? AND """ + _latest_eligibility_condition(profile),
+        (experiment_id, profile, RULES_VERSION),
+    ).fetchone()
+    if row is None:
+        return ()
+    payload = json.loads(row['reasons_json'])
+    return tuple(value for value in payload if isinstance(value, str))
+
+
 def _review_arm(connection: sqlite3.Connection, row: sqlite3.Row) -> ReviewArm:
     review = connection.execute(
         """SELECT review_tag, review_status, reason_code, field_name FROM import_review
@@ -258,7 +274,6 @@ def _review_arm(connection: sqlite3.Connection, row: sqlite3.Row) -> ReviewArm:
         """SELECT missing_fields_json, completeness_status, verification_status
            FROM arm_assessment WHERE experiment_id = ?""", (row['experiment_id'],)
     ).fetchone()
-    import json
     missing = tuple(json.loads(assessment['missing_fields_json'])) if assessment else ()
     return ReviewArm(
         int(row['experiment_id']), int(row['paper_id']), row['source_paper_id'], row['title'],
@@ -267,6 +282,7 @@ def _review_arm(connection: sqlite3.Connection, row: sqlite3.Row) -> ReviewArm:
         review['reason_code'] if review else None,
         assessment['completeness_status'] if assessment else 'incomplete',
         assessment['verification_status'] if assessment else 'unreviewed', missing,
+        _current_eligibility_reasons(connection, row['experiment_id'], 'comet'),
         _latest_eligible(connection, row['experiment_id'], 'nearest_neighbor'),
         _latest_eligible(connection, row['experiment_id'], 'comet'),
     )
@@ -282,8 +298,7 @@ def list_review_arms() -> tuple[ReviewArm, ...]:
     def priority(arm: ReviewArm) -> int:
         if arm.completeness_status == 'complete' and arm.verification_status != 'manually_verified':
             return 0
-        comet_missing = set(arm.missing_fields).intersection(PROFILE_REQUIRED_FIELDS['comet'])
-        if 1 <= len(comet_missing) <= 2:
+        if 1 <= len(arm.comet_blockers) <= 2:
             return 1
         if arm.review_reason_code and (
             'target_cell' in arm.review_reason_code or 'experiment_link' in arm.review_reason_code
