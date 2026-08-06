@@ -276,6 +276,61 @@ def test_backup_never_overwrites_an_existing_timestamped_artifact(
     assert first_backup.read_bytes() == original_contents
 
 
+def test_backup_removes_reserved_artifact_when_source_open_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    _create_empty_legacy_database(database_path)
+    backup_directory = tmp_path / "excluded-backups"
+
+    def fail_source_open(path: Path) -> sqlite3.Connection:
+        raise sqlite3.OperationalError(f"cannot open source: {path}")
+
+    monkeypatch.setattr(
+        database_lifecycle, "_read_only_connection", fail_source_open
+    )
+
+    with pytest.raises(sqlite3.OperationalError, match="cannot open source"):
+        backup_database(database_path, backup_directory)
+
+    assert list(backup_directory.glob("*.db")) == []
+
+
+def test_backup_closes_source_and_removes_artifact_when_destination_open_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    _create_empty_legacy_database(database_path)
+    backup_directory = tmp_path / "excluded-backups"
+    source = sqlite3.connect(
+        f"{database_path.resolve().as_uri()}?mode=ro", uri=True
+    )
+
+    def fail_destination_open(*args: object, **kwargs: object) -> sqlite3.Connection:
+        raise sqlite3.OperationalError("cannot open destination")
+
+    monkeypatch.setattr(
+        database_lifecycle, "_read_only_connection", lambda path: source
+    )
+    monkeypatch.setattr(database_lifecycle.sqlite3, "connect", fail_destination_open)
+
+    try:
+        with pytest.raises(sqlite3.OperationalError, match="cannot open destination"):
+            backup_database(database_path, backup_directory)
+
+        try:
+            source.execute("SELECT 1")
+        except sqlite3.ProgrammingError:
+            source_closed = True
+        else:
+            source_closed = False
+
+        assert source_closed is True
+        assert list(backup_directory.glob("*.db")) == []
+    finally:
+        source.close()
+
+
 def test_migration_runs_against_the_preflighted_database_and_verifies_integrity(
     tmp_path: Path,
 ) -> None:

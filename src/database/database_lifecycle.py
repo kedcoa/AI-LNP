@@ -113,19 +113,26 @@ def backup_database(path: str | Path, backup_dir: str | Path) -> Path:
     except FileExistsError as error:
         raise FileExistsError(f"backup already exists: {backup_path}") from error
 
-    source = _read_only_connection(database_path)
-    destination = sqlite3.connect(backup_path)
+    source: sqlite3.Connection | None = None
+    destination: sqlite3.Connection | None = None
+    backup_complete = False
     try:
+        source = _read_only_connection(database_path)
+        destination = sqlite3.connect(backup_path)
         source.backup(destination)
         destination.commit()
-    except BaseException:
-        destination.close()
-        backup_path.unlink(missing_ok=True)
-        raise
-    else:
-        destination.close()
+        backup_complete = True
     finally:
-        source.close()
+        try:
+            if destination is not None:
+                destination.close()
+        finally:
+            try:
+                if source is not None:
+                    source.close()
+            finally:
+                if not backup_complete:
+                    backup_path.unlink(missing_ok=True)
     return backup_path
 
 
