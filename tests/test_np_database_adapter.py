@@ -161,6 +161,28 @@ def test_reconciliation_retains_incompatible_supported_basis_values():
     assert conflicts[0]["evidence_ids"] == ["E-10", "E-20"]
 
 
+def test_reconciliation_conflicts_on_nonratio_basis_semantics():
+    first = _slice("hepatocytes")
+    first["formulations"][0]["composition_basis"] = _field(
+        "Measured composition", "E-MEASURED"
+    )
+    second = _slice("Kupffer cells")
+    second["formulations"][0]["formulation_id"] = "F-MC3"
+    second["experiments"][0]["formulation_id"] = "F-MC3"
+    second["formulations"][0]["composition_basis"] = _field(
+        "Theoretical composition", "E-THEORETICAL"
+    )
+
+    reconciled = reconcile_slices([("a", first), ("b", second)])
+
+    assert len(reconciled["formulations"]) == 2
+    assert any(
+        row["field_name"] == "composition_basis"
+        and row["evidence_ids"] == ["E-MEASURED", "E-THEORETICAL"]
+        for row in reconciled["conflicts"]
+    )
+
+
 def test_adapter_emits_evidence_linked_review_for_formulation_conflict(tmp_path):
     packet = _packet()
     packet["evidence"].extend([
@@ -189,6 +211,41 @@ def test_adapter_emits_evidence_linked_review_for_formulation_conflict(tmp_path)
     conflict = next(review for review in bundle.reviews if review.status == "conflict")
     assert conflict.field_name == "composition_basis"
     assert len(conflict.evidence_ids) == 2
+
+
+def test_composition_conflict_review_uses_composition_raw_evidence(tmp_path):
+    packet = _packet()
+    packet["evidence"].extend([
+        {"evidence_id": "E-C1", "text": "MC3/DSPC 50:50", "source_ids": ["S1"]},
+        {"evidence_id": "E-C2", "text": "MC3/DSPC 60:40", "source_ids": ["S2"]},
+    ])
+    packet_path = tmp_path / "packet.json"
+    packet_path.write_text(json.dumps(packet))
+    paths = []
+    for name, composition, evidence_id in (
+        ("a", "MC3 and DSPC at 50:50", "E-C1"),
+        ("b", "MC3 and DSPC at 60:40", "E-C2"),
+    ):
+        directory = tmp_path / name
+        directory.mkdir()
+        payload = _slice("hepatocytes")
+        payload["formulations"][0]["composition"] = _field(composition, evidence_id)
+        path = directory / "result.json"
+        path.write_text(json.dumps(payload))
+        paths.append(path)
+
+    bundle = build_np_bundle(
+        result_paths=paths, packet_path=packet_path,
+        paper_metadata={"title": "Example"},
+    )
+
+    conflict_reviews = [review for review in bundle.reviews if review.status == "conflict"]
+    assert conflict_reviews
+    assert all(len(review.evidence_ids) >= 2 for review in conflict_reviews)
+    composition_review = next(
+        review for review in conflict_reviews if review.field_name == "composition"
+    )
+    assert all("::composition_raw::" in evidence_id for evidence_id in composition_review.evidence_ids)
 
 
 def test_adapter_builds_valid_quarantined_bundle_without_synthesizing_links(tmp_path):

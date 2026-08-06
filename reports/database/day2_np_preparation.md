@@ -36,6 +36,9 @@ made, and the authoritative SQLite database was not opened or modified.
   In particular, contradictory supported quantitative facts such as 10:1
   versus 20:1 mass ratios are never resolved by description length: they create
   separate evidence-linked variants and a visible conflict review.
+  Non-ratio semantics are checked as well (for example, measured versus
+  theoretical composition). Compatible distinct descriptions are preserved as
+  an explicit union; no scientific value is selected by string length.
   This avoids both duplicate formulations and invented cross-slice links.
 - Review state: all 13 arms are visible but quarantined and ineligible for
   nearest neighbor and COMET. The bundle contains 13 quarantined arm reviews

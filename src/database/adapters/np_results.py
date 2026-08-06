@@ -15,6 +15,14 @@ from src.database.import_contracts import (
 from src.database.reconcile_np002 import load_and_reconcile
 
 
+CONFLICT_EVIDENCE_FIELDS = {
+    "composition": "composition_raw",
+    "formulation_name": "formulation_name",
+    "composition_basis": "composition_basis",
+    "np_ratio": "np_ratio",
+}
+
+
 def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -329,14 +337,22 @@ def build_np_bundle(
         link("outcome", rid, "qualitative_outcome", raw.get("qualitative_outcome"), slice_name, arm_id=arm_id, outcome_id=rid)
 
     for index, conflict in enumerate(merged.get("conflicts", [])):
+        evidence_field = CONFLICT_EVIDENCE_FIELDS.get(
+            conflict.get("field_name"), conflict.get("field_name")
+        )
         conflict_evidence = tuple(
             record_id for record_id, record in evidence_records.items()
-            if record.field_name == conflict.get("field_name")
+            if record.field_name == evidence_field
             and any(
                 record_id.endswith(f"::{raw_evidence_id}")
                 for raw_evidence_id in conflict.get("evidence_ids", [])
             )
         )
+        if len(conflict_evidence) < 2:
+            raise ValueError(
+                "formulation conflict requires evidence from both supported values: "
+                f"{conflict.get('field_name')}"
+            )
         reviews.append(ReviewRecord(
             record_id=f"{paper_id}::conflict::{index}", paper_id=paper_id,
             artifact_id=primary_artifact, reason_code="conflicting_formulation",

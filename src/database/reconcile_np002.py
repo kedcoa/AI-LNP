@@ -28,22 +28,35 @@ def _scientific_identity(raw: dict[str, Any]) -> tuple[Any, ...]:
         component for component in ("mc3", "ckke12", "cholesterol", "c14peg2000", "dspc")
         if component in re.sub(r"[^a-z0-9]+", "", composition)
     )
-    ratios = tuple(re.findall(r"\d+(?:\.\d+)?", composition))
+    ratios = tuple(sorted(set(re.findall(r"\d+(?:\.\d+)?", composition))))
     return (
         _normalized_name(raw), supported_components, ratios,
         _reported(raw.get("np_ratio")),
     )
 
 
-def _merge_supported_field(target: dict[str, Any], incoming: dict[str, Any]) -> None:
+def _canonical_text(value: Any) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
+
+
+def _merge_supported_field(
+    field_name: str, target: dict[str, Any], incoming: dict[str, Any]
+) -> None:
     target_value = _reported(target)
     incoming_value = _reported(incoming)
-    if incoming_value is not None and (
-        target_value is None or len(str(incoming_value)) > len(str(target_value))
-    ):
+    if target_value is None and incoming_value is not None:
         target["value"] = incoming_value
         target["status"] = incoming.get("status", target.get("status"))
         target["missing_reason"] = incoming.get("missing_reason")
+    elif (
+        target_value is not None
+        and incoming_value is not None
+        and _canonical_text(target_value) != _canonical_text(incoming_value)
+        and field_name in {"composition", "composition_basis"}
+    ):
+        target["value"] = " | ".join(sorted(
+            {str(target_value), str(incoming_value)}, key=_canonical_text
+        ))
     target["evidence_ids"] = list(dict.fromkeys(
         [*target.get("evidence_ids", []), *incoming.get("evidence_ids", [])]
     ))
@@ -73,7 +86,28 @@ def _incompatible_fields(
             conflict = _normalized_name(existing) != _normalized_name(incoming)
         elif field_name == "composition_basis":
             left_ratio, right_ratio = _mass_ratio(left), _mass_ratio(right)
-            conflict = left_ratio is not None and right_ratio is not None and left_ratio != right_ratio
+            exclusive_terms = ("measured", "theoretical", "nominal")
+            left_terms = {
+                term for term in exclusive_terms
+                if term in _canonical_text(left).split()
+            }
+            right_terms = {
+                term for term in exclusive_terms
+                if term in _canonical_text(right).split()
+            }
+            conflict = (
+                left_ratio is not None
+                and right_ratio is not None
+                and left_ratio != right_ratio
+            ) or bool(left_terms and right_terms and left_terms != right_terms)
+            if not conflict and left_ratio is None and right_ratio is None:
+                left_canonical = _canonical_text(left)
+                right_canonical = _canonical_text(right)
+                conflict = not (
+                    left_canonical == right_canonical
+                    or left_canonical == "molar ratio"
+                    or right_canonical == "molar ratio"
+                )
         elif field_name == "composition":
             conflict = _scientific_identity(existing)[:3] != _scientific_identity(incoming)[:3]
         else:
@@ -156,7 +190,7 @@ def reconcile_slices(
                     "formulation_name", "composition", "composition_basis", "np_ratio"
                 ):
                     _merge_supported_field(
-                        match["record"][field_name], raw[field_name]
+                        field_name, match["record"][field_name], raw[field_name]
                     )
             formulation_map[original_id] = match["id"]
 
