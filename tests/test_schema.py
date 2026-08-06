@@ -361,6 +361,14 @@ EXPECTED_TABLES = {
     "experiment",
     "outcome",
     "evidence",
+    "schema_migration",
+    "record_source",
+    "missing_field",
+    "field_verification",
+    "arm_assessment",
+    "review_revision",
+    "screening_event",
+    "eligibility_result",
 }
 
 
@@ -385,6 +393,27 @@ def test_expected_tables_exist(database_path: Path) -> None:
         }
 
     assert EXPECTED_TABLES.issubset(actual_tables)
+
+
+def test_working_database_columns_are_available(database_path: Path) -> None:
+    with sqlite3.connect(database_path) as connection:
+        paper_columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(paper)")
+        }
+        assessment_columns = {
+            row[1]
+            for row in connection.execute("PRAGMA table_info(arm_assessment)")
+        }
+
+    assert {"source_paper_id", "import_status"} <= paper_columns
+    assert {
+        "completeness_status",
+        "missing_fields_json",
+        "verification_status",
+        "nearest_neighbor_eligible",
+        "comet_eligible",
+        "quarantine_reason",
+    } <= assessment_columns
 
 
 def test_experiment_has_compact_contract_columns(database_path: Path) -> None:
