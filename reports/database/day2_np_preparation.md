@@ -46,7 +46,9 @@ made, and the authoritative SQLite database was not opened or modified.
   by string length. Conflict provenance remains grouped into left and right
   evidence sets, and a missing side is visibly blocked rather than accepted.
   Component `molar_percentage` is populated only for explicit `mol%` or for a
-  complete set of molar-ratio parts that deterministically sums to 100. Other
+  complete set where every formulation component has a numeric molar-ratio
+  value and the full set deterministically sums to 100. A partial set that sums
+  to 100 is not converted if any component is missing or uses another unit. Other
   percentage meanings remain raw evidence/notes with review.
   This avoids both duplicate formulations and invented cross-slice links.
 - Review state: all 13 arms are visible but quarantined and ineligible for

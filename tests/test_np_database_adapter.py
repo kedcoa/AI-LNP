@@ -405,6 +405,46 @@ def test_adapter_rejects_evidence_missing_from_packet(tmp_path):
         )
 
 
+def test_ratio_parts_do_not_convert_when_any_formulation_component_is_missing(tmp_path):
+    payload = _slice("hepatocytes")
+    payload["components"] = [
+        {
+            "component_id": "C1", "formulation_id": "F1",
+            "identity": _field("lipid A", "E-FORM"),
+            "role": _field("ionizable_lipid", "E-FORM"),
+            "amount": _field(50.0, "E-FORM"),
+            "amount_unit": _field("molar-ratio parts", "E-FORM"),
+        },
+        {
+            "component_id": "C2", "formulation_id": "F1",
+            "identity": _field("cholesterol", "E-FORM"),
+            "role": _field("cholesterol", "E-FORM"),
+            "amount": _field(50.0, "E-FORM"),
+            "amount_unit": _field("molar-ratio parts", "E-FORM"),
+        },
+        {
+            "component_id": "C3", "formulation_id": "F1",
+            "identity": _field("PEG lipid", "E-FORM"),
+            "role": _field("peg_lipid", "E-FORM"),
+            "amount": _field(None), "amount_unit": _field(None),
+        },
+    ]
+    result_path = tmp_path / "result.json"
+    packet_path = tmp_path / "packet.json"
+    result_path.write_text(json.dumps(payload))
+    packet_path.write_text(json.dumps(_packet()))
+
+    bundle = build_np_bundle(
+        result_paths=[result_path], packet_path=packet_path,
+        paper_metadata={"title": "Example"},
+    )
+
+    assert all(component.molar_percentage is None for component in bundle.components)
+    assert sum(
+        review.field_name == "identity_notes" for review in bundle.reviews
+    ) == 2
+
+
 def test_real_np_artifacts_generate_deterministic_valid_bundles(tmp_path):
     np1 = build_np_bundle(
         result_paths=[ROOT / "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json"],

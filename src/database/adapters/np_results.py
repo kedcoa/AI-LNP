@@ -244,17 +244,23 @@ def build_np_bundle(
     reviews: list[ReviewRecord] = []
     components = []
     molar_ratio_totals: dict[tuple[str, str], float] = {}
+    component_counts: dict[tuple[str, str], int] = {}
+    numeric_molar_ratio_counts: dict[tuple[str, str], int] = {}
     for raw in merged["components"]:
         unit = _value(raw.get("amount_unit"))
         amount = _value(raw.get("amount"))
+        key = (_slice_of(raw, default_slice), raw["formulation_id"])
+        component_counts[key] = component_counts.get(key, 0) + 1
         if (
             isinstance(unit, str)
             and re.fullmatch(r"\s*molar[- ]ratio parts\s*", unit, re.IGNORECASE)
             and isinstance(amount, (int, float))
             and not isinstance(amount, bool)
         ):
-            key = (_slice_of(raw, default_slice), raw["formulation_id"])
             molar_ratio_totals[key] = molar_ratio_totals.get(key, 0.0) + float(amount)
+            numeric_molar_ratio_counts[key] = (
+                numeric_molar_ratio_counts.get(key, 0) + 1
+            )
     for raw in merged["components"]:
         slice_name = _slice_of(raw, default_slice)
         rid = _record_id(paper_id, "component", raw["component_id"])
@@ -272,6 +278,8 @@ def build_np_bundle(
             and re.fullmatch(
                 r"\s*molar[- ]ratio parts\s*", amount_unit, re.IGNORECASE
             )
+            and numeric_molar_ratio_counts.get(ratio_key, 0)
+            == component_counts.get(ratio_key, -1)
             and abs(molar_ratio_totals.get(ratio_key, float("nan")) - 100.0) < 1e-9
         )
         is_molar_percentage = explicit_mol_percent or safe_molar_ratio_parts
