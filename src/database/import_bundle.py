@@ -112,6 +112,14 @@ CREATE TABLE IF NOT EXISTS import_review (
 );
 """
 
+_IMPORT_SCHEMA_MIGRATION_SQL = """
+CREATE TABLE IF NOT EXISTS import_schema_migration (
+    version INTEGER PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    applied_at TEXT NOT NULL
+);
+"""
+
 
 @dataclass(frozen=True)
 class PaperImportResult:
@@ -148,6 +156,184 @@ def _execute_script(connection: sqlite3.Connection, script: str) -> None:
 
 def _artifact(bundle: ImportBundle, artifact_id: str) -> SourceArtifactRecord:
     return next(row for row in bundle.artifacts if row.artifact_id == artifact_id)
+
+
+def _field_link_natural_key(
+    *,
+    source_paper_id: str,
+    entity_type: str,
+    entity_local_key: str,
+    entity_artifact_path: str,
+    entity_artifact_sha256: str,
+    evidence_local_key: str,
+    evidence_artifact_path: str,
+    evidence_artifact_sha256: str,
+    field_name: str,
+) -> str:
+    return json.dumps(
+        {
+            "source_paper_id": source_paper_id,
+            "entity": {
+                "type": entity_type,
+                "local_key": entity_local_key,
+                "artifact_path": entity_artifact_path,
+                "artifact_sha256": entity_artifact_sha256.lower(),
+            },
+            "evidence": {
+                "local_key": evidence_local_key,
+                "artifact_path": evidence_artifact_path,
+                "artifact_sha256": evidence_artifact_sha256.lower(),
+            },
+            "field_name": field_name,
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _database_record_identity(
+    connection: sqlite3.Connection,
+    *,
+    paper_id: int,
+    entity_type: str,
+    entity_id: int,
+) -> tuple[str, str, str]:
+    identity_type = {
+        "formulation": "formulation",
+        "component": "chemical_component",
+        "arm": "experiment",
+        "outcome": "outcome",
+        "evidence": "evidence",
+    }[entity_type]
+    row = connection.execute(
+        """
+        SELECT content_json
+        FROM import_record_identity
+        WHERE paper_id = ? AND entity_type = ? AND entity_id = ?
+        ORDER BY import_record_identity_id
+        LIMIT 1
+        """,
+        (paper_id, identity_type, entity_id),
+    ).fetchone()
+    if row is not None:
+        content = json.loads(row[0])
+        return (
+            str(content["record"]["record_id"]),
+            str(content["artifact"]["path"]),
+            str(content["artifact"]["sha256"]),
+        )
+    source = connection.execute(
+        """
+        SELECT artifact_path, artifact_sha256
+        FROM record_source
+        WHERE paper_id = ? AND entity_type = ? AND entity_id = ?
+        ORDER BY record_source_id
+        LIMIT 1
+        """,
+        (paper_id, identity_type, entity_id),
+    ).fetchone()
+    if source is None:
+        return (f"legacy-{entity_type}-{entity_id}", "legacy", "0" * 64)
+    return (f"legacy-{entity_type}-{entity_id}", source[0], source[1])
+
+
+def _migrate_import_schema(connection: sqlite3.Connection) -> None:
+    _execute_script(connection, _IMPORT_SCHEMA_MIGRATION_SQL)
+    columns = {
+        row[1]
+        for row in connection.execute(
+            "PRAGMA table_info(import_field_evidence)"
+        )
+    }
+    additions = {
+        "natural_key": "TEXT",
+        "content_sha256": "TEXT",
+        "content_json": "TEXT",
+    }
+    for column, declaration in additions.items():
+        if column not in columns:
+            connection.execute(
+                f"ALTER TABLE import_field_evidence "
+                f"ADD COLUMN {column} {declaration}"
+            )
+    rows = connection.execute(
+        """
+        SELECT import_field_evidence_id, paper_id, entity_type, entity_id,
+               field_name, evidence_id, verification_status, notes
+        FROM import_field_evidence
+        WHERE natural_key IS NULL OR content_sha256 IS NULL
+           OR content_json IS NULL
+        ORDER BY import_field_evidence_id
+        """
+    ).fetchall()
+    for row in rows:
+        (
+            link_id,
+            paper_id,
+            entity_type,
+            entity_id,
+            field_name,
+            evidence_id,
+            verification_status,
+            notes,
+        ) = row
+        source_paper_id = connection.execute(
+            "SELECT source_paper_id FROM paper WHERE paper_id = ?",
+            (paper_id,),
+        ).fetchone()[0]
+        entity_key, entity_path, entity_sha = _database_record_identity(
+            connection,
+            paper_id=paper_id,
+            entity_type=entity_type,
+            entity_id=entity_id,
+        )
+        evidence_key, evidence_path, evidence_sha = _database_record_identity(
+            connection,
+            paper_id=paper_id,
+            entity_type="evidence",
+            entity_id=evidence_id,
+        )
+        natural_key = _field_link_natural_key(
+            source_paper_id=source_paper_id,
+            entity_type=entity_type,
+            entity_local_key=entity_key,
+            entity_artifact_path=entity_path,
+            entity_artifact_sha256=entity_sha,
+            evidence_local_key=evidence_key,
+            evidence_artifact_path=evidence_path,
+            evidence_artifact_sha256=evidence_sha,
+            field_name=field_name,
+        )
+        content_json = json.dumps(
+            {"verification_status": verification_status, "notes": notes},
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        content_sha256 = hashlib.sha256(
+            content_json.encode("utf-8")
+        ).hexdigest()
+        connection.execute(
+            """
+            UPDATE import_field_evidence
+            SET natural_key = ?, content_sha256 = ?, content_json = ?
+            WHERE import_field_evidence_id = ?
+            """,
+            (natural_key, content_sha256, content_json, link_id),
+        )
+    connection.execute(
+        """
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_import_field_evidence_identity
+        ON import_field_evidence(paper_id, natural_key, content_sha256)
+        """
+    )
+    connection.execute(
+        """
+        INSERT OR IGNORE INTO import_schema_migration (
+            version, name, applied_at
+        ) VALUES (1, 'stable_field_evidence_identity', ?)
+        """,
+        (_utc_now(),),
+    )
 
 
 def _serialized_content(
@@ -970,6 +1156,7 @@ def import_bundle(
     connection.execute(f"SAVEPOINT {savepoint}")
     try:
         _execute_script(connection, _IMPORT_SCHEMA)
+        _migrate_import_schema(connection)
         paper_id, paper_conflict = _insert_paper(connection, bundle, counters)
         if paper_conflict:
             _mark_conflict_arms(
@@ -1246,14 +1433,38 @@ def import_bundle(
             "arm": arm_ids,
             "outcome": outcome_ids,
         }
+        entity_records = {
+            "formulation": {
+                row.record_id: row for row in bundle.formulations
+            },
+            "component": {row.record_id: row for row in bundle.components},
+            "arm": {row.record_id: row for row in bundle.arms},
+            "outcome": {row.record_id: row for row in bundle.outcomes},
+        }
+        evidence_records = {row.record_id: row for row in bundle.evidence}
         outcome_records = {row.record_id: row for row in bundle.outcomes}
         for link in bundle.field_evidence_links:
             entity_id = entity_maps[link.entity_type][link.entity_id]
             for local_evidence_id in link.evidence_ids:
                 evidence_id = evidence_ids[local_evidence_id]
-                natural_key = (
-                    f"{link.entity_type}:{entity_id}:{link.field_name}:"
-                    f"{evidence_id}"
+                entity_record = entity_records[link.entity_type][link.entity_id]
+                entity_artifact = _artifact(
+                    bundle, entity_record.artifact_id
+                )
+                evidence_record = evidence_records[local_evidence_id]
+                evidence_artifact = _artifact(
+                    bundle, evidence_record.artifact_id
+                )
+                natural_key = _field_link_natural_key(
+                    source_paper_id=bundle.paper.source_paper_id,
+                    entity_type=link.entity_type,
+                    entity_local_key=link.entity_id,
+                    entity_artifact_path=entity_artifact.path,
+                    entity_artifact_sha256=entity_artifact.sha256,
+                    evidence_local_key=local_evidence_id,
+                    evidence_artifact_path=evidence_artifact.path,
+                    evidence_artifact_sha256=evidence_artifact.sha256,
+                    field_name=link.field_name,
                 )
                 content_json = json.dumps(
                     {

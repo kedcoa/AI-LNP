@@ -657,6 +657,139 @@ def test_changed_field_link_content_is_retained_as_conflict(
         connection.close()
 
 
+def _shift_surrogate_ids(connection: sqlite3.Connection) -> None:
+    connection.executescript(
+        """
+        INSERT INTO paper (
+            paper_id, source_paper_id, title, source_type, retrieval_date,
+            screening_status, import_status
+        ) VALUES (100, 'OFFSET-100', 'Offset row', 'fixture', '2026-08-06',
+                  'include', 'needs_review');
+        INSERT INTO formulation (
+            formulation_id, paper_id, formulation_name
+        ) VALUES (100, 100, 'Offset formulation');
+        INSERT INTO experiment (
+            experiment_id, paper_id, formulation_id, cell_type
+        ) VALUES (100, 100, 100, 'hepatocyte');
+        INSERT INTO outcome (
+            outcome_id, experiment_id, endpoint_family, endpoint_name,
+            value_status
+        ) VALUES (100, 100, 'other', 'offset outcome', 'missing');
+        INSERT INTO evidence (
+            evidence_id, paper_id, experiment_id, outcome_id, field_name,
+            evidence_text, evidence_location_type, extraction_method,
+            extraction_confidence
+        ) VALUES (100, 100, 100, 100, 'offset', 'Offset evidence.',
+                  'other', 'manual', 'high');
+        """
+    )
+    connection.commit()
+
+
+def test_field_link_natural_keys_are_stable_across_database_rebuilds(
+    tmp_path: Path,
+) -> None:
+    first = _connection(tmp_path / "first")
+    second = _connection(tmp_path / "second")
+    try:
+        _shift_surrogate_ids(second)
+        _import_bundle(first, _load_bundle())
+        _import_bundle(second, _load_bundle())
+
+        first_keys = {
+            row[0]
+            for row in first.execute(
+                "SELECT natural_key FROM import_field_evidence"
+            )
+        }
+        second_keys = {
+            row[0]
+            for row in second.execute(
+                "SELECT natural_key FROM import_field_evidence"
+            )
+        }
+        assert first_keys == second_keys
+        assert all("GP-002" in key and "E-1" in key for key in first_keys)
+        assert first.execute(
+            "SELECT experiment_id FROM experiment WHERE paper_id != 100"
+        ).fetchone() == (1,)
+        assert second.execute(
+            "SELECT experiment_id FROM experiment WHERE paper_id != 100"
+        ).fetchone() == (101,)
+    finally:
+        first.close()
+        second.close()
+
+
+def test_prior_field_link_schema_migrates_idempotently_without_data_loss(
+    tmp_path: Path,
+) -> None:
+    connection = _connection(tmp_path)
+    try:
+        _import_bundle(connection, _load_bundle())
+        connection.executescript(
+            """
+            ALTER TABLE import_field_evidence
+                RENAME TO import_field_evidence_new;
+            CREATE TABLE import_field_evidence (
+                import_field_evidence_id INTEGER PRIMARY KEY,
+                paper_id INTEGER NOT NULL,
+                entity_type TEXT NOT NULL,
+                entity_id INTEGER NOT NULL,
+                field_name TEXT NOT NULL,
+                evidence_id INTEGER NOT NULL,
+                verification_status TEXT NOT NULL,
+                notes TEXT,
+                UNIQUE (
+                    paper_id, entity_type, entity_id, field_name,
+                    evidence_id, verification_status
+                )
+            );
+            INSERT INTO import_field_evidence (
+                import_field_evidence_id, paper_id, entity_type, entity_id,
+                field_name, evidence_id, verification_status, notes
+            )
+            SELECT import_field_evidence_id, paper_id, entity_type, entity_id,
+                   field_name, evidence_id, verification_status, notes
+            FROM import_field_evidence_new;
+            DROP TABLE import_field_evidence_new;
+            CREATE TABLE IF NOT EXISTS import_schema_migration (
+                version INTEGER PRIMARY KEY,
+                name TEXT NOT NULL UNIQUE,
+                applied_at TEXT NOT NULL
+            );
+            DELETE FROM import_schema_migration
+            WHERE version = 1;
+            """
+        )
+        connection.commit()
+
+        _import_bundle(connection, _load_bundle())
+        _import_bundle(connection, _load_bundle())
+
+        columns = {
+            row[1]
+            for row in connection.execute(
+                "PRAGMA table_info(import_field_evidence)"
+            )
+        }
+        assert {"natural_key", "content_sha256", "content_json"} <= columns
+        assert connection.execute(
+            "SELECT COUNT(*) FROM import_field_evidence"
+        ).fetchone() == (19,)
+        assert connection.execute(
+            """
+            SELECT version, name FROM import_schema_migration
+            ORDER BY version
+            """
+        ).fetchall() == [(1, "stable_field_evidence_identity")]
+        assert connection.execute(
+            "SELECT COUNT(DISTINCT natural_key) FROM import_field_evidence"
+        ).fetchone() == (19,)
+    finally:
+        connection.close()
+
+
 def test_screening_only_import_creates_no_scientific_rows(tmp_path: Path) -> None:
     payload = _load_payload()
     payload["paper"].update(
