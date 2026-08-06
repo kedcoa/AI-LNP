@@ -2,14 +2,14 @@
   "arms": [
     {
       "artifact_id": "GP-008:accepted_graph",
-      "assay": "flow cytometry; single-cell RNA sequencing",
+      "assay": null,
       "cell_source": null,
       "cell_type": "hepatic stellate cells",
       "comet_eligible": false,
       "comparator_description": null,
       "comparator_type": null,
       "completeness_status": "incomplete",
-      "disease_model": "carbon tetrachloride-induced mouse liver fibrosis model",
+      "disease_model": null,
       "dose": null,
       "dose_unit": null,
       "experiment_notes": "\u03b1CD163/LNP-FAPCAR in situ CAR-M treatment for liver fibrosis",
@@ -19,16 +19,80 @@
       "paper_id": "GP-008",
       "payload_encoded_product": "FAP-targeted chimeric antigen receptor",
       "payload_molecular_target": null,
-      "payload_name": "mRNA encoding an FAP-targeted chimeric antigen receptor; Photinus pyralis luciferase mRNA; ZsGreen mRNA",
+      "payload_name": "mRNA encoding an FAP-targeted chimeric antigen receptor",
       "payload_type": "nucleic acid",
       "protocol_reference": null,
       "quarantine_reason": null,
-      "record_id": "GP-008:ARM:GP-008-E01",
+      "record_id": "GP-008:ARM:GP-008-E01:F1",
       "reporter": null,
       "route": null,
-      "species": "Mus musculus",
-      "timepoint": 48.0,
-      "timepoint_unit": "hours",
+      "species": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "tissue_or_organ": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "artifact_id": "GP-008:accepted_graph",
+      "assay": null,
+      "cell_source": null,
+      "cell_type": "",
+      "comet_eligible": false,
+      "comparator_description": null,
+      "comparator_type": null,
+      "completeness_status": "incomplete",
+      "disease_model": null,
+      "dose": null,
+      "dose_unit": null,
+      "experiment_notes": "\u03b1CD163/LNP-FAPCAR in situ CAR-M treatment for liver fibrosis",
+      "formulation_id": "GP-008:FORM:F4",
+      "in_vitro_in_vivo": null,
+      "nearest_neighbor_eligible": false,
+      "paper_id": "GP-008",
+      "payload_encoded_product": null,
+      "payload_molecular_target": null,
+      "payload_name": "Photinus pyralis luciferase mRNA",
+      "payload_type": "nucleic acid",
+      "protocol_reference": null,
+      "quarantine_reason": null,
+      "record_id": "GP-008:ARM:GP-008-E01:F4",
+      "reporter": null,
+      "route": null,
+      "species": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "tissue_or_organ": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "artifact_id": "GP-008:accepted_graph",
+      "assay": null,
+      "cell_source": null,
+      "cell_type": "",
+      "comet_eligible": false,
+      "comparator_description": null,
+      "comparator_type": null,
+      "completeness_status": "incomplete",
+      "disease_model": null,
+      "dose": null,
+      "dose_unit": null,
+      "experiment_notes": "\u03b1CD163/LNP-FAPCAR in situ CAR-M treatment for liver fibrosis",
+      "formulation_id": "GP-008:FORM:F5",
+      "in_vitro_in_vivo": null,
+      "nearest_neighbor_eligible": false,
+      "paper_id": "GP-008",
+      "payload_encoded_product": null,
+      "payload_molecular_target": null,
+      "payload_name": "ZsGreen mRNA",
+      "payload_type": "nucleic acid",
+      "protocol_reference": null,
+      "quarantine_reason": null,
+      "record_id": "GP-008:ARM:GP-008-E01:F5",
+      "reporter": null,
+      "route": null,
+      "species": null,
+      "timepoint": null,
+      "timepoint_unit": null,
       "tissue_or_organ": null,
       "verification_status": "unreviewed"
     }
@@ -147,7 +211,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F1",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "liposomal nanoparticles (LNP), conjugated with CD163 antibodies and encapsulating FAPCAR mRNA",
@@ -167,47 +231,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "We administered LNP carrying either Photinus pyralis luciferase (LNP-Luc or \u03b1CD163/LNP-Luc)",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "payload_name",
-      "figure_number": null,
-      "outcome_id": null,
-      "page_number": null,
-      "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0007",
-      "reviewer_notes": null,
-      "section_name": "B012C001",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "or ZsGreen (LNP-ZsGreen or \u03b1CD163/LNP-ZsGreen) mRNA",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "payload_name",
-      "figure_number": null,
-      "outcome_id": null,
-      "page_number": null,
-      "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0008",
-      "reviewer_notes": null,
-      "section_name": "B012C001",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F1",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "a modified nucleoside-inclusive mRNA encoding an FAP-targeted CAR sequence",
@@ -218,7 +242,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0009",
+      "record_id": "GP-008:EV:0007",
       "reviewer_notes": null,
       "section_name": "B002C017",
       "structured_evidence": null,
@@ -227,7 +251,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F1",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "can recognize and eliminate overactive HSCs that express FAP upon activation",
@@ -238,7 +262,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0010",
+      "record_id": "GP-008:EV:0008",
       "reviewer_notes": null,
       "section_name": "B006C004",
       "structured_evidence": null,
@@ -247,33 +271,73 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F1",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "both liver fibrotic (CCL4+\u03b1CD163/LNP-FAPCAR group) and normal mice (oil + \u03b1CD163/LNP-FAPCAR group)",
+      "evidence_text": "The resulting \u03b1CD163/LNP-FAPCAR displayed a mean particle size of 110.3 \u00b1 6.8 nm",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "disease_model",
+      "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": null,
+      "outcome_id": "GP-008:OUT:GP-008-E01:F1:01",
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0011",
+      "record_id": "GP-008:EV:0009",
       "reviewer_notes": null,
-      "section_name": "B012C024",
+      "section_name": "B003C007",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F1",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "fibrotic mice induced by CCL4",
+      "evidence_text": "110.3 \u00b1 6.8 nm",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "species",
+      "field_name": "qualitative_outcome",
+      "figure_number": null,
+      "outcome_id": "GP-008:OUT:GP-008-E01:F1:01",
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0010",
+      "reviewer_notes": null,
+      "section_name": "B003C007",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-008:ARM:GP-008-E01:F4",
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "We administered LNP carrying either Photinus pyralis luciferase (LNP-Luc or \u03b1CD163/LNP-Luc)",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "payload_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0011",
+      "reviewer_notes": null,
+      "section_name": "B012C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-008:ARM:GP-008-E01:F5",
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "or ZsGreen (LNP-ZsGreen or \u03b1CD163/LNP-ZsGreen) mRNA",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "payload_name",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -287,58 +351,98 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F5",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "We incubated BMDMs with \u03b1CD163/LNPs containing mRNA encoding FAPCAR or GFP for 48 h in vitro.",
+      "evidence_text": "ZsGreen mRNA tracking studies demonstrated prolonged hepatic fluorescence persistence in the \u03b1CD163/LNP-ZsGreen cohort",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "timepoint",
+      "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": null,
+      "outcome_id": "GP-008:OUT:GP-008-E01:F5:01",
       "page_number": null,
       "paper_id": "GP-008",
       "record_id": "GP-008:EV:0013",
       "reviewer_notes": null,
-      "section_name": "B007C005",
+      "section_name": "B012C007",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F5",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "Flow cytometry showed that the LNP conjugated to the \u03b1CD163 effectively delivered its mRNA cargo to target cells.",
+      "evidence_text": "sustained through day 14",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "assay",
+      "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": null,
+      "outcome_id": "GP-008:OUT:GP-008-E01:F5:01",
       "page_number": null,
       "paper_id": "GP-008",
       "record_id": "GP-008:EV:0014",
       "reviewer_notes": null,
-      "section_name": "B007C006",
+      "section_name": "B012C007",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "treated with \u03b1CD163/LNP-FAPCAR (LNP group) for scRNA-seq",
+      "evidence_text": "both liver fibrotic (CCL4+\u03b1CD163/LNP-FAPCAR group) and normal mice (oil + \u03b1CD163/LNP-FAPCAR group)",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "assay",
+      "field_name": "experiment_relationship",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
       "record_id": "GP-008:EV:0015",
+      "reviewer_notes": null,
+      "section_name": "B012C024",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "fibrotic mice induced by CCL4",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0016",
+      "reviewer_notes": null,
+      "section_name": "B012C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "liver tissues were collected from fibrotic model mice",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0017",
       "reviewer_notes": null,
       "section_name": "B011C001",
       "structured_evidence": null,
@@ -347,18 +451,58 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "We incubated BMDMs with \u03b1CD163/LNPs containing mRNA encoding FAPCAR or GFP for 48 h in vitro.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0018",
+      "reviewer_notes": null,
+      "section_name": "B007C005",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "Flow cytometry showed that the LNP conjugated to the \u03b1CD163 effectively delivered its mRNA cargo to target cells.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0019",
+      "reviewer_notes": null,
+      "section_name": "B007C006",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to \u03b1CD163/LNP-GFP or \u03b1CD163/LNP-FAPCAR, respectively.",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:01",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0016",
+      "record_id": "GP-008:EV:0020",
       "reviewer_notes": null,
       "section_name": "B007C007",
       "structured_evidence": null,
@@ -367,18 +511,18 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "over 80% of the BMDMs expressed GFP or FAPCAR",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "outcome_value",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:01",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0017",
+      "record_id": "GP-008:EV:0021",
       "reviewer_notes": null,
       "section_name": "B007C007",
       "structured_evidence": null,
@@ -387,138 +531,98 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "fewer than 20% of target BMDMs",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:02",
-      "page_number": null,
-      "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0018",
-      "reviewer_notes": null,
-      "section_name": "B007C008",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "fewer than 20% of target BMDMs",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "outcome_value",
-      "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:02",
-      "page_number": null,
-      "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0019",
-      "reviewer_notes": null,
-      "section_name": "B007C008",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "The resulting \u03b1CD163/LNP-FAPCAR displayed a mean particle size of 110.3 \u00b1 6.8 nm",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
-      "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:03",
-      "page_number": null,
-      "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0020",
-      "reviewer_notes": null,
-      "section_name": "B003C007",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "110.3 \u00b1 6.8 nm",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "qualitative_outcome",
-      "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:03",
-      "page_number": null,
-      "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0021",
-      "reviewer_notes": null,
-      "section_name": "B003C007",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "ZsGreen mRNA tracking studies demonstrated prolonged hepatic fluorescence persistence in the \u03b1CD163/LNP-ZsGreen cohort",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
-      "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:04",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
       "record_id": "GP-008:EV:0022",
       "reviewer_notes": null,
-      "section_name": "B012C007",
+      "section_name": "B007C008",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "sustained through day 14",
+      "evidence_text": "over 80% of the BMDMs expressed GFP or FAPCAR upon exposure to \u03b1CD163/LNP-GFP or \u03b1CD163/LNP-FAPCAR, respectively.",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "qualitative_outcome",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:04",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
       "record_id": "GP-008:EV:0023",
       "reviewer_notes": null,
-      "section_name": "B012C007",
+      "section_name": "B007C007",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "In contrast, unmodified LNPs delivered mRNA to fewer than 20% of target BMDMs in vitro",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0024",
+      "reviewer_notes": null,
+      "section_name": "B007C008",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "treated with \u03b1CD163/LNP-FAPCAR (LNP group) for scRNA-seq",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-008",
+      "record_id": "GP-008:EV:0025",
+      "reviewer_notes": null,
+      "section_name": "B011C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "the LNP group had a lower proportion of HSCs than the Fibrosis group",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:05",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0024",
+      "record_id": "GP-008:EV:0026",
       "reviewer_notes": null,
       "section_name": "B011C012",
       "structured_evidence": null,
@@ -527,18 +631,18 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "a lower proportion of HSCs than the Fibrosis group",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "qualitative_outcome",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:05",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0025",
+      "record_id": "GP-008:EV:0027",
       "reviewer_notes": null,
       "section_name": "B011C012",
       "structured_evidence": null,
@@ -547,18 +651,18 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "The IF results showed that the apoptosis of Heps in the LNP group was significantly lower",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:06",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0026",
+      "record_id": "GP-008:EV:0028",
       "reviewer_notes": null,
       "section_name": "B011C031",
       "structured_evidence": null,
@@ -567,18 +671,18 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "significantly lower",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "qualitative_outcome",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:06",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0027",
+      "record_id": "GP-008:EV:0029",
       "reviewer_notes": null,
       "section_name": "B011C031",
       "structured_evidence": null,
@@ -587,38 +691,18 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": null,
       "artifact_id": "GP-008:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "markedly attenuating the amount of FAP+ macrophages",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:07",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0028",
-      "reviewer_notes": null,
-      "section_name": "B014C004",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "markedly attenuating the amount of FAP+ macrophages",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "qualitative_outcome",
-      "figure_number": null,
-      "outcome_id": "GP-008:OUT:GP-008-E01:07",
-      "page_number": null,
-      "paper_id": "GP-008",
-      "record_id": "GP-008:EV:0029",
+      "record_id": "GP-008:EV:0030",
       "reviewer_notes": null,
       "section_name": "B014C004",
       "structured_evidence": null,
@@ -674,12 +758,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:ARM:GP-008-E01",
+      "entity_id": "GP-008:ARM:GP-008-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-008:EV:0006",
-        "GP-008:EV:0007",
-        "GP-008:EV:0008"
+        "GP-008:EV:0006"
       ],
       "field_name": "payload_name",
       "notes": null,
@@ -687,10 +769,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:ARM:GP-008-E01",
+      "entity_id": "GP-008:ARM:GP-008-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-008:EV:0009"
+        "GP-008:EV:0007"
       ],
       "field_name": "payload_encoded_product",
       "notes": null,
@@ -698,10 +780,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:ARM:GP-008-E01",
+      "entity_id": "GP-008:ARM:GP-008-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-008:EV:0010"
+        "GP-008:EV:0008"
       ],
       "field_name": "cell_type",
       "notes": null,
@@ -709,68 +791,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:ARM:GP-008-E01",
+      "entity_id": "GP-008:ARM:GP-008-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-008:EV:0011"
-      ],
-      "field_name": "disease_model",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:ARM:GP-008-E01",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-008:EV:0012"
-      ],
-      "field_name": "species",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:ARM:GP-008-E01",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-008:EV:0013"
-      ],
-      "field_name": "timepoint",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:ARM:GP-008-E01",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-008:EV:0013"
-      ],
-      "field_name": "timepoint_unit",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:ARM:GP-008-E01",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-008:EV:0014",
-        "GP-008:EV:0015"
-      ],
-      "field_name": "assay",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:ARM:GP-008-E01",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-008:EV:0006",
-        "GP-008:EV:0007",
-        "GP-008:EV:0008"
+        "GP-008:EV:0006"
       ],
       "field_name": "payload_type",
       "notes": null,
@@ -778,10 +802,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:OUT:GP-008-E01:01",
+      "entity_id": "GP-008:OUT:GP-008-E01:F1:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-008:EV:0016"
+        "GP-008:EV:0009"
       ],
       "field_name": "endpoint_name",
       "notes": null,
@@ -789,10 +813,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:OUT:GP-008-E01:01",
+      "entity_id": "GP-008:OUT:GP-008-E01:F1:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-008:EV:0016"
+        "GP-008:EV:0009"
       ],
       "field_name": "endpoint_family",
       "notes": null,
@@ -800,98 +824,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:OUT:GP-008-E01:01",
+      "entity_id": "GP-008:OUT:GP-008-E01:F1:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-008:EV:0017"
-      ],
-      "field_name": "outcome_value",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:01",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0017"
-      ],
-      "field_name": "outcome_unit",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:02",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0018"
-      ],
-      "field_name": "endpoint_name",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:02",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0018"
-      ],
-      "field_name": "endpoint_family",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:02",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0019"
-      ],
-      "field_name": "outcome_value",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:02",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0019"
-      ],
-      "field_name": "outcome_unit",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:03",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0020"
-      ],
-      "field_name": "endpoint_name",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:03",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0020"
-      ],
-      "field_name": "endpoint_family",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:03",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0021"
+        "GP-008:EV:0010"
       ],
       "field_name": "qualitative_outcome",
       "notes": null,
@@ -899,10 +835,54 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:OUT:GP-008-E01:04",
+      "entity_id": "GP-008:ARM:GP-008-E01:F4",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-008:EV:0011"
+      ],
+      "field_name": "payload_name",
+      "notes": null,
+      "paper_id": "GP-008",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-008:ARM:GP-008-E01:F4",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-008:EV:0011"
+      ],
+      "field_name": "payload_type",
+      "notes": null,
+      "paper_id": "GP-008",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-008:ARM:GP-008-E01:F5",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-008:EV:0012"
+      ],
+      "field_name": "payload_name",
+      "notes": null,
+      "paper_id": "GP-008",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-008:ARM:GP-008-E01:F5",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-008:EV:0012"
+      ],
+      "field_name": "payload_type",
+      "notes": null,
+      "paper_id": "GP-008",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-008:OUT:GP-008-E01:F5:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-008:EV:0022"
+        "GP-008:EV:0013"
       ],
       "field_name": "endpoint_name",
       "notes": null,
@@ -910,10 +890,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:OUT:GP-008-E01:04",
+      "entity_id": "GP-008:OUT:GP-008-E01:F5:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-008:EV:0022"
+        "GP-008:EV:0013"
       ],
       "field_name": "endpoint_family",
       "notes": null,
@@ -921,109 +901,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-008:OUT:GP-008-E01:04",
+      "entity_id": "GP-008:OUT:GP-008-E01:F5:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-008:EV:0023"
-      ],
-      "field_name": "qualitative_outcome",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:05",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0024"
-      ],
-      "field_name": "endpoint_name",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:05",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0024"
-      ],
-      "field_name": "endpoint_family",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:05",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0025"
-      ],
-      "field_name": "qualitative_outcome",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:06",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0026"
-      ],
-      "field_name": "endpoint_name",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:06",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0026"
-      ],
-      "field_name": "endpoint_family",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:06",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0027"
-      ],
-      "field_name": "qualitative_outcome",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:07",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0028"
-      ],
-      "field_name": "endpoint_name",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:07",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0028"
-      ],
-      "field_name": "endpoint_family",
-      "notes": null,
-      "paper_id": "GP-008",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-008:OUT:GP-008-E01:07",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-008:EV:0029"
+        "GP-008:EV:0014"
       ],
       "field_name": "qualitative_outcome",
       "notes": null,
@@ -1036,7 +917,7 @@
       "artifact_id": "GP-008:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "anti-CD163-conjugated LNP encapsulating FAPCAR mRNA",
+      "formulation_name": "\u03b1CD163/LNP-FAPCAR",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1047,7 +928,7 @@
       "artifact_id": "GP-008:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "LNP encapsulating FAPCAR mRNA",
+      "formulation_name": "LNP-FAPCAR",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1058,7 +939,7 @@
       "artifact_id": "GP-008:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "anti-CD163-conjugated LNP encapsulating luciferase mRNA",
+      "formulation_name": "\u03b1CD163/LNP-Luc",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1069,7 +950,7 @@
       "artifact_id": "GP-008:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "anti-CD163-conjugated LNP encapsulating ZsGreen mRNA",
+      "formulation_name": "\u03b1CD163/LNP-ZsGreen",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1079,39 +960,7 @@
   ],
   "outcomes": [
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "BMDM transgene-expression frequency",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": "%",
-      "outcome_value": 80.0,
-      "paper_id": "GP-008",
-      "qualitative_outcome": null,
-      "record_id": "GP-008:OUT:GP-008-E01:01",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "reported"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "Reported outcome",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": "%",
-      "outcome_value": 20.0,
-      "paper_id": "GP-008",
-      "qualitative_outcome": null,
-      "record_id": "GP-008:OUT:GP-008-E01:02",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "reported"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F1",
       "artifact_id": "GP-008:accepted_graph",
       "endpoint_family": "reported endpoint",
       "endpoint_name": "mean particle diameter",
@@ -1121,13 +970,13 @@
       "outcome_value": null,
       "paper_id": "GP-008",
       "qualitative_outcome": "110.3 \u00b1 6.8 nm",
-      "record_id": "GP-008:OUT:GP-008-E01:03",
+      "record_id": "GP-008:OUT:GP-008-E01:F1:01",
       "uncertainty_type": null,
       "uncertainty_value": null,
       "value_status": "qualitative_only"
     },
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F5",
       "artifact_id": "GP-008:accepted_graph",
       "endpoint_family": "reported endpoint",
       "endpoint_name": "duration of hepatic ZsGreen fluorescence",
@@ -1137,55 +986,7 @@
       "outcome_value": null,
       "paper_id": "GP-008",
       "qualitative_outcome": "hepatic fluorescence sustained through day 14",
-      "record_id": "GP-008:OUT:GP-008-E01:04",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "HSC proportion in liver samples",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-008",
-      "qualitative_outcome": "lower HSC proportion versus fibrosis group",
-      "record_id": "GP-008:OUT:GP-008-E01:05",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "hepatocyte apoptosis",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-008",
-      "qualitative_outcome": "significantly lower than the Fibrosis group",
-      "record_id": "GP-008:OUT:GP-008-E01:06",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-008:ARM:GP-008-E01",
-      "artifact_id": "GP-008:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "Reported outcome",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-008",
-      "qualitative_outcome": "marked reduction in FAP-positive macrophages",
-      "record_id": "GP-008:OUT:GP-008-E01:07",
+      "record_id": "GP-008:OUT:GP-008-E01:F5:01",
       "uncertainty_type": null,
       "uncertainty_value": null,
       "value_status": "qualitative_only"
@@ -1212,15 +1013,68 @@
   },
   "reviews": [
     {
-      "arm_id": "GP-008:ARM:GP-008-E01",
+      "arm_id": "GP-008:ARM:GP-008-E01:F1",
       "artifact_id": "GP-008:accepted_graph",
       "evidence_ids": [],
       "field_name": null,
-      "notes": "Unsupported graph relation requires review.",
+      "notes": "Arm is retained but is not complete enough for training.",
       "outcome_id": null,
       "paper_id": "GP-008",
-      "reason_code": "needs_human_verification",
-      "record_id": "GP-008:REV:GP-008-E01",
+      "reason_code": "missing_dose",
+      "record_id": "GP-008:REV:GP-008-E01:F1",
+      "status": "incomplete"
+    },
+    {
+      "arm_id": "GP-008:ARM:GP-008-E01:F4",
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_ids": [],
+      "field_name": null,
+      "notes": "Arm is retained but is not complete enough for training.",
+      "outcome_id": null,
+      "paper_id": "GP-008",
+      "reason_code": "missing_dose",
+      "record_id": "GP-008:REV:GP-008-E01:F4",
+      "status": "incomplete"
+    },
+    {
+      "arm_id": "GP-008:ARM:GP-008-E01:F5",
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_ids": [],
+      "field_name": null,
+      "notes": "Arm is retained but is not complete enough for training.",
+      "outcome_id": null,
+      "paper_id": "GP-008",
+      "reason_code": "missing_dose",
+      "record_id": "GP-008:REV:GP-008-E01:F5",
+      "status": "incomplete"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-008:accepted_graph",
+      "evidence_ids": [
+        "GP-008:EV:0015",
+        "GP-008:EV:0016",
+        "GP-008:EV:0017",
+        "GP-008:EV:0018",
+        "GP-008:EV:0019",
+        "GP-008:EV:0020",
+        "GP-008:EV:0021",
+        "GP-008:EV:0022",
+        "GP-008:EV:0023",
+        "GP-008:EV:0024",
+        "GP-008:EV:0025",
+        "GP-008:EV:0026",
+        "GP-008:EV:0027",
+        "GP-008:EV:0028",
+        "GP-008:EV:0029",
+        "GP-008:EV:0030"
+      ],
+      "field_name": null,
+      "notes": "Evidence is retained, but cannot be assigned to one formulation arm without inventing a link.",
+      "outcome_id": null,
+      "paper_id": "GP-008",
+      "reason_code": "experiment_link_unclear",
+      "record_id": "GP-008:REV:GP-008-E01:UNASSIGNED",
       "status": "incomplete"
     }
   ],

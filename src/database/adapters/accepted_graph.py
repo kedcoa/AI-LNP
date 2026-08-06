@@ -65,7 +65,7 @@ def _unit(text: str | None, kind: str) -> str | None:
     if not text:
         return None
     if kind == "dose":
-        match = re.search(r"(µg|μg|ug|mg|ng)(?:\s*[^,;]*)?", text, re.I)
+        match = re.search(r"(micrograms?|µg|μg|ug|mg|ng)(?:\s*[^,;]*)?", text, re.I)
     elif kind == "timepoint":
         match = re.search(r"\b(hours?|hrs?|h|days?|d|weeks?|wk)\b", text, re.I)
     else:
@@ -142,7 +142,7 @@ def adapt_accepted_graph(
 
     for entity in formulation_entities:
         record_id = f"{paper_id}:FORM:{entity['entity_id']}"
-        value = _name(entity)
+        value = entity.get("reported_name") or entity.get("normalized_name")
         formulations.append(FormulationRecord(
             record_id=record_id, paper_id=paper_id, artifact_id=artifact_id,
             formulation_name=value, formulation_review_status="unreviewed",
@@ -187,112 +187,192 @@ def adapt_accepted_graph(
     reviews: list[ReviewRecord] = []
     for experiment in graph.get("experiments", []):
         experiment_id = experiment["experiment_id"]
-        experiment_claims = [claims[cid] for cid in experiment.get("claim_ids", []) if cid in claims]
-        form_claim = next((c for c in experiment_claims if c.get("predicate") == "has_formulation"), None)
-        form_entity_id = form_claim.get("object_entity_id") if form_claim else formulation_entities[0]["entity_id"]
-        formulation_id = formulation_id_by_entity.get(form_entity_id, formulations[0].record_id)
-        arm_id = f"{paper_id}:ARM:{experiment_id}"
-        values: dict[str, str] = {}
-        field_claims: dict[str, list[dict[str, Any]]] = {}
-        unknown: list[dict[str, Any]] = []
+        claim_ids = list(dict.fromkeys(experiment.get("claim_ids", []) + experiment.get("shared_claim_ids", [])))
+        experiment_claims = [claims[cid] for cid in claim_ids if cid in claims]
+
+        ownership: dict[str, set[str]] = {
+            entity_id: {entity_id} for entity_id in formulation_id_by_entity
+        }
         for claim in experiment_claims:
-            predicate = claim.get("predicate")
-            if predicate not in SUPPORTED_PREDICATES:
-                unknown.append(claim)
-                continue
-            field = FIELD_BY_PREDICATE.get(predicate)
-            if not field:
-                continue
-            entity = entities.get(claim.get("object_entity_id"))
-            value = _name(entity)
-            if value:
-                values[field] = value if field not in values else f"{values[field]}; {value}"
-                field_claims.setdefault(field, []).append(claim)
-        dose_text = values.get("dose")
-        time_text = values.get("timepoint")
-        cell_type = values.get("cell_type") or values.get("tissue_or_organ") or ""
-        arms.append(ArmRecord(
-            record_id=arm_id, paper_id=paper_id, artifact_id=artifact_id,
-            formulation_id=formulation_id, cell_type=cell_type,
-            tissue_or_organ=values.get("tissue_or_organ"), species=values.get("species"),
-            disease_model=values.get("disease_model"), payload_type="nucleic acid" if values.get("payload_name") else None,
-            payload_name=values.get("payload_name"), payload_encoded_product=values.get("payload_encoded_product"),
-            payload_molecular_target=values.get("payload_molecular_target"), dose=_number(dose_text),
-            dose_unit=_unit(dose_text, "dose"), route=values.get("route"), timepoint=_number(time_text),
-            timepoint_unit=_unit(time_text, "timepoint"), assay=values.get("assay"),
-            experiment_notes=experiment.get("label"), completeness_status="incomplete",
-            verification_status="unreviewed", nearest_neighbor_eligible=False, comet_eligible=False,
-        ))
-        for field, claim_rows in field_claims.items():
-            target_field = field
-            if field == "dose": target_field = "dose"
-            if field == "timepoint": target_field = "timepoint"
-            ids = add_evidence([ev for claim in claim_rows for ev in claim.get("evidence", [])], target_field, arm_id=arm_id)
-            if ids:
-                links.append(FieldEvidenceLink(paper_id, "arm", arm_id, target_field, ids))
-                if field == "dose" and _unit(dose_text, "dose"):
-                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "dose_unit", ids))
-                if field == "timepoint" and _unit(time_text, "timepoint"):
-                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "timepoint_unit", ids))
-        if values.get("payload_name"):
-            ids = next((link.evidence_ids for link in links if link.entity_id == arm_id and link.field_name == "payload_name"), ())
-            if ids:
-                links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "payload_type", ids))
+            if claim.get("predicate") == "has_formulation" and claim.get("object_entity_id") in formulation_id_by_entity:
+                ownership.setdefault(claim["subject_entity_id"], set()).add(claim["object_entity_id"])
+        for _ in range(3):
+            for claim in experiment_claims:
+                owners = ownership.get(claim.get("subject_entity_id"), set())
+                if owners and claim.get("predicate") in {"carries_payload", "encodes_product", "measures_endpoint"}:
+                    ownership.setdefault(claim["object_entity_id"], set()).update(owners)
 
-        endpoint_claims = [c for c in experiment_claims if c.get("predicate") == "measures_endpoint"]
-        endpoint_by_entity = {c.get("object_entity_id"): c for c in endpoint_claims}
-        value_claims = [c for c in experiment_claims if c.get("predicate") == "has_outcome_value"]
-        for index, value_claim in enumerate(value_claims, start=1):
-            endpoint_claim = endpoint_by_entity.get(value_claim.get("subject_entity_id"))
-            endpoint = entities.get(endpoint_claim.get("object_entity_id")) if endpoint_claim else None
-            value_entity = entities.get(value_claim.get("object_entity_id"))
-            values_text = _name(value_entity) or ""
-            outcome_id = f"{paper_id}:OUT:{experiment_id}:{index:02d}"
-            outcome_value = _number(values_text) if re.search(r"%|percent|fold", values_text, re.I) else None
-            outcomes.append(OutcomeRecord(
-                record_id=outcome_id, paper_id=paper_id, artifact_id=artifact_id, arm_id=arm_id,
-                endpoint_family="reported endpoint", endpoint_name=_name(endpoint) or "Reported outcome",
-                value_status="reported" if outcome_value is not None else "qualitative_only",
-                outcome_value=outcome_value, outcome_unit=_unit(values_text, "outcome") if outcome_value is not None else None,
-                qualitative_outcome=None if outcome_value is not None else (values_text or "Reported outcome"),
+        candidate_forms: list[str] = []
+        for claim in experiment_claims:
+            if claim.get("predicate") == "has_formulation":
+                candidate = claim.get("object_entity_id")
+                if candidate in formulation_id_by_entity and candidate not in candidate_forms:
+                    candidate_forms.append(candidate)
+            subject = claim.get("subject_entity_id")
+            if subject in formulation_id_by_entity and claim.get("predicate") in {"carries_payload", "measures_endpoint", "therapeutic_target_cell"} and subject not in candidate_forms:
+                candidate_forms.append(subject)
+
+        if not candidate_forms:
+            unresolved_ids = add_evidence(
+                [item for claim in experiment_claims for item in claim.get("evidence", [])],
+                "experiment_relationship",
+            )
+            reviews.append(ReviewRecord(
+                record_id=f"{paper_id}:REV:{experiment_id}:UNLINKED", paper_id=paper_id,
+                artifact_id=artifact_id, reason_code="experiment_link_unclear",
+                status="incomplete", evidence_ids=unresolved_ids,
+                notes="Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
             ))
-            endpoint_source = endpoint_claim.get("evidence", []) if endpoint_claim else value_claim.get("evidence", [])
-            endpoint_ids = add_evidence(endpoint_source, "endpoint_name", arm_id=arm_id, outcome_id=outcome_id)
-            value_ids = add_evidence(value_claim.get("evidence", []), "outcome_value" if outcome_value is not None else "qualitative_outcome", arm_id=arm_id, outcome_id=outcome_id)
-            if endpoint_ids:
-                links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_name", endpoint_ids))
-                links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_family", endpoint_ids))
-            if value_ids:
-                field = "outcome_value" if outcome_value is not None else "qualitative_outcome"
-                links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, field, value_ids))
-                if outcome_value is not None and _unit(values_text, "outcome"):
-                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "outcome_unit", value_ids))
-            elif outcome_value is None and endpoint_ids:
-                links.append(FieldEvidenceLink(
-                    paper_id, "outcome", outcome_id, "qualitative_outcome", endpoint_ids
-                ))
-        reviews.append(ReviewRecord(
-            record_id=f"{paper_id}:REV:{experiment_id}", paper_id=paper_id, artifact_id=artifact_id,
-            reason_code="needs_human_verification" if unknown else "missing_dose" if not dose_text else "missing_evidence_excerpt",
-            status="incomplete", arm_id=arm_id,
-            notes="Unsupported graph relation requires review." if unknown else "Arm is retained but is not complete enough for training.",
-        ))
+            continue
 
-    shared_outcomes = [
-        claim for claim in claims.values()
-        if claim.get("predicate") == "has_outcome_value"
-        and claim.get("experiment_id") == "SHARED"
+        consumed_claim_ids: set[str] = set()
+        for form_entity_id in candidate_forms:
+            formulation_id = formulation_id_by_entity[form_entity_id]
+            arm_claims = (
+                experiment_claims
+                if len(candidate_forms) == 1
+                else [
+                    claim for claim in experiment_claims
+                    if form_entity_id in ownership.get(claim.get("subject_entity_id"), set())
+                    or (
+                        claim.get("predicate") == "has_formulation"
+                        and claim.get("object_entity_id") == form_entity_id
+                    )
+                ]
+            )
+            consumed_claim_ids.update(claim["claim_id"] for claim in arm_claims)
+            arm_id = f"{paper_id}:ARM:{experiment_id}:{form_entity_id}"
+            values: dict[str, str] = {}
+            field_claims: dict[str, list[dict[str, Any]]] = {}
+            unknown: list[dict[str, Any]] = []
+            for claim in arm_claims:
+                predicate = claim.get("predicate")
+                if predicate not in SUPPORTED_PREDICATES:
+                    unknown.append(claim)
+                    continue
+                field = FIELD_BY_PREDICATE.get(predicate)
+                if not field:
+                    continue
+                value = _name(entities.get(claim.get("object_entity_id")))
+                if value:
+                    values[field] = value if field not in values else f"{values[field]}; {value}"
+                    field_claims.setdefault(field, []).append(claim)
+            dose_text = values.get("dose")
+            time_text = values.get("timepoint")
+            dose = _number(dose_text)
+            dose_unit = _unit(dose_text, "dose")
+            if dose is not None and dose_unit is None:
+                dose = None
+            arms.append(ArmRecord(
+                record_id=arm_id, paper_id=paper_id, artifact_id=artifact_id,
+                formulation_id=formulation_id,
+                cell_type=values.get("cell_type") or values.get("tissue_or_organ") or "",
+                tissue_or_organ=values.get("tissue_or_organ"), species=values.get("species"),
+                disease_model=values.get("disease_model"),
+                payload_type="nucleic acid" if values.get("payload_name") else None,
+                payload_name=values.get("payload_name"),
+                payload_encoded_product=values.get("payload_encoded_product"),
+                payload_molecular_target=values.get("payload_molecular_target"),
+                dose=dose, dose_unit=dose_unit, route=values.get("route"),
+                timepoint=_number(time_text), timepoint_unit=_unit(time_text, "timepoint"),
+                assay=values.get("assay"), experiment_notes=experiment.get("label"),
+                completeness_status="incomplete", verification_status="unreviewed",
+                nearest_neighbor_eligible=False, comet_eligible=False,
+            ))
+            for field, claim_rows in field_claims.items():
+                if field == "dose" and dose is None:
+                    continue
+                ids = add_evidence(
+                    [item for claim in claim_rows for item in claim.get("evidence", [])],
+                    field, arm_id=arm_id,
+                )
+                if ids:
+                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, field, ids))
+                    if field == "dose" and dose_unit:
+                        links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "dose_unit", ids))
+                    if field == "timepoint" and _unit(time_text, "timepoint"):
+                        links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "timepoint_unit", ids))
+            if values.get("payload_name"):
+                ids = next((link.evidence_ids for link in links if link.entity_id == arm_id and link.field_name == "payload_name"), ())
+                if ids:
+                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "payload_type", ids))
+
+            endpoint_claims = [claim for claim in arm_claims if claim.get("predicate") == "measures_endpoint"]
+            endpoint_by_entity = {claim.get("object_entity_id"): claim for claim in endpoint_claims}
+            value_claims = [
+                claim for claim in arm_claims
+                if claim.get("predicate") == "has_outcome_value"
+                and (
+                    len(candidate_forms) == 1
+                    or form_entity_id in ownership.get(claim.get("subject_entity_id"), set())
+                )
+            ]
+            for index, value_claim in enumerate(value_claims, start=1):
+                endpoint_claim = endpoint_by_entity.get(value_claim.get("subject_entity_id"))
+                endpoint = entities.get(endpoint_claim.get("object_entity_id")) if endpoint_claim else None
+                values_text = _name(entities.get(value_claim.get("object_entity_id"))) or ""
+                outcome_id = f"{paper_id}:OUT:{experiment_id}:{form_entity_id}:{index:02d}"
+                outcome_value = _number(values_text) if re.search(r"%|percent|fold", values_text, re.I) else None
+                outcomes.append(OutcomeRecord(
+                    record_id=outcome_id, paper_id=paper_id, artifact_id=artifact_id,
+                    arm_id=arm_id, endpoint_family="reported endpoint",
+                    endpoint_name=_name(endpoint) or "Reported outcome",
+                    value_status="reported" if outcome_value is not None else "qualitative_only",
+                    outcome_value=outcome_value,
+                    outcome_unit=_unit(values_text, "outcome") if outcome_value is not None else None,
+                    qualitative_outcome=None if outcome_value is not None else (values_text or "Reported outcome"),
+                ))
+                endpoint_source = endpoint_claim.get("evidence", []) if endpoint_claim else value_claim.get("evidence", [])
+                endpoint_ids = add_evidence(endpoint_source, "endpoint_name", arm_id=arm_id, outcome_id=outcome_id)
+                value_field = "outcome_value" if outcome_value is not None else "qualitative_outcome"
+                value_ids = add_evidence(value_claim.get("evidence", []), value_field, arm_id=arm_id, outcome_id=outcome_id)
+                if endpoint_ids:
+                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_name", endpoint_ids))
+                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_family", endpoint_ids))
+                if value_ids:
+                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, value_field, value_ids))
+                    if outcome_value is not None and _unit(values_text, "outcome"):
+                        links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "outcome_unit", value_ids))
+            unknown_ids = add_evidence(
+                [item for claim in unknown for item in claim.get("evidence", [])],
+                "unsupported_relationship", arm_id=arm_id,
+            )
+            reviews.append(ReviewRecord(
+                record_id=f"{paper_id}:REV:{experiment_id}:{form_entity_id}", paper_id=paper_id,
+                artifact_id=artifact_id,
+                reason_code="needs_human_verification" if unknown else "missing_dose" if not dose_text else "missing_evidence_excerpt",
+                status="incomplete", evidence_ids=unknown_ids, arm_id=arm_id,
+                notes="Unsupported graph relation evidence requires review." if unknown else "Arm is retained but is not complete enough for training.",
+            ))
+
+        unresolved_claims = [claim for claim in experiment_claims if claim["claim_id"] not in consumed_claim_ids]
+        if unresolved_claims:
+            unresolved_ids = add_evidence(
+                [item for claim in unresolved_claims for item in claim.get("evidence", [])],
+                "experiment_relationship",
+            )
+            reviews.append(ReviewRecord(
+                record_id=f"{paper_id}:REV:{experiment_id}:UNASSIGNED", paper_id=paper_id,
+                artifact_id=artifact_id, reason_code="experiment_link_unclear",
+                status="incomplete", evidence_ids=unresolved_ids,
+                notes="Evidence is retained, but cannot be assigned to one formulation arm without inventing a link.",
+            ))
+
+    imported_quotes = {row.evidence_text for row in evidence}
+    unrepresented_items = [
+        item
+        for claim in claims.values()
+        for item in claim.get("evidence", [])
+        if item.get("quote") and item["quote"] not in imported_quotes
     ]
-    for index, claim in enumerate(shared_outcomes, start=1):
-        ids = add_evidence(claim.get("evidence", []), "outcome_value")
+    if unrepresented_items:
+        ids = add_evidence(unrepresented_items, "unresolved_relationship")
         reviews.append(ReviewRecord(
-            record_id=f"{paper_id}:REV:SHARED-OUTCOME:{index:02d}",
-            paper_id=paper_id,
-            artifact_id=artifact_id,
-            reason_code="outcome_link_unclear",
-            status="incomplete",
+            record_id=f"{paper_id}:REV:UNRESOLVED-RELATIONSHIPS",
+            paper_id=paper_id, artifact_id=artifact_id,
+            reason_code="needs_human_verification", status="incomplete",
             evidence_ids=ids,
-            notes="Outcome evidence is retained, but the accepted graph does not assign it to one experiment arm.",
+            notes="Exact accepted-graph evidence is retained, but its relationship is not safely normalized.",
         ))
 
     return ImportBundle(

@@ -9,104 +9,8 @@
       "comparator_description": null,
       "comparator_type": null,
       "completeness_status": "incomplete",
-      "disease_model": "mouse model of hepatic ischemia-reperfusion injury; hepatic ischemia-reperfusion injury",
-      "dose": null,
-      "dose_unit": null,
-      "experiment_notes": "ACT in-vivo HIRI experiment",
-      "formulation_id": "GP-007:FORM:ENT-F01",
-      "in_vitro_in_vivo": null,
-      "nearest_neighbor_eligible": false,
-      "paper_id": "GP-007",
-      "payload_encoded_product": null,
-      "payload_molecular_target": null,
-      "payload_name": null,
-      "payload_type": null,
-      "protocol_reference": null,
-      "quarantine_reason": null,
-      "record_id": "GP-007:ARM:GP-007-E01",
-      "reporter": null,
-      "route": null,
-      "species": null,
-      "timepoint": null,
-      "timepoint_unit": null,
-      "tissue_or_organ": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "artifact_id": "GP-007:accepted_graph",
-      "assay": null,
-      "cell_source": null,
-      "cell_type": "",
-      "comet_eligible": false,
-      "comparator_description": null,
-      "comparator_type": null,
-      "completeness_status": "incomplete",
-      "disease_model": "hypoxia-reoxygenation- or lactate-stimulated liver sinusoidal endothelial cells",
-      "dose": null,
-      "dose_unit": null,
-      "experiment_notes": "ACT in-vitro LSEC experiment",
-      "formulation_id": "GP-007:FORM:ENT-F01",
-      "in_vitro_in_vivo": null,
-      "nearest_neighbor_eligible": false,
-      "paper_id": "GP-007",
-      "payload_encoded_product": null,
-      "payload_molecular_target": null,
-      "payload_name": null,
-      "payload_type": null,
-      "protocol_reference": null,
-      "quarantine_reason": null,
-      "record_id": "GP-007:ARM:GP-007-E02",
-      "reporter": null,
-      "route": null,
-      "species": null,
-      "timepoint": null,
-      "timepoint_unit": null,
-      "tissue_or_organ": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "artifact_id": "GP-007:accepted_graph",
-      "assay": null,
-      "cell_source": null,
-      "cell_type": "",
-      "comet_eligible": false,
-      "comparator_description": null,
-      "comparator_type": null,
-      "completeness_status": "incomplete",
       "disease_model": null,
       "dose": null,
-      "dose_unit": null,
-      "experiment_notes": "LSEC-specific Micu1-overexpression experiment",
-      "formulation_id": "GP-007:FORM:ENT-F01",
-      "in_vitro_in_vivo": null,
-      "nearest_neighbor_eligible": false,
-      "paper_id": "GP-007",
-      "payload_encoded_product": null,
-      "payload_molecular_target": null,
-      "payload_name": null,
-      "payload_type": null,
-      "protocol_reference": null,
-      "quarantine_reason": null,
-      "record_id": "GP-007:ARM:GP-007-E03",
-      "reporter": null,
-      "route": null,
-      "species": null,
-      "timepoint": null,
-      "timepoint_unit": null,
-      "tissue_or_organ": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "artifact_id": "GP-007:accepted_graph",
-      "assay": null,
-      "cell_source": null,
-      "cell_type": "",
-      "comet_eligible": false,
-      "comparator_description": null,
-      "comparator_type": null,
-      "completeness_status": "incomplete",
-      "disease_model": null,
-      "dose": 5.0,
       "dose_unit": null,
       "experiment_notes": "ACT plus siMicu1-LNP experiment",
       "formulation_id": "GP-007:FORM:ENT-F01",
@@ -115,11 +19,11 @@
       "paper_id": "GP-007",
       "payload_encoded_product": null,
       "payload_molecular_target": null,
-      "payload_name": null,
-      "payload_type": null,
+      "payload_name": "MICU1-targeting siRNA",
+      "payload_type": "nucleic acid",
       "protocol_reference": null,
       "quarantine_reason": null,
-      "record_id": "GP-007:ARM:GP-007-E04",
+      "record_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "reporter": null,
       "route": "intravenous administration",
       "species": "Mus musculus",
@@ -269,13 +173,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E01",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "we explored the hepatoprotective mechanisms of ACT in vivo in HIRI mice",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "disease_model",
+      "field_name": "experiment_relationship",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -289,13 +193,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E01",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "ACT enhanced endoplasmic reticulum function and restored mitochondrial homeostasis, thereby alleviating LSECs damage and HIRI.",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "disease_model",
+      "field_name": "experiment_relationship",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -309,13 +213,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E02",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "in vitro in hypoxia-reoxygenation or lactate-stimulated LSECs",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "disease_model",
+      "field_name": "experiment_relationship",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -329,15 +233,15 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E03",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "the hepatoprotective and sinusoid-stabilizing effects of ACT",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E03:01",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0008",
@@ -349,15 +253,15 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E03",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "largely abolished",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "qualitative_outcome",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E03:01",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0009",
@@ -369,7 +273,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "mice were randomly assigned to four groups",
@@ -389,7 +293,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "an intravenous injection of LNPs-siMicu1",
@@ -409,13 +313,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "LNPs-siMicu1 (5 \u03bcl/g)",
+      "evidence_text": "2 h prior to surgery",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "dose",
+      "field_name": "timepoint",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -429,27 +333,27 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "2 h prior to surgery",
+      "evidence_text": "a T-junction mixer was used to quickly mix siMicu1 and above solution",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "timepoint",
+      "field_name": "payload_name",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0013",
       "reviewer_notes": null,
-      "section_name": "B007C002",
+      "section_name": "B002C004",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "liver was the primary target organ",
@@ -457,7 +361,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:01",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:01",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0014",
@@ -469,7 +373,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "liver was the primary target organ",
@@ -477,7 +381,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:01",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:01",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0015",
@@ -489,7 +393,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "were largely improved in the HIRI + LNPs-siMicu1 group, more significantly in the HIRI + LNPs-siMicu1 + ACT group",
@@ -497,7 +401,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:02",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:02",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0016",
@@ -509,7 +413,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "were largely improved in the HIRI + LNPs-siMicu1 group, more significantly in the HIRI + LNPs-siMicu1 + ACT group",
@@ -517,7 +421,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:02",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:02",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0017",
@@ -529,7 +433,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "were largely improved in the HIRI + LNPs-siMicu1 group, more significantly in the HIRI + LNPs-siMicu1 + ACT group",
@@ -537,7 +441,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:03",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:03",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0018",
@@ -549,7 +453,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "were largely improved in the HIRI + LNPs-siMicu1 group, more significantly in the HIRI + LNPs-siMicu1 + ACT group",
@@ -557,7 +461,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:03",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:03",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0019",
@@ -569,7 +473,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "significantly restored in HIRI + LNPs-siMicu1 and HIRI + LNPs-siMicu1 + ACT groups",
@@ -577,7 +481,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:04",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:04",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0020",
@@ -589,7 +493,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "significantly restored in HIRI + LNPs-siMicu1 and HIRI + LNPs-siMicu1 + ACT groups",
@@ -597,7 +501,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-007:OUT:GP-007-E04:04",
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:04",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0021",
@@ -609,15 +513,15 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": null,
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "the particle size of siMicu1-LNPs was 80.03 \u00b1 1.19 nm",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "outcome_value",
+      "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": null,
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:05",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0022",
@@ -629,15 +533,15 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": null,
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "the surface potential was 10.12 mV",
+      "evidence_text": "the particle size of siMicu1-LNPs was 80.03 \u00b1 1.19 nm",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "outcome_value",
+      "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": null,
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:05",
       "page_number": null,
       "paper_id": "GP-007",
       "record_id": "GP-007:EV:0023",
@@ -649,7 +553,67 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": null,
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "the surface potential was 10.12 mV",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:06",
+      "page_number": null,
+      "paper_id": "GP-007",
+      "record_id": "GP-007:EV:0024",
+      "reviewer_notes": null,
+      "section_name": "B003C003",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "the surface potential was 10.12 mV",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "qualitative_outcome",
+      "figure_number": null,
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:06",
+      "page_number": null,
+      "paper_id": "GP-007",
+      "record_id": "GP-007:EV:0025",
+      "reviewer_notes": null,
+      "section_name": "B003C003",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The encapsulation efficiency (EE%) determined by UPLC",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:07",
+      "page_number": null,
+      "paper_id": "GP-007",
+      "record_id": "GP-007:EV:0026",
+      "reviewer_notes": null,
+      "section_name": "B003C004",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "The encapsulation efficiency (EE%) determined by UPLC was 71.97%",
@@ -657,12 +621,72 @@
       "extraction_method": "accepted_graph",
       "field_name": "outcome_value",
       "figure_number": null,
+      "outcome_id": "GP-007:OUT:GP-007-E04:ENT-F01:07",
+      "page_number": null,
+      "paper_id": "GP-007",
+      "record_id": "GP-007:EV:0027",
+      "reviewer_notes": null,
+      "section_name": "B003C004",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "blank-LNPs or siMicu1-LNPs",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "unsupported_relationship",
+      "figure_number": null,
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-007",
-      "record_id": "GP-007:EV:0024",
+      "record_id": "GP-007:EV:0028",
       "reviewer_notes": null,
-      "section_name": "B003C004",
+      "section_name": "B003C007",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "0.1 mol% FITC-labeled HA derivatives",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "unsupported_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-007",
+      "record_id": "GP-007:EV:0029",
+      "reviewer_notes": null,
+      "section_name": "B002C003",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-007:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "LNPs-siMicu1 (5 \u03bcl/g)",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "unresolved_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-007",
+      "record_id": "GP-007:EV:0030",
+      "reviewer_notes": null,
+      "section_name": "B007C002",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
@@ -781,63 +805,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:ARM:GP-007-E01",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-007:EV:0005",
-        "GP-007:EV:0006"
-      ],
-      "field_name": "disease_model",
-      "notes": null,
-      "paper_id": "GP-007",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-007:ARM:GP-007-E02",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-007:EV:0007"
-      ],
-      "field_name": "disease_model",
-      "notes": null,
-      "paper_id": "GP-007",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-007:OUT:GP-007-E03:01",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-007:EV:0008"
-      ],
-      "field_name": "endpoint_name",
-      "notes": null,
-      "paper_id": "GP-007",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-007:OUT:GP-007-E03:01",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-007:EV:0008"
-      ],
-      "field_name": "endpoint_family",
-      "notes": null,
-      "paper_id": "GP-007",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-007:OUT:GP-007-E03:01",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-007:EV:0009"
-      ],
-      "field_name": "qualitative_outcome",
-      "notes": null,
-      "paper_id": "GP-007",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-007:ARM:GP-007-E04",
+      "entity_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "entity_type": "arm",
       "evidence_ids": [
         "GP-007:EV:0010"
@@ -848,7 +816,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:ARM:GP-007-E04",
+      "entity_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "entity_type": "arm",
       "evidence_ids": [
         "GP-007:EV:0011"
@@ -859,21 +827,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:ARM:GP-007-E04",
+      "entity_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "entity_type": "arm",
       "evidence_ids": [
         "GP-007:EV:0012"
-      ],
-      "field_name": "dose",
-      "notes": null,
-      "paper_id": "GP-007",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-007:ARM:GP-007-E04",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-007:EV:0013"
       ],
       "field_name": "timepoint",
       "notes": null,
@@ -881,10 +838,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:ARM:GP-007-E04",
+      "entity_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-007:EV:0013"
+        "GP-007:EV:0012"
       ],
       "field_name": "timepoint_unit",
       "notes": null,
@@ -892,7 +849,29 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:01",
+      "entity_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-007:EV:0013"
+      ],
+      "field_name": "payload_name",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-007:EV:0013"
+      ],
+      "field_name": "payload_type",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:01",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0014"
@@ -903,7 +882,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:01",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:01",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0014"
@@ -914,7 +893,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:01",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:01",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0015"
@@ -925,7 +904,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:02",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:02",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0016"
@@ -936,7 +915,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:02",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:02",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0016"
@@ -947,7 +926,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:02",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:02",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0017"
@@ -958,7 +937,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:03",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:03",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0018"
@@ -969,7 +948,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:03",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:03",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0018"
@@ -980,7 +959,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:03",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:03",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0019"
@@ -991,7 +970,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:04",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:04",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0020"
@@ -1002,7 +981,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:04",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:04",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0020"
@@ -1013,12 +992,122 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-007:OUT:GP-007-E04:04",
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:04",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-007:EV:0021"
       ],
       "field_name": "qualitative_outcome",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:05",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0022"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:05",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0022"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:05",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0023"
+      ],
+      "field_name": "qualitative_outcome",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:06",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0024"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:06",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0024"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:06",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0025"
+      ],
+      "field_name": "qualitative_outcome",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:07",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0026"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:07",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0026"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:07",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0027"
+      ],
+      "field_name": "outcome_value",
+      "notes": null,
+      "paper_id": "GP-007",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-007:OUT:GP-007-E04:ENT-F01:07",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-007:EV:0027"
+      ],
+      "field_name": "outcome_unit",
       "notes": null,
       "paper_id": "GP-007",
       "verification_status": "unreviewed"
@@ -1029,7 +1118,7 @@
       "artifact_id": "GP-007:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "siMicu1-loaded lipid nanoparticles",
+      "formulation_name": "LNPs-siMicu1",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1039,23 +1128,7 @@
   ],
   "outcomes": [
     {
-      "arm_id": "GP-007:ARM:GP-007-E03",
-      "artifact_id": "GP-007:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "ACT hepatoprotection and sinusoid stabilization",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-007",
-      "qualitative_outcome": "largely abolished",
-      "record_id": "GP-007:OUT:GP-007-E03:01",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "endpoint_family": "reported endpoint",
       "endpoint_name": "primary biodistribution target organ",
@@ -1065,13 +1138,13 @@
       "outcome_value": null,
       "paper_id": "GP-007",
       "qualitative_outcome": "predominant liver biodistribution",
-      "record_id": "GP-007:OUT:GP-007-E04:01",
+      "record_id": "GP-007:OUT:GP-007-E04:ENT-F01:01",
       "uncertainty_type": null,
       "uncertainty_value": null,
       "value_status": "qualitative_only"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "endpoint_family": "reported endpoint",
       "endpoint_name": "Reported outcome",
@@ -1081,13 +1154,13 @@
       "outcome_value": null,
       "paper_id": "GP-007",
       "qualitative_outcome": "improved with siMicu1-LNPs and more strongly with siMicu1-LNPs plus acteoside",
-      "record_id": "GP-007:OUT:GP-007-E04:02",
+      "record_id": "GP-007:OUT:GP-007-E04:ENT-F01:02",
       "uncertainty_type": null,
       "uncertainty_value": null,
       "value_status": "qualitative_only"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "endpoint_family": "reported endpoint",
       "endpoint_name": "Reported outcome",
@@ -1097,13 +1170,13 @@
       "outcome_value": null,
       "paper_id": "GP-007",
       "qualitative_outcome": "improved with siMicu1-LNPs and more strongly with siMicu1-LNPs plus acteoside",
-      "record_id": "GP-007:OUT:GP-007-E04:03",
+      "record_id": "GP-007:OUT:GP-007-E04:ENT-F01:03",
       "uncertainty_type": null,
       "uncertainty_value": null,
       "value_status": "qualitative_only"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
       "endpoint_family": "reported endpoint",
       "endpoint_name": "Reported outcome",
@@ -1113,10 +1186,58 @@
       "outcome_value": null,
       "paper_id": "GP-007",
       "qualitative_outcome": "significantly restored in siMicu1-LNP and siMicu1-LNP-plus-acteoside groups",
-      "record_id": "GP-007:OUT:GP-007-E04:04",
+      "record_id": "GP-007:OUT:GP-007-E04:ENT-F01:04",
       "uncertainty_type": null,
       "uncertainty_value": null,
       "value_status": "qualitative_only"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "particle diameter",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": null,
+      "outcome_value": null,
+      "paper_id": "GP-007",
+      "qualitative_outcome": "80.03 \u00b1 1.19 nm",
+      "record_id": "GP-007:OUT:GP-007-E04:ENT-F01:05",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "qualitative_only"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "zeta potential",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": null,
+      "outcome_value": null,
+      "paper_id": "GP-007",
+      "qualitative_outcome": "10.12 mV",
+      "record_id": "GP-007:OUT:GP-007-E04:ENT-F01:06",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "qualitative_only"
+    },
+    {
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+      "artifact_id": "GP-007:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "encapsulation efficiency",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": "%",
+      "outcome_value": 71.97,
+      "paper_id": "GP-007",
+      "qualitative_outcome": null,
+      "record_id": "GP-007:OUT:GP-007-E04:ENT-F01:07",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "reported"
     }
   ],
   "paper": {
@@ -1140,93 +1261,76 @@
   },
   "reviews": [
     {
-      "arm_id": "GP-007:ARM:GP-007-E01",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "GP-007:EV:0005",
+        "GP-007:EV:0006"
+      ],
       "field_name": null,
-      "notes": "Arm is retained but is not complete enough for training.",
+      "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
       "outcome_id": null,
       "paper_id": "GP-007",
-      "reason_code": "missing_dose",
-      "record_id": "GP-007:REV:GP-007-E01",
+      "reason_code": "experiment_link_unclear",
+      "record_id": "GP-007:REV:GP-007-E01:UNLINKED",
       "status": "incomplete"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E02",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "GP-007:EV:0007"
+      ],
       "field_name": null,
-      "notes": "Arm is retained but is not complete enough for training.",
+      "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
       "outcome_id": null,
       "paper_id": "GP-007",
-      "reason_code": "missing_dose",
-      "record_id": "GP-007:REV:GP-007-E02",
+      "reason_code": "experiment_link_unclear",
+      "record_id": "GP-007:REV:GP-007-E02:UNLINKED",
       "status": "incomplete"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E03",
+      "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "GP-007:EV:0008",
+        "GP-007:EV:0009"
+      ],
       "field_name": null,
-      "notes": "Arm is retained but is not complete enough for training.",
+      "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
       "outcome_id": null,
       "paper_id": "GP-007",
-      "reason_code": "missing_dose",
-      "record_id": "GP-007:REV:GP-007-E03",
+      "reason_code": "experiment_link_unclear",
+      "record_id": "GP-007:REV:GP-007-E03:UNLINKED",
       "status": "incomplete"
     },
     {
-      "arm_id": "GP-007:ARM:GP-007-E04",
+      "arm_id": "GP-007:ARM:GP-007-E04:ENT-F01",
       "artifact_id": "GP-007:accepted_graph",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "GP-007:EV:0028",
+        "GP-007:EV:0029"
+      ],
       "field_name": null,
-      "notes": "Unsupported graph relation requires review.",
+      "notes": "Unsupported graph relation evidence requires review.",
       "outcome_id": null,
       "paper_id": "GP-007",
       "reason_code": "needs_human_verification",
-      "record_id": "GP-007:REV:GP-007-E04",
+      "record_id": "GP-007:REV:GP-007-E04:ENT-F01",
       "status": "incomplete"
     },
     {
       "arm_id": null,
       "artifact_id": "GP-007:accepted_graph",
       "evidence_ids": [
-        "GP-007:EV:0022"
+        "GP-007:EV:0030"
       ],
       "field_name": null,
-      "notes": "Outcome evidence is retained, but the accepted graph does not assign it to one experiment arm.",
+      "notes": "Exact accepted-graph evidence is retained, but its relationship is not safely normalized.",
       "outcome_id": null,
       "paper_id": "GP-007",
-      "reason_code": "outcome_link_unclear",
-      "record_id": "GP-007:REV:SHARED-OUTCOME:01",
-      "status": "incomplete"
-    },
-    {
-      "arm_id": null,
-      "artifact_id": "GP-007:accepted_graph",
-      "evidence_ids": [
-        "GP-007:EV:0023"
-      ],
-      "field_name": null,
-      "notes": "Outcome evidence is retained, but the accepted graph does not assign it to one experiment arm.",
-      "outcome_id": null,
-      "paper_id": "GP-007",
-      "reason_code": "outcome_link_unclear",
-      "record_id": "GP-007:REV:SHARED-OUTCOME:02",
-      "status": "incomplete"
-    },
-    {
-      "arm_id": null,
-      "artifact_id": "GP-007:accepted_graph",
-      "evidence_ids": [
-        "GP-007:EV:0024"
-      ],
-      "field_name": null,
-      "notes": "Outcome evidence is retained, but the accepted graph does not assign it to one experiment arm.",
-      "outcome_id": null,
-      "paper_id": "GP-007",
-      "reason_code": "outcome_link_unclear",
-      "record_id": "GP-007:REV:SHARED-OUTCOME:03",
+      "reason_code": "needs_human_verification",
+      "record_id": "GP-007:REV:UNRESOLVED-RELATIONSHIPS",
       "status": "incomplete"
     }
   ],

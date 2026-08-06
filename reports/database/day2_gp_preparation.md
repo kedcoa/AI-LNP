@@ -13,12 +13,12 @@ missing or unresolved required field.
 
 | Paper | Formulations | Components | Arms | Outcomes | Evidence excerpts | Review records | Plain review reasons |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| GP-002 | 1 | 4 | 6 | 6 | 40 | 6 | Missing dose; needs human verification |
-| GP-004 | 1 | 4 | 4 | 8 | 44 | 4 | Missing dose; missing evidence excerpt |
-| GP-005 | 5 | 4 | 3 | 5 | 32 | 3 | Missing dose; needs human verification |
+| GP-002 | 1 | 4 | 6 | 6 | 62 | 7 | Missing dose; needs human verification |
+| GP-004 | 1 | 4 | 3 | 7 | 49 | 5 | Experiment link unclear; missing dose; missing evidence excerpt; needs human verification |
+| GP-005 | 5 | 4 | 4 | 4 | 40 | 7 | Experiment link unclear; missing dose; needs human verification |
 | GP-006 | 1 | 1 | 1 | 5 | 17 | 1 | Missing dose |
-| GP-007 | 1 | 3 | 4 | 5 | 24 | 7 | Missing dose; needs human verification; outcome link unclear |
-| GP-008 | 4 | 0 | 1 | 7 | 29 | 1 | Needs human verification |
+| GP-007 | 1 | 3 | 1 | 7 | 30 | 5 | Experiment link unclear; needs human verification |
+| GP-008 | 4 | 0 | 3 | 2 | 30 | 4 | Experiment link unclear; missing dose |
 
 ## Provenance and conservative decisions
 
@@ -27,12 +27,19 @@ missing or unresolved required field.
 - Formulation/component/arm/outcome fields are populated only when an explicit
   graph entity and claim support the relationship. Numeric values are parsed
   only from explicitly numeric dose, timepoint, percent, or fold text.
-- Multiple claims are retained as separate outcomes. Shared GP-007 outcome
-  claims that lack an experiment assignment are retained as evidence plus
-  `Outcome link unclear` review records; they are not attached to an arbitrary
-  arm.
-- Unsupported or not-yet-normalized relation types remain visible through the
-  `Needs human verification` tag. Missing values are not imputed.
+- One experiment may produce multiple arms when its accepted graph explicitly
+  relates multiple formulations. GP-005 therefore preserves LNP1, LNP16,
+  LNP17, and LNP3–LNP7 as distinct arms. GP-008 preserves F1, F4, and F5;
+  unused F2 is not invented as an arm.
+- `shared_claim_ids` are evaluated per experiment. This preserves the shared
+  GP-002 payload and assigns GP-007 shared outcomes to E04 because E04 lists
+  those claim IDs. Evidence without an explicit formulation relationship stays
+  unassigned and visible as `Experiment link unclear` rather than being attached
+  to the first formulation.
+- Unsupported or not-yet-normalized relation types and their exact excerpts
+  remain visible through review records. Missing values are not imputed.
+- Numeric dose values are stored only with a parsed unit; `microgram(s)` is
+  recognized in addition to symbol and abbreviated forms.
 - Titles remain the paper IDs because the controlled local gold-source manifest
   contains PMID/PMCID/DOI but no title. Bibliographic identifiers are preserved
   from that manifest.

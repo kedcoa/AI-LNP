@@ -19,14 +19,14 @@
       "paper_id": "GP-005",
       "payload_encoded_product": null,
       "payload_molecular_target": null,
-      "payload_name": "EGFP-encoding mRNA; negative-control siRNA; TLR4-targeting siRNA; EGFP-encoding mRNA",
-      "payload_type": "nucleic acid",
+      "payload_name": null,
+      "payload_type": null,
       "protocol_reference": null,
       "quarantine_reason": null,
-      "record_id": "GP-005:ARM:GP-005-E01",
+      "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "reporter": null,
       "route": null,
-      "species": "Mus musculus",
+      "species": null,
       "timepoint": 16.0,
       "timepoint_unit": "hours",
       "tissue_or_organ": null,
@@ -44,18 +44,18 @@
       "disease_model": null,
       "dose": null,
       "dose_unit": null,
-      "experiment_notes": "Alternative ionizable lipid and modified mRNA effects on EGFP translation",
-      "formulation_id": "GP-005:FORM:ENT-LNP-GENERIC",
+      "experiment_notes": "LNP1 uptake/translation and co-encapsulated mRNA\u2013siRNA LNP studies",
+      "formulation_id": "GP-005:FORM:ENT-LNP17",
       "in_vitro_in_vivo": null,
       "nearest_neighbor_eligible": false,
       "paper_id": "GP-005",
       "payload_encoded_product": null,
       "payload_molecular_target": null,
-      "payload_name": "m1\u03a8- or 5-methoxyuridine-modified EGFP mRNA",
+      "payload_name": "TLR4-targeting siRNA; EGFP-encoding mRNA",
       "payload_type": "nucleic acid",
       "protocol_reference": null,
       "quarantine_reason": null,
-      "record_id": "GP-005:ARM:GP-005-E02",
+      "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "reporter": null,
       "route": null,
       "species": null,
@@ -76,18 +76,50 @@
       "disease_model": null,
       "dose": null,
       "dose_unit": null,
-      "experiment_notes": "Ploidy analysis of selected cell types",
-      "formulation_id": "GP-005:FORM:ENT-LNP-GENERIC",
+      "experiment_notes": "LNP1 uptake/translation and co-encapsulated mRNA\u2013siRNA LNP studies",
+      "formulation_id": "GP-005:FORM:ENT-LNP16",
       "in_vitro_in_vivo": null,
       "nearest_neighbor_eligible": false,
       "paper_id": "GP-005",
       "payload_encoded_product": null,
       "payload_molecular_target": null,
-      "payload_name": null,
-      "payload_type": null,
+      "payload_name": "EGFP-encoding mRNA; negative-control siRNA",
+      "payload_type": "nucleic acid",
       "protocol_reference": null,
       "quarantine_reason": null,
-      "record_id": "GP-005:ARM:GP-005-E03",
+      "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "reporter": null,
+      "route": null,
+      "species": null,
+      "timepoint": null,
+      "timepoint_unit": null,
+      "tissue_or_organ": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "artifact_id": "GP-005:accepted_graph",
+      "assay": null,
+      "cell_source": null,
+      "cell_type": "",
+      "comet_eligible": false,
+      "comparator_description": null,
+      "comparator_type": null,
+      "completeness_status": "incomplete",
+      "disease_model": null,
+      "dose": null,
+      "dose_unit": null,
+      "experiment_notes": "Alternative ionizable lipid and modified mRNA effects on EGFP translation",
+      "formulation_id": "GP-005:FORM:ENT-LNP3-7",
+      "in_vitro_in_vivo": null,
+      "nearest_neighbor_eligible": false,
+      "paper_id": "GP-005",
+      "payload_encoded_product": null,
+      "payload_molecular_target": null,
+      "payload_name": "m1\u03a8- or 5-methoxyuridine-modified EGFP mRNA",
+      "payload_type": "nucleic acid",
+      "protocol_reference": null,
+      "quarantine_reason": null,
+      "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
       "reporter": null,
       "route": null,
       "species": null,
@@ -412,7 +444,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "into C57BL6J wild type mice.",
@@ -432,13 +464,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "C57BL6J wild type mice",
+      "evidence_text": "2 mg k\u22121g Egfp mRNA\u2010LNP (LNP1)",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "species",
+      "field_name": "dose",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -452,13 +484,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "2 mg k\u22121g Egfp mRNA\u2010LNP (LNP1)",
+      "evidence_text": "16 h after the injection",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "dose",
+      "field_name": "timepoint",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -472,13 +504,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "16 h after the injection",
+      "evidence_text": "Intravital microscopy",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "timepoint",
+      "field_name": "assay",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -492,13 +524,13 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "Intravital microscopy",
+      "evidence_text": "Intravital microscopy of liver",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "assay",
+      "field_name": "unsupported_relationship",
       "figure_number": null,
       "outcome_id": null,
       "page_number": null,
@@ -512,47 +544,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
-      "artifact_id": "GP-005:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "16 (HS) Egfp mRNA + siRNA5 (NC siRNA)",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "payload_name",
-      "figure_number": null,
-      "outcome_id": null,
-      "page_number": null,
-      "paper_id": "GP-005",
-      "record_id": "GP-005:EV:0018",
-      "reviewer_notes": null,
-      "section_name": "B001C002",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-005:ARM:GP-005-E01",
-      "artifact_id": "GP-005:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "The LNP16 containing control siRNA",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "payload_name",
-      "figure_number": null,
-      "outcome_id": null,
-      "page_number": null,
-      "paper_id": "GP-005",
-      "record_id": "GP-005:EV:0019",
-      "reviewer_notes": null,
-      "section_name": "B010C006",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "LNP bearing an siRNA against Tlr4",
@@ -563,7 +555,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-005",
-      "record_id": "GP-005:EV:0020",
+      "record_id": "GP-005:EV:0018",
       "reviewer_notes": null,
       "section_name": "B010C005",
       "structured_evidence": null,
@@ -572,7 +564,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "the same Egfp mRNA (LNP17)",
@@ -583,7 +575,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-005",
-      "record_id": "GP-005:EV:0021",
+      "record_id": "GP-005:EV:0019",
       "reviewer_notes": null,
       "section_name": "B010C005",
       "structured_evidence": null,
@@ -592,47 +584,87 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "low EGFP protein translation by KC",
+      "evidence_text": "LNP17 caused a significant reduction of Tlr4 mRNA in HC, KC, and HSC",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:01",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP17:01",
       "page_number": null,
       "paper_id": "GP-005",
-      "record_id": "GP-005:EV:0022",
+      "record_id": "GP-005:EV:0020",
       "reviewer_notes": null,
-      "section_name": "B009C005",
+      "section_name": "B010C006",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "low EGFP protein translation by KC",
+      "evidence_text": "LNP17 caused a significant reduction of Tlr4 mRNA in HC, KC, and HSC",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:01",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP17:01",
       "page_number": null,
       "paper_id": "GP-005",
-      "record_id": "GP-005:EV:0023",
+      "record_id": "GP-005:EV:0021",
       "reviewer_notes": null,
-      "section_name": "B009C005",
+      "section_name": "B010C006",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "16 (HS) Egfp mRNA + siRNA5 (NC siRNA)",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "payload_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0022",
+      "reviewer_notes": null,
+      "section_name": "B001C002",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The LNP16 containing control siRNA",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "payload_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0023",
+      "reviewer_notes": null,
+      "section_name": "B010C006",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "LNP16 were taken up in significant amounts by hepatocytes and KC",
@@ -640,7 +672,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:02",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:01",
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0024",
@@ -652,7 +684,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "LNP16 were taken up in significant amounts by hepatocytes and KC",
@@ -660,7 +692,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:02",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:01",
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0025",
@@ -672,7 +704,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "LNP16 were taken up in significant amounts by hepatocytes and KC",
@@ -680,7 +712,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:03",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:02",
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0026",
@@ -692,7 +724,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "HSC did not absorb the LNP at a significant level",
@@ -700,7 +732,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:03",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:02",
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0027",
@@ -712,7 +744,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "The LNP16 containing control siRNA did not lead to a knockdown of Tlr4 mRNA",
@@ -720,7 +752,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "endpoint_name",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:04",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:03",
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0028",
@@ -732,7 +764,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "The LNP16 containing control siRNA did not lead to a knockdown of Tlr4 mRNA",
@@ -740,7 +772,7 @@
       "extraction_method": "accepted_graph",
       "field_name": "qualitative_outcome",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:04",
+      "outcome_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:03",
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0029",
@@ -752,47 +784,147 @@
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": null,
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "LNP17 caused a significant reduction of Tlr4 mRNA in HC, KC, and HSC",
+      "evidence_text": "C57BL6J wild type mice",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "endpoint_name",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:05",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0030",
       "reviewer_notes": null,
-      "section_name": "B010C006",
+      "section_name": "B007C003",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": null,
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
-      "evidence_text": "LNP17 caused a significant reduction of Tlr4 mRNA in HC, KC, and HSC",
+      "evidence_text": "we studied the uptake of LNP1 in vitro",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
-      "field_name": "qualitative_outcome",
+      "field_name": "experiment_relationship",
       "figure_number": null,
-      "outcome_id": "GP-005:OUT:GP-005-E01:05",
+      "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-005",
       "record_id": "GP-005:EV:0031",
       "reviewer_notes": null,
-      "section_name": "B010C006",
+      "section_name": "B009C001",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
       "verification_status": "unreviewed"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E02",
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "low EGFP protein translation by KC",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0032",
+      "reviewer_notes": null,
+      "section_name": "B009C005",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The lipid components (MC3, DSPC, Chol, and PEG2000\u2010lipid)",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0033",
+      "reviewer_notes": null,
+      "section_name": "B004C004",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The lipid components (MC3, DSPC, Chol, and PEG2000\u2010lipid)",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0034",
+      "reviewer_notes": null,
+      "section_name": "B004C004",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The lipid components (MC3, DSPC, Chol, and PEG2000\u2010lipid)",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0035",
+      "reviewer_notes": null,
+      "section_name": "B004C004",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The lipid components (MC3, DSPC, Chol, and PEG2000\u2010lipid)",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0036",
+      "reviewer_notes": null,
+      "section_name": "B004C004",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_location_type": "clause",
       "evidence_text": "LNP3\u2010LNP7 (Table 1) which included combinations of the ionizable lipid SM\u2010102 and m1\u03a8 or 5moU modified Egfp mRNA",
@@ -803,9 +935,69 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-005",
-      "record_id": "GP-005:EV:0032",
+      "record_id": "GP-005:EV:0037",
       "reviewer_notes": null,
       "section_name": "B016C003",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "Ploidy (2n, 4n) was assessed by flow cytometric analysis of nuclei staining.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "experiment_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0038",
+      "reviewer_notes": null,
+      "section_name": "B017C011",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "injection of DMSO and 2 mg k\u22121g Egfp mRNA\u2010LNP (LNP1) into C57BL6J wild type mice.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "unresolved_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0039",
+      "reviewer_notes": null,
+      "section_name": "B007C003",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "we generated LNP bearing an siRNA against Tlr4 and the same Egfp mRNA (LNP17) and treated mice with the LNP using the identical dose and time frame.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "unresolved_relationship",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-005",
+      "record_id": "GP-005:EV:0040",
+      "reviewer_notes": null,
+      "section_name": "B010C005",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
@@ -1004,7 +1196,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "entity_type": "arm",
       "evidence_ids": [
         "GP-005:EV:0013"
@@ -1015,21 +1207,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "entity_type": "arm",
       "evidence_ids": [
         "GP-005:EV:0014"
-      ],
-      "field_name": "species",
-      "notes": null,
-      "paper_id": "GP-005",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-005:ARM:GP-005-E01",
-      "entity_type": "arm",
-      "evidence_ids": [
-        "GP-005:EV:0015"
       ],
       "field_name": "dose",
       "notes": null,
@@ -1037,10 +1218,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-005:EV:0015"
+        "GP-005:EV:0014"
       ],
       "field_name": "dose_unit",
       "notes": null,
@@ -1048,10 +1229,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-005:EV:0016"
+        "GP-005:EV:0015"
       ],
       "field_name": "timepoint",
       "notes": null,
@@ -1059,10 +1240,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-005:EV:0016"
+        "GP-005:EV:0015"
       ],
       "field_name": "timepoint_unit",
       "notes": null,
@@ -1070,10 +1251,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-005:EV:0017"
+        "GP-005:EV:0016"
       ],
       "field_name": "assay",
       "notes": null,
@@ -1081,13 +1262,11 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "entity_type": "arm",
       "evidence_ids": [
         "GP-005:EV:0018",
-        "GP-005:EV:0019",
-        "GP-005:EV:0020",
-        "GP-005:EV:0021"
+        "GP-005:EV:0019"
       ],
       "field_name": "payload_name",
       "notes": null,
@@ -1095,13 +1274,11 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E01",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "entity_type": "arm",
       "evidence_ids": [
         "GP-005:EV:0018",
-        "GP-005:EV:0019",
-        "GP-005:EV:0020",
-        "GP-005:EV:0021"
+        "GP-005:EV:0019"
       ],
       "field_name": "payload_type",
       "notes": null,
@@ -1109,10 +1286,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:01",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP17:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-005:EV:0022"
+        "GP-005:EV:0020"
       ],
       "field_name": "endpoint_name",
       "notes": null,
@@ -1120,10 +1297,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:01",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP17:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-005:EV:0022"
+        "GP-005:EV:0020"
       ],
       "field_name": "endpoint_family",
       "notes": null,
@@ -1131,10 +1308,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:01",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP17:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-005:EV:0023"
+        "GP-005:EV:0021"
       ],
       "field_name": "qualitative_outcome",
       "notes": null,
@@ -1142,7 +1319,31 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:02",
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-005:EV:0022",
+        "GP-005:EV:0023"
+      ],
+      "field_name": "payload_name",
+      "notes": null,
+      "paper_id": "GP-005",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-005:EV:0022",
+        "GP-005:EV:0023"
+      ],
+      "field_name": "payload_type",
+      "notes": null,
+      "paper_id": "GP-005",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:01",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0024"
@@ -1153,7 +1354,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:02",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:01",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0024"
@@ -1164,7 +1365,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:02",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:01",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0025"
@@ -1175,7 +1376,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:03",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:02",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0026"
@@ -1186,7 +1387,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:03",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:02",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0026"
@@ -1197,7 +1398,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:03",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:02",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0027"
@@ -1208,7 +1409,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:04",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:03",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0028"
@@ -1219,7 +1420,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:04",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:03",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0028"
@@ -1230,7 +1431,7 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:04",
+      "entity_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:03",
       "entity_type": "outcome",
       "evidence_ids": [
         "GP-005:EV:0029"
@@ -1241,43 +1442,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:OUT:GP-005-E01:05",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-005:EV:0030"
-      ],
-      "field_name": "endpoint_name",
-      "notes": null,
-      "paper_id": "GP-005",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-005:OUT:GP-005-E01:05",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-005:EV:0030"
-      ],
-      "field_name": "endpoint_family",
-      "notes": null,
-      "paper_id": "GP-005",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-005:OUT:GP-005-E01:05",
-      "entity_type": "outcome",
-      "evidence_ids": [
-        "GP-005:EV:0031"
-      ],
-      "field_name": "qualitative_outcome",
-      "notes": null,
-      "paper_id": "GP-005",
-      "verification_status": "unreviewed"
-    },
-    {
-      "entity_id": "GP-005:ARM:GP-005-E02",
+      "entity_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-005:EV:0032"
+        "GP-005:EV:0037"
       ],
       "field_name": "payload_name",
       "notes": null,
@@ -1285,10 +1453,10 @@
       "verification_status": "unreviewed"
     },
     {
-      "entity_id": "GP-005:ARM:GP-005-E02",
+      "entity_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-005:EV:0032"
+        "GP-005:EV:0037"
       ],
       "field_name": "payload_type",
       "notes": null,
@@ -1301,7 +1469,7 @@
       "artifact_id": "GP-005:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "lipid nanoparticle",
+      "formulation_name": "LNP",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1312,7 +1480,7 @@
       "artifact_id": "GP-005:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "LNP1",
+      "formulation_name": "Egfp mRNA\u2010LNP (LNP1)",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1345,7 +1513,7 @@
       "artifact_id": "GP-005:accepted_graph",
       "composition_basis": null,
       "composition_raw": null,
-      "formulation_name": "LNP3\u2013LNP7",
+      "formulation_name": "LNP3\u2010LNP7",
       "formulation_notes": null,
       "formulation_review_status": "unreviewed",
       "np_ratio": null,
@@ -1355,71 +1523,7 @@
   ],
   "outcomes": [
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
-      "artifact_id": "GP-005:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "Reported outcome",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-005",
-      "qualitative_outcome": "low EGFP translation in Kupffer cells",
-      "record_id": "GP-005:OUT:GP-005-E01:01",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-005:ARM:GP-005-E01",
-      "artifact_id": "GP-005:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "cellular LNP16 uptake",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-005",
-      "qualitative_outcome": "significant LNP16 uptake by hepatocytes and Kupffer cells",
-      "record_id": "GP-005:OUT:GP-005-E01:02",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-005:ARM:GP-005-E01",
-      "artifact_id": "GP-005:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "cellular LNP16 uptake",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-005",
-      "qualitative_outcome": "no significant LNP16 uptake by hepatic stellate cells",
-      "record_id": "GP-005:OUT:GP-005-E01:03",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-005:ARM:GP-005-E01",
-      "artifact_id": "GP-005:accepted_graph",
-      "endpoint_family": "reported endpoint",
-      "endpoint_name": "TLR4 mRNA knockdown after LNP16 control treatment",
-      "normalization_basis": null,
-      "outcome_notes": null,
-      "outcome_unit": null,
-      "outcome_value": null,
-      "paper_id": "GP-005",
-      "qualitative_outcome": "no TLR4 mRNA knockdown after LNP16 control treatment",
-      "record_id": "GP-005:OUT:GP-005-E01:04",
-      "uncertainty_type": null,
-      "uncertainty_value": null,
-      "value_status": "qualitative_only"
-    },
-    {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "artifact_id": "GP-005:accepted_graph",
       "endpoint_family": "reported endpoint",
       "endpoint_name": "TLR4 mRNA knockdown after LNP17 treatment",
@@ -1429,7 +1533,55 @@
       "outcome_value": null,
       "paper_id": "GP-005",
       "qualitative_outcome": "significant TLR4 mRNA reduction in hepatocytes, Kupffer cells, and hepatic stellate cells",
-      "record_id": "GP-005:OUT:GP-005-E01:05",
+      "record_id": "GP-005:OUT:GP-005-E01:ENT-LNP17:01",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "qualitative_only"
+    },
+    {
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "artifact_id": "GP-005:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "cellular LNP16 uptake",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": null,
+      "outcome_value": null,
+      "paper_id": "GP-005",
+      "qualitative_outcome": "significant LNP16 uptake by hepatocytes and Kupffer cells",
+      "record_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:01",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "qualitative_only"
+    },
+    {
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "artifact_id": "GP-005:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "cellular LNP16 uptake",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": null,
+      "outcome_value": null,
+      "paper_id": "GP-005",
+      "qualitative_outcome": "no significant LNP16 uptake by hepatic stellate cells",
+      "record_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:02",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "qualitative_only"
+    },
+    {
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+      "artifact_id": "GP-005:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "TLR4 mRNA knockdown after LNP16 control treatment",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": null,
+      "outcome_value": null,
+      "paper_id": "GP-005",
+      "qualitative_outcome": "no TLR4 mRNA knockdown after LNP16 control treatment",
+      "record_id": "GP-005:OUT:GP-005-E01:ENT-LNP16:03",
       "uncertainty_type": null,
       "uncertainty_value": null,
       "value_status": "qualitative_only"
@@ -1456,19 +1608,21 @@
   },
   "reviews": [
     {
-      "arm_id": "GP-005:ARM:GP-005-E01",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP1",
       "artifact_id": "GP-005:accepted_graph",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "GP-005:EV:0017"
+      ],
       "field_name": null,
-      "notes": "Unsupported graph relation requires review.",
+      "notes": "Unsupported graph relation evidence requires review.",
       "outcome_id": null,
       "paper_id": "GP-005",
       "reason_code": "needs_human_verification",
-      "record_id": "GP-005:REV:GP-005-E01",
+      "record_id": "GP-005:REV:GP-005-E01:ENT-LNP1",
       "status": "incomplete"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E02",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_ids": [],
       "field_name": null,
@@ -1476,11 +1630,11 @@
       "outcome_id": null,
       "paper_id": "GP-005",
       "reason_code": "missing_dose",
-      "record_id": "GP-005:REV:GP-005-E02",
+      "record_id": "GP-005:REV:GP-005-E01:ENT-LNP17",
       "status": "incomplete"
     },
     {
-      "arm_id": "GP-005:ARM:GP-005-E03",
+      "arm_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
       "artifact_id": "GP-005:accepted_graph",
       "evidence_ids": [],
       "field_name": null,
@@ -1488,7 +1642,68 @@
       "outcome_id": null,
       "paper_id": "GP-005",
       "reason_code": "missing_dose",
-      "record_id": "GP-005:REV:GP-005-E03",
+      "record_id": "GP-005:REV:GP-005-E01:ENT-LNP16",
+      "status": "incomplete"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_ids": [
+        "GP-005:EV:0030",
+        "GP-005:EV:0031",
+        "GP-005:EV:0032",
+        "GP-005:EV:0033",
+        "GP-005:EV:0034",
+        "GP-005:EV:0035",
+        "GP-005:EV:0036"
+      ],
+      "field_name": null,
+      "notes": "Evidence is retained, but cannot be assigned to one formulation arm without inventing a link.",
+      "outcome_id": null,
+      "paper_id": "GP-005",
+      "reason_code": "experiment_link_unclear",
+      "record_id": "GP-005:REV:GP-005-E01:UNASSIGNED",
+      "status": "incomplete"
+    },
+    {
+      "arm_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_ids": [],
+      "field_name": null,
+      "notes": "Arm is retained but is not complete enough for training.",
+      "outcome_id": null,
+      "paper_id": "GP-005",
+      "reason_code": "missing_dose",
+      "record_id": "GP-005:REV:GP-005-E02:ENT-LNP3-7",
+      "status": "incomplete"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_ids": [
+        "GP-005:EV:0038"
+      ],
+      "field_name": null,
+      "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
+      "outcome_id": null,
+      "paper_id": "GP-005",
+      "reason_code": "experiment_link_unclear",
+      "record_id": "GP-005:REV:GP-005-E03:UNLINKED",
+      "status": "incomplete"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-005:accepted_graph",
+      "evidence_ids": [
+        "GP-005:EV:0039",
+        "GP-005:EV:0040"
+      ],
+      "field_name": null,
+      "notes": "Exact accepted-graph evidence is retained, but its relationship is not safely normalized.",
+      "outcome_id": null,
+      "paper_id": "GP-005",
+      "reason_code": "needs_human_verification",
+      "record_id": "GP-005:REV:UNRESOLVED-RELATIONSHIPS",
       "status": "incomplete"
     }
   ],

@@ -74,12 +74,16 @@ def test_real_supported_graph_produces_valid_noneligible_bundle(paper_id: str) -
     assert bundle.arms
     assert bundle.evidence
     assert all(not arm.nearest_neighbor_eligible and not arm.comet_eligible for arm in bundle.arms)
+    assert all(arm.dose is None or arm.dose_unit for arm in bundle.arms)
     graph = json.loads((GRAPH_ROOT / paper_id / "accepted_graph.json").read_text())
-    outcome_claims = sum(
-        claim["predicate"] == "has_outcome_value" and claim["experiment_id"] != "SHARED"
+    imported_quotes = {evidence.evidence_text for evidence in bundle.evidence}
+    source_quotes = {
+        evidence["quote"]
         for claim in graph["claims"]
-    )
-    assert len(bundle.outcomes) >= outcome_claims
+        for evidence in claim.get("evidence", [])
+        if evidence.get("quote")
+    }
+    assert source_quotes <= imported_quotes
     assert ImportBundle.from_dict(bundle.to_dict()).to_dict() == bundle.to_dict()
 
 
@@ -90,3 +94,53 @@ def test_generator_writes_only_six_supported_gp_bundles(tmp_path: Path) -> None:
     assert not any((tmp_path / f"{paper_id}.json").exists() for paper_id in ("GP-001", "GP-003", "GP-009"))
     bundles = [ImportBundle.from_dict(json.loads(path.read_text())) for path in paths]
     assert all(bundle.artifacts[0].path.startswith("data/staging/extraction/") for bundle in bundles)
+
+
+def test_gp005_preserves_explicit_formulation_arms_without_fallback() -> None:
+    bundle = adapt_accepted_graph(GRAPH_ROOT / "GP-005" / "accepted_graph.json")
+    formulation_by_id = {row.record_id: row.formulation_name for row in bundle.formulations}
+
+    assert {formulation_by_id[arm.formulation_id] for arm in bundle.arms} == {
+        "Egfp mRNA‐LNP (LNP1)", "LNP16", "LNP17", "LNP3‐LNP7"
+    }
+    assert not any("GP-005-E03" in arm.record_id for arm in bundle.arms)
+    assert any(review.reason_code == "experiment_link_unclear" for review in bundle.reviews)
+
+
+def test_gp008_creates_only_explicitly_related_formulation_arms() -> None:
+    bundle = adapt_accepted_graph(GRAPH_ROOT / "GP-008" / "accepted_graph.json")
+    formulation_by_id = {row.record_id: row.formulation_name for row in bundle.formulations}
+
+    assert {formulation_by_id[arm.formulation_id] for arm in bundle.arms} == {
+        "αCD163/LNP-FAPCAR", "αCD163/LNP-Luc", "αCD163/LNP-ZsGreen"
+    }
+
+
+def test_shared_claims_are_assigned_only_when_experiment_lists_them() -> None:
+    gp002 = adapt_accepted_graph(GRAPH_ROOT / "GP-002" / "accepted_graph.json")
+    assert all(arm.payload_name for arm in gp002.arms)
+    gp007 = adapt_accepted_graph(GRAPH_ROOT / "GP-007" / "accepted_graph.json")
+    e04 = next(arm for arm in gp007.arms if "GP-007-E04" in arm.record_id)
+    graph = json.loads((GRAPH_ROOT / "GP-007" / "accepted_graph.json").read_text())
+    experiment = next(row for row in graph["experiments"] if row["experiment_id"] == "GP-007-E04")
+    expected = sum(
+        graph_claim["predicate"] == "has_outcome_value"
+        for graph_claim in graph["claims"]
+        if graph_claim["claim_id"] in experiment["claim_ids"] + experiment["shared_claim_ids"]
+    )
+    assert len([outcome for outcome in gp007.outcomes if outcome.arm_id == e04.record_id]) == expected
+
+
+def test_dimensioned_dose_keeps_microgram_unit() -> None:
+    bundle = adapt_accepted_graph(GRAPH_ROOT / "GP-002" / "accepted_graph.json")
+    arm = next(arm for arm in bundle.arms if arm.dose == 10)
+    assert arm.dose_unit == "micrograms"
+
+
+def test_unsupported_predicate_preserves_exact_evidence(tmp_path: Path) -> None:
+    graph_path = _write_graph(tmp_path / "accepted_graph.json", predicate="has_magic")
+    bundle = adapt_accepted_graph(graph_path)
+    review = next(review for review in bundle.reviews if review.reason_code == "needs_human_verification")
+
+    assert review.evidence_ids
+    assert all(next(e for e in bundle.evidence if e.record_id == evidence_id).evidence_text for evidence_id in review.evidence_ids)
