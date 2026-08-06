@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import sqlite3
 
+import pytest
+
 from src.init_db import initialize_database
 from src.database.run_current_corpus_import import run_current_corpus_import
 
@@ -91,6 +93,110 @@ def test_audit_detects_semantic_orphan_and_eligibility_inconsistency(
     assert result["passed"] is False
     assert result["checks"]["orphan_counts"]["evidence_paper_mismatch"] > 0
     assert result["checks"]["eligibility_inconsistencies"]
+
+
+def test_audit_recomputes_rules_when_flags_and_results_are_tampered_together(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    with sqlite3.connect(database) as connection:
+        experiment_id = connection.execute(
+            "SELECT experiment_id FROM experiment ORDER BY experiment_id LIMIT 1"
+        ).fetchone()[0]
+        connection.execute(
+            "UPDATE arm_assessment SET nearest_neighbor_eligible=1, comet_eligible=1 "
+            "WHERE experiment_id=?", (experiment_id,)
+        )
+        connection.execute(
+            "UPDATE eligibility_result SET eligible=1, reasons_json='[]', "
+            "rules_version='forged' WHERE experiment_id=?", (experiment_id,)
+        )
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    problem = next(
+        row for row in result["checks"]["eligibility_inconsistencies"]
+        if row["arm_id"] == experiment_id
+    )
+    assert "rules_version" in " ".join(problem["reasons"])
+    assert result["passed"] is False
+
+
+def test_audit_rejects_manifest_disposition_drift(tmp_path: Path) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "UPDATE paper SET import_status='blocked' WHERE source_paper_id='GP-002'"
+        )
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    assert result["checks"]["manifest_disposition_mismatches"] == [
+        {
+            "paper_id": "GP-002",
+            "expected_import_status": "needs_review",
+            "actual_import_status": "blocked",
+            "expected_screening_status": "manual_review",
+            "actual_screening_status": "manual_review",
+        }
+    ]
+    assert result["passed"] is False
+
+
+def test_audit_rejects_polymorphic_entity_ids_with_wrong_ownership(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    with sqlite3.connect(database) as connection:
+        identity_id = connection.execute(
+            "SELECT import_record_identity_id FROM import_record_identity "
+            "WHERE entity_type='experiment' ORDER BY 1 LIMIT 1"
+        ).fetchone()[0]
+        field_link_id = connection.execute(
+            "SELECT import_field_evidence_id FROM import_field_evidence "
+            "WHERE entity_type='arm' ORDER BY 1 LIMIT 1"
+        ).fetchone()[0]
+        connection.execute(
+            "UPDATE import_record_identity SET entity_id=999999 "
+            "WHERE import_record_identity_id=?", (identity_id,)
+        )
+        connection.execute(
+            "UPDATE import_field_evidence SET entity_id=999999 "
+            "WHERE import_field_evidence_id=?", (field_link_id,)
+        )
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    assert result["checks"]["orphan_counts"]["identity_experiment_missing"] == 1
+    assert result["checks"]["orphan_counts"]["field_evidence_arm_missing"] == 1
+    assert result["passed"] is False
+
+
+def test_authoritative_label_requires_exact_expected_path(tmp_path: Path) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    with pytest.raises(ValueError, match="authoritative database path"):
+        audit_current_database(
+            database, MANIFEST, BUNDLES, database_kind="authoritative",
+            expected_authoritative_path=tmp_path / "different.db",
+        )
+    with pytest.raises(ValueError, match="database_kind"):
+        audit_current_database(
+            database, MANIFEST, BUNDLES, database_kind="authoratative"
+        )
+
+    result = audit_current_database(
+        database, MANIFEST, BUNDLES, database_kind="authoritative",
+        expected_authoritative_path=database,
+    )
+    assert result["database_kind"] == "authoritative"
 
 
 def test_audit_detects_foreign_key_coverage_tag_and_bundle_hash_failures(

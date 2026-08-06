@@ -8,6 +8,15 @@ from pathlib import Path
 import sqlite3
 from typing import Any
 
+from src.database.status import (
+    RULES_VERSION,
+    evaluate_arm_status,
+    evaluate_eligibility,
+)
+
+
+DATABASE_KINDS = frozenset({"explicit_fixture", "authoritative"})
+
 
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -61,6 +70,56 @@ def _orphan_counts(connection: sqlite3.Connection) -> dict[str, int]:
             WHERE r.paper_id != e.paper_id
         """,
     }
+    identity_targets = {
+        "paper": ("paper", "paper_id", "paper_id"),
+        "formulation": ("formulation", "formulation_id", "paper_id"),
+        "chemical_component": (
+            "(SELECT component_id, paper_id FROM chemical_component "
+            "JOIN formulation USING (formulation_id))",
+            "component_id",
+            "paper_id",
+        ),
+        "experiment": ("experiment", "experiment_id", "paper_id"),
+        "outcome": (
+            "(SELECT outcome_id, paper_id FROM outcome "
+            "JOIN experiment USING (experiment_id))",
+            "outcome_id",
+            "paper_id",
+        ),
+        "evidence": ("evidence", "evidence_id", "paper_id"),
+    }
+    for entity_type, (target, id_column, paper_column) in identity_targets.items():
+        queries[f"identity_{entity_type}_missing"] = f"""
+            SELECT count(*) FROM import_record_identity i
+            WHERE i.entity_type='{entity_type}' AND NOT EXISTS (
+                SELECT 1 FROM {target} t
+                WHERE t.{id_column}=i.entity_id AND t.{paper_column}=i.paper_id
+            )
+        """
+    field_targets = {
+        "formulation": ("formulation", "formulation_id", "paper_id"),
+        "component": (
+            "(SELECT component_id, paper_id FROM chemical_component "
+            "JOIN formulation USING (formulation_id))",
+            "component_id",
+            "paper_id",
+        ),
+        "arm": ("experiment", "experiment_id", "paper_id"),
+        "outcome": (
+            "(SELECT outcome_id, paper_id FROM outcome "
+            "JOIN experiment USING (experiment_id))",
+            "outcome_id",
+            "paper_id",
+        ),
+    }
+    for entity_type, (target, id_column, paper_column) in field_targets.items():
+        queries[f"field_evidence_{entity_type}_missing"] = f"""
+            SELECT count(*) FROM import_field_evidence f
+            WHERE f.entity_type='{entity_type}' AND NOT EXISTS (
+                SELECT 1 FROM {target} t
+                WHERE t.{id_column}=f.entity_id AND t.{paper_column}=f.paper_id
+            )
+        """
     return {
         name: count
         for name, sql in queries.items()
@@ -148,36 +207,62 @@ def _review_tag_gaps(connection: sqlite3.Connection) -> list[int]:
 
 
 def _eligibility_inconsistencies(connection: sqlite3.Connection) -> list[dict[str, Any]]:
-    rows = connection.execute(
+    stored_rows = connection.execute(
         """
         SELECT p.source_paper_id, a.experiment_id, a.completeness_status,
-               a.nearest_neighbor_eligible, a.comet_eligible,
-               max(CASE WHEN r.profile='nearest_neighbor' THEN r.eligible END),
-               max(CASE WHEN r.profile='comet' THEN r.eligible END),
-               count(DISTINCT v.evidence_id), count(DISTINCT o.outcome_id)
+               a.missing_fields_json, a.verification_status, a.quarantine_reason,
+               a.nearest_neighbor_eligible, a.comet_eligible
         FROM arm_assessment a
         JOIN experiment e USING (experiment_id)
         JOIN paper p USING (paper_id)
-        LEFT JOIN eligibility_result r USING (experiment_id)
-        LEFT JOIN evidence v USING (experiment_id)
-        LEFT JOIN outcome o USING (experiment_id)
-        GROUP BY a.experiment_id
         ORDER BY p.source_paper_id, a.experiment_id
         """
     ).fetchall()
+    stored_results = {
+        (int(experiment_id), str(profile)): (
+            int(eligible), tuple(json.loads(reasons_json)), str(rules_version)
+        )
+        for experiment_id, profile, eligible, reasons_json, rules_version
+        in connection.execute(
+            "SELECT experiment_id, profile, eligible, reasons_json, rules_version "
+            "FROM eligibility_result"
+        )
+    }
+    # Evaluate the current rules against an in-memory clone. The audited database
+    # remains read-only while the existing evaluators persist only into the clone.
+    recomputed = sqlite3.connect(":memory:")
+    connection.backup(recomputed)
     problems = []
-    for paper_id, arm_id, status, nearest, comet, stored_nearest, stored_comet, evidence, outcomes in rows:
-        reasons = []
-        if stored_nearest is None or stored_comet is None:
-            reasons.append("missing eligibility result")
-        if stored_nearest is not None and nearest != stored_nearest:
-            reasons.append("nearest-neighbor flag differs from result")
-        if stored_comet is not None and comet != stored_comet:
-            reasons.append("COMET flag differs from result")
-        if (nearest or comet) and (status != "complete" or not evidence or not outcomes):
-            reasons.append("eligible arm is incomplete or lacks evidence/outcome")
-        if reasons:
-            problems.append({"paper_id": paper_id, "arm_id": arm_id, "reasons": reasons})
+    try:
+        for paper_id, arm_id, status, missing_json, verification, quarantine, nearest, comet in stored_rows:
+            reasons = []
+            expected_status = evaluate_arm_status(recomputed, arm_id)
+            if (
+                status != expected_status.completeness_status
+                or tuple(json.loads(missing_json)) != expected_status.missing_fields
+                or verification != expected_status.verification_status
+                or quarantine != expected_status.quarantine_reason
+            ):
+                reasons.append("arm assessment differs from current rules")
+            for profile, stored_flag in (("nearest_neighbor", nearest), ("comet", comet)):
+                expected = evaluate_eligibility(recomputed, arm_id, profile)
+                stored = stored_results.get((arm_id, profile))
+                if stored is None:
+                    reasons.append(f"{profile} eligibility result missing")
+                    continue
+                stored_eligible, stored_reasons, stored_version = stored
+                if stored_flag != int(expected.eligible):
+                    reasons.append(f"{profile} flag differs from current rules")
+                if stored_eligible != int(expected.eligible):
+                    reasons.append(f"{profile} result differs from current rules")
+                if stored_reasons != expected.reasons:
+                    reasons.append(f"{profile} reasons differ from current rules")
+                if stored_version != RULES_VERSION:
+                    reasons.append(f"{profile} rules_version is not current")
+            if reasons:
+                problems.append({"paper_id": paper_id, "arm_id": arm_id, "reasons": reasons})
+    finally:
+        recomputed.close()
     return problems
 
 
@@ -213,12 +298,25 @@ def audit_current_database(
     *,
     expected_preflight_path: Path | str | None = None,
     database_kind: str = "explicit_fixture",
+    expected_authoritative_path: Path | str | None = None,
 ) -> dict[str, Any]:
     """Audit an explicitly named database without modifying it."""
 
     database_path = Path(database_path).resolve()
     manifest_path = Path(manifest_path).resolve()
     bundle_root = Path(bundle_root).resolve()
+    if database_kind not in DATABASE_KINDS:
+        raise ValueError(f"database_kind must be one of {sorted(DATABASE_KINDS)}")
+    if database_kind == "authoritative":
+        canonical = (
+            Path(expected_authoritative_path).resolve()
+            if expected_authoritative_path is not None
+            else manifest_path.parents[2] / "data/curated/lnp_evidence.db"
+        )
+        if database_path != canonical.resolve():
+            raise ValueError(
+                f"authoritative database path must equal {canonical.resolve()}"
+            )
     if not database_path.is_file():
         raise FileNotFoundError(database_path)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -235,6 +333,14 @@ def audit_current_database(
             "manifest_sha256"
         )
     manifest_hash = _sha256(manifest_path)
+    bundle_dispositions: dict[str, tuple[str, str]] = {}
+    for path in sorted(bundle_root.glob("*/*.json")):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        paper = payload.get("paper")
+        if isinstance(paper, dict) and paper.get("source_paper_id"):
+            bundle_dispositions[str(paper["source_paper_id"])] = (
+                str(paper["import_status"]), str(paper["screening_status"])
+            )
 
     uri = f"file:{database_path}?mode=ro"
     with sqlite3.connect(uri, uri=True) as connection:
@@ -251,6 +357,28 @@ def audit_current_database(
             "missing": sorted(set(manifest_ids) - set(present_ids)),
             "unexpected": sorted(set(present_ids) - set(manifest_ids)),
         }
+        disposition_mismatches = []
+        entries_by_id = {str(entry["paper_id"]): entry for entry in manifest["entries"]}
+        for paper_id in manifest_ids:
+            actual = connection.execute(
+                "SELECT import_status, screening_status FROM paper WHERE source_paper_id=?",
+                (paper_id,),
+            ).fetchone()
+            if actual is None:
+                continue
+            manifest_import = str(entries_by_id[paper_id]["import_status"])
+            if manifest_import == "screening_only":
+                expected_import, expected_screening = "screening_only", "exclude"
+            else:
+                expected_import, expected_screening = bundle_dispositions[paper_id]
+            if actual[0] != expected_import or actual[1] != expected_screening:
+                disposition_mismatches.append({
+                    "paper_id": paper_id,
+                    "expected_import_status": expected_import,
+                    "actual_import_status": actual[0],
+                    "expected_screening_status": expected_screening,
+                    "actual_screening_status": actual[1],
+                })
         coverage = _coverage(connection)
         tag_gaps = _review_tag_gaps(connection)
         eligibility = _eligibility_inconsistencies(connection)
@@ -322,6 +450,7 @@ def audit_current_database(
         "review_tag_gaps": tag_gaps,
         "eligibility_inconsistencies": eligibility,
         "manifest_dispositions": disposition,
+        "manifest_disposition_mismatches": disposition_mismatches,
         "manifest_hash_matches": manifest_match,
         "bundle_hash_mismatches": bundle_mismatches,
     }
@@ -330,6 +459,7 @@ def audit_current_database(
         and not coverage["arms_without_evidence"] and not coverage["outcomes_without_evidence"]
         and not tag_gaps and not eligibility and not disposition["missing"]
         and not disposition["unexpected"] and disposition["present"] == 14
+        and not disposition_mismatches
         and manifest_match and not bundle_mismatches
     )
     return {
