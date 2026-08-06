@@ -1,0 +1,247 @@
+{
+  "schema_version": "day2-import-bundle/v1",
+  "artifacts": [
+    {
+      "artifact_id": "accepted-graph",
+      "path": "data/staging/GP-002/accepted_graph.json",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_kind": "validated_extraction",
+      "pipeline_name": "fulltext-rag-evidence-graph",
+      "pipeline_version": "v4"
+    }
+  ],
+  "paper": {
+    "source_paper_id": "GP-002",
+    "artifact_id": "accepted-graph",
+    "title": "Fixture paper",
+    "source_type": "fixture",
+    "retrieval_date": "2026-08-06",
+    "screening_status": "include",
+    "import_status": "ready"
+  },
+  "formulations": [
+    {
+      "record_id": "F-1",
+      "paper_id": "GP-002",
+      "artifact_id": "accepted-graph",
+      "formulation_name": "LNP-A",
+      "composition_raw": "A:B:C:D = 50:10:38.5:1.5",
+      "composition_basis": "mol%"
+    }
+  ],
+  "components": [
+    {
+      "record_id": "C-1",
+      "paper_id": "GP-002",
+      "artifact_id": "accepted-graph",
+      "formulation_id": "F-1",
+      "component_name_reported": "Lipid A",
+      "component_role": "ionizable_lipid",
+      "molar_percentage": 50.0,
+      "percentage_unit": "mol%"
+    }
+  ],
+  "arms": [
+    {
+      "record_id": "A-1",
+      "paper_id": "GP-002",
+      "artifact_id": "accepted-graph",
+      "formulation_id": "F-1",
+      "cell_type": "hepatocyte",
+      "species": "mouse",
+      "in_vitro_in_vivo": "in_vivo",
+      "payload_type": "mRNA",
+      "dose": 1.0,
+      "dose_unit": "mg/kg",
+      "assay": "ELISA",
+      "completeness_status": "complete",
+      "verification_status": "manually_verified",
+      "nearest_neighbor_eligible": true,
+      "comet_eligible": true
+    }
+  ],
+  "outcomes": [
+    {
+      "record_id": "O-1",
+      "paper_id": "GP-002",
+      "artifact_id": "accepted-graph",
+      "arm_id": "A-1",
+      "endpoint_family": "functional_expression",
+      "endpoint_name": "protein expression",
+      "outcome_value": 12.0,
+      "outcome_unit": "ng/mL",
+      "normalization_basis": "total protein",
+      "value_status": "reported"
+    }
+  ],
+  "evidence": [
+    {
+      "record_id": "E-1",
+      "paper_id": "GP-002",
+      "artifact_id": "accepted-graph",
+      "arm_id": "A-1",
+      "outcome_id": "O-1",
+      "field_name": "outcome_value",
+      "evidence_text": "Expression was 12 ng/mL.",
+      "evidence_location_type": "results",
+      "extraction_method": "text_extraction",
+      "extraction_confidence": "high",
+      "verification_status": "manually_verified"
+    }
+  ],
+  "field_evidence_links": [
+    {
+      "paper_id": "GP-002",
+      "entity_type": "formulation",
+      "entity_id": "F-1",
+      "field_name": "formulation_name",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "formulation",
+      "entity_id": "F-1",
+      "field_name": "composition_raw",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "formulation",
+      "entity_id": "F-1",
+      "field_name": "composition_basis",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "component",
+      "entity_id": "C-1",
+      "field_name": "component_name_reported",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "component",
+      "entity_id": "C-1",
+      "field_name": "component_role",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "component",
+      "entity_id": "C-1",
+      "field_name": "molar_percentage",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "component",
+      "entity_id": "C-1",
+      "field_name": "percentage_unit",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "arm",
+      "entity_id": "A-1",
+      "field_name": "cell_type",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "arm",
+      "entity_id": "A-1",
+      "field_name": "species",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "arm",
+      "entity_id": "A-1",
+      "field_name": "in_vitro_in_vivo",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "arm",
+      "entity_id": "A-1",
+      "field_name": "payload_type",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "arm",
+      "entity_id": "A-1",
+      "field_name": "dose",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "arm",
+      "entity_id": "A-1",
+      "field_name": "dose_unit",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "arm",
+      "entity_id": "A-1",
+      "field_name": "assay",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "outcome",
+      "entity_id": "O-1",
+      "field_name": "endpoint_family",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "outcome",
+      "entity_id": "O-1",
+      "field_name": "endpoint_name",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "outcome",
+      "entity_id": "O-1",
+      "field_name": "outcome_value",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "outcome",
+      "entity_id": "O-1",
+      "field_name": "outcome_unit",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    },
+    {
+      "paper_id": "GP-002",
+      "entity_type": "outcome",
+      "entity_id": "O-1",
+      "field_name": "normalization_basis",
+      "evidence_ids": ["E-1"],
+      "verification_status": "manually_verified"
+    }
+  ],
+  "reviews": []
+}

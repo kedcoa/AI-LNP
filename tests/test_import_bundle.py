@@ -1,0 +1,562 @@
+from __future__ import annotations
+
+import importlib
+import json
+import math
+from pathlib import Path
+import sqlite3
+
+import pytest
+
+from src.database.status import evaluate_arm_status
+from src.init_db import initialize_database
+
+
+FIXTURE = (
+    Path(__file__).parent
+    / "fixtures"
+    / "database"
+    / "import_bundle"
+    / "valid_bundle.json"
+)
+
+
+def _contracts():
+    return importlib.import_module("src.database.import_contracts")
+
+
+def _load_payload() -> dict:
+    return json.loads(FIXTURE.read_text(encoding="utf-8"))
+
+
+def _load_bundle(payload: dict | None = None):
+    contracts = _contracts()
+    return contracts.ImportBundle.from_dict(payload or _load_payload())
+
+
+def test_valid_normalized_bundle_loads_from_plain_data() -> None:
+    bundle = _load_bundle()
+
+    assert bundle.paper.source_paper_id == "GP-002"
+    assert bundle.outcomes[0].outcome_value == 12.0
+    assert bundle.field_evidence_links[0].evidence_ids == ("E-1",)
+
+
+def test_contract_rejects_cross_paper_records() -> None:
+    payload = _load_payload()
+    payload["outcomes"][0]["paper_id"] = "GP-999"
+
+    with pytest.raises(ValueError, match="cross-paper"):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_unknown_relationship_and_evidence_ids() -> None:
+    payload = _load_payload()
+    payload["components"][0]["formulation_id"] = "F-unknown"
+
+    with pytest.raises(ValueError, match="unknown formulation"):
+        _load_bundle(payload)
+
+    payload = _load_payload()
+    payload["field_evidence_links"][0]["evidence_ids"] = ["E-unknown"]
+
+    with pytest.raises(ValueError, match="unknown evidence"):
+        _load_bundle(payload)
+
+
+@pytest.mark.parametrize("sha256", ["", "abc", "g" * 64])
+def test_contract_rejects_missing_or_malformed_source_hash(sha256: str) -> None:
+    payload = _load_payload()
+    payload["artifacts"][0]["sha256"] = sha256
+
+    with pytest.raises(ValueError, match="SHA-256"):
+        _load_bundle(payload)
+
+
+@pytest.mark.parametrize(
+    ("section", "field", "value"),
+    [
+        ("formulations", "np_ratio", -1),
+        ("components", "molar_percentage", 101),
+        ("arms", "dose", math.inf),
+        ("arms", "timepoint", "tomorrow"),
+        ("outcomes", "outcome_value", math.nan),
+        ("outcomes", "uncertainty_value", -0.1),
+    ],
+)
+def test_contract_rejects_malformed_scientific_numeric_values(
+    section: str,
+    field: str,
+    value: object,
+) -> None:
+    payload = _load_payload()
+    payload[section][0][field] = value
+
+    with pytest.raises(ValueError, match=field):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_raw_provider_response_as_evidence_source() -> None:
+    payload = _load_payload()
+    payload["artifacts"][0]["source_kind"] = "raw_provider_response"
+
+    with pytest.raises(ValueError, match="raw provider response"):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_scientific_value_without_evidence_link() -> None:
+    payload = _load_payload()
+    payload["field_evidence_links"] = [
+        row
+        for row in payload["field_evidence_links"]
+        if not (
+            row["entity_type"] == "outcome"
+            and row["field_name"] == "outcome_value"
+        )
+    ]
+
+    with pytest.raises(ValueError, match="unsupported outcome field"):
+        _load_bundle(payload)
+
+
+@pytest.mark.parametrize(
+    ("entity_type", "field_name"),
+    [
+        ("formulation", "composition_raw"),
+        ("component", "molar_percentage"),
+        ("arm", "dose"),
+        ("outcome", "endpoint_name"),
+    ],
+)
+def test_contract_requires_evidence_for_each_populated_scientific_field(
+    entity_type: str,
+    field_name: str,
+) -> None:
+    payload = _load_payload()
+    payload["field_evidence_links"] = [
+        row
+        for row in payload["field_evidence_links"]
+        if not (
+            row["entity_type"] == entity_type
+            and row["field_name"] == field_name
+        )
+    ]
+
+    with pytest.raises(ValueError, match=f"unsupported {entity_type} field"):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_outcome_evidence_without_arm_scope() -> None:
+    payload = _load_payload()
+    payload["evidence"][0].pop("arm_id")
+
+    with pytest.raises(ValueError, match="outcome evidence requires arm"):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_review_state_that_leaves_arm_eligible() -> None:
+    payload = _load_payload()
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "arm_id": "A-1",
+            "evidence_ids": ["E-1"],
+            "reason_code": "outcome_link_unclear",
+            "status": "quarantined",
+        }
+    ]
+
+    with pytest.raises(ValueError, match="review state contradicts arm"):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_unsafe_eligibility_state() -> None:
+    payload = _load_payload()
+    payload["arms"][0]["completeness_status"] = "conflict"
+
+    with pytest.raises(ValueError, match="unsafe eligibility"):
+        _load_bundle(payload)
+
+    payload = _load_payload()
+    payload["arms"][0]["verification_status"] = "automatically_validated"
+
+    with pytest.raises(ValueError, match="COMET eligibility"):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_scientific_rows_for_screening_only_paper() -> None:
+    payload = _load_payload()
+    payload["paper"]["screening_status"] = "exclude"
+    payload["paper"]["import_status"] = "screening_only"
+
+    with pytest.raises(ValueError, match="screening-only"):
+        _load_bundle(payload)
+
+
+def test_contract_requires_review_record_for_each_unsafe_arm() -> None:
+    payload = _load_payload()
+    payload["arms"][0].update(
+        completeness_status="incomplete",
+        nearest_neighbor_eligible=False,
+        comet_eligible=False,
+    )
+
+    with pytest.raises(ValueError, match="review record"):
+        _load_bundle(payload)
+
+
+def _connection(tmp_path: Path) -> sqlite3.Connection:
+    database_path = tmp_path / "import-test.db"
+    initialize_database(database_path)
+    connection = sqlite3.connect(database_path)
+    connection.execute("PRAGMA foreign_keys = ON")
+    return connection
+
+
+def _import_bundle(connection: sqlite3.Connection, bundle):
+    module = importlib.import_module("src.database.import_bundle")
+    return module.import_bundle(connection, bundle)
+
+
+def test_import_is_idempotent_and_preserves_evidence_provenance(
+    tmp_path: Path,
+) -> None:
+    connection = _connection(tmp_path)
+    bundle = _load_bundle()
+    try:
+        first = _import_bundle(connection, bundle)
+        second = _import_bundle(connection, bundle)
+
+        assert first.inserted == 6
+        assert first.unchanged == 0
+        assert second.inserted == 0
+        assert second.unchanged == 6
+        assert connection.execute("SELECT COUNT(*) FROM paper").fetchone() == (1,)
+        assert connection.execute("SELECT COUNT(*) FROM outcome").fetchone() == (1,)
+        assert connection.execute("SELECT COUNT(*) FROM evidence").fetchone() == (1,)
+        assert connection.execute(
+            "SELECT evidence_text, evidence_location_type FROM evidence"
+        ).fetchone() == ("Expression was 12 ng/mL.", "results")
+        assert connection.execute(
+            """
+            SELECT artifact_path, artifact_sha256, pipeline_name, pipeline_version
+            FROM record_source
+            WHERE entity_type = 'evidence'
+            """
+        ).fetchone() == (
+            "data/staging/GP-002/accepted_graph.json",
+            "a" * 64,
+            "fulltext-rag-evidence-graph",
+            "v4",
+        )
+        assert connection.execute(
+            "SELECT COUNT(*) FROM import_field_evidence"
+        ).fetchone() == (19,)
+    finally:
+        connection.close()
+
+
+def test_import_rolls_back_the_whole_paper_on_late_failure(tmp_path: Path) -> None:
+    connection = _connection(tmp_path)
+    connection.execute(
+        """
+        CREATE TRIGGER reject_fixture_evidence
+        BEFORE INSERT ON evidence
+        BEGIN
+            SELECT RAISE(ABORT, 'forced late import failure');
+        END
+        """
+    )
+    connection.commit()
+    try:
+        with pytest.raises(sqlite3.IntegrityError, match="forced late"):
+            _import_bundle(connection, _load_bundle())
+
+        for table in (
+            "paper",
+            "formulation",
+            "chemical_component",
+            "experiment",
+            "outcome",
+            "evidence",
+            "record_source",
+        ):
+            assert connection.execute(
+                f"SELECT COUNT(*) FROM {table}"
+            ).fetchone() == (0,)
+    finally:
+        connection.close()
+
+
+def test_failed_paper_does_not_undo_previously_imported_paper(
+    tmp_path: Path,
+) -> None:
+    connection = _connection(tmp_path)
+    first_bundle = _load_bundle()
+    second_payload = _load_payload()
+    second_payload["paper"]["source_paper_id"] = "GP-004"
+    for section in (
+        "formulations",
+        "components",
+        "arms",
+        "outcomes",
+        "evidence",
+        "field_evidence_links",
+    ):
+        for row in second_payload[section]:
+            row["paper_id"] = "GP-004"
+    second_payload["evidence"][0]["evidence_text"] = "Reject this paper."
+    second_bundle = _load_bundle(second_payload)
+    try:
+        _import_bundle(connection, first_bundle)
+        connection.execute(
+            """
+            CREATE TRIGGER reject_second_paper
+            BEFORE INSERT ON evidence
+            WHEN NEW.evidence_text = 'Reject this paper.'
+            BEGIN
+                SELECT RAISE(ABORT, 'second paper failed');
+            END
+            """
+        )
+        connection.commit()
+
+        with pytest.raises(sqlite3.IntegrityError, match="second paper failed"):
+            _import_bundle(connection, second_bundle)
+
+        assert connection.execute(
+            "SELECT source_paper_id FROM paper ORDER BY source_paper_id"
+        ).fetchall() == [("GP-002",)]
+        assert connection.execute("SELECT COUNT(*) FROM evidence").fetchone() == (1,)
+    finally:
+        connection.close()
+
+
+def test_changed_content_with_same_natural_key_is_retained_as_conflict(
+    tmp_path: Path,
+) -> None:
+    connection = _connection(tmp_path)
+    changed = _load_payload()
+    changed["outcomes"][0]["outcome_value"] = 13.0
+    changed["evidence"][0]["evidence_text"] = "Expression was 13 ng/mL."
+    try:
+        _import_bundle(connection, _load_bundle())
+        result = _import_bundle(connection, _load_bundle(changed))
+
+        assert result.conflicts == 2
+        assert result.review_tags == ("Conflicting outcome", "Needs human verification")
+        assert connection.execute(
+            "SELECT outcome_value FROM outcome ORDER BY outcome_id"
+        ).fetchall() == [(12.0,), (13.0,)]
+        assert connection.execute(
+            "SELECT evidence_text FROM evidence ORDER BY evidence_id"
+        ).fetchall() == [
+            ("Expression was 12 ng/mL.",),
+            ("Expression was 13 ng/mL.",),
+        ]
+        assert connection.execute(
+            """
+            SELECT completeness_status, verification_status,
+                   nearest_neighbor_eligible, comet_eligible
+            FROM arm_assessment
+            """
+        ).fetchone() == ("conflict", "conflict", 0, 0)
+
+        repeated = _import_bundle(connection, _load_bundle(changed))
+        assert repeated.inserted == 0
+        assert repeated.unchanged == 6
+        assert repeated.review_tags == (
+            "Conflicting outcome",
+            "Needs human verification",
+        )
+    finally:
+        connection.close()
+
+
+def test_changed_parent_identity_cascades_to_dependent_records(
+    tmp_path: Path,
+) -> None:
+    connection = _connection(tmp_path)
+    changed = _load_payload()
+    changed["arms"][0]["dose"] = 2.0
+    try:
+        _import_bundle(connection, _load_bundle())
+        result = _import_bundle(connection, _load_bundle(changed))
+
+        assert result.conflicts == 3
+        assert connection.execute(
+            "SELECT experiment_id, dose FROM experiment ORDER BY experiment_id"
+        ).fetchall() == [(1, 1.0), (2, 2.0)]
+        assert connection.execute(
+            "SELECT outcome_id, experiment_id FROM outcome ORDER BY outcome_id"
+        ).fetchall() == [(1, 1), (2, 2)]
+        assert connection.execute(
+            """
+            SELECT evidence_id, experiment_id, outcome_id
+            FROM evidence ORDER BY evidence_id
+            """
+        ).fetchall() == [(1, 1, 1), (2, 2, 2)]
+    finally:
+        connection.close()
+
+
+def test_evidence_only_conflict_survives_status_recalculation(
+    tmp_path: Path,
+) -> None:
+    connection = _connection(tmp_path)
+    changed = _load_payload()
+    changed["evidence"][0]["evidence_text"] = "A conflicting excerpt."
+    try:
+        _import_bundle(connection, _load_bundle())
+        _import_bundle(connection, _load_bundle(changed))
+        experiment_id = connection.execute(
+            "SELECT experiment_id FROM experiment"
+        ).fetchone()[0]
+
+        assert evaluate_arm_status(
+            connection, experiment_id
+        ).completeness_status == "conflict"
+    finally:
+        connection.close()
+
+
+def test_screening_only_import_creates_no_scientific_rows(tmp_path: Path) -> None:
+    payload = _load_payload()
+    payload["paper"].update(
+        screening_status="exclude",
+        import_status="screening_only",
+        screening_reason="Does not meet the evidence scope.",
+    )
+    for section in (
+        "formulations",
+        "components",
+        "arms",
+        "outcomes",
+        "evidence",
+        "field_evidence_links",
+    ):
+        payload[section] = []
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "reason_code": "source_file_unavailable",
+            "status": "blocked",
+            "notes": "No source-derived full text is available.",
+        }
+    ]
+    connection = _connection(tmp_path)
+    try:
+        result = _import_bundle(connection, _load_bundle(payload))
+
+        assert result.inserted == 1
+        assert result.review_tags == ("Source file unavailable",)
+        assert connection.execute(
+            "SELECT screening_status, import_status FROM paper"
+        ).fetchone() == ("exclude", "screening_only")
+        for table in (
+            "formulation",
+            "chemical_component",
+            "experiment",
+            "outcome",
+            "evidence",
+        ):
+            assert connection.execute(
+                f"SELECT COUNT(*) FROM {table}"
+            ).fetchone() == (0,)
+    finally:
+        connection.close()
+
+
+def test_quarantine_and_plain_language_review_tag_are_persisted(
+    tmp_path: Path,
+) -> None:
+    payload = _load_payload()
+    payload["arms"][0].update(
+        completeness_status="quarantined",
+        verification_status="rejected",
+        nearest_neighbor_eligible=False,
+        comet_eligible=False,
+        quarantine_reason="Outcome relationship could not be resolved.",
+    )
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "arm_id": "A-1",
+            "evidence_ids": ["E-1"],
+            "reason_code": "outcome_link_unclear",
+            "status": "quarantined",
+            "notes": "Machine route outcome_relation_v12 could not decide.",
+        }
+    ]
+    connection = _connection(tmp_path)
+    try:
+        result = _import_bundle(connection, _load_bundle(payload))
+
+        assert result.quarantined == 1
+        assert result.review_tags == ("Outcome link unclear",)
+        assert connection.execute(
+            """
+            SELECT completeness_status, nearest_neighbor_eligible,
+                   comet_eligible, quarantine_reason
+            FROM arm_assessment
+            """
+        ).fetchone() == (
+            "quarantined",
+            0,
+            0,
+            "Outcome relationship could not be resolved.",
+        )
+        assert connection.execute(
+            """
+            SELECT reason_code, review_tag, artifact_path,
+                   artifact_sha256, evidence_ids_json
+            FROM import_review
+            """
+        ).fetchone() == (
+            "outcome_link_unclear",
+            "Outcome link unclear",
+            "data/staging/GP-002/accepted_graph.json",
+            "a" * 64,
+            "[1]",
+        )
+    finally:
+        connection.close()
+
+
+def test_unknown_machine_reason_maps_to_human_verification_tag() -> None:
+    module = importlib.import_module("src.database.review_tags")
+    payload = _load_payload()
+    payload["arms"][0].update(
+        completeness_status="incomplete",
+        nearest_neighbor_eligible=False,
+        comet_eligible=False,
+    )
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "arm_id": "A-1",
+            "reason_code": "missing_dose",
+            "status": "incomplete",
+        },
+        {
+            "record_id": "R-2",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "arm_id": "A-1",
+            "reason_code": "candidate_relation_v12_unknown_evidence_id",
+            "status": "incomplete",
+        },
+    ]
+
+    tags = module.derive_review_tags(_load_bundle(payload))
+
+    assert tags == ("Missing dose", "Needs human verification")
+    assert all("v12" not in tag and "candidate" not in tag for tag in tags)
