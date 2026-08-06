@@ -32,6 +32,22 @@ SCIENTIFIC_TABLES = (
 SCREENING_ONLY_IDS = frozenset({"GP-001", "GP-003", "GP-009"})
 
 
+class CurrentCorpusImportError(RuntimeError):
+    """Aggregate strict-import failure with every per-paper disposition."""
+
+    def __init__(self, summary: dict[str, Any]) -> None:
+        self.summary = summary
+        self.failed_paper_ids = tuple(
+            row["paper_id"]
+            for row in summary["dispositions"]
+            if row["status"] == "rolled_back"
+        )
+        super().__init__(
+            "current corpus import rolled back papers: "
+            + ", ".join(self.failed_paper_ids)
+        )
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -269,8 +285,18 @@ def _bundle_expected_counts(bundle: ImportBundle) -> dict[str, int]:
         "arms": len(bundle.arms),
         "outcomes": len(bundle.outcomes),
         "evidence": len(bundle.evidence),
-        "field_evidence_references": sum(
-            len(link.evidence_ids) for link in bundle.field_evidence_links
+        "field_evidence_references": len(
+            {
+                (
+                    bundle.paper.source_paper_id,
+                    link.entity_type,
+                    link.entity_id,
+                    link.field_name,
+                    evidence_id,
+                )
+                for link in bundle.field_evidence_links
+                for evidence_id in link.evidence_ids
+            }
         ),
         "reviews": len(bundle.reviews),
     }
@@ -316,6 +342,8 @@ def run_current_corpus_import(
     database_path: Path | str,
     manifest_path: Path | str,
     bundle_root: Path | str,
+    *,
+    allow_partial: bool = False,
 ) -> dict[str, Any]:
     """Import all 14 manifest dispositions, committing or rolling back per paper."""
 
@@ -337,7 +365,7 @@ def run_current_corpus_import(
                 result: PaperImportResult = import_bundle(connection, bundle)
                 paper_eligibility = _recalculate_paper(connection, paper_id)
                 connection.commit()
-            except BaseException as exc:
+            except Exception as exc:
                 connection.rollback()
                 dispositions.append(
                     {"paper_id": paper_id, "status": "rolled_back", "error": str(exc)}
@@ -351,13 +379,18 @@ def run_current_corpus_import(
                     **asdict(result),
                 }
             )
-        return {
+        summary = {
             "paid_calls": 0,
             "dispositions": dispositions,
             "expected_counts": _expected_counts(bundles),
             "database_counts": _table_counts(connection),
             "eligibility": eligibility,
         }
+        if not allow_partial and any(
+            row["status"] == "rolled_back" for row in dispositions
+        ):
+            raise CurrentCorpusImportError(summary)
+        return summary
     finally:
         connection.close()
 
@@ -420,4 +453,8 @@ def build_import_preflight(
     return report
 
 
-__all__ = ["build_import_preflight", "run_current_corpus_import"]
+__all__ = [
+    "CurrentCorpusImportError",
+    "build_import_preflight",
+    "run_current_corpus_import",
+]

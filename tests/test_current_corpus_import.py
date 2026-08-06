@@ -169,16 +169,48 @@ def test_failed_paper_rolls_back_without_erasing_other_papers(
         return real_import(connection, bundle)
 
     monkeypatch.setattr(module, "import_bundle", fail_one)
-    summary = module.run_current_corpus_import(database, MANIFEST, BUNDLES)
+    with pytest.raises(module.CurrentCorpusImportError) as captured:
+        module.run_current_corpus_import(database, MANIFEST, BUNDLES)
+    summary = captured.value.summary
 
     failed = [row for row in summary["dispositions"] if row["paper_id"] == "GP-004"]
     assert failed == [{"paper_id": "GP-004", "status": "rolled_back", "error": "forced paper failure"}]
+    assert captured.value.failed_paper_ids == ("GP-004",)
     with sqlite3.connect(database) as connection:
         assert connection.execute(
             "SELECT count(*) FROM paper WHERE title = 'must rollback'"
         ).fetchone()[0] == 0
         assert connection.execute(
             "SELECT count(*) FROM paper WHERE source_paper_id = 'GP-005'"
+        ).fetchone()[0] == 1
+
+
+def test_failed_rerun_raises_even_when_prior_database_contains_that_paper(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = _module()
+    database = _new_database(tmp_path)
+    module.run_current_corpus_import(database, MANIFEST, BUNDLES)
+    real_import = module.import_bundle
+
+    def fail_existing(connection, bundle):
+        if bundle.paper.source_paper_id == "GP-004":
+            raise RuntimeError("forced stale-paper failure")
+        return real_import(connection, bundle)
+
+    monkeypatch.setattr(module, "import_bundle", fail_existing)
+    with pytest.raises(module.CurrentCorpusImportError) as captured:
+        module.run_current_corpus_import(database, MANIFEST, BUNDLES)
+
+    assert captured.value.failed_paper_ids == ("GP-004",)
+    failed = [
+        row for row in captured.value.summary["dispositions"]
+        if row["paper_id"] == "GP-004"
+    ]
+    assert failed[0]["status"] == "rolled_back"
+    with sqlite3.connect(database) as connection:
+        assert connection.execute(
+            "SELECT count(*) FROM paper WHERE source_paper_id='GP-004'"
         ).fetchone()[0] == 1
 
 
@@ -206,5 +238,6 @@ def test_preflight_is_exact_and_read_only(tmp_path: Path) -> None:
         row["expected_counts"]["field_evidence_references"]
         for row in report["bundles"]
     )
+    assert report["expected_counts"]["field_evidence_references"] == 672
     assert "field_evidence_links" not in report["expected_counts"]
     assert report_path.exists()
