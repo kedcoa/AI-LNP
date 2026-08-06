@@ -325,6 +325,93 @@ def test_audit_detects_deleted_and_stale_normalized_identities(tmp_path: Path) -
     assert result["passed"] is False
 
 
+def test_field_link_natural_key_canonicalizes_equivalent_repository_paths(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import (
+        COMMON_CHECKOUT_ROOT,
+        audit_current_database,
+    )
+
+    database = _populated_database(tmp_path)
+    with sqlite3.connect(database) as connection:
+        rows = connection.execute(
+            "SELECT import_field_evidence_id, natural_key "
+            "FROM import_field_evidence ORDER BY 1 LIMIT 2"
+        ).fetchall()
+        for (link_id, natural_key), repository_root in zip(
+            rows, (ROOT, COMMON_CHECKOUT_ROOT), strict=True
+        ):
+            payload = json.loads(natural_key)
+            for section in ("entity", "evidence"):
+                payload[section]["artifact_path"] = str(
+                    repository_root / payload[section]["artifact_path"]
+                )
+            connection.execute(
+                "UPDATE import_field_evidence SET natural_key=? "
+                "WHERE import_field_evidence_id=?",
+                (json.dumps(payload, sort_keys=True, separators=(",", ":")), link_id),
+            )
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    links = result["checks"]["normalized_identity_sets"]["field_evidence_links"]
+    assert links["missing"] == []
+    assert links["unexpected"] == []
+    assert result["passed"] is True
+
+
+def test_field_link_natural_key_does_not_mask_different_artifact_path(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    with sqlite3.connect(database) as connection:
+        link_id, natural_key = connection.execute(
+            "SELECT import_field_evidence_id, natural_key "
+            "FROM import_field_evidence ORDER BY 1 LIMIT 1"
+        ).fetchone()
+        payload = json.loads(natural_key)
+        payload["entity"]["artifact_path"] = "/different/source/artifact.json"
+        connection.execute(
+            "UPDATE import_field_evidence SET natural_key=? "
+            "WHERE import_field_evidence_id=?",
+            (json.dumps(payload, sort_keys=True, separators=(",", ":")), link_id),
+        )
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    links = result["checks"]["normalized_identity_sets"]["field_evidence_links"]
+    assert links["missing"]
+    assert links["unexpected"]
+    assert result["passed"] is False
+
+
+def test_non_object_identity_content_is_structured_failed_audit(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    with sqlite3.connect(database) as connection:
+        identity_id = connection.execute(
+            "SELECT min(import_record_identity_id) FROM import_record_identity"
+        ).fetchone()[0]
+        connection.execute(
+            "UPDATE import_record_identity SET content_json='[]', content_sha256=? "
+            "WHERE import_record_identity_id=?",
+            (hashlib.sha256(b"[]").hexdigest(), identity_id),
+        )
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    errors = result["checks"]["normalized_identity_sets"]["content_shape_mismatches"]
+    assert errors
+    assert errors[0]["reason"] == "content_json must be an object"
+    assert result["passed"] is False
+
+
 def test_current_canonical_database_audit_is_read_only() -> None:
     from src.database.audit_current_database import (
         CANONICAL_AUTHORITATIVE_DATABASE,

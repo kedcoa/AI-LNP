@@ -357,25 +357,61 @@ def _bundle_hash_checks(
 
 def _identity_sets(
     connection: sqlite3.Connection,
-) -> tuple[set[tuple[str, ...]], set[tuple[str, ...]], list[dict[str, str]]]:
-    def canonical_content(content_json: str) -> tuple[str, str]:
+) -> tuple[
+    set[tuple[str, ...]],
+    set[tuple[str, ...]],
+    list[dict[str, str]],
+    list[dict[str, str]],
+]:
+    def canonical_path(value: str) -> str:
+        artifact_path = Path(value)
+        if artifact_path.is_absolute():
+            for root in (REPOSITORY_ROOT, COMMON_CHECKOUT_ROOT):
+                try:
+                    return artifact_path.relative_to(root).as_posix()
+                except ValueError:
+                    continue
+        return artifact_path.as_posix()
+
+    def canonical_natural_key(natural_key: str) -> str:
+        try:
+            payload = json.loads(natural_key)
+        except (json.JSONDecodeError, TypeError):
+            return natural_key
+        if not isinstance(payload, dict):
+            return natural_key
+
+        def rewrite(value: Any) -> None:
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    if key == "artifact_path" and isinstance(child, str):
+                        value[key] = canonical_path(child)
+                    else:
+                        rewrite(child)
+            elif isinstance(value, list):
+                for child in value:
+                    rewrite(child)
+
+        rewrite(payload)
+        return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+    def canonical_content(content_json: str) -> tuple[str, str, str | None]:
         payload = json.loads(content_json)
+        if not isinstance(payload, dict):
+            normalized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+            return (
+                normalized,
+                hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
+                "content_json must be an object",
+            )
         artifact = payload.get("artifact")
         if isinstance(artifact, dict) and isinstance(artifact.get("path"), str):
-            artifact_path = Path(artifact["path"])
-            if artifact_path.is_absolute():
-                for root in (REPOSITORY_ROOT, COMMON_CHECKOUT_ROOT):
-                    try:
-                        artifact["path"] = artifact_path.relative_to(root).as_posix()
-                        break
-                    except ValueError:
-                        continue
-            else:
-                artifact["path"] = artifact_path.as_posix()
+            artifact["path"] = canonical_path(artifact["path"])
         normalized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
-        return normalized, hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+        return normalized, hashlib.sha256(normalized.encode("utf-8")).hexdigest(), None
 
     hash_mismatches: list[dict[str, str]] = []
+    shape_mismatches: list[dict[str, str]] = []
     records: set[tuple[str, ...]] = set()
     for paper_id, entity_type, natural_key, stored_hash, content_json in connection.execute(
         """
@@ -391,8 +427,13 @@ def _identity_sets(
                 "natural_key": str(natural_key), "stored": str(stored_hash),
                 "calculated": raw_hash,
             })
-        normalized, canonical_hash = canonical_content(content_json)
-        records.add((str(paper_id), str(entity_type), str(natural_key), canonical_hash, normalized))
+        normalized, canonical_hash, shape_error = canonical_content(content_json)
+        if shape_error:
+            shape_mismatches.append({
+                "paper_id": str(paper_id), "entity_type": str(entity_type),
+                "natural_key": str(natural_key), "reason": shape_error,
+            })
+        records.add((str(paper_id), str(entity_type), canonical_natural_key(str(natural_key)), canonical_hash, normalized))
     links: set[tuple[str, ...]] = set()
     for paper_id, entity_type, natural_key, stored_hash, content_json in connection.execute(
             """
@@ -408,9 +449,14 @@ def _identity_sets(
                 "natural_key": str(natural_key), "stored": str(stored_hash),
                 "calculated": raw_hash,
             })
-        normalized, canonical_hash = canonical_content(content_json)
-        links.add((str(paper_id), str(entity_type), str(natural_key), canonical_hash, normalized))
-    return records, links, hash_mismatches
+        normalized, canonical_hash, shape_error = canonical_content(content_json)
+        if shape_error:
+            shape_mismatches.append({
+                "paper_id": str(paper_id), "entity_type": f"field:{entity_type}",
+                "natural_key": str(natural_key), "reason": shape_error,
+            })
+        links.add((str(paper_id), str(entity_type), canonical_natural_key(str(natural_key)), canonical_hash, normalized))
+    return records, links, hash_mismatches, shape_mismatches
 
 
 def _serialized_identities(rows: set[tuple[str, ...]]) -> list[list[str]]:
@@ -456,8 +502,8 @@ def _expected_identity_sets(
                 for row in failed
             )
         with sqlite3.connect(expected_database) as connection:
-            records, links, hash_mismatches = _identity_sets(connection)
-            if hash_mismatches:
+            records, links, hash_mismatches, shape_mismatches = _identity_sets(connection)
+            if hash_mismatches or shape_mismatches:
                 errors.append("expected identity generation produced invalid content hashes")
     return records, links, errors
 
@@ -549,6 +595,7 @@ def audit_current_database(
             actual_record_identities,
             actual_field_links,
             identity_hash_mismatches,
+            identity_shape_mismatches,
         ) = _identity_sets(connection)
         paper_rows = []
         for source_id in manifest_ids:
@@ -612,6 +659,7 @@ def audit_current_database(
     identity_check = {
         "generation_errors": identity_errors,
         "content_hash_mismatches": identity_hash_mismatches,
+        "content_shape_mismatches": identity_shape_mismatches,
         "record_identities": {
             "expected": len(expected_record_identities),
             "actual": len(actual_record_identities),
@@ -659,6 +707,7 @@ def audit_current_database(
         and manifest_match and not bundle_mismatches
         and not identity_errors
         and not identity_hash_mismatches
+        and not identity_shape_mismatches
         and not identity_check["record_identities"]["missing"]
         and not identity_check["record_identities"]["unexpected"]
         and not identity_check["field_evidence_links"]["missing"]
