@@ -358,9 +358,14 @@ CREATE TABLE IF NOT EXISTS review_revision (
     reviewer TEXT NOT NULL CHECK (length(trim(reviewer)) > 0),
     decision TEXT NOT NULL DEFAULT 'accepted'
         CHECK (decision IN ('accepted', 'rejected', 'superseded')),
+    supersedes_review_revision_id INTEGER,
     reviewer_notes TEXT,
     reviewed_at TEXT NOT NULL,
     FOREIGN KEY (experiment_id) REFERENCES experiment(experiment_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (supersedes_review_revision_id)
+        REFERENCES review_revision(review_revision_id)
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );

@@ -83,14 +83,19 @@ def _accepted_correction(
 ) -> str | None:
     row = connection.execute(
         """
-        SELECT corrected_value
-        FROM review_revision
-        WHERE experiment_id = ?
-          AND field_name = ?
-          AND decision = 'accepted'
-          AND length(trim(evidence_excerpt)) > 0
-          AND length(trim(evidence_location)) > 0
-        ORDER BY review_revision_id DESC
+        SELECT current.corrected_value
+        FROM review_revision AS current
+        WHERE current.experiment_id = ?
+          AND current.field_name = ?
+          AND current.decision = 'accepted'
+          AND length(trim(current.evidence_excerpt)) > 0
+          AND length(trim(current.evidence_location)) > 0
+          AND NOT EXISTS (
+              SELECT 1
+              FROM review_revision AS later
+              WHERE later.supersedes_review_revision_id = current.review_revision_id
+          )
+        ORDER BY current.review_revision_id DESC
         LIMIT 1
         """,
         (experiment_id, field_name),
@@ -129,10 +134,24 @@ def _unresolved_missing_fields(
         row[0]
         for row in connection.execute(
             """
-            SELECT field_name
-            FROM missing_field
-            WHERE experiment_id = ?
-              AND resolved_by_review_revision_id IS NULL
+            SELECT missing.field_name
+            FROM missing_field AS missing
+            WHERE missing.experiment_id = ?
+              AND (
+                  missing.resolved_by_review_revision_id IS NULL
+                  OR NOT EXISTS (
+                      SELECT 1
+                      FROM review_revision AS active
+                      WHERE active.experiment_id = missing.experiment_id
+                        AND active.field_name = missing.field_name
+                        AND active.decision = 'accepted'
+                        AND NOT EXISTS (
+                            SELECT 1
+                            FROM review_revision AS later
+                            WHERE later.supersedes_review_revision_id = active.review_revision_id
+                        )
+                  )
+              )
             """,
             (experiment_id,),
         )

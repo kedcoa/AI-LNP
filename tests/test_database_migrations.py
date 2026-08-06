@@ -90,7 +90,7 @@ def test_migration_preserves_legacy_rows_and_is_idempotent() -> None:
     ).fetchall() == [(13, "mRNA")]
     assert connection.execute(
         "SELECT version FROM schema_migration ORDER BY version"
-    ).fetchall() == [(1,)]
+    ).fetchall() == [(1,), (2,)]
     assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
 
 
@@ -180,6 +180,71 @@ def test_review_history_is_additive_and_screening_events_are_retained() -> None:
         )
 
 
+def test_missing_field_rejects_resolution_from_another_field() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    revision_id = connection.execute(
+        """
+        INSERT INTO review_revision (
+            experiment_id, field_name, corrected_value, evidence_excerpt,
+            evidence_location, reviewer, reviewed_at
+        ) VALUES (13, 'dose', '0.75', 'Reported dose was 0.75 mg/kg.',
+                  'methods, p. 3', 'reviewer-a', '2026-08-06T11:00:00Z')
+        """
+    ).lastrowid
+
+    with pytest.raises(sqlite3.IntegrityError, match="matching experiment and field"):
+        connection.execute(
+            """
+            INSERT INTO missing_field (
+                experiment_id, field_name, reason, recorded_at,
+                resolved_by_review_revision_id, resolved_at
+            ) VALUES (13, 'species', 'not extracted', '2026-08-06T10:00:00Z',
+                      ?, '2026-08-06T11:00:00Z')
+            """,
+            (revision_id,),
+        )
+
+
+def test_missing_field_rejects_resolution_from_another_arm() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    connection.execute(
+        """
+        INSERT INTO experiment (
+            experiment_id, paper_id, formulation_id, cell_type, payload_type
+        ) VALUES (14, 7, 11, 'hepatocyte', 'mRNA')
+        """
+    )
+    revision_id = connection.execute(
+        """
+        INSERT INTO review_revision (
+            experiment_id, field_name, corrected_value, evidence_excerpt,
+            evidence_location, reviewer, reviewed_at
+        ) VALUES (13, 'dose', '0.75', 'Reported dose was 0.75 mg/kg.',
+                  'methods, p. 3', 'reviewer-a', '2026-08-06T11:00:00Z')
+        """
+    ).lastrowid
+    missing_field_id = connection.execute(
+        """
+        INSERT INTO missing_field (
+            experiment_id, field_name, reason, recorded_at
+        ) VALUES (14, 'dose', 'not extracted', '2026-08-06T10:00:00Z')
+        """
+    ).lastrowid
+
+    with pytest.raises(sqlite3.IntegrityError, match="matching experiment and field"):
+        connection.execute(
+            """
+            UPDATE missing_field
+            SET resolved_by_review_revision_id = ?,
+                resolved_at = '2026-08-06T11:00:00Z'
+            WHERE missing_field_id = ?
+            """,
+            (revision_id, missing_field_id),
+        )
+
+
 def test_screening_only_paper_cannot_be_marked_import_ready() -> None:
     connection = _legacy_connection()
     migrate_database(connection)
@@ -200,6 +265,28 @@ def test_screening_only_paper_cannot_be_marked_import_ready() -> None:
             ) VALUES ('Excluded paper', 'fixture', '2026-08-06', 'exclude', 'ready')
             """
         )
+
+
+@pytest.mark.parametrize("disposition", ["exclude", "screening_only"])
+def test_exclusion_event_removes_ready_import_eligibility(disposition: str) -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    connection.execute(
+        "UPDATE paper SET import_status = 'ready' WHERE paper_id = 7"
+    )
+
+    connection.execute(
+        """
+        INSERT INTO screening_event (
+            paper_id, disposition, reason, source, occurred_at
+        ) VALUES (7, ?, 'outside scope', 'human screening', '2026-08-06T12:00:00Z')
+        """,
+        (disposition,),
+    )
+
+    assert connection.execute(
+        "SELECT screening_status, import_status FROM paper WHERE paper_id = 7"
+    ).fetchone() == ("exclude", "screening_only")
 
 
 def test_eligibility_result_profiles_are_stored_independently() -> None:

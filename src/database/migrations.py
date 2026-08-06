@@ -5,7 +5,7 @@ from __future__ import annotations
 import sqlite3
 
 
-MIGRATION_VERSION = 1
+MIGRATION_VERSION = 2
 
 PAPER_COLUMNS = {
     "source_paper_id": "TEXT",
@@ -17,6 +17,13 @@ EXPERIMENT_COLUMNS = {
     "disease_model": "TEXT",
     "payload_encoded_product": "TEXT",
     "payload_molecular_target": "TEXT",
+}
+
+REVIEW_REVISION_COLUMNS = {
+    "supersedes_review_revision_id": (
+        "INTEGER REFERENCES review_revision(review_revision_id) "
+        "ON UPDATE CASCADE ON DELETE RESTRICT"
+    ),
 }
 
 ADDITIVE_SCHEMA_SQL = """
@@ -53,9 +60,11 @@ CREATE TABLE IF NOT EXISTS review_revision (
     evidence_location TEXT NOT NULL CHECK (length(trim(evidence_location)) > 0),
     reviewer TEXT NOT NULL CHECK (length(trim(reviewer)) > 0),
     decision TEXT NOT NULL DEFAULT 'accepted' CHECK (decision IN ('accepted', 'rejected', 'superseded')),
+    supersedes_review_revision_id INTEGER,
     reviewer_notes TEXT,
     reviewed_at TEXT NOT NULL,
-    FOREIGN KEY (experiment_id) REFERENCES experiment(experiment_id) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (experiment_id) REFERENCES experiment(experiment_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (supersedes_review_revision_id) REFERENCES review_revision(review_revision_id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS missing_field (
@@ -168,6 +177,79 @@ INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
 VALUES (1, 'working_evidence_database_contract', '2026-08-06T00:00:00Z');
 """
 
+INTEGRITY_SCHEMA_SQL = """
+CREATE UNIQUE INDEX IF NOT EXISTS idx_review_revision_superseded_once
+    ON review_revision(supersedes_review_revision_id)
+    WHERE supersedes_review_revision_id IS NOT NULL;
+
+CREATE TRIGGER IF NOT EXISTS trg_missing_field_resolution_matches_insert
+BEFORE INSERT ON missing_field
+WHEN NEW.resolved_by_review_revision_id IS NOT NULL
+ AND NOT EXISTS (
+    SELECT 1
+    FROM review_revision
+    WHERE review_revision_id = NEW.resolved_by_review_revision_id
+      AND experiment_id = NEW.experiment_id
+      AND field_name = NEW.field_name
+      AND decision = 'accepted'
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'missing field resolution requires matching experiment and field');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_missing_field_resolution_matches_update
+BEFORE UPDATE OF experiment_id, field_name, resolved_by_review_revision_id
+ON missing_field
+WHEN NEW.resolved_by_review_revision_id IS NOT NULL
+ AND NOT EXISTS (
+    SELECT 1
+    FROM review_revision
+    WHERE review_revision_id = NEW.resolved_by_review_revision_id
+      AND experiment_id = NEW.experiment_id
+      AND field_name = NEW.field_name
+      AND decision = 'accepted'
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'missing field resolution requires matching experiment and field');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_review_revision_supersession_matches
+BEFORE INSERT ON review_revision
+WHEN NEW.supersedes_review_revision_id IS NOT NULL
+ AND NOT EXISTS (
+    SELECT 1
+    FROM review_revision
+    WHERE review_revision_id = NEW.supersedes_review_revision_id
+      AND experiment_id = NEW.experiment_id
+      AND field_name = NEW.field_name
+      AND decision = 'accepted'
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'supersession requires an accepted revision for the same experiment and field');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_review_revision_retraction_requires_target
+BEFORE INSERT ON review_revision
+WHEN NEW.decision IN ('rejected', 'superseded')
+ AND NEW.supersedes_review_revision_id IS NULL
+BEGIN
+    SELECT RAISE(ABORT, 'retraction requires a superseded review revision');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_screening_event_excludes_import
+AFTER INSERT ON screening_event
+WHEN NEW.disposition IN ('exclude', 'screening_only')
+BEGIN
+    UPDATE paper
+    SET screening_status = 'exclude',
+        import_status = 'screening_only'
+    WHERE paper_id = NEW.paper_id;
+END;
+
+INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
+VALUES (2, 'review_and_screening_integrity', '2026-08-06T01:00:00Z');
+"""
+
 
 def _add_missing_columns(
     connection: sqlite3.Connection,
@@ -201,3 +283,9 @@ def migrate_database(connection: sqlite3.Connection) -> None:
     _add_missing_columns(connection, "paper", PAPER_COLUMNS)
     _add_missing_columns(connection, "experiment", EXPERIMENT_COLUMNS)
     connection.executescript(ADDITIVE_SCHEMA_SQL)
+    _add_missing_columns(
+        connection,
+        "review_revision",
+        REVIEW_REVISION_COLUMNS,
+    )
+    connection.executescript(INTEGRITY_SCHEMA_SQL)

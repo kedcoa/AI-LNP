@@ -294,6 +294,117 @@ def test_non_numeric_human_dose_does_not_change_comet_eligibility(
     assert "dose" in result.reasons
 
 
+def test_accepted_correction_can_be_retracted_append_only(arm_database) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        "UPDATE experiment SET dose = NULL WHERE experiment_id = ?",
+        (experiment_id,),
+    )
+    accepted_id = connection.execute(
+        """
+        INSERT INTO review_revision (
+            experiment_id, field_name, corrected_value, evidence_excerpt,
+            evidence_location, reviewer, reviewed_at
+        ) VALUES (?, 'dose', '0.75', 'Animals received 0.75 mg/kg.',
+                  'methods, p. 3', 'reviewer-a', '2026-08-06T11:00:00Z')
+        """,
+        (experiment_id,),
+    ).lastrowid
+    connection.execute(
+        """
+        INSERT INTO missing_field (
+            experiment_id, field_name, reason, recorded_at,
+            resolved_by_review_revision_id, resolved_at
+        ) VALUES (?, 'dose', 'not extracted', '2026-08-06T10:00:00Z', ?,
+                  '2026-08-06T11:00:00Z')
+        """,
+        (experiment_id, accepted_id),
+    )
+    assert evaluate_eligibility(connection, experiment_id, "comet").eligible is True
+
+    connection.execute(
+        """
+        INSERT INTO review_revision (
+            experiment_id, field_name, corrected_value, evidence_excerpt,
+            evidence_location, reviewer, decision, supersedes_review_revision_id,
+            reviewed_at
+        ) VALUES (?, 'dose', '0.75', 'Correction was assigned to the wrong arm.',
+                  'human review record', 'reviewer-b', 'rejected', ?,
+                  '2026-08-06T12:00:00Z')
+        """,
+        (experiment_id, accepted_id),
+    )
+
+    result = evaluate_eligibility(connection, experiment_id, "comet")
+
+    assert result.eligible is False
+    assert "dose" in result.reasons
+    assert connection.execute(
+        "SELECT corrected_value FROM review_revision ORDER BY review_revision_id"
+    ).fetchall() == [("0.75",), ("0.75",)]
+
+
+def test_accepted_correction_can_be_superseded_append_only(arm_database) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        "UPDATE experiment SET dose = NULL WHERE experiment_id = ?",
+        (experiment_id,),
+    )
+    accepted_id = connection.execute(
+        """
+        INSERT INTO review_revision (
+            experiment_id, field_name, corrected_value, evidence_excerpt,
+            evidence_location, reviewer, reviewed_at
+        ) VALUES (?, 'dose', '0.75', 'Animals received 0.75 mg/kg.',
+                  'methods, p. 3', 'reviewer-a', '2026-08-06T11:00:00Z')
+        """,
+        (experiment_id,),
+    ).lastrowid
+    connection.execute(
+        """
+        INSERT INTO missing_field (
+            experiment_id, field_name, reason, recorded_at,
+            resolved_by_review_revision_id, resolved_at
+        ) VALUES (?, 'dose', 'not extracted', '2026-08-06T10:00:00Z', ?,
+                  '2026-08-06T11:00:00Z')
+        """,
+        (experiment_id, accepted_id),
+    )
+
+    connection.execute(
+        """
+        INSERT INTO review_revision (
+            experiment_id, field_name, corrected_value, evidence_excerpt,
+            evidence_location, reviewer, supersedes_review_revision_id,
+            reviewed_at
+        ) VALUES (?, 'dose', '0.50', 'The corrected dose was 0.50 mg/kg.',
+                  'methods, p. 3', 'reviewer-b', ?, '2026-08-06T12:00:00Z')
+        """,
+        (experiment_id, accepted_id),
+    )
+
+    assert evaluate_eligibility(connection, experiment_id, "comet").eligible is True
+    replacement_id = connection.execute(
+        "SELECT MAX(review_revision_id) FROM review_revision"
+    ).fetchone()[0]
+    connection.execute(
+        """
+        INSERT INTO review_revision (
+            experiment_id, field_name, corrected_value, evidence_excerpt,
+            evidence_location, reviewer, supersedes_review_revision_id,
+            reviewed_at
+        ) VALUES (?, 'dose', 'not-a-dose', 'The value requires another review.',
+                  'methods, p. 3', 'reviewer-c', ?, '2026-08-06T13:00:00Z')
+        """,
+        (experiment_id, replacement_id),
+    )
+
+    result = evaluate_eligibility(connection, experiment_id, "comet")
+
+    assert result.eligible is False
+    assert "dose" in result.reasons
+
+
 def test_unknown_experiment_and_profile_are_rejected(arm_database) -> None:
     connection, experiment_id = arm_database
 
