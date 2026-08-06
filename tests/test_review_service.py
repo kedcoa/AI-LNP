@@ -347,3 +347,358 @@ def test_arm_workspace_exposes_explicit_blanks_owned_evidence_and_history(
     assert [revision.corrected_value for revision in workspace.history] == [
         'Luciferase mRNA', 'mRNA-LUC'
     ]
+
+
+def _write_readiness(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+):
+    """Create the external, verified backup capability needed by write tests."""
+
+    from src import ui
+    from src.ui.review_service import prepare_writes
+
+    monkeypatch.setattr(ui.review_service, 'authoritative_database_path', lambda: review_database)
+    readiness = prepare_writes(tmp_path / 'review-backups')
+    assert readiness.ready is True
+    assert readiness.backup_path is not None
+    return readiness
+
+
+def _workspace_token(experiment_id: int) -> str:
+    from src.ui.review_service import load_arm_workspace
+
+    return load_arm_workspace(experiment_id).state_token
+
+
+def test_prepare_writes_requires_a_current_schema_and_verified_external_backup(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """A broken safety preflight must never return a capability for writes."""
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+
+    assert readiness.database_path == review_database
+    assert readiness.schema_version == 3
+    assert readiness.backup_path.parent == (tmp_path / 'review-backups').resolve()
+    assert readiness.backup_sha256
+
+    connection = sqlite3.connect(review_database)
+    connection.execute('DELETE FROM schema_migration WHERE version = 3')
+    connection.commit()
+    connection.close()
+    from src.ui.review_service import prepare_writes
+
+    unsafe = prepare_writes(tmp_path / 'review-backups')
+
+    assert unsafe.ready is False
+    assert 'schema' in (unsafe.failure_reason or '').lower()
+
+
+def test_corrected_decision_is_append_only_and_keeps_source_evidence_unchanged(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Replacing a correction must not replace either source extraction or evidence."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    original_evidence = sqlite3.connect(review_database).execute(
+        'SELECT evidence_text, evidence_review_status FROM evidence WHERE evidence_id = 1'
+    ).fetchone()
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='payload_name', decision='correct',
+        corrected_value='LUC-mRNA', evidence_id=1, reviewer='reviewer-b',
+        reviewer_notes='The methods section uses the canonical payload name.',
+        expected_review_revision_id=2, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+
+    workspace = load_arm_workspace(1)
+    connection = sqlite3.connect(review_database)
+    history = connection.execute(
+        'SELECT decision, corrected_value, supersedes_review_revision_id FROM review_revision '
+        'WHERE experiment_id = 1 ORDER BY review_revision_id'
+    ).fetchall()
+    source_value = connection.execute(
+        'SELECT payload_name FROM experiment WHERE experiment_id = 1'
+    ).fetchone()[0]
+    evidence = connection.execute(
+        'SELECT evidence_text, evidence_review_status FROM evidence WHERE evidence_id = 1'
+    ).fetchone()
+    connection.close()
+
+    assert result.review_revision_id == 3
+    assert workspace.fields[9].value == 'LUC-mRNA'
+    assert source_value == 'Luciferase'
+    assert evidence == original_evidence
+    assert history[-1] == ('accepted', 'LUC-mRNA', 2)
+
+
+def test_formulation_field_correction_reads_the_formulation_entity_not_experiment(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Formulation fields are reviewable overlays even though they are not experiment columns."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='composition_ratio', decision='correct',
+        corrected_value='50:10:38:2', evidence_id=4, reviewer='reviewer-b',
+        reviewer_notes='Table 1 provides the corrected molar ratio.', expected_review_revision_id=2,
+        expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+
+    fields = {field.name: field.value for field in load_arm_workspace(1).fields}
+    assert result.review_revision_id == 3
+    assert fields['composition_ratio'] == '50:10:38:2'
+
+
+def test_correction_supersedes_a_not_reported_revision_without_leaving_a_missing_blocker(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """A later supported value must be able to resolve a prior not-reported conclusion."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    initial_token = _workspace_token(1)
+    apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='dose', decision='not_reported', reviewer='reviewer-b',
+        reviewer_notes='No dose was found in the initially reviewed source.', expected_review_revision_id=2,
+        expected_state_token=initial_token, write_readiness=readiness,
+    ))
+    connection = sqlite3.connect(review_database)
+    dose_evidence = connection.execute(
+        """INSERT INTO evidence (
+               paper_id, experiment_id, field_name, evidence_text, evidence_location_type,
+               extraction_method, extraction_confidence
+           ) VALUES (1, 1, 'dose', 'Animals received 0.75 mg/kg.', 'methods', 'manual', 'high')"""
+    ).lastrowid
+    connection.commit()
+    connection.close()
+    workspace = load_arm_workspace(1)
+
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='dose', decision='correct', corrected_value='0.75',
+        evidence_id=dose_evidence, reviewer='reviewer-c',
+        reviewer_notes='A later source review found the dosing statement.',
+        expected_review_revision_id=3, expected_state_token=workspace.state_token,
+        write_readiness=readiness,
+    ))
+
+    assert result.review_revision_id == 4
+    assert 'dose' not in result.arm_status.missing_fields
+
+
+def test_accept_decision_marks_linked_evidence_manually_verified(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Accepting an extracted value records a human-verification event."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_dashboard
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='payload_name', decision='accept', evidence_id=1,
+        reviewer='reviewer-b', reviewer_notes='The excerpt supports the extracted value.',
+        expected_review_revision_id=2, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+    connection = sqlite3.connect(review_database)
+    verification = connection.execute(
+        'SELECT verification_status FROM field_verification WHERE experiment_id = 1 '
+        "AND field_name = 'payload_name' ORDER BY field_verification_id DESC LIMIT 1"
+    ).fetchone()[0]
+    connection.close()
+
+    assert result.decision == 'accept'
+    assert result.review_revision_id is not None
+    assert verification == 'manually_verified'
+    assert result.nearest_neighbor.eligible is True
+    assert result.comet.eligible is True
+    dashboard = load_dashboard()
+    assert dashboard.automatically_validated_usable_facts == 2
+    assert dashboard.manually_verified_usable_facts == 2
+
+
+@pytest.mark.parametrize(
+    ('decision', 'verification_status'),
+    [('not_reported', 'rejected'), ('unresolved', 'ambiguous')],
+)
+def test_nonfinal_field_decisions_preserve_value_and_leave_an_explicit_missing_record(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path,
+    decision: str, verification_status: str,
+) -> None:
+    """Not-reported and unresolved are explicit blockers, never synthetic values."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='dose', decision=decision, reviewer='reviewer-b',
+        reviewer_notes='The dosing detail cannot be supported by the reviewed source.',
+        expected_review_revision_id=2, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+    connection = sqlite3.connect(review_database)
+    value = connection.execute('SELECT dose FROM experiment WHERE experiment_id = 1').fetchone()[0]
+    missing = connection.execute(
+        "SELECT resolved_by_review_revision_id FROM missing_field WHERE experiment_id = 1 AND field_name = 'dose'"
+    ).fetchone()
+    verification = connection.execute(
+        "SELECT verification_status FROM field_verification WHERE experiment_id = 1 AND field_name = 'dose' "
+        'ORDER BY field_verification_id DESC LIMIT 1'
+    ).fetchone()[0]
+    history = connection.execute(
+        "SELECT corrected_value, reviewer_notes FROM review_revision WHERE experiment_id = 1 AND field_name = 'dose'"
+    ).fetchall()
+    connection.close()
+
+    assert value == 1
+    assert missing == (None,)
+    assert verification == verification_status
+    if decision == 'not_reported':
+        assert history == [('Not reported', '[not_reported] The dosing detail cannot be supported by the reviewed source.')]
+        assert next(
+            item.review_action for item in load_arm_workspace(1).history if item.field_name == 'dose'
+        ) == 'not_reported'
+    else:
+        assert history == []
+
+
+def test_rejected_correction_supersedes_the_active_history_without_deleting_it(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """A rejection retracts an accepted correction by appending a linked revision."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='payload_name', decision='reject', reviewer='reviewer-b',
+        reviewer_notes='The correction is not supported by the cited source.',
+        expected_review_revision_id=2, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+    connection = sqlite3.connect(review_database)
+    revisions = connection.execute(
+        'SELECT decision, supersedes_review_revision_id FROM review_revision WHERE experiment_id = 1 '
+        'ORDER BY review_revision_id'
+    ).fetchall()
+    connection.close()
+
+    assert result.review_revision_id is not None
+    assert revisions[-1] == ('rejected', 2)
+    assert len(revisions) == 3
+
+
+def test_wrong_arm_marks_same_paper_foreign_arm_evidence_conflicted(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Evidence from another arm can be quarantined without moving the evidence row."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=2, field_name='payload_name', decision='wrong_arm', evidence_id=1,
+        reviewer='reviewer-b', reviewer_notes='This excerpt describes experimental arm 1.',
+        expected_review_revision_id=0, expected_state_token=_workspace_token(2), write_readiness=readiness,
+    ))
+    connection = sqlite3.connect(review_database)
+    review = connection.execute(
+        "SELECT review_status, reason_code FROM import_review WHERE arm_id = 2 ORDER BY import_review_id DESC LIMIT 1"
+    ).fetchone()
+    evidence_arm = connection.execute('SELECT experiment_id FROM evidence WHERE evidence_id = 1').fetchone()[0]
+    connection.close()
+
+    assert result.review_revision_id is None
+    assert review == ('conflict', 'wrong_arm_evidence')
+    assert evidence_arm == 1
+
+
+def test_wrong_arm_retracts_an_active_correction_with_an_immutable_rejected_revision(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """A wrong-arm finding against an active correction must be auditable as a retraction."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision
+
+    connection = sqlite3.connect(review_database)
+    foreign_arm_evidence = connection.execute(
+        """INSERT INTO evidence (
+               paper_id, experiment_id, field_name, evidence_text, evidence_location_type,
+               extraction_method, extraction_confidence
+           ) VALUES (1, 2, 'payload_name', 'Arm 2 used a different payload.', 'methods', 'manual', 'high')"""
+    ).lastrowid
+    connection.commit()
+    connection.close()
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=1, field_name='payload_name', decision='wrong_arm', evidence_id=foreign_arm_evidence,
+        reviewer='reviewer-b', reviewer_notes='The correction was supported only by arm 2.',
+        expected_review_revision_id=2, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    ))
+    connection = sqlite3.connect(review_database)
+    revision = connection.execute(
+        'SELECT decision, supersedes_review_revision_id, reviewer_notes FROM review_revision '
+        'WHERE review_revision_id = ?', (result.review_revision_id,)
+    ).fetchone()
+    connection.close()
+
+    assert result.decision == 'wrong_arm'
+    assert revision == ('rejected', 2, '[wrong_arm] The correction was supported only by arm 2.')
+
+
+def test_stale_cross_paper_and_failing_decisions_roll_back_without_partial_history(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Bad submissions must not leave a revision, verification, or eligibility side effect."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    initial_token = _workspace_token(1)
+    accepted = ReviewDecision(
+        experiment_id=1, field_name='payload_name', decision='accept', evidence_id=1,
+        reviewer='reviewer-b', reviewer_notes='Source checked.', expected_review_revision_id=2,
+        expected_state_token=initial_token, write_readiness=readiness,
+    )
+    apply_review_decision(accepted)
+    stale = ReviewDecision(
+        experiment_id=1, field_name='payload_name', decision='correct', corrected_value='stale', evidence_id=1,
+        reviewer='reviewer-c', reviewer_notes='This browser state is stale.', expected_review_revision_id=2,
+        expected_state_token=initial_token, write_readiness=readiness,
+    )
+    with pytest.raises(ValueError, match='stale'):
+        apply_review_decision(stale)
+    cross_paper = ReviewDecision(
+        experiment_id=1, field_name='species', decision='correct', corrected_value='mouse', evidence_id=3,
+        reviewer='reviewer-c', reviewer_notes='This must reject foreign-paper evidence.',
+        expected_review_revision_id=3, expected_state_token=_workspace_token(1), write_readiness=readiness,
+    )
+    with pytest.raises(ValueError, match='same paper'):
+        apply_review_decision(cross_paper)
+
+    connection = sqlite3.connect(review_database)
+    assert connection.execute('SELECT count(*) FROM review_revision WHERE experiment_id = 1').fetchone()[0] == 3
+    assert connection.execute("SELECT count(*) FROM field_verification WHERE field_name = 'species'").fetchone()[0] == 0
+    connection.close()
+
+
+def test_unresolved_decision_advances_the_workspace_token_and_rejects_a_stale_repeat(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    """Every final action, including unresolved, must invalidate the submitted workspace state."""
+
+    from src.ui.review_service import ReviewDecision, apply_review_decision, load_arm_workspace
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    token = load_arm_workspace(1).state_token
+    request = ReviewDecision(
+        experiment_id=1, field_name='dose', decision='unresolved', reviewer='reviewer-b',
+        reviewer_notes='The source does not settle the dosing value.', expected_review_revision_id=2,
+        expected_state_token=token, write_readiness=readiness,
+    )
+
+    apply_review_decision(request)
+    with pytest.raises(ValueError, match='stale'):
+        apply_review_decision(request)
