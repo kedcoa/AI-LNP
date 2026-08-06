@@ -39,7 +39,7 @@ This inventory selects or defers local artifacts only. Field- and arm-level vali
 
 - The canonical manifest contains **14** paper dispositions: **11** import candidates, **3** screening-only records, **7** selected supported artifacts, and **4** included records with explicit unresolved reasons. It records **0** paid/API/LLM calls.
 - Recomputed SHA-256 digests for all **7/7** selected artifact paths matched the canonical manifest; no selected path was missing.
-- A temporary legacy six-table SQLite database preserved its seeded `paper` and `experiment` rows through migration. The first and second post-migration schema-and-data dumps were identical (`fb3678bcd8d62baae7f2cd8e05fc44c5208eb8a97ae65e7df2ef5634274fc219`); migration versions 1 and 2 were the only recorded versions, foreign keys were enabled, and `PRAGMA foreign_key_check` returned no rows.
+- A temporary legacy six-table SQLite database preserved its seeded `paper` and `experiment` rows through migration. Within the same run, the first and second post-migration schema-and-data dumps were identical; the migrated database had 14 tables, migration versions 1 and 2 only, enabled foreign keys, and no `PRAGMA foreign_key_check` rows.
 - With `OPENAI_API_KEY` and `SENSENOVA_API_KEY` blank and the RAG site-packages on `PYTHONPATH`, the complete offline suite reported **889 passed, 7 skipped** (5 warnings).
 - The worktree has no curated database file (only the tracked placeholder). The repository working database at `data/curated/lnp_evidence.db` remained byte-identical before and after the suite: `87a77275f8c524e70747bff92f247cf78d9907b5a6059d0fcadb38dfb1eca675`.
 - The Git index was empty, so no raw provider response, licensed source, credential, or other sensitive file was staged.
@@ -48,4 +48,4 @@ This inventory selects or defers local artifacts only. Field- and arm-level vali
 
 Day 2 imports only the seven selected artifacts and preserves the four explicit unresolved routes (NP-002 plus PILOT-001 through PILOT-003). Day 3 performs field/arm validation, the scoped selective repairs, and the blocked-source follow-up.
 
-Whole-branch review is tracked separately from this local verification record.
+All local gates recorded here passed. The controller-owned independent whole-branch review remains pending; Day 1 must not be called complete until that review passes.
