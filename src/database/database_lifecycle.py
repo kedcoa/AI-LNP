@@ -150,7 +150,14 @@ def migrate_authoritative_database(path: str | Path) -> DatabaseMigration:
 def backup_and_migrate_authoritative_database(
     path: str | Path, backup_dir: str | Path
 ) -> DatabaseLifecycleResult:
-    """Back up and migrate only the exact database state that passed preflight."""
+    """Back up and migrate only the exact database state that passed preflight.
+
+    ``migrate_database`` exclusively owns its SQLite transaction because a
+    legacy CHECK-table rebuild must toggle foreign-key enforcement before that
+    transaction begins.  The source digest is therefore revalidated on the
+    open local connection immediately before handoff.  This command assumes a
+    single local migration writer; concurrent external writers are unsupported.
+    """
 
     preflight = preflight_authoritative_database(path)
     backup_path = backup_database(preflight.database_path, backup_dir)
@@ -160,7 +167,6 @@ def backup_and_migrate_authoritative_database(
     connection = sqlite3.connect(preflight.database_path)
     try:
         _enable_and_verify_foreign_keys(connection)
-        connection.execute("BEGIN EXCLUSIVE")
         source_state_sha256 = _database_state_sha256(preflight.database_path)
         if source_state_sha256 != preflight.source_state_sha256:
             raise RuntimeError(

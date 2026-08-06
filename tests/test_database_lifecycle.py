@@ -373,6 +373,54 @@ def test_composed_lifecycle_binds_preflight_backup_and_migration_digests(
     assert result.migration.migration_versions == (1, 2, 3)
 
 
+def test_composed_lifecycle_migrates_legacy_four_cell_schema_without_outer_transaction(
+    tmp_path: Path,
+) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    schema_path = Path(__file__).resolve().parents[1] / "src/schema.sql"
+    legacy_schema = schema_path.read_text(encoding="utf-8").replace(
+        "'hsc',\n                'not_reported',\n                'other'",
+        "'hsc'",
+        1,
+    )
+    connection = sqlite3.connect(database_path)
+    connection.execute("PRAGMA foreign_keys = ON")
+    connection.executescript(legacy_schema)
+    connection.commit()
+    connection.close()
+    original_sha256 = _sha256(database_path)
+
+    result = backup_and_migrate_authoritative_database(
+        database_path, tmp_path / "excluded-backups"
+    )
+
+    assert result.preflight.original_sha256 == original_sha256
+    assert result.backup_path.is_file()
+    backup = sqlite3.connect(result.backup_path)
+    try:
+        assert backup.execute("PRAGMA integrity_check").fetchall() == [("ok",)]
+        backup_experiment_sql = backup.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='experiment'"
+        ).fetchone()[0]
+        backup_cell_check = backup_experiment_sql.split("cell_type", 1)[1].split(
+            "cell_source", 1
+        )[0]
+        assert "'not_reported'" not in backup_cell_check
+    finally:
+        backup.close()
+    connection = sqlite3.connect(database_path)
+    try:
+        experiment_sql = connection.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='experiment'"
+        ).fetchone()[0]
+        cell_check = experiment_sql.split("cell_type", 1)[1].split("cell_source", 1)[0]
+        assert "'not_reported'" in cell_check
+        assert "'other'" in cell_check
+        assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
+    finally:
+        connection.close()
+
+
 def test_composed_lifecycle_refuses_to_migrate_a_source_changed_after_backup(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -407,6 +455,37 @@ def test_composed_lifecycle_refuses_to_migrate_a_source_changed_after_backup(
     try:
         assert connection.execute(
             "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'schema_migration'"
+        ).fetchall() == []
+    finally:
+        connection.close()
+
+
+def test_composed_lifecycle_rolls_back_migration_failure_without_source_change(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    _create_empty_legacy_database(database_path)
+    original_bytes = database_path.read_bytes()
+
+    def fail_inside_owned_transaction(connection: sqlite3.Connection) -> None:
+        connection.execute("BEGIN")
+        connection.execute("CREATE TABLE must_rollback (value TEXT)")
+        raise RuntimeError("injected migration failure")
+
+    monkeypatch.setattr(
+        database_lifecycle, "migrate_database", fail_inside_owned_transaction
+    )
+
+    with pytest.raises(RuntimeError, match="injected migration failure"):
+        backup_and_migrate_authoritative_database(
+            database_path, tmp_path / "excluded-backups"
+        )
+
+    assert database_path.read_bytes() == original_bytes
+    connection = sqlite3.connect(database_path)
+    try:
+        assert connection.execute(
+            "SELECT name FROM sqlite_master WHERE name='must_rollback'"
         ).fetchall() == []
     finally:
         connection.close()
