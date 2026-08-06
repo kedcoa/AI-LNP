@@ -93,7 +93,10 @@ _EXCLUDED_DIRECTORY_NAMES = frozenset(
     }
 )
 _EXCLUDED_FILE_NAMES = frozenset({".env", ".env.local", ".env.production"})
-_RAW_PROVIDER_MARKERS = ("raw_response", "provider_response")
+_SENSITIVE_PATH_COMPONENT = re.compile(
+    r"(?:^|[._-])(?:api[._-]?key|credential(?:s)?|secret(?:s)?|raw|provider|licensed)(?:[._-]|$)",
+    re.IGNORECASE,
+)
 _ARTIFACT_KINDS = {
     ".csv": "csv",
     ".json": "json",
@@ -148,6 +151,11 @@ def validate_corpus(
         if entry.import_artifact is None:
             continue
         artifact_path = _resolve_within_root(corpus_root, entry.import_artifact)
+        if _is_excluded(artifact_path.relative_to(corpus_root)):
+            raise ValueError(
+                "selected import artifact is excluded by local safety policy: "
+                f"{entry.import_artifact}"
+            )
         if not artifact_path.is_file():
             raise ValueError(
                 "selected import artifact does not exist for "
@@ -219,7 +227,7 @@ def _is_excluded(relative_path: Path) -> bool:
     lowered_parts = [part.casefold() for part in relative_path.parts]
     if any(
         part in _EXCLUDED_DIRECTORY_NAMES
-        or part.startswith(("licensed-", "licensed_", "provider-", "provider_", "raw-", "raw_"))
+        or _SENSITIVE_PATH_COMPONENT.search(part)
         for part in lowered_parts[:-1]
     ):
         return True
@@ -227,7 +235,7 @@ def _is_excluded(relative_path: Path) -> bool:
     return (
         filename in _EXCLUDED_FILE_NAMES
         or filename.startswith(".env.")
-        or any(marker in filename for marker in _RAW_PROVIDER_MARKERS)
+        or _SENSITIVE_PATH_COMPONENT.search(filename) is not None
     )
 
 

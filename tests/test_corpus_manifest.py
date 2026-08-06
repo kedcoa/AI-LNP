@@ -98,6 +98,45 @@ def test_scanner_excludes_provider_and_licensed_paths(tmp_path: Path) -> None:
     assert scan_artifact_candidates(tmp_path, ["GP-001"]) == []
 
 
+@pytest.mark.parametrize(
+    "filename",
+    [
+        "GP-001_credentials.json",
+        "GP-001_secret.txt",
+        "GP-001_api_key.json",
+        "GP-001-raw-provider-output.json",
+        "GP-001.provider-response.json",
+    ],
+)
+def test_scanner_excludes_sensitive_filename_variants(
+    tmp_path: Path, filename: str
+) -> None:
+    artifact = tmp_path / "GP-001" / filename
+    artifact.parent.mkdir()
+    artifact.write_text("must not be hashed", encoding="utf-8")
+
+    assert scan_artifact_candidates(tmp_path, ["GP-001"]) == []
+
+
+@pytest.mark.parametrize(
+    "artifact_path",
+    [
+        "GP-001/GP-001_credentials.json",
+        "GP-001/GP-001-raw-provider-output.json",
+        "licensed-sources/GP-001.json",
+    ],
+)
+def test_validate_corpus_rejects_selected_sensitive_artifacts(
+    tmp_path: Path, artifact_path: str
+) -> None:
+    selected = tmp_path / artifact_path
+    selected.parent.mkdir(parents=True)
+    selected.write_text("must not be selected", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="selected import artifact is excluded"):
+        validate_corpus([_entry(import_artifact=artifact_path)], tmp_path)
+
+
 def test_load_lane_rejects_non_list_entries(tmp_path: Path) -> None:
     lane = tmp_path / "malformed.json"
     lane.write_text(json.dumps({"entries": {"paper_id": "GP-001"}}), encoding="utf-8")
