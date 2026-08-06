@@ -1,0 +1,98 @@
+{
+  "routing": {
+    "blocked": [
+      "PILOT-001",
+      "PILOT-002",
+      "PILOT-003"
+    ],
+    "needs_review": [
+      "GP-002",
+      "GP-004",
+      "GP-005",
+      "GP-006",
+      "GP-007",
+      "GP-008",
+      "NP-001",
+      "NP-002"
+    ],
+    "screening_only": [
+      "GP-001",
+      "GP-003",
+      "GP-009"
+    ]
+  },
+  "schema_version": "day1-current-corpus-inventory/v1",
+  "selected_artifacts": [
+    {
+      "paper_id": "GP-002",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json",
+      "sha256": "ae26ecbed9127a17b94022e1dac45fd1069ea14106f609f0ce3e2ede679a1548"
+    },
+    {
+      "paper_id": "GP-004",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json",
+      "sha256": "39fab437cd3467fe48a3e990c3c17040d113915c00581f3b212b01da31d866d2"
+    },
+    {
+      "paper_id": "GP-005",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json",
+      "sha256": "a999f6d38d73aea10f6d2232c368cbed5bbaab579165ff1b30e27ed2d3e3ce4b"
+    },
+    {
+      "paper_id": "GP-006",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
+      "sha256": "a2f63ee4a98314668a1452806a329e96011f3c3dfae086bdc139ce59a3a08c96"
+    },
+    {
+      "paper_id": "GP-007",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json",
+      "sha256": "28ecf42ef8b06e160ee199f6a80a36b9c57c94af9e6be6cceab6267759763142"
+    },
+    {
+      "paper_id": "GP-008",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json",
+      "sha256": "5c8ccb74f0d3c95038d9314d70c7e64746223a37a478aba9a9a7d4f2693b506e"
+    },
+    {
+      "paper_id": "NP-001",
+      "path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
+      "sha256": "6ad0acdc54379dca715b9514d1acf3a54ad3f890d5121ce0d83cb4f85a7c56f4"
+    }
+  ],
+  "summary": {
+    "explicit_unresolved_reasons": 4,
+    "import_candidates": 11,
+    "import_status_counts": {
+      "blocked": 3,
+      "needs_review": 8,
+      "screening_only": 3
+    },
+    "paid_api_calls": 0,
+    "rerun_status_counts": {
+      "blocked_pending_access": 3,
+      "none": 4,
+      "selective": 7
+    },
+    "screening_only": 3,
+    "selected_artifacts": 7,
+    "total_papers": 14
+  },
+  "unresolved_import_candidates": [
+    {
+      "paper_id": "NP-002",
+      "reason": "High priority: deterministically reconcile the three validated, recipient-cell-scoped results into one source-evidence-preserving artifact, then repair only the missing assay, endpoint, qualitative-outcome, and comparator fields. No new extraction request is authorized by this inventory."
+    },
+    {
+      "paper_id": "PILOT-001",
+      "reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable."
+    },
+    {
+      "paper_id": "PILOT-002",
+      "reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable."
+    },
+    {
+      "paper_id": "PILOT-003",
+      "reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable."
+    }
+  ]
+}

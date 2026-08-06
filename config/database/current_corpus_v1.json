@@ -1,0 +1,220 @@
+{
+  "constraints": {
+    "evidence_import_performed": false,
+    "paid_api_calls": 0,
+    "scientific_extraction_performed": false
+  },
+  "entries": [
+    {
+      "doi": "10.1080/10717544.2026.2682976",
+      "import_artifact": null,
+      "import_status": "screening_only",
+      "paper_id": "GP-001",
+      "pmid": "42249613",
+      "rerun_reason": null,
+      "rerun_status": "none",
+      "title": null
+    },
+    {
+      "doi": "10.1016/j.omtn.2026.102989",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json",
+      "import_status": "needs_review",
+      "paper_id": "GP-002",
+      "pmid": "42440881",
+      "rerun_reason": "The compact routing artifact marks two first-call-required gaps; import only the accepted full-text graph and route those gaps for selective Day 2-3 handling.",
+      "rerun_status": "selective",
+      "title": null
+    },
+    {
+      "doi": "10.34133/research.1288",
+      "import_artifact": null,
+      "import_status": "screening_only",
+      "paper_id": "GP-003",
+      "pmid": "42164756",
+      "rerun_reason": null,
+      "rerun_status": "none",
+      "title": null
+    },
+    {
+      "doi": "10.1038/s41467-021-20903-3",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json",
+      "import_status": "needs_review",
+      "paper_id": "GP-004",
+      "pmid": "33504774",
+      "rerun_reason": "The selected accepted graph is supported, but compact routing records six missing-record-text gaps and incomplete formulation context; do not broaden import beyond the accepted graph.",
+      "rerun_status": "selective",
+      "title": null
+    },
+    {
+      "doi": "10.1002/advs.202409729",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json",
+      "import_status": "needs_review",
+      "paper_id": "GP-005",
+      "pmid": "39792811",
+      "rerun_reason": "The accepted graph is the strongest validated merge, while compact routing retains one selective-vision gap and unresolved endpoint adjudication.",
+      "rerun_status": "selective",
+      "title": null
+    },
+    {
+      "doi": "10.1016/j.omtn.2024.102383",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
+      "import_status": "needs_review",
+      "paper_id": "GP-006",
+      "pmid": "39640016",
+      "rerun_reason": "The accepted graph is importable as supported evidence, but compact routing retains six selective-vision and fourteen missing-record-text gaps, including supplemental evidence.",
+      "rerun_status": "selective",
+      "title": null
+    },
+    {
+      "doi": "10.7150/ijbs.126332",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json",
+      "import_status": "needs_review",
+      "paper_id": "GP-007",
+      "pmid": "42088421",
+      "rerun_reason": null,
+      "rerun_status": "none",
+      "title": null
+    },
+    {
+      "doi": "10.1073/pnas.2534673123",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json",
+      "import_status": "needs_review",
+      "paper_id": "GP-008",
+      "pmid": "42213756",
+      "rerun_reason": "The screening ledger retains manual review and compact routing retains seven selective-vision plus three missing-record-text gaps; import only the accepted graph pending review.",
+      "rerun_status": "selective",
+      "title": null
+    },
+    {
+      "doi": "10.1016/j.ymthe.2025.03.018",
+      "import_artifact": null,
+      "import_status": "screening_only",
+      "paper_id": "GP-009",
+      "pmid": "40087866",
+      "rerun_reason": null,
+      "rerun_status": "none",
+      "title": null
+    },
+    {
+      "doi": "10.3390/ijms252011254",
+      "import_artifact": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
+      "import_status": "needs_review",
+      "paper_id": "NP-001",
+      "pmid": null,
+      "rerun_reason": "First perform field-level review of the validated primary result. If the three declared gaps remain material, run only source-bounded repairs for formulation-specific transfection, formulation composition, and the HepG2 assay; do not repeat the primary extraction.",
+      "rerun_status": "selective",
+      "title": "Encapsulation of Dexamethasone into mRNA-Lipid Nanoparticles Is a Promising Approach for the Development of Liver-Targeted Anti-Inflammatory Therapies"
+    },
+    {
+      "doi": "10.1007/s12195-019-00573-4",
+      "import_artifact": null,
+      "import_status": "needs_review",
+      "paper_id": "NP-002",
+      "pmid": "31719922",
+      "rerun_reason": "High priority: deterministically reconcile the three validated, recipient-cell-scoped results into one source-evidence-preserving artifact, then repair only the missing assay, endpoint, qualitative-outcome, and comparator fields. No new extraction request is authorized by this inventory.",
+      "rerun_status": "selective",
+      "title": "Cell Subtypes Within the Liver Microenvironment Differentially Interact with Lipid Nanoparticles"
+    },
+    {
+      "doi": "10.1038/s41467-022-35637-z",
+      "import_artifact": null,
+      "import_status": "blocked",
+      "paper_id": "PILOT-001",
+      "pmid": "36650129",
+      "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
+      "rerun_status": "blocked_pending_access",
+      "title": "Ligand-tethered lipid nanoparticles for targeted RNA delivery to treat liver fibrosis"
+    },
+    {
+      "doi": "10.1126/sciadv.abf4398",
+      "import_artifact": null,
+      "import_status": "blocked",
+      "paper_id": "PILOT-002",
+      "pmid": "33637537",
+      "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
+      "rerun_status": "blocked_pending_access",
+      "title": "Engineered ionizable lipid nanoparticles for targeted delivery of RNA therapeutics into different types of cells in the liver"
+    },
+    {
+      "doi": "10.1038/s41419-020-2571-4",
+      "import_artifact": null,
+      "import_status": "blocked",
+      "paper_id": "PILOT-003",
+      "pmid": "32393755",
+      "rerun_reason": "The committed worktree lacks the local source HTML and inventory.json named by the pilot selection manifest; the only committed consolidated replay failed formal acceptance and is not importable.",
+      "rerun_status": "blocked_pending_access",
+      "title": "Lipid-encapsulated siRNA for hepatocyte-directed treatment of advanced liver disease"
+    }
+  ],
+  "purpose": "Day 2 supported-evidence import routing",
+  "schema_version": "current-corpus/v1",
+  "selected_artifacts": [
+    {
+      "paper_id": "GP-002",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json",
+      "sha256": "ae26ecbed9127a17b94022e1dac45fd1069ea14106f609f0ce3e2ede679a1548"
+    },
+    {
+      "paper_id": "GP-004",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json",
+      "sha256": "39fab437cd3467fe48a3e990c3c17040d113915c00581f3b212b01da31d866d2"
+    },
+    {
+      "paper_id": "GP-005",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json",
+      "sha256": "a999f6d38d73aea10f6d2232c368cbed5bbaab579165ff1b30e27ed2d3e3ce4b"
+    },
+    {
+      "paper_id": "GP-006",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
+      "sha256": "a2f63ee4a98314668a1452806a329e96011f3c3dfae086bdc139ce59a3a08c96"
+    },
+    {
+      "paper_id": "GP-007",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json",
+      "sha256": "28ecf42ef8b06e160ee199f6a80a36b9c57c94af9e6be6cceab6267759763142"
+    },
+    {
+      "paper_id": "GP-008",
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json",
+      "sha256": "5c8ccb74f0d3c95038d9314d70c7e64746223a37a478aba9a9a7d4f2693b506e"
+    },
+    {
+      "paper_id": "NP-001",
+      "path": "data/staging/extraction/np001_primary_paid_v1/NP-001/result.json",
+      "sha256": "6ad0acdc54379dca715b9514d1acf3a54ad3f890d5121ce0d83cb4f85a7c56f4"
+    }
+  ],
+  "source_lanes": [
+    {
+      "path": "data/manifests/current_corpus_lanes/gp_v1.json",
+      "sha256": "decf13d83e59d2c557d896858edd16a43677b173213690494c8d0ba21ca622bf"
+    },
+    {
+      "path": "data/manifests/current_corpus_lanes/np_v1.json",
+      "sha256": "77d840652d509135593d4bb96bd9ca44297a1a731b6fd3fe936fb0bfa01863fb"
+    },
+    {
+      "path": "data/manifests/current_corpus_lanes/pilot_v1.json",
+      "sha256": "98e065a7ac0ec157b373d634606b59ca49b08a3decf2e485ff95dc81e06f21f0"
+    }
+  ],
+  "summary": {
+    "explicit_unresolved_reasons": 4,
+    "import_candidates": 11,
+    "import_status_counts": {
+      "blocked": 3,
+      "needs_review": 8,
+      "screening_only": 3
+    },
+    "paid_api_calls": 0,
+    "rerun_status_counts": {
+      "blocked_pending_access": 3,
+      "none": 4,
+      "selective": 7
+    },
+    "screening_only": 3,
+    "selected_artifacts": 7,
+    "total_papers": 14
+  }
+}
