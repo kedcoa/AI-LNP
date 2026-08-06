@@ -298,7 +298,7 @@ def list_review_arms() -> tuple[ReviewArm, ...]:
     def priority(arm: ReviewArm) -> int:
         if arm.completeness_status == 'complete' and arm.verification_status != 'manually_verified':
             return 0
-        if arm.completeness_status == 'quarantined' or arm.review_status == 'blocked':
+        if arm.completeness_status == 'quarantined' or arm.review_status in ('blocked', 'quarantined'):
             return 4
         if arm.completeness_status == 'conflict' or arm.review_status == 'conflict':
             return 3

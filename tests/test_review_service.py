@@ -281,7 +281,7 @@ def test_review_arms_follow_the_specified_review_priority(
         connection.execute(
             "INSERT INTO experiment (paper_id, formulation_id, cell_type, payload_type) VALUES (1, 1, 'hepatocyte', 'mRNA')"
         ).lastrowid
-        for _ in range(3)
+        for _ in range(4)
     ]
     connection.executemany(
         """INSERT INTO arm_assessment (
@@ -298,6 +298,7 @@ def test_review_arms_follow_the_specified_review_priority(
     for arm_id, status, tag, key in (
             (extra_arms[1], 'incomplete', 'Needs human verification', 'target_cell_confirmation'),
         (extra_arms[2], 'blocked', 'Source file unavailable', 'blocked'),
+        (extra_arms[3], 'quarantined', 'Source file unavailable', 'quarantined'),
     ):
         connection.execute(
             """INSERT INTO import_review (
@@ -314,6 +315,7 @@ def test_review_arms_follow_the_specified_review_priority(
             (extra_arms[0], '["normalization_basis"]', RULES_VERSION),
             (2, '["dose"]', RULES_VERSION),
             (extra_arms[2], '["dose"]', RULES_VERSION),
+            (extra_arms[3], '["dose", "route"]', RULES_VERSION),
         ],
     )
     connection.commit()
@@ -322,7 +324,9 @@ def test_review_arms_follow_the_specified_review_priority(
 
     assert {arm.experiment_id: arm.review_reason_code for arm in arms}[extra_arms[1]] == 'target_cell_confirmation'
     assert arms[1].experiment_id == extra_arms[0]
-    assert [arm.experiment_id for arm in arms] == [1, extra_arms[0], extra_arms[1], 2, extra_arms[2]]
+    assert [arm.experiment_id for arm in arms] == [
+        1, extra_arms[0], extra_arms[1], 2, extra_arms[2], extra_arms[3]
+    ]
 
 
 def test_arm_workspace_exposes_explicit_blanks_owned_evidence_and_history(
