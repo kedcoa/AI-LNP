@@ -30,7 +30,7 @@ SUPPORTED_PREDICATES = frozenset(
         "has_component", "has_disease_context", "has_dose", "has_formulation",
         "has_molecular_target", "has_outcome_value", "has_physiological_context",
         "has_route", "has_species", "has_targeting_ligand", "has_timepoint",
-        "has_tissue_or_organ", "measures_endpoint", "therapeutic_target_cell",
+        "has_tissue_context", "has_tissue_or_organ", "measures_endpoint", "therapeutic_target_cell",
         "delivery_target_cell",
     }
 )
@@ -38,7 +38,8 @@ FIELD_BY_PREDICATE = {
     "has_species": "species", "has_route": "route", "has_dose": "dose",
     "has_timepoint": "timepoint", "has_assay": "assay",
     "has_biological_model": "disease_model", "has_disease_context": "disease_model",
-    "has_tissue_or_organ": "tissue_or_organ", "therapeutic_target_cell": "cell_type",
+    "has_tissue_context": "tissue_or_organ", "has_tissue_or_organ": "tissue_or_organ",
+    "therapeutic_target_cell": "cell_type",
     "delivery_target_cell": "cell_type", "carries_payload": "payload_name",
     "encodes_product": "payload_encoded_product", "has_molecular_target": "payload_molecular_target",
 }
@@ -199,7 +200,11 @@ def adapt_accepted_graph(
         for _ in range(3):
             for claim in experiment_claims:
                 owners = ownership.get(claim.get("subject_entity_id"), set())
-                if owners and claim.get("predicate") in {"carries_payload", "encodes_product", "measures_endpoint"}:
+                if owners and claim.get("predicate") in {
+                    "carries_payload", "encodes_product", "measures_endpoint",
+                    "has_biological_model", "has_disease_context",
+                    "has_physiological_context", "has_tissue_context",
+                }:
                     ownership.setdefault(claim["object_entity_id"], set()).update(owners)
 
         candidate_forms: list[str] = []
@@ -288,6 +293,10 @@ def adapt_accepted_graph(
                 )
                 if ids:
                     links.append(FieldEvidenceLink(paper_id, "arm", arm_id, field, ids))
+                    if field == "tissue_or_organ" and not values.get("cell_type"):
+                        links.append(FieldEvidenceLink(
+                            paper_id, "arm", arm_id, "cell_type", ids
+                        ))
                     if field == "dose" and dose_unit:
                         links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "dose_unit", ids))
                     if field == "timepoint" and _unit(time_text, "timepoint"):

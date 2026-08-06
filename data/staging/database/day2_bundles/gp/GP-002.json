@@ -4,7 +4,7 @@
       "artifact_id": "GP-002:accepted_graph",
       "assay": null,
       "cell_source": null,
-      "cell_type": "",
+      "cell_type": "liver",
       "comet_eligible": false,
       "comparator_description": null,
       "comparator_type": null,
@@ -29,7 +29,7 @@
       "species": "Mus musculus",
       "timepoint": 24.0,
       "timepoint_unit": "hours",
-      "tissue_or_organ": null,
+      "tissue_or_organ": "liver",
       "verification_status": "unreviewed"
     },
     {
@@ -471,6 +471,26 @@
       "arm_id": "GP-002:ARM:GP-002-E01:F1",
       "artifact_id": "GP-002:accepted_graph",
       "evidence_location_type": "clause",
+      "evidence_text": "delivery of mRNA to the liver",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "tissue_or_organ",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-002",
+      "record_id": "GP-002:EV:0011",
+      "reviewer_notes": null,
+      "section_name": "B017C003",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-002:ARM:GP-002-E01:F1",
+      "artifact_id": "GP-002:accepted_graph",
+      "evidence_location_type": "clause",
       "evidence_text": "via the tail vein",
       "extraction_confidence": "accepted",
       "extraction_method": "accepted_graph",
@@ -479,7 +499,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0011",
+      "record_id": "GP-002:EV:0012",
       "reviewer_notes": null,
       "section_name": "B017C008",
       "structured_evidence": null,
@@ -499,7 +519,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0012",
+      "record_id": "GP-002:EV:0013",
       "reviewer_notes": null,
       "section_name": "B017C008",
       "structured_evidence": null,
@@ -519,7 +539,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0013",
+      "record_id": "GP-002:EV:0014",
       "reviewer_notes": null,
       "section_name": "B017C008",
       "structured_evidence": null,
@@ -539,7 +559,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0014",
+      "record_id": "GP-002:EV:0015",
       "reviewer_notes": null,
       "section_name": "B017C003",
       "structured_evidence": null,
@@ -559,7 +579,7 @@
       "outcome_id": null,
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0015",
+      "record_id": "GP-002:EV:0016",
       "reviewer_notes": null,
       "section_name": "B017C003",
       "structured_evidence": null,
@@ -579,7 +599,7 @@
       "outcome_id": "GP-002:OUT:GP-002-E01:F1:01",
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0016",
+      "record_id": "GP-002:EV:0017",
       "reviewer_notes": null,
       "section_name": "B017C004",
       "structured_evidence": null,
@@ -599,7 +619,7 @@
       "outcome_id": "GP-002:OUT:GP-002-E01:F1:01",
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0017",
+      "record_id": "GP-002:EV:0018",
       "reviewer_notes": null,
       "section_name": "B017C004",
       "structured_evidence": null,
@@ -619,7 +639,7 @@
       "outcome_id": "GP-002:OUT:GP-002-E01:F1:02",
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0018",
+      "record_id": "GP-002:EV:0019",
       "reviewer_notes": null,
       "section_name": "B017C015",
       "structured_evidence": null,
@@ -639,29 +659,9 @@
       "outcome_id": "GP-002:OUT:GP-002-E01:F1:02",
       "page_number": null,
       "paper_id": "GP-002",
-      "record_id": "GP-002:EV:0019",
-      "reviewer_notes": null,
-      "section_name": "B017C015",
-      "structured_evidence": null,
-      "supplement_identifier": null,
-      "table_number": null,
-      "verification_status": "unreviewed"
-    },
-    {
-      "arm_id": "GP-002:ARM:GP-002-E01:F1",
-      "artifact_id": "GP-002:accepted_graph",
-      "evidence_location_type": "clause",
-      "evidence_text": "delivery of mRNA to the liver",
-      "extraction_confidence": "accepted",
-      "extraction_method": "accepted_graph",
-      "field_name": "unsupported_relationship",
-      "figure_number": null,
-      "outcome_id": null,
-      "page_number": null,
-      "paper_id": "GP-002",
       "record_id": "GP-002:EV:0020",
       "reviewer_notes": null,
-      "section_name": "B017C003",
+      "section_name": "B017C015",
       "structured_evidence": null,
       "supplement_identifier": null,
       "table_number": null,
@@ -1673,7 +1673,18 @@
       "evidence_ids": [
         "GP-002:EV:0011"
       ],
-      "field_name": "route",
+      "field_name": "tissue_or_organ",
+      "notes": null,
+      "paper_id": "GP-002",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-002:ARM:GP-002-E01:F1",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-002:EV:0011"
+      ],
+      "field_name": "cell_type",
       "notes": null,
       "paper_id": "GP-002",
       "verification_status": "unreviewed"
@@ -1683,6 +1694,17 @@
       "entity_type": "arm",
       "evidence_ids": [
         "GP-002:EV:0012"
+      ],
+      "field_name": "route",
+      "notes": null,
+      "paper_id": "GP-002",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-002:ARM:GP-002-E01:F1",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-002:EV:0013"
       ],
       "field_name": "dose",
       "notes": null,
@@ -1693,7 +1715,7 @@
       "entity_id": "GP-002:ARM:GP-002-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-002:EV:0012"
+        "GP-002:EV:0013"
       ],
       "field_name": "dose_unit",
       "notes": null,
@@ -1704,7 +1726,7 @@
       "entity_id": "GP-002:ARM:GP-002-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-002:EV:0013"
+        "GP-002:EV:0014"
       ],
       "field_name": "timepoint",
       "notes": null,
@@ -1715,7 +1737,7 @@
       "entity_id": "GP-002:ARM:GP-002-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-002:EV:0013"
+        "GP-002:EV:0014"
       ],
       "field_name": "timepoint_unit",
       "notes": null,
@@ -1726,7 +1748,7 @@
       "entity_id": "GP-002:ARM:GP-002-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-002:EV:0014"
+        "GP-002:EV:0015"
       ],
       "field_name": "payload_name",
       "notes": null,
@@ -1737,7 +1759,7 @@
       "entity_id": "GP-002:ARM:GP-002-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-002:EV:0015"
+        "GP-002:EV:0016"
       ],
       "field_name": "payload_encoded_product",
       "notes": null,
@@ -1748,7 +1770,7 @@
       "entity_id": "GP-002:ARM:GP-002-E01:F1",
       "entity_type": "arm",
       "evidence_ids": [
-        "GP-002:EV:0014"
+        "GP-002:EV:0015"
       ],
       "field_name": "payload_type",
       "notes": null,
@@ -1759,7 +1781,7 @@
       "entity_id": "GP-002:OUT:GP-002-E01:F1:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-002:EV:0016"
+        "GP-002:EV:0017"
       ],
       "field_name": "endpoint_name",
       "notes": null,
@@ -1770,7 +1792,7 @@
       "entity_id": "GP-002:OUT:GP-002-E01:F1:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-002:EV:0016"
+        "GP-002:EV:0017"
       ],
       "field_name": "endpoint_family",
       "notes": null,
@@ -1781,7 +1803,7 @@
       "entity_id": "GP-002:OUT:GP-002-E01:F1:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-002:EV:0017"
+        "GP-002:EV:0018"
       ],
       "field_name": "outcome_value",
       "notes": null,
@@ -1792,7 +1814,7 @@
       "entity_id": "GP-002:OUT:GP-002-E01:F1:01",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-002:EV:0017"
+        "GP-002:EV:0018"
       ],
       "field_name": "outcome_unit",
       "notes": null,
@@ -1803,7 +1825,7 @@
       "entity_id": "GP-002:OUT:GP-002-E01:F1:02",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-002:EV:0018"
+        "GP-002:EV:0019"
       ],
       "field_name": "endpoint_name",
       "notes": null,
@@ -1814,7 +1836,7 @@
       "entity_id": "GP-002:OUT:GP-002-E01:F1:02",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-002:EV:0018"
+        "GP-002:EV:0019"
       ],
       "field_name": "endpoint_family",
       "notes": null,
@@ -1825,7 +1847,7 @@
       "entity_id": "GP-002:OUT:GP-002-E01:F1:02",
       "entity_type": "outcome",
       "evidence_ids": [
-        "GP-002:EV:0019"
+        "GP-002:EV:0020"
       ],
       "field_name": "qualitative_outcome",
       "notes": null,
@@ -2475,7 +2497,6 @@
       "arm_id": "GP-002:ARM:GP-002-E01:F1",
       "artifact_id": "GP-002:accepted_graph",
       "evidence_ids": [
-        "GP-002:EV:0020",
         "GP-002:EV:0021"
       ],
       "field_name": null,

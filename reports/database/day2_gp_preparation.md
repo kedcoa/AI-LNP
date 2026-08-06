@@ -15,7 +15,7 @@ missing or unresolved required field.
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | GP-002 | 1 | 4 | 6 | 6 | 62 | 7 | Missing dose; needs human verification |
 | GP-004 | 1 | 4 | 3 | 7 | 49 | 5 | Experiment link unclear; missing dose; missing evidence excerpt; needs human verification |
-| GP-005 | 5 | 4 | 4 | 4 | 40 | 7 | Experiment link unclear; missing dose; needs human verification |
+| GP-005 | 5 | 4 | 4 | 4 | 40 | 7 | Experiment link unclear; missing dose; missing evidence excerpt; needs human verification |
 | GP-006 | 1 | 1 | 1 | 5 | 17 | 1 | Missing dose |
 | GP-007 | 1 | 3 | 1 | 7 | 30 | 5 | Experiment link unclear; needs human verification |
 | GP-008 | 4 | 0 | 3 | 2 | 30 | 4 | Experiment link unclear; missing dose |
@@ -40,6 +40,10 @@ missing or unresolved required field.
   remain visible through review records. Missing values are not imputed.
 - Numeric dose values are stored only with a parsed unit; `microgram(s)` is
   recognized in addition to symbol and abbreviated forms.
+- Context ownership follows explicit, directional graph chains. For example,
+  GP-005 links LNP1 administration to the C57BL/6J model and then to *Mus
+  musculus*, so species/model/liver context belongs to LNP1. It is not copied
+  to the separately linked LNP16 or LNP17 arms.
 - Titles remain the paper IDs because the controlled local gold-source manifest
   contains PMID/PMCID/DOI but no title. Bibliographic identifiers are preserved
   from that manifest.

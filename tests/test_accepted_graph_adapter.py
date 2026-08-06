@@ -107,6 +107,25 @@ def test_gp005_preserves_explicit_formulation_arms_without_fallback() -> None:
     assert any(review.reason_code == "experiment_link_unclear" for review in bundle.reviews)
 
 
+def test_gp005_context_chain_assigns_species_only_to_linked_lnp1_arm() -> None:
+    bundle = adapt_accepted_graph(GRAPH_ROOT / "GP-005" / "accepted_graph.json")
+    formulation_by_id = {row.record_id: row.formulation_name for row in bundle.formulations}
+    arm_by_formulation = {
+        formulation_by_id[arm.formulation_id]: arm
+        for arm in bundle.arms
+        if "GP-005-E01" in arm.record_id
+    }
+
+    assert arm_by_formulation["Egfp mRNA‐LNP (LNP1)"].species == "Mus musculus"
+    assert arm_by_formulation["LNP16"].species is None
+    assert arm_by_formulation["LNP17"].species is None
+    lnp1 = arm_by_formulation["Egfp mRNA‐LNP (LNP1)"]
+    assert any(
+        link.entity_id == lnp1.record_id and link.field_name == "species"
+        for link in bundle.field_evidence_links
+    )
+
+
 def test_gp008_creates_only_explicitly_related_formulation_arms() -> None:
     bundle = adapt_accepted_graph(GRAPH_ROOT / "GP-008" / "accepted_graph.json")
     formulation_by_id = {row.record_id: row.formulation_name for row in bundle.formulations}
