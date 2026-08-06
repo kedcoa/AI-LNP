@@ -225,17 +225,20 @@ def build_np_bundle(
         slice_name = (raw.get("source_slices") or [default_slice])[0]
         rid = _record_id(paper_id, "formulation", raw_id)
         formulation_ids[raw_id] = rid
+        def supported(field_name: str) -> Any:
+            field = raw.get(field_name)
+            return _value(field) if _eids(field) else None
         record = FormulationRecord(
             record_id=rid, paper_id=paper_id, artifact_id=artifact_by_slice[slice_name],
-            formulation_name=_value(raw.get("formulation_name")),
-            composition_raw=_value(raw.get("composition")),
-            composition_basis=_value(raw.get("composition_basis")),
-            np_ratio=_value(raw.get("np_ratio")),
+            formulation_name=supported("formulation_name"),
+            composition_raw=supported("composition"),
+            composition_basis=supported("composition_basis"),
+            np_ratio=supported("np_ratio"),
             formulation_review_status="unreviewed",
         )
         formulations.append(record)
         for dst, src in (("formulation_name", "formulation_name"), ("composition_raw", "composition"), ("composition_basis", "composition_basis"), ("np_ratio", "np_ratio")):
-            link("formulation", rid, dst, raw.get(src), slice_name)
+            link("formulation", rid, dst, raw.get(src) if _eids(raw.get(src)) else None, slice_name)
 
     components = []
     for raw in merged["components"]:
@@ -340,24 +343,42 @@ def build_np_bundle(
         evidence_field = CONFLICT_EVIDENCE_FIELDS.get(
             conflict.get("field_name"), conflict.get("field_name")
         )
-        conflict_evidence = tuple(
-            record_id for record_id, record in evidence_records.items()
-            if record.field_name == evidence_field
-            and any(
-                record_id.endswith(f"::{raw_evidence_id}")
-                for raw_evidence_id in conflict.get("evidence_ids", [])
+        def resolve_side(
+            raw_ids: list[str], formulation_source_ids: list[str]
+        ) -> tuple[str, ...]:
+            normalized_formulation_ids = {
+                _record_id(paper_id, "formulation", source_id)
+                for source_id in formulation_source_ids
+            }
+            return tuple(
+                record_id for record_id, record in evidence_records.items()
+                if record.field_name == evidence_field
+                and any(
+                    f"::{formulation_id}::" in record_id
+                    for formulation_id in normalized_formulation_ids
+                )
+                and any(record_id.endswith(f"::{raw_id}") for raw_id in raw_ids)
             )
+        left_evidence = resolve_side(
+            conflict.get("left_evidence_ids", []),
+            conflict.get("left_formulation_ids", []),
         )
-        if len(conflict_evidence) < 2:
-            raise ValueError(
-                "formulation conflict requires evidence from both supported values: "
-                f"{conflict.get('field_name')}"
-            )
+        right_evidence = resolve_side(
+            conflict.get("right_evidence_ids", []),
+            [conflict.get("right_formulation_id")],
+        )
+        conflict_evidence = tuple(dict.fromkeys((*left_evidence, *right_evidence)))
+        fully_supported = bool(left_evidence and right_evidence)
+        conflict_notes = dict(conflict)
+        conflict_notes["left_resolved_evidence_ids"] = list(left_evidence)
+        conflict_notes["right_resolved_evidence_ids"] = list(right_evidence)
         reviews.append(ReviewRecord(
             record_id=f"{paper_id}::conflict::{index}", paper_id=paper_id,
             artifact_id=primary_artifact, reason_code="conflicting_formulation",
-            status="conflict", evidence_ids=conflict_evidence,
-            field_name=conflict.get("field_name"), notes=json.dumps(conflict, sort_keys=True),
+            status="conflict" if fully_supported else "blocked",
+            evidence_ids=conflict_evidence,
+            field_name=conflict.get("field_name"),
+            notes=json.dumps(conflict_notes, sort_keys=True),
         ))
     for index, item in enumerate(merged.get("unresolved_items", [])):
         text = item["text"] if isinstance(item, dict) else str(item)

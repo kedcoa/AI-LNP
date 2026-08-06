@@ -37,8 +37,12 @@ made, and the authoritative SQLite database was not opened or modified.
   versus 20:1 mass ratios are never resolved by description length: they create
   separate evidence-linked variants and a visible conflict review.
   Non-ratio semantics are checked as well (for example, measured versus
-  theoretical composition). Compatible distinct descriptions are preserved as
-  an explicit union; no scientific value is selected by string length.
+  theoretical composition). Ratio identity preserves ratio type, ordered
+  values, and multiplicity, so `50:50` molar, `50:50` mass, and a lone `50`
+  remain distinct. Compatible descriptions retain their complete evidence union
+  under an explicit semantic representation; no scientific value is selected
+  by string length. Conflict provenance remains grouped into left and right
+  evidence sets, and a missing side is visibly blocked rather than accepted.
   This avoids both duplicate formulations and invented cross-slice links.
 - Review state: all 13 arms are visible but quarantined and ineligible for
   nearest neighbor and COMET. The bundle contains 13 quarantined arm reviews

@@ -116,7 +116,7 @@ def test_reconciliation_unions_supported_scientific_formulation_identity():
     second["formulations"][0]["formulation_id"] = "F-MC3"
     second["experiments"][0]["formulation_id"] = "F-MC3"
     second["formulations"][0]["composition"] = _field(
-        "MC3, cholesterol, C14 PEG 2000, DSPC; lipids formulated at 50:38.5:1.5:10",
+        "MC3, cholesterol, C14 PEG 2000, DSPC; lipids formulated at 50:38.5:1.5:10 molar ratio",
         "E-FORM",
     )
     first["formulations"][0]["composition_basis"] = _field("molar ratio", "E-A")
@@ -158,7 +158,8 @@ def test_reconciliation_retains_incompatible_supported_basis_values():
         if row["field_name"] == "composition_basis"
     ]
     assert len(conflicts) == 1
-    assert conflicts[0]["evidence_ids"] == ["E-10", "E-20"]
+    assert conflicts[0]["left_evidence_ids"] == ["E-10"]
+    assert conflicts[0]["right_evidence_ids"] == ["E-20"]
 
 
 def test_reconciliation_conflicts_on_nonratio_basis_semantics():
@@ -178,9 +179,33 @@ def test_reconciliation_conflicts_on_nonratio_basis_semantics():
     assert len(reconciled["formulations"]) == 2
     assert any(
         row["field_name"] == "composition_basis"
-        and row["evidence_ids"] == ["E-MEASURED", "E-THEORETICAL"]
+        and row["left_evidence_ids"] == ["E-MEASURED"]
+        and row["right_evidence_ids"] == ["E-THEORETICAL"]
         for row in reconciled["conflicts"]
     )
+
+
+@pytest.mark.parametrize(
+    ("left", "right"),
+    [
+        ("MC3 and DSPC at 50:50 molar ratio", "MC3 and DSPC at 50:50 mass ratio"),
+        ("MC3 and DSPC at 50:50 molar ratio", "MC3 and DSPC at 50 molar ratio"),
+    ],
+)
+def test_composition_identity_preserves_ratio_type_order_and_multiplicity(left, right):
+    first = _slice("hepatocytes")
+    first["formulations"][0]["composition"] = _field(left, "E-LEFT")
+    second = _slice("Kupffer cells")
+    second["formulations"][0]["formulation_id"] = "F-MC3"
+    second["experiments"][0]["formulation_id"] = "F-MC3"
+    second["formulations"][0]["composition"] = _field(right, "E-RIGHT")
+
+    reconciled = reconcile_slices([("a", first), ("b", second)])
+
+    assert len(reconciled["formulations"]) == 2
+    conflict = next(row for row in reconciled["conflicts"] if row["field_name"] == "composition")
+    assert conflict["left_evidence_ids"] == ["E-LEFT"]
+    assert conflict["right_evidence_ids"] == ["E-RIGHT"]
 
 
 def test_adapter_emits_evidence_linked_review_for_formulation_conflict(tmp_path):
@@ -246,6 +271,44 @@ def test_composition_conflict_review_uses_composition_raw_evidence(tmp_path):
         review for review in conflict_reviews if review.field_name == "composition"
     )
     assert all("::composition_raw::" in evidence_id for evidence_id in composition_review.evidence_ids)
+    notes = json.loads(composition_review.notes)
+    assert len(notes["left_resolved_evidence_ids"]) == 1
+    assert len(notes["right_resolved_evidence_ids"]) == 1
+    assert set(notes["left_resolved_evidence_ids"]).isdisjoint(
+        notes["right_resolved_evidence_ids"]
+    )
+
+
+def test_conflict_missing_one_evidence_side_is_explicitly_blocked(tmp_path):
+    packet = _packet()
+    packet["evidence"].append(
+        {"evidence_id": "E-RIGHT", "text": "mass ratio 20:1", "source_ids": ["S2"]}
+    )
+    packet_path = tmp_path / "packet.json"
+    packet_path.write_text(json.dumps(packet))
+    paths = []
+    for name, ratio, evidence_ids in (("a", "10:1", []), ("b", "20:1", ["E-RIGHT"])):
+        directory = tmp_path / name
+        directory.mkdir()
+        payload = _slice("hepatocytes")
+        payload["formulations"][0]["composition_basis"] = {
+            "value": f"lipid:nucleic-acid mass ratio {ratio}", "status": "reported",
+            "evidence_ids": evidence_ids, "missing_reason": None,
+        }
+        path = directory / "result.json"
+        path.write_text(json.dumps(payload))
+        paths.append(path)
+
+    bundle = build_np_bundle(
+        result_paths=paths, packet_path=packet_path,
+        paper_metadata={"title": "Example"},
+    )
+
+    review = next(review for review in bundle.reviews if review.field_name == "composition_basis")
+    assert review.status == "blocked"
+    notes = json.loads(review.notes)
+    assert notes["left_resolved_evidence_ids"] == []
+    assert len(notes["right_resolved_evidence_ids"]) == 1
 
 
 def test_adapter_builds_valid_quarantined_bundle_without_synthesizing_links(tmp_path):

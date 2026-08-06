@@ -28,9 +28,22 @@ def _scientific_identity(raw: dict[str, Any]) -> tuple[Any, ...]:
         component for component in ("mc3", "ckke12", "cholesterol", "c14peg2000", "dspc")
         if component in re.sub(r"[^a-z0-9]+", "", composition)
     )
-    ratios = tuple(sorted(set(re.findall(r"\d+(?:\.\d+)?", composition))))
+    ratios = []
+    for match in re.finditer(
+        r"(\d+(?:\.\d+)?(?:\s*:\s*\d+(?:\.\d+)?)+)", composition
+    ):
+        values = tuple(re.findall(r"\d+(?:\.\d+)?", match.group(1)))
+        context = composition[max(0, match.start() - 24):match.end() + 24]
+        mentioned_types = tuple(
+            ratio_type for ratio_type in ("mass", "molar")
+            if ratio_type in context
+        )
+        ratio_type = mentioned_types[0] if len(mentioned_types) == 1 else (
+            "unspecified" if not mentioned_types else "ambiguous"
+        )
+        ratios.append((ratio_type, values))
     return (
-        _normalized_name(raw), supported_components, ratios,
+        _normalized_name(raw), supported_components, tuple(ratios),
         _reported(raw.get("np_ratio")),
     )
 
@@ -54,9 +67,14 @@ def _merge_supported_field(
         and _canonical_text(target_value) != _canonical_text(incoming_value)
         and field_name in {"composition", "composition_basis"}
     ):
-        target["value"] = " | ".join(sorted(
-            {str(target_value), str(incoming_value)}, key=_canonical_text
-        ))
+        target["supported_values"] = list(dict.fromkeys([
+            *target.get("supported_values", [target_value]), incoming_value
+        ]))
+        if field_name == "composition_basis":
+            target_ratio = _mass_ratio(target_value)
+            incoming_ratio = _mass_ratio(incoming_value)
+            if target_ratio is None and incoming_ratio is not None:
+                target["value"] = incoming_value
     target["evidence_ids"] = list(dict.fromkeys(
         [*target.get("evidence_ids", []), *incoming.get("evidence_ids", [])]
     ))
@@ -176,11 +194,15 @@ def reconcile_slices(
                                 "source_id": original_id,
                                 "field_name": field_name,
                                 "source_slices": [slice_name],
-                                "evidence_ids": list(dict.fromkeys([
-                                    evidence_id
-                                    for row in conflicting_rows
+                                "left_formulation_ids": [row["id"] for row in conflicting_rows],
+                                "right_formulation_id": variant_id,
+                                "left_evidence_ids": list(dict.fromkeys([
+                                    evidence_id for row in conflicting_rows
                                     for evidence_id in row["record"][field_name].get("evidence_ids", [])
-                                ] + raw[field_name].get("evidence_ids", []))),
+                                ])),
+                                "right_evidence_ids": list(dict.fromkeys(
+                                    raw[field_name].get("evidence_ids", [])
+                                )),
                             })
                 variants.append(match)
                 formulations_by_identity.setdefault(identity, []).append(match)
