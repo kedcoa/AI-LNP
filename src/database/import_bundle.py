@@ -56,10 +56,10 @@ CREATE TABLE IF NOT EXISTS import_field_evidence (
     evidence_id INTEGER NOT NULL,
     verification_status TEXT NOT NULL,
     notes TEXT,
-    UNIQUE (
-        paper_id, entity_type, entity_id, field_name,
-        evidence_id, verification_status
-    ),
+    natural_key TEXT NOT NULL,
+    content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+    content_json TEXT NOT NULL CHECK (json_valid(content_json)),
+    UNIQUE (paper_id, natural_key, content_sha256),
     FOREIGN KEY (paper_id) REFERENCES paper(paper_id)
         ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (evidence_id) REFERENCES evidence(evidence_id)
@@ -392,6 +392,93 @@ def _mark_conflict_arms(
         )
 
 
+def _field_link_arm_ids(
+    connection: sqlite3.Connection,
+    entity_type: str,
+    entity_id: int,
+) -> tuple[int, ...]:
+    if entity_type == "arm":
+        return (entity_id,)
+    if entity_type == "outcome":
+        row = connection.execute(
+            "SELECT experiment_id FROM outcome WHERE outcome_id = ?",
+            (entity_id,),
+        ).fetchone()
+        return () if row is None else (int(row[0]),)
+    if entity_type == "formulation":
+        rows = connection.execute(
+            "SELECT experiment_id FROM experiment WHERE formulation_id = ?",
+            (entity_id,),
+        )
+    else:
+        rows = connection.execute(
+            """
+            SELECT experiment.experiment_id
+            FROM chemical_component AS component
+            JOIN experiment
+              ON experiment.formulation_id = component.formulation_id
+            WHERE component.component_id = ?
+            """,
+            (entity_id,),
+        )
+    return tuple(int(row[0]) for row in rows)
+
+
+def _mark_field_link_conflict(
+    connection: sqlite3.Connection,
+    *,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+) -> None:
+    for experiment_id in _field_link_arm_ids(
+        connection, entity_type, entity_id
+    ):
+        connection.execute(
+            """
+            UPDATE arm_assessment
+            SET completeness_status = CASE
+                    WHEN completeness_status = 'quarantined'
+                    THEN 'quarantined'
+                    ELSE 'conflict'
+                END,
+                verification_status = CASE
+                    WHEN completeness_status = 'quarantined'
+                    THEN 'rejected'
+                    ELSE 'conflict'
+                END,
+                nearest_neighbor_eligible = 0,
+                comet_eligible = 0,
+                updated_at = ?
+            WHERE experiment_id = ?
+            """,
+            (_utc_now(), experiment_id),
+        )
+        conflict_field = f"field_evidence_content:{field_name}"
+        connection.execute(
+            """
+            INSERT INTO field_verification (
+                experiment_id, field_name, verification_status,
+                notes, verified_at
+            )
+            SELECT ?, ?, 'conflict', ?, ?
+            WHERE NOT EXISTS (
+                SELECT 1 FROM field_verification
+                WHERE experiment_id = ? AND field_name = ?
+                  AND verification_status = 'conflict'
+            )
+            """,
+            (
+                experiment_id,
+                conflict_field,
+                "Changed content shares one stable field-evidence identity.",
+                _utc_now(),
+                experiment_id,
+                conflict_field,
+            ),
+        )
+
+
 def _resolve_record(
     connection: sqlite3.Connection,
     *,
@@ -718,6 +805,17 @@ def _insert_evidence(
         if record.verification_status == "automatically_validated"
         else record.verification_status
     )
+    reviewer_notes = record.reviewer_notes
+    if record.verification_status == "automatically_validated":
+        mapping_note = (
+            "Source verification status automatically_validated; stored as "
+            "unreviewed because the core schema has no automatic state."
+        )
+        reviewer_notes = (
+            f"{reviewer_notes}\n{mapping_note}"
+            if reviewer_notes
+            else mapping_note
+        )
     return int(
         connection.execute(
             """
@@ -744,7 +842,7 @@ def _insert_evidence(
                 record.extraction_method,
                 record.extraction_confidence,
                 evidence_status,
-                record.reviewer_notes,
+                reviewer_notes,
             ),
         ).lastrowid
     )
@@ -1153,23 +1251,89 @@ def import_bundle(
             entity_id = entity_maps[link.entity_type][link.entity_id]
             for local_evidence_id in link.evidence_ids:
                 evidence_id = evidence_ids[local_evidence_id]
-                connection.execute(
-                    """
-                    INSERT OR IGNORE INTO import_field_evidence (
-                        paper_id, entity_type, entity_id, field_name,
-                        evidence_id, verification_status, notes
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """,
-                    (
-                        paper_id,
-                        link.entity_type,
-                        entity_id,
-                        link.field_name,
-                        evidence_id,
-                        link.verification_status,
-                        link.notes,
-                    ),
+                natural_key = (
+                    f"{link.entity_type}:{entity_id}:{link.field_name}:"
+                    f"{evidence_id}"
                 )
+                content_json = json.dumps(
+                    {
+                        "verification_status": link.verification_status,
+                        "notes": link.notes,
+                    },
+                    sort_keys=True,
+                    separators=(",", ":"),
+                )
+                content_sha256 = hashlib.sha256(
+                    content_json.encode("utf-8")
+                ).hexdigest()
+                exact_link = connection.execute(
+                    """
+                    SELECT 1 FROM import_field_evidence
+                    WHERE paper_id = ? AND natural_key = ?
+                      AND content_sha256 = ?
+                    """,
+                    (paper_id, natural_key, content_sha256),
+                ).fetchone()
+                link_conflict = False
+                if exact_link is None:
+                    link_conflict = connection.execute(
+                        """
+                        SELECT 1 FROM import_field_evidence
+                        WHERE paper_id = ? AND natural_key = ?
+                        LIMIT 1
+                        """,
+                        (paper_id, natural_key),
+                    ).fetchone() is not None
+                    connection.execute(
+                        """
+                        INSERT INTO import_field_evidence (
+                            paper_id, entity_type, entity_id, field_name,
+                            evidence_id, verification_status, notes,
+                            natural_key, content_sha256, content_json
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            paper_id,
+                            link.entity_type,
+                            entity_id,
+                            link.field_name,
+                            evidence_id,
+                            link.verification_status,
+                            link.notes,
+                            natural_key,
+                            content_sha256,
+                            content_json,
+                        ),
+                    )
+                if link_conflict:
+                    counters.conflicts += 1
+                    _mark_field_link_conflict(
+                        connection,
+                        entity_type=link.entity_type,
+                        entity_id=entity_id,
+                        field_name=link.field_name,
+                    )
+                    affected_arms = _field_link_arm_ids(
+                        connection, link.entity_type, entity_id
+                    )
+                    tag = _store_review(
+                        connection,
+                        paper_id=paper_id,
+                        natural_key=f"auto:field-evidence:{natural_key}",
+                        arm_id=(affected_arms[0] if affected_arms else None),
+                        outcome_id=(
+                            entity_id if link.entity_type == "outcome" else None
+                        ),
+                        reason_code="content_conflict_field_evidence",
+                        status="conflict",
+                        field_name=link.field_name,
+                        notes=(
+                            "Changed content retained for the same "
+                            "field-evidence identity."
+                        ),
+                    )
+                    if tag not in review_tags:
+                        review_tags.append(tag)
                 if link.entity_type in {"arm", "outcome"}:
                     experiment_id = (
                         entity_id

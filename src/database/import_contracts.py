@@ -10,6 +10,24 @@ from typing import Any, Literal
 
 _SHA256 = re.compile(r"^[0-9a-fA-F]{64}$")
 
+SUPPORTED_SOURCE_KINDS = frozenset(
+    {
+        "pdf",
+        "xml",
+        "html",
+        "text",
+        "table",
+        "figure",
+        "supplement",
+        "validated_extraction",
+        "deterministic_reconciliation",
+        "source_inventory",
+        "screening_manifest",
+        "manual_transcription",
+    }
+)
+EVIDENCE_SOURCE_KINDS = SUPPORTED_SOURCE_KINDS - {"screening_manifest"}
+
 CompletenessStatus = Literal["complete", "incomplete", "conflict", "quarantined"]
 VerificationStatus = Literal[
     "unreviewed",
@@ -302,6 +320,10 @@ def _validate_bundle(bundle: ImportBundle) -> None:
             raise ValueError("source artifact SHA-256 must contain 64 hex characters")
         if not artifact.pipeline_name.strip():
             raise ValueError("source artifact pipeline name must not be empty")
+        if artifact.source_kind not in SUPPORTED_SOURCE_KINDS:
+            raise ValueError(
+                f"unsupported source kind: {artifact.source_kind}"
+            )
 
     if bundle.paper.artifact_id not in artifact_ids:
         raise ValueError("paper references unknown source artifact")
@@ -399,9 +421,11 @@ def _validate_bundle(bundle: ImportBundle) -> None:
 
     evidence_by_id = {record.record_id: record for record in bundle.evidence}
     for record in bundle.evidence:
-        artifact = artifacts[record.artifact_id]
-        if artifact.source_kind == "raw_provider_response":
-            raise ValueError("raw provider response cannot support imported evidence")
+        if artifacts[record.artifact_id].source_kind not in EVIDENCE_SOURCE_KINDS:
+            raise ValueError(
+                "unsupported evidence source kind: "
+                f"{artifacts[record.artifact_id].source_kind}"
+            )
         if not (record.evidence_text or "").strip() and record.structured_evidence is None:
             raise ValueError(f"evidence {record.record_id} has no supported source text")
         if record.arm_id is not None and record.arm_id not in arms:
@@ -428,6 +452,9 @@ def _validate_bundle(bundle: ImportBundle) -> None:
         "outcome": outcomes,
     }
     linked_fields: set[tuple[str, str, str]] = set()
+    links_by_field: dict[
+        tuple[str, str, str], list[FieldEvidenceLink]
+    ] = {}
     for link in bundle.field_evidence_links:
         if link.entity_id not in entity_ids[link.entity_type]:
             raise ValueError(
@@ -450,6 +477,9 @@ def _validate_bundle(bundle: ImportBundle) -> None:
             ):
                 raise ValueError("field evidence link crosses arm scope")
         linked_fields.add((link.entity_type, link.entity_id, link.field_name))
+        links_by_field.setdefault(
+            (link.entity_type, link.entity_id, link.field_name), []
+        ).append(link)
 
     required_fields = {
         "formulation": {
@@ -524,6 +554,107 @@ def _validate_bundle(bundle: ImportBundle) -> None:
 
     arm_by_id = {arm.record_id: arm for arm in bundle.arms}
     outcome_by_id = {outcome.record_id: outcome for outcome in bundle.outcomes}
+    formulation_by_id = {
+        formulation.record_id: formulation
+        for formulation in bundle.formulations
+    }
+    accepted_link_statuses = {
+        "automatically_validated",
+        "manually_verified",
+    }
+    for arm in bundle.arms:
+        if not (arm.nearest_neighbor_eligible or arm.comet_eligible):
+            continue
+        related_records: list[tuple[str, Any]] = [
+            ("formulation", formulation_by_id[arm.formulation_id]),
+            ("arm", arm),
+        ]
+        related_records.extend(
+            ("component", component)
+            for component in bundle.components
+            if component.formulation_id == arm.formulation_id
+        )
+        related_records.extend(
+            ("outcome", outcome)
+            for outcome in bundle.outcomes
+            if outcome.arm_id == arm.record_id
+        )
+        related_field_links: list[
+            tuple[object, str, list[FieldEvidenceLink]]
+        ] = []
+        for entity_type, record in related_records:
+            for field_name in required_fields[entity_type]:
+                value = getattr(record, field_name)
+                populated = value is not None and (
+                    not isinstance(value, str) or bool(value.strip())
+                )
+                if not populated:
+                    continue
+                field_links = links_by_field[
+                    (entity_type, record.record_id, field_name)
+                ]
+                related_field_links.append((record, field_name, field_links))
+        related_links = [
+            link
+            for _, _, field_links in related_field_links
+            for link in field_links
+        ]
+        if not any(
+            evidence_by_id[evidence_id].verification_status
+            == "manually_verified"
+            for link in related_links
+            for evidence_id in link.evidence_ids
+        ):
+            if any(
+                evidence_by_id[evidence_id].verification_status
+                == "automatically_validated"
+                for link in related_links
+                for evidence_id in link.evidence_ids
+            ):
+                raise ValueError(
+                    "core schema cannot persist accepted automatic "
+                    f"evidence for eligible arm {arm.record_id}"
+                )
+            raise ValueError(
+                f"eligible arm requires accepted evidence: {arm.record_id}"
+            )
+        arm_outcome_ids = {
+            outcome.record_id
+            for outcome in bundle.outcomes
+            if outcome.arm_id == arm.record_id
+        }
+        if not any(
+            link.entity_type == "outcome"
+            and link.entity_id in arm_outcome_ids
+            and link.verification_status in accepted_link_statuses
+            and any(
+                evidence_by_id[evidence_id].outcome_id == link.entity_id
+                and evidence_by_id[evidence_id].verification_status
+                == "manually_verified"
+                for evidence_id in link.evidence_ids
+            )
+            for link in related_links
+        ):
+            raise ValueError(
+                "eligible arm requires accepted outcome evidence: "
+                f"{arm.record_id}"
+            )
+        for record, field_name, field_links in related_field_links:
+            if not any(
+                link.verification_status in accepted_link_statuses
+                and any(
+                    evidence_by_id[evidence_id].verification_status
+                    == "manually_verified"
+                    for evidence_id in link.evidence_ids
+                )
+                for link in field_links
+            ):
+                raise ValueError(
+                    "eligible arm requires accepted field evidence: "
+                    f"{record.record_id}.{field_name}"
+                )
+
+    reviewed_arm_ids: set[str] = set()
     for review in bundle.reviews:
         if review.artifact_id not in artifact_ids:
             raise ValueError(f"review {review.record_id} references unknown artifact")
@@ -544,14 +675,45 @@ def _validate_bundle(bundle: ImportBundle) -> None:
             if target_arm_id is not None and target_arm_id != outcome_arm_id:
                 raise ValueError("review crosses arm and outcome scopes")
             target_arm_id = outcome_arm_id
+        if review.status == "quarantined" and target_arm_id is None:
+            raise ValueError(
+                "quarantined review requires arm or outcome scope"
+            )
+        for evidence_id in review.evidence_ids:
+            evidence_record = evidence_by_id[evidence_id]
+            if review.outcome_id is not None and (
+                evidence_record.outcome_id != review.outcome_id
+                or evidence_record.arm_id != target_arm_id
+            ):
+                raise ValueError("review evidence is outside outcome scope")
+            if (
+                review.outcome_id is None
+                and target_arm_id is not None
+                and evidence_record.arm_id != target_arm_id
+            ):
+                raise ValueError("review evidence is outside arm scope")
+        if target_arm_id is not None:
+            reviewed_arm_ids.add(target_arm_id)
+            target_arm = arm_by_id[target_arm_id]
+            if review.status == "blocked" and (
+                target_arm.nearest_neighbor_eligible
+                or target_arm.comet_eligible
+            ):
+                raise ValueError(
+                    f"blocked review targets eligible arm {target_arm_id}"
+                )
+            if (
+                review.status == "blocked"
+                and target_arm.completeness_status != "quarantined"
+            ):
+                raise ValueError(
+                    f"blocked review requires quarantined arm {target_arm_id}"
+                )
         if target_arm_id is not None and review.status != "blocked":
             if arm_by_id[target_arm_id].completeness_status != review.status:
                 raise ValueError(
                     f"review state contradicts arm {target_arm_id} status"
                 )
-    reviewed_arm_ids = {
-        review.arm_id for review in bundle.reviews if review.arm_id is not None
-    }
     for arm in bundle.arms:
         if (
             arm.completeness_status

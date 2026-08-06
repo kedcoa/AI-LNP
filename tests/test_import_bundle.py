@@ -8,7 +8,7 @@ import sqlite3
 
 import pytest
 
-from src.database.status import evaluate_arm_status
+from src.database.status import evaluate_arm_status, evaluate_eligibility
 from src.init_db import initialize_database
 
 
@@ -96,11 +96,24 @@ def test_contract_rejects_malformed_scientific_numeric_values(
         _load_bundle(payload)
 
 
-def test_contract_rejects_raw_provider_response_as_evidence_source() -> None:
+@pytest.mark.parametrize(
+    "source_kind",
+    [
+        "raw_provider_response",
+        "provider_response",
+        "model_output",
+        "llm_response",
+        "codex_generated",
+        "unknown_blob",
+    ],
+)
+def test_contract_rejects_unsupported_evidence_source_kind(
+    source_kind: str,
+) -> None:
     payload = _load_payload()
-    payload["artifacts"][0]["source_kind"] = "raw_provider_response"
+    payload["artifacts"][0]["source_kind"] = source_kind
 
-    with pytest.raises(ValueError, match="raw provider response"):
+    with pytest.raises(ValueError, match="unsupported source kind"):
         _load_bundle(payload)
 
 
@@ -169,6 +182,154 @@ def test_contract_rejects_review_state_that_leaves_arm_eligible() -> None:
     ]
 
     with pytest.raises(ValueError, match="review state contradicts arm"):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_targeted_blocked_review_for_eligible_arm() -> None:
+    payload = _load_payload()
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "arm_id": "A-1",
+            "evidence_ids": ["E-1"],
+            "reason_code": "source_file_unavailable",
+            "status": "blocked",
+        }
+    ]
+
+    with pytest.raises(ValueError, match="blocked review targets eligible arm"):
+        _load_bundle(payload)
+
+
+def test_contract_requires_durable_quarantine_for_targeted_blocked_review() -> None:
+    payload = _load_payload()
+    payload["arms"][0].update(
+        nearest_neighbor_eligible=False,
+        comet_eligible=False,
+    )
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "arm_id": "A-1",
+            "evidence_ids": ["E-1"],
+            "reason_code": "source_file_unavailable",
+            "status": "blocked",
+        }
+    ]
+
+    with pytest.raises(ValueError, match="blocked review requires quarantined arm"):
+        _load_bundle(payload)
+
+
+def test_screening_manifest_cannot_support_scientific_evidence() -> None:
+    payload = _load_payload()
+    payload["artifacts"][0]["source_kind"] = "screening_manifest"
+
+    with pytest.raises(ValueError, match="unsupported evidence source kind"):
+        _load_bundle(payload)
+
+
+def test_contract_requires_accepted_evidence_for_eligible_arm() -> None:
+    payload = _load_payload()
+    payload["evidence"][0]["verification_status"] = "unreviewed"
+
+    with pytest.raises(ValueError, match="eligible arm requires accepted evidence"):
+        _load_bundle(payload)
+
+
+def test_contract_requires_accepted_field_link_for_eligible_arm() -> None:
+    payload = _load_payload()
+    for link in payload["field_evidence_links"]:
+        if link["entity_type"] == "arm" and link["field_name"] == "dose":
+            link["verification_status"] = "ambiguous"
+
+    with pytest.raises(ValueError, match="eligible arm requires accepted field evidence"):
+        _load_bundle(payload)
+
+
+def test_contract_requires_accepted_outcome_evidence_for_eligible_arm() -> None:
+    payload = _load_payload()
+    payload["outcomes"] = []
+    payload["evidence"][0]["outcome_id"] = None
+    payload["evidence"][0]["field_name"] = "dose"
+    payload["field_evidence_links"] = [
+        link
+        for link in payload["field_evidence_links"]
+        if link["entity_type"] != "outcome"
+    ]
+
+    with pytest.raises(
+        ValueError,
+        match="eligible arm requires accepted outcome evidence",
+    ):
+        _load_bundle(payload)
+
+
+def test_contract_rejects_automatic_evidence_for_persisted_eligibility() -> None:
+    payload = _load_payload()
+    payload["evidence"][0]["verification_status"] = "automatically_validated"
+    payload["arms"][0].update(
+        verification_status="automatically_validated",
+        comet_eligible=False,
+    )
+    for link in payload["field_evidence_links"]:
+        link["verification_status"] = "automatically_validated"
+
+    with pytest.raises(ValueError, match="core schema cannot persist accepted automatic evidence"):
+        _load_bundle(payload)
+
+
+def test_quarantine_review_rejects_unscoped_evidence() -> None:
+    payload = _load_payload()
+    payload["arms"][0].update(
+        completeness_status="quarantined",
+        verification_status="rejected",
+        nearest_neighbor_eligible=False,
+        comet_eligible=False,
+        quarantine_reason="Relationship unresolved.",
+    )
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "evidence_ids": ["E-1"],
+            "reason_code": "outcome_link_unclear",
+            "status": "quarantined",
+        }
+    ]
+
+    with pytest.raises(ValueError, match="quarantined review requires arm or outcome scope"):
+        _load_bundle(payload)
+
+
+def test_outcome_review_rejects_arm_only_evidence() -> None:
+    payload = _load_payload()
+    payload["arms"][0].update(
+        completeness_status="quarantined",
+        verification_status="rejected",
+        nearest_neighbor_eligible=False,
+        comet_eligible=False,
+        quarantine_reason="Outcome relationship unresolved.",
+    )
+    payload["evidence"][0]["outcome_id"] = None
+    payload["reviews"] = [
+        {
+            "record_id": "R-1",
+            "paper_id": "GP-002",
+            "artifact_id": "accepted-graph",
+            "outcome_id": "O-1",
+            "evidence_ids": ["E-1"],
+            "reason_code": "outcome_link_unclear",
+            "status": "quarantined",
+        }
+    ]
+
+    with pytest.raises(ValueError, match="review evidence is outside outcome scope"):
         _load_bundle(payload)
 
 
@@ -418,6 +579,80 @@ def test_evidence_only_conflict_survives_status_recalculation(
         assert evaluate_arm_status(
             connection, experiment_id
         ).completeness_status == "conflict"
+    finally:
+        connection.close()
+
+
+def test_automatic_evidence_mapping_is_explicit_and_ineligible(
+    tmp_path: Path,
+) -> None:
+    payload = _load_payload()
+    payload["evidence"][0]["verification_status"] = "automatically_validated"
+    payload["arms"][0].update(
+        verification_status="automatically_validated",
+        nearest_neighbor_eligible=False,
+        comet_eligible=False,
+    )
+    for link in payload["field_evidence_links"]:
+        link["verification_status"] = "automatically_validated"
+    connection = _connection(tmp_path)
+    try:
+        _import_bundle(connection, _load_bundle(payload))
+        experiment_id = connection.execute(
+            "SELECT experiment_id FROM experiment"
+        ).fetchone()[0]
+
+        assert connection.execute(
+            "SELECT evidence_review_status, reviewer_notes FROM evidence"
+        ).fetchone() == (
+            "unreviewed",
+            "Source verification status automatically_validated; "
+            "stored as unreviewed because the core schema has no automatic state.",
+        )
+        assert evaluate_arm_status(
+            connection, experiment_id
+        ).verification_status == "automatically_validated"
+        assert evaluate_eligibility(
+            connection, experiment_id, "nearest_neighbor"
+        ).eligible is False
+    finally:
+        connection.close()
+
+
+@pytest.mark.parametrize(
+    ("changed_field", "changed_value"),
+    [
+        ("notes", "A revised evidence-link interpretation."),
+        ("verification_status", "automatically_validated"),
+    ],
+)
+def test_changed_field_link_content_is_retained_as_conflict(
+    tmp_path: Path,
+    changed_field: str,
+    changed_value: str,
+) -> None:
+    changed = _load_payload()
+    for link in changed["field_evidence_links"]:
+        if link["entity_type"] == "arm" and link["field_name"] == "dose":
+            link[changed_field] = changed_value
+    connection = _connection(tmp_path)
+    try:
+        _import_bundle(connection, _load_bundle())
+        result = _import_bundle(connection, _load_bundle(changed))
+
+        assert result.conflicts == 1
+        assert connection.execute(
+            """
+            SELECT COUNT(*) FROM import_field_evidence
+            WHERE entity_type = 'arm' AND field_name = 'dose'
+            """
+        ).fetchone() == (2,)
+        assert connection.execute(
+            """
+            SELECT completeness_status, nearest_neighbor_eligible, comet_eligible
+            FROM arm_assessment
+            """
+        ).fetchone() == ("conflict", 0, 0)
     finally:
         connection.close()
 
