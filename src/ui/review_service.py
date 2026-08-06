@@ -200,6 +200,20 @@ WITH canonical_fact AS (
                            AND evidence.paper_id = field_link.paper_id
     WHERE field_link.verification_status IN ('automatically_validated', 'manually_verified')
       AND (
+          json_extract(field_link.content_json, '$.review_revision_id') IS NULL
+          OR EXISTS (
+              SELECT 1 FROM review_revision AS revision
+              WHERE revision.review_revision_id = json_extract(
+                        field_link.content_json, '$.review_revision_id'
+                    )
+                AND revision.decision = 'accepted'
+                AND NOT EXISTS (
+                    SELECT 1 FROM review_revision AS later
+                    WHERE later.supersedes_review_revision_id = revision.review_revision_id
+                )
+          )
+      )
+      AND (
           (field_link.entity_type = 'formulation' AND EXISTS (
               SELECT 1 FROM formulation AS target
               WHERE target.formulation_id = field_link.entity_id
@@ -559,6 +573,22 @@ def _review_state_token(connection: sqlite3.Connection, experiment_id: int) -> s
     """Hash every mutable review-state row the workspace can submit against."""
 
     state = {
+        'scientific': [tuple(row) for row in connection.execute(
+            """SELECT experiment.*, formulation.formulation_name, formulation.composition_raw
+               FROM experiment JOIN formulation USING (formulation_id)
+               WHERE experiment.experiment_id = ?""",
+            (experiment_id,),
+        )],
+        'paper_evidence': [tuple(row) for row in connection.execute(
+            """SELECT evidence_id, paper_id, experiment_id, outcome_id, field_name,
+                      evidence_text, evidence_location_type, section_name, page_number,
+                      table_number, figure_number, supplement_identifier,
+                      extraction_method, extraction_confidence, evidence_review_status
+               FROM evidence
+               WHERE paper_id = (SELECT paper_id FROM experiment WHERE experiment_id = ?)
+               ORDER BY evidence_id""",
+            (experiment_id,),
+        )],
         'revisions': [tuple(row) for row in connection.execute(
             """SELECT review_revision_id, field_name, decision, supersedes_review_revision_id
                FROM review_revision WHERE experiment_id = ? ORDER BY review_revision_id""",
@@ -791,26 +821,6 @@ def _verify_review_consistency(connection: sqlite3.Connection, experiment_id: in
     ).fetchone()
     if invalid_verification is not None:
         raise ValueError('Field verification is inconsistent with review history')
-    invalid_not_reported = connection.execute(
-        """SELECT 1 FROM review_revision AS revision
-           WHERE revision.experiment_id = ?
-             AND revision.reviewer_notes LIKE '[not_reported]%'
-             AND NOT EXISTS (
-                 SELECT 1 FROM review_revision AS later
-                 WHERE later.supersedes_review_revision_id = revision.review_revision_id
-             )
-             AND NOT EXISTS (
-                 SELECT 1 FROM missing_field AS missing
-                 WHERE missing.experiment_id = revision.experiment_id
-                   AND missing.field_name = revision.field_name
-                   AND missing.resolved_by_review_revision_id IS NULL
-             )""",
-        (experiment_id,),
-    ).fetchone()
-    if invalid_not_reported is not None:
-        raise ValueError('Not-reported review has no unresolved missing-field record')
-
-
 def apply_review_decision(request: ReviewDecision) -> ReviewResult:
     """Atomically apply one validated decision to the fixed authoritative database."""
 
@@ -871,26 +881,23 @@ def apply_review_decision(request: ReviewDecision) -> ReviewResult:
             )
             _mark_missing(connection, request.experiment_id, field_name, '', revision_id)
         elif request.decision == 'reject':
-            if active is None:
-                raise ValueError('Only an active accepted correction can be rejected')
-            evidence = _owned_evidence(
-                connection, request.experiment_id, experiment['paper_id'], request.evidence_id,
-                require_current_arm=True,
-            ) if request.evidence_id is not None else active
-            revision_id = _insert_review_revision(
-                connection, request, field_name, active['corrected_value'], active['corrected_value'],
-                evidence, 'rejected', int(active['review_revision_id']),
+            if request.evidence_id is None and active is None:
+                raise ValueError('Evidence is required to reject original extraction')
+            evidence = (
+                _owned_evidence(
+                    connection, request.experiment_id, experiment['paper_id'], request.evidence_id,
+                    require_current_arm=True,
+                ) if request.evidence_id is not None else active
             )
+            if active is not None:
+                revision_id = _insert_review_revision(
+                    connection, request, field_name, active['corrected_value'], active['corrected_value'],
+                    evidence, 'rejected', int(active['review_revision_id']),
+                )
             _insert_verification(connection, request, field_name, 'rejected', revision_id)
             _mark_missing(connection, request.experiment_id, field_name, 'rejected during human review', None)
         elif request.decision == 'not_reported':
-            revision_id = _insert_review_revision(
-                connection, request, field_name, _field_value(connection, request.experiment_id, field_name),
-                'Not reported', None, 'accepted',
-                int(active['review_revision_id']) if active is not None else None,
-                request.reviewer_notes,
-            )
-            _insert_verification(connection, request, field_name, 'rejected', revision_id)
+            _insert_verification(connection, request, field_name, 'rejected', None)
             _mark_missing(connection, request.experiment_id, field_name, 'not reported', None)
         elif request.decision == 'unresolved':
             _insert_verification(connection, request, field_name, 'ambiguous', None)
