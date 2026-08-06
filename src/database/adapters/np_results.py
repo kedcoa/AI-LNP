@@ -329,10 +329,19 @@ def build_np_bundle(
         link("outcome", rid, "qualitative_outcome", raw.get("qualitative_outcome"), slice_name, arm_id=arm_id, outcome_id=rid)
 
     for index, conflict in enumerate(merged.get("conflicts", [])):
+        conflict_evidence = tuple(
+            record_id for record_id, record in evidence_records.items()
+            if record.field_name == conflict.get("field_name")
+            and any(
+                record_id.endswith(f"::{raw_evidence_id}")
+                for raw_evidence_id in conflict.get("evidence_ids", [])
+            )
+        )
         reviews.append(ReviewRecord(
             record_id=f"{paper_id}::conflict::{index}", paper_id=paper_id,
             artifact_id=primary_artifact, reason_code="conflicting_formulation",
-            status="conflict", field_name=conflict.get("field_name"), notes=json.dumps(conflict, sort_keys=True),
+            status="conflict", evidence_ids=conflict_evidence,
+            field_name=conflict.get("field_name"), notes=json.dumps(conflict, sort_keys=True),
         ))
     for index, item in enumerate(merged.get("unresolved_items", [])):
         text = item["text"] if isinstance(item, dict) else str(item)

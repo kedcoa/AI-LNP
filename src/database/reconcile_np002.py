@@ -49,6 +49,40 @@ def _merge_supported_field(target: dict[str, Any], incoming: dict[str, Any]) -> 
     ))
 
 
+def _mass_ratio(value: Any) -> tuple[str, str] | None:
+    text = str(value or "").lower()
+    match = re.search(
+        r"(?:lipid\s*[:/]?\s*nucleic[- ]acid\s+)?mass ratio\s+(\d+(?:\.\d+)?)\s*:\s*(\d+(?:\.\d+)?)",
+        text,
+    )
+    return match.groups() if match else None
+
+
+def _incompatible_fields(
+    existing: dict[str, Any], incoming: dict[str, Any]
+) -> list[str]:
+    incompatible = []
+    for field_name in (
+        "formulation_name", "composition", "composition_basis", "np_ratio"
+    ):
+        left = _reported(existing.get(field_name))
+        right = _reported(incoming.get(field_name))
+        if left is None or right is None:
+            continue
+        if field_name == "formulation_name":
+            conflict = _normalized_name(existing) != _normalized_name(incoming)
+        elif field_name == "composition_basis":
+            left_ratio, right_ratio = _mass_ratio(left), _mass_ratio(right)
+            conflict = left_ratio is not None and right_ratio is not None and left_ratio != right_ratio
+        elif field_name == "composition":
+            conflict = _scientific_identity(existing)[:3] != _scientific_identity(incoming)[:3]
+        else:
+            conflict = left != right
+        if conflict:
+            incompatible.append(field_name)
+    return incompatible
+
+
 def reconcile_slices(
     slices: Iterable[tuple[str, dict[str, Any]]],
 ) -> dict[str, Any]:
@@ -71,7 +105,7 @@ def reconcile_slices(
         "conflicts": [],
         "source_slices": [name for name, _ in ordered],
     }
-    formulations_by_identity: dict[tuple[Any, ...], dict[str, Any]] = {}
+    formulations_by_identity: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
     formulations_by_name: dict[str, list[dict[str, Any]]] = {}
 
     for slice_name, payload in ordered:
@@ -81,7 +115,14 @@ def reconcile_slices(
             identity = _scientific_identity(raw)
             name = _normalized_name(raw)
             variants = formulations_by_name.setdefault(name, [])
-            match = formulations_by_identity.get(identity)
+            identity_candidates = formulations_by_identity.get(identity, [])
+            match = next(
+                (
+                    candidate for candidate in identity_candidates
+                    if not _incompatible_fields(candidate["record"], raw)
+                ),
+                None,
+            )
             if match is None:
                 variant_id = original_id if not variants else f"{original_id}::conflict-{len(variants) + 1}"
                 record = copy.deepcopy(raw)
@@ -91,15 +132,24 @@ def reconcile_slices(
                 match = {"identity": identity, "id": variant_id, "record": record}
                 if variants:
                     for field_name in ("formulation_name", "composition", "composition_basis", "np_ratio"):
-                        if any(_canonical(row["record"].get(field_name)) != _canonical(raw.get(field_name)) for row in variants):
+                        conflicting_rows = [
+                            row for row in variants
+                            if field_name in _incompatible_fields(row["record"], raw)
+                        ]
+                        if conflicting_rows:
                             merged["conflicts"].append({
                                 "entity_type": "formulation",
                                 "source_id": original_id,
                                 "field_name": field_name,
                                 "source_slices": [slice_name],
+                                "evidence_ids": list(dict.fromkeys([
+                                    evidence_id
+                                    for row in conflicting_rows
+                                    for evidence_id in row["record"][field_name].get("evidence_ids", [])
+                                ] + raw[field_name].get("evidence_ids", []))),
                             })
                 variants.append(match)
-                formulations_by_identity[identity] = match
+                formulations_by_identity.setdefault(identity, []).append(match)
             elif slice_name not in match["record"]["source_slices"]:
                 match["record"]["source_slices"].append(slice_name)
                 for field_name in (

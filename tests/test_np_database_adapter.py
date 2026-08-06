@@ -134,6 +134,63 @@ def test_reconciliation_unions_supported_scientific_formulation_identity():
     assert basis["evidence_ids"] == ["E-A", "E-B"]
 
 
+def test_reconciliation_retains_incompatible_supported_basis_values():
+    first = _slice("hepatocytes")
+    first["formulations"][0]["composition_basis"] = _field(
+        "Molar ratio; lipid:nucleic-acid mass ratio 10:1", "E-10"
+    )
+    second = _slice("Kupffer cells")
+    second["formulations"][0]["formulation_id"] = "F-MC3"
+    second["experiments"][0]["formulation_id"] = "F-MC3"
+    second["formulations"][0]["composition_basis"] = _field(
+        "Molar ratio; lipid:nucleic-acid mass ratio 20:1", "E-20"
+    )
+
+    reconciled = reconcile_slices([("a", first), ("b", second)])
+
+    assert len(reconciled["formulations"]) == 2
+    assert {row["composition_basis"]["value"] for row in reconciled["formulations"]} == {
+        "Molar ratio; lipid:nucleic-acid mass ratio 10:1",
+        "Molar ratio; lipid:nucleic-acid mass ratio 20:1",
+    }
+    conflicts = [
+        row for row in reconciled["conflicts"]
+        if row["field_name"] == "composition_basis"
+    ]
+    assert len(conflicts) == 1
+    assert conflicts[0]["evidence_ids"] == ["E-10", "E-20"]
+
+
+def test_adapter_emits_evidence_linked_review_for_formulation_conflict(tmp_path):
+    packet = _packet()
+    packet["evidence"].extend([
+        {"evidence_id": "E-10", "text": "mass ratio 10:1", "source_ids": ["S1"]},
+        {"evidence_id": "E-20", "text": "mass ratio 20:1", "source_ids": ["S2"]},
+    ])
+    packet_path = tmp_path / "packet.json"
+    packet_path.write_text(json.dumps(packet))
+    paths = []
+    for name, ratio, evidence_id in (("a", "10:1", "E-10"), ("b", "20:1", "E-20")):
+        directory = tmp_path / name
+        directory.mkdir()
+        payload = _slice("hepatocytes")
+        payload["formulations"][0]["composition_basis"] = _field(
+            f"Molar ratio; lipid:nucleic-acid mass ratio {ratio}", evidence_id
+        )
+        path = directory / "result.json"
+        path.write_text(json.dumps(payload))
+        paths.append(path)
+
+    bundle = build_np_bundle(
+        result_paths=paths, packet_path=packet_path,
+        paper_metadata={"title": "Example"},
+    )
+
+    conflict = next(review for review in bundle.reviews if review.status == "conflict")
+    assert conflict.field_name == "composition_basis"
+    assert len(conflict.evidence_ids) == 2
+
+
 def test_adapter_builds_valid_quarantined_bundle_without_synthesizing_links(tmp_path):
     result_path = tmp_path / "result.json"
     packet_path = tmp_path / "packet.json"
