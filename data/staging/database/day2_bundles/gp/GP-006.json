@@ -1,0 +1,848 @@
+{
+  "arms": [
+    {
+      "artifact_id": "GP-006:accepted_graph",
+      "assay": null,
+      "cell_source": null,
+      "cell_type": "",
+      "comet_eligible": false,
+      "comparator_description": null,
+      "comparator_type": null,
+      "completeness_status": "incomplete",
+      "disease_model": null,
+      "dose": null,
+      "dose_unit": null,
+      "experiment_notes": "In vivo CRISPR-Cas9 mRNA LNP gene editing of mutant F8 in NSG HemA mice",
+      "formulation_id": "GP-006:FORM:E_FORM_01",
+      "in_vitro_in_vivo": null,
+      "nearest_neighbor_eligible": false,
+      "paper_id": "GP-006",
+      "payload_encoded_product": null,
+      "payload_molecular_target": null,
+      "payload_name": "CRISPR-associated protein 9 mRNA; NSGHAsgRNA",
+      "payload_type": "nucleic acid",
+      "protocol_reference": null,
+      "quarantine_reason": null,
+      "record_id": "GP-006:ARM:GP-006-E01",
+      "reporter": null,
+      "route": null,
+      "species": "Mus musculus",
+      "timepoint": 26.0,
+      "timepoint_unit": "weeks",
+      "tissue_or_organ": null,
+      "verification_status": "unreviewed"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "GP-006:accepted_graph",
+      "extraction_run_identifier": null,
+      "path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json",
+      "pipeline_name": "g1_fulltext_rag",
+      "pipeline_version": "4.0.0",
+      "sha256": "a2f63ee4a98314668a1452806a329e96011f3c3dfae086bdc139ce59a3a08c96",
+      "source_kind": "validated_extraction"
+    }
+  ],
+  "components": [
+    {
+      "artifact_id": "GP-006:accepted_graph",
+      "component_name_normalized": "D-Lin-MC3-DMA",
+      "component_name_reported": "MC3",
+      "component_review_status": "unreviewed",
+      "component_role": "reported component",
+      "formulation_id": "GP-006:FORM:E_FORM_01",
+      "identity_notes": null,
+      "identity_source": null,
+      "inchikey": null,
+      "molar_percentage": null,
+      "paper_id": "GP-006",
+      "percentage_unit": null,
+      "record_id": "GP-006:COMP:E_COMP_01:E_FORM_01"
+    }
+  ],
+  "evidence": [
+    {
+      "arm_id": null,
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "MC3 LNP",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "formulation_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0001",
+      "reviewer_notes": null,
+      "section_name": "B008C020",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "D-Lin-MC3-DMA (MC3)-based LNPs",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "formulation_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0002",
+      "reviewer_notes": null,
+      "section_name": "B004C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": null,
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "D-Lin-MC3-DMA (MC3)-based LNPs",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "component_name_reported",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0003",
+      "reviewer_notes": null,
+      "section_name": "B004C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "payload_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0004",
+      "reviewer_notes": null,
+      "section_name": "B008C020",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "payload_name",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0005",
+      "reviewer_notes": null,
+      "section_name": "B008C020",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "The NSGHAsgRNA was encapsulated with Cas9 Evaluation of in vivo gene editing of mutant F8 in HemA NSG mRNA into MC3 LNP and intravenously injected into NSG HemA mouse model mice at a dosage of 4 mg/kg of Cas9/sgRNA LNP.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "species",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0006",
+      "reviewer_notes": null,
+      "section_name": "B008C020",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "over a span of 26 weeks",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "timepoint",
+      "figure_number": null,
+      "outcome_id": null,
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0007",
+      "reviewer_notes": null,
+      "section_name": "B008C021",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "Post-treatment, It was previously demonstrated in our lab that following hydrody- FVIII activity was measured by aPTT, and our results indicated namic injection of plasmid DNA, transfection occurred predomi- that the treated mice generated an average of 3.30% \u00b1 0.68% of nantly in hepatocytes; however, lower transgene expression was FVIII activity over a span of 26 weeks (Figure 5A).",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:01",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0008",
+      "reviewer_notes": null,
+      "section_name": "B008C021",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "Post-treatment, It was previously demonstrated in our lab that following hydrody- FVIII activity was measured by aPTT, and our results indicated namic injection of plasmid DNA, transfection occurred predomi- that the treated mice generated an average of 3.30% \u00b1 0.68% of nantly in hepatocytes; however, lower transgene expression was FVIII activity over a span of 26 weeks (Figure 5A).",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "outcome_value",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:01",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0009",
+      "reviewer_notes": null,
+      "section_name": "B008C021",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "Following injection, Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about we euthanized the treated mice and extracted genomic DNA 52.7% in total liver cells.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:02",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0010",
+      "reviewer_notes": null,
+      "section_name": "B008C033",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "Following injection, Cas9/NSGHAsgRNA LNP resulted in a gene editing rate of about we euthanized the treated mice and extracted genomic DNA 52.7% in total liver cells.",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "outcome_value",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:02",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0011",
+      "reviewer_notes": null,
+      "section_name": "B008C033",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "LSECs showed gene editing rates of approximately 16.50% \u00b1 2.96%",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:03",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0012",
+      "reviewer_notes": null,
+      "section_name": "XMLP0060C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "LSECs showed gene editing rates of approximately 16.50% \u00b1 2.96%",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "outcome_value",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:03",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0013",
+      "reviewer_notes": null,
+      "section_name": "XMLP0060C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "60.54% \u00b1 11.65%",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:04",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0014",
+      "reviewer_notes": null,
+      "section_name": "XMLP0060C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "60.54% \u00b1 11.65%",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "outcome_value",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:04",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0015",
+      "reviewer_notes": null,
+      "section_name": "XMLP0060C001",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "using next generation sequencing (NGS) analysis",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "endpoint_name",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:05",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0016",
+      "reviewer_notes": null,
+      "section_name": "XMLP0060C002",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_location_type": "clause",
+      "evidence_text": "No indel variants were found at five top predicted potential off-target sites",
+      "extraction_confidence": "accepted",
+      "extraction_method": "accepted_graph",
+      "field_name": "qualitative_outcome",
+      "figure_number": null,
+      "outcome_id": "GP-006:OUT:GP-006-E01:05",
+      "page_number": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:EV:0017",
+      "reviewer_notes": null,
+      "section_name": "XMLP0060C002",
+      "structured_evidence": null,
+      "supplement_identifier": null,
+      "table_number": null,
+      "verification_status": "unreviewed"
+    }
+  ],
+  "field_evidence_links": [
+    {
+      "entity_id": "GP-006:FORM:E_FORM_01",
+      "entity_type": "formulation",
+      "evidence_ids": [
+        "GP-006:EV:0001",
+        "GP-006:EV:0002"
+      ],
+      "field_name": "formulation_name",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:COMP:E_COMP_01:E_FORM_01",
+      "entity_type": "component",
+      "evidence_ids": [
+        "GP-006:EV:0003"
+      ],
+      "field_name": "component_name_reported",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:COMP:E_COMP_01:E_FORM_01",
+      "entity_type": "component",
+      "evidence_ids": [
+        "GP-006:EV:0003"
+      ],
+      "field_name": "component_name_normalized",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:COMP:E_COMP_01:E_FORM_01",
+      "entity_type": "component",
+      "evidence_ids": [
+        "GP-006:EV:0003"
+      ],
+      "field_name": "component_role",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:ARM:GP-006-E01",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-006:EV:0004",
+        "GP-006:EV:0005"
+      ],
+      "field_name": "payload_name",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:ARM:GP-006-E01",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-006:EV:0006"
+      ],
+      "field_name": "species",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:ARM:GP-006-E01",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-006:EV:0007"
+      ],
+      "field_name": "timepoint",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:ARM:GP-006-E01",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-006:EV:0007"
+      ],
+      "field_name": "timepoint_unit",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:ARM:GP-006-E01",
+      "entity_type": "arm",
+      "evidence_ids": [
+        "GP-006:EV:0004",
+        "GP-006:EV:0005"
+      ],
+      "field_name": "payload_type",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:01",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0008"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:01",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0008"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:01",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0009"
+      ],
+      "field_name": "outcome_value",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:01",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0009"
+      ],
+      "field_name": "outcome_unit",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:02",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0010"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:02",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0010"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:02",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0011"
+      ],
+      "field_name": "outcome_value",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:02",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0011"
+      ],
+      "field_name": "outcome_unit",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:03",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0012"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:03",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0012"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:03",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0013"
+      ],
+      "field_name": "outcome_value",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:03",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0013"
+      ],
+      "field_name": "outcome_unit",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:04",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0014"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:04",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0014"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:04",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0015"
+      ],
+      "field_name": "outcome_value",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:04",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0015"
+      ],
+      "field_name": "outcome_unit",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:05",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0016"
+      ],
+      "field_name": "endpoint_name",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:05",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0016"
+      ],
+      "field_name": "endpoint_family",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    },
+    {
+      "entity_id": "GP-006:OUT:GP-006-E01:05",
+      "entity_type": "outcome",
+      "evidence_ids": [
+        "GP-006:EV:0017"
+      ],
+      "field_name": "qualitative_outcome",
+      "notes": null,
+      "paper_id": "GP-006",
+      "verification_status": "unreviewed"
+    }
+  ],
+  "formulations": [
+    {
+      "artifact_id": "GP-006:accepted_graph",
+      "composition_basis": null,
+      "composition_raw": null,
+      "formulation_name": "D-Lin-MC3-DMA-based lipid nanoparticle",
+      "formulation_notes": null,
+      "formulation_review_status": "unreviewed",
+      "np_ratio": null,
+      "paper_id": "GP-006",
+      "record_id": "GP-006:FORM:E_FORM_01"
+    }
+  ],
+  "outcomes": [
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "Reported outcome",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": "%",
+      "outcome_value": 3.3,
+      "paper_id": "GP-006",
+      "qualitative_outcome": null,
+      "record_id": "GP-006:OUT:GP-006-E01:01",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "reported"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "Reported outcome",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": "%",
+      "outcome_value": 52.7,
+      "paper_id": "GP-006",
+      "qualitative_outcome": null,
+      "record_id": "GP-006:OUT:GP-006-E01:02",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "reported"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "Reported outcome",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": "%",
+      "outcome_value": 16.5,
+      "paper_id": "GP-006",
+      "qualitative_outcome": null,
+      "record_id": "GP-006:OUT:GP-006-E01:03",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "reported"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "Reported outcome",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": "%",
+      "outcome_value": 60.54,
+      "paper_id": "GP-006",
+      "qualitative_outcome": null,
+      "record_id": "GP-006:OUT:GP-006-E01:04",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "reported"
+    },
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "endpoint_family": "reported endpoint",
+      "endpoint_name": "indels at five top-predicted potential off-target sites",
+      "normalization_basis": null,
+      "outcome_notes": null,
+      "outcome_unit": null,
+      "outcome_value": null,
+      "paper_id": "GP-006",
+      "qualitative_outcome": "no detected indels at five top-predicted potential off-target sites",
+      "record_id": "GP-006:OUT:GP-006-E01:05",
+      "uncertainty_type": null,
+      "uncertainty_value": null,
+      "value_status": "qualitative_only"
+    }
+  ],
+  "paper": {
+    "artifact_id": "GP-006:accepted_graph",
+    "authors": null,
+    "doi": "10.1016/j.omtn.2024.102383",
+    "full_text_status": "full_text",
+    "import_status": "needs_review",
+    "journal": null,
+    "pmcid": "PMC11617921",
+    "pmid": "39640016",
+    "publication_year": null,
+    "retrieval_date": "2026-08-06",
+    "screening_reason": null,
+    "screening_status": "manual_review",
+    "search_query_id": null,
+    "source_paper_id": "GP-006",
+    "source_type": "full_text",
+    "source_url": null,
+    "title": "GP-006"
+  },
+  "reviews": [
+    {
+      "arm_id": "GP-006:ARM:GP-006-E01",
+      "artifact_id": "GP-006:accepted_graph",
+      "evidence_ids": [],
+      "field_name": null,
+      "notes": "Arm is retained but is not complete enough for training.",
+      "outcome_id": null,
+      "paper_id": "GP-006",
+      "reason_code": "missing_dose",
+      "record_id": "GP-006:REV:GP-006-E01",
+      "status": "incomplete"
+    }
+  ],
+  "schema_version": "day2-import-bundle/v1"
+}
