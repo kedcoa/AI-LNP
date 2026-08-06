@@ -727,7 +727,7 @@ def build_audit_cases(
 ) -> list[BenchmarkCase]:
     """Build audit inputs by replaying saved post-merge artifacts."""
 
-    replay_root = artifact_root or (root.parent / "np002-selective-vision")
+    replay_root = artifact_root or root
     cases = []
     for paper_id in PAPERS:
         paths = replay_source_paths(paper_id, replay_root)

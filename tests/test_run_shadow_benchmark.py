@@ -17,6 +17,11 @@ from src.extraction.run_shadow_benchmark import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+LOCAL_PILOT_ROOT = ROOT / "data/staging/extraction/application_pilot"
+requires_local_pilot_artifacts = pytest.mark.skipif(
+    not (LOCAL_PILOT_ROOT / "downstream_gate/manifest.json").is_file(),
+    reason="requires local, uncommitted application-pilot provider artifacts",
+)
 
 
 def _completed(stdout: str, returncode: int = 0):
@@ -59,6 +64,7 @@ def test_ollama_command_is_ephemeral_read_only_and_local(tmp_path):
     assert command[-1] == "-"
 
 
+@requires_local_pilot_artifacts
 def test_legacy_runner_rejects_audit_cases(tmp_path):
     case = build_audit_cases(ROOT)[0]
 

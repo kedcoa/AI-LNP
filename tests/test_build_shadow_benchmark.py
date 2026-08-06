@@ -16,6 +16,11 @@ from src.extraction.shadow_benchmark_contracts import AttemptResult, AuditRespon
 
 
 ROOT = Path(__file__).resolve().parents[1]
+LOCAL_PILOT_ROOT = ROOT / "data/staging/extraction/application_pilot"
+requires_local_pilot_artifacts = pytest.mark.skipif(
+    not (LOCAL_PILOT_ROOT / "downstream_gate/manifest.json").is_file(),
+    reason="requires local, uncommitted application-pilot provider artifacts",
+)
 
 
 def valid_attempt_payload() -> dict:
@@ -76,6 +81,7 @@ def test_audit_observation_values_have_a_typed_output_schema():
     }
 
 
+@requires_local_pilot_artifacts
 def test_builds_three_pilot_audits_and_fourteen_text_gate_b_cases():
     assert [row.paper_id for row in build_audit_cases(ROOT)] == [
         "PILOT-001",
@@ -91,6 +97,7 @@ def test_builds_three_pilot_audits_and_fourteen_text_gate_b_cases():
     }
 
 
+@requires_local_pilot_artifacts
 def test_case_payloads_do_not_contain_gold_paths_or_ids():
     serialized = json.dumps(
         [row.model_dump(mode="json") for row in build_all_cases(ROOT)]
@@ -101,6 +108,7 @@ def test_case_payloads_do_not_contain_gold_paths_or_ids():
     assert not re.search(r"\b(?:gf|gx|go|gc)-\d{3}\b", serialized)
 
 
+@requires_local_pilot_artifacts
 def test_case_manifest_is_append_only_and_records_zero_paid_calls(tmp_path):
     destination = tmp_path / "case_manifest.json"
     cases = build_all_cases(ROOT)

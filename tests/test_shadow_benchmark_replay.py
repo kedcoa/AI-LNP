@@ -13,10 +13,18 @@ from src.extraction.build_shadow_benchmark import build_audit_cases
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ARTIFACT_ROOT = ROOT.parent / "np002-selective-vision"
+ARTIFACT_ROOT = ROOT
 PAPER_IDS = ("PILOT-001", "PILOT-002", "PILOT-003")
+requires_local_pilot_artifacts = pytest.mark.skipif(
+    not (
+        ARTIFACT_ROOT
+        / "data/staging/extraction/application_pilot/downstream_gate/manifest.json"
+    ).is_file(),
+    reason="requires local, uncommitted application-pilot provider artifacts",
+)
 
 
+@requires_local_pilot_artifacts
 def test_replays_all_saved_pilot_artifacts_without_provider_clients():
     replayed = [replay_pilot_paper(paper_id, ARTIFACT_ROOT) for paper_id in PAPER_IDS]
 
@@ -26,6 +34,7 @@ def test_replays_all_saved_pilot_artifacts_without_provider_clients():
     assert all("approval_request" not in row for row in replayed)
 
 
+@requires_local_pilot_artifacts
 def test_evidence_inventory_deduplicates_marks_used_evidence_and_preserves_provenance():
     replayed = replay_pilot_paper("PILOT-001", ARTIFACT_ROOT)
 
@@ -110,6 +119,7 @@ def test_gold_blind_payload_allows_benign_audit_and_reference_language():
     )
 
 
+@requires_local_pilot_artifacts
 def test_audit_case_fingerprint_includes_saved_replay_dependencies():
     case = build_audit_cases(ROOT, artifact_root=ARTIFACT_ROOT)[0]
 
