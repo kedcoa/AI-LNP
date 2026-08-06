@@ -14,13 +14,13 @@
 
 ## Bibliographic reconciliation
 
-The local pilot-selection manifest already supplied the titles, DOIs, PMCIDs, and years. PMIDs were absent locally and were resolved through free PubMed bibliographic records:
+The local pilot-selection manifest supplied the three titles, DOIs, PMCIDs, and years. PILOT-002's local deduplicated search record (`data/staging/searches/deduplicated_papers.jsonl`, `candidate_00106`) also supplied PMID `33637537` together with its DOI, PMCID, and title. Only the remaining two PMIDs required free PubMed bibliographic lookup:
 
 - PILOT-001: [PubMed 36650129](https://pubmed.ncbi.nlm.nih.gov/36650129/)
-- PILOT-002: [PubMed 33637537](https://pubmed.ncbi.nlm.nih.gov/33637537/)
+- PILOT-002: local `candidate_00106` (`PMID 33637537`); no new lookup used
 - PILOT-003: [PubMed 32393755](https://pubmed.ncbi.nlm.nih.gov/32393755/)
 
-`pmcid` and publication metadata are documented here because the committed `CorpusEntry` contract stores only `title`, `doi`, and `pmid` bibliographic fields. The lane manifest passes those contract-supported identifiers through without inventing additional fields.
+`pmcid` and publication metadata are documented here because the committed `CorpusEntry` contract stores only `title`, `doi`, and `pmid` bibliographic fields. The lane manifest passes those contract-supported identifiers through and records source attribution in its top-level `metadata_provenance` block, which `load_lane()` safely ignores while validating the strict entry schema.
 
 ## Reference and artifact policy
 
