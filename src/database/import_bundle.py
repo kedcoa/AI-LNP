@@ -120,6 +120,53 @@ CREATE TABLE IF NOT EXISTS import_schema_migration (
 );
 """
 
+_FIELD_EVIDENCE_LEGACY_UNIQUE_COLUMNS = (
+    "paper_id",
+    "entity_type",
+    "entity_id",
+    "field_name",
+    "evidence_id",
+    "verification_status",
+)
+
+_FIELD_EVIDENCE_REBUILD_SQL = """
+CREATE TABLE import_field_evidence_migration_v2 (
+    import_field_evidence_id INTEGER PRIMARY KEY,
+    paper_id INTEGER NOT NULL,
+    entity_type TEXT NOT NULL CHECK (
+        entity_type IN ('formulation', 'component', 'arm', 'outcome')
+    ),
+    entity_id INTEGER NOT NULL,
+    field_name TEXT NOT NULL CHECK (length(trim(field_name)) > 0),
+    evidence_id INTEGER NOT NULL,
+    verification_status TEXT NOT NULL,
+    notes TEXT,
+    natural_key TEXT NOT NULL,
+    content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+    content_json TEXT NOT NULL CHECK (json_valid(content_json)),
+    UNIQUE (paper_id, natural_key, content_sha256),
+    FOREIGN KEY (paper_id) REFERENCES paper(paper_id)
+        ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (evidence_id) REFERENCES evidence(evidence_id)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+INSERT INTO import_field_evidence_migration_v2 (
+    import_field_evidence_id, paper_id, entity_type, entity_id,
+    field_name, evidence_id, verification_status, notes,
+    natural_key, content_sha256, content_json
+)
+SELECT import_field_evidence_id, paper_id, entity_type, entity_id,
+       field_name, evidence_id, verification_status, notes,
+       natural_key, content_sha256, content_json
+FROM import_field_evidence;
+
+DROP TABLE import_field_evidence;
+
+ALTER TABLE import_field_evidence_migration_v2
+    RENAME TO import_field_evidence;
+"""
+
 
 @dataclass(frozen=True)
 class PaperImportResult:
@@ -237,6 +284,29 @@ def _database_record_identity(
     return (f"legacy-{entity_type}-{entity_id}", source[0], source[1])
 
 
+def _has_unique_index(
+    connection: sqlite3.Connection,
+    table_name: str,
+    columns: tuple[str, ...],
+) -> bool:
+    quoted_table_name = table_name.replace('"', '""')
+    for index in connection.execute(
+        f'PRAGMA index_list("{quoted_table_name}")'
+    ).fetchall():
+        if not index[2]:
+            continue
+        index_name = str(index[1]).replace('"', '""')
+        index_columns = tuple(
+            row[2]
+            for row in connection.execute(
+                f'PRAGMA index_info("{index_name}")'
+            ).fetchall()
+        )
+        if index_columns == columns:
+            return True
+    return False
+
+
 def _migrate_import_schema(connection: sqlite3.Connection) -> None:
     _execute_script(connection, _IMPORT_SCHEMA_MIGRATION_SQL)
     columns = {
@@ -320,6 +390,12 @@ def _migrate_import_schema(connection: sqlite3.Connection) -> None:
             """,
             (natural_key, content_sha256, content_json, link_id),
         )
+    if _has_unique_index(
+        connection,
+        "import_field_evidence",
+        _FIELD_EVIDENCE_LEGACY_UNIQUE_COLUMNS,
+    ):
+        _execute_script(connection, _FIELD_EVIDENCE_REBUILD_SQL)
     connection.execute(
         """
         CREATE UNIQUE INDEX IF NOT EXISTS idx_import_field_evidence_identity
@@ -331,6 +407,14 @@ def _migrate_import_schema(connection: sqlite3.Connection) -> None:
         INSERT OR IGNORE INTO import_schema_migration (
             version, name, applied_at
         ) VALUES (1, 'stable_field_evidence_identity', ?)
+        """,
+        (_utc_now(),),
+    )
+    connection.execute(
+        """
+        INSERT OR IGNORE INTO import_schema_migration (
+            version, name, applied_at
+        ) VALUES (2, 'drop_legacy_field_evidence_uniqueness', ?)
         """,
         (_utc_now(),),
     )

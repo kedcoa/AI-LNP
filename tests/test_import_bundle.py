@@ -721,48 +721,59 @@ def test_field_link_natural_keys_are_stable_across_database_rebuilds(
         second.close()
 
 
+def _replace_with_prior_field_evidence_schema(
+    connection: sqlite3.Connection,
+) -> None:
+    connection.executescript(
+        """
+        ALTER TABLE import_field_evidence
+            RENAME TO import_field_evidence_new;
+        CREATE TABLE import_field_evidence (
+            import_field_evidence_id INTEGER PRIMARY KEY,
+            paper_id INTEGER NOT NULL,
+            entity_type TEXT NOT NULL CHECK (
+                entity_type IN ('formulation', 'component', 'arm', 'outcome')
+            ),
+            entity_id INTEGER NOT NULL,
+            field_name TEXT NOT NULL CHECK (length(trim(field_name)) > 0),
+            evidence_id INTEGER NOT NULL,
+            verification_status TEXT NOT NULL,
+            notes TEXT,
+            UNIQUE (
+                paper_id, entity_type, entity_id, field_name,
+                evidence_id, verification_status
+            ),
+            FOREIGN KEY (paper_id) REFERENCES paper(paper_id)
+                ON UPDATE CASCADE ON DELETE RESTRICT,
+            FOREIGN KEY (evidence_id) REFERENCES evidence(evidence_id)
+                ON UPDATE CASCADE ON DELETE RESTRICT
+        );
+        INSERT INTO import_field_evidence (
+            import_field_evidence_id, paper_id, entity_type, entity_id,
+            field_name, evidence_id, verification_status, notes
+        )
+        SELECT import_field_evidence_id, paper_id, entity_type, entity_id,
+               field_name, evidence_id, verification_status, notes
+        FROM import_field_evidence_new;
+        DROP TABLE import_field_evidence_new;
+        CREATE TABLE IF NOT EXISTS import_schema_migration (
+            version INTEGER PRIMARY KEY,
+            name TEXT NOT NULL UNIQUE,
+            applied_at TEXT NOT NULL
+        );
+        DELETE FROM import_schema_migration;
+        """
+    )
+    connection.commit()
+
+
 def test_prior_field_link_schema_migrates_idempotently_without_data_loss(
     tmp_path: Path,
 ) -> None:
     connection = _connection(tmp_path)
     try:
         _import_bundle(connection, _load_bundle())
-        connection.executescript(
-            """
-            ALTER TABLE import_field_evidence
-                RENAME TO import_field_evidence_new;
-            CREATE TABLE import_field_evidence (
-                import_field_evidence_id INTEGER PRIMARY KEY,
-                paper_id INTEGER NOT NULL,
-                entity_type TEXT NOT NULL,
-                entity_id INTEGER NOT NULL,
-                field_name TEXT NOT NULL,
-                evidence_id INTEGER NOT NULL,
-                verification_status TEXT NOT NULL,
-                notes TEXT,
-                UNIQUE (
-                    paper_id, entity_type, entity_id, field_name,
-                    evidence_id, verification_status
-                )
-            );
-            INSERT INTO import_field_evidence (
-                import_field_evidence_id, paper_id, entity_type, entity_id,
-                field_name, evidence_id, verification_status, notes
-            )
-            SELECT import_field_evidence_id, paper_id, entity_type, entity_id,
-                   field_name, evidence_id, verification_status, notes
-            FROM import_field_evidence_new;
-            DROP TABLE import_field_evidence_new;
-            CREATE TABLE IF NOT EXISTS import_schema_migration (
-                version INTEGER PRIMARY KEY,
-                name TEXT NOT NULL UNIQUE,
-                applied_at TEXT NOT NULL
-            );
-            DELETE FROM import_schema_migration
-            WHERE version = 1;
-            """
-        )
-        connection.commit()
+        _replace_with_prior_field_evidence_schema(connection)
 
         _import_bundle(connection, _load_bundle())
         _import_bundle(connection, _load_bundle())
@@ -782,10 +793,66 @@ def test_prior_field_link_schema_migrates_idempotently_without_data_loss(
             SELECT version, name FROM import_schema_migration
             ORDER BY version
             """
-        ).fetchall() == [(1, "stable_field_evidence_identity")]
+        ).fetchall() == [
+            (1, "stable_field_evidence_identity"),
+            (2, "drop_legacy_field_evidence_uniqueness"),
+        ]
         assert connection.execute(
             "SELECT COUNT(DISTINCT natural_key) FROM import_field_evidence"
         ).fetchone() == (19,)
+        indexes = {
+            row[1]: row[2]
+            for row in connection.execute(
+                "PRAGMA index_list(import_field_evidence)"
+            ).fetchall()
+        }
+        assert indexes["idx_import_field_evidence_identity"] == 1
+        foreign_keys = {
+            (row[2], row[3], row[4], row[5], row[6])
+            for row in connection.execute(
+                "PRAGMA foreign_key_list(import_field_evidence)"
+            ).fetchall()
+        }
+        assert foreign_keys == {
+            ("paper", "paper_id", "paper_id", "CASCADE", "RESTRICT"),
+            (
+                "evidence",
+                "evidence_id",
+                "evidence_id",
+                "CASCADE",
+                "RESTRICT",
+            ),
+        }
+        assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
+    finally:
+        connection.close()
+
+
+def test_prior_field_link_schema_retains_notes_revision_as_conflict(
+    tmp_path: Path,
+) -> None:
+    changed = _load_payload()
+    for link in changed["field_evidence_links"]:
+        if link["entity_type"] == "arm" and link["field_name"] == "dose":
+            link["notes"] = "A revised evidence-link interpretation."
+    connection = _connection(tmp_path)
+    try:
+        _import_bundle(connection, _load_bundle())
+        _replace_with_prior_field_evidence_schema(connection)
+
+        result = _import_bundle(connection, _load_bundle(changed))
+
+        assert result.conflicts == 1
+        assert connection.execute(
+            """
+            SELECT notes FROM import_field_evidence
+            WHERE entity_type = 'arm' AND field_name = 'dose'
+            ORDER BY import_field_evidence_id
+            """
+        ).fetchall() == [
+            (None,),
+            ("A revised evidence-link interpretation.",),
+        ]
     finally:
         connection.close()
 
