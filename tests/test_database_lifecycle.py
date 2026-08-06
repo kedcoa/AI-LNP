@@ -8,6 +8,7 @@ import pytest
 
 from src.database import database_lifecycle
 from src.database.database_lifecycle import (
+    backup_and_migrate_authoritative_database,
     backup_database,
     migrate_authoritative_database,
     preflight_authoritative_database,
@@ -194,7 +195,7 @@ def test_preflight_rejects_foreign_key_violations(tmp_path: Path) -> None:
         preflight_authoritative_database(database_path)
 
 
-def test_backup_is_timestamped_outside_database_location_and_matches_source(
+def test_backup_is_timestamped_outside_database_location_and_is_valid(
     tmp_path: Path,
 ) -> None:
     database_path = tmp_path / "database" / "lnp_evidence.db"
@@ -208,7 +209,53 @@ def test_backup_is_timestamped_outside_database_location_and_matches_source(
     assert backup_path.name.startswith("lnp_evidence-pre-day2-")
     assert backup_path.suffix == ".db"
     assert backup_path != database_path
-    assert _sha256(backup_path) == _sha256(database_path)
+    backup = sqlite3.connect(backup_path)
+    try:
+        assert backup.execute("PRAGMA integrity_check").fetchall() == [("ok",)]
+        assert backup.execute("SELECT COUNT(*) FROM paper").fetchone() == (0,)
+    finally:
+        backup.close()
+
+
+def test_backup_includes_committed_wal_rows(tmp_path: Path) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    _create_empty_legacy_database(database_path)
+    source = sqlite3.connect(database_path)
+    try:
+        assert source.execute("PRAGMA journal_mode = WAL").fetchone() == ("wal",)
+        source.execute(
+            """
+            INSERT INTO paper (paper_id, title, source_type, retrieval_date)
+            VALUES (1, 'WAL paper', 'fixture', '2026-08-06')
+            """
+        )
+        source.commit()
+        assert database_path.with_name(f"{database_path.name}-wal").is_file()
+
+        backup_path = backup_database(database_path, tmp_path / "excluded-backups")
+    finally:
+        source.close()
+
+    backup = sqlite3.connect(backup_path)
+    try:
+        assert backup.execute("SELECT title FROM paper").fetchall() == [("WAL paper",)]
+    finally:
+        backup.close()
+
+
+@pytest.mark.parametrize("directory_name", ("data/backups", ".git/backups"))
+def test_backup_rejects_destinations_inside_a_repository(
+    tmp_path: Path, directory_name: str
+) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    _create_empty_legacy_database(database_path)
+    repository = tmp_path / "repository"
+    (repository / ".git").mkdir(parents=True)
+
+    with pytest.raises(ValueError, match="outside the repository"):
+        backup_database(database_path, repository / directory_name)
+
+    assert not (repository / directory_name).exists()
 
 
 def test_backup_never_overwrites_an_existing_timestamped_artifact(
@@ -247,5 +294,64 @@ def test_migration_runs_against_the_preflighted_database_and_verifies_integrity(
         assert connection.execute(
             "SELECT version FROM schema_migration ORDER BY version"
         ).fetchall() == [(1,), (2,), (3,)]
+    finally:
+        connection.close()
+
+
+def test_composed_lifecycle_binds_preflight_backup_and_migration_digests(
+    tmp_path: Path,
+) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    _create_empty_legacy_database(database_path)
+    original_sha256 = _sha256(database_path)
+
+    result = backup_and_migrate_authoritative_database(
+        database_path, tmp_path / "excluded-backups"
+    )
+
+    assert result.preflight.original_sha256 == original_sha256
+    assert result.backup_path.is_file()
+    assert result.backup_sha256 == _sha256(result.backup_path)
+    assert result.source_state_sha256_before_migration == (
+        result.preflight.source_state_sha256
+    )
+    assert result.migration.migration_versions == (1, 2, 3)
+
+
+def test_composed_lifecycle_refuses_to_migrate_a_source_changed_after_backup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    database_path = tmp_path / "lnp_evidence.db"
+    _create_empty_legacy_database(database_path)
+    real_backup = backup_database
+    changed_source_connections: list[sqlite3.Connection] = []
+
+    def backup_then_change_source(path: str | Path, backup_dir: str | Path) -> Path:
+        backup_path = real_backup(path, backup_dir)
+        connection = sqlite3.connect(path)
+        assert connection.execute("PRAGMA journal_mode = WAL").fetchone() == ("wal",)
+        connection.execute("PRAGMA user_version = 1")
+        connection.commit()
+        changed_source_connections.append(connection)
+        return backup_path
+
+    monkeypatch.setattr(
+        database_lifecycle, "backup_database", backup_then_change_source
+    )
+
+    try:
+        with pytest.raises(RuntimeError, match="changed since preflight"):
+            backup_and_migrate_authoritative_database(
+                database_path, tmp_path / "excluded-backups"
+            )
+    finally:
+        for connection in changed_source_connections:
+            connection.close()
+
+    connection = sqlite3.connect(database_path)
+    try:
+        assert connection.execute(
+            "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'schema_migration'"
+        ).fetchall() == []
     finally:
         connection.close()
