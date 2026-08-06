@@ -125,7 +125,9 @@ CREATE TABLE IF NOT EXISTS experiment (
                 'hepatocyte',
                 'kupffer_cell',
                 'lsec',
-                'hsc'
+                'hsc',
+                'not_reported',
+                'other'
             )
     ),
     cell_source TEXT,

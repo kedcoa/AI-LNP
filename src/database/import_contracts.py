@@ -542,6 +542,12 @@ def _validate_bundle(bundle: ImportBundle) -> None:
                 populated = value is not None and (
                     not isinstance(value, str) or bool(value.strip())
                 )
+                if (
+                    entity_type == "arm"
+                    and field_name == "cell_type"
+                    and value == "not_reported"
+                ):
+                    populated = False
                 if populated and (
                     entity_type,
                     record.record_id,

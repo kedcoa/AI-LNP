@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sqlite3
+from pathlib import Path
 
 import pytest
 
@@ -463,3 +464,42 @@ def test_eligibility_result_profiles_are_stored_independently() -> None:
     assert connection.execute(
         "SELECT profile, eligible FROM eligibility_result ORDER BY profile"
     ).fetchall() == [("comet", 0), ("nearest_neighbor", 1)]
+def test_migration_expands_cell_type_without_losing_existing_arm(tmp_path: Path) -> None:
+    database_path = tmp_path / "legacy.db"
+    connection = sqlite3.connect(database_path)
+    connection.execute("PRAGMA foreign_keys = ON")
+    try:
+        schema_path = Path(__file__).resolve().parents[1] / "src/schema.sql"
+        schema = schema_path.read_text(encoding="utf-8").replace(
+            "'hsc',\n                'not_reported',\n                'other'",
+            "'hsc'",
+            1,
+        )
+        connection.executescript(schema)
+        connection.execute(
+            "INSERT INTO paper (paper_id, title, source_type, retrieval_date) "
+            "VALUES (1, 'paper', 'fixture', '2026-08-06')"
+        )
+        connection.execute(
+            "INSERT INTO formulation (formulation_id, paper_id) VALUES (1, 1)"
+        )
+        connection.execute(
+            "INSERT INTO experiment (experiment_id, paper_id, formulation_id, cell_type) "
+            "VALUES (1, 1, 1, 'hepatocyte')"
+        )
+        connection.commit()
+        migrate_database(connection)
+        connection.execute(
+            "INSERT INTO experiment (experiment_id, paper_id, formulation_id, cell_type) "
+            "VALUES (2, 1, 1, 'not_reported')"
+        )
+        connection.execute(
+            "INSERT INTO experiment (experiment_id, paper_id, formulation_id, cell_type) "
+            "VALUES (3, 1, 1, 'other')"
+        )
+        assert connection.execute(
+            "SELECT cell_type FROM experiment ORDER BY experiment_id"
+        ).fetchall() == [('hepatocyte',), ('not_reported',), ('other',)]
+        assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
+    finally:
+        connection.close()
