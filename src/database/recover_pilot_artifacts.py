@@ -4,21 +4,39 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
+import subprocess
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Literal
 
 
-_FORBIDDEN_PARTS = {"benchmarks", "response.json", "responses"}
+_FORBIDDEN_TOKENS = (
+    "benchmark",
+    "answerkey",
+    "goldstandard",
+    "providerresponse",
+    "rawprovider",
+    "rawresponse",
+    "response",
+    "invocation",
+)
+
+
+def _normalized_token(value: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", value.casefold())
 
 
 def _validate_relative_path(path: Path) -> None:
     if path.is_absolute() or ".." in path.parts:
         raise ValueError("artifact paths must be repository-relative")
-    if any(part in _FORBIDDEN_PARTS for part in path.parts):
-        raise ValueError("forbidden artifact path")
-    if path.name in {"response.json", "invocation.json"}:
-        raise ValueError("forbidden raw provider artifact path")
+    normalized = [_normalized_token(part) for part in path.parts]
+    if any(
+        forbidden in component
+        for component in normalized
+        for forbidden in _FORBIDDEN_TOKENS
+    ):
+        raise ValueError("forbidden benchmark or provider artifact path")
 
 
 @dataclass(frozen=True)
@@ -33,8 +51,21 @@ class PilotArtifactExpectation:
         _validate_relative_path(self.inventory_relative_path)
         if not self.paper_id.startswith("PILOT-"):
             raise ValueError("paper ID must be a PILOT identifier")
-        if len(self.source_sha256) != 64:
-            raise ValueError("source SHA-256 must contain 64 characters")
+        expected_source_prefix = Path("data/staging/new_papers") / self.paper_id
+        expected_inventory = (
+            Path("data/staging/extraction/application_pilot")
+            / self.paper_id
+            / "inventory.json"
+        )
+        if (
+            self.source_relative_path.parent != expected_source_prefix
+            or self.source_relative_path.suffix.casefold() != ".html"
+        ):
+            raise ValueError("expected PILOT source HTML path")
+        if self.inventory_relative_path != expected_inventory:
+            raise ValueError("expected PILOT inventory path")
+        if not re.fullmatch(r"[0-9a-fA-F]{64}", self.source_sha256):
+            raise ValueError("source SHA-256 must contain 64 hex characters")
 
 
 @dataclass(frozen=True)
@@ -49,14 +80,49 @@ class PilotRecoveryResult:
     inventory_path: str | None = None
     inventory_version: str | None = None
     evidence_block_count: int = 0
-    recovery_root: str | None = None
+    recovery_worktree_root: str | None = None
+    recovery_commit: str | None = None
+    source_verification: str | None = None
+    inventory_verification: str | None = None
     reason: str | None = None
 
     def to_dict(self) -> dict[str, object]:
         payload = asdict(self)
-        for local_only in ("source_path", "inventory_path", "recovery_root"):
+        for local_only in ("source_path", "inventory_path"):
             payload.pop(local_only)
         return payload
+
+
+def registered_worktrees(repository_root: Path) -> dict[Path, str]:
+    """Return resolved registered worktree roots and their checked-out commits."""
+
+    command = [
+        "git",
+        "-C",
+        str(repository_root.resolve()),
+        "worktree",
+        "list",
+        "--porcelain",
+    ]
+    try:
+        completed = subprocess.run(
+            command, check=True, capture_output=True, text=True
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise ValueError("repository root is not a readable git repository") from exc
+    result: dict[Path, str] = {}
+    current_root: Path | None = None
+    for line in completed.stdout.splitlines():
+        if line.startswith("worktree "):
+            current_root = Path(line.removeprefix("worktree ")).resolve()
+        elif line.startswith("HEAD ") and current_root is not None:
+            commit = line.removeprefix("HEAD ").strip()
+            if not re.fullmatch(r"[0-9a-f]{40,64}", commit):
+                raise ValueError("registered worktree has invalid commit identity")
+            result[current_root] = commit
+    if not result:
+        raise ValueError("repository has no registered git worktrees")
+    return result
 
 
 def sha256_file(path: Path) -> str:
@@ -69,9 +135,10 @@ def sha256_file(path: Path) -> str:
 
 def recover_pilot_sources(
     expectation: PilotArtifactExpectation,
+    repository_root: Path,
     worktree_roots: tuple[Path, ...],
 ) -> PilotRecoveryResult:
-    """Find the first complete hash-verified source/inventory pair.
+    """Find source-matched inventory candidates in registered worktrees.
 
     Roots are sorted to make selection independent of caller ordering. Raw provider
     response and benchmark paths are rejected by the expectation contract.
@@ -80,7 +147,12 @@ def recover_pilot_sources(
     logical_source = expectation.source_relative_path.as_posix()
     logical_inventory = expectation.inventory_relative_path.as_posix()
     failures: list[str] = []
-    for root in sorted({path.resolve() for path in worktree_roots}, key=str):
+    registrations = registered_worktrees(repository_root)
+    candidates = {path.resolve() for path in worktree_roots}
+    unregistered = candidates - registrations.keys()
+    if unregistered:
+        raise ValueError("recovery root is not a registered git worktree")
+    for root in sorted(candidates, key=str):
         source = root / expectation.source_relative_path
         inventory = root / expectation.inventory_relative_path
         if not source.is_file() or not inventory.is_file():
@@ -115,7 +187,10 @@ def recover_pilot_sources(
             inventory_path=str(inventory.resolve()),
             inventory_version=payload.get("inventory_version"),
             evidence_block_count=len(blocks),
-            recovery_root=str(root),
+            recovery_worktree_root=str(root),
+            recovery_commit=registrations[root],
+            source_verification="manifest_sha256_match",
+            inventory_verification="observed_sha256_unverified",
         )
     reason = failures[0] if failures else "source or inventory unavailable"
     return PilotRecoveryResult(
@@ -129,6 +204,7 @@ def recover_pilot_sources(
 
 def prepare_pilot_bundles(
     manifest_path: Path,
+    repository_root: Path,
     worktree_roots: tuple[Path, ...],
     output_dir: Path,
 ) -> dict[str, object]:
@@ -162,7 +238,9 @@ def prepare_pilot_bundles(
             source_sha256=str(source_candidates[0]["sha256"]),
             inventory_relative_path=Path(inventory_candidates[0]["path"]),
         )
-        recovery = recover_pilot_sources(expectation, worktree_roots)
+        recovery = recover_pilot_sources(
+            expectation, repository_root, worktree_roots
+        )
         entry["manifest_sha256"] = manifest_hash
         bundle = build_blocked_pilot_bundle(recovery, entry)
         bundle_path = output_dir / f"{paper_id}.json"
@@ -202,6 +280,7 @@ __all__ = [
     "PilotArtifactExpectation",
     "PilotRecoveryResult",
     "prepare_pilot_bundles",
+    "registered_worktrees",
     "recover_pilot_sources",
     "sha256_file",
 ]

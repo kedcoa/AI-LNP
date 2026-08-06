@@ -50,16 +50,19 @@ def build_blocked_pilot_bundle(
                     path=recovery.inventory_logical_path,
                     sha256=recovery.inventory_sha256,
                     source_kind="source_inventory",
-                    pipeline_name="application_pilot",
-                    pipeline_version=recovery.inventory_version,
+                    pipeline_name="unverified_recovered_source_inventory",
+                    pipeline_version=(
+                        f"{recovery.inventory_version};observed_sha256_unverified"
+                    ),
                 ),
             ]
         )
         paper_artifact_id = f"{paper_id}:source-inventory"
-        reason_code = "validated_extraction_unavailable"
+        reason_code = "recovered_inventory_unverified"
         notes = (
-            "Source and inventory were hash-verified, but no formally accepted "
-            "merged extraction is available; scientific rows were not imported."
+            "The source matches its approved manifest hash. The inventory hash "
+            "was observed during recovery but had no approved expected hash, so "
+            "its excerpts are quarantined and no experimental rows were imported."
         )
         full_text_status = "available"
         if recovery.inventory_path is None:
@@ -81,7 +84,7 @@ def build_blocked_pilot_bundle(
                     field_name=",".join(str(tag) for tag in tags) or "source_inventory",
                     evidence_location_type="source_inventory_block",
                     extraction_method="deterministic_source_inventory_recovery",
-                    extraction_confidence="unreviewed",
+                    extraction_confidence="unverified_recovery",
                     evidence_text=evidence_text,
                     section_name=block.get("heading"),
                     page_number=(
@@ -91,7 +94,8 @@ def build_blocked_pilot_bundle(
                     ),
                     verification_status="unreviewed",
                     reviewer_notes=(
-                        "Recovered source excerpt only; no experimental entity "
+                        "Quarantined recovered source excerpt; its inventory had "
+                        "no approved expected hash and no experimental entity "
                         "relationship has been validated."
                     ),
                 )
@@ -136,6 +140,7 @@ def build_blocked_pilot_bundle(
                 artifact_id=paper_artifact_id,
                 reason_code=reason_code,
                 status="blocked",
+                evidence_ids=tuple(record.record_id for record in evidence),
                 notes=notes,
             ),
         ),
