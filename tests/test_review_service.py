@@ -250,6 +250,27 @@ def test_paper_summaries_report_physical_rows_exactly(
     assert summaries[1].row_counts.evidence_excerpts == 1
 
 
+def test_workspace_includes_linked_outcomes_and_service_configured_access_links(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    from src.ui.review_service import load_arm_workspace, paper_access_links
+
+    local_full_text = tmp_path / 'P-001.pdf'
+    local_full_text.write_text('fixture full text', encoding='utf-8')
+    from src.ui import review_service
+    monkeypatch.setattr(review_service, 'authoritative_database_path', lambda: review_database)
+    monkeypatch.setenv('AI_LNP_LOCAL_FULL_TEXT_DIR', str(tmp_path))
+    monkeypatch.setenv('AI_LNP_INSTITUTIONAL_LIBRARY_URL', 'https://library.example/search')
+
+    workspace = load_arm_workspace(1)
+    links = paper_access_links(workspace.paper)
+
+    assert workspace.outcomes[0].endpoint_name == 'Luciferase'
+    assert workspace.outcomes[0].value == '12'
+    assert links.local_full_text_url == local_full_text.as_uri()
+    assert links.institutional_library_url == 'https://library.example/search'
+
+
 def test_dashboard_ignores_eligibility_from_an_obsolete_rules_version(
     monkeypatch: pytest.MonkeyPatch, review_database: Path
 ) -> None:

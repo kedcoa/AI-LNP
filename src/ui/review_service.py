@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
 from pathlib import Path
 import sqlite3
 from typing import Literal
@@ -57,6 +58,16 @@ class PaperSummary:
 
 
 @dataclass(frozen=True)
+class PaperAccessLinks:
+    doi_url: str | None
+    pubmed_url: str | None
+    pmc_url: str | None
+    source_url: str | None
+    local_full_text_url: str | None
+    institutional_library_url: str | None
+
+
+@dataclass(frozen=True)
 class ReviewArm:
     experiment_id: int
     paper_id: int
@@ -72,6 +83,7 @@ class ReviewArm:
     completeness_status: str
     verification_status: str
     missing_fields: tuple[str, ...]
+    nearest_neighbor_blockers: tuple[str, ...]
     comet_blockers: tuple[str, ...]
     nearest_neighbor_eligible: bool
     comet_eligible: bool
@@ -111,10 +123,23 @@ class ReviewHistory:
 
 
 @dataclass(frozen=True)
+class OutcomeRow:
+    outcome_id: int
+    endpoint_family: str | None
+    endpoint_name: str | None
+    value: str
+    unit: str | None
+    normalization_basis: str | None
+    value_status: str
+    qualitative_outcome: str | None
+
+
+@dataclass(frozen=True)
 class ArmWorkspace:
     arm: ReviewArm
     paper: PaperSummary
     fields: tuple[WorkspaceField, ...]
+    outcomes: tuple[OutcomeRow, ...]
     evidence: tuple[EvidenceExcerpt, ...]
     history: tuple[ReviewHistory, ...]
     state_token: str
@@ -166,6 +191,41 @@ def authoritative_database_path() -> Path:
     """Return the one shared database path; callers cannot override it."""
 
     return CANONICAL_AUTHORITATIVE_DATABASE
+
+
+def review_backup_directory() -> Path:
+    """Return the configured absolute destination for verified review backups."""
+
+    configured = os.environ.get('AI_LNP_REVIEW_BACKUP_DIR')
+    destination = (
+        Path(configured).expanduser()
+        if configured else Path.home() / 'Documents' / 'AI-LNP-review-backups'
+    )
+    if not destination.is_absolute():
+        raise ValueError('AI_LNP_REVIEW_BACKUP_DIR must be an absolute path')
+    return destination.resolve()
+
+
+def paper_access_links(paper: PaperSummary) -> PaperAccessLinks:
+    """Build display-only links from persisted paper metadata and local configuration."""
+
+    local_full_text_url: str | None = None
+    local_directory = os.environ.get('AI_LNP_LOCAL_FULL_TEXT_DIR')
+    if local_directory and paper.source_paper_id:
+        directory = Path(local_directory).expanduser()
+        if directory.is_absolute():
+            for suffix in ('.pdf', '.html', '.xml'):
+                candidate = directory / f'{paper.source_paper_id}{suffix}'
+                if candidate.is_file():
+                    local_full_text_url = candidate.resolve().as_uri()
+                    break
+    library_url = os.environ.get('AI_LNP_INSTITUTIONAL_LIBRARY_URL') or None
+    return PaperAccessLinks(
+        f'https://doi.org/{paper.doi}' if paper.doi else None,
+        f'https://pubmed.ncbi.nlm.nih.gov/{paper.pmid}/' if paper.pmid else None,
+        f'https://pmc.ncbi.nlm.nih.gov/articles/{paper.pmcid}/' if paper.pmcid else None,
+        paper.source_url, local_full_text_url, library_url,
+    )
 
 
 def _connect() -> sqlite3.Connection:
@@ -351,6 +411,7 @@ def _review_arm(connection: sqlite3.Connection, row: sqlite3.Row) -> ReviewArm:
         review['reason_code'] if review else None,
         assessment['completeness_status'] if assessment else 'incomplete',
         assessment['verification_status'] if assessment else 'unreviewed', missing,
+        _current_eligibility_reasons(connection, row['experiment_id'], 'nearest_neighbor'),
         _current_eligibility_reasons(connection, row['experiment_id'], 'comet'),
         _latest_eligible(connection, row['experiment_id'], 'nearest_neighbor'),
         _latest_eligible(connection, row['experiment_id'], 'comet'),
@@ -426,6 +487,17 @@ def load_arm_workspace(experiment_id: int) -> ArmWorkspace:
             )
             for name, label, column in _FIELD_COLUMNS
         )
+        outcomes = tuple(
+            OutcomeRow(
+                int(item['outcome_id']), item['endpoint_family'], item['endpoint_name'],
+                '' if item['outcome_value'] is None else format(item['outcome_value'], 'g'),
+                item['outcome_unit'], item['normalization_basis'], item['value_status'],
+                item['qualitative_outcome'],
+            )
+            for item in connection.execute(
+                'SELECT * FROM outcome WHERE experiment_id = ? ORDER BY outcome_id', (experiment_id,)
+            ).fetchall()
+        )
         evidence_rows = connection.execute(
             """SELECT DISTINCT evidence.* FROM evidence
                WHERE evidence.paper_id = ? AND (
@@ -462,7 +534,7 @@ def load_arm_workspace(experiment_id: int) -> ArmWorkspace:
             item['decision'], _review_action(item['decision'], item['reviewer_notes']),
             item['reviewer'], item['reviewer_notes'], item['reviewed_at']
         ) for item in history_rows)
-    return ArmWorkspace(arm, paper, fields, evidence, history, _review_state_token(connection, experiment_id))
+    return ArmWorkspace(arm, paper, fields, outcomes, evidence, history, _review_state_token(connection, experiment_id))
 
 
 _FIELD_COLUMN_BY_NAME = {name: column for name, _label, column in _FIELD_COLUMNS}
@@ -984,8 +1056,8 @@ def apply_review_decision(request: ReviewDecision) -> ReviewResult:
 
 
 __all__ = [
-    'ArmWorkspace', 'DashboardMetrics', 'EvidenceExcerpt', 'PaperRowCounts', 'PaperSummary',
+    'ArmWorkspace', 'DashboardMetrics', 'EvidenceExcerpt', 'OutcomeRow', 'PaperAccessLinks', 'PaperRowCounts', 'PaperSummary',
     'ReviewArm', 'ReviewDecision', 'ReviewHistory', 'ReviewResult', 'WorkspaceField', 'WriteReadiness',
     'apply_review_decision', 'authoritative_database_path', 'list_paper_summaries', 'list_review_arms',
-    'load_arm_workspace', 'load_dashboard', 'prepare_writes',
+    'load_arm_workspace', 'load_dashboard', 'paper_access_links', 'prepare_writes', 'review_backup_directory',
 ]

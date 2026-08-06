@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import streamlit as st
 
 try:
@@ -17,7 +15,9 @@ try:
         list_review_arms,
         load_arm_workspace,
         load_dashboard,
+        paper_access_links,
         prepare_writes,
+        review_backup_directory,
     )
 except ModuleNotFoundError:
     from review_service import (  # type: ignore[no-redef]
@@ -30,7 +30,9 @@ except ModuleNotFoundError:
         list_review_arms,
         load_arm_workspace,
         load_dashboard,
+        paper_access_links,
         prepare_writes,
+        review_backup_directory,
     )
 
 
@@ -66,20 +68,6 @@ def _label(value: str | None) -> str:
     return (value or "not recorded").replace("_", " ").title()
 
 
-def _source_links(workspace: ArmWorkspace) -> tuple[tuple[str, str], ...]:
-    paper = workspace.paper
-    links: list[tuple[str, str]] = []
-    if paper.doi:
-        links.append(("DOI / publisher", f"https://doi.org/{paper.doi}"))
-    if paper.pmid:
-        links.append(("PubMed", f"https://pubmed.ncbi.nlm.nih.gov/{paper.pmid}/"))
-    if paper.pmcid:
-        links.append(("PMC", f"https://pmc.ncbi.nlm.nih.gov/articles/{paper.pmcid}/"))
-    if paper.source_url:
-        links.append(("Source record", paper.source_url))
-    return tuple(links)
-
-
 def _show_eligibility(result: ReviewResult | None, workspace: ArmWorkspace) -> None:
     st.subheader("Eligibility after save")
     if result is None:
@@ -92,6 +80,8 @@ def _show_eligibility(result: ReviewResult | None, workspace: ArmWorkspace) -> N
     st.success("Review saved. Eligibility was recalculated in the same transaction.")
     st.write(f"Nearest neighbor: {'Eligible' if result.nearest_neighbor.eligible else 'Not yet eligible'}")
     st.write(f"COMET: {'Eligible' if result.comet.eligible else 'Not yet eligible'}")
+    if result.nearest_neighbor.reasons:
+        st.caption("Nearest-neighbor blockers: " + ", ".join(result.nearest_neighbor.reasons))
     if result.comet.reasons:
         st.caption("COMET blockers: " + ", ".join(result.comet.reasons))
 
@@ -148,13 +138,27 @@ def main() -> None:
         paper_filter = st.multiselect("Paper", paper_options)
         status_filter = st.multiselect("Review status", status_options)
         reason_filter = st.multiselect("Review reason", reason_options)
-        near_filter = st.checkbox("Only show nearly eligible arms")
+        target_cell_filter = st.multiselect("Target cell", sorted({arm.target_cell or "not_recorded" for arm in arms}))
+        species_filter = st.multiselect("Species", sorted({arm.species or "not_recorded" for arm in arms}))
+        payload_filter = st.multiselect("Payload", sorted({arm.payload or "not_recorded" for arm in arms}))
+        proximity_filter = st.multiselect(
+            "Eligibility proximity",
+            ("Near nearest-neighbor eligibility", "Near COMET eligibility"),
+        )
         visible = [
             arm for arm in arms
             if (not paper_filter or (arm.source_paper_id or str(arm.paper_id)) in paper_filter)
             and (not status_filter or (arm.review_status or "not_recorded") in status_filter)
             and (not reason_filter or (arm.review_reason_code or arm.review_reason or "not_recorded") in reason_filter)
-            and (not near_filter or (not arm.comet_eligible and len(arm.comet_blockers) <= 2))
+            and (not target_cell_filter or (arm.target_cell or "not_recorded") in target_cell_filter)
+            and (not species_filter or (arm.species or "not_recorded") in species_filter)
+            and (not payload_filter or (arm.payload or "not_recorded") in payload_filter)
+            and (not proximity_filter or (
+                ("Near nearest-neighbor eligibility" in proximity_filter
+                 and not arm.nearest_neighbor_eligible and len(arm.nearest_neighbor_blockers) <= 2)
+                or ("Near COMET eligibility" in proximity_filter
+                    and not arm.comet_eligible and len(arm.comet_blockers) <= 2)
+            ))
         ]
         if not visible:
             st.warning("No authoritative arms match these filters.")
@@ -186,7 +190,16 @@ def main() -> None:
         f"<h3>{paper.title}</h3><div>Full text: {_label(paper.full_text_status)}</div></div>",
         unsafe_allow_html=True,
     )
-    for column, (label, url) in zip(st.columns(4), _source_links(workspace)):
+    access = paper_access_links(workspace.paper)
+    source_links = tuple(
+        (label, url) for label, url in (
+            ("DOI / publisher", access.doi_url), ("PubMed", access.pubmed_url),
+            ("PMC", access.pmc_url), ("Local full text", access.local_full_text_url),
+            ("Institutional library", access.institutional_library_url),
+            ("Source record", access.source_url),
+        ) if url
+    )
+    for column, (label, url) in zip(st.columns(max(len(source_links), 1)), source_links):
         column.link_button(label, url, width="stretch")
 
     details, inspector = st.columns([1.55, 1], gap="large")
@@ -199,6 +212,13 @@ def main() -> None:
              "Missing": "Yes" if field.is_blank else "No"}
             for field in workspace.fields
         ], hide_index=True, width="stretch", height=390)
+        st.caption("Outcomes")
+        st.dataframe([
+            {"Endpoint": item.endpoint_name or "—", "Family": item.endpoint_family or "—",
+             "Value": item.value or item.qualitative_outcome or "—", "Unit": item.unit or "—",
+             "Normalization": item.normalization_basis or "—", "Status": _label(item.value_status)}
+            for item in workspace.outcomes
+        ], hide_index=True, width="stretch")
     with inspector:
         st.subheader("Evidence inspector")
         field_names = [field.name for field in workspace.fields]
@@ -222,13 +242,13 @@ def main() -> None:
                 st.caption(f"#{excerpt.evidence_id} · {excerpt.location or excerpt.location_type} · "
                            f"{excerpt.modality} · {excerpt.confidence} · {_label(excerpt.verification_status)}")
 
-    st.subheader("Review history")
-    st.dataframe([
-        {"When": item.reviewed_at, "Field": item.field_name, "Decision": item.review_action,
-         "Previous value": item.previous_value or "—", "Reviewed value": item.corrected_value,
-         "Reviewer": item.reviewer, "Note": item.reviewer_notes or "—"}
-        for item in workspace.history
-    ], hide_index=True, width="stretch")
+    with st.expander("Review history for selected field"):
+        st.dataframe([
+            {"When": item.reviewed_at, "Decision": item.review_action,
+             "Previous value": item.previous_value or "—", "Reviewed value": item.corrected_value,
+             "Reviewer": item.reviewer, "Note": item.reviewer_notes or "—"}
+            for item in workspace.history if item.field_name == selected_field
+        ], hide_index=True, width="stretch")
 
     st.divider()
     decision_column, eligibility_column = st.columns(2, gap="large")
@@ -245,7 +265,7 @@ def main() -> None:
         readiness = st.session_state.get("write_readiness")
         _readiness_message(readiness)
         if st.button("Prepare writing session"):
-            readiness = prepare_writes(Path("data/review_backups"))
+            readiness = prepare_writes(review_backup_directory())
             st.session_state.write_readiness = readiness
             st.rerun()
         needs_evidence = decision in {"accept", "correct", "reject", "wrong_arm"}
