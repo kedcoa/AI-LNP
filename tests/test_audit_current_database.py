@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import shutil
 import sqlite3
 
 import pytest
@@ -184,19 +185,52 @@ def test_authoritative_label_requires_exact_expected_path(tmp_path: Path) -> Non
     database = _populated_database(tmp_path)
     with pytest.raises(ValueError, match="authoritative database path"):
         audit_current_database(
+            database, MANIFEST, BUNDLES, database_kind="authoritative"
+        )
+    with pytest.raises(TypeError, match="expected_authoritative_path"):
+        audit_current_database(
             database, MANIFEST, BUNDLES, database_kind="authoritative",
-            expected_authoritative_path=tmp_path / "different.db",
+            expected_authoritative_path=database,
         )
     with pytest.raises(ValueError, match="database_kind"):
         audit_current_database(
             database, MANIFEST, BUNDLES, database_kind="authoratative"
         )
 
+
+
+def test_missing_bundle_is_a_structured_failed_audit_not_an_exception(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    incomplete_bundles = tmp_path / "bundles"
+    shutil.copytree(BUNDLES, incomplete_bundles)
+    (incomplete_bundles / "gp/GP-002.json").unlink()
+
     result = audit_current_database(
-        database, MANIFEST, BUNDLES, database_kind="authoritative",
-        expected_authoritative_path=database,
+        database, MANIFEST, incomplete_bundles,
+        expected_preflight_path=PREFLIGHT,
     )
-    assert result["database_kind"] == "authoritative"
+
+    assert result["passed"] is False
+    assert result["checks"]["bundle_hash_mismatches"] == [
+        {
+            "paper_id": "GP-002",
+            "expected": json.loads(PREFLIGHT.read_text())["bundles"][0]["sha256"],
+            "actual": "missing",
+        }
+    ]
+    assert result["checks"]["manifest_disposition_mismatches"] == [
+        {
+            "paper_id": "GP-002",
+            "expected_import_status": "missing_bundle",
+            "actual_import_status": "needs_review",
+            "expected_screening_status": "missing_bundle",
+            "actual_screening_status": "manual_review",
+        }
+    ]
 
 
 def test_audit_detects_foreign_key_coverage_tag_and_bundle_hash_failures(

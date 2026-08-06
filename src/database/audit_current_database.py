@@ -16,6 +16,10 @@ from src.database.status import (
 
 
 DATABASE_KINDS = frozenset({"explicit_fixture", "authoritative"})
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+CANONICAL_AUTHORITATIVE_DATABASE = (
+    REPOSITORY_ROOT / "data/curated/lnp_evidence.db"
+).resolve()
 
 
 def _sha256(path: Path) -> str:
@@ -298,7 +302,6 @@ def audit_current_database(
     *,
     expected_preflight_path: Path | str | None = None,
     database_kind: str = "explicit_fixture",
-    expected_authoritative_path: Path | str | None = None,
 ) -> dict[str, Any]:
     """Audit an explicitly named database without modifying it."""
 
@@ -308,14 +311,10 @@ def audit_current_database(
     if database_kind not in DATABASE_KINDS:
         raise ValueError(f"database_kind must be one of {sorted(DATABASE_KINDS)}")
     if database_kind == "authoritative":
-        canonical = (
-            Path(expected_authoritative_path).resolve()
-            if expected_authoritative_path is not None
-            else manifest_path.parents[2] / "data/curated/lnp_evidence.db"
-        )
-        if database_path != canonical.resolve():
+        if database_path != CANONICAL_AUTHORITATIVE_DATABASE:
             raise ValueError(
-                f"authoritative database path must equal {canonical.resolve()}"
+                "authoritative database path must equal "
+                f"{CANONICAL_AUTHORITATIVE_DATABASE}"
             )
     if not database_path.is_file():
         raise FileNotFoundError(database_path)
@@ -370,7 +369,9 @@ def audit_current_database(
             if manifest_import == "screening_only":
                 expected_import, expected_screening = "screening_only", "exclude"
             else:
-                expected_import, expected_screening = bundle_dispositions[paper_id]
+                expected_import, expected_screening = bundle_dispositions.get(
+                    paper_id, ("missing_bundle", "missing_bundle")
+                )
             if actual[0] != expected_import or actual[1] != expected_screening:
                 disposition_mismatches.append({
                     "paper_id": paper_id,
