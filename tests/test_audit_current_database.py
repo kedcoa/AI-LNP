@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -273,6 +274,76 @@ def test_missing_bundle_is_a_structured_failed_audit_not_an_exception(
             "actual_screening_status": "manual_review",
         }
     ]
+
+
+def test_audit_reconciles_canonical_normalized_identity_sets(tmp_path: Path) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    identities = result["checks"]["normalized_identity_sets"]
+    assert identities["record_identities"]["missing"] == []
+    assert identities["record_identities"]["unexpected"] == []
+    assert identities["field_evidence_links"]["raw_references"] == 673
+    assert identities["field_evidence_links"]["expected_canonical"] == 672
+    assert identities["field_evidence_links"]["actual"] == 672
+    assert identities["field_evidence_links"]["missing"] == []
+    assert identities["field_evidence_links"]["unexpected"] == []
+
+
+def test_audit_detects_deleted_and_stale_normalized_identities(tmp_path: Path) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = _populated_database(tmp_path)
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "DELETE FROM import_record_identity WHERE import_record_identity_id="
+            "(SELECT min(import_record_identity_id) FROM import_record_identity)"
+        )
+        connection.execute(
+            "DELETE FROM import_field_evidence WHERE import_field_evidence_id="
+            "(SELECT min(import_field_evidence_id) FROM import_field_evidence)"
+        )
+        paper_id, entity_id = connection.execute(
+            "SELECT paper_id, entity_id FROM import_record_identity "
+            "WHERE entity_type='paper' LIMIT 1"
+        ).fetchone()
+        connection.execute(
+            "INSERT INTO import_record_identity "
+            "(paper_id, entity_type, natural_key, content_sha256, content_json, entity_id) "
+            "VALUES (?, 'paper', 'stale:identity', ?, '{}', ?)",
+            (paper_id, "f" * 64, entity_id),
+        )
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    identities = result["checks"]["normalized_identity_sets"]
+    assert identities["record_identities"]["missing"]
+    assert identities["record_identities"]["unexpected"]
+    assert identities["field_evidence_links"]["missing"]
+    assert result["passed"] is False
+
+
+def test_current_canonical_database_audit_is_read_only() -> None:
+    from src.database.audit_current_database import (
+        CANONICAL_AUTHORITATIVE_DATABASE,
+        audit_current_database,
+    )
+    if not CANONICAL_AUTHORITATIVE_DATABASE.is_file():
+        pytest.skip("ignored canonical database is not present in this checkout")
+
+    before = hashlib.sha256(CANONICAL_AUTHORITATIVE_DATABASE.read_bytes()).hexdigest()
+    result = audit_current_database(
+        CANONICAL_AUTHORITATIVE_DATABASE,
+        MANIFEST,
+        BUNDLES,
+        database_kind="authoritative",
+    )
+    after = hashlib.sha256(CANONICAL_AUTHORITATIVE_DATABASE.read_bytes()).hexdigest()
+
+    assert result["passed"] is True
+    assert before == after
 
 
 def test_audit_detects_foreign_key_coverage_tag_and_bundle_hash_failures(

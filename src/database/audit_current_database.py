@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import sqlite3
+import tempfile
 from typing import Any
 
 from src.database.status import (
@@ -354,6 +355,113 @@ def _bundle_hash_checks(
     return mismatches, actual
 
 
+def _identity_sets(
+    connection: sqlite3.Connection,
+) -> tuple[set[tuple[str, ...]], set[tuple[str, ...]], list[dict[str, str]]]:
+    def canonical_content(content_json: str) -> tuple[str, str]:
+        payload = json.loads(content_json)
+        artifact = payload.get("artifact")
+        if isinstance(artifact, dict) and isinstance(artifact.get("path"), str):
+            artifact_path = Path(artifact["path"])
+            if artifact_path.is_absolute():
+                for root in (REPOSITORY_ROOT, COMMON_CHECKOUT_ROOT):
+                    try:
+                        artifact["path"] = artifact_path.relative_to(root).as_posix()
+                        break
+                    except ValueError:
+                        continue
+            else:
+                artifact["path"] = artifact_path.as_posix()
+        normalized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+        return normalized, hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+    hash_mismatches: list[dict[str, str]] = []
+    records: set[tuple[str, ...]] = set()
+    for paper_id, entity_type, natural_key, stored_hash, content_json in connection.execute(
+        """
+        SELECT p.source_paper_id, i.entity_type, i.natural_key,
+               i.content_sha256, i.content_json
+        FROM import_record_identity i JOIN paper p USING (paper_id)
+        """
+    ):
+        raw_hash = hashlib.sha256(content_json.encode("utf-8")).hexdigest()
+        if raw_hash != stored_hash:
+            hash_mismatches.append({
+                "paper_id": str(paper_id), "entity_type": str(entity_type),
+                "natural_key": str(natural_key), "stored": str(stored_hash),
+                "calculated": raw_hash,
+            })
+        normalized, canonical_hash = canonical_content(content_json)
+        records.add((str(paper_id), str(entity_type), str(natural_key), canonical_hash, normalized))
+    links: set[tuple[str, ...]] = set()
+    for paper_id, entity_type, natural_key, stored_hash, content_json in connection.execute(
+            """
+            SELECT p.source_paper_id, f.entity_type, f.natural_key,
+                   f.content_sha256, f.content_json
+            FROM import_field_evidence f JOIN paper p USING (paper_id)
+            """
+    ):
+        raw_hash = hashlib.sha256(content_json.encode("utf-8")).hexdigest()
+        if raw_hash != stored_hash:
+            hash_mismatches.append({
+                "paper_id": str(paper_id), "entity_type": f"field:{entity_type}",
+                "natural_key": str(natural_key), "stored": str(stored_hash),
+                "calculated": raw_hash,
+            })
+        normalized, canonical_hash = canonical_content(content_json)
+        links.add((str(paper_id), str(entity_type), str(natural_key), canonical_hash, normalized))
+    return records, links, hash_mismatches
+
+
+def _serialized_identities(rows: set[tuple[str, ...]]) -> list[list[str]]:
+    return [list(row) for row in sorted(rows)]
+
+
+def _raw_field_evidence_reference_count(bundle_root: Path) -> int:
+    total = 0
+    for path in sorted(bundle_root.glob("*/*.json")):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(payload.get("paper"), dict):
+            continue
+        for link in payload.get("field_evidence_links", []):
+            total += len(link.get("evidence_ids", []))
+    return total
+
+
+def _expected_identity_sets(
+    manifest_path: Path, bundle_root: Path
+) -> tuple[set[tuple[str, ...]], set[tuple[str, ...]], list[str]]:
+    """Build canonical identities through the production normalization/import path."""
+
+    from src.database.run_current_corpus_import import run_current_corpus_import
+    from src.init_db import initialize_database
+
+    errors: list[str] = []
+    with tempfile.TemporaryDirectory(prefix="ai-lnp-audit-expected-") as directory:
+        expected_database = Path(directory) / "expected.db"
+        initialize_database(expected_database)
+        try:
+            summary = run_current_corpus_import(
+                expected_database, manifest_path, bundle_root
+            )
+        except (FileNotFoundError, KeyError, ValueError) as exc:
+            return set(), set(), [str(exc)]
+        failed = [
+            row for row in summary["dispositions"]
+            if row["status"] != "committed"
+        ]
+        if failed:
+            errors.extend(
+                f"{row['paper_id']}: {row.get('error', row['status'])}"
+                for row in failed
+            )
+        with sqlite3.connect(expected_database) as connection:
+            records, links, hash_mismatches = _identity_sets(connection)
+            if hash_mismatches:
+                errors.append("expected identity generation produced invalid content hashes")
+    return records, links, errors
+
+
 def audit_current_database(
     database_path: Path | str,
     manifest_path: Path | str,
@@ -437,6 +545,11 @@ def audit_current_database(
         eligibility = _eligibility_inconsistencies(connection)
         orphans = _orphan_counts(connection)
         duplicates = _duplicate_natural_keys(connection)
+        (
+            actual_record_identities,
+            actual_field_links,
+            identity_hash_mismatches,
+        ) = _identity_sets(connection)
         paper_rows = []
         for source_id in manifest_ids:
             row = connection.execute(
@@ -493,6 +606,35 @@ def audit_current_database(
                    if inaccessible else {}),
             })
 
+    expected_record_identities, expected_field_links, identity_errors = (
+        _expected_identity_sets(manifest_path, bundle_root)
+    )
+    identity_check = {
+        "generation_errors": identity_errors,
+        "content_hash_mismatches": identity_hash_mismatches,
+        "record_identities": {
+            "expected": len(expected_record_identities),
+            "actual": len(actual_record_identities),
+            "missing": _serialized_identities(
+                expected_record_identities - actual_record_identities
+            ),
+            "unexpected": _serialized_identities(
+                actual_record_identities - expected_record_identities
+            ),
+        },
+        "field_evidence_links": {
+            "raw_references": _raw_field_evidence_reference_count(bundle_root),
+            "expected_canonical": len(expected_field_links),
+            "actual": len(actual_field_links),
+            "missing": _serialized_identities(
+                expected_field_links - actual_field_links
+            ),
+            "unexpected": _serialized_identities(
+                actual_field_links - expected_field_links
+            ),
+        },
+    }
+
     manifest_match = expected_manifest_hash in (None, manifest_hash)
     checks = {
         "sqlite_integrity": integrity,
@@ -506,6 +648,7 @@ def audit_current_database(
         "manifest_disposition_mismatches": disposition_mismatches,
         "manifest_hash_matches": manifest_match,
         "bundle_hash_mismatches": bundle_mismatches,
+        "normalized_identity_sets": identity_check,
     }
     passed = (
         integrity == "ok" and not fk and not orphans and not duplicates
@@ -514,6 +657,12 @@ def audit_current_database(
         and not disposition["unexpected"] and disposition["present"] == 14
         and not disposition_mismatches
         and manifest_match and not bundle_mismatches
+        and not identity_errors
+        and not identity_hash_mismatches
+        and not identity_check["record_identities"]["missing"]
+        and not identity_check["record_identities"]["unexpected"]
+        and not identity_check["field_evidence_links"]["missing"]
+        and not identity_check["field_evidence_links"]["unexpected"]
     )
     return {
         "schema_version": "day2-database-audit/v1",
