@@ -338,16 +338,23 @@ def migrate_database(connection: sqlite3.Connection) -> None:
     same schema and single migration-version record.
     """
 
-    _migrate_experiment_cell_type(connection)
+    rebuild_cell_type = _experiment_needs_cell_type_rebuild(connection)
+    if rebuild_cell_type and connection.in_transaction:
+        raise RuntimeError("cell-type migration requires no active transaction")
     if not connection.in_transaction:
         connection.execute("PRAGMA foreign_keys = ON")
     if connection.execute("PRAGMA foreign_keys").fetchone() != (1,):
         raise RuntimeError(
             "SQLite foreign-key enforcement must be enabled before migration"
         )
+    if rebuild_cell_type:
+        connection.execute("PRAGMA foreign_keys = OFF")
+        connection.execute("PRAGMA legacy_alter_table = ON")
     savepoint = "working_evidence_database_migration"
     connection.execute(f"SAVEPOINT {savepoint}")
     try:
+        if rebuild_cell_type:
+            _migrate_experiment_cell_type(connection)
         _add_missing_columns(connection, "paper", PAPER_COLUMNS)
         _add_missing_columns(connection, "experiment", EXPERIMENT_COLUMNS)
         _execute_sql_script(connection, ADDITIVE_SCHEMA_SQL)
@@ -361,8 +368,26 @@ def migrate_database(connection: sqlite3.Connection) -> None:
     except BaseException:
         connection.execute(f"ROLLBACK TO SAVEPOINT {savepoint}")
         connection.execute(f"RELEASE SAVEPOINT {savepoint}")
+        if rebuild_cell_type:
+            connection.execute("PRAGMA legacy_alter_table = OFF")
+            connection.execute("PRAGMA foreign_keys = ON")
         raise
     connection.execute(f"RELEASE SAVEPOINT {savepoint}")
+    if rebuild_cell_type:
+        connection.execute("PRAGMA legacy_alter_table = OFF")
+        connection.execute("PRAGMA foreign_keys = ON")
+        if connection.execute("PRAGMA foreign_key_check").fetchall():
+            raise RuntimeError("foreign-key violations after cell-type migration")
+
+
+def _experiment_needs_cell_type_rebuild(connection: sqlite3.Connection) -> bool:
+    row = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'experiment'"
+    ).fetchone()
+    if row is None:
+        return False
+    cell_segment = row[0].split("cell_type", 1)[1].split("cell_source", 1)[0]
+    return "CHECK" in cell_segment.upper() and "'not_reported'" not in cell_segment
 
 
 def _migrate_experiment_cell_type(connection: sqlite3.Connection) -> None:
@@ -371,13 +396,8 @@ def _migrate_experiment_cell_type(connection: sqlite3.Connection) -> None:
     row = connection.execute(
         "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'experiment'"
     ).fetchone()
-    if row is None:
+    if row is None or not _experiment_needs_cell_type_rebuild(connection):
         return
-    cell_segment = row[0].split("cell_type", 1)[1].split("cell_source", 1)[0]
-    if "CHECK" not in cell_segment.upper() or "'not_reported'" in cell_segment:
-        return
-    if connection.in_transaction:
-        raise RuntimeError("cell-type migration requires no active transaction")
     old_sql = row[0]
     new_sql, replacements = re.subn(
         r"('hsc')(\s*\))",
@@ -389,22 +409,9 @@ def _migrate_experiment_cell_type(connection: sqlite3.Connection) -> None:
         raise RuntimeError("unrecognized experiment cell_type constraint")
     columns = [row[1] for row in connection.execute("PRAGMA table_info(experiment)")]
     quoted = ", ".join(f'"{column}"' for column in columns)
-    connection.execute("PRAGMA foreign_keys = OFF")
-    connection.execute("PRAGMA legacy_alter_table = ON")
-    try:
-        connection.execute("BEGIN")
-        connection.execute("ALTER TABLE experiment RENAME TO experiment_cell_type_v1")
-        connection.execute(new_sql)
-        connection.execute(
-            f"INSERT INTO experiment ({quoted}) SELECT {quoted} FROM experiment_cell_type_v1"
-        )
-        connection.execute("DROP TABLE experiment_cell_type_v1")
-        connection.commit()
-    except BaseException:
-        connection.rollback()
-        raise
-    finally:
-        connection.execute("PRAGMA legacy_alter_table = OFF")
-        connection.execute("PRAGMA foreign_keys = ON")
-    if connection.execute("PRAGMA foreign_key_check").fetchall():
-        raise RuntimeError("foreign-key violations after cell-type migration")
+    connection.execute("ALTER TABLE experiment RENAME TO experiment_cell_type_v1")
+    connection.execute(new_sql)
+    connection.execute(
+        f"INSERT INTO experiment ({quoted}) SELECT {quoted} FROM experiment_cell_type_v1"
+    )
+    connection.execute("DROP TABLE experiment_cell_type_v1")

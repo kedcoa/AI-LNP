@@ -133,7 +133,6 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
     cell_types = {
         "hepatocyte": "hepatocyte",
         "hepatocytes": "hepatocyte",
-        "HepG2 human hepatocellular carcinoma cells": "hepatocyte",
         "Kupffer cells": "kupffer_cell",
         "Kupffer cells (CD31− CD45+ CD68+)": "kupffer_cell",
         "liver endothelial cells": "lsec",
@@ -262,21 +261,24 @@ def _table_counts(connection: sqlite3.Connection) -> dict[str, int]:
     }
 
 
-def _expected_counts(bundles: list[ImportBundle]) -> dict[str, int]:
+def _bundle_expected_counts(bundle: ImportBundle) -> dict[str, int]:
     return {
-        "papers": len(bundles),
-        "formulations": sum(len(bundle.formulations) for bundle in bundles),
-        "components": sum(len(bundle.components) for bundle in bundles),
-        "arms": sum(len(bundle.arms) for bundle in bundles),
-        "outcomes": sum(len(bundle.outcomes) for bundle in bundles),
-        "evidence": sum(len(bundle.evidence) for bundle in bundles),
-        "field_evidence_links": sum(
-            len(link.evidence_ids)
-            for bundle in bundles
-            for link in bundle.field_evidence_links
+        "papers": 1,
+        "formulations": len(bundle.formulations),
+        "components": len(bundle.components),
+        "arms": len(bundle.arms),
+        "outcomes": len(bundle.outcomes),
+        "evidence": len(bundle.evidence),
+        "field_evidence_references": sum(
+            len(link.evidence_ids) for link in bundle.field_evidence_links
         ),
-        "reviews": sum(len(bundle.reviews) for bundle in bundles),
+        "reviews": len(bundle.reviews),
     }
+
+
+def _expected_counts(bundles: list[ImportBundle]) -> dict[str, int]:
+    rows = [_bundle_expected_counts(bundle) for bundle in bundles]
+    return {key: sum(row[key] for row in rows) for key in rows[0]}
 
 
 def _recalculate_paper(
@@ -377,6 +379,7 @@ def build_import_preflight(
     manifest = _load_manifest(manifest_path)
     paths = _bundle_paths(bundle_root)
     bundles = _load_ordered_bundles(manifest_path, bundle_root)
+    bundles_by_id = {bundle.paper.source_paper_id: bundle for bundle in bundles}
     corpus_date = max(str(entry.get("last_checked") or "unknown") for entry in manifest["entries"])
     stamp = corpus_date.replace("-", "")
     backup = (
@@ -389,19 +392,12 @@ def build_import_preflight(
         path = paths.get(paper_id)
         if path is None:
             continue
-        payload = json.loads(path.read_text(encoding="utf-8"))
         rows.append(
             {
                 "paper_id": paper_id,
                 "path": str(path.relative_to(bundle_root.parent.parent.parent.parent)),
                 "sha256": _sha256(path),
-                "expected_counts": {
-                    key: len(payload.get(key, []))
-                    for key in (
-                        "formulations", "components", "arms", "outcomes",
-                        "evidence", "field_evidence_links", "reviews",
-                    )
-                },
+                "expected_counts": _bundle_expected_counts(bundles_by_id[paper_id]),
             }
         )
     report = {

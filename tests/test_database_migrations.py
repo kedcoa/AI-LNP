@@ -503,3 +503,42 @@ def test_migration_expands_cell_type_without_losing_existing_arm(tmp_path: Path)
         assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
     finally:
         connection.close()
+
+
+def test_cell_type_rebuild_rolls_back_with_later_migration_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    database_path = tmp_path / "legacy-failure.db"
+    connection = sqlite3.connect(database_path)
+    connection.execute("PRAGMA foreign_keys = ON")
+    schema_path = Path(__file__).resolve().parents[1] / "src/schema.sql"
+    legacy_schema = schema_path.read_text(encoding="utf-8").replace(
+        "'hsc',\n                'not_reported',\n                'other'",
+        "'hsc'",
+        1,
+    )
+    connection.executescript(legacy_schema)
+    connection.execute(
+        "INSERT INTO paper (paper_id, title, source_type, retrieval_date) "
+        "VALUES (1, 'paper', 'fixture', '2026-08-06')"
+    )
+    connection.execute("INSERT INTO formulation (formulation_id, paper_id) VALUES (1, 1)")
+    connection.execute(
+        "INSERT INTO experiment (experiment_id, paper_id, formulation_id, cell_type) "
+        "VALUES (1, 1, 1, 'hepatocyte')"
+    )
+    connection.commit()
+    before_dump = "\n".join(connection.iterdump())
+    before_schema_version = connection.execute("PRAGMA schema_version").fetchone()[0]
+
+    def fail_later(*_args, **_kwargs):
+        raise RuntimeError("injected late failure")
+
+    monkeypatch.setattr(migrations_module, "_execute_sql_script", fail_later)
+    with pytest.raises(RuntimeError, match="injected late failure"):
+        migrate_database(connection)
+
+    assert "\n".join(connection.iterdump()) == before_dump
+    assert connection.execute("PRAGMA schema_version").fetchone()[0] == before_schema_version
+    assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
+    connection.close()

@@ -45,6 +45,11 @@ def _scientific_counts(connection: sqlite3.Connection, paper_id: int) -> tuple[i
     )
 
 
+def _canonical_database_dump(path: Path) -> tuple[str, ...]:
+    with sqlite3.connect(path) as connection:
+        return tuple(sorted(connection.iterdump()))
+
+
 def test_current_corpus_import_covers_all_dispositions_and_isolates_screening(
     tmp_path: Path,
 ) -> None:
@@ -114,6 +119,19 @@ def test_import_preserves_review_visibility_evidence_and_deterministic_eligibili
             status == "quarantined" and nearest == 0 and comet == 0 and reason
             for _, status, nearest, comet, reason in unknown_arms
         )
+        hep_g2 = connection.execute(
+            """
+            SELECT e.cell_type, e.cell_source, a.completeness_status,
+                   a.nearest_neighbor_eligible, a.comet_eligible
+            FROM experiment e JOIN paper p USING (paper_id)
+            JOIN arm_assessment a USING (experiment_id)
+            WHERE p.source_paper_id = 'NP-001'
+            """
+        ).fetchone()
+        assert hep_g2 is not None
+        assert hep_g2[0] == "other"
+        assert "HepG2" in (hep_g2[1] or "")
+        assert hep_g2[2:] == ("quarantined", 0, 0)
 
 
 def test_import_is_ordered_and_idempotent(tmp_path: Path) -> None:
@@ -121,7 +139,9 @@ def test_import_is_ordered_and_idempotent(tmp_path: Path) -> None:
     database = _new_database(tmp_path)
 
     first = module.run_current_corpus_import(database, MANIFEST, BUNDLES)
+    first_dump = _canonical_database_dump(database)
     second = module.run_current_corpus_import(database, MANIFEST, BUNDLES)
+    second_dump = _canonical_database_dump(database)
 
     assert [row["paper_id"] for row in first["dispositions"]] == [
         row["paper_id"] for row in second["dispositions"]
@@ -129,6 +149,7 @@ def test_import_is_ordered_and_idempotent(tmp_path: Path) -> None:
     assert sum(row["inserted"] for row in second["dispositions"]) == 0
     assert second["database_counts"] == first["database_counts"]
     assert second["eligibility"] == first["eligibility"]
+    assert second_dump == first_dump
 
 
 def test_failed_paper_rolls_back_without_erasing_other_papers(
@@ -181,4 +202,9 @@ def test_preflight_is_exact_and_read_only(tmp_path: Path) -> None:
     ]
     assert len(report["bundles"]) == 11
     assert all(len(row["sha256"]) == 64 for row in report["bundles"])
+    assert report["expected_counts"]["field_evidence_references"] == sum(
+        row["expected_counts"]["field_evidence_references"]
+        for row in report["bundles"]
+    )
+    assert "field_evidence_links" not in report["expected_counts"]
     assert report_path.exists()

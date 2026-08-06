@@ -354,6 +354,10 @@ def evaluate_arm_status(
             verification_status = excluded.verification_status,
             quarantine_reason = excluded.quarantine_reason,
             updated_at = excluded.updated_at
+        WHERE arm_assessment.completeness_status IS NOT excluded.completeness_status
+           OR arm_assessment.missing_fields_json IS NOT excluded.missing_fields_json
+           OR arm_assessment.verification_status IS NOT excluded.verification_status
+           OR arm_assessment.quarantine_reason IS NOT excluded.quarantine_reason
         """,
         (
             experiment_id,
@@ -471,6 +475,9 @@ def evaluate_eligibility(
             reasons_json = excluded.reasons_json,
             rules_version = excluded.rules_version,
             evaluated_at = excluded.evaluated_at
+        WHERE eligibility_result.eligible IS NOT excluded.eligible
+           OR eligibility_result.reasons_json IS NOT excluded.reasons_json
+           OR eligibility_result.rules_version IS NOT excluded.rules_version
         """,
         (
             experiment_id,
@@ -487,7 +494,8 @@ def evaluate_eligibility(
         else "comet_eligible"
     )
     connection.execute(
-        f"UPDATE arm_assessment SET {column} = ? WHERE experiment_id = ?",
-        (int(result.eligible), experiment_id),
+        f"UPDATE arm_assessment SET {column} = ? "
+        f"WHERE experiment_id = ? AND {column} IS NOT ?",
+        (int(result.eligible), experiment_id, int(result.eligible)),
     )
     return result
