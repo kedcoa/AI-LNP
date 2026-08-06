@@ -35,6 +35,20 @@ def _scientific_identity(raw: dict[str, Any]) -> tuple[Any, ...]:
     )
 
 
+def _merge_supported_field(target: dict[str, Any], incoming: dict[str, Any]) -> None:
+    target_value = _reported(target)
+    incoming_value = _reported(incoming)
+    if incoming_value is not None and (
+        target_value is None or len(str(incoming_value)) > len(str(target_value))
+    ):
+        target["value"] = incoming_value
+        target["status"] = incoming.get("status", target.get("status"))
+        target["missing_reason"] = incoming.get("missing_reason")
+    target["evidence_ids"] = list(dict.fromkeys(
+        [*target.get("evidence_ids", []), *incoming.get("evidence_ids", [])]
+    ))
+
+
 def reconcile_slices(
     slices: Iterable[tuple[str, dict[str, Any]]],
 ) -> dict[str, Any]:
@@ -88,6 +102,12 @@ def reconcile_slices(
                 formulations_by_identity[identity] = match
             elif slice_name not in match["record"]["source_slices"]:
                 match["record"]["source_slices"].append(slice_name)
+                for field_name in (
+                    "formulation_name", "composition", "composition_basis", "np_ratio"
+                ):
+                    _merge_supported_field(
+                        match["record"][field_name], raw[field_name]
+                    )
             formulation_map[original_id] = match["id"]
 
         experiment_map: dict[str, str] = {}

@@ -124,13 +124,26 @@ def build_np_bundle(
                 )
                 evidence_artifact.setdefault(item["evidence_id"], claims_artifact.artifact_id)
 
+    local_source_artifacts: list[SourceArtifactRecord] = []
+    if repo_root is not None and paper_metadata.get("pmcid"):
+        source_dir = repo_root / "data/staging/new_papers" / paper_id
+        for suffix, source_kind in (("html", "html"), ("pdf", "pdf")):
+            source_path = source_dir / f"{paper_metadata['pmcid']}.{suffix}"
+            if source_path.is_file():
+                local_source_artifacts.append(
+                    _source_artifact(source_path, source_kind, "local_fulltext_copy")
+                )
+
     result_artifacts = tuple(
         _source_artifact(
             path, "validated_extraction",
             "compact" if paper_id == "NP-001" else "isolated_liver_cell",
         ) for path in paths
     )
-    artifacts = result_artifacts + (packet_artifact,) + tuple(docling_artifacts)
+    artifacts = (
+        result_artifacts + (packet_artifact,) + tuple(docling_artifacts)
+        + tuple(local_source_artifacts)
+    )
     slice_names = [paper_id] if len(paths) == 1 else [path.parent.name for path in paths]
     artifact_by_slice = {
         slice_name: artifact.artifact_id
@@ -159,18 +172,13 @@ def build_np_bundle(
                 ]
                 source = sources[0] if sources else {}
                 locators = [
-                    {
-                        key: value for key, value in {
-                            "source_id": row.get("source_id"),
-                            "section": row.get("section"),
-                            "page_number": row.get("page_number"),
-                            "block_type": row.get("block_type"),
-                            "chunk_id": row.get("chunk_id"),
-                            "xml_element_id": row.get("xml_element_id"),
-                        }.items() if value is not None
-                    }
+                    {key: value for key, value in row.items() if value is not None}
                     for row in sources
                 ]
+                unverified_source_paths = list(dict.fromkeys(
+                    str(row["source_path"])
+                    for row in sources if row.get("source_path")
+                ))
                 evidence_records[eid] = EvidenceRecord(
                     record_id=eid,
                     paper_id=paper_id,
@@ -180,7 +188,14 @@ def build_np_bundle(
                     extraction_method="validated_extraction",
                     extraction_confidence="requires_review",
                     evidence_text=item.get("text"),
-                    structured_evidence={"source_locators": locators},
+                    structured_evidence={
+                        "source_locators": locators,
+                        "immediate_artifact_id": evidence_artifact[raw_eid],
+                        "available_local_source_artifact_ids": [
+                            artifact.artifact_id for artifact in local_source_artifacts
+                        ],
+                        "unverified_source_paths": unverified_source_paths,
+                    },
                     arm_id=arm_id,
                     outcome_id=outcome_id,
                     section_name=source.get("section"),

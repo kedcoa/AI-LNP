@@ -24,12 +24,14 @@ made, and the authoritative SQLite database was not opened or modified.
   result slices under
   `data/staging/extraction/np002_isolated_liver_cell_run/`.
 - Imported candidates: 2 scientifically reconciled formulations, 24 source-slice
-  components, 13 experimental arms, 13 outcomes, and 345 entity-and-field-scoped
+  components, 13 experimental arms, 13 outcomes, and 347 entity-and-field-scoped
   evidence records.
 - Reconciliation: experiment, outcome, component, and evidence identities are
   namespaced by source slice. Slice-local formulation IDs are reconciled using
   normalized formulation name, supported component identities, reported ratio,
-  and N:P ratio. The wording variants resolve to the same two scientific
+  and N:P ratio. Supported facts and evidence are unioned across the matching
+  records, preserving the Kupffer slice's reported 10:1 lipid:nucleic-acid mass
+  ratio. The wording variants resolve to the same two scientific
   formulations; truly incompatible variants would remain explicit conflicts.
   This avoids both duplicate formulations and invented cross-slice links.
 - Review state: all 13 arms are visible but quarantined and ineligible for
@@ -46,7 +48,11 @@ Every populated normalized field has one or more field-evidence links, and each
 link points to evidence carrying the same entity field. Packet evidence is
 copied as an excerpt with every available source locator; visual table evidence
 used by NP-001 is recovered from the committed supported Docling claims. The
-compact packet, Docling claims, and validated result artifacts are independently
-registered with canonical repository-relative paths and SHA-256 hashes. Bundle
+compact packet, Docling claims, validated result artifacts, and available local
+full-text copies are independently registered with canonical repository-relative
+paths and SHA-256 hashes. NP-002's committed PMC HTML and PDF copies are
+registered; the packet's absent `.full` source path remains explicitly marked
+unverified rather than borrowing either copy's hash. NP-001 source paths that are
+not present in the checkout likewise remain unverified. Bundle
 bytes contain no checkout-root paths and are reproducible across worktrees. Both
 JSON files load through the validated `ImportBundle` contract.

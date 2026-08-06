@@ -119,12 +119,19 @@ def test_reconciliation_unions_supported_scientific_formulation_identity():
         "MC3, cholesterol, C14 PEG 2000, DSPC; lipids formulated at 50:38.5:1.5:10",
         "E-FORM",
     )
+    first["formulations"][0]["composition_basis"] = _field("molar ratio", "E-A")
+    second["formulations"][0]["composition_basis"] = _field(
+        "Molar ratio; lipid:nucleic-acid mass ratio 10:1", "E-B"
+    )
 
     reconciled = reconcile_slices([("a", first), ("b", second)])
 
     assert len(reconciled["formulations"]) == 1
     assert {row["formulation_id"] for row in reconciled["experiments"]} == {"F1"}
     assert reconciled["formulations"][0]["source_slices"] == ["a", "b"]
+    basis = reconciled["formulations"][0]["composition_basis"]
+    assert "10:1" in basis["value"]
+    assert basis["evidence_ids"] == ["E-A", "E-B"]
 
 
 def test_adapter_builds_valid_quarantined_bundle_without_synthesizing_links(tmp_path):
@@ -165,6 +172,10 @@ def test_adapter_preserves_every_packet_source_locator(tmp_path):
     result_path.write_text(json.dumps(_slice("hepatocytes")))
     packet = _packet()
     packet["evidence"][1]["source_ids"] = ["S1", "S2"]
+    packet["sources"][0].update({
+        "source_path": "data/raw/example.xml", "source_kind": "pmc_xml",
+        "subsection": "Formulation", "xml_element_id": "Par7",
+    })
     packet_path.write_text(json.dumps(packet))
 
     bundle = build_np_bundle(
@@ -174,8 +185,13 @@ def test_adapter_preserves_every_packet_source_locator(tmp_path):
 
     rows = [row for row in bundle.evidence if row.field_name == "payload_type"]
     assert rows[0].structured_evidence["source_locators"] == [
-        {"source_id": "S1", "section": "Methods", "page_number": 2},
+        {"source_id": "S1", "section": "Methods", "page_number": 2,
+         "source_path": "data/raw/example.xml", "source_kind": "pmc_xml",
+         "subsection": "Formulation", "xml_element_id": "Par7"},
         {"source_id": "S2", "section": "Results", "page_number": 4},
+    ]
+    assert rows[0].structured_evidence["unverified_source_paths"] == [
+        "data/raw/example.xml"
     ]
 
 
@@ -237,6 +253,14 @@ def test_real_np_artifacts_generate_deterministic_valid_bundles(tmp_path):
     assert (len(np1.formulations), len(np1.arms), len(np1.outcomes)) == (1, 1, 1)
     assert (len(np2.arms), len(np2.outcomes)) == (13, 13)
     assert len(np2.formulations) == 2
+    assert all("10:1" in row.composition_basis for row in np2.formulations)
+    artifact_paths = {row.path for row in np2.artifacts}
+    assert "data/staging/new_papers/NP-002/PMC6816632.html" in artifact_paths
+    assert "data/staging/new_papers/NP-002/PMC6816632.pdf" in artifact_paths
+    sample = next(row for row in np2.evidence if row.structured_evidence)
+    assert sample.structured_evidence["immediate_artifact_id"] == sample.artifact_id
+    assert "data/raw/fulltext/new_papers/PMC6816632.full" in sample.structured_evidence["unverified_source_paths"]
+    assert len(sample.structured_evidence["available_local_source_artifact_ids"]) == 2
     first = write_bundle(np2, tmp_path / "np2.json")
     second = write_bundle(np2, tmp_path / "np2.json")
     assert first == second
