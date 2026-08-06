@@ -94,7 +94,8 @@ _EXCLUDED_DIRECTORY_NAMES = frozenset(
 )
 _EXCLUDED_FILE_NAMES = frozenset({".env", ".env.local", ".env.production"})
 _SENSITIVE_PATH_COMPONENT = re.compile(
-    r"(?:^|[._-])(?:api[._-]?key|credential(?:s)?|secret(?:s)?|raw|provider|licensed)(?:[._-]|$)",
+    r"(?:^|[._-])(?:access[._-]?token|api[._-]?key|credential(?:s)?|"
+    r"password(?:s)?|private[._-]?key|secret(?:s)?|raw|provider|licensed)(?:[._-]|$)",
     re.IGNORECASE,
 )
 _ARTIFACT_KINDS = {

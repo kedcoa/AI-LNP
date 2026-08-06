@@ -119,6 +119,27 @@ def test_scanner_excludes_sensitive_filename_variants(
 
 
 @pytest.mark.parametrize(
+    "filename",
+    [
+        "GP-001_access-token.json",
+        "GP-001.access_token.json",
+        "GP-001-private-key.pem",
+        "GP-001.private_key.pem",
+        "GP-001-password.txt",
+        "GP-001.password.txt",
+    ],
+)
+def test_scanner_excludes_access_secrets_with_separator_variants(
+    tmp_path: Path, filename: str
+) -> None:
+    artifact = tmp_path / "GP-001" / filename
+    artifact.parent.mkdir()
+    artifact.write_text("must not be hashed", encoding="utf-8")
+
+    assert scan_artifact_candidates(tmp_path, ["GP-001"]) == []
+
+
+@pytest.mark.parametrize(
     "artifact_path",
     [
         "GP-001/GP-001_credentials.json",
@@ -127,6 +148,25 @@ def test_scanner_excludes_sensitive_filename_variants(
     ],
 )
 def test_validate_corpus_rejects_selected_sensitive_artifacts(
+    tmp_path: Path, artifact_path: str
+) -> None:
+    selected = tmp_path / artifact_path
+    selected.parent.mkdir(parents=True)
+    selected.write_text("must not be selected", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="selected import artifact is excluded"):
+        validate_corpus([_entry(import_artifact=artifact_path)], tmp_path)
+
+
+@pytest.mark.parametrize(
+    "artifact_path",
+    [
+        "GP-001/GP-001_access-token.json",
+        "GP-001/GP-001.private_key.pem",
+        "GP-001/GP-001-password.txt",
+    ],
+)
+def test_validate_corpus_rejects_selected_access_secrets(
     tmp_path: Path, artifact_path: str
 ) -> None:
     selected = tmp_path / artifact_path
