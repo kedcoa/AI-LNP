@@ -10,6 +10,7 @@ import pytest
 
 from src.init_db import initialize_database
 from src.database.run_current_corpus_import import run_current_corpus_import
+from src.database.run_current_corpus_import import rebuild_database
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -63,6 +64,30 @@ def test_audit_accepts_complete_current_corpus_fixture(tmp_path: Path) -> None:
     assert sum(row["missing"] for row in result["papers"]) == 6
     pilot1 = next(row for row in result["papers"] if row["paper_id"] == "PILOT-001")
     assert pilot1["likely_evidence_inaccessible"] is True
+
+
+def test_audit_accepts_lossless_rebuild_with_completed_pilot_maps(
+    tmp_path: Path,
+) -> None:
+    from src.database.audit_current_database import audit_current_database
+
+    database = tmp_path / "lossless.db"
+    rebuild_database(database, MANIFEST, BUNDLES, corpus_root=ROOT)
+
+    result = audit_current_database(database, MANIFEST, BUNDLES)
+
+    assert result["passed"] is True
+    ledger = result["checks"]["lossless_source_ledger"]
+    assert ledger["expected_available_manifest_artifacts"] == 197
+    assert ledger["completed_exact_map_artifacts"] == 3
+    assert ledger["registered_source_artifacts"] == 200
+    assert ledger["missing_registered_artifacts"] == []
+    assert ledger["unexpected_registered_artifacts"] == []
+    assert ledger["forbidden_general_app_human_tags"] == 0
+    assert ledger["pilot_promoted_counts"]["PILOT-001"] == {
+        "formulations": 2,
+        "arms": 5,
+    }
 
 
 def test_audit_detects_semantic_orphan_and_eligibility_inconsistency(

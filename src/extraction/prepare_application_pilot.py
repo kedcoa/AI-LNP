@@ -468,13 +468,25 @@ def _map_artifact_inputs(
         inventory_binding_path = artifact_path.resolve()
         inventory_sha256 = _sha256(artifact_bytes)
     elif isinstance(inventory_path_value, str) and inventory_path_value:
-        inventory_binding_path = Path(inventory_path_value).resolve()
+        recorded_inventory_path = Path(inventory_path_value).resolve()
+        mirror_inventory_path: Path | None = None
+        if request_metadata and len(artifact_path.resolve().parents) >= 4:
+            paper_id = request_metadata.get("paper_id")
+            if isinstance(paper_id, str) and paper_id:
+                candidate = (
+                    artifact_path.resolve().parents[3]
+                    / paper_id
+                    / "inventory.json"
+                )
+                if candidate.is_file():
+                    mirror_inventory_path = candidate
+        inventory_binding_path = mirror_inventory_path or recorded_inventory_path
         inventory_bytes = inventory_binding_path.read_bytes()
         inventory_sha256 = _sha256(inventory_bytes)
         recorded_path = request_metadata.get("source_artifact_path")
         recorded_sha256 = request_metadata.get("source_artifact_sha256")
         if request_metadata and (
-            recorded_path != str(inventory_binding_path)
+            recorded_path != str(recorded_inventory_path)
             or recorded_sha256 != inventory_sha256
         ):
             raise ValueError("inventory path or hash does not match Gate-A binding")

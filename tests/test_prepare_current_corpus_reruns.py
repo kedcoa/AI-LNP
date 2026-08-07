@@ -13,7 +13,7 @@ from src.database.run_current_corpus_import import rebuild_database
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_preflight_contains_only_post_local_closure_gaps(tmp_path: Path) -> None:
+def test_preflight_does_not_rerun_completed_exact_hashes(tmp_path: Path) -> None:
     database = tmp_path / "rerun.db"
     rebuild_database(
         database,
@@ -28,9 +28,16 @@ def test_preflight_contains_only_post_local_closure_gaps(tmp_path: Path) -> None
     )
 
     assert "GP-008:lnp_molar_ratio" not in preflight.requested_fields
-    assert set(preflight.paper_ids) == {"PILOT-001", "PILOT-002", "PILOT-003"}
+    assert preflight.paper_ids == ()
+    assert set(preflight.completed_existing_paper_ids) == {
+        "PILOT-001", "PILOT-002", "PILOT-003"
+    }
     assert preflight.provider_calls == 0
-    assert len(preflight.requests) == 3
+    assert len(preflight.requests) == 0
+    assert preflight.human_approval_required is False
+    assert Path(preflight.manifest_path) == (
+        ROOT / "data/staging/extraction/application_pilot/map_gate/manifest.json"
+    ).resolve()
 
 
 def test_runner_refuses_unapproved_request_hashes() -> None:

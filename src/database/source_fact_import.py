@@ -117,9 +117,14 @@ def import_source_facts(
             connection.execute(
                 """
                 SELECT source_artifact_id FROM source_artifact
-                WHERE paper_id = ? AND sha256 = ? AND role = ?
+                WHERE paper_id = ? AND logical_path = ? AND sha256 = ? AND role = ?
                 """,
-                (paper_id, artifact.sha256, artifact.role),
+                (
+                    paper_id,
+                    artifact.logical_path,
+                    artifact.sha256,
+                    artifact.role,
+                ),
             ).fetchone()[0]
         )
         inserted = 0

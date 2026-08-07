@@ -23,6 +23,10 @@ from src.database.status import evaluate_arm_status, evaluate_eligibility
 from src.database.adapters.accepted_graph import adapt_accepted_graph_losslessly
 from src.database.adapters.np_results import build_np_lossless_result
 from src.database.adapters.pilot_results import build_pilot_lossless_result
+from src.database.adapters.pilot_map_results import (
+    build_pilot_map_lossless_result,
+    completed_pilot_map_response,
+)
 from src.database.deduplicate_science import deduplicate_science
 from src.database.scientific_identity import fact_identity
 from src.database.source_fact_import import (
@@ -177,6 +181,8 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
         "kupffer_cell": "kupffer_cell",
         "lsec": "lsec",
         "hsc": "hsc",
+        "other": "other",
+        "not_reported": "not_reported",
         "Kupffer cells": "kupffer_cell",
         "Kupffer cells (CD31− CD45+ CD68+)": "kupffer_cell",
         "liver endothelial cells": "lsec",
@@ -230,7 +236,7 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
                 verification_status="ambiguous",
                 nearest_neighbor_eligible=False,
                 comet_eligible=False,
-                quarantine_reason="Target cell needs human verification",
+                quarantine_reason="Target cell needs automatic resolution",
                 experiment_notes=(
                     f"{arm.experiment_notes}\n{note}" if arm.experiment_notes else note
                 ),
@@ -285,7 +291,7 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
                 replace(
                     review,
                     status="quarantined" if review.evidence_ids else "blocked",
-                    reason_code="target_cell_needs_verification",
+                    reason_code="target_cell_automatic_resolution",
                 )
             )
         else:
@@ -299,7 +305,7 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
                 record_id=f"{arm_id}:target-cell-review",
                 paper_id=bundle.paper.source_paper_id,
                 artifact_id=next(arm.artifact_id for arm in arms if arm.record_id == arm_id),
-                reason_code="target_cell_needs_verification",
+                reason_code="target_cell_automatic_resolution",
                 status="quarantined" if scoped_evidence else "blocked",
                 evidence_ids=scoped_evidence,
                 arm_id=arm_id,
@@ -570,25 +576,46 @@ def _dynamic_results(
             )
             bundle = result.bundle
         else:
-            consolidated_item = next(
-                item for item in entry["contributing_artifacts"]
-                if item.get("schema_family") == "consolidated_replay"
-            )
-            consolidated_path = _resolve_corpus_path(
-                root, str(consolidated_item["path"])
-            )
-            if consolidated_path is None:
-                raise FileNotFoundError(consolidated_item["path"])
             bundle = legacy
-            result = build_pilot_lossless_result(
-                consolidated_path=consolidated_path,
-                paper_id=paper_id,
-                bundle=bundle,
+            approval_manifest_path = (
+                root
+                / "data/staging/extraction/application_pilot/map_gate/manifest.json"
             )
+            response_path = completed_pilot_map_response(
+                approval_manifest_path, paper_id
+            )
+            if response_path is not None:
+                result = build_pilot_map_lossless_result(
+                    response_path=response_path,
+                    base_bundle=bundle,
+                )
+                bundle = result.bundle
+            else:
+                consolidated_item = next(
+                    item for item in entry["contributing_artifacts"]
+                    if item.get("schema_family") == "consolidated_replay"
+                )
+                consolidated_path = _resolve_corpus_path(
+                    root, str(consolidated_item["path"])
+                )
+                if consolidated_path is None:
+                    raise FileNotFoundError(consolidated_item["path"])
+                result = build_pilot_lossless_result(
+                    consolidated_path=consolidated_path,
+                    paper_id=paper_id,
+                    bundle=bundle,
+                )
         if bundle.paper.full_text_status not in {
             "unknown", "abstract_only", "open_full_text", "pdf_available", "unavailable"
         }:
             bundle = replace(bundle, paper=replace(bundle.paper, full_text_status="pdf_available"))
+        requested_import_status = str(entry["import_status"])
+        if paper_id.startswith("PILOT-") and bundle.formulations and bundle.arms:
+            requested_import_status = "ready_with_missing_fields"
+        bundle = replace(
+            bundle,
+            paper=replace(bundle.paper, import_status=requested_import_status),
+        )
         rows.append((_normalize_database_vocabulary(bundle), result))
     return rows
 
@@ -738,6 +765,15 @@ def rebuild_database(
         for entry in manifest["entries"]:
             paper_id = str(entry["paper_id"])
             for item in entry.get("contributing_artifacts", []):
+                if (
+                    item.get("access_status") != "available"
+                    or not item.get("sha256")
+                ):
+                    # Missing or unhashed inventory entries stay visible in the
+                    # manifest/report; they are not fabricated as registered
+                    # source artifacts merely because a similarly named file
+                    # appears later in one worktree.
+                    continue
                 logical_path = str(item["path"])
                 if logical_path in handled_paths.get(paper_id, set()):
                     continue

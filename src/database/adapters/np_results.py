@@ -354,7 +354,7 @@ def build_np_bundle(
             if _value(field) is None:
                 missing.append(reason)
         if not missing:
-            missing.append("needs_human_verification")
+            missing.append("automatic_resolution_required")
         record = ArmRecord(
             record_id=rid, paper_id=paper_id, artifact_id=artifact_by_slice[slice_name],
             formulation_id=formulation_ids[raw["formulation_id"]],
@@ -367,7 +367,7 @@ def build_np_bundle(
             dose_unit=_value(raw.get("dose_unit")), route=_value(raw.get("route")), timepoint=_value(raw.get("timepoint")),
             timepoint_unit=_value(raw.get("timepoint_unit")), assay=_value(assay_field),
             comparator_description=_value(comparator_field), completeness_status="quarantined",
-            verification_status="unreviewed", quarantine_reason="; ".join(missing) or "Needs human verification",
+            verification_status="unreviewed", quarantine_reason="; ".join(missing) or "Needs automatic resolution",
         )
         arms.append(record)
         mapping = {
@@ -645,7 +645,11 @@ def build_np_lossless_result(
             paper_id=str(payload["paper_id"]),
             logical_path=_canonical_path(path, _repo_root(path)),
             sha256=_sha(path),
-            role="primary_extraction",
+            role=(
+                "primary_extraction"
+                if len(paths) == 1
+                else "contributing_extraction"
+            ),
             schema_family="np_result",
             validation_status="accepted",
             contributes_facts=True,

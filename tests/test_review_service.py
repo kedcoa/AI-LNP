@@ -172,8 +172,8 @@ def review_database(tmp_path: Path) -> Path:
         INSERT INTO import_review (
             paper_id, natural_key, arm_id, reason_code, review_status, review_tag,
             field_name, notes, evidence_ids_json, content_sha256
-        ) VALUES (?, 'target-cell', ?, 'needs_human_verification', 'incomplete',
-                  'Needs human verification', 'cell_type', 'Confirm target cell', '[]', ?)
+        ) VALUES (?, 'target-cell', ?, 'automatic_resolution_required', 'incomplete',
+                  'Needs automatic resolution', 'cell_type', 'Resolve target cell', '[]', ?)
         """,
         (first_paper, incomplete_arm, _hash('target-cell')),
     )
@@ -317,7 +317,7 @@ def test_review_arms_follow_the_specified_review_priority(
         ],
     )
     for arm_id, status, tag, key in (
-            (extra_arms[1], 'incomplete', 'Needs human verification', 'target_cell_confirmation'),
+            (extra_arms[1], 'incomplete', 'Needs automatic resolution', 'target_cell_confirmation'),
         (extra_arms[2], 'blocked', 'Source file unavailable', 'blocked'),
         (extra_arms[3], 'quarantined', 'Source file unavailable', 'quarantined'),
     ):

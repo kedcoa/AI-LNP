@@ -30,6 +30,17 @@ _ROLE_ALIASES = {
     "peg": "peg_lipid",
     "targeting": "targeting_ligand",
 }
+_COMPONENT_ALIASES = {
+    "mc3": "dlin-mc3-dma",
+    "dlinmc3dma": "dlin-mc3-dma",
+    "dlinmc3dmamc3": "dlin-mc3-dma",
+    "c14peg2000": "c14-peg2000",
+}
+_COMPOSITION_UNIT_ALIASES = {
+    "mol%": "molar_parts",
+    "molar-ratio parts": "molar_parts",
+    "molar ratio parts": "molar_parts",
+}
 
 
 @dataclass(frozen=True)
@@ -128,19 +139,22 @@ def composition_fingerprint(
         if part.component_name is None or not part.component_name.strip():
             return None
         role = _ROLE_ALIASES.get(_text(part.role), _text(part.role))
+        component_text = _text(part.component_name)
+        component_key = re.sub(r"[^a-z0-9]+", "", component_text)
+        component_name = _COMPONENT_ALIASES.get(component_key, component_text)
+        amount_unit = None if part.amount_unit is None else _text(part.amount_unit)
+        amount_unit = _COMPOSITION_UNIT_ALIASES.get(amount_unit, amount_unit)
         canonical_parts.append(
             {
                 **asdict(part),
                 "role": role,
-                "component_name": _text(part.component_name),
+                "component_name": component_name,
                 "amount_value": (
                     None
                     if part.amount_value is None
                     else _text(str(part.amount_value))
                 ),
-                "amount_unit": (
-                    None if part.amount_unit is None else _text(part.amount_unit)
-                ),
+                "amount_unit": amount_unit,
             }
         )
     if not canonical_parts:

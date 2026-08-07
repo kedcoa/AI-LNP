@@ -12,8 +12,10 @@ from src.database.database_lifecycle import (
     backup_database,
     migrate_authoritative_database,
     preflight_authoritative_database,
+    promote_verified_database,
     snapshot_database,
 )
+from src.init_db import initialize_database
 
 
 SCIENTIFIC_TABLES = (
@@ -519,3 +521,57 @@ def test_composed_lifecycle_rolls_back_migration_failure_without_source_change(
         ).fetchall() == []
     finally:
         connection.close()
+
+
+def test_promote_verified_database_backs_up_and_atomically_replaces_authoritative(
+    tmp_path: Path,
+) -> None:
+    authoritative = tmp_path / "authoritative" / "lnp_evidence.db"
+    authoritative.parent.mkdir()
+    _create_empty_legacy_database(authoritative)
+    with sqlite3.connect(authoritative) as connection:
+        connection.execute(
+            "INSERT INTO paper (title,source_type,retrieval_date) VALUES ('old','legacy','2026-08-07')"
+        )
+    candidate = tmp_path / "candidate.db"
+    initialize_database(candidate)
+    with sqlite3.connect(candidate) as connection:
+        connection.execute(
+            "INSERT INTO paper (title,source_type,retrieval_date) VALUES ('new','json','2026-08-07')"
+        )
+    candidate_hash = _sha256(candidate)
+
+    result = promote_verified_database(
+        candidate,
+        authoritative,
+        tmp_path / "outside-repository-backups",
+        expected_candidate_sha256=candidate_hash,
+    )
+
+    assert result.old_authoritative_sha256 != candidate_hash
+    assert result.new_authoritative_sha256 == candidate_hash
+    assert _sha256(authoritative) == candidate_hash
+    assert result.backup_path.is_file()
+    with sqlite3.connect(authoritative) as connection:
+        assert connection.execute("SELECT title FROM paper").fetchall() == [("new",)]
+    with sqlite3.connect(result.backup_path) as connection:
+        assert connection.execute("SELECT title FROM paper").fetchall() == [("old",)]
+
+
+def test_promote_verified_database_rejects_bad_candidate_without_touching_authoritative(
+    tmp_path: Path,
+) -> None:
+    authoritative = tmp_path / "authoritative.db"
+    initialize_database(authoritative)
+    original = authoritative.read_bytes()
+    candidate = tmp_path / "candidate.db"
+    candidate.write_bytes(b"not sqlite")
+
+    with pytest.raises((ValueError, sqlite3.DatabaseError)):
+        promote_verified_database(
+            candidate,
+            authoritative,
+            tmp_path / "outside-repository-backups",
+        )
+
+    assert authoritative.read_bytes() == original

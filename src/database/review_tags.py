@@ -19,8 +19,10 @@ REVIEW_TAGS = {
     "experiment_link_unclear": "Experiment link unclear",
     "outcome_link_unclear": "Outcome link unclear",
     "unsupported_value": "Unsupported value",
+    "automatic_resolution_required": "Needs automatic resolution",
+    "target_cell_automatic_resolution": "Needs automatic resolution",
 }
-FALLBACK_REVIEW_TAG = "Needs human verification"
+FALLBACK_REVIEW_TAG = "Needs automatic resolution"
 
 
 def review_tag_for_reason(reason_code: str) -> str:

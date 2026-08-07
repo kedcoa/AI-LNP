@@ -358,7 +358,7 @@ def adapt_accepted_graph(
             reviews.append(ReviewRecord(
                 record_id=f"{paper_id}:REV:{experiment_id}:{form_entity_id}", paper_id=paper_id,
                 artifact_id=artifact_id,
-                reason_code="needs_human_verification" if unknown else "missing_dose" if not dose_text else "missing_evidence_excerpt",
+                reason_code="automatic_resolution_required" if unknown else "missing_dose" if not dose_text else "missing_evidence_excerpt",
                 status="incomplete", evidence_ids=unknown_ids, arm_id=arm_id,
                 notes="Unsupported graph relation evidence requires review." if unknown else "Arm is retained but is not complete enough for training.",
             ))
@@ -388,7 +388,7 @@ def adapt_accepted_graph(
         reviews.append(ReviewRecord(
             record_id=f"{paper_id}:REV:UNRESOLVED-RELATIONSHIPS",
             paper_id=paper_id, artifact_id=artifact_id,
-            reason_code="needs_human_verification", status="incomplete",
+            reason_code="automatic_resolution_required", status="incomplete",
             evidence_ids=ids,
             notes="Exact accepted-graph evidence is retained, but its relationship is not safely normalized.",
         ))

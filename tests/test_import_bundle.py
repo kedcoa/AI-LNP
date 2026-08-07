@@ -507,7 +507,7 @@ def test_changed_content_with_same_natural_key_is_retained_as_conflict(
         result = _import_bundle(connection, _load_bundle(changed))
 
         assert result.conflicts == 2
-        assert result.review_tags == ("Conflicting outcome", "Needs human verification")
+        assert result.review_tags == ("Conflicting outcome", "Needs automatic resolution")
         assert connection.execute(
             "SELECT outcome_value FROM outcome ORDER BY outcome_id"
         ).fetchall() == [(12.0,), (13.0,)]
@@ -530,7 +530,7 @@ def test_changed_content_with_same_natural_key_is_retained_as_conflict(
         assert repeated.unchanged == 6
         assert repeated.review_tags == (
             "Conflicting outcome",
-            "Needs human verification",
+            "Needs automatic resolution",
         )
     finally:
         connection.close()
@@ -993,5 +993,5 @@ def test_unknown_machine_reason_maps_to_human_verification_tag() -> None:
 
     tags = module.derive_review_tags(_load_bundle(payload))
 
-    assert tags == ("Missing dose", "Needs human verification")
+    assert tags == ("Missing dose", "Needs automatic resolution")
     assert all("v12" not in tag and "candidate" not in tag for tag in tags)

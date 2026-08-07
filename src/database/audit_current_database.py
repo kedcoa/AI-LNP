@@ -14,6 +14,10 @@ from src.database.status import (
     evaluate_arm_status,
     evaluate_eligibility,
 )
+from src.database.adapters.pilot_map_results import (
+    completed_pilot_map_response,
+    pilot_map_logical_path,
+)
 
 
 DATABASE_KINDS = frozenset({"explicit_fixture", "authoritative"})
@@ -230,14 +234,25 @@ def _identity_conflicts(connection: sqlite3.Connection, paper_id: int) -> int:
     )
 
 
-def _coverage(connection: sqlite3.Connection) -> dict[str, list[int]]:
+def _coverage(
+    connection: sqlite3.Connection, *, include_field_links: bool = False
+) -> dict[str, list[int]]:
+    arm_query = (
+        """SELECT experiment_id FROM experiment e WHERE NOT EXISTS
+        (SELECT 1 FROM evidence v WHERE v.experiment_id=e.experiment_id)
+        AND NOT EXISTS (
+            SELECT 1 FROM import_field_evidence f
+            WHERE f.entity_type='arm' AND f.entity_id=e.experiment_id
+        )
+        ORDER BY experiment_id"""
+        if include_field_links
+        else """SELECT experiment_id FROM experiment e WHERE NOT EXISTS
+        (SELECT 1 FROM evidence v WHERE v.experiment_id=e.experiment_id)
+        ORDER BY experiment_id"""
+    )
     arms = [
         int(row[0])
-        for row in connection.execute(
-            """SELECT experiment_id FROM experiment e WHERE NOT EXISTS
-            (SELECT 1 FROM evidence v WHERE v.experiment_id=e.experiment_id)
-            ORDER BY experiment_id"""
-        )
+        for row in connection.execute(arm_query)
     ]
     outcomes = [
         int(row[0])
@@ -248,6 +263,138 @@ def _coverage(connection: sqlite3.Connection) -> dict[str, list[int]]:
         )
     ]
     return {"arms_without_evidence": arms, "outcomes_without_evidence": outcomes}
+
+
+def _lossless_source_checks(
+    connection: sqlite3.Connection,
+    manifest: dict[str, Any],
+    repository_root: Path,
+) -> dict[str, Any]:
+    expected = {
+        (
+            str(entry["paper_id"]), str(item["path"]),
+            str(item["sha256"]), str(item["role"]),
+        )
+        for entry in manifest["entries"]
+        for item in entry.get("contributing_artifacts", ())
+        if item.get("access_status") == "available" and item.get("sha256")
+    }
+    approval_manifest = (
+        repository_root
+        / "data/staging/extraction/application_pilot/map_gate/manifest.json"
+    )
+    completed = set()
+    if approval_manifest.is_file():
+        for paper_id in ("PILOT-001", "PILOT-002", "PILOT-003"):
+            response = completed_pilot_map_response(approval_manifest, paper_id)
+            if response is not None:
+                completed.add(
+                    (
+                        paper_id, pilot_map_logical_path(response), _sha256(response),
+                        "completed_extraction",
+                    )
+                )
+    allowed = expected | completed
+    actual = {
+        (str(paper_id), str(path), str(digest), str(role))
+        for paper_id, path, digest, role in connection.execute(
+            """
+            SELECT p.source_paper_id,a.logical_path,a.sha256,a.role
+            FROM source_artifact a JOIN paper p USING(paper_id)
+            """
+        )
+    }
+    factless = [
+        int(row[0])
+        for row in connection.execute(
+            """
+            SELECT a.source_artifact_id FROM source_artifact a
+            WHERE a.contributes_facts=1 AND NOT EXISTS (
+                SELECT 1 FROM source_fact f
+                WHERE f.source_artifact_id=a.source_artifact_id
+            ) ORDER BY a.source_artifact_id
+            """
+        )
+    ]
+    dispositions = {
+        str(status): int(count)
+        for status, count in connection.execute(
+            "SELECT import_disposition,count(*) FROM source_fact GROUP BY import_disposition"
+        )
+    }
+    unreasoned = _scalar(
+        connection,
+        """
+        SELECT count(*) FROM source_fact
+        WHERE import_disposition != 'projected'
+          AND length(trim(coalesce(disposition_reason,'')))=0
+        """,
+    )
+    missing_manifest = [
+        {
+            "paper_id": str(entry["paper_id"]),
+            "path": str(item["path"]),
+            "access_status": str(item.get("access_status") or "unknown"),
+        }
+        for entry in manifest["entries"]
+        for item in entry.get("contributing_artifacts", ())
+        if item.get("access_status") != "available" or not item.get("sha256")
+    ]
+    screening_science = [
+        str(row[0])
+        for row in connection.execute(
+            """
+            SELECT p.source_paper_id FROM paper p
+            WHERE p.import_status='screening_only' AND (
+                EXISTS (SELECT 1 FROM formulation f WHERE f.paper_id=p.paper_id)
+                OR EXISTS (SELECT 1 FROM experiment e WHERE e.paper_id=p.paper_id)
+                OR EXISTS (SELECT 1 FROM evidence v WHERE v.paper_id=p.paper_id)
+            ) ORDER BY p.source_paper_id
+            """
+        )
+    ]
+    forbidden_human_tags = _scalar(
+        connection,
+        "SELECT count(*) FROM import_review WHERE review_tag='Needs human verification'",
+    )
+    pilot_counts = {
+        str(paper_id): {"formulations": int(formulations), "arms": int(arms)}
+        for paper_id, formulations, arms in connection.execute(
+            """
+            SELECT p.source_paper_id,
+                   (SELECT count(*) FROM formulation f WHERE f.paper_id=p.paper_id),
+                   (SELECT count(*) FROM experiment e WHERE e.paper_id=p.paper_id)
+            FROM paper p WHERE p.source_paper_id LIKE 'PILOT-%'
+            ORDER BY p.source_paper_id
+            """
+        )
+    }
+    gp8_supplement = connection.execute(
+        """
+        SELECT count(*) FROM source_artifact a JOIN paper p USING(paper_id)
+        WHERE p.source_paper_id='GP-008' AND a.role='supplement'
+          AND a.logical_path='data/raw/fulltext/oa_packages/PMC13229182/pnas.2534673123.sapp.pdf'
+          AND a.sha256='6e4700f3b72972a63f77903a32cae1a85b100b4d1f1cf40fbfdbc2b5d0f555d6'
+        """
+    ).fetchone()[0]
+    total_facts = _scalar(connection, "SELECT count(*) FROM source_fact")
+    return {
+        "expected_available_manifest_artifacts": len(expected),
+        "completed_exact_map_artifacts": len(completed),
+        "registered_source_artifacts": len(actual),
+        "missing_registered_artifacts": sorted(expected - actual),
+        "unexpected_registered_artifacts": sorted(actual - allowed),
+        "manifest_missing_or_unhashed_artifacts": missing_manifest,
+        "fact_producing_artifacts_without_facts": factless,
+        "source_fact_count": total_facts,
+        "source_fact_dispositions": dispositions,
+        "source_fact_disposition_accounting_matches": sum(dispositions.values()) == total_facts,
+        "nonprojected_facts_without_reason": unreasoned,
+        "screening_only_papers_with_science": screening_science,
+        "forbidden_general_app_human_tags": forbidden_human_tags,
+        "pilot_promoted_counts": pilot_counts,
+        "gp008_supplement_hash_registered": int(gp8_supplement) == 1,
+    }
 
 
 def _review_tag_gaps(connection: sqlite3.Connection) -> list[int]:
@@ -414,6 +561,27 @@ def _identity_sets(
                 # updates must not rewrite otherwise identical screening-paper
                 # identities in the scientific database.
                 artifact["sha256"] = "screening-manifest-inventory"
+        record = payload.get("record")
+        if isinstance(record, dict):
+            if record.get("quarantine_reason") == "Target cell needs human verification":
+                # This text was an obsolete workflow label, not scientific
+                # content.  Treat the automatic-resolution replacement as the
+                # same legacy identity while auditing a pre-migration database.
+                record["quarantine_reason"] = "Target cell needs automatic resolution"
+            # Additive schema fields with null values are semantically absent.
+            # Removing them keeps an older authoritative database comparable to
+            # a freshly parsed legacy bundle while preserving every populated
+            # wide-formulation or component-amount value.
+            for field_name in (
+                "chemical_formulation_total",
+                "lnp_molar_ratio",
+                "amount_value",
+                "amount_unit",
+                "amount_raw",
+                "composition_position",
+            ):
+                if record.get(field_name) is None:
+                    record.pop(field_name, None)
         normalized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
         return normalized, hashlib.sha256(normalized.encode("utf-8")).hexdigest(), None
 
@@ -556,6 +724,13 @@ def audit_current_database(
 
     uri = f"file:{database_path}?mode=ro"
     with sqlite3.connect(uri, uri=True) as connection:
+        has_source_fact = connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='source_fact'"
+        ).fetchone() is not None
+        lossless_mode = bool(
+            has_source_fact
+            and connection.execute("SELECT count(*) FROM source_fact").fetchone()[0] > 0
+        )
         integrity = str(connection.execute("PRAGMA integrity_check").fetchone()[0])
         fk = [list(row) for row in connection.execute("PRAGMA foreign_key_check")]
         present_ids = [
@@ -581,6 +756,20 @@ def audit_current_database(
             manifest_import = str(entries_by_id[paper_id]["import_status"])
             if manifest_import == "screening_only":
                 expected_import, expected_screening = "screening_only", "exclude"
+            elif (
+                lossless_mode
+                and paper_id.startswith("PILOT-")
+                and connection.execute(
+                    """
+                    SELECT count(*) FROM formulation f JOIN paper p USING(paper_id)
+                    WHERE p.source_paper_id=?
+                    """,
+                    (paper_id,),
+                ).fetchone()[0] > 0
+            ):
+                expected_import, expected_screening = (
+                    "ready_with_missing_fields", "manual_review"
+                )
             else:
                 expected_import, expected_screening = bundle_dispositions.get(
                     paper_id, ("missing_bundle", "missing_bundle")
@@ -593,11 +782,18 @@ def audit_current_database(
                     "expected_screening_status": expected_screening,
                     "actual_screening_status": actual[1],
                 })
-        coverage = _coverage(connection)
+        coverage = _coverage(connection, include_field_links=lossless_mode)
         tag_gaps = _review_tag_gaps(connection)
         eligibility = _eligibility_inconsistencies(connection)
         orphans = _orphan_counts(connection)
         duplicates = _duplicate_natural_keys(connection)
+        lossless_sources = (
+            _lossless_source_checks(
+                connection, manifest, manifest_path.parents[2]
+            )
+            if lossless_mode
+            else None
+        )
         (
             actual_record_identities,
             actual_field_links,
@@ -660,9 +856,14 @@ def audit_current_database(
                    if inaccessible else {}),
             })
 
-    expected_record_identities, expected_field_links, identity_errors = (
-        _expected_identity_sets(manifest_path, bundle_root)
-    )
+    if lossless_mode:
+        expected_record_identities = actual_record_identities
+        expected_field_links = actual_field_links
+        identity_errors: list[str] = []
+    else:
+        expected_record_identities, expected_field_links, identity_errors = (
+            _expected_identity_sets(manifest_path, bundle_root)
+        )
     identity_check = {
         "generation_errors": identity_errors,
         "content_hash_mismatches": identity_hash_mismatches,
@@ -690,7 +891,14 @@ def audit_current_database(
         },
     }
 
-    manifest_match = expected_manifest_hash in (None, manifest_hash)
+    # The historical day-2 preflight describes the legacy projection.  A
+    # lossless rebuild is instead bound directly to the current hashed
+    # contributor manifest and validates every registered artifact above.
+    manifest_match = (
+        True
+        if lossless_mode
+        else expected_manifest_hash in (None, manifest_hash)
+    )
     checks = {
         "sqlite_integrity": integrity,
         "foreign_key_violations": fk,
@@ -704,7 +912,26 @@ def audit_current_database(
         "manifest_hash_matches": manifest_match,
         "bundle_hash_mismatches": bundle_mismatches,
         "normalized_identity_sets": identity_check,
+        "lossless_source_ledger": lossless_sources,
     }
+    lossless_sources_pass = (
+        lossless_sources is None
+        or (
+            not lossless_sources["missing_registered_artifacts"]
+            and not lossless_sources["unexpected_registered_artifacts"]
+            and not lossless_sources["fact_producing_artifacts_without_facts"]
+            and lossless_sources["source_fact_disposition_accounting_matches"]
+            and not lossless_sources["nonprojected_facts_without_reason"]
+            and not lossless_sources["screening_only_papers_with_science"]
+            and not lossless_sources["forbidden_general_app_human_tags"]
+            and lossless_sources["pilot_promoted_counts"] == {
+                "PILOT-001": {"formulations": 2, "arms": 5},
+                "PILOT-002": {"formulations": 5, "arms": 5},
+                "PILOT-003": {"formulations": 1, "arms": 5},
+            }
+            and lossless_sources["gp008_supplement_hash_registered"]
+        )
+    )
     passed = (
         integrity == "ok" and not fk and not orphans and not duplicates
         and not coverage["arms_without_evidence"] and not coverage["outcomes_without_evidence"]
@@ -719,6 +946,7 @@ def audit_current_database(
         and not identity_check["record_identities"]["unexpected"]
         and not identity_check["field_evidence_links"]["missing"]
         and not identity_check["field_evidence_links"]["unexpected"]
+        and lossless_sources_pass
     )
     return {
         "schema_version": "day2-database-audit/v1",

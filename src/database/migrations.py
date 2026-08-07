@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS source_artifact (
     validation_status TEXT NOT NULL CHECK(length(trim(validation_status)) > 0),
     contributes_facts INTEGER NOT NULL CHECK(contributes_facts IN (0, 1)),
     contributes_evidence INTEGER NOT NULL CHECK(contributes_evidence IN (0, 1)),
-    UNIQUE(paper_id, sha256, role)
+    UNIQUE(paper_id, logical_path, sha256, role)
 );
 
 CREATE TABLE IF NOT EXISTS source_fact (

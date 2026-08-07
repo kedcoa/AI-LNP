@@ -384,10 +384,7 @@
         "reports/extraction/application_pilot_final.json"
       ],
       "hash_mismatches": [],
-      "missing_files": [
-        "data/staging/new_papers/PILOT-001/PMC9845313.html",
-        "reports/database/day1_lane_pilot.md"
-      ],
+      "missing_files": [],
       "primary_artifact": null
     },
     "PILOT-002": {
@@ -400,10 +397,7 @@
         "reports/extraction/application_pilot_final.json"
       ],
       "hash_mismatches": [],
-      "missing_files": [
-        "data/staging/new_papers/PILOT-002/PMC7909888.html",
-        "reports/database/day1_lane_pilot.md"
-      ],
+      "missing_files": [],
       "primary_artifact": null
     },
     "PILOT-003": {
@@ -416,10 +410,7 @@
         "reports/extraction/application_pilot_final.json"
       ],
       "hash_mismatches": [],
-      "missing_files": [
-        "data/staging/new_papers/PILOT-003/PMC7214425.html",
-        "reports/database/day1_lane_pilot.md"
-      ],
+      "missing_files": [],
       "primary_artifact": null
     }
   },
@@ -3732,20 +3723,20 @@
       ],
       "contributing_artifacts": [
         {
-          "access_status": "missing",
+          "access_status": "available",
           "contributes_evidence": true,
           "contributes_facts": false,
-          "notes": "Expected OA source path is absent from the committed worktree.",
+          "notes": "Exact OA source HTML recovered locally from a registered worktree and hash-verified.",
           "path": "data/staging/new_papers/PILOT-001/PMC9845313.html",
           "pipeline_name": null,
           "pipeline_version": null,
           "role": "source_document",
           "schema_family": "full_text_html",
           "sha256": "74f5c9753888de6396a73609bfa1339e2033e14d6b6453cbabe776d0a0df0b94",
-          "validation_status": "missing"
+          "validation_status": "hash_verified"
         },
         {
-          "access_status": "missing",
+          "access_status": "available",
           "contributes_evidence": false,
           "contributes_facts": false,
           "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
@@ -3754,7 +3745,7 @@
           "pipeline_version": null,
           "role": "validation",
           "schema_family": "reviewed_inventory_report",
-          "sha256": null,
+          "sha256": "638ba0edc7371b5e0bc6892b92aa09811acbf1c8b083054078837fc6deb0b6dc",
           "validation_status": "available"
         },
         {
@@ -3820,12 +3811,12 @@
           "access_status": "available",
           "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
           "path": "reports/database/day1_lane_pilot.md",
-          "sha256": null,
+          "sha256": "638ba0edc7371b5e0bc6892b92aa09811acbf1c8b083054078837fc6deb0b6dc",
           "source_kind": "reviewed_inventory_report"
         },
         {
-          "access_status": "missing",
-          "notes": "Expected OA source path is absent from the committed worktree.",
+          "access_status": "available",
+          "notes": "Exact OA source HTML recovered locally from a registered worktree and hash-verified.",
           "path": "data/staging/new_papers/PILOT-001/PMC9845313.html",
           "sha256": "74f5c9753888de6396a73609bfa1339e2033e14d6b6453cbabe776d0a0df0b94",
           "source_kind": "full_text_html"
@@ -3837,7 +3828,7 @@
     {
       "candidate_artifacts": [
         {
-          "access_status": "missing",
+          "access_status": "available",
           "artifact_kind": "source_inventory",
           "notes": "Named by the selection manifest but absent.",
           "path": "data/staging/extraction/application_pilot/PILOT-002/inventory.json",
@@ -3861,20 +3852,20 @@
       ],
       "contributing_artifacts": [
         {
-          "access_status": "missing",
+          "access_status": "available",
           "contributes_evidence": true,
           "contributes_facts": false,
-          "notes": "Expected OA source path is absent from the committed worktree.",
+          "notes": "Exact OA source HTML recovered locally from a registered worktree and hash-verified.",
           "path": "data/staging/new_papers/PILOT-002/PMC7909888.html",
           "pipeline_name": null,
           "pipeline_version": null,
           "role": "source_document",
           "schema_family": "full_text_html",
           "sha256": "ca3f29c32d7e84085693e36c0bf409ab09125a2ddbcb5aba2aada052e0866619",
-          "validation_status": "missing"
+          "validation_status": "hash_verified"
         },
         {
-          "access_status": "missing",
+          "access_status": "available",
           "contributes_evidence": false,
           "contributes_facts": false,
           "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
@@ -3883,7 +3874,7 @@
           "pipeline_version": null,
           "role": "validation",
           "schema_family": "reviewed_inventory_report",
-          "sha256": null,
+          "sha256": "638ba0edc7371b5e0bc6892b92aa09811acbf1c8b083054078837fc6deb0b6dc",
           "validation_status": "available"
         },
         {
@@ -3949,12 +3940,12 @@
           "access_status": "available",
           "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
           "path": "reports/database/day1_lane_pilot.md",
-          "sha256": null,
+          "sha256": "638ba0edc7371b5e0bc6892b92aa09811acbf1c8b083054078837fc6deb0b6dc",
           "source_kind": "reviewed_inventory_report"
         },
         {
-          "access_status": "missing",
-          "notes": "Expected OA source path is absent from the committed worktree.",
+          "access_status": "available",
+          "notes": "Exact OA source HTML recovered locally from a registered worktree and hash-verified.",
           "path": "data/staging/new_papers/PILOT-002/PMC7909888.html",
           "sha256": "ca3f29c32d7e84085693e36c0bf409ab09125a2ddbcb5aba2aada052e0866619",
           "source_kind": "full_text_html"
@@ -3966,7 +3957,7 @@
     {
       "candidate_artifacts": [
         {
-          "access_status": "missing",
+          "access_status": "available",
           "artifact_kind": "source_inventory",
           "notes": "Named by the selection manifest but absent.",
           "path": "data/staging/extraction/application_pilot/PILOT-003/inventory.json",
@@ -3990,20 +3981,20 @@
       ],
       "contributing_artifacts": [
         {
-          "access_status": "missing",
+          "access_status": "available",
           "contributes_evidence": true,
           "contributes_facts": false,
-          "notes": "Expected OA source path is absent from the committed worktree.",
+          "notes": "Exact OA source HTML recovered locally from a registered worktree and hash-verified.",
           "path": "data/staging/new_papers/PILOT-003/PMC7214425.html",
           "pipeline_name": null,
           "pipeline_version": null,
           "role": "source_document",
           "schema_family": "full_text_html",
           "sha256": "b27ca7553386ece0179125f7234d68434b9ae5bc7311dd016fc4a35b3980cabf",
-          "validation_status": "missing"
+          "validation_status": "hash_verified"
         },
         {
-          "access_status": "missing",
+          "access_status": "available",
           "contributes_evidence": false,
           "contributes_facts": false,
           "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
@@ -4012,7 +4003,7 @@
           "pipeline_version": null,
           "role": "validation",
           "schema_family": "reviewed_inventory_report",
-          "sha256": null,
+          "sha256": "638ba0edc7371b5e0bc6892b92aa09811acbf1c8b083054078837fc6deb0b6dc",
           "validation_status": "available"
         },
         {
@@ -4078,12 +4069,12 @@
           "access_status": "available",
           "notes": "Reviewed local bibliography and expected-source inventory; not human gold.",
           "path": "reports/database/day1_lane_pilot.md",
-          "sha256": null,
+          "sha256": "638ba0edc7371b5e0bc6892b92aa09811acbf1c8b083054078837fc6deb0b6dc",
           "source_kind": "reviewed_inventory_report"
         },
         {
-          "access_status": "missing",
-          "notes": "Expected OA source path is absent from the committed worktree.",
+          "access_status": "available",
+          "notes": "Exact OA source HTML recovered locally from a registered worktree and hash-verified.",
           "path": "data/staging/new_papers/PILOT-003/PMC7214425.html",
           "sha256": "b27ca7553386ece0179125f7234d68434b9ae5bc7311dd016fc4a35b3980cabf",
           "source_kind": "full_text_html"

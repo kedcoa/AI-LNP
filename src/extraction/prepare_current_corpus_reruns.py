@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from src.database.build_rerun_queue import build_rerun_queue
+from src.database.adapters.pilot_map_results import completed_pilot_map_response
 
 
 @dataclass(frozen=True)
@@ -22,6 +23,7 @@ class RerunPreflight:
     paper_ids: tuple[str, ...]
     requested_fields: tuple[str, ...]
     requests: tuple[dict[str, Any], ...]
+    completed_existing_paper_ids: tuple[str, ...]
     total_estimated_input_tokens: int
     total_max_output_tokens: int
     provider_calls: int = 0
@@ -46,6 +48,13 @@ def prepare_current_corpus_reruns(
         queue = build_rerun_queue(connection)
     requested_papers = {str(item["paper_id"]) for item in queue}
     approval = json.loads(approval_manifest_path.read_text(encoding="utf-8"))
+    completed_existing = {
+        paper_id
+        for paper_id in requested_papers
+        if completed_pilot_map_response(approval_manifest_path, paper_id)
+        is not None
+    }
+    requested_papers -= completed_existing
     requests = []
     for row in approval["requests"]:
         if row["paper_id"] not in requested_papers:
@@ -72,19 +81,24 @@ def prepare_current_corpus_reruns(
     if {row["paper_id"] for row in requests} != requested_papers:
         missing = requested_papers - {row["paper_id"] for row in requests}
         raise ValueError(f"rerun queue lacks immutable request bytes: {sorted(missing)}")
-    requested_fields = tuple(
-        sorted(f"{item['paper_id']}:{field}" for item in queue for field in item["fields"])
-    )
+    requested_fields = tuple(sorted(
+        f"{item['paper_id']}:{field}"
+        for item in queue
+        if item["paper_id"] in requested_papers
+        for field in item["fields"]
+    ))
     return RerunPreflight(
         schema_version="current-corpus-rerun-preflight/v1",
         database_path=str(database_path), database_sha256=_sha(database_path),
-        manifest_path=str(approval["manifest_path"]),
+        manifest_path=str(approval_manifest_path),
         approval_hash=approval["approval_hash"],
         paper_ids=tuple(sorted(requested_papers)),
         requested_fields=requested_fields,
         requests=tuple(requests),
+        completed_existing_paper_ids=tuple(sorted(completed_existing)),
         total_estimated_input_tokens=sum(row["estimated_input_tokens"] for row in requests),
         total_max_output_tokens=sum(row["max_output_tokens"] for row in requests),
+        human_approval_required=bool(requests),
     )
 
 

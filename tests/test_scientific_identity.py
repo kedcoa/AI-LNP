@@ -76,3 +76,20 @@ def test_surface_ligands_participate_in_composition_identity() -> None:
     ]
 
     assert composition_fingerprint(core) != composition_fingerprint(targeted)
+
+
+def test_composition_fingerprint_deduplicates_reported_mc3_aliases() -> None:
+    compact = [
+        CompositionPart("ionizable_lipid", "MC3", 50, "molar-ratio parts"),
+        CompositionPart("helper_lipid", "DSPC", 10, "molar-ratio parts"),
+        CompositionPart("cholesterol", "cholesterol", 38.5, "molar-ratio parts"),
+        CompositionPart("peg_lipid", "C14 PEG 2000", 1.5, "molar-ratio parts"),
+    ]
+    expanded = [
+        CompositionPart("ionizable_lipid", "DLin-MC3-DMA (MC3)", 50, "mol%"),
+        CompositionPart("helper_lipid", "DSPC", 10, "mol%"),
+        CompositionPart("cholesterol", "cholesterol", 38.5, "mol%"),
+        CompositionPart("peg_lipid", "C14-PEG2000", 1.5, "mol%"),
+    ]
+
+    assert composition_fingerprint(compact) == composition_fingerprint(expanded)

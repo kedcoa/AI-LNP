@@ -55,7 +55,7 @@ def test_adapter_quarantines_unknown_predicate_with_plain_review_tag(tmp_path: P
 
     bundle = adapt_accepted_graph(graph_path)
 
-    assert any(review.reason_code == "needs_human_verification" for review in bundle.reviews)
+    assert any(review.reason_code == "automatic_resolution_required" for review in bundle.reviews)
     assert all(arm.completeness_status != "complete" for arm in bundle.arms)
 
 
@@ -159,7 +159,7 @@ def test_dimensioned_dose_keeps_microgram_unit() -> None:
 def test_unsupported_predicate_preserves_exact_evidence(tmp_path: Path) -> None:
     graph_path = _write_graph(tmp_path / "accepted_graph.json", predicate="has_magic")
     bundle = adapt_accepted_graph(graph_path)
-    review = next(review for review in bundle.reviews if review.reason_code == "needs_human_verification")
+    review = next(review for review in bundle.reviews if review.reason_code == "automatic_resolution_required")
 
     assert review.evidence_ids
     assert all(next(e for e in bundle.evidence if e.record_id == evidence_id).evidence_text for evidence_id in review.evidence_ids)

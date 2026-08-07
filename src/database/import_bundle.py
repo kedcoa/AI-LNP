@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS import_review (
             'Experiment link unclear',
             'Outcome link unclear',
             'Unsupported value',
-            'Needs human verification'
+            'Needs automatic resolution'
         )
     ),
     field_name TEXT,

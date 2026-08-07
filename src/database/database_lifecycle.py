@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import hashlib
+import os
+import shutil
 import sqlite3
+import tempfile
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -51,6 +54,19 @@ class DatabaseLifecycleResult:
     backup_sha256: str
     source_state_sha256_before_migration: str
     migration: DatabaseMigration
+
+
+@dataclass(frozen=True)
+class DatabasePromotion:
+    """Verified record of one atomic candidate-to-authoritative promotion."""
+
+    candidate_path: Path
+    candidate_sha256: str
+    authoritative_path: Path
+    old_authoritative_sha256: str
+    new_authoritative_sha256: str
+    backup_path: Path
+    backup_sha256: str
 
 
 def snapshot_database(path: str | Path) -> dict[str, object]:
@@ -238,6 +254,82 @@ def backup_and_migrate_authoritative_database(
     )
 
 
+def promote_verified_database(
+    candidate_path: str | Path,
+    authoritative_path: str | Path,
+    backup_dir: str | Path,
+    *,
+    expected_candidate_sha256: str | None = None,
+) -> DatabasePromotion:
+    """Back up and atomically promote one already-built SQLite candidate.
+
+    Both databases are checked before any replacement.  The candidate is
+    copied to a temporary sibling, checked again, and then moved over the
+    authoritative path with one filesystem-level atomic replace.
+    """
+
+    candidate = _database_path(candidate_path)
+    authoritative = _database_path(authoritative_path)
+    if candidate == authoritative:
+        raise ValueError("candidate and authoritative database paths must differ")
+    candidate_wal = candidate.with_name(f"{candidate.name}-wal")
+    if candidate_wal.exists():
+        raise ValueError("candidate database has an uncheckpointed WAL")
+    _verify_promotable_database(candidate)
+    candidate_sha256 = _sha256(candidate)
+    if (
+        expected_candidate_sha256 is not None
+        and candidate_sha256 != expected_candidate_sha256
+    ):
+        raise ValueError("candidate database hash does not match approved hash")
+
+    old_sha256 = _sha256(authoritative)
+    old_state_sha256 = _database_state_sha256(authoritative)
+    _verify_replaceable_database(authoritative)
+    backup_path = backup_database(authoritative, backup_dir)
+    backup_sha256 = _sha256(backup_path)
+    _verify_backup_database(backup_path)
+    if _database_state_sha256(authoritative) != old_state_sha256:
+        raise RuntimeError(
+            "authoritative database changed after backup; promotion is refused"
+        )
+
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{authoritative.name}.promotion-",
+        suffix=".tmp",
+        dir=authoritative.parent,
+    )
+    os.close(descriptor)
+    temporary = Path(temporary_name)
+    replaced = False
+    try:
+        shutil.copyfile(candidate, temporary)
+        with temporary.open("rb") as handle:
+            os.fsync(handle.fileno())
+        if _sha256(temporary) != candidate_sha256:
+            raise RuntimeError("candidate changed while preparing promotion")
+        _verify_promotable_database(temporary)
+        temporary.replace(authoritative)
+        replaced = True
+    finally:
+        if not replaced:
+            temporary.unlink(missing_ok=True)
+
+    _verify_promotable_database(authoritative)
+    new_sha256 = _sha256(authoritative)
+    if new_sha256 != candidate_sha256:
+        raise RuntimeError("promoted database hash differs from verified candidate")
+    return DatabasePromotion(
+        candidate_path=candidate,
+        candidate_sha256=candidate_sha256,
+        authoritative_path=authoritative,
+        old_authoritative_sha256=old_sha256,
+        new_authoritative_sha256=new_sha256,
+        backup_path=backup_path,
+        backup_sha256=backup_sha256,
+    )
+
+
 def _database_path(path: str | Path) -> Path:
     database_path = Path(path).expanduser().resolve()
     if not database_path.is_file():
@@ -292,6 +384,45 @@ def _verify_backup_database(backup_path: Path) -> None:
         if connection.execute("PRAGMA integrity_check").fetchall() != [("ok",)]:
             raise ValueError(f"backup integrity check failed: {backup_path}")
         _verify_foreign_key_integrity(connection)
+    finally:
+        connection.close()
+
+
+def _verify_promotable_database(database_path: Path) -> None:
+    _verify_replaceable_database(database_path)
+    connection = _read_only_connection(database_path)
+    try:
+        tables = {
+            str(row[0])
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            )
+        }
+        required = {"schema_migration", "source_artifact", "source_fact"}
+        missing = sorted(required - tables)
+        if missing:
+            raise ValueError(
+                "candidate database is missing lossless schema tables: "
+                + ", ".join(missing)
+            )
+        latest = connection.execute(
+            "SELECT max(version) FROM schema_migration"
+        ).fetchone()[0]
+        if latest != 6:
+            raise ValueError(f"candidate database schema version is {latest}, expected 6")
+    finally:
+        connection.close()
+
+
+def _verify_replaceable_database(database_path: Path) -> None:
+    """Verify an existing scientific database without requiring new tables."""
+
+    connection = _read_only_connection(database_path)
+    try:
+        if connection.execute("PRAGMA integrity_check").fetchall() != [("ok",)]:
+            raise ValueError(f"database integrity check failed: {database_path}")
+        _verify_foreign_key_integrity(connection)
+        _scientific_row_counts(connection)
     finally:
         connection.close()
 
