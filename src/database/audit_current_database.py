@@ -407,6 +407,13 @@ def _identity_sets(
         artifact = payload.get("artifact")
         if isinstance(artifact, dict) and isinstance(artifact.get("path"), str):
             artifact["path"] = canonical_path(artifact["path"])
+            artifact_id = str(artifact.get("artifact_id") or "")
+            if artifact_id.endswith(":screening-manifest"):
+                # The corpus manifest is a mutable contributor inventory. Its
+                # top-level hash is audited separately, so contributor-only
+                # updates must not rewrite otherwise identical screening-paper
+                # identities in the scientific database.
+                artifact["sha256"] = "screening-manifest-inventory"
         normalized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
         return normalized, hashlib.sha256(normalized.encode("utf-8")).hexdigest(), None
 

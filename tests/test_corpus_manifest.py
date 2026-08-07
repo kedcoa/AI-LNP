@@ -7,6 +7,7 @@ from pydantic import ValidationError
 
 from src.database.corpus_manifest import (
     CandidateArtifactRecord,
+    ContributingArtifact,
     CorpusEntry,
     MetadataProvenanceRecord,
     PipelineLineageRecord,
@@ -14,6 +15,7 @@ from src.database.corpus_manifest import (
     SourceAccessRecord,
     load_lane,
     scan_artifact_candidates,
+    validate_artifact_coverage,
     validate_corpus,
 )
 
@@ -141,6 +143,79 @@ def test_complete_entry_round_trips_all_inventory_structures() -> None:
     assert isinstance(restored.metadata_provenance[0], MetadataProvenanceRecord)
     assert restored.pmcid == "PMC123"
     assert restored.last_checked.isoformat() == "2026-08-06"
+
+
+def test_manifest_accepts_multiple_contributing_artifacts() -> None:
+    entry = CorpusEntry.model_validate(
+        {
+            **_complete_entry_values(),
+            "contributing_artifacts": [
+                {
+                    "path": "graph.json",
+                    "role": "primary_extraction",
+                    "access_status": "available",
+                    "sha256": "a" * 64,
+                    "schema_family": "gold_graph",
+                    "pipeline_name": "test",
+                    "pipeline_version": None,
+                    "validation_status": "accepted",
+                    "contributes_facts": True,
+                    "contributes_evidence": True,
+                    "notes": None,
+                },
+                {
+                    "path": "packet.json",
+                    "role": "evidence_inventory",
+                    "access_status": "available",
+                    "sha256": "b" * 64,
+                    "schema_family": "compact_packet",
+                    "pipeline_name": "rag",
+                    "pipeline_version": None,
+                    "validation_status": "source_derived",
+                    "contributes_facts": False,
+                    "contributes_evidence": True,
+                    "notes": None,
+                },
+            ],
+        }
+    )
+
+    assert len(entry.contributing_artifacts) == 2
+    assert isinstance(entry.contributing_artifacts[0], ContributingArtifact)
+
+
+def test_manifest_rejects_hashless_available_contributor() -> None:
+    with pytest.raises(ValidationError, match="SHA-256"):
+        CorpusEntry.model_validate(
+            {
+                **_complete_entry_values(),
+                "contributing_artifacts": [
+                    {
+                        "path": "result.json",
+                        "role": "contributing_extraction",
+                        "access_status": "available",
+                        "sha256": None,
+                        "schema_family": "np_result",
+                        "pipeline_name": "test",
+                        "pipeline_version": None,
+                        "validation_status": "accepted",
+                        "contributes_facts": True,
+                        "contributes_evidence": True,
+                        "notes": None,
+                    }
+                ],
+            }
+        )
+
+
+def test_manifest_rejects_unlisted_primary_artifact(tmp_path: Path) -> None:
+    artifact = tmp_path / "data/staging/extraction/GP-001/result.json"
+    artifact.parent.mkdir(parents=True)
+    artifact.write_text("{}\n", encoding="utf-8")
+    entry = _entry(import_artifact=artifact.relative_to(tmp_path).as_posix())
+
+    with pytest.raises(ValueError, match="primary artifact must be a contributor"):
+        validate_artifact_coverage([entry], tmp_path)
 
 
 def test_selected_artifact_requires_matching_candidate_and_rationale() -> None:

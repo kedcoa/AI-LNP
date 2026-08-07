@@ -15,7 +15,13 @@ from collections import Counter
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
 
-from src.database.corpus_manifest import CorpusEntry, load_lane, validate_corpus
+from src.database.corpus_manifest import (
+    ContributingArtifact,
+    CorpusEntry,
+    load_lane,
+    validate_artifact_coverage,
+    validate_corpus,
+)
 
 
 EXPECTED_PAPER_IDS = frozenset(
@@ -71,8 +77,19 @@ def build_current_corpus_manifest(
             entries_by_id[entry.paper_id] = entry
 
     entries = [entries_by_id[paper_id] for paper_id in sorted(entries_by_id)]
+    entries = [
+        entry.model_copy(
+            update={
+                "contributing_artifacts": _contributing_artifacts(
+                    corpus_root, entry
+                )
+            }
+        )
+        for entry in entries
+    ]
     _validate_expected_scope(entries)
     validate_corpus(entries, corpus_root)
+    validate_artifact_coverage(entries, corpus_root)
     _validate_import_decisions(entries)
 
     selected_artifacts = []
@@ -104,11 +121,208 @@ def build_current_corpus_manifest(
         },
         "source_lanes": source_lanes,
         "selected_artifacts": selected_artifacts,
+        "artifact_coverage": _artifact_coverage(entries),
         "summary": _summary(entries),
         "entries": [entry.model_dump(mode="json") for entry in entries],
     }
     _write_json_atomic(_resolve_output_path(corpus_root, output_path), manifest)
     return manifest
+
+
+def _contributing_artifacts(
+    root: Path, entry: CorpusEntry
+) -> list[ContributingArtifact]:
+    contributors: dict[str, ContributingArtifact] = {}
+
+    def register(
+        path_value: str,
+        *,
+        role: str,
+        schema_family: str,
+        contributes_facts: bool,
+        contributes_evidence: bool,
+        pipeline_name: str | None = None,
+        pipeline_version: str | None = None,
+        validation_status: str | None = None,
+        notes: str | None = None,
+        expected_sha256: str | None = None,
+    ) -> None:
+        path = root / path_value
+        available = path.is_file()
+        contributors[path_value] = ContributingArtifact.model_validate(
+            {
+                "path": path_value,
+                "role": role,
+                "access_status": "available" if available else "missing",
+                "sha256": _sha256(path) if available else expected_sha256,
+                "schema_family": schema_family,
+                "pipeline_name": pipeline_name,
+                "pipeline_version": pipeline_version,
+                "validation_status": validation_status,
+                "contributes_facts": contributes_facts,
+                "contributes_evidence": contributes_evidence,
+                "notes": notes,
+            }
+        )
+
+    for source in entry.source_access_records:
+        if source.source_kind == "compact_packet":
+            role = "evidence_inventory"
+            contributes_evidence = True
+        elif source.source_kind.startswith("full_text"):
+            role = "source_document"
+            contributes_evidence = True
+        else:
+            role = "validation"
+            contributes_evidence = False
+        register(
+            source.path,
+            role=role,
+            schema_family=source.source_kind,
+            contributes_facts=False,
+            contributes_evidence=contributes_evidence,
+            validation_status=source.access_status,
+            notes=source.notes,
+            expected_sha256=source.sha256,
+        )
+
+    for candidate in entry.candidate_artifacts:
+        selected = candidate.selection_status == "selected"
+        valid_slice = (
+            candidate.selection_status == "candidate"
+            and (candidate.validation_status or "").startswith("valid_")
+        )
+        rejected_pilot_ledger = (
+            candidate.artifact_kind == "consolidated_replay"
+            and candidate.selection_status == "rejected"
+        )
+        if not (selected or valid_slice or rejected_pilot_ledger):
+            continue
+        register(
+            candidate.path,
+            role=(
+                "primary_extraction" if selected else "contributing_extraction"
+            ),
+            schema_family=candidate.artifact_kind,
+            contributes_facts=True,
+            contributes_evidence=True,
+            pipeline_name=candidate.pipeline_name,
+            pipeline_version=candidate.pipeline_version,
+            validation_status=candidate.validation_status,
+            notes=candidate.notes,
+            expected_sha256=candidate.sha256,
+        )
+
+    if entry.import_artifact is not None:
+        selected_path = root / entry.import_artifact
+        for filename, role, facts, evidence in (
+            ("source_clauses.json", "evidence_inventory", False, True),
+            ("clause_provenance.json", "evidence_inventory", False, True),
+            ("final_audit.json", "validation", False, False),
+        ):
+            sibling = selected_path.with_name(filename)
+            if sibling.is_file():
+                register(
+                    sibling.relative_to(root).as_posix(),
+                    role=role,
+                    schema_family=filename.removesuffix(".json"),
+                    contributes_facts=facts,
+                    contributes_evidence=evidence,
+                    pipeline_name="g1_fulltext_rag",
+                    validation_status="local",
+                )
+
+    if entry.paper_id.startswith("GP-") and entry.import_status != "screening_only":
+        for annotation_name in (
+            "papers.csv",
+            "formulations.csv",
+            "components.csv",
+            "experiments.csv",
+            "outcomes.csv",
+            "evidence.csv",
+            "issues.csv",
+        ):
+            annotation_path = f"data/annotations/gold_v1/{annotation_name}"
+            if (root / annotation_path).is_file():
+                register(
+                    annotation_path,
+                    role="annotation",
+                    schema_family="gold_v1_annotation",
+                    contributes_facts=annotation_name not in {"evidence.csv", "issues.csv"},
+                    contributes_evidence=annotation_name == "evidence.csv",
+                    pipeline_name="gold_v1",
+                    validation_status="human_annotation",
+                )
+
+    source_directory = (
+        root / "data/raw/fulltext/oa_packages" / (entry.pmcid or "missing")
+    )
+    if source_directory.is_dir():
+        for source_path in sorted(source_directory.iterdir()):
+            if not source_path.is_file() or source_path.suffix.casefold() not in {
+                ".pdf",
+                ".xml",
+                ".nxml",
+            }:
+                continue
+            lower_name = source_path.name.casefold()
+            is_supplement = "supp" in lower_name or "sapp" in lower_name
+            register(
+                source_path.relative_to(root).as_posix(),
+                role="supplement" if is_supplement else "source_document",
+                schema_family="supplement_pdf" if is_supplement else "full_text_source",
+                contributes_facts=False,
+                contributes_evidence=True,
+                validation_status="local_source",
+            )
+
+    vision_root = root / "data/staging/extraction/day8_object_vision/results"
+    if vision_root.is_dir():
+        for vision_path in sorted(vision_root.glob(f"{entry.paper_id}-*.json")):
+            if not (
+                vision_path.name.endswith(".validated.json")
+                or vision_path.name.endswith(".human_corrected.json")
+            ):
+                continue
+            register(
+                vision_path.relative_to(root).as_posix(),
+                role="vision",
+                schema_family="validated_visual_claims",
+                contributes_facts=True,
+                contributes_evidence=True,
+                pipeline_name="day8_object_vision",
+                validation_status="accepted",
+            )
+
+    return [contributors[path] for path in sorted(contributors)]
+
+
+def _artifact_coverage(
+    entries: Sequence[CorpusEntry],
+) -> dict[str, dict[str, object]]:
+    return {
+        entry.paper_id: {
+            "contributor_count": len(entry.contributing_artifacts),
+            "missing_files": [
+                artifact.path
+                for artifact in entry.contributing_artifacts
+                if artifact.access_status != "available"
+            ],
+            "hash_mismatches": [],
+            "fact_producing_artifacts": [
+                artifact.path
+                for artifact in entry.contributing_artifacts
+                if artifact.contributes_facts
+            ],
+            "evidence_producing_artifacts": [
+                artifact.path
+                for artifact in entry.contributing_artifacts
+                if artifact.contributes_evidence
+            ],
+            "primary_artifact": entry.import_artifact,
+        }
+        for entry in entries
+    }
 
 
 def write_day1_reports(

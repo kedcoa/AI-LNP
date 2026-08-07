@@ -95,6 +95,49 @@ def test_canonical_entries_preserve_complete_lane_inventory(
     assert all("pipeline_lineage" in entry for entry in entries)
 
 
+def test_manifest_registers_all_fact_and_evidence_contributors(
+    tmp_path: Path,
+) -> None:
+    manifest = build_current_corpus_manifest(
+        ROOT, LANE_PATHS, tmp_path / "manifest.json"
+    )
+    entries = {entry["paper_id"]: entry for entry in manifest["entries"]}
+
+    gp2_paths = {
+        artifact["path"] for artifact in entries["GP-002"]["contributing_artifacts"]
+    }
+    assert entries["GP-002"]["import_artifact"] in gp2_paths
+    assert "data/staging/extraction/g1_fulltext_rag/GP-002/source_clauses.json" in gp2_paths
+    assert "data/staging/rag/compact_packets_v1/GP-002.json" in gp2_paths
+
+    np2_fact_sources = [
+        artifact
+        for artifact in entries["NP-002"]["contributing_artifacts"]
+        if artifact["contributes_facts"]
+    ]
+    assert len(np2_fact_sources) == 3
+    assert all(
+        artifact["role"] == "contributing_extraction"
+        for artifact in np2_fact_sources
+    )
+
+    pilot_fact_sources = [
+        artifact
+        for artifact in entries["PILOT-001"]["contributing_artifacts"]
+        if artifact["contributes_facts"]
+    ]
+    assert [artifact["path"] for artifact in pilot_fact_sources] == [
+        "reports/extraction/application_pilot_final.json"
+    ]
+    assert pilot_fact_sources[0]["validation_status"] == "formal_acceptance_failed"
+
+    coverage = manifest["artifact_coverage"]
+    assert len(coverage) == 14
+    assert coverage["GP-002"]["primary_artifact"] == entries["GP-002"][
+        "import_artifact"
+    ]
+
+
 def test_every_import_candidate_has_an_artifact_or_explicit_reason(
     tmp_path: Path,
 ) -> None:

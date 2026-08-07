@@ -76,6 +76,42 @@ class MetadataProvenanceRecord(StrictModel):
     method: Literal["local_artifact", "free_bibliographic_lookup", "unresolved"]
 
 
+ArtifactRole = Literal[
+    "primary_extraction",
+    "contributing_extraction",
+    "repair",
+    "reconciliation",
+    "vision",
+    "annotation",
+    "validation",
+    "evidence_inventory",
+    "source_document",
+    "supplement",
+]
+
+
+class ContributingArtifact(StrictModel):
+    """One explicitly classified source of facts, evidence, or validation."""
+
+    path: str = Field(min_length=1)
+    role: ArtifactRole
+    access_status: Literal["available", "missing", "restricted", "unresolved"]
+    sha256: str | None = Field(pattern=r"^[0-9a-f]{64}$")
+    schema_family: str = Field(min_length=1)
+    pipeline_name: str | None
+    pipeline_version: str | None
+    validation_status: str | None
+    contributes_facts: bool
+    contributes_evidence: bool
+    notes: str | None
+
+    @model_validator(mode="after")
+    def validate_available_hash(self) -> "ContributingArtifact":
+        if self.access_status == "available" and self.sha256 is None:
+            raise ValueError("available contributing artifact requires SHA-256")
+        return self
+
+
 class CorpusEntry(StrictModel):
     """One paper's explicit corpus and rerun routing state."""
 
@@ -89,6 +125,9 @@ class CorpusEntry(StrictModel):
     candidate_artifacts: list[CandidateArtifactRecord]
     pipeline_lineage: list[PipelineLineageRecord]
     metadata_provenance: list[MetadataProvenanceRecord] = Field(min_length=1)
+    contributing_artifacts: list[ContributingArtifact] = Field(
+        default_factory=list
+    )
     last_checked: date
     strongest_artifact_rationale: str = Field(min_length=1)
     import_status: Literal[
@@ -259,6 +298,44 @@ def validate_corpus(
                 f"{entry.paper_id}: {entry.import_artifact}"
             )
     return materialized
+
+
+def validate_artifact_coverage(
+    entries: Sequence[CorpusEntry], root: str | Path
+) -> None:
+    """Require every declared contributor and primary artifact to be traceable."""
+
+    corpus_root = Path(root).resolve()
+    for entry in entries:
+        contributors = {
+            contributor.path: contributor
+            for contributor in entry.contributing_artifacts
+        }
+        if entry.import_artifact is not None and entry.import_artifact not in contributors:
+            raise ValueError(
+                f"{entry.paper_id} primary artifact must be a contributor"
+            )
+        if entry.import_status == "screening_only" and any(
+            contributor.contributes_facts
+            for contributor in entry.contributing_artifacts
+        ):
+            raise ValueError(
+                f"{entry.paper_id} screening-only entry cannot contribute facts"
+            )
+        for contributor in entry.contributing_artifacts:
+            artifact_path = _resolve_within_root(corpus_root, contributor.path)
+            if contributor.access_status != "available":
+                continue
+            if not artifact_path.is_file():
+                raise ValueError(
+                    "available contributing artifact does not exist for "
+                    f"{entry.paper_id}: {contributor.path}"
+                )
+            actual_sha256 = _sha256(artifact_path)
+            if actual_sha256 != contributor.sha256:
+                raise ValueError(
+                    f"SHA-256 mismatch for {entry.paper_id}: {contributor.path}"
+                )
 
 
 def scan_artifact_candidates(
