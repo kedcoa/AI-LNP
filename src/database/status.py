@@ -572,15 +572,7 @@ def evaluate_eligibility(
 ) -> EligibilityResult:
     """Evaluate and store deterministic nearest-neighbor or COMET eligibility."""
 
-    if profile not in PROFILE_REQUIRED_FIELDS:
-        raise ValueError(f"Unknown eligibility profile: {profile}")
-    experiment = _row(connection, experiment_id)
-    status = evaluate_arm_status(connection, experiment_id)
-    reasons = _profile_reasons(connection, experiment, profile)
-    if status.completeness_status in {"conflict", "quarantined"}:
-        reasons.add(status.completeness_status)
-    if profile == "comet" and status.verification_status != "manually_verified":
-        reasons.add("manually_verified")
+    reasons = set(eligibility_reasons(connection, experiment_id, profile))
 
     result = EligibilityResult(
         profile=profile,
@@ -622,3 +614,22 @@ def evaluate_eligibility(
         (int(result.eligible), experiment_id, int(result.eligible)),
     )
     return result
+
+
+def eligibility_reasons(
+    connection: sqlite3.Connection,
+    experiment_id: int,
+    profile: EligibilityProfile,
+) -> tuple[str, ...]:
+    """Calculate profile blockers without updating cached eligibility rows."""
+
+    if profile not in PROFILE_REQUIRED_FIELDS:
+        raise ValueError(f"Unknown eligibility profile: {profile}")
+    experiment = _row(connection, experiment_id)
+    status = evaluate_arm_status(connection, experiment_id)
+    reasons = _profile_reasons(connection, experiment, profile)
+    if status.completeness_status in {"conflict", "quarantined"}:
+        reasons.add(status.completeness_status)
+    if profile == "comet" and status.verification_status != "manually_verified":
+        reasons.add("manually_verified")
+    return tuple(sorted(reasons))

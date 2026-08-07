@@ -1,0 +1,44 @@
+{
+  "version": "working-evidence-v3",
+  "nearest_neighbor": {
+    "description": "Evidence-backed similarity-search arm requirements"
+  },
+  "comet": {
+    "arm_required": [
+      "cell_type",
+      "species",
+      "in_vitro_in_vivo",
+      "payload_type",
+      "payload_name",
+      "dose",
+      "dose_unit",
+      "assay"
+    ],
+    "arm_one_of": [
+      {
+        "reason": "biological_model",
+        "fields": ["disease_model", "cell_source"]
+      },
+      {
+        "reason": "payload_encoded_product_or_molecular_target",
+        "fields": [
+          "payload_encoded_product",
+          "payload_molecular_target",
+          "reporter"
+        ]
+      }
+    ],
+    "formulation_required": ["lnp_molar_ratio"],
+    "formulation_one_of": [
+      {
+        "reason": "formulation_identity",
+        "fields": ["formulation_name", "chemical_formulation_total"]
+      },
+      {
+        "reason": "formulation_composition",
+        "fields": ["chemical_formulation_total", "composition_raw", "components"]
+      }
+    ],
+    "max_blockers_for_almost_ready": 3
+  }
+}

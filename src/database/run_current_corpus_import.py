@@ -19,7 +19,8 @@ from src.database.import_contracts import (
     SourceArtifactRecord,
 )
 from src.database.migrations import migrate_database
-from src.database.status import evaluate_arm_status, evaluate_eligibility
+from src.database.readiness import evaluate_readiness
+from src.database.status import evaluate_arm_status
 from src.database.adapters.accepted_graph import adapt_accepted_graph_losslessly
 from src.database.adapters.np_results import build_np_lossless_result
 from src.database.adapters.pilot_results import build_pilot_lossless_result
@@ -375,18 +376,19 @@ def _recalculate_paper(
     results: list[dict[str, Any]] = []
     for (experiment_id,) in rows:
         status = evaluate_arm_status(connection, experiment_id)
-        nearest = evaluate_eligibility(connection, experiment_id, "nearest_neighbor")
-        comet = evaluate_eligibility(connection, experiment_id, "comet")
+        readiness = evaluate_readiness(connection, experiment_id)
         results.append(
             {
                 "paper_id": source_paper_id,
                 "experiment_id": experiment_id,
                 "completeness_status": status.completeness_status,
                 "verification_status": status.verification_status,
-                "nearest_neighbor_eligible": nearest.eligible,
-                "nearest_neighbor_reasons": list(nearest.reasons),
-                "comet_eligible": comet.eligible,
-                "comet_reasons": list(comet.reasons),
+                "general_usable": readiness.general_usable,
+                "nearest_neighbor_eligible": readiness.nearest_neighbor_ready,
+                "nearest_neighbor_reasons": list(readiness.nearest_neighbor_blockers),
+                "comet_eligible": readiness.comet_ready,
+                "comet_reasons": list(readiness.comet_blockers),
+                "queue_label": readiness.queue_label,
             }
         )
     return results
