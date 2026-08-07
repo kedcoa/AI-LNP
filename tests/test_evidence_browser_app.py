@@ -1,0 +1,66 @@
+from __future__ import annotations
+
+import hashlib
+from pathlib import Path
+
+import pytest
+
+from tests.test_evidence_browser_service import evidence_browser_database
+
+
+APP = Path(__file__).parents[1] / "src/ui/evidence_browser_app.py"
+
+
+def _source() -> str:
+    return APP.read_text(encoding="utf-8")
+
+
+def test_evidence_browser_app_uses_only_the_read_only_service_boundary() -> None:
+    source = _source()
+    lowered = source.lower()
+
+    assert "from src.ui.evidence_browser_service import" in source
+    assert "sqlite3" not in lowered
+    assert ".execute(" not in source
+    assert "Submit review decision" not in source
+    assert "Needs human verification" not in source
+    assert "apply_review_decision" not in source
+
+
+def test_evidence_browser_app_preserves_approved_columns_and_sections() -> None:
+    source = _source()
+    labels = (
+        "lnp_name", "chemical_formulation_total", "lnp_molar_ratio",
+        "ionizable_lipid", "helper_lipid", "cholesterol", "peg_lipid", "others",
+    )
+    positions = [source.index(f'"{label}"') for label in labels]
+    assert positions == sorted(positions)
+    for label in (
+        "Paper", "Paper access", "LNP formulations", "Formulation evidence",
+        "Experimental arms", "Outcomes", "Automatic-resolution issues",
+        "Nearest neighbor", "COMET", "NA",
+    ):
+        assert label in source
+
+
+def test_evidence_browser_app_renders_fixture_without_writing(
+    monkeypatch: pytest.MonkeyPatch,
+    evidence_browser_database: Path,
+) -> None:
+    from src.ui import evidence_browser_service
+    from streamlit.testing.v1 import AppTest
+
+    monkeypatch.setattr(
+        evidence_browser_service,
+        "browser_database_path",
+        lambda: evidence_browser_database,
+    )
+    before = hashlib.sha256(evidence_browser_database.read_bytes()).hexdigest()
+    app = AppTest.from_file(str(APP)).run(timeout=15)
+    after = hashlib.sha256(evidence_browser_database.read_bytes()).hexdigest()
+
+    assert not app.exception
+    assert any(item.value == "LNP formulations" for item in app.subheader)
+    assert any(item.label == "Paper" for item in app.selectbox)
+    assert not app.button
+    assert before == after
