@@ -6,6 +6,7 @@ from pathlib import Path
 
 from src.rag.current_corpus_assets import (
     classify_link,
+    discover_declared_assets,
     ingest_current_corpus_assets,
     resolve_declared_supplements,
     inventory_local_assets,
@@ -46,6 +47,32 @@ def test_asset_classifier_ignores_navigation_links() -> None:
     assert classify_link("About this journal", "/about") is None
     assert classify_link("Supplementary Table S1", "mmc1.xlsx") == "supplement"
     assert classify_link("Supplementary data", "asset?id=8921") == "supplement"
+
+
+def test_asset_classifier_recognizes_scientific_link_kinds() -> None:
+    assert classify_link(
+        "Lipids and lipid nanoparticle formulations",
+        "https://patents.google.com/patent/US10221127B2/en",
+        element_name="ext-link",
+        citation_context="US patent US10,221,127",
+    ) == "patent"
+    assert classify_link("Study protocol", "protocol.pdf") == "protocol"
+    assert classify_link("Source data", "dataset.xlsx") == "dataset"
+
+
+def test_declared_asset_discovery_is_selective_and_local_first() -> None:
+    assets = discover_declared_assets(
+        (ROOT / "tests/fixtures/assets/paper_with_scientific_links.nxml",)
+    )
+
+    assert {(row.kind, row.filename) for row in assets} == {
+        ("supplement", "mmc1.xlsx"),
+        ("patent", "US10221127"),
+    }
+    supplement = next(row for row in assets if row.kind == "supplement")
+    patent = next(row for row in assets if row.kind == "patent")
+    assert supplement.provenance_scope == "direct_source_asset"
+    assert patent.provenance_scope == "indirect_reference"
 
 
 def test_jats_keyword_discovers_opaque_local_supplement(tmp_path: Path) -> None:

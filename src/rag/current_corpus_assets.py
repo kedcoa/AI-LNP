@@ -11,6 +11,7 @@ import urllib.request
 import zipfile
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -30,6 +31,10 @@ SUPPLEMENT_FILENAMES = re.compile(
     r"(?:^|[._-])(supp|sapp|mmc\d*|esm|moesm\d*|suppl)(?:[._-]|$)",
     re.IGNORECASE,
 )
+PATENT_WORDS = re.compile(r"\bpatent\b|\bUS\s*\d[\d,]{5,}", re.IGNORECASE)
+PROTOCOL_WORDS = re.compile(r"\b(protocol|method(?:s)? appendix)\b", re.IGNORECASE)
+DATASET_WORDS = re.compile(r"\b(source data|dataset|data set|raw data)\b", re.IGNORECASE)
+PATENT_NUMBER = re.compile(r"\bUS\s*([\d,]{6,})", re.IGNORECASE)
 
 
 @dataclass(frozen=True)
@@ -48,16 +53,49 @@ class AssetResolution:
     hash_mismatches: tuple[str, ...] = ()
 
 
-def classify_link(label: str | None, href: str | None) -> str | None:
+@dataclass(frozen=True)
+class DeclaredAsset:
+    url: str
+    label: str
+    kind: str
+    filename: str
+    declared_by: str
+    local_path: str | None
+    sha256: str | None
+    access_status: str
+    provenance_scope: str
+
+
+def classify_link(
+    label: str | None,
+    href: str | None,
+    *,
+    element_name: str | None = None,
+    citation_context: str | None = None,
+) -> str | None:
     """Classify only links explicitly recognizable as scientific supplements."""
 
     label_text = compact(label or "")
     href_text = (href or "").strip()
     if not href_text:
         return None
+    context = compact(" ".join(
+        value for value in (label_text, element_name or "", citation_context or "")
+        if value
+    ))
     parsed = urllib.parse.urlparse(href_text)
     filename = Path(parsed.path).name
     suffix = Path(filename).suffix.casefold()
+    if PATENT_WORDS.search(context) or "patents.google." in parsed.netloc:
+        return "patent"
+    if PROTOCOL_WORDS.search(context) and (
+        not suffix or suffix in SCIENTIFIC_SUFFIXES
+    ):
+        return "protocol"
+    if DATASET_WORDS.search(context) and (
+        not suffix or suffix in SCIENTIFIC_SUFFIXES
+    ):
+        return "dataset"
     declared = bool(SUPPLEMENT_WORDS.search(label_text))
     filename_signal = bool(SUPPLEMENT_FILENAMES.search(filename))
     if declared:
@@ -67,6 +105,108 @@ def classify_link(label: str | None, href: str | None) -> str | None:
     if filename_signal and suffix in SCIENTIFIC_SUFFIXES:
         return "supplement"
     return None
+
+
+class _AnchorParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self._href: str | None = None
+        self._text: list[str] = []
+        self.links: list[tuple[str, str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.casefold() != "a":
+            return
+        self._href = dict(attrs).get("href")
+        self._text = []
+
+    def handle_data(self, data: str) -> None:
+        if self._href is not None:
+            self._text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.casefold() == "a" and self._href is not None:
+            self.links.append((compact(" ".join(self._text)), self._href, "a"))
+            self._href = None
+            self._text = []
+
+
+def _declared_link_rows(path: Path) -> list[tuple[str, str, str]]:
+    if path.suffix.casefold() in {".xml", ".nxml"}:
+        try:
+            root = ET.fromstring(path.read_bytes())
+        except ET.ParseError:
+            return []
+        rows: list[tuple[str, str, str]] = []
+        for element in root.iter():
+            href = next(
+                (
+                    value for key, value in element.attrib.items()
+                    if key.rsplit("}", 1)[-1] in {"href", "locator"}
+                ),
+                None,
+            )
+            if href:
+                rows.append((
+                    compact("".join(element.itertext())),
+                    href,
+                    element.tag.rsplit("}", 1)[-1],
+                ))
+        return rows
+    if path.suffix.casefold() in {".html", ".htm"}:
+        parser = _AnchorParser()
+        parser.feed(path.read_text(encoding="utf-8", errors="replace"))
+        return parser.links
+    return []
+
+
+def _asset_filename(kind: str, label: str, href: str) -> str:
+    if kind == "patent":
+        match = PATENT_NUMBER.search(f"{label} {href}")
+        if match:
+            return f"US{match.group(1).replace(',', '')}"
+        path_match = re.search(r"/patent/(US\d+)", href, re.IGNORECASE)
+        if path_match:
+            return path_match.group(1).upper()
+    return Path(urllib.parse.urlparse(href).path).name or href
+
+
+def discover_declared_assets(
+    source_paths: Iterable[Path],
+) -> tuple[DeclaredAsset, ...]:
+    """Discover only explicitly declared scientific assets in local sources."""
+
+    discovered: dict[tuple[str, str], DeclaredAsset] = {}
+    for source_path in (Path(path).resolve() for path in source_paths):
+        for label, href, element_name in _declared_link_rows(source_path):
+            kind = classify_link(
+                label, href, element_name=element_name, citation_context=label
+            )
+            if kind is None:
+                continue
+            parsed = urllib.parse.urlparse(href)
+            basename = Path(parsed.path).name
+            adjacent = source_path.parent / basename if basename else None
+            local = adjacent if adjacent is not None and adjacent.is_file() else None
+            digest = (
+                hashlib.sha256(local.read_bytes()).hexdigest() if local else None
+            )
+            asset = DeclaredAsset(
+                url=href,
+                label=label,
+                kind=kind,
+                filename=_asset_filename(kind, label, href),
+                declared_by=str(source_path),
+                local_path=str(local) if local else None,
+                sha256=digest,
+                access_status="available" if local else "declared",
+                provenance_scope=(
+                    "indirect_reference" if kind == "patent"
+                    else "direct_source_asset"
+                ),
+            )
+            discovered[(kind, href)] = asset
+    return tuple(discovered[key] for key in sorted(discovered))
 
 
 def _checkout_roots(root: Path) -> tuple[Path, ...]:
@@ -343,7 +483,8 @@ def ingest_current_corpus_assets(
 
 
 __all__ = [
-    "AssetInventory", "AssetResolution", "classify_link",
+    "AssetInventory", "AssetResolution", "DeclaredAsset", "classify_link",
+    "discover_declared_assets",
     "inventory_local_assets", "resolve_declared_supplements",
     "ingest_current_corpus_assets",
 ]
