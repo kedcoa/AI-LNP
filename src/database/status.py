@@ -149,6 +149,8 @@ def _has_canonical_outcome_evidence(
         return False
     return connection.execute(
         """SELECT 1 FROM import_field_evidence AS link
+           JOIN evidence
+             ON evidence.evidence_id = link.evidence_id
            WHERE link.entity_type = 'outcome' AND link.entity_id = ?
              AND link.verification_status = ?
              AND NOT EXISTS (
@@ -161,17 +163,24 @@ def _has_canonical_outcome_evidence(
                    AND later.import_field_evidence_id > link.import_field_evidence_id
              )
              AND (
-                 json_extract(link.content_json, '$.review_revision_id') IS NULL
-                 OR EXISTS (
-                     SELECT 1 FROM review_revision AS revision
-                     WHERE revision.review_revision_id = json_extract(
-                               link.content_json, '$.review_revision_id'
+                 evidence.evidence_review_status = 'manually_verified'
+                 OR (
+                     json_extract(
+                         link.content_json, '$.review_revision_id'
+                     ) IS NOT NULL
+                     AND EXISTS (
+                         SELECT 1 FROM review_revision AS revision
+                         WHERE revision.review_revision_id = json_extract(
+                                   link.content_json, '$.review_revision_id'
+                               )
+                           AND revision.decision = 'accepted'
+                           AND NOT EXISTS (
+                               SELECT 1
+                               FROM review_revision AS later_revision
+                               WHERE later_revision.supersedes_review_revision_id =
+                                     revision.review_revision_id
                            )
-                       AND revision.decision = 'accepted'
-                       AND NOT EXISTS (
-                           SELECT 1 FROM review_revision AS later_revision
-                           WHERE later_revision.supersedes_review_revision_id = revision.review_revision_id
-                       )
+                     )
                  )
              )
            LIMIT 1""",
