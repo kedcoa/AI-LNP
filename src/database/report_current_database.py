@@ -26,10 +26,11 @@ DEFINITIONS = {
     "outcomes": "Canonical outcome rows linked to experimental arms.",
     "source_evidence_occurrences": "Imported evidence source occurrences before canonical evidence deduplication.",
     "evidence_records": "Deduplicated canonical evidence records.",
+    "general_use_ready_arms": "Complete canonical arms with accepted direct evidence or accepted evidence linked through arm or outcome fields.",
     "nearest_neighbor_ready_arms": "Arms passing the fixed nearest-neighbor eligibility rules.",
     "comet_ready_arms": "Arms passing the stricter COMET eligibility rules.",
     "almost_comet_ready_arms": "Evidence-backed, non-conflict arms failing COMET v3 on only one to three fields.",
-    "unresolved_review_items": "Visible import-review rows whose status remains incomplete, conflict, quarantined, or blocked.",
+    "unresolved_review_items": "Visible relationship, normalization, or conflict items; ordinary missing fields are reported separately as readiness blockers.",
     "unresolved_automatic_items": "Open relationship or normalization items for automatic repair; these are not a general-use human gate.",
     "human_adjudication_items": "Open scientific conflicts that require a human scientific decision.",
 }
@@ -122,6 +123,33 @@ def report_current_database(
             "SELECT count(*) FROM import_record_identity WHERE entity_type='evidence'"
         ),
         "evidence_records": scalar("SELECT count(*) FROM evidence"),
+        "general_use_ready_arms": scalar(
+            """SELECT count(*)
+               FROM experiment x
+               JOIN arm_assessment a USING(experiment_id)
+               WHERE a.completeness_status='complete'
+                 AND EXISTS (
+                   SELECT 1
+                   FROM evidence e
+                   WHERE length(trim(coalesce(e.evidence_text,'')))>0
+                     AND e.evidence_review_status NOT IN
+                         ('rejected','conflict','ambiguous')
+                     AND (
+                       e.experiment_id=x.experiment_id
+                       OR e.evidence_id IN (
+                         SELECT link.evidence_id
+                         FROM import_field_evidence link
+                         WHERE (link.entity_type='arm'
+                                AND link.entity_id=x.experiment_id)
+                            OR (link.entity_type='outcome'
+                                AND link.entity_id IN (
+                                  SELECT outcome_id FROM outcome
+                                  WHERE experiment_id=x.experiment_id
+                                ))
+                       )
+                     )
+                 )"""
+        ),
         "nearest_neighbor_ready_arms": scalar(
             "SELECT count(*) FROM eligibility_result WHERE profile='nearest_neighbor' AND eligible=1"
         ),
@@ -140,10 +168,13 @@ def report_current_database(
                      AND e.evidence_review_status NOT IN ('rejected','conflict','ambiguous')
                  )"""
         ),
-        "unresolved_review_items": scalar("SELECT count(*) FROM import_review"),
+        "unresolved_review_items": scalar(
+            "SELECT count(*) FROM import_review WHERE reason_code!='missing_required_fields'"
+        ),
         "unresolved_automatic_items": scalar(
             """SELECT count(*) FROM import_review
                WHERE review_status IN ('incomplete','quarantined','blocked')
+                 AND reason_code!='missing_required_fields'
                  AND reason_code NOT LIKE '%conflict%'"""
         ),
         "human_adjudication_items": scalar(
@@ -185,7 +216,10 @@ def report_current_database(
             "named_formulations": query("SELECT count(*) FROM formulation WHERE paper_id=? AND trim(coalesce(formulation_name,''))!=''"),
             "arms": query("SELECT count(*) FROM experiment WHERE paper_id=?"),
             "outcomes": query("SELECT count(*) FROM outcome o JOIN experiment e USING(experiment_id) WHERE e.paper_id=?"),
-            "unresolved_items": query("SELECT count(*) FROM import_review WHERE paper_id=?"),
+            "unresolved_items": query(
+                "SELECT count(*) FROM import_review WHERE paper_id=? "
+                "AND reason_code!='missing_required_fields'"
+            ),
             "verification_status_counts": verification_status_counts,
             "nearest_neighbor_ready_arms": query(
                 "SELECT count(*) FROM eligibility_result r JOIN experiment e USING(experiment_id) WHERE e.paper_id=? AND r.profile='nearest_neighbor' AND r.eligible=1"
@@ -209,7 +243,10 @@ def report_current_database(
         "SELECT count(*) FROM source_artifact "
         "WHERE role='completed_extraction' AND schema_family='full_paper_map'"
     )
-    registered_artifacts = scalar("SELECT count(*) FROM source_artifact")
+    registered_artifacts = scalar(
+        "SELECT count(*) FROM ("
+        "SELECT DISTINCT paper_id,logical_path,sha256 FROM source_artifact)"
+    )
     checks = {
         "integrity_check": connection.execute("PRAGMA integrity_check").fetchone()[0],
         "foreign_key_violations": len(connection.execute("PRAGMA foreign_key_check").fetchall()),

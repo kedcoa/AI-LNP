@@ -14,7 +14,7 @@ REQUIRED_COUNTS = {
     "complete_formulations", "incomplete_formulations", "components",
     "source_fact_occurrences", "canonical_facts", "experimental_arms",
     "outcomes", "source_evidence_occurrences", "evidence_records",
-    "nearest_neighbor_ready_arms", "comet_ready_arms",
+    "general_use_ready_arms", "nearest_neighbor_ready_arms", "comet_ready_arms",
     "almost_comet_ready_arms", "unresolved_review_items",
     "unresolved_automatic_items", "human_adjudication_items",
 }
@@ -39,6 +39,8 @@ def test_final_report_keeps_scientific_counts_separate(tmp_path: Path) -> None:
         )
 
     assert REQUIRED_COUNTS <= report["counts"].keys()
+    assert report["counts"]["general_use_ready_arms"] > 0
+    assert "general_use_ready_arms" in report["definitions"]
     assert report["definitions"]["named_formulations"] != report["definitions"]["unique_chemical_formulations"]
     assert report["checks"]["silent_fact_omissions"] == 0
     assert report["checks"]["silent_evidence_omissions"] == 0
@@ -47,7 +49,7 @@ def test_final_report_keeps_scientific_counts_separate(tmp_path: Path) -> None:
     assert report["checks"]["new_paid_rerun_calls"] == 0
     assert report["database"]["path"] == str(database.resolve())
     assert len(report["database"]["sha256"]) == 64
-    assert report["database"]["schema_versions"][-1] == 6
+    assert report["database"]["schema_versions"][-1] == 8
     assert len(report["manifest"]["sha256"]) == 64
     assert report["eligibility"]["rules_version"]
     assert report["rerun_history"] == {"provider_calls": 0, "paper_ids": []}
