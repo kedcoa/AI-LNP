@@ -13,6 +13,7 @@ try:
         BrowserFilters,
         BrowserField,
         BrowserIssue,
+        combined_arm_rows_for_export,
         default_browser_paper_id,
         list_browser_papers,
         list_combined_arm_rows,
@@ -28,6 +29,7 @@ except ModuleNotFoundError:
         BrowserFilters,
         BrowserField,
         BrowserIssue,
+        combined_arm_rows_for_export,
         default_browser_paper_id,
         list_browser_papers,
         list_combined_arm_rows,
@@ -156,44 +158,7 @@ def _issue_rows(issues: tuple[BrowserIssue, ...]) -> list[dict[str, str]]:
 
 
 def _combined_rows(rows: tuple[object, ...]) -> list[dict[str, str]]:
-    rendered: list[dict[str, str]] = []
-    for row in rows:
-        values = {
-            "Paper": row.paper.source_paper_id,  # type: ignore[attr-defined]
-            "Paper title": row.paper.title,  # type: ignore[attr-defined]
-            "DOI / paper link": next(iter(row.paper.links.values()), "NA"),  # type: ignore[attr-defined]
-            "Arm ID": str(row.experiment_id),  # type: ignore[attr-defined]
-        }
-        values.update({
-            COLUMN_LABELS[column]: row.formulation[column].display_value  # type: ignore[attr-defined]
-            for column in FORMULATION_COLUMNS
-        })
-        values.update({
-            "Target / recipient organ": row.arm_fields["target_or_recipient_organ"].display_value,  # type: ignore[attr-defined]
-            "Intended target cell": row.arm_fields["intended_target_cell"].display_value,  # type: ignore[attr-defined]
-            "Observed transfected cell": row.arm_fields["observed_transfected_cell"].display_value,  # type: ignore[attr-defined]
-            "Legacy cell label": row.arm_fields["cell_type"].display_value,  # type: ignore[attr-defined]
-            "Species": row.arm_fields["species"].display_value,  # type: ignore[attr-defined]
-            "Biological model": row.arm_fields["disease_model"].display_value,  # type: ignore[attr-defined]
-            "Payload": row.arm_fields["payload_name"].display_value,  # type: ignore[attr-defined]
-            "Encoded product": row.arm_fields["payload_encoded_product"].display_value,  # type: ignore[attr-defined]
-            "Molecular target": row.arm_fields["payload_molecular_target"].display_value,  # type: ignore[attr-defined]
-            "Dose": row.arm_fields["dose"].display_value,  # type: ignore[attr-defined]
-            "Route": row.arm_fields["route"].display_value,  # type: ignore[attr-defined]
-            "Timepoint": row.arm_fields["timepoint"].display_value,  # type: ignore[attr-defined]
-            "Assay": row.arm_fields["assay"].display_value,  # type: ignore[attr-defined]
-            "Outcomes": row.outcomes_display,  # type: ignore[attr-defined]
-            "General use": "Ready" if row.general_usable else "Not ready",  # type: ignore[attr-defined]
-            "Nearest neighbor": "Ready" if row.nearest_neighbor_ready else "Not ready",  # type: ignore[attr-defined]
-            "COMET": "Ready" if row.comet_ready else "Not ready",  # type: ignore[attr-defined]
-            "COMET blockers": ", ".join(row.comet_blockers) or "None",  # type: ignore[attr-defined]
-            "Missing fields": ", ".join(row.missing_fields) or "None",  # type: ignore[attr-defined]
-            "Automatic-resolution issues": ", ".join(
-                issue.reason_code for issue in row.issues  # type: ignore[attr-defined]
-            ) or "None",
-        })
-        rendered.append(values)
-    return rendered
+    return combined_arm_rows_for_export(rows)  # type: ignore[arg-type]
 
 
 def _render_eligibility(
@@ -478,4 +443,5 @@ def main() -> None:
     st.caption("Read-only evidence browser · no database editing controls")
 
 
-main()
+if __name__ == "__main__":
+    main()

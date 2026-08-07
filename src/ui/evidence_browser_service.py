@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
 import sqlite3
 import sys
@@ -225,6 +226,12 @@ class PaperBrowserView:
 def browser_database_path() -> Path:
     """Return the single authoritative database used by the live browser."""
 
+    snapshot = os.environ.get("LNP_MENTOR_SNAPSHOT_DB", "").strip()
+    if snapshot:
+        path = Path(snapshot).expanduser().resolve()
+        if not path.is_file():
+            raise FileNotFoundError(f"Mentor snapshot database is missing: {path}")
+        return path
     return CANONICAL_AUTHORITATIVE_DATABASE
 
 
@@ -336,7 +343,9 @@ def _paper_from_row(
         links["PMC"] = f"https://pmc.ncbi.nlm.nih.gov/articles/{row['pmcid']}/"
     if row["source_url"]:
         links["Source record"] = str(row["source_url"])
-    local = _local_artifact_link(connection, int(row["paper_id"]))
+    local = None
+    if not os.environ.get("LNP_MENTOR_SNAPSHOT_DB", "").strip():
+        local = _local_artifact_link(connection, int(row["paper_id"]))
     if local:
         links["Local source"] = local
     return BrowserPaper(
@@ -779,6 +788,79 @@ def summarize_browser_database(
     )
 
 
+def combined_arm_rows_for_export(
+    rows: Sequence[BrowserArmRow],
+    *,
+    include_local_links: bool = True,
+) -> list[dict[str, str]]:
+    """Serialize combined arm rows without importing Streamlit."""
+
+    formulation_labels = {
+        "lnp_name": "LNP name",
+        "chemical_formulation_total": "Chemical formulation (total)",
+        "lnp_molar_ratio": "LNP molar ratio",
+        "ionizable_lipid": "Ionizable lipid",
+        "helper_lipid": "Helper lipid",
+        "cholesterol": "Cholesterol",
+        "peg_lipid": "PEG lipid",
+        "others": "Others",
+    }
+    rendered: list[dict[str, str]] = []
+    for row in rows:
+        links = [
+            value for value in row.paper.links.values()
+            if include_local_links or not value.startswith("file://")
+        ]
+        values = {
+            "Paper": row.paper.source_paper_id,
+            "Paper title": row.paper.title,
+            "DOI / paper link": next(iter(links), "NA"),
+            "Arm ID": str(row.experiment_id),
+        }
+        values.update({
+            formulation_labels[column]: row.formulation[column].display_value
+            for column in FORMULATION_COLUMNS
+        })
+        values.update({
+            "Target / recipient organ": row.arm_fields[
+                "target_or_recipient_organ"
+            ].display_value,
+            "Intended target cell": row.arm_fields[
+                "intended_target_cell"
+            ].display_value,
+            "Observed transfected cell": row.arm_fields[
+                "observed_transfected_cell"
+            ].display_value,
+            "Legacy cell label": row.arm_fields["cell_type"].display_value,
+            "Species": row.arm_fields["species"].display_value,
+            "Biological model": row.arm_fields["disease_model"].display_value,
+            "Payload": row.arm_fields["payload_name"].display_value,
+            "Encoded product": row.arm_fields[
+                "payload_encoded_product"
+            ].display_value,
+            "Molecular target": row.arm_fields[
+                "payload_molecular_target"
+            ].display_value,
+            "Dose": row.arm_fields["dose"].display_value,
+            "Route": row.arm_fields["route"].display_value,
+            "Timepoint": row.arm_fields["timepoint"].display_value,
+            "Assay": row.arm_fields["assay"].display_value,
+            "Outcomes": row.outcomes_display,
+            "General use": "Ready" if row.general_usable else "Not ready",
+            "Nearest neighbor": (
+                "Ready" if row.nearest_neighbor_ready else "Not ready"
+            ),
+            "COMET": "Ready" if row.comet_ready else "Not ready",
+            "COMET blockers": ", ".join(row.comet_blockers) or "None",
+            "Missing fields": ", ".join(row.missing_fields) or "None",
+            "Automatic-resolution issues": ", ".join(
+                issue.reason_code for issue in row.issues
+            ) or "None",
+        })
+        rendered.append(values)
+    return rendered
+
+
 __all__ = [
     "ARM_FIELD_COLUMNS",
     "FORMULATION_COLUMNS",
@@ -796,6 +878,7 @@ __all__ = [
     "BrowserPaper",
     "PaperBrowserView",
     "browser_database_path",
+    "combined_arm_rows_for_export",
     "default_browser_paper_id",
     "list_browser_papers",
     "list_combined_arm_rows",
