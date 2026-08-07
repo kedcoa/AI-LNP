@@ -78,9 +78,9 @@ def test_audit_accepts_lossless_rebuild_with_completed_pilot_maps(
 
     assert result["passed"] is True
     ledger = result["checks"]["lossless_source_ledger"]
-    assert ledger["expected_available_manifest_artifacts"] == 197
+    assert ledger["expected_available_manifest_artifacts"] == 198
     assert ledger["completed_exact_map_artifacts"] == 3
-    assert ledger["registered_source_artifacts"] == 200
+    assert ledger["registered_source_artifacts"] == 201
     assert ledger["missing_registered_artifacts"] == []
     assert ledger["unexpected_registered_artifacts"] == []
     assert ledger["forbidden_general_app_human_tags"] == 0

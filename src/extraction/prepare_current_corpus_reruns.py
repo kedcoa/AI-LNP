@@ -45,14 +45,17 @@ def prepare_current_corpus_reruns(
     database_path = Path(database_path).resolve()
     approval_manifest_path = Path(approval_manifest_path).resolve()
     with sqlite3.connect(database_path) as connection:
-        queue = build_rerun_queue(connection)
+        queue = build_rerun_queue(
+            connection, corpus_root=Path(corpus_manifest_path).resolve().parents[2]
+        )
     requested_papers = {str(item["paper_id"]) for item in queue}
     approval = json.loads(approval_manifest_path.read_text(encoding="utf-8"))
     completed_existing = {
-        paper_id
-        for paper_id in requested_papers
-        if completed_pilot_map_response(approval_manifest_path, paper_id)
-        is not None
+        str(row["paper_id"])
+        for row in approval.get("requests", [])
+        if completed_pilot_map_response(
+            approval_manifest_path, str(row["paper_id"])
+        ) is not None
     }
     requested_papers -= completed_existing
     requests = []

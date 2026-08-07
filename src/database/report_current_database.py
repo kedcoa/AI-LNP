@@ -10,6 +10,7 @@ from typing import Any
 
 from src.database.scientific_identity import CompositionPart, composition_fingerprint
 from src.database.status import RULES_VERSION
+from src.database.build_rerun_queue import audit_database_gaps, build_requests
 
 
 DEFINITIONS = {
@@ -96,6 +97,10 @@ def report_current_database(
     promotion_record: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     formulation = _formulation_metrics(connection)
+    gaps = audit_database_gaps(
+        connection,
+        corpus_root=manifest_path.resolve().parents[2] if manifest_path else None,
+    )
     scalar = lambda query: int(connection.execute(query).fetchone()[0])
     counts = {
         "papers": scalar("SELECT count(*) FROM paper"),
@@ -256,6 +261,14 @@ def report_current_database(
         "eligibility": {
             "rules_version": RULES_VERSION,
             "blocking_reasons": all_blocking_reasons,
+        },
+        "post_projection_gaps": {
+            "counts_by_kind": {
+                kind: sum(gap.gap_kind == kind for gap in gaps)
+                for kind in sorted({gap.gap_kind for gap in gaps})
+            },
+            "records": [gap.to_dict() for gap in gaps],
+            "paid_rerun_requests": list(build_requests(gaps)),
         },
         "rerun_history": rerun_history or {},
         "promotion": promotion_record or {},

@@ -7,10 +7,43 @@ import pytest
 
 from src.extraction.prepare_current_corpus_reruns import prepare_current_corpus_reruns
 from src.extraction.run_current_corpus_reruns import run_current_corpus_reruns
+from src.database.build_rerun_queue import GapRecord, build_requests
 from src.database.run_current_corpus_import import rebuild_database
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _gap(kind: str, *, recoverable: bool = False) -> GapRecord:
+    return GapRecord(
+        paper_id="TEST-001",
+        experiment_id=1,
+        record_id="TEST-001:ARM:1",
+        field_name="outcome",
+        gap_kind=kind,
+        reason="test gap",
+        recoverable=recoverable,
+    )
+
+
+def test_projection_gap_never_creates_paid_rerun() -> None:
+    assert build_requests((_gap("projection_missed"),)) == ()
+
+
+def test_source_not_reported_is_reported_but_not_rerun() -> None:
+    assert build_requests((_gap("source_not_reported"),)) == ()
+
+
+def test_only_extraction_or_recoverable_asset_gaps_create_reruns() -> None:
+    requests = build_requests((
+        _gap("source_asset_missing", recoverable=False),
+        _gap("source_asset_missing", recoverable=True),
+        _gap("extraction_missed"),
+        _gap("scientific_conflict"),
+    ))
+    assert len(requests) == 1
+    assert requests[0]["paper_id"] == "TEST-001"
+    assert requests[0]["fields"] == ["outcome"]
 
 
 def test_preflight_does_not_rerun_completed_exact_hashes(tmp_path: Path) -> None:

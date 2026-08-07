@@ -20,6 +20,8 @@ from src.database.status import (
     evaluate_arm_status,
     evaluate_eligibility,
 )
+from src.database.readiness import evaluate_readiness
+from src.database.build_rerun_queue import audit_database_gaps, build_requests
 from src.database.adapters.pilot_map_results import (
     completed_pilot_map_response,
     pilot_map_logical_path,
@@ -413,20 +415,43 @@ def _eligibility_inconsistencies(connection: sqlite3.Connection) -> list[dict[st
                 or quarantine != expected_status.quarantine_reason
             ):
                 reasons.append("arm assessment differs from current rules")
+            readiness = evaluate_readiness(recomputed, arm_id)
+            stored_comet = stored_results.get((arm_id, "comet"))
+            legacy_comet = evaluate_eligibility(recomputed, arm_id, "comet")
+            expected_profiles = {
+                "nearest_neighbor": (
+                    readiness.nearest_neighbor_ready,
+                    readiness.nearest_neighbor_blockers,
+                    RULES_VERSION,
+                ),
+                "comet": (
+                    (readiness.comet_ready if stored_comet and
+                     stored_comet[2] == readiness.rules_version
+                     else legacy_comet.eligible),
+                    (readiness.comet_blockers if stored_comet and
+                     stored_comet[2] == readiness.rules_version
+                     else legacy_comet.reasons),
+                    (readiness.rules_version if stored_comet and
+                     stored_comet[2] == readiness.rules_version
+                     else RULES_VERSION),
+                ),
+            }
             for profile, stored_flag in (("nearest_neighbor", nearest), ("comet", comet)):
-                expected = evaluate_eligibility(recomputed, arm_id, profile)
+                expected_eligible, expected_reasons, expected_version = (
+                    expected_profiles[profile]
+                )
                 stored = stored_results.get((arm_id, profile))
                 if stored is None:
                     reasons.append(f"{profile} eligibility result missing")
                     continue
                 stored_eligible, stored_reasons, stored_version = stored
-                if stored_flag != int(expected.eligible):
+                if stored_flag != int(expected_eligible):
                     reasons.append(f"{profile} flag differs from current rules")
-                if stored_eligible != int(expected.eligible):
+                if stored_eligible != int(expected_eligible):
                     reasons.append(f"{profile} result differs from current rules")
-                if stored_reasons != expected.reasons:
+                if stored_reasons != expected_reasons:
                     reasons.append(f"{profile} reasons differ from current rules")
-                if stored_version != RULES_VERSION:
+                if stored_version != expected_version:
                     reasons.append(f"{profile} rules_version is not current")
             if reasons:
                 problems.append({"paper_id": paper_id, "arm_id": arm_id, "reasons": reasons})
@@ -752,6 +777,9 @@ def audit_current_database(
             if lossless_mode
             else None
         )
+        post_projection_gaps = audit_database_gaps(
+            connection, corpus_root=manifest_path.parents[2]
+        )
         (
             actual_record_identities,
             actual_field_links,
@@ -871,6 +899,14 @@ def audit_current_database(
         "bundle_hash_mismatches": bundle_mismatches,
         "normalized_identity_sets": identity_check,
         "lossless_source_ledger": lossless_sources,
+        "post_projection_gaps": {
+            "records": [gap.to_dict() for gap in post_projection_gaps],
+            "counts_by_kind": {
+                kind: sum(gap.gap_kind == kind for gap in post_projection_gaps)
+                for kind in sorted({gap.gap_kind for gap in post_projection_gaps})
+            },
+            "paid_rerun_requests": list(build_requests(post_projection_gaps)),
+        },
     }
     lossless_sources_pass = (
         lossless_sources is None
