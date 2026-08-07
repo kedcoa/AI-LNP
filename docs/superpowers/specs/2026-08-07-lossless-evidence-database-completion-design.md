@@ -202,6 +202,7 @@ Counts are split by paper and verification status. No count is described as usab
 - Do not store redundant full JSON blobs in SQLite when immutable local paths and hashes are available.
 - Do not rerun a complete paper when a bounded repair is sufficient.
 - Do not present source occurrences, named formulations, chemical compositions, arms, or papers as interchangeable counts.
+- Do not use the CodeRabbit CLI or CodeRabbit review workflow; verification uses repository tests, deterministic audits, and direct human inspection.
 
 ## 14. Time estimate
 

@@ -20,6 +20,7 @@
 - Keep formulation name, chemical composition, and payload separate.
 - Never equate paper, named formulation, unique composition, fact, arm, outcome, or evidence counts.
 - Paid calls require exact immutable request hashes and explicit human approval; never retry silently.
+- Do not use the CodeRabbit CLI or CodeRabbit review workflow. Review through repository tests, deterministic audits, and direct human inspection only.
 - Build and validate a temporary SQLite database before replacing `data/curated/lnp_evidence.db`.
 - Do not overwrite human review history or an existing supported value without retaining provenance.
 
