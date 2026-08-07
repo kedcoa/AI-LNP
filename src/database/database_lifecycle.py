@@ -53,6 +53,55 @@ class DatabaseLifecycleResult:
     migration: DatabaseMigration
 
 
+def snapshot_database(path: str | Path) -> dict[str, object]:
+    """Return a JSON-serializable, read-only audit of one SQLite database."""
+
+    database_path = _database_path(path)
+    database_sha256 = _sha256(database_path)
+    wal_sha256, source_state_sha256 = _wal_and_state_sha256(
+        database_path, database_sha256
+    )
+    connection = _read_only_connection(database_path)
+    try:
+        integrity_rows = connection.execute("PRAGMA integrity_check").fetchall()
+        integrity = (
+            "ok"
+            if integrity_rows == [("ok",)]
+            else "; ".join(row[0] for row in integrity_rows)
+        )
+        _verify_foreign_key_integrity(connection)
+        counts = _scientific_row_counts(connection)
+        available_tables = {
+            row[0]
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+        }
+        migration_versions = (
+            [
+                row[0]
+                for row in connection.execute(
+                    "SELECT version FROM schema_migration ORDER BY version"
+                )
+            ]
+            if "schema_migration" in available_tables
+            else []
+        )
+    finally:
+        connection.close()
+
+    return {
+        "database_path": str(database_path),
+        "sha256": database_sha256,
+        "wal_sha256": wal_sha256,
+        "source_state_sha256": source_state_sha256,
+        "integrity": integrity,
+        "migration_versions": migration_versions,
+        "counts": counts,
+        "snapshot_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
 def preflight_authoritative_database(path: str | Path) -> DatabasePreflight:
     """Reject unsafe direct-import targets without changing the database.
 

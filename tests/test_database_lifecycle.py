@@ -12,6 +12,7 @@ from src.database.database_lifecycle import (
     backup_database,
     migrate_authoritative_database,
     preflight_authoritative_database,
+    snapshot_database,
 )
 
 
@@ -93,6 +94,35 @@ def _create_empty_legacy_database(path: Path) -> None:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def test_snapshot_records_hash_schema_and_counts(tmp_path: Path) -> None:
+    database_path = tmp_path / "source.db"
+    _create_empty_legacy_database(database_path)
+    migrate_authoritative_database(database_path)
+    connection = sqlite3.connect(database_path)
+    try:
+        connection.execute(
+            """
+            INSERT INTO paper (
+                source_paper_id, title, source_type, retrieval_date,
+                screening_status, import_status
+            ) VALUES (
+                'TEST-001', 'Snapshot fixture', 'fixture', '2026-08-07',
+                'include', 'ready'
+            )
+            """
+        )
+        connection.commit()
+    finally:
+        connection.close()
+
+    report = snapshot_database(database_path)
+
+    assert report["sha256"] == _sha256(database_path)
+    assert report["integrity"] == "ok"
+    assert report["counts"]["paper"] == 1
+    assert report["migration_versions"] == [1, 2, 3, 4, 5]
 
 
 def test_preflight_rejects_a_missing_authoritative_database(tmp_path: Path) -> None:
