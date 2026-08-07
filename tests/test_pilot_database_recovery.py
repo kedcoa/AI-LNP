@@ -6,8 +6,15 @@ from dataclasses import replace
 
 import pytest
 
-from src.database.adapters.pilot_results import build_blocked_pilot_bundle
-from src.database.import_contracts import ImportBundle
+from src.database.adapters.pilot_results import (
+    build_blocked_pilot_bundle,
+    build_pilot_lossless_result,
+)
+from src.database.import_contracts import (
+    ImportBundle,
+    PaperRecord,
+    SourceArtifactRecord,
+)
 from src.database.recover_pilot_artifacts import (
     PilotArtifactExpectation,
     _read_regular_file_descriptor_relative,
@@ -20,6 +27,45 @@ def _write(path: Path, payload: bytes) -> str:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(payload)
     return hashlib.sha256(payload).hexdigest()
+
+
+def test_consolidated_pilot_facts_are_preserved_but_quarantined() -> None:
+    root = Path(__file__).resolve().parents[1]
+    consolidated = root / "reports/extraction/application_pilot_final.json"
+    payload = json.loads(consolidated.read_text())
+
+    for paper in payload["extraction"]["papers"]:
+        paper_id = paper["paper_id"]
+        result = build_pilot_lossless_result(
+            consolidated_path=consolidated,
+            paper_id=paper_id,
+            bundle=ImportBundle(
+                paper=PaperRecord(
+                    source_paper_id=paper_id,
+                    artifact_id="fixture",
+                    title=paper_id,
+                    source_type="fixture",
+                    retrieval_date="2026-08-07",
+                    import_status="needs_review",
+                ),
+                artifacts=(
+                    SourceArtifactRecord(
+                        "fixture", "fixture.json", "0" * 64,
+                        "validated_extraction", "fixture",
+                    ),
+                ),
+            ),
+        )
+        expected_scientific = len(paper["shared_facts"]) + sum(
+            len(experiment["facts"]) for experiment in paper["experiments"]
+        )
+        scientific = [
+            fact for fact in result.source_facts
+            if fact.record_kind in {"shared_fact", "experiment_fact"}
+        ]
+        assert len(scientific) == expected_scientific
+        assert all(fact.import_disposition == "quarantined" for fact in scientific)
+        assert result.coverage.silent_omissions == 0
 
 
 def _registered_worktree(tmp_path: Path) -> tuple[Path, Path, str]:
