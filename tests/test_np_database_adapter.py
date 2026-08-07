@@ -3,7 +3,11 @@ from pathlib import Path
 
 import pytest
 
-from src.database.adapters.np_results import build_np_bundle, write_bundle
+from src.database.adapters.np_results import (
+    build_np_bundle,
+    build_np_lossless_result,
+    write_bundle,
+)
 from src.database.import_contracts import ImportBundle
 from src.database.reconcile_np002 import reconcile_slices
 
@@ -92,6 +96,55 @@ def test_reconciliation_namespaces_overlapping_ids_and_preserves_slice_provenanc
     }
     assert len(reconciled["formulations"]) == 1
     assert reconciled["formulations"][0]["source_slices"] == ["hepatocytes", "kupffer"]
+
+
+def test_lossless_adapter_accounts_for_every_labeled_source_field(tmp_path):
+    packet_path = tmp_path / "packet.json"
+    packet_path.write_text(json.dumps(_packet()))
+    result_path = tmp_path / "result.json"
+    payload = _slice("hepatocytes")
+    payload["unresolved_items"] = ["Needs review"]
+    result_path.write_text(json.dumps(payload))
+
+    result = build_np_lossless_result(
+        result_paths=[result_path],
+        packet_path=packet_path,
+        paper_metadata={"title": "Example"},
+    )
+
+    expected_fields = 1 + len(payload.get("eligibility", {})) + 1
+    expected_fields += int("contract_version" in payload)
+    for collection in ("formulations", "components", "experiments", "outcomes"):
+        expected_fields += sum(len(row) for row in payload[collection])
+    assert result.coverage.source_fields == expected_fields
+    assert result.coverage.silent_omissions == 0
+    assert len(result.artifact_fact_sets) == 1
+    assert len(result.source_facts) == expected_fields
+
+
+def test_real_np002_projects_one_component_set_per_unique_formulation():
+    result_paths = sorted(
+        (ROOT / "data/staging/extraction/np002_isolated_liver_cell_run").glob(
+            "*/result.json"
+        )
+    )
+    result = build_np_lossless_result(
+        result_paths=result_paths,
+        packet_path=ROOT / "data/staging/rag/compact_packets_v1/NP-002.json",
+        paper_metadata={"title": "NP-002"},
+    )
+
+    identities = {
+        (
+            row.formulation_id,
+            row.component_name_reported,
+            row.component_role,
+            row.amount_value,
+        )
+        for row in result.bundle.components
+    }
+    assert len(result.bundle.components) == len(identities) == 8
+    assert all(row.amount_raw is not None for row in result.bundle.components)
 
 
 def test_reconciliation_retains_conflicting_formulations():

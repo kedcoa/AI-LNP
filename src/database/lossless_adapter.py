@@ -19,6 +19,12 @@ class AdapterCoverage:
 
 
 @dataclass(frozen=True)
+class ArtifactFactSet:
+    artifact: SourceArtifactRecord
+    source_facts: tuple[SourceFactRecord, ...]
+
+
+@dataclass(frozen=True)
 class LosslessAdapterResult:
     bundle: ImportBundle
     artifact: SourceArtifactRecord
@@ -27,6 +33,7 @@ class LosslessAdapterResult:
     contributing_artifacts: tuple[SourceArtifactRecord, ...] = field(
         default_factory=tuple
     )
+    artifact_fact_sets: tuple[ArtifactFactSet, ...] = field(default_factory=tuple)
 
     @property
     def source_fact_count(self) -> int:

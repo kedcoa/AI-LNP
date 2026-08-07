@@ -243,6 +243,34 @@ def reconcile_slices(
             {"source_slice": slice_name, "text": text}
             for text in payload.get("unresolved_items", [])
         )
+
+    # Components are formulation properties, not recipient-cell properties.
+    # Merge identical component rows repeated by the isolated cell slices while
+    # retaining the union of their evidence and source-slice provenance.
+    unique_components: dict[tuple[Any, ...], dict[str, Any]] = {}
+    for component in merged["components"]:
+        normalized_unit = _canonical_text(_reported(component.get("amount_unit")))
+        if normalized_unit in {"mol", "molar ratio parts"}:
+            normalized_unit = "mol percent"
+        identity = (
+            component["formulation_id"],
+            _canonical_text(_reported(component.get("identity"))),
+            _canonical_text(_reported(component.get("role"))),
+            _reported(component.get("amount")),
+            normalized_unit,
+        )
+        existing = unique_components.get(identity)
+        if existing is None:
+            existing = component
+            existing["source_slices"] = [component["source_slice"]]
+            unique_components[identity] = existing
+            continue
+        existing["source_slices"].append(component["source_slice"])
+        for field_name in ("identity", "role", "amount", "amount_unit"):
+            _merge_supported_field(
+                field_name, existing[field_name], component[field_name]
+            )
+    merged["components"] = list(unique_components.values())
     return merged
 
 

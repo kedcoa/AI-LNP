@@ -14,6 +14,17 @@ from src.database.import_contracts import (
     SourceArtifactRecord,
 )
 from src.database.reconcile_np002 import load_and_reconcile
+from src.database.lossless_adapter import (
+    AdapterCoverage,
+    ArtifactFactSet,
+    LosslessAdapterResult,
+)
+from src.database.scientific_identity import fact_identity
+from src.database.source_fact_import import (
+    SourceArtifactRecord as LedgerArtifactRecord,
+    SourceFactEvidenceRecord,
+    SourceFactRecord,
+)
 
 
 CONFLICT_EVIDENCE_FIELDS = {
@@ -37,7 +48,8 @@ def _eids(field: Any) -> list[str]:
 
 
 def _slice_of(record: dict[str, Any], default: str) -> str:
-    return str(record.get("source_slice", default))
+    slices = record.get("source_slices")
+    return str(slices[0] if slices else record.get("source_slice", default))
 
 
 def _artifact_id(slice_name: str) -> str:
@@ -296,6 +308,11 @@ def build_np_bundle(
             molar_percentage=amount if is_molar_percentage else None,
             percentage_unit="mol%" if is_molar_percentage else None,
             component_review_status="unreviewed", identity_notes=raw_amount_note,
+            amount_value=amount,
+            amount_unit=amount_unit,
+            amount_raw=(
+                None if amount is None else f"{amount} {amount_unit or ''}".strip()
+            ),
         )
         components.append(record)
         for dst, src in (("component_name_reported", "identity"), ("component_role", "role")):
@@ -483,4 +500,140 @@ def write_bundle(bundle: ImportBundle, path: Path) -> Path:
     return path
 
 
-__all__ = ["build_np_bundle", "write_bundle"]
+def _source_field_facts(path: Path) -> tuple[SourceFactRecord, ...]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    paper_id = str(payload["paper_id"])
+    facts: list[SourceFactRecord] = []
+
+    def add(
+        json_path: str,
+        record_key: str,
+        record_kind: str,
+        subject_type: str,
+        field_name: str,
+        raw_value: Any,
+    ) -> None:
+        evidence_ids = _eids(raw_value)
+        value = _value(raw_value)
+        status = raw_value.get("status") if isinstance(raw_value, dict) else None
+        reason = (
+            raw_value.get("missing_reason")
+            if isinstance(raw_value, dict)
+            else None
+        )
+        facts.append(
+            SourceFactRecord(
+                json_path=json_path,
+                source_record_key=record_key,
+                record_kind=record_kind,
+                subject_type=subject_type,
+                subject_key=record_key,
+                field_name=field_name,
+                raw_value=raw_value,
+                canonical_value=value,
+                fact_identity_sha256=fact_identity(
+                    paper_id, record_kind, record_key, field_name, raw_value
+                ),
+                import_disposition="unresolved",
+                disposition_reason=(
+                    reason
+                    or ("explicitly missing" if status == "missing" else "awaiting normalized projection")
+                ),
+                evidence=tuple(
+                    SourceFactEvidenceRecord(
+                        source_evidence_key=str(evidence_id),
+                        resolution_status="unresolved",
+                        resolution_reason="awaiting canonical evidence import",
+                    )
+                    for evidence_id in evidence_ids
+                ),
+            )
+        )
+
+    for field_name, value in payload.items():
+        if field_name in {
+            "formulations", "components", "experiments", "outcomes",
+            "unresolved_items", "eligibility",
+        }:
+            continue
+        add(f"$.{field_name}", paper_id, "paper_field", "paper", field_name, value)
+    for field_name, value in payload.get("eligibility", {}).items():
+        add(
+            f"$.eligibility.{field_name}", paper_id, "eligibility_field",
+            "paper", field_name, value,
+        )
+    collections = {
+        "formulations": ("formulation_id", "formulation"),
+        "components": ("component_id", "component"),
+        "experiments": ("experiment_id", "experiment"),
+        "outcomes": ("outcome_id", "outcome"),
+    }
+    for collection, (id_field, subject_type) in collections.items():
+        for index, row in enumerate(payload.get(collection, [])):
+            record_key = str(row.get(id_field) or f"{subject_type}-{index}")
+            for field_name, value in row.items():
+                add(
+                    f"$.{collection}[{index}].{field_name}", record_key,
+                    f"{subject_type}_field", subject_type, field_name, value,
+                )
+    for index, value in enumerate(payload.get("unresolved_items", [])):
+        add(
+            f"$.unresolved_items[{index}]", f"unresolved-{index}",
+            "unresolved_item", "review", "unresolved_item", value,
+        )
+    return tuple(facts)
+
+
+def build_np_lossless_result(
+    *,
+    result_paths: Iterable[Path],
+    packet_path: Path,
+    paper_metadata: dict[str, Any],
+) -> LosslessAdapterResult:
+    """Preserve every labeled NP result field before normalized projection."""
+
+    paths = sorted((Path(path) for path in result_paths), key=lambda item: str(item))
+    bundle = build_np_bundle(
+        result_paths=paths,
+        packet_path=packet_path,
+        paper_metadata=paper_metadata,
+    )
+    fact_sets: list[ArtifactFactSet] = []
+    for path in paths:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        artifact = LedgerArtifactRecord(
+            paper_id=str(payload["paper_id"]),
+            logical_path=_canonical_path(path, _repo_root(path)),
+            sha256=_sha(path),
+            role="primary_extraction",
+            schema_family="np_result",
+            validation_status="accepted",
+            contributes_facts=True,
+            contributes_evidence=True,
+            pipeline_name=(
+                "compact" if payload["paper_id"] == "NP-001"
+                else "isolated_liver_cell"
+            ),
+            pipeline_version=str(payload.get("contract_version") or "unknown"),
+        )
+        fact_sets.append(ArtifactFactSet(artifact, _source_field_facts(path)))
+    all_facts = tuple(fact for item in fact_sets for fact in item.source_facts)
+    unresolved_count = sum(
+        len(json.loads(path.read_text(encoding="utf-8")).get("unresolved_items", []))
+        for path in paths
+    )
+    return LosslessAdapterResult(
+        bundle=bundle,
+        artifact=fact_sets[0].artifact,
+        source_facts=all_facts,
+        coverage=AdapterCoverage(
+            source_fields=len(all_facts),
+            unresolved_items=unresolved_count,
+            silent_omissions=0,
+        ),
+        contributing_artifacts=tuple(item.artifact for item in fact_sets),
+        artifact_fact_sets=tuple(fact_sets),
+    )
+
+
+__all__ = ["build_np_bundle", "build_np_lossless_result", "write_bundle"]
