@@ -12,6 +12,7 @@ try:
         BrowserEvidence,
         BrowserField,
         BrowserIssue,
+        default_browser_paper_id,
         list_browser_papers,
         load_paper_browser,
     )
@@ -23,6 +24,7 @@ except ModuleNotFoundError:
         BrowserEvidence,
         BrowserField,
         BrowserIssue,
+        default_browser_paper_id,
         list_browser_papers,
         load_paper_browser,
     )
@@ -277,9 +279,11 @@ def main() -> None:
         if not visible:
             st.warning("No papers match this search.")
             return
+        visible_ids = [paper.paper_id for paper in visible]
         selected_id = st.selectbox(
             "Paper",
-            options=[paper.paper_id for paper in visible],
+            options=visible_ids,
+            index=visible_ids.index(default_browser_paper_id(visible)),
             format_func=lambda paper_id: next(
                 f"{paper.source_paper_id} · {paper.title}"
                 for paper in visible if paper.paper_id == paper_id

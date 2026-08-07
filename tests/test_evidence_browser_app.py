@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -62,5 +64,28 @@ def test_evidence_browser_app_renders_fixture_without_writing(
     assert not app.exception
     assert any(item.value == "LNP formulations" for item in app.subheader)
     assert any(item.label == "Paper" for item in app.selectbox)
+    assert app.selectbox[0].value == 1
+    assert app.dataframe
     assert not app.button
     assert before == after
+
+
+def test_local_service_import_bootstraps_repository_package() -> None:
+    ui_directory = APP.parent
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-c",
+            (
+                "import sys; "
+                f"sys.path.insert(0, {str(ui_directory)!r}); "
+                "import evidence_browser_service"
+            ),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr

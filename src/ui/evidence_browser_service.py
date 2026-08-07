@@ -6,10 +6,16 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 import sqlite3
+import sys
 from types import MappingProxyType
 from typing import Mapping, Sequence
 
-from src.database.audit_current_database import (
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
+
+from src.database.paths import (
     CANONICAL_AUTHORITATIVE_DATABASE,
     COMMON_CHECKOUT_ROOT,
 )
@@ -260,6 +266,17 @@ def list_browser_papers() -> tuple[BrowserPaper, ...]:
             """
         ).fetchall()
         return tuple(_paper_from_row(connection, row) for row in rows)
+
+
+def default_browser_paper_id(papers: Sequence[BrowserPaper]) -> int:
+    """Choose the first paper with extracted formulations for the initial view."""
+
+    if not papers:
+        raise ValueError("at least one paper is required")
+    return next(
+        (paper.paper_id for paper in papers if paper.counts.formulations > 0),
+        papers[0].paper_id,
+    )
 
 
 def _location(row: sqlite3.Row) -> str:
@@ -566,6 +583,7 @@ __all__ = [
     "BrowserPaper",
     "PaperBrowserView",
     "browser_database_path",
+    "default_browser_paper_id",
     "list_browser_papers",
     "load_paper_browser",
 ]

@@ -258,3 +258,18 @@ def test_browser_service_rejects_unknown_paper_without_writing(
     with pytest.raises(KeyError, match="unknown paper"):
         service.load_paper_browser(999)
     assert _hash(evidence_browser_database) == before
+
+
+def test_default_browser_paper_skips_screening_only_empty_paper() -> None:
+    from src.ui import evidence_browser_service as service
+
+    empty_counts = service.BrowserCounts(0, 0, 0, 0, 0, 0)
+    rich_counts = service.BrowserCounts(1, 4, 2, 3, 8, 0)
+    empty = service.BrowserPaper(
+        1, "GP-001", "Screening only", "unknown", "screening_only", {}, empty_counts
+    )
+    rich = service.BrowserPaper(
+        2, "GP-002", "Extracted", "available", "imported", {}, rich_counts
+    )
+
+    assert service.default_browser_paper_id((empty, rich)) == 2

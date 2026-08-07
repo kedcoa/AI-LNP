@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-08-07T12:25:00+08:00",
+  "application": "src/ui/evidence_browser_app.py",
+  "service": "src/ui/evidence_browser_service.py",
+  "authoritative_database": "/Users/renemilywei/Desktop/AI-LNP/data/curated/lnp_evidence.db",
+  "database_sha256_before": "a8655d9c7a2a1b1aa235cad0a4b173e836070c055f84e51398869487be5879c3",
+  "database_sha256_after": "a8655d9c7a2a1b1aa235cad0a4b173e836070c055f84e51398869487be5879c3",
+  "database_unchanged": true,
+  "authoritative_counts": {
+    "papers": 14,
+    "formulations": 24,
+    "components": 74,
+    "experimental_arms": 37,
+    "outcomes": 29,
+    "evidence_records": 403,
+    "automatic_resolution_issues": 53
+  },
+  "http_smoke_test": {
+    "url": "http://127.0.0.1:8506/",
+    "health": "ok"
+  },
+  "browser_smoke_test": {
+    "initial_paper": "GP-002",
+    "initial_paper_has_formulations": true,
+    "paper_links_rendered": true,
+    "approved_formulation_columns_rendered": true,
+    "formulation_evidence_rendered": true,
+    "separate_experimental_arm_rendered": true,
+    "outcome_section_rendered": true,
+    "readiness_labels_rendered": true,
+    "automatic_resolution_issues_rendered": true,
+    "write_or_review_controls_present": false,
+    "browser_console_errors": []
+  },
+  "verification": {
+    "targeted_tests": "8 passed",
+    "full_suite": "1210 passed, 7 skipped",
+    "provider_calls": 0
+  }
+}
