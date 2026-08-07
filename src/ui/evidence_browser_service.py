@@ -115,6 +115,57 @@ class BrowserOutcome:
 
 
 @dataclass(frozen=True)
+class BrowserFilters:
+    paper_ids: tuple[str, ...] = ()
+    cell_types: tuple[str, ...] = ()
+    general_usable: bool | None = None
+    nearest_neighbor_ready: bool | None = None
+    comet_ready: bool | None = None
+    blocker: str | None = None
+
+
+@dataclass(frozen=True)
+class BrowserArmRow:
+    experiment_id: int
+    paper: BrowserPaper
+    formulation_id: int
+    formulation: Mapping[str, BrowserField]
+    arm_fields: Mapping[str, BrowserField]
+    outcomes: tuple[BrowserOutcome, ...]
+    general_usable: bool
+    nearest_neighbor_ready: bool
+    comet_ready: bool
+    queue_label: str
+    missing_fields: tuple[str, ...]
+    nearest_neighbor_blockers: tuple[str, ...]
+    comet_blockers: tuple[str, ...]
+    issues: tuple[BrowserIssue, ...]
+
+    @property
+    def outcomes_display(self) -> str:
+        lines: list[str] = []
+        for outcome in self.outcomes:
+            fields = outcome.fields
+            endpoint = (
+                fields["endpoint_name"].value
+                or fields["endpoint_family"].value
+                or f"Outcome #{outcome.outcome_id}"
+            )
+            value = fields["outcome_value"].display_value
+            if value != "NA" and fields["outcome_unit"].value:
+                value = f"{value} {fields['outcome_unit'].value}"
+            if value == "NA":
+                value = fields["qualitative_outcome"].display_value
+            qualifiers = [
+                fields["normalization_basis"].value,
+                fields["value_status"].value,
+            ]
+            suffix = " · ".join(str(item) for item in qualifiers if item)
+            lines.append(f"{endpoint}: {value}" + (f" · {suffix}" if suffix else ""))
+        return "\n".join(lines) if lines else "NA"
+
+
+@dataclass(frozen=True)
 class BrowserArm:
     experiment_id: int
     fields: Mapping[str, BrowserField]
@@ -569,11 +620,91 @@ def load_paper_browser(paper_id: int) -> PaperBrowserView:
         )
 
 
+def list_combined_arm_rows(
+    filters: BrowserFilters | None = None,
+) -> tuple[BrowserArmRow, ...]:
+    """Return exactly one display row per canonical experimental arm."""
+
+    selected = filters or BrowserFilters()
+    results: list[BrowserArmRow] = []
+    with _connect() as connection:
+        paper_rows = connection.execute(
+            """
+            SELECT paper_id,source_paper_id,title,doi,pmid,pmcid,source_url,
+                   full_text_status,import_status
+            FROM paper WHERE import_status!='screening_only'
+            ORDER BY source_paper_id,paper_id
+            """
+        ).fetchall()
+        for paper_row in paper_rows:
+            paper = _paper_from_row(connection, paper_row)
+            if selected.paper_ids and paper.source_paper_id not in selected.paper_ids:
+                continue
+            for formulation in _formulations(connection, paper.paper_id):
+                for arm in formulation.arms:
+                    has_evidence = connection.execute(
+                        """
+                        SELECT 1 FROM evidence
+                        WHERE experiment_id=?
+                          AND length(trim(coalesce(evidence_text,'')))>0
+                          AND evidence_review_status NOT IN
+                              ('rejected','conflict','ambiguous')
+                        LIMIT 1
+                        """,
+                        (arm.experiment_id,),
+                    ).fetchone() is not None
+                    general = (
+                        arm.completeness_status not in {"conflict", "quarantined"}
+                        and has_evidence
+                    )
+                    queue = (
+                        "conflict" if arm.completeness_status == "conflict"
+                        else "quarantined" if arm.completeness_status == "quarantined"
+                        else "comet_ready" if arm.comet_eligible
+                        else "almost_comet_ready" if general and len(arm.comet_blockers) <= 3
+                        else "comet_gap"
+                    )
+                    cell_type = arm.fields["cell_type"].value or ""
+                    all_blockers = set(arm.nearest_neighbor_blockers) | set(
+                        arm.comet_blockers
+                    )
+                    if selected.cell_types and cell_type not in selected.cell_types:
+                        continue
+                    if selected.general_usable is not None and general != selected.general_usable:
+                        continue
+                    if (selected.nearest_neighbor_ready is not None and
+                            arm.nearest_neighbor_eligible != selected.nearest_neighbor_ready):
+                        continue
+                    if selected.comet_ready is not None and arm.comet_eligible != selected.comet_ready:
+                        continue
+                    if selected.blocker and selected.blocker not in all_blockers:
+                        continue
+                    results.append(BrowserArmRow(
+                        experiment_id=arm.experiment_id,
+                        paper=paper,
+                        formulation_id=formulation.formulation_id,
+                        formulation=formulation.cells,
+                        arm_fields=arm.fields,
+                        outcomes=arm.outcomes,
+                        general_usable=general,
+                        nearest_neighbor_ready=arm.nearest_neighbor_eligible,
+                        comet_ready=arm.comet_eligible,
+                        queue_label=queue,
+                        missing_fields=arm.missing_fields,
+                        nearest_neighbor_blockers=arm.nearest_neighbor_blockers,
+                        comet_blockers=arm.comet_blockers,
+                        issues=arm.issues,
+                    ))
+    return tuple(results)
+
+
 __all__ = [
     "ARM_FIELD_COLUMNS",
     "FORMULATION_COLUMNS",
     "OUTCOME_FIELD_COLUMNS",
     "BrowserArm",
+    "BrowserArmRow",
+    "BrowserFilters",
     "BrowserCounts",
     "BrowserEvidence",
     "BrowserField",
@@ -585,5 +716,6 @@ __all__ = [
     "browser_database_path",
     "default_browser_paper_id",
     "list_browser_papers",
+    "list_combined_arm_rows",
     "load_paper_browser",
 ]

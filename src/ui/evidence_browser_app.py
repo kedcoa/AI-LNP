@@ -10,10 +10,12 @@ try:
         FORMULATION_COLUMNS,
         OUTCOME_FIELD_COLUMNS,
         BrowserEvidence,
+        BrowserFilters,
         BrowserField,
         BrowserIssue,
         default_browser_paper_id,
         list_browser_papers,
+        list_combined_arm_rows,
         load_paper_browser,
     )
 except ModuleNotFoundError:
@@ -22,10 +24,12 @@ except ModuleNotFoundError:
         FORMULATION_COLUMNS,
         OUTCOME_FIELD_COLUMNS,
         BrowserEvidence,
+        BrowserFilters,
         BrowserField,
         BrowserIssue,
         default_browser_paper_id,
         list_browser_papers,
+        list_combined_arm_rows,
         load_paper_browser,
     )
 
@@ -146,6 +150,44 @@ def _issue_rows(issues: tuple[BrowserIssue, ...]) -> list[dict[str, str]]:
     ]
 
 
+def _combined_rows(rows: tuple[object, ...]) -> list[dict[str, str]]:
+    rendered: list[dict[str, str]] = []
+    for row in rows:
+        values = {
+            "Paper": row.paper.source_paper_id,  # type: ignore[attr-defined]
+            "Paper title": row.paper.title,  # type: ignore[attr-defined]
+            "DOI / paper link": next(iter(row.paper.links.values()), "NA"),  # type: ignore[attr-defined]
+            "Arm ID": str(row.experiment_id),  # type: ignore[attr-defined]
+        }
+        values.update({
+            COLUMN_LABELS[column]: row.formulation[column].display_value  # type: ignore[attr-defined]
+            for column in FORMULATION_COLUMNS
+        })
+        values.update({
+            "Target cell": row.arm_fields["cell_type"].display_value,  # type: ignore[attr-defined]
+            "Species": row.arm_fields["species"].display_value,  # type: ignore[attr-defined]
+            "Biological model": row.arm_fields["disease_model"].display_value,  # type: ignore[attr-defined]
+            "Payload": row.arm_fields["payload_name"].display_value,  # type: ignore[attr-defined]
+            "Encoded product": row.arm_fields["payload_encoded_product"].display_value,  # type: ignore[attr-defined]
+            "Molecular target": row.arm_fields["payload_molecular_target"].display_value,  # type: ignore[attr-defined]
+            "Dose": row.arm_fields["dose"].display_value,  # type: ignore[attr-defined]
+            "Route": row.arm_fields["route"].display_value,  # type: ignore[attr-defined]
+            "Timepoint": row.arm_fields["timepoint"].display_value,  # type: ignore[attr-defined]
+            "Assay": row.arm_fields["assay"].display_value,  # type: ignore[attr-defined]
+            "Outcomes": row.outcomes_display,  # type: ignore[attr-defined]
+            "General use": "Ready" if row.general_usable else "Not ready",  # type: ignore[attr-defined]
+            "Nearest neighbor": "Ready" if row.nearest_neighbor_ready else "Not ready",  # type: ignore[attr-defined]
+            "COMET": "Ready" if row.comet_ready else "Not ready",  # type: ignore[attr-defined]
+            "COMET blockers": ", ".join(row.comet_blockers) or "None",  # type: ignore[attr-defined]
+            "Missing fields": ", ".join(row.missing_fields) or "None",  # type: ignore[attr-defined]
+            "Automatic-resolution issues": ", ".join(
+                issue.reason_code for issue in row.issues  # type: ignore[attr-defined]
+            ) or "None",
+        })
+        rendered.append(values)
+    return rendered
+
+
 def _render_eligibility(
     nearest: bool,
     comet: bool,
@@ -260,6 +302,7 @@ def main() -> None:
     )
     try:
         papers = list_browser_papers()
+        all_arm_rows = list_combined_arm_rows()
     except Exception as error:
         st.error(f"Could not open the authoritative evidence database: {error}")
         return
@@ -289,6 +332,44 @@ def main() -> None:
                 for paper in visible if paper.paper_id == paper_id
             ),
         )
+        st.divider()
+        st.header("Combined table filters")
+        combined_papers = st.multiselect(
+            "Combined table papers",
+            options=[paper.source_paper_id for paper in papers if paper.counts.arms],
+        )
+        cell_types = sorted({
+            row.arm_fields["cell_type"].value
+            for row in all_arm_rows if row.arm_fields["cell_type"].value
+        })
+        combined_cells = st.multiselect("Cell type", options=cell_types)
+        general_choice = st.selectbox("General use", ("All", "Ready", "Not ready"))
+        nearest_choice = st.selectbox("Nearest-neighbor readiness", ("All", "Ready", "Not ready"))
+        comet_choice = st.selectbox("COMET readiness", ("All", "Ready", "Not ready"))
+        blockers = sorted({
+            blocker for row in all_arm_rows
+            for blocker in (*row.nearest_neighbor_blockers, *row.comet_blockers)
+        })
+        blocker_choice = st.selectbox("Required blocker", ("All", *blockers))
+
+    def ready_filter(value: str) -> bool | None:
+        return None if value == "All" else value == "Ready"
+
+    combined = list_combined_arm_rows(BrowserFilters(
+        paper_ids=tuple(combined_papers),
+        cell_types=tuple(combined_cells),
+        general_usable=ready_filter(general_choice),
+        nearest_neighbor_ready=ready_filter(nearest_choice),
+        comet_ready=ready_filter(comet_choice),
+        blocker=None if blocker_choice == "All" else blocker_choice,
+    ))
+    st.subheader("Combined experimental arms")
+    st.caption(
+        "One row is one experimental arm. Multiple outcomes stay separate in SQLite and are stacked inside the Outcomes cell. NA means the value is absent."
+    )
+    st.dataframe(_combined_rows(combined), hide_index=True, width="stretch")
+    st.caption(f"Showing {len(combined)} of {len(all_arm_rows)} canonical arms.")
+    st.divider()
 
     try:
         view = load_paper_browser(int(selected_id))

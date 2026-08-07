@@ -273,3 +273,53 @@ def test_default_browser_paper_skips_screening_only_empty_paper() -> None:
     )
 
     assert service.default_browser_paper_id((empty, rich)) == 2
+
+
+def test_combined_table_has_one_row_per_arm_and_stacked_outcomes(
+    monkeypatch: pytest.MonkeyPatch, evidence_browser_database: Path,
+) -> None:
+    from src.ui import evidence_browser_service as service
+
+    with sqlite3.connect(evidence_browser_database) as connection:
+        connection.execute(
+            """
+            INSERT INTO outcome (
+                experiment_id,endpoint_family,endpoint_name,qualitative_outcome,
+                value_status
+            ) VALUES (1,'toxicity','Tolerability','No toxicity observed','reported')
+            """
+        )
+        connection.commit()
+    monkeypatch.setattr(service, "browser_database_path", lambda: evidence_browser_database)
+
+    rows = service.list_combined_arm_rows()
+
+    assert len(rows) == 2
+    arm = next(row for row in rows if len(row.outcomes) == 2)
+    assert arm.outcomes[0].outcome_id != arm.outcomes[1].outcome_id
+    assert "Luciferase expression" in arm.outcomes_display
+    assert "Tolerability" in arm.outcomes_display
+    assert tuple(arm.formulation) == service.FORMULATION_COLUMNS
+    assert arm.formulation["lnp_molar_ratio"].display_value == "50:10:38.5:1.5"
+
+
+def test_combined_table_keeps_missing_ratio_visible_with_comet_blocker(
+    monkeypatch: pytest.MonkeyPatch, evidence_browser_database: Path,
+) -> None:
+    from src.ui import evidence_browser_service as service
+
+    with sqlite3.connect(evidence_browser_database) as connection:
+        connection.execute(
+            "UPDATE experiment SET formulation_id=2 WHERE experiment_id=2"
+        )
+        connection.execute(
+            "UPDATE eligibility_result SET reasons_json=? "
+            "WHERE experiment_id=2 AND profile='comet'",
+            (json.dumps(["lnp_molar_ratio"]),),
+        )
+        connection.commit()
+    monkeypatch.setattr(service, "browser_database_path", lambda: evidence_browser_database)
+
+    row = next(row for row in service.list_combined_arm_rows() if row.experiment_id == 2)
+    assert row.formulation["lnp_molar_ratio"].display_value == "NA"
+    assert "lnp_molar_ratio" in row.comet_blockers
