@@ -808,20 +808,6 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             arm_id=arm_id, outcome_id=outcome_id,
         )
 
-    removed_arm_ids = {row.record_id for row in bundle.arms}
-    retained_evidence = tuple(
-        row for row in bundle.evidence if row.arm_id not in removed_arm_ids
-    )
-    removed_outcome_ids = {row.record_id for row in bundle.outcomes}
-    retained_reviews = tuple(
-        row for row in bundle.reviews
-        if row.arm_id not in removed_arm_ids
-        and row.outcome_id not in removed_outcome_ids
-    )
-    retained_links = tuple(
-        row for row in retained_links
-        if row.entity_type not in {"arm", "outcome"}
-    )
     return ImportBundle(
         paper=bundle.paper,
         artifacts=(*bundle.artifacts, *annotation_artifacts),
@@ -830,11 +816,11 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             for row in bundle.formulations
         ),
         components=(*retained_components, *added_components),
-        arms=tuple(gold_arms),
-        outcomes=tuple(gold_outcome_records),
-        evidence=(*retained_evidence, *added_evidence, *gold_evidence),
+        arms=(*bundle.arms, *gold_arms),
+        outcomes=(*bundle.outcomes, *gold_outcome_records),
+        evidence=(*bundle.evidence, *added_evidence, *gold_evidence),
         field_evidence_links=(*retained_links, *added_links, *gold_links),
-        reviews=retained_reviews,
+        reviews=bundle.reviews,
     )
 
 
