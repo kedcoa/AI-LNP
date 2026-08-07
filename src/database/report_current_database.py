@@ -28,7 +28,10 @@ DEFINITIONS = {
     "evidence_records": "Deduplicated canonical evidence records.",
     "nearest_neighbor_ready_arms": "Arms passing the fixed nearest-neighbor eligibility rules.",
     "comet_ready_arms": "Arms passing the stricter COMET eligibility rules.",
+    "almost_comet_ready_arms": "Evidence-backed, non-conflict arms failing COMET v3 on only one to three fields.",
     "unresolved_review_items": "Visible import-review rows whose status remains incomplete, conflict, quarantined, or blocked.",
+    "unresolved_automatic_items": "Open relationship or normalization items for automatic repair; these are not a general-use human gate.",
+    "human_adjudication_items": "Open scientific conflicts that require a human scientific decision.",
 }
 
 
@@ -125,7 +128,28 @@ def report_current_database(
         "comet_ready_arms": scalar(
             "SELECT count(*) FROM eligibility_result WHERE profile='comet' AND eligible=1"
         ),
+        "almost_comet_ready_arms": scalar(
+            """SELECT count(*) FROM eligibility_result r
+               JOIN arm_assessment a USING(experiment_id)
+               WHERE r.profile='comet' AND r.eligible=0
+                 AND json_array_length(r.reasons_json) BETWEEN 1 AND 3
+                 AND a.completeness_status NOT IN ('conflict','quarantined')
+                 AND EXISTS (
+                   SELECT 1 FROM evidence e WHERE e.experiment_id=r.experiment_id
+                     AND length(trim(coalesce(e.evidence_text,'')))>0
+                     AND e.evidence_review_status NOT IN ('rejected','conflict','ambiguous')
+                 )"""
+        ),
         "unresolved_review_items": scalar("SELECT count(*) FROM import_review"),
+        "unresolved_automatic_items": scalar(
+            """SELECT count(*) FROM import_review
+               WHERE review_status IN ('incomplete','quarantined','blocked')
+                 AND reason_code NOT LIKE '%conflict%'"""
+        ),
+        "human_adjudication_items": scalar(
+            """SELECT count(*) FROM import_review
+               WHERE review_status='conflict' OR reason_code LIKE '%conflict%'"""
+        ),
     }
     per_paper = []
     for paper_id, source_id in connection.execute(

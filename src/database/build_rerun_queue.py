@@ -96,15 +96,27 @@ def audit_database_gaps(
 ) -> tuple[GapRecord, ...]:
     """Return every canonical arm gap with an explicit non-overlapping cause."""
 
+    has_identity = connection.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' "
+        "AND name='import_record_identity'"
+    ).fetchone() is not None
+    identity_value = (
+        "coalesce(json_extract(i.content_json,'$.record.record_id'),'')"
+        if has_identity else "''"
+    )
+    identity_join = (
+        "LEFT JOIN import_record_identity i "
+        "ON i.entity_type='experiment' AND i.entity_id=e.experiment_id"
+        if has_identity else ""
+    )
     rows = connection.execute(
-        """
+        f"""
         SELECT p.source_paper_id,e.experiment_id,
-               coalesce(json_extract(i.content_json,'$.record.record_id'),''),
+               {identity_value},
                a.completeness_status,a.missing_fields_json
         FROM experiment e JOIN paper p USING(paper_id)
         JOIN arm_assessment a USING(experiment_id)
-        LEFT JOIN import_record_identity i
-          ON i.entity_type='experiment' AND i.entity_id=e.experiment_id
+        {identity_join}
         WHERE json_array_length(a.missing_fields_json)>0
         ORDER BY p.source_paper_id,e.experiment_id
         """

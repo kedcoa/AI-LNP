@@ -64,7 +64,7 @@ def test_evidence_browser_app_renders_fixture_without_writing(
     assert not app.exception
     assert any(item.value == "LNP formulations" for item in app.subheader)
     assert any(item.label == "Paper" for item in app.selectbox)
-    assert app.selectbox[0].value == 1
+    assert next(item for item in app.selectbox if item.label == "Paper").value == 1
     assert app.dataframe
     assert any(item.label == "Save correction" for item in app.button)
     assert before == after

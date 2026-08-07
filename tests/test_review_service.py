@@ -204,7 +204,7 @@ def review_database(tmp_path: Path) -> Path:
 
 
 def test_authoritative_database_path_uses_common_checkout_resolver() -> None:
-    from src.database.audit_current_database import CANONICAL_AUTHORITATIVE_DATABASE
+    from src.database.paths import CANONICAL_AUTHORITATIVE_DATABASE
     from src.ui.review_service import authoritative_database_path
 
     assert authoritative_database_path() == CANONICAL_AUTHORITATIVE_DATABASE

@@ -5,11 +5,6 @@ from __future__ import annotations
 import streamlit as st
 
 try:
-    from src.ui import review_service
-except ModuleNotFoundError:
-    import review_service  # type: ignore[no-redef]
-
-try:
     from src.ui.evidence_browser_service import (
         ARM_FIELD_COLUMNS,
         FORMULATION_COLUMNS,
@@ -37,6 +32,11 @@ except ModuleNotFoundError:
         list_combined_arm_rows,
         load_paper_browser,
     )
+
+try:
+    from src.ui import review_service
+except ModuleNotFoundError:
+    import review_service  # type: ignore[no-redef]
 
 
 COLUMN_LABELS = {
@@ -561,7 +561,9 @@ def main() -> None:
         st.subheader("Paper-level automatic-resolution issues")
         st.dataframe(_issue_rows(view.issues), hide_index=True, width="stretch")
 
-    st.caption("Read-only browser · no review decisions or database writes are available")
+    st.caption(
+        "Combined evidence tables are read-only · COMET corrections are append-only and backed up before saving"
+    )
 
 
 main()

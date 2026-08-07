@@ -11,7 +11,7 @@ from pathlib import Path
 import sqlite3
 from typing import Literal
 
-from src.database.audit_current_database import CANONICAL_AUTHORITATIVE_DATABASE
+from src.database.paths import CANONICAL_AUTHORITATIVE_DATABASE
 from src.database.database_lifecycle import backup_database
 from src.database.migrations import MIGRATION_VERSION
 from src.database.status import (

@@ -15,7 +15,8 @@ REQUIRED_COUNTS = {
     "source_fact_occurrences", "canonical_facts", "experimental_arms",
     "outcomes", "source_evidence_occurrences", "evidence_records",
     "nearest_neighbor_ready_arms", "comet_ready_arms",
-    "unresolved_review_items",
+    "almost_comet_ready_arms", "unresolved_review_items",
+    "unresolved_automatic_items", "human_adjudication_items",
 }
 
 
