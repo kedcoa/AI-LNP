@@ -77,6 +77,8 @@ class FormulationRecord:
     paper_id: str
     artifact_id: str
     formulation_name: str | None = None
+    chemical_formulation_total: str | None = None
+    lnp_molar_ratio: str | None = None
     composition_raw: str | None = None
     composition_basis: str | None = None
     np_ratio: float | None = None
@@ -99,6 +101,10 @@ class ComponentRecord:
     component_review_status: str = "unreviewed"
     identity_source: str | None = None
     identity_notes: str | None = None
+    amount_value: float | None = None
+    amount_unit: str | None = None
+    amount_raw: str | None = None
+    composition_position: int | None = None
 
 
 @dataclass(frozen=True)
@@ -375,12 +381,15 @@ def _validate_bundle(bundle: ImportBundle) -> None:
             raise ValueError(
                 f"component {record.record_id} references unknown formulation"
             )
+        _validate_number("amount_value", record.amount_value, minimum=0)
         _validate_number(
             "molar_percentage",
             record.molar_percentage,
             minimum=0,
             maximum=100,
         )
+        if record.composition_position is not None and record.composition_position < 1:
+            raise ValueError("composition_position must be a positive integer")
     for record in bundle.arms:
         if record.formulation_id not in formulations:
             raise ValueError(f"arm {record.record_id} references unknown formulation")

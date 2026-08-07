@@ -906,14 +906,17 @@ def _insert_formulation(
         connection.execute(
             """
             INSERT INTO formulation (
-                paper_id, formulation_name, composition_raw,
+                paper_id, formulation_name, chemical_formulation_total,
+                lnp_molar_ratio, composition_raw,
                 composition_basis, np_ratio, formulation_notes,
                 formulation_review_status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 paper_id,
                 record.formulation_name,
+                record.chemical_formulation_total,
+                record.lnp_molar_ratio,
                 record.composition_raw,
                 record.composition_basis,
                 record.np_ratio,
@@ -936,8 +939,9 @@ def _insert_component(
                 formulation_id, component_name_reported,
                 component_name_normalized, component_role, inchikey,
                 molar_percentage, percentage_unit, component_review_status,
-                identity_source, identity_notes
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                identity_source, identity_notes, amount_value, amount_unit,
+                amount_raw, composition_position
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 formulation_id,
@@ -950,6 +954,10 @@ def _insert_component(
                 record.component_review_status,
                 record.identity_source,
                 record.identity_notes,
+                record.amount_value,
+                record.amount_unit,
+                record.amount_raw,
+                record.composition_position,
             ),
         ).lastrowid
     )

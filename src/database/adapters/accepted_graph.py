@@ -5,6 +5,8 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import csv
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +21,13 @@ from src.database.import_contracts import (
     PaperRecord,
     ReviewRecord,
     SourceArtifactRecord,
+)
+from src.database.lossless_adapter import AdapterCoverage, LosslessAdapterResult
+from src.database.scientific_identity import fact_identity
+from src.database.source_fact_import import (
+    SourceArtifactRecord as LedgerArtifactRecord,
+    SourceFactEvidenceRecord,
+    SourceFactRecord,
 )
 
 
@@ -391,6 +400,370 @@ def adapt_accepted_graph(
     )
 
 
+def _repository_root(path: Path) -> Path | None:
+    for candidate in (path.resolve(), *path.resolve().parents):
+        if (candidate / "src/database").is_dir() and (candidate / "data").is_dir():
+            return candidate
+    return None
+
+
+def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
+    formulations_path = root / "data/annotations/gold_v1/formulations.csv"
+    components_path = root / "data/annotations/gold_v1/components.csv"
+    if not formulations_path.is_file() or not components_path.is_file():
+        return bundle
+    with formulations_path.open(encoding="utf-8", newline="") as handle:
+        formulation_rows = list(csv.DictReader(handle))
+    gold = next(
+        (
+            row
+            for row in formulation_rows
+            if row["gold_paper_id"] == bundle.paper.source_paper_id
+        ),
+        None,
+    )
+    if gold is None:
+        return bundle
+    target = next(
+        (
+            row
+            for row in bundle.formulations
+            if (
+                bundle.paper.source_paper_id != "GP-005"
+                or "lnp1" in (row.formulation_name or "").casefold()
+            )
+            and (
+                bundle.paper.source_paper_id != "GP-008"
+                or "fapcar" in (row.formulation_name or "").casefold()
+                and (row.formulation_name or "").startswith("α")
+            )
+        ),
+        bundle.formulations[0],
+    )
+    composition = gold["composition_raw"].strip()
+    left, _, right = composition.partition("=")
+    ratio = right.split(";", 1)[0].strip() or None
+    total = left.strip().replace(":", "-").replace(" / ", "-") or None
+    enriched_target = replace(
+        target,
+        composition_raw=composition,
+        composition_basis=gold["composition_basis"].strip() or None,
+        chemical_formulation_total=total,
+        lnp_molar_ratio=ratio,
+        formulation_review_status=gold["formulation_review_status"],
+    )
+
+    annotation_artifacts = (
+        SourceArtifactRecord(
+            artifact_id=f"{bundle.paper.source_paper_id}:gold-formulations",
+            path="data/annotations/gold_v1/formulations.csv",
+            sha256=_sha256(formulations_path),
+            source_kind="manual_transcription",
+            pipeline_name="gold_v1_human_annotation",
+            pipeline_version="v1",
+        ),
+        SourceArtifactRecord(
+            artifact_id=f"{bundle.paper.source_paper_id}:gold-components",
+            path="data/annotations/gold_v1/components.csv",
+            sha256=_sha256(components_path),
+            source_kind="manual_transcription",
+            pipeline_name="gold_v1_human_annotation",
+            pipeline_version="v1",
+        ),
+    )
+    formulation_evidence_id = f"{bundle.paper.source_paper_id}:GOLD:FORM"
+    added_evidence = [
+        EvidenceRecord(
+            record_id=formulation_evidence_id,
+            paper_id=bundle.paper.source_paper_id,
+            artifact_id=annotation_artifacts[0].artifact_id,
+            field_name="composition_raw",
+            evidence_location_type="table",
+            extraction_method="manual",
+            extraction_confidence="high",
+            evidence_text=composition,
+            table_number="gold_v1/formulations.csv",
+            verification_status="manually_verified",
+        )
+    ]
+    added_links = [
+        FieldEvidenceLink(
+            bundle.paper.source_paper_id,
+            "formulation",
+            target.record_id,
+            field_name,
+            (formulation_evidence_id,),
+            "manually_verified",
+        )
+        for field_name in ("composition_raw", "composition_basis")
+        if getattr(enriched_target, field_name) is not None
+    ]
+
+    with components_path.open(encoding="utf-8", newline="") as handle:
+        component_rows = [
+            row
+            for row in csv.DictReader(handle)
+            if row["gold_formulation_id"] == gold["gold_formulation_id"]
+        ]
+    role_map = {
+        "sterol": "cholesterol",
+        "targeting_or_tracer_polymer": "other",
+        "payload": "other",
+    }
+    added_components: list[ComponentRecord] = []
+    for position, row in enumerate(component_rows, start=1):
+        percentage = (
+            float(row["molar_percentage"])
+            if row["molar_percentage"].strip()
+            else None
+        )
+        component_id = f"{bundle.paper.source_paper_id}:GOLD:{row['gold_component_id']}"
+        role = role_map.get(row["component_role"], row["component_role"])
+        added_components.append(
+            ComponentRecord(
+                record_id=component_id,
+                paper_id=bundle.paper.source_paper_id,
+                artifact_id=annotation_artifacts[1].artifact_id,
+                formulation_id=target.record_id,
+                component_name_reported=row["component_name_reported"],
+                component_name_normalized=row["component_name_normalized"] or None,
+                component_role=role,
+                molar_percentage=percentage,
+                percentage_unit="mol%" if percentage is not None else None,
+                component_review_status="manually_verified",
+                identity_source=row["identity_source"] or None,
+                identity_notes=row["notes"] or None,
+                amount_value=percentage,
+                amount_unit="mol%" if percentage is not None else None,
+                amount_raw=row["molar_percentage"] or None,
+                composition_position=position,
+            )
+        )
+        evidence_id = f"{bundle.paper.source_paper_id}:GOLD:{row['gold_component_id']}:EV"
+        added_evidence.append(
+            EvidenceRecord(
+                record_id=evidence_id,
+                paper_id=bundle.paper.source_paper_id,
+                artifact_id=annotation_artifacts[1].artifact_id,
+                field_name="component_name_reported",
+                evidence_location_type="table",
+                extraction_method="manual",
+                extraction_confidence="high",
+                evidence_text=(
+                    f"{row['component_name_reported']}; {row['molar_percentage']} "
+                    f"{row['percentage_unit']}"
+                ).strip(),
+                table_number="gold_v1/components.csv",
+                verification_status="manually_verified",
+            )
+        )
+        for field_name, value in (
+            ("component_name_reported", row["component_name_reported"]),
+            ("component_name_normalized", row["component_name_normalized"]),
+            ("component_role", role),
+            ("molar_percentage", percentage),
+            ("percentage_unit", "mol%" if percentage is not None else None),
+        ):
+            if value is not None and value != "":
+                added_links.append(
+                    FieldEvidenceLink(
+                        bundle.paper.source_paper_id,
+                        "component",
+                        component_id,
+                        field_name,
+                        (evidence_id,),
+                        "manually_verified",
+                    )
+                )
+    if bundle.paper.source_paper_id == "GP-008":
+        for offset, (name, role) in enumerate(
+            (
+                ("DSPE-PEG-maleimide", "targeting_anchor"),
+                ("anti-CD163 antibody", "targeting_ligand"),
+                ("antibody:LNP 1:20", "other"),
+            ),
+            start=len(added_components) + 1,
+        ):
+            component_id = f"GP-008:GOLD:OTHER:{offset}"
+            added_components.append(
+                ComponentRecord(
+                    record_id=component_id,
+                    paper_id="GP-008",
+                    artifact_id=annotation_artifacts[1].artifact_id,
+                    formulation_id=target.record_id,
+                    component_name_reported=name,
+                    component_role=role,
+                    component_review_status="manually_verified",
+                    composition_position=offset,
+                )
+            )
+            evidence_id = f"{component_id}:EV"
+            added_evidence.append(
+                EvidenceRecord(
+                    record_id=evidence_id,
+                    paper_id="GP-008",
+                    artifact_id=annotation_artifacts[1].artifact_id,
+                    field_name="component_name_reported",
+                    evidence_location_type="supplement",
+                    extraction_method="manual",
+                    extraction_confidence="high",
+                    evidence_text=name,
+                    supplement_identifier="pnas.2534673123.sapp.pdf",
+                    verification_status="manually_verified",
+                )
+            )
+            for field_name in ("component_name_reported", "component_role"):
+                added_links.append(
+                    FieldEvidenceLink(
+                        "GP-008", "component", component_id, field_name,
+                        (evidence_id,), "manually_verified"
+                    )
+                )
+    retained_components = tuple(
+        row for row in bundle.components if row.formulation_id != target.record_id
+    )
+    removed_component_ids = {
+        row.record_id
+        for row in bundle.components
+        if row.formulation_id == target.record_id
+    }
+    retained_links = tuple(
+        row
+        for row in bundle.field_evidence_links
+        if not (
+            row.entity_type == "component"
+            and row.entity_id in removed_component_ids
+        )
+    )
+    return ImportBundle(
+        paper=bundle.paper,
+        artifacts=(*bundle.artifacts, *annotation_artifacts),
+        formulations=tuple(
+            enriched_target if row.record_id == target.record_id else row
+            for row in bundle.formulations
+        ),
+        components=(*retained_components, *added_components),
+        arms=bundle.arms,
+        outcomes=bundle.outcomes,
+        evidence=(*bundle.evidence, *added_evidence),
+        field_evidence_links=(*retained_links, *added_links),
+        reviews=bundle.reviews,
+    )
+
+
+def adapt_accepted_graph_losslessly(
+    graph_path: str | Path,
+    **metadata: str | None,
+) -> LosslessAdapterResult:
+    """Account for every accepted-graph record before normalized projection."""
+
+    path = Path(graph_path)
+    graph = json.loads(path.read_text(encoding="utf-8"))
+    bundle = adapt_accepted_graph(path, **metadata)
+    root = _repository_root(path)
+    if root is not None:
+        bundle = _gold_enriched_bundle(bundle, root)
+    paper_id = str(graph["paper_id"])
+    ledger_artifact = LedgerArtifactRecord(
+        paper_id=paper_id,
+        logical_path=(
+            path.resolve().relative_to(root).as_posix()
+            if root is not None
+            else path.as_posix()
+        ),
+        sha256=_sha256(path),
+        role="primary_extraction",
+        schema_family="accepted_graph",
+        validation_status="accepted",
+        contributes_facts=True,
+        contributes_evidence=True,
+        pipeline_name="g1_fulltext_rag",
+        pipeline_version=str(graph.get("contract_version") or "unknown"),
+    )
+    facts: list[SourceFactRecord] = []
+    for index, entity in enumerate(graph.get("entities", [])):
+        key = str(entity.get("entity_id") or f"entity-{index}")
+        field_name = f"entity:{entity.get('entity_type') or 'unknown'}"
+        facts.append(
+            SourceFactRecord(
+                json_path=f"$.entities[{index}]",
+                source_record_key=key,
+                record_kind="entity",
+                subject_type=str(entity.get("entity_type") or "unknown"),
+                subject_key=key,
+                field_name=field_name,
+                raw_value=entity,
+                fact_identity_sha256=fact_identity(
+                    paper_id, "entity", key, field_name, entity
+                ),
+                import_disposition="unresolved",
+                disposition_reason="awaiting normalized entity projection",
+            )
+        )
+    for index, claim in enumerate(graph.get("claims", [])):
+        key = str(claim.get("claim_id") or f"claim-{index}")
+        predicate = str(claim.get("predicate") or "unknown_predicate")
+        supported = predicate in SUPPORTED_PREDICATES
+        evidence_refs = tuple(
+            SourceFactEvidenceRecord(
+                source_evidence_key=str(item.get("clause_id") or f"{key}:{offset}"),
+                resolution_status="unresolved",
+                resolution_reason="awaiting canonical evidence import",
+            )
+            for offset, item in enumerate(claim.get("evidence", []))
+        )
+        facts.append(
+            SourceFactRecord(
+                json_path=f"$.claims[{index}]",
+                source_record_key=key,
+                record_kind="claim",
+                subject_type="claim",
+                subject_key=str(claim.get("subject_entity_id") or key),
+                field_name=FIELD_BY_PREDICATE.get(predicate, predicate),
+                raw_value=claim,
+                fact_identity_sha256=fact_identity(
+                    paper_id, "claim", key, predicate, claim
+                ),
+                import_disposition="unresolved" if supported else "quarantined",
+                disposition_reason=(
+                    "awaiting normalized claim projection"
+                    if supported
+                    else f"unsupported accepted-graph predicate: {predicate}"
+                ),
+                evidence=evidence_refs,
+            )
+        )
+    for index, experiment in enumerate(graph.get("experiments", [])):
+        key = str(experiment.get("experiment_id") or f"experiment-{index}")
+        facts.append(
+            SourceFactRecord(
+                json_path=f"$.experiments[{index}]",
+                source_record_key=key,
+                record_kind="experiment",
+                subject_type="experiment",
+                subject_key=key,
+                field_name="experiment_membership",
+                raw_value=experiment,
+                fact_identity_sha256=fact_identity(
+                    paper_id, "experiment", key, "experiment_membership", experiment
+                ),
+                import_disposition="unresolved",
+                disposition_reason="awaiting normalized arm projection",
+            )
+        )
+    return LosslessAdapterResult(
+        bundle=bundle,
+        artifact=ledger_artifact,
+        source_facts=tuple(facts),
+        coverage=AdapterCoverage(
+            source_entities=len(graph.get("entities", [])),
+            source_claims=len(graph.get("claims", [])),
+            source_experiments=len(graph.get("experiments", [])),
+            silent_omissions=0,
+        ),
+    )
+
+
 def generate_gp_bundles(repository_root: str | Path, output_dir: str | Path) -> tuple[Path, ...]:
     """Generate the six supported GP bundles from committed local artifacts."""
 
@@ -421,4 +794,10 @@ if __name__ == "__main__":
     generate_gp_bundles(repo, repo / "data/staging/database/day2_bundles/gp")
 
 
-__all__ = ["SCREENING_ONLY", "SUPPORTED_GP", "adapt_accepted_graph", "generate_gp_bundles"]
+__all__ = [
+    "SCREENING_ONLY",
+    "SUPPORTED_GP",
+    "adapt_accepted_graph",
+    "adapt_accepted_graph_losslessly",
+    "generate_gp_bundles",
+]
