@@ -1,210 +1,233 @@
 # AI-LNP
 
-AI-LNP is a literature-grounded system for finding and comparing lipid
-nanoparticle (LNP) evidence for hepatocytes, Kupffer cells, liver sinusoidal
-endothelial cells (LSECs), and hepatic stellate cells (HSCs).
+AI-LNP is a literature-grounded pipeline for finding, extracting, validating,
+and comparing lipid nanoparticle (LNP) evidence involving hepatocytes, Kupffer
+cells, liver sinusoidal endothelial cells (LSECs), and hepatic stellate cells
+(HSCs).
 
-The current engineering priority is reliable evidence recovery: every accepted
-record must preserve its paper, experiment, biological context, outcome,
-source location, and exact supporting evidence.
+## Live read-only database
 
-## Current status
+**[Open the AI-LNP mentor evidence browser](https://ai-lnp-mentor-snapshot.streamlit.app/)**
 
-The compact extraction workflow has been implemented and tested on nine
-open-access gold-set papers.
+The public app is hosted by Streamlit Community Cloud. It does not depend on a
+local computer remaining powered on. The app may take a moment to wake after a
+period without visitors, but closing the development laptop does not shut it
+down.
 
-| Measure | Current result |
+The deployed app is a frozen, read-only snapshot. It contains no correction,
+review-submission, or database-writing controls.
+
+## v5.2 status
+
+The v5.2 database passed SQLite integrity and foreign-key checks. These counts
+describe different scientific objects and must not be combined:
+
+| Measure | v5.2 result |
 |---|---:|
-| Gold papers | 9 |
-| Gold outcome records | 15 |
-| Final recovered outcome records | 10/15 (66.7%) |
-| Missing outcome records | 5/15 (33.3%) |
-| Local candidate-inventory recall | 15/15 |
-| Current quality-gate status | **Not passed** |
+| Manifest papers | 14 |
+| Named formulation rows | 28 |
+| Unique chemical formulations | 17 |
+| Complete formulations | 21 |
+| Incomplete formulations | 7 |
+| Chemical components | 115 |
+| Canonical source facts | 1,823 |
+| Source-fact occurrences retained in the lossless ledger | 45,938 |
+| Experimental arms | 48 |
+| Outcomes | 114 |
+| Evidence records | 518 |
+| General-use-ready arms | 38 |
+| Nearest-neighbor-ready arms | 32 |
+| COMET-ready arms | 4 |
+| Unresolved automatic review items | 24 |
+| Human scientific-conflict items | 0 |
 
-The 15/15 candidate-inventory result means local code can flag evidence groups
-that may represent outcomes. It does **not** mean those outcomes have been
-correctly extracted, validated, and merged. The final recovery result remains
-10/15, so the compact route is not yet reliable enough for unattended database
-expansion.
+“Manifest papers” includes screening-only paper dispositions. A formulation
+row is a reported formulation identity; a unique chemical formulation is a
+deduplicated component-and-amount fingerprint. Facts, evidence records,
+experimental arms, and outcomes are separate database objects.
 
-## Current compact workflow
+The frozen public snapshot has SHA-256:
 
-```text
-paper retrieval
-  -> ingestion and provenance-preserving parsing
-  -> lexical + semantic retrieval
-  -> full local evidence inventory
-  -> compact API packet
-  -> local complexity assessment
-  -> first structured LLM extraction
-  -> ordinary schema/evidence validation
-  -> complex-paper candidate and coverage check
-  -> route unmatched or invalid evidence
-       -> narrow text repair
-       -> targeted table/figure vision
-       -> human review when ambiguous
-  -> deterministic merge
-  -> validation and coverage recheck
-  -> final result
-  -> gold-set evaluation
-```
+`d183c0065126fc2e14e7dcc9a07d9be75b822b0a679bc4aa8e40d44a01064725`
 
-### Main files
+## What changed in v5.2
 
-| Stage | Main file(s) | Purpose |
-|---|---|---|
-| Ingestion | `src/rag/ingestion.py`, `src/rag/run_pipeline.py` | Parse papers and retain source coordinates and provenance. |
-| Compact packet | `src/rag/compact_api_packet.py` | Select high-value evidence while recording what the token budget excludes. |
-| Complexity | `src/extraction/assess_outcome_complexity.py` | Classify a packet locally before extraction so complex papers receive coverage checking. |
-| First extraction | `src/extraction/run_compact_one_call.py` | Make the first structured extraction call and save its candidate, validation, complexity, and coverage artifacts. |
-| Ordinary validation | `src/extraction/compact_validation.py` | Check schema, identifiers, links, field states, and evidence references. |
-| Outcome inventory | `build_full_outcome_inventory.py`, `build_outcome_candidates.py`, `consolidate_outcome_candidates.py` | Detect and deduplicate possible outcome groups using the larger local evidence view. |
-| Coverage | `src/extraction/check_outcome_coverage.py` | Compare extracted records with candidate groups and keep unmatched groups explicit. |
-| Routing | `src/extraction/route_compact_findings.py` | Separate field errors, missing text outcomes, missing visual outcomes, and ambiguous cases. |
-| Text repair | `run_narrow_repair.py`, `run_missing_record_repair.py` | Repair one bounded field or recover one missing text-supported record. |
-| Vision repair | `build_missing_record_vision_tasks.py`, `run_missing_record_vision.py` | Send only a targeted figure/table image and small context packet for visual recovery. |
-| Merge | `merge_compact_results.py`, `merge_missing_records.py`, `merge_consolidated_gap_results.py` | Merge validated additions without overwriting the original extraction. |
-| Final evaluation | `src/extraction/evaluate_final_gold_dynamic.py` | Measure one-to-one recovery from the actual merged records. |
-
-No validation or candidate-counting step automatically triggers a paid call.
-Call-running commands require explicit confirmation and cache completed
-responses to prevent accidental duplicate spending.
-
-## Why the current result is not ideal
-
-The compact packet reduced input cost, but it sometimes compressed a large
-paper into too small or too text-oriented an evidence view. Schema validation
-could prove that returned JSON was well formed, but it could not prove that the
-model had returned every experiment in the paper. The later candidate and
-coverage checks exposed silent omissions, yet detecting a missing group did not
-itself reconstruct the exact table cells, figure labels, panel relationships,
-or experiment boundaries needed for a final record.
-
-Repeated recovery prompts could not reliably fix evidence that had never been
-converted into a clear machine-readable form. This is why the next improvement
-is structural document parsing and targeted local vision, rather than simply
-sending more of the PDF to an LLM.
-
-## Next extraction improvement: Docling + local VLM
-
-The planned extraction route is:
+The current workflow is designed to prevent information from disappearing
+between source JSON and SQLite:
 
 ```text
-PDF / XML / supplements
-  -> Docling document structure
-       -> sections, captions, tables, cells, reading order
-       -> figure and table object boundaries
-  -> local vision-language model (Ollama + Gemma)
-       -> printed labels and numeric values
-       -> panel, legend, marker, and spatial relationships
-       -> explicit uncertainty/abstention
-  -> structured visual observations
-  -> compact evidence packet containing only relevant observations
-  -> LLM normalization into project contracts
-  -> deterministic validation, coverage, and merge
+paper discovery and screening
+  -> full text, supplement, and source-asset retrieval
+  -> schema-specific JSON adapters
+  -> immutable source-fact ledger
+  -> evidence and provenance links
+  -> deterministic arm and outcome projection
+  -> shared paper/experiment context propagation
+  -> scientific deduplication
+  -> wide LNP formulation projection
+  -> readiness calculation
+  -> SQLite audits and read-only Streamlit browser
 ```
 
-Docling should recover layout and table structure. The local VLM should inspect
-only the figures or table regions that require visual interpretation. Its
-output should be structured observations—not unconstrained conclusions—and
-must preserve object, panel, row, column, label, value, unit, and image
-coordinates. Exact values are accepted only when visibly printed or
-deterministically derived; estimates and ambiguity go to human review.
+Important v5.2 behavior:
 
-This approach can improve recall without sending every page to a paid model.
-It must still be benchmarked against all 15 gold outcomes before it is trusted.
+- Every contributing artifact is registered with its paper, schema family,
+  hash, role, and provenance.
+- Accepted graph JSON, NP result JSON, and pilot paper-map JSON use explicit
+  adapters instead of one lossy generic importer.
+- Source facts are retained before projection, including facts that cannot yet
+  become an arm or outcome field.
+- Evidence reported in a contributing JSON artifact is audited against the
+  SQLite source-fact and evidence tables.
+- Shared experimental context can be propagated across arms when the paper
+  reports setup information once for a group of experiments.
+- Experimental arms are deduplicated by scientific identity rather than raw
+  JSON node identity.
+- Multiple outcomes remain separate in SQLite and are displayed together in
+  one arm row in the main browser.
+- Missing values remain `NA`; the pipeline does not invent unsupported values.
 
-## Expanding literature discovery
+No validation, audit, or screening command silently initiates a paid provider
+call. Paid calls require exact request-hash approval.
 
-The discovery stage should expand beyond PubMed and Europe PMC while retaining
-deduplication and a complete search manifest.
+## LNP formulation projection
+
+The wide formulation view uses the approved order:
 
 ```text
-cell-specific query families
-  -> PubMed + Europe PMC
-  -> OpenAlex discovery and citation graph
-  -> semantic similarity search
-  -> backward references + forward citations
-  -> DOI / PMID / PMCID / title normalization
-  -> deduplication
-  -> screening and source-priority ranking
+lnp_name
+chemical_formulation_total
+lnp_molar_ratio
+ionizable_lipid
+helper_lipid
+cholesterol
+peg_lipid
+others
 ```
 
-- **OpenAlex** broadens discovery, supplies citation relationships, and can find
-  relevant papers that use different terminology.
-- **Semantic search** retrieves conceptually related work rather than relying
-  only on exact keywords. Semantic Scholar may be evaluated subject to its
-  current API terms and rate limits.
-- **Backward and forward citation chaining** finds foundational and follow-up
-  studies from already relevant papers.
-- **LNP databases and atlases** are useful as formulation and nearest-neighbor
-  leads. Their entries should not be treated as complete outcome evidence unless
-  they link back to a verifiable primary paper.
+One formulation stays on one wide row. Individual components and their
+evidence remain normalized internally so the database can preserve provenance,
+deduplicate chemistry, and rebuild the wide view deterministically.
 
-Every source must preserve query text, filters, pagination, retrieval date,
-identifiers, raw response provenance, and deduplication decisions.
+## Readiness definitions
 
-## Full-text access
+General-use readiness requires the following supported fields:
 
-Use the following lawful priority order:
+- chemical formulation (total);
+- LNP molar ratio;
+- target cell or recipient organ;
+- species;
+- payload;
+- dose;
+- route;
+- outcome;
+- timepoint.
 
-1. PMC, Europe PMC, publisher open access, and author manuscripts.
-2. DOI and repository lookup, including institutional repositories.
-3. Unpaywall-style open-access resolution.
-4. University-library link resolver, proxy, or VPN using the user's authorized
-   institutional account.
-5. Interlibrary loan or an author copy when no accessible full text exists.
-6. Abstract-only processing with an explicit full-text-unavailable status.
+Individual component slots, biological model, encoded product, and molecular
+target are useful but are not general-use blockers when the required
+formulation and experiment evidence is already present.
 
-The system may help navigate a university library session that the user has
-opened and authenticated, but it must not store credentials, bypass access
-controls, or redistribute licensed PDFs. Licensed papers and derived evidence
-must follow the institution's terms.
+Nearest-neighbor and COMET readiness use separate versioned rules. COMET is
+intentionally stricter and may require evidence review; that review requirement
+does not block the general application.
 
-## Scientific boundaries
+## Repository layout
 
-The application keeps these categories separate:
+| Path | Purpose |
+|---|---|
+| `src/rag/` | Full-text/XML/PDF ingestion, retrieval, compact evidence packets, and provenance. |
+| `src/extraction/` | Structured contracts, validation, repair routing, provider-call gates, and deterministic merging. |
+| `src/database/` | Lossless adapters, source-fact import, schema migrations, deduplication, readiness, audits, and reports. |
+| `src/screening/` and `src/search/` | Literature discovery, metadata normalization, deduplication, and screening. |
+| `src/ui/` | Read-only evidence browser, review services, and snapshot export. |
+| `config/database/` | Current-corpus manifests, readiness profiles, and source-backed repair rules. |
+| `data/manifests/` | Paper and contributing-artifact manifests. |
+| `reports/database/` | Integrity audits and honest final database reports. |
+| `exports/mentor_snapshot_2026-08-07/` | Portable read-only Streamlit app, SQLite snapshot, and CSV export. |
+| `tests/` | Regression tests for successful, incomplete, and abstention paths. |
 
-- **Reported evidence (`y`)**: a measurement explicitly supported by a paper.
-- **Normalized/derived data**: a documented mechanical transformation.
-- **Similarity result**: a related reported formulation, not a prediction.
-- **Experimental suggestion (`X`)**: an untested candidate.
-- **Model prediction (`y_hat`)**: a separately labelled estimate, never
-  presented as reported evidence.
+## Run the portable Streamlit snapshot
 
-The application does not claim a universally best formulation, validated
-four-cell prediction, prospective biological validation, or complete evidence
-recovery while the gold-set gate remains below target.
-
-## Local setup
+The portable snapshot is the easiest option after cloning the repository. It
+already contains its own SQLite database.
 
 ```bash
-python3 -m venv .venv-rag
-.venv-rag/bin/pip install -r requirements-rag.txt
-.venv-rag/bin/python -m src.rag.ingestion
-.venv-rag/bin/python -m src.rag.run_pipeline
+python3 -m venv .venv
+.venv/bin/pip install -r exports/mentor_snapshot_2026-08-07/requirements.txt
+.venv/bin/streamlit run exports/mentor_snapshot_2026-08-07/app.py
 ```
 
-Run local tests:
+Streamlit will print a local URL, normally
+[http://localhost:8501](http://localhost:8501).
+
+## Run the development evidence browser
+
+Install the full project dependencies:
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+```
+
+The development browser reads `data/curated/lnp_evidence.db`. That working
+database is intentionally ignored by Git. To initialize it from the committed
+v5.2 snapshot:
+
+```bash
+mkdir -p data/curated
+cp exports/mentor_snapshot_2026-08-07/lnp_evidence.db data/curated/lnp_evidence.db
+.venv/bin/streamlit run src/ui/evidence_browser_app.py --server.port 8506
+```
+
+Then open [http://localhost:8506](http://localhost:8506).
+
+## Run tests
 
 ```bash
 .venv/bin/python -m pytest -q
 ```
 
-Local vision testing will use Ollama with a multimodal Gemma model. The model
-download was intentionally stopped on July 28, 2026 and can be resumed with:
+The database-specific regression suite checks:
 
-```bash
-ollama pull gemma3:4b
-```
+- source-fact and evidence import coverage;
+- JSON adapter behavior for each schema family;
+- experimental-arm and outcome projection;
+- shared-context propagation;
+- scientific deduplication;
+- readiness calculations;
+- SQLite integrity and foreign keys;
+- read-only Streamlit behavior.
 
-API keys remain only in `.env`. The file is ignored by Git and must never be
-committed.
+## New-paper screening handoff
 
-## Current reference documents
+The screening pipeline deduplicates candidates against the existing SQLite
+database, records inclusion/exclusion reasons, selects a balanced full-text
+queue by liver-cell type, retrieves primary and supplementary assets, and
+prepares compact extraction requests.
 
-- `docs/extraction/corrected_compact_workflow.md`
-- `docs/extraction/outcome_complexity_workflow.md`
-- `reports/extraction/final_gold_dynamic_v1/evaluation.json`
-- `reports/extraction/day5_afternoon_g1/comparison.md`
+The first batch metadata and extraction preflight artifacts are under:
+
+`data/staging/new_papers/2026-08-07/`
+
+Screening and extraction remain separate stages. A paper is not imported merely
+because it mentions an LNP: it must produce at least one evidence-backed
+formulation/experimental-arm candidate, or remain explicitly queued for
+automatic repair or review.
+
+## Data and security boundaries
+
+- API keys belong only in `.env`; `.env` is ignored by Git.
+- Raw provider responses are not committed.
+- Downloaded or licensed PDFs and supplements are not committed.
+- Public snapshot links omit local source-file paths.
+- Reported evidence, normalized/derived data, similarity results,
+  experimental suggestions, and model predictions remain separate categories.
+- Similarity does not turn an inferred formulation into reported evidence.
+
+## Reference reports
+
+- `reports/database/final_current_evidence_database.md`
+- `reports/database/final_current_evidence_database.json`
+- `reports/database/final_current_evidence_audit.md`
+- `reports/database/target_scope_candidate_audit.md`
+- `docs/database/shared-context-projection-invariants.md`

@@ -74,12 +74,13 @@ def test_preflight_does_not_rerun_completed_exact_hashes(tmp_path: Path) -> None
 
 
 def test_runner_refuses_unapproved_request_hashes() -> None:
-    manifest = json.loads(
-        (ROOT / "data/staging/extraction/application_pilot/map_gate/manifest.json").read_text()
+    manifest_path = (
+        ROOT / "data/staging/extraction/application_pilot/map_gate/manifest.json"
     )
+    manifest = json.loads(manifest_path.read_text())
     with pytest.raises(PermissionError, match="approved request hash"):
         run_current_corpus_reruns(
-            Path(manifest["manifest_path"]),
+            manifest_path,
             manifest["approval_hash"],
             approved_request_hashes=set(),
         )
