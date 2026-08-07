@@ -49,6 +49,8 @@ CREATE TABLE IF NOT EXISTS formulation (
     formulation_id INTEGER PRIMARY KEY,
     paper_id INTEGER NOT NULL,
     formulation_name TEXT,
+    chemical_formulation_total TEXT,
+    lnp_molar_ratio TEXT,
     composition_raw TEXT,
     composition_basis TEXT
         CHECK (
@@ -83,6 +85,9 @@ CREATE TABLE IF NOT EXISTS chemical_component (
                 'cholesterol',
                 'peg_lipid',
                 'targeting_ligand',
+                'targeting_anchor',
+                'adjuvant',
+                'small_molecule_additive',
                 'sort_lipid',
                 'other'
             )
@@ -110,6 +115,14 @@ CREATE TABLE IF NOT EXISTS chemical_component (
         ),
     identity_source TEXT,
     identity_notes TEXT,
+    amount_value REAL,
+    amount_unit TEXT,
+    amount_raw TEXT,
+    composition_position INTEGER
+        CHECK (
+            composition_position IS NULL
+            OR composition_position > 0
+        ),
     FOREIGN KEY (formulation_id) REFERENCES formulation(formulation_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE

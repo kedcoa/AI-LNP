@@ -124,8 +124,165 @@ def test_migration_preserves_legacy_rows_and_is_idempotent() -> None:
     ).fetchall() == [(13, "mRNA")]
     assert connection.execute(
         "SELECT version FROM schema_migration ORDER BY version"
-    ).fetchall() == [(1,), (2,), (3,), (4,), (5,)]
+    ).fetchall() == [(1,), (2,), (3,), (4,), (5,), (6,)]
     assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
+
+
+def test_lossless_fact_tables_and_wide_formulation_interface_exist() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+
+    tables = {
+        row[0]
+        for row in connection.execute(
+            "SELECT name FROM sqlite_master WHERE type = 'table'"
+        )
+    }
+    assert {
+        "source_artifact",
+        "source_fact",
+        "source_fact_evidence",
+        "fact_projection",
+    } <= tables
+    columns = [
+        row[1]
+        for row in connection.execute("PRAGMA table_info(lnp_formulation_wide)")
+    ]
+    assert columns == [
+        "lnp_name",
+        "chemical_formulation_total",
+        "lnp_molar_ratio",
+        "ionizable_lipid",
+        "helper_lipid",
+        "cholesterol",
+        "peg_lipid",
+        "others",
+    ]
+
+
+def test_source_fact_requires_visible_disposition() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    artifact_id = connection.execute(
+        """
+        INSERT INTO source_artifact (
+            paper_id, logical_path, sha256, role, schema_family,
+            validation_status, contributes_facts, contributes_evidence
+        ) VALUES (7, 'result.json', ?, 'primary_extraction', 'fixture',
+                  'accepted', 1, 1)
+        """,
+        ("a" * 64,),
+    ).lastrowid
+
+    with pytest.raises(sqlite3.IntegrityError):
+        connection.execute(
+            """
+            INSERT INTO source_fact (
+                source_artifact_id, paper_id, json_path, source_record_key,
+                record_kind, subject_type, subject_key, field_name,
+                raw_value_json, fact_identity_sha256, import_disposition
+            ) VALUES (?, 7, '$.x', 'x', 'field', 'paper', 'GP-002', 'title',
+                      '"value"', ?, '')
+            """,
+            (artifact_id, "b" * 64),
+        )
+
+
+def test_fact_projection_rejects_cross_paper_target() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    connection.execute(
+        """
+        INSERT INTO paper (
+            paper_id, title, source_type, retrieval_date, screening_status,
+            source_paper_id, import_status
+        ) VALUES (8, 'Other paper', 'fixture', '2026-08-07', 'include',
+                  'OTHER', 'needs_review')
+        """
+    )
+    other_formulation = connection.execute(
+        "INSERT INTO formulation (paper_id, formulation_name) VALUES (8, 'Other LNP')"
+    ).lastrowid
+    artifact_id = connection.execute(
+        """
+        INSERT INTO source_artifact (
+            paper_id, logical_path, sha256, role, schema_family,
+            validation_status, contributes_facts, contributes_evidence
+        ) VALUES (7, 'result.json', ?, 'primary_extraction', 'fixture',
+                  'accepted', 1, 1)
+        """,
+        ("a" * 64,),
+    ).lastrowid
+    fact_id = connection.execute(
+        """
+        INSERT INTO source_fact (
+            source_artifact_id, paper_id, json_path, source_record_key,
+            record_kind, subject_type, subject_key, field_name,
+            raw_value_json, fact_identity_sha256, import_disposition,
+            disposition_reason
+        ) VALUES (?, 7, '$.x', 'x', 'field', 'formulation', 'F1',
+                  'formulation_name', '"value"', ?, 'unresolved', 'pending')
+        """,
+        (artifact_id, "b" * 64),
+    ).lastrowid
+
+    with pytest.raises(sqlite3.IntegrityError, match="same paper"):
+        connection.execute(
+            """
+            INSERT INTO fact_projection (
+                source_fact_id, paper_id, entity_type, entity_id, field_name,
+                canonical_fact_sha256, projection_status
+            ) VALUES (?, 7, 'formulation', ?, 'formulation_name', ?, 'active')
+            """,
+            (fact_id, other_formulation, "c" * 64),
+        )
+
+
+def test_wide_formulation_renders_gp008_as_one_row() -> None:
+    connection = _legacy_connection()
+    migrate_database(connection)
+    formulation_id = connection.execute(
+        """
+        INSERT INTO formulation (
+            paper_id, formulation_name, chemical_formulation_total,
+            lnp_molar_ratio
+        ) VALUES (7, 'alpha-CD163/LNP-FAPCAR',
+                  'ionizable lipid-DSPC-cholesterol-PEG-lipid',
+                  '45:30:23.5:1.5')
+        """
+    ).lastrowid
+    connection.executemany(
+        """
+        INSERT INTO chemical_component (
+            formulation_id, component_name_reported, component_role,
+            amount_value, amount_unit, amount_raw, composition_position
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        """,
+        [
+            (formulation_id, "heptadecan-9-yl... amino lipid", "ionizable_lipid", 45, "mol%", "45", 1),
+            (formulation_id, "DSPC", "helper_lipid", 30, "mol%", "30", 2),
+            (formulation_id, "cholesterol", "cholesterol", 23.5, "mol%", "23.5", 3),
+            (formulation_id, "PEG-lipid", "peg_lipid", 1.5, "mol%", "1.5", 4),
+            (formulation_id, "DSPE-PEG-maleimide", "targeting_anchor", None, None, None, 5),
+            (formulation_id, "anti-CD163 antibody", "targeting_ligand", None, None, None, 6),
+            (formulation_id, "antibody:LNP 1:20", "other", None, None, None, 7),
+        ],
+    )
+
+    row = connection.execute(
+        "SELECT * FROM lnp_formulation_wide WHERE lnp_name = 'alpha-CD163/LNP-FAPCAR'"
+    ).fetchone()
+
+    assert row == (
+        "alpha-CD163/LNP-FAPCAR",
+        "ionizable lipid-DSPC-cholesterol-PEG-lipid",
+        "45:30:23.5:1.5",
+        "heptadecan-9-yl... amino lipid",
+        "DSPC",
+        "cholesterol",
+        "PEG-lipid",
+        "DSPE-PEG-maleimide; anti-CD163 antibody; antibody:LNP 1:20",
+    )
 
 
 def test_migration_and_first_bundle_import_converge_in_one_pass(
@@ -454,7 +611,7 @@ def test_migration_adds_entity_action_and_evidence_context_to_review_history() -
     assert {'entity_type', 'entity_id', 'review_action', 'evidence_id'} <= columns
     assert connection.execute(
         "SELECT version FROM schema_migration ORDER BY version"
-    ).fetchall() == [(1,), (2,), (3,), (4,), (5,)]
+    ).fetchall() == [(1,), (2,), (3,), (4,), (5,), (6,)]
 
     revision_id = connection.execute(
         """INSERT INTO review_revision (
@@ -565,7 +722,7 @@ def test_v5_repairs_v4_missing_field_triggers_for_shared_formulations() -> None:
     )
 
     assert connection.execute(
-        'SELECT version FROM schema_migration ORDER BY version DESC LIMIT 1'
+        'SELECT version FROM schema_migration WHERE version = 5'
     ).fetchone() == (5,)
     assert connection.execute(
         'SELECT field_name FROM field_verification WHERE review_revision_id = ?',

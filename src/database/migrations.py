@@ -6,7 +6,7 @@ import re
 import sqlite3
 
 
-MIGRATION_VERSION = 5
+MIGRATION_VERSION = 6
 
 PAPER_COLUMNS = {
     "source_paper_id": "TEXT",
@@ -18,6 +18,25 @@ EXPERIMENT_COLUMNS = {
     "disease_model": "TEXT",
     "payload_encoded_product": "TEXT",
     "payload_molecular_target": "TEXT",
+}
+
+FORMULATION_COLUMNS = {
+    "chemical_formulation_total": "TEXT",
+    "lnp_molar_ratio": "TEXT",
+}
+
+CHEMICAL_COMPONENT_COLUMNS = {
+    "component_name_normalized": "TEXT",
+    "inchikey": "TEXT",
+    "molar_percentage": "REAL CHECK (molar_percentage IS NULL OR (molar_percentage >= 0 AND molar_percentage <= 100))",
+    "percentage_unit": "TEXT",
+    "component_review_status": "TEXT NOT NULL DEFAULT 'unreviewed'",
+    "identity_source": "TEXT",
+    "identity_notes": "TEXT",
+    "amount_value": "REAL",
+    "amount_unit": "TEXT",
+    "amount_raw": "TEXT",
+    "composition_position": "INTEGER CHECK (composition_position IS NULL OR composition_position > 0)",
 }
 
 REVIEW_REVISION_COLUMNS = {
@@ -33,6 +52,280 @@ REVIEW_REVISION_COLUMNS = {
         "INTEGER REFERENCES evidence(evidence_id) ON UPDATE CASCADE ON DELETE RESTRICT"
     ),
 }
+
+LOSSLESS_FACT_SCHEMA_SQL = """
+CREATE TABLE IF NOT EXISTS source_artifact (
+    source_artifact_id INTEGER PRIMARY KEY,
+    paper_id INTEGER NOT NULL REFERENCES paper(paper_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    logical_path TEXT NOT NULL CHECK(length(trim(logical_path)) > 0),
+    sha256 TEXT NOT NULL CHECK(length(sha256) = 64),
+    role TEXT NOT NULL CHECK(length(trim(role)) > 0),
+    schema_family TEXT NOT NULL CHECK(length(trim(schema_family)) > 0),
+    pipeline_name TEXT,
+    pipeline_version TEXT,
+    validation_status TEXT NOT NULL CHECK(length(trim(validation_status)) > 0),
+    contributes_facts INTEGER NOT NULL CHECK(contributes_facts IN (0, 1)),
+    contributes_evidence INTEGER NOT NULL CHECK(contributes_evidence IN (0, 1)),
+    UNIQUE(paper_id, sha256, role)
+);
+
+CREATE TABLE IF NOT EXISTS source_fact (
+    source_fact_id INTEGER PRIMARY KEY,
+    source_artifact_id INTEGER NOT NULL REFERENCES source_artifact(source_artifact_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    paper_id INTEGER NOT NULL REFERENCES paper(paper_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    json_path TEXT NOT NULL CHECK(length(trim(json_path)) > 0),
+    source_record_key TEXT NOT NULL CHECK(length(trim(source_record_key)) > 0),
+    record_kind TEXT NOT NULL CHECK(length(trim(record_kind)) > 0),
+    source_context_key TEXT,
+    subject_type TEXT NOT NULL CHECK(length(trim(subject_type)) > 0),
+    subject_key TEXT NOT NULL CHECK(length(trim(subject_key)) > 0),
+    field_name TEXT NOT NULL CHECK(length(trim(field_name)) > 0),
+    raw_value_json TEXT NOT NULL CHECK(json_valid(raw_value_json)),
+    canonical_value_json TEXT CHECK(canonical_value_json IS NULL OR json_valid(canonical_value_json)),
+    fact_identity_sha256 TEXT NOT NULL CHECK(length(fact_identity_sha256) = 64),
+    import_disposition TEXT NOT NULL CHECK(import_disposition IN ('projected', 'unresolved', 'quarantined', 'rejected')),
+    disposition_reason TEXT,
+    UNIQUE(source_artifact_id, json_path, source_record_key, field_name),
+    CHECK(
+        import_disposition = 'projected'
+        OR length(trim(coalesce(disposition_reason, ''))) > 0
+    )
+);
+
+CREATE TABLE IF NOT EXISTS source_fact_evidence (
+    source_fact_evidence_id INTEGER PRIMARY KEY,
+    source_fact_id INTEGER NOT NULL REFERENCES source_fact(source_fact_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    source_evidence_key TEXT NOT NULL CHECK(length(trim(source_evidence_key)) > 0),
+    evidence_id INTEGER REFERENCES evidence(evidence_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    resolution_status TEXT NOT NULL CHECK(resolution_status IN ('resolved', 'unresolved', 'rejected')),
+    resolution_reason TEXT,
+    UNIQUE(source_fact_id, source_evidence_key),
+    CHECK(
+        (resolution_status = 'resolved' AND evidence_id IS NOT NULL)
+        OR (
+            resolution_status != 'resolved'
+            AND length(trim(coalesce(resolution_reason, ''))) > 0
+        )
+    )
+);
+
+CREATE TABLE IF NOT EXISTS fact_projection (
+    fact_projection_id INTEGER PRIMARY KEY,
+    source_fact_id INTEGER NOT NULL REFERENCES source_fact(source_fact_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    paper_id INTEGER NOT NULL REFERENCES paper(paper_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    entity_type TEXT NOT NULL CHECK(entity_type IN ('paper', 'formulation', 'component', 'chemical_component', 'arm', 'experiment', 'outcome', 'evidence')),
+    entity_id INTEGER NOT NULL,
+    field_name TEXT NOT NULL CHECK(length(trim(field_name)) > 0),
+    canonical_fact_sha256 TEXT NOT NULL CHECK(length(canonical_fact_sha256) = 64),
+    projection_status TEXT NOT NULL CHECK(projection_status IN ('active', 'superseded', 'rejected')),
+    UNIQUE(source_fact_id, entity_type, entity_id, field_name, canonical_fact_sha256)
+);
+
+CREATE INDEX IF NOT EXISTS idx_source_artifact_paper ON source_artifact(paper_id);
+CREATE INDEX IF NOT EXISTS idx_source_fact_artifact ON source_fact(source_artifact_id);
+CREATE INDEX IF NOT EXISTS idx_source_fact_paper ON source_fact(paper_id);
+CREATE INDEX IF NOT EXISTS idx_fact_projection_fact ON fact_projection(source_fact_id);
+
+CREATE TRIGGER IF NOT EXISTS trg_source_fact_artifact_same_paper_insert
+BEFORE INSERT ON source_fact
+WHEN NOT EXISTS (
+    SELECT 1 FROM source_artifact
+    WHERE source_artifact_id = NEW.source_artifact_id
+      AND paper_id = NEW.paper_id
+)
+BEGIN
+    SELECT RAISE(ABORT, 'source fact artifact must belong to same paper');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_source_fact_artifact_same_paper_update
+BEFORE UPDATE OF source_artifact_id, paper_id ON source_fact
+WHEN NOT EXISTS (
+    SELECT 1 FROM source_artifact
+    WHERE source_artifact_id = NEW.source_artifact_id
+      AND paper_id = NEW.paper_id
+)
+BEGIN
+    SELECT RAISE(ABORT, 'source fact artifact must belong to same paper');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_fact_projection_same_paper_insert
+BEFORE INSERT ON fact_projection
+WHEN NOT EXISTS (
+    SELECT 1 FROM source_fact
+    WHERE source_fact_id = NEW.source_fact_id AND paper_id = NEW.paper_id
+)
+OR NOT (
+    (NEW.entity_type = 'paper' AND EXISTS (
+        SELECT 1 FROM paper WHERE paper_id = NEW.entity_id AND paper_id = NEW.paper_id
+    ))
+    OR (NEW.entity_type = 'formulation' AND EXISTS (
+        SELECT 1 FROM formulation WHERE formulation_id = NEW.entity_id AND paper_id = NEW.paper_id
+    ))
+    OR (NEW.entity_type IN ('component', 'chemical_component') AND EXISTS (
+        SELECT 1 FROM chemical_component JOIN formulation USING(formulation_id)
+        WHERE component_id = NEW.entity_id AND paper_id = NEW.paper_id
+    ))
+    OR (NEW.entity_type IN ('arm', 'experiment') AND EXISTS (
+        SELECT 1 FROM experiment WHERE experiment_id = NEW.entity_id AND paper_id = NEW.paper_id
+    ))
+    OR (NEW.entity_type = 'outcome' AND EXISTS (
+        SELECT 1 FROM outcome JOIN experiment USING(experiment_id)
+        WHERE outcome_id = NEW.entity_id AND paper_id = NEW.paper_id
+    ))
+    OR (NEW.entity_type = 'evidence' AND EXISTS (
+        SELECT 1 FROM evidence WHERE evidence_id = NEW.entity_id AND paper_id = NEW.paper_id
+    ))
+)
+BEGIN
+    SELECT RAISE(ABORT, 'fact projection target must belong to same paper');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_source_fact_projected_insert_requires_projection
+BEFORE INSERT ON source_fact
+WHEN NEW.import_disposition = 'projected'
+BEGIN
+    SELECT RAISE(ABORT, 'projected source fact must be linked after insertion');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_source_fact_projected_update_requires_projection
+BEFORE UPDATE OF import_disposition ON source_fact
+WHEN NEW.import_disposition = 'projected'
+ AND NOT EXISTS (
+     SELECT 1 FROM fact_projection
+     WHERE source_fact_id = NEW.source_fact_id AND projection_status = 'active'
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'projected source fact requires active projection');
+END;
+
+
+CREATE TRIGGER IF NOT EXISTS trg_fact_projection_no_update
+BEFORE UPDATE ON fact_projection
+BEGIN
+    SELECT RAISE(ABORT, 'fact projections are immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_fact_projection_active_delete_guard
+BEFORE DELETE ON fact_projection
+WHEN OLD.projection_status = 'active'
+ AND EXISTS (
+     SELECT 1 FROM source_fact
+     WHERE source_fact_id = OLD.source_fact_id
+       AND import_disposition = 'projected'
+ )
+ AND NOT EXISTS (
+     SELECT 1 FROM fact_projection
+     WHERE source_fact_id = OLD.source_fact_id
+       AND projection_status = 'active'
+       AND fact_projection_id != OLD.fact_projection_id
+ )
+BEGIN
+    SELECT RAISE(ABORT, 'projected source fact requires active projection');
+END;
+
+CREATE VIEW IF NOT EXISTS lnp_formulation_wide AS
+SELECT
+    formulation.formulation_name AS lnp_name,
+    coalesce(
+        formulation.chemical_formulation_total,
+        (
+            SELECT group_concat(component_name, '-')
+            FROM (
+                SELECT component_name_reported AS component_name
+                FROM chemical_component
+                WHERE formulation_id = formulation.formulation_id
+                  AND component_role IN ('ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid')
+                ORDER BY coalesce(composition_position, component_id), component_id
+            )
+        )
+    ) AS chemical_formulation_total,
+    coalesce(
+        formulation.lnp_molar_ratio,
+        (
+            SELECT group_concat(amount, ':')
+            FROM (
+                SELECT CASE
+                    WHEN length(trim(coalesce(amount_raw, ''))) > 0 THEN amount_raw
+                    WHEN amount_value IS NOT NULL THEN printf('%g', amount_value)
+                    WHEN molar_percentage IS NOT NULL THEN printf('%g', molar_percentage)
+                END AS amount
+                FROM chemical_component
+                WHERE formulation_id = formulation.formulation_id
+                  AND component_role IN ('ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid')
+                  AND coalesce(amount_raw, amount_value, molar_percentage) IS NOT NULL
+                ORDER BY coalesce(composition_position, component_id), component_id
+            )
+        )
+    ) AS lnp_molar_ratio,
+    (SELECT group_concat(component_name, '; ') FROM (
+        SELECT component_name_reported AS component_name FROM chemical_component
+        WHERE formulation_id = formulation.formulation_id AND component_role = 'ionizable_lipid'
+        ORDER BY coalesce(composition_position, component_id), component_id
+    )) AS ionizable_lipid,
+    (SELECT group_concat(component_name, '; ') FROM (
+        SELECT component_name_reported AS component_name FROM chemical_component
+        WHERE formulation_id = formulation.formulation_id AND component_role = 'helper_lipid'
+        ORDER BY coalesce(composition_position, component_id), component_id
+    )) AS helper_lipid,
+    (SELECT group_concat(component_name, '; ') FROM (
+        SELECT component_name_reported AS component_name FROM chemical_component
+        WHERE formulation_id = formulation.formulation_id AND component_role = 'cholesterol'
+        ORDER BY coalesce(composition_position, component_id), component_id
+    )) AS cholesterol,
+    (SELECT group_concat(component_name, '; ') FROM (
+        SELECT component_name_reported AS component_name FROM chemical_component
+        WHERE formulation_id = formulation.formulation_id AND component_role = 'peg_lipid'
+        ORDER BY coalesce(composition_position, component_id), component_id
+    )) AS peg_lipid,
+    (SELECT group_concat(component_name, '; ') FROM (
+        SELECT component_name_reported AS component_name FROM chemical_component
+        WHERE formulation_id = formulation.formulation_id
+          AND component_role NOT IN ('ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid')
+        ORDER BY coalesce(composition_position, component_id), component_id
+    )) AS others
+FROM formulation;
+
+INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
+VALUES (6, 'lossless_source_fact_ledger', '2026-08-07T00:00:00Z');
+"""
+
+CHEMICAL_COMPONENT_V6_SQL = """
+CREATE TABLE chemical_component_v6 (
+    component_id INTEGER PRIMARY KEY,
+    formulation_id INTEGER NOT NULL,
+    component_name_reported TEXT NOT NULL,
+    component_name_normalized TEXT,
+    component_role TEXT NOT NULL CHECK (
+        component_role IN (
+            'ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid',
+            'targeting_ligand', 'targeting_anchor', 'adjuvant',
+            'small_molecule_additive', 'sort_lipid', 'other'
+        )
+    ),
+    inchikey TEXT,
+    molar_percentage REAL CHECK (
+        molar_percentage IS NULL
+        OR (molar_percentage >= 0 AND molar_percentage <= 100)
+    ),
+    percentage_unit TEXT,
+    component_review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+        component_review_status IN (
+            'unreviewed', 'automatically_normalized', 'manually_verified',
+            'ambiguous', 'conflict', 'rejected'
+        )
+    ),
+    identity_source TEXT,
+    identity_notes TEXT,
+    amount_value REAL,
+    amount_unit TEXT,
+    amount_raw TEXT,
+    composition_position INTEGER CHECK (
+        composition_position IS NULL OR composition_position > 0
+    ),
+    FOREIGN KEY (formulation_id) REFERENCES formulation(formulation_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+"""
 
 ADDITIVE_SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS schema_migration (
@@ -468,6 +761,55 @@ def _ensure_screening_state_triggers(
         connection.execute(definition)
 
 
+def _chemical_component_needs_role_rebuild(
+    connection: sqlite3.Connection,
+) -> bool:
+    row = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'chemical_component'"
+    ).fetchone()
+    return row is not None and "'targeting_anchor'" not in (row[0] or "")
+
+
+def _migrate_chemical_component_roles(connection: sqlite3.Connection) -> None:
+    if not _chemical_component_needs_role_rebuild(connection):
+        return
+    columns = [
+        row[1]
+        for row in connection.execute("PRAGMA table_info(chemical_component)")
+    ]
+    expected = [
+        "component_id",
+        "formulation_id",
+        "component_name_reported",
+        "component_name_normalized",
+        "component_role",
+        "inchikey",
+        "molar_percentage",
+        "percentage_unit",
+        "component_review_status",
+        "identity_source",
+        "identity_notes",
+        "amount_value",
+        "amount_unit",
+        "amount_raw",
+        "composition_position",
+    ]
+    if set(columns) != set(expected):
+        raise RuntimeError(
+            "chemical_component columns are not ready for the v6 role migration"
+        )
+    quoted = ", ".join(f'"{column}"' for column in expected)
+    _execute_sql_script(connection, CHEMICAL_COMPONENT_V6_SQL)
+    connection.execute(
+        f"INSERT INTO chemical_component_v6 ({quoted}) "
+        f"SELECT {quoted} FROM chemical_component"
+    )
+    connection.execute("DROP TABLE chemical_component")
+    connection.execute(
+        "ALTER TABLE chemical_component_v6 RENAME TO chemical_component"
+    )
+
+
 def migrate_database(connection: sqlite3.Connection) -> None:
     """Upgrade a legacy six-table database without replacing existing rows.
 
@@ -494,6 +836,11 @@ def migrate_database(connection: sqlite3.Connection) -> None:
             _migrate_experiment_cell_type(connection)
         _add_missing_columns(connection, "paper", PAPER_COLUMNS)
         _add_missing_columns(connection, "experiment", EXPERIMENT_COLUMNS)
+        _add_missing_columns(connection, "formulation", FORMULATION_COLUMNS)
+        _add_missing_columns(
+            connection, "chemical_component", CHEMICAL_COMPONENT_COLUMNS
+        )
+        _migrate_chemical_component_roles(connection)
         _execute_sql_script(connection, ADDITIVE_SCHEMA_SQL)
         _add_missing_columns(
             connection,
@@ -609,6 +956,7 @@ def migrate_database(connection: sqlite3.Connection) -> None:
                 """INSERT INTO schema_migration (version, name, applied_at)
                    VALUES (5, 'entity_review_trigger_repair', '2026-08-06T04:00:00Z')"""
             )
+        _execute_sql_script(connection, LOSSLESS_FACT_SCHEMA_SQL)
         if connection.execute("PRAGMA foreign_key_check").fetchall():
             raise RuntimeError("foreign-key violations during migration")
     except BaseException:

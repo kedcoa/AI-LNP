@@ -399,7 +399,7 @@ def test_prepare_writes_requires_a_current_schema_and_verified_external_backup(
     readiness = _write_readiness(monkeypatch, review_database, tmp_path)
 
     assert readiness.database_path == review_database
-    assert readiness.schema_version == 5
+    assert readiness.schema_version == 6
     assert readiness.backup_path.parent == (tmp_path / 'review-backups').resolve()
     assert readiness.backup_sha256
 

@@ -369,6 +369,10 @@ EXPECTED_TABLES = {
     "review_revision",
     "screening_event",
     "eligibility_result",
+    "source_artifact",
+    "source_fact",
+    "source_fact_evidence",
+    "fact_projection",
 }
 
 
@@ -404,6 +408,13 @@ def test_working_database_columns_are_available(database_path: Path) -> None:
             row[1]
             for row in connection.execute("PRAGMA table_info(arm_assessment)")
         }
+        formulation_columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(formulation)")
+        }
+        component_columns = {
+            row[1]
+            for row in connection.execute("PRAGMA table_info(chemical_component)")
+        }
 
     assert {"source_paper_id", "import_status"} <= paper_columns
     assert {
@@ -414,6 +425,13 @@ def test_working_database_columns_are_available(database_path: Path) -> None:
         "comet_eligible",
         "quarantine_reason",
     } <= assessment_columns
+    assert {"chemical_formulation_total", "lnp_molar_ratio"} <= formulation_columns
+    assert {
+        "amount_value",
+        "amount_unit",
+        "amount_raw",
+        "composition_position",
+    } <= component_columns
 
 
 def test_experiment_has_compact_contract_columns(database_path: Path) -> None:
