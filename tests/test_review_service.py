@@ -551,6 +551,61 @@ def test_correction_resolves_a_not_reported_missing_state_without_leaving_a_bloc
     assert 'dose' not in result.arm_status.missing_fields
 
 
+def test_pasted_evidence_correction_is_stored_and_recalculates_comet_v3(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
+) -> None:
+    from src.ui.review_service import ReviewDecision, apply_review_decision
+
+    readiness = _write_readiness(monkeypatch, review_database, tmp_path)
+    result = apply_review_decision(ReviewDecision(
+        experiment_id=2,
+        field_name='species',
+        decision='correct',
+        corrected_value='mouse',
+        evidence_excerpt='Experiments were performed in C57BL/6 mice.',
+        evidence_location='Methods, page 4',
+        reviewer='reviewer-c',
+        reviewer_notes='Copied directly from the paper.',
+        expected_review_revision_id=0,
+        expected_state_token=_workspace_token(2),
+        write_readiness=readiness,
+    ))
+
+    connection = sqlite3.connect(review_database)
+    evidence = connection.execute(
+        "SELECT evidence_text,section_name FROM evidence "
+        "WHERE experiment_id=2 ORDER BY evidence_id DESC LIMIT 1"
+    ).fetchone()
+    connection.close()
+    assert evidence == ('Experiments were performed in C57BL/6 mice.', 'Methods, page 4')
+    assert result.review_revision_id is not None
+    assert result.comet.rules_version == 'working-evidence-v3'
+
+
+def test_list_comet_gap_arms_returns_only_small_comet_gap_queue(
+    monkeypatch: pytest.MonkeyPatch, review_database: Path
+) -> None:
+    from src.ui import review_service
+
+    with sqlite3.connect(review_database) as connection:
+        connection.execute(
+            """INSERT INTO eligibility_result (
+                   experiment_id,profile,eligible,reasons_json,rules_version,evaluated_at
+               ) VALUES (2,'comet',0,'[\"species\",\"dose\"]',
+                         'readiness-profiles/v3','2026-08-07T00:00:00Z')
+               ON CONFLICT(experiment_id,profile) DO UPDATE SET
+                 eligible=0,reasons_json=excluded.reasons_json,
+                 rules_version=excluded.rules_version,evaluated_at=excluded.evaluated_at"""
+        )
+        connection.commit()
+    monkeypatch.setattr(review_service, 'authoritative_database_path', lambda: review_database)
+
+    gaps = review_service.list_comet_gap_arms()
+
+    assert [arm.experiment_id for arm in gaps] == [2]
+    assert gaps[0].comet_blockers == ('species', 'dose')
+
+
 def test_accept_decision_marks_linked_evidence_manually_verified(
     monkeypatch: pytest.MonkeyPatch, review_database: Path, tmp_path: Path
 ) -> None:
@@ -575,7 +630,8 @@ def test_accept_decision_marks_linked_evidence_manually_verified(
     assert result.review_revision_id is not None
     assert verification == 'manually_verified'
     assert result.nearest_neighbor.eligible is True
-    assert result.comet.eligible is True
+    assert result.comet.eligible is False
+    assert 'lnp_molar_ratio' in result.comet.reasons
     dashboard = load_dashboard()
     assert dashboard.automatically_validated_usable_facts == 2
     assert dashboard.manually_verified_usable_facts == 2
@@ -1031,4 +1087,6 @@ def test_outcome_fields_are_reviewable_with_owned_evidence_and_history(
     assert corrected.value == '14'
     assert source_value == 12
     assert (history.entity_type, history.entity_id, history.field_name) == ('outcome', 1, 'outcome_value')
-    assert result.comet.eligible is True
+    assert result.comet.eligible is False
+    assert 'usable_outcome' not in result.comet.reasons
+    assert 'lnp_molar_ratio' in result.comet.reasons

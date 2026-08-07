@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -21,6 +21,7 @@ from src.database.status import (
     evaluate_arm_status,
     evaluate_eligibility,
 )
+from src.database.readiness import evaluate_readiness
 
 
 @dataclass(frozen=True)
@@ -183,6 +184,8 @@ class ReviewDecision:
     write_readiness: WriteReadiness
     corrected_value: str | None = None
     evidence_id: int | None = None
+    evidence_excerpt: str | None = None
+    evidence_location: str | None = None
     entity_type: Literal['arm', 'formulation', 'outcome'] | None = None
     entity_id: int | None = None
 
@@ -396,9 +399,10 @@ def list_paper_summaries() -> tuple[PaperSummary, ...]:
 
 def _latest_eligible(connection: sqlite3.Connection, experiment_id: int, profile: str) -> bool:
     row = connection.execute(
-        """SELECT eligible FROM eligibility_result AS eligibility
-           WHERE experiment_id = ? AND """ + _latest_eligibility_condition(profile),
-        (experiment_id, profile, RULES_VERSION),
+        """SELECT eligible FROM eligibility_result
+           WHERE experiment_id = ? AND profile = ?
+           ORDER BY evaluated_at DESC,rowid DESC LIMIT 1""",
+        (experiment_id, profile),
     ).fetchone()
     return bool(row['eligible']) if row else False
 
@@ -407,9 +411,10 @@ def _current_eligibility_reasons(
     connection: sqlite3.Connection, experiment_id: int, profile: str
 ) -> tuple[str, ...]:
     row = connection.execute(
-        """SELECT reasons_json FROM eligibility_result AS eligibility
-           WHERE experiment_id = ? AND """ + _latest_eligibility_condition(profile),
-        (experiment_id, profile, RULES_VERSION),
+        """SELECT reasons_json FROM eligibility_result
+           WHERE experiment_id = ? AND profile = ?
+           ORDER BY evaluated_at DESC,rowid DESC LIMIT 1""",
+        (experiment_id, profile),
     ).fetchone()
     if row is None:
         return ()
@@ -502,6 +507,22 @@ def list_review_arms() -> tuple[ReviewArm, ...]:
     return tuple(sorted(arms, key=lambda arm: (priority(arm), arm.paper_id, arm.experiment_id)))
 
 
+def list_comet_gap_arms() -> tuple[ReviewArm, ...]:
+    """Return the small, high-value COMET correction queue only."""
+
+    arms = [
+        arm for arm in list_review_arms()
+        if not arm.comet_eligible and 1 <= len(arm.comet_blockers) <= 3
+    ]
+    return tuple(sorted(
+        arms,
+        key=lambda arm: (
+            arm.completeness_status in {'conflict', 'quarantined'},
+            len(arm.comet_blockers), arm.paper_id, arm.experiment_id,
+        ),
+    ))
+
+
 _FIELD_COLUMNS = (
     ('formulation', 'Formulation', 'formulation_name'), ('composition_ratio', 'Composition ratio', 'composition_raw'),
     ('target_cell', 'Target cell', 'cell_type'), ('delivery_cell', 'Delivery cell', 'cell_source'),
@@ -510,6 +531,10 @@ _FIELD_COLUMNS = (
     ('payload', 'Payload', 'payload_type'), ('payload_name', 'Payload name', 'payload_name'),
     ('dose', 'Dose', 'dose'), ('assay', 'Assay', 'assay'),
     ('timepoint', 'Timepoint', 'timepoint'),
+    ('chemical_formulation_total', 'Chemical formulation (total)', 'chemical_formulation_total'),
+    ('lnp_molar_ratio', 'LNP molar ratio', 'lnp_molar_ratio'),
+    ('payload_encoded_product', 'Encoded product', 'payload_encoded_product'),
+    ('payload_molecular_target', 'Molecular target', 'payload_molecular_target'),
 )
 
 _OUTCOME_FIELD_COLUMNS = (
@@ -533,7 +558,8 @@ def load_arm_workspace(experiment_id: int) -> ArmWorkspace:
     with _connect() as connection:
         row = connection.execute(
             """SELECT experiment.*, paper.source_paper_id, paper.title, formulation.formulation_name,
-                      formulation.composition_raw
+                      formulation.composition_raw,formulation.chemical_formulation_total,
+                      formulation.lnp_molar_ratio
                FROM experiment JOIN paper USING (paper_id) JOIN formulation USING (formulation_id)
                WHERE experiment.experiment_id = ?""", (experiment_id,)
         ).fetchone()
@@ -613,7 +639,10 @@ def load_arm_workspace(experiment_id: int) -> ArmWorkspace:
 
 _FIELD_COLUMN_BY_NAME = {name: column for name, _label, column in _FIELD_COLUMNS}
 _REVIEWABLE_FIELDS = frozenset(_FIELD_COLUMN_BY_NAME)
-_FORMULATION_COLUMNS = frozenset({'formulation_name', 'composition_raw'})
+_FORMULATION_COLUMNS = frozenset({
+    'formulation_name', 'composition_raw', 'chemical_formulation_total',
+    'lnp_molar_ratio',
+})
 _OUTCOME_COLUMNS = frozenset(column for column, _label in _OUTCOME_FIELD_COLUMNS)
 
 
@@ -883,6 +912,36 @@ def _owned_evidence(
     return evidence
 
 
+def _create_reviewer_evidence(
+    connection: sqlite3.Connection,
+    request: ReviewDecision,
+    *,
+    paper_id: int,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+) -> int:
+    excerpt = (request.evidence_excerpt or '').strip()
+    location = (request.evidence_location or '').strip()
+    if not excerpt or not location:
+        raise ValueError(
+            'An evidence excerpt and evidence location are required for a pasted correction'
+        )
+    outcome_id = entity_id if entity_type == 'outcome' else None
+    cursor = connection.execute(
+        """INSERT INTO evidence (
+               paper_id,experiment_id,outcome_id,field_name,evidence_text,
+               evidence_location_type,section_name,extraction_method,
+               extraction_confidence,evidence_review_status
+           ) VALUES (?,?,?,?,?,'other',?,'manual','high','manually_verified')""",
+        (
+            paper_id, request.experiment_id, outcome_id, field_name,
+            excerpt, location,
+        ),
+    )
+    return int(cursor.lastrowid)
+
+
 def _evidence_location(evidence: sqlite3.Row) -> str:
     return ' · '.join(
         str(value) for value in (
@@ -1043,11 +1102,14 @@ def _recalculate(
         ]
     selected: tuple[ArmStatusResult, EligibilityResult, EligibilityResult] | None = None
     for current_id in experiment_ids:
-        result = (
-            evaluate_arm_status(connection, current_id),
-            evaluate_eligibility(connection, current_id, 'nearest_neighbor'),
-            evaluate_eligibility(connection, current_id, 'comet'),
-        )
+        status = evaluate_arm_status(connection, current_id)
+        nearest = evaluate_eligibility(connection, current_id, 'nearest_neighbor')
+        readiness = evaluate_readiness(connection, current_id)
+        result = (status, nearest, EligibilityResult(
+            profile='comet', eligible=readiness.comet_ready,
+            reasons=readiness.comet_blockers,
+            rules_version=readiness.rules_version,
+        ))
         if current_id == experiment_id:
             selected = result
     if selected is None:
@@ -1112,7 +1174,11 @@ def apply_review_decision(request: ReviewDecision) -> ReviewResult:
             if request.decision == 'correct' and not (request.corrected_value or '').strip():
                 raise ValueError('A corrected value is required')
             if request.evidence_id is None:
-                raise ValueError('Supporting evidence is required for an accepted correction')
+                request = replace(request, evidence_id=_create_reviewer_evidence(
+                    connection, request, paper_id=int(experiment['paper_id']),
+                    entity_type=entity_type, entity_id=entity_id,
+                    field_name=field_name,
+                ))
             evidence = _owned_evidence(
                 connection, request.experiment_id, experiment['paper_id'], request.evidence_id,
                 require_current_arm=True, entity_type=entity_type, entity_id=entity_id,
@@ -1232,5 +1298,6 @@ __all__ = [
     'ArmWorkspace', 'DashboardMetrics', 'EvidenceExcerpt', 'OutcomeRow', 'PaperAccessLinks', 'PaperRowCounts', 'PaperSummary',
     'ReviewArm', 'ReviewDecision', 'ReviewHistory', 'ReviewResult', 'WorkspaceField', 'WriteReadiness',
     'apply_review_decision', 'authoritative_database_path', 'list_paper_summaries', 'list_review_arms',
+    'list_comet_gap_arms',
     'load_arm_workspace', 'load_dashboard', 'paper_access_links', 'prepare_writes', 'review_backup_directory',
 ]

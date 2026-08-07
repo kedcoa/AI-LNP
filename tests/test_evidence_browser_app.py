@@ -17,7 +17,7 @@ def _source() -> str:
     return APP.read_text(encoding="utf-8")
 
 
-def test_evidence_browser_app_uses_only_the_read_only_service_boundary() -> None:
+def test_evidence_browser_app_keeps_sql_behind_service_boundaries() -> None:
     source = _source()
     lowered = source.lower()
 
@@ -26,7 +26,7 @@ def test_evidence_browser_app_uses_only_the_read_only_service_boundary() -> None
     assert ".execute(" not in source
     assert "Submit review decision" not in source
     assert "Needs human verification" not in source
-    assert "apply_review_decision" not in source
+    assert "review_service.apply_review_decision" in source
 
 
 def test_evidence_browser_app_preserves_approved_columns_and_sections() -> None:
@@ -66,7 +66,7 @@ def test_evidence_browser_app_renders_fixture_without_writing(
     assert any(item.label == "Paper" for item in app.selectbox)
     assert app.selectbox[0].value == 1
     assert app.dataframe
-    assert not app.button
+    assert any(item.label == "Save correction" for item in app.button)
     assert before == after
 
 

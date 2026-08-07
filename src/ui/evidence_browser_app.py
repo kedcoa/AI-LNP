@@ -5,6 +5,11 @@ from __future__ import annotations
 import streamlit as st
 
 try:
+    from src.ui import review_service
+except ModuleNotFoundError:
+    import review_service  # type: ignore[no-redef]
+
+try:
     from src.ui.evidence_browser_service import (
         ARM_FIELD_COLUMNS,
         FORMULATION_COLUMNS,
@@ -211,6 +216,126 @@ def _render_eligibility(
         )
 
 
+def _render_comet_gap_correction() -> None:
+    st.subheader("Almost COMET-ready corrections")
+    st.caption(
+        "Only small COMET gaps appear here. General application rows do not require human approval."
+    )
+    try:
+        arms = review_service.list_comet_gap_arms()
+    except Exception as error:
+        st.error(f"Could not load the COMET correction queue: {error}")
+        return
+    if not arms:
+        st.success("No almost-COMET-ready arms currently need a correction.")
+        return
+    arm_ids = [arm.experiment_id for arm in arms]
+    experiment_id = st.selectbox(
+        "COMET arm",
+        arm_ids,
+        format_func=lambda value: next(
+            f"{arm.source_paper_id} · arm #{arm.experiment_id} · "
+            f"{len(arm.comet_blockers)} missing"
+            for arm in arms if arm.experiment_id == value
+        ),
+    )
+    workspace = review_service.load_arm_workspace(int(experiment_id))
+    links = review_service.paper_access_links(workspace.paper)
+    st.markdown(f"**{workspace.paper.source_paper_id} · {workspace.paper.title}**")
+    link_values = [
+        ("PMC", links.pmc_url), ("PubMed", links.pubmed_url),
+        ("DOI / publisher", links.doi_url), ("Source", links.source_url),
+        ("Local full text", links.local_full_text_url),
+    ]
+    available_links = [(label, url) for label, url in link_values if url]
+    if available_links:
+        columns = st.columns(len(available_links))
+        for column, (label, url) in zip(columns, available_links):
+            column.link_button(label, url, width="stretch")
+
+    arm = next(item for item in arms if item.experiment_id == experiment_id)
+    aliases = {
+        "formulation_identity": "formulation",
+        "formulation_composition": "chemical_formulation_total",
+        "payload_identity": "payload_name",
+        "encoded_product": "payload_encoded_product",
+        "molecular_target": "payload_molecular_target",
+    }
+    by_name = {field.name: field for field in workspace.fields}
+    candidates = []
+    for blocker in arm.comet_blockers:
+        name = aliases.get(blocker, blocker)
+        field = by_name.get(name) or next(
+            (item for item in workspace.fields if item.field_name == name), None
+        )
+        if field is not None and field not in candidates:
+            candidates.append(field)
+    if not candidates:
+        st.info("These blockers need automatic relationship repair, not a typed value.")
+        return
+    selected_name = st.selectbox(
+        "Missing field", [field.name for field in candidates],
+        format_func=lambda value: next(
+            field.label for field in candidates if field.name == value
+        ),
+    )
+    selected = next(field for field in candidates if field.name == selected_name)
+    st.caption(
+        "Current value: " + (selected.value or "NA")
+        + " · COMET blockers: " + ", ".join(arm.comet_blockers)
+    )
+    updated_value = st.text_input("Updated value")
+    evidence_excerpt = st.text_area("Evidence excerpt")
+    evidence_location = st.text_input(
+        "Evidence location", placeholder="Methods, page 4; Table S2; patent example 12"
+    )
+    reviewer = st.text_input("Reviewer", value="researcher")
+    if st.button("Save correction", type="primary"):
+        if not all((updated_value.strip(), evidence_excerpt.strip(), evidence_location.strip(), reviewer.strip())):
+            st.error("Updated value, evidence excerpt, evidence location, and reviewer are required.")
+        else:
+            try:
+                readiness = review_service.prepare_writes(
+                    review_service.review_backup_directory()
+                )
+                if not readiness.ready:
+                    raise RuntimeError(readiness.failure_reason or "Could not prepare a safe write")
+                result = review_service.apply_review_decision(review_service.ReviewDecision(
+                    experiment_id=workspace.arm.experiment_id,
+                    entity_type=selected.entity_type,
+                    entity_id=selected.entity_id,
+                    field_name=selected.field_name,
+                    decision="correct",
+                    corrected_value=updated_value,
+                    evidence_excerpt=evidence_excerpt,
+                    evidence_location=evidence_location,
+                    reviewer=reviewer,
+                    reviewer_notes="COMET gap correction entered in compact browser form.",
+                    expected_review_revision_id=max(
+                        (item.review_revision_id for item in workspace.history), default=0
+                    ),
+                    expected_state_token=workspace.state_token,
+                    write_readiness=readiness,
+                ))
+            except (KeyError, ValueError, RuntimeError) as error:
+                st.error(str(error))
+            else:
+                st.success(
+                    "Correction saved. COMET was recalculated under "
+                    f"{result.comet.rules_version}."
+                )
+                st.rerun()
+    with st.expander("Evidence history and current arm details"):
+        st.dataframe(
+            [{"Field": field.label, "Value": field.value or "NA"}
+             for field in workspace.fields],
+            hide_index=True, width="stretch",
+        )
+        for excerpt in workspace.evidence:
+            st.write(excerpt.text)
+            st.caption(f"#{excerpt.evidence_id} · {excerpt.location or excerpt.location_type}")
+
+
 def _render_formulation(formulation: object) -> None:
     cells = formulation.cells  # type: ignore[attr-defined]
     name = cells["lnp_name"].display_value
@@ -369,6 +494,8 @@ def main() -> None:
     )
     st.dataframe(_combined_rows(combined), hide_index=True, width="stretch")
     st.caption(f"Showing {len(combined)} of {len(all_arm_rows)} canonical arms.")
+    st.divider()
+    _render_comet_gap_correction()
     st.divider()
 
     try:
