@@ -9,24 +9,30 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Literal
 
+from src.database.target_scope import has_supported_delivery_destination
+
 
 CompletenessStatus = Literal["complete", "incomplete", "conflict", "quarantined"]
 EligibilityProfile = Literal["nearest_neighbor", "comet"]
 
-RULES_VERSION = "working-evidence-v2"
+RULES_VERSION = "working-evidence-v3"
 
-BASE_REQUIRED_FIELDS = ("formulation_id", "cell_type", "payload_type")
+BASE_REQUIRED_FIELDS = (
+    "species",
+    "payload_name",
+    "dose",
+    "route",
+    "timepoint",
+)
 PROFILE_REQUIRED_FIELDS = {
     "nearest_neighbor": (
         "formulation_id",
-        "cell_type",
         "payload_type",
         "species",
         "in_vitro_in_vivo",
     ),
     "comet": (
         "formulation_id",
-        "cell_type",
         "payload_type",
         "species",
         "in_vitro_in_vivo",
@@ -163,6 +169,13 @@ def _has_canonical_outcome_evidence(
                    AND later.import_field_evidence_id > link.import_field_evidence_id
              )
              AND (
+                 (
+                     ? = 'automatically_validated'
+                     AND evidence.evidence_review_status NOT IN (
+                         'rejected','conflict','ambiguous'
+                     )
+                 )
+                 OR
                  evidence.evidence_review_status = 'manually_verified'
                  OR (
                      json_extract(
@@ -184,7 +197,7 @@ def _has_canonical_outcome_evidence(
                  )
              )
            LIMIT 1""",
-        (outcome_id, status),
+        (outcome_id, status, status),
     ).fetchone() is not None
 
 
@@ -194,8 +207,14 @@ def _has_value(
     field_name: str,
 ) -> bool:
     value = experiment[field_name]
-    if value is not None and (not isinstance(value, str) or value.strip()):
-        return True
+    if value is not None:
+        if not isinstance(value, str):
+            return True
+        normalized = value.strip().casefold().replace(" ", "_")
+        if normalized and normalized not in {
+            "na", "n/a", "none", "not_reported", "unknown"
+        }:
+            return True
     return _accepted_correction(
         connection, experiment["experiment_id"], field_name
     ) is not None
@@ -343,16 +362,39 @@ def _evidence_statuses(
     connection: sqlite3.Connection,
     experiment_id: int,
 ) -> tuple[str, ...]:
+    if connection.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name='import_field_evidence'"
+    ).fetchone() is None:
+        return tuple(
+            row[0] for row in connection.execute(
+                "SELECT evidence_review_status FROM evidence "
+                "WHERE experiment_id=? ORDER BY evidence_id", (experiment_id,)
+            )
+        )
     return tuple(
         row[0]
         for row in connection.execute(
             """
-            SELECT evidence_review_status
+            SELECT evidence_review_status AS status, evidence_id AS ordering
             FROM evidence
             WHERE experiment_id = ?
-            ORDER BY evidence_id
+            UNION ALL
+            SELECT CASE
+                     WHEN link.verification_status IN (
+                       'automatically_validated','manually_verified'
+                     ) THEN link.verification_status
+                     ELSE evidence.evidence_review_status
+                   END AS status,
+                   evidence.evidence_id AS ordering
+            FROM import_field_evidence AS link
+            JOIN evidence USING(evidence_id)
+            WHERE (link.entity_type='arm' AND link.entity_id=?)
+               OR (link.entity_type='outcome' AND link.entity_id IN (
+                    SELECT outcome_id FROM outcome WHERE experiment_id=?
+               ))
+            ORDER BY ordering
             """,
-            (experiment_id,),
+            (experiment_id, experiment_id, experiment_id),
         )
     )
 
@@ -423,13 +465,35 @@ def evaluate_arm_status(
         else None
     )
     missing = _unresolved_missing_fields(connection, experiment_id)
+    if has_supported_delivery_destination(connection, experiment_id):
+        missing.discard("cell_type")
+        missing.discard("delivery_destination")
+    else:
+        missing.add("delivery_destination")
     missing.update(
         field_name
         for field_name in BASE_REQUIRED_FIELDS
         if not _has_value(connection, experiment, field_name)
     )
+    formulation = connection.execute(
+        """
+        SELECT chemical_formulation_total,lnp_molar_ratio
+        FROM formulation WHERE formulation_id=?
+        """,
+        (experiment["formulation_id"],),
+    ).fetchone()
+    for field_name, index in (
+        ("chemical_formulation_total", 0),
+        ("lnp_molar_ratio", 1),
+    ):
+        corrected = _accepted_entity_correction(
+            connection, "formulation", experiment["formulation_id"], field_name
+        )
+        stored_value = formulation[index] if formulation is not None else None
+        if not str(corrected or stored_value or "").strip():
+            missing.add(field_name)
     outcomes = _linked_outcomes(connection, experiment_id)
-    if not outcomes:
+    if not outcomes or not _usable_outcomes(connection, experiment_id):
         missing.add("outcome")
 
     evidence_statuses = _evidence_statuses(connection, experiment_id)
@@ -491,6 +555,11 @@ def _profile_reasons(
 ) -> set[str]:
     experiment_id = experiment["experiment_id"]
     reasons = _unresolved_missing_fields(connection, experiment_id)
+    if has_supported_delivery_destination(connection, experiment_id):
+        reasons.discard("cell_type")
+        reasons.discard("delivery_destination")
+    else:
+        reasons.add("delivery_destination")
     reasons.update(
         field_name
         for field_name in PROFILE_REQUIRED_FIELDS[profile]
@@ -628,6 +697,8 @@ def eligibility_reasons(
     experiment = _row(connection, experiment_id)
     status = evaluate_arm_status(connection, experiment_id)
     reasons = _profile_reasons(connection, experiment, profile)
+    if status.completeness_status == "incomplete":
+        reasons.update(status.missing_fields)
     if status.completeness_status in {"conflict", "quarantined"}:
         reasons.add(status.completeness_status)
     if profile == "comet" and status.verification_status != "manually_verified":

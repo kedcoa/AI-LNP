@@ -95,16 +95,35 @@ def _field_available(
 
 
 def _has_evidence(connection: sqlite3.Connection, experiment_id: int) -> bool:
+    if connection.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name='import_field_evidence'"
+    ).fetchone() is None:
+        return connection.execute(
+            "SELECT 1 FROM evidence WHERE experiment_id=? "
+            "AND length(trim(coalesce(evidence_text,'')))>0 "
+            "AND evidence_review_status NOT IN ('rejected','conflict','ambiguous') LIMIT 1",
+            (experiment_id,),
+        ).fetchone() is not None
     return connection.execute(
         """
         SELECT 1
         FROM evidence
-        WHERE experiment_id = ?
-          AND length(trim(coalesce(evidence_text, ''))) > 0
+        WHERE length(trim(coalesce(evidence_text, ''))) > 0
           AND evidence_review_status NOT IN ('rejected', 'conflict', 'ambiguous')
+          AND (
+            experiment_id = ?
+            OR evidence_id IN (
+              SELECT link.evidence_id
+              FROM import_field_evidence AS link
+              WHERE (link.entity_type='arm' AND link.entity_id=?)
+                 OR (link.entity_type='outcome' AND link.entity_id IN (
+                      SELECT outcome_id FROM outcome WHERE experiment_id=?
+                 ))
+            )
+          )
         LIMIT 1
         """,
-        (experiment_id,),
+        (experiment_id, experiment_id, experiment_id),
     ).fetchone() is not None
 
 
@@ -187,8 +206,10 @@ def evaluate_readiness(
     nearest = evaluate_eligibility(connection, experiment_id, "nearest_neighbor")
     comet_blockers = set(eligibility_reasons(connection, experiment_id, "comet"))
     comet_blockers.update(_configured_comet_blockers(connection, experiment_id))
-    invalid = status.completeness_status in {"conflict", "quarantined"}
-    general_usable = not invalid and _has_evidence(connection, experiment_id)
+    general_usable = (
+        status.completeness_status == "complete"
+        and _has_evidence(connection, experiment_id)
+    )
     if status.completeness_status == "conflict":
         queue_label = "conflict"
     elif status.completeness_status == "quarantined":
@@ -196,7 +217,8 @@ def evaluate_readiness(
     elif not comet_blockers:
         queue_label = "comet_ready"
     elif (
-        general_usable
+        status.completeness_status == "incomplete"
+        and _has_evidence(connection, experiment_id)
         and len(comet_blockers)
         <= int(_profiles()["comet"]["max_blockers_for_almost_ready"])
     ):

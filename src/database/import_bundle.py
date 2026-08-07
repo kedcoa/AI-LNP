@@ -975,6 +975,9 @@ def _insert_arm(
         record.cell_type,
         record.cell_source,
         record.tissue_or_organ,
+        record.intended_target_cell,
+        record.target_or_recipient_organ,
+        record.observed_transfected_cell,
         record.species,
         record.disease_model,
         record.in_vitro_in_vivo,
@@ -999,13 +1002,15 @@ def _insert_arm(
             """
             INSERT INTO experiment (
                 paper_id, formulation_id, cell_type, cell_source,
-                tissue_or_organ, species, disease_model, in_vitro_in_vivo,
+                tissue_or_organ, intended_target_cell,
+                target_or_recipient_organ, observed_transfected_cell,
+                species, disease_model, in_vitro_in_vivo,
                 payload_type, payload_name, payload_encoded_product,
                 payload_molecular_target, reporter, dose, dose_unit, route,
                 timepoint, timepoint_unit, assay, comparator_type,
                 comparator_description, protocol_reference, experiment_notes
             ) VALUES (
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
             """,
             values,
@@ -1078,22 +1083,8 @@ def _insert_evidence(
             sort_keys=True,
             separators=(",", ":"),
         )
-    evidence_status = (
-        "unreviewed"
-        if record.verification_status == "automatically_validated"
-        else record.verification_status
-    )
+    evidence_status = record.verification_status
     reviewer_notes = record.reviewer_notes
-    if record.verification_status == "automatically_validated":
-        mapping_note = (
-            "Source verification status automatically_validated; stored as "
-            "unreviewed because the core schema has no automatic state."
-        )
-        reviewer_notes = (
-            f"{reviewer_notes}\n{mapping_note}"
-            if reviewer_notes
-            else mapping_note
-        )
     return int(
         connection.execute(
             """

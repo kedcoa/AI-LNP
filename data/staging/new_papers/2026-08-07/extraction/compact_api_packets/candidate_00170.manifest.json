@@ -1,0 +1,5223 @@
+{
+  "paper_id": "candidate_00170",
+  "source_review_packet_checksum": "537aaad5253ea02977b351eb9f17e583045d518396fd42e0e7037e0d236217ac",
+  "api_packet_checksum": "ebc5bb638236bbc892592143f33f6f4a932a8f293c20f547954fb0006f1ea41c",
+  "packet_budget_tokens": 16000,
+  "budget_status": "human_approved",
+  "token_estimation_method": "ceil(compact UTF-8 JSON bytes / 4)",
+  "estimated_input_tokens": {
+    "prompt": 285,
+    "response_schema": 2123,
+    "evidence_packet": 15964,
+    "total": 18372
+  },
+  "counts": {
+    "candidate_evidence": 294,
+    "selected_evidence": 124,
+    "excluded_evidence": 170,
+    "selected_sources": 29
+  },
+  "removed_duplicates": {
+    "input_hits": 80,
+    "unique_chunks": 41,
+    "removed_chunk_duplicates": 39,
+    "removed_normalized_passages": 0,
+    "input_clauses": 296,
+    "unique_evidence_items": 294
+  },
+  "blocked_fields_with_diagnostics": {},
+  "selected_passages": [
+    {
+      "evidence_id": "candidate_00170-E-608daf2e581fa04a",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-a2af54cc2871"
+      ],
+      "text": "Preparation and characterization of mannose-modified LNP (LNP-Man) for enhancing LSEC uptake."
+    },
+    {
+      "evidence_id": "candidate_00170-E-cdc94f8ed22c0e29",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-a2af54cc2871"
+      ],
+      "text": "(A) Composition of LNP-Man, including mannose contained lipid DSPE-PEG2000-Man."
+    },
+    {
+      "evidence_id": "candidate_00170-E-352733cdc974bfdf",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 167,
+      "source_ids": [
+        "S-781dfd9683a0"
+      ],
+      "text": "To determine whether epitope 4 delivery is capable of generating CD25+FoxP3+ T-cells in C3H/HeJ mice, animals (n = 3) were IV injected with 1.25 mg/kg LNP before spleen harvesting on day 7, preparation of splenocyte suspensions and staining with antibodies recognizing CD3, CD4, CD25, and FoxP3 (Figure 6A).5,32 Following gating on CD3+CD4+ cells, the percentages of CD25+FoxP3+ cells in each study group were recorded (Figure S8)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-6ba6ecfdb3127e83",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 132,
+      "source_ids": [
+        "S-781dfd9683a0"
+      ],
+      "text": "This demonstrated significant (p < 0.01; p < 0.001) increases above the 5.4% CD25+FoxP3+ T-cells of untreated animals, reaching 8.6% and 11.1% after treatment with mAra h2#4/LNP and mAra h2#4/LNP-Man, respectively (Figure 6B)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-3b63113ea3752715",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-781dfd9683a0"
+      ],
+      "text": "This includes a significant (p < 0.05) increase as a result of mannose decoration."
+    },
+    {
+      "evidence_id": "candidate_00170-E-8ed291c4d7280eb5",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 53,
+      "source_ids": [
+        "S-781dfd9683a0"
+      ],
+      "text": "PolyA/LNP-Man injection had no impact."
+    },
+    {
+      "evidence_id": "candidate_00170-E-cf4772a3cdfc5eef",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-781dfd9683a0"
+      ],
+      "text": "We also conducted ELISpot assays to quantify the number of IL-10-producing cell clusters."
+    },
+    {
+      "evidence_id": "candidate_00170-E-20577e4853b11233",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 152,
+      "source_ids": [
+        "S-781dfd9683a0"
+      ],
+      "text": "Splenocyte suspensions were used to collect CD4+CD25+ cells by magnetic beads before the addition of the epitope 4 peptide for 48 h, followed by assessment of the number of IL-10-producing colonies (Figure 6C).33 This demonstrated a significant increase in the number of IL-10 spots in mAra h2#4/LNP and mAra h2#4/LNP-Man treated animals compared to control (Figure 6D)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-0db25dcd1a796c23",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 170,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "Similar efficacy was demonstrated during LNP administration postsensitization."
+    },
+    {
+      "evidence_id": "candidate_00170-E-b363a53173f3abed",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 136,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "We demonstrate the development of a liver-targeting cationic LNP platform to deliver mRNA-encoded peanut allergen epitopes to LSECs, capable of acting as tolerogenic APC for interference in anaphylaxis, including through the generation of regulatory T-cells."
+    },
+    {
+      "evidence_id": "candidate_00170-E-7db50756a1654266",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 117,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "The encoding mRNA strand was constructed by including nucleotide sequences that express T-cell epitopes, identified in an IEDB search of the dominant peanut allergen protein, Ara h2."
+    },
+    {
+      "evidence_id": "candidate_00170-E-344394bc151e2c84",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "The mRNA was used for the preparation of LNPs, including a variation in which the particle surface is decorated with a lipid-anchored mannose ligand."
+    },
+    {
+      "evidence_id": "candidate_00170-E-1e163162447f4f74",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "IV injection of the mAra h2#4/LNP-Man increased the generation of IL-10-producing CD25+FoxP3+ T-cells in the spleen."
+    },
+    {
+      "evidence_id": "candidate_00170-E-ff623e9fa623330c",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "Similar efficacy was demonstrated using mAra h2#4/LNP-Man delivery after sensitization."
+    },
+    {
+      "evidence_id": "candidate_00170-E-658fc801b39f3822",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "Nondecorated LNP exerted lesser but still significant effects, while PolyA/LNP-Man lacked tolerogenic effects."
+    },
+    {
+      "evidence_id": "candidate_00170-E-7ceb5c0385551e6c",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 190,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "While it has previously been demonstrated that oral delivery of chitosan-DNA nanoparticles can generate immune protection in a murine model of peanut allergy, we could not find any other literature evidence of mRNA epitope delivery to treat peanut allergy or other forms of food anaphylaxis.38 All considered, our results demonstrate the feasibility of using a tolerogenic mRNA/LNP to treat anaphylaxis, introducing a technology platform that can be applied for the treatment of multiple allergic disorders as well as autoimmune diseases."
+    },
+    {
+      "evidence_id": "candidate_00170-E-d8c3974753c0f541",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 85,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "Therapeutic effects of mAra h2#4/LNP postsensitization as well as comparison of additional mRNA epitopes in a prophylaxis model."
+    },
+    {
+      "evidence_id": "candidate_00170-E-7fef44ee7711eecb",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 85,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 102,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(A) Experimental timeline to assess the therapeutic effect of different nanoparticles (PolyA/LNP-Man, mAra h2#4/LNP, mAra h2#4/LNP-Man), administered postsensitization in the same CPE-induced anaphylaxis model described in Figure 7 (n = 6)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-e94a5db97e4394ec",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 85,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(E) Experimental timeline for comparing the prophylactic effects of decorated LNP delivering mRNA constructs encoding for Ara h2 epitope 2 and epitope 4 as well as an epitope combination (1, 2, 3, and 4) (n = 6)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-43ebff9d42138582",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 85,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "The designs of the different mRNA-encoding strands are shown in Figure S11A–C, with the physiochemical characterization of the corresponding LNP-Man in Figure S11D."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9db92ec49158a4bc",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "(A) Schematic to explain microfluidics mixing for construction of LNPs, which are composed of an ionizable cationic lipid (DLin-MC3-DMA), helper lipids (cholesterol and DSPE), and DSPE-PEG2000."
+    },
+    {
+      "evidence_id": "candidate_00170-E-c79be7aada1ff439",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "(B) Physicochemical characterization of LNP size, polydispersity index (PDI), and ζ-potential."
+    },
+    {
+      "evidence_id": "candidate_00170-E-0efa64f001f74c97",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 59,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "mRNA encapsulation efficiency (EE) was determined by the RiboGreen assay."
+    },
+    {
+      "evidence_id": "candidate_00170-E-e8803725629c53dd",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 52,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "(C) Cryo-EM images of PolyA/LNP and mGFP/LNP."
+    },
+    {
+      "evidence_id": "candidate_00170-E-8d8787d9e0f472eb",
+      "may_support_fields": [
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 54,
+      "source_ids": [
+        "S-be80bf5604f2",
+        "S-e94f8e0fd60e"
+      ],
+      "text": "Scale bars are 100 nm."
+    },
+    {
+      "evidence_id": "candidate_00170-E-4f1b54b6cc07e06a",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "(D) Confocal images to show GFP expression, following LSEC incubation with 0.5 μg/mL PolyA/LNP or mGFP/LNP for 24 h."
+    },
+    {
+      "evidence_id": "candidate_00170-E-300cee9f1b23c7cb",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "(E) In vivo and ex vivo IVIS images following IV injection of 1 mg/kg DiR/mGFP/LNP."
+    },
+    {
+      "evidence_id": "candidate_00170-E-6cd0cc660160d78f",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "The lower panel shows a digital fluorescence scanning view of a liver slice to show the sinusoidal distribution of GFP expression in relation to the more scattered distribution of Kupffer cells."
+    },
+    {
+      "evidence_id": "candidate_00170-E-388dee8ab3a4f1c2",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "GFP staining was performed with anti-GFP antibody (AF488), and Kupffer cells were detected using an anti-F4/80 antibody (AF647)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-e4234b2d64bdcc0c",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "LNPs were synthesized by a microfluidics approach, using a NanoAssemblr Benchtop (Precision NanoSystems Inc.) to blend and mix the lipid-containing organic phase with an aqueous phase containing the mRNA strand."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9a177df9034dcf76",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 124,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "The organic phase was prepared by mixing the ionizable cationic lipid, DLin-MC3-DMA, with DSPC, cholesterol, and DMG-PEG2000 or DSPE-PEG2000-mannose in ethanol at molar ratios of 50:10:38.5:1.5."
+    },
+    {
+      "evidence_id": "candidate_00170-E-a58469092e158489",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "The aqueous phase was prepared by diluting the mRNA constructs (PolyA, mGFP, or mAra h2) in RNase-free sodium acetate buffer (pH 4.0)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-bb89a542db68e58f",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "The LNP size, polydispersity index (PDI), and ζ potential were determined by dynamic light scattering (DLS) measurement, using a Zetasizer Nano ZS (Malvern Instruments Ltd.)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-f7e95b0bf7166b26",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "mRNA encapsulation efficiency (EE) was determined by a RiboGreen (Thermo Scientific) assay to assess nucleic acid content."
+    },
+    {
+      "evidence_id": "candidate_00170-E-f795de079e3d841d",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 139,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "For the performance of in vivo imaging, we also synthesized DiOC18(7) (DiR)-labeled LNPs (DiR/mGFP/LNP and DiR/mGFP/LNP-Man), in which 0.3% of the cholesterol content was substituted to yield a lipid composition of DLin-MC3-DMA:DSPC:cholesterol:DMG-PEG2000 or DSPE-PEG2000-Man:DiR in the molar ratio 50:10:38.2:1.5:0.3."
+    },
+    {
+      "evidence_id": "candidate_00170-E-cdd64f4478dd4e3c",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "Particle stability was assessed by storing the PolyA/LNP and PolyA/LNP-Man at 4 °C, with the regular removal of aliquots to assess particle size, polydispersity, and RiboGreen content over 14 days."
+    },
+    {
+      "evidence_id": "candidate_00170-E-c73b8246854b5af0",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 175,
+      "source_ids": [
+        "S-bb46a298e29b"
+      ],
+      "text": "Successful therapeutic cargo delivery and mRNA expression in LSECs depend on endosomal escape of the LNP, where lipid composition and the presence of the ionizable lipid play important roles in destabilizing the endosomal lipid bilayer (Figure S4A).26 This escape is dependent on formation of a particle hexagonal (HII) lipid phase, a property associated with ionizable cationic lipids, not observed in other lipid nanocarriers, such as liposomes."
+    },
+    {
+      "evidence_id": "candidate_00170-E-597cc8507dbe7c4b",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 151,
+      "source_ids": [
+        "S-bb46a298e29b"
+      ],
+      "text": "Thus, while cylindrical cone lipids (e.g., DSPC) favor the formation of lipid bilayers, protonated ionizable lipids (e.g., DLin-MC3-DMA) form inverted cone-shaped lipid structures (hexagonal phase), which have a destabilizing effect on the endosomal membrane, leading to mRNA release."
+    },
+    {
+      "evidence_id": "candidate_00170-E-0e2b1fa2af9c3ec6",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 172,
+      "source_ids": [
+        "S-bb46a298e29b"
+      ],
+      "text": "To assess whether the surface decoration of a mannose ligand interfere with the membrane destabilizing effects of the hexagonal phase, the surrogate lipid bilayer of red blood cells (RBC) was used in an assay to assess the impact of the LNP lipid phase.27 This was accomplished by suspending RBC in pH 7.4 or pH 5.5 buffers in tissue culture plates, followed by the addition of different concentrations of PolyA/LNP or PolyA/LNP-Man."
+    },
+    {
+      "evidence_id": "candidate_00170-E-0d2cc408300dbbc4",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-bb46a298e29b"
+      ],
+      "text": "PBS served as a blank, while 0.1% Triton X-100 provided 100% hemolysis."
+    },
+    {
+      "evidence_id": "candidate_00170-E-80d9803ce47748db",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-bb46a298e29b"
+      ],
+      "text": "The analysis demonstrated that while there was no hemolysis during particle addition at pH 7.4, both LNPs induced roughly equivalent membrane damage at pH 5.5 (Figure S4B,C)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-560b1079c8d51efd",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-bb46a298e29b"
+      ],
+      "text": "These results confirm that mannose decoration does not impact the hexagonal lipid phase activity."
+    },
+    {
+      "evidence_id": "candidate_00170-E-c2fbd826a4457068",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-5af704e1f7c6"
+      ],
+      "text": "mRNA epitope therapy could also be applicable to the treatment of autoimmune diseases."
+    },
+    {
+      "evidence_id": "candidate_00170-E-faa9a9bb52e07220",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 170,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome"
+      ],
+      "estimated_item_tokens": 266,
+      "source_ids": [
+        "S-5af704e1f7c6"
+      ],
+      "text": "For example, it has been demonstrated that a mRNA-based construct expressing a myelin oligodendrocyte glycoprotein peptide, MOG35-55, is capable of inducing Tregs that prevent the generation of experimental autoimmune encephalomyelitis (EAE) in response to the same peptide in a mouse model resembling multiple sclerosis.49 These results also agree with the previous demonstration that the delivery of a MOG35-55 nucleic acid construct to the liver by an adenovirus-associated vector can prevent EAE or reverse neurological damage in animals challenged with the immune epitope.50 Based on the finding that multiple antigens and epitopes play a role in autoimmune disease processes such as type I diabetes, the availability of multiple-epitope mRNA vaccines could also make inroads into the treatment of these disease processes."
+    },
+    {
+      "evidence_id": "candidate_00170-E-cccf021ddd88bc46",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-7a2fb765b510"
+      ],
+      "text": "mRNA release in the cytosol is dependent on the LNP’s hexagonal lipid phase, which allows destabilization of the endosomal lipid membrane, as depicted in Figure S4A."
+    },
+    {
+      "evidence_id": "candidate_00170-E-6e9df4153ac7b33a",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 130,
+      "source_ids": [
+        "S-7a2fb765b510"
+      ],
+      "text": "Because it is difficult to assess the impact of mannose decoration on the function of the hexagonal lipid phase inside cells, a surrogate mouse red blood cell (RBC) hemolysis assay was used to assess lipid bilayer destabilization under acidic endosomal conditions."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9be222cb52640ec9",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-7a2fb765b510"
+      ],
+      "text": "Purified murine RBC, suspended in PBS at a pH of 5.5 or 7.4, was mixed with different quantities (0.5, 1.0, and 2.0 μg/mL) of PolyA/LNP or PolyA/LNP-Man for 1 h at 37 °C."
+    },
+    {
+      "evidence_id": "candidate_00170-E-5d79c990ef223604",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-7a2fb765b510"
+      ],
+      "text": "Plates were centrifuged at 3000 rpm to collect supernatants for assessing hemoglobin release in a microplate reader at 575 nm."
+    },
+    {
+      "evidence_id": "candidate_00170-E-d1df9bd0e8aab471",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 68,
+      "source_ids": [
+        "S-7a2fb765b510"
+      ],
+      "text": "RBC lysis with 0.1% Triton X-100 was used as the positive control (100% hemolysis)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-d78067e5ab8bfd54",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 118,
+      "source_ids": [
+        "S-eccac4d2103c"
+      ],
+      "text": "An intriguing question is how the use of a single Ara h2 epitope exerts tolerogenic control over a potentially large number of participating IgE-binding epitopes, displayed among 17 peanut allergens in the extract."
+    },
+    {
+      "evidence_id": "candidate_00170-E-99110f78813f9051",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 467,
+      "source_ids": [
+        "S-eccac4d2103c"
+      ],
+      "text": "One possibility is that Ara h2 T-cell epitopes make a dominant contribution to the alleviation of allergic inflammation induced by the accompanying IgE-binding epitopes in the same allergen.8,39,40 Another possibility is the occurrence of infectious tolerance, denoting tolerance transfer from one cell population to another.44,45 This could include a role for FoxP3+ Tregs, capable of converting conventional T-cells into regulatory T-cells, either indirectly (e.g., TGF-β, IL-10, or IL-35) or through direct interference (e.g., checkpoint receptor expression).44 Growing evidence for the participation of infectious tolerance in the suppression of allergic disease has been provided previously.8 For instance, a dominant T-cell epitope in the major house dust mite allergen, Der p 1, is capable of inducing tolerance to whole Der p 1 4A, or a crude house dust mite extract.46,47 Also, administration of selected Fel d 1 peptides has been shown to alter T-cell responses to cat allergen extract in humans, including non-Fel d 1 related peptides.48 Similar findings of linked suppression with alteration of cytokine profiles have also been demonstrated by using dominant T-cell epitopes in murine allergy models for tree pollen (e.g., birch, cedar, and olive), bee and hornet venom, egg-white protein, and Timothy grass pollen.8,39,40 Based on these findings, we propose that tolerogenic mRNA lipid nanoparticles could also be useful for treating a wide range of allergies, including epitope combinations derived from more than one allergen to treat mixed food allergies, e.g., peanut plus egg-white proteins."
+    },
+    {
+      "evidence_id": "candidate_00170-E-16cc0deefddf6de2",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 110,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "While prophylactic interference in allergic sensitization is accomplishable (Figure 7), a key question is whether Treg generation by mAra h2#4/LNP can prevent anaphylaxis once allergic sensitization is in progress."
+    },
+    {
+      "evidence_id": "candidate_00170-E-90e461afed230843",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 130,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "This was accomplished by adopting the protocol in Figure 8A, allowing 2 doses of PolyA/LNP-Man, mAra h2#4/LNP, and mAra h2#4/LNP-Man to be administered IV in C3H/HeJ mice (n = 6) after 3 rounds of oral sensitization (Figure 8A)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-02a915560c54e866",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 110,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "Peritoneal CPE challenge triggered hypothermia and onset of anaphylaxis in nontreated animals or animals injected with PolyA/LNP-Man (Figures 8B,C)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-5c2a7ed94b53c51d",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "Noteworthy, the administration of both particle types to deliver epitope 4 interfered in the generation of anaphylaxis, with the impact of mAra h2#4/LNP-Man significantly better (p < 0.001) than mAra h2#4/LNP (p < 0.01)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-5ce9ce19686f32a6",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "Mannose-decorated LNP was more effective than nondecorated particles in all response outcomes."
+    },
+    {
+      "evidence_id": "candidate_00170-E-363bdea07d1f9701",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "The competition of bound mannose was also compared to the impact of a blocking anti-CD206 antibody (Figure 4A,B)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-07dc62f2302f0fea",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 180,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "While mannose surface decoration increased GFP expression in the absence of binding competition, incremental amounts of nonfluorescent LNPs or anti-CD206 could be seen to decrease GFP expression (Figure 4A)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-cda9a7c5b24dd0da",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "Nontreated cells served as control (Figures 4C,D)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-179fc1879539177b",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 180,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "This demonstrated increased GFP expression of decorated versus nondecorated LNPs (Figure 4C)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-3b98ab3035a37778",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 180,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 114,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "Moreover, MFI calculations showed that in spite of increased GFP expression by both delivery vehicles, these expression levels were significantly increased for mannose-decorated particles (Figure 4D)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-730411a70b6a24d8",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "Briefly, the cells were incubated with a range of PolyA/LNP or PolyA/LNP-Man concentrations, amounting to 0, 0.1, 0.25, 0.5, 1.0, and 2.5 μg/mL PolyA at 37 °C."
+    },
+    {
+      "evidence_id": "candidate_00170-E-3dfd524e9be0b654",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "After 24 h, the MTS was added and the absorbance was recorded in the microplate reader, using a 490 nm wavelength."
+    },
+    {
+      "evidence_id": "candidate_00170-E-242b6b758638c8bb",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "Because their cytotoxic events at high concentrations, the LNPs also underwent in vivo safety assessment in nonsensitized C3H/HeJ mice."
+    },
+    {
+      "evidence_id": "candidate_00170-E-7dc5f85b11db38fe",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 81,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "The experiment included 3 animal groups, each including 3 mice."
+    },
+    {
+      "evidence_id": "candidate_00170-E-7b5d228268008704",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "These mice received IV administration of PBS or 2 mg/kg each of PolyA/LNP or PolyA/LNP-Man."
+    },
+    {
+      "evidence_id": "candidate_00170-E-8293f2007f105482",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "Assessment of mannose-decorated LNP that deliver reporter-encoding GFP mRNA."
+    },
+    {
+      "evidence_id": "candidate_00170-E-3734c048cdcfdf1e",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "The LNPs described in Figure 3 were used to perform these studies: (A, B) Flow cytometry to assess GFP expression in LSECs, exposed to 0.5 μg/mL mGFP/LNP-Man, with or without co-incubation with competitive binding PolyA/LNP-Man at ratios of 1:0, 1:1, and 1:2 for 24 h (n = 3)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-2a2da3de95a5c9d4",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 98,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "The statistically significant decline in GFP fluorescence as a result of binding competition was confirmed by assessing mean fluorescence intensity (MFI)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-1eb8c7fdf084da48",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 97,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "(C, D) Flow cytometry to compare GFP fluorescence intensity in LSEC, following uptake of 0.25 and 0.5 μg/mL mGFP/LNP or mGFP/LNP-Man (n = 3) over 24 h."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9c25b0a22b6f55af",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "(E) In vivo and ex vivo IVIS imaging following IV injection of 1 mg/kg DiR-labeled nondecorated or mannose-decorated LNPs for 6 h (n = 3)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-b84305e116af5d82",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "(G) Representative digital fluorescence scanning images to compare the intrahepatic distribution of DiR/mGFP/LNP and DiR/mGFP/LNP-Man."
+    },
+    {
+      "evidence_id": "candidate_00170-E-54457ad19b1ede90",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "(H) Relative GFP fluorescence intensity compared using ImageJ analysis."
+    },
+    {
+      "evidence_id": "candidate_00170-E-e9f8a87cc8388b75",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 215,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 104,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "(I) Fluorescence overlap to determine colocalization of GFP with LSEC, using ImageJ analysis (n = 3); N.S., no significant difference; * p < 0.05; ** p < 0.01; and *** p < 0.001."
+    },
+    {
+      "evidence_id": "candidate_00170-E-6bf7ed32eb88456d",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 125,
+      "source_ids": [
+        "S-581c890cc67d"
+      ],
+      "text": "Food allergy affects 15 million people in the United States, including children and adults.1,2 Of particular concern is the steady rise in the prevalence of peanut allergy in children, with impact on lifestyle and potentially life-threatening allergic reactions."
+    },
+    {
+      "evidence_id": "candidate_00170-E-06cc501223d4db21",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 170,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome"
+      ],
+      "estimated_item_tokens": 493,
+      "source_ids": [
+        "S-581c890cc67d"
+      ],
+      "text": "We asked whether a mRNA approach could be used to achieve immune tolerance for the prevention and treatment of peanut anaphylaxis, a highly prevalent food allergy that impacts one in 50 children and one in 200 adults.1,2 As a front-runner of this study, we have previously shown that the delivery of an egg-white protein, ovalbumin (OVA), or a dominant peanut allergen, Arachis hypogaea protein 2 (Ara h2), can alleviate anaphylaxis if these proteins are encapsulated in poly(lactic-co-glycolic acid) (PLGA) nanoparticles, followed by targeted delivery to the stabilin scavenger receptor expressed on liver sinusoidal endothelial cells (LSECs).3−5 The basis of this tolerogenic effect is the ability of LSECs to act as specialized antigen-presenting cells (APCs), which generate regulatory T-cells (Tregs), capable of suppressing T-helper 2 (Th2) immunity, IgE production, mast cell release, and anaphylaxis resulting from allergen sensitization (Figure 1).6,7 Noteworthy, it has also been shown that short nonallergenic peptide sequences, present in these food allergens, can be selected for class II major histocompatibility (MHC-II) binding and presentation to naïve CD4+ T-cell precursors of Tregs.5 This is in keeping with the discovery of so-called immune-regulatory T-cell epitopes capable of suppressing allergic responses to cat, house dust mite, and grass pollen in preclinical and human studies.8 In fact, the most robust T-cell epitope identified in our NIAID Immune Epitope Database (IEDB) search for MHC-II binding Ara h2 peptides was more effective for anaphylaxis prevention than the intact, purified Ara h2 protein.5 The same applies to an MHC-II-presented OVA peptide compared to the whole egg-white protein.3−5"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8d390dd4c1ccf1c5",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-ebb98c19d5fd"
+      ],
+      "text": "Our primary study goal was to develop an epitope-expressing mRNA carrier for peanut allergen delivery and presentation by tolerogenic LSECs."
+    },
+    {
+      "evidence_id": "candidate_00170-E-cbbc826fa979e87c",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 143,
+      "source_ids": [
+        "S-ebb98c19d5fd"
+      ],
+      "text": "The selection of mRNA instead of protein or peptide sequences is the ease of producing nucleic acid constructs to conduct immunotherapy, as demonstrated for COVID vaccination as well as cancer immunotherapy.17 However, in order to accomplish antigen expression by LSECs, it is important to use LNP compositions that favor liver biodistribution."
+    },
+    {
+      "evidence_id": "candidate_00170-E-0024893759c2393c",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 330,
+      "source_ids": [
+        "S-ebb98c19d5fd"
+      ],
+      "text": "This was accomplished by including an ionizable cationic lipid, 4-(dimethylamino)butanoic acid (DLin-MC3-DMA, aka MC3) and helper lipids [distearoylphosphatidylcholine (DSPC) and cholesterol] as well as a surface-stabilizing lipid component, dimyristoyl glycerol polyethylene glycol 2000 (DMG-PEG2000) into our particle design (Figure 2A).18 To demonstrate that the capability of such a particle design to deliver a green fluorescence protein (mGFP) reporter-encoding mRNA construct to the liver, a microfluidic synthesis process was used (Figure 2A).19 This involved the use of a NanoAssemblr Benchtop for blending and mixing the aqueous mGFP phase (prepared in RNase-free sodium acetate buffer) with an ethanol-dissolved lipid phase that included DLin-MC3-DMA, DSPC, cholesterol and DMG-PEG2000 at molar ratios of 50, 10, 38.5, 1.5 (Figures 2A and Supporting Information Figure S1).20 PolyA was used as a nonfluorescent nucleic acid strand, serving as control, while also providing an inexpensive source to fine-tune optimum volume and flow rate settings for the NanoAssemblr (Figure S1)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-92c297e14d768c37",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 102,
+      "source_ids": [
+        "S-ebb98c19d5fd"
+      ],
+      "text": "Following the synthesis of mGFP/LNP and PolyA/LNP particle batches, the materials were dialyzed against PBS (pH 7.4) and fully characterized.21 This included the performance of dynamic light scattering (DLS) (Figure 2B) and cryo-EM (Figure 2C)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-c2d6f9a42f2dc7e4",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-ebb98c19d5fd"
+      ],
+      "text": "The cryo-EM images confirmed the formation of multilamellar, electron-dense particle cores obtained through the nanoprecipitation of the mRNA by MC3."
+    },
+    {
+      "evidence_id": "candidate_00170-E-07699e69dc32020c",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-ebb98c19d5fd"
+      ],
+      "text": "DLS demonstrated the synthesis PolyA and mGFP particles of sizes 110 and 127 nm and corresponding ζ potentials of −11.4 and −5.5 mV, respectively."
+    },
+    {
+      "evidence_id": "candidate_00170-E-0236b9ecf2c76a7b",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "To determine whether GFP expression can be obtained in vivo, an mGFP/LNP was synthesized in which 0.3% of the cholesterol content was replaced by the carbocyanine iodide dye, DiOC18(7) (DiR)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-61e5caec019039c6",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "Following liver tissue sectioning, digital fluorescence microscopy was performed after staining with AlexaFluor488-conjugated anti-GFP as well as anti-F4/80 antibodies (the latter to identify Kupffer cells)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-973938549fe9b242",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 180,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 139,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "Visualization under an Aperio AT Turbo scanner demonstrated widespread GFP expression in a sinusoidal distribution fashion around the central vein, compared to the more disperse punctate distribution of Kupffer cells through the liver lobules (Figure 2E)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-ad28295ef09d2231",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 183,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "This agrees with the previous demonstration that LNPs that contain ionizable cationic DLin-MC3-DMA and DMG-PEG2000 are capable of distributing to all major liver cell types that exhibit tolerogenic properties, including Kupffer cells, LSECs, and hepatocytes.22 Digital fluorescence microscopy was also used for the spleen, where it could be shown that GFP expression is mostly localized to the white pulp, where lymphoid elements such as lymphocytes surround splenic blood vessels (Figure S2)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-27d330dc83d5f290",
+      "may_support_fields": [
+        "endpoint",
+        "therapeutic_target"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 334,
+      "source_ids": [
+        "S-694774772540"
+      ],
+      "text": "A core requirement for mRNA introduction into the endosomal compartment in LSECs is the cytosolic release that is reliant on the hexagonal (HII) lipid phase of the LNP (Figure S4A), as well as subsequent routing of the epitopes to the MHC-II compartment by the Ii invariant chain, which is able to insert into the ER membrane (Figure S6).41 The replacement of uridine with N1-methyl-pseudouridine in the nucleotide backbone constitutes another important design feature to avoid skewing of the immune response, which could negatively impact the tolerogenic effects of LSECs.6 An additional design feature of the LNP was the lipid selections to favor biodistribution to the liver as well as the addition of a mannose ligand, which facilitates endocytic uptake after docking onto CD206 scavenger receptor on LSECs.16 This was accomplished by making use of the 18-carbon lipid tail of DSPE-PEG2000-mannose, which provides stable attachment to the particle surface.23 This design modification improved LSEC uptake in the liver compared to DMG-PEG2000 (Figure 4H) and was also associated with a significant increase in the tolerogenic effect of decorated LNP."
+    },
+    {
+      "evidence_id": "candidate_00170-E-370832a73829157e",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "LSEC were exposed to mGFP/LNP (0.5 μg/mL mGFP) at 37 °C for 24 h, followed by fixing in 4% paraformaldehyde and incubation with Hoechst33342 and WGA594 dyes at room temperature."
+    },
+    {
+      "evidence_id": "candidate_00170-E-4a272e66cbf063d2",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "GFP expression was observed by confocal microscopy (Leica SP8 STED)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9fe6ac13556a2569",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 97,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "In order to compare GFP expression of nondecorated with mannose-decorated LNP, cells were incubated with mGFP/LNP or mGFP/LNP-Man at mGFP concentrations of 0.25 or 0.5 μg/mL for 24 h at 37 °C."
+    },
+    {
+      "evidence_id": "candidate_00170-E-c3cf9ae5c55f0143",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "Cells were treated with 0.25% trypsin and washed three times before assessing GFP mean fluorescence intensity (MFI) in a LSR Fortessa X-20 SORP flow cytometer."
+    },
+    {
+      "evidence_id": "candidate_00170-E-69b231da8e5b541c",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 121,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "To assess the impact of mannose ligation on cellular uptake and transfection efficiency, a competitive inhibition experiment was carried out by mixing mGFP/LNP-Man with PolyA/LNP-Man at mGFP/PolyA ratios of 1:0, 1:1, and 1:2."
+    },
+    {
+      "evidence_id": "candidate_00170-E-319b823ba87da17d",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "These mixtures were incubated with LSEC for 24 h at 37 °C, keeping the mGFP concentration at 0.5 μg/mL."
+    },
+    {
+      "evidence_id": "candidate_00170-E-b21333185aa96f38",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "Flow cytometry was conducted to assess the MFI of GFP expression in LSECs, using the same instrument."
+    },
+    {
+      "evidence_id": "candidate_00170-E-1384ddad39ecd766",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 317,
+      "source_ids": [
+        "S-21d105337f92"
+      ],
+      "text": "The widespread sinusoidal distribution of mRNA-expressing LNPs in the liver has been ascribed to the formation of an apolipoprotein E (ApoE) protein corona in the circulation, which is assisted by the dissociation of the 14-carbon lipid tail in DMG-PEG2000 from the particle surface.23 ApoE targets the low-density lipoprotein receptor (LDLR).24 Although Kupffer cells and hepatocytes contribute to the tolerogenic capabilities of the liver, the more robust Treg-inducing effects of LSECs are preferred for use in our application.3−5 Thus, to improve LSEC uptake of mRNA/LNP, a commercially available lipid DSPE-PEG2000-mannose was used for particle surface decoration, with a view to enhance LSEC uptake through binding to the CD206 mannose receptor (Figure 3A).25 Not only does this preserve the one-step synthesis approach for LNP production but also introduces an 18-carbon DSPE lipid tail, which is more stably associated with the LNP surface, compared to the DMG-PEG2000 lipid tail."
+    },
+    {
+      "evidence_id": "candidate_00170-E-768a1dadbe373342",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 119,
+      "source_ids": [
+        "S-21d105337f92"
+      ],
+      "text": "Thus, the LNP composition shown in Figure S3A was used for successful synthesis of a series of mannose-decorated (mGFP/LNP-Man, PolyA/LNP-Man), as well as nondecorated (mGFP/LNP, PolyA/LNP) LNPs."
+    },
+    {
+      "evidence_id": "candidate_00170-E-655dc82bc568df7b",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 129,
+      "source_ids": [
+        "S-21d105337f92"
+      ],
+      "text": "While the spherical particle morphology and slight negative ζ potential are maintained, the addition of the mannose ligand leads to a 25–35 nm size increase, which could also be advantageous to promote LSEC uptake by slowing particle egress through the endothelial fenestrae into the space of Disse."
+    },
+    {
+      "evidence_id": "candidate_00170-E-db2ee1c7b8a2c7d3",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-21d105337f92"
+      ],
+      "text": "Aliquots of the PolyA/LNP or PolyA/LNP-Man was also used to assess particle stability in storage at 4 °C over 15 days."
+    },
+    {
+      "evidence_id": "candidate_00170-E-31bdd91cbdf26028",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 140,
+      "priority_reasons": [
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 110,
+      "source_ids": [
+        "S-21d105337f92"
+      ],
+      "text": "This demonstrated slight increase in the particle size, while maintaining PDI and the percent encapsulation efficacy (EE) of nucleic acid loading (Figure S3D)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-a1b873833db5503e",
+      "may_support_fields": [
+        "assay",
+        "biological_model"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 142,
+      "source_ids": [
+        "S-685fa61d320a"
+      ],
+      "text": "Therapeutic intervention in already-sensitized animals (n = 6) followed the same outline as for the prophylactic administration experiments, except that administration of epitope 4 mRNA, incorporated into mannose-decorated or nondecorated LNP as well as PolyA/LNP-Man, occurred after oral sensitizations (days 0, 7, and 14)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9d0dc97a3be8ec58",
+      "may_support_fields": [
+        "assay",
+        "biological_model"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-685fa61d320a"
+      ],
+      "text": "This was done by IV injection of the same particle dose on days 21 and 28 (Figure 8A)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-ca6d8aa4c079bb08",
+      "may_support_fields": [
+        "assay",
+        "biological_model"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 59,
+      "source_ids": [
+        "S-685fa61d320a"
+      ],
+      "text": "Anaphylaxis was induced by peritoneal challenge on day 35."
+    },
+    {
+      "evidence_id": "candidate_00170-E-2c37c1c2c9d232b0",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 180,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "The cells were exposed to an antibody cocktail that recognizes CD3, CD4, CD25, and FoxP3."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9dcd59558485a699",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 122,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "(A) Following identification of the single cell population, gating was performed on CD3+CD4+ T cells, followed by a gating procedure to assess the percent of CD25+FoxP3+ cells in the spleen."
+    },
+    {
+      "evidence_id": "candidate_00170-E-023dcf0885dfefb9",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "LNP Composition, Nanoassemblr synthesis and Particle characterization."
+    },
+    {
+      "evidence_id": "candidate_00170-E-562ccbd5ffc9f8c1",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "A microfluidic laminar mixing system (NanoAssemblr) was used for LNP formulation."
+    },
+    {
+      "evidence_id": "candidate_00170-E-accbd75c20faed72",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 130,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "PolyA or GFP-mRNA (mGFP) was suspended in RNase-free sodium acetate buffer (pH 4.0) to form the aqueous phase, while the ionizable lipid, DLin-MC3-DMA, DSPC, cholesterol and DMG-PEG2000, were dissolved in ethanol in a molar ratio of 50:10:38.5:1.5 to form a lipid phase."
+    },
+    {
+      "evidence_id": "candidate_00170-E-7ccb0fe91f5ef8d7",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "To prepare a 2.2 mL LNP batch, an appropriate amount (listed in the lower left table) of each of the lipid stock solutions was mixed in ethanol to provide a 0.55 mL lipid phase."
+    },
+    {
+      "evidence_id": "candidate_00170-E-50a94bb56b80b250",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-a4c7da10f9b6",
+        "S-e94f8e0fd60e"
+      ],
+      "text": "mRNA encapsulation efficiency (EE) was determined by the RiboGreen® assay."
+    },
+    {
+      "evidence_id": "candidate_00170-E-7ee8c68b1f73557e",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 81,
+      "source_ids": [
+        "S-c3fb84f56878"
+      ],
+      "text": "(A) Experimental timeline used for assessing the therapeutic effect of PolyA/LNP-Man, mAra h2#4/LNP, and mAra h2#4/LNP-Man in the post- sensitization model (n = 6)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-56eecd4dbc44913c",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "Hemolysis assay to explain the role of the LNP hexagonal lipid phase in endosomal release."
+    },
+    {
+      "evidence_id": "candidate_00170-E-adbff52c20a9f2b4",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 151,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "(A) Schematic to explain the role of the particle hexagonal lipid phase in mRNA release from the endosome: The inverted-cone arrangement of the ionizable cationic lipid in the LNP assists formation of a hexagonal (HII) lipid phase, capable of destabilizing the endosomal lipid bilayer under acidic conditions."
+    },
+    {
+      "evidence_id": "candidate_00170-E-340d39c05298e7b4",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "This leads to mRNA release."
+    },
+    {
+      "evidence_id": "candidate_00170-E-667c37ed6fde049d",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "(B) Use of a hemolysis assay, performed in triplicate wells, to demonstrate the ability of PolyA/LNP and PolyA/LNP-Man to disrupt the RBC lipid bilayer at pH 5.5 but not pH 7.4."
+    },
+    {
+      "evidence_id": "candidate_00170-E-886bfb427cc2805e",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-b8250cb37d37"
+      ],
+      "text": "(A) Experimental timeline used for assessing the prophylactic effect of PolyA/LNP-Man, mAra h2#4/LNP, and mAra h2#4/LNP-Man (n = 6)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-5873b3fce64980a8",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 72,
+      "source_ids": [
+        "S-b8250cb37d37"
+      ],
+      "text": "(B) Serial dilution ELISA titer assay to determine OD values at 450 nm, using serum from the treatment groups shown in the legend."
+    },
+    {
+      "evidence_id": "candidate_00170-E-348cba43e7a7a2f3",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 71,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "(C) A serum dilution factor of 4 was used to assess the average OD values at 450 nm for all the animals in each group (n = 6)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-f37d7aab2567eaf3",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "(D) Serial dilution ELISA titer assay to determine OD values at 450 nm, using serum from the treatment groups shown in the legend."
+    },
+    {
+      "evidence_id": "candidate_00170-E-1ad6dd5e846b2172",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 132,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "The serum from each mouse was diluted at 20, 100, 500, 2500, and 12500 times, and the detection antibody used for IgG1 titer assay was HRP-conjugated anti-mouse IgG1 antibody.(E) A serum dilution factor of 20 was used to assess the average OD values at 450 nm for all the animals in each group (n = 6)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-eea97f3a7f4ac7c0",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 54,
+      "source_ids": [
+        "S-e94f8e0fd60e"
+      ],
+      "text": "PolyA/LNP, PolyA/LNP-Man, mGFP/LNP, and mGFP/LNP-Man."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9eeb04cbd41788e2",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-e94f8e0fd60e"
+      ],
+      "text": "(B) Physicochemical characterization of LNPs, including size, polydispersity index (PDI) and ζ-potential."
+    },
+    {
+      "evidence_id": "candidate_00170-E-9eb1e9607d08ceb7",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-e94f8e0fd60e"
+      ],
+      "text": "(C) Cryo-EM images of different LNPs."
+    },
+    {
+      "evidence_id": "candidate_00170-E-08f5c88f77ed6067",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-e94f8e0fd60e"
+      ],
+      "text": "(D) The stability of PolyA/LNP and PolyA/LNP-Man was determined during storage at 4oC over 15 days by assessing particle size, PDI and EE, using a Zetasizer Nano ZS and the RiboGreen Assay (Thermo Scientific)."
+    },
+    {
+      "evidence_id": "candidate_00170-E-f81c2ca450ee085f",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-e94f8e0fd60e"
+      ],
+      "text": "The data demonstrate an increase from 95 nm to 125 nm for PolyA/LNP and 145 nm to 180 nm for PolyA/LNP-Man, while PDI values remained below 0.2, and the EE values above 90%."
+    }
+  ],
+  "excluded_passages": [
+    {
+      "evidence_id": "candidate_00170-E-7e32be328ae4009f",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 248,
+      "source_ids": [
+        "S-4a975ac10eb5"
+      ],
+      "text": "We have previously described use of the NIAID Immune Epitope Database (IEDB) and Analysis Resource for identifying MHC-II binding epitopes in the dominant peanut allergen, Ara h2.5 This peanut allergen is responsible for IgE generation in >80% of peanut-allergic human subjects (Figure 5A).28 Four top-ranking 15-mer T-cell epitopes with affinity binding to murine MHC-II alleles (H2-IAb, H2-IEd, and H2- IAd) were identified (Figure S6A).5 Among them, epitope 4 was the most robust inducer of CD25+FoxP3+ T-cells in the spleen of mice receiving IV injection with a LSEC-targeting PLGA nanoparticle (Figure S6B).5 To design an equivalent mRNA construct, epitope 4 was endowed with natural flanking sequences, followed by the reverse translation (Figure 5B).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c8a3250f761e9792",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 144,
+      "source_ids": [
+        "S-4a975ac10eb5"
+      ],
+      "text": "Tandem-repeat epitope sequences were inserted in the mRNA construct downstream of an invariant Ii chain sequence (aa 1–80), specifically designed to allow the hybrid peptide to be inserted into the endoplasmic reticulum (ER) membrane of the MHC-II compartment (Figure 5C).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-50fedc6bb6a842d7",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 165,
+      "source_ids": [
+        "S-4a975ac10eb5"
+      ],
+      "text": "Figure S7 explains the role of the Ii chain, including insertion into MHC-II vesicles, where proteolytic processing of hybrid peptides allows insertion into the peptide groove and trafficking to the cell surface.29 The design of the mRNA strand was completed by the addition of start (ATG) and stop codons (TAA), followed by codon optimization (Figure 5C).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8e6e85590a339c7b",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 167,
+      "source_ids": [
+        "S-4a975ac10eb5"
+      ],
+      "text": "This sequence was sent to TriLink for in vitro cell-free transcription during which the mRNA was further endowed with 5′ and 3′ UTR sequences and a PolyA tail, as described in Figures 5D and S6C.30,31 All uridine nucleotides in the strand were substituted with N1-methyl-pseudouridine before RNA purification and returning a 624-nucleotide strand (Figure S6C).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c93c853fa2d5c1b7",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-4a975ac10eb5"
+      ],
+      "text": "This mRNA construct was used to synthesize mAra h2#4/LNP and mAra h2#4/LNP-Man carriers, capable of epitope 4 delivery.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-f530cee8b81ed178",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-4a975ac10eb5"
+      ],
+      "text": "Particle construction proceeded as described in Figure 3, yielding spherical LNP of sizes 95.3 and 148.7 nm, respectively (Figure 5E).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-e8583da74c10c5e3",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 57,
+      "source_ids": [
+        "S-4a975ac10eb5"
+      ],
+      "text": "The corresponding cryo-EM images are shown in Figure S6D.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-9d372f9003f46b42",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-a2af54cc2871"
+      ],
+      "text": "(B) Particle physicochemical characterization, including size, polydispersity (PDI), ζ potential, and encapsulation efficiency (EE) (n = 3).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-a26dacca5437f353",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 63,
+      "source_ids": [
+        "S-781dfd9683a0"
+      ],
+      "text": "Meanwhile, the increase was significantly higher for mannose-decorated particles.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d13fbe0b5d967fc6",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "While oral desensitization is capable of alleviating peanut allergen anaphylaxis, long-term immune tolerance is the sought-after goal.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-132c56a025767919",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 140,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "We developed a liver-targeting lipid nanoparticle (LNP) platform to deliver mRNA-encoded peanut allergen epitopes to liver sinusoidal endothelial cells (LSECs), which function as robust tolerogenic antigen-presenting cells that induce FoxP3+ regulatory T-cells (Tregs).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-e95efb3006c641c9",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 117,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "The mRNA strand was constructed by including nucleotide sequences encoding for nonallergenic MHC-II binding T-cell epitopes, identified in the dominant peanut allergen, Ara h2.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-ace1fbc2862f19d0",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "These epitopes were inserted in the mRNA strand downstream of an MHC-II targeting sequence, further endowed in vitro with 5′ and 3′ capping sequences, a PolyA tail, and uridine substitution.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c1eb0456362ebd34",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "Codon-optimized mRNA was used for microfluidics synthesis of LNPs with an ionizable cationic lipid, also decorated with a lipid-anchored mannose ligand for LSEC targeting.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4d90dac1d414fa4d",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "Biodistribution to the liver was confirmed by in vivo imaging, while ELISpot assays demonstrated an increase in IL-10-producing Tregs in the spleen.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-98415e4a64857b78",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "Prophylactic administration of tandem-repeat or a combination of encapsulated Ara h2 epitopes induced robust tolerogenic effects in C3H/HeJ mice, sensitized to and subsequently challenged with crude peanut allergen extract.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-914fadb15d7f6aff",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "In addition to alleviating physical manifestations of anaphylaxis, there was suppression of Th2-mediated cytokine production, IgE synthesis, and mast cell release, accompanied by increased IL-10 and TGF-β production in the peritoneum.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-f73b23487412a3ff",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "While nondecorated particles had lesser but significant effects, PolyA/LNP-Man lacked protective effects.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c4685a4d109d02fb",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-7d93f17d3f41"
+      ],
+      "text": "These results demonstrate an exciting application of mRNA/LNP for treatment of food allergen anaphylaxis, with the promise to be widely applicable to the allergy field.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-a8395b7997bd9845",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 163,
+      "source_ids": [
+        "S-688a199eecd0"
+      ],
+      "text": "In spite of these listed advantages, it is important to consider that most mRNA immune-modulatory approaches currently are aimed at generating antibody or cytotoxic T-cell responses for the treatment of infectious diseases (e.g., COVID-19) or cancer immunotherapy.14,15 In addition, most of these applications are designed for intact proteins or protein subunits, rather than considering the adaptability and diversity of epitopes for tolerogenic immunotherapy (Figure 1B).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-9c58c48801ffae74",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 145,
+      "source_ids": [
+        "S-688a199eecd0"
+      ],
+      "text": "A further advantage is that the lipid nanoparticles (LNPs) used for mRNA encapsulation will distribute to the liver after intravenous injection, where a large LSEC capture bed can participate in cellular uptake, further enhanced by particle surface decoration with a lipid-anchored mannose ligand targeting the mannose receptor in these APCs (Figure 1A).16 We will refer to these particles as mRNA/LNP.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-69dfb3d1a8604c3b",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "Single-tandem- or combined-epitope sequences were inserted downstream of an MHC-II routing sequence.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-510da33582f4fc6e",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 98,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "Following codon optimization, in vitro strand synthesis proceeded by the addition of 5′ and 3′ UTR sequences as well as uridine replacement by N1-methyl-pseudouridine.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8c36428dd542713d",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 108,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "Prophylactic administration of these particles also induced robust tolerogenic effects in an oral sensitization anaphylaxis model to CPE proteins.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8d6cd5e9289b2aed",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 137,
+      "source_ids": [
+        "S-888f8a1d36b4"
+      ],
+      "text": "In addition to alleviating the physical manifestations of anaphylaxis, the tolerogenic effects were accompanied by Treg generation, IL-10 and TGF-β release as well as suppression of Th2-mediated immunity, allergen-specific IgE synthesis, and mast cell release.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-26b15db364d54486",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "To study the prophylactic effect of different LNPs, 6-weeks-old female C3H/HeJ mice were randomly assigned to 5 groups (n = 6): nonsensitized control, sensitized control without pretreatment, PolyA/LNP-Man pretreatment, mAra h2/LNP pretreatment, and mAra h2/LNP-Man pretreatment.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-2ddc2d1269287ee5",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "mAra h2 refers to the use of single-tandem mRNA epitopes (i.e., epitopes 2 and epitopes 4) or a combination of epitopes 1–4.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b1e84657068098e4",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "Animals received IV injection of 1.25 mg/kg of each LNP on days 0 and 7 before oral gavage on 3 occasions, using a CPE extract (100 mg/kg), supplemented with cholera toxin (0.5 mg/kg) (Figure 7A and Figure 8E).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-5afe8118334ec090",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "Animals were challenged by peritoneal administration with 100 mg/kg CPE extract on day 35.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-61d997532a0be404",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "Rectal temperatures and anaphylaxis scores were recorded every 15 min for 2 h.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-25515d13a5650b14",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 118,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "Anaphylaxis scoring was done using the following criteria: 0 = no symptoms; 1 = scratching of ear and mouth; 2 = puffiness around eyes and mouth, pilar erection, labored breathing; 3 = prolonged period of motionlessness; 4 = severely reduced motility, tremors, severe respiratory distress; and 5 = death.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-89ebbf90098930e8",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 101,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "Blood and peritoneal fluid were collected 3 h after challenge and used for quantification of mouse mast cell protease 1 (mMCP-1), total serum IgE, peanut-specific IgE and IgG1, peritoneal lavage fluid Th2 cytokine levels (IL-4, IL-5.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-14ef60b1e6a5fe65",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 55,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "and IL-13), and peritoneal IL-10 and TGF-β levels.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6a909b95ba5d913b",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "Spleens were harvested to assess the percent of CD25+FoxP3+ T-cells in the CD3+CD4+-gated population, as described above.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-5ad1b05f8f5a77a5",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "All animal experiments were performed with permission from the UCLA Animal Research Committee, using animal welfare guidelines established by the USDA, AVMA, and the U.S.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-101a21f9e2b67732",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 45,
+      "source_ids": [
+        "S-5ce020f060f6"
+      ],
+      "text": "government.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-bf410cf03ae48bfa",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-996c358ffc0b"
+      ],
+      "text": "Initial discovery of liver-based APC responses to nanoparticles was obtained with support from the National Institute of Environmental Health Sciences of the National Institutes of Health (U01 ES027237).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-a0c0e82f6cb602c0",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-996c358ffc0b"
+      ],
+      "text": "Subsequent studies looking at the therapeutic implications of allergen-encapsulating particles were supported by the Marlin Miller, Jr.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c22a486e9fe91b02",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-996c358ffc0b"
+      ],
+      "text": "Family Foundation and the Noble Family Innovation award (made by the CNSI).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6376de10ea490473",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-996c358ffc0b"
+      ],
+      "text": "We acknowledge the Advanced Light Microscopy/Spectroscopy (ALMS) Shared Facility at UCLA and the Electron Imaging Center for Nanomachines (EICN) for assisting LNP characterization.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-82d3b2d05fdf2d11",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 102,
+      "source_ids": [
+        "S-996c358ffc0b"
+      ],
+      "text": "We also acknowledge the infrastructure in the Preclinical Imaging Technology Center, the Translational Pathology Core Laboratory (TPCL), and the Molecular Instrumentation Center for technical assistance for biological experiments.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c2c0ab36382fd8ff",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 43,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(B).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-0c037c50ae796677",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "Comparison of body temperatures at the time of maximum hypothermia (45 min) postchallenge.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b7f3b26a606d108b",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 55,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(C) Comparison of the anaphylaxis scores at 45 min.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8482fb631b75e563",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(D) mMCP-1 release to the serum in the same experiment, with additional biological response parameters shown in Figure S10.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-71a91fa30b957625",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(F) Comparison of the anaphylactic response at the point of maximal hypothermia (30 min).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-9f0218b6f19bd572",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 55,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(G) Comparison of the anaphylaxis scores at 30 min.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-a0a8e85720fcce78",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "(H) mMCP-1 serum concentration.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-127cfef985472337",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "The time-dependent hypothermia and anaphylaxis scores are shown in Figure S12.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4b090a9092deb5f5",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 25,
+      "priority_reasons": [
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-96e8008114af"
+      ],
+      "text": "N.S., no significant difference; * p < 0.05; ** p < 0.01; and *** p < 0.001.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-0671d2773314f0da",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 54,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "Preparation and characterization of unmodified LNP.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-11e9335c88da655c",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "The images were obtained by staining nuclei and the surface membrane with Hoechst33342 and WGA594, respectively.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8bf2f7c2c9000096",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 46,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "Scale bar is 40 μm.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-f6714847019726eb",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 72,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "The ex vivo images of the explanted organs were used to show that most of particles are localized in the liver and spleen.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d53a34ff44f3de2e",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-be80bf5604f2"
+      ],
+      "text": "Left scale bar, 500 μm; right scale bar, 200 μm, c.v., central vein (n = 3).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d11b028094ce1715",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 145,
+      "source_ids": [
+        "S-b5c2d0dacc34"
+      ],
+      "text": "In summary, we developed a mannose-modified LNP that encapsulates mRNA designed for expressing peanut epitopes for biodistribution to the liver, LSEC uptake and ability to induce a tolerogenic effect, capable of suppressing an anaphylactic response to a crude peanut allergen extract.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-aa5e263bc2808eb6",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 102,
+      "source_ids": [
+        "S-b5c2d0dacc34"
+      ],
+      "text": "The tolerogenic effect was accompanied by the suppression of Th2 immunity, IgE production, and mast cell release.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-7dc3966d3400bec8",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 113,
+      "source_ids": [
+        "S-b5c2d0dacc34"
+      ],
+      "text": "Since this platform is highly adaptable for targeted delivery of mRNA epitopes, it provides a promising approach for therapeutic intervention in the range of allergic disorders as well as possibly also autoimmune disease.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-7ce2faf537bd02f8",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "Particles in the effluent phase were dialyzed against PBS (pH 7.4) to remove ethanol, before filtering (0.2 μm) to remove large aggregates.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-fd2ca4e2017002df",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 75,
+      "source_ids": [
+        "S-cb98690a1184"
+      ],
+      "text": "Cryogenic electron microscopy (Cryo-EM) images were obtained in a TF20 FEI Tecnai-G2 instrument to assess particle morphology.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-26b651f4fb1ccb40",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "X.X.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-67d650e1e0a1a273",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 43,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "and X.W.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-83301a9db127efae",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 49,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "contributed equally to this work.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-aa09f19decd2ad16",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "The original liver-targeting tolerogenic platform was conceptualized by A.E.N., with additional conceptual advances for using mRNA therapy for epitope delivery by A.E.N., T.X., X.W., and X.X.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-95ee1a662fb564c3",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 54,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "Drafting of the manuscript was introduced by A.E.N.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d54d2b78dca549c6",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "with input from X.X., X.W., and T.X.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-e3c843e3b7fd4a50",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "Preparation and characterization of the nondecorated LNP and LNP-Man were performed by X.W.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-f4a29ee600bb288f",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 47,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "and X.X., respectively.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4889cb36b6cf4035",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "The design of the mRNA strand and microfluidics incorporation into LNP involved T.X., X.W., and A.E.N.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-2afce259479bead8",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 57,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "Animal experiments were performed X.X., X.W., Y.-P.L., and L.L.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-dd0bfd1a59460490",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-5ef0e83218b1"
+      ],
+      "text": "Data analysis and discussion were carried out by X.X., X.W., T.X., and A.E.N.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-2888605f0ae47b89",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-eccac4d2103c"
+      ],
+      "text": "An important requirement for the clinical translation of mRNA epitope delivery for each disease application necessitates studies that address response duration, frequency of administration, and the required nucleic acid dose to assess efficacy outcome.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-31374e141e65af7a",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 56,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "The time-dependent response profiles are shown in Figure S10B,C.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c916bf6ba8611c87",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "Suppression of the physical manifestations of anaphylaxis was accompanied by a reduction in mast cell protease release (Figure 8D), serum IgE elevation (Figure S10D), serum IgG1 elevation (Figure S10E,F) and IL-4 increase in peritoneal lavage fluid (Figure S10G).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-7fa362ca7ca98a29",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-230c8fed291d"
+      ],
+      "text": "Moreover, the tolerogenic effect of mAra h2 delivery postsensitization was accompanied by an increase in the percent of CD25+FoxP3+ T-cells in the spleen (Figure S10H) as well as by elevation of IL-10 (Figure S10I) and TGF-β (Figure S10J) levels in peritoneal fluid.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-76545132598412e1",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "In order to assess the specificity of the ligand/receptor interaction and abundance of GFP expression, a series of flow cytometry experiments were performed in a LSEC line (Figure 4).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-230140e47a1c03c2",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "The first experiment looked at the effect of cellular incubation with a mixture of mGFP/LNP-Man in the presence of incremental amounts of PolyA/LNP-Man (1:0, 1:1, and 1:2) for 24 h.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-5d6b36551f59b85d",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 101,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "This allowed assessment of nonfluorescent particles interfering in the binding of GFP-expressing particles, when the former is present in molar axis.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6d46ebda2951e304",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 94,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "The binding competition using this approach takes into consideration the appropriate stereospecific and density of the ligand display on the particle surface, as compared to free ligand.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-a0d7ba66a333a735",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "Additional display of the data as a mean fluorescence intensity (MFI) was used for statistical comparison (Figure 4B).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-e7f7ba165ec476a7",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-8352e089f39c"
+      ],
+      "text": "A second experiment compared the level of GFP expression of the nondecorated mGFP/LNP with decorated mGFP/LNP-Man, using 24 h particle exposure.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8c614ea26543ab9e",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-9d94295f67b9"
+      ],
+      "text": "Animal experimentation was carried out in 6-week-old female C3H/HeJ mice, using 3 animals per group (n = 3), receiving tail vein injection with DiR/mGFP/LNP or DiR/mGFP/LNP-Man at a mGFP dose of 1 mg/kg.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-5f37df458e09200b",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-9d94295f67b9"
+      ],
+      "text": "IVIS imaging (PerkinElmer Lumina II) was performed 6 h later to assess in vivo DiR distribution.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-f5fa680cdf013b09",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-9d94295f67b9"
+      ],
+      "text": "Animals were sacrificed for ex vivo IVIS imaging of the explanted organs, as shown in Figures 2 and 4.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-5027bdd50c9b0b30",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-9d94295f67b9"
+      ],
+      "text": "We also used the liver tissue for paraformaldehyde fixation and sectioning.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-1dbce4ee53be8568",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 71,
+      "source_ids": [
+        "S-9d94295f67b9"
+      ],
+      "text": "The mounted slides were stained with DAPI, as well as antibodies recognizing GFP and the LSEC surface receptor, LYVE1.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-2e6ccd150eecfc3d",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-9d94295f67b9"
+      ],
+      "text": "Digital fluorescence microscopy was performed in a Leica SP8-STED/FLIM/FCS in the Electron Microscopy Services Center at UCLA.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-437664d12826fd22",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "In vitro cytotoxicity was studied by using LSECs to conduct a MTS assay.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-afb29d844a60d287",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "Blood was collected after 24 and 48 h to assess the impact on liver enzymes (ALT, AST) and kidney function (BUN, creatinine).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6350219b6f98b0a9",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-f820fa519d21"
+      ],
+      "text": "Animals were sacrificed after 48 h for organ harvesting and histological analysis.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4b57e18ecb43fc26",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 130,
+      "source_ids": [
+        "S-4a41c466f20d"
+      ],
+      "text": "Importantly, although we ascribe the tolerogenic effects of mRNA epitope delivery to Treg generation, we do not rule out a contribution by other tolerogenic cell types, including anergic T-cells, type I regulatory T-cells (Tr1), regulatory B-cells, etc.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c673a4e63fae0340",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 134,
+      "source_ids": [
+        "S-4a41c466f20d"
+      ],
+      "text": "What is clear from our data is that the tolerogenic effects of LNP include the ability to interfere with Th2 immunity, as evidenced by the decrease in total and antigen-specific IgE production, mast cell protease release, and limiting IL-4, IL-5, and IL-13 production.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-98972b3cb3ff434f",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-4a41c466f20d"
+      ],
+      "text": "The clampdown on Th2 immunity could involve indirect (e.g., TGF-β, IL-10, and IL-35) or direct immune suppressive pathways (e.g., cell–cell contact).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-1028ae3f36a42302",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 207,
+      "source_ids": [
+        "S-4a41c466f20d"
+      ],
+      "text": "This is in keeping with the major immune suppressive mechanisms used by Tregs, including (i) Treg cytolysis by granzyme A, granzyme B, and perforin; (ii) IL-2 depletion and apoptosis through Treg expression of CD25+; (iii) checkpoint receptor expression (e.g., CTLA-4, LAG-3, and PD-L1), interfering in CD80/CD86 co-stimulation, dendritic cell maturation, or indoleamine 2,3-dioxygenase (IDO) production; (iv) ectonucleotidase expression (e.g., CD39 and CD73), leading to ATP conversion to adenosine; (v) inhibition of cell migration and tissue inflammation.43",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d9a9bf8b2c506ff5",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "CD206 binding specificity was determined by including a blocking antibody.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6b8732954d0864d6",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 63,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "Particles were synthesized as in Figure 3, with composition shown in Figure S5.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-1aebaeccc839d98c",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "(F) Average DiR radiant efficiency analysis of the main organs (n = 3).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b9c8b301ee1ca912",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 75,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "Nuclei were stained with DAPI, while GFP and LSEC were detected by anti-GFP (AF488) and anti-LYVE1 antibody (AF594), respectively.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-81fd224483e57120",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 45,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "structured_or_caption_evidence",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 48,
+      "source_ids": [
+        "S-63ec03360af9"
+      ],
+      "text": "Scale bar is 200 μm.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-08855b060b090999",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "6-weeks-old female C3H/HeJ mice were randomly assigned among 4 groups, each including 3 animals.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b9db3c184f33be6a",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "These animals were IV injected with PBS, PolyA/LNP-Man, mAra h2#4/LNP, and mAra h2#4/LNP-Man at the dose of 1.25 mg/kg.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-19bf10b8847fa0f1",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 143,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "The spleens were harvested 7 days after injection and used to prepare splenocyte populations in which non-CD4+ cells were magnetically labeled with a cocktail of biotin-conjugated antibodies against CD8, CD11b, CD45R, CD49b, Ter-119, and antibiotin microbeads, before flow-through in a MACS Column to collect CD4+ cells.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-c2c10a5819f47479",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 123,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "These cells were treated with anti-CD25 PE and labeled with anti-PE microbeads for obtaining magnetic separation of CD4+CD25+ cells, considered phenotypically similar to Tregs.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-16d2fcbb00f071dc",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "One million CD4+CD25+ cells were added to each well of an ELISpot plate, precoated with IL-10 capture antibody and blocked with BSA.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-1b4758ea615acc94",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "Cells were stimulated with 1 μg/mL Ara h2 peptide (epitope 4) for 48 h.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-1b49d788b6a79979",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "The supernatants were discarded, and HRP-conjugated antimouse IL-10 antibodies were added to each well for 2 h before removal of the supernatant and adding the TMB substrate for 30 min.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d7a36327788f62d8",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-74f29408c5ab"
+      ],
+      "text": "After addition of a stop solution, plates were washed, dried, and imaged in an ELISpot reader (CTL Immunospot), with software for calculating the number of spots.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-a632781d77a89810",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 251,
+      "source_ids": [
+        "S-a5e4e6f44dea"
+      ],
+      "text": "6–8 weeks old C3H/HeJ mice were orally sensitized with crude peanut extract (CPE), administered three times before peritoneal challenge to induce anaphylaxis (Figure 7A).5,34 Anaphylaxis was monitored by recording rectal temperatures, as well as scoring physical manifestations of anaphylaxis every 15 min, using the following criteria: 0 = no symptoms; 1 = ear and mouth scratching; 2 = puffiness around the eyes and mouth, pilar erection, labored breathing; 3 = prolonged motionlessness; 4 = severely reduced motility, tremors, severe respiratory distress; 5 = death.35 To assess the impact of prophylactic LNP administration, animals (n = 6) received two IV injections of 1.25 mg/kg mAra h2#4/LNP or mAra h2#4/LNP-Man 7 days apart, before the performance of 3 rounds of oral CPE sensitization, and finally CPE challenge (Figure 7A).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-56ef4b1c83f1e733",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-a5e4e6f44dea"
+      ],
+      "text": "While CPE challenge in nonsensitized animals did not induce hypothermia, noticeable temperature drops in untreated sensitized mice were observed, with a maximal and statistically significant decline at 45 min, before gradual recovery (by 120 min) (Figure 7B).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d92c2acab7393a1d",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-a5e4e6f44dea"
+      ],
+      "text": "Essentially similar results were obtained in animals pretreated with PolyA/LNP-Man, with no evidence of protection.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-89f53787ff2149a8",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 134,
+      "source_ids": [
+        "S-a5e4e6f44dea"
+      ],
+      "text": "However, prophylactic administration of mAra h2#4/LNP or mAra h2#4/LNP-Man prevented hypothermia onset, with the impact of mannose-decorated particles highly significant (p < 0.001) compared with nondecorated LNP (p < 0.01) (Figure 7C).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-3958309004170fa2",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 119,
+      "source_ids": [
+        "S-a5e4e6f44dea"
+      ],
+      "text": "The hypothermic response also agrees with the anaphylaxis scores, showing significant declines for mAra h2#4 pretreatment, with the response to mAra h2#4/LNP-Man being more significant (p < 0.05) than that for nondecorated LNP (Figure 7D,E).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6339d7f71039d8f8",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-a5e4e6f44dea"
+      ],
+      "text": "All considered, these data confirmed the significant tolerogenic effect of the Ara h2 epitope 4 TriLink nucleotide version.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b5a48667b98604cb",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-d6e15cdb424d"
+      ],
+      "text": "Epitope selection was performed by an Immune Epitope Database (IEDB) database search of Ara h2, a dominant peanut IgE-generating allergen in humans (Figure S7).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-94925f313322e14e",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-d6e15cdb424d"
+      ],
+      "text": "The selection criteria are discussed in the legend of Figure S7.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-75385d37bbfdffd5",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 108,
+      "source_ids": [
+        "S-d6e15cdb424d"
+      ],
+      "text": "The initial mRNA construct was designed for expression of epitope 4, the best-performing tolerogenic peptide included in our PLGA nanocarrier.5 Subsequently, another mRNA construct was designed to encode epitope 2 as well as an epitope combination (i.e., epitopes 1–4).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6f03e0dda0425288",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-d6e15cdb424d"
+      ],
+      "text": "All epitopes were endowed with linker sequences, allowing proteolytic processing and MHC-II association.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-65c7fd3464492f15",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-d6e15cdb424d"
+      ],
+      "text": "Epitope routing to the MHC-II compartment was accomplished by upstream insertion of a nucleotide sequence for expressing amino acids 1–80 of the invariant (Ii) chain, which targets the ER membrane (Figure S6).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-fd82e50cf3fd7065",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 104,
+      "source_ids": [
+        "S-d6e15cdb424d"
+      ],
+      "text": "Start and (ATG) and stop (TAA) codons were added before codon optimization, using the GenSmartTM Codon Optimization tool (https://www.genscript.com/gensmart-free-gene-codon-optimization.html).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-9f9dd0659fe27137",
+      "may_support_fields": [
+        "payload"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 114,
+      "source_ids": [
+        "S-d6e15cdb424d"
+      ],
+      "text": "This sequence was sent to TriLink for in vitro synthesis of a mRNA construct with full substitution of uridine by N1-methyl-pseudouridine, in addition to adding 5′ and 3′ UTRs and PolyA (120) tails, as described in Figure S7C.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-e716950dfec75ebc",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "To determine if mGFP delivery can achieve GFP expression in vitro, confocal imaging was performed in a liver sinusoidal endothelial cell line incubated with mGFP/LNP for 24 h (Figure 2D).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-cff5e02b86bba65f",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "This confirmed GFP expression, compared to the inability of PolyA/LNP to generate a fluorescent product.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-9dbbc7587d2128ea",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "Physicochemical characterization of the DiR/mGFP/LNP is shown in Figure S1.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-825e5d8020026de1",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 104,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "These particles were intravenously (IV) injected in C3H/HeJ mice at 1 mg/kg (n = 3), followed by IVIS image collection 6 h later to determine in vivo biodistribution (Figure 2E).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-745244b397ba234c",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "Image analysis demonstrated a strong DiR signal in an upper abdominal location, which represents the liver.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-9545b1c9446ada7a",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "This was confirmed by subsequent animal sacrifice and organ explantation to obtain ex vivo images.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-af0d919c18ef734e",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-5baeb33a05ab"
+      ],
+      "text": "These data show most LNPs distributed to the liver, with some particles also trafficking to the spleen (Figure 2E and Figure S2).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-92708c7c46e423ed",
+      "may_support_fields": [
+        "endpoint",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 140,
+      "source_ids": [
+        "S-694774772540"
+      ],
+      "text": "Confirmation of the efficacy of mRNA-based T-cell epitope delivery to the liver introduces a number of advantages over a more expensive tolerogenic therapy that makes use of peptides, in addition to offering a versatile combinatorial platform for coexpression of multiple epitopes and immunomodulatory molecules.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-15b978371a2b6b64",
+      "may_support_fields": [
+        "endpoint",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-694774772540"
+      ],
+      "text": "Nonetheless, the use of mRNA constructs for epitope delivery by LNPs requires careful consideration of design features.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-80c57e4786ab4848",
+      "may_support_fields": [
+        "endpoint",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 144,
+      "source_ids": [
+        "S-694774772540"
+      ],
+      "text": "Collectively, these LNP design features are of particular significance for mRNA expression in the liver in contrast to other lipid-based immunomodulatory nanocarriers that can be used for cancer immunotherapy, for example, successful implementation of mannose-modified liposomes to co-deliver papillomavirus peptide plus a CpG oligodeoxynucleotide adjuvant for enhancing antitumor immunity.42",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-ac208344045a7138",
+      "may_support_fields": [
+        "formulation",
+        "outcomes",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 72,
+      "source_ids": [
+        "S-f54576d13cc0"
+      ],
+      "text": "Nontreated LSECs served as a blank, while anti-CD206 antibody was used as the positive control.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-227ea58eecd0c669",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 68,
+      "source_ids": [
+        "S-21d105337f92"
+      ],
+      "text": "Particle characterization is shown in Figures 3B and S3B,C.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-7ae5373271c258c0",
+      "may_support_fields": [
+        "assay",
+        "biological_model"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-685fa61d320a"
+      ],
+      "text": "Assessment of anaphylaxis manifestations and quantification of immunological end points proceeded as described for the prophylactic model.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-13db08e9c02d293d",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 44,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "Figure S8.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-24d7f58a68d2cdd2",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "Flow cytometry analysis of splenocytes to assess the presence of T cells expressing Treg phenotype.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4c6139e1769678eb",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "Mice (n = 3) received a one-time injection of PolyA/LNP-Man, mAra h2#4/LNP, or mAra h2#4/LNP-Man, followed by spleen harvesting and preparation of a splenocyte population.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-5480c5bf9a866af7",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "(B) Panel displaying the percent of CD25+FoxP3+ cells in a representative spleen from each animal group.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8ca783edd3e6bdb5",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "Statistical comparison of the results in each group (n = 3) was used to generate panel B in Figure 6.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4fc82b26aecb47d2",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-19618eadc37d"
+      ],
+      "text": "11",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b0ab39d6683ac6b3",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 45,
+      "source_ids": [
+        "S-556cf1edaf0b"
+      ],
+      "text": "Figure S12.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4c2dc6ebaa601446",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-556cf1edaf0b"
+      ],
+      "text": "Additional results in the experiment comparing the prophylactic administration of LNP delivering single or combination of Ara h2 epitopes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-5a3fdcaa00a42856",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-556cf1edaf0b"
+      ],
+      "text": "These results were derived from the experiment described in Figures 8F and 8G.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-ad19e340846b0b04",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 48,
+      "source_ids": [
+        "S-556cf1edaf0b"
+      ],
+      "text": "(A) Pretreatment protocol.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-534bc5b4c6656869",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-556cf1edaf0b"
+      ],
+      "text": "(B) Time-dependent rectal temperature plot.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-8a19672aefd71296",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-556cf1edaf0b"
+      ],
+      "text": "(C) Time-dependent anaphylaxis scoring plot.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-4ec9599fc203d176",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-556cf1edaf0b"
+      ],
+      "text": "18",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-f3605826070fb9d1",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 49,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "Figure S1.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-ac99c7c95898a7b8",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "The same approach was used for the synthesis of the DiR-labeled particle, except for the slight reduction in the cholesterol content to accommodate inclusion of DiR.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-a128bab8c4d19ef4",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "Physicochemical characterization of DiR/mGFP/LNP, including size, polydispersity index (PDI) and ζ-potential.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d4735e3a265e16ee",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 47,
+      "source_ids": [
+        "S-a4c7da10f9b6"
+      ],
+      "text": "2",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-2dc33e8948d4f1c6",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-c3fb84f56878"
+      ],
+      "text": "Figure S10.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-08cf91d42948d2d5",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-c3fb84f56878"
+      ],
+      "text": "Additional results obtained during the experiment using post-sensitization treatment as described in Figures 8A and 8B.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-76e46376bac975f0",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-c3fb84f56878"
+      ],
+      "text": "(B) Time-dependent assessment of rectal temperatures, as described in Material and methods.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b0ede8ad4ed28a69",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 57,
+      "source_ids": [
+        "S-c3fb84f56878"
+      ],
+      "text": "(C) Time-dependent anaphylaxis scores, as described in Materials and 14",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-d087cc28a3b0184f",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 44,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "Figure S4.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-bb7252ea4a46e666",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 57,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "The figure is reprinted with permission from reference paper 1.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-7bf019cfbd796300",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 71,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "(C) Microplate readout of Hb release into the supernatant, with the percent hemolysis cord in comparison to Triton X-100.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-f8ef3d0ec112570f",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 53,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "*** p<0.001, N.S., no significant differences.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-e7f6c011776e8db7",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 41,
+      "source_ids": [
+        "S-44cb7b02fb0c"
+      ],
+      "text": "6",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-81b7ccde5ffaa3e5",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-b8250cb37d37"
+      ],
+      "text": "Figure S9.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-b1752595c61c0d59",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-b8250cb37d37"
+      ],
+      "text": "Additional results obtained during prophylactic treatment, as described in Figure 7.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-54b0e03a7c0ed6d5",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 68,
+      "source_ids": [
+        "S-b8250cb37d37"
+      ],
+      "text": "The serum from each mouse was diluted at 4, 20, 100, 500, and 2500 times, and the detection antibody used for 12",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-769a8ff8c53a9568",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 54,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "IgE titer assay was HRP-conjugated anti-mouse IgE antibody.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-2223c8d9ea4f1385",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "(F, G) ELISA quantification of IL-5 and IL-13 concentrations in the peritoneal fluid.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-6933d5d6cef5d986",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "(H) Representative flow cytometry panel of one of the animals in each group (n = 6) to determine the percent of CD25+FoxP3+ T cells.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-0794d3d0d5e09ec1",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "This experiment was used to generate panel I in Figure 7.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-52ffa6664772daad",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 41,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "N.S.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-27b44dc6113533a4",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 55,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "no significant difference, * p<0.05, ** p<0.01, *** p<0.001.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-3fdba35f04dc8c46",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 40,
+      "source_ids": [
+        "S-7ba224d6b7e7"
+      ],
+      "text": "13",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00170-E-ef2d127de37b942b",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 41,
+      "source_ids": [
+        "S-e94f8e0fd60e"
+      ],
+      "text": "5",
+      "exclusion_reason": "evidence_budget_exceeded"
+    }
+  ]
+}

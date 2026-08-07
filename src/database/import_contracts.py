@@ -116,6 +116,9 @@ class ArmRecord:
     cell_type: str
     cell_source: str | None = None
     tissue_or_organ: str | None = None
+    intended_target_cell: str | None = None
+    target_or_recipient_organ: str | None = None
+    observed_transfected_cell: str | None = None
     species: str | None = None
     disease_model: str | None = None
     in_vitro_in_vivo: str | None = None
@@ -509,6 +512,9 @@ def _validate_bundle(bundle: ImportBundle) -> None:
             "cell_type",
             "cell_source",
             "tissue_or_organ",
+            "intended_target_cell",
+            "target_or_recipient_organ",
+            "observed_transfected_cell",
             "species",
             "disease_model",
             "in_vitro_in_vivo",
@@ -616,20 +622,10 @@ def _validate_bundle(bundle: ImportBundle) -> None:
         ]
         if not any(
             evidence_by_id[evidence_id].verification_status
-            == "manually_verified"
+            in accepted_link_statuses
             for link in related_links
             for evidence_id in link.evidence_ids
         ):
-            if any(
-                evidence_by_id[evidence_id].verification_status
-                == "automatically_validated"
-                for link in related_links
-                for evidence_id in link.evidence_ids
-            ):
-                raise ValueError(
-                    "core schema cannot persist accepted automatic "
-                    f"evidence for eligible arm {arm.record_id}"
-                )
             raise ValueError(
                 f"eligible arm requires accepted evidence: {arm.record_id}"
             )
@@ -645,7 +641,7 @@ def _validate_bundle(bundle: ImportBundle) -> None:
             and any(
                 evidence_by_id[evidence_id].outcome_id == link.entity_id
                 and evidence_by_id[evidence_id].verification_status
-                == "manually_verified"
+                in accepted_link_statuses
                 for evidence_id in link.evidence_ids
             )
             for link in related_links
@@ -659,7 +655,7 @@ def _validate_bundle(bundle: ImportBundle) -> None:
                 link.verification_status in accepted_link_statuses
                 and any(
                     evidence_by_id[evidence_id].verification_status
-                    == "manually_verified"
+                    in accepted_link_statuses
                     for evidence_id in link.evidence_ids
                 )
                 for link in field_links

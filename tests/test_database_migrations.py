@@ -124,7 +124,15 @@ def test_migration_preserves_legacy_rows_and_is_idempotent() -> None:
     ).fetchall() == [(13, "mRNA")]
     assert connection.execute(
         "SELECT version FROM schema_migration ORDER BY version"
-    ).fetchall() == [(1,), (2,), (3,), (4,), (5,), (6,)]
+    ).fetchall() == [(1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,)]
+    experiment_columns = {
+        row[1] for row in connection.execute("PRAGMA table_info(experiment)")
+    }
+    assert {
+        "intended_target_cell",
+        "target_or_recipient_organ",
+        "observed_transfected_cell",
+    } <= experiment_columns
     assert connection.execute("PRAGMA foreign_keys").fetchone() == (1,)
 
 
@@ -611,7 +619,7 @@ def test_migration_adds_entity_action_and_evidence_context_to_review_history() -
     assert {'entity_type', 'entity_id', 'review_action', 'evidence_id'} <= columns
     assert connection.execute(
         "SELECT version FROM schema_migration ORDER BY version"
-    ).fetchall() == [(1,), (2,), (3,), (4,), (5,), (6,)]
+    ).fetchall() == [(1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,)]
 
     revision_id = connection.execute(
         """INSERT INTO review_revision (

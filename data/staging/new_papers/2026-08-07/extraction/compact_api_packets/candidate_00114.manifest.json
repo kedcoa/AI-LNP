@@ -1,0 +1,3852 @@
+{
+  "paper_id": "candidate_00114",
+  "source_review_packet_checksum": "141cea4382920fed36e784600808341f5aca31dd5415e19c61b756d140a50b58",
+  "api_packet_checksum": "19dbbc55fa3e1a3be65c9ff8ee4ba58eddefde1fdfdadea6c9d7991f9ee78eac",
+  "packet_budget_tokens": 16000,
+  "budget_status": "human_approved",
+  "token_estimation_method": "ceil(compact UTF-8 JSON bytes / 4)",
+  "estimated_input_tokens": {
+    "prompt": 285,
+    "response_schema": 2123,
+    "evidence_packet": 15955,
+    "total": 18363
+  },
+  "counts": {
+    "candidate_evidence": 200,
+    "selected_evidence": 122,
+    "excluded_evidence": 78,
+    "selected_sources": 20
+  },
+  "removed_duplicates": {
+    "input_hits": 80,
+    "unique_chunks": 29,
+    "removed_chunk_duplicates": 51,
+    "removed_normalized_passages": 0,
+    "input_clauses": 202,
+    "unique_evidence_items": 200
+  },
+  "blocked_fields_with_diagnostics": {},
+  "selected_passages": [
+    {
+      "evidence_id": "candidate_00114-E-ad4367225251dccc",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "We then measured the physical properties including size, surface charge, and RNA encapsulation (Figure 1D–F)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-93beb32cfe6d932a",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "Both 5A2-SC8 and 3A5-SC14 LNPs shared similar physical properties."
+    },
+    {
+      "evidence_id": "candidate_00114-E-d058d83020e73da2",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNP diameters were each around 80 nm with similar surface charge and similar encapsulation of siRNA."
+    },
+    {
+      "evidence_id": "candidate_00114-E-95f13f03f59ffdd8",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 140,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "It has been shown in the literature that efficacious liver targeting LNPs possess a pKa value ranging from 6.2 to 6.5.23 We measured the apparent pKa for 5A2-SC8 and 3A5-SC14 LNPs using the 6-(p-toluidino)-2-naphthalenesulfonic acid (TNS) assay."
+    },
+    {
+      "evidence_id": "candidate_00114-E-d0d66c80f587579e",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "Both 5A2-SC8 and 3A5-SC14 LNPs have an identical pKa value of 6.5, which falls within the preferable range for hepatocyte delivery (Figure 1E)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-0255c29842fdb621",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 134,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "Further, neither 5A2-SC8 or 3A5-SC14 LNPs elevated liver (AST and ALT) and kidney function enzymes (CREA and BUN) when delivering siRNA (Figure S1), indicating that observed differences would also not be due to toxicity."
+    },
+    {
+      "evidence_id": "candidate_00114-E-31034107f22a2359",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "Taken together, we found that both 5A2-SC8 and 3A5-SC14 LNPs exhibit similar physical properties."
+    },
+    {
+      "evidence_id": "candidate_00114-E-761fb7469016ef93",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "These physical attributes, therefore, could not sufficiently explain differences in their activities within the liver."
+    },
+    {
+      "evidence_id": "candidate_00114-E-e317f2bc126d5d4d",
+      "may_support_fields": [
+        "assay",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 121,
+      "source_ids": [
+        "S-830ad7813d54"
+      ],
+      "text": "We wanted to explore if this potential factor attributing to the different activities within the liver was a mechanistic difference between the two LNPs or a difference in overcoming the delivery barrier to reach specific liver cells."
+    },
+    {
+      "evidence_id": "candidate_00114-E-de4262d4667715f8",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 101,
+      "source_ids": [
+        "S-de961241396c"
+      ],
+      "text": "Understanding the biofate of LNPs can open up new avenues for therapeutic development as disease targets exist not only in specific organs but also in specific cell types."
+    },
+    {
+      "evidence_id": "candidate_00114-E-8e40b5fb3379ac26",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 180,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 117,
+      "source_ids": [
+        "S-de961241396c"
+      ],
+      "text": "To move RNA LNPs into clinical development, an improved understanding of LNP cellular tropism within the liver and its impact on therapeutic efficacy will be valuable."
+    },
+    {
+      "evidence_id": "candidate_00114-E-80ed0404bbf820c0",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": -15,
+      "priority_reasons": [
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-de961241396c"
+      ],
+      "text": "We have seen in the context of failed clinical trials that it is crucial to understand cellular tropism."
+    },
+    {
+      "evidence_id": "candidate_00114-E-500cafc735445ad9",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "We administered 5A2-SC8 LNPs and 3A5-SC14 LNPs encapsulating let-7g miRNA to the cancer mouse model."
+    },
+    {
+      "evidence_id": "candidate_00114-E-fcaa029655a98481",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 143,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "Let-7g was chosen as the therapeutic small RNA because it is an important tumor suppressor that is downregulated in liver cancer49,50 and can lead to the silencing of multiple oncogenes beneficial for cancer therapy.51 The use of a validated therapeutic in the MYC model also allowed a direct comparison of 5A2-SC8 and 3A5-SC14 LNP efficacies."
+    },
+    {
+      "evidence_id": "candidate_00114-E-1a31f09ed7675c96",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "MYC was induced at birth by the removal of Dox water, and male pups were randomly divided into five groups of nontreatment, empty 5A2-SC8 LNPs, empty 3A5-SC14 LNPs, 5A2-SC8 let-7g miRNA LNPs, and 3A5-SC14 let-7g miRNA LNPs."
+    },
+    {
+      "evidence_id": "candidate_00114-E-5bc45534a0047ab0",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "Let-7g miRNA was delivered twice a week, with 5A2-SC8 and 3A5-SC14 let-7g miRNA LNPs at a dose of 0.5 mg/kg starting at day 21 and continuing until day 55 (Figure 5A)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-3d113b7fcd076e3e",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "At specific time points, the liver tissue was collected for H&E staining to assess tumor burden (21 days, 26 days, 30 days, 45 days, and 55 days)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-384b777396d3ae75",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 53,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "By day 55, the liver was entirely full of tumors."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b6ae86392812147e",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "(Figure 5A) The various treatment groups were monitored weekly for their abdomen size and body weight."
+    },
+    {
+      "evidence_id": "candidate_00114-E-ca2882d65937cdd8",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "The results showed that empty LNPs had comparable results to the nontreatment in terms of histology, abdomen size, and overall survival."
+    },
+    {
+      "evidence_id": "candidate_00114-E-79f600f6d307787d",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 121,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "The abdominal growth of groups treated with controls and 3A5-SC14 LNPs had a steady increase in the abdominal size, consistent with the livers becoming overcome by tumor growth (Figure 5C,D)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b0d01b3db57d7eb5",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-a1d7b1a768de"
+      ],
+      "text": "In comparison, 5A2-SC8 let-7g miRNA LNP treatment led to a slower increase in abdominal size that flattened out, consistent with our hypothesis of anticancer benefit and overall survival (Figure 5C,D)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-2b2f7ef9552fbead",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-26bfdfb68ea1"
+      ],
+      "text": "Nucleic acid therapeutics, including RNA interference (RNAi), are promising drugs for liver cancer and other diseases due to their high efficacy, selectivity, and numerous target choices."
+    },
+    {
+      "evidence_id": "candidate_00114-E-eebaa704923f33cb",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 182,
+      "source_ids": [
+        "S-26bfdfb68ea1"
+      ],
+      "text": "Liver cancer has limited treatment options because many current drugs have intrinsic hepatotoxicity, which can exacerbate the underlying liver disease and drastically limit a patient’s treatment options.8 As evidenced by the recent FDA approval of four siRNA drugs, it has been demonstrated that RNAi is a safe and effective therapeutic modality.9,10 However, RNA delivery still faces challenges with respect to understanding and controlling cell-specific delivery."
+    },
+    {
+      "evidence_id": "candidate_00114-E-5be28c81c73e95d5",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 180,
+      "source_ids": [
+        "S-26bfdfb68ea1"
+      ],
+      "text": "For example, selective organ targeting (SORT) LNPs were developed that can control RNA delivery to the lungs, spleen, or liver.11–13 We showed that the chemical identity of the SORT molecule can affect biodistribution, pKa, and protein corona formation to alter organ-specific functional mRNA delivery.13 While SORT and other methods of active and endogenous targeting are beginning to open the door to organ level delivery, the specific cellular fate of LNPs within the organ remains poorly defined (including in the liver)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-a10160008111b82b",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 157,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "Here, we studied a pair of LNPs with similar physical properties and discovered how the chemistry of the ionizable amino lipid can control the endogenous LNP identity, affecting cellular uptake in the liver and altering therapeutic outcomes in a model of liver cancer."
+    },
+    {
+      "evidence_id": "candidate_00114-E-a183d63a7fd57673",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 163,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "Although most LNPs accumulate in the liver after intravenous administration (suggesting that liver delivery is straightforward), we observed an unexpected behavior when comparing two similar LNP formulations (5A2-SC8 and 3A5-SC14 LNPs) that resulted in distinct RNA delivery within the organ."
+    },
+    {
+      "evidence_id": "candidate_00114-E-00a7f117df21c750",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 150,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "Despite both LNPs possessing similar physical properties, ability to silence gene expression in vitro, strong accumulation within the liver, and a shared pKa, of 6.5, only 5A2-SC8 LNPs were able to functionally deliver RNA to hepatocytes."
+    },
+    {
+      "evidence_id": "candidate_00114-E-c9d685441c2e1730",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 149,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "Factor VII (FVII) activity was reduced by 87%, with 5A2-SC8 LNPs carrying FVII siRNA (siFVII), while 3A5-SC14 LNPs carrying siFVII produced baseline FVII activity levels comparable to the nontreatment control at a dosage of 0.5 mg/kg."
+    },
+    {
+      "evidence_id": "candidate_00114-E-0c5271846bdf565b",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 127,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "Protein corona analysis indicated that 5A2-SC8 LNPs bind apolipoprotein E (ApoE), which can drive LDL-R receptor-mediated endocytosis in hepatocytes."
+    },
+    {
+      "evidence_id": "candidate_00114-E-d4b7fa4bdce566aa",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "To examine first the barriers of cellular uptake and endosomal escape of siRNA, we compared the activity of 5A2-SC8 and 3A5-SC14 LNPs in vitro."
+    },
+    {
+      "evidence_id": "candidate_00114-E-ee094515a8f971c5",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 113,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNPs containing antiluciferase siRNA (siLuc) were delivered into HeLa cells, which were stably expressing the luciferase gene (HeLa-Luc)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-3ed3507b58f94f9c",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "Both 5A2-SC8 and 3A5-SC14 were not toxic to cells (Figure 2A)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-f36086cadcec563c",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 127,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "While both 5A2-SC8 siLuc LNPs and 3A5-SC14 siLuc LNPs were able to silence luciferase in HeLa-Luc cells, 3A5-SC14 LNPs were more potent (Figure 2B)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-080ead21121ea6cd",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 129,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "These results indicated that both LNPs can overcome intracellular barriers such as cellular uptake and endosomal escape to deliver siRNA effectively in vitro."
+    },
+    {
+      "evidence_id": "candidate_00114-E-8554d3b7320e2a9d",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 147,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "To examine the accumulation of 5A2-SC8 and 3A5-SC14 LNPs in vivo, we i.v.-administered Cy5.5 dye-labeled siRNA encapsulated inside 5A2-SC8 and 3A5-SC14 LNPs and quantified the explanted tissue fluorescence using in vivo imaging."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b75bb48e62dba848",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 128,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNPs were each sequestered in the liver as the major organ of accumulation, with 3A5-SC14 LNPs accumulating more (Figures 2C and S2)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-10003dc119b69878",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 104,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "To test the functional RNA delivery to the liver in vivo, we prepared both LNPs encapsulating mFluc and administered i.v."
+    },
+    {
+      "evidence_id": "candidate_00114-E-558244f657d8ab52",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "at a time point of 6 h and a dose of 0.1 mg/kg."
+    },
+    {
+      "evidence_id": "candidate_00114-E-177b7dfd6367200f",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "The results indicated that both 5A2-SC8 and 3A5-SC14 LNPs delivered functional mRNA to the liver (Figure S3B)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-5bb893e15a3e62ed",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "We next examined in vivo siRNA-mediated gene silencing in the liver."
+    },
+    {
+      "evidence_id": "candidate_00114-E-6f9aa1a12c9c7aca",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 145,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "We choose factor VII (FVII) siRNA (siFVII) as the in vivo RNA delivery efficacy test because the assay is well established and commonly used to access functional delivery to the hepatocytes in the liver.24 FVII, a blood clotting protein, is specifically produced by the hepatocytes and secreted into the blood, where it can be readily measured in serum."
+    },
+    {
+      "evidence_id": "candidate_00114-E-a0593427bdd20123",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "We administered 5A2-SC8 and 3A5-SC14 LNPs containing siFVII to mice through i.v."
+    },
+    {
+      "evidence_id": "candidate_00114-E-92cebc67525bc189",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "Interestingly, only 5A2-SC8 LNPs could enable FVII silencing in hepatocytes."
+    },
+    {
+      "evidence_id": "candidate_00114-E-a13de3a2a74a59cc",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 118,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "3A5-SC14 LNPs were unable to silence FVII at doses of 0.25 and 0.5 mg/kg despite having such similar physical properties and being more potent in vitro compared to 5A2-SC8 LNPs."
+    },
+    {
+      "evidence_id": "candidate_00114-E-89d11052f656f331",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 101,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "The FVII activity for 5A2-SC8 LNP-treated groups was reduced by 87% compared with that of the nontreated groups."
+    },
+    {
+      "evidence_id": "candidate_00114-E-904dcbfc964f3890",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 126,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "However, the FVII activity in the groups treated with 3A5-SC14 LNPs was not reduced and remained comparable to the nontreated groups (Figure 2D)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-5bf65c076a939a1c",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 144,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "Hepatocytes make up 80% of the liver cell mass, and LNPs have to first pass through the endothelial and Kupffer cell barriers to reach hepatocytes.25 However, the distinct FVII activity reduced by 5A2-SC8 and 3A5-SC14 LNPs illustrates the unique cell tropism of these LNPs in vivo."
+    },
+    {
+      "evidence_id": "candidate_00114-E-9b92bcb772ac33d1",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 108,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "To further investigate whether the proteins on the surface of 5A2-SC8 and 3A5-SC14 LNPs aid cell-specific uptake, functional mRNA delivery experiments using 5A2-SC8 and 3A5-SC14 LNPs were performed in vitro using relevant cell lines."
+    },
+    {
+      "evidence_id": "candidate_00114-E-8e35a11fd4b0dacd",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 72,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "First, LDL-R expressing HepG2 and HuH-7 cells was used to examine ApoE-mediated uptake."
+    },
+    {
+      "evidence_id": "candidate_00114-E-3a6da66aabb7b986",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNPs encapsulating mFLuc were preincubated with recombinant ApoE or albumin prior to the treatment of cultured cells."
+    },
+    {
+      "evidence_id": "candidate_00114-E-a25411f8adbd1aa3",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "Next, luciferase activity was quantified after 24 h of incubation as a readout for successful cellular uptake, endosomal escape, and mRNA translation to a functional protein."
+    },
+    {
+      "evidence_id": "candidate_00114-E-546375e767e21e9a",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "The results indicated that when 5A2-SC8 LNPs were preincubated with ApoE, there was an improvement in mRNA delivery to HuH-7 (Figure 4E), HepG2 (Figure S4A,E), and primary hepatocytes (Figure S5C)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b7454e23c73fda27",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 169,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "Preincubation of 5A2-SC8 with albumin eliminated efficacy in both HuH-7 (Figure 4E) and HepG2 cells (Figure S4A,E), suggesting that 5A2-SC8 LNPs may utilize ApoE LDL-R uptake pathways, as previously identified.13 In contrast, preincubation of 3A5-SC14 LNPs with ApoE did not improve mRNA delivery to HuH-7 (Figure 4F) or HepG2 cells (Figure S4B)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-71d77501b5a33716",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "It is speculated that the inability of 3A5-SC14 LNPs to bind ApoE led to free ApoE in the media that blocked LDL-R (Figure S6B)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-0686419a9cabc548",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 182,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "Preincubation of 3A5-SC14 LNPs with albumin led to a slight increase in mRNA delivery to HuH-7 (Figure 4F) and HepG2 cells (Figure S4B,F), suggesting possible ApoE-independent mechanisms although this will have to be further studied in the future.35,36 To model the delivery of LNPs to Kupffer cells, primary mouse Kupffer cells and RAW 264.7 murine peritoneal macrophage cell lines were employed."
+    },
+    {
+      "evidence_id": "candidate_00114-E-10b4082a27ad2692",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 126,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "5A2-SC8 LNPs were unable to effectively deliver mRNA to primary Kupffer cells (Figure 4G) or RAW 264.7 (Figure S4C,G) with or without ApoE or albumin protein preincubation."
+    },
+    {
+      "evidence_id": "candidate_00114-E-16680a386542eced",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 127,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "In comparison, preincubation of 3A5-SC14 LNPs with albumin did maintain efficacy in primary Kupffer cells (Figure 4H) and RAW 264.7 cells incubated with FBS media (Figure S4D)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b7df412d47b379c3",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 127,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "Together, these results confirm the mechanism of ApoE adsorption on 5A2-SC8 LNPs for delivery to LDL-R expressing cells while also revealing possible ApoE-independent mechanisms."
+    },
+    {
+      "evidence_id": "candidate_00114-E-e7cf5ac077bc3a05",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 292,
+      "source_ids": [
+        "S-2c61b99473ca"
+      ],
+      "text": "Multiple studies have reported that LNP delivery to liver hepatocytes is ApoE-dependent,35,36 evidenced by the loss of efficacy in ApoE knockout mice.33 Although albumin is an abundant protein, reports have indicated that it can become structurally altered once it binds to the surface of a nanocarrier, and this altered form of albumin can become a ligand for cell membrane receptors such as glycoprotein receptors and macrophage class A1 scavenger receptors (SR-A1).37 It has also been suggested that albumin may aid in preferential uptake into macrophage populations and impact the mechanisms of endocytosis due to gp18 and gp30 receptor binding.36–39 Albumin has been identified on the protein corona of Syn-3 mRNA LNPs, wherein it aided liver delivery.36 Together, these results show that protein corona adsorption can be linked to lipid chemistry and guide the biofate of LNPs within the liver."
+    },
+    {
+      "evidence_id": "candidate_00114-E-74bb3bacdfca681d",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 150,
+      "source_ids": [
+        "S-fcffa673616b"
+      ],
+      "text": "Twenty-five nanograms of firefly luciferase mRNA (mFLuc) inside 5A2-SC8 and 3A5-SC14 LNPs were incubated with either no serum protein, ApoE, or albumin at a ratio of 0.1 g protein/0.1 g total lipid, 0.2 g protein/0.2 g total lipid, 0.3 g protein/0.3 g total lipid, 0.4 g protein/0.4 g total lipid, 0.5 g protein/0.5 g total lipid, or 1 g protein/1 g total lipid."
+    },
+    {
+      "evidence_id": "candidate_00114-E-86f496c9c1f83d72",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-fcffa673616b"
+      ],
+      "text": "The following LNPs were directly added to 96-well plates."
+    },
+    {
+      "evidence_id": "candidate_00114-E-24cccf17c6066c4e",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-fcffa673616b"
+      ],
+      "text": "A total of 10,000 cells per well were plated into a white-bottom 96-well plate and mixed with the LNPs."
+    },
+    {
+      "evidence_id": "candidate_00114-E-f5db7c7c58ef67a0",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-21d96a9074c7",
+        "S-fcffa673616b"
+      ],
+      "text": "The next day, a One-Glo+ Tox assay was performed according to the manufacturer’s directions (Promega)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-0245f7283a658003",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "We designed a series of experiments to determine the impact of liver Kupffer cells on the siRNA delivery of LNPs to hepatocytes (Figure 3A)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-abd633e48e6e3584",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 144,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "First, we depleted the Kupffer cells in the liver using dichloromethylenediphosphonic acid (clodronate) liposomes.29 Immunohistochemistry (IHC) was used to demonstrate that Kupffer cells in liver were successfully removed after 24 h of treatment of clodronate liposomes (Figure 3A)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-e7cb05ce1953b87d",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "When Kupffer cells were depleted, 5A2-SC8 and 3A5-SC14 LNPs still accumulated strongly within the liver following i.v."
+    },
+    {
+      "evidence_id": "candidate_00114-E-e7875f161e2f3261",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "administration of 5A2-SC8 and 3A5-SC14 LNPs containing Cy5.5 dye-labeled siFVII (Figure 3B)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-91daf8e8fefddb73",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "Next, 5A2-SC8 and 3A5-SC14 LNPs containing FVII siRNA were administrated into mice via i.v."
+    },
+    {
+      "evidence_id": "candidate_00114-E-fa622ea2212a58a3",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "injection at three different doses (0.25, 0.5, and 1 mg/kg siRNA) 24 h after the depletion of Kupffer cells."
+    },
+    {
+      "evidence_id": "candidate_00114-E-4cc88cd2f866c5a0",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "Mouse serum was collected 72 h later for quantification of FVII levels."
+    },
+    {
+      "evidence_id": "candidate_00114-E-d0e3087d511ebd85",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "After the administration of 5A2-SC8 siFVII LNPs, FVII levels were distinctly reduced in wild-type (WT) mice and Kupffer cell-depleted mice (Figure 3C)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-19a89e2d5908b179",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 116,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "The presence or absence of Kupffer cells did not significantly affect siRNA delivery to hepatocytes using 5A2-SC8 siFVII LNPs at all doses tested (0.25, 0.5, and 1 mg/kg)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-5fe9e344de96c2ae",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "In contrast, Kupffer cell depletion was required for 3A5-SC14 siFVII LNP-mediated siRNA gene silencing in hepatocytes."
+    },
+    {
+      "evidence_id": "candidate_00114-E-f79af13eee7a1d90",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "3A5-SC14 siFVII LNPs were only able to modestly affect FVII levels in WT mice at the highest dose of 1 mg/kg."
+    },
+    {
+      "evidence_id": "candidate_00114-E-00d44c4b4b09e0f6",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "However, FVII levels were significantly reduced after Kupffer cells were depleted including at the lowest dose tested (0.25 mg/kg) (Figure 3C)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b5e93c23cd3ba6d2",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 140,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "This data suggests that 5A2-SC8 siFVII LNPs pass through the first barrier of Kupffer cells in the liver and internalize into hepatocytes, whereas 3A5-SC14 siFVII LNPs may end up trapped within Kupffer cells, unable to pass through this barrier to reach hepatocytes."
+    },
+    {
+      "evidence_id": "candidate_00114-E-f3ecb85ecf456d24",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-8e36b9105283"
+      ],
+      "text": "We next aimed to understand, mechanistically, whether the endogenous identity of LNPs formed when the LNPs come in contact with the plasma could explain their transport to Kupffer cells and hepatocytes."
+    },
+    {
+      "evidence_id": "candidate_00114-E-4680b7d68b18db47",
+      "may_support_fields": [
+        "assay",
+        "endpoint"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-9df3a93010ba"
+      ],
+      "text": "HeLa-Luc cells were seeded into white 96-well plates at a density of 10,000 cells per well 24 h before transfection, and cells were incubated with DMEM medium (10% FBS, 1% PenStep)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-06428b9845a2fb64",
+      "may_support_fields": [
+        "assay",
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-9df3a93010ba"
+      ],
+      "text": "The next day, 5A2-SC8 and 3A5-SC14 LNP formulations containing antiluciferase siRNAs (siLuc) were added with a fixed 24 nM siLuc per well."
+    },
+    {
+      "evidence_id": "candidate_00114-E-1f5e52b310b6eabe",
+      "may_support_fields": [
+        "assay",
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-9df3a93010ba"
+      ],
+      "text": "After incubation of 24 h, ONE-Glo + Tox kits were used to detect luciferase expression and cytotoxicity based on Promega’s recommended protocol."
+    },
+    {
+      "evidence_id": "candidate_00114-E-4703b8b4ba567495",
+      "may_support_fields": [
+        "assay",
+        "endpoint"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-9df3a93010ba"
+      ],
+      "text": "Cell viability was measured using the CellTiter-Glo Luminescent Cell Viability Assay following Promega’s recommended protocol."
+    },
+    {
+      "evidence_id": "candidate_00114-E-30a2dfedd5b08159",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "5A2-SC8 or 3A5-SC14, 1,2-distearoyl-sn-glycero-3-phosphocholine (DSPC), cholesterol, and PEG-DMG-2000 were dissolved in ethanol (molar ratio of 50:10:38:2), and all RNAs were dissolved in citrate buffer (10 mM citrate buffer at a pH 3.9)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-8e16334e2ecd9d0a",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "Under vortex mixing, the ethanol solutions (40 μL) were added to the RNA solution (120 μL)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-0afd28f4298ed2ce",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "The weight ratio of 5A2-SC8 or 3A5-SC14 amino lipid to RNA was set to 25:1 for all LNP formulations."
+    },
+    {
+      "evidence_id": "candidate_00114-E-854daeb13e035ea1",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 110,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "The formulated 5A2-SC8 and 3A5-SC14 LNPs were incubated for 15 min at room temperature and then diluted with 1× PBS for in vitro studies."
+    },
+    {
+      "evidence_id": "candidate_00114-E-0e785ddb8a6225d3",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "For in vivo studies, the LNPs were purified by dialysis in sterile 1× PBS with 3.5 kD cutoff dialysis tubes for 2 h."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b708733fb3cea8b2",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 101,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNPs containing luciferase mRNA were prepared using the same conditions as above."
+    },
+    {
+      "evidence_id": "candidate_00114-E-9df22a4b4f663df7",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNPs were diluted to a concentration of 0.1 mg/mL using 1X PBS prior to measuring size, and LNPs were diluted further to a volume of 800 μL using 1X PBS for ζ potential measurements."
+    },
+    {
+      "evidence_id": "candidate_00114-E-c11d41f63ea25aae",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "The LNP size and ζ potentials were measured by dynamic light scattering (DLS) using a Malvern Zetasizer Nano ZS (He–Ne laser, λ = 632 nm) prior to in vivo studies."
+    },
+    {
+      "evidence_id": "candidate_00114-E-2adee991424525b9",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 179,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "Following a reported procedure, the TNS assay was used to determine the pKa of 5A2-SC8 and 3A5-SC14 siRNA LNPs comprised of dendrimer/DMG PEG lipid/ DSPC/cholesterol (50/2/10/38 mol %) in PBS at a concentration of 100 μM total lipid.20 Briefly, the formulated LNPs were diluted to 60 μM total lipid in 100 μL volume per well in 96-well plates with a series of 10 mM HEPS/10 mM MES/10 mM ammonium acetate/130 mM NaCl buffer solution, where the pH values ranged from 2.5 to 11."
+    },
+    {
+      "evidence_id": "candidate_00114-E-1f5ce5bbc579872d",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "The TNS buffer was diluted to 50 mM."
+    },
+    {
+      "evidence_id": "candidate_00114-E-73318453e1f3d96f",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 81,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "The plate was read with an Infinite F/M200 Pro microplate reader (Tecan) using excitation and emission wavelengths of 321 and 445 nm shaking for 200 s."
+    },
+    {
+      "evidence_id": "candidate_00114-E-401a16f44a9600cf",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 173,
+      "source_ids": [
+        "S-34fb7670b4d6"
+      ],
+      "text": "The liver structure is complex and is comprised of multiple cell types, where 60–80% of parenchymal cells are hepatocytes and the remaining 20% are nonparenchymal cells such as Kupffer cells, endothelial cells, and hepatic stellate cells.26 Hepatocytes are involved in functions such as protein synthesis, protein storage, detoxification, and metabolism.27 When LNPs are administered i.v."
+    },
+    {
+      "evidence_id": "candidate_00114-E-7b20ef779edbf5d6",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 231,
+      "source_ids": [
+        "S-34fb7670b4d6"
+      ],
+      "text": "and enter the liver, one of the first cell types they are exposed to is the Kupffer cell.26 Kupffer cells are an important first line of defense against foreign materials as these cells are tissue-resident macrophages that will phagocytose and destroy pathogens and other foreign materials within the blood.26 They are responsible for the majority of phagocytic activity within the liver and make up 80–90% of the total macrophage population within the body.26,28 We aimed to investigate whether the Kupffer cells were playing a role in the difference in RNA delivery of 5A2-SC8 and 3A5-SC14 LNPs, theorizing that Kupffer cells could be acting as a barrier for delivery to hepatocytes."
+    },
+    {
+      "evidence_id": "candidate_00114-E-f3c065319141aba4",
+      "may_support_fields": [
+        "outcomes",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-8534463b98aa"
+      ],
+      "text": "We followed a treatment regimen (Figure 5B) to test the therapeutic outcome of 5A2-SC8 and 3A5-SC14 LNPs."
+    },
+    {
+      "evidence_id": "candidate_00114-E-b5d0d6e9e968e9a1",
+      "may_support_fields": [
+        "outcomes",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 250,
+      "source_ids": [
+        "S-8534463b98aa"
+      ],
+      "text": "MYC is a challenging target and is an oncogene deregulated in many types of cancers.44,45 Tumors with elevated MYC expression are a challenge to treat due to the highly proliferative and aggressive phenotypes.46 When MYC is turned on, it drives cellular growth and proliferation.46 microRNAs have emerged as key posttranscriptional regulators of gene expression, offering a promising approach for cancer therapy.47 Let-7g is part of the let-7 family and is known to be downregulated in many tumor types, especially in HCC.48 We hypothesized that 5A2-SC8 LNPs would bind ApoE to aid delivery to LDL-R expressing hepatocytes and LDL-R expressing cancer cells, while 3A5-SC14 LNPs would not."
+    },
+    {
+      "evidence_id": "candidate_00114-E-d743ddf32c1ce018",
+      "may_support_fields": [
+        "outcomes",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-8534463b98aa"
+      ],
+      "text": "Instead, albumin recognition on 3A5-SC14 LNPs is likely engulfed by the Kupffer cells that are unable to deliver therapeutic miRNA to hepatocytes or cancer cells."
+    },
+    {
+      "evidence_id": "candidate_00114-E-ef7d9010ebc0be2b",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-92f2f3089720"
+      ],
+      "text": "For in vivo small RNA delivery to hepatocytes, C57BL/6 mice received i.v."
+    },
+    {
+      "evidence_id": "candidate_00114-E-e27ed7b441610943",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-92f2f3089720"
+      ],
+      "text": "injections of PBS (negative control, n = 3), 5A2-SC8 LNPs containing anti-factor VII siRNA (siFVII) diluted in PBS (200 μL, 0.5 mg/kg of siFVII) or 3A5-SC14 LNPs containing siFVII diluted in PBS (200 μL, 0.5 mg/kg of siFVII)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-2e0f2bb8adf87785",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-92f2f3089720"
+      ],
+      "text": "A standard curve was constructed using samples from PBS-injected mice, and relative factor VII expression was determined by comparing treated groups to an untreated PBS control."
+    },
+    {
+      "evidence_id": "candidate_00114-E-cfcb90fcb1192179",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 155,
+      "source_ids": [
+        "S-21d96a9074c7"
+      ],
+      "text": "After 24 h, the media was replaced with 100 μL of fresh media and cells were treated with 25 ng of firefly luciferase mRNA (mFLuc) inside 5A2-SC8 and 3A5-SC14 LNPs incubated with either no serum protein, ApoE, or albumin at a ratio of 0.1 g protein/0.1 g total lipid, 0.2 g protein/0.2 g total lipid, 0.3 g protein/0.3 g total lipid, 0.4 g protein/0.4 g total lipid, 0.5 g protein/0.5 g total lipid, or 1 g protein/1 g total lipid."
+    },
+    {
+      "evidence_id": "candidate_00114-E-438e6ced7020f5d1",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 113,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "Thus, it is reasonable to expect that the chemistry of surface-exposed amino lipids (5A2-SC8 or 3A5-SC14) could control protein adsorption that would affect cellular uptake within the liver."
+    },
+    {
+      "evidence_id": "candidate_00114-E-89803603ee3ddc8d",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 166,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "LNPs were incubated with mouse plasma, and the plasma proteins, which bind to the surface of 5A2-SC8 and 3A5-SC14 LNPs, were isolated using differential centrifugation.34 Once the LNP protein coronas were isolated, we utilized an SDS-PAGE gel to separate the different proteins present on the protein coronas of 5A2-SC8 and 3A5-SC14 LNPs."
+    },
+    {
+      "evidence_id": "candidate_00114-E-40e693bafd66f7e6",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 139,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "While the set of plasma proteins on the surface of 5A2-SC8 and 3A5-SC14 LNPs share similarities, there was a striking difference at a molecular weight of around 35 kDa (Figure 4A), which is close to the molecular weight of ApoE."
+    },
+    {
+      "evidence_id": "candidate_00114-E-075b8a043049ee82",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 121,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "Western blotting (WB) using an ApoE antibody demonstrated that 5A2-SC8 LNPs were enriched in ApoE, while there was little to no ApoE present on 3A5-SC14 LNPs."
+    },
+    {
+      "evidence_id": "candidate_00114-E-8558f508a54a3b54",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "In addition, we noticed a pronounced band around 69 kDa, particularly for 3A5-SC14 LNPs."
+    },
+    {
+      "evidence_id": "candidate_00114-E-dd879f30e0a43081",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "The WB result validated that this protein was albumin."
+    },
+    {
+      "evidence_id": "candidate_00114-E-c1e1e7edfdc85850",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "Therefore, these results indicate that 5A2-SC8 LNPs are enriched in ApoE, whereas 3A5-SC14 LNPs are enriched in albumin (Figure 4B)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-4ad66c597884d964",
+      "may_support_fields": [
+        "assay",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 121,
+      "source_ids": [
+        "S-2b5b084b1963"
+      ],
+      "text": "Next, we quantified this result using mass spectrometry proteomics, which confirmed that 5A2-SC8 LNP corona had a higher abundance of ApoE and 3A5-SC14 LNP corona had a slightly higher abundance of albumin (Figure 4C,D)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-33420e1f24a67f93",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 170,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNPs were prepared according to the previously described protocol and were diluted to a final lipid concentration of 1 g/L with 1× PBS.22 The plasma proteins absorbed onto the LNPs were isolated following our reported methods.13 Briefly, equal volumes of 5A2-SC8 and 3A5-SC14 LNPs (at a concentration of 1 mg/mL total lipid) were incubated in equal volumes of mouse plasma (Innovative Grade US Origin Mouse Plasma KD EDTA purchased from Fisher Scientific) at a 1:1 ratio at 37 °C for 15 min."
+    },
+    {
+      "evidence_id": "candidate_00114-E-27092e943650491a",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "A 0.7 M sucrose gradient was prepared by dissolving solid sucrose in MilliQ water."
+    },
+    {
+      "evidence_id": "candidate_00114-E-80a15aed5bfc3a51",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "The LNP and plasma solution were added to tubes containing a 0.7 M sucrose gradient."
+    },
+    {
+      "evidence_id": "candidate_00114-E-fd4ef8367eba61e0",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 81,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "The sucrose gradient tubes were prepared in advance by diluting 2 M sucrose in MilliQ water."
+    },
+    {
+      "evidence_id": "candidate_00114-E-45ee9ab43e0d7360",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "After 3 washes, samples were resuspended in 50 μL of a buffer comprised of Laemli sample buffer with 50% BME."
+    },
+    {
+      "evidence_id": "candidate_00114-E-9965ad3aecc56ec6",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 180,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 110,
+      "source_ids": [
+        "S-4bcbed01051a"
+      ],
+      "text": "Further, our results showed that 5A2-SC8 let-7g miRNA LNPs extended survival in the MYC mouse model to day 121, while 3A5-SC14 let-7g miRNA LNPs were not able to extend survival past day 67 (Figure 5E)."
+    },
+    {
+      "evidence_id": "candidate_00114-E-2c9d6f88be337fe7",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": -15,
+      "priority_reasons": [
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-4bcbed01051a"
+      ],
+      "text": "Delivery of let-7g miRNA or a therapeutic miRNA to hepatocytes and cancer cells is beneficial for treatment in this MYC-driven liver cancer model."
+    },
+    {
+      "evidence_id": "candidate_00114-E-bf733d56d79721fe",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-32e6dcb0c6b1"
+      ],
+      "text": "To further explore the mechanism of the in vivo biofate of 5A2-SC8 and 3A5-SC14 LNPs (Figure 2D), we examined the interaction of LNPs with serum proteins."
+    },
+    {
+      "evidence_id": "candidate_00114-E-c784a8debb3a8502",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 299,
+      "source_ids": [
+        "S-32e6dcb0c6b1"
+      ],
+      "text": "Once LNPs are administered into the bloodstream, the nanoparticle’s surface becomes modified by a layer of proteins from the biological fluid, known as the protein corona, which creates an endogenous identity with biological impact.30,31 For example, individual proteins associated with the nanoparticle surface can serve as ligands guiding nanoparticles to specific cell surface receptors.32 For LNP delivery to the liver, the adsorbed ApoE enables by hepatocyte uptake via binding to the LDL-R on the surface of hepatocytes and undergoing receptor-mediated endocytosis.32,33 Furthermore, in our previous work, it was shown that LNPs undergo a three-step endogenous targeting mechanism to reach specific organs (such as the lungs, liver, or spleen).13 proteinsEG lipid displacement first exposes the underlying molecules on the LNP, in this case, 5A2-SC8 or 3A5-SC14, to serum proteins in the blood."
+    },
+    {
+      "evidence_id": "candidate_00114-E-f90f70b9ffc73403",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 135,
+      "source_ids": [
+        "S-52877d49b574"
+      ],
+      "text": "During the development of LNPs, physical characterization of particle size, surface charge, and pKa are important parameters that can correlate with efficacy.23 Four-component LNPs are comprised of an ionizable cationic lipid, phospholipid, cholesterol, and PEG lipid."
+    },
+    {
+      "evidence_id": "candidate_00114-E-7c10b0d50b848ac4",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 132,
+      "source_ids": [
+        "S-52877d49b574"
+      ],
+      "text": "To examine these properties, we formulated 5A2-SC8 LNPs and 3A5-SC14 LNPs (Figure 1A), differing only in the chemistry of the ionizable amino lipid (5A-SC8 or 3A5-SC14) while keeping the other three components (PEG lipid, cholesterol, and DSPC) constant."
+    },
+    {
+      "evidence_id": "candidate_00114-E-4dc7c5703ec0ec58",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-52877d49b574"
+      ],
+      "text": "Each LNP was formulated using the same molar ratios of ionizable dendrimer (either 5A2-SC8 or 3A5-SC14), DSPC, cholesterol, and PEG2000-DMG (Figure 1B,C) (50/38/10/2, mol/mol)."
+    }
+  ],
+  "excluded_passages": [
+    {
+      "evidence_id": "candidate_00114-E-71cbd68940e377e2",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-26bfdfb68ea1"
+      ],
+      "text": "Significant progress has been made in hepatic and extrahepatic delivery.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-ea8fa16499dc3e59",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 124,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "Within the field of lipid nanoparticles (LNPs) for RNA delivery, the focus has been mainly placed on organ level delivery, which can mask cellular level effects consequential to therapeutic applications.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-07bbed590da7cf2e",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 130,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "In contrast, the surface of 3A5-SC14 LNPs was enriched in albumin but depleted in ApoE, which likely led to Kupffer cell delivery and detargeting of hepatocytes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-cd285ccd3f9e835a",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "In an aggressive MYC-driven liver cancer model relevant to hepatocytes, 5A2-SC8 LNPs carrying let-7g miRNA were able to significantly extend survival up to 121 days.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-0a3c371e33f641e4",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 122,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "Since disease targets exist in an organ- and cell-specific manner, the clinical development of RNA LNP therapeutics will require an improved understanding of LNP cellular tropism within organs.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-d5a638c831a6b4d2",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 162,
+      "source_ids": [
+        "S-e1dbbe60c478"
+      ],
+      "text": "The results from our work illustrate the importance of understanding the cellular localization of RNA delivery and incorporating further checkpoints when choosing nanoparticles beyond biochemical and physical characterization, as small changes in the chemical composition of LNPs can have an impact on both the biofate of LNPs and therapeutic outcomes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-de314fc74bfcfbe5",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 242,
+      "source_ids": [
+        "S-ab324a4d04e1"
+      ],
+      "text": "All traditional LNPs, including those used in Onpattro and the COVID-19 vaccines, are comprised of four lipid components: an ionizable amino lipid, a phospholipid (typically DSPC), cholesterol, and a poly(ethylene glycol) (PEG) lipid.1,6,10,16–19 The ionizable amino lipid is one of the most critical components in LNPs because they bind negatively charged nucleic acids and release the encapsulated cargo of the LNP into the cytoplasm via lipid charge acquisition in acidic endosomes.19 Although many ionizable amino lipids have been studied with diverse chemical structures, applications of i.v.-administered LNPs have largely been limited to one organ (the liver) and a single cell type (hepatocytes).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-56a161f9c25578c2",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 182,
+      "source_ids": [
+        "S-ab324a4d04e1"
+      ],
+      "text": "Analogous to very-low-density lipoprotein (V-LDL), this fate of LNPs has been shown to involve apolipoprotein E (ApoE) adsorption in the blood that subsequently mediates uptake into hepatocytes via the low-density lipoprotein receptor (LDL-R).13,18 For this study, we hypothesized that the chemical structure of the ionizable amino lipid may modulate the biofate of LNPs within the liver, which could then affect therapeutic outcomes in the treatment of liver cancer.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-89f60745e248d321",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "After 24 h, cytotoxicity and luciferase activity were quantified.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f286beb760865183",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "injection.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-c9133ad418326e72",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-1a9ff1a022a4"
+      ],
+      "text": "After 72 h, the FVII levels in the serum were quantified utilizing chromogenic FVII kit.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-58f80af996ce3b45",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 181,
+      "source_ids": [
+        "S-fe05f711f53c"
+      ],
+      "text": "In our previous work, we developed a chemically diverse library of ionizable cationic lipids and identified a successful amino lipid named 5A2-SC8 that when formulated into 5A2-SC8/DSPC/Chol/PEG-DMG LNPs was able to effectively deliver siRNA, miRNA, and mRNA to the liver for therapeutic benefit.20,21 This LNP was shown to have high potency in liver hepatocytes and cancer cells while avoiding off-target toxicity to the remaining liver tissue.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-526eb217932a0424",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 129,
+      "source_ids": [
+        "S-fe05f711f53c"
+      ],
+      "text": "It is often assumed that the majority of LNPs are primarily uptaken by hepatocytes and that liver delivery is a relatively easy and solved problem in terms of targeting.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-ff29b3fcc6bf49f1",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 121,
+      "source_ids": [
+        "S-fe05f711f53c"
+      ],
+      "text": "However, upon re-examination of our chemical library of ionizable cationic lipids for siRNA LNP delivery, we made an unexpected observation.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-543a9dff362be00e",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 144,
+      "source_ids": [
+        "S-fe05f711f53c"
+      ],
+      "text": "A structurally similar lipid, 3A5-SC14, with higher siRNA delivery potency in vitro compared to 5A2-SC8 LNPs and liver accumulation in vivo to that of 5A2-SC8 LNPs, was ineffective for functional siRNA delivery to liver hepatocytes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f81f064480dc8802",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 123,
+      "source_ids": [
+        "S-fe05f711f53c"
+      ],
+      "text": "This observation of two related and similar LNPs, 5A2-SC8 and 3A5-SC14, that both accumulated within the liver but had distinct in vivo functional RNA delivery capabilities prompted further examination (Scheme 1).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-9492709659e2a3d7",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-21d96a9074c7",
+        "S-fcffa673616b"
+      ],
+      "text": "All of the data was normalized to cell viability.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-955159791958d313",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 68,
+      "source_ids": [
+        "S-fcffa673616b"
+      ],
+      "text": "The cells that were utilized in this experiment were primary Kupffer cells and primary hepatocytes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-6be834e86073a8b2",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-fcffa673616b"
+      ],
+      "text": "Cell culture conditions and primary cell isolation details can be found in the Supporting Information.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-a2b44fc5fe6eb8f3",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-5334625f5c21"
+      ],
+      "text": "In this transgenic mouse model, the overexpression of human c-MYC is controlled by a liver-specific promoter wherein doxycycline (dox) is used to turn on or off MYC in hepatocytes.42,43 Upon the removal of dox, rapid tumor growth leads to death within 60 days without treatment.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-6b1c4b0cb3c13c72",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": -15,
+      "priority_reasons": [
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-5334625f5c21"
+      ],
+      "text": "Importantly, hepatocytes differentiate into tumor cells in this model, which further allowed us to test cellular tropism and consequences in regard to liver cancer treatment.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-90c945d4ffaf0d9c",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-5334625f5c21"
+      ],
+      "text": "Without any treatment, liver tumors become visible around days 20–26 and tumors take over the entire liver by days 45–55 (Figure 5A).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-8d7c7c18db5a506d",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 63,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "A 3:1 ratio of the aqueous solution to the EtOH solution (by volume) was used.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-7f0d6139868c98ac",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "Nucleic acid binding was determined using the Quant-iT Ribogreen assay (Fisher Scientific) following the recommended protocol, and additional details can be found in the Supporting Information.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-bd07858521cd06f9",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "The same volume (4 μL) of TNS stock solution was added to each well to give a final concentration of 2 μM.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f7db5cc7e75ff32c",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 55,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "Four replicates were used for each data point.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-0cd2e986f7800369",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "The data was normalized to the values at pH 2.5, and the data was analyzed using GraphPad Prism.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-e70f962975cfe6f9",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 97,
+      "source_ids": [
+        "S-874e18339e4d"
+      ],
+      "text": "A nonlinear fit analysis of log (inhibitor) vs response was applied to the fluorescence data, and the pKa was measured as the pH value where the fluorescence intensity is half-maximum fluorescence (inflection point).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-420a3a81e3e85a4b",
+      "may_support_fields": [
+        "biological_model",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-287ee4402869"
+      ],
+      "text": "Overall, this body of work focused on understanding the biochemical and biophysical factors of two similar yet unique LNPs.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-8d7d22afa7043e15",
+      "may_support_fields": [
+        "biological_model",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 141,
+      "source_ids": [
+        "S-287ee4402869"
+      ],
+      "text": "We learned that though two LNPs are structurally similar and share the suggested characteristics for successful liver hepatocyte targeting, these similarities do not always correlate to successful hepatocyte delivery and therapeutic efficacy.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-6a8ad33fb9a38d72",
+      "may_support_fields": [
+        "biological_model",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 131,
+      "source_ids": [
+        "S-287ee4402869"
+      ],
+      "text": "Our results illustrate the importance of understanding the suborgan cellular destination of RNA delivery and incorporating further checkpoints when choosing nanoparticles beyond biochemical and physical characterization, especially in the context of therapeutic LNPs.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-3f97dc236bbc80dd",
+      "may_support_fields": [
+        "biological_model",
+        "therapeutic_target"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-287ee4402869"
+      ],
+      "text": "We anticipate that these findings can help guide others in the selection of nanoparticles for disease treatment as cellular tropism impacts cancer therapy.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-98cb995570c11eac",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 104,
+      "source_ids": [
+        "S-34fb7670b4d6"
+      ],
+      "text": "Since 5A2-SC8 LNPs silenced FVII in liver hepatocytes but 3A5-SC14 LNPs did not, we hypothesized that the cellular distribution of these LNPs to cells within the liver is different.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-26ff500e922cfe00",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-5133c341eeb9"
+      ],
+      "text": "Understanding the cellular fate of LNPs within the organ is especially important in the context of therapeutic LNPs as delivery to an unexpected cell type could relate to adverse events.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-b0a97be890bc7bd0",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-5133c341eeb9"
+      ],
+      "text": "For instance, the clinical progress of nucleic acid therapy has been stymied by unexpected nanoparticle-induced stimulation of immune cells.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-d8af06cc24d7a491",
+      "may_support_fields": [
+        "endpoint",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 131,
+      "source_ids": [
+        "S-5133c341eeb9"
+      ],
+      "text": "For example, the phase I HCC trial of a miR-34a nanoparticle MRX34 was halted after severe immune-related adverse events driven by off-target nanoparticle uptake.14,15 This clinical trial failure highlights that nanoparticle cellular tropism can have negative consequences and thus is essential to understand when developing therapeutic LNP candidates.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-83bd49ba03d015f1",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 153,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "The phenomenon inspired us to characterize the biochemical and physical properties of 5A2-SC8 and 3A5-SC14 LNPs and to determine what factors impact the cellular location of RNA LNPs in the liver and whether cellular tropism within an organ could alter the outcomes of cancer therapy.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-2d11a5e538156b97",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 125,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "Herein, we formulated four-component LNPs that only differed in one component—the ionizable cationic lipid.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-bbd9542544649840",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 126,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 LNPs each had similar physical properties such as size, charge, RNA encapsulation, and pKa.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-b6cb9cba160fd78a",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 145,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "In addition, 5A2-SC8 and 3A5-SC14 LNPs were able to deliver siRNA to silence reporter luciferase expression in vitro, as well as accumulate in the liver on a gross analysis level in vivo.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-788c3ae4df63e5d1",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 134,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "Despite being more potent for siRNA delivery in vitro, 3A5-SC14 LNPs were ineffective for siRNA-mediated gene silencing in hepatocytes in vivo.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-0de4e8719aba8e49",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 131,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "This phenomenon was intriguing as it challenges the dogma that the majority of LNPs targeting the liver are consumed by hepatocytes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-6ab53ffe13b9cfac",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 136,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "This unique observation in differential hepatocyte delivery inspired further exploration of the two structurally similar yet functionally distinct LNPs.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-9752b682e38dfaa1",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 129,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "Through a series of in vitro studies, we found that different protein coronas help guide the biofate of LNPs in the liver.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f960f5102353c5bd",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 152,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "We hypothesized that the chemistry of the amino lipid plays a prominent role in which proteins bind to the surface of LNPs when administered in the bloodstream and ultimately dictates the biofate of LNPs in the liver.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-61b67433d427887c",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 145,
+      "source_ids": [
+        "S-0457dab7635f"
+      ],
+      "text": "We further explored if this unique biofate could impact the therapeutic outcomes in a genetically engineered model of MYC-driven liver cancer and found that only 5A2-SC8 let-7g miRNA LNPS were able to extend survival in the aggressive liver cancer model.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-62bd8c8f7d55606d",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-92f2f3089720"
+      ],
+      "text": "After 72 h, mice were anesthetized by isoflurane inhalation for blood sample collection by cheek puncture.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f6d7b592de104097",
+      "may_support_fields": [
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 98,
+      "source_ids": [
+        "S-92f2f3089720"
+      ],
+      "text": "Serum was isolated with serum separation tubes (Becton Dickinson), and factor VII protein levels were analyzed by a Biophen FVII chromogenic assay (Hyphen Biomed, Aniara Corporation) following the recommended protocol.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-6b8c4beb317ac5a5",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-21d96a9074c7"
+      ],
+      "text": "A total of 10,000 cells per well were plated into a white-bottom 96-well plate.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-bb3a1dcd6424c082",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 72,
+      "source_ids": [
+        "S-21d96a9074c7"
+      ],
+      "text": "The cell lines that were utilized in this experiment were HuH-7 cells, HepG2, and RAW 264.6 cells.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-c6024a2361d78c67",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-21d96a9074c7"
+      ],
+      "text": "Cell culture conditions can be found in the Supporting Information.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-12a31186d384878b",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 116,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "Understanding the cellular fate of LNPs within the liver is important in the context of cancer therapy because delivery to an unexpected cell type could result in a lack of efficacy and even in adverse events.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-017b076cca744a86",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "Here, we studied two LNPs, 5A2-SC8 and 3A5-SC14, that accumulate in the liver and share similar physical properties.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-e690d6c803deb48d",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "We found that altering the chemistry of the amino lipid can affect protein corona formation, which then likely drives the uptake into hepatocytes or Kupffer cells.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-dee0565df6b1fd28",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "We identified ApoE and albumin as key mediators of this difference between 5A2-SC8 and 3A5-SC14 LNPs.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-c212ae5bc14bf96c",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "3A5-SC14 LNPs were only able to silence gene expression in hepatocytes after Kupffer cells were depleted.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-c6c7ee7f525202ab",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "Consequently, in a liver cancer model dependent on hepatocyte and cancer cell delivery, only 5A2-SC8 LNPs carrying let-7g miRNA provided a therapeutic benefit.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-d2a148463c5c54c7",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "Overall, these results illustrate the importance of understanding the suborgan cellular destination of RNA delivery and incorporating further checkpoints when choosing nanoparticles beyond biochemical and physical characterization.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-cbcf9f9fcbaaa029",
+      "may_support_fields": [
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 75,
+      "source_ids": [
+        "S-11e70984ca6a"
+      ],
+      "text": "We hope that our research can help guide others in the future selection of nanoparticles for specific diseases.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f1ddee677499b8db",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-89fd45e21b6f"
+      ],
+      "text": "We hypothesized that 5A2-SC8 LNPs would provide a therapeutic benefit when delivering a therapeutic RNA as this LNP was able to deliver RNA more effectively to hepatocytes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-94462ce9c2242b25",
+      "may_support_fields": [
+        "biological_model"
+      ],
+      "priority_score": -15,
+      "priority_reasons": [
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 195,
+      "source_ids": [
+        "S-89fd45e21b6f"
+      ],
+      "text": "Liver cancer is one of the most common malignancies in the world with few promising effective treatments available, and current treatments only extend life by 3 months.40,41 One of the most frequently activated oncogenes associated with the pathogenesis of liver tumors in liver cancer is the MYC oncogene.42 Since MYC is an oncogene deregulated in hepatocellular carcinoma (HCC), an aggressive form of liver cancer, we chose to carry out our therapeutic study with a genetically engineered mouse model of MYC-driven cancer where cancer develops in the liver from hepatocytes and disease progresses quickly.20",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-faf802987e609789",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 51,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "Each sample was prepared in triplicate.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-ba730ebd490ea24a",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 57,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "Samples were centrifuged at a speed of 25,000g for 1 h at 4 °C.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-a34a7992b7799971",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 54,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "The supernatant was removed carefully and discarded.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-89f7a43f6c444f00",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "The samples were washed with 1× PBS 3 times at a speed of 25,000 for 5 min.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-72563811791813ab",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "Next, excess lipids were removed using the ReadyPrep 2D Clean up kit (Bio-Rad) following the steps provided by the manufacturer.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-250108c2d23314d9",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 56,
+      "source_ids": [
+        "S-092b2be8f28d"
+      ],
+      "text": "Samples were then stored at −20 °C prior to processing.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f1f862296314f17c",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 122,
+      "source_ids": [
+        "S-4bcbed01051a"
+      ],
+      "text": "3A5-SC14 LNPs are unable to release let-7g miRNA into hepatocytes and thus are not able to provide a therapeutic benefit, likely due to Kupffer cell engulfment and potential degradation.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-081ab0c60d7debc9",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-4bcbed01051a"
+      ],
+      "text": "This result emphasizes the importance of understanding the cell type delivery of LNPs as two similar LNPs with promising liver targeting characteristics do not provide a similar therapeutic benefit.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-2f4dd504e7a0a433",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-4bcbed01051a"
+      ],
+      "text": "We anticipate that understanding the suborgan cellular destination of RNA delivery can help guide others in the selection of nanoparticles for specific diseases and cancers.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-7e4cdd21e7016a27",
+      "may_support_fields": [
+        "biological_model",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 102,
+      "source_ids": [
+        "S-318f5df39089"
+      ],
+      "text": "5A2-SC8 and 3A5-SC14 dendrimer amino lipids were synthesized according to our previously reported methods.20 Clodronate liposomes and PBS liposomes were purchased from Liposoma and utilized for Kupffer cell depletion studies.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-30271debf6b085f9",
+      "may_support_fields": [
+        "biological_model",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 73,
+      "source_ids": [
+        "S-318f5df39089"
+      ],
+      "text": "Additional details regarding the materials and reagents utilized can be found in the Supporting Information.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-5c305c4b180a8eb6",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-32e6dcb0c6b1"
+      ],
+      "text": "Next, distinct proteins bind to the surface of the LNP.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-c5baa75bf4342479",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "outcomes",
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-32e6dcb0c6b1"
+      ],
+      "text": "Third, interactions between specific surface-bound proteins and cognate receptors can drive endogenous targeting.13",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-c42c262e9b69ed9e",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-52877d49b574"
+      ],
+      "text": "While 5A2-SC8 and 3A5-SC14 are structurally similar dendritic amino lipids, they do have a few unique chemical differences.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-8b244a6d6a769797",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-52877d49b574"
+      ],
+      "text": "Both 5A2-SC8 and 3A5-SC14 have polyamine cores; they differ in the number of hydrophobic branches (5 versus 3, respectively).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-1f803fbe4b9e25b5",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 98,
+      "source_ids": [
+        "S-52877d49b574"
+      ],
+      "text": "Further, 3A5-SC14’s alkyl tail length is comprised of 14 carbons compared to the 8 carbons on the 5A2-SC8 alkyl tail.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00114-E-f974fdf32d1e2d2b",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "formulation",
+        "recipient_cell"
+      ],
+      "priority_score": 5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-52877d49b574"
+      ],
+      "text": "These amine and alkyl differences could lead to different biological interactions with serum proteins and endosomal membranes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    }
+  ]
+}

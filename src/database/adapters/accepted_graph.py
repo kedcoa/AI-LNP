@@ -37,6 +37,7 @@ SUPPORTED_PREDICATES = frozenset(
     {
         "carries_payload", "encodes_product", "has_assay", "has_biological_model",
         "has_component", "has_disease_context", "has_dose", "has_formulation",
+        "has_intervention",
         "has_molecular_target", "has_outcome_value", "has_physiological_context",
         "has_route", "has_species", "has_targeting_ligand", "has_timepoint",
         "has_tissue_context", "has_tissue_or_organ", "measures_endpoint", "therapeutic_target_cell",
@@ -47,11 +48,113 @@ FIELD_BY_PREDICATE = {
     "has_species": "species", "has_route": "route", "has_dose": "dose",
     "has_timepoint": "timepoint", "has_assay": "assay",
     "has_biological_model": "disease_model", "has_disease_context": "disease_model",
+    "has_physiological_context": "disease_model",
     "has_tissue_context": "tissue_or_organ", "has_tissue_or_organ": "tissue_or_organ",
     "therapeutic_target_cell": "cell_type",
     "delivery_target_cell": "cell_type", "carries_payload": "payload_name",
     "encodes_product": "payload_encoded_product", "has_molecular_target": "payload_molecular_target",
 }
+
+
+def _append_distinct(current: str | None, value: str) -> str:
+    values = [item.strip() for item in (current or "").split(";") if item.strip()]
+    if value.casefold() not in {item.casefold() for item in values}:
+        values.append(value)
+    return "; ".join(values)
+
+
+def _payload_semantics(
+    payload_name: str | None,
+    encoded_product: str | None = None,
+    molecular_target: str | None = None,
+) -> tuple[str | None, str | None]:
+    """Derive only semantics explicitly stated by conventional payload labels."""
+
+    if not payload_name:
+        return encoded_product, molecular_target
+    encoded = encoded_product
+    target = molecular_target
+    for raw_part in re.split(r"\s*;\s*", payload_name):
+        part = raw_part.strip()
+        if not encoded:
+            match = re.search(r"\b([A-Za-z0-9Ψψ-]+)(?:-encoding|\s+encoding)\s+mRNA\b", part, re.I)
+            if match:
+                encoded = match.group(1)
+            else:
+                match = re.search(r"(.+?)\s+mRNA\b", part, re.I)
+                if match and not re.search(r"\bcontrol\b", match.group(1), re.I):
+                    candidate = re.sub(r"^.*?modified\s+", "", match.group(1), flags=re.I)
+                    encoded = (
+                        "Cas9"
+                        if "crispr-associated protein 9" in candidate.casefold()
+                        else candidate.strip(" -")
+                    )
+        if not target:
+            match = re.search(r"\b([A-Za-z0-9-]+)-targeting\s+siRNA\b", part, re.I)
+            if match:
+                target = match.group(1)
+            else:
+                match = re.fullmatch(r"si([A-Za-z0-9-]+)", part, re.I)
+                if match:
+                    target = match.group(1)
+    if encoded and encoded.casefold() in {"egfp", "gfp"}:
+        encoded = encoded.upper()
+    return encoded, target
+
+
+def _identity_text(value: str | None) -> str:
+    text = re.sub(r"[^a-z0-9]+", " ", (value or "").casefold())
+    text = text.replace("enhanced green fluorescent protein", "egfp")
+    text = text.replace("crispr associated protein 9", "cas9")
+    tokens = [
+        token for token in text.split()
+        if token not in {"encoding", "targeting", "modified", "mrna", "sirna", "and", "plus", "or"}
+    ]
+    return " ".join(
+        token[2:] if token.startswith("si") and len(token) > 4 else token
+        for token in tokens
+    )
+
+
+def _payloads_compatible(left: str | None, right: str | None) -> bool:
+    if not left or not right:
+        return True
+    left_tokens = set(_identity_text(left).split())
+    right_tokens = set(_identity_text(right).split())
+    return bool(left_tokens & right_tokens)
+
+
+def _arm_match_score(base: ArmRecord, gold: ArmRecord) -> int:
+    """Score conservative graph/gold matches; low-information pairs stay separate."""
+
+    if base.formulation_id != gold.formulation_id:
+        return -1
+    if not _payloads_compatible(base.payload_name, gold.payload_name):
+        return -1
+    score = 0
+    if base.payload_name and gold.payload_name:
+        score += 4
+    for left, right, weight in (
+        (base.dose, gold.dose, 3),
+        (base.timepoint, gold.timepoint, 2),
+    ):
+        if left is not None and right is not None:
+            if abs(left - right) > 1e-9:
+                return -1
+            score += weight
+    if base.species and gold.species and _identity_text(base.species) == _identity_text(gold.species):
+        score += 1
+    if base.route and gold.route and "intravenous" in _identity_text(base.route) and "intravenous" in _identity_text(gold.route):
+        score += 1
+    if base.assay and gold.assay and set(_identity_text(base.assay).split()) & set(_identity_text(gold.assay).split()):
+        score += 1
+    if base.tissue_or_organ and gold.tissue_or_organ and set(_identity_text(base.tissue_or_organ).split()) & set(_identity_text(gold.tissue_or_organ).split()):
+        score += 1
+    context = _identity_text(" ".join(filter(None, (base.disease_model, base.experiment_notes))))
+    gold_context = _identity_text(" ".join(filter(None, (gold.disease_model, gold.tissue_or_organ, gold.experiment_notes))))
+    if context and gold_context and set(context.split()) & set(gold_context.split()):
+        score += 1
+    return score
 
 
 def _sha256(path: Path) -> str:
@@ -145,7 +248,7 @@ def adapt_accepted_graph(
                 field_name=field, evidence_location_type="clause",
                 extraction_method="accepted_graph", extraction_confidence="accepted",
                 evidence_text=quote, arm_id=arm_id, outcome_id=outcome_id,
-                section_name=item.get("clause_id"), verification_status="unreviewed",
+                section_name=item.get("clause_id"), verification_status="automatically_validated",
             ))
             ids.append(evidence_id)
         return tuple(ids)
@@ -159,7 +262,7 @@ def adapt_accepted_graph(
         ))
         ids = add_evidence(entity.get("evidence", []), "formulation_name")
         if value and ids:
-            links.append(FieldEvidenceLink(paper_id, "formulation", record_id, "formulation_name", ids))
+            links.append(FieldEvidenceLink(paper_id, "formulation", record_id, "formulation_name", ids, verification_status="automatically_validated"))
     if not formulations:
         raise ValueError(f"{paper_id} accepted graph has no LNP formulation")
 
@@ -190,7 +293,7 @@ def adapt_accepted_graph(
         ids = add_evidence(claim.get("evidence", []) or component.get("evidence", []), "component_name_reported")
         for field, value in (("component_name_reported", reported), ("component_name_normalized", normalized), ("component_role", "reported component")):
             if value and ids:
-                links.append(FieldEvidenceLink(paper_id, "component", record_id, field, ids))
+                links.append(FieldEvidenceLink(paper_id, "component", record_id, field, ids, verification_status="automatically_validated"))
 
     arms: list[ArmRecord] = []
     outcomes: list[OutcomeRecord] = []
@@ -269,24 +372,38 @@ def adapt_accepted_graph(
                     continue
                 value = _name(entities.get(claim.get("object_entity_id")))
                 if value:
-                    values[field] = value if field not in values else f"{values[field]}; {value}"
+                    values[field] = _append_distinct(values.get(field), value)
                     field_claims.setdefault(field, []).append(claim)
+                if predicate == "has_species":
+                    subject = entities.get(claim.get("subject_entity_id"))
+                    if subject and subject.get("entity_type") == "biological_model":
+                        model = _name(subject)
+                        if model:
+                            values["disease_model"] = _append_distinct(
+                                values.get("disease_model"), model
+                            )
+                            field_claims.setdefault("disease_model", []).append(claim)
             dose_text = values.get("dose")
             time_text = values.get("timepoint")
             dose = _number(dose_text)
             dose_unit = _unit(dose_text, "dose")
             if dose is not None and dose_unit is None:
                 dose = None
+            encoded_product, molecular_target = _payload_semantics(
+                values.get("payload_name"),
+                values.get("payload_encoded_product"),
+                values.get("payload_molecular_target"),
+            )
             arms.append(ArmRecord(
                 record_id=arm_id, paper_id=paper_id, artifact_id=artifact_id,
                 formulation_id=formulation_id,
-                cell_type=values.get("cell_type") or values.get("tissue_or_organ") or "",
+                cell_type=values.get("cell_type") or "",
                 tissue_or_organ=values.get("tissue_or_organ"), species=values.get("species"),
                 disease_model=values.get("disease_model"),
                 payload_type="nucleic acid" if values.get("payload_name") else None,
                 payload_name=values.get("payload_name"),
-                payload_encoded_product=values.get("payload_encoded_product"),
-                payload_molecular_target=values.get("payload_molecular_target"),
+                payload_encoded_product=encoded_product,
+                payload_molecular_target=molecular_target,
                 dose=dose, dose_unit=dose_unit, route=values.get("route"),
                 timepoint=_number(time_text), timepoint_unit=_unit(time_text, "timepoint"),
                 assay=values.get("assay"), experiment_notes=experiment.get("label"),
@@ -301,19 +418,30 @@ def adapt_accepted_graph(
                     field, arm_id=arm_id,
                 )
                 if ids:
-                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, field, ids))
+                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, field, ids, verification_status="automatically_validated"))
                     if field == "tissue_or_organ" and not values.get("cell_type"):
                         links.append(FieldEvidenceLink(
-                            paper_id, "arm", arm_id, "cell_type", ids
+                            paper_id, "arm", arm_id, "cell_type", ids,
+                            verification_status="automatically_validated",
                         ))
                     if field == "dose" and dose_unit:
-                        links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "dose_unit", ids))
+                        links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "dose_unit", ids, verification_status="automatically_validated"))
                     if field == "timepoint" and _unit(time_text, "timepoint"):
-                        links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "timepoint_unit", ids))
+                        links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "timepoint_unit", ids, verification_status="automatically_validated"))
             if values.get("payload_name"):
                 ids = next((link.evidence_ids for link in links if link.entity_id == arm_id and link.field_name == "payload_name"), ())
                 if ids:
-                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "payload_type", ids))
+                    links.append(FieldEvidenceLink(paper_id, "arm", arm_id, "payload_type", ids, verification_status="automatically_validated"))
+                    if encoded_product and not values.get("payload_encoded_product"):
+                        links.append(FieldEvidenceLink(
+                            paper_id, "arm", arm_id, "payload_encoded_product", ids,
+                            verification_status="automatically_validated",
+                        ))
+                    if molecular_target and not values.get("payload_molecular_target"):
+                        links.append(FieldEvidenceLink(
+                            paper_id, "arm", arm_id, "payload_molecular_target", ids,
+                            verification_status="automatically_validated",
+                        ))
 
             endpoint_claims = [claim for claim in arm_claims if claim.get("predicate") == "measures_endpoint"]
             endpoint_by_entity = {claim.get("object_entity_id"): claim for claim in endpoint_claims}
@@ -345,12 +473,12 @@ def adapt_accepted_graph(
                 value_field = "outcome_value" if outcome_value is not None else "qualitative_outcome"
                 value_ids = add_evidence(value_claim.get("evidence", []), value_field, arm_id=arm_id, outcome_id=outcome_id)
                 if endpoint_ids:
-                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_name", endpoint_ids))
-                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_family", endpoint_ids))
+                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_name", endpoint_ids, verification_status="automatically_validated"))
+                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "endpoint_family", endpoint_ids, verification_status="automatically_validated"))
                 if value_ids:
-                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, value_field, value_ids))
+                    links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, value_field, value_ids, verification_status="automatically_validated"))
                     if outcome_value is not None and _unit(values_text, "outcome"):
-                        links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "outcome_unit", value_ids))
+                        links.append(FieldEvidenceLink(paper_id, "outcome", outcome_id, "outcome_unit", value_ids, verification_status="automatically_validated"))
             unknown_ids = add_evidence(
                 [item for claim in unknown for item in claim.get("evidence", [])],
                 "unsupported_relationship", arm_id=arm_id,
@@ -358,9 +486,16 @@ def adapt_accepted_graph(
             reviews.append(ReviewRecord(
                 record_id=f"{paper_id}:REV:{experiment_id}:{form_entity_id}", paper_id=paper_id,
                 artifact_id=artifact_id,
-                reason_code="automatic_resolution_required" if unknown else "missing_dose" if not dose_text else "missing_evidence_excerpt",
+                reason_code=(
+                    "automatic_resolution_required" if unknown
+                    else "missing_required_fields"
+                ),
                 status="incomplete", evidence_ids=unknown_ids, arm_id=arm_id,
-                notes="Unsupported graph relation evidence requires review." if unknown else "Arm is retained but is not complete enough for training.",
+                notes=(
+                    "Unsupported graph relation evidence requires review."
+                    if unknown
+                    else "Readiness is computed automatically from the populated fields."
+                ),
             ))
 
         unresolved_claims = [claim for claim in experiment_claims if claim["claim_id"] not in consumed_claim_ids]
@@ -731,6 +866,9 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
 
     for row in gold_experiments:
         arm_id = f"{bundle.paper.source_paper_id}:GOLD:{row['gold_experiment_id']}"
+        encoded_product, molecular_target = _payload_semantics(
+            row["payload_name"] or None,
+        )
         arm = ArmRecord(
             record_id=arm_id,
             paper_id=bundle.paper.source_paper_id,
@@ -743,6 +881,8 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             in_vitro_in_vivo=row["in_vitro_in_vivo"] or None,
             payload_type=row["payload_type"] or None,
             payload_name=row["payload_name"] or None,
+            payload_encoded_product=encoded_product,
+            payload_molecular_target=molecular_target,
             reporter=row["reporter"] or None,
             dose=numeric(row["dose"]),
             dose_unit=row["dose_unit"] or None,
@@ -761,6 +901,7 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             name for name in (
                 "cell_type", "cell_source", "tissue_or_organ", "species",
                 "in_vitro_in_vivo", "payload_type", "payload_name", "reporter",
+                "payload_encoded_product", "payload_molecular_target",
                 "dose", "dose_unit", "route", "timepoint", "timepoint_unit",
                 "assay", "comparator_type", "comparator_description",
             ) if getattr(arm, name) is not None
@@ -808,6 +949,71 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             arm_id=arm_id, outcome_id=outcome_id,
         )
 
+    merged_gold_ids: dict[str, str] = {}
+    merged_base_ids: set[str] = set()
+    merged_arms = list(bundle.arms)
+    remaining_gold: list[ArmRecord] = []
+    for gold_arm in gold_arms:
+        scored = sorted(
+            (
+                (_arm_match_score(base, gold_arm), index, base)
+                for index, base in enumerate(merged_arms)
+                if base.record_id not in merged_base_ids
+            ),
+            key=lambda item: item[0],
+            reverse=True,
+        )
+        if not scored or scored[0][0] < 7 or (
+            len(scored) > 1 and scored[0][0] == scored[1][0]
+        ):
+            remaining_gold.append(gold_arm)
+            continue
+        _, index, base = scored[0]
+        standardized_gold_fields = {
+            "cell_type", "cell_source", "tissue_or_organ", "in_vitro_in_vivo",
+            "payload_type", "dose", "dose_unit", "route", "timepoint",
+            "timepoint_unit", "assay", "comparator_type",
+            "comparator_description", "completeness_status",
+            "verification_status", "nearest_neighbor_eligible", "comet_eligible",
+        }
+        updates = {}
+        for name, value in gold_arm.__dict__.items():
+            if name in {"record_id", "paper_id", "artifact_id", "formulation_id"}:
+                continue
+            if value is None or value == "":
+                continue
+            if name in standardized_gold_fields or getattr(base, name) in {None, ""}:
+                updates[name] = value
+        notes = [
+            value for value in (base.experiment_notes, gold_arm.experiment_notes)
+            if value
+        ]
+        updates["experiment_notes"] = "\n".join(dict.fromkeys(notes)) or None
+        updates["quarantine_reason"] = None
+        merged_arms[index] = replace(base, **updates)
+        merged_base_ids.add(base.record_id)
+        merged_gold_ids[gold_arm.record_id] = base.record_id
+
+    if merged_gold_ids:
+        gold_outcome_records = [
+            replace(row, arm_id=merged_gold_ids.get(row.arm_id, row.arm_id))
+            for row in gold_outcome_records
+        ]
+        gold_evidence = [
+            replace(row, arm_id=merged_gold_ids.get(row.arm_id, row.arm_id))
+            for row in gold_evidence
+        ]
+        gold_links = [
+            replace(row, entity_id=merged_gold_ids.get(row.entity_id, row.entity_id))
+            if row.entity_type == "arm" else row
+            for row in gold_links
+        ]
+        retained_reviews = tuple(
+            row for row in bundle.reviews if row.arm_id not in merged_base_ids
+        )
+    else:
+        retained_reviews = bundle.reviews
+
     return ImportBundle(
         paper=bundle.paper,
         artifacts=(*bundle.artifacts, *annotation_artifacts),
@@ -816,11 +1022,561 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             for row in bundle.formulations
         ),
         components=(*retained_components, *added_components),
-        arms=(*bundle.arms, *gold_arms),
+        arms=(*merged_arms, *remaining_gold),
         outcomes=(*bundle.outcomes, *gold_outcome_records),
         evidence=(*bundle.evidence, *added_evidence, *gold_evidence),
         field_evidence_links=(*retained_links, *added_links, *gold_links),
-        reviews=bundle.reviews,
+        reviews=retained_reviews,
+    )
+
+
+def _correct_gp007_chemistry(bundle: ImportBundle) -> ImportBundle:
+    """Keep the siRNA payload out of the carrier-composition projection."""
+
+    if bundle.paper.source_paper_id != "GP-007":
+        return bundle
+    formulation = bundle.formulations[0]
+    payload_component_ids = {
+        row.record_id
+        for row in bundle.components
+        if (row.component_name_reported or "").casefold() == "simicu1"
+    }
+    corrected = replace(
+        formulation,
+        chemical_formulation_total=(
+            "cholesterol-DSPE-PEG-FITC-labeled hyaluronic acid"
+        ),
+        lnp_molar_ratio=None,
+        formulation_notes=(
+            "Only FITC-labeled hyaluronic acid was quantified (0.1 mol%); "
+            "the complete carrier molar ratio and a classical ionizable lipid "
+            "were not reported."
+        ),
+    )
+    retained_links = tuple(
+        row for row in bundle.field_evidence_links
+        if not (
+            row.entity_type == "component"
+            and row.entity_id in payload_component_ids
+        )
+    )
+    return replace(
+        bundle,
+        formulations=(corrected,),
+        components=tuple(
+            row for row in bundle.components
+            if row.record_id not in payload_component_ids
+        ),
+        field_evidence_links=retained_links,
+    )
+
+
+def _project_gp004_patent_ratio(
+    bundle: ImportBundle, root: Path | None
+) -> ImportBundle:
+    """Project the cited patent recipe while labeling it as an inference.
+
+    GP-004 says that its proprietary Acuitas composition is described in
+    US10,221,127, while the patent repeatedly reports the four-lipid recipe.
+    The paper does not identify a patent example, so the displayed value must
+    never look like a ratio directly reported by GP-004.
+    """
+
+    if bundle.paper.source_paper_id != "GP-004" or root is None:
+        return bundle
+    formulation = bundle.formulations[0]
+    if formulation.lnp_molar_ratio:
+        return bundle
+
+    blocks_path = root / "data/staging/rag/gold_v1/GP-004.blocks.jsonl"
+    if not blocks_path.is_file():
+        return bundle
+    blocks = [
+        json.loads(line)
+        for line in blocks_path.read_text(encoding="utf-8").splitlines()
+    ]
+    reference = next(
+        row for row in blocks
+        if "US patent US10,221,127" in str(row.get("text") or "")
+        and str(row.get("section_path") or "").startswith("Methods")
+    )
+    reference_excerpt = (
+        "The proprietary lipid and LNP composition are described in US patent "
+        "US10,221,127"
+    )
+    if reference_excerpt not in str(reference["text"]):
+        raise ValueError("GP-004 patent-reference excerpt changed")
+
+    patent_excerpt = (
+        "Lipid nanoparticles were formulated using the following molar ratio: "
+        "50% Cationic lipid/10% distearoylphosphatidylcholine (DSPC)/38.5% "
+        "Cholesterol/1.5% PEG lipid."
+    )
+    inferred_ratio = "50:10:38.5:1.5 [inferred from US10,221,127]"
+    paper_artifact_id = "GP-004:patent-reference-paper"
+    patent_artifact_id = "GP-004:US10221127B2"
+    paper_source_path = blocks_path
+    artifacts = (
+        *bundle.artifacts,
+        SourceArtifactRecord(
+            artifact_id=paper_artifact_id,
+            path="data/staging/rag/gold_v1/GP-004.blocks.jsonl",
+            sha256=_sha256(paper_source_path),
+            source_kind="text",
+            pipeline_name="gp004_patent_ratio_projection",
+            pipeline_version="v1",
+        ),
+        SourceArtifactRecord(
+            artifact_id=patent_artifact_id,
+            path="https://patents.google.com/patent/US10221127B2/en",
+            sha256=hashlib.sha256(patent_excerpt.encode("utf-8")).hexdigest(),
+            source_kind="html",
+            pipeline_name="gp004_patent_ratio_projection",
+            pipeline_version="v1",
+        ),
+    )
+    reference_evidence_id = "GP-004:EV:PATENT-REFERENCE"
+    patent_evidence_id = "GP-004:EV:US10221127B2:RATIO"
+    evidence = (
+        *bundle.evidence,
+        EvidenceRecord(
+            record_id=reference_evidence_id,
+            paper_id="GP-004",
+            artifact_id=paper_artifact_id,
+            field_name="lnp_molar_ratio_applicability",
+            evidence_location_type="paragraph",
+            extraction_method="text_extraction",
+            extraction_confidence="high",
+            evidence_text=reference_excerpt,
+            section_name=str(reference["section_path"]),
+            verification_status="automatically_validated",
+        ),
+        EvidenceRecord(
+            record_id=patent_evidence_id,
+            paper_id="GP-004",
+            artifact_id=patent_artifact_id,
+            field_name="lnp_molar_ratio",
+            evidence_location_type="patent",
+            extraction_method="text_extraction",
+            extraction_confidence="high",
+            evidence_text=patent_excerpt,
+            section_name="LNP formulation examples",
+            verification_status="automatically_validated",
+            reviewer_notes=(
+                "The patent reports this recipe, but GP-004 does not identify "
+                "the exact patent example used."
+            ),
+        ),
+    )
+    updated = replace(
+        formulation,
+        lnp_molar_ratio=inferred_ratio,
+        composition_basis="molar_ratio",
+        formulation_notes=_append_distinct(
+            formulation.formulation_notes,
+            "Patent-derived candidate ratio; not directly reported by GP-004.",
+        ),
+        formulation_review_status="inferred_from_patent",
+    )
+    link = FieldEvidenceLink(
+        paper_id="GP-004",
+        entity_type="formulation",
+        entity_id=formulation.record_id,
+        field_name="lnp_molar_ratio",
+        evidence_ids=(reference_evidence_id, patent_evidence_id),
+        verification_status="automatically_validated",
+        notes=(
+            "Inference joins GP-004's explicit patent reference to the patent's "
+            "reported four-lipid recipe; it is not a direct paper measurement."
+        ),
+    )
+    return replace(
+        bundle,
+        artifacts=artifacts,
+        formulations=(updated,),
+        evidence=evidence,
+        field_evidence_links=(*bundle.field_evidence_links, link),
+    )
+
+
+def _project_gp008_shared_targeted_platform(bundle: ImportBundle) -> ImportBundle:
+    """Project the explicitly shared αCD163-targeted carrier across payloads."""
+
+    if bundle.paper.source_paper_id != "GP-008":
+        return bundle
+    source = next(
+        row for row in bundle.formulations
+        if row.formulation_name == "αCD163/LNP-FAPCAR"
+    )
+    targets = {
+        row.record_id
+        for row in bundle.formulations
+        if row.formulation_name in {"αCD163/LNP-Luc", "αCD163/LNP-ZsGreen"}
+    }
+    source_components = [
+        row for row in bundle.components if row.formulation_id == source.record_id
+    ]
+    source_links = [
+        row for row in bundle.field_evidence_links
+        if row.entity_type == "formulation" and row.entity_id == source.record_id
+    ]
+    components = list(bundle.components)
+    links = list(bundle.field_evidence_links)
+    enriched_formulations = []
+    for formulation in bundle.formulations:
+        if formulation.record_id not in targets:
+            enriched_formulations.append(formulation)
+            continue
+        enriched_formulations.append(replace(
+            formulation,
+            chemical_formulation_total=source.chemical_formulation_total,
+            lnp_molar_ratio=source.lnp_molar_ratio,
+            composition_raw=source.composition_raw,
+            composition_basis=source.composition_basis,
+            formulation_notes=(
+                "Shared αCD163-targeted LNP carrier; payload identity differs."
+            ),
+            formulation_review_status=source.formulation_review_status,
+        ))
+        for link in source_links:
+            links.append(replace(link, entity_id=formulation.record_id))
+        for index, component in enumerate(source_components, start=1):
+            cloned_id = (
+                f"{bundle.paper.source_paper_id}:SHARED:"
+                f"{formulation.record_id.rsplit(':', 1)[-1]}:{index}"
+            )
+            components.append(replace(
+                component,
+                record_id=cloned_id,
+                formulation_id=formulation.record_id,
+            ))
+            links.extend(
+                replace(link, entity_id=cloned_id)
+                for link in bundle.field_evidence_links
+                if link.entity_type == "component"
+                and link.entity_id == component.record_id
+            )
+    return replace(
+        bundle,
+        formulations=tuple(enriched_formulations),
+        components=tuple(components),
+        field_evidence_links=tuple(links),
+    )
+
+
+def _recover_gp008_luciferase_outcome(
+    bundle: ImportBundle, root: Path | None
+) -> ImportBundle:
+    """Normalize the source-clause Luc kinetic result omitted by the graph."""
+
+    if bundle.paper.source_paper_id != "GP-008" or root is None:
+        return bundle
+    arm = next(
+        row for row in bundle.arms
+        if row.formulation_id.endswith(":FORM:F4")
+    )
+    if any(row.arm_id == arm.record_id for row in bundle.outcomes):
+        return bundle
+    source_path = root / "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json"
+    if not source_path.is_file():
+        return bundle
+    clauses = json.loads(source_path.read_text(encoding="utf-8"))
+    clause = next(row for row in clauses if row.get("clause_id") == "B012C002")
+    artifact_id = "GP-008:source-clauses-normalization"
+    outcome_id = "GP-008:OUT:GP-008-E01:F4:LUC-KINETICS"
+    evidence_id = "GP-008:EV:B012C002:LUC-KINETICS"
+    artifact = SourceArtifactRecord(
+        artifact_id=artifact_id,
+        path="data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+        sha256=_sha256(source_path), source_kind="validated_extraction",
+        pipeline_name="g1_source_clause_projection", pipeline_version="v1",
+    )
+    outcome = OutcomeRecord(
+        record_id=outcome_id, paper_id="GP-008", artifact_id=artifact_id,
+        arm_id=arm.record_id, endpoint_family="functional_expression",
+        endpoint_name="luciferase fluorescence kinetics",
+        value_status="qualitative_only",
+        qualitative_outcome=(
+            "Peak fluorescence intensity at 8 h post-injection; signal attenuation "
+            "was evident after 24 h."
+        ),
+    )
+    evidence = EvidenceRecord(
+        record_id=evidence_id, paper_id="GP-008", artifact_id=artifact_id,
+        field_name="luciferase_fluorescence_kinetics",
+        evidence_location_type="results", extraction_method="text_extraction",
+        extraction_confidence="high", evidence_text=clause["text"],
+        arm_id=arm.record_id, outcome_id=outcome_id,
+        section_name=clause["clause_id"],
+        verification_status="automatically_validated",
+    )
+    outcome_links = tuple(
+        FieldEvidenceLink(
+            paper_id="GP-008", entity_type="outcome", entity_id=outcome_id,
+            field_name=field_name, evidence_ids=(evidence_id,),
+            verification_status="automatically_validated",
+        )
+        for field_name in ("endpoint_family", "endpoint_name", "qualitative_outcome")
+    )
+    return replace(
+        bundle, artifacts=(*bundle.artifacts, artifact),
+        outcomes=(*bundle.outcomes, outcome), evidence=(*bundle.evidence, evidence),
+        field_evidence_links=(*bundle.field_evidence_links, *outcome_links),
+    )
+
+
+def _recover_gp005_table_formulations(bundle: ImportBundle, root: Path | None) -> ImportBundle:
+    """Expand Table 1 formulations and project explicitly shared GP-005 context."""
+
+    if bundle.paper.source_paper_id != "GP-005" or root is None:
+        return bundle
+    blocks_path = root / "data/staging/rag/gold_v1/GP-005.blocks.jsonl"
+    if not blocks_path.is_file():
+        return bundle
+    blocks = {
+        row["block_id"]: row
+        for line in blocks_path.read_text(encoding="utf-8").splitlines()
+        if (row := json.loads(line))
+    }
+    table = blocks["GP-005-B-799d453b51f13ce55cad"]
+    comparison = blocks["GP-005-B-b968ea93d9feb275a0e7"]
+    protocol = blocks["GP-005-B-4f6880c631811896358c"]
+    protocol_outcomes = blocks["GP-005-B-ac54e8065863b347bd06"]
+    artifact_id = "GP-005:gold-v1-blocks"
+    artifact = SourceArtifactRecord(
+        artifact_id=artifact_id,
+        path="data/staging/rag/gold_v1/GP-005.blocks.jsonl",
+        sha256=_sha256(blocks_path),
+        source_kind="xml",
+        pipeline_name="gold_v1_ingestion",
+        pipeline_version="v1",
+    )
+    evidence_rows = {
+        "table": EvidenceRecord(
+            record_id="GP-005:EV:TABLE1-ROWS", paper_id="GP-005",
+            artifact_id=artifact_id, field_name="formulation_table",
+            evidence_location_type="table", extraction_method="structured_table",
+            extraction_confidence="high", evidence_text=table["text"],
+            section_name=table["section_path"], table_number="Table 1",
+            verification_status="automatically_validated",
+        ),
+        "comparison": EvidenceRecord(
+            record_id="GP-005:EV:LNP3-7-COMPARISON", paper_id="GP-005",
+            artifact_id=artifact_id, field_name="experimental_context",
+            evidence_location_type="paragraph", extraction_method="text_extraction",
+            extraction_confidence="high", evidence_text=comparison["text"],
+            section_name=comparison["section_path"],
+            verification_status="automatically_validated",
+        ),
+        "protocol": EvidenceRecord(
+            record_id="GP-005:EV:LNP16-PROTOCOL", paper_id="GP-005",
+            artifact_id=artifact_id, field_name="experimental_context",
+            evidence_location_type="paragraph", extraction_method="text_extraction",
+            extraction_confidence="high", evidence_text=protocol["text"],
+            section_name=protocol["section_path"],
+            verification_status="automatically_validated",
+        ),
+        "protocol_outcomes": EvidenceRecord(
+            record_id="GP-005:EV:LNP16-17-OUTCOMES", paper_id="GP-005",
+            artifact_id=artifact_id, field_name="experimental_context",
+            evidence_location_type="paragraph", extraction_method="text_extraction",
+            extraction_confidence="high", evidence_text=protocol_outcomes["text"],
+            section_name=protocol_outcomes["section_path"],
+            verification_status="automatically_validated",
+        ),
+    }
+    base = next(row for row in bundle.formulations if row.formulation_name == "Egfp mRNA‐LNP (LNP1)")
+    grouped = next(row for row in bundle.formulations if row.formulation_name == "LNP3‐LNP7")
+    table_specs = {
+        "LNP3": ("MC3", "5moU-modified EGFP mRNA"),
+        "LNP4": ("SM-102", "5moU-modified EGFP mRNA"),
+        "LNP5": ("SM-102", "unmodified EGFP mRNA"),
+        "LNP6": ("MC3", "m1Ψ-modified EGFP mRNA"),
+        "LNP7": ("SM-102", "m1Ψ-modified EGFP mRNA"),
+    }
+    formulations = [row for row in bundle.formulations if row.record_id != grouped.record_id]
+    components = list(bundle.components)
+    grouped_arm_id = "GP-005:ARM:GP-005-E02:ENT-LNP3-7"
+    links = [
+        row for row in bundle.field_evidence_links
+        if row.entity_id not in {grouped.record_id, grouped_arm_id}
+    ]
+    arms = [row for row in bundle.arms if row.formulation_id != grouped.record_id]
+    outcomes = list(bundle.outcomes)
+    base_components = [row for row in bundle.components if row.formulation_id == base.record_id]
+
+    def add_formulation(name: str, ionizable: str) -> FormulationRecord:
+        formulation_id = f"GP-005:FORM:{name}"
+        total = f"{ionizable}-DSPC-cholesterol-DMG-PEG2000"
+        row = FormulationRecord(
+            record_id=formulation_id, paper_id="GP-005", artifact_id=artifact_id,
+            formulation_name=name, chemical_formulation_total=total,
+            lnp_molar_ratio="50:10:38.5:1.5",
+            composition_raw=f"{total.replace('-', ':', 1)} = 50:10:38.5:1.5",
+            composition_basis="lipid molar ratio",
+            formulation_notes=(
+                "Table 1 prints SN102; the adjacent narrative identifies the replacement lipid as SM-102."
+                if ionizable == "SM-102" else None
+            ),
+            formulation_review_status="source_verified",
+        )
+        formulations.append(row)
+        for field_name in (
+            "formulation_name", "chemical_formulation_total", "lnp_molar_ratio",
+            "composition_raw", "composition_basis",
+        ):
+            links.append(FieldEvidenceLink(
+                paper_id="GP-005", entity_type="formulation", entity_id=formulation_id,
+                field_name=field_name,
+                evidence_ids=(evidence_rows["table"].record_id, "GP-005:EV:0001"),
+                verification_status="automatically_validated",
+            ))
+        for position, component in enumerate(base_components, start=1):
+            is_ionizable = component.component_role == "ionizable_lipid"
+            component_name = ionizable if is_ionizable else component.component_name_reported
+            component_id = f"GP-005:COMP:{name}:{position}"
+            components.append(replace(
+                component, record_id=component_id, artifact_id=artifact_id,
+                formulation_id=formulation_id, component_name_reported=component_name,
+                component_name_normalized=component_name if is_ionizable else component.component_name_normalized,
+                component_review_status="automatically_normalized",
+            ))
+            for field_name in (
+                "component_name_reported", "component_name_normalized", "component_role",
+                "molar_percentage", "percentage_unit",
+            ):
+                links.append(FieldEvidenceLink(
+                    paper_id="GP-005", entity_type="component", entity_id=component_id,
+                    field_name=field_name,
+                    evidence_ids=(evidence_rows["table"].record_id, "GP-005:EV:0001"),
+                    verification_status="automatically_validated",
+                ))
+        return row
+
+    for name, (ionizable, payload) in table_specs.items():
+        formulation = add_formulation(name, ionizable)
+        arm_id = f"GP-005:ARM:GP-005-E02:{name}"
+        arms.append(ArmRecord(
+            record_id=arm_id, paper_id="GP-005", artifact_id=artifact_id,
+            formulation_id=formulation.record_id, cell_type="HeLa cell; human primary macrophage",
+            intended_target_cell="HeLa cell; human primary macrophage",
+            observed_transfected_cell="HeLa cell; human primary macrophage",
+            species="Homo sapiens", in_vitro_in_vivo="in_vitro",
+            payload_type="mRNA", payload_name=payload,
+            payload_encoded_product="EGFP", dose=1.0, dose_unit="micrograms per mL",
+            route="in vitro incubation", timepoint=24.0, timepoint_unit="hours",
+            assay="flow cytometry", experiment_notes="Table 1 formulation comparison.",
+            completeness_status="complete", verification_status="automatically_validated",
+        ))
+        for field_name in (
+            "cell_type", "intended_target_cell", "observed_transfected_cell", "species", "in_vitro_in_vivo",
+            "payload_type", "payload_name", "payload_encoded_product", "dose", "dose_unit",
+            "route", "timepoint", "timepoint_unit", "assay",
+        ):
+            links.append(FieldEvidenceLink(
+                paper_id="GP-005", entity_type="arm", entity_id=arm_id,
+                field_name=field_name,
+                evidence_ids=(evidence_rows["table"].record_id,
+                              evidence_rows["comparison"].record_id),
+                verification_status="automatically_validated",
+            ))
+        for suffix, cell, qualitative in (
+            ("HELA", "HeLa cells", "significant EGFP protein translation"),
+            ("MAC", "human primary macrophages", "low EGFP protein translation"),
+        ):
+            outcome_id = f"GP-005:OUT:GP-005-E02:{name}:{suffix}"
+            outcomes.append(OutcomeRecord(
+                record_id=outcome_id, paper_id="GP-005", artifact_id=artifact_id,
+                arm_id=arm_id, endpoint_family="functional_expression",
+                endpoint_name=f"EGFP expression in {cell}", value_status="qualitative_only",
+                qualitative_outcome=qualitative,
+            ))
+            for field_name in ("endpoint_family", "endpoint_name", "qualitative_outcome"):
+                links.append(FieldEvidenceLink(
+                    paper_id="GP-005", entity_type="outcome", entity_id=outcome_id,
+                    field_name=field_name,
+                    evidence_ids=(evidence_rows["comparison"].record_id,),
+                    verification_status="automatically_validated",
+                ))
+
+    # The fabrication method states that all study LNP use the common carrier recipe.
+    # The 2:1 mRNA:siRNA value is payload ratio and must not replace lipid molar ratio.
+    for name in ("LNP16", "LNP17"):
+        index = next(i for i, row in enumerate(formulations) if row.formulation_name == name)
+        old = formulations[index]
+        formulations[index] = replace(
+            old, chemical_formulation_total=base.chemical_formulation_total,
+            lnp_molar_ratio=base.lnp_molar_ratio, composition_raw=base.composition_raw,
+            composition_basis=base.composition_basis,
+            formulation_notes="Carrier recipe is shared; mRNA:siRNA payload ratio is 2:1.",
+            formulation_review_status="source_verified",
+        )
+        for field_name in (
+            "composition_raw", "composition_basis", "chemical_formulation_total",
+            "lnp_molar_ratio",
+        ):
+            links.append(FieldEvidenceLink(
+                paper_id="GP-005", entity_type="formulation", entity_id=old.record_id,
+                field_name=field_name, evidence_ids=("GP-005:EV:0001",),
+                verification_status="automatically_validated",
+            ))
+        for position, component in enumerate(base_components, start=1):
+            component_id = f"GP-005:COMP:{name}:{position}"
+            components.append(replace(
+                component, record_id=component_id, artifact_id=artifact_id,
+                formulation_id=old.record_id, component_review_status="automatically_normalized",
+            ))
+            for field_name in (
+                "component_name_reported", "component_name_normalized", "component_role",
+                "molar_percentage", "percentage_unit",
+            ):
+                links.append(FieldEvidenceLink(
+                    paper_id="GP-005", entity_type="component", entity_id=component_id,
+                    field_name=field_name, evidence_ids=("GP-005:EV:0001",),
+                    verification_status="automatically_validated",
+                ))
+        for i, arm in enumerate(arms):
+            if arm.formulation_id != old.record_id:
+                continue
+            observed = (
+                "hepatocyte; liver sinusoidal endothelial cell; Kupffer cell; "
+                "monocyte-derived macrophage"
+                if name == "LNP16" else "hepatocyte; Kupffer cell; hepatic stellate cell"
+            )
+            arms[i] = replace(
+                arm, cell_type="liver cell", tissue_or_organ="liver",
+                target_or_recipient_organ="liver", observed_transfected_cell=observed,
+                species="Mus musculus", disease_model="mouse",
+                in_vitro_in_vivo="in_vivo", dose=3.0, dose_unit="mg_per_kg",
+                route="intravenous injection", timepoint=16.0, timepoint_unit="hours",
+                assay="flow cytometry; quantitative PCR",
+            )
+            for field_name in (
+                "cell_type", "tissue_or_organ", "target_or_recipient_organ",
+                "observed_transfected_cell", "species", "disease_model", "in_vitro_in_vivo",
+                "dose", "dose_unit", "route", "timepoint", "timepoint_unit", "assay",
+            ):
+                links.append(FieldEvidenceLink(
+                    paper_id="GP-005", entity_type="arm", entity_id=arm.record_id,
+                    field_name=field_name,
+                    evidence_ids=(evidence_rows["protocol"].record_id,
+                                  evidence_rows["protocol_outcomes"].record_id),
+                    verification_status="automatically_validated",
+                ))
+
+    reviews = tuple(
+        row for row in bundle.reviews
+        if row.arm_id != grouped_arm_id
+    )
+    retained_evidence = tuple(
+        replace(row, arm_id=None) if row.arm_id == grouped_arm_id else row
+        for row in bundle.evidence
+    )
+    return replace(
+        bundle, artifacts=(*bundle.artifacts, artifact), formulations=tuple(formulations),
+        components=tuple(components), arms=tuple(arms), outcomes=tuple(outcomes),
+        evidence=(*retained_evidence, *evidence_rows.values()),
+        field_evidence_links=tuple(links), reviews=reviews,
     )
 
 
@@ -836,6 +1592,11 @@ def adapt_accepted_graph_losslessly(
     root = _repository_root(path)
     if root is not None:
         bundle = _gold_enriched_bundle(bundle, root)
+    bundle = _project_gp004_patent_ratio(bundle, root)
+    bundle = _recover_gp005_table_formulations(bundle, root)
+    bundle = _correct_gp007_chemistry(bundle)
+    bundle = _project_gp008_shared_targeted_platform(bundle)
+    bundle = _recover_gp008_luciferase_outcome(bundle, root)
     paper_id = str(graph["paper_id"])
     ledger_artifact = LedgerArtifactRecord(
         paper_id=paper_id,

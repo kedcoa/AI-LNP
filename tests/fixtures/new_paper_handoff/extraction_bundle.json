@@ -1,0 +1,93 @@
+{
+  "schema_version": "day2-import-bundle/v1",
+  "artifacts": [{
+    "artifact_id": "generic-extraction",
+    "path": "tests/fixtures/new_paper_handoff/extraction_bundle.json",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "source_kind": "validated_extraction",
+    "pipeline_name": "generic-full-paper-extraction",
+    "pipeline_version": "v1"
+  }],
+  "paper": {
+    "source_paper_id": "NEW-TEST-001",
+    "artifact_id": "generic-extraction",
+    "title": "Generic new-paper fixture",
+    "source_type": "full_text",
+    "retrieval_date": "2026-08-07",
+    "screening_status": "include",
+    "import_status": "ready"
+  },
+  "formulations": [{
+    "record_id": "F-1", "paper_id": "NEW-TEST-001",
+    "artifact_id": "generic-extraction", "formulation_name": "Fixture LNP",
+    "chemical_formulation_total": "ION-DSPC-cholesterol-PEG",
+    "lnp_molar_ratio": "50:10:38.5:1.5",
+    "composition_raw": "ION:DSPC:cholesterol:PEG = 50:10:38.5:1.5",
+    "composition_basis": "mol%"
+  }],
+  "components": [
+    {"record_id":"C-1","paper_id":"NEW-TEST-001","artifact_id":"generic-extraction","formulation_id":"F-1","component_name_reported":"ION","component_role":"ionizable_lipid","molar_percentage":50,"percentage_unit":"mol%"},
+    {"record_id":"C-2","paper_id":"NEW-TEST-001","artifact_id":"generic-extraction","formulation_id":"F-1","component_name_reported":"DSPC","component_role":"helper_lipid","molar_percentage":10,"percentage_unit":"mol%"},
+    {"record_id":"C-3","paper_id":"NEW-TEST-001","artifact_id":"generic-extraction","formulation_id":"F-1","component_name_reported":"cholesterol","component_role":"cholesterol","molar_percentage":38.5,"percentage_unit":"mol%"},
+    {"record_id":"C-4","paper_id":"NEW-TEST-001","artifact_id":"generic-extraction","formulation_id":"F-1","component_name_reported":"PEG","component_role":"peg_lipid","molar_percentage":1.5,"percentage_unit":"mol%"}
+  ],
+  "arms": [{
+    "record_id":"A-1","paper_id":"NEW-TEST-001","artifact_id":"generic-extraction","formulation_id":"F-1",
+    "cell_type":"hepatocyte","species":"mouse","disease_model":"healthy mouse","in_vitro_in_vivo":"in_vivo",
+    "payload_type":"mRNA","payload_name":"luciferase mRNA","payload_encoded_product":"luciferase",
+    "dose":1,"dose_unit":"mg/kg","route":"intravenous","timepoint":24,"timepoint_unit":"hour","assay":"luminescence",
+    "completeness_status":"complete","verification_status":"automatically_validated"
+  }],
+  "outcomes": [{
+    "record_id":"O-1","paper_id":"NEW-TEST-001","artifact_id":"generic-extraction","arm_id":"A-1",
+    "endpoint_family":"functional_expression","endpoint_name":"luciferase expression","outcome_value":12,
+    "outcome_unit":"RLU","normalization_basis":"per mg protein","value_status":"reported"
+  }],
+  "evidence": [{
+    "record_id":"E-1","paper_id":"NEW-TEST-001","artifact_id":"generic-extraction","arm_id":"A-1","outcome_id":"O-1",
+    "field_name":"outcome_value","evidence_text":"Fixture LNP used ION:DSPC:cholesterol:PEG at 50:10:38.5:1.5 mol%. Healthy mice received 1 mg/kg luciferase mRNA intravenously; hepatocyte luminescence at 24 hours was 12 RLU per mg protein.",
+    "evidence_location_type":"results","section_name":"Results","extraction_method":"text_extraction",
+    "extraction_confidence":"high","verification_status":"automatically_validated"
+  }],
+  "field_evidence_links": [
+    {"paper_id":"NEW-TEST-001","entity_type":"formulation","entity_id":"F-1","field_name":"formulation_name","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"formulation","entity_id":"F-1","field_name":"composition_raw","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"formulation","entity_id":"F-1","field_name":"composition_basis","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"formulation","entity_id":"F-1","field_name":"lnp_molar_ratio","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-1","field_name":"component_name_reported","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-1","field_name":"component_role","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-1","field_name":"molar_percentage","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-1","field_name":"percentage_unit","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-2","field_name":"component_name_reported","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-2","field_name":"component_role","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-2","field_name":"molar_percentage","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-2","field_name":"percentage_unit","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-3","field_name":"component_name_reported","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-3","field_name":"component_role","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-3","field_name":"molar_percentage","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-3","field_name":"percentage_unit","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-4","field_name":"component_name_reported","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-4","field_name":"component_role","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-4","field_name":"molar_percentage","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"component","entity_id":"C-4","field_name":"percentage_unit","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"cell_type","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"species","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"disease_model","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"in_vitro_in_vivo","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"payload_type","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"payload_name","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"payload_encoded_product","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"dose","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"dose_unit","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"route","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"timepoint","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"timepoint_unit","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"arm","entity_id":"A-1","field_name":"assay","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"outcome","entity_id":"O-1","field_name":"endpoint_family","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"outcome","entity_id":"O-1","field_name":"endpoint_name","evidence_ids":["E-1"],"verification_status":"automatically_validated"},
+    {"paper_id":"NEW-TEST-001","entity_type":"outcome","entity_id":"O-1","field_name":"outcome_value","evidence_ids":["E-1"],"verification_status":"automatically_validated"}
+    ,{"paper_id":"NEW-TEST-001","entity_type":"outcome","entity_id":"O-1","field_name":"outcome_unit","evidence_ids":["E-1"],"verification_status":"automatically_validated"}
+    ,{"paper_id":"NEW-TEST-001","entity_type":"outcome","entity_id":"O-1","field_name":"normalization_basis","evidence_ids":["E-1"],"verification_status":"automatically_validated"}
+  ],
+  "reviews": []
+}

@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
-from src.database.migrations import migrate_database
+from src.database.migrations import MIGRATION_VERSION, migrate_database
 
 
 SCIENTIFIC_TABLES = (
@@ -408,8 +408,11 @@ def _verify_promotable_database(database_path: Path) -> None:
         latest = connection.execute(
             "SELECT max(version) FROM schema_migration"
         ).fetchone()[0]
-        if latest != 6:
-            raise ValueError(f"candidate database schema version is {latest}, expected 6")
+        if latest != MIGRATION_VERSION:
+            raise ValueError(
+                f"candidate database schema version is {latest}, "
+                f"expected {MIGRATION_VERSION}"
+            )
     finally:
         connection.close()
 

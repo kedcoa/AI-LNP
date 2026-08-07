@@ -156,6 +156,30 @@ def test_real_np002_projects_one_component_set_per_unique_formulation():
     }
 
 
+def test_np_adapter_projects_reported_delivery_context_to_canonical_fields(tmp_path):
+    packet_path = tmp_path / "packet.json"
+    packet_path.write_text(json.dumps(_packet()))
+    result_path = tmp_path / "result.json"
+    result_path.write_text(json.dumps(_slice("hepatocytes")))
+
+    bundle = build_np_bundle(
+        result_paths=[result_path],
+        packet_path=packet_path,
+        paper_metadata={"title": "Example"},
+    )
+
+    arm = bundle.arms[0]
+    assert arm.target_or_recipient_organ == "liver"
+    assert arm.observed_transfected_cell == "hepatocytes"
+    linked = {
+        row.field_name
+        for row in bundle.field_evidence_links
+        if row.entity_type == "arm" and row.entity_id == arm.record_id
+    }
+    assert "target_or_recipient_organ" in linked
+    assert "observed_transfected_cell" in linked
+
+
 def test_reconciliation_retains_conflicting_formulations():
     second = _slice("Kupffer cells")
     second["formulations"][0]["np_ratio"] = _field(8.0, "E-FORM")
@@ -373,7 +397,7 @@ def test_conflict_missing_one_evidence_side_is_explicitly_blocked(tmp_path):
     assert len(notes["right_resolved_evidence_ids"]) == 1
 
 
-def test_adapter_builds_valid_quarantined_bundle_without_synthesizing_links(tmp_path):
+def test_adapter_automatically_validates_evidence_linked_arm_without_synthesizing_links(tmp_path):
     result_path = tmp_path / "result.json"
     packet_path = tmp_path / "packet.json"
     result_path.write_text(json.dumps(_slice("hepatocytes")))
@@ -387,14 +411,23 @@ def test_adapter_builds_valid_quarantined_bundle_without_synthesizing_links(tmp_
 
     assert isinstance(bundle, ImportBundle)
     assert len(bundle.arms) == 1
-    assert bundle.arms[0].completeness_status == "quarantined"
+    assert bundle.arms[0].completeness_status == "complete"
+    assert bundle.arms[0].verification_status == "automatically_validated"
     assert not bundle.arms[0].nearest_neighbor_eligible
     assert not bundle.arms[0].comet_eligible
-    assert {review.reason_code for review in bundle.reviews} >= {
-        "missing_timepoint", "missing_comparator"
-    }
+    assert not any(
+        review.reason_code in {"missing_timepoint", "missing_comparator"}
+        for review in bundle.reviews
+    )
     assert all("::" in row.record_id for row in bundle.evidence)
-    assert all(row.verification_status == "unreviewed" for row in bundle.evidence)
+    assert all(
+        row.verification_status == "automatically_validated"
+        for row in bundle.evidence
+    )
+    assert all(
+        row.verification_status == "automatically_validated"
+        for row in bundle.field_evidence_links
+    )
     evidence = {row.record_id: row for row in bundle.evidence}
     for field_link in bundle.field_evidence_links:
         for evidence_id in field_link.evidence_ids:

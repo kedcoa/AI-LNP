@@ -20,6 +20,12 @@ from src.database.import_contracts import (
 )
 from src.database.migrations import migrate_database
 from src.database.readiness import evaluate_readiness
+from src.database.paths import resolve_common_checkout_root
+from src.database.rescreen_target_scope import (
+    apply_target_scope_candidates,
+    rescreen_paper,
+)
+from src.database.source_backed_arm_repair import apply_repair_manifest
 from src.database.status import evaluate_arm_status
 from src.database.adapters.accepted_graph import adapt_accepted_graph_losslessly
 from src.database.adapters.np_results import build_np_lossless_result
@@ -47,6 +53,9 @@ SCIENTIFIC_TABLES = (
     "evidence",
 )
 SCREENING_ONLY_IDS = frozenset({"GP-001", "GP-003", "GP-009"})
+SOURCE_BACKED_ARM_REPAIRS = Path(
+    "config/database/source_backed_arm_repairs_v1.json"
+)
 
 
 @dataclass(frozen=True)
@@ -219,30 +228,30 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
         else formulation
         for formulation in bundle.formulations
     )
+    def normalize_cell_type(value: str) -> str:
+        exact = cell_types.get(value)
+        if exact is not None:
+            return exact
+        folded = value.casefold()
+        matches = {
+            category
+            for category, terms in {
+                "hepatocyte": ("hepatocyte", "hepa "),
+                "kupffer_cell": ("kupffer", "macrophage", "monocyte-derived"),
+                "lsec": ("lsec", "endothelial"),
+                "hsc": ("hsc", "stellate"),
+            }.items()
+            if any(term in folded for term in terms)
+        }
+        return next(iter(matches)) if len(matches) == 1 else "other"
+
     normalized_arms = []
-    review_gated_arm_ids: set[str] = set()
     for arm in bundle.arms:
-        mapped = cell_types.get(arm.cell_type)
-        if mapped is not None:
-            normalized_arms.append(replace(arm, cell_type=mapped))
-            continue
         original = arm.cell_type.strip()
-        review_gated_arm_ids.add(arm.record_id)
-        note = f"Reported target-cell value: {original}" if original else "Target cell was not reported."
-        normalized_arms.append(
-            replace(
-                arm,
-                cell_type="other" if original else "not_reported",
-                completeness_status="quarantined",
-                verification_status="ambiguous",
-                nearest_neighbor_eligible=False,
-                comet_eligible=False,
-                quarantine_reason="Target cell needs automatic resolution",
-                experiment_notes=(
-                    f"{arm.experiment_notes}\n{note}" if arm.experiment_notes else note
-                ),
-            )
-        )
+        if not original:
+            normalized_arms.append(replace(arm, cell_type="not_reported"))
+            continue
+        normalized_arms.append(replace(arm, cell_type=normalize_cell_type(original)))
     arms = tuple(normalized_arms)
     endpoint_families = {
         "reported endpoint": "other", "reported outcome": "other",
@@ -283,37 +292,7 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
         )
         for row in bundle.evidence
     )
-    reviews = []
-    reviewed_ids: set[str] = set()
-    for review in bundle.reviews:
-        if review.arm_id in review_gated_arm_ids:
-            reviewed_ids.add(review.arm_id)
-            reviews.append(
-                replace(
-                    review,
-                    status="quarantined" if review.evidence_ids else "blocked",
-                    reason_code="target_cell_automatic_resolution",
-                )
-            )
-        else:
-            reviews.append(review)
-    for arm_id in sorted(review_gated_arm_ids - reviewed_ids):
-        scoped_evidence = tuple(
-            row.record_id for row in evidence if row.arm_id == arm_id
-        )
-        reviews.append(
-            ReviewRecord(
-                record_id=f"{arm_id}:target-cell-review",
-                paper_id=bundle.paper.source_paper_id,
-                artifact_id=next(arm.artifact_id for arm in arms if arm.record_id == arm_id),
-                reason_code="target_cell_automatic_resolution",
-                status="quarantined" if scoped_evidence else "blocked",
-                evidence_ids=scoped_evidence,
-                arm_id=arm_id,
-                field_name="cell_type",
-                notes="Target cell is not safely mapped to a supported liver cell type.",
-            )
-        )
+    reviews = list(bundle.reviews)
     return replace(
         bundle,
         formulations=formulations,
@@ -525,6 +504,21 @@ def _resolve_corpus_path(root: Path, logical_path: str) -> Path | None:
     return None
 
 
+def _apply_source_backed_arm_repairs(
+    connection: sqlite3.Connection,
+    *,
+    corpus_root: Path,
+) -> None:
+    """Project explicitly registered shared source context after base imports."""
+
+    manifest_path = corpus_root / SOURCE_BACKED_ARM_REPAIRS
+    if not manifest_path.is_file():
+        raise FileNotFoundError(manifest_path)
+    source_root = resolve_common_checkout_root(corpus_root)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    apply_repair_manifest(connection, manifest, source_root=source_root)
+
+
 def _dynamic_results(
     manifest: dict[str, Any], root: Path, bundle_root: Path, manifest_path: Path
 ) -> list[tuple[ImportBundle, Any | None]]:
@@ -587,9 +581,19 @@ def _dynamic_results(
                 approval_manifest_path, paper_id
             )
             if response_path is not None:
+                consolidated_item = next(
+                    item for item in entry["contributing_artifacts"]
+                    if item.get("schema_family") == "consolidated_replay"
+                )
+                consolidated_path = _resolve_corpus_path(
+                    root, str(consolidated_item["path"])
+                )
+                if consolidated_path is None:
+                    raise FileNotFoundError(consolidated_item["path"])
                 result = build_pilot_map_lossless_result(
                     response_path=response_path,
                     base_bundle=bundle,
+                    consolidated_path=consolidated_path,
                 )
                 bundle = result.bundle
             else:
@@ -758,6 +762,23 @@ def rebuild_database(
             handled_paths[bundle.paper.source_paper_id] = handled
         connection.commit()
         dedup = deduplicate_science(connection)
+        target_scope_results = tuple(
+            rescreen_paper(connection, source_paper_id)
+            for (source_paper_id,) in connection.execute(
+                """SELECT source_paper_id FROM paper
+                   WHERE source_paper_id IN (
+                       'GP-001','GP-002','GP-003','GP-004','GP-005',
+                       'GP-006','GP-007','GP-008','GP-009','NP-002'
+                   )
+                   AND EXISTS (
+                       SELECT 1 FROM experiment
+                       WHERE experiment.paper_id=paper.paper_id
+                   )
+                   ORDER BY source_paper_id"""
+            )
+        )
+        apply_target_scope_candidates(connection, target_scope_results)
+        _apply_source_backed_arm_repairs(connection, corpus_root=root)
         for (source_paper_id,) in connection.execute(
             "SELECT source_paper_id FROM paper ORDER BY source_paper_id"
         ):

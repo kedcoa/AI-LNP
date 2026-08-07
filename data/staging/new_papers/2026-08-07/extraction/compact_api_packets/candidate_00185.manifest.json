@@ -1,0 +1,4476 @@
+{
+  "paper_id": "candidate_00185",
+  "source_review_packet_checksum": "5439b32365da00fc9be4e021c04624973f0d93fd45411e9b79842e4966dc6860",
+  "api_packet_checksum": "6feecde9281adab508bad6251b64d0ad01c8c8273bcf54bc35a21f7fe231ef3a",
+  "packet_budget_tokens": 16000,
+  "budget_status": "human_approved",
+  "token_estimation_method": "ceil(compact UTF-8 JSON bytes / 4)",
+  "estimated_input_tokens": {
+    "prompt": 285,
+    "response_schema": 2123,
+    "evidence_packet": 15987,
+    "total": 18395
+  },
+  "counts": {
+    "candidate_evidence": 239,
+    "selected_evidence": 173,
+    "excluded_evidence": 66,
+    "selected_sources": 26
+  },
+  "removed_duplicates": {
+    "input_hits": 80,
+    "unique_chunks": 30,
+    "removed_chunk_duplicates": 50,
+    "removed_normalized_passages": 0,
+    "input_clauses": 239,
+    "unique_evidence_items": 239
+  },
+  "blocked_fields_with_diagnostics": {},
+  "selected_passages": [
+    {
+      "evidence_id": "candidate_00185-E-72ba144f7dbe7c56",
+      "may_support_fields": [
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-5b803a0d7a48"
+      ],
+      "text": "For in vivo imaging system, luciferase mRNA LNP was intravenously injected into CCl4-induced fibrosis mice for 12 hours, and D-luciferin (150 mg/kg; Beyotime) was injected before animal live imaging detection."
+    },
+    {
+      "evidence_id": "candidate_00185-E-763f7b02bfbb26fa",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 57,
+      "source_ids": [
+        "S-4dbe8763a4a1"
+      ],
+      "text": "Cells were treatment with GDF10 or TGFβ1 for 24 hours."
+    },
+    {
+      "evidence_id": "candidate_00185-E-513c10cc84fa3a05",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 131,
+      "source_ids": [
+        "S-4dbe8763a4a1"
+      ],
+      "text": "Mitochondrial respiration and glycolytic flux were measured in the Seahorse XFe96 Analyzer (Agilent) using the Agilent Seahorse XF Glycolytic Rate Assay Kit in the presence of 1 μM rotenone/antimycin A and 100 mM 2DG, or the Agilent Seahorse XF Mito Stress Test Kit in the presence of 1.5 μM oligomycin, 3 μM FCCP, and 0.5 μM rotenone/antimycin A."
+    },
+    {
+      "evidence_id": "candidate_00185-E-79a020b163e4449a",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 55,
+      "source_ids": [
+        "S-4dbe8763a4a1"
+      ],
+      "text": "All results were normalized to protein content."
+    },
+    {
+      "evidence_id": "candidate_00185-E-aea0d65ca8d03125",
+      "may_support_fields": [
+        "assay",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 110,
+      "source_ids": [
+        "S-4dbe8763a4a1"
+      ],
+      "text": "Data of oxygen consumption rate (OCR) during basal metabolism of Cell Mito Stress Test and glycolytic rate (GlycoPER) during basal metabolism of Glycolytic Rate Assay were used in the graphs depicting the quiescent or energetic state of HSCs under different conditions."
+    },
+    {
+      "evidence_id": "candidate_00185-E-0ba395955f833a5e",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 94,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "To investigate whether Gdf10 affects MASH progression, we administered control AAV or Gdf10-expressing AAV via tail vein injection to C57BL/6J mice in diet-induced MASH model (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d8a1d2a028a1e8ee",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "2A)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-c8847f4357de8ab0",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "Hepatocyte-specific Gdf10 overexpression via AAV-TBG-Gdf10 elevates local GDF10 levels in the liver."
+    },
+    {
+      "evidence_id": "candidate_00185-E-11f60d3f227a6eec",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "AAV-mediated Gdf10 delivery did not significantly alter body weight, liver-to-body weight ratio, or fat mass in HFFC diet-fed mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-a544cd7f83b2ff2e",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "S2A-C)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ffb473f2710acc92",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 72,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "Furthermore, Gdf10 overexpression had no effect on glucose or lipid metabolic parameters (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-df62a7da7fd46f75",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "S2D-J)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-a8fc9d4c4996fb56",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "Notably, AAV-Gdf10 treatment in HFFC diet-fed mice resulted in reduced serum AST and ALT levels, accompanied by significant improvements in hepatic fibrosis as demonstrated by H&E, Sirius Red, and Masson staining (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b8d5d152b21eaf90",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "2B, C)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-4351121585b297f5",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "Additionally, hepatic expression of fibrogenic genes was markedly decreased in Gdf10-overexpressing (Gdf10-OE) mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-aa03d9a637c8be7f",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "2D)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-dac2a6195180155a",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "Importantly, Gdf10-expressing AAV treatment inhibited the SMAD2-mediated liver fibrosis pathway in the HFFC diet-induced MASH model (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-5015360d10df0144",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "2E)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-454ae737bfc190bd",
+      "may_support_fields": [
+        "biological_model",
+        "formulation",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-dff74636679c"
+      ],
+      "text": "These findings demonstrate that GDF10 attenuates liver fibrosis in vivo through mechanisms independent of glucose or lipid metabolism."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e4845e647f34e94b",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Single-cell RNA sequencing revealed HSC-specific Gdf10 expression inversely correlated with fibrotic activation."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d010ca21b98f8057",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 113,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "In murine models of diet-induced MASH and CCl4-induced fibrosis, AAV-mediated Gdf10 overexpression reduced collagen deposition, serum ALT/AST, and fibrogenic gene expression without perturbing glucose or lipid metabolism."
+    },
+    {
+      "evidence_id": "candidate_00185-E-a9ebcdf6333b6258",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Leveraging this pathway, we developed liver-targeted lipid nanoparticles (LNPs) encapsulating mGdf10 mRNA, which selectively delivered Gdf10 to HSCs, reversed fibrosis in multiple animal models."
+    },
+    {
+      "evidence_id": "candidate_00185-E-a74bc1be151a95b6",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Clinically, GDF10 expression correlated with fibrosis severity in human cirrhotic livers."
+    },
+    {
+      "evidence_id": "candidate_00185-E-f9f87e07dae0a41d",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 116,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "Quiescent HSCs undergo activation and transdifferentiation into proliferative, motile myofibroblasts that secrete extracellular matrix-a process requiring rapid metabolic adaptation to meet increased energy demands 21, 31."
+    },
+    {
+      "evidence_id": "candidate_00185-E-96127a48dc532962",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "This metabolic reprogramming predominantly relies on aerobic glycolysis 22, 32-35."
+    },
+    {
+      "evidence_id": "candidate_00185-E-7a95d6393048be5d",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "To investigate GDF10's role in promoting HSC reversion to quiescence and associated metabolic remodeling, we conducted mechanistic studies using cultured cell models."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e9bfebca3606d57d",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "Gene set enrichment analysis (GSEA) revealed significant alterations in the glycolysis pathway, with glycolysis-related genes being downregulated in GDF10-treated HSCs (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-acbb1ebe9f11ebc5",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 47,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "S4E and F)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-345a5e7ce17375f0",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 98,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "Metabolic flux analyses demonstrated that GDF10 attenuated TGF-β-driven increases in basal glycolysis and compensatory glycolytic capacity, as measured by OCR and the glycolytic proton efflux rate (GlycoPER) (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-53cf40bab3ee15d4",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 47,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "5I-K; Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-cc8e600015e924bb",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 46,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "S4G-M)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-127f197df78f9452",
+      "may_support_fields": [
+        "endpoint",
+        "recipient_cell"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-d31db820b1f0"
+      ],
+      "text": "Consistently, GDF10 downregulated key glycolytic enzymes and blocked the metabolic reprogramming associated with HSC activation, revealing its dual function in restraining both ECM deposition and the glycolytic switch that drives myofibroblast transdifferentiation."
+    },
+    {
+      "evidence_id": "candidate_00185-E-209f7452281bfc2f",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 102,
+      "source_ids": [
+        "S-669a6a25bc82"
+      ],
+      "text": "The levels of extracellular lactate and glucose consumption were measured in the media from GDF10-treated or TGFβ1-treated HSCs using a Lactic Acid Assay Kit and Glucose Kit (NJJCBIO, A019-2-1 & A154-1-1), following the manufacturer's instructions."
+    },
+    {
+      "evidence_id": "candidate_00185-E-816f2832eed33d80",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-669a6a25bc82"
+      ],
+      "text": "All values were normalized to cell number."
+    },
+    {
+      "evidence_id": "candidate_00185-E-1892aba4ab2b5dcf",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-34b0a6da73f7"
+      ],
+      "text": "Importantly, GDF10 expression was significantly elevated in human metabolic liver disease and fibrosis samples, showing strong correlation with classic fibrosis markers (ACTA2, COL1A1) (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-2f1484aa46aad9e0",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-34b0a6da73f7"
+      ],
+      "text": "S1E)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e8b5ffefbb0d9ffc",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 126,
+      "source_ids": [
+        "S-34b0a6da73f7"
+      ],
+      "text": "These findings were corroborated at the protein level across multiple experimental models, including diet-induced MASH and CCl4-induced fibrosis, where increased GDF10 expression coincided with enhanced extracellular matrix (ECM) deposition (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b918009c538d247b",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 51,
+      "source_ids": [
+        "S-34b0a6da73f7"
+      ],
+      "text": "1E and S1F)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-51ab61742367f0a9",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-34b0a6da73f7"
+      ],
+      "text": "Collectively, our results demonstrate that GDF10 is specifically expressed in HSCs and represents a potential biomarker for MASH progression."
+    },
+    {
+      "evidence_id": "candidate_00185-E-58f322e75c7e82b8",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-437ef89bf9de"
+      ],
+      "text": "In the liver, GDF10 expression is enriched in HSCs, yet its functional significance in liver fibrosis and HSC biology has not been explored."
+    },
+    {
+      "evidence_id": "candidate_00185-E-a0ea24d84bcb2d6f",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "To translate this anti-fibrotic activity into a clinically viable modality, we encapsulated mouse Gdf10 mRNA in an ionizable lipid nanoparticle (LNP) composed of DSPC, cholesterol and the novel ionizable lipid AA-T3A-C12 (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-2956c48c0e8955a0",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "7J)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-108ba7fed1783ba3",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "As described by Han et al.26, AA-T3-C12 LNP was developed to target sigma receptors of fibroblasts and aHSCs, exhibiting high specificity."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e992ee9eb4d311a1",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "Physicochemical characterization showed a mean diameter of 100 nm, with a high RNA encapsulation efficiency (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b7c97c092f18130a",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "S8A and S8B)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-9f772f85165a03d1",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "In vitro treatment of activated HSCs with mGdf10-LNP yielded robust GDF10 protein expression and suppressed COL1A1 and α-SMA (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-f4a8e45b319191fc",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "S8C)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ad32bfcf4c24d2a1",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "We then administered LNP to mice and evaluated its tissue distribution."
+    },
+    {
+      "evidence_id": "candidate_00185-E-77102842bfbb6cb2",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "In vivo imaging revealed that following the injection of AA-T3-C12 LNPs, the particles predominantly accumulated in the liver, with faint detectable signals observed in other tissues (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-cc6cedb745836238",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "7K)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-111037c7d348a017",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "Consistently, qPCR and immunoblot analyses showed marked changes specifically in liver tissue (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-3c81204206809a35",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "S8D and E)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-00788fe5db3dcec5",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "Furthermore, immunofluorescence analysis indicated pronounced alterations specifically in HSCs (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8825b022f66951ab",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "S8F)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-881e23404fcfc1c8",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "Collectively, these data support the HSCs-targeting specificity of mGdf10-LNP."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ae2d00104e3126bc",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 97,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "To evaluate the therapeutic efficacy, we administered mGdf10-LNP to mice subjected to either HFFC-diet-induced fibrosis or CCl4-induced liver injury (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-08ab441e18026c24",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "7L and S8G)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-cf2c2cc3bb6405d5",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "mGdf10-LNP treatment did not alter body weight, liver-to-body weight ratio or fasting glucose levels (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-739d3a03f779d064",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "7M-O; Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-0219bd62fb464cbd",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "S8H-J)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8cae7f340b170058",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "By contrast, serum AST and ALT concentrations were markedly reduced after mGdf10-LNP administration (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-885ca349ecc230de",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 62,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "7P and Q; Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-baf0775827346430",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "S8K-L)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8de6a256b2951fdb",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "Moreover, histological staining and fibrosis-related gene expression showed concordant reductions following mGdf10-LNP administration (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-defeff97818c8fbf",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 63,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "7R-T and S8M-O)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b2b52a8ad585130f",
+      "may_support_fields": [
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-cf1f630a1042"
+      ],
+      "text": "Together, these data established LNP-mediated delivery system for Gdf10, translating the cytokine's anti-fibrotic activity into a practical therapeutic modality."
+    },
+    {
+      "evidence_id": "candidate_00185-E-69133b9bc317919f",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-15c40b4d84ed"
+      ],
+      "text": "To isolate hepatocytes, livers from AAV8-TBG-Vector, AAV8-TBG-GFP and AAV8-TBG-Gdf10 treated mice were perfused with collagenase type IV (100 CDU/mL; Sigma, USA), and the liver was excised rapidly and placed into cold HBSS."
+    },
+    {
+      "evidence_id": "candidate_00185-E-7f42da7051395076",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-15c40b4d84ed"
+      ],
+      "text": "The pellet was then resuspended in 20 mL of DMEM supplemented with 10% FBS for subsequent culture."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b836ec1f4b86aa94",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-4244e420fa86"
+      ],
+      "text": "Our findings position GDF10 as a master regulator of HSC quiescence, with its expression inversely correlated with fibrotic activation across multiple animal models and human cirrhotic livers."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ab0d609b7e710e68",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-4244e420fa86"
+      ],
+      "text": "This aligns with emerging evidence highlighting the remarkable plasticity of HSCs and their capacity to revert to a quiescent state during fibrosis regression 16, 36."
+    },
+    {
+      "evidence_id": "candidate_00185-E-47bd3a2ccc76b842",
+      "may_support_fields": [
+        "biological_model",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 111,
+      "source_ids": [
+        "S-fbc48834687f"
+      ],
+      "text": "The development of a targeted LNP-mRNA delivery system not only validates GDF10's therapeutic potential but also provides a blueprint for RNA-based treatment of fibrotic diseases."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ee89435792f1f827",
+      "may_support_fields": [
+        "biological_model",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-fbc48834687f"
+      ],
+      "text": "These findings advance our fundamental understanding of HSC plasticity while offering a clinically translatable strategy that addresses the urgent unmet need for effective antifibrotic therapies."
+    },
+    {
+      "evidence_id": "candidate_00185-E-a97aef859ffdcc64",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "To further delineate the role of GDF10 in inhibiting liver fibrosis, we first analyzed scRNA-seq data of CCl4-induced mouse liver and it revealed that Gdf10 was more specifically expressed in quiescent HSCs, with less coincidence with canonical aHSC markers (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-c96af9b4b9670065",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "5A-D)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d321a44ad4e54b9e",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "Furthermore, differential expression between Gdf10high and Gdf10low HSC subpopulations showed that Gdf10high cells exhibited enriched expression of quiescence-related genes and down-regulation of activation signatures (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8c46a3bd72c0f260",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "5E-G)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-5f207bb2d3defa71",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "KEGG pathway analysis of these subclusters further linked Gdf10 abundance to suppression of TGF-β receptor signaling, ECM organization, and collagen fibril formation (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e983eb430f4ce230",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "5G; Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b679776e1b71f3a8",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "S4A)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-fc0f54fe50b7119a",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "Also, rhGDF10 restored expression of qHSCs markers in immortalized HSCs (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-14cd8050153c6000",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "5H; Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-f42cb1eaeee3f523",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 58,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "S4B-D)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-df8153a31a3a37f3",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-ef896cb5b85c"
+      ],
+      "text": "These results indicate that high endogenous GDF10 promotes toward a quiescent, anti-fibrotic HSC state."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8acd58f412e6e09b",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "We identify GDF10 as a precise therapeutic agent capable of reversing fibrosis."
+    },
+    {
+      "evidence_id": "candidate_00185-E-03a201a6341d7190",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "Compared with vehicle-treated controls, systemic administration of rhGDF10 did not significantly alter body weight and liver-to-body weight ratio in CCl4-induced mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-05363a3d763232f0",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "7A-C)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-879951b5236471a2",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "Furthermore, rhGDF10 treatment did not affect blood glucose levels, and only slightly decreased serum ALT, or AST levels (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ed095411cfa2b9f2",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 81,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "7D-F)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-4d28015691f46406",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 118,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "However, it significantly reduced Sirius Red-positive fibrotic areas and downregulated the expression of fibrosis-related genes in CCl4-induced mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-0d24418c2d778576",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "7G and H)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-1b5fc679805238f4",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "Immunoblot of whole-liver lysates revealed significant down-regulation of COL1A1 and α-SMA (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8088ce960d3b7da9",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "7I), confirming potent inhibition of HSCs."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e041b4847d06b294",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 120,
+      "source_ids": [
+        "S-b86a2ec1e0c4"
+      ],
+      "text": "These data establish that GDF10 attenuates liver fibrosis through pathways that are mechanistically separable from its effects on glucose or lipid homeostasis."
+    },
+    {
+      "evidence_id": "candidate_00185-E-309e4a291eaa6bf5",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 110,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "To further investigate the functional role of GDF10 in liver fibrosis progression, we employed a lentiviral system delivering shRNA to knock down Gdf10 (Gdf10-KD) expression in vivo."
+    },
+    {
+      "evidence_id": "candidate_00185-E-2f0f2cfabbce3347",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "Mice were given short-term injections of CCl4 (3 weeks) to induce liver fibrosis (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-1e40fd1a9abecef2",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 49,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "3A)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-0a045f153fb27c7d",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "The multiple tissue expression of GDF10 via Lv-shGdf10 significantly decreased compared to the Lv-Vector control (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-2975262a8b430222",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 49,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "3B)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-88b141fe2357d19c",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 74,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "Physiological assessments revealed no differences in body weight and blood glucose between groups (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-1204ebd3857591ed",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 68,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "3C), but notable increased in liver injury markers (AST, ALT) were observed (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-29160d90f69d1a8e",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 49,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "3D)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-679238d1cc468444",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 140,
+      "priority_reasons": [
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "Histological analysis also showed that Gdf10-KD mice had exacerbated liver fibrosis compared to control mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d549bd25a90b077a",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 49,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "3E)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-20b93936bcacc573",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 99,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "Consistently, mRNA and protein expression profiling showed upregulated levels of fibrotic genes in the Lv-shGdf10 group, suggesting enhanced fibrotic activity, implicating stress-response involvement (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-df5549048df8d118",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "3F and G)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-fd78d5f8208d2c02",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-410650902bdd"
+      ],
+      "text": "These findings collectively highlight the role of GDF10 in regulating fibrotic procession in the liver."
+    },
+    {
+      "evidence_id": "candidate_00185-E-7d65c1ad78c0e18b",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-938349f1273a"
+      ],
+      "text": "Total RNA was extracted from snap-frozen mouse livers and cultured cells using TRIzol reagent (Vazyme Biotech, R401-01)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d42dfab621d2b9d7",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 102,
+      "source_ids": [
+        "S-938349f1273a"
+      ],
+      "text": "1 µg of total RNA was reverse-transcribed using MMLV-RT (Vazyme Biotech, R222-01), and qPCR was performed using SYBR Green Master Mix (Vazyme Biotech, Q311-02)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d28e1ed5b760308c",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-938349f1273a"
+      ],
+      "text": "Relative mRNA abundance was normalized to internal control genes encoding ribosomal protein 36B4."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b03a365a6ee01571",
+      "may_support_fields": [
+        "assay",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-7e2a60d006d2"
+      ],
+      "text": "Using single-cell RNA sequencing, we demonstrate that Gdf10 expression is restricted to HSCs and inversely correlates with fibrotic activation across animal models and human cirrhosis."
+    },
+    {
+      "evidence_id": "candidate_00185-E-5a0930c6365349e6",
+      "may_support_fields": [
+        "assay",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 104,
+      "source_ids": [
+        "S-7e2a60d006d2"
+      ],
+      "text": "Capitalizing on these insights, we developed liver-targeted lipid nanoparticles (LNPs) encapsulating Gdf10 mRNA, which selectively deliver Gdf10 to HSCs and reverse fibrosis in diet- and toxin-induced models without perturbing systemic metabolism."
+    },
+    {
+      "evidence_id": "candidate_00185-E-2d0d78543dc94b98",
+      "may_support_fields": [
+        "assay",
+        "payload"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 101,
+      "source_ids": [
+        "S-7e2a60d006d2"
+      ],
+      "text": "Our findings posited GDF10 as a dual-functional modulator of TGF-β signaling and HSC metabolic plasticity, offering a precision therapeutic strategy for liver fibrosis."
+    },
+    {
+      "evidence_id": "candidate_00185-E-5fffae200d39dc6a",
+      "may_support_fields": [
+        "assay",
+        "payload"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-7e2a60d006d2"
+      ],
+      "text": "This work not only advances our understanding of HSC biology but also provides a translatable platform for RNA-based antifibrotic therapy."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d8511e8c0faaa8c6",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 152,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "To induce MASH, C57BL/6J mice were fed with High-fat/High-fructose/High-cholesterol diet (HFFC diet, Research Diets, D09100310, 40% kcal fat, 20% kcal fructose and 2% cholesterol) for 5 months and High-fat and Methionine/Choline-deficient diet (HFMCD diet, Research Diets, A06071309, 45% kcal fat with 0.1% Methionine and no added choline) for 10 weeks respectively."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8c2337eed6df0b42",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 88,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "In diet induced MAFLD, mice were fed with High fat diet (HFD diet, Research Diets, D12492) as indicated time."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8191ae0f0c71cfd6",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "To establish injury induced liver fibrosis, CCl4 was liquified in 1:6 ratio in olive oil and was injected at 0.8ml/kg body weight intraperitoneally into mice twice per week for 3 weeks."
+    },
+    {
+      "evidence_id": "candidate_00185-E-3b6eeddd361a8ffc",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "For AAV8 transduction, AAV-TBG-Vector or AAV-TBG-Gdf10 (1×1011 genome copies/mouse) was delivered by tail vein injection."
+    },
+    {
+      "evidence_id": "candidate_00185-E-da7b0c60f18c1d00",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "For Gdf10 knockdown in mice, mice were injected 5 x 107 TU/mouse lentivirus particles via the tail vein."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ae5f984f0964424c",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "Recombinant human GDF10 (1 mg/kg), blank-LNP or mGdf10-LNP (5ug mRNA/mouse) were delivered four times by tail vein injection two weeks prior to sacrifice."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8293ad2892e856d7",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 125,
+      "source_ids": [
+        "S-b8d2f79e138f"
+      ],
+      "text": "The translational potential of our work is underscored by the development of liver-targeted LNPs for Gdf10 mRNA delivery, which addresses a major challenge in antifibrotic therapy-achieving sufficient drug concentrations in HSCs while minimizing systemic exposure."
+    },
+    {
+      "evidence_id": "candidate_00185-E-2218ddeb6675c56d",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-b8d2f79e138f"
+      ],
+      "text": "Importantly, our LNP formulation-maintained HSCs specificity without detectable accumulation in other organs and other liver cells, a crucial feature for chronic therapy in fibrotic diseases."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ac6fdd463daccd8c",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 116,
+      "source_ids": [
+        "S-b8d2f79e138f"
+      ],
+      "text": "The absence of weight or glucose perturbations following mGdf10-LNP treatment contrasts sharply with existing pharmacologic approaches such as FXR agonists 41, 42."
+    },
+    {
+      "evidence_id": "candidate_00185-E-3f75de86f8c81bd6",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 80,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-b8d2f79e138f"
+      ],
+      "text": "This favorable safety profile, combined with potent antifibrotic efficacy, positions mGdf10-LNP as a promising candidate for clinical translation."
+    },
+    {
+      "evidence_id": "candidate_00185-E-27559ee2acde223a",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 87,
+      "source_ids": [
+        "S-5d43f0370c88"
+      ],
+      "text": "In the HFMCD diet model, after 10 weeks of feeding, Gdf10-OE mice exhibited comparable body weight and liver-to-body weight ratios to WT mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e128f6cfccff385d",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-5d43f0370c88"
+      ],
+      "text": "S3K-M) but showed reduced blood glucose and serum ALT levels (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-58306226eba644c5",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 53,
+      "source_ids": [
+        "S-5d43f0370c88"
+      ],
+      "text": "S3N and P)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-78dd0e5b9dfaaf1e",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-5d43f0370c88"
+      ],
+      "text": "Histopathological assessment revealed significant improvement in liver fibrosis in Gdf10-OE mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-07e4bc17cdb13931",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-5d43f0370c88"
+      ],
+      "text": "S3Q), which was further supported by decreased expression of fibrogenic genes at both mRNA and protein levels (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b03bcd38de5f7602",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 53,
+      "source_ids": [
+        "S-5d43f0370c88"
+      ],
+      "text": "S3R and S)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-f2ac05f4f4391f28",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "formulation"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-5d43f0370c88"
+      ],
+      "text": "Collectively, these data demonstrate that GDF10 effectively ameliorates diet-induced MASH associated liver fibrosis in vivo."
+    },
+    {
+      "evidence_id": "candidate_00185-E-cc3ea7fde0364ce6",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "To define the antifibrotic mechanism of GDF10 at the cellular level, we interrogated its impact on immortalized HSCs."
+    },
+    {
+      "evidence_id": "candidate_00185-E-7b1629f2ecf858dc",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "In line with its anti-fibrotic function, rhGDF10 dose-dependently blunted TGFβ1-induced COL1A1 and α-SMA expression (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b54d079ca86862c2",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 52,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "6A and B)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-60e92f9ce07d164f",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 75,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "Furthermore, rhGDF10 blocked TGFβ1-triggered phosphorylation and nuclear translocation of SMAD2/3 (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-716b0ecffb988bc6",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "6C-E), indicating direct interference with canonical TGF-β signaling."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d485a81d5e5daf50",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "During HSC activation, TβR2 is the receptor for TGFβ1, recruiting TβR1 and leading to phosphorylation of SMAD2/3."
+    },
+    {
+      "evidence_id": "candidate_00185-E-b11689a2ca2eef00",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "Given that TGFβ1 and GDF10 belong to the same superfamily, whether they can compete for the identical receptor warrants further investigation."
+    },
+    {
+      "evidence_id": "candidate_00185-E-48281ba5ca2ee501",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "Molecular docking was used to predict if GDF10 binds to TβR2 (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-1100c2aa8d3f5c76",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "6F)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-0a7d3aa2ccb085a4",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 71,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "Mechanistically, co-immunoprecipitation revealed that GDF10 associates with TβR2 (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-87fecd7e7a77be60",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "6G), suggesting competition with TGFβ1 for receptor engagement."
+    },
+    {
+      "evidence_id": "candidate_00185-E-4016509de5a98928",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "Moreover, we found conditioned medium containing rhGDF10, but not control medium, significantly suppressed TGFβ1-induced COL1A1 and α-SMA up-regulation (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-7011c080137ec252",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 52,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "S5B and C)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-6d640b222048af8e",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "In LX2 cells, rhGDF10 reduced p-SMAD2 levels, reinforcing its inhibitory effect on SMAD2/3 activation (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-c04f7b182d8ea7ab",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "S5D)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-8b7efd3b060735ba",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 210,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_quantitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "To better preserve quiescence of HSCs, we also cultured HSCs with 2% FBS and obtained consistent results (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-3e710b656d0cbfdd",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 50,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "S6)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-daf840dd4fe2efee",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "Essentially, co-culture experiments showed that hepatocyte-specific Gdf10 overexpression via AAV-TBG-Gdf10 elevated local GDF10 levels (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-121adb66bc11f7a3",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 107,
+      "source_ids": [
+        "S-1e4b64aef593"
+      ],
+      "text": "While we focused on its antifibrotic effects, GDF10's expression pattern and mechanism of action suggest potential involvement in other aspects of liver homeostasis and repair."
+    },
+    {
+      "evidence_id": "candidate_00185-E-47f947869bd2f3d2",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": 60,
+      "priority_reasons": [
+        "direct_scientific_signal"
+      ],
+      "estimated_item_tokens": 131,
+      "source_ids": [
+        "S-1e4b64aef593"
+      ],
+      "text": "The observation that GDF10 expression correlates with fibrosis severity in human cirrhosis hints at its possible role as an endogenous brake on fibrogenesis, potentially explaining why some patients develop progressive fibrosis while others maintain stable disease 1, 7."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d2411aab1afe2249",
+      "may_support_fields": [
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-b278994260cc"
+      ],
+      "text": "Primary cultured HSCs were infected with a SV40 large T antigen-expressing retrovirus and were selected using G418 solution to obtain immortalized HSCs."
+    },
+    {
+      "evidence_id": "candidate_00185-E-378d57d5ca89a695",
+      "may_support_fields": [
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 106,
+      "source_ids": [
+        "S-b278994260cc"
+      ],
+      "text": "Immortalized HSCs and LX2 cells were cultured in DMEM supplemented with 10% fetal bovine serum (FBS) and 100 μg/mL penicillin-streptomycin at 37 °C in an incubator with 5% CO2."
+    },
+    {
+      "evidence_id": "candidate_00185-E-38feef61a4b06bc6",
+      "may_support_fields": [
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-b278994260cc"
+      ],
+      "text": "Cells were treated with GDF10 recombinant protein (200 ng/ml; R&D Systems, 1543-BP-025) and TGFβ1 (10ng/ml novoprotein, CA59) for 24 or 48 hours."
+    },
+    {
+      "evidence_id": "candidate_00185-E-d517f6bca74f2e94",
+      "may_support_fields": [
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-b278994260cc"
+      ],
+      "text": "For Gdf10 knockdown, 4 × 106 TU lentivirus particles were used to transfect HSCs."
+    },
+    {
+      "evidence_id": "candidate_00185-E-eff1e70fc63185bf",
+      "may_support_fields": [
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 86,
+      "source_ids": [
+        "S-b278994260cc"
+      ],
+      "text": "To evaluate the effect of LNPs, activated HSCs after TGFβ1 treatment in a six-well plate (5 × 105 per well) were incubated with mGdf10 LNPs (50 nM) for 48 hours."
+    },
+    {
+      "evidence_id": "candidate_00185-E-4195400ff0972025",
+      "may_support_fields": [
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 70,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-b278994260cc"
+      ],
+      "text": "For better preserving quiescence of HSCs, immortalized HSCs were cultured in DMEM supplemented with 2% FBS and 100 μg/mL penicillin-streptomycin at 37 °C in an incubator with 5% CO2."
+    },
+    {
+      "evidence_id": "candidate_00185-E-7367c9b33c236bb7",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "Following three weeks of CCl4 administration, Gdf10-OE mice showed unchanged body weight (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-ac5c2fa0eee539c7",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 59,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "S3B), but reduced liver-to-body weight ratio compared to WT controls (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-7c9c852a2bf56013",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 200,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 83,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "Strikingly, AAV-Gdf10 treatment in CCl4-induced fibrosis mice decreased serum AST and ALT levels and improved hepatic fibrosis, as evidenced by histological analyses (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-25dd5357c02cc278",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 58,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "S3E-G)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-1eb15b297b83e5a5",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 81,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "Both mRNA and protein levels of fibrogenic genes were reduced in the livers of Gdf10-OE mice (Fig."
+    },
+    {
+      "evidence_id": "candidate_00185-E-76d047a572dd494d",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 190,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "direct_qualitative_outcome",
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-1ec60ef30e61"
+      ],
+      "text": "Our data demonstrate that GDF10 reverses the glycolytic switch characteristic of activated HSCs, a metabolic adaptation increasingly recognized as critical for myofibroblast persistence 21, 22."
+    },
+    {
+      "evidence_id": "candidate_00185-E-9144f5f7645cdc88",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-1ec60ef30e61"
+      ],
+      "text": "This process of metabolic reprogramming involves downregulation of key glycolytic enzymes and restoration of oxidative phosphorylation, mirroring the metabolic profile of quiescent HSCs."
+    },
+    {
+      "evidence_id": "candidate_00185-E-12d745a01bb21ec6",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-1ec60ef30e61"
+      ],
+      "text": "Our findings that GDF10 simultaneously targets both the TGF-β signaling axis and metabolic reprogramming suggest it acts at a critical nodal point coordinating these two fundamental aspects of HSC activation."
+    },
+    {
+      "evidence_id": "candidate_00185-E-632e7e60833de854",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": 105,
+      "priority_reasons": [
+        "direct_qualitative_outcome",
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 114,
+      "source_ids": [
+        "S-1ec60ef30e61"
+      ],
+      "text": "This dual mechanism may explain its superior efficacy compared to approaches targeting either pathway alone, as evidenced by the robust fibrosis regression observed across multiple animal models without metabolic perturbations."
+    },
+    {
+      "evidence_id": "candidate_00185-E-90344e953599d8ba",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 84,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "To obtain Gdf10 mRNA, we retrieved complete coding sequence including signal peptide region from mouse gene library (NM_145741.3)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e7252f7dee2124b8",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 68,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "Gdf10 and luciferase mRNA were produced via in vitro transcription."
+    },
+    {
+      "evidence_id": "candidate_00185-E-5221858746b1a205",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 64,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "Formulation was performed as previously described 26."
+    },
+    {
+      "evidence_id": "candidate_00185-E-9f19a092cb9271f3",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "An organic phase was composed of solubilizing ionizable lipid AA-T3A-C12 (MCE, HY-148859), cholesterol (Avanti Polar Lipids, #700100), DSPC (Avanti Polar Lipids, #850365), and C14-PEG2000 (Avanti Polar Lipids, #880150) at a molar ratio of 50: 38.5:10:1.5."
+    },
+    {
+      "evidence_id": "candidate_00185-E-1f839afc771401e7",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 69,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "The aqueous phase was prepared in 10 mM citrate buffer (pH 3) with mRNA."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e866b47a0ed141a5",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "Then a microfluidic device was used to mix these two phases at an ionizable lipid: RNA weight ratio of 10:1, with a flow rate of 1.8 mL/min and 0.6 mL/min (3:1)."
+    },
+    {
+      "evidence_id": "candidate_00185-E-e3c432e46a1a9d5f",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "Finally, LNPs were dialyzed against 1 × PBS for 2 h, filtered by a 0.22 μm filter, and stored at 4 °C."
+    },
+    {
+      "evidence_id": "candidate_00185-E-cb7cf4031e0f0151",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 90,
+      "priority_reasons": [
+        "direct_scientific_signal",
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 70,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "mRNA encapsulation efficiency was determined by agarose gel electrophoresis."
+    }
+  ],
+  "excluded_passages": [
+    {
+      "evidence_id": "candidate_00185-E-0b536bc6f799d678",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 105,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Liver fibrosis has emerged as the primary determinant of outcomes in metabolic dysfunction-associated steatohepatitis (MASH).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-e9e2429360f33203",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 119,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Quiescent hepatic stellate cells (HSCs) differentiate into activated HSCs or myofibroblasts, which drives liver fibrosis and contribute to the progressive loss of hepatic function.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-ae22e0bb775c0e5f",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 85,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "MASH with progressive fibrosis lacks effective therapies due to incomplete understanding of HSCs regulation.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-c45aefeb1d5be9d2",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Here, we identify growth differentiation factor 10 (GDF10) as a master regulator of HSCs quiescence that ameliorates fibrosis through shifting HSC functions to restore HSC balance of transcriptional and metabolic reprogramming.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-5d82877e850a8e27",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 127,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Mechanistically, GDF10 competitively bound TGF-β receptor 2 (TβR2), inhibiting SMAD2/3 phosphorylation and nuclear translocation, ultimately suppressing TGFβ1-driven extracellular matrix production, and reversing the activated HSCs phenotype and their hypermetabolic states.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-889ed02ee813cdd8",
+      "may_support_fields": [
+        "assay",
+        "formulation",
+        "outcomes",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 20,
+      "priority_reasons": [
+        "priority_retrieval_group"
+      ],
+      "estimated_item_tokens": 97,
+      "source_ids": [
+        "S-a4eca7aafc49"
+      ],
+      "text": "Our findings establish GDF10 as a dual-function modulator of TGF-β signaling and HSC metabolism, offering a targeted therapeutic strategy for liver fibrosis.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-bc64300822236c49",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "Liver fibrosis, a hallmark of chronic liver disease, represents a significant global health burden, particularly in the context of metabolic dysfunction-associated steatohepatitis (MASH) 1-3.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-5314ad6e86ff3057",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 150,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "As the most advanced form of metabolic dysfunction-associated steatotic liver disease (MASLD), MASH is characterized by hepatic steatosis, inflammation, and progressive fibrosis, which collectively drive the transition to cirrhosis and hepatocellular carcinoma 4, 5.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-bdca47584df310b7",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 119,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "The prevalence of MASLD and MASH has reached epidemic proportions, affecting over one-third of the global adult population, with fibrosis stage being the strongest predictor of liver-related mortality 6, 7.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-83374a74d2bee143",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "Despite its clinical significance, no approved therapies specifically target liver fibrosis, underscoring the urgent need for mechanistic insights and novel therapeutic strategies 8.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-65540635bc15391a",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "The initiation of liver fibrosis is a process involving the collaboration of multiple cell types.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-941bd7967980410e",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "Among these, the activation of immune cells and the dysfunction of liver sinusoidal endothelial cells (LSECs) are key initiating events that disrupt the homeostasis of the intrahepatic environment.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-b3d5388b350bb4d2",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 136,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "Hepatic stellate cells (HSCs) serve as the core executors of the fibrotic process; upon receiving external activation signals, HSCs are activated and transdifferentiate into myofibroblasts, which subsequently secrete excessive amounts of extracellular matrix (ECM) components.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-37d8f2f465dac3e8",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "This process ultimately leads to abnormal excessive extracellular matrix (ECM) deposition, progressive fibrosis, and the disruption of normal liver architecture 9-11.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-dc25c1458f158688",
+      "may_support_fields": [
+        "formulation",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 90,
+      "source_ids": [
+        "S-5ead089ad8e9"
+      ],
+      "text": "Understanding the molecular mechanisms governing HSC activation and reversion to quiescence is thus critical for developing effective antifibrotic treatments.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-1e8ac79b64e073d6",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-437ef89bf9de"
+      ],
+      "text": "Growth differentiation factor 10 (GDF10), a lesser-studied member of the TGF-β superfamily, has recently garnered attention for its roles in tissue repair and metabolic regulation 18, 19.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-10b5541391a83e2e",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 93,
+      "source_ids": [
+        "S-437ef89bf9de"
+      ],
+      "text": "Unlike other TGF-β family members, GDF10 signals through TβR2 but exhibits context-dependent antagonistic effects on TGF-β signaling, as seen in its anti-adipogenic and neuroprotective actions 19, 20.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-42d0a7394a76f998",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 95,
+      "source_ids": [
+        "S-437ef89bf9de"
+      ],
+      "text": "Preliminary evidence suggests that GDF10 may modulate cellular metabolism, a key determinant of HSC activation, by suppressing glycolytic flux-a metabolic adaptation critical for myofibroblast persistence 21, 22.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-b598ec3175174203",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 125,
+      "source_ids": [
+        "S-437ef89bf9de"
+      ],
+      "text": "Given the dual role of TGF-β signaling and metabolic reprogramming in fibrosis, we hypothesized that GDF10 could serve as a natural brake on HSC activation by competitively inhibiting TGF-β/SMAD2 signaling while restoring quiescence-associated metabolic homeostasis.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-4d923c66910322a8",
+      "may_support_fields": [
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 96,
+      "source_ids": [
+        "S-437ef89bf9de"
+      ],
+      "text": "Unraveling this mechanism could unlock new therapeutic strategies that simultaneously target fibrogenic signaling and metabolic dysregulation in HSCs.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-8ec038028cfb4d64",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-15c40b4d84ed"
+      ],
+      "text": "The primary hepatocytes were released and filtered by a sterile 70-μm filter (Beyotime; FSTR070), and then centrifuged at 50 g for 5 min at 4 °C.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-8bfa968326ee5a1a",
+      "may_support_fields": [
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 60,
+      "source_ids": [
+        "S-15c40b4d84ed"
+      ],
+      "text": "The experiments were initiated with cells plated at the same density.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-34ab2824daa80deb",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 108,
+      "source_ids": [
+        "S-4244e420fa86"
+      ],
+      "text": "The discovery of GDF10 as a HSC-derived factor capable of attenuating liver fibrosis through dual modulation of TGF-β signaling and metabolic reprogramming represents a significant advancement in our understanding of antifibrotic mechanisms.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-3db7c3d1db9df00d",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-4244e420fa86"
+      ],
+      "text": "The specificity of GDF10 action on HSCs, achieved through competitive inhibition of TGFβ1 binding to TβR2, offers distinct advantages over broad-spectrum antifibrotic approaches.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-4d48d62d980e5d54",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 112,
+      "source_ids": [
+        "S-4244e420fa86"
+      ],
+      "text": "This mechanism resembles the decoy receptor strategy but operates with endogenous precision, avoiding the off-target effects commonly associated with global TGF-β pathway inhibition 14, 37.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-d679b0a7b0993ead",
+      "may_support_fields": [
+        "biological_model",
+        "endpoint",
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-4244e420fa86"
+      ],
+      "text": "The downstream consequences of this interaction-suppression of SMAD2/3 phosphorylation and nuclear translocation-effectively disrupt the canonical fibrogenic cascade while preserving the indispensability of TGF-β signaling in other cell types.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-c09e71d711a0d478",
+      "may_support_fields": [
+        "biological_model",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-fbc48834687f"
+      ],
+      "text": "Our work establishes GDF10 as a pivotal regulator of HSC biology that integrates TGF-β signaling inhibition with metabolic reprogramming to promote fibrosis resolution.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-4282677774efd82f",
+      "may_support_fields": [
+        "biological_model",
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 0,
+      "priority_reasons": [
+        "retrieval_candidate"
+      ],
+      "estimated_item_tokens": 115,
+      "source_ids": [
+        "S-fbc48834687f"
+      ],
+      "text": "As the field moves toward precision medicine approaches for liver disease, GDF10 emerges as both a promising therapeutic agent and a valuable tool for elucidating the complex interplay between signaling pathways and cellular metabolism in fibrosis pathogenesis.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-6fbc0179ed14ff3d",
+      "may_support_fields": [
+        "biological_model",
+        "payload"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 63,
+      "source_ids": [
+        "S-938349f1273a"
+      ],
+      "text": "The sequences of the qPCR primers are listed in Supplementary Table S1.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-c501b057f437a1c0",
+      "may_support_fields": [
+        "assay",
+        "payload"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-7e2a60d006d2"
+      ],
+      "text": "In this study, we identify GDF10 as a pivotal regulator of HSC quiescence and fibrosis resolution.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-c2d83196400f60ae",
+      "may_support_fields": [
+        "assay",
+        "payload"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 97,
+      "source_ids": [
+        "S-7e2a60d006d2"
+      ],
+      "text": "Through gain- and loss-of-function experiments, we show that Gdf10 overexpression attenuates liver fibrosis by competitively binding TβR2, blunting SMAD2/3 phosphorylation, and suppressing TGFβ1-driven ECM deposition.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-f482c58a32910f66",
+      "may_support_fields": [
+        "assay",
+        "payload"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 80,
+      "source_ids": [
+        "S-7e2a60d006d2"
+      ],
+      "text": "Mechanistically, GDF10 reprograms HSC metabolism, reversing the glycolytic switch characteristic of activated HSCs and restoring a quiescent phenotype.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-cb5ed00e4ec7a160",
+      "may_support_fields": [
+        "formulation",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 92,
+      "source_ids": [
+        "S-9847e2641f44"
+      ],
+      "text": "The activation of HSCs is orchestrated by a complex interplay of signaling pathways, with transforming growth factor-β (TGF-β) emerging as a master regulator of fibrogenesis 12, 13.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-9c2ae57543d2084d",
+      "may_support_fields": [
+        "formulation",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-9847e2641f44"
+      ],
+      "text": "TGFβ1, the most potent profibrogenic cytokine, binds to TGF-β receptor 2 (TβR2), triggering SMAD2/3 phosphorylation and nuclear translocation, which in turn upregulates ECM production and inhibits matrix degradation 14, 15.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-ab4743e8341de3c3",
+      "may_support_fields": [
+        "formulation",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 82,
+      "source_ids": [
+        "S-9847e2641f44"
+      ],
+      "text": "While the mechanisms driving HSC activation are well-studied, the pathways that promote HSC quiescence or inactivation remain less understood.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-9284c9514062a11b",
+      "may_support_fields": [
+        "formulation",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 128,
+      "source_ids": [
+        "S-9847e2641f44"
+      ],
+      "text": "Recent studies have highlighted the remarkable plasticity of HSCs, demonstrating that activated HSCs can revert to a quiescent-like state during fibrosis regression, a process accompanied by metabolic reprogramming and downregulation of fibrogenic genes 16, 17.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-e0310d45ca4a9432",
+      "may_support_fields": [
+        "formulation",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 114,
+      "source_ids": [
+        "S-9847e2641f44"
+      ],
+      "text": "This plasticity suggests that targeting HSC reversion, rather than solely inhibiting activation, could offer a promising therapeutic avenue.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-96726566acc2afbc",
+      "may_support_fields": [
+        "formulation",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-9847e2641f44"
+      ],
+      "text": "However, the endogenous factors that orchestrate this reversion and their interplay with metabolic and fibrogenic pathways remain elusive, limiting the development of targeted therapies.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-9cf9f1ea789ebb00",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "All animal studies were performed following procedures approved by the Institutional Animal Care & Use Committee at the Fudan University.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-36043f31efbff98d",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 79,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "Mice were housed in pathogen-free facilities under 12 h light-dark cycles with free access to water and fed with a normal chow diet (NCD).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-9a4e5747ec4cd166",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "The sequence of the antisense shRNA of Gdf10 was 5′- GCTACAGAGATACGACCCATT-3′.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-0885bfe9a41c4dcd",
+      "may_support_fields": [
+        "payload",
+        "recipient_cell"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 61,
+      "source_ids": [
+        "S-69f18ef37aa0"
+      ],
+      "text": "The number of mice in each group is specified in the figure legend.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-5e89831beb04ab9e",
+      "may_support_fields": [
+        "assay",
+        "biological_model",
+        "endpoint",
+        "payload",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 119,
+      "source_ids": [
+        "S-b8d2f79e138f"
+      ],
+      "text": "The success of this delivery platform builds upon recent advances in nucleic acid therapeutics and nanomedicine 39, 40, demonstrating how rational nanoparticle design can overcome biological barriers to achieve cell-type specific delivery.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-c3eeb7b2c942f5d2",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 51,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "S7A-C).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-5e9ddbd0e9169c16",
+      "may_support_fields": [
+        "assay",
+        "recipient_cell",
+        "therapeutic_target"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 91,
+      "source_ids": [
+        "S-d38a9428c194"
+      ],
+      "text": "Collectively, these data demonstrate that GDF10 antagonizes TGFβ1 signaling by targeting TβR2, thereby preventing SMAD2/3-mediated HSC activation and ECM production.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-b05148e5dc817398",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-d92c3117f233"
+      ],
+      "text": "Western blot and immunofluorescence staining were utilized to assess nuclear translocation of SMAD2.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-7c3dad4e7b50da62",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 67,
+      "source_ids": [
+        "S-d92c3117f233"
+      ],
+      "text": "Before harvesting, cells were pretreated with GDF10 for 50 min, followed by stimulation with TGFβ1 for 50 min.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-c03cf6dce5e1b792",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 66,
+      "source_ids": [
+        "S-d92c3117f233"
+      ],
+      "text": "Cell nuclei were isolated using Nuclear and Cytoplasmic Protein Extraction Kit (Sangon Biotech, C510001).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-d49b3087114965ba",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 56,
+      "source_ids": [
+        "S-d92c3117f233"
+      ],
+      "text": "In brief, cell pellets were resuspended in hypotonic lysis buffer.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-2c97ce791a52da6e",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 94,
+      "source_ids": [
+        "S-d92c3117f233"
+      ],
+      "text": "After centrifugation at 14,000 g for 5 minutes, the solution can be observed to separate into three distinct layers: a transparent lower layer, a white nuclear pellet in the middle layer, and a supernatant upper layer.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-676dc5deb1effb95",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 72,
+      "source_ids": [
+        "S-d92c3117f233"
+      ],
+      "text": "Then, supernatant containing cytoplasmic proteins was collected.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-a48e5172d06a9d04",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 94,
+      "source_ids": [
+        "S-d92c3117f233"
+      ],
+      "text": "The white nuclear pellet was resuspended with nuclear extraction buffer and nuclear proteins were collected by centrifugation at 14,000 g for 5 minutes.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-590cacf1d3701a24",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 76,
+      "source_ids": [
+        "S-1e4b64aef593"
+      ],
+      "text": "Our study also raises important questions about the broader biological roles of GDF10 in liver physiology and disease.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-2d44f9d55669fa61",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 129,
+      "source_ids": [
+        "S-1e4b64aef593"
+      ],
+      "text": "Furthermore, the interplay between GDF10 and other resident liver cells, particularly Kupffer cells and hepatocytes, warrants further investigation given their known contributions to fibrosis progression through inflammatory signaling and oxidative stress 43, 44.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-ba60494e62f6af82",
+      "may_support_fields": [
+        "biological_model",
+        "recipient_cell"
+      ],
+      "priority_score": -25,
+      "priority_reasons": [
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 103,
+      "source_ids": [
+        "S-1e4b64aef593"
+      ],
+      "text": "Thus, whether GDF10 has immunomodulatory functions that complement its direct effects on HSCs, and the upstream mechanism of GDF10 require further investigation.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-e1f16c6f57f4180a",
+      "may_support_fields": [
+        "payload",
+        "therapeutic_target"
+      ],
+      "priority_score": 10,
+      "priority_reasons": [
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 77,
+      "source_ids": [
+        "S-b278994260cc"
+      ],
+      "text": "HSCs were isolated from mice livers by collagenase digestion followed by gradient centrifugation, as previously described 23.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-794780433dbd3906",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 89,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "To further confirm the metabolic-independent anti-fibrotic effects of GDF10, we compared Gdf10-OE mice with wild-type (WT) littermates in both CCl4- and HFMCD diet-induced fibrosis models (Fig.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-497e03e97812d208",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 43,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "S3A, S3K).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-a5d309f5291bc21b",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 54,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "S3C), with no alterations in blood glucose levels (Fig.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-2c011269e71cc2c9",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "S3D).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-694f75828756b41b",
+      "may_support_fields": [
+        "endpoint"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 42,
+      "source_ids": [
+        "S-8889006de11d"
+      ],
+      "text": "S3H-J).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-0e9f446a8af86ba7",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 116,
+      "source_ids": [
+        "S-695ec59f2807"
+      ],
+      "text": "The plasma alanine aminotransferase (ALT) and aspartate aminotransferase (AST) levels were measured using commercial kits from Nanjing Jianchen Bioengineering Institute (NJJCBIO, C009-2-1&C010-2-1) following the manufacturer's instructions.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-db2b525771cb18a7",
+      "may_support_fields": [
+        "assay"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 100,
+      "source_ids": [
+        "S-695ec59f2807"
+      ],
+      "text": "Plasma concentrations of cholesterol (T-CHO) and triglyceride (TG) were measured using assay kits from Nanjing Jianchen Bioengineering Institute (NJJCBIO, A111-1-1& A110-1-1).",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-eddfcc0972f70ebe",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 65,
+      "source_ids": [
+        "S-1ec60ef30e61"
+      ],
+      "text": "The metabolic effects of GDF10 on HSCs add another layer of complexity to its antifibrotic action.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-1857fd006684a493",
+      "may_support_fields": [
+        "outcomes"
+      ],
+      "priority_score": -5,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "background_without_direct_signal"
+      ],
+      "estimated_item_tokens": 109,
+      "source_ids": [
+        "S-1ec60ef30e61"
+      ],
+      "text": "The connection between metabolic flexibility and fibrogenic potential has gained considerable attention in recent years, with studies highlighting how metabolic intermediates can directly influence epigenetic modifications and transcriptional programs driving fibrosis 31, 38.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    },
+    {
+      "evidence_id": "candidate_00185-E-e924c02b4ae0d99c",
+      "may_support_fields": [
+        "assay",
+        "endpoint",
+        "formulation",
+        "outcomes",
+        "payload"
+      ],
+      "priority_score": 30,
+      "priority_reasons": [
+        "priority_retrieval_group",
+        "methods_or_results"
+      ],
+      "estimated_item_tokens": 78,
+      "source_ids": [
+        "S-343d1b010a22"
+      ],
+      "text": "For characterization of LNP, Zetasizer Nano ZS90 was utilized to measured diameter and polydispersity index.",
+      "exclusion_reason": "evidence_budget_exceeded"
+    }
+  ]
+}

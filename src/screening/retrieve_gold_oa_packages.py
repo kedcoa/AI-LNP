@@ -20,7 +20,7 @@ import certifi
 from src.rag.ingestion import GOLD_PAPERS, OA_ROOT, ROOT
 
 
-OA_API = "https://pmc.ncbi.nlm.nih.gov/utils/oa/oa.fcgi?id={pmcid}"
+OA_API = "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id={pmcid}"
 USER_AGENT = "AI-LNP evidence project (lawful PMC OA package retrieval)"
 PMC_BIN = "https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/bin/{name}"
 EUROPE_PMC_PDF = "https://europepmc.org/articles/{pmcid}?pdf=render"

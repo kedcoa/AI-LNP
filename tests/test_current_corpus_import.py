@@ -115,9 +115,16 @@ def test_import_preserves_review_visibility_evidence_and_deterministic_eligibili
             """
         ).fetchall()
         assert unknown_arms
+        assert all(nearest == 0 and comet == 0 for _, _, nearest, comet, _ in unknown_arms)
         assert all(
-            status == "quarantined" and nearest == 0 and comet == 0 and reason
-            for _, status, nearest, comet, reason in unknown_arms
+            status in {"complete", "incomplete"} and reason is None
+            for cell, status, _, _, reason in unknown_arms
+            if cell == "not_reported"
+        )
+        assert all(
+            reason != "Target cell needs automatic resolution"
+            for cell, _, _, _, reason in unknown_arms
+            if cell == "other"
         )
         hep_g2 = connection.execute(
             """
@@ -171,6 +178,168 @@ def test_lossless_rebuild_is_source_complete_and_reproducible(tmp_path: Path) ->
             "SELECT lnp_molar_ratio FROM lnp_formulation_wide "
             "WHERE lnp_name='αCD163/LNP-FAPCAR'"
         ).fetchone() == ("45:30:23.5:1.5",)
+
+
+def test_lossless_rebuild_projects_shared_gp002_and_gp004_context(
+    tmp_path: Path,
+) -> None:
+    module = _module()
+    database = tmp_path / "shared-context.db"
+    module.rebuild_database(database, MANIFEST, BUNDLES, corpus_root=ROOT)
+
+    with sqlite3.connect(database) as connection:
+        gp002 = connection.execute(
+            """
+            SELECT experiment_id,target_or_recipient_organ,
+                   observed_transfected_cell,route,timepoint,timepoint_unit
+            FROM experiment JOIN paper USING(paper_id)
+            WHERE source_paper_id='GP-002'
+            ORDER BY experiment_id
+            """
+        ).fetchall()
+        gp004 = connection.execute(
+            """
+            SELECT experiment_id,target_or_recipient_organ,payload_name,
+                   timepoint,timepoint_unit,assay
+            FROM experiment JOIN paper USING(paper_id)
+            WHERE source_paper_id='GP-004'
+            ORDER BY experiment_id
+            """
+        ).fetchall()
+
+    assert len(gp002) == 6
+    assert all(row[1] and "liver" in row[1].casefold() for row in gp002)
+    assert all(row[2] and "hepatocyte" in row[2].casefold() for row in gp002)
+    assert all(row[3] == "intravenous tail-vein injection" for row in gp002)
+    assert gp002[1][4:6] == (24.0, "hours")
+    assert gp002[3][4:6] == (14.0, "hours")
+
+    assert len(gp004) == 4
+    assert all(row[1] and "liver" in row[1].casefold() for row in gp004)
+    assert gp004[0][3:5] == (5.0, "hours; also days 1, 2, 3, 6, and 8")
+    assert gp004[2][2] == "HGF mRNA + EGF mRNA"
+    assert "Oil Red O" in gp004[2][5]
+
+
+def test_lossless_rebuild_projects_existing_pilot_outcomes(tmp_path: Path) -> None:
+    module = _module()
+    database = tmp_path / "pilot-outcomes.db"
+    module.rebuild_database(database, MANIFEST, BUNDLES, corpus_root=ROOT)
+
+    with sqlite3.connect(database) as connection:
+        counts = dict(connection.execute(
+            """
+            SELECT source_paper_id,count(outcome_id)
+            FROM paper JOIN experiment USING(paper_id)
+            LEFT JOIN outcome USING(experiment_id)
+            WHERE source_paper_id LIKE 'PILOT-%'
+            GROUP BY source_paper_id
+            """
+        ))
+
+    assert counts == {"PILOT-001": 11, "PILOT-002": 18, "PILOT-003": 14}
+
+
+def test_np002_validated_evidence_is_usable_only_when_mandatory_fields_exist(
+    tmp_path: Path,
+) -> None:
+    module = _module()
+    database = tmp_path / "np002.db"
+    module.rebuild_database(database, MANIFEST, BUNDLES, corpus_root=ROOT)
+
+    with sqlite3.connect(database) as connection:
+        rows = connection.execute(
+            """
+            SELECT a.completeness_status,a.verification_status,
+                   a.nearest_neighbor_eligible,a.comet_eligible
+            FROM arm_assessment a JOIN experiment e USING(experiment_id)
+            JOIN paper p USING(paper_id)
+            WHERE p.source_paper_id='NP-002'
+            ORDER BY e.experiment_id
+            """
+        ).fetchall()
+
+    assert len(rows) == 6
+    assert all(status != "quarantined" for status, _, _, _ in rows)
+    assert all(verification == "automatically_validated" for _, verification, _, _ in rows)
+    assert sum(nearest for _, _, nearest, _ in rows) == 6
+    assert sum(status == "complete" for status, _, _, _ in rows) == 6
+    assert all(comet == 0 for _, _, _, comet in rows)
+
+
+def test_descriptive_recipient_labels_do_not_force_human_review(tmp_path: Path) -> None:
+    module = _module()
+    database = tmp_path / "recipient-labels.db"
+    module.rebuild_database(database, MANIFEST, BUNDLES, corpus_root=ROOT)
+
+    with sqlite3.connect(database) as connection:
+        false_reviews = connection.execute(
+            "SELECT count(*) FROM import_review "
+            "WHERE reason_code='target_cell_automatic_resolution'"
+        ).fetchone()[0]
+        quarantined = connection.execute(
+            """
+            SELECT count(*)
+            FROM arm_assessment a JOIN experiment e USING(experiment_id)
+            JOIN paper p USING(paper_id)
+            WHERE p.source_paper_id IN ('GP-005','PILOT-001','PILOT-002','PILOT-003')
+              AND a.quarantine_reason='Target cell needs automatic resolution'
+            """
+        ).fetchone()[0]
+
+    assert false_reviews == 0
+    assert quarantined == 0
+
+
+def test_repaired_corpus_rows_keep_shared_context_and_real_readiness(tmp_path: Path) -> None:
+    module = _module()
+    database = tmp_path / "shared-invariants.db"
+    module.rebuild_database(database, MANIFEST, BUNDLES, corpus_root=ROOT)
+
+    with sqlite3.connect(database) as connection:
+        gp005 = connection.execute(
+            """
+            SELECT f.formulation_name,a.completeness_status,
+                   a.nearest_neighbor_eligible,count(o.outcome_id)
+            FROM experiment e JOIN paper p USING(paper_id)
+            JOIN formulation f USING(formulation_id)
+            JOIN arm_assessment a USING(experiment_id)
+            LEFT JOIN outcome o USING(experiment_id)
+            WHERE p.source_paper_id='GP-005'
+            GROUP BY e.experiment_id ORDER BY e.experiment_id
+            """
+        ).fetchall()
+        gp008 = connection.execute(
+            """
+            SELECT f.formulation_name,e.in_vitro_in_vivo,
+                   a.completeness_status,a.nearest_neighbor_eligible,
+                   count(o.outcome_id)
+            FROM experiment e JOIN paper p USING(paper_id)
+            JOIN formulation f USING(formulation_id)
+            JOIN arm_assessment a USING(experiment_id)
+            LEFT JOIN outcome o USING(experiment_id)
+            WHERE p.source_paper_id='GP-008'
+            GROUP BY e.experiment_id ORDER BY e.experiment_id
+            """
+        ).fetchall()
+        pilot_ready = dict(connection.execute(
+            """
+            SELECT p.source_paper_id,sum(a.nearest_neighbor_eligible)
+            FROM paper p JOIN experiment e USING(paper_id)
+            JOIN arm_assessment a USING(experiment_id)
+            WHERE p.source_paper_id LIKE 'PILOT-%'
+            GROUP BY p.source_paper_id
+            """
+        ))
+
+    assert len(gp005) == 8
+    assert {row[0] for row in gp005} >= {"LNP3", "LNP4", "LNP5", "LNP6", "LNP7", "LNP16", "LNP17"}
+    assert all(row[1:] == ("complete", 1, row[3]) and row[3] > 0 for row in gp005)
+    luc = next(row for row in gp008 if row[0] == "αCD163/LNP-Luc")
+    zsgreen = next(row for row in gp008 if row[0] == "αCD163/LNP-ZsGreen")
+    assert luc[1:] == ("in_vivo", "complete", 1, 1)
+    assert zsgreen[1:] == ("in_vivo", "complete", 1, 1)
+    assert pilot_ready == {"PILOT-001": 5, "PILOT-002": 2, "PILOT-003": 4}
 
 
 def test_failed_paper_rolls_back_without_erasing_other_papers(

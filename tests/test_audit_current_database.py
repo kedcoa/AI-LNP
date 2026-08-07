@@ -61,7 +61,7 @@ def test_audit_accepts_complete_current_corpus_fixture(tmp_path: Path) -> None:
         "conflicts", "quarantined", "eligible_arms",
     }
     assert sum(row["evidence"] for row in result["papers"]) == 777
-    assert sum(row["missing"] for row in result["papers"]) == 6
+    assert sum(row["missing"] for row in result["papers"]) == 153
     pilot1 = next(row for row in result["papers"] if row["paper_id"] == "PILOT-001")
     assert pilot1["likely_evidence_inaccessible"] is True
 

@@ -1,0 +1,27 @@
+Focus only on the LNP formulation used in this paper (GP-004; DOI: 10.1038/s41467-021-20903-3).
+
+The supplied PDF contains the 10-page main paper followed by three supplementary PDFs. Find the exact lipid components and their molar ratio for the Acuitas LNP used to deliver the mRNAs in this study.
+
+Rules:
+1. Search the Methods, supplementary information, formulation descriptions, footnotes, and patent references.
+2. Do not assume a standard LNP ratio.
+3. Do not infer a ratio merely because the formulation contains an ionizable lipid, DSPC, cholesterol, and PEG-lipid.
+4. Distinguish the lipid molar ratio from the mRNA dose, N/P ratio, weight ratio, particle size, and lipid:mRNA ratio.
+5. If the exact ratio is not stated in the supplied document, return "NOT REPORTED IN THIS DOCUMENT."
+6. If the document points to a patent or another source, provide the patent/publication number and the exact formulation-identifying language, but do not invent a ratio.
+7. Keep the response under 500 words.
+
+Return exactly:
+
+LNP name:
+Ionizable lipid:
+Helper lipid:
+Cholesterol:
+PEG lipid:
+Other components:
+Exact molar ratio:
+Ratio status: REPORTED / NOT REPORTED / AMBIGUOUS
+Evidence quotation:
+Evidence location:
+Referenced patent or external source:
+Explanation:

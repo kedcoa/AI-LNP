@@ -6,7 +6,7 @@ import re
 import sqlite3
 
 
-MIGRATION_VERSION = 6
+MIGRATION_VERSION = 8
 
 PAPER_COLUMNS = {
     "source_paper_id": "TEXT",
@@ -15,6 +15,9 @@ PAPER_COLUMNS = {
 
 EXPERIMENT_COLUMNS = {
     "tissue_or_organ": "TEXT",
+    "intended_target_cell": "TEXT",
+    "target_or_recipient_organ": "TEXT",
+    "observed_transfected_cell": "TEXT",
     "disease_model": "TEXT",
     "payload_encoded_product": "TEXT",
     "payload_molecular_target": "TEXT",
@@ -818,15 +821,17 @@ def migrate_database(connection: sqlite3.Connection) -> None:
     """
 
     rebuild_cell_type = _experiment_needs_cell_type_rebuild(connection)
-    if rebuild_cell_type and connection.in_transaction:
-        raise RuntimeError("cell-type migration requires no active transaction")
+    rebuild_evidence_status = _evidence_needs_auto_validation_rebuild(connection)
+    rebuild_constrained_table = rebuild_cell_type or rebuild_evidence_status
+    if rebuild_constrained_table and connection.in_transaction:
+        raise RuntimeError("constrained-table migration requires no active transaction")
     if connection.execute("PRAGMA foreign_keys").fetchone() != (1,):
         raise RuntimeError(
             "SQLite foreign-key enforcement must be enabled before migration"
         )
     if connection.execute("PRAGMA foreign_key_check").fetchall():
         raise RuntimeError("foreign-key violations before migration")
-    if rebuild_cell_type:
+    if rebuild_constrained_table:
         connection.execute("PRAGMA foreign_keys = OFF")
         connection.execute("PRAGMA legacy_alter_table = ON")
     savepoint = "working_evidence_database_migration"
@@ -834,6 +839,8 @@ def migrate_database(connection: sqlite3.Connection) -> None:
     try:
         if rebuild_cell_type:
             _migrate_experiment_cell_type(connection)
+        if rebuild_evidence_status:
+            _migrate_evidence_review_status(connection)
         _add_missing_columns(connection, "paper", PAPER_COLUMNS)
         _add_missing_columns(connection, "experiment", EXPERIMENT_COLUMNS)
         _add_missing_columns(connection, "formulation", FORMULATION_COLUMNS)
@@ -957,21 +964,76 @@ def migrate_database(connection: sqlite3.Connection) -> None:
                    VALUES (5, 'entity_review_trigger_repair', '2026-08-06T04:00:00Z')"""
             )
         _execute_sql_script(connection, LOSSLESS_FACT_SCHEMA_SQL)
+        connection.execute(
+            """INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
+               VALUES (7, 'automatic_evidence_validation', '2026-08-07T06:30:00Z')"""
+        )
+        connection.execute(
+            """INSERT OR IGNORE INTO schema_migration (version, name, applied_at)
+               VALUES (8, 'target_scope_dimensions', '2026-08-07T08:00:00Z')"""
+        )
         if connection.execute("PRAGMA foreign_key_check").fetchall():
             raise RuntimeError("foreign-key violations during migration")
     except BaseException:
         connection.execute(f"ROLLBACK TO SAVEPOINT {savepoint}")
         connection.execute(f"RELEASE SAVEPOINT {savepoint}")
-        if rebuild_cell_type:
+        if rebuild_constrained_table:
             connection.execute("PRAGMA legacy_alter_table = OFF")
             connection.execute("PRAGMA foreign_keys = ON")
         raise
     connection.execute(f"RELEASE SAVEPOINT {savepoint}")
-    if rebuild_cell_type:
+    if rebuild_constrained_table:
         connection.execute("PRAGMA legacy_alter_table = OFF")
         connection.execute("PRAGMA foreign_keys = ON")
         if connection.execute("PRAGMA foreign_key_check").fetchall():
             raise RuntimeError("foreign-key violations after cell-type migration")
+
+
+def _evidence_needs_auto_validation_rebuild(
+    connection: sqlite3.Connection,
+) -> bool:
+    row = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='evidence'"
+    ).fetchone()
+    if row is None or not row[0]:
+        return False
+    sql = str(row[0])
+    return (
+        "evidence_review_status" in sql
+        and "CHECK" in sql.upper()
+        and "'automatically_validated'" not in sql
+    )
+
+
+def _migrate_evidence_review_status(connection: sqlite3.Connection) -> None:
+    """Persist automatic validation instead of downgrading it to unreviewed."""
+
+    row = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='evidence'"
+    ).fetchone()
+    if row is None or not _evidence_needs_auto_validation_rebuild(connection):
+        return
+    old_sql = str(row[0])
+    new_sql, replacements = re.subn(
+        r"('unreviewed'\s*,)",
+        r"\1\n                'automatically_validated',",
+        old_sql,
+        count=1,
+    )
+    if replacements != 1:
+        raise RuntimeError("unrecognized evidence review-status constraint")
+    columns = [row[1] for row in connection.execute("PRAGMA table_info(evidence)")]
+    quoted = ", ".join(f'"{column}"' for column in columns)
+    connection.execute("ALTER TABLE evidence RENAME TO evidence_review_status_v1")
+    connection.execute(new_sql)
+    connection.execute(
+        f"INSERT INTO evidence ({quoted}) "
+        f"SELECT {quoted} FROM evidence_review_status_v1"
+    )
+    connection.execute("DROP TABLE evidence_review_status_v1")
+    connection.execute(
+        "CREATE INDEX IF NOT EXISTS idx_evidence_outcome ON evidence(outcome_id)"
+    )
 
 
 def _experiment_needs_cell_type_rebuild(connection: sqlite3.Connection) -> bool:

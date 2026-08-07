@@ -145,6 +145,9 @@ CREATE TABLE IF NOT EXISTS experiment (
     ),
     cell_source TEXT,
     tissue_or_organ TEXT,
+    intended_target_cell TEXT,
+    target_or_recipient_organ TEXT,
+    observed_transfected_cell TEXT,
     species TEXT,
     disease_model TEXT,
     in_vitro_in_vivo TEXT
@@ -284,6 +287,7 @@ CREATE TABLE IF NOT EXISTS evidence (
         CHECK (
             evidence_review_status IN (
                 'unreviewed',
+                'automatically_validated',
                 'manually_verified',
                 'ambiguous',
                 'conflict',

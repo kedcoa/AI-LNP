@@ -44,8 +44,11 @@ def review_database(tmp_path: Path) -> Path:
     ).lastrowid
     formulation_id = connection.execute(
         """
-        INSERT INTO formulation (paper_id, formulation_name, composition_raw, composition_basis)
-        VALUES (?, 'LNP-A', '50:10:38.5:1.5', 'mol%')
+        INSERT INTO formulation (
+            paper_id, formulation_name, composition_raw, composition_basis,
+            chemical_formulation_total, lnp_molar_ratio
+        ) VALUES (?, 'LNP-A', '50:10:38.5:1.5', 'mol%',
+                  'A-B-C-D', '50:10:38.5:1.5')
         """,
         (first_paper,),
     ).lastrowid
@@ -60,10 +63,11 @@ def review_database(tmp_path: Path) -> Path:
     ready_arm = connection.execute(
         """
         INSERT INTO experiment (
-            paper_id, formulation_id, cell_type, species, in_vitro_in_vivo,
+            paper_id, formulation_id, cell_type, intended_target_cell,
+            species, in_vitro_in_vivo,
             payload_type, payload_name, dose, dose_unit, route, timepoint,
             timepoint_unit, assay
-        ) VALUES (?, ?, 'hepatocyte', 'mouse', 'in_vivo', 'mRNA', 'Luciferase',
+        ) VALUES (?, ?, 'hepatocyte', 'hepatocyte', 'mouse', 'in_vivo', 'mRNA', 'Luciferase',
                   1, 'mg/kg', 'iv', 24, 'h', 'ELISA')
         """,
         (first_paper, formulation_id),
@@ -399,7 +403,7 @@ def test_prepare_writes_requires_a_current_schema_and_verified_external_backup(
     readiness = _write_readiness(monkeypatch, review_database, tmp_path)
 
     assert readiness.database_path == review_database
-    assert readiness.schema_version == 6
+    assert readiness.schema_version == 8
     assert readiness.backup_path.parent == (tmp_path / 'review-backups').resolve()
     assert readiness.backup_sha256
 
@@ -631,7 +635,7 @@ def test_accept_decision_marks_linked_evidence_manually_verified(
     assert verification == 'manually_verified'
     assert result.nearest_neighbor.eligible is True
     assert result.comet.eligible is False
-    assert 'lnp_molar_ratio' in result.comet.reasons
+    assert 'biological_model' in result.comet.reasons
     dashboard = load_dashboard()
     assert dashboard.automatically_validated_usable_facts == 2
     assert dashboard.manually_verified_usable_facts == 2
@@ -1089,4 +1093,4 @@ def test_outcome_fields_are_reviewable_with_owned_evidence_and_history(
     assert (history.entity_type, history.entity_id, history.field_name) == ('outcome', 1, 'outcome_value')
     assert result.comet.eligible is False
     assert 'usable_outcome' not in result.comet.reasons
-    assert 'lnp_molar_ratio' in result.comet.reasons
+    assert 'biological_model' in result.comet.reasons

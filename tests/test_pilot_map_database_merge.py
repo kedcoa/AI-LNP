@@ -12,6 +12,7 @@ from src.extraction.prepare_application_pilot import _map_artifact_inputs
 
 
 ROOT = Path(__file__).resolve().parents[1]
+CONSOLIDATED = ROOT / "reports/extraction/application_pilot_final.json"
 
 
 def _completed_response(paper_id: str) -> Path:
@@ -33,6 +34,7 @@ def test_completed_pilot_map_promotes_only_grounded_formulations_and_arms() -> N
     result = build_pilot_map_lossless_result(
         response_path=(response := _completed_response("PILOT-001")),
         base_bundle=_base_bundle("PILOT-001"),
+        consolidated_path=CONSOLIDATED,
     )
     assert _map_artifact_inputs(response)[7] == (
         ROOT / "data/staging/extraction/application_pilot/PILOT-001/inventory.json"
@@ -42,7 +44,20 @@ def test_completed_pilot_map_promotes_only_grounded_formulations_and_arms() -> N
     assert len(bundle.formulations) == 2
     assert len(bundle.components) == 10
     assert len(bundle.arms) == 5
-    assert len(bundle.outcomes) == 0
+    assert len(bundle.outcomes) == 11
+    assert any(
+        outcome.endpoint_name.casefold() == "gfp silencing/knockdown efficiency"
+        and ">80% GFP silencing" in (outcome.qualitative_outcome or "")
+        for outcome in bundle.outcomes
+    )
+    assert not any(
+        review.reason_code == "outcome_link_unclear"
+        for review in bundle.reviews
+    )
+    in_vivo = [arm for arm in bundle.arms if arm.tissue_or_organ == "liver"]
+    assert in_vivo
+    assert all(arm.target_or_recipient_organ == "liver" for arm in in_vivo)
+    assert all(arm.observed_transfected_cell for arm in bundle.arms)
     completed_artifact = next(
         artifact
         for artifact in bundle.artifacts
@@ -72,16 +87,18 @@ def test_completed_pilot_map_promotes_only_grounded_formulations_and_arms() -> N
 
 def test_all_three_completed_maps_are_schema_and_inventory_bound() -> None:
     expected = {
-        "PILOT-001": (2, 5),
-        "PILOT-002": (5, 5),
-        "PILOT-003": (1, 5),
+        "PILOT-001": (2, 5, 11),
+        "PILOT-002": (5, 5, 18),
+        "PILOT-003": (1, 5, 14),
     }
-    for paper_id, (formulation_count, arm_count) in expected.items():
+    for paper_id, (formulation_count, arm_count, outcome_count) in expected.items():
         result = build_pilot_map_lossless_result(
             response_path=_completed_response(paper_id),
             base_bundle=_base_bundle(paper_id),
+            consolidated_path=CONSOLIDATED,
         )
         assert len(result.bundle.formulations) == formulation_count
         assert len(result.bundle.arms) == arm_count
+        assert len(result.bundle.outcomes) == outcome_count
         assert result.coverage.silent_omissions == 0
         assert result.coverage.source_fields == result.source_fact_count

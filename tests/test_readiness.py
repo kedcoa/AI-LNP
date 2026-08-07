@@ -36,11 +36,13 @@ def readiness_database(tmp_path: Path):
     experiment_id = connection.execute(
         """
         INSERT INTO experiment (
-            paper_id,formulation_id,cell_type,cell_source,species,disease_model,
+            paper_id,formulation_id,cell_type,intended_target_cell,
+            cell_source,species,disease_model,
             in_vitro_in_vivo,payload_type,payload_name,payload_encoded_product,
-            dose,dose_unit,assay
-        ) VALUES (?,?,'hepatocyte','mouse hepatocytes','Mus musculus','healthy mouse',
-                  'in_vivo','mRNA','eGFP mRNA','eGFP',10,'ug','IHC')
+            dose,dose_unit,route,timepoint,timepoint_unit,assay
+        ) VALUES (?,?,'hepatocyte','hepatocyte','mouse hepatocytes',
+                  'Mus musculus','healthy mouse','in_vivo','mRNA','eGFP mRNA',
+                  'eGFP',10,'ug','intravenous',24,'hour','IHC')
         """,
         (paper_id, formulation_id),
     ).lastrowid
@@ -103,6 +105,21 @@ def test_missing_formulation_ratio_is_visible_comet_blocker(
         (experiment_id,),
     ).fetchone()
     assert stored == (0, "working-evidence-v3")
+
+
+def test_missing_mandatory_arm_field_is_not_general_usable(
+    readiness_database,
+) -> None:
+    connection, experiment_id, _ = readiness_database
+    connection.execute(
+        "UPDATE experiment SET route=NULL WHERE experiment_id=?",
+        (experiment_id,),
+    )
+
+    result = evaluate_readiness(connection, experiment_id)
+
+    assert result.general_usable is False
+    assert "route" in result.comet_blockers
 
 
 def test_conflict_is_not_labeled_almost_comet_ready(readiness_database) -> None:

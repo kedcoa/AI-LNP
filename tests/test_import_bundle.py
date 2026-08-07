@@ -269,7 +269,7 @@ def test_contract_requires_accepted_outcome_evidence_for_eligible_arm() -> None:
         _load_bundle(payload)
 
 
-def test_contract_rejects_automatic_evidence_for_persisted_eligibility() -> None:
+def test_contract_accepts_automatic_evidence_for_persisted_eligibility() -> None:
     payload = _load_payload()
     payload["evidence"][0]["verification_status"] = "automatically_validated"
     payload["arms"][0].update(
@@ -279,8 +279,7 @@ def test_contract_rejects_automatic_evidence_for_persisted_eligibility() -> None
     for link in payload["field_evidence_links"]:
         link["verification_status"] = "automatically_validated"
 
-    with pytest.raises(ValueError, match="core schema cannot persist accepted automatic evidence"):
-        _load_bundle(payload)
+    assert _load_bundle(payload).arms[0].verification_status == "automatically_validated"
 
 
 def test_quarantine_review_rejects_unscoped_evidence() -> None:
@@ -583,7 +582,7 @@ def test_evidence_only_conflict_survives_status_recalculation(
         connection.close()
 
 
-def test_automatic_evidence_mapping_is_explicit_and_ineligible(
+def test_automatic_evidence_mapping_is_stored_and_nearest_neighbor_eligible(
     tmp_path: Path,
 ) -> None:
     payload = _load_payload()
@@ -601,20 +600,29 @@ def test_automatic_evidence_mapping_is_explicit_and_ineligible(
         experiment_id = connection.execute(
             "SELECT experiment_id FROM experiment"
         ).fetchone()[0]
+        connection.execute(
+            "UPDATE formulation SET chemical_formulation_total='A-B-C-D',"
+            "lnp_molar_ratio='50:10:38.5:1.5'"
+        )
+        connection.execute(
+            "UPDATE experiment SET intended_target_cell='hepatocyte',"
+            "payload_name='test mRNA',route='intravenous',"
+            "timepoint=24,timepoint_unit='hours' WHERE experiment_id=?",
+            (experiment_id,),
+        )
 
         assert connection.execute(
             "SELECT evidence_review_status, reviewer_notes FROM evidence"
         ).fetchone() == (
-            "unreviewed",
-            "Source verification status automatically_validated; "
-            "stored as unreviewed because the core schema has no automatic state.",
+            "automatically_validated",
+            None,
         )
         assert evaluate_arm_status(
             connection, experiment_id
         ).verification_status == "automatically_validated"
         assert evaluate_eligibility(
             connection, experiment_id, "nearest_neighbor"
-        ).eligible is False
+        ).eligible is True
     finally:
         connection.close()
 

@@ -64,8 +64,12 @@ def test_gold_arms_enrich_instead_of_replacing_graph_arms() -> None:
     gp006 = _bundle("GP-006")
     gp008 = _bundle("GP-008")
 
-    assert len(gp006.arms) == 3
-    assert len({arm.record_id for arm in gp006.arms}) == 3
+    assert len(gp006.arms) == 2
+    assert len({arm.record_id for arm in gp006.arms}) == 2
+    cas9 = next(arm for arm in gp006.arms if ":ARM:GP-006-E01:" in arm.record_id)
+    assert cas9.cell_type == "lsec"
+    assert cas9.payload_encoded_product == "Cas9"
+    assert sum(outcome.arm_id == cas9.record_id for outcome in gp006.outcomes) == 8
     assert len(gp008.arms) == 5
     assert len({arm.record_id for arm in gp008.arms}) == 5
 

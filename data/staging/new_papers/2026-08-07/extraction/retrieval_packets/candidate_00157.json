@@ -1,0 +1,2013 @@
+{
+  "paper_id": "candidate_00157",
+  "packets": {
+    "formulation": {
+      "query": {
+        "query_id": "candidate_00157-01-formulation",
+        "paper_id": "candidate_00157",
+        "question": "What exact LNP lipid components, chemical names, molar ratios, and preparation conditions are reported?",
+        "field_group": "formulation",
+        "required_entity_types": []
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-d5d59a52bf447cd6a06e",
+          "paper_id": "candidate_00157",
+          "text": "To test the hypothesis that cholesterol structure affects LNP delivery of mRNA, we created a library of LNPs with nine cholesterol variants. We chose variants that were (i) produced naturally or synthetically and (ii) had oxidative modifications on sterol ring B, the hydrocarbon tail attached to sterol ring D, or both. We formulated LNPs to carry DNA barcodes and Cre mRNA[7], systemically injected them into Cre reporter mice, and analyzed the efficiency with which they delivered Cre mRNA in 28 cells types in vivo. We identified an LNP that delivers mRNA to Kupffer cells and hepatic endothelial cells five-fold more potently than to hepatocytes. Notably, the lead LNPs performed as predicted by the FIND screen, suggesting that FIND can rapidly identify LNPs for mRNA delivery.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.0232298375169067,
+          "vector_score": 0.005158599265041517,
+          "fused_score": 0.041126217714682285,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-b6797422a8c56e0ea35c",
+          "paper_id": "candidate_00157",
+          "text": "There have been several advances in local and systemic mRNA delivery[1], especially to hepatocytes[2]. However, low dose mRNA delivery to other cell types within the liver microenvironment remains challenging. Using a high-throughput DNA barcode screen named JORDAN, we observed that in vitro nanoparticle delivery can be a poor predictor of in vivo delivery[3]. Since in vitro assays typically lack a complete immune system[4], variable blood flow[5], heterogeneous vasculature, off-target cells, and other factors that influence delivery in vivo[6], we reasoned that an ideal nanoparticle experiment would study LNPs directly in vivo. We therefore developed FIND[7] to quantify how over 100 LNPs deliver functional mRNA into the cytoplasm of target cells in a single mouse.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P1",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.313689944430801,
+          "vector_score": 0.0012563244776375364,
+          "fused_score": 0.035568356374807986,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.7033208982236667,
+          "vector_score": 0.008072667039063173,
+          "fused_score": 0.035062229437229434,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.023570532671987,
+          "vector_score": 0.005434902704802369,
+          "fused_score": 0.034825009602503204,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-739369218d80cc0f6585",
+          "paper_id": "candidate_00157",
+          "text": "Like all high-throughput screens, the utility of FIND is governed by its ability to make predictions that can be verified. To this end, we formulated our top 3 LNP candidates identified by FIND with Cre mRNA. Of the 3 LNPs formulated, one LNP – which contained 25-OH cholesterol - did not formulate consistently and was excluded. The remaining two LNPs – which contained 20α-OH cholesterol (Figure 3G,H, SI Figure 3F,G) – formed stable LNPs, and were administered to Ai14 mice at a total mRNA dose of 0.25 mg / kg. Encouragingly, we found that both LNPs recapitulated the results from the FIND screen (Figure 3I–L). Both LNP1 and LNP2 robustly targeted cells in the microenvironment after a 0.25 mg / kg injection; as predicted by the screen, hepatocytes were targeted far less efficiently. LNP1 did not cause mouse weight loss in any experiment; LNP2 did cause mice to lose weight at 0.25 mg / kg (SI Figure 4B). Encouraged by robust delivery at 0.25 mg / kg, we injected LNP1 and LNP2 at a dose of 0.05 mg / kg.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P9",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.517143650271459e-06,
+          "vector_score": 0.004258534982921011,
+          "fused_score": 0.03379960317460317,
+          "entity_types": [
+            "cell",
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.329406522291254e-06,
+          "vector_score": 0.004014952727040578,
+          "fused_score": 0.033684776523502116,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-4476b67617048f6e97e1",
+          "paper_id": "candidate_00157",
+          "text": "Unmodified cholesterol is acted upon by enzymes to form variants that are side-chain or ring oxidized (Figure 1A). To investigate whether these modifications altered LNP targeting, we formulated 125 FIND LNPs using microfluidics (Figure 1B). To minimize variation from components other than cholesterol, LNPs were made of the ionizable lipid-like material cKK-E12[8], two well validated PEG-lipids, the phospholipid 1,2-Dioleoyl-sn-glycero-3-phosphoethanolamine (DOPE), and one of nine different cholesterol variants (Figure 1B).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 7.063914354762905,
+          "vector_score": 0.027344047745052724,
+          "fused_score": 0.03278688524590164,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-c995375a23a087c5ba06",
+          "paper_id": "candidate_00157",
+          "text": "LNPs are formulated by mixing nucleic acids with ionizable lipids, PEG-lipids, phospholipids, and cholesterol. The diversity of available chemistries enables scientists to evaluate how LNP structure affects delivery. However, these studies are mostly performed in vitro[8, 9] and use LNPs formulated with unmodified cholesterol. Several lines of evidence led us to hypothesize that cholesterol chemical structure affected LNP mRNA delivery. First, cholesterol structure is modified via oxidation; this requires specific enzymes, demonstrating that cells regulate cholesterol structure[10]. Second, oxidized cholesterols signal differently than unmodified cholesterols, altering interactions with membrane and nuclear receptors that regulate gene expression[11]. Third, cholesterol is trafficked in lipoproteins using forward and reverse transport[12] and trafficking to endothelial cells, hepatocytes, and macrophages may change with cholesterol structure in vivo[13]. Fourth, LNPs and lipoproteins have similar size and composition. Finally, using JORDAN, we found that modified cholesterols alter LNP biodistribution[14], however this study measured LNP biodistribution; it did not measure functional mRNA delivery. Given that less than 4% of exogenously delivered RNA escapes endosomes[15] and endosomal escape changes with cell type[16], it is difficult to predict functional mRNA delivery using biodistribution.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.616782085897121,
+          "vector_score": 0.01915139049920815,
+          "fused_score": 0.03225806451612903,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-407f2c275fc17b2642c8",
+          "paper_id": "candidate_00157",
+          "text": "Nanoparticles were formulated in a microfluidic device by mixing Cre mRNA, DNA, and LNP components[17]. The nucleic acid was diluted in citrate buffer (Teknova). Nanoparticle materials were diluted in ethanol. The phases were mixed together via microfluidics. Each LNP was formulated to carry a distinct barcode; LNP1 carried Cre mRNA and DNA barcode 1, whereas LNP2 carried Cre mRNA and DNA barcode 2. LNP hydrodynamic diameter was measured using dynamic light scattering. All animal experiments were performed in accordance with the Georgia Tech IACUC. C57BL/6J mice were purchased from Jackson Laboratory. Mice were aged 5–8 weeks, and N = 3–4 mice per group were injected intravenously. Sequencing was performed on MiniSeq™ using Illumina protocols.",
+          "section_path": "Experimental Section",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P13",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.7068378849201324,
+          "vector_score": 0.018823849968287253,
+          "fused_score": 0.03125763125763126,
+          "entity_types": [
+            "formulation_label",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-01-formulation",
+          "block_id": "candidate_00157-B-d9611ebe64f50cb53747",
+          "paper_id": "candidate_00157",
+          "text": "These data suggested that LNP cholesterol chemical composition was an important factor in LNP targeting. However, they did not take LNP size into account. We previously found no relationship between nanoparticle size and delivery for hydrodynamic diameters between ~20 and ~200 nm26,34. To investigate how size altered delivery in this experiment, we calculated whether normalized delivery varied with LNP size for all LNPs (SI Figure 2E), LNPs with tail oxidized cholesterols (SI Figure 2F), and LNPs with ring oxidized cholesterols (SI Figure 2G); we found no relationship. We then calculated the percentage of formulated LNPs that met our inclusion criteria as a function of cholesterol structure and the average size of stable LNPs based on cholesterol structure and found no significant differences (SI Figure 2H,I). We performed the same analyses as a function of cholesterol mole percentage, and reached the same conclusions (SI Figure 2J,K). Thus, we did not find evidence that size affected LNP delivery between 20 and 220 nm. However, we cannot exclude the possibility that size could affect delivery if very small or very large nanoparticles are analyzed.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.150994032292023,
+          "vector_score": 0.01755030268746442,
+          "fused_score": 0.03125,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "payload": {
+      "query": {
+        "query_id": "candidate_00157-02-payload",
+        "paper_id": "candidate_00157",
+        "question": "What exact molecular cargo is encapsulated, and what does it encode or target?",
+        "field_group": "payload",
+        "required_entity_types": [
+          "lnp",
+          "payload"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-d5d59a52bf447cd6a06e",
+          "paper_id": "candidate_00157",
+          "text": "To test the hypothesis that cholesterol structure affects LNP delivery of mRNA, we created a library of LNPs with nine cholesterol variants. We chose variants that were (i) produced naturally or synthetically and (ii) had oxidative modifications on sterol ring B, the hydrocarbon tail attached to sterol ring D, or both. We formulated LNPs to carry DNA barcodes and Cre mRNA[7], systemically injected them into Cre reporter mice, and analyzed the efficiency with which they delivered Cre mRNA in 28 cells types in vivo. We identified an LNP that delivers mRNA to Kupffer cells and hepatic endothelial cells five-fold more potently than to hepatocytes. Notably, the lead LNPs performed as predicted by the FIND screen, suggesting that FIND can rapidly identify LNPs for mRNA delivery.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.781455943409847e-06,
+          "vector_score": 0.008112043064610514,
+          "fused_score": 0.04139438130409098,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.562247882571739e-06,
+          "vector_score": 0.005734901802131055,
+          "fused_score": 0.039942506498376794,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-b6797422a8c56e0ea35c",
+          "paper_id": "candidate_00157",
+          "text": "There have been several advances in local and systemic mRNA delivery[1], especially to hepatocytes[2]. However, low dose mRNA delivery to other cell types within the liver microenvironment remains challenging. Using a high-throughput DNA barcode screen named JORDAN, we observed that in vitro nanoparticle delivery can be a poor predictor of in vivo delivery[3]. Since in vitro assays typically lack a complete immune system[4], variable blood flow[5], heterogeneous vasculature, off-target cells, and other factors that influence delivery in vivo[6], we reasoned that an ideal nanoparticle experiment would study LNPs directly in vivo. We therefore developed FIND[7] to quantify how over 100 LNPs deliver functional mRNA into the cytoplasm of target cells in a single mouse.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P1",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.7557761689937017,
+          "vector_score": 0.01993301677812573,
+          "fused_score": 0.03916599603779095,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-c995375a23a087c5ba06",
+          "paper_id": "candidate_00157",
+          "text": "LNPs are formulated by mixing nucleic acids with ionizable lipids, PEG-lipids, phospholipids, and cholesterol. The diversity of available chemistries enables scientists to evaluate how LNP structure affects delivery. However, these studies are mostly performed in vitro[8, 9] and use LNPs formulated with unmodified cholesterol. Several lines of evidence led us to hypothesize that cholesterol chemical structure affected LNP mRNA delivery. First, cholesterol structure is modified via oxidation; this requires specific enzymes, demonstrating that cells regulate cholesterol structure[10]. Second, oxidized cholesterols signal differently than unmodified cholesterols, altering interactions with membrane and nuclear receptors that regulate gene expression[11]. Third, cholesterol is trafficked in lipoproteins using forward and reverse transport[12] and trafficking to endothelial cells, hepatocytes, and macrophages may change with cholesterol structure in vivo[13]. Fourth, LNPs and lipoproteins have similar size and composition. Finally, using JORDAN, we found that modified cholesterols alter LNP biodistribution[14], however this study measured LNP biodistribution; it did not measure functional mRNA delivery. Given that less than 4% of exogenously delivered RNA escapes endosomes[15] and endosomal escape changes with cell type[16], it is difficult to predict functional mRNA delivery using biodistribution.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.9289469640978725e-06,
+          "vector_score": 0.016441010392153656,
+          "fused_score": 0.036908450870975634,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.8531477082692628e-06,
+          "vector_score": 0.013141196208552369,
+          "fused_score": 0.03613884488221518,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-10fe6bf322450416f7f2",
+          "paper_id": "candidate_00157",
+          "text": "As a quality control, we analyzed the size of each individual LNP. LNPs were only pooled if their hydrodynamic diameter was between 20 and 215 nm and their autocorrelation curve contained one inflection point (SI Figure 1A,B). Eighty-six of the 125 LNPs we formulated met these criteria and were pooled. As a control, we compared the diameters of all 86 LNPs to the diameter of the pooled LNP solution, and found they were similar (Figure 2C). This suggests that the pooled LNPs did not aggregate after mixing; we have previously observed that pooled LNPs are stable[7]. We added a naked DNA barcode as a negative control[3] since naked DNA does not readily enter cells. After isolating cells and performing NGS, we found that - as expected - the naked DNA was delivered into cells less frequently than all the DNA barcodes delivered by LNPs (Figure 2D,E).Mice were sacrificed 72 hours after we injected the pooled LNPs[7]; this timepoint allows cells to express tdTomato after Cre mRNA delivery (Figure 2A). We isolated the liver, spleen, heart, kidney, pancreas, lung, and bone marrow. Using fluorescence activated cell sorting (FACS), we then isolated 28 different tdTomato+ cell types (Figure 2A). Comparing the percentage of tdTomato+ cell types in different organs, cells in the liver tended to be targeted more than cells in other organs (Figure 2B). The organ with the second-highest percentage of tdTomato+ cells was the spleen; the remaining five organs had negligible delivery (SI Figure 1C). We then clustered the barcode sequencing data using an unbiased Euclidean algorithm. This bioinformatics technique is regularly applied to gene expression data[18] and can analyze nanoparticle barcoding data[7]. Euclidean clustering revealed that the 4 liver cell types tended to ‘cluster’ together more closely than they did to splenic cell types (Figure 2F).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.221953796948671,
+          "vector_score": 0.01578272644815678,
+          "fused_score": 0.032266458495966696,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-4476b67617048f6e97e1",
+          "paper_id": "candidate_00157",
+          "text": "Unmodified cholesterol is acted upon by enzymes to form variants that are side-chain or ring oxidized (Figure 1A). To investigate whether these modifications altered LNP targeting, we formulated 125 FIND LNPs using microfluidics (Figure 1B). To minimize variation from components other than cholesterol, LNPs were made of the ionizable lipid-like material cKK-E12[8], two well validated PEG-lipids, the phospholipid 1,2-Dioleoyl-sn-glycero-3-phosphoethanolamine (DOPE), and one of nine different cholesterol variants (Figure 1B).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.5034929303147693,
+          "vector_score": 0.009179275987937448,
+          "fused_score": 0.030776515151515152,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.1343454208365549,
+          "vector_score": 0.011737592617594389,
+          "fused_score": 0.030536130536130537,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-739369218d80cc0f6585",
+          "paper_id": "candidate_00157",
+          "text": "Like all high-throughput screens, the utility of FIND is governed by its ability to make predictions that can be verified. To this end, we formulated our top 3 LNP candidates identified by FIND with Cre mRNA. Of the 3 LNPs formulated, one LNP – which contained 25-OH cholesterol - did not formulate consistently and was excluded. The remaining two LNPs – which contained 20α-OH cholesterol (Figure 3G,H, SI Figure 3F,G) – formed stable LNPs, and were administered to Ai14 mice at a total mRNA dose of 0.25 mg / kg. Encouragingly, we found that both LNPs recapitulated the results from the FIND screen (Figure 3I–L). Both LNP1 and LNP2 robustly targeted cells in the microenvironment after a 0.25 mg / kg injection; as predicted by the screen, hepatocytes were targeted far less efficiently. LNP1 did not cause mouse weight loss in any experiment; LNP2 did cause mice to lose weight at 0.25 mg / kg (SI Figure 4B). Encouraged by robust delivery at 0.25 mg / kg, we injected LNP1 and LNP2 at a dose of 0.05 mg / kg.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P9",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.5947107209942957,
+          "vector_score": 0.004241669078218056,
+          "fused_score": 0.030158730158730156,
+          "entity_types": [
+            "cell",
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-02-payload",
+          "block_id": "candidate_00157-B-d9611ebe64f50cb53747",
+          "paper_id": "candidate_00157",
+          "text": "These data suggested that LNP cholesterol chemical composition was an important factor in LNP targeting. However, they did not take LNP size into account. We previously found no relationship between nanoparticle size and delivery for hydrodynamic diameters between ~20 and ~200 nm26,34. To investigate how size altered delivery in this experiment, we calculated whether normalized delivery varied with LNP size for all LNPs (SI Figure 2E), LNPs with tail oxidized cholesterols (SI Figure 2F), and LNPs with ring oxidized cholesterols (SI Figure 2G); we found no relationship. We then calculated the percentage of formulated LNPs that met our inclusion criteria as a function of cholesterol structure and the average size of stable LNPs based on cholesterol structure and found no significant differences (SI Figure 2H,I). We performed the same analyses as a function of cholesterol mole percentage, and reached the same conclusions (SI Figure 2J,K). Thus, we did not find evidence that size affected LNP delivery between 20 and 220 nm. However, we cannot exclude the possibility that size could affect delivery if very small or very large nanoparticles are analyzed.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.1521863518753332,
+          "vector_score": 0.004819339781613541,
+          "fused_score": 0.029877369007803793,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "biological_model": {
+      "query": {
+        "query_id": "candidate_00157-03-biological_model",
+        "paper_id": "candidate_00157",
+        "question": "For each distinct LNP intervention, what species, biological model, disease or physiological context, dose, route, timepoint, and control are reported?",
+        "field_group": "model_context",
+        "required_entity_types": [
+          "lnp",
+          "species"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-9a75dbcb6083766d1e5c",
+          "paper_id": "candidate_00157",
+          "text": "Systemic delivery of therapeutic RNA to hepatocytes has led to an FDA approved drug[21]. Delivery to non-hepatocytes has remained more challenging. Thus, an unbiased, high throughput method to study how LNPs deliver RNA in vivo could accelerate the discovery of nanoparticles with new tropisms. Here we report that FIND can predict delivery of LNPs to the liver microenvironment. If this holds true for other cell types, then FIND could reduce the time and resources needed to identify clinically relevant LNPs, relative to traditional in vitro screening. Future studies will also be needed to identify therapeutic mRNA that – when delivered to Kupffer cells – will alleviate disease.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P11",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.9450779777151945,
+          "vector_score": 0.011137511445944904,
+          "fused_score": 0.04143145161290322,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 8.709471372140825,
+          "vector_score": 0.028477888174452824,
+          "fused_score": 0.03862064525975816,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-407f2c275fc17b2642c8",
+          "paper_id": "candidate_00157",
+          "text": "Nanoparticles were formulated in a microfluidic device by mixing Cre mRNA, DNA, and LNP components[17]. The nucleic acid was diluted in citrate buffer (Teknova). Nanoparticle materials were diluted in ethanol. The phases were mixed together via microfluidics. Each LNP was formulated to carry a distinct barcode; LNP1 carried Cre mRNA and DNA barcode 1, whereas LNP2 carried Cre mRNA and DNA barcode 2. LNP hydrodynamic diameter was measured using dynamic light scattering. All animal experiments were performed in accordance with the Georgia Tech IACUC. C57BL/6J mice were purchased from Jackson Laboratory. Mice were aged 5–8 weeks, and N = 3–4 mice per group were injected intravenously. Sequencing was performed on MiniSeq™ using Illumina protocols.",
+          "section_path": "Experimental Section",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P13",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.754232622166747,
+          "vector_score": 0.02337163798479479,
+          "fused_score": 0.03676998404820986,
+          "entity_types": [
+            "formulation_label",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.682041229071834,
+          "vector_score": 0.01979511925386649,
+          "fused_score": 0.03643776988039283,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-739369218d80cc0f6585",
+          "paper_id": "candidate_00157",
+          "text": "Like all high-throughput screens, the utility of FIND is governed by its ability to make predictions that can be verified. To this end, we formulated our top 3 LNP candidates identified by FIND with Cre mRNA. Of the 3 LNPs formulated, one LNP – which contained 25-OH cholesterol - did not formulate consistently and was excluded. The remaining two LNPs – which contained 20α-OH cholesterol (Figure 3G,H, SI Figure 3F,G) – formed stable LNPs, and were administered to Ai14 mice at a total mRNA dose of 0.25 mg / kg. Encouragingly, we found that both LNPs recapitulated the results from the FIND screen (Figure 3I–L). Both LNP1 and LNP2 robustly targeted cells in the microenvironment after a 0.25 mg / kg injection; as predicted by the screen, hepatocytes were targeted far less efficiently. LNP1 did not cause mouse weight loss in any experiment; LNP2 did cause mice to lose weight at 0.25 mg / kg (SI Figure 4B). Encouraged by robust delivery at 0.25 mg / kg, we injected LNP1 and LNP2 at a dose of 0.05 mg / kg.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P9",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.7769591690924638,
+          "vector_score": 0.013798332900693972,
+          "fused_score": 0.035404637438298026,
+          "entity_types": [
+            "cell",
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.498017283066254,
+          "vector_score": 0.009996997251062005,
+          "fused_score": 0.034076242518865464,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-10fe6bf322450416f7f2",
+          "paper_id": "candidate_00157",
+          "text": "As a quality control, we analyzed the size of each individual LNP. LNPs were only pooled if their hydrodynamic diameter was between 20 and 215 nm and their autocorrelation curve contained one inflection point (SI Figure 1A,B). Eighty-six of the 125 LNPs we formulated met these criteria and were pooled. As a control, we compared the diameters of all 86 LNPs to the diameter of the pooled LNP solution, and found they were similar (Figure 2C). This suggests that the pooled LNPs did not aggregate after mixing; we have previously observed that pooled LNPs are stable[7]. We added a naked DNA barcode as a negative control[3] since naked DNA does not readily enter cells. After isolating cells and performing NGS, we found that - as expected - the naked DNA was delivered into cells less frequently than all the DNA barcodes delivered by LNPs (Figure 2D,E).Mice were sacrificed 72 hours after we injected the pooled LNPs[7]; this timepoint allows cells to express tdTomato after Cre mRNA delivery (Figure 2A). We isolated the liver, spleen, heart, kidney, pancreas, lung, and bone marrow. Using fluorescence activated cell sorting (FACS), we then isolated 28 different tdTomato+ cell types (Figure 2A). Comparing the percentage of tdTomato+ cell types in different organs, cells in the liver tended to be targeted more than cells in other organs (Figure 2B). The organ with the second-highest percentage of tdTomato+ cells was the spleen; the remaining five organs had negligible delivery (SI Figure 1C). We then clustered the barcode sequencing data using an unbiased Euclidean algorithm. This bioinformatics technique is regularly applied to gene expression data[18] and can analyze nanoparticle barcoding data[7]. Euclidean clustering revealed that the 4 liver cell types tended to ‘cluster’ together more closely than they did to splenic cell types (Figure 2F).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 9.395001377972214,
+          "vector_score": 0.032975975460188545,
+          "fused_score": 0.03278688524590164,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-c3577ddcc2cf246361da",
+          "paper_id": "candidate_00157",
+          "text": "Once again, we found robust delivery (Figure 3I–L). Whereas LNP1 and LNP2 both performed equally well at 0.25 mg / kg by saturating our Cre-based system, LNP1 outperformed LNP2 at the lower dose of 0.05 mg / kg. We then investigated whether LNP1 formulated with unmodified cholesterol performed as effectively as LNP1 formulated with 20α-OH (Figure 3M). Three days after injecting mice with 0.05 mg / kg Cre mRNA, we found that 20α-OH improved delivery to the liver, across all hepatic cell types (Figure 3N–Q). As an additional control, we assessed the potency of LNP1 compared to a previously reported LNP with potency at 0.2 mg / kg (Figure 3M); LNP1 outperformed this positive control LNP (Figure 3N–Q) between 14- and 77-fold within the liver microenvironment. We then used QUANT[20], a highly sensitive biodistribution system. to assess LNP biodistribution, for LNP1, LNP2, and LNP1-Chol. We did not find a difference in LNP biodistribution within the liver microenvironment (SI Figure 3D,E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P10",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 7.232439101161115,
+          "vector_score": 0.029375609199375742,
+          "fused_score": 0.03200204813108039,
+          "entity_types": [
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-d5d59a52bf447cd6a06e",
+          "paper_id": "candidate_00157",
+          "text": "To test the hypothesis that cholesterol structure affects LNP delivery of mRNA, we created a library of LNPs with nine cholesterol variants. We chose variants that were (i) produced naturally or synthetically and (ii) had oxidative modifications on sterol ring B, the hydrocarbon tail attached to sterol ring D, or both. We formulated LNPs to carry DNA barcodes and Cre mRNA[7], systemically injected them into Cre reporter mice, and analyzed the efficiency with which they delivered Cre mRNA in 28 cells types in vivo. We identified an LNP that delivers mRNA to Kupffer cells and hepatic endothelial cells five-fold more potently than to hepatocytes. Notably, the lead LNPs performed as predicted by the FIND screen, suggesting that FIND can rapidly identify LNPs for mRNA delivery.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.023230971666284,
+          "vector_score": 0.011532037211799235,
+          "fused_score": 0.02919863597612958,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-03-biological_model",
+          "block_id": "candidate_00157-B-d9611ebe64f50cb53747",
+          "paper_id": "candidate_00157",
+          "text": "These data suggested that LNP cholesterol chemical composition was an important factor in LNP targeting. However, they did not take LNP size into account. We previously found no relationship between nanoparticle size and delivery for hydrodynamic diameters between ~20 and ~200 nm26,34. To investigate how size altered delivery in this experiment, we calculated whether normalized delivery varied with LNP size for all LNPs (SI Figure 2E), LNPs with tail oxidized cholesterols (SI Figure 2F), and LNPs with ring oxidized cholesterols (SI Figure 2G); we found no relationship. We then calculated the percentage of formulated LNPs that met our inclusion criteria as a function of cholesterol structure and the average size of stable LNPs based on cholesterol structure and found no significant differences (SI Figure 2H,I). We performed the same analyses as a function of cholesterol mole percentage, and reached the same conclusions (SI Figure 2J,K). Thus, we did not find evidence that size affected LNP delivery between 20 and 220 nm. However, we cannot exclude the possibility that size could affect delivery if very small or very large nanoparticles are analyzed.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.2848733190158885,
+          "vector_score": 0.013047706971322615,
+          "fused_score": 0.028438886647841874,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "recipient_cell": {
+      "query": {
+        "query_id": "candidate_00157-04-recipient_cell",
+        "paper_id": "candidate_00157",
+        "question": "Which cells physically receive the LNP or express its payload in each experiment?",
+        "field_group": "recipient_cell",
+        "required_entity_types": [
+          "lnp",
+          "cell"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.116757493001832,
+          "vector_score": 0.028877769477765224,
+          "fused_score": 0.03785229297063072,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-10fe6bf322450416f7f2",
+          "paper_id": "candidate_00157",
+          "text": "As a quality control, we analyzed the size of each individual LNP. LNPs were only pooled if their hydrodynamic diameter was between 20 and 215 nm and their autocorrelation curve contained one inflection point (SI Figure 1A,B). Eighty-six of the 125 LNPs we formulated met these criteria and were pooled. As a control, we compared the diameters of all 86 LNPs to the diameter of the pooled LNP solution, and found they were similar (Figure 2C). This suggests that the pooled LNPs did not aggregate after mixing; we have previously observed that pooled LNPs are stable[7]. We added a naked DNA barcode as a negative control[3] since naked DNA does not readily enter cells. After isolating cells and performing NGS, we found that - as expected - the naked DNA was delivered into cells less frequently than all the DNA barcodes delivered by LNPs (Figure 2D,E).Mice were sacrificed 72 hours after we injected the pooled LNPs[7]; this timepoint allows cells to express tdTomato after Cre mRNA delivery (Figure 2A). We isolated the liver, spleen, heart, kidney, pancreas, lung, and bone marrow. Using fluorescence activated cell sorting (FACS), we then isolated 28 different tdTomato+ cell types (Figure 2A). Comparing the percentage of tdTomato+ cell types in different organs, cells in the liver tended to be targeted more than cells in other organs (Figure 2B). The organ with the second-highest percentage of tdTomato+ cells was the spleen; the remaining five organs had negligible delivery (SI Figure 1C). We then clustered the barcode sequencing data using an unbiased Euclidean algorithm. This bioinformatics technique is regularly applied to gene expression data[18] and can analyze nanoparticle barcoding data[7]. Euclidean clustering revealed that the 4 liver cell types tended to ‘cluster’ together more closely than they did to splenic cell types (Figure 2F).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.8395352119497064,
+          "vector_score": 0.03237447676483036,
+          "fused_score": 0.03667940539239287,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.343218355985018,
+          "vector_score": 0.017406435221093204,
+          "fused_score": 0.03647966197843451,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-407f2c275fc17b2642c8",
+          "paper_id": "candidate_00157",
+          "text": "Nanoparticles were formulated in a microfluidic device by mixing Cre mRNA, DNA, and LNP components[17]. The nucleic acid was diluted in citrate buffer (Teknova). Nanoparticle materials were diluted in ethanol. The phases were mixed together via microfluidics. Each LNP was formulated to carry a distinct barcode; LNP1 carried Cre mRNA and DNA barcode 1, whereas LNP2 carried Cre mRNA and DNA barcode 2. LNP hydrodynamic diameter was measured using dynamic light scattering. All animal experiments were performed in accordance with the Georgia Tech IACUC. C57BL/6J mice were purchased from Jackson Laboratory. Mice were aged 5–8 weeks, and N = 3–4 mice per group were injected intravenously. Sequencing was performed on MiniSeq™ using Illumina protocols.",
+          "section_path": "Experimental Section",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P13",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.714813092855188,
+          "vector_score": 0.020186927852938075,
+          "fused_score": 0.03634867363732526,
+          "entity_types": [
+            "formulation_label",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-d9611ebe64f50cb53747",
+          "paper_id": "candidate_00157",
+          "text": "These data suggested that LNP cholesterol chemical composition was an important factor in LNP targeting. However, they did not take LNP size into account. We previously found no relationship between nanoparticle size and delivery for hydrodynamic diameters between ~20 and ~200 nm26,34. To investigate how size altered delivery in this experiment, we calculated whether normalized delivery varied with LNP size for all LNPs (SI Figure 2E), LNPs with tail oxidized cholesterols (SI Figure 2F), and LNPs with ring oxidized cholesterols (SI Figure 2G); we found no relationship. We then calculated the percentage of formulated LNPs that met our inclusion criteria as a function of cholesterol structure and the average size of stable LNPs based on cholesterol structure and found no significant differences (SI Figure 2H,I). We performed the same analyses as a function of cholesterol mole percentage, and reached the same conclusions (SI Figure 2J,K). Thus, we did not find evidence that size affected LNP delivery between 20 and 220 nm. However, we cannot exclude the possibility that size could affect delivery if very small or very large nanoparticles are analyzed.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.069489026544375,
+          "vector_score": 0.024467573843136862,
+          "fused_score": 0.03554590811896585,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-c3577ddcc2cf246361da",
+          "paper_id": "candidate_00157",
+          "text": "Once again, we found robust delivery (Figure 3I–L). Whereas LNP1 and LNP2 both performed equally well at 0.25 mg / kg by saturating our Cre-based system, LNP1 outperformed LNP2 at the lower dose of 0.05 mg / kg. We then investigated whether LNP1 formulated with unmodified cholesterol performed as effectively as LNP1 formulated with 20α-OH (Figure 3M). Three days after injecting mice with 0.05 mg / kg Cre mRNA, we found that 20α-OH improved delivery to the liver, across all hepatic cell types (Figure 3N–Q). As an additional control, we assessed the potency of LNP1 compared to a previously reported LNP with potency at 0.2 mg / kg (Figure 3M); LNP1 outperformed this positive control LNP (Figure 3N–Q) between 14- and 77-fold within the liver microenvironment. We then used QUANT[20], a highly sensitive biodistribution system. to assess LNP biodistribution, for LNP1, LNP2, and LNP1-Chol. We did not find a difference in LNP biodistribution within the liver microenvironment (SI Figure 3D,E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P10",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 0.1658202921061639,
+          "vector_score": 0.009182868727294511,
+          "fused_score": 0.03367941712204007,
+          "entity_types": [
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-4476b67617048f6e97e1",
+          "paper_id": "candidate_00157",
+          "text": "Unmodified cholesterol is acted upon by enzymes to form variants that are side-chain or ring oxidized (Figure 1A). To investigate whether these modifications altered LNP targeting, we formulated 125 FIND LNPs using microfluidics (Figure 1B). To minimize variation from components other than cholesterol, LNPs were made of the ionizable lipid-like material cKK-E12[8], two well validated PEG-lipids, the phospholipid 1,2-Dioleoyl-sn-glycero-3-phosphoethanolamine (DOPE), and one of nine different cholesterol variants (Figure 1B).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.4081447237495837e-06,
+          "vector_score": 0.010830968046253431,
+          "fused_score": 0.03340813717923982,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-9a75dbcb6083766d1e5c",
+          "paper_id": "candidate_00157",
+          "text": "Systemic delivery of therapeutic RNA to hepatocytes has led to an FDA approved drug[21]. Delivery to non-hepatocytes has remained more challenging. Thus, an unbiased, high throughput method to study how LNPs deliver RNA in vivo could accelerate the discovery of nanoparticles with new tropisms. Here we report that FIND can predict delivery of LNPs to the liver microenvironment. If this holds true for other cell types, then FIND could reduce the time and resources needed to identify clinically relevant LNPs, relative to traditional in vitro screening. Future studies will also be needed to identify therapeutic mRNA that – when delivered to Kupffer cells – will alleviate disease.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P11",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 0.2516300503386347,
+          "vector_score": 0.008579278089308534,
+          "fused_score": 0.033333421809220845,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-739369218d80cc0f6585",
+          "paper_id": "candidate_00157",
+          "text": "Like all high-throughput screens, the utility of FIND is governed by its ability to make predictions that can be verified. To this end, we formulated our top 3 LNP candidates identified by FIND with Cre mRNA. Of the 3 LNPs formulated, one LNP – which contained 25-OH cholesterol - did not formulate consistently and was excluded. The remaining two LNPs – which contained 20α-OH cholesterol (Figure 3G,H, SI Figure 3F,G) – formed stable LNPs, and were administered to Ai14 mice at a total mRNA dose of 0.25 mg / kg. Encouragingly, we found that both LNPs recapitulated the results from the FIND screen (Figure 3I–L). Both LNP1 and LNP2 robustly targeted cells in the microenvironment after a 0.25 mg / kg injection; as predicted by the screen, hepatocytes were targeted far less efficiently. LNP1 did not cause mouse weight loss in any experiment; LNP2 did cause mice to lose weight at 0.25 mg / kg (SI Figure 4B). Encouraged by robust delivery at 0.25 mg / kg, we injected LNP1 and LNP2 at a dose of 0.05 mg / kg.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P9",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.73677329893223,
+          "vector_score": 0.041306752397312296,
+          "fused_score": 0.03278688524590164,
+          "entity_types": [
+            "cell",
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-04-recipient_cell",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.204624429797409,
+          "vector_score": 0.019290802441413405,
+          "fused_score": 0.030834914611005692,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "therapeutic_target": {
+      "query": {
+        "query_id": "candidate_00157-05-therapeutic_target",
+        "paper_id": "candidate_00157",
+        "question": "Which cells are acted upon for the therapeutic effect in each experiment, distinguishing them from delivery recipient cells?",
+        "field_group": "therapeutic_target",
+        "required_entity_types": [
+          "cell"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-d5d59a52bf447cd6a06e",
+          "paper_id": "candidate_00157",
+          "text": "To test the hypothesis that cholesterol structure affects LNP delivery of mRNA, we created a library of LNPs with nine cholesterol variants. We chose variants that were (i) produced naturally or synthetically and (ii) had oxidative modifications on sterol ring B, the hydrocarbon tail attached to sterol ring D, or both. We formulated LNPs to carry DNA barcodes and Cre mRNA[7], systemically injected them into Cre reporter mice, and analyzed the efficiency with which they delivered Cre mRNA in 28 cells types in vivo. We identified an LNP that delivers mRNA to Kupffer cells and hepatic endothelial cells five-fold more potently than to hepatocytes. Notably, the lead LNPs performed as predicted by the FIND screen, suggesting that FIND can rapidly identify LNPs for mRNA delivery.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 8.042322403629738,
+          "vector_score": 0.04031711622923439,
+          "fused_score": 0.0386538054107594,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-c995375a23a087c5ba06",
+          "paper_id": "candidate_00157",
+          "text": "LNPs are formulated by mixing nucleic acids with ionizable lipids, PEG-lipids, phospholipids, and cholesterol. The diversity of available chemistries enables scientists to evaluate how LNP structure affects delivery. However, these studies are mostly performed in vitro[8, 9] and use LNPs formulated with unmodified cholesterol. Several lines of evidence led us to hypothesize that cholesterol chemical structure affected LNP mRNA delivery. First, cholesterol structure is modified via oxidation; this requires specific enzymes, demonstrating that cells regulate cholesterol structure[10]. Second, oxidized cholesterols signal differently than unmodified cholesterols, altering interactions with membrane and nuclear receptors that regulate gene expression[11]. Third, cholesterol is trafficked in lipoproteins using forward and reverse transport[12] and trafficking to endothelial cells, hepatocytes, and macrophages may change with cholesterol structure in vivo[13]. Fourth, LNPs and lipoproteins have similar size and composition. Finally, using JORDAN, we found that modified cholesterols alter LNP biodistribution[14], however this study measured LNP biodistribution; it did not measure functional mRNA delivery. Given that less than 4% of exogenously delivered RNA escapes endosomes[15] and endosomal escape changes with cell type[16], it is difficult to predict functional mRNA delivery using biodistribution.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.201303013647123,
+          "vector_score": 0.021496322637055965,
+          "fused_score": 0.034931080905079105,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-739369218d80cc0f6585",
+          "paper_id": "candidate_00157",
+          "text": "Like all high-throughput screens, the utility of FIND is governed by its ability to make predictions that can be verified. To this end, we formulated our top 3 LNP candidates identified by FIND with Cre mRNA. Of the 3 LNPs formulated, one LNP – which contained 25-OH cholesterol - did not formulate consistently and was excluded. The remaining two LNPs – which contained 20α-OH cholesterol (Figure 3G,H, SI Figure 3F,G) – formed stable LNPs, and were administered to Ai14 mice at a total mRNA dose of 0.25 mg / kg. Encouragingly, we found that both LNPs recapitulated the results from the FIND screen (Figure 3I–L). Both LNP1 and LNP2 robustly targeted cells in the microenvironment after a 0.25 mg / kg injection; as predicted by the screen, hepatocytes were targeted far less efficiently. LNP1 did not cause mouse weight loss in any experiment; LNP2 did cause mice to lose weight at 0.25 mg / kg (SI Figure 4B). Encouraged by robust delivery at 0.25 mg / kg, we injected LNP1 and LNP2 at a dose of 0.05 mg / kg.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P9",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.483721366911192,
+          "vector_score": 0.02822444229921694,
+          "fused_score": 0.030536130536130537,
+          "entity_types": [
+            "cell",
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.964503511410021,
+          "vector_score": 0.027289850191147737,
+          "fused_score": 0.030330882352941176,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-b6797422a8c56e0ea35c",
+          "paper_id": "candidate_00157",
+          "text": "There have been several advances in local and systemic mRNA delivery[1], especially to hepatocytes[2]. However, low dose mRNA delivery to other cell types within the liver microenvironment remains challenging. Using a high-throughput DNA barcode screen named JORDAN, we observed that in vitro nanoparticle delivery can be a poor predictor of in vivo delivery[3]. Since in vitro assays typically lack a complete immune system[4], variable blood flow[5], heterogeneous vasculature, off-target cells, and other factors that influence delivery in vivo[6], we reasoned that an ideal nanoparticle experiment would study LNPs directly in vivo. We therefore developed FIND[7] to quantify how over 100 LNPs deliver functional mRNA into the cytoplasm of target cells in a single mouse.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P1",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.110033080244037,
+          "vector_score": 0.035116529273087435,
+          "fused_score": 0.029910714285714284,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-9a75dbcb6083766d1e5c",
+          "paper_id": "candidate_00157",
+          "text": "Systemic delivery of therapeutic RNA to hepatocytes has led to an FDA approved drug[21]. Delivery to non-hepatocytes has remained more challenging. Thus, an unbiased, high throughput method to study how LNPs deliver RNA in vivo could accelerate the discovery of nanoparticles with new tropisms. Here we report that FIND can predict delivery of LNPs to the liver microenvironment. If this holds true for other cell types, then FIND could reduce the time and resources needed to identify clinically relevant LNPs, relative to traditional in vitro screening. Future studies will also be needed to identify therapeutic mRNA that – when delivered to Kupffer cells – will alleviate disease.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P11",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.378594976316982,
+          "vector_score": 0.030808450416902854,
+          "fused_score": 0.029877369007803793,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.624544981497716,
+          "vector_score": 0.028037257154422946,
+          "fused_score": 0.029850746268656716,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-4476b67617048f6e97e1",
+          "paper_id": "candidate_00157",
+          "text": "Unmodified cholesterol is acted upon by enzymes to form variants that are side-chain or ring oxidized (Figure 1A). To investigate whether these modifications altered LNP targeting, we formulated 125 FIND LNPs using microfluidics (Figure 1B). To minimize variation from components other than cholesterol, LNPs were made of the ionizable lipid-like material cKK-E12[8], two well validated PEG-lipids, the phospholipid 1,2-Dioleoyl-sn-glycero-3-phosphoethanolamine (DOPE), and one of nine different cholesterol variants (Figure 1B).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 12.860820076466085,
+          "vector_score": 0.08755756317601399,
+          "fused_score": 0.04533420533353479,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 14.944262540795574,
+          "vector_score": 0.06240496521014064,
+          "fused_score": 0.039430248545742994,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-05-therapeutic_target",
+          "block_id": "candidate_00157-B-d9611ebe64f50cb53747",
+          "paper_id": "candidate_00157",
+          "text": "These data suggested that LNP cholesterol chemical composition was an important factor in LNP targeting. However, they did not take LNP size into account. We previously found no relationship between nanoparticle size and delivery for hydrodynamic diameters between ~20 and ~200 nm26,34. To investigate how size altered delivery in this experiment, we calculated whether normalized delivery varied with LNP size for all LNPs (SI Figure 2E), LNPs with tail oxidized cholesterols (SI Figure 2F), and LNPs with ring oxidized cholesterols (SI Figure 2G); we found no relationship. We then calculated the percentage of formulated LNPs that met our inclusion criteria as a function of cholesterol structure and the average size of stable LNPs based on cholesterol structure and found no significant differences (SI Figure 2H,I). We performed the same analyses as a function of cholesterol mole percentage, and reached the same conclusions (SI Figure 2J,K). Thus, we did not find evidence that size affected LNP delivery between 20 and 220 nm. However, we cannot exclude the possibility that size could affect delivery if very small or very large nanoparticles are analyzed.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.413292118830615,
+          "vector_score": 0.024374623056271864,
+          "fused_score": 0.03469513947263308,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "assay": {
+      "query": {
+        "query_id": "candidate_00157-06-assay",
+        "paper_id": "candidate_00157",
+        "question": "For each distinct LNP intervention, which assay or measurement method was used, and which experiment does it belong to?",
+        "field_group": "outcome",
+        "required_entity_types": []
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-10fe6bf322450416f7f2",
+          "paper_id": "candidate_00157",
+          "text": "As a quality control, we analyzed the size of each individual LNP. LNPs were only pooled if their hydrodynamic diameter was between 20 and 215 nm and their autocorrelation curve contained one inflection point (SI Figure 1A,B). Eighty-six of the 125 LNPs we formulated met these criteria and were pooled. As a control, we compared the diameters of all 86 LNPs to the diameter of the pooled LNP solution, and found they were similar (Figure 2C). This suggests that the pooled LNPs did not aggregate after mixing; we have previously observed that pooled LNPs are stable[7]. We added a naked DNA barcode as a negative control[3] since naked DNA does not readily enter cells. After isolating cells and performing NGS, we found that - as expected - the naked DNA was delivered into cells less frequently than all the DNA barcodes delivered by LNPs (Figure 2D,E).Mice were sacrificed 72 hours after we injected the pooled LNPs[7]; this timepoint allows cells to express tdTomato after Cre mRNA delivery (Figure 2A). We isolated the liver, spleen, heart, kidney, pancreas, lung, and bone marrow. Using fluorescence activated cell sorting (FACS), we then isolated 28 different tdTomato+ cell types (Figure 2A). Comparing the percentage of tdTomato+ cell types in different organs, cells in the liver tended to be targeted more than cells in other organs (Figure 2B). The organ with the second-highest percentage of tdTomato+ cells was the spleen; the remaining five organs had negligible delivery (SI Figure 1C). We then clustered the barcode sequencing data using an unbiased Euclidean algorithm. This bioinformatics technique is regularly applied to gene expression data[18] and can analyze nanoparticle barcoding data[7]. Euclidean clustering revealed that the 4 liver cell types tended to ‘cluster’ together more closely than they did to splenic cell types (Figure 2F).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.8462488614930175,
+          "vector_score": 0.023963805616878688,
+          "fused_score": 0.03814492521367521,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.74025034995513,
+          "vector_score": 0.02391002853267941,
+          "fused_score": 0.03692727411477412,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.7446171913051405,
+          "vector_score": 0.021733618765755996,
+          "fused_score": 0.03621162786320604,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-d9611ebe64f50cb53747",
+          "paper_id": "candidate_00157",
+          "text": "These data suggested that LNP cholesterol chemical composition was an important factor in LNP targeting. However, they did not take LNP size into account. We previously found no relationship between nanoparticle size and delivery for hydrodynamic diameters between ~20 and ~200 nm26,34. To investigate how size altered delivery in this experiment, we calculated whether normalized delivery varied with LNP size for all LNPs (SI Figure 2E), LNPs with tail oxidized cholesterols (SI Figure 2F), and LNPs with ring oxidized cholesterols (SI Figure 2G); we found no relationship. We then calculated the percentage of formulated LNPs that met our inclusion criteria as a function of cholesterol structure and the average size of stable LNPs based on cholesterol structure and found no significant differences (SI Figure 2H,I). We performed the same analyses as a function of cholesterol mole percentage, and reached the same conclusions (SI Figure 2J,K). Thus, we did not find evidence that size affected LNP delivery between 20 and 220 nm. However, we cannot exclude the possibility that size could affect delivery if very small or very large nanoparticles are analyzed.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.069492474085445,
+          "vector_score": 0.02262099184937659,
+          "fused_score": 0.03524368105013266,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.278739243474713,
+          "vector_score": 0.020805536809178182,
+          "fused_score": 0.03486827883327244,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-4476b67617048f6e97e1",
+          "paper_id": "candidate_00157",
+          "text": "Unmodified cholesterol is acted upon by enzymes to form variants that are side-chain or ring oxidized (Figure 1A). To investigate whether these modifications altered LNP targeting, we formulated 125 FIND LNPs using microfluidics (Figure 1B). To minimize variation from components other than cholesterol, LNPs were made of the ionizable lipid-like material cKK-E12[8], two well validated PEG-lipids, the phospholipid 1,2-Dioleoyl-sn-glycero-3-phosphoethanolamine (DOPE), and one of nine different cholesterol variants (Figure 1B).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.143743198694e-06,
+          "vector_score": 0.010643952625914652,
+          "fused_score": 0.03404416961463194,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-c3577ddcc2cf246361da",
+          "paper_id": "candidate_00157",
+          "text": "Once again, we found robust delivery (Figure 3I–L). Whereas LNP1 and LNP2 both performed equally well at 0.25 mg / kg by saturating our Cre-based system, LNP1 outperformed LNP2 at the lower dose of 0.05 mg / kg. We then investigated whether LNP1 formulated with unmodified cholesterol performed as effectively as LNP1 formulated with 20α-OH (Figure 3M). Three days after injecting mice with 0.05 mg / kg Cre mRNA, we found that 20α-OH improved delivery to the liver, across all hepatic cell types (Figure 3N–Q). As an additional control, we assessed the potency of LNP1 compared to a previously reported LNP with potency at 0.2 mg / kg (Figure 3M); LNP1 outperformed this positive control LNP (Figure 3N–Q) between 14- and 77-fold within the liver microenvironment. We then used QUANT[20], a highly sensitive biodistribution system. to assess LNP biodistribution, for LNP1, LNP2, and LNP1-Chol. We did not find a difference in LNP biodistribution within the liver microenvironment (SI Figure 3D,E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P10",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.926340395540549e-06,
+          "vector_score": 0.012812186689579995,
+          "fused_score": 0.033584229390681,
+          "entity_types": [
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-407f2c275fc17b2642c8",
+          "paper_id": "candidate_00157",
+          "text": "Nanoparticles were formulated in a microfluidic device by mixing Cre mRNA, DNA, and LNP components[17]. The nucleic acid was diluted in citrate buffer (Teknova). Nanoparticle materials were diluted in ethanol. The phases were mixed together via microfluidics. Each LNP was formulated to carry a distinct barcode; LNP1 carried Cre mRNA and DNA barcode 1, whereas LNP2 carried Cre mRNA and DNA barcode 2. LNP hydrodynamic diameter was measured using dynamic light scattering. All animal experiments were performed in accordance with the Georgia Tech IACUC. C57BL/6J mice were purchased from Jackson Laboratory. Mice were aged 5–8 weeks, and N = 3–4 mice per group were injected intravenously. Sequencing was performed on MiniSeq™ using Illumina protocols.",
+          "section_path": "Experimental Section",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P13",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 11.02044438586576,
+          "vector_score": 0.031850746186598465,
+          "fused_score": 0.03278688524590164,
+          "entity_types": [
+            "formulation_label",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-739369218d80cc0f6585",
+          "paper_id": "candidate_00157",
+          "text": "Like all high-throughput screens, the utility of FIND is governed by its ability to make predictions that can be verified. To this end, we formulated our top 3 LNP candidates identified by FIND with Cre mRNA. Of the 3 LNPs formulated, one LNP – which contained 25-OH cholesterol - did not formulate consistently and was excluded. The remaining two LNPs – which contained 20α-OH cholesterol (Figure 3G,H, SI Figure 3F,G) – formed stable LNPs, and were administered to Ai14 mice at a total mRNA dose of 0.25 mg / kg. Encouragingly, we found that both LNPs recapitulated the results from the FIND screen (Figure 3I–L). Both LNP1 and LNP2 robustly targeted cells in the microenvironment after a 0.25 mg / kg injection; as predicted by the screen, hepatocytes were targeted far less efficiently. LNP1 did not cause mouse weight loss in any experiment; LNP2 did cause mice to lose weight at 0.25 mg / kg (SI Figure 4B). Encouraged by robust delivery at 0.25 mg / kg, we injected LNP1 and LNP2 at a dose of 0.05 mg / kg.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P9",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.884684077470919,
+          "vector_score": 0.028988033405511995,
+          "fused_score": 0.03225806451612903,
+          "entity_types": [
+            "cell",
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-06-assay",
+          "block_id": "candidate_00157-B-d5d59a52bf447cd6a06e",
+          "paper_id": "candidate_00157",
+          "text": "To test the hypothesis that cholesterol structure affects LNP delivery of mRNA, we created a library of LNPs with nine cholesterol variants. We chose variants that were (i) produced naturally or synthetically and (ii) had oxidative modifications on sterol ring B, the hydrocarbon tail attached to sterol ring D, or both. We formulated LNPs to carry DNA barcodes and Cre mRNA[7], systemically injected them into Cre reporter mice, and analyzed the efficiency with which they delivered Cre mRNA in 28 cells types in vivo. We identified an LNP that delivers mRNA to Kupffer cells and hepatic endothelial cells five-fold more potently than to hepatocytes. Notably, the lead LNPs performed as predicted by the FIND screen, suggesting that FIND can rapidly identify LNPs for mRNA delivery.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.1536157040050274,
+          "vector_score": 0.023936546085239863,
+          "fused_score": 0.030330882352941176,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "endpoint": {
+      "query": {
+        "query_id": "candidate_00157-07-endpoint",
+        "paper_id": "candidate_00157",
+        "question": "For each distinct LNP intervention, what endpoint was measured, including negative, qualitative, cell-specific, and comparator endpoints?",
+        "field_group": "outcome",
+        "required_entity_types": [
+          "outcome"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-10fe6bf322450416f7f2",
+          "paper_id": "candidate_00157",
+          "text": "As a quality control, we analyzed the size of each individual LNP. LNPs were only pooled if their hydrodynamic diameter was between 20 and 215 nm and their autocorrelation curve contained one inflection point (SI Figure 1A,B). Eighty-six of the 125 LNPs we formulated met these criteria and were pooled. As a control, we compared the diameters of all 86 LNPs to the diameter of the pooled LNP solution, and found they were similar (Figure 2C). This suggests that the pooled LNPs did not aggregate after mixing; we have previously observed that pooled LNPs are stable[7]. We added a naked DNA barcode as a negative control[3] since naked DNA does not readily enter cells. After isolating cells and performing NGS, we found that - as expected - the naked DNA was delivered into cells less frequently than all the DNA barcodes delivered by LNPs (Figure 2D,E).Mice were sacrificed 72 hours after we injected the pooled LNPs[7]; this timepoint allows cells to express tdTomato after Cre mRNA delivery (Figure 2A). We isolated the liver, spleen, heart, kidney, pancreas, lung, and bone marrow. Using fluorescence activated cell sorting (FACS), we then isolated 28 different tdTomato+ cell types (Figure 2A). Comparing the percentage of tdTomato+ cell types in different organs, cells in the liver tended to be targeted more than cells in other organs (Figure 2B). The organ with the second-highest percentage of tdTomato+ cells was the spleen; the remaining five organs had negligible delivery (SI Figure 1C). We then clustered the barcode sequencing data using an unbiased Euclidean algorithm. This bioinformatics technique is regularly applied to gene expression data[18] and can analyze nanoparticle barcoding data[7]. Euclidean clustering revealed that the 4 liver cell types tended to ‘cluster’ together more closely than they did to splenic cell types (Figure 2F).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.091957992863481,
+          "vector_score": 0.03192303531177926,
+          "fused_score": 0.03892822580645161,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-d5d59a52bf447cd6a06e",
+          "paper_id": "candidate_00157",
+          "text": "To test the hypothesis that cholesterol structure affects LNP delivery of mRNA, we created a library of LNPs with nine cholesterol variants. We chose variants that were (i) produced naturally or synthetically and (ii) had oxidative modifications on sterol ring B, the hydrocarbon tail attached to sterol ring D, or both. We formulated LNPs to carry DNA barcodes and Cre mRNA[7], systemically injected them into Cre reporter mice, and analyzed the efficiency with which they delivered Cre mRNA in 28 cells types in vivo. We identified an LNP that delivers mRNA to Kupffer cells and hepatic endothelial cells five-fold more potently than to hepatocytes. Notably, the lead LNPs performed as predicted by the FIND screen, suggesting that FIND can rapidly identify LNPs for mRNA delivery.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.817682976473032e-06,
+          "vector_score": 0.008651695207067774,
+          "fused_score": 0.035126050420168066,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-c995375a23a087c5ba06",
+          "paper_id": "candidate_00157",
+          "text": "LNPs are formulated by mixing nucleic acids with ionizable lipids, PEG-lipids, phospholipids, and cholesterol. The diversity of available chemistries enables scientists to evaluate how LNP structure affects delivery. However, these studies are mostly performed in vitro[8, 9] and use LNPs formulated with unmodified cholesterol. Several lines of evidence led us to hypothesize that cholesterol chemical structure affected LNP mRNA delivery. First, cholesterol structure is modified via oxidation; this requires specific enzymes, demonstrating that cells regulate cholesterol structure[10]. Second, oxidized cholesterols signal differently than unmodified cholesterols, altering interactions with membrane and nuclear receptors that regulate gene expression[11]. Third, cholesterol is trafficked in lipoproteins using forward and reverse transport[12] and trafficking to endothelial cells, hepatocytes, and macrophages may change with cholesterol structure in vivo[13]. Fourth, LNPs and lipoproteins have similar size and composition. Finally, using JORDAN, we found that modified cholesterols alter LNP biodistribution[14], however this study measured LNP biodistribution; it did not measure functional mRNA delivery. Given that less than 4% of exogenously delivered RNA escapes endosomes[15] and endosomal escape changes with cell type[16], it is difficult to predict functional mRNA delivery using biodistribution.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.292490881873883,
+          "vector_score": 0.025069697215289954,
+          "fused_score": 0.031746031746031744,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-9a75dbcb6083766d1e5c",
+          "paper_id": "candidate_00157",
+          "text": "Systemic delivery of therapeutic RNA to hepatocytes has led to an FDA approved drug[21]. Delivery to non-hepatocytes has remained more challenging. Thus, an unbiased, high throughput method to study how LNPs deliver RNA in vivo could accelerate the discovery of nanoparticles with new tropisms. Here we report that FIND can predict delivery of LNPs to the liver microenvironment. If this holds true for other cell types, then FIND could reduce the time and resources needed to identify clinically relevant LNPs, relative to traditional in vitro screening. Future studies will also be needed to identify therapeutic mRNA that – when delivered to Kupffer cells – will alleviate disease.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P11",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.110379066900224e-06,
+          "vector_score": 0.00686234377895152,
+          "fused_score": 0.02857142857142857,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.9461941976889847,
+          "vector_score": 0.018511546839600924,
+          "fused_score": 0.037056451612903225,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.58458263238051e-06,
+          "vector_score": 0.012484811516686505,
+          "fused_score": 0.03611644013184697,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-4476b67617048f6e97e1",
+          "paper_id": "candidate_00157",
+          "text": "Unmodified cholesterol is acted upon by enzymes to form variants that are side-chain or ring oxidized (Figure 1A). To investigate whether these modifications altered LNP targeting, we formulated 125 FIND LNPs using microfluidics (Figure 1B). To minimize variation from components other than cholesterol, LNPs were made of the ionizable lipid-like material cKK-E12[8], two well validated PEG-lipids, the phospholipid 1,2-Dioleoyl-sn-glycero-3-phosphoethanolamine (DOPE), and one of nine different cholesterol variants (Figure 1B).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.071871599347e-06,
+          "vector_score": 0.004543099032968943,
+          "fused_score": 0.034447939068100356,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.4966032325970112e-06,
+          "vector_score": 0.00438345807758779,
+          "fused_score": 0.033684776523502116,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-b6797422a8c56e0ea35c",
+          "paper_id": "candidate_00157",
+          "text": "There have been several advances in local and systemic mRNA delivery[1], especially to hepatocytes[2]. However, low dose mRNA delivery to other cell types within the liver microenvironment remains challenging. Using a high-throughput DNA barcode screen named JORDAN, we observed that in vitro nanoparticle delivery can be a poor predictor of in vivo delivery[3]. Since in vitro assays typically lack a complete immune system[4], variable blood flow[5], heterogeneous vasculature, off-target cells, and other factors that influence delivery in vivo[6], we reasoned that an ideal nanoparticle experiment would study LNPs directly in vivo. We therefore developed FIND[7] to quantify how over 100 LNPs deliver functional mRNA into the cytoplasm of target cells in a single mouse.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P1",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.0139188571312454e-06,
+          "vector_score": 0.005793544909018924,
+          "fused_score": 0.03349742289352554,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-07-endpoint",
+          "block_id": "candidate_00157-B-407f2c275fc17b2642c8",
+          "paper_id": "candidate_00157",
+          "text": "Nanoparticles were formulated in a microfluidic device by mixing Cre mRNA, DNA, and LNP components[17]. The nucleic acid was diluted in citrate buffer (Teknova). Nanoparticle materials were diluted in ethanol. The phases were mixed together via microfluidics. Each LNP was formulated to carry a distinct barcode; LNP1 carried Cre mRNA and DNA barcode 1, whereas LNP2 carried Cre mRNA and DNA barcode 2. LNP hydrodynamic diameter was measured using dynamic light scattering. All animal experiments were performed in accordance with the Georgia Tech IACUC. C57BL/6J mice were purchased from Jackson Laboratory. Mice were aged 5–8 weeks, and N = 3–4 mice per group were injected intravenously. Sequencing was performed on MiniSeq™ using Illumina protocols.",
+          "section_path": "Experimental Section",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P13",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 8.590656192556095,
+          "vector_score": 0.06634581134329114,
+          "fused_score": 0.03278688524590164,
+          "entity_types": [
+            "formulation_label",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "outcomes": {
+      "query": {
+        "query_id": "candidate_00157-08-outcomes",
+        "paper_id": "candidate_00157",
+        "question": "For each endpoint in each distinct LNP intervention, what exact quantitative or qualitative outcome was observed, including zero, absent, or below-detection results?",
+        "field_group": "outcome",
+        "required_entity_types": [
+          "outcome"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-10fe6bf322450416f7f2",
+          "paper_id": "candidate_00157",
+          "text": "As a quality control, we analyzed the size of each individual LNP. LNPs were only pooled if their hydrodynamic diameter was between 20 and 215 nm and their autocorrelation curve contained one inflection point (SI Figure 1A,B). Eighty-six of the 125 LNPs we formulated met these criteria and were pooled. As a control, we compared the diameters of all 86 LNPs to the diameter of the pooled LNP solution, and found they were similar (Figure 2C). This suggests that the pooled LNPs did not aggregate after mixing; we have previously observed that pooled LNPs are stable[7]. We added a naked DNA barcode as a negative control[3] since naked DNA does not readily enter cells. After isolating cells and performing NGS, we found that - as expected - the naked DNA was delivered into cells less frequently than all the DNA barcodes delivered by LNPs (Figure 2D,E).Mice were sacrificed 72 hours after we injected the pooled LNPs[7]; this timepoint allows cells to express tdTomato after Cre mRNA delivery (Figure 2A). We isolated the liver, spleen, heart, kidney, pancreas, lung, and bone marrow. Using fluorescence activated cell sorting (FACS), we then isolated 28 different tdTomato+ cell types (Figure 2A). Comparing the percentage of tdTomato+ cell types in different organs, cells in the liver tended to be targeted more than cells in other organs (Figure 2B). The organ with the second-highest percentage of tdTomato+ cells was the spleen; the remaining five organs had negligible delivery (SI Figure 1C). We then clustered the barcode sequencing data using an unbiased Euclidean algorithm. This bioinformatics technique is regularly applied to gene expression data[18] and can analyze nanoparticle barcoding data[7]. Euclidean clustering revealed that the 4 liver cell types tended to ‘cluster’ together more closely than they did to splenic cell types (Figure 2F).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.637906695053799,
+          "vector_score": 0.015134146128100058,
+          "fused_score": 0.03866528811690102,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-9a75dbcb6083766d1e5c",
+          "paper_id": "candidate_00157",
+          "text": "Systemic delivery of therapeutic RNA to hepatocytes has led to an FDA approved drug[21]. Delivery to non-hepatocytes has remained more challenging. Thus, an unbiased, high throughput method to study how LNPs deliver RNA in vivo could accelerate the discovery of nanoparticles with new tropisms. Here we report that FIND can predict delivery of LNPs to the liver microenvironment. If this holds true for other cell types, then FIND could reduce the time and resources needed to identify clinically relevant LNPs, relative to traditional in vitro screening. Future studies will also be needed to identify therapeutic mRNA that – when delivered to Kupffer cells – will alleviate disease.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P11",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.9146061241689295e-06,
+          "vector_score": 0.0026798453969507814,
+          "fused_score": 0.03476236531111941,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-d5d59a52bf447cd6a06e",
+          "paper_id": "candidate_00157",
+          "text": "To test the hypothesis that cholesterol structure affects LNP delivery of mRNA, we created a library of LNPs with nine cholesterol variants. We chose variants that were (i) produced naturally or synthetically and (ii) had oxidative modifications on sterol ring B, the hydrocarbon tail attached to sterol ring D, or both. We formulated LNPs to carry DNA barcodes and Cre mRNA[7], systemically injected them into Cre reporter mice, and analyzed the efficiency with which they delivered Cre mRNA in 28 cells types in vivo. We identified an LNP that delivers mRNA to Kupffer cells and hepatic endothelial cells five-fold more potently than to hepatocytes. Notably, the lead LNPs performed as predicted by the FIND screen, suggesting that FIND can rapidly identify LNPs for mRNA delivery.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.0362270330631852e-06,
+          "vector_score": 0.014421265308848845,
+          "fused_score": 0.030117753623188408,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-c995375a23a087c5ba06",
+          "paper_id": "candidate_00157",
+          "text": "LNPs are formulated by mixing nucleic acids with ionizable lipids, PEG-lipids, phospholipids, and cholesterol. The diversity of available chemistries enables scientists to evaluate how LNP structure affects delivery. However, these studies are mostly performed in vitro[8, 9] and use LNPs formulated with unmodified cholesterol. Several lines of evidence led us to hypothesize that cholesterol chemical structure affected LNP mRNA delivery. First, cholesterol structure is modified via oxidation; this requires specific enzymes, demonstrating that cells regulate cholesterol structure[10]. Second, oxidized cholesterols signal differently than unmodified cholesterols, altering interactions with membrane and nuclear receptors that regulate gene expression[11]. Third, cholesterol is trafficked in lipoproteins using forward and reverse transport[12] and trafficking to endothelial cells, hepatocytes, and macrophages may change with cholesterol structure in vivo[13]. Fourth, LNPs and lipoproteins have similar size and composition. Finally, using JORDAN, we found that modified cholesterols alter LNP biodistribution[14], however this study measured LNP biodistribution; it did not measure functional mRNA delivery. Given that less than 4% of exogenously delivered RNA escapes endosomes[15] and endosomal escape changes with cell type[16], it is difficult to predict functional mRNA delivery using biodistribution.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.8633537572332357e-06,
+          "vector_score": 0.005042166537036587,
+          "fused_score": 0.027777777777777776,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-407f2c275fc17b2642c8",
+          "paper_id": "candidate_00157",
+          "text": "Nanoparticles were formulated in a microfluidic device by mixing Cre mRNA, DNA, and LNP components[17]. The nucleic acid was diluted in citrate buffer (Teknova). Nanoparticle materials were diluted in ethanol. The phases were mixed together via microfluidics. Each LNP was formulated to carry a distinct barcode; LNP1 carried Cre mRNA and DNA barcode 1, whereas LNP2 carried Cre mRNA and DNA barcode 2. LNP hydrodynamic diameter was measured using dynamic light scattering. All animal experiments were performed in accordance with the Georgia Tech IACUC. C57BL/6J mice were purchased from Jackson Laboratory. Mice were aged 5–8 weeks, and N = 3–4 mice per group were injected intravenously. Sequencing was performed on MiniSeq™ using Illumina protocols.",
+          "section_path": "Experimental Section",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P13",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 8.039256813618557,
+          "vector_score": 0.030486421196053357,
+          "fused_score": 0.03956490613432047,
+          "entity_types": [
+            "formulation_label",
+            "lnp",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-9b5d3dc3b0cfc4b9d5e0",
+          "paper_id": "candidate_00157",
+          "text": "We found that LNPs containing oxidized cholesterol can deliver mRNA to cells in the liver microenvironment more potently than to hepatocytes. Notably, robust delivery occurred at 0.05 mg / kg, which is below the dose regime used for siRNA therapies in humans[21]. Given the importance of liver endothelial cells[22] and Kupffer cells[23] in disease, these data suggest that additional advances in delivery could eventually result in protein replacement therapies within the liver microenvironment. We observed that oxidative modifications made to the hydrocarbon tail were more well tolerated than those made to the B cholesterol ring. These results need to be repeated with more ionizable lipids before they can be considered a general statement. However, in the context of these experiments, cholesterol structure impacts functional delivery. We find it feasible that different protein coronas may adsorb onto LNPs based on cholesterol structure, thereby altering targeting. In this paper, one limitation is that we did not identify the mechanism; although future work is needed to substantiate this hypothesis, we believe these data are an exciting first step to understanding how cholesterol structure can be rationally altered to change LNP tropism.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P12",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.6083217953646654,
+          "vector_score": 0.028801858225334636,
+          "fused_score": 0.03765567160232681,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-4cdd033a1ad2d5ce7b88",
+          "paper_id": "candidate_00157",
+          "text": "We formed LNPs by mixing the contents together in a microfluidic device[17]. Each LNP carried a unique DNA barcode, which acted as a tag for that LNP, as well as Cre mRNA, which signals functional mRNA delivery (Figure 1C). Stable LNPs were pooled together (Figure 1D) and administered to Ai14 mice at a total nucleic acid dose of 1.0 mg / kg. Ai14 mice contain a Lox-Stop-Lox-tdTomato construct under the control of a CAG promoter; as a result, cells in Ai14 mice become tdTomato+ if: (1) Cre mRNA is delivered into the cytoplasm, (2) Cre mRNA is translated into Cre protein, (3) Cre protein translocates from the cytoplasm into the nucleus, and (4) Cre protein edits the genome by removing the ‘Stop’ between Lox sites. Therefore, by isolating tdTomato+ cell types using fluorescence-activated cell sorting (FACS) and using next generation sequencing (NGS) to quantify barcodes within them, FIND identifies LNPs located in cells where functional mRNA delivery occurred (Figure 1E). We quantified NGS sequencing data as ‘normalized delivery’, analogous to counts per million in RNA-seq[7] (Figure 1E).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.3561439104225945,
+          "vector_score": 0.013003239087574427,
+          "fused_score": 0.03701799992122573,
+          "entity_types": [
+            "lnp",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-0702be84e146992b5282",
+          "paper_id": "candidate_00157",
+          "text": "Unexpectedly, we found that the percentage of tdTomato+ hepatic endothelial cells, hepatic immune cells, and Kupffer cells was much higher than the percentage of tdTomato+ hepatocytes (Figure 2B). This result was surprising, however, the stability of the pooled LNPs, the poor performance of the naked barcode, the high percentage of tdTomato+ cells in the liver relative to other organs, and the Euclidean clustering convinced us the data were reliable enough to test our hypothesis: LNP cholesterol structure alters mRNA delivery in vivo. To quantify the impact of cholesterol structure on overall splenic and hepatic delivery, we calculated the normalized delivery across all 8 cell types we sequenced (4 in spleen and 4 in liver) (Figure 3A). We noted that side-chain oxidized cholesterol variants tended to enhance delivery relative to the other cholesterol variants (Figure 3B,C). In particular, LNPs formulated with 25-hydroxycholesterol (25-OH) and 20α-hydroxycholesterol (20α-OH) resulted in higher normalized delivery across all 8 cell types (Figure 3D). To complement these calculations, we assessed which cholesterol variants were enriched in the top 10% of LNPs (Figure 3E). We then calculated the enrichment in the bottom 10% of LNPs[19] and subtracted it from enrichment in the top 10% (Figure 3E,F). This identifies how likely it is that a given cholesterol variant is found in the best- and worst-performing LNPs. Enrichment calculations are detailed in SI Figure 2A. As an additional control, we performed the same two analyses – normalized delivery across all 8 cell types, and enrichment – for cholesterol mole percentage, ionizable lipid mole percentage, and phospholipid mole percentage (SI Figure 2B–D). We did not observe any significant trends.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.222719391419399,
+          "vector_score": 0.00542691661893595,
+          "fused_score": 0.03499639085736314,
+          "entity_types": [
+            "cell",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-4476b67617048f6e97e1",
+          "paper_id": "candidate_00157",
+          "text": "Unmodified cholesterol is acted upon by enzymes to form variants that are side-chain or ring oxidized (Figure 1A). To investigate whether these modifications altered LNP targeting, we formulated 125 FIND LNPs using microfluidics (Figure 1B). To minimize variation from components other than cholesterol, LNPs were made of the ionizable lipid-like material cKK-E12[8], two well validated PEG-lipids, the phospholipid 1,2-Dioleoyl-sn-glycero-3-phosphoethanolamine (DOPE), and one of nine different cholesterol variants (Figure 1B).",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.7814435327568529e-06,
+          "vector_score": 0.008494374036463501,
+          "fused_score": 0.034854623745995336,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00157-08-outcomes",
+          "block_id": "candidate_00157-B-b6797422a8c56e0ea35c",
+          "paper_id": "candidate_00157",
+          "text": "There have been several advances in local and systemic mRNA delivery[1], especially to hepatocytes[2]. However, low dose mRNA delivery to other cell types within the liver microenvironment remains challenging. Using a high-throughput DNA barcode screen named JORDAN, we observed that in vitro nanoparticle delivery can be a poor predictor of in vivo delivery[3]. Since in vitro assays typically lack a complete immune system[4], variable blood flow[5], heterogeneous vasculature, off-target cells, and other factors that influence delivery in vivo[6], we reasoned that an ideal nanoparticle experiment would study LNPs directly in vivo. We therefore developed FIND[7] to quantify how over 100 LNPs deliver functional mRNA into the cytoplasm of target cells in a single mouse.",
+          "section_path": "Body",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00157/PMC6445717.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P1",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.3250093580902194,
+          "vector_score": 0.009486167746898868,
+          "fused_score": 0.030309988518943745,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    }
+  },
+  "blocked_fields": {},
+  "ready_for_extraction": true,
+  "source": "new-paper-source-blocks"
+}

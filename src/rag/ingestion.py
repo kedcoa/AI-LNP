@@ -67,7 +67,11 @@ def xml_blocks(paper_id: str, path: Path) -> list[DocumentBlock]:
         seen.add(id(element))
         block_id = f"{paper_id}-B-{stable_id(str(path), section, block_type, text)}"
         rows.append(DocumentBlock(
-            block_id=block_id, paper_id=paper_id, source_path=str(path.relative_to(ROOT)),
+            block_id=block_id, paper_id=paper_id,
+            source_path=(
+                str(path.relative_to(ROOT)) if path.is_relative_to(ROOT)
+                else str(path)
+            ),
             source_kind="pmc_xml", section_path=section, block_type=block_type,
             text=text, xml_element_id=element.attrib.get("id"), char_start=0,
             char_end=len(text), parser="pmc_xml", parser_confidence=1.0, **metadata,
@@ -116,7 +120,11 @@ def pdf_blocks(paper_id: str, path: Path) -> list[DocumentBlock]:
                 continue
             rows.append(DocumentBlock(
                 block_id=f"{paper_id}-B-{stable_id(str(path), str(page_index + 1), text)}",
-                paper_id=paper_id, source_path=str(path.relative_to(ROOT)), source_kind="pdf",
+                paper_id=paper_id,
+                source_path=(
+                    str(path.relative_to(ROOT)) if path.is_relative_to(ROOT)
+                    else str(path)
+                ),
                 section_path=f"Supplement page {page_index + 1}", block_type="pdf_page",
                 text=text, page_number=page_index + 1, char_start=0, char_end=len(text),
                 parser="pymupdf", parser_confidence=0.75,

@@ -208,7 +208,7 @@ def build_np_bundle(
                     field_name=field_name,
                     evidence_location_type=str(source.get("block_type") or "text"),
                     extraction_method="validated_extraction",
-                    extraction_confidence="requires_review",
+                    extraction_confidence="accepted",
                     evidence_text=item.get("text"),
                     structured_evidence={
                         "source_locators": locators,
@@ -222,14 +222,15 @@ def build_np_bundle(
                     outcome_id=outcome_id,
                     section_name=source.get("section"),
                     page_number=str(source["page_number"]) if source.get("page_number") is not None else None,
-                    verification_status="unreviewed",
+                    verification_status="automatically_validated",
                     reviewer_notes=f"Source slice: {slice_name}; packet evidence: {raw_eid}",
                 )
         if namespaced:
             links.append(FieldEvidenceLink(
                 paper_id=paper_id, entity_type=entity_type, entity_id=entity_id,
                 field_name=field_name, evidence_ids=tuple(namespaced),
-                verification_status="unreviewed", notes=f"Source slice: {slice_name}",
+                verification_status="automatically_validated",
+                notes=f"Source slice: {slice_name}",
             ))
 
     formulations = []
@@ -349,29 +350,40 @@ def build_np_bundle(
         related = outcomes_by_experiment.get(raw["experiment_id"], [])
         assay_field = related[0].get("assay") if len(related) == 1 else None
         comparator_field = related[0].get("comparator") if len(related) == 1 else None
-        missing = []
-        for reason, field in (("missing_dose", raw.get("dose")), ("missing_timepoint", raw.get("timepoint")), ("missing_comparator", comparator_field)):
-            if _value(field) is None:
-                missing.append(reason)
-        if not missing:
-            missing.append("automatic_resolution_required")
+        cell_type = (
+            _value(raw.get("therapeutic_target_cell"))
+            or _value(raw.get("delivery_recipient_cell"))
+        )
+        structural_missing = []
+        if not cell_type:
+            structural_missing.append("cell_type")
+        if not _value(raw.get("payload_type")):
+            structural_missing.append("payload_type")
+        if not related:
+            structural_missing.append("outcome")
         record = ArmRecord(
             record_id=rid, paper_id=paper_id, artifact_id=artifact_by_slice[slice_name],
             formulation_id=formulation_ids[raw["formulation_id"]],
-            cell_type=_value(raw.get("therapeutic_target_cell")) or _value(raw.get("delivery_recipient_cell")) or "Unknown",
-            cell_source=_value(raw.get("delivery_recipient_cell")), tissue_or_organ=_value(raw.get("tissue_or_organ")),
+            cell_type=cell_type or "not_reported",
+            cell_source=_value(raw.get("delivery_recipient_cell")),
+            tissue_or_organ=_value(raw.get("tissue_or_organ")),
+            target_or_recipient_organ=_value(raw.get("tissue_or_organ")),
+            observed_transfected_cell=_value(raw.get("delivery_recipient_cell")),
             species=_value(raw.get("species")), disease_model=_value(raw.get("disease_model")),
             in_vitro_in_vivo=_value(raw.get("experimental_context")), payload_type=_value(raw.get("payload_type")),
             payload_name=_value(raw.get("payload_name")), payload_encoded_product=_value(raw.get("encoded_product")),
             payload_molecular_target=_value(raw.get("molecular_target")), dose=_value(raw.get("dose")),
             dose_unit=_value(raw.get("dose_unit")), route=_value(raw.get("route")), timepoint=_value(raw.get("timepoint")),
             timepoint_unit=_value(raw.get("timepoint_unit")), assay=_value(assay_field),
-            comparator_description=_value(comparator_field), completeness_status="quarantined",
-            verification_status="unreviewed", quarantine_reason="; ".join(missing) or "Needs automatic resolution",
+            comparator_description=_value(comparator_field),
+            completeness_status=("incomplete" if structural_missing else "complete"),
+            verification_status="automatically_validated",
         )
         arms.append(record)
         mapping = {
             "cell_type": "therapeutic_target_cell", "cell_source": "delivery_recipient_cell", "tissue_or_organ": "tissue_or_organ",
+            "target_or_recipient_organ": "tissue_or_organ",
+            "observed_transfected_cell": "delivery_recipient_cell",
             "species": "species", "disease_model": "disease_model", "in_vitro_in_vivo": "experimental_context",
             "payload_type": "payload_type", "payload_name": "payload_name", "payload_encoded_product": "encoded_product",
             "payload_molecular_target": "molecular_target", "dose": "dose", "dose_unit": "dose_unit", "route": "route",
@@ -389,12 +401,13 @@ def build_np_bundle(
             for evidence_id, evidence_record in evidence_records.items()
             if evidence_record.arm_id == rid and evidence_record.outcome_id is None
         )
-        for index, reason in enumerate(missing):
+        for index, field_name in enumerate(structural_missing):
             reviews.append(ReviewRecord(
                 record_id=f"{rid}::review::{index}", paper_id=paper_id,
-                artifact_id=artifact_by_slice[slice_name], reason_code=reason,
-                status="quarantined" if review_evidence else "blocked",
-                evidence_ids=review_evidence, arm_id=rid,
+                artifact_id=artifact_by_slice[slice_name],
+                reason_code="missing_required_fields", status="incomplete",
+                evidence_ids=review_evidence, arm_id=rid, field_name=field_name,
+                notes="Validated extraction did not populate a general-use field.",
             ))
 
     outcomes = []

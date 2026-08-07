@@ -25,8 +25,10 @@ def arm_database(tmp_path):
     formulation_id = connection.execute(
         """
         INSERT INTO formulation (
-            paper_id, formulation_name, composition_raw, composition_basis
-        ) VALUES (?, 'LNP-A', 'A:B:C:D = 50:10:38.5:1.5', 'mol%')
+            paper_id, formulation_name, composition_raw, composition_basis,
+            chemical_formulation_total, lnp_molar_ratio
+        ) VALUES (?, 'LNP-A', 'A:B:C:D = 50:10:38.5:1.5', 'mol%',
+                  'A-B-C-D', '50:10:38.5:1.5')
         """,
         (paper_id,),
     ).lastrowid
@@ -42,9 +44,12 @@ def arm_database(tmp_path):
     experiment_id = connection.execute(
         """
         INSERT INTO experiment (
-            paper_id, formulation_id, cell_type, species, in_vitro_in_vivo,
-            payload_type, dose, dose_unit, assay
-        ) VALUES (?, ?, 'hepatocyte', 'mouse', 'in_vivo', 'mRNA', 1.0, 'mg/kg', 'ELISA')
+            paper_id, formulation_id, cell_type, intended_target_cell,
+            species, in_vitro_in_vivo,
+            payload_type, payload_name, dose, dose_unit, route, timepoint,
+            timepoint_unit, assay
+        ) VALUES (?, ?, 'hepatocyte', 'hepatocyte', 'mouse', 'in_vivo', 'mRNA', 'test mRNA',
+                  1.0, 'mg/kg', 'intravenous', 24, 'hours', 'ELISA')
         """,
         (paper_id, formulation_id),
     ).lastrowid
@@ -99,6 +104,84 @@ def test_missing_field_makes_arm_incomplete(arm_database) -> None:
 
     assert result.completeness_status == "incomplete"
     assert result.missing_fields == ("payload_type",)
+
+
+def test_general_completeness_requires_every_approved_mandatory_field(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        "UPDATE experiment SET route=NULL,timepoint=NULL WHERE experiment_id=?",
+        (experiment_id,),
+    )
+    connection.execute(
+        "UPDATE formulation SET lnp_molar_ratio=NULL WHERE formulation_id=(SELECT formulation_id FROM experiment WHERE experiment_id=?)",
+        (experiment_id,),
+    )
+
+    status = evaluate_arm_status(connection, experiment_id)
+    nearest = evaluate_eligibility(connection, experiment_id, "nearest_neighbor")
+
+    assert status.completeness_status == "incomplete"
+    assert {"lnp_molar_ratio", "route", "timepoint"} <= set(status.missing_fields)
+    assert nearest.eligible is False
+    assert {"lnp_molar_ratio", "route", "timepoint"} <= set(nearest.reasons)
+
+
+def test_organ_destination_satisfies_delivery_without_intended_target_cell(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        """UPDATE experiment
+           SET cell_type='not_reported', intended_target_cell=NULL,
+               target_or_recipient_organ='liver',
+               observed_transfected_cell='hepatocyte'
+           WHERE experiment_id=?""",
+        (experiment_id,),
+    )
+
+    result = evaluate_arm_status(connection, experiment_id)
+
+    assert result.completeness_status == "complete"
+    assert "cell_type" not in result.missing_fields
+    assert "delivery_destination" not in result.missing_fields
+
+
+def test_observed_cell_alone_does_not_satisfy_delivery_destination(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        """UPDATE experiment
+           SET cell_type='not_reported', intended_target_cell=NULL,
+               target_or_recipient_organ=NULL, tissue_or_organ=NULL,
+               observed_transfected_cell='hepatocyte'
+           WHERE experiment_id=?""",
+        (experiment_id,),
+    )
+
+    result = evaluate_arm_status(connection, experiment_id)
+
+    assert result.completeness_status == "incomplete"
+    assert "delivery_destination" in result.missing_fields
+
+
+def test_missing_value_outcome_does_not_satisfy_general_completeness(
+    arm_database,
+) -> None:
+    connection, experiment_id = arm_database
+    connection.execute(
+        """UPDATE outcome
+           SET outcome_value=NULL, qualitative_outcome=NULL, value_status='missing'
+           WHERE experiment_id=?""",
+        (experiment_id,),
+    )
+
+    result = evaluate_arm_status(connection, experiment_id)
+
+    assert result.completeness_status == "incomplete"
+    assert "outcome" in result.missing_fields
 
 
 def test_conflict_takes_precedence_over_incomplete(arm_database) -> None:
@@ -218,7 +301,7 @@ def test_eligibility_records_the_coherent_outcome_rules_version(
         connection, experiment_id, "nearest_neighbor"
     )
 
-    assert result.rules_version == "working-evidence-v2"
+    assert result.rules_version == "working-evidence-v3"
 
 
 def test_ambiguous_evidence_is_not_similarity_eligible(arm_database) -> None:

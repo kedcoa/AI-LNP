@@ -22,6 +22,7 @@ from src.database.import_contracts import (
     FieldEvidenceLink,
     FormulationRecord,
     ImportBundle,
+    OutcomeRecord,
     ReviewRecord,
     SourceArtifactRecord,
 )
@@ -42,6 +43,10 @@ from src.extraction.prepare_application_pilot import (
 _FULL_RATIO = re.compile(
     r"(?<![\d.])(\d+(?:\.\d+)?(?::\d+(?:\.\d+)?){2,})(?![\d.])"
 )
+_OUTCOME_FIELD = re.compile(
+    r"^outcome\.(?P<outcome_id>[^.]+)\.(?P<field_name>"
+    r"assay|endpoint|comparator|outcome_value|outcome_unit|qualitative_outcome)$"
+)
 
 
 def pilot_map_logical_path(path: Path) -> str:
@@ -54,6 +59,68 @@ def pilot_map_logical_path(path: Path) -> str:
         if tuple(parts[index:index + len(marker)]) == marker:
             return Path(*parts[index:]).as_posix()
     return resolved.as_posix()
+
+
+def _repository_logical_path(path: Path) -> str:
+    resolved = path.resolve()
+    for root in resolved.parents:
+        if (root / "src/database").is_dir() and (root / "data").is_dir():
+            return resolved.relative_to(root).as_posix()
+    return resolved.as_posix()
+
+
+def _reported_fact_value(row: dict[str, Any]) -> Any:
+    raw_values = row.get("raw_values")
+    if isinstance(raw_values, list) and raw_values:
+        return raw_values[0]
+    return row.get("canonical_value")
+
+
+def _consolidated_outcome_groups(
+    path: Path,
+    paper_id: str,
+) -> dict[str, list[dict[str, dict[str, Any]]]]:
+    """Return normalized outcome facts grouped by approved map candidate.
+
+    The consolidated replay failed aggregate recall thresholds, but its safety
+    audit found zero wrong-arm links and zero unsupported exact numerics.  A
+    later inventory-bound paper map supplies the arm/evidence boundary used by
+    the caller to admit or reject each individual field.
+    """
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    safety = payload.get("scientific_safety_audit") or {}
+    if safety.get("accepted_wrong_arm_links") != 0:
+        raise ValueError("pilot outcome source has accepted wrong-arm links")
+    if safety.get("unsupported_exact_numeric_values") != 0:
+        raise ValueError("pilot outcome source has unsupported exact numerics")
+    paper = next(
+        (
+            row for row in payload.get("extraction", {}).get("papers", ())
+            if row.get("paper_id") == paper_id
+        ),
+        None,
+    )
+    if paper is None:
+        raise ValueError(f"pilot outcome source lacks {paper_id}")
+    grouped: dict[str, list[dict[str, dict[str, Any]]]] = {}
+    for experiment in paper.get("experiments", ()):
+        candidate_id = str(experiment.get("candidate_id") or "").strip()
+        if not candidate_id:
+            continue
+        by_outcome: dict[str, dict[str, dict[str, Any]]] = {}
+        for fact in experiment.get("facts", ()):
+            match = _OUTCOME_FIELD.fullmatch(str(fact.get("field_name") or ""))
+            if match is None:
+                continue
+            by_outcome.setdefault(match.group("outcome_id"), {})[
+                match.group("field_name")
+            ] = fact
+        grouped[candidate_id] = [
+            {"_identity": {"value": outcome_id}, **fields}
+            for outcome_id, fields in by_outcome.items()
+        ]
+    return grouped
 
 
 def completed_pilot_map_response(
@@ -303,6 +370,7 @@ def build_pilot_map_lossless_result(
     *,
     response_path: Path,
     base_bundle: ImportBundle,
+    consolidated_path: Path | None = None,
 ) -> LosslessAdapterResult:
     """Validate and conservatively project one completed PILOT paper map."""
 
@@ -350,6 +418,20 @@ def build_pilot_map_lossless_result(
     inventory_evidence = {block.evidence_id for block in inventory.evidence_blocks}
     if allowed_evidence != inventory_evidence:
         raise ValueError("base bundle does not exactly match the bound inventory")
+
+    outcome_groups: dict[str, list[dict[str, dict[str, Any]]]] = {}
+    outcome_artifact: SourceArtifactRecord | None = None
+    if consolidated_path is not None:
+        consolidated_path = Path(consolidated_path).resolve()
+        outcome_groups = _consolidated_outcome_groups(consolidated_path, paper_id)
+        outcome_artifact = SourceArtifactRecord(
+            artifact_id=f"{paper_id}:evidence-bound-outcomes",
+            path=_repository_logical_path(consolidated_path),
+            sha256=hashlib.sha256(consolidated_path.read_bytes()).hexdigest(),
+            source_kind="validated_extraction",
+            pipeline_name="application_pilot_evidence_bound_outcome_projection",
+            pipeline_version="v1",
+        )
 
     links: list[FieldEvidenceLink] = []
     formulations: list[FormulationRecord] = []
@@ -499,6 +581,7 @@ def build_pilot_map_lossless_result(
 
     payloads = {str(row["payload_id"]): row for row in paper_map["payloads"]}
     arms: list[ArmRecord] = []
+    outcomes: list[OutcomeRecord] = []
     reviews: list[ReviewRecord] = []
     for raw_context in paper_map["provisional_experiment_contexts"]:
         raw_context_id = str(raw_context["provisional_context_id"])
@@ -509,6 +592,71 @@ def build_pilot_map_lossless_result(
         route = str(_value(raw_context.get("route")) or "").strip() or None
         model = str(_value(raw_context.get("experimental_model")) or "").strip() or None
         arm_id = f"{paper_id}::map-arm::{raw_context_id}"
+        context_evidence = set(raw_context.get("joint_evidence_ids", ())) | set(
+            raw_context.get("outcome_evidence_ids", ())
+        )
+        projected_outcomes: list[tuple[OutcomeRecord, dict[str, dict[str, Any]]]] = []
+        for fields in outcome_groups.get(raw_context_id, ()):
+            supported = {
+                name: fact
+                for name, fact in fields.items()
+                if name == "_identity"
+                or (
+                    _evidence_ids(fact)
+                    and set(_evidence_ids(fact)).issubset(context_evidence)
+                )
+            }
+            endpoint_fact = supported.get("endpoint")
+            qualitative_fact = supported.get("qualitative_outcome")
+            numeric_fact = supported.get("outcome_value")
+            if endpoint_fact is None or (
+                qualitative_fact is None and numeric_fact is None
+            ):
+                continue
+            raw_numeric = _reported_fact_value(numeric_fact) if numeric_fact else None
+            try:
+                numeric_value = float(raw_numeric) if raw_numeric is not None else None
+            except (TypeError, ValueError):
+                numeric_value = None
+            qualitative = (
+                str(_reported_fact_value(qualitative_fact))
+                if qualitative_fact is not None else None
+            )
+            outcome_identity = str(supported["_identity"]["value"])
+            notes = []
+            for label, name in (("Assay", "assay"), ("Comparator", "comparator")):
+                if name in supported:
+                    notes.append(f"{label}: {_reported_fact_value(supported[name])}")
+            projected_outcomes.append((OutcomeRecord(
+                record_id=f"{paper_id}::map-outcome::{raw_context_id}::{outcome_identity}",
+                paper_id=paper_id,
+                artifact_id=(
+                    outcome_artifact.artifact_id if outcome_artifact else map_artifact_id
+                ),
+                arm_id=arm_id,
+                endpoint_family="other",
+                endpoint_name=str(_reported_fact_value(endpoint_fact)),
+                value_status=(
+                    "reported" if numeric_value is not None
+                    else "qualitative_only" if qualitative else "missing"
+                ),
+                outcome_value=numeric_value,
+                outcome_unit=(
+                    str(_reported_fact_value(supported["outcome_unit"]))
+                    if "outcome_unit" in supported else None
+                ),
+                qualitative_outcome=qualitative,
+                outcome_notes="; ".join(notes) or None,
+            ), supported))
+        assay_values = _ordered_unique(
+            str(_reported_fact_value(fields["assay"]))
+            for _, fields in projected_outcomes if "assay" in fields
+        )
+        comparator_values = _ordered_unique(
+            str(_reported_fact_value(fields["comparator"]))
+            for _, fields in projected_outcomes if "comparator" in fields
+        )
+        study_scope = _study_scope(route, model)
         arm = ArmRecord(
             record_id=arm_id,
             paper_id=paper_id,
@@ -517,9 +665,12 @@ def build_pilot_map_lossless_result(
             cell_type=_cell_type(recipient),
             cell_source=recipient,
             tissue_or_organ=_value(raw_context.get("organ")),
+            intended_target_cell=recipient if study_scope == "in_vitro" else None,
+            target_or_recipient_organ=_value(raw_context.get("organ")),
+            observed_transfected_cell=recipient,
             species=_value(raw_context.get("species")),
             disease_model=model,
-            in_vitro_in_vivo=_study_scope(route, model),
+            in_vitro_in_vivo=study_scope,
             payload_type=_payload_type(payload_name),
             payload_name=payload_name,
             payload_molecular_target=_value(payload.get("role")),
@@ -528,6 +679,8 @@ def build_pilot_map_lossless_result(
             route=route,
             timepoint=_value(raw_context.get("timepoint")),
             timepoint_unit=_value(raw_context.get("timepoint_unit")),
+            assay="; ".join(assay_values) or None,
+            comparator_description="; ".join(comparator_values) or None,
             experiment_notes=(
                 "Provisional context from a completed, schema-valid paper map. "
                 "Outcome evidence remains unnormalized: "
@@ -553,7 +706,11 @@ def build_pilot_map_lossless_result(
         if arm.cell_source:
             link_arm("cell_source", recipient_evidence)
         mappings = (
-            ("tissue_or_organ", "organ"), ("species", "species"),
+            ("tissue_or_organ", "organ"),
+            ("intended_target_cell", "recipient_cell"),
+            ("target_or_recipient_organ", "organ"),
+            ("observed_transfected_cell", "recipient_cell"),
+            ("species", "species"),
             ("disease_model", "experimental_model"), ("dose", "dose"),
             ("dose_unit", "dose_unit"), ("route", "route"),
             ("timepoint", "timepoint"), ("timepoint_unit", "timepoint_unit"),
@@ -578,11 +735,53 @@ def build_pilot_map_lossless_result(
                 "payload_molecular_target",
                 _evidence_ids(payload.get("role")) or payload_evidence,
             )
+        if arm.assay:
+            link_arm(
+                "assay",
+                _ordered_unique(
+                    evidence_id
+                    for _, fields in projected_outcomes
+                    if "assay" in fields
+                    for evidence_id in _evidence_ids(fields["assay"])
+                ),
+            )
+        if arm.comparator_description:
+            link_arm(
+                "comparator_description",
+                _ordered_unique(
+                    evidence_id
+                    for _, fields in projected_outcomes
+                    if "comparator" in fields
+                    for evidence_id in _evidence_ids(fields["comparator"])
+                ),
+            )
+        for outcome, fields in projected_outcomes:
+            outcomes.append(outcome)
+            endpoint_evidence = _evidence_ids(fields["endpoint"])
+            _add_link(
+                links, paper_id=paper_id, entity_type="outcome",
+                entity_id=outcome.record_id, field_name="endpoint_family",
+                evidence_ids=endpoint_evidence, allowed_evidence=allowed_evidence,
+            )
+            for destination, source in (
+                ("endpoint_name", "endpoint"),
+                ("outcome_value", "outcome_value"),
+                ("outcome_unit", "outcome_unit"),
+                ("qualitative_outcome", "qualitative_outcome"),
+            ):
+                if source in fields and getattr(outcome, destination) is not None:
+                    _add_link(
+                        links, paper_id=paper_id, entity_type="outcome",
+                        entity_id=outcome.record_id, field_name=destination,
+                        evidence_ids=_evidence_ids(fields[source]),
+                        allowed_evidence=allowed_evidence,
+                    )
         review_evidence = _ordered_unique(
             (*raw_context.get("joint_evidence_ids", ()),
              *raw_context.get("outcome_evidence_ids", ()))
         )
-        reviews.append(
+        if not projected_outcomes:
+            reviews.append(
             ReviewRecord(
                 record_id=f"{paper_id}::map-review::{raw_context_id}",
                 paper_id=paper_id,
@@ -602,8 +801,22 @@ def build_pilot_map_lossless_result(
                     "remains unresolved. Source evidence IDs: "
                     + ", ".join(review_evidence)
                 ),
-            )
-        )
+            ))
+        else:
+            reviews.append(ReviewRecord(
+                record_id=f"{paper_id}::map-review::{raw_context_id}",
+                paper_id=paper_id,
+                artifact_id=map_artifact_id,
+                reason_code="missing_required_fields",
+                status="incomplete",
+                evidence_ids=(),
+                arm_id=arm_id,
+                notes=(
+                    "Evidence-bound outcomes were projected automatically. "
+                    "The arm remains incomplete only for other mandatory "
+                    "database fields."
+                ),
+            ))
 
     for index, unresolved in enumerate(paper_map.get("unresolved_items", ()), start=1):
         reviews.append(
@@ -627,11 +840,15 @@ def build_pilot_map_lossless_result(
                 "remain review-gated and no map-only outcome was invented."
             ),
         ),
-        artifacts=(*base_bundle.artifacts, map_artifact),
+        artifacts=(
+            *base_bundle.artifacts,
+            map_artifact,
+            *((outcome_artifact,) if outcome_artifact is not None else ()),
+        ),
         formulations=tuple(formulations),
         components=tuple(components),
         arms=tuple(arms),
-        outcomes=(),
+        outcomes=tuple(outcomes),
         evidence=base_bundle.evidence,
         field_evidence_links=tuple(links),
         reviews=tuple(reviews),

@@ -214,13 +214,22 @@ def _coverage(
         int(row[0])
         for row in connection.execute(arm_query)
     ]
+    outcome_query = (
+        """SELECT outcome_id FROM outcome o WHERE NOT EXISTS
+        (SELECT 1 FROM evidence v WHERE v.outcome_id=o.outcome_id)
+        AND NOT EXISTS (
+            SELECT 1 FROM import_field_evidence f
+            WHERE f.entity_type='outcome' AND f.entity_id=o.outcome_id
+        )
+        ORDER BY outcome_id"""
+        if include_field_links
+        else """SELECT outcome_id FROM outcome o WHERE NOT EXISTS
+        (SELECT 1 FROM evidence v WHERE v.outcome_id=o.outcome_id)
+        ORDER BY outcome_id"""
+    )
     outcomes = [
         int(row[0])
-        for row in connection.execute(
-            """SELECT outcome_id FROM outcome o WHERE NOT EXISTS
-            (SELECT 1 FROM evidence v WHERE v.outcome_id=o.outcome_id)
-            ORDER BY outcome_id"""
-        )
+        for row in connection.execute(outcome_query)
     ]
     return {"arms_without_evidence": arms, "outcomes_without_evidence": outcomes}
 
@@ -338,12 +347,16 @@ def _lossless_source_checks(
         """
     ).fetchone()[0]
     total_facts = _scalar(connection, "SELECT count(*) FROM source_fact")
+    allowed_identities = {(row[0], row[1], row[2]) for row in allowed}
+    unexpected = {
+        row for row in actual if (row[0], row[1], row[2]) not in allowed_identities
+    }
     return {
         "expected_available_manifest_artifacts": len(expected),
         "completed_exact_map_artifacts": len(completed),
-        "registered_source_artifacts": len(actual),
+        "registered_source_artifacts": len({(row[0], row[1], row[2]) for row in actual}),
         "missing_registered_artifacts": sorted(expected - actual),
-        "unexpected_registered_artifacts": sorted(actual - allowed),
+        "unexpected_registered_artifacts": sorted(unexpected),
         "manifest_missing_or_unhashed_artifacts": missing_manifest,
         "fact_producing_artifacts_without_facts": factless,
         "source_fact_count": total_facts,
@@ -365,6 +378,13 @@ def _review_tag_gaps(connection: sqlite3.Connection) -> list[int]:
             SELECT a.experiment_id FROM arm_assessment a
             JOIN experiment e USING (experiment_id)
             WHERE a.completeness_status != 'complete'
+              AND (
+                  json_array_length(a.missing_fields_json) = 0
+                  OR NOT EXISTS (
+                      SELECT 1 FROM evidence ev
+                      WHERE ev.experiment_id=a.experiment_id
+                  )
+              )
               AND NOT EXISTS (
                 SELECT 1 FROM import_review r
                 WHERE r.paper_id=e.paper_id
