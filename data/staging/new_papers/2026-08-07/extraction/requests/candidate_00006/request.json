@@ -1,0 +1,632 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning": {
+    "effort": "low"
+  },
+  "store": false,
+  "service_tier": "default",
+  "max_output_tokens": 12000,
+  "prompt_cache_key": "97b9d2085c30fc5bf4baface68bdb76c41a2c3aa9df33d8262fd2f944d5d5e80",
+  "input": [
+    {
+      "role": "system",
+      "content": "Extract directly reported LNP evidence from the supplied packet; use no outside knowledge. Return a reported value with valid supplied evidence IDs, or missing with a reason and no IDs. Set eligibility to eligible only for original LNP delivery of supported RNA or a validated tracer/barcode, an eligible liver cell, and linked formulation, experiment, and outcome. Report payload_role as therapeutic, reporter, biodistribution_tracer, or screening_barcode. Tracers are delivery evidence, not therapeutic RNA evidence. Put strains and engineered reporter models in experimental_model. Use disease_model only for actual disease. Failed criteria are ineligible; insufficient evidence is uncertain. Ineligible or uncertain papers must return empty extraction lists. Keep records separate. Do not infer hepatocytes from liver-level evidence. Do not mix facts from different experiments. Do not store payload as an LNP component. Do not convert a mechanism, hypothesis, or interpretation into a measured outcome. Candidates are navigation aids, not facts. A reported negative result is an outcome, not missing. Return only the required response."
+    },
+    {
+      "role": "user",
+      "content": "{\"evidence_packet\":{\"blocked_fields\":[],\"evidence\":[{\"evidence_id\":\"candidate_00006-E-b3ba1172efddf031\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-a68e0e24de9e\"],\"text\":\"Second, a single (tissue-invariant) mRNA escape rate was used; endosomal pH dynamics and trafficking pathways likely vary by cell type and physiological context.\"},{\"evidence_id\":\"candidate_00006-E-34f70f45ded5355a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-a68e0e24de9e\"],\"text\":\"Third, cellular uptake and translation efficiency was assumed equal between hepatocytes and Kupffer cells; differences in ribosomal load, innate immune activation, or RNA modification sensing could introduce cell-type-specific mRNA translation rates [42, 43].\"},{\"evidence_id\":\"candidate_00006-E-484deca3a29e6c99\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\"],\"source_ids\":[\"S-a40e3786235b\"],\"text\":\"The mRNA escape rate, endosomal degradation rate, and mRNA degradation rate were assumed to be similar across species.\"},{\"evidence_id\":\"candidate_00006-E-0635cc65a9c1c24a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\"],\"source_ids\":[\"S-a40e3786235b\"],\"text\":\"The scaled human model was then used to perform virtual trial simulations and the results were compared with clinical plasma mRNA PK data from the mRNA encoded mAb targeting Chikungunya virus [5].\"},{\"evidence_id\":\"candidate_00006-E-fb48a901bc0f99f2\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-ed18bda35bbe\"],\"text\":\"The model was then used to explore how key parameters related to mRNA-LNP treatment design may influence total protein production within the liver (Fig.\"},{\"evidence_id\":\"candidate_00006-E-a32b79f30f67104c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-ed18bda35bbe\"],\"text\":\"Three key design factors were tested: mRNA degradation rate, mRNA escape rate, and endosomal degradation rate.\"},{\"evidence_id\":\"candidate_00006-E-cab8631e952fde3a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-ed18bda35bbe\"],\"text\":\"Each parameter was varied from 0.2- to 5-fold of the baseline value at three different dose levels (0.5, 1, and 2 mg/kg).\"},{\"evidence_id\":\"candidate_00006-E-73caf0a19d005a65\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-ed18bda35bbe\"],\"text\":\"Simulation results suggest that an increase in mRNA degradation rate substantially reduces protein production in the liver in a highly nonlinear manner (Fig.\"},{\"evidence_id\":\"candidate_00006-E-942dbcdc8ad4cacf\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-ed18bda35bbe\"],\"text\":\"The impact on protein AUC appears to plateau above ~ 3 fold increase in the degradation rate.Fig.\"},{\"evidence_id\":\"candidate_00006-E-cd18e2da30e98f7e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-ed18bda35bbe\"],\"text\":\"Liver protein AUC under three different doses (0.5, 1 and 2 mg/kg) was plotted by varying (A) liver mRNA degradation rate, (B) mRNA escape rate, and (C) liver endosomal degradation rate.\"},{\"context_after_evidence_id\":\"candidate_00006-E-82faf43755a1a2d9\",\"evidence_id\":\"candidate_00006-E-b0c0d84f414a65a8\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"Lipid nanoparticle (LNP)–based messenger RNA (mRNA) therapeutics enable in vivo production of diverse protein modalities, but their translation is complicated by multiscale pharmacokinetics encompassing tissue transport, cellular uptake, and intracellular processing.\"},{\"context_before_evidence_id\":\"candidate_00006-E-b0c0d84f414a65a8\",\"evidence_id\":\"candidate_00006-E-82faf43755a1a2d9\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"We developed a platform translational whole-body physiologically based pharmacokinetic (PBPK) model to mechanistically characterize the biodistribution and protein expression of intravenously administered mRNA–LNP therapeutics.\"},{\"evidence_id\":\"candidate_00006-E-e7a3935627134432\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"The model integrates receptor-mediated, saturable tissue infiltration, lymphatic recirculation, hepatic uptake, and explicit intracellular processes including endosomal degradation, mRNA escape, translation, and protein turnover.\"},{\"context_after_evidence_id\":\"candidate_00006-E-b1fe3f46aaca4260\",\"evidence_id\":\"candidate_00006-E-eefb2e274b1b1a99\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"Parameters were calibrated using comprehensive rat biodistribution data containing both tissue-level mRNA and translated protein measurements, enabling characterization of rapid early tissue deposition and dominant hepatic protein production.\"},{\"context_before_evidence_id\":\"candidate_00006-E-eefb2e274b1b1a99\",\"evidence_id\":\"candidate_00006-E-b1fe3f46aaca4260\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"Sensitivity analyses identified endosomal degradation, mRNA stability, and translation efficiency as the primary determinants of hepatic protein exposure, whereas increasing tissue influx alone yielded minimal effect.\"},{\"evidence_id\":\"candidate_00006-E-c541143233c0bfa6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"Using fundamental allometric scaling principle, the model was translated from rat to human and evaluated against published clinical plasma mRNA pharmacokinetics of an mRNA-encoded monoclonal antibody.\"},{\"context_after_evidence_id\":\"candidate_00006-E-81847b75279247f5\",\"evidence_id\":\"candidate_00006-E-fb3fdb2ac368835e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"Cell-type specific simulation analyses further demonstrated the competing roles of Kupffer cells and hepatocytes in shaping liver protein exposure.\"},{\"context_before_evidence_id\":\"candidate_00006-E-fb3fdb2ac368835e\",\"evidence_id\":\"candidate_00006-E-81847b75279247f5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"therapeutic_target\"],\"source_ids\":[\"S-95159cea36fb\"],\"text\":\"This whole-body PBPK framework provides a mechanistic and predictive platform to support first-in-human dose selection, to interrogate multilevel determinants of mRNA pharmacokinetics, and to guide rational mRNA-LNP design.\"},{\"context_after_evidence_id\":\"candidate_00006-E-62ccd42cceeab83e\",\"evidence_id\":\"candidate_00006-E-e67ee6e4f671a103\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-67db4dae5ed8\"],\"text\":\"mRNA-LNP enters each tissue compartment through vascular blood flow (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{Q}_{tissue}$$\\\\end{document}) and returns to the venous compartment at a rate determined by the difference between blood flow and lymphatic flow (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{Q}_{tissue}-{L}_{tissue}$$\\\\end{document}).\"},{\"context_before_evidence_id\":\"candidate_00006-E-e67ee6e4f671a103\",\"evidence_id\":\"candidate_00006-E-62ccd42cceeab83e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-67db4dae5ed8\"],\"text\":\"Within the vasculature, mRNA-LNP transports into the interstitial space via the influx rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{J}_{in}^{tissue}$$\\\\end{document}).\"},{\"evidence_id\":\"candidate_00006-E-604d4e8aeb1d94fa\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-67db4dae5ed8\"],\"text\":\"To account for receptor-mediated rapid uptake of mRNA-LNP observed in biodistribution data, we incorporated a saturating function into the tissue infiltration process.\"},{\"evidence_id\":\"candidate_00006-E-b67abf442f17d5fa\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-67db4dae5ed8\"],\"text\":\"The apparent Km of the infiltration function (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{K}_{m}^{Jin}$$\\\\end{document}) was assumed to be uniform across the tissues, estimated using plasma mRNA PK data.\"},{\"context_after_evidence_id\":\"candidate_00006-E-7baa46971dd5a127\",\"evidence_id\":\"candidate_00006-E-28935c00ec7df25e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-67db4dae5ed8\"],\"text\":\"Additionally, a probability function was included to represent receptor depletion and regeneration.\"},{\"context_before_evidence_id\":\"candidate_00006-E-28935c00ec7df25e\",\"evidence_id\":\"candidate_00006-E-7baa46971dd5a127\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-67db4dae5ed8\"],\"text\":\"Receptor depletion is governed by the depletion rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{receptor}$$\\\\end{document}), while receptor recovery half-life is assumed to be 72 h (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:\\\\tau\\\\:$$\\\\end{document}), long enough to capture the observed mRNA PK profile.\"},{\"context_after_evidence_id\":\"candidate_00006-E-d136f3d190d14ca1\",\"evidence_id\":\"candidate_00006-E-42e736b8f865cfd2\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-fbb8c38681b0\"],\"text\":\"Messenger RNA (mRNA) technology has emerged as a transformative and increasingly established modality in modern therapeutics and vaccine development, offering a versatile platform for targeted protein expression delivered via lipid nanoparticles.\"},{\"context_before_evidence_id\":\"candidate_00006-E-42e736b8f865cfd2\",\"evidence_id\":\"candidate_00006-E-d136f3d190d14ca1\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-fbb8c38681b0\"],\"text\":\"This is exemplified by the unprecedented speed and scale with which mRNA based vaccines were developed against SARS-COV-2 during the COVID-19 pandemic [1, 2].\"},{\"evidence_id\":\"candidate_00006-E-3e41f7fe1e77d2d8\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-fbb8c38681b0\"],\"text\":\"Similar progress has been achieved with neoantigen mRNA cancer immunotherapy [3, 4], highlighting the versatility of the platform for both infectious disease and oncology vaccine applications.\"},{\"evidence_id\":\"candidate_00006-E-415fb46e738cbfe4\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-fbb8c38681b0\"],\"text\":\"Beyond applications to vaccine development, the mRNA technology is being explored for therapeutic purposes, such as development of mRNA encoded monoclonal antibodies [5], bispecific antibodies for oncology [6], in situ CAR-T (chimeric antigen receptor T cell) therapy for cancer [7], and mRNA based enzyme replacement therapy for rare diseases [8, 9].\"},{\"evidence_id\":\"candidate_00006-E-14c5d3c52b0d6352\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"outcomes\",\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-fbb8c38681b0\"],\"text\":\"Achieving success in the broader application of lipid-based nanoparticle mRNA (mRNA-LNP) therapeutics requires a quantitative understanding of how LNP based mRNA constructs distribute across tissues, traverse cellular barriers, escape the endosomal pathway and translate into functional protein over clinically relevant dose regimens and time scales.\"},{\"context_after_evidence_id\":\"candidate_00006-E-5bfcb18e810077f0\",\"evidence_id\":\"candidate_00006-E-4d29ab5c28382221\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-db43369b1de6\"],\"text\":\"mRNA-LNP within the interstitial space can either be taken up by cells with an uptake rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{up}^{tissue}$$\\\\end{document}) or flow into the lymph node through lymphatic flow.\"},{\"context_after_evidence_id\":\"candidate_00006-E-eefd3dbb1624c1f6\",\"context_before_evidence_id\":\"candidate_00006-E-4d29ab5c28382221\",\"evidence_id\":\"candidate_00006-E-5bfcb18e810077f0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-db43369b1de6\"],\"text\":\"The lymphatic flow is assumed to be 0.2% of the plasma flow rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{L}_{tissue}={Q}_{tissue}/500$$\\\\end{document}) and is limited by the lymphatic reflection coefficient (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:\\\\sigma\\\\:$$\\\\end{document}), consistent with the assumptions used in published study [15].\"},{\"context_after_evidence_id\":\"candidate_00006-E-0228ae01d7137feb\",\"context_before_evidence_id\":\"candidate_00006-E-5bfcb18e810077f0\",\"evidence_id\":\"candidate_00006-E-eefd3dbb1624c1f6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-db43369b1de6\"],\"text\":\"Within the cellular compartment of each tissue, mRNA-LNP undergoes endosomal degradation at a rate \\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{deg}^{LNP}$$\\\\end{document}, while mRNA escapes from LNP and endosome at the cumulative escape rate of \\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{escape}$$\\\\end{document}.\"},{\"context_before_evidence_id\":\"candidate_00006-E-eefd3dbb1624c1f6\",\"evidence_id\":\"candidate_00006-E-0228ae01d7137feb\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-db43369b1de6\"],\"text\":\"Escaped mRNA within the cytoplasm either undergoes degradation at the degradation rate of \\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{deg}^{mRNA}$$\\\\end{document} or is translated to produce the desired protein at the translation rate of \\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{translate}$$\\\\end{document}.\"},{\"evidence_id\":\"candidate_00006-E-dfee45154b1ea20e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-db43369b1de6\"],\"text\":\"The cumulative escape rate of mRNA from LNP and endosome is assumed to be the same across different tissues and is fixed to a value reported in the literature [18].\"},{\"evidence_id\":\"candidate_00006-E-1a40951c42086fcc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-db43369b1de6\"],\"text\":\"The tissue influx rates, cellular uptake rates, endosomal degradation rates, mRNA degradation rates, and protein translation rates were estimated by calibrating the model to the Rat biodistribution data [22].\"},{\"evidence_id\":\"candidate_00006-E-d492d80af16cc55f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-db43369b1de6\"],\"text\":\"Unlike other tissue compartments, the liver compartment includes two distinct cell types: Kupffer cells, which are adjacent to the vasculature and directly take up mRNA-LNP from the vasculature, and hepatocytes, that reside within the interstitial space.\"},{\"evidence_id\":\"candidate_00006-E-cecb840771ca75ac\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"Here we report the construction and validation of a whole-body translational PBPK platform for mRNA-LNP therapeutics.\"},{\"evidence_id\":\"candidate_00006-E-2179d36cfa8ca3ea\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"In this modeling framework, pharmacokinetics (PK) refers specifically to mRNA disposition, whereas pharmacodynamics (PD) refers to the resulting encoded protein expression.\"},{\"evidence_id\":\"candidate_00006-E-4c9ba9f00699f95a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"Building on the anatomical template of Shah and Betts [15], we introduced Michaelis–Menten infiltration terms to model receptor saturation and receptor mediated tissue infiltration, an endosomal sub-compartment to account for degradation and escape, and mRNA to protein translation within each tissue.\"},{\"evidence_id\":\"candidate_00006-E-9772e93b8e21f9f2\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"Parameters were calibrated against the comprehensive rat dataset of Ci et al., [22], encompassing both mRNA and translated protein across different organs.\"},{\"evidence_id\":\"candidate_00006-E-40ee7d252e5fcba6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"Although the calibration was performed for a specific LNP formulation, the underlying model structure is designed to support re-calibration for other LNP designs, recognizing that differences in chemical composition may alter tissue distribution, cellular uptake, and downstream expression.\"},{\"context_after_evidence_id\":\"candidate_00006-E-34c1f422970039d3\",\"evidence_id\":\"candidate_00006-E-4b48d6da2bf3ec8f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"The model was then allometrically scaled to human based on fundamental allometric scaling principles.\"},{\"context_before_evidence_id\":\"candidate_00006-E-4b48d6da2bf3ec8f\",\"evidence_id\":\"candidate_00006-E-34c1f422970039d3\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"This allometric scaling was shown to enable adequate prediction of human plasma mRNA PK.\"},{\"evidence_id\":\"candidate_00006-E-a25a3a68b16c66de\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-b6fd46ca460e\"],\"text\":\"Virtual patient simulations reproduced published plasma PK profiles for an mRNA encoded monoclonal antibody targeting Chikungunya virus at doses from 0.1 to 0.6 mg/kg [5], providing confidence in cross-species scaling.\"},{\"context_after_evidence_id\":\"candidate_00006-E-0ee14d03580804ec\",\"evidence_id\":\"candidate_00006-E-86c8165e91b3ab72\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-160d50bca93f\"],\"text\":\"Following IV injection, mRNA-LNP enters the venous compartment, from which it travels to the rest of the tissues through arterial flow.\"},{\"context_before_evidence_id\":\"candidate_00006-E-86c8165e91b3ab72\",\"evidence_id\":\"candidate_00006-E-0ee14d03580804ec\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-160d50bca93f\"],\"text\":\"From each organ, mRNA-LNP can return to the venous pool via blood flow or enter the lymphatic system through the lymph node, ultimately re-circulating back to the venous compartment.\"},{\"evidence_id\":\"candidate_00006-E-59fc07f2d40475a3\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"formulation\",\"recipient_cell\"],\"source_ids\":[\"S-160d50bca93f\"],\"text\":\"Within portal organs (small intestine, large intestine, spleen, and pancreas), mRNA-LNP flows into the liver before re-entering the venous circulation.\"},{\"evidence_id\":\"candidate_00006-E-63c33fe76b507673\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"endpoint\",\"outcomes\",\"payload\",\"recipient_cell\"],\"source_ids\":[\"S-3b0867117fdd\"],\"text\":\"Quantitative receptor measurements (density, turnover) in relevant vascular beds, time-resolved endosomal pH/escape readouts, and single-cell resolved mRNA/protein trajectories would enable replacement of phenomenological terms with mechanistic modules.\"},{\"evidence_id\":\"candidate_00006-E-5ed8ce0ad38c3206\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"endpoint\",\"outcomes\",\"payload\",\"recipient_cell\"],\"source_ids\":[\"S-3b0867117fdd\"],\"text\":\"Complementary in vitro studies characterizing species-dependent cellular uptake or endosomal processing would further enhance model validation and mechanistic resolution.\"},{\"evidence_id\":\"candidate_00006-E-ea7cc51960c184d2\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"endpoint\",\"outcomes\",\"payload\",\"recipient_cell\"],\"source_ids\":[\"S-3b0867117fdd\"],\"text\":\"Importantly, application to LNPs with different chemistries or formulations would require appropriate recalibration and validation, which are beyond the scope of the present work.\"},{\"context_after_evidence_id\":\"candidate_00006-E-ac14a1f0a5c62601\",\"evidence_id\":\"candidate_00006-E-93e262d215f788ba\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"The rat-scaled model, established based on physiological parameters for a 280-g rat, was calibrated to rat biodistribution data in [22].\"},{\"context_before_evidence_id\":\"candidate_00006-E-93e262d215f788ba\",\"evidence_id\":\"candidate_00006-E-ac14a1f0a5c62601\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"The study includes biodistribution data for an intracellular mRNA therapy, in which the translated protein remains within the cell.\"},{\"evidence_id\":\"candidate_00006-E-ee969c6c1ad6ecdc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"Quantified mRNA and protein concentrations across different tissues were measured using a branched DNA (bDNA) assay and an LC-MS/MS assay, respectively, following a 2 mg/kg dose of mRNA administered via 10-minute infusion.\"},{\"context_after_evidence_id\":\"candidate_00006-E-7a533fbe0edcfb2e\",\"evidence_id\":\"candidate_00006-E-b6423f8735f9c478\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"Model calibration steps were as follows: we first calibrated the liver mRNA concentration profile to estimate the tissue influx rate, mRNA degradation rate, and LNP endosomal degradation rate.\"},{\"context_after_evidence_id\":\"candidate_00006-E-e86f7689ec6cf64f\",\"context_before_evidence_id\":\"candidate_00006-E-b6423f8735f9c478\",\"evidence_id\":\"candidate_00006-E-7a533fbe0edcfb2e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"Spleen and lung mRNA data were then calibrated by fitting their respective influx rates as well as mRNA and LNP degradation rates.\"},{\"context_after_evidence_id\":\"candidate_00006-E-4f90d6fab07aa751\",\"context_before_evidence_id\":\"candidate_00006-E-7a533fbe0edcfb2e\",\"evidence_id\":\"candidate_00006-E-e86f7689ec6cf64f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"Plasma mRNA data was then calibrated by fitting \\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{K}_{m}^{Jin}$$\\\\end{document} for tissue influx (the apparent Km of the receptor availability function), receptor depletion rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{receptor}$$\\\\end{document}), and cellular uptake rate.\"},{\"context_before_evidence_id\":\"candidate_00006-E-e86f7689ec6cf64f\",\"evidence_id\":\"candidate_00006-E-4f90d6fab07aa751\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"Both \\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{K}_{m}^{Jin}$$\\\\end{document} and \\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{receptor}$$\\\\end{document} were assumed to be the same across all organ types, while cellular uptake was assumed to be the same for all non-liver organs.\"},{\"evidence_id\":\"candidate_00006-E-0797cb6b440e1152\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"The model was then calibrated to mRNA data for the remaining tissues, including the small intestine, muscle, heart, and lymph node, by fitting their corresponding tissue influx rates, endosomal degradation rates, and mRNA degradation rates.\"},{\"evidence_id\":\"candidate_00006-E-301638619e92d0a4\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"The model calibration results for mRNA biodistribution data are shown in Fig.\"},{\"context_after_evidence_id\":\"candidate_00006-E-943397ba52880e19\",\"evidence_id\":\"candidate_00006-E-32d5e657af58cedd\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"While the specific product names were not disclosed, the preclinical and clinical data used for model calibration and validation employed similar LNP formulations, with consistent lipid compositions and comparable lipid-to-mRNA ratios, thereby supporting the translational applicability of the model.Fig.\"},{\"context_before_evidence_id\":\"candidate_00006-E-32d5e657af58cedd\",\"evidence_id\":\"candidate_00006-E-943397ba52880e19\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"formulation\",\"outcomes\"],\"source_ids\":[\"S-22ef88913fbc\"],\"text\":\"2Overlay of model calibration (blue solid lines) to mRNA biodistribution raw data at different tissue sites (shown as asterisks)\"},{\"evidence_id\":\"candidate_00006-E-acc010830a6de666\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"therapeutic_target\"],\"source_ids\":[\"S-54e978e25ac3\"],\"text\":\"Ci et al., [22] showed that plasma and liver mRNA concentrations peak within 10–15 min of dosing, a profile incompatible with perfusion-limited tissue uptake.\"},{\"evidence_id\":\"candidate_00006-E-f44b4538373b6634\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"therapeutic_target\"],\"source_ids\":[\"S-54e978e25ac3\"],\"text\":\"Sago et al., [23] demonstrated that sub-cellular competition between Kupffer cells, liver endothelial cells, and hepatocytes shape functional delivery of lipid nanoparticles into the liver tissue.\"},{\"evidence_id\":\"candidate_00006-E-b755eb13f12b27e7\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"therapeutic_target\"],\"source_ids\":[\"S-54e978e25ac3\"],\"text\":\"Meanwhile, recent data reveal steep pH-dependent changes in ionizable lipid structure that alter endosomal escape kinetics [24].\"},{\"evidence_id\":\"candidate_00006-E-a69b36accbbe592d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"therapeutic_target\"],\"source_ids\":[\"S-54e978e25ac3\"],\"text\":\"Collectively, these findings argue for development of a translational PBPK model that can disentangle early, receptor-driven deposition from downstream intracellular bottlenecks and present an opportunity to predict human mRNA-LNP PK from preclinical species.\"},{\"evidence_id\":\"candidate_00006-E-a79cdc9fef83b35d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"Local and global sensitivity analyses consistently suggest an important implication for therapeutic design: hepatic protein exposure is dominated by parameters determining intracellular dynamics of mRNA-LNP, specifically endosomal degradation, mRNA stability, and translation.\"},{\"evidence_id\":\"candidate_00006-E-cd7ad0e7f32a8f33\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"Interestingly, liver exposure is less sensitive to increases in LNP tissue influx consistent with previously published modeling results [20].\"},{\"context_after_evidence_id\":\"candidate_00006-E-99c3144f5b7af831\",\"evidence_id\":\"candidate_00006-E-377671b5b97b69df\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"Increasing mRNA escape from endosomes can linearly tune protein exposure over the explored range, whereas increasing endosomal or mRNA degradation produces strongly nonlinear response with threshold-like behavior.\"},{\"context_after_evidence_id\":\"candidate_00006-E-8f0d2b9d16cd79f2\",\"context_before_evidence_id\":\"candidate_00006-E-377671b5b97b69df\",\"evidence_id\":\"candidate_00006-E-99c3144f5b7af831\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"This result is consistent with available evidence demonstrating the critical role of mRNA stability and escape in modulating the encoded protein exposure, even suggesting mRNA escape as a critical determinant in designing optimal LNP based mRNA therapeutics [31, 32].\"},{\"context_before_evidence_id\":\"candidate_00006-E-99c3144f5b7af831\",\"evidence_id\":\"candidate_00006-E-8f0d2b9d16cd79f2\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"These findings are consistent with several well-known empirical levers that could be modulated - ionizable lipid pKa [33] and helper-lipid composition (endosomal escape) [34], UTR/codon design and chemical context (mRNA stability), and 5’ structural elements (translation) [35] - and the PBPK framework could provide a quantitative way to potentially guide the prioritization of which lever will matter most under specific dosing constraints.\"},{\"context_after_evidence_id\":\"candidate_00006-E-056b49f4c071ebee\",\"evidence_id\":\"candidate_00006-E-26d26dc69aab32dc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"We note that the sensitivity analyses were performed at 2 mg/kg dose, where some process may begin to saturate.\"},{\"context_before_evidence_id\":\"candidate_00006-E-26d26dc69aab32dc\",\"evidence_id\":\"candidate_00006-E-056b49f4c071ebee\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"Thus, the relative sensitivities should be viewed as dose-dependent and primarily hypothesis generating.\"},{\"evidence_id\":\"candidate_00006-E-99cf72173b7a9217\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\",\"outcomes\",\"payload\"],\"source_ids\":[\"S-4028f09634b1\"],\"text\":\"In addition, the model was specifically calibrated to the dataset reported by Ci et al., and further re-calibration and sensitivity analyses would be necessary to assess the relative importance of key mechanistic steps for LNPs with different formulations.\"},{\"context_after_evidence_id\":\"candidate_00006-E-2b7622a36988d27d\",\"evidence_id\":\"candidate_00006-E-3c66f4a25a399bec\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"A local sensitivity analysis was conducted to identify parameters impacting mRNA and protein dynamics in the liver.\"},{\"context_before_evidence_id\":\"candidate_00006-E-3c66f4a25a399bec\",\"evidence_id\":\"candidate_00006-E-2b7622a36988d27d\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"Each parameter was individually increased or decreased by 50%, and the resulting fold change in mRNA/protein AUC from the baseline simulation was plotted (Fig.\"},{\"context_after_evidence_id\":\"candidate_00006-E-7daac54ad9817e03\",\"evidence_id\":\"candidate_00006-E-e94478cc69c57661\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"The results indicate that the most sensitive parameters influencing liver protein AUC are endosomal degradation rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{deg,LNP}^{Liver}$$\\\\end{document}), mRNA degradation rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{deg,mRNA}^{Liver}$$\\\\end{document}), and protein degradation rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{deg,protein}^{Liver}$$\\\\end{document}), with changes of up to 2-fold in protein AUC.\"},{\"context_before_evidence_id\":\"candidate_00006-E-e94478cc69c57661\",\"evidence_id\":\"candidate_00006-E-7daac54ad9817e03\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"Other notable parameters include the mRNA escape rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{escape}^{Liver}$$\\\\end{document}) and protein translation rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{translate}^{Liver}$$\\\\end{document}), which lead to ~ 1.5-fold change in the protein AUC.\"},{\"context_after_evidence_id\":\"candidate_00006-E-c5c26deacbde4a69\",\"evidence_id\":\"candidate_00006-E-46ec9d5108df53ce\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"Liver protein AUC was not appreciably influenced by the perturbations in the remaining parameters.Fig.\"},{\"context_before_evidence_id\":\"candidate_00006-E-46ec9d5108df53ce\",\"evidence_id\":\"candidate_00006-E-c5c26deacbde4a69\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"5Local sensitivity study of liver protein AUC (area under the curve) (A) and liver mRNA AUC (B).\"},{\"evidence_id\":\"candidate_00006-E-a6375712a95607d0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"Each of the parameters was varied by 50% (decreased or increased), and corresponding fold changes in mRNA/protein AUC from the baseline were plotted.\"},{\"evidence_id\":\"candidate_00006-E-69518232b2e46310\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"Red bars indicate the fold change due to the increase in the parameter by 50%, and the blue bars indicate the fold change as a result of the parameter reduction by 50%.\"},{\"evidence_id\":\"candidate_00006-E-62a9d3530cb96fd6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"endpoint\",\"outcomes\",\"recipient_cell\"],\"source_ids\":[\"S-6f1400a32cf5\"],\"text\":\"mRNA dose is fixed to 2 mg/kg and the infusion time is 10 min\"},{\"evidence_id\":\"candidate_00006-E-fd2a15d2642457bd\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"Biodistribution raw data was first analyzed to confirm the primary sites of mRNA deposition and protein production.\"},{\"evidence_id\":\"candidate_00006-E-0c8df01e931b3bf9\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"The amount of mRNA in each tissue, calculated from the tissue concentration and corresponding tissue volume, at t=10 min was plotted as percentage of the injected dose (Figs.\"},{\"evidence_id\":\"candidate_00006-E-3ef4acdfdc56612e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"Initial biodistribution analysis revealed that at t~10 min (the earliest time-point assessed) the majority of mRNA was in plasma (~ 30% of the injected dose) and the liver (~ 24% of the injected dose).\"},{\"evidence_id\":\"candidate_00006-E-31cec22a4be0418b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"Interestingly, a substantial amount of mRNA was also detected in the muscle tissue (~ 14%), whereas little mRNA was found in the rest of the tissues in the study (< 2%).\"},{\"context_after_evidence_id\":\"candidate_00006-E-a79a4ae3aad2bf7a\",\"evidence_id\":\"candidate_00006-E-d92928f573ed4c4a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"The rest of the mRNA (~ 30%) at t = 10 min was most likely degraded.\"},{\"context_before_evidence_id\":\"candidate_00006-E-d92928f573ed4c4a\",\"evidence_id\":\"candidate_00006-E-a79a4ae3aad2bf7a\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"This biodistribution analysis was also compared with model simulations, which demonstrated consistent biodistribution behavior (the results shown in Supplementary Figure S2).Fig.\"},{\"evidence_id\":\"candidate_00006-E-b80d0af8e3b70217\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"4Bar plot of mRNA and protein biodistribution Following IV Administration of 2 mg/kg mRNA-LNP in Rats.\"},{\"context_after_evidence_id\":\"candidate_00006-E-351a98bb963802ee\",\"evidence_id\":\"candidate_00006-E-e5404574b3c053a5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"(A) Biodistribution of mRNA at t = 10 min at different tissue locations computed as percent injected dose.\"},{\"context_before_evidence_id\":\"candidate_00006-E-e5404574b3c053a5\",\"evidence_id\":\"candidate_00006-E-351a98bb963802ee\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"(B) Biodistribution of mRNA at 1 h time point at different tissues given as the percent of injected dose.\"},{\"evidence_id\":\"candidate_00006-E-8c6ca26eba653d38\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"recipient_cell\"],\"source_ids\":[\"S-23ef18930e3f\"],\"text\":\"(C) Biodistribution of protein, expressed as tissue-specific protein Cmax relative to liver protein Cmax\"},{\"evidence_id\":\"candidate_00006-E-1a6fb6eaa79d0e0f\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"formulation\",\"payload\"],\"source_ids\":[\"S-73a7cee8a671\"],\"text\":\"Beyond liver centric applications, the same framework can be used to (i) explore extrahepatic targeting via alternative lipid compositions and targeting ligands; (ii) simulate complex modalities such as mRNA-encoded bi-specifics or cytokines with feedback on clearance or distribution; and (iii) integrate with QSP pharmacodynamic models to translate tissue protein time-courses into functional PD (e.g., enzyme replacement, immune activation).\"},{\"evidence_id\":\"candidate_00006-E-c0cb2b1b8395713c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-25ca633ce3d4\"],\"text\":\"Equation 1 describes the rate of change in the total amount of mRNA encapsulated in LNP in plasma.\"},{\"evidence_id\":\"candidate_00006-E-2050b9e7bf7db185\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-25ca633ce3d4\"],\"text\":\"The first term represents cellular uptake, which is proportional to the volume of macrophages in plasma.\"},{\"evidence_id\":\"candidate_00006-E-d0c99c1678ed09ca\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-25ca633ce3d4\"],\"text\":\"The mathematical form of the uptake equation follows a similar structure as in [20, 26].\"},{\"context_after_evidence_id\":\"candidate_00006-E-05895b4b875e20da\",\"evidence_id\":\"candidate_00006-E-3d0021cc94a0fef2\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-25ca633ce3d4\"],\"text\":\"The second term accounts for flow out of the venous compartment (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{Q}_{Lung}$$\\\\end{document}).\"},{\"context_before_evidence_id\":\"candidate_00006-E-3d0021cc94a0fef2\",\"evidence_id\":\"candidate_00006-E-05895b4b875e20da\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\",\"therapeutic_target\"],\"source_ids\":[\"S-25ca633ce3d4\"],\"text\":\"The last term represents flow from the lymph node into the venous compartment with the lymphatic flow rate (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{L}_{LN}$$\\\\end{document}), other terms denote plasma flow rates from tissues other than liver (heart, skin, muscle, etc.).\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:\\\\begin{array}{c}\\\\frac{dM_{Liver,vascular}^{LNP}}{dt}=\\\\underbrace{Q_{Liver}C_{Arterial}^{LNP}}_{Transport\\\\:from\\\\:arterial}\\\\underbrace{-\\\\left(Q_{Liver}-L_{Liver}\\\\right)C_{Liver,vascular\\\\:}^{LNP}}_{Transport\\\\:to\\\\:venous}\\\\\\\\\\\\:+\\\\underbrace{\\\\left(Q_{SI}-L_{SI}\\\\right)C_{SI,vascular\\\\:}^{LNP}}_{Transport\\\\:from\\\\:small\\\\:intestine}+\\\\underbrace{\\\\left(Q_{LI}-L_{LI}\\\\right)C_{LI,vascular\\\\:}^{LNP}}_{Transport\\\\:from\\\\:large\\\\:intestine}\\\\\\\\\\\\:\\\\begin{array}{c}\\\\:\\\\:+\\\\underbrace{\\\\left(Q_{spleen}-L_{spleen}\\\\right)C_{spleen,vascular\\\\:}^{LNP}}_{Transport\\\\:from\\\\:spleen}\\\\:\\\\:\\\\:\\\\:\\\\\\\\\\\\:+\\\\underbrace{\\\\left(Q_{pancreas}-L_{pancreas}\\\\right)C_{pancreas,vascular\\\\:}^{LNP}}_{Transport\\\\:from\\\\:pancreas}\\\\\\\\\\\\:\\\\underbrace{-J_{in}^{Liver}\\\\frac{C_{Liver,vascular}^{LNP}}{C_{Liver,vascular\\\\:}^{LNP}+K_m^{Jin,liver}}\\\\cdot\\\\:R_{Liver}\\\\cdot\\\\:C_{Liver.vascular\\\\:}^{LNP}}_{Receptor\\\\:mediated\\\\:tissue\\\\:infiltration}\\\\end{array}\\\\end{array}$$\\\\end{document}2\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:\\\\underbrace{-k_{up}^{Liver}\\\\cdot\\\\:C_{Liver.vascular\\\\:}^{LNP}\\\\cdot\\\\:Vol_{cell}^{Kupffer}}_{Cellular\\\\:uptake\\\\:of\\\\:Kupffer\\\\:cell\\\\:from\\\\:plasma}$$\\\\end{document}\"},{\"evidence_id\":\"candidate_00006-E-5118a4be1276d001\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"formulation\"],\"source_ids\":[\"S-996e6499e6e1\"],\"text\":\"On the other hand, liver mRNA exposure was negatively correlated with the LNP degradation rate, followed by the liver cellular uptake rate and parameters related to mRNA stability (Fig.\"},{\"evidence_id\":\"candidate_00006-E-e596d1f672e34189\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"formulation\"],\"source_ids\":[\"S-996e6499e6e1\"],\"text\":\"Conversely, liver mRNA exposure was positively correlated with the mRNA escape rate and liver tissue influx rate (Fig.\"},{\"evidence_id\":\"candidate_00006-E-01f71b3b1140c025\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"endpoint\",\"formulation\"],\"source_ids\":[\"S-996e6499e6e1\"],\"text\":\"Interestingly, liver protein AUC was much less sensitive to the influx rate indicating that once the mRNA reach the liver tissue, the most significant parameters for protein exposure are LNP and mRNA stability rates and the translation rate.\"},{\"context_after_evidence_id\":\"candidate_00006-E-7e92672390ad3711\",\"evidence_id\":\"candidate_00006-E-19b2a8db0af43cc0\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"therapeutic_target\"],\"source_ids\":[\"S-fca8dc5e97db\"],\"text\":\"The human-scaled model, validated with clinical plasma PK data, was then used to explore the role of Kupffer cells in modulating protein expression within the liver tissue.\"},{\"context_before_evidence_id\":\"candidate_00006-E-19b2a8db0af43cc0\",\"evidence_id\":\"candidate_00006-E-7e92672390ad3711\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"therapeutic_target\"],\"source_ids\":[\"S-fca8dc5e97db\"],\"text\":\"Maximum protein expression in hepatocytes, Kupffer cells, and total liver tissue was compared by varying the cellular uptake rate into hepatocytes (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{up}^{Hep}$$\\\\end{document}) and Kupffer cells (\\\\documentclass[12pt]{minimal} \\\\usepackage{amsmath} \\\\usepackage{wasysym} \\\\usepackage{amsfonts} \\\\usepackage{amssymb} \\\\usepackage{amsbsy} \\\\usepackage{mathrsfs} \\\\usepackage{upgreek} \\\\setlength{\\\\oddsidemargin}{-69pt} \\\\begin{document}$$\\\\:{k}_{up}^{Kup}$$\\\\end{document}), either together or separately (Fig.\"},{\"evidence_id\":\"candidate_00006-E-ec28ee8524aaaca6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"endpoint\",\"outcomes\",\"payload\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-8dfe2dd63660\"],\"text\":\"The pharmacokinetics of mRNA-LNP is complex and multi-layered.\"},{\"evidence_id\":\"candidate_00006-E-613281efd0d59bfc\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"endpoint\",\"outcomes\",\"payload\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-8dfe2dd63660\"],\"text\":\"Particle size, ionizable-lipid pKa and helper-lipid composition all modulate this corona and hence tissue tropism [12, 13].\"},{\"evidence_id\":\"candidate_00006-E-874dd1bec4d399a9\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"endpoint\",\"outcomes\",\"payload\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-8dfe2dd63660\"],\"text\":\"Within target organs the particles must cross the endothelial fenestrae, undergo uptake (often via scavenger or LDL-family receptors), survive endosomal degradation and finally release mRNA into the cytosol where ribosomes translate the mRNA into encoded protein.\"},{\"evidence_id\":\"candidate_00006-E-6b12e8f8a4228bac\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"biological_model\",\"endpoint\",\"outcomes\",\"payload\",\"recipient_cell\",\"therapeutic_target\"],\"source_ids\":[\"S-8dfe2dd63660\"],\"text\":\"Consequently, while conventional allometric approaches remain valuable tools, relying on them without accounting for the absorption, distribution, metabolism, and excretion (ADME) complexities of mRNA-LNP may lead to less informative or potentially misleading dose projections.\"},{\"evidence_id\":\"candidate_00006-E-f5b26208550e569b\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"payload\"],\"source_ids\":[\"S-282a3caf523d\"],\"text\":\"Equation 2 describes the rate of change in the total amount of mRNA encapsulated in LNP in the liver vasculature space.\"},{\"evidence_id\":\"candidate_00006-E-b49a3d9c53dd4a9c\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"formulation\",\"payload\"],\"source_ids\":[\"S-7f36dafbf170\"],\"text\":\"For example, if endosomal degradation is a dominant limiter for a given construct, the model predicts pronounced shifts in protein exposure with small changes in escape kinetics—suggesting that modest differences in ionizable lipid composition may manifest as outsized differences in circulating protein (for secreted payloads) or tissue PD (for intracellular targets).\"},{\"evidence_id\":\"candidate_00006-E-fef1301f0720ba07\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\",\"formulation\",\"payload\"],\"source_ids\":[\"S-7f36dafbf170\"],\"text\":\"Similarly, when the model is used to generate “what-if” scenarios for receptor saturation, it predicts changes on very early plasma/tissue mRNA time-course, implying that sampling around infusion could be informative for deconvolving transport vs.\"},{\"context_after_evidence_id\":\"candidate_00006-E-5d4e59e558a27c34\",\"evidence_id\":\"candidate_00006-E-d5f0db45b0532a71\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\"],\"source_ids\":[\"S-8ac3b958f9f8\"],\"text\":\"In sum, the platform provides a coherent quantitative scaffold for hypothesis testing, construct prioritization, and FIH planning.\"},{\"context_before_evidence_id\":\"candidate_00006-E-d5f0db45b0532a71\",\"evidence_id\":\"candidate_00006-E-5d4e59e558a27c34\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"assay\"],\"source_ids\":[\"S-8ac3b958f9f8\"],\"text\":\"It helps identify which design knobs (lipid chemistry, RNA engineering, dose/infusion) could efficiently impact the clinical exposure and pharmacological response, and it highlights where additional biological characterization will likely offer the greatest return on experimental investment.\"},{\"context_after_evidence_id\":\"candidate_00006-E-76203690dc2f91e5\",\"evidence_id\":\"candidate_00006-E-188b2e53835b2eef\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\"],\"source_ids\":[\"S-d656ec7650b4\"],\"text\":\"Digitized clinical trial data from a study of an mRNA encoded monoclonal antibody against Chikungunya virus was used to evaluate the capability of the model for inter-species translation [5].\"},{\"context_before_evidence_id\":\"candidate_00006-E-188b2e53835b2eef\",\"evidence_id\":\"candidate_00006-E-76203690dc2f91e5\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\"],\"source_ids\":[\"S-d656ec7650b4\"],\"text\":\"Virtual patients were generated to conduct a virtual clinical trial following the dosing regimens reported in the data: a single mRNA dose of 0.1 mg/kg, 0.3 mg/kg, or 0.6 mg/kg, as well as a two-dose regimen of 0.3 mg/kg, with the second dose administered on day 7.\"},{\"evidence_id\":\"candidate_00006-E-cd1d0b1067291247\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\"],\"source_ids\":[\"S-d656ec7650b4\"],\"text\":\"9Human mRNA PK projection.\"},{\"evidence_id\":\"candidate_00006-E-5d6aa522990fe0e6\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\"],\"source_ids\":[\"S-d656ec7650b4\"],\"text\":\"Scaled model was used to recreate the virtual clinical trial with (A) 0.1 mg/kg, (B) 0.3 mg/kg, (C) 0.6 mg/kg, and (D) 0.3 mg/kg with two doses.\"},{\"evidence_id\":\"candidate_00006-E-09e6feccd7382b9e\",\"experiment_candidate_ids\":[],\"retrieval_field_tags\":[\"biological_model\",\"formulation\"],\"source_ids\":[\"S-d656ec7650b4\"],\"text\":\"The predicted 5–95 percentile plasma mRNA PK was shown by the light blue shaded region and predicted central tendency was shown by the solid blue line.\"}],\"packet_checksum\":\"e064ff6340148180119060db35c4d3a1be687aeeece689d2a560c7b908ea9c6b\",\"packet_version\":\"compact-api-packet-1.0.0\",\"paper_id\":\"candidate_00006\",\"sources\":[{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-47b6724c683c8ef290a0\",\"section\":\"Methods\",\"source_id\":\"S-160d50bca93f\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Model structure\",\"xml_element_id\":\"Par9\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-5491bbcd83b1feea837a\",\"section\":\"Results\",\"source_id\":\"S-22ef88913fbc\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Model calibration to the rat biodistribution data\",\"xml_element_id\":\"Par20\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-750346a405340b253fd5\",\"section\":\"Results\",\"source_id\":\"S-23ef18930e3f\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Data driven analysis of mRNA and protein distribution\",\"xml_element_id\":\"Par22\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-842bdd25f73827e58e86\",\"section\":\"Methods\",\"source_id\":\"S-25ca633ce3d4\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Model equations\",\"xml_element_id\":\"Par16\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-cc297142cbd95f3fbcd3\",\"section\":\"Methods\",\"source_id\":\"S-282a3caf523d\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Model equations\",\"xml_element_id\":\"Par17\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-5357348be48f0ceaddb4\",\"section\":\"Discussion\",\"source_id\":\"S-3b0867117fdd\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par43\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-6a82c6a812e1852d6c05\",\"section\":\"Discussion\",\"source_id\":\"S-4028f09634b1\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par38\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-5bb81ff5b52fb87cddbd\",\"section\":\"Introduction\",\"source_id\":\"S-54e978e25ac3\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par5\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-18192845d87c5c680361\",\"section\":\"Methods\",\"source_id\":\"S-67db4dae5ed8\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Sub-compartment model structure\",\"xml_element_id\":\"Par10\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-70154be5d7e40472a296\",\"section\":\"Results\",\"source_id\":\"S-6f1400a32cf5\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Local and global sensitivity analysis of the model to identify important mechanistic parameters influencing mRNA and protein dynamics\",\"xml_element_id\":\"Par25\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-83679912199185b690ff\",\"section\":\"Discussion\",\"source_id\":\"S-73a7cee8a671\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par44\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-cce5c904c2efc9a6f771\",\"section\":\"Discussion\",\"source_id\":\"S-7f36dafbf170\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par41\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-d4359b43ab39a121bbba\",\"section\":\"Discussion\",\"source_id\":\"S-8ac3b958f9f8\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par45\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-c1d5a68de6d159144a13\",\"section\":\"Introduction\",\"source_id\":\"S-8dfe2dd63660\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par3\"},{\"block_type\":\"abstract\",\"chunk_id\":\"candidate_00006-B-17a53bdb5601a735bee7\",\"section\":\"Abstract\",\"source_id\":\"S-95159cea36fb\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par1\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-8b5ecb0c7ffe171851d5\",\"section\":\"Results\",\"source_id\":\"S-996e6499e6e1\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Local and global sensitivity analysis of the model to identify important mechanistic parameters influencing mRNA and protein dynamics\",\"xml_element_id\":\"Par28\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-0baf9783739d0a3f6b32\",\"section\":\"Methods\",\"source_id\":\"S-a40e3786235b\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Rat to human scaling of the PBPK model\",\"xml_element_id\":\"Par14\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-0663f85f64005a741d74\",\"section\":\"Discussion\",\"source_id\":\"S-a68e0e24de9e\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par42\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-41bda90dbf2f971236ee\",\"section\":\"Introduction\",\"source_id\":\"S-b6fd46ca460e\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par6\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-fae4fda06d2d92ec10bd\",\"section\":\"Results\",\"source_id\":\"S-d656ec7650b4\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Projection of human clinical mRNA PK from rat\",\"xml_element_id\":\"Par32\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-25fe26f3b1d708c61d49\",\"section\":\"Methods\",\"source_id\":\"S-db43369b1de6\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Sub-compartment model structure\",\"xml_element_id\":\"Par11\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-0e6537def7524bad7265\",\"section\":\"Results\",\"source_id\":\"S-ed18bda35bbe\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Potential Key mRNA design parameter investigation\",\"xml_element_id\":\"Par29\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-1b6c15c3322c85bacf78\",\"section\":\"Introduction\",\"source_id\":\"S-fbb8c38681b0\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"xml_element_id\":\"Par2\"},{\"block_type\":\"paragraph\",\"chunk_id\":\"candidate_00006-B-9043ee3918662d9d83b3\",\"section\":\"Results\",\"source_id\":\"S-fca8dc5e97db\",\"source_kind\":\"pmc_xml\",\"source_path\":\"data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00006/PMC13421247.nxml\",\"subsection\":\"Interplay of Kupffer cells and hepatocytes in shaping liver protein exposure\",\"xml_element_id\":\"Par34\"}]},\"outcome_recall_support\":{\"accepted_visual_claims\":[],\"atomic_outcome_candidates\":[],\"estimated_tokens\":142,\"instructions\":[\"Candidates are navigation aids, not verified final outcomes.\",\"Create a final record only when its cited evidence directly supports it.\",\"Keep distinct provisional experiments and atomic relationships separate.\",\"Deduplicate candidates against outcomes already supported by the packet.\",\"Use only evidence IDs present in the packet or local_evidence below.\"],\"local_evidence\":[],\"paper_id\":\"candidate_00006\",\"provisional_experiments\":[],\"support_version\":\"main-route-recall-support-1.2.0\"}}"
+    }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "CompactExtractionResponse",
+      "schema": {
+        "$defs": {
+          "ComponentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {
+                "title": "Component Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "identity": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "role": {
+                "$ref": "#/$defs/ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___"
+              },
+              "amount": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "amount_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "component_id",
+              "formulation_id",
+              "identity",
+              "role",
+              "amount",
+              "amount_unit"
+            ],
+            "title": "ComponentRecord",
+            "type": "object"
+          },
+          "EligibilityRecord": {
+            "additionalProperties": false,
+            "description": "Evidence-grounded final paper disposition for the extraction task.",
+            "properties": {
+              "decision": {
+                "enum": [
+                  "eligible",
+                  "ineligible",
+                  "uncertain"
+                ],
+                "title": "Decision",
+                "type": "string"
+              },
+              "reason_codes": {
+                "items": {
+                  "enum": [
+                    "ORIGINAL_EXPERIMENT",
+                    "IDENTIFIABLE_LNP",
+                    "SUPPORTED_PAYLOAD",
+                    "TARGET_CELL_EVIDENCE",
+                    "USABLE_FORMULATION_OUTCOME_LINKAGE",
+                    "NOT_ORIGINAL_RESEARCH",
+                    "NOT_ELIGIBLE_LNP",
+                    "UNSUPPORTED_PAYLOAD",
+                    "NO_TARGET_CELL_EVIDENCE",
+                    "NO_FORMULATION_OUTCOME_LINKAGE",
+                    "DUPLICATE_SCIENTIFIC_REPORT",
+                    "RETRACTED_OR_INVALID",
+                    "FULL_TEXT_REQUIRED",
+                    "PUBLICATION_TYPE_AMBIGUOUS",
+                    "LNP_IDENTITY_AMBIGUOUS",
+                    "PAYLOAD_AMBIGUOUS",
+                    "TARGET_CELL_AMBIGUOUS",
+                    "FORMULATION_INCOMPLETE",
+                    "OUTCOME_LINKAGE_AMBIGUOUS",
+                    "CHEMISTRY_AMBIGUOUS"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "title": "Reason Codes",
+                "type": "array"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "explanation": {
+                "maxLength": 500,
+                "minLength": 1,
+                "title": "Explanation",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision",
+              "reason_codes",
+              "evidence_ids",
+              "explanation"
+            ],
+            "title": "EligibilityRecord",
+            "type": "object"
+          },
+          "ExperimentRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "payload_type": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "payload_role": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/ReportedField_Literal__therapeutic____reporter____biodistribution_tracer____screening_barcode___"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "encoded_product": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "molecular_target": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "delivery_recipient_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "therapeutic_target_cell": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "tissue_or_organ": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "species": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "disease_model": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "experimental_context": {
+                "$ref": "#/$defs/ReportedField_Literal__in_vitro____ex_vivo____in_vivo___"
+              },
+              "dose": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "dose_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "route": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "timepoint": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "timepoint_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "experiment_id",
+              "formulation_id",
+              "payload_type",
+              "payload_name",
+              "payload_role",
+              "encoded_product",
+              "molecular_target",
+              "delivery_recipient_cell",
+              "therapeutic_target_cell",
+              "tissue_or_organ",
+              "species",
+              "experimental_model",
+              "disease_model",
+              "experimental_context",
+              "dose",
+              "dose_unit",
+              "route",
+              "timepoint",
+              "timepoint_unit"
+            ],
+            "title": "ExperimentRecord",
+            "type": "object"
+          },
+          "FormulationRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "formulation_id": {
+                "title": "Formulation Id",
+                "type": "string"
+              },
+              "formulation_name": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "composition_basis": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "np_ratio": {
+                "$ref": "#/$defs/ReportedField_float_"
+              }
+            },
+            "required": [
+              "formulation_id",
+              "formulation_name",
+              "composition",
+              "composition_basis",
+              "np_ratio"
+            ],
+            "title": "FormulationRecord",
+            "type": "object"
+          },
+          "OutcomeRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "outcome_id": {
+                "title": "Outcome Id",
+                "type": "string"
+              },
+              "experiment_id": {
+                "title": "Experiment Id",
+                "type": "string"
+              },
+              "assay": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "endpoint": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "comparator": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "outcome_value": {
+                "$ref": "#/$defs/ReportedField_float_"
+              },
+              "outcome_unit": {
+                "$ref": "#/$defs/ReportedField_str_"
+              },
+              "qualitative_outcome": {
+                "$ref": "#/$defs/ReportedField_str_"
+              }
+            },
+            "required": [
+              "outcome_id",
+              "experiment_id",
+              "assay",
+              "endpoint",
+              "comparator",
+              "outcome_value",
+              "outcome_unit",
+              "qualitative_outcome"
+            ],
+            "title": "OutcomeRecord",
+            "type": "object"
+          },
+          "ReportedField_Literal__in_vitro____ex_vivo____in_vivo___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "in_vitro",
+                      "ex_vivo",
+                      "in_vivo"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['in_vitro', 'ex_vivo', 'in_vivo']]",
+            "type": "object"
+          },
+          "ReportedField_Literal__ionizable_lipid____helper_lipid____cholesterol____peg_lipid____targeting_ligand____sort_lipid____other___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "ionizable_lipid",
+                      "helper_lipid",
+                      "cholesterol",
+                      "peg_lipid",
+                      "targeting_ligand",
+                      "sort_lipid",
+                      "other"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['ionizable_lipid', 'helper_lipid', 'cholesterol', 'peg_lipid', 'targeting_ligand', 'sort_lipid', 'other']]",
+            "type": "object"
+          },
+          "ReportedField_Literal__therapeutic____reporter____biodistribution_tracer____screening_barcode___": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "therapeutic",
+                      "reporter",
+                      "biodistribution_tracer",
+                      "screening_barcode"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[Literal['therapeutic', 'reporter', 'biodistribution_tracer', 'screening_barcode']]",
+            "type": "object"
+          },
+          "ReportedField_float_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[float]",
+            "type": "object"
+          },
+          "ReportedField_str_": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Value"
+              },
+              "status": {
+                "enum": [
+                  "reported",
+                  "missing"
+                ],
+                "title": "Status",
+                "type": "string"
+              },
+              "evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "title": "Evidence Ids",
+                "type": "array"
+              },
+              "missing_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Missing Reason"
+              }
+            },
+            "required": [
+              "value",
+              "status",
+              "evidence_ids",
+              "missing_reason"
+            ],
+            "title": "ReportedField[str]",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One paper response joined to a local evidence packet after validation.",
+        "properties": {
+          "contract_version": {
+            "const": "compact-1.1.0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "paper_id": {
+            "title": "Paper Id",
+            "type": "string"
+          },
+          "eligibility": {
+            "$ref": "#/$defs/EligibilityRecord"
+          },
+          "formulations": {
+            "items": {
+              "$ref": "#/$defs/FormulationRecord"
+            },
+            "title": "Formulations",
+            "type": "array"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/$defs/ComponentRecord"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "experiments": {
+            "items": {
+              "$ref": "#/$defs/ExperimentRecord"
+            },
+            "title": "Experiments",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/$defs/OutcomeRecord"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "unresolved_items": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "contract_version",
+          "paper_id",
+          "eligibility",
+          "formulations",
+          "components",
+          "experiments",
+          "outcomes",
+          "unresolved_items"
+        ],
+        "title": "CompactExtractionResponse",
+        "type": "object"
+      },
+      "strict": true
+    }
+  }
+}

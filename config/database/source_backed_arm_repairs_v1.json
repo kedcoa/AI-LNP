@@ -1,0 +1,531 @@
+{
+  "schema_version": "source-backed-arm-repair/v1",
+  "repairs": [
+    {
+      "repair_id": "gp002-arm1-liver-context",
+      "paper_id": "GP-002",
+      "arm_record_id": "GP-002:ARM:GP-002-E01:F1",
+      "expected": {
+        "payload_name": "enhanced green fluorescent protein mRNA",
+        "disease_model": "healthy mouse model; healthy"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "observed_transfected_cell": "hepatocyte",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 24.0,
+        "timepoint_unit": "hours"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Figure 1A",
+          "excerpt": "We injected 5 healthy mice with 10 μg eGFP mRNA-LNPs via the tail vein and investigated reporter expression after 24 h.",
+          "fields": ["route", "timepoint", "timepoint_unit"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; Figure 1",
+          "excerpt": "Strong and specific eGFP fluorescence was observed in the liver after 24 h via ex vivo fluorescence imaging, with measured fluorescence values around 10-fold higher than background (tissue autofluorescence) (Figures 1B and 1C).",
+          "fields": ["target_or_recipient_organ"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Figure 1F",
+          "excerpt": "Immunohistochemistry for eGFP in liver tissue sections from injected mice shows strong eGFP staining in virtually all hepatocytes.",
+          "fields": ["observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp002-arm2-f3-shared-protocol",
+      "paper_id": "GP-002",
+      "arm_record_id": "GP-002:ARM:GP-002-E02:F1",
+      "expected": {
+        "payload_name": "enhanced green fluorescent protein mRNA",
+        "disease_model": "Mdr2 knockout mouse model with F3 severe fibrosis; severe hepatic fibrosis",
+        "timepoint": 14.0
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "observed_transfected_cell": "hepatocyte",
+        "dose": 10.0,
+        "dose_unit": "micrograms per mouse",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 24.0,
+        "timepoint_unit": "hours"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Methods; Animal experiments",
+          "excerpt": "4 groups of male Mdr2−/− mice (n = 4–5) were defined based on age: 2–3 months, 5 months, 8 months, and 11 months. Mice were injected via tail vein with 10 μg of mRNA-LNPs diluted to a final volume of 100 μL with TBS. Approximately 24 h after injection, mice were euthanized, and their organs were collected for histology and molecular analysis.",
+          "fields": ["dose", "dose_unit", "route", "timepoint", "timepoint_unit"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; liver fibrosis and cirrhosis",
+          "excerpt": "We used the Mdr2 knockout model to evaluate mRNA-LNP delivery to the liver in the context of liver fibrosis and cirrhosis (Figure 2A).",
+          "fields": ["target_or_recipient_organ"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; Figure 2",
+          "excerpt": "Transfection of hepatocytes was widespread in most livers (Figures 2F and S7).",
+          "fields": ["observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp002-arm3-f4-shared-protocol",
+      "paper_id": "GP-002",
+      "arm_record_id": "GP-002:ARM:GP-002-E03:F1",
+      "expected": {
+        "payload_name": "enhanced green fluorescent protein mRNA",
+        "disease_model": "Mdr2 knockout mouse model with F4 cirrhosis; liver cirrhosis"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "observed_transfected_cell": "hepatocyte",
+        "dose": 10.0,
+        "dose_unit": "micrograms per mouse",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 24.0,
+        "timepoint_unit": "hours"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Methods; Animal experiments",
+          "excerpt": "4 groups of male Mdr2−/− mice (n = 4–5) were defined based on age: 2–3 months, 5 months, 8 months, and 11 months. Mice were injected via tail vein with 10 μg of mRNA-LNPs diluted to a final volume of 100 μL with TBS. Approximately 24 h after injection, mice were euthanized, and their organs were collected for histology and molecular analysis.",
+          "fields": ["dose", "dose_unit", "route", "timepoint", "timepoint_unit"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; liver fibrosis and cirrhosis",
+          "excerpt": "We used the Mdr2 knockout model to evaluate mRNA-LNP delivery to the liver in the context of liver fibrosis and cirrhosis (Figure 2A).",
+          "fields": ["target_or_recipient_organ"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; Figure 2",
+          "excerpt": "Transfection of hepatocytes was widespread in most livers (Figures 2F and S7).",
+          "fields": ["observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp002-arm4-spontaneous-hcc",
+      "paper_id": "GP-002",
+      "arm_record_id": "GP-002:ARM:GP-002-E04:F1",
+      "expected": {
+        "payload_name": "enhanced green fluorescent protein mRNA",
+        "disease_model": "spontaneous hepatocellular carcinoma in situ"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver; spontaneous liver tumors",
+        "observed_transfected_cell": "hepatocytes; spontaneous HCC cells",
+        "species": "Mus musculus",
+        "dose": 10.0,
+        "dose_unit": "micrograms per mouse",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 14.0,
+        "timepoint_unit": "hours"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Methods; Animal experiments",
+          "excerpt": "A separate cohort of 11-month-old Mdr2−/− males (n = 4) was used for imaging; these mice were injected via tail vein with 10 μg of mRNA-LNPs diluted to 100 μL with TBS, then euthanized approximately 14 h later, and their organs were removed for fluorescence imaging.",
+          "fields": ["species", "dose", "dose_unit", "route", "timepoint", "timepoint_unit"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; Figure 3",
+          "excerpt": "To investigate the efficacy of mRNA-LNP delivery in a physiologically relevant HCC model, we first compared eGFP expression between liver tissue and liver tumors of 11-month-old male Mdr2−/− mice using ex vivo fluorescence imaging.",
+          "fields": ["target_or_recipient_organ"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; spontaneous HCC",
+          "excerpt": "These findings demonstrate that intravenous delivery of mRNA-LNPs results in specific expression within most hepatocytes and many cells within spontaneously occurring HCCs in situ, with minimal delivery to other organs and tissues, likely including other cancers.",
+          "fields": ["observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp002-arm5-huh7-xenograft",
+      "paper_id": "GP-002",
+      "arm_record_id": "GP-002:ARM:GP-002-E05:F1",
+      "expected": {
+        "payload_name": "enhanced green fluorescent protein mRNA",
+        "disease_model": "orthotopic HuH-7 hepatocellular carcinoma xenograft model",
+        "route": "intravenous injection"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver; orthotopic liver tumor",
+        "observed_transfected_cell": "adjacent hepatocytes; HuH-7 tumor cells",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 24.0,
+        "timepoint_unit": "hours"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Figure 4A",
+          "excerpt": "We surgically engrafted HuH-7 human HCC cells, which constitutively express mCherry, into the livers of BALB/c nude mice. Tissues were analyzed approximately 24 h after an injection of 10 μg eGFP mRNA-LNPs via the tail vein.",
+          "fields": ["target_or_recipient_organ", "route", "timepoint", "timepoint_unit"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; Figure 4F",
+          "excerpt": "IHC for eGFP in 3 tumors showed weak expression of eGFP in virtually all tumor cells, with some cells at the margins of most tumors showing higher signal (Figures 4F and S19). Expression of eGFP was substantially weaker in the HuH-7 tumors relative to the adjacent liver tissue.",
+          "fields": ["observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp002-arm6-secondary-xenografts",
+      "paper_id": "GP-002",
+      "arm_record_id": "GP-002:ARM:GP-002-E06:F1",
+      "expected": {
+        "payload_name": "enhanced green fluorescent protein mRNA",
+        "disease_model": "A549-mCherry xenograft group; HCT116-mCherry xenograft group",
+        "route": "intravenous injection"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver; secondary liver tumors",
+        "observed_transfected_cell": "adjacent hepatocytes; A549 and HCT116 tumor cells",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 24.0,
+        "timepoint_unit": "hours"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; Figure 5A",
+          "excerpt": "Cells were engrafted into the livers of BALB/c nude mice by single direct injection (n = 8–9), and after approximately 2 weeks, mice were injected with 10 μg of eGFP mRNA-LNPs via the tail vein and then culled 24 h later for tissue collection and imaging (Figure 5A).",
+          "fields": ["target_or_recipient_organ", "route", "timepoint", "timepoint_unit"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC13334401/PMC13334401.nxml",
+          "location": "Results; secondary liver tumors",
+          "excerpt": "IHC for eGFP in two A549 tumors (Figures 5H and S25A) and two HCT116 tumors (Figures 5I and S25B) showed weak expression of eGFP in most tumor cells and much stronger eGFP expression in adjacent healthy liver.",
+          "fields": ["observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp004-arm7-luciferase-kinetics",
+      "paper_id": "GP-004",
+      "arm_record_id": "GP-004:ARM:GP-004-E01:ENT-FORM-01",
+      "expected": {
+        "payload_name": "firefly luciferase mRNA"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "route": "intravenous injection (tail vein or retro-orbital)",
+        "timepoint": 5.0,
+        "timepoint_unit": "hours; also days 1, 2, 3, 6, and 8",
+        "assay": "bioluminescence imaging"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; Figure 1",
+          "excerpt": "Here, we determined the organ distribution and duration of protein activity produced by firefly luciferase encoding mRNA-LNP (Luc mRNA-LNP) during a 1-week time course (at 5 h, days 1, 2, 3, 6, and 8) following a single IV injection (5 μg Luc mRNA-LNP/20 g body weight).",
+          "fields": ["timepoint", "timepoint_unit"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; Figure 1",
+          "excerpt": "The efficiency of two IV delivery methods including tail vein injection and retro-orbital venous sinus injection were compared. Both delivery methods led to liver restricted Luc mRNA-LNP expression as measured by bioluminescence (Fig. 1a).",
+          "fields": ["target_or_recipient_organ", "route", "assay"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp004-arm8-hgf-homeostasis",
+      "paper_id": "GP-004",
+      "arm_record_id": "GP-004:ARM:GP-004-E02:ENT-FORM-01",
+      "expected": {
+        "payload_name": "hepatocyte growth factor mRNA",
+        "disease_model": "homeostasis"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "observed_transfected_cell": "hepatocyte",
+        "route": "intravenous injection",
+        "timepoint": 5.0,
+        "timepoint_unit": "hours; also 24 and 48 hours",
+        "assay": "HGF immunostaining; EdU incorporation; EdU/HNF4α and EdU/CD45 co-staining"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; Figure 3",
+          "excerpt": "To demonstrate that the mRNA-LNP platform is an ideal delivery tool to express hepatocyte mitogens for proliferation, we examined the potential of a single IV injection of mRNA-LNP encoding the mitogen HGF to induce DNA synthesis and cell proliferation by assessing 5-ethynyl-2′-deoxyuridine (EdU) incorporation in hepatocytes in a homeostatic context (Fig. 3).",
+          "fields": ["target_or_recipient_organ", "observed_transfected_cell", "route", "assay"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; Figure 3",
+          "excerpt": "When mice were given a single injection of HGF mRNA-LNP (10 μg mRNA-LNP/20 g body weight), no significant proliferative response was observed at 5 h (Fig. 3b), although HGF was strongly expressed as early as 5 h (Fig. 3a) and at later time points tested (24 and 48 h, Supplementary Fig. 6).",
+          "fields": ["timepoint", "timepoint_unit"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp004-arm9-hgf-egf-cde",
+      "paper_id": "GP-004",
+      "arm_record_id": "GP-004:ARM:GP-004-E03:ENT-FORM-01",
+      "expected": {
+        "payload_name": "epidermal growth factor mRNA",
+        "disease_model": "CDE diet-induced NAFLD mouse model; nonalcoholic fatty liver disease"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "observed_transfected_cell": "hepatocyte",
+        "payload_name": "HGF mRNA + EGF mRNA",
+        "payload_encoded_product": "hepatocyte growth factor + epidermal growth factor",
+        "dose": 10.0,
+        "dose_unit": "micrograms total per 20 g body weight (5 micrograms HGF + 5 micrograms EGF)",
+        "route": "intravenous injection (tail vein or retro-orbital)",
+        "timepoint": 2.0,
+        "timepoint_unit": "days after first injection; also day 8 (injections at T0 and T4)",
+        "assay": "Oil Red O staining; serum cholesterol; serum ALT; CD45 immunostaining"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Methods; mRNA-LNP administration",
+          "excerpt": "Mice were administered 100 μl of diluted mRNA-LNP-encoding luciferase (5 μg), eGFP (10 μg), HGF (10 μg), Poly(C) (10 μg), or combination HGF (5 μg) + EGF (5 μg) intravenously by either retro-orbital or tail vein injections using 1/2cc lo-dose insulin syringes (EXELINT).",
+          "fields": ["payload_name", "payload_encoded_product", "dose", "dose_unit", "route"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; CDE liver injury",
+          "excerpt": "We first confirmed that HGF and EGF proteins were highly expressed in hepatocytes 24 h after a single IV injection of HGF/EGF mRNA-LNP (Supplementary Fig. 7).",
+          "fields": ["target_or_recipient_organ", "observed_transfected_cell"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; Figure 4",
+          "excerpt": "Injections of both HGF/EGF mRNA-LNP were performed as soon as the diet was terminated as well as 4 days later during the recovery period (Fig. 4a). Analyses of lipid accumulation in hepatocytes as assessed by Oil Red O staining on liver sections revealed a sharp decrease of steatosis 2 days after the first injection of HGF/EGF mRNA-LNP compared to that with Poly(C) RNA-LNP treatment, in which steatosis was evenly maintained with persistent macrosteatosis (Fig. 4b).",
+          "fields": ["timepoint", "timepoint_unit", "assay"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp004-arm10-egfp-cell-types",
+      "paper_id": "GP-004",
+      "arm_record_id": "GP-004:GOLD:GX-001",
+      "expected": {
+        "payload_name": "eGFP mRNA"
+      },
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "observed_transfected_cell": "hepatocytes; endothelial cells; Kupffer cells",
+        "route": "intravenous injection",
+        "timepoint": 5.0,
+        "timepoint_unit": "hours",
+        "assay": "immunohistochemistry and flow cytometry"
+      },
+      "evidence": [
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; Figure 2",
+          "excerpt": "To further evaluate the histologic specificity of IV-injected mRNA-LNP, we performed immunostaining on sections from liver, lung, intestine, and spleen 5 h following a single injection of mRNA-LNP encoding enhanced green fluorescent protein (eGFP) (10 μg eGFP mRNA-LNP/20 g body weight) to identify eGFP+ transfected cells.",
+          "fields": ["target_or_recipient_organ", "route", "timepoint", "timepoint_unit", "assay"]
+        },
+        {
+          "source_path": "data/raw/fulltext/oa_packages/PMC7840919/PMC7840919.nxml",
+          "location": "Results; Figure 2",
+          "excerpt": "Altogether, immunostaining and flow cytometry analyses of eGFP mRNA-LNP- and Poly(C) RNA-LNP- injected mice indicate that hepatocytes are the main cells targeted by IV-administered mRNA-LNP, together with a significant fraction of endothelial cells and Kupffer cells.",
+          "fields": ["observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "np002-cre-mc3-1mg-three-day-readout",
+      "paper_id": "NP-002",
+      "arm_record_id": "NP-002::arm::03-hepatic-endothelial-cells::EXP-CRE-1.0-MC3",
+      "expected": {"payload_name": "Cre mRNA", "dose": 1.0},
+      "updates": {"timepoint": 3.0, "timepoint_unit": "days"},
+      "evidence": [{
+        "source_path": "data/staging/rag/compact_packets_v1/NP-002.json",
+        "location": "Functional mRNA Delivery",
+        "excerpt": "Three days after administration, transfection of the liver (percent tdTomato + cells) was analyzed via flow cytometry.",
+        "fields": ["timepoint", "timepoint_unit"]
+      }]
+    },
+    {
+      "repair_id": "np002-cre-ckke12-1mg-three-day-readout",
+      "paper_id": "NP-002",
+      "arm_record_id": "NP-002::arm::03-hepatic-endothelial-cells::EXP-CRE-1.0-cKK-E12",
+      "expected": {"payload_name": "Cre mRNA", "dose": 1.0},
+      "updates": {"timepoint": 3.0, "timepoint_unit": "days"},
+      "evidence": [{
+        "source_path": "data/staging/rag/compact_packets_v1/NP-002.json",
+        "location": "Functional mRNA Delivery",
+        "excerpt": "Three days after administration, transfection of the liver (percent tdTomato + cells) was analyzed via flow cytometry.",
+        "fields": ["timepoint", "timepoint_unit"]
+      }]
+    },
+    {
+      "repair_id": "np002-cre-mc3-03mg-three-day-readout",
+      "paper_id": "NP-002",
+      "arm_record_id": "NP-002::arm::01-hepatocytes::X5",
+      "expected": {"payload_name": "Cre mRNA", "dose": 0.3},
+      "updates": {"timepoint": 3.0, "timepoint_unit": "days"},
+      "evidence": [{
+        "source_path": "data/staging/rag/compact_packets_v1/NP-002.json",
+        "location": "Functional mRNA Delivery",
+        "excerpt": "Three days after administration, transfection of the liver (percent tdTomato + cells) was analyzed via flow cytometry.",
+        "fields": ["timepoint", "timepoint_unit"]
+      }]
+    },
+    {
+      "repair_id": "np002-cre-ckke12-03mg-three-day-readout",
+      "paper_id": "NP-002",
+      "arm_record_id": "NP-002::arm::01-hepatocytes::X6",
+      "expected": {"payload_name": "Cre mRNA", "dose": 0.3},
+      "updates": {"timepoint": 3.0, "timepoint_unit": "days"},
+      "evidence": [{
+        "source_path": "data/staging/rag/compact_packets_v1/NP-002.json",
+        "location": "Functional mRNA Delivery",
+        "excerpt": "Three days after administration, transfection of the liver (percent tdTomato + cells) was analyzed via flow cytometry.",
+        "fields": ["timepoint", "timepoint_unit"]
+      }]
+    },
+    {
+      "repair_id": "gp006-cas9-lsec-liver-destination",
+      "paper_id": "GP-006",
+      "arm_record_id": "GP-006:ARM:GP-006-E01:E_FORM_01",
+      "expected": {"payload_name": "CRISPR-associated protein 9 mRNA; NSGHAsgRNA"},
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "intended_target_cell": "liver sinusoidal endothelial cell (LSEC)"
+      },
+      "evidence": [{
+        "source_path": "data/raw/fulltext/oa_packages/PMC11617921/PMC11617921.nxml",
+        "location": "Abstract",
+        "excerpt": "We first developed MC3-based LNPs for efficient mRNA delivery into liver sinusoidal endothelial cells (LSECs), the major site of FVIII biosynthesis.",
+        "fields": ["target_or_recipient_organ", "intended_target_cell"]
+      }]
+    },
+    {
+      "repair_id": "gp008-luciferase-liver-macrophage-context",
+      "paper_id": "GP-008",
+      "arm_record_id": "GP-008:ARM:GP-008-E01:F4",
+      "expected": {"payload_name": "Photinus pyralis luciferase mRNA"},
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "intended_target_cell": "CD163+ macrophage",
+        "observed_transfected_cell": "hepatic macrophage",
+        "species": "mouse",
+        "disease_model": "CCl4-induced liver fibrosis",
+        "in_vitro_in_vivo": "in_vivo",
+        "dose": 0.4,
+        "dose_unit": "mg mRNA/kg body weight",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 8.0,
+        "timepoint_unit": "hours; signal attenuation after 24 hours",
+        "assay": "in vivo bioluminescence imaging and ex vivo organ imaging"
+      },
+      "evidence": [
+        {
+          "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+          "location": "Supplemental Methods; Bioluminescence",
+          "excerpt": "240 Bioluminescence 241 In the liver fibrosis model, mice were intravenously administered with α 242 CD163/LNP-Luc loaded with Luciferase or with α CD163/LNP-ZsGreen loaded with 243 ZsGreen mRNA (via an intravenous injection of the tail vein at a dose of 0.4 mg of 244 mRNA per kg body weight).",
+          "fields": ["species", "disease_model", "in_vitro_in_vivo", "dose", "dose_unit", "route"]
+        },
+        {
+          "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+          "location": "Results; SI Appendix Figure S5",
+          "excerpt": "In vivo bioluminescence imaging revealed that both unmodified LNP-Luc and αCD163-modified LNP-Luc formulations achieved peak fluorescence intensity at 8 h postinjection, with signal attenuation becoming evident after 24 h.",
+          "fields": ["timepoint", "timepoint_unit", "assay"]
+        },
+        {
+          "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+          "location": "Results; SI Appendix Figure S5",
+          "excerpt": "These findings established that CD163 antibody-LNP mRNA formulations confer macrophage-specific delivery with enhanced targeting precision and transfection efficiency in hepatic tissue.",
+          "fields": ["target_or_recipient_organ", "intended_target_cell", "observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp008-zsgreen-liver-macrophage-context",
+      "paper_id": "GP-008",
+      "arm_record_id": "GP-008:ARM:GP-008-E01:F5",
+      "expected": {"payload_name": "ZsGreen mRNA"},
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "intended_target_cell": "CD163+ macrophage",
+        "observed_transfected_cell": "hepatic macrophage",
+        "species": "mouse",
+        "disease_model": "CCl4-induced liver fibrosis",
+        "in_vitro_in_vivo": "in_vivo",
+        "dose": 0.4,
+        "dose_unit": "mg mRNA/kg body weight",
+        "route": "intravenous tail-vein injection",
+        "timepoint": 14.0,
+        "timepoint_unit": "days",
+        "assay": "ZsGreen fluorescence imaging and flow cytometry"
+      },
+      "evidence": [
+        {
+          "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+          "location": "Supplemental Methods; Bioluminescence",
+          "excerpt": "240 Bioluminescence 241 In the liver fibrosis model, mice were intravenously administered with α 242 CD163/LNP-Luc loaded with Luciferase or with α CD163/LNP-ZsGreen loaded with 243 ZsGreen mRNA (via an intravenous injection of the tail vein at a dose of 0.4 mg of 244 mRNA per kg body weight).",
+          "fields": ["species", "disease_model", "in_vitro_in_vivo", "dose", "dose_unit", "route"]
+        },
+        {
+          "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+          "location": "Results; SI Appendix Figure S5",
+          "excerpt": "ZsGreen mRNA tracking studies demonstrated prolonged hepatic fluorescence persistence in the αCD163/LNP-ZsGreen cohort (sustained through day 14).",
+          "fields": ["target_or_recipient_organ", "timepoint", "timepoint_unit", "assay"]
+        },
+        {
+          "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+          "location": "Results; SI Appendix Figure S5",
+          "excerpt": "These findings established that CD163 antibody-LNP mRNA formulations confer macrophage-specific delivery with enhanced targeting precision and transfection efficiency in hepatic tissue.",
+          "fields": ["intended_target_cell", "observed_transfected_cell"]
+        }
+      ]
+    },
+    {
+      "repair_id": "gp008-in-vitro-bmdm-recipient",
+      "paper_id": "GP-008",
+      "arm_record_id": "GP-008:GOLD:GX-008",
+      "expected": {"payload_name": "FAPCAR mRNA", "route": "cell_incubation"},
+      "updates": {
+        "intended_target_cell": "bone-marrow-derived macrophage (BMDM)",
+        "observed_transfected_cell": "bone-marrow-derived macrophage (BMDM)"
+      },
+      "evidence": [{
+        "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+        "location": "Supplemental Methods; In Vitro Phagocytosis Assay",
+        "excerpt": "Then the 220 GFP+BMDMs were treated with different LNPs (αCD163/LNP-Luc, LNP-FAPCAR, 221 and αCD163/LNP-FAPCAR).",
+        "fields": ["intended_target_cell", "observed_transfected_cell"]
+      }]
+    },
+    {
+      "repair_id": "gp008-in-vivo-fapcar-macrophage-recipient",
+      "paper_id": "GP-008",
+      "arm_record_id": "GP-008:GOLD:GX-009",
+      "expected": {"payload_name": "FAPCAR mRNA", "dose": 0.4},
+      "updates": {
+        "target_or_recipient_organ": "liver",
+        "intended_target_cell": "CD163+ macrophage",
+        "observed_transfected_cell": "FAPCAR+ hepatic macrophage"
+      },
+      "evidence": [{
+        "source_path": "data/staging/extraction/g1_fulltext_rag/GP-008/source_clauses.json",
+        "location": "Results; SI Appendix Figure S5",
+        "excerpt": "Furthermore, both liver fibrotic (CCL4+αCD163/LNP-FAPCAR group) and normal mice (oil + αCD163/LNP-FAPCAR group) that received LNP injections exhibited FAPCAR+ macrophages, signifying successful FAPCAR mRNA transduction; no FAPCAR signal was detected in CCL4+PBS controls (SI Appendix, Fig.",
+        "fields": ["target_or_recipient_organ", "intended_target_cell", "observed_transfected_cell"]
+      }]
+    }
+  ]
+}

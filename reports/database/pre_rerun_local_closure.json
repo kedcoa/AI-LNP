@@ -1,0 +1,345 @@
+{
+  "checks": {
+    "foreign_key_violations": 0,
+    "integrity_check": "ok",
+    "manifest_contributor_occurrences": 199,
+    "registered_source_artifacts": 197,
+    "silent_evidence_omissions": 0,
+    "silent_fact_omissions": 0,
+    "source_fact_dispositions": {
+      "quarantined": 15756,
+      "unresolved": 28879
+    }
+  },
+  "counts": {
+    "canonical_facts": 643,
+    "comet_ready_arms": 4,
+    "complete_formulations": 6,
+    "components": 44,
+    "evidence_records": 403,
+    "experimental_arms": 22,
+    "incomplete_formulations": 10,
+    "named_formulations": 16,
+    "nearest_neighbor_ready_arms": 8,
+    "outcomes": 29,
+    "papers": 14,
+    "source_evidence_occurrences": 626,
+    "source_fact_occurrences": 44635,
+    "unique_chemical_formulations": 10,
+    "unresolved_review_items": 32
+  },
+  "definitions": {
+    "canonical_facts": "Distinct normalized entity fields with at least one evidence link.",
+    "comet_ready_arms": "Arms passing the stricter COMET eligibility rules.",
+    "complete_formulations": "Named formulations with all four core LNP roles and a supported amount for each core component or an explicit LNP molar ratio.",
+    "components": "Deduplicated canonical chemical-component rows, including targeting and other formulation constituents.",
+    "evidence_records": "Deduplicated canonical evidence records.",
+    "experimental_arms": "Canonical experiment/arm rows after reconciliation and deduplication.",
+    "incomplete_formulations": "Named formulation rows that do not meet the complete-formulation definition.",
+    "named_formulations": "Canonical formulation rows with a non-empty reported name.",
+    "nearest_neighbor_ready_arms": "Arms passing the fixed nearest-neighbor eligibility rules.",
+    "outcomes": "Canonical outcome rows linked to experimental arms.",
+    "papers": "All manifest paper dispositions, including screening-only papers.",
+    "source_evidence_occurrences": "Imported evidence source occurrences before canonical evidence deduplication.",
+    "source_fact_occurrences": "Immutable labeled facts retained from every fact-producing source artifact; repeated source occurrences remain separate.",
+    "unique_chemical_formulations": "Distinct component-and-amount fingerprints among formulation rows that have component identities.",
+    "unresolved_review_items": "Visible import-review rows whose status remains incomplete, conflict, quarantined, or blocked."
+  },
+  "formulations": [
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "08bb5172e6db4804a55a759ff593c7801241da3198b6e7da243f22aeeec4281d",
+      "formulation_id": 1,
+      "name": "SM-102 mRNA-LNPs"
+    },
+    {
+      "complete": false,
+      "component_count": 4,
+      "composition_fingerprint": "77f8bc7a837e98b89d564de2abc7675f81fdd9260e0d943051753bfea971d71a",
+      "formulation_id": 2,
+      "name": "mRNA-LNP"
+    },
+    {
+      "complete": false,
+      "component_count": 4,
+      "composition_fingerprint": "85e3d236f7d84e2503a4fd40ac45c96ca66a8cc72d562d836be06350a0c39443",
+      "formulation_id": 3,
+      "name": "LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "ee8253a0b86114c2a9b38a3b9fa20745b2973b7ea22055efbdc831e00f0352b3",
+      "formulation_id": 4,
+      "name": "Egfp mRNA\u2010LNP (LNP1)"
+    },
+    {
+      "complete": false,
+      "component_count": 0,
+      "composition_fingerprint": null,
+      "formulation_id": 5,
+      "name": "LNP16"
+    },
+    {
+      "complete": false,
+      "component_count": 0,
+      "composition_fingerprint": null,
+      "formulation_id": 6,
+      "name": "LNP17"
+    },
+    {
+      "complete": false,
+      "component_count": 0,
+      "composition_fingerprint": null,
+      "formulation_id": 7,
+      "name": "LNP3\u2010LNP7"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "85a377245e42ac1026c52b55016d25515d031d031f2963d56c39c7e9d84e2bd9",
+      "formulation_id": 8,
+      "name": "MC3 LNP"
+    },
+    {
+      "complete": false,
+      "component_count": 4,
+      "composition_fingerprint": "9b4bc0a01502d8f6dfda6df605c81a0ad21b524ec8234848f3924d784a8da52a",
+      "formulation_id": 9,
+      "name": "LNPs-siMicu1"
+    },
+    {
+      "complete": true,
+      "component_count": 7,
+      "composition_fingerprint": "9d7946dd0ae624a68259fc959c04957f9d7486136eb0ac7b56c238ebfa530684",
+      "formulation_id": 10,
+      "name": "\u03b1CD163/LNP-FAPCAR"
+    },
+    {
+      "complete": false,
+      "component_count": 0,
+      "composition_fingerprint": null,
+      "formulation_id": 11,
+      "name": "LNP-FAPCAR"
+    },
+    {
+      "complete": false,
+      "component_count": 0,
+      "composition_fingerprint": null,
+      "formulation_id": 12,
+      "name": "\u03b1CD163/LNP-Luc"
+    },
+    {
+      "complete": false,
+      "component_count": 0,
+      "composition_fingerprint": null,
+      "formulation_id": 13,
+      "name": "\u03b1CD163/LNP-ZsGreen"
+    },
+    {
+      "complete": false,
+      "component_count": 5,
+      "composition_fingerprint": "4965f0919e4f3a507e5f2783c28485dbfb000f473e1ba94b886bf1c8d9b24da8",
+      "formulation_id": 14,
+      "name": "LNP(DSPC)/DX25"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "333b36ce66b36d65e1c3e35a72595bf3af8f4b68789274934262598314aa3fe0",
+      "formulation_id": 15,
+      "name": "MC3 LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "2fb1c2c1c392168b3c5365e0344949c3b7c6123ab89c6e06c8e635459cdc5596",
+      "formulation_id": 16,
+      "name": "cKK-E12 LNP"
+    }
+  ],
+  "per_paper": [
+    {
+      "arms": 0,
+      "canonical_evidence": 0,
+      "canonical_facts": 0,
+      "evidence_occurrences": 0,
+      "named_formulations": 0,
+      "outcomes": 0,
+      "paper_id": "GP-001",
+      "source_facts": 0,
+      "unresolved_items": 0
+    },
+    {
+      "arms": 1,
+      "canonical_evidence": 18,
+      "canonical_facts": 43,
+      "evidence_occurrences": 18,
+      "named_formulations": 1,
+      "outcomes": 1,
+      "paper_id": "GP-002",
+      "source_facts": 194,
+      "unresolved_items": 1
+    },
+    {
+      "arms": 0,
+      "canonical_evidence": 0,
+      "canonical_facts": 0,
+      "evidence_occurrences": 0,
+      "named_formulations": 0,
+      "outcomes": 0,
+      "paper_id": "GP-003",
+      "source_facts": 0,
+      "unresolved_items": 0
+    },
+    {
+      "arms": 1,
+      "canonical_evidence": 16,
+      "canonical_facts": 42,
+      "evidence_occurrences": 25,
+      "named_formulations": 1,
+      "outcomes": 2,
+      "paper_id": "GP-004",
+      "source_facts": 3268,
+      "unresolved_items": 2
+    },
+    {
+      "arms": 1,
+      "canonical_evidence": 22,
+      "canonical_facts": 65,
+      "evidence_occurrences": 29,
+      "named_formulations": 5,
+      "outcomes": 2,
+      "paper_id": "GP-005",
+      "source_facts": 201,
+      "unresolved_items": 3
+    },
+    {
+      "arms": 2,
+      "canonical_evidence": 14,
+      "canonical_facts": 84,
+      "evidence_occurrences": 15,
+      "named_formulations": 1,
+      "outcomes": 5,
+      "paper_id": "GP-006",
+      "source_facts": 6223,
+      "unresolved_items": 0
+    },
+    {
+      "arms": 1,
+      "canonical_evidence": 16,
+      "canonical_facts": 37,
+      "evidence_occurrences": 17,
+      "named_formulations": 1,
+      "outcomes": 1,
+      "paper_id": "GP-007",
+      "source_facts": 179,
+      "unresolved_items": 4
+    },
+    {
+      "arms": 2,
+      "canonical_evidence": 36,
+      "canonical_facts": 84,
+      "evidence_occurrences": 37,
+      "named_formulations": 4,
+      "outcomes": 4,
+      "paper_id": "GP-008",
+      "source_facts": 18237,
+      "unresolved_items": 1
+    },
+    {
+      "arms": 0,
+      "canonical_evidence": 0,
+      "canonical_facts": 0,
+      "evidence_occurrences": 0,
+      "named_formulations": 0,
+      "outcomes": 0,
+      "paper_id": "GP-009",
+      "source_facts": 0,
+      "unresolved_items": 0
+    },
+    {
+      "arms": 1,
+      "canonical_evidence": 11,
+      "canonical_facts": 31,
+      "evidence_occurrences": 42,
+      "named_formulations": 1,
+      "outcomes": 1,
+      "paper_id": "NP-001",
+      "source_facts": 69,
+      "unresolved_items": 5
+    },
+    {
+      "arms": 13,
+      "canonical_evidence": 110,
+      "canonical_facts": 257,
+      "evidence_occurrences": 283,
+      "named_formulations": 2,
+      "outcomes": 13,
+      "paper_id": "NP-002",
+      "source_facts": 517,
+      "unresolved_items": 13
+    },
+    {
+      "arms": 0,
+      "canonical_evidence": 58,
+      "canonical_facts": 0,
+      "evidence_occurrences": 58,
+      "named_formulations": 0,
+      "outcomes": 0,
+      "paper_id": "PILOT-001",
+      "source_facts": 5240,
+      "unresolved_items": 1
+    },
+    {
+      "arms": 0,
+      "canonical_evidence": 48,
+      "canonical_facts": 0,
+      "evidence_occurrences": 48,
+      "named_formulations": 0,
+      "outcomes": 0,
+      "paper_id": "PILOT-002",
+      "source_facts": 5285,
+      "unresolved_items": 1
+    },
+    {
+      "arms": 0,
+      "canonical_evidence": 54,
+      "canonical_facts": 0,
+      "evidence_occurrences": 54,
+      "named_formulations": 0,
+      "outcomes": 0,
+      "paper_id": "PILOT-003",
+      "source_facts": 5222,
+      "unresolved_items": 1
+    }
+  ],
+  "remaining_rerun_queue": [
+    {
+      "fields": [
+        "experimental_arm",
+        "formulation"
+      ],
+      "paper_id": "PILOT-001",
+      "reason": "remaining post-local-closure canonical data gap"
+    },
+    {
+      "fields": [
+        "experimental_arm",
+        "formulation"
+      ],
+      "paper_id": "PILOT-002",
+      "reason": "remaining post-local-closure canonical data gap"
+    },
+    {
+      "fields": [
+        "experimental_arm",
+        "formulation"
+      ],
+      "paper_id": "PILOT-003",
+      "reason": "remaining post-local-closure canonical data gap"
+    }
+  ],
+  "schema_version": "current-evidence-final-report/v1"
+}

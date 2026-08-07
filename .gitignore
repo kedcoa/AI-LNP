@@ -256,5 +256,31 @@ data/curated/*.db
 data/curated/*.db-shm
 data/curated/*.db-wal
 
+# Local database rebuild intermediates (the portable mentor snapshot is versioned)
+data/staging/database/current_corpus_rebuild/*.db
+
+# Downloaded papers, supplements, and provider-native responses stay local
+data/staging/new_papers/**/*.pdf
+data/staging/new_papers/**/*.html
+data/staging/new_papers/**/*.nxml
+data/staging/new_papers/**/*.gif
+data/staging/new_papers/**/*.jpg
+data/staging/new_papers/**/*.png
+data/staging/new_papers/**/*.xlsx
+data/staging/new_papers/**/*.db
+data/staging/new_papers/**/*.sqlite
+data/staging/new_papers/**/*_supplementary.zip
+data/staging/extraction/chatpdf_*/**/*.pdf
+data/staging/extraction/chatpdf_*/**/raw_response.json
+data/staging/extraction/**/run/**/response.json
+data/staging/extraction/**/run/**/trial_response.json
+data/staging/extraction/**/run/**/raw.jsonl
+data/staging/extraction/**/run/**/invocation.json
+
+# Local ideation state and duplicate/generated sharing archives
+.superpowers/
+exports/* 2/
+exports/*.zip
+
 # Generated literature-search runs
 data/raw/searches/*/run_*/

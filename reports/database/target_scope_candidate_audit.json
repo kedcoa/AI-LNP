@@ -1,0 +1,1559 @@
+{
+  "schema_version": "day2-database-audit/v1",
+  "database_kind": "explicit_fixture",
+  "database_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day1-current-corpus/data/staging/database/current_corpus_rebuild/lnp_evidence.target-scope-v4.db",
+  "database_sha256": "a6b7f24eedbda4d7a9373226b61beea5e34217c95850dd4ddd6bd9ca56b00acf",
+  "manifest_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day1-current-corpus/config/database/current_corpus_v1.json",
+  "manifest_sha256": "2559a0498a238bdc8cce8b0324ae0e350b284579e46679b3d6ea0290a07be459",
+  "bundle_hashes": {
+    "GP-002": "e95505e61c3a531060b3a545f12304e506c784d45e62c514b3113df74c843c48",
+    "GP-004": "b7e210fd0a9f85da0e95678c279fe0897d8bf6369149c6094782bbebcd5f060e",
+    "GP-005": "0db03d2f21d11f4c61fda2c892b7808bf597b8e28ad5cff8ecddb7416715fd12",
+    "GP-006": "581a1728a90da3a9169788c254a174f4c1886b8acb723ab7b182d7b4680c40ae",
+    "GP-007": "df6dce50c9f08fef145cc84631460ad2c09101cf5034d4f8bc6cda82df1e30bc",
+    "GP-008": "2593b0373fd3dda77931589d9fe2d39ee2d6be9e8594a498aef3d82de452f876",
+    "NP-001": "727d5837f6c53b5f8566f9d7875a21e988e0171601ca8d1042743582a2f94bcd",
+    "NP-002": "6f856e670d33ace73a3f169cc48151e2cb100bf6fda0cfd5e3edb7780c21958e",
+    "PILOT-001": "e4bf680c183527719580bae6f79823340b3b9871f2a6fff809d796c53800084e",
+    "PILOT-002": "06cf2a8ac7f0539f6e81c1602e0caa703aa04ebc645fbdfff5c671197edbff08",
+    "PILOT-003": "6b5e7357f5193c4b6aa0fb290fd27265a7624e28e95ec6baf5ec3d43b999ce24"
+  },
+  "paid_calls": 0,
+  "passed": true,
+  "checks": {
+    "sqlite_integrity": "ok",
+    "foreign_key_violations": [],
+    "orphan_counts": {},
+    "exact_duplicate_natural_keys": [],
+    "evidence_coverage": {
+      "arms_without_evidence": [],
+      "outcomes_without_evidence": []
+    },
+    "review_tag_gaps": [],
+    "eligibility_inconsistencies": [],
+    "manifest_dispositions": {
+      "expected": 14,
+      "present": 14,
+      "missing": [],
+      "unexpected": []
+    },
+    "manifest_disposition_mismatches": [],
+    "manifest_hash_matches": true,
+    "bundle_hash_mismatches": [],
+    "normalized_identity_sets": {
+      "generation_errors": [],
+      "content_hash_mismatches": [],
+      "content_shape_mismatches": [],
+      "record_identities": {
+        "expected": 1000,
+        "actual": 1000,
+        "missing": [],
+        "unexpected": []
+      },
+      "field_evidence_links": {
+        "raw_references": 673,
+        "expected_canonical": 1501,
+        "actual": 1501,
+        "missing": [],
+        "unexpected": []
+      }
+    },
+    "lossless_source_ledger": {
+      "expected_available_manifest_artifacts": 198,
+      "completed_exact_map_artifacts": 3,
+      "registered_source_artifacts": 201,
+      "missing_registered_artifacts": [],
+      "unexpected_registered_artifacts": [],
+      "manifest_missing_or_unhashed_artifacts": [
+        {
+          "paper_id": "NP-001",
+          "path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml",
+          "access_status": "missing"
+        },
+        {
+          "paper_id": "NP-001",
+          "path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf",
+          "access_status": "missing"
+        }
+      ],
+      "fact_producing_artifacts_without_facts": [],
+      "source_fact_count": 45835,
+      "source_fact_dispositions": {
+        "quarantined": 15183,
+        "unresolved": 30652
+      },
+      "source_fact_disposition_accounting_matches": true,
+      "nonprojected_facts_without_reason": 0,
+      "screening_only_papers_with_science": [],
+      "forbidden_general_app_human_tags": 0,
+      "pilot_promoted_counts": {
+        "PILOT-001": {
+          "formulations": 2,
+          "arms": 5
+        },
+        "PILOT-002": {
+          "formulations": 5,
+          "arms": 5
+        },
+        "PILOT-003": {
+          "formulations": 1,
+          "arms": 5
+        }
+      },
+      "gp008_supplement_hash_registered": true
+    },
+    "post_projection_gaps": {
+      "records": [
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 2,
+          "record_id": "GP-002:ARM:GP-002-E02:F1",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 2,
+          "record_id": "GP-002:ARM:GP-002-E02:F1",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 2,
+          "record_id": "GP-002:ARM:GP-002-E02:F1",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 3,
+          "record_id": "GP-002:ARM:GP-002-E03:F1",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 3,
+          "record_id": "GP-002:ARM:GP-002-E03:F1",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 3,
+          "record_id": "GP-002:ARM:GP-002-E03:F1",
+          "field_name": "outcome",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 3,
+          "record_id": "GP-002:ARM:GP-002-E03:F1",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 3,
+          "record_id": "GP-002:ARM:GP-002-E03:F1",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 4,
+          "record_id": "GP-002:ARM:GP-002-E04:F1",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 4,
+          "record_id": "GP-002:ARM:GP-002-E04:F1",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 4,
+          "record_id": "GP-002:ARM:GP-002-E04:F1",
+          "field_name": "species",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 4,
+          "record_id": "GP-002:ARM:GP-002-E04:F1",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 5,
+          "record_id": "GP-002:ARM:GP-002-E05:F1",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 6,
+          "record_id": "GP-002:ARM:GP-002-E06:F1",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-002",
+          "experiment_id": 6,
+          "record_id": "GP-002:ARM:GP-002-E06:F1",
+          "field_name": "outcome",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 7,
+          "record_id": "GP-004:ARM:GP-004-E01:ENT-FORM-01",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 7,
+          "record_id": "GP-004:ARM:GP-004-E01:ENT-FORM-01",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 8,
+          "record_id": "GP-004:ARM:GP-004-E02:ENT-FORM-01",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 8,
+          "record_id": "GP-004:ARM:GP-004-E02:ENT-FORM-01",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 8,
+          "record_id": "GP-004:ARM:GP-004-E02:ENT-FORM-01",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 9,
+          "record_id": "GP-004:ARM:GP-004-E03:ENT-FORM-01",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 9,
+          "record_id": "GP-004:ARM:GP-004-E03:ENT-FORM-01",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 9,
+          "record_id": "GP-004:ARM:GP-004-E03:ENT-FORM-01",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 9,
+          "record_id": "GP-004:ARM:GP-004-E03:ENT-FORM-01",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 9,
+          "record_id": "GP-004:ARM:GP-004-E03:ENT-FORM-01",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-004",
+          "experiment_id": 10,
+          "record_id": "GP-004:GOLD:GX-001",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 12,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
+          "field_name": "chemical_formulation_total",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 12,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 12,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 12,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 12,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 12,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
+          "field_name": "species",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 12,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 13,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+          "field_name": "chemical_formulation_total",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 13,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 13,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 13,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 13,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 13,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+          "field_name": "species",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 13,
+          "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "chemical_formulation_total",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "outcome",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "species",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-005",
+          "experiment_id": 14,
+          "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-006",
+          "experiment_id": 15,
+          "record_id": "GP-006:ARM:GP-006-E01:E_FORM_01",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-007",
+          "experiment_id": 17,
+          "record_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 18,
+          "record_id": "GP-008:ARM:GP-008-E01:F1",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 18,
+          "record_id": "GP-008:ARM:GP-008-E01:F1",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 18,
+          "record_id": "GP-008:ARM:GP-008-E01:F1",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 18,
+          "record_id": "GP-008:ARM:GP-008-E01:F1",
+          "field_name": "species",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 18,
+          "record_id": "GP-008:ARM:GP-008-E01:F1",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "chemical_formulation_total",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "source graph contains the field, but canonical arm projection did not attach it",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "species",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 19,
+          "record_id": "GP-008:ARM:GP-008-E01:F4",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 20,
+          "record_id": "GP-008:ARM:GP-008-E01:F5",
+          "field_name": "chemical_formulation_total",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 20,
+          "record_id": "GP-008:ARM:GP-008-E01:F5",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 20,
+          "record_id": "GP-008:ARM:GP-008-E01:F5",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 20,
+          "record_id": "GP-008:ARM:GP-008-E01:F5",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 20,
+          "record_id": "GP-008:ARM:GP-008-E01:F5",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 20,
+          "record_id": "GP-008:ARM:GP-008-E01:F5",
+          "field_name": "species",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 20,
+          "record_id": "GP-008:ARM:GP-008-E01:F5",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 21,
+          "record_id": "GP-008:GOLD:GX-008",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 21,
+          "record_id": "GP-008:GOLD:GX-008",
+          "field_name": "dose",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "GP-008",
+          "experiment_id": 22,
+          "record_id": "GP-008:GOLD:GX-009",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-001",
+          "experiment_id": 23,
+          "record_id": "NP-001::arm::EX1",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-001",
+          "experiment_id": 23,
+          "record_id": "NP-001::arm::EX1",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-001",
+          "experiment_id": 23,
+          "record_id": "NP-001::arm::EX1",
+          "field_name": "route",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 26,
+          "record_id": "NP-002::arm::03-hepatic-endothelial-cells::EXP-CRE-1.0-MC3",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 26,
+          "record_id": "NP-002::arm::03-hepatic-endothelial-cells::EXP-CRE-1.0-MC3",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 26,
+          "record_id": "NP-002::arm::01-hepatocytes::X3",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 26,
+          "record_id": "NP-002::arm::01-hepatocytes::X3",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 26,
+          "record_id": "NP-002::arm::02-kupffer-cells::EXP-Cre-MC3-1.0",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 26,
+          "record_id": "NP-002::arm::02-kupffer-cells::EXP-Cre-MC3-1.0",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 27,
+          "record_id": "NP-002::arm::03-hepatic-endothelial-cells::EXP-CRE-1.0-cKK-E12",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 27,
+          "record_id": "NP-002::arm::03-hepatic-endothelial-cells::EXP-CRE-1.0-cKK-E12",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 27,
+          "record_id": "NP-002::arm::01-hepatocytes::X4",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 27,
+          "record_id": "NP-002::arm::01-hepatocytes::X4",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 27,
+          "record_id": "NP-002::arm::02-kupffer-cells::EXP-Cre-cKK-E12-1.0",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 27,
+          "record_id": "NP-002::arm::02-kupffer-cells::EXP-Cre-cKK-E12-1.0",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 28,
+          "record_id": "NP-002::arm::01-hepatocytes::X5",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 28,
+          "record_id": "NP-002::arm::01-hepatocytes::X5",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 29,
+          "record_id": "NP-002::arm::01-hepatocytes::X6",
+          "field_name": "delivery_destination",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "NP-002",
+          "experiment_id": 29,
+          "record_id": "NP-002::arm::01-hepatocytes::X6",
+          "field_name": "timepoint",
+          "gap_kind": "source_not_reported",
+          "reason": "available arm-scoped source claims do not report this field",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 37,
+          "record_id": "PILOT-001::map-arm::PEC-1",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 37,
+          "record_id": "PILOT-001::map-arm::PEC-1",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 37,
+          "record_id": "PILOT-001::map-arm::PEC-1",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 38,
+          "record_id": "PILOT-001::map-arm::PEC-2",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 38,
+          "record_id": "PILOT-001::map-arm::PEC-2",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 38,
+          "record_id": "PILOT-001::map-arm::PEC-2",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 39,
+          "record_id": "PILOT-001::map-arm::PEC-3",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 39,
+          "record_id": "PILOT-001::map-arm::PEC-3",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 39,
+          "record_id": "PILOT-001::map-arm::PEC-3",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 40,
+          "record_id": "PILOT-001::map-arm::PEC-4",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 40,
+          "record_id": "PILOT-001::map-arm::PEC-4",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 40,
+          "record_id": "PILOT-001::map-arm::PEC-4",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 41,
+          "record_id": "PILOT-001::map-arm::PEC-5",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 41,
+          "record_id": "PILOT-001::map-arm::PEC-5",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-001",
+          "experiment_id": 41,
+          "record_id": "PILOT-001::map-arm::PEC-5",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 42,
+          "record_id": "PILOT-002::map-arm::CTX::HELA_MFLUC",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 42,
+          "record_id": "PILOT-002::map-arm::CTX::HELA_MFLUC",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 42,
+          "record_id": "PILOT-002::map-arm::CTX::HELA_MFLUC",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 43,
+          "record_id": "PILOT-002::map-arm::CTX::C57BL6_MFLUC",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 43,
+          "record_id": "PILOT-002::map-arm::CTX::C57BL6_MFLUC",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 43,
+          "record_id": "PILOT-002::map-arm::CTX::C57BL6_MFLUC",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 44,
+          "record_id": "PILOT-002::map-arm::CTX::LSL_MCRE",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 44,
+          "record_id": "PILOT-002::map-arm::CTX::LSL_MCRE",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 44,
+          "record_id": "PILOT-002::map-arm::CTX::LSL_MCRE",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 44,
+          "record_id": "PILOT-002::map-arm::CTX::LSL_MCRE",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 45,
+          "record_id": "PILOT-002::map-arm::CTX::MANNOSE_MCRE_LSEC",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 45,
+          "record_id": "PILOT-002::map-arm::CTX::MANNOSE_MCRE_LSEC",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 45,
+          "record_id": "PILOT-002::map-arm::CTX::MANNOSE_MCRE_LSEC",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 45,
+          "record_id": "PILOT-002::map-arm::CTX::MANNOSE_MCRE_LSEC",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 46,
+          "record_id": "PILOT-002::map-arm::CTX::C57BL6_SIFVIII_MANNOSE",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 46,
+          "record_id": "PILOT-002::map-arm::CTX::C57BL6_SIFVIII_MANNOSE",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 46,
+          "record_id": "PILOT-002::map-arm::CTX::C57BL6_SIFVIII_MANNOSE",
+          "field_name": "lnp_molar_ratio",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-002",
+          "experiment_id": 46,
+          "record_id": "PILOT-002::map-arm::CTX::C57BL6_SIFVIII_MANNOSE",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 47,
+          "record_id": "PILOT-003::map-arm::CTX-1",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 47,
+          "record_id": "PILOT-003::map-arm::CTX-1",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 47,
+          "record_id": "PILOT-003::map-arm::CTX-1",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 48,
+          "record_id": "PILOT-003::map-arm::CTX-2",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 48,
+          "record_id": "PILOT-003::map-arm::CTX-2",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 48,
+          "record_id": "PILOT-003::map-arm::CTX-2",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 49,
+          "record_id": "PILOT-003::map-arm::CTX-3",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 49,
+          "record_id": "PILOT-003::map-arm::CTX-3",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 49,
+          "record_id": "PILOT-003::map-arm::CTX-3",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 50,
+          "record_id": "PILOT-003::map-arm::CTX-4",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 50,
+          "record_id": "PILOT-003::map-arm::CTX-4",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 50,
+          "record_id": "PILOT-003::map-arm::CTX-4",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 51,
+          "record_id": "PILOT-003::map-arm::CTX-5",
+          "field_name": "delivery_destination",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 51,
+          "record_id": "PILOT-003::map-arm::CTX-5",
+          "field_name": "evidence",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        },
+        {
+          "paper_id": "PILOT-003",
+          "experiment_id": 51,
+          "record_id": "PILOT-003::map-arm::CTX-5",
+          "field_name": "outcome",
+          "gap_kind": "projection_missed",
+          "reason": "extracted records exist but their arm relationship is unresolved",
+          "recoverable": false
+        }
+      ],
+      "counts_by_kind": {
+        "projection_missed": 49,
+        "source_not_reported": 91
+      },
+      "paid_rerun_requests": []
+    }
+  },
+  "papers": [
+    {
+      "paper_id": "GP-001",
+      "disposition": "screening_only",
+      "formulations": 0,
+      "arms": 0,
+      "outcomes": 0,
+      "evidence": 0,
+      "missing": 0,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-002",
+      "disposition": "needs_review",
+      "formulations": 1,
+      "arms": 6,
+      "outcomes": 7,
+      "evidence": 51,
+      "missing": 15,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 1,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-003",
+      "disposition": "screening_only",
+      "formulations": 0,
+      "arms": 0,
+      "outcomes": 0,
+      "evidence": 0,
+      "missing": 0,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-004",
+      "disposition": "needs_review",
+      "formulations": 1,
+      "arms": 4,
+      "outcomes": 9,
+      "evidence": 44,
+      "missing": 11,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-005",
+      "disposition": "needs_review",
+      "formulations": 5,
+      "arms": 4,
+      "outcomes": 6,
+      "evidence": 38,
+      "missing": 22,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 1,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-006",
+      "disposition": "needs_review",
+      "formulations": 1,
+      "arms": 2,
+      "outcomes": 10,
+      "evidence": 22,
+      "missing": 1,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 1,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-007",
+      "disposition": "needs_review",
+      "formulations": 1,
+      "arms": 1,
+      "outcomes": 8,
+      "evidence": 30,
+      "missing": 1,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-008",
+      "disposition": "needs_review",
+      "formulations": 4,
+      "arms": 5,
+      "outcomes": 6,
+      "evidence": 45,
+      "missing": 23,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "GP-009",
+      "disposition": "screening_only",
+      "formulations": 0,
+      "arms": 0,
+      "outcomes": 0,
+      "evidence": 0,
+      "missing": 0,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "NP-001",
+      "disposition": "needs_review",
+      "formulations": 1,
+      "arms": 1,
+      "outcomes": 1,
+      "evidence": 11,
+      "missing": 3,
+      "conflicts": 0,
+      "quarantined": 1,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "NP-002",
+      "disposition": "needs_review",
+      "formulations": 2,
+      "arms": 6,
+      "outcomes": 13,
+      "evidence": 72,
+      "missing": 8,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 2,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "PILOT-001",
+      "disposition": "ready_with_missing_fields",
+      "formulations": 2,
+      "arms": 5,
+      "outcomes": 0,
+      "evidence": 58,
+      "missing": 15,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "PILOT-002",
+      "disposition": "ready_with_missing_fields",
+      "formulations": 5,
+      "arms": 5,
+      "outcomes": 0,
+      "evidence": 48,
+      "missing": 18,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    },
+    {
+      "paper_id": "PILOT-003",
+      "disposition": "ready_with_missing_fields",
+      "formulations": 1,
+      "arms": 5,
+      "outcomes": 0,
+      "evidence": 54,
+      "missing": 15,
+      "conflicts": 0,
+      "quarantined": 0,
+      "eligible_arms": 0,
+      "likely_evidence_inaccessible": false
+    }
+  ]
+}

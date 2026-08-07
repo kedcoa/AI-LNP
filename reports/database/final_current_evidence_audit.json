@@ -1,0 +1,290 @@
+{
+  "bundle_hashes": {
+    "GP-002": "e95505e61c3a531060b3a545f12304e506c784d45e62c514b3113df74c843c48",
+    "GP-004": "b7e210fd0a9f85da0e95678c279fe0897d8bf6369149c6094782bbebcd5f060e",
+    "GP-005": "0db03d2f21d11f4c61fda2c892b7808bf597b8e28ad5cff8ecddb7416715fd12",
+    "GP-006": "581a1728a90da3a9169788c254a174f4c1886b8acb723ab7b182d7b4680c40ae",
+    "GP-007": "df6dce50c9f08fef145cc84631460ad2c09101cf5034d4f8bc6cda82df1e30bc",
+    "GP-008": "2593b0373fd3dda77931589d9fe2d39ee2d6be9e8594a498aef3d82de452f876",
+    "NP-001": "727d5837f6c53b5f8566f9d7875a21e988e0171601ca8d1042743582a2f94bcd",
+    "NP-002": "6f856e670d33ace73a3f169cc48151e2cb100bf6fda0cfd5e3edb7780c21958e",
+    "PILOT-001": "e4bf680c183527719580bae6f79823340b3b9871f2a6fff809d796c53800084e",
+    "PILOT-002": "06cf2a8ac7f0539f6e81c1602e0caa703aa04ebc645fbdfff5c671197edbff08",
+    "PILOT-003": "6b5e7357f5193c4b6aa0fb290fd27265a7624e28e95ec6baf5ec3d43b999ce24"
+  },
+  "checks": {
+    "bundle_hash_mismatches": [],
+    "eligibility_inconsistencies": [],
+    "evidence_coverage": {
+      "arms_without_evidence": [],
+      "outcomes_without_evidence": []
+    },
+    "exact_duplicate_natural_keys": [],
+    "foreign_key_violations": [],
+    "lossless_source_ledger": {
+      "completed_exact_map_artifacts": 3,
+      "expected_available_manifest_artifacts": 197,
+      "fact_producing_artifacts_without_facts": [],
+      "forbidden_general_app_human_tags": 0,
+      "gp008_supplement_hash_registered": true,
+      "manifest_missing_or_unhashed_artifacts": [
+        {
+          "access_status": "missing",
+          "paper_id": "NP-001",
+          "path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+        },
+        {
+          "access_status": "missing",
+          "paper_id": "NP-001",
+          "path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+        }
+      ],
+      "missing_registered_artifacts": [],
+      "nonprojected_facts_without_reason": 0,
+      "pilot_promoted_counts": {
+        "PILOT-001": {
+          "arms": 5,
+          "formulations": 2
+        },
+        "PILOT-002": {
+          "arms": 5,
+          "formulations": 5
+        },
+        "PILOT-003": {
+          "arms": 5,
+          "formulations": 1
+        }
+      },
+      "registered_source_artifacts": 200,
+      "screening_only_papers_with_science": [],
+      "source_fact_count": 45515,
+      "source_fact_disposition_accounting_matches": true,
+      "source_fact_dispositions": {
+        "quarantined": 15189,
+        "unresolved": 30326
+      },
+      "unexpected_registered_artifacts": []
+    },
+    "manifest_disposition_mismatches": [],
+    "manifest_dispositions": {
+      "expected": 14,
+      "missing": [],
+      "present": 14,
+      "unexpected": []
+    },
+    "manifest_hash_matches": true,
+    "normalized_identity_sets": {
+      "content_hash_mismatches": [],
+      "content_shape_mismatches": [],
+      "field_evidence_links": {
+        "actual": 1260,
+        "expected_canonical": 1260,
+        "missing": [],
+        "raw_references": 673,
+        "unexpected": []
+      },
+      "generation_errors": [],
+      "record_identities": {
+        "actual": 806,
+        "expected": 806,
+        "missing": [],
+        "unexpected": []
+      }
+    },
+    "orphan_counts": {},
+    "review_tag_gaps": [],
+    "sqlite_integrity": "ok"
+  },
+  "database_kind": "authoritative",
+  "database_path": "/Users/renemilywei/Desktop/AI-LNP/data/curated/lnp_evidence.db",
+  "database_sha256": "a8655d9c7a2a1b1aa235cad0a4b173e836070c055f84e51398869487be5879c3",
+  "manifest_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day1-current-corpus/config/database/current_corpus_v1.json",
+  "manifest_sha256": "788a5235818de211cf4c80d52941dc51d053dedd0a07cc1c290dbc2d85cda3c4",
+  "paid_calls": 0,
+  "papers": [
+    {
+      "arms": 0,
+      "conflicts": 0,
+      "disposition": "screening_only",
+      "eligible_arms": 0,
+      "evidence": 0,
+      "formulations": 0,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 0,
+      "paper_id": "GP-001",
+      "quarantined": 0
+    },
+    {
+      "arms": 1,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 1,
+      "evidence": 18,
+      "formulations": 1,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 1,
+      "paper_id": "GP-002",
+      "quarantined": 0
+    },
+    {
+      "arms": 0,
+      "conflicts": 0,
+      "disposition": "screening_only",
+      "eligible_arms": 0,
+      "evidence": 0,
+      "formulations": 0,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 0,
+      "paper_id": "GP-003",
+      "quarantined": 0
+    },
+    {
+      "arms": 1,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 1,
+      "evidence": 16,
+      "formulations": 1,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 2,
+      "paper_id": "GP-004",
+      "quarantined": 0
+    },
+    {
+      "arms": 1,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 1,
+      "evidence": 22,
+      "formulations": 5,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 2,
+      "paper_id": "GP-005",
+      "quarantined": 0
+    },
+    {
+      "arms": 2,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 2,
+      "evidence": 14,
+      "formulations": 1,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 5,
+      "paper_id": "GP-006",
+      "quarantined": 0
+    },
+    {
+      "arms": 1,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 1,
+      "evidence": 16,
+      "formulations": 1,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 1,
+      "paper_id": "GP-007",
+      "quarantined": 0
+    },
+    {
+      "arms": 2,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 2,
+      "evidence": 36,
+      "formulations": 4,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 4,
+      "paper_id": "GP-008",
+      "quarantined": 0
+    },
+    {
+      "arms": 0,
+      "conflicts": 0,
+      "disposition": "screening_only",
+      "eligible_arms": 0,
+      "evidence": 0,
+      "formulations": 0,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 0,
+      "paper_id": "GP-009",
+      "quarantined": 0
+    },
+    {
+      "arms": 1,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 0,
+      "evidence": 11,
+      "formulations": 1,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 1,
+      "paper_id": "NP-001",
+      "quarantined": 1
+    },
+    {
+      "arms": 13,
+      "conflicts": 0,
+      "disposition": "needs_review",
+      "eligible_arms": 0,
+      "evidence": 110,
+      "formulations": 2,
+      "likely_evidence_inaccessible": false,
+      "missing": 0,
+      "outcomes": 13,
+      "paper_id": "NP-002",
+      "quarantined": 13
+    },
+    {
+      "arms": 5,
+      "conflicts": 0,
+      "disposition": "ready_with_missing_fields",
+      "eligible_arms": 0,
+      "evidence": 58,
+      "formulations": 2,
+      "likely_evidence_inaccessible": false,
+      "missing": 10,
+      "outcomes": 0,
+      "paper_id": "PILOT-001",
+      "quarantined": 0
+    },
+    {
+      "arms": 5,
+      "conflicts": 0,
+      "disposition": "ready_with_missing_fields",
+      "eligible_arms": 0,
+      "evidence": 48,
+      "formulations": 5,
+      "likely_evidence_inaccessible": false,
+      "missing": 10,
+      "outcomes": 0,
+      "paper_id": "PILOT-002",
+      "quarantined": 0
+    },
+    {
+      "arms": 5,
+      "conflicts": 0,
+      "disposition": "ready_with_missing_fields",
+      "eligible_arms": 0,
+      "evidence": 54,
+      "formulations": 1,
+      "likely_evidence_inaccessible": false,
+      "missing": 10,
+      "outcomes": 0,
+      "paper_id": "PILOT-003",
+      "quarantined": 0
+    }
+  ],
+  "passed": true,
+  "schema_version": "day2-database-audit/v1"
+}

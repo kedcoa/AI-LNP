@@ -1,0 +1,55 @@
+{
+  "schema_version": "new-paper-batch-start-report/v1",
+  "batch_date": "2026-08-07",
+  "status": "extraction_preflight_complete_awaiting_exact_hash_approval",
+  "discovery": {
+    "source_records": 433,
+    "unique_candidates": 222,
+    "already_in_authoritative_database": 11,
+    "novel_candidates": 211
+  },
+  "abstract_screening": {
+    "screened_papers": 211,
+    "include": 89,
+    "exclude": 19,
+    "manual_review": 103,
+    "scope_note": "These are deterministic abstract-level screening decisions, not proof that a complete formulation or evidence-backed arm has been extracted."
+  },
+  "first_full_text_batch": {
+    "queued_papers": 12,
+    "source_accessible_papers": 9,
+    "source_inaccessible_papers": 3,
+    "article_blocks": 440,
+    "declared_supplements": 4,
+    "downloaded_declared_supplements": 2,
+    "supplement_blocks": 28,
+    "undownloaded_declared_supplements": 2
+  },
+  "extraction": {
+    "immutable_requests_prepared": 9,
+    "estimated_input_tokens": 173156,
+    "maximum_output_tokens": 108000,
+    "provider_calls": 0,
+    "papers_with_at_least_one_evidence_backed_arm": 0,
+    "extracted_imported_arms": 0,
+    "approval_state": "Each exact request SHA-256 requires explicit approval before dispatch."
+  },
+  "request_hashes": {
+    "candidate_00002": "523fe133b673d2598a09552ed86f215dcb93296b64ef8b822a2ed20f390f5a9d",
+    "candidate_00006": "68684b5ea32d7f77f8f219ddacbd5785a4e98fe5d735cf5d2edc2b182130b904",
+    "candidate_00019": "1a408ac43bbeb64fab2519b65e16ea9484be1aaefc037dab157b8d24e87eaa7e",
+    "candidate_00058": "0deab911f3fc8c41d37e7dc13292ab2f811f4aebf50a499dd448f8e1d6dec925",
+    "candidate_00114": "993a05bfff304f178612bf2a1bc4768fda32190a98fe4c0761a88dc8118ce5f4",
+    "candidate_00157": "162173a45abc2987c739bdf584860a0ad01ec893876ecf902649d8720e4c1cdf",
+    "candidate_00170": "3fe17f28c54e42c027a725039c3190da7da422dc08bb76deffbc56deb5bef4af",
+    "candidate_00182": "baf11d6f02b4087cfe9b0e83701ca43a54212d3ce4f9c2361b104dac78df0d12",
+    "candidate_00185": "cee1ea97a00e6f1aadc709e9bd7470b63317374d0570376a065352518f4aeaac"
+  },
+  "source_artifacts": {
+    "discovery_run": "data/raw/searches/2026-08-07/run_20260807T140443+0800/run_metadata.json",
+    "screening_summary": "data/staging/new_papers/2026-08-07/batch/batch_summary.json",
+    "screening_ledger": "data/staging/new_papers/2026-08-07/batch/screening_ledger.jsonl",
+    "retrieval_manifest": "data/staging/new_papers/2026-08-07/retrieval/retrieval_manifest.json",
+    "extraction_preflight": "data/staging/new_papers/2026-08-07/extraction/preflight_report.json"
+  }
+}

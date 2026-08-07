@@ -1,0 +1,1303 @@
+"""Read-only SQLite boundary for the human evidence-review workspace."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, replace
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import sqlite3
+from typing import Literal
+
+from src.database.paths import CANONICAL_AUTHORITATIVE_DATABASE
+from src.database.database_lifecycle import backup_database
+from src.database.migrations import MIGRATION_VERSION
+from src.database.status import (
+    ArmStatusResult,
+    EligibilityResult,
+    RULES_VERSION,
+    evaluate_arm_status,
+    evaluate_eligibility,
+)
+from src.database.readiness import evaluate_readiness
+
+
+@dataclass(frozen=True)
+class DashboardMetrics:
+    nearest_neighbor_ready_arms: int
+    comet_ready_arms: int
+    automatically_validated_usable_facts: int
+    manually_verified_usable_facts: int
+    usable_field_facts: int
+
+
+@dataclass(frozen=True)
+class PaperRowCounts:
+    formulations: int
+    chemical_components: int
+    experimental_arms: int
+    outcomes: int
+    evidence_excerpts: int
+    usable_field_facts: int
+    open_review_items: int
+    review_history_revisions: int
+
+
+@dataclass(frozen=True)
+class PaperSummary:
+    paper_id: int
+    source_paper_id: str | None
+    title: str
+    doi: str | None
+    pmid: str | None
+    pmcid: str | None
+    source_url: str | None
+    full_text_status: str
+    row_counts: PaperRowCounts
+
+
+@dataclass(frozen=True)
+class PaperAccessLinks:
+    doi_url: str | None
+    pubmed_url: str | None
+    pmc_url: str | None
+    source_url: str | None
+    local_full_text_url: str | None
+    institutional_library_url: str | None
+
+
+@dataclass(frozen=True)
+class ReviewArm:
+    experiment_id: int
+    paper_id: int
+    source_paper_id: str | None
+    paper_title: str
+    formulation: str
+    target_cell: str
+    species: str
+    payload: str
+    review_reason: str | None
+    review_status: str | None
+    review_reason_code: str | None
+    completeness_status: str
+    verification_status: str
+    missing_fields: tuple[str, ...]
+    nearest_neighbor_blockers: tuple[str, ...]
+    comet_blockers: tuple[str, ...]
+    nearest_neighbor_eligible: bool
+    comet_eligible: bool
+
+
+@dataclass(frozen=True)
+class WorkspaceField:
+    name: str
+    label: str
+    value: str
+    is_blank: bool
+    entity_type: str = 'arm'
+    entity_id: int = 0
+    field_name: str = ''
+
+
+@dataclass(frozen=True)
+class EvidenceExcerpt:
+    evidence_id: int
+    field_name: str
+    text: str
+    location_type: str
+    location: str
+    modality: str
+    confidence: str
+    verification_status: str
+    outcome_id: int | None = None
+    experiment_id: int | None = None
+
+
+@dataclass(frozen=True)
+class ReviewHistory:
+    review_revision_id: int
+    field_name: str
+    previous_value: str | None
+    corrected_value: str
+    decision: str
+    review_action: str
+    reviewer: str
+    reviewer_notes: str | None
+    reviewed_at: str
+    entity_type: str = 'arm'
+    entity_id: int = 0
+
+
+@dataclass(frozen=True)
+class OutcomeRow:
+    outcome_id: int
+    endpoint_family: str | None
+    endpoint_name: str | None
+    value: str
+    unit: str | None
+    normalization_basis: str | None
+    value_status: str
+    qualitative_outcome: str | None
+
+
+@dataclass(frozen=True)
+class ArmWorkspace:
+    arm: ReviewArm
+    paper: PaperSummary
+    fields: tuple[WorkspaceField, ...]
+    outcomes: tuple[OutcomeRow, ...]
+    evidence: tuple[EvidenceExcerpt, ...]
+    history: tuple[ReviewHistory, ...]
+    state_token: str
+
+
+ReviewAction = Literal[
+    'accept', 'correct', 'not_reported', 'reject', 'wrong_arm', 'unresolved'
+]
+
+
+@dataclass(frozen=True)
+class WriteReadiness:
+    """A verified external backup capability for one review-writing session."""
+
+    ready: bool
+    database_path: Path
+    schema_version: int | None
+    backup_path: Path | None
+    backup_sha256: str | None
+    failure_reason: str | None = None
+
+
+@dataclass(frozen=True)
+class ReviewDecision:
+    """One optimistic, field-scoped human-review action."""
+
+    experiment_id: int
+    field_name: str
+    decision: ReviewAction
+    reviewer: str
+    reviewer_notes: str
+    expected_review_revision_id: int
+    expected_state_token: str
+    write_readiness: WriteReadiness
+    corrected_value: str | None = None
+    evidence_id: int | None = None
+    evidence_excerpt: str | None = None
+    evidence_location: str | None = None
+    entity_type: Literal['arm', 'formulation', 'outcome'] | None = None
+    entity_id: int | None = None
+
+
+@dataclass(frozen=True)
+class ReviewResult:
+    decision: ReviewAction
+    review_revision_id: int | None
+    arm_status: ArmStatusResult
+    nearest_neighbor: EligibilityResult
+    comet: EligibilityResult
+
+
+def authoritative_database_path() -> Path:
+    """Return the one shared database path; callers cannot override it."""
+
+    return CANONICAL_AUTHORITATIVE_DATABASE
+
+
+def review_backup_directory() -> Path:
+    """Return the configured absolute destination for verified review backups."""
+
+    configured = os.environ.get('AI_LNP_REVIEW_BACKUP_DIR')
+    destination = (
+        Path(configured).expanduser()
+        if configured else Path.home() / 'Documents' / 'AI-LNP-review-backups'
+    )
+    if not destination.is_absolute():
+        raise ValueError('AI_LNP_REVIEW_BACKUP_DIR must be an absolute path')
+    return destination.resolve()
+
+
+def paper_access_links(paper: PaperSummary) -> PaperAccessLinks:
+    """Build display-only links from persisted paper metadata and local configuration."""
+
+    local_full_text_url: str | None = None
+    local_directory = os.environ.get('AI_LNP_LOCAL_FULL_TEXT_DIR')
+    if local_directory and paper.source_paper_id:
+        directory = Path(local_directory).expanduser()
+        if directory.is_absolute():
+            for suffix in ('.pdf', '.html', '.xml'):
+                candidate = directory / f'{paper.source_paper_id}{suffix}'
+                if candidate.is_file():
+                    local_full_text_url = candidate.resolve().as_uri()
+                    break
+    library_url = os.environ.get('AI_LNP_INSTITUTIONAL_LIBRARY_URL') or None
+    return PaperAccessLinks(
+        f'https://doi.org/{paper.doi}' if paper.doi else None,
+        f'https://pubmed.ncbi.nlm.nih.gov/{paper.pmid}/' if paper.pmid else None,
+        f'https://pmc.ncbi.nlm.nih.gov/articles/{paper.pmcid}/' if paper.pmcid else None,
+        paper.source_url, local_full_text_url, library_url,
+    )
+
+
+def _connect() -> sqlite3.Connection:
+    path = authoritative_database_path()
+    connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+    connection.row_factory = sqlite3.Row
+    connection.execute("PRAGMA query_only = ON")
+    return connection
+
+
+def _latest_eligibility_condition(profile: str) -> str:
+    return """
+        eligibility.profile = ?
+        AND eligibility.rules_version = ?
+        AND NOT EXISTS (
+            SELECT 1 FROM eligibility_result AS later
+            WHERE later.experiment_id = eligibility.experiment_id
+              AND later.profile = eligibility.profile
+              AND later.rules_version = eligibility.rules_version
+              AND (later.evaluated_at > eligibility.evaluated_at
+                   OR (later.evaluated_at = eligibility.evaluated_at
+                       AND later.rowid > eligibility.rowid))
+        )
+    """
+
+
+_VALID_FACTS_CTE = """
+WITH canonical_fact AS (
+    SELECT field_link.*
+    FROM import_field_evidence AS field_link
+    JOIN evidence AS evidence ON evidence.evidence_id = field_link.evidence_id
+                           AND evidence.paper_id = field_link.paper_id
+    WHERE field_link.verification_status IN ('automatically_validated', 'manually_verified')
+      AND (
+          json_extract(field_link.content_json, '$.review_revision_id') IS NULL
+          OR EXISTS (
+              SELECT 1 FROM review_revision AS revision
+              WHERE revision.review_revision_id = json_extract(
+                        field_link.content_json, '$.review_revision_id'
+                    )
+                AND revision.decision = 'accepted'
+                AND NOT EXISTS (
+                    SELECT 1 FROM review_revision AS later
+                    WHERE later.supersedes_review_revision_id = revision.review_revision_id
+                )
+          )
+      )
+      AND (
+          (field_link.entity_type = 'formulation' AND EXISTS (
+              SELECT 1 FROM formulation AS target
+              WHERE target.formulation_id = field_link.entity_id
+                AND target.paper_id = field_link.paper_id
+          )) OR
+          (field_link.entity_type = 'component' AND EXISTS (
+              SELECT 1 FROM chemical_component AS target
+              JOIN formulation AS formulation ON formulation.formulation_id = target.formulation_id
+              WHERE target.component_id = field_link.entity_id
+                AND formulation.paper_id = field_link.paper_id
+          )) OR
+          (field_link.entity_type = 'arm' AND EXISTS (
+              SELECT 1 FROM experiment AS target
+              WHERE target.experiment_id = field_link.entity_id
+                AND target.paper_id = field_link.paper_id
+          )) OR
+          (field_link.entity_type = 'outcome' AND EXISTS (
+              SELECT 1 FROM outcome AS target
+              JOIN experiment AS experiment ON experiment.experiment_id = target.experiment_id
+              WHERE target.outcome_id = field_link.entity_id
+                AND experiment.paper_id = field_link.paper_id
+          ))
+      )
+      AND NOT EXISTS (
+          SELECT 1 FROM import_field_evidence AS later
+          WHERE later.paper_id = field_link.paper_id
+            AND later.entity_type = field_link.entity_type
+            AND later.entity_id = field_link.entity_id
+            AND later.field_name = field_link.field_name
+            AND later.evidence_id = field_link.evidence_id
+            AND later.import_field_evidence_id > field_link.import_field_evidence_id
+      )
+      AND NOT EXISTS (
+          SELECT 1 FROM review_revision AS terminal
+          WHERE terminal.entity_type = field_link.entity_type
+            AND terminal.entity_id = field_link.entity_id
+            AND terminal.field_name = field_link.field_name
+            AND terminal.review_action IN ('not_reported', 'wrong_arm')
+            AND NOT EXISTS (
+                SELECT 1 FROM review_revision AS later_action
+                WHERE later_action.entity_type = terminal.entity_type
+                  AND later_action.entity_id = terminal.entity_id
+                  AND later_action.field_name = terminal.field_name
+                  AND later_action.review_revision_id > terminal.review_revision_id
+                  AND later_action.decision = 'accepted'
+            )
+      )
+)
+"""
+
+
+def load_dashboard() -> DashboardMetrics:
+    with _connect() as connection:
+        nearest = connection.execute(
+            f"SELECT count(DISTINCT experiment_id) FROM eligibility_result AS eligibility WHERE {_latest_eligibility_condition('nearest_neighbor')} AND eligible = 1",
+            ('nearest_neighbor', RULES_VERSION),
+        ).fetchone()[0]
+        comet = connection.execute(
+            f"SELECT count(DISTINCT experiment_id) FROM eligibility_result AS eligibility WHERE {_latest_eligibility_condition('comet')} AND eligible = 1",
+            ('comet', RULES_VERSION),
+        ).fetchone()[0]
+        facts = connection.execute(
+            _VALID_FACTS_CTE + """
+            SELECT verification_status, count(*) AS total
+            FROM canonical_fact
+            GROUP BY verification_status
+            """
+        ).fetchall()
+    by_status = {row['verification_status']: int(row['total']) for row in facts}
+    automated = by_status.get('automatically_validated', 0)
+    manual = by_status.get('manually_verified', 0)
+    return DashboardMetrics(int(nearest), int(comet), automated, manual, automated + manual)
+
+
+def _paper_summaries(connection: sqlite3.Connection) -> tuple[PaperSummary, ...]:
+    rows = connection.execute(
+        _VALID_FACTS_CTE + """
+        SELECT paper.*, 
+               (SELECT count(*) FROM formulation WHERE paper_id = paper.paper_id) AS formulations,
+               (SELECT count(*) FROM chemical_component AS component JOIN formulation AS formulation
+                 ON formulation.formulation_id = component.formulation_id WHERE formulation.paper_id = paper.paper_id) AS components,
+               (SELECT count(*) FROM experiment WHERE paper_id = paper.paper_id) AS arms,
+               (SELECT count(*) FROM outcome AS outcome JOIN experiment AS experiment
+                 ON experiment.experiment_id = outcome.experiment_id WHERE experiment.paper_id = paper.paper_id) AS outcomes,
+               (SELECT count(*) FROM evidence WHERE paper_id = paper.paper_id) AS evidence,
+               (SELECT count(*) FROM canonical_fact WHERE paper_id = paper.paper_id) AS usable_facts,
+               (SELECT count(*) FROM import_review WHERE paper_id = paper.paper_id
+                 AND review_status IN ('incomplete', 'conflict', 'quarantined', 'blocked')) AS open_reviews,
+               (SELECT count(*) FROM review_revision AS revision JOIN experiment AS experiment
+                 ON experiment.experiment_id = revision.experiment_id WHERE experiment.paper_id = paper.paper_id) AS revisions
+        FROM paper
+        ORDER BY coalesce(paper.source_paper_id, ''), paper.paper_id
+        """
+    ).fetchall()
+    return tuple(
+        PaperSummary(
+            paper_id=int(row['paper_id']), source_paper_id=row['source_paper_id'], title=row['title'],
+            doi=row['doi'], pmid=row['pmid'], pmcid=row['pmcid'], source_url=row['source_url'],
+            full_text_status=row['full_text_status'], row_counts=PaperRowCounts(
+                int(row['formulations']), int(row['components']), int(row['arms']), int(row['outcomes']),
+                int(row['evidence']), int(row['usable_facts']), int(row['open_reviews']), int(row['revisions'])
+            )
+        ) for row in rows
+    )
+
+
+def list_paper_summaries() -> tuple[PaperSummary, ...]:
+    with _connect() as connection:
+        return _paper_summaries(connection)
+
+
+def _latest_eligible(connection: sqlite3.Connection, experiment_id: int, profile: str) -> bool:
+    row = connection.execute(
+        """SELECT eligible FROM eligibility_result
+           WHERE experiment_id = ? AND profile = ?
+           ORDER BY evaluated_at DESC,rowid DESC LIMIT 1""",
+        (experiment_id, profile),
+    ).fetchone()
+    return bool(row['eligible']) if row else False
+
+
+def _current_eligibility_reasons(
+    connection: sqlite3.Connection, experiment_id: int, profile: str
+) -> tuple[str, ...]:
+    row = connection.execute(
+        """SELECT reasons_json FROM eligibility_result
+           WHERE experiment_id = ? AND profile = ?
+           ORDER BY evaluated_at DESC,rowid DESC LIMIT 1""",
+        (experiment_id, profile),
+    ).fetchone()
+    if row is None:
+        return ()
+    payload = json.loads(row['reasons_json'])
+    return tuple(value for value in payload if isinstance(value, str))
+
+
+def _active_entity_value(
+    connection: sqlite3.Connection,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+    source_value: object,
+) -> object:
+    row = connection.execute(
+        """SELECT current.corrected_value
+           FROM review_revision AS current
+           WHERE (current.entity_type = ? OR (? = 'arm' AND current.entity_type = 'experiment'))
+             AND coalesce(current.entity_id, current.experiment_id) = ?
+             AND current.field_name = ? AND current.decision = 'accepted'
+             AND NOT EXISTS (
+                 SELECT 1 FROM review_revision AS later
+                 WHERE later.supersedes_review_revision_id = current.review_revision_id
+             )
+           ORDER BY current.review_revision_id DESC LIMIT 1""",
+        (entity_type, entity_type, entity_id, field_name),
+    ).fetchone()
+    return row[0] if row is not None else source_value
+
+
+def _review_arm(connection: sqlite3.Connection, row: sqlite3.Row) -> ReviewArm:
+    review = connection.execute(
+        """SELECT review_tag, review_status, reason_code, field_name FROM import_review
+           WHERE arm_id = ? AND review_status IN ('incomplete', 'conflict', 'quarantined', 'blocked')
+           ORDER BY import_review_id DESC LIMIT 1""", (row['experiment_id'],)
+    ).fetchone()
+    assessment = connection.execute(
+        """SELECT missing_fields_json, completeness_status, verification_status
+           FROM arm_assessment WHERE experiment_id = ?""", (row['experiment_id'],)
+    ).fetchone()
+    missing = tuple(json.loads(assessment['missing_fields_json'])) if assessment else ()
+    formulation_name = _active_entity_value(
+        connection, 'formulation', int(row['formulation_id']),
+        'formulation_name', row['formulation_name'],
+    )
+    target_cell = _active_entity_value(
+        connection, 'arm', int(row['experiment_id']), 'cell_type', row['cell_type'],
+    )
+    species = _active_entity_value(
+        connection, 'arm', int(row['experiment_id']), 'species', row['species'],
+    )
+    payload = _active_entity_value(
+        connection, 'arm', int(row['experiment_id']), 'payload_type', row['payload_type'],
+    )
+    return ReviewArm(
+        int(row['experiment_id']), int(row['paper_id']), row['source_paper_id'], row['title'],
+        str(formulation_name or ''), str(target_cell or ''), str(species or ''), str(payload or ''),
+        review['review_tag'] if review else None, review['review_status'] if review else None,
+        review['reason_code'] if review else None,
+        assessment['completeness_status'] if assessment else 'incomplete',
+        assessment['verification_status'] if assessment else 'unreviewed', missing,
+        _current_eligibility_reasons(connection, row['experiment_id'], 'nearest_neighbor'),
+        _current_eligibility_reasons(connection, row['experiment_id'], 'comet'),
+        _latest_eligible(connection, row['experiment_id'], 'nearest_neighbor'),
+        _latest_eligible(connection, row['experiment_id'], 'comet'),
+    )
+
+
+def list_review_arms() -> tuple[ReviewArm, ...]:
+    with _connect() as connection:
+        rows = connection.execute(
+            """SELECT experiment.*, paper.source_paper_id, paper.title, formulation.formulation_name
+               FROM experiment JOIN paper USING (paper_id) JOIN formulation USING (formulation_id)"""
+        ).fetchall()
+        arms = [_review_arm(connection, row) for row in rows]
+    def priority(arm: ReviewArm) -> int:
+        if arm.completeness_status == 'complete' and arm.verification_status != 'manually_verified':
+            return 0
+        if arm.completeness_status == 'quarantined' or arm.review_status in ('blocked', 'quarantined'):
+            return 4
+        if arm.completeness_status == 'conflict' or arm.review_status == 'conflict':
+            return 3
+        if 1 <= len(arm.comet_blockers) <= 2:
+            return 1
+        if arm.review_reason_code and (
+            'target_cell' in arm.review_reason_code or 'experiment_link' in arm.review_reason_code
+        ):
+            return 2
+        return 4
+    return tuple(sorted(arms, key=lambda arm: (priority(arm), arm.paper_id, arm.experiment_id)))
+
+
+def list_comet_gap_arms() -> tuple[ReviewArm, ...]:
+    """Return the small, high-value COMET correction queue only."""
+
+    arms = [
+        arm for arm in list_review_arms()
+        if not arm.comet_eligible and 1 <= len(arm.comet_blockers) <= 3
+    ]
+    return tuple(sorted(
+        arms,
+        key=lambda arm: (
+            arm.completeness_status in {'conflict', 'quarantined'},
+            len(arm.comet_blockers), arm.paper_id, arm.experiment_id,
+        ),
+    ))
+
+
+_FIELD_COLUMNS = (
+    ('formulation', 'Formulation', 'formulation_name'), ('composition_ratio', 'Composition ratio', 'composition_raw'),
+    ('target_cell', 'Target cell', 'cell_type'), ('delivery_cell', 'Delivery cell', 'cell_source'),
+    ('species', 'Species', 'species'), ('biological_model', 'Biological model', 'disease_model'),
+    ('delivery_setting', 'Delivery setting', 'in_vitro_in_vivo'), ('route', 'Route', 'route'),
+    ('payload', 'Payload', 'payload_type'), ('payload_name', 'Payload name', 'payload_name'),
+    ('dose', 'Dose', 'dose'), ('assay', 'Assay', 'assay'),
+    ('timepoint', 'Timepoint', 'timepoint'),
+    ('chemical_formulation_total', 'Chemical formulation (total)', 'chemical_formulation_total'),
+    ('lnp_molar_ratio', 'LNP molar ratio', 'lnp_molar_ratio'),
+    ('payload_encoded_product', 'Encoded product', 'payload_encoded_product'),
+    ('payload_molecular_target', 'Molecular target', 'payload_molecular_target'),
+)
+
+_OUTCOME_FIELD_COLUMNS = (
+    ('endpoint_family', 'Endpoint family'), ('endpoint_name', 'Endpoint name'),
+    ('outcome_value', 'Outcome value'), ('outcome_unit', 'Outcome unit'),
+    ('normalization_basis', 'Normalization basis'),
+    ('uncertainty_value', 'Uncertainty value'), ('uncertainty_type', 'Uncertainty type'),
+    ('qualitative_outcome', 'Qualitative outcome'), ('value_status', 'Value status'),
+)
+
+
+def _display_value(value: object) -> str:
+    if value is None:
+        return ''
+    if isinstance(value, float):
+        return format(value, 'g')
+    return str(value)
+
+
+def load_arm_workspace(experiment_id: int) -> ArmWorkspace:
+    with _connect() as connection:
+        row = connection.execute(
+            """SELECT experiment.*, paper.source_paper_id, paper.title, formulation.formulation_name,
+                      formulation.composition_raw,formulation.chemical_formulation_total,
+                      formulation.lnp_molar_ratio
+               FROM experiment JOIN paper USING (paper_id) JOIN formulation USING (formulation_id)
+               WHERE experiment.experiment_id = ?""", (experiment_id,)
+        ).fetchone()
+        if row is None:
+            raise KeyError(f'Unknown experiment_id: {experiment_id}')
+        paper = next(summary for summary in _paper_summaries(connection) if summary.paper_id == row['paper_id'])
+        arm = _review_arm(connection, row)
+        base_fields: list[WorkspaceField] = []
+        for name, label, column in _FIELD_COLUMNS:
+            entity_type = 'formulation' if column in _FORMULATION_COLUMNS else 'arm'
+            entity_id = int(row['formulation_id']) if entity_type == 'formulation' else experiment_id
+            value = _active_entity_value(connection, entity_type, entity_id, column, row[column])
+            base_fields.append(WorkspaceField(
+                name, label, '' if value is None else str(value), value is None,
+                entity_type, entity_id, column,
+            ))
+        outcome_rows = connection.execute(
+            'SELECT * FROM outcome WHERE experiment_id = ? ORDER BY outcome_id', (experiment_id,)
+        ).fetchall()
+        outcome_fields: list[WorkspaceField] = []
+        for item in outcome_rows:
+            outcome_id = int(item['outcome_id'])
+            for column, label in _OUTCOME_FIELD_COLUMNS:
+                value = _active_entity_value(
+                    connection, 'outcome', outcome_id, column, item[column]
+                )
+                outcome_fields.append(WorkspaceField(
+                    f'outcome:{outcome_id}:{column}',
+                    f'Outcome #{outcome_id} · {label}', _display_value(value), value is None,
+                    'outcome', outcome_id, column,
+                ))
+        fields = tuple(base_fields + outcome_fields)
+        outcomes = tuple(
+            OutcomeRow(
+                int(item['outcome_id']),
+                _active_entity_value(connection, 'outcome', int(item['outcome_id']), 'endpoint_family', item['endpoint_family']),
+                _active_entity_value(connection, 'outcome', int(item['outcome_id']), 'endpoint_name', item['endpoint_name']),
+                _display_value(_active_entity_value(connection, 'outcome', int(item['outcome_id']), 'outcome_value', item['outcome_value'])),
+                _active_entity_value(connection, 'outcome', int(item['outcome_id']), 'outcome_unit', item['outcome_unit']),
+                _active_entity_value(connection, 'outcome', int(item['outcome_id']), 'normalization_basis', item['normalization_basis']),
+                str(_active_entity_value(connection, 'outcome', int(item['outcome_id']), 'value_status', item['value_status'])),
+                _active_entity_value(connection, 'outcome', int(item['outcome_id']), 'qualitative_outcome', item['qualitative_outcome']),
+            )
+            for item in outcome_rows
+        )
+        evidence_rows = connection.execute(
+            """SELECT evidence.* FROM evidence
+               WHERE evidence.paper_id = ? ORDER BY evidence.evidence_id""",
+            (row['paper_id'],),
+        ).fetchall()
+        evidence = tuple(EvidenceExcerpt(
+            int(item['evidence_id']), item['field_name'], item['evidence_text'], item['evidence_location_type'],
+            ' · '.join(value for value in (item['section_name'], item['page_number'], item['table_number'], item['figure_number'], item['supplement_identifier']) if value),
+            item['extraction_method'], item['extraction_confidence'], item['evidence_review_status'],
+            int(item['outcome_id']) if item['outcome_id'] is not None else None,
+            int(item['experiment_id']) if item['experiment_id'] is not None else None,
+        ) for item in evidence_rows)
+        history_rows = connection.execute(
+            """SELECT * FROM review_revision
+               WHERE (entity_type IN ('arm', 'experiment') AND coalesce(entity_id, experiment_id) = ?)
+                  OR (entity_type = 'formulation' AND entity_id = ?)
+                  OR (entity_type = 'outcome' AND entity_id IN (
+                      SELECT outcome_id FROM outcome WHERE experiment_id = ?
+                  ))
+               ORDER BY reviewed_at DESC, review_revision_id DESC""",
+            (experiment_id, row['formulation_id'], experiment_id),
+        ).fetchall()
+        history = tuple(ReviewHistory(
+            int(item['review_revision_id']), item['field_name'], item['previous_value'], item['corrected_value'],
+            item['decision'], item['review_action'] or _review_action(item['decision'], item['reviewer_notes']),
+            item['reviewer'], item['reviewer_notes'], item['reviewed_at'],
+            'arm' if item['entity_type'] == 'experiment' else item['entity_type'],
+            int(item['entity_id'] or item['experiment_id']),
+        ) for item in history_rows)
+    return ArmWorkspace(arm, paper, fields, outcomes, evidence, history, _review_state_token(connection, experiment_id))
+
+
+_FIELD_COLUMN_BY_NAME = {name: column for name, _label, column in _FIELD_COLUMNS}
+_REVIEWABLE_FIELDS = frozenset(_FIELD_COLUMN_BY_NAME)
+_FORMULATION_COLUMNS = frozenset({
+    'formulation_name', 'composition_raw', 'chemical_formulation_total',
+    'lnp_molar_ratio',
+})
+_OUTCOME_COLUMNS = frozenset(column for column, _label in _OUTCOME_FIELD_COLUMNS)
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _review_action(decision: str, reviewer_notes: str | None) -> str:
+    if reviewer_notes and reviewer_notes.startswith('['):
+        marker, separator, _rest = reviewer_notes.partition(']')
+        if separator and marker[1:] in {
+            'accept', 'correct', 'not_reported', 'reject', 'wrong_arm', 'unresolved'
+        }:
+            return marker[1:]
+    return decision
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as source:
+        for block in iter(lambda: source.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _verify_database_safety(connection: sqlite3.Connection) -> int:
+    if not connection.in_transaction:
+        connection.execute('PRAGMA foreign_keys = ON')
+    foreign_keys = connection.execute('PRAGMA foreign_keys').fetchone()
+    if foreign_keys is None or foreign_keys[0] != 1:
+        raise RuntimeError('SQLite foreign-key enforcement could not be enabled')
+    if any(row[0] != 'ok' for row in connection.execute('PRAGMA integrity_check')):
+        raise ValueError('SQLite integrity check failed')
+    violations = connection.execute('PRAGMA foreign_key_check').fetchall()
+    if violations:
+        raise ValueError(f'SQLite foreign-key check failed: {violations}')
+    versions = tuple(
+        row[0] for row in connection.execute(
+            'SELECT version FROM schema_migration ORDER BY version'
+        )
+    )
+    expected = tuple(range(1, MIGRATION_VERSION + 1))
+    if versions != expected:
+        raise ValueError(
+            f'Unsupported review schema migrations: expected {expected}, found {versions}'
+        )
+    return versions[-1]
+
+
+def _verify_backup(path: Path, expected_sha256: str) -> None:
+    if not path.is_file() or _sha256(path) != expected_sha256:
+        raise ValueError('Verified external backup is missing or has changed')
+    connection = sqlite3.connect(f'{path.as_uri()}?mode=ro', uri=True)
+    try:
+        _verify_database_safety(connection)
+    finally:
+        connection.close()
+
+
+def prepare_writes(backup_dir: Path) -> WriteReadiness:
+    """Verify the fixed database and create an externally stored backup first."""
+
+    database_path = authoritative_database_path().resolve()
+    try:
+        connection = sqlite3.connect(f'{database_path.as_uri()}?mode=ro', uri=True)
+        try:
+            schema_version = _verify_database_safety(connection)
+        finally:
+            connection.close()
+        backup_path = backup_database(database_path, backup_dir)
+        backup_sha256 = _sha256(backup_path)
+        _verify_backup(backup_path, backup_sha256)
+    except (OSError, sqlite3.Error, ValueError, RuntimeError) as error:
+        return WriteReadiness(
+            ready=False, database_path=database_path, schema_version=None,
+            backup_path=None, backup_sha256=None, failure_reason=str(error),
+        )
+    return WriteReadiness(
+        ready=True, database_path=database_path, schema_version=schema_version,
+        backup_path=backup_path, backup_sha256=backup_sha256,
+    )
+
+
+def _require_write_readiness(readiness: WriteReadiness, database_path: Path) -> None:
+    if not readiness.ready:
+        raise ValueError(readiness.failure_reason or 'Writes are not ready')
+    if readiness.database_path.resolve() != database_path.resolve():
+        raise ValueError('Write readiness belongs to a different database')
+    if readiness.schema_version != MIGRATION_VERSION:
+        raise ValueError('Write readiness has an unsupported schema version')
+    if readiness.backup_path is None or readiness.backup_sha256 is None:
+        raise ValueError('Write readiness has no verified external backup')
+    _verify_backup(readiness.backup_path, readiness.backup_sha256)
+
+
+def _current_revision_id(connection: sqlite3.Connection, experiment_id: int) -> int:
+    return int(connection.execute(
+        """SELECT coalesce(max(review_revision_id), 0) FROM review_revision
+           WHERE (entity_type IN ('arm', 'experiment') AND coalesce(entity_id, experiment_id) = ?)
+              OR (entity_type = 'formulation' AND entity_id = (
+                  SELECT formulation_id FROM experiment WHERE experiment_id = ?
+              ))
+              OR (entity_type = 'outcome' AND entity_id IN (
+                  SELECT outcome_id FROM outcome WHERE experiment_id = ?
+              ))""",
+        (experiment_id, experiment_id, experiment_id),
+    ).fetchone()[0])
+
+
+def _review_state_token(connection: sqlite3.Connection, experiment_id: int) -> str:
+    """Hash every mutable review-state row the workspace can submit against."""
+
+    state = {
+        'scientific': [tuple(row) for row in connection.execute(
+            """SELECT experiment.*, formulation.formulation_name, formulation.composition_raw
+               FROM experiment JOIN formulation USING (formulation_id)
+               WHERE experiment.experiment_id = ?""",
+            (experiment_id,),
+        )],
+        'outcomes': [tuple(row) for row in connection.execute(
+            "SELECT * FROM outcome WHERE experiment_id = ? ORDER BY outcome_id",
+            (experiment_id,),
+        )],
+        'paper_evidence': [tuple(row) for row in connection.execute(
+            """SELECT evidence_id, paper_id, experiment_id, outcome_id, field_name,
+                      evidence_text, evidence_location_type, section_name, page_number,
+                      table_number, figure_number, supplement_identifier,
+                      extraction_method, extraction_confidence, evidence_review_status
+               FROM evidence
+               WHERE paper_id = (SELECT paper_id FROM experiment WHERE experiment_id = ?)
+               ORDER BY evidence_id""",
+            (experiment_id,),
+        )],
+        'revisions': [tuple(row) for row in connection.execute(
+            """SELECT review_revision_id, entity_type, entity_id, field_name, decision,
+                      review_action, evidence_id, supersedes_review_revision_id
+               FROM review_revision
+               WHERE (entity_type IN ('arm', 'experiment') AND coalesce(entity_id, experiment_id) = ?)
+                  OR (entity_type = 'formulation' AND entity_id = (
+                      SELECT formulation_id FROM experiment WHERE experiment_id = ?
+                  ))
+                  OR (entity_type = 'outcome' AND entity_id IN (
+                      SELECT outcome_id FROM outcome WHERE experiment_id = ?
+                  ))
+               ORDER BY review_revision_id""",
+            (experiment_id, experiment_id, experiment_id),
+        )],
+        'verifications': [tuple(row) for row in connection.execute(
+            """SELECT field_verification_id, field_name, evidence_id, review_revision_id,
+                      verification_status
+               FROM field_verification WHERE experiment_id = ? ORDER BY field_verification_id""",
+            (experiment_id,),
+        )],
+        'missing': [tuple(row) for row in connection.execute(
+            """SELECT missing_field_id, field_name, resolved_by_review_revision_id
+               FROM missing_field WHERE experiment_id = ? ORDER BY missing_field_id""",
+            (experiment_id,),
+        )],
+        'reviews': [tuple(row) for row in connection.execute(
+            """SELECT import_review_id, reason_code, review_status, evidence_ids_json
+               FROM import_review WHERE arm_id = ? ORDER BY import_review_id""",
+            (experiment_id,),
+        )],
+    }
+    return hashlib.sha256(json.dumps(state, separators=(',', ':')).encode()).hexdigest()
+
+
+def _active_revision(
+    connection: sqlite3.Connection, entity_type: str, entity_id: int, field_name: str
+) -> sqlite3.Row | None:
+    return connection.execute(
+        """SELECT * FROM review_revision AS current
+           WHERE (current.entity_type = ? OR (? = 'arm' AND current.entity_type = 'experiment'))
+             AND coalesce(current.entity_id, current.experiment_id) = ?
+             AND current.field_name = ?
+             AND current.decision = 'accepted'
+             AND NOT EXISTS (
+                 SELECT 1 FROM review_revision AS later
+                 WHERE later.supersedes_review_revision_id = current.review_revision_id
+             )
+           ORDER BY current.review_revision_id DESC LIMIT 1""",
+        (entity_type, entity_type, entity_id, field_name),
+    ).fetchone()
+
+
+def _field_value(
+    connection: sqlite3.Connection, entity_type: str, entity_id: int, column: str
+) -> str:
+    table, primary_key = {
+        'arm': ('experiment', 'experiment_id'),
+        'formulation': ('formulation', 'formulation_id'),
+        'outcome': ('outcome', 'outcome_id'),
+    }[entity_type]
+    value = connection.execute(
+        f'SELECT {column} FROM {table} WHERE {primary_key} = ?', (entity_id,)
+    ).fetchone()[0]
+    return _display_value(value)
+
+
+def _review_target(
+    connection: sqlite3.Connection, request: ReviewDecision, experiment: sqlite3.Row
+) -> tuple[str, int, str]:
+    column = _FIELD_COLUMN_BY_NAME.get(request.field_name, request.field_name)
+    if request.entity_type is None:
+        if request.field_name not in _REVIEWABLE_FIELDS:
+            raise ValueError(f'Unsupported review field: {request.field_name}')
+        if column in _FORMULATION_COLUMNS:
+            return 'formulation', int(experiment['formulation_id']), column
+        return 'arm', request.experiment_id, column
+    if request.entity_id is None:
+        raise ValueError('An entity_id is required for entity-scoped review')
+    if request.entity_type == 'arm':
+        valid = request.entity_id == request.experiment_id and column in _FIELD_COLUMN_BY_NAME.values()
+    elif request.entity_type == 'formulation':
+        valid = request.entity_id == experiment['formulation_id'] and column in _FORMULATION_COLUMNS
+    else:
+        valid = column in _OUTCOME_COLUMNS and connection.execute(
+            'SELECT 1 FROM outcome WHERE outcome_id = ? AND experiment_id = ?',
+            (request.entity_id, request.experiment_id),
+        ).fetchone() is not None
+    if not valid:
+        raise ValueError('Review entity or field does not belong to the selected arm')
+    return request.entity_type, int(request.entity_id), column
+
+
+def _state_field_name(entity_type: str, entity_id: int, field_name: str) -> str:
+    return f'outcome:{entity_id}:{field_name}' if entity_type == 'outcome' else field_name
+
+
+def _owned_evidence(
+    connection: sqlite3.Connection,
+    experiment_id: int,
+    paper_id: int,
+    evidence_id: int,
+    *,
+    require_current_arm: bool,
+    entity_type: str = 'arm',
+    entity_id: int | None = None,
+) -> sqlite3.Row:
+    evidence = connection.execute(
+        'SELECT * FROM evidence WHERE evidence_id = ?', (evidence_id,)
+    ).fetchone()
+    if evidence is None:
+        raise ValueError(f'Unknown evidence_id: {evidence_id}')
+    if evidence['paper_id'] != paper_id:
+        raise ValueError('Supporting evidence must belong to the same paper')
+    if entity_type == 'outcome' and require_current_arm and evidence['outcome_id'] != entity_id:
+        raise ValueError('Supporting evidence must belong to the selected outcome')
+    if require_current_arm:
+        linked_outcome = evidence['outcome_id'] is not None and connection.execute(
+            'SELECT 1 FROM outcome WHERE outcome_id = ? AND experiment_id = ?',
+            (evidence['outcome_id'], experiment_id),
+        ).fetchone()
+        formulation_link = connection.execute(
+            """SELECT 1 FROM import_field_evidence AS link
+               JOIN experiment AS experiment ON experiment.formulation_id = link.entity_id
+               WHERE link.evidence_id = ? AND link.paper_id = ?
+                 AND link.entity_type = 'formulation' AND experiment.experiment_id = ?""",
+            (evidence_id, paper_id, experiment_id),
+        ).fetchone()
+        if (
+            evidence['experiment_id'] != experiment_id
+            and linked_outcome is None
+            and formulation_link is None
+        ):
+            raise ValueError('Supporting evidence must belong to the selected arm')
+    return evidence
+
+
+def _create_reviewer_evidence(
+    connection: sqlite3.Connection,
+    request: ReviewDecision,
+    *,
+    paper_id: int,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+) -> int:
+    excerpt = (request.evidence_excerpt or '').strip()
+    location = (request.evidence_location or '').strip()
+    if not excerpt or not location:
+        raise ValueError(
+            'An evidence excerpt and evidence location are required for a pasted correction'
+        )
+    outcome_id = entity_id if entity_type == 'outcome' else None
+    cursor = connection.execute(
+        """INSERT INTO evidence (
+               paper_id,experiment_id,outcome_id,field_name,evidence_text,
+               evidence_location_type,section_name,extraction_method,
+               extraction_confidence,evidence_review_status
+           ) VALUES (?,?,?,?,?,'other',?,'manual','high','manually_verified')""",
+        (
+            paper_id, request.experiment_id, outcome_id, field_name,
+            excerpt, location,
+        ),
+    )
+    return int(cursor.lastrowid)
+
+
+def _evidence_location(evidence: sqlite3.Row) -> str:
+    return ' · '.join(
+        str(value) for value in (
+            evidence['section_name'], evidence['page_number'], evidence['table_number'],
+            evidence['figure_number'], evidence['supplement_identifier'],
+        ) if value
+    ) or evidence['evidence_location_type']
+
+
+def _insert_verification(
+    connection: sqlite3.Connection, request: ReviewDecision, field_name: str,
+    status: str, review_revision_id: int | None,
+) -> int:
+    cursor = connection.execute(
+        """INSERT INTO field_verification (
+               experiment_id, field_name, evidence_id, review_revision_id,
+               verification_status, notes, verified_at
+           ) VALUES (?, ?, ?, ?, ?, ?, ?)""",
+        (request.experiment_id, field_name, request.evidence_id, review_revision_id,
+         status, request.reviewer_notes.strip(), _utc_now()),
+    )
+    return int(cursor.lastrowid)
+
+
+def _record_canonical_field_evidence(
+    connection: sqlite3.Connection, request: ReviewDecision, paper_id: int,
+    entity_type: str, entity_id: int, field_name: str,
+    evidence_id: int, review_revision_id: int,
+) -> None:
+    """Promote one human-verified arm/evidence link into dashboard fact accounting."""
+
+    payload = json.dumps({
+        'evidence_id': evidence_id,
+        'field_name': field_name,
+        'review_revision_id': review_revision_id,
+        'verification_status': 'manually_verified',
+    }, sort_keys=True)
+    connection.execute(
+        """INSERT INTO import_field_evidence (
+               paper_id, entity_type, entity_id, field_name, evidence_id,
+               verification_status, notes, natural_key, content_sha256, content_json
+           ) VALUES (?, ?, ?, ?, ?, 'manually_verified', ?, ?, ?, ?)""",
+        (paper_id, entity_type, entity_id, field_name, evidence_id, request.reviewer_notes.strip(),
+         f'human-review:{review_revision_id}', hashlib.sha256(payload.encode()).hexdigest(), payload),
+    )
+
+
+def _record_rejected_field_evidence(
+    connection: sqlite3.Connection, request: ReviewDecision, paper_id: int,
+    entity_type: str, entity_id: int, field_name: str,
+    evidence_id: int, verification_id: int,
+) -> None:
+    """Append a rejected canonical link so it supersedes the prior field/evidence status."""
+
+    payload = json.dumps({
+        'evidence_id': evidence_id,
+        'field_name': field_name,
+        'field_verification_id': verification_id,
+        'verification_status': 'rejected',
+    }, sort_keys=True)
+    connection.execute(
+        """INSERT INTO import_field_evidence (
+               paper_id, entity_type, entity_id, field_name, evidence_id,
+               verification_status, notes, natural_key, content_sha256, content_json
+           ) VALUES (?, ?, ?, ?, ?, 'rejected', ?, ?, ?, ?)""",
+        (paper_id, entity_type, entity_id, field_name, evidence_id, request.reviewer_notes.strip(),
+         f'human-review-rejection:{verification_id}', hashlib.sha256(payload.encode()).hexdigest(), payload),
+    )
+
+
+def _mark_missing(
+    connection: sqlite3.Connection, experiment_id: int, field_name: str, reason: str,
+    revision_id: int | None, entity_type: str = 'arm', entity_id: int | None = None,
+) -> None:
+    if revision_id is None:
+        connection.execute(
+            """INSERT INTO missing_field (experiment_id, field_name, reason, recorded_at)
+               VALUES (?, ?, ?, ?)""",
+            (experiment_id, field_name, reason, _utc_now()),
+        )
+        return
+    if entity_type == 'formulation':
+        unresolved = connection.execute(
+            """SELECT missing.missing_field_id FROM missing_field AS missing
+               JOIN experiment ON experiment.experiment_id = missing.experiment_id
+               WHERE experiment.formulation_id = ? AND missing.field_name = ?
+                 AND missing.resolved_by_review_revision_id IS NULL""",
+            (entity_id, field_name),
+        ).fetchall()
+    else:
+        unresolved = connection.execute(
+            """SELECT missing_field_id FROM missing_field
+               WHERE experiment_id = ? AND field_name = ?
+                 AND resolved_by_review_revision_id IS NULL""",
+            (experiment_id, field_name),
+        ).fetchall()
+    for item in unresolved:
+        connection.execute(
+            """UPDATE missing_field SET resolved_by_review_revision_id = ?, resolved_at = ?
+               WHERE missing_field_id = ?""",
+            (revision_id, _utc_now(), item[0]),
+        )
+
+
+def _insert_review_revision(
+    connection: sqlite3.Connection, request: ReviewDecision,
+    entity_type: str, entity_id: int, field_name: str,
+    previous_value: str, corrected_value: str, evidence: sqlite3.Row | None,
+    decision: str, supersedes_revision_id: int | None, reviewer_notes: str | None = None,
+) -> int:
+    is_evidence_row = evidence is not None and 'evidence_text' in evidence.keys()
+    evidence_excerpt = (
+        evidence['evidence_text'] if is_evidence_row
+        else evidence['evidence_excerpt'] if evidence is not None
+        else f'Reviewer confirmed that {request.field_name} is not reported.'
+    )
+    evidence_location_type = (
+        evidence['evidence_location_type'] if is_evidence_row
+        else evidence['evidence_location_type'] if evidence is not None
+        else 'human_review'
+    )
+    evidence_location = (
+        _evidence_location(evidence) if is_evidence_row
+        else evidence['evidence_location'] if evidence is not None
+        else 'human review record'
+    )
+    cursor = connection.execute(
+        """INSERT INTO review_revision (
+               experiment_id, entity_type, entity_id, field_name,
+               previous_value, corrected_value, evidence_excerpt,
+               evidence_location_type, evidence_location, reviewer, decision,
+               supersedes_review_revision_id, reviewer_notes, reviewed_at,
+               review_action, evidence_id
+           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (request.experiment_id, entity_type, entity_id, field_name,
+         previous_value, corrected_value,
+         evidence_excerpt, evidence_location_type, evidence_location,
+         request.reviewer.strip(), decision, supersedes_revision_id,
+         (reviewer_notes or request.reviewer_notes).strip(), _utc_now(),
+         request.decision, request.evidence_id),
+    )
+    return int(cursor.lastrowid)
+
+
+def _recalculate(
+    connection: sqlite3.Connection, experiment_id: int,
+    entity_type: str = 'arm', entity_id: int | None = None,
+) -> tuple[
+    ArmStatusResult, EligibilityResult, EligibilityResult
+]:
+    experiment_ids = [experiment_id]
+    if entity_type == 'formulation':
+        experiment_ids = [
+            int(row[0]) for row in connection.execute(
+                'SELECT experiment_id FROM experiment WHERE formulation_id = ? ORDER BY experiment_id',
+                (entity_id,),
+            )
+        ]
+    selected: tuple[ArmStatusResult, EligibilityResult, EligibilityResult] | None = None
+    for current_id in experiment_ids:
+        status = evaluate_arm_status(connection, current_id)
+        nearest = evaluate_eligibility(connection, current_id, 'nearest_neighbor')
+        readiness = evaluate_readiness(connection, current_id)
+        result = (status, nearest, EligibilityResult(
+            profile='comet', eligible=readiness.comet_ready,
+            reasons=readiness.comet_blockers,
+            rules_version=readiness.rules_version,
+        ))
+        if current_id == experiment_id:
+            selected = result
+    if selected is None:
+        raise KeyError(f'Unknown experiment_id: {experiment_id}')
+    return selected
+
+
+def _verify_review_consistency(connection: sqlite3.Connection, experiment_id: int) -> None:
+    """Reject a transaction if its linked review state is internally inconsistent."""
+
+    invalid_verification = connection.execute(
+        """SELECT 1 FROM field_verification AS verification
+           WHERE verification.experiment_id = ?
+             AND verification.review_revision_id IS NOT NULL
+             AND NOT EXISTS (
+                 SELECT 1 FROM review_revision AS revision
+                 WHERE revision.review_revision_id = verification.review_revision_id
+                   AND revision.experiment_id = verification.experiment_id
+                   AND (
+                       revision.field_name = verification.field_name
+                       OR (revision.entity_type = 'outcome' AND verification.field_name =
+                           'outcome:' || revision.entity_id || ':' || revision.field_name)
+                   )
+             )""",
+        (experiment_id,),
+    ).fetchone()
+    if invalid_verification is not None:
+        raise ValueError('Field verification is inconsistent with review history')
+def apply_review_decision(request: ReviewDecision) -> ReviewResult:
+    """Atomically apply one validated decision to the fixed authoritative database."""
+
+    database_path = authoritative_database_path().resolve()
+    _require_write_readiness(request.write_readiness, database_path)
+    if request.decision not in {
+        'accept', 'correct', 'not_reported', 'reject', 'wrong_arm', 'unresolved'
+    }:
+        raise ValueError(f'Unsupported review decision: {request.decision}')
+    if not request.reviewer.strip() or not request.reviewer_notes.strip():
+        raise ValueError('A reviewer and reviewer note are required for every decision')
+    connection = sqlite3.connect(database_path, isolation_level=None)
+    connection.row_factory = sqlite3.Row
+    try:
+        connection.execute('PRAGMA foreign_keys = ON')
+        _verify_database_safety(connection)
+        connection.execute('BEGIN IMMEDIATE')
+        experiment = connection.execute(
+            'SELECT * FROM experiment WHERE experiment_id = ?', (request.experiment_id,)
+        ).fetchone()
+        if experiment is None:
+            raise KeyError(f'Unknown experiment_id: {request.experiment_id}')
+        entity_type, entity_id, field_name = _review_target(connection, request, experiment)
+        state_field_name = _state_field_name(entity_type, entity_id, field_name)
+        current_revision_id = _current_revision_id(connection, request.experiment_id)
+        if current_revision_id != request.expected_review_revision_id:
+            raise ValueError('Review submission is stale; reload the arm workspace')
+        if _review_state_token(connection, request.experiment_id) != request.expected_state_token:
+            raise ValueError('Review submission is stale; reload the arm workspace')
+        active = _active_revision(connection, entity_type, entity_id, field_name)
+        source_value = _field_value(connection, entity_type, entity_id, field_name)
+        revision_id: int | None = None
+        if request.decision in {'accept', 'correct'}:
+            if request.decision == 'correct' and not (request.corrected_value or '').strip():
+                raise ValueError('A corrected value is required')
+            if request.evidence_id is None:
+                request = replace(request, evidence_id=_create_reviewer_evidence(
+                    connection, request, paper_id=int(experiment['paper_id']),
+                    entity_type=entity_type, entity_id=entity_id,
+                    field_name=field_name,
+                ))
+            evidence = _owned_evidence(
+                connection, request.experiment_id, experiment['paper_id'], request.evidence_id,
+                require_current_arm=True, entity_type=entity_type, entity_id=entity_id,
+            )
+            corrected_value = (
+                request.corrected_value.strip() if request.decision == 'correct'
+                else (active['corrected_value'] if active is not None else source_value)
+            )
+            if not corrected_value.strip():
+                raise ValueError('An empty extracted value cannot be accepted')
+            revision_id = _insert_review_revision(
+                connection, request, entity_type, entity_id, field_name,
+                active['corrected_value'] if active is not None else source_value,
+                corrected_value, evidence, 'accepted',
+                int(active['review_revision_id']) if active is not None else None,
+            )
+            _insert_verification(connection, request, state_field_name, 'manually_verified', revision_id)
+            _record_canonical_field_evidence(
+                connection, request, experiment['paper_id'], entity_type, entity_id,
+                field_name, request.evidence_id, revision_id
+            )
+            _mark_missing(
+                connection, request.experiment_id, state_field_name, '', revision_id,
+                entity_type, entity_id,
+            )
+        elif request.decision == 'reject':
+            if request.evidence_id is None and active is None:
+                raise ValueError('Evidence is required to reject original extraction')
+            evidence = (
+                _owned_evidence(
+                    connection, request.experiment_id, experiment['paper_id'], request.evidence_id,
+                    require_current_arm=True, entity_type=entity_type, entity_id=entity_id,
+                ) if request.evidence_id is not None else active
+            )
+            audit_value = active['corrected_value'] if active is not None else source_value or '[rejected]'
+            revision_id = _insert_review_revision(
+                connection, request, entity_type, entity_id, field_name,
+                active['corrected_value'] if active is not None else source_value,
+                audit_value, evidence, 'rejected',
+                int(active['review_revision_id']) if active is not None else None,
+            )
+            verification_id = _insert_verification(
+                connection, request, state_field_name, 'rejected', revision_id
+            )
+            if request.evidence_id is not None:
+                _record_rejected_field_evidence(
+                    connection, request, experiment['paper_id'], entity_type, entity_id, field_name,
+                    request.evidence_id, verification_id,
+                )
+            _mark_missing(connection, request.experiment_id, state_field_name, 'rejected during human review', None)
+        elif request.decision == 'not_reported':
+            revision_id = _insert_review_revision(
+                connection, request, entity_type, entity_id, field_name,
+                active['corrected_value'] if active is not None else source_value,
+                active['corrected_value'] if active is not None else source_value or '[not reported]',
+                None, 'rejected', int(active['review_revision_id']) if active is not None else None,
+            )
+            _insert_verification(connection, request, state_field_name, 'rejected', revision_id)
+            _mark_missing(connection, request.experiment_id, state_field_name, 'not reported', None)
+        elif request.decision == 'unresolved':
+            revision_id = _insert_review_revision(
+                connection, request, entity_type, entity_id, field_name, source_value,
+                source_value or '[unresolved]', None, 'rejected', None,
+            )
+            _insert_verification(connection, request, state_field_name, 'ambiguous', revision_id)
+            _mark_missing(connection, request.experiment_id, state_field_name, request.decision.replace('_', ' '), None)
+        else:
+            if request.evidence_id is None:
+                raise ValueError('Evidence is required to flag a wrong arm')
+            evidence = _owned_evidence(
+                connection, request.experiment_id, experiment['paper_id'], request.evidence_id,
+                require_current_arm=False, entity_type=entity_type, entity_id=entity_id,
+            )
+            if evidence['experiment_id'] in (None, request.experiment_id):
+                raise ValueError('Wrong-arm evidence must be linked to another arm')
+            content = json.dumps({
+                'experiment_id': request.experiment_id, 'field_name': field_name,
+                'evidence_id': request.evidence_id, 'notes': request.reviewer_notes.strip(),
+            }, sort_keys=True)
+            content_sha256 = hashlib.sha256(content.encode()).hexdigest()
+            connection.execute(
+                """INSERT INTO import_review (
+                       paper_id, natural_key, arm_id, reason_code, review_status, review_tag,
+                       field_name, notes, evidence_ids_json, content_sha256
+                   ) VALUES (?, ?, ?, 'wrong_arm_evidence', 'conflict', 'Experiment link unclear',
+                             ?, ?, ?, ?)""",
+                (experiment['paper_id'], f'wrong-arm:{request.experiment_id}:{request.evidence_id}:{field_name}',
+                 request.experiment_id, field_name, request.reviewer_notes.strip(),
+                 json.dumps([request.evidence_id]), content_sha256),
+            )
+            revision_id = _insert_review_revision(
+                connection, request, entity_type, entity_id, field_name,
+                active['corrected_value'] if active is not None else source_value,
+                active['corrected_value'] if active is not None else source_value or '[wrong arm]',
+                evidence, 'rejected', int(active['review_revision_id']) if active is not None else None,
+                request.reviewer_notes,
+            )
+            _insert_verification(connection, request, state_field_name, 'conflict', revision_id)
+            _mark_missing(connection, request.experiment_id, state_field_name, 'evidence belongs to another arm', None)
+        status, nearest, comet = _recalculate(
+            connection, request.experiment_id, entity_type, entity_id
+        )
+        _verify_review_consistency(connection, request.experiment_id)
+        if connection.execute('PRAGMA foreign_key_check').fetchall():
+            raise ValueError('SQLite foreign-key check failed after decision')
+        connection.commit()
+    except BaseException:
+        if connection.in_transaction:
+            connection.rollback()
+        raise
+    finally:
+        connection.close()
+    return ReviewResult(request.decision, revision_id, status, nearest, comet)
+
+
+__all__ = [
+    'ArmWorkspace', 'DashboardMetrics', 'EvidenceExcerpt', 'OutcomeRow', 'PaperAccessLinks', 'PaperRowCounts', 'PaperSummary',
+    'ReviewArm', 'ReviewDecision', 'ReviewHistory', 'ReviewResult', 'WorkspaceField', 'WriteReadiness',
+    'apply_review_decision', 'authoritative_database_path', 'list_paper_summaries', 'list_review_arms',
+    'list_comet_gap_arms',
+    'load_arm_workspace', 'load_dashboard', 'paper_access_links', 'prepare_writes', 'review_backup_directory',
+]

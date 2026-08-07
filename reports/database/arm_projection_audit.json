@@ -1,0 +1,659 @@
+{
+  "database": "/private/tmp/ai-lnp-rebuild.AKB1f1/repaired-worktree.db",
+  "papers": {
+    "GP-002": {
+      "accounted_count": 6,
+      "duplicate_projection_count": 0,
+      "experiments": {
+        "GP-002-E01": {
+          "boundary_reason": "The healthy-mouse baseline is separately introduced and reported.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-002-E01",
+          "json_path": "$.experiments[0]",
+          "label": "mRNA-LNP transfection of healthy liver",
+          "paper_id": "GP-002",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-002:REV:GP-002-E01:F1",
+              "notes": "Unsupported graph relation evidence requires review.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "quarantined"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 1,
+              "record_id": "GP-002:ARM:GP-002-E01:F1"
+            }
+          ]
+        },
+        "GP-002-E02": {
+          "boundary_reason": "F3 severe fibrosis is an outcome-defined subgroup of the Mdr2-knockout experiment.",
+          "boundary_status": "inferred",
+          "disposition": "projected",
+          "experiment_id": "GP-002-E02",
+          "json_path": "$.experiments[1]",
+          "label": "mRNA-LNP transfection of fibrotic liver",
+          "paper_id": "GP-002",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-002:REV:GP-002-E02:F1",
+              "notes": "Unsupported graph relation evidence requires review.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "quarantined"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 2,
+              "record_id": "GP-002:ARM:GP-002-E02:F1"
+            }
+          ]
+        },
+        "GP-002-E03": {
+          "boundary_reason": "F4 cirrhosis is an outcome-defined subgroup of the Mdr2-knockout experiment.",
+          "boundary_status": "inferred",
+          "disposition": "projected",
+          "experiment_id": "GP-002-E03",
+          "json_path": "$.experiments[2]",
+          "label": "mRNA-LNP transfection of cirrhotic liver",
+          "paper_id": "GP-002",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-002:REV:GP-002-E03:F1",
+              "notes": "Unsupported graph relation evidence requires review.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "quarantined"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 3,
+              "record_id": "GP-002:ARM:GP-002-E03:F1"
+            }
+          ]
+        },
+        "GP-002-E04": {
+          "boundary_reason": "Only aggregate spontaneous-HCC expression reporting is available in the supplied clauses; a model-specific administration relation is not exactly co-supported.",
+          "boundary_status": "ambiguous",
+          "disposition": "projected",
+          "experiment_id": "GP-002-E04",
+          "json_path": "$.experiments[3]",
+          "label": "mRNA-LNP transfection of spontaneous hepatocellular carcinoma in situ",
+          "paper_id": "GP-002",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-002:REV:GP-002-E04:F1",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 4,
+              "record_id": "GP-002:ARM:GP-002-E04:F1"
+            }
+          ]
+        },
+        "GP-002-E05": {
+          "boundary_reason": "The orthotopic HuH-7 xenograft experiment, dosing, and tumor readouts are explicitly reported.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-002-E05",
+          "json_path": "$.experiments[4]",
+          "label": "mRNA-LNP delivery in primary liver cancer xenograft model",
+          "paper_id": "GP-002",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-002:REV:GP-002-E05:F1",
+              "notes": "Unsupported graph relation evidence requires review.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "quarantined"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 5,
+              "record_id": "GP-002:ARM:GP-002-E05:F1"
+            }
+          ]
+        },
+        "GP-002-E06": {
+          "boundary_reason": "The A549 and HCT116 xenograft groups and their shared mRNA-LNP administration are explicitly described; group-specific reporter outcomes are not supplied.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-002-E06",
+          "json_path": "$.experiments[5]",
+          "label": "mRNA-LNP delivery in secondary liver cancer xenograft model",
+          "paper_id": "GP-002",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-002:REV:GP-002-E06:F1",
+              "notes": "Unsupported graph relation evidence requires review.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "quarantined"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 6,
+              "record_id": "GP-002:ARM:GP-002-E06:F1"
+            }
+          ]
+        }
+      },
+      "graph_experiment_count": 6,
+      "projected_count": 6,
+      "sqlite_arm_count": 7,
+      "unexplained_experiment_ids": []
+    },
+    "GP-003": {
+      "accounted_count": 0,
+      "duplicate_projection_count": 0,
+      "experiments": {},
+      "graph_experiment_count": 0,
+      "projected_count": 0,
+      "sqlite_arm_count": 0,
+      "unexplained_experiment_ids": []
+    },
+    "GP-004": {
+      "accounted_count": 4,
+      "duplicate_projection_count": 0,
+      "experiments": {
+        "GP-004-E01": {
+          "boundary_reason": "This experiment is explicitly defined by a single intravenous Luc mRNA-LNP injection and a one-week expression time course.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-004-E01",
+          "json_path": "$.experiments[0]",
+          "label": "Luciferase mRNA-LNP expression kinetics after intravenous administration",
+          "paper_id": "GP-004",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-004:REV:GP-004-E01:ENT-FORM-01",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 8,
+              "record_id": "GP-004:ARM:GP-004-E01:ENT-FORM-01"
+            }
+          ]
+        },
+        "GP-004-E02": {
+          "boundary_reason": "This experiment uses HGF mRNA-LNP in a homeostatic context and measures EdU-defined proliferation.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-004-E02",
+          "json_path": "$.experiments[1]",
+          "label": "HGF mRNA-LNP induction of hepatocyte proliferation in homeostasis",
+          "paper_id": "GP-004",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-004:REV:GP-004-E02:ENT-FORM-01",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "missing_evidence_excerpt",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 9,
+              "record_id": "GP-004:ARM:GP-004-E02:ENT-FORM-01"
+            }
+          ]
+        },
+        "GP-004-E03": {
+          "boundary_reason": "The source explicitly distinguishes the chronic CDE diet-induced NAFLD mouse model from the acute acetaminophen model.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-004-E03",
+          "json_path": "$.experiments[2]",
+          "label": "Combined HGF and EGF mRNA-LNP in CDE diet-induced NAFLD",
+          "paper_id": "GP-004",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-004:REV:GP-004-E03:ENT-FORM-01",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 10,
+              "record_id": "GP-004:ARM:GP-004-E03:ENT-FORM-01"
+            }
+          ]
+        },
+        "GP-004-E04": {
+          "boundary_reason": "The abstract explicitly identifies an acute acetaminophen-induced liver injury mouse model as a separate therapeutic context.",
+          "boundary_status": "explicit",
+          "disposition": "incomplete",
+          "experiment_id": "GP-004-E04",
+          "json_path": "$.experiments[3]",
+          "label": "Combined HGF and EGF mRNA-LNP in acetaminophen-induced acute liver injury",
+          "paper_id": "GP-004",
+          "reason": "experiment_link_unclear",
+          "review_records": [
+            {
+              "natural_key": "GP-004:REV:GP-004-E04:UNLINKED",
+              "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
+              "reason_code": "experiment_link_unclear",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": []
+        }
+      },
+      "graph_experiment_count": 4,
+      "projected_count": 3,
+      "sqlite_arm_count": 4,
+      "unexplained_experiment_ids": []
+    },
+    "GP-005": {
+      "accounted_count": 3,
+      "duplicate_projection_count": 2,
+      "experiments": {
+        "GP-005-E01": {
+          "boundary_reason": "The approved E01 inventory groups the core LNP uptake/imaging work. The supplied clauses demonstrate several related but methodologically distinct substudies: in-vivo LNP1 intravital microscopy, in-vitro LNP1 exposure, and in-vivo LNP16/17 co-encapsulation/knockdown. They are separated by intervention entities and no in-vitro observation is asserted as an in-vivo outcome.",
+          "boundary_status": "ambiguous",
+          "disposition": "projected",
+          "experiment_id": "GP-005-E01",
+          "json_path": "$.experiments[0]",
+          "label": "LNP1 uptake/translation and co-encapsulated mRNA\u2013siRNA LNP studies",
+          "paper_id": "GP-005",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-005:REV:GP-005-E01:ENT-LNP1",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            },
+            {
+              "natural_key": "GP-005:REV:GP-005-E01:ENT-LNP17",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            },
+            {
+              "natural_key": "GP-005:REV:GP-005-E01:ENT-LNP16",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            },
+            {
+              "natural_key": "GP-005:REV:GP-005-E01:UNASSIGNED",
+              "notes": "Evidence is retained, but cannot be assigned to one formulation arm without inventing a link.",
+              "reason_code": "experiment_link_unclear",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 12,
+              "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP1"
+            },
+            {
+              "entity_id": 13,
+              "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP17"
+            },
+            {
+              "entity_id": 14,
+              "record_id": "GP-005:ARM:GP-005-E01:ENT-LNP16"
+            }
+          ]
+        },
+        "GP-005-E02": {
+          "boundary_reason": "The source explicitly introduces the modified-mRNA/alternative-ionizable-lipid comparison and reports translation outcomes in HeLa cells and macrophages.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-005-E02",
+          "json_path": "$.experiments[1]",
+          "label": "Alternative ionizable lipid and modified mRNA effects on EGFP translation",
+          "paper_id": "GP-005",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-005:REV:GP-005-E02:ENT-LNP3-7",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 15,
+              "record_id": "GP-005:ARM:GP-005-E02:ENT-LNP3-7"
+            }
+          ]
+        },
+        "GP-005-E03": {
+          "boundary_reason": "Only ploidy analysis and nuclear-staining assessment are supported by the supplied clauses. The inventory's total-RNA, total-protein, and ribosomal-protein characterization outcomes are not present in the source clauses.",
+          "boundary_status": "ambiguous",
+          "disposition": "incomplete",
+          "experiment_id": "GP-005-E03",
+          "json_path": "$.experiments[2]",
+          "label": "Ploidy analysis of selected cell types",
+          "paper_id": "GP-005",
+          "reason": "experiment_link_unclear",
+          "review_records": [
+            {
+              "natural_key": "GP-005:REV:GP-005-E03:UNLINKED",
+              "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
+              "reason_code": "experiment_link_unclear",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": []
+        }
+      },
+      "graph_experiment_count": 3,
+      "projected_count": 2,
+      "sqlite_arm_count": 5,
+      "unexplained_experiment_ids": []
+    },
+    "GP-006": {
+      "accounted_count": 1,
+      "duplicate_projection_count": 0,
+      "experiments": {
+        "GP-006-E01": {
+          "boundary_reason": "The experiment is explicitly defined by encapsulation of NSGHAsgRNA with Cas9 mRNA in MC3 LNP, intravenous dosing of NSG HemA mice, and subsequent FVIII, coagulation, on-target editing, and off-target measurements. Hydrodynamic injection and plasmid-only findings are distinct preliminary experiments and are excluded.",
+          "boundary_status": "explicit",
+          "disposition": "projected",
+          "experiment_id": "GP-006-E01",
+          "json_path": "$.experiments[0]",
+          "label": "In vivo CRISPR-Cas9 mRNA LNP gene editing of mutant F8 in NSG HemA mice",
+          "paper_id": "GP-006",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-006:REV:GP-006-E01:E_FORM_01",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 17,
+              "record_id": "GP-006:ARM:GP-006-E01:E_FORM_01"
+            }
+          ]
+        }
+      },
+      "graph_experiment_count": 1,
+      "projected_count": 1,
+      "sqlite_arm_count": 3,
+      "unexplained_experiment_ids": []
+    },
+    "GP-007": {
+      "accounted_count": 4,
+      "duplicate_projection_count": 0,
+      "experiments": {
+        "GP-007-E01": {
+          "boundary_reason": "The human-approved in-vivo boundary is directly supported by the explicit statement that ACT was explored in HIRI mice.",
+          "boundary_status": "explicit",
+          "disposition": "incomplete",
+          "experiment_id": "GP-007-E01",
+          "json_path": "$.experiments[0]",
+          "label": "ACT in-vivo HIRI experiment",
+          "paper_id": "GP-007",
+          "reason": "experiment_link_unclear",
+          "review_records": [
+            {
+              "natural_key": "GP-007:REV:GP-007-E01:UNLINKED",
+              "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
+              "reason_code": "experiment_link_unclear",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": []
+        },
+        "GP-007-E02": {
+          "boundary_reason": "The human-approved in-vitro boundary is directly supported by hypoxia-reoxygenation or lactate-stimulated LSECs.",
+          "boundary_status": "explicit",
+          "disposition": "incomplete",
+          "experiment_id": "GP-007-E02",
+          "json_path": "$.experiments[1]",
+          "label": "ACT in-vitro LSEC experiment",
+          "paper_id": "GP-007",
+          "reason": "experiment_link_unclear",
+          "review_records": [
+            {
+              "natural_key": "GP-007:REV:GP-007-E02:UNLINKED",
+              "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
+              "reason_code": "experiment_link_unclear",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": []
+        },
+        "GP-007-E03": {
+          "boundary_reason": "The boundary is directly supported by the explicitly reported Stab2-promoter AAV-mediated LSEC-specific Micu1-overexpression intervention.",
+          "boundary_status": "explicit",
+          "disposition": "incomplete",
+          "experiment_id": "GP-007-E03",
+          "json_path": "$.experiments[2]",
+          "label": "LSEC-specific Micu1-overexpression experiment",
+          "paper_id": "GP-007",
+          "reason": "experiment_link_unclear",
+          "review_records": [
+            {
+              "natural_key": "GP-007:REV:GP-007-E03:UNLINKED",
+              "notes": "Evidence is retained, but no explicit formulation-to-experiment relationship exists.",
+              "reason_code": "experiment_link_unclear",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": []
+        },
+        "GP-007-E04": {
+          "boundary_reason": "The human-approved Figure 7 combination-treatment boundary is explicit, but formulation characterization and biodistribution are supporting procedures that may not have been performed in the same therapeutic treatment cohort.",
+          "boundary_status": "ambiguous",
+          "disposition": "projected",
+          "experiment_id": "GP-007-E04",
+          "json_path": "$.experiments[3]",
+          "label": "ACT plus siMicu1-LNP experiment",
+          "paper_id": "GP-007",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-007:REV:GP-007-E04:ENT-F01",
+              "notes": "Unsupported graph relation evidence requires review.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "quarantined"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 20,
+              "record_id": "GP-007:ARM:GP-007-E04:ENT-F01"
+            }
+          ]
+        }
+      },
+      "graph_experiment_count": 4,
+      "projected_count": 1,
+      "sqlite_arm_count": 2,
+      "unexplained_experiment_ids": []
+    },
+    "GP-008": {
+      "accounted_count": 1,
+      "duplicate_projection_count": 2,
+      "experiments": {
+        "GP-008-E01": {
+          "boundary_reason": "The approved inventory designates one experiment, but the retrieved text reports multiple assay-level activities using FAPCAR, GFP, luciferase, and ZsGreen payloads. They are retained as one approved umbrella program while formulation-specific claims are not transferred across payloads.",
+          "boundary_status": "ambiguous",
+          "disposition": "projected",
+          "experiment_id": "GP-008-E01",
+          "json_path": "$.experiments[0]",
+          "label": "\u03b1CD163/LNP-FAPCAR in situ CAR-M treatment for liver fibrosis",
+          "paper_id": "GP-008",
+          "reason": null,
+          "review_records": [
+            {
+              "natural_key": "GP-008:REV:GP-008-E01:F1",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "missing_dose",
+              "review_status": "incomplete"
+            },
+            {
+              "natural_key": "GP-008:REV:GP-008-E01:F4",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            },
+            {
+              "natural_key": "GP-008:REV:GP-008-E01:F5",
+              "notes": "Arm is retained but is not complete enough for training.",
+              "reason_code": "target_cell_automatic_resolution",
+              "review_status": "blocked"
+            },
+            {
+              "natural_key": "GP-008:REV:GP-008-E01:UNASSIGNED",
+              "notes": "Evidence is retained, but cannot be assigned to one formulation arm without inventing a link.",
+              "reason_code": "experiment_link_unclear",
+              "review_status": "incomplete"
+            }
+          ],
+          "sqlite_arms": [
+            {
+              "entity_id": 22,
+              "record_id": "GP-008:ARM:GP-008-E01:F1"
+            },
+            {
+              "entity_id": 23,
+              "record_id": "GP-008:ARM:GP-008-E01:F4"
+            },
+            {
+              "entity_id": 24,
+              "record_id": "GP-008:ARM:GP-008-E01:F5"
+            }
+          ]
+        }
+      },
+      "graph_experiment_count": 1,
+      "projected_count": 1,
+      "sqlite_arm_count": 5,
+      "unexplained_experiment_ids": []
+    },
+    "GP-009": {
+      "accounted_count": 7,
+      "duplicate_projection_count": 0,
+      "experiments": {
+        "E1": {
+          "boundary_reason": "The source explicitly defines a radiolabeled in vivo comparison, intravenous administration to C57BL/6 mice, four-hour harvest, and gamma-counting biodistribution endpoints.",
+          "boundary_status": "explicit",
+          "disposition": "screening_only",
+          "experiment_id": "E1",
+          "json_path": "$.experiments[0]",
+          "label": "Radiolabeled CD47/LNP-mRNA biodistribution versus unmodified LNP-mRNA",
+          "paper_id": "GP-009",
+          "reason": "paper_is_screening_only",
+          "review_records": [],
+          "sqlite_arms": []
+        },
+        "E2": {
+          "boundary_reason": "This is the distinct 10-\u03bcg anti-CD31 luciferase formulation comparison using tissue IVIS imaging and lung luciferase activity.",
+          "boundary_status": "explicit",
+          "disposition": "screening_only",
+          "experiment_id": "E2",
+          "json_path": "$.experiments[1]",
+          "label": "Anti-CD31-targeted luciferase LNP tissue-expression comparison",
+          "paper_id": "GP-009",
+          "reason": "paper_is_screening_only",
+          "review_records": [],
+          "sqlite_arms": []
+        },
+        "E3": {
+          "boundary_reason": "This is a separate 1-\u03bcg, 24-hour flow-cytometry experiment in lung CD45-negative CD31-positive endothelial cells.",
+          "boundary_status": "explicit",
+          "disposition": "screening_only",
+          "experiment_id": "E3",
+          "json_path": "$.experiments[2]",
+          "label": "Anti-CD31-targeted ZsGreen delivery to lung endothelial cells",
+          "paper_id": "GP-009",
+          "reason": "paper_is_screening_only",
+          "review_records": [],
+          "sqlite_arms": []
+        },
+        "E5": {
+          "boundary_reason": "This is a distinct 1-\u03bcg, 24-hour flow-cytometry experiment in CD4-positive T cells.",
+          "boundary_status": "explicit",
+          "disposition": "screening_only",
+          "experiment_id": "E5",
+          "json_path": "$.experiments[3]",
+          "label": "Anti-CD4-targeted ZsGreen delivery to splenic CD4-positive T cells",
+          "paper_id": "GP-009",
+          "reason": "paper_is_screening_only",
+          "review_records": [],
+          "sqlite_arms": []
+        },
+        "E6": {
+          "boundary_reason": "The source explicitly defines a 1-\u03bcg luciferase imaging experiment assessing liver and whole-femur bone marrow.",
+          "boundary_status": "explicit",
+          "disposition": "screening_only",
+          "experiment_id": "E6",
+          "json_path": "$.experiments[4]",
+          "label": "Anti-CD117-targeted luciferase LNP liver and bone-marrow imaging",
+          "paper_id": "GP-009",
+          "reason": "paper_is_screening_only",
+          "review_records": [],
+          "sqlite_arms": []
+        },
+        "E7": {
+          "boundary_reason": "This is a distinct Ai6 Cre-reporter experiment measured at 24 hours by bone-marrow flow cytometry.",
+          "boundary_status": "explicit",
+          "disposition": "screening_only",
+          "experiment_id": "E7",
+          "json_path": "$.experiments[5]",
+          "label": "Anti-CD117-targeted Cre delivery to hematopoietic stem cells in Ai6 mice",
+          "paper_id": "GP-009",
+          "reason": "paper_is_screening_only",
+          "review_records": [],
+          "sqlite_arms": []
+        },
+        "E8": {
+          "boundary_reason": "This is an in vitro normal-mouse-serum incubation followed by protein-corona isolation and LC-MS analysis, separate from the in vivo biodistribution studies.",
+          "boundary_status": "explicit",
+          "disposition": "screening_only",
+          "experiment_id": "E8",
+          "json_path": "$.experiments[6]",
+          "label": "Mouse-serum protein-corona LC-MS comparison",
+          "paper_id": "GP-009",
+          "reason": "paper_is_screening_only",
+          "review_records": [],
+          "sqlite_arms": []
+        }
+      },
+      "graph_experiment_count": 7,
+      "projected_count": 0,
+      "sqlite_arm_count": 0,
+      "unexplained_experiment_ids": []
+    }
+  },
+  "root": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day1-current-corpus",
+  "summary": {
+    "accounted_experiments": 26,
+    "graph_experiments": 26,
+    "multi_arm_projection_extras": 4,
+    "projected_experiments": 14,
+    "unexplained_experiments": 0
+  }
+}

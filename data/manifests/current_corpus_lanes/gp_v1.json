@@ -1,0 +1,193 @@
+{
+  "entries": [
+    {
+      "paper_id": "GP-001",
+      "title": null,
+      "doi": "10.1080/10717544.2026.2682976",
+      "pmid": "42249613",
+      "pmcid": "PMC13244520",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-001.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived packet retained for screening provenance only."}],
+      "candidate_artifacts": [],
+      "pipeline_lineage": [],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "No artifact is eligible because the screening ledger excludes this non-RNA-payload paper.",
+      "import_status": "screening_only",
+      "rerun_status": "none",
+      "rerun_reason": null,
+      "import_artifact": null
+    },
+    {
+      "paper_id": "GP-002",
+      "title": null,
+      "doi": "10.1016/j.omtn.2026.102989",
+      "pmid": "42440881",
+      "pmcid": "PMC13334401",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-002.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived evidence packet."}],
+      "candidate_artifacts": [{"path": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json", "artifact_kind": "accepted_graph", "access_status": "available", "selection_status": "selected", "sha256": "ae26ecbed9127a17b94022e1dac45fd1069ea14106f609f0ce3e2ede679a1548", "pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "validation_status": "accepted_zero_audit_findings", "notes": null}],
+      "pipeline_lineage": [{"pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json", "status": "selected", "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-002/final_audit.json", "notes": "Compact routing retains two selective gaps."}],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected the evidence-linked accepted full-text graph with zero final-audit findings; unresolved compact gaps remain selective review work.",
+      "import_status": "needs_review",
+      "rerun_status": "selective",
+      "rerun_reason": "The compact routing artifact marks two first-call-required gaps; import only the accepted full-text graph and route those gaps for selective Day 2-3 handling.",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-002/accepted_graph.json"
+    },
+    {
+      "paper_id": "GP-003",
+      "title": null,
+      "doi": "10.34133/research.1288",
+      "pmid": "42164756",
+      "pmcid": "PMC13184955",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-003.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived packet retained for screening provenance only."}],
+      "candidate_artifacts": [],
+      "pipeline_lineage": [],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "No artifact is eligible because the screening ledger identifies this publication as a review article.",
+      "import_status": "screening_only",
+      "rerun_status": "none",
+      "rerun_reason": null,
+      "import_artifact": null
+    },
+    {
+      "paper_id": "GP-004",
+      "title": null,
+      "doi": "10.1038/s41467-021-20903-3",
+      "pmid": "33504774",
+      "pmcid": "PMC7840919",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-004.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived evidence packet."}],
+      "candidate_artifacts": [{"path": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json", "artifact_kind": "accepted_graph", "access_status": "available", "selection_status": "selected", "sha256": "39fab437cd3467fe48a3e990c3c17040d113915c00581f3b212b01da31d866d2", "pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "validation_status": "accepted_zero_audit_findings", "notes": null}],
+      "pipeline_lineage": [{"pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json", "status": "selected", "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-004/final_audit.json", "notes": "Full-text-with-supplement graph; compact routing retains bounded gaps."}],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked full-text-with-supplement graph; six missing-record-text gaps and formulation context remain review-bound.",
+      "import_status": "needs_review",
+      "rerun_status": "selective",
+      "rerun_reason": "The selected accepted graph is supported, but compact routing records six missing-record-text gaps and incomplete formulation context; do not broaden import beyond the accepted graph.",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-004/accepted_graph.json"
+    },
+    {
+      "paper_id": "GP-005",
+      "title": null,
+      "doi": "10.1002/advs.202409729",
+      "pmid": "39792811",
+      "pmcid": "PMC11884593",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-005.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived evidence packet."}],
+      "candidate_artifacts": [{"path": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json", "artifact_kind": "accepted_graph", "access_status": "available", "selection_status": "selected", "sha256": "a999f6d38d73aea10f6d2232c368cbed5bbaab579165ff1b30e27ed2d3e3ce4b", "pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "validation_status": "accepted_zero_audit_findings", "notes": null}],
+      "pipeline_lineage": [{"pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json", "status": "selected", "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-005/final_audit.json", "notes": "Compact routing retains one vision gap and endpoint adjudication."}],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked graph as the strongest validated merge; the remaining vision gap and endpoint adjudication prevent automatic readiness.",
+      "import_status": "needs_review",
+      "rerun_status": "selective",
+      "rerun_reason": "The accepted graph is the strongest validated merge, while compact routing retains one selective-vision gap and unresolved endpoint adjudication.",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-005/accepted_graph.json"
+    },
+    {
+      "paper_id": "GP-006",
+      "title": null,
+      "doi": "10.1016/j.omtn.2024.102383",
+      "pmid": "39640016",
+      "pmcid": "PMC11617921",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-006.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived evidence packet."}],
+      "candidate_artifacts": [{"path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json", "artifact_kind": "accepted_graph", "access_status": "available", "selection_status": "selected", "sha256": "a2f63ee4a98314668a1452806a329e96011f3c3dfae086bdc139ce59a3a08c96", "pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "validation_status": "accepted_zero_audit_findings", "notes": null}],
+      "pipeline_lineage": [{"pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json", "status": "selected", "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-006/final_audit.json", "notes": "Compact routing retains vision and missing-record-text gaps."}],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked graph with zero final-audit findings; supplemental, vision, and missing-record-text gaps remain selective work.",
+      "import_status": "needs_review",
+      "rerun_status": "selective",
+      "rerun_reason": "The accepted graph is importable as supported evidence, but compact routing retains six selective-vision and fourteen missing-record-text gaps, including supplemental evidence.",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-006/accepted_graph.json"
+    },
+    {
+      "paper_id": "GP-007",
+      "title": null,
+      "doi": "10.7150/ijbs.126332",
+      "pmid": "42088421",
+      "pmcid": "PMC13137855",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-007.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived evidence packet."}],
+      "candidate_artifacts": [{"path": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json", "artifact_kind": "accepted_graph", "access_status": "available", "selection_status": "selected", "sha256": "28ecf42ef8b06e160ee199f6a80a36b9c57c94af9e6be6cceab6267759763142", "pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "validation_status": "accepted_zero_audit_findings", "notes": null}],
+      "pipeline_lineage": [{"pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json", "status": "selected", "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-007/final_audit.json", "notes": "Full-text-with-supplement graph; human review items remain."}],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked full-text-with-supplement graph; no broader artifact is needed for the Day 1 routing decision.",
+      "import_status": "needs_review",
+      "rerun_status": "none",
+      "rerun_reason": null,
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-007/accepted_graph.json"
+    },
+    {
+      "paper_id": "GP-008",
+      "title": null,
+      "doi": "10.1073/pnas.2534673123",
+      "pmid": "42213756",
+      "pmcid": "PMC13229182",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-008.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived evidence packet."}],
+      "candidate_artifacts": [{"path": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json", "artifact_kind": "accepted_graph", "access_status": "available", "selection_status": "selected", "sha256": "5c8ccb74f0d3c95038d9314d70c7e64746223a37a478aba9a9a7d4f2693b506e", "pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "validation_status": "accepted_zero_audit_findings", "notes": null}],
+      "pipeline_lineage": [{"pipeline_name": "g1_fulltext_rag", "pipeline_version": null, "artifact_path": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json", "status": "selected", "validation_path": "data/staging/extraction/g1_fulltext_rag/GP-008/final_audit.json", "notes": "Manual screening review and compact gaps remain."}],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "Selected the accepted evidence-linked graph, but retained manual screening review and bounded vision/text gaps rather than claiming automatic readiness.",
+      "import_status": "needs_review",
+      "rerun_status": "selective",
+      "rerun_reason": "The screening ledger retains manual review and compact routing retains seven selective-vision plus three missing-record-text gaps; import only the accepted graph pending review.",
+      "import_artifact": "data/staging/extraction/g1_fulltext_rag/GP-008/accepted_graph.json"
+    },
+    {
+      "paper_id": "GP-009",
+      "title": null,
+      "doi": "10.1016/j.ymthe.2025.03.018",
+      "pmid": "40087866",
+      "pmcid": "PMC12265960",
+      "publication_metadata": {"citation": null, "journal": null, "publication_year": null, "publication_date": null},
+      "source_access_records": [{"path": "data/staging/rag/compact_packets_v1/GP-009.json", "source_kind": "compact_packet", "access_status": "available", "sha256": null, "notes": "Local source-derived packet retained for screening provenance only."}],
+      "candidate_artifacts": [],
+      "pipeline_lineage": [],
+      "metadata_provenance": [
+        {"fields": ["doi", "pmid", "pmcid"], "source": "data/manifests/gold_source_manifest_v1.json", "method": "local_artifact"},
+        {"fields": ["title", "publication_metadata"], "source": null, "method": "unresolved"}
+      ],
+      "last_checked": "2026-08-06",
+      "strongest_artifact_rationale": "No artifact is eligible because the screening ledger shows HSC refers to out-of-scope hematopoietic stem cells.",
+      "import_status": "screening_only",
+      "rerun_status": "none",
+      "rerun_reason": null,
+      "import_artifact": null
+    }
+  ]
+}

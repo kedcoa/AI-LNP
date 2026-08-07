@@ -1,0 +1,815 @@
+{
+  "checks": {
+    "approved_completed_map_artifacts": 3,
+    "expected_registered_source_artifacts": 201,
+    "forbidden_general_app_human_tags": 0,
+    "foreign_key_violations": 0,
+    "integrity_check": "ok",
+    "manifest_available_hashed_artifacts": 198,
+    "manifest_contributor_occurrences": 200,
+    "manifest_missing_or_unhashed_artifacts": 2,
+    "new_paid_rerun_calls": 0,
+    "registered_source_artifacts": 201,
+    "reused_successful_exact_hash_outputs": 3,
+    "silent_evidence_omissions": 0,
+    "silent_fact_omissions": 0,
+    "source_artifact_accounting_matches": true,
+    "source_fact_dispositions": {
+      "projected": 103,
+      "quarantined": 15183,
+      "unresolved": 30652
+    }
+  },
+  "counts": {
+    "almost_comet_ready_arms": 4,
+    "canonical_facts": 1823,
+    "comet_ready_arms": 4,
+    "complete_formulations": 21,
+    "components": 115,
+    "evidence_records": 518,
+    "experimental_arms": 48,
+    "general_use_ready_arms": 38,
+    "human_adjudication_items": 0,
+    "incomplete_formulations": 7,
+    "named_formulations": 28,
+    "nearest_neighbor_ready_arms": 32,
+    "outcomes": 114,
+    "papers": 14,
+    "source_evidence_occurrences": 812,
+    "source_fact_occurrences": 45938,
+    "unique_chemical_formulations": 17,
+    "unresolved_automatic_items": 24,
+    "unresolved_review_items": 24
+  },
+  "database": {
+    "path": "/Users/renemilywei/Desktop/AI-LNP/data/curated/lnp_evidence.db",
+    "schema_versions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "sha256": "d183c0065126fc2e14e7dcc9a07d9be75b822b0a679bc4aa8e40d44a01064725"
+  },
+  "definitions": {
+    "almost_comet_ready_arms": "Evidence-backed, non-conflict arms failing COMET v3 on only one to three fields.",
+    "canonical_facts": "Distinct normalized entity fields with at least one evidence link.",
+    "comet_ready_arms": "Arms passing the stricter COMET eligibility rules.",
+    "complete_formulations": "Named formulations with all four core LNP roles and a supported amount for each core component or an explicit LNP molar ratio.",
+    "components": "Deduplicated canonical chemical-component rows, including targeting and other formulation constituents.",
+    "evidence_records": "Deduplicated canonical evidence records.",
+    "experimental_arms": "Canonical experiment/arm rows after reconciliation and deduplication.",
+    "general_use_ready_arms": "Complete canonical arms with accepted direct evidence or accepted evidence linked through arm or outcome fields.",
+    "human_adjudication_items": "Open scientific conflicts that require a human scientific decision.",
+    "incomplete_formulations": "Named formulation rows that do not meet the complete-formulation definition.",
+    "named_formulations": "Canonical formulation rows with a non-empty reported name.",
+    "nearest_neighbor_ready_arms": "Arms passing the fixed nearest-neighbor eligibility rules.",
+    "outcomes": "Canonical outcome rows linked to experimental arms.",
+    "papers": "All manifest paper dispositions, including screening-only papers.",
+    "source_evidence_occurrences": "Imported evidence source occurrences before canonical evidence deduplication.",
+    "source_fact_occurrences": "Immutable labeled facts retained from every fact-producing source artifact; repeated source occurrences remain separate.",
+    "unique_chemical_formulations": "Distinct component-and-amount fingerprints among formulation rows that have component identities.",
+    "unresolved_automatic_items": "Open relationship or normalization items for automatic repair; these are not a general-use human gate.",
+    "unresolved_review_items": "Visible relationship, normalization, or conflict items; ordinary missing fields are reported separately as readiness blockers."
+  },
+  "eligibility": {
+    "blocking_reasons": {
+      "accepted_evidence": 6,
+      "assay": 9,
+      "biological_model": 7,
+      "coherent_outcome": 40,
+      "delivery_destination": 6,
+      "dose": 4,
+      "dose_unit": 2,
+      "in_vitro_in_vivo": 18,
+      "lnp_molar_ratio": 10,
+      "manually_verified": 40,
+      "normalization_basis": 37,
+      "outcome": 6,
+      "outcome_unit": 29,
+      "payload_encoded_product_or_molecular_target": 2,
+      "route": 4,
+      "species": 2,
+      "timepoint": 2
+    },
+    "rules_version": "working-evidence-v3"
+  },
+  "formulations": [
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "9055c5a8bf791847faf2eeb5b1568b0f15f4a8816012a71b6e4ea165a941d2e8",
+      "formulation_id": 1,
+      "name": "SM-102 mRNA-LNPs"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "77f8bc7a837e98b89d564de2abc7675f81fdd9260e0d943051753bfea971d71a",
+      "formulation_id": 2,
+      "name": "mRNA-LNP"
+    },
+    {
+      "complete": false,
+      "component_count": 4,
+      "composition_fingerprint": "85e3d236f7d84e2503a4fd40ac45c96ca66a8cc72d562d836be06350a0c39443",
+      "formulation_id": 3,
+      "name": "LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "cbc522d7e4358d4ea71adbdc8f3531912176db26df5dc65be14dc7189eab507a",
+      "formulation_id": 4,
+      "name": "Egfp mRNA\u2010LNP (LNP1)"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "cbc522d7e4358d4ea71adbdc8f3531912176db26df5dc65be14dc7189eab507a",
+      "formulation_id": 5,
+      "name": "LNP16"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "cbc522d7e4358d4ea71adbdc8f3531912176db26df5dc65be14dc7189eab507a",
+      "formulation_id": 6,
+      "name": "LNP17"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "cbc522d7e4358d4ea71adbdc8f3531912176db26df5dc65be14dc7189eab507a",
+      "formulation_id": 7,
+      "name": "LNP3"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "9055c5a8bf791847faf2eeb5b1568b0f15f4a8816012a71b6e4ea165a941d2e8",
+      "formulation_id": 8,
+      "name": "LNP4"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "9055c5a8bf791847faf2eeb5b1568b0f15f4a8816012a71b6e4ea165a941d2e8",
+      "formulation_id": 9,
+      "name": "LNP5"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "cbc522d7e4358d4ea71adbdc8f3531912176db26df5dc65be14dc7189eab507a",
+      "formulation_id": 10,
+      "name": "LNP6"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "9055c5a8bf791847faf2eeb5b1568b0f15f4a8816012a71b6e4ea165a941d2e8",
+      "formulation_id": 11,
+      "name": "LNP7"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "693a04eb0b32e3dca33042e2f4e76f25e0d692a5e046d53df6146cd11f6e52b4",
+      "formulation_id": 12,
+      "name": "MC3 LNP"
+    },
+    {
+      "complete": false,
+      "component_count": 3,
+      "composition_fingerprint": "0a6e4f248bd3a9fad127d7f93473becf5a22b7ee3d023ea411d47ba8d7b274dc",
+      "formulation_id": 13,
+      "name": "LNPs-siMicu1"
+    },
+    {
+      "complete": true,
+      "component_count": 7,
+      "composition_fingerprint": "716442b66d9662a97923c455a8f527c6004c588534ddab2f8a6d3b16a2cc5c49",
+      "formulation_id": 14,
+      "name": "\u03b1CD163/LNP-FAPCAR"
+    },
+    {
+      "complete": false,
+      "component_count": 0,
+      "composition_fingerprint": null,
+      "formulation_id": 15,
+      "name": "LNP-FAPCAR"
+    },
+    {
+      "complete": true,
+      "component_count": 7,
+      "composition_fingerprint": "716442b66d9662a97923c455a8f527c6004c588534ddab2f8a6d3b16a2cc5c49",
+      "formulation_id": 16,
+      "name": "\u03b1CD163/LNP-Luc"
+    },
+    {
+      "complete": true,
+      "component_count": 7,
+      "composition_fingerprint": "716442b66d9662a97923c455a8f527c6004c588534ddab2f8a6d3b16a2cc5c49",
+      "formulation_id": 17,
+      "name": "\u03b1CD163/LNP-ZsGreen"
+    },
+    {
+      "complete": false,
+      "component_count": 5,
+      "composition_fingerprint": "4965f0919e4f3a507e5f2783c28485dbfb000f473e1ba94b886bf1c8d9b24da8",
+      "formulation_id": 18,
+      "name": "LNP(DSPC)/DX25"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "ba8f821334fcfc8634d9580cf1dd0ad9bd45fe02f10cec89edbcd17b17c1a514",
+      "formulation_id": 19,
+      "name": "MC3 LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "6f5078c7565b6a40c760845fafab82b68d634d1eaf99c573ee13525407c192c6",
+      "formulation_id": 20,
+      "name": "cKK-E12 LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 6,
+      "composition_fingerprint": "a1c3d2cb4c13afa2b02b20584aada28c14308c02bcf65333571d0d0292e68c62",
+      "formulation_id": 21,
+      "name": "AA-T3A-C12 lipid nanoparticle (LNP)"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "ba8f821334fcfc8634d9580cf1dd0ad9bd45fe02f10cec89edbcd17b17c1a514",
+      "formulation_id": 22,
+      "name": "MC3 LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "425c5cd4e47b47ea6005fe0b5af93a1c25d3c8c87e7813f87e548cab8792a807",
+      "formulation_id": 23,
+      "name": "mRNA-loaded ionizable LNP"
+    },
+    {
+      "complete": false,
+      "component_count": 4,
+      "composition_fingerprint": "3d820fc3940d926d85dd079e27ce8c02df3c1de381325c8103c909b3b1cebeab",
+      "formulation_id": 24,
+      "name": "241C10 to 246C10 ionizable-lipid LNPs"
+    },
+    {
+      "complete": false,
+      "component_count": 2,
+      "composition_fingerprint": "7b7a0a7512113db91ef7eb7cea957ca23f4ac0e5388576c49a68fa7e98907cc1",
+      "formulation_id": 25,
+      "name": "PEG-lipid-tuned mCre-loaded LNP"
+    },
+    {
+      "complete": false,
+      "component_count": 2,
+      "composition_fingerprint": "c63682d8dfe5bb38b4d286b2ef3508b04e8f06a657f8d309ebc6c49c75a98e98",
+      "formulation_id": 26,
+      "name": "Mannose-PEG-lipid-incorporated LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "f46166dff50677598a1a35ca689349c5aa79cd3b88e933c42f9d8b64153b2b8c",
+      "formulation_id": 27,
+      "name": "siRNA-loaded ionizable LNP"
+    },
+    {
+      "complete": true,
+      "component_count": 4,
+      "composition_fingerprint": "276898a44137f605d76219c4630267a28647dae4a74b97e139c5d180a3e8958b",
+      "formulation_id": 28,
+      "name": "KL-52-containing lipid nanoparticle (LNP)"
+    }
+  ],
+  "manifest": {
+    "path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day1-current-corpus/config/database/current_corpus_v1.json",
+    "registered_artifact_count": 201,
+    "sha256": "2559a0498a238bdc8cce8b0324ae0e350b284579e46679b3d6ea0290a07be459"
+  },
+  "per_paper": [
+    {
+      "arms": 0,
+      "canonical_evidence": 0,
+      "canonical_facts": 0,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {},
+      "evidence_occurrences": 0,
+      "named_formulations": 0,
+      "nearest_neighbor_ready_arms": 0,
+      "outcomes": 0,
+      "paper_id": "GP-001",
+      "source_facts": 0,
+      "unresolved_items": 0,
+      "verification_status_counts": {}
+    },
+    {
+      "arms": 6,
+      "canonical_evidence": 67,
+      "canonical_facts": 126,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "accepted_evidence": 4,
+        "assay": 5,
+        "coherent_outcome": 4,
+        "in_vitro_in_vivo": 10,
+        "manually_verified": 5,
+        "normalization_basis": 3,
+        "outcome": 4,
+        "outcome_unit": 3
+      },
+      "evidence_occurrences": 71,
+      "named_formulations": 1,
+      "nearest_neighbor_ready_arms": 1,
+      "outcomes": 7,
+      "paper_id": "GP-002",
+      "source_facts": 231,
+      "unresolved_items": 1,
+      "verification_status_counts": {
+        "automatically_validated": 5,
+        "manually_verified": 1
+      }
+    },
+    {
+      "arms": 0,
+      "canonical_evidence": 0,
+      "canonical_facts": 0,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {},
+      "evidence_occurrences": 0,
+      "named_formulations": 0,
+      "nearest_neighbor_ready_arms": 0,
+      "outcomes": 0,
+      "paper_id": "GP-003",
+      "source_facts": 0,
+      "unresolved_items": 0,
+      "verification_status_counts": {}
+    },
+    {
+      "arms": 4,
+      "canonical_evidence": 55,
+      "canonical_facts": 107,
+      "comet_ready_arms": 1,
+      "eligibility_blocking_reasons": {
+        "biological_model": 1,
+        "coherent_outcome": 3,
+        "in_vitro_in_vivo": 6,
+        "manually_verified": 3,
+        "normalization_basis": 3,
+        "outcome_unit": 2
+      },
+      "evidence_occurrences": 59,
+      "named_formulations": 1,
+      "nearest_neighbor_ready_arms": 1,
+      "outcomes": 9,
+      "paper_id": "GP-004",
+      "source_facts": 3295,
+      "unresolved_items": 1,
+      "verification_status_counts": {
+        "automatically_validated": 3,
+        "manually_verified": 1
+      }
+    },
+    {
+      "arms": 8,
+      "canonical_evidence": 42,
+      "canonical_facts": 384,
+      "comet_ready_arms": 1,
+      "eligibility_blocking_reasons": {
+        "biological_model": 5,
+        "coherent_outcome": 7,
+        "manually_verified": 7,
+        "normalization_basis": 7,
+        "outcome_unit": 7
+      },
+      "evidence_occurrences": 53,
+      "named_formulations": 9,
+      "nearest_neighbor_ready_arms": 8,
+      "outcomes": 16,
+      "paper_id": "GP-005",
+      "source_facts": 201,
+      "unresolved_items": 3,
+      "verification_status_counts": {
+        "automatically_validated": 7,
+        "manually_verified": 1
+      }
+    },
+    {
+      "arms": 2,
+      "canonical_evidence": 23,
+      "canonical_facts": 108,
+      "comet_ready_arms": 2,
+      "eligibility_blocking_reasons": {},
+      "evidence_occurrences": 30,
+      "named_formulations": 1,
+      "nearest_neighbor_ready_arms": 2,
+      "outcomes": 10,
+      "paper_id": "GP-006",
+      "source_facts": 6225,
+      "unresolved_items": 0,
+      "verification_status_counts": {
+        "manually_verified": 2
+      }
+    },
+    {
+      "arms": 1,
+      "canonical_evidence": 30,
+      "canonical_facts": 57,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "coherent_outcome": 1,
+        "lnp_molar_ratio": 2
+      },
+      "evidence_occurrences": 37,
+      "named_formulations": 1,
+      "nearest_neighbor_ready_arms": 0,
+      "outcomes": 8,
+      "paper_id": "GP-007",
+      "source_facts": 179,
+      "unresolved_items": 4,
+      "verification_status_counts": {
+        "manually_verified": 1
+      }
+    },
+    {
+      "arms": 5,
+      "canonical_evidence": 54,
+      "canonical_facts": 194,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "assay": 1,
+        "biological_model": 1,
+        "coherent_outcome": 4,
+        "delivery_destination": 2,
+        "dose": 4,
+        "dose_unit": 2,
+        "in_vitro_in_vivo": 2,
+        "manually_verified": 3,
+        "normalization_basis": 3,
+        "outcome_unit": 4,
+        "route": 2,
+        "species": 2,
+        "timepoint": 2
+      },
+      "evidence_occurrences": 47,
+      "named_formulations": 4,
+      "nearest_neighbor_ready_arms": 3,
+      "outcomes": 7,
+      "paper_id": "GP-008",
+      "source_facts": 18266,
+      "unresolved_items": 1,
+      "verification_status_counts": {
+        "automatically_validated": 3,
+        "manually_verified": 2
+      }
+    },
+    {
+      "arms": 0,
+      "canonical_evidence": 0,
+      "canonical_facts": 0,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {},
+      "evidence_occurrences": 0,
+      "named_formulations": 0,
+      "nearest_neighbor_ready_arms": 0,
+      "outcomes": 0,
+      "paper_id": "GP-009",
+      "source_facts": 0,
+      "unresolved_items": 0,
+      "verification_status_counts": {}
+    },
+    {
+      "arms": 1,
+      "canonical_evidence": 11,
+      "canonical_facts": 32,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "assay": 1,
+        "coherent_outcome": 1,
+        "delivery_destination": 2,
+        "lnp_molar_ratio": 2,
+        "manually_verified": 1,
+        "normalization_basis": 1,
+        "route": 2
+      },
+      "evidence_occurrences": 44,
+      "named_formulations": 1,
+      "nearest_neighbor_ready_arms": 0,
+      "outcomes": 1,
+      "paper_id": "NP-001",
+      "source_facts": 389,
+      "unresolved_items": 4,
+      "verification_status_counts": {
+        "automatically_validated": 1
+      }
+    },
+    {
+      "arms": 6,
+      "canonical_evidence": 76,
+      "canonical_facts": 181,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "coherent_outcome": 6,
+        "manually_verified": 6,
+        "normalization_basis": 6,
+        "outcome_unit": 6,
+        "payload_encoded_product_or_molecular_target": 2
+      },
+      "evidence_occurrences": 311,
+      "named_formulations": 2,
+      "nearest_neighbor_ready_arms": 6,
+      "outcomes": 13,
+      "paper_id": "NP-002",
+      "source_facts": 525,
+      "unresolved_items": 0,
+      "verification_status_counts": {
+        "automatically_validated": 6
+      }
+    },
+    {
+      "arms": 5,
+      "canonical_evidence": 58,
+      "canonical_facts": 208,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "coherent_outcome": 5,
+        "manually_verified": 5,
+        "normalization_basis": 5,
+        "outcome_unit": 1
+      },
+      "evidence_occurrences": 58,
+      "named_formulations": 2,
+      "nearest_neighbor_ready_arms": 5,
+      "outcomes": 11,
+      "paper_id": "PILOT-001",
+      "source_facts": 5545,
+      "unresolved_items": 3,
+      "verification_status_counts": {
+        "automatically_validated": 5
+      }
+    },
+    {
+      "arms": 5,
+      "canonical_evidence": 48,
+      "canonical_facts": 260,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "assay": 1,
+        "coherent_outcome": 5,
+        "delivery_destination": 2,
+        "lnp_molar_ratio": 6,
+        "manually_verified": 5,
+        "normalization_basis": 5,
+        "outcome_unit": 2
+      },
+      "evidence_occurrences": 48,
+      "named_formulations": 5,
+      "nearest_neighbor_ready_arms": 2,
+      "outcomes": 18,
+      "paper_id": "PILOT-002",
+      "source_facts": 5597,
+      "unresolved_items": 3,
+      "verification_status_counts": {
+        "automatically_validated": 5
+      }
+    },
+    {
+      "arms": 5,
+      "canonical_evidence": 54,
+      "canonical_facts": 166,
+      "comet_ready_arms": 0,
+      "eligibility_blocking_reasons": {
+        "accepted_evidence": 2,
+        "assay": 1,
+        "coherent_outcome": 4,
+        "manually_verified": 5,
+        "normalization_basis": 4,
+        "outcome": 2,
+        "outcome_unit": 4
+      },
+      "evidence_occurrences": 54,
+      "named_formulations": 1,
+      "nearest_neighbor_ready_arms": 4,
+      "outcomes": 14,
+      "paper_id": "PILOT-003",
+      "source_facts": 5485,
+      "unresolved_items": 4,
+      "verification_status_counts": {
+        "automatically_validated": 5
+      }
+    }
+  ],
+  "post_projection_gaps": {
+    "counts_by_kind": {
+      "projection_missed": 5,
+      "source_not_reported": 12
+    },
+    "paid_rerun_requests": [],
+    "records": [
+      {
+        "experiment_id": 3,
+        "field_name": "outcome",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-002",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-002:ARM:GP-002-E03:F1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 6,
+        "field_name": "outcome",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-002",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-002:ARM:GP-002-E06:F1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 21,
+        "field_name": "lnp_molar_ratio",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-007",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-007:ARM:GP-007-E04:ENT-F01",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 22,
+        "field_name": "delivery_destination",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-008",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-008:ARM:GP-008-E01:F1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 22,
+        "field_name": "dose",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-008",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-008:ARM:GP-008-E01:F1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 22,
+        "field_name": "route",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-008",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-008:ARM:GP-008-E01:F1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 22,
+        "field_name": "species",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-008",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-008:ARM:GP-008-E01:F1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 22,
+        "field_name": "timepoint",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-008",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-008:ARM:GP-008-E01:F1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 25,
+        "field_name": "dose",
+        "gap_kind": "source_not_reported",
+        "paper_id": "GP-008",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "GP-008:GOLD:GX-008",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 27,
+        "field_name": "delivery_destination",
+        "gap_kind": "source_not_reported",
+        "paper_id": "NP-001",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "NP-001::arm::EX1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 27,
+        "field_name": "lnp_molar_ratio",
+        "gap_kind": "source_not_reported",
+        "paper_id": "NP-001",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "NP-001::arm::EX1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 27,
+        "field_name": "route",
+        "gap_kind": "source_not_reported",
+        "paper_id": "NP-001",
+        "reason": "available arm-scoped source claims do not report this field",
+        "record_id": "NP-001::arm::EX1",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 48,
+        "field_name": "lnp_molar_ratio",
+        "gap_kind": "projection_missed",
+        "paper_id": "PILOT-002",
+        "reason": "completed pilot map exists; outcome-to-arm linking remains unresolved",
+        "record_id": "PILOT-002::map-arm::CTX::LSL_MCRE",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 49,
+        "field_name": "lnp_molar_ratio",
+        "gap_kind": "projection_missed",
+        "paper_id": "PILOT-002",
+        "reason": "completed pilot map exists; outcome-to-arm linking remains unresolved",
+        "record_id": "PILOT-002::map-arm::CTX::MANNOSE_MCRE_LSEC",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 50,
+        "field_name": "delivery_destination",
+        "gap_kind": "projection_missed",
+        "paper_id": "PILOT-002",
+        "reason": "completed pilot map exists; outcome-to-arm linking remains unresolved",
+        "record_id": "PILOT-002::map-arm::CTX::C57BL6_SIFVIII_MANNOSE",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 50,
+        "field_name": "lnp_molar_ratio",
+        "gap_kind": "projection_missed",
+        "paper_id": "PILOT-002",
+        "reason": "completed pilot map exists; outcome-to-arm linking remains unresolved",
+        "record_id": "PILOT-002::map-arm::CTX::C57BL6_SIFVIII_MANNOSE",
+        "recoverable": false
+      },
+      {
+        "experiment_id": 55,
+        "field_name": "outcome",
+        "gap_kind": "projection_missed",
+        "paper_id": "PILOT-003",
+        "reason": "extracted records exist but their arm relationship is unresolved",
+        "record_id": "PILOT-003::map-arm::CTX-5",
+        "recoverable": false
+      }
+    ]
+  },
+  "promotion": {
+    "backup_path": "/private/tmp/ai-lnp-database-backups/lnp_evidence-pre-day2-20260807T095144Z.db",
+    "backup_sha256": "38cb21db9d355ebcd1c91f5d14b44dcd6fc0f925b42fd47d47107a5865557c97",
+    "new_authoritative_sha256": "8258842d955d327e7aa8e4e6099046debcf54bf31db425ef9a95d98121c55d34",
+    "old_authoritative_sha256": "ea26a4173e58df8fc0602a8ad37bce4cff7ca3133c1cd6bb1706608a736cfe38"
+  },
+  "rerun_history": {
+    "note": "No paid rerun was required for this deterministic projection repair.",
+    "paper_ids": [],
+    "provider_calls": 0
+  },
+  "schema_version": "current-evidence-final-report/v1",
+  "unresolved_blockers": {
+    "missing_or_unhashed_manifest_artifacts": [
+      {
+        "access_status": "missing",
+        "paper_id": "NP-001",
+        "path": "data/raw/fulltext/oa_packages/PMC11508592/PMC11508592.nxml"
+      },
+      {
+        "access_status": "missing",
+        "paper_id": "NP-001",
+        "path": "data/raw/fulltext/oa_packages/PMC11508592/main.pdf"
+      }
+    ],
+    "review_reason_counts": {
+      "automatic_resolution_required": 3,
+      "experiment_link_unclear": 7,
+      "missing_required_fields": 27,
+      "outcome_link_unclear": 1,
+      "unsupported_value": 13
+    }
+  },
+  "verification_status_counts": {
+    "automatically_validated": 40,
+    "manually_verified": 8
+  }
+}

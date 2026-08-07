@@ -1,0 +1,1921 @@
+{
+  "paper_id": "candidate_00002",
+  "packets": {
+    "formulation": {
+      "query": {
+        "query_id": "candidate_00002-01-formulation",
+        "paper_id": "candidate_00002",
+        "question": "What exact LNP lipid components, chemical names, molar ratios, and preparation conditions are reported?",
+        "field_group": "formulation",
+        "required_entity_types": []
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-a12fb39b03cec4c1ea93",
+          "paper_id": "candidate_00002",
+          "text": "Ethylenediamine (Core #1, C1), N,N′-Diethylethylenediamine (Core #2, C2), Tris(2-aminoethyl)amine (Core #3, C3), 2,2′-diamino-N-methyldiethylamine (Core #4, C4), 1,4-Bis(3-aminopropyl)piperazine (Core #5, C5), and N,N′-Bis(2-aminoethyl)-1,3-propanediamine (Core #6, C6) were purchased from Sigma-Aldrich. Poly(amidoamine) (PAMAM) Dendrimer G0-NH2 (C1G1) and G1-NH2 (C1G2) were obtained from Dendritech (Midland, MI). Methyl acrylate, methanol (MeOH, anhydrous), ethyl alcohol (EtOH, 200 Proof, anhydrous, for chemical synthesis), dichloromethane (DCM, or CH2Cl2, ACS grade), 2-ethylhexyl glycidyl ether (LB), 1,2-epoxy-9-decene (UNL), and triethylamine (Et3N) were also obtained from Sigma-Aldrich. Additionally, 6-(p-Toluidino)-2-naphthalenesulfonic acid sodium salt (TNS), 1,6-Diphenyl-1,3,5-hexatriene (DPH), iodomethane (methyl iodide, CH3I), and tetrahydrofuran (THF) were acquired from Sigma-Aldrich. 1,2-Epoxyoctane (L8), 1,2-Epoxydodecane (L12), and 2-(Dimethylamino)-6-propionylnaphthalene (PRODAN) were purchased from TCI America. Lipid excipients, including 1,2-distearoyl-sn-glycero-3-phosphocholine (DSPC), cholesterol, and 1,2-dimyristoyl-rac-glycero-3-methoxypoly-ethylene glycol-2000 (DMG-PEG 2000) were obtained from Avanti Polar Lipids. LNP-102 Exploration Kit (SM-102), LNP-MC3 Exploration Kit (DLin-MC3-DMA), LipidLaunch™ LNP-0315 Exploration Kit (ALC-0315), C12-200, and 1,2-Dioleoyl-3-trimethylammoniumpropane (DOTAP) were purchased from Cayman Chemical. mRNA transfection reagent jetMESSENGER® was obtained from Polyplus. Ethanol (200 proof, molecular biology grade) for preparing lipid stock solutions was purchased from Fisher Scientific. Molecular Biology Grade Water and 1× Phosphate Buffered Saline (PBS, pH = 7.4) were obtained from CORNING. CleanCap (FLuc) mRNA (L-7602) and CleanCap Cre mRNA (5moU, L-7211) were purchased from TriLink Biotechnologies (San Diego, CA). Sodium citrate buffer (0.5 M, pH 4.5) was purchased from Teknova. Phosphate buffer solution (0.1 M, pH = 7.5) and Amicron Ultra Centrifugal Filters (MWCO 100 kDa) were purchased from Millipore. Borate buffer solution (0.5 M, pH 8.5) was obtained from Alfa Aesar. IVISbrite D-Luciferin Potassium Salt was purchased from Revvity (previously as PerkinElmer). CellTiter-Blue® Cell Viability Assay was purchased from Promega. Innovative Grade US Origin Mouse C57BL6 Plasma with K2 EDTA as anticoagulant (SKU: IGMSC57PLAK2E10ML) was purchased from Innovative Research. Sodium chloride and D-Sucrose were purchased from Fisher Bioreagent. Additional materials, including Invitrogen™ Quant-it™ RiboGreen Reagent and RNA Assay Kit, Invitrogen™ NuPAGE™ 4-12% Bis-Tris Gels, Invitrogen™ NuPAGE™ MOPS SDS Running Buffer (20×), and Pierce™ Bradford Protein Assay Kit were purchased from Thermo Fisher Scientific.",
+          "section_path": "Materials and methods > Materials",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P32",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.126721849069548,
+          "vector_score": 0.016468001973057235,
+          "fused_score": 0.03345559375492221,
+          "entity_types": [
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-30d4928d18262784cd47",
+          "paper_id": "candidate_00002",
+          "text": "Unless otherwise stated, all lipids were dissolved in ethanol at defined molar ratios, while mRNAs (FLuc or Cre) were diluted in 10 mM citrate buffer (pH 4.5). The two phases were rapidly mixed at a volume ratio of 3:1 (mRNA to lipids, v/v), and a mass ratio of 40:1 (total lipids to mRNA, w/w), followed by equilibration at room temperature for 10 min prior to utilization. For dLNPs, dendrimer-based lipids (dILs), DSPC, cholesterol, and DMG-PEG 2000 were dissolved in ethanol at a molar ratio of 50:10:38:2. For quaternary amine-modified dendrimer-based lipid nanoparticles (dLNPQA), quaternary amine-modified dILs were formulated with DSPC, cholesterol, and DMG-PEG 2000 at five distinct molar ratios: 5:55:38:2 (Ratio 1), 10:50:38:2 (Ratio 2), 15:45:38:2 (Ratio 3), 20:40:38:2 (Ratio 4), and 25:35:38:2 (Ratio 5). SM-102, DLin-MC3-DMA, and jetMESSENGER® were prepared according to the manufacturers’ protocols, while C12-200 was formulated following a previously published method [56]. For the DOTAP liposome formulation, the cationic lipid DOTAP was combined with cholesterol and DMG-PEG 2000 at a molar ratio of 49.5:49.5:1. For ALC-0315 LNP formulation, the ionizable lipid ALC-0315 was dissolved in ethanol with DSPC, cholesterol, and DMG-PEG 2000 at a molar ratio 50:10:38.5:1.5.",
+          "section_path": "Materials and methods > Nanoparticle preparation",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P37",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 13.384396622253453,
+          "vector_score": 0.06459600532001292,
+          "fused_score": 0.03252247488101534,
+          "entity_types": [
+            "composition_signal",
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-756074753eda465e570a",
+          "paper_id": "candidate_00002",
+          "text": "Recent studies demonstrated that incorporating cationic lipids, such as DOTAP and chemically modified cationic cholesterol, into LNP formulations enables lung-selective mRNA delivery [3,11,12]. Inspired by these findings, we designed a small library of cationic dendrimers by converting internal amines into permanently charged quaternary amines (QAs), aiming to identify lung-tropic dLNP formulations. We selected seven lead dendrimers from the 100% and 50% dLNP series (Fig. 5A) and modified them with two approaches to introduce QAs: (i) partial conversion of core dendrimer amines (QAP dendrimers) (Fig. 5B, top) and (ii) full conversion of both core and terminal amines (QAF dendrimers) (Fig. 5B, bottom). Given that QA influences both toxicity and transfection efficiency, we formulated 14 QA dendrimers into dLNPs by mixing with helper lipids at 5 distinct molar ratios, creating a library of 70 QA-containing dLNPs (dLNPQA). In vitro screening identified three leading dendrimer categories: C5G0-L12-100, C4G0-UNL-100, and C1G1-L8-50 (Fig. 5C), with all QAF-based formulations proving too toxic for in vivo use. While C1G1-L8-50QAP showed limited transfection, C4G0-UNL-100QAP and C5G0-L12-100QAP were both potent and safe (Fig. 5D and E). Of note, C4G0-UNL-100QAP dLNPs were composed of dendrimer-lipid, DSPC, cholesterol, and DMG-PEG 2000 at a molar ratio of 50:10:38:2, respectively. C5G0-L12-100QAP dLNPs were composed of the same components at a molar ratio of 25:35:38:2, respectively. Bioluminescence data revealed robust lung mRNA expression from both C4G0-UNL-100QAP and C5G0-L12-100QAP compared to their unmodified versions (Fig. 5D, Supplementary 3, Fig. S15). Notably, C5G0-L12-100QAP demonstrated strong lung-preferential expression, with 91.7 ± 7.3% of mRNA expression in the lung, significantly higher than its unmodified counterpart (5.5 ± 4.2%) (Fig. 5E). Further validation in transgenic tdTomato reporter mice confirmed the lung-specific expression of C5G0-L12-100QAP (Fig. 5F).",
+          "section_path": "Results > Construct quaternary amine (QA) dendrimers for lung-specific mRNA delivery",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P21",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 14.562472047167157,
+          "vector_score": 0.041143950309324655,
+          "fused_score": 0.032266458495966696,
+          "entity_types": [
+            "composition_signal",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-d57bcf5b5c480af806ea",
+          "paper_id": "candidate_00002",
+          "text": "Dendrimers derived from Core #1 (C1) were commercially available and used without further modification or purification. Dendrimer synthesis procedures were adapted from previously published protocols [54]. G1 dendrimers were synthesized using a two-step reaction process involving Michael addition and amidation. Initially, initiator cores were individually reacted with an excess of methyl acrylate in anhydrous methanol. The reactions were initiated on ice and gradually brought to room temperature, where they proceeded for 24 h. The resulting Michael addition products were purified by methanol co-evaporation using a rotary evaporator (BUCHI, Rotavapor® R-100). In the second step, amidation was carried out by reacting the purified intermediates separately with an excess of ethylenediamine in anhydrous methanol. These reactions were also initiated on ice and then allowed to proceed at room temperature for 96 h. The final G1 dendrimers were purified using a 9:1 toluene-to-methanol ratio, followed by methanol co-evaporation via rotary evaporation. The purity and chemical structure of the final G1 dendrimers were confirmed by proton nuclear magnetic resonance (1H NMR) spectroscopy (Bruker, 600 MHz) in methanol-d4 (CD3OD) prior to further use. All NMR spectra were analyzed using MestReNova version 14.2.1 (Mestrelab Research, Spain), and chemical shifts are reported in parts per million (ppm). G2 dendrimers were synthesized using the same two-step reaction scheme as G1 dendrimers, with G1 dendrimers serving as the starting material in place of initiator cores. The purity and chemical structure of the final G2 dendrimers were also confirmed by 1H NMR in CD3OD prior to further use.",
+          "section_path": "Materials and methods > Synthesis of generation 1 (G1) and generation 2 (G2) dendrimers",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P33",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 9.250816490984919,
+          "vector_score": 0.04120810846057583,
+          "fused_score": 0.0315136476426799,
+          "entity_types": []
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-dee344c69e4512dd7d3b",
+          "paper_id": "candidate_00002",
+          "text": "The apparent pKa is a key determinant of LNP tissue-specific delivery [11]. Given the differences in tissue mRNA expression between the 50% series and 100% series dLNPs, we first characterized the apparent pKa of the lead dLNP formulations using the TNS assay. In general, the apparent pKa for the 50% series dLNPs was slightly higher than that of the 100% series (Fig. 2A), likely due to the presence of secondary amines formed when grafting one lipid tail per terminal primary amine (Fig. 1A). The apparent pKa of the 100% series dLNPs ranges from 6.9 to 7.7 (Fig. 2A), aligning with reported values for liver-targeting formulations [5,11]. In contrast, the 50% series had an apparent pKa of 7.5 to 8.4 (Fig. 2A), which differs from the previously reported range (2 to 6) for spleen-targeting LNPs [11]. This suggests that spleen-preferential expression by dLNPs may be governed by additional mechanisms beyond apparent pKa. Further analysis revealed a correlation between higher apparent pKa and increased splenic mRNA expression, along with reduced hepatic expression. However, this trend was not consistent across the 50% and 100% series (Fig. 2B), indicating that other factors linked to lipid grafting may influence tissue distribution. Since lipid grafting alters both the amine type (secondary vs. tertiary) and the number of lipid tails per dendrimer, we investigated whether a reduced number of lipid tails affects dLNP hydrophobicity, given that ionizable lipids constitute 50% of the total lipid molar ratio and are concentrated on the LNP surface (Fig. 2C).",
+          "section_path": "Results > Lipid grafting modifies dLNP surface properties",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P10",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 10.160744516915473,
+          "vector_score": 0.034855337093412646,
+          "fused_score": 0.03149801587301587,
+          "entity_types": [
+            "composition_signal",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-f6c3d183d069132ca402",
+          "paper_id": "candidate_00002",
+          "text": "All MS/MS spectra were analyzed using PEAKS 12.5 (Bioinformatics Solutions). Protein identification was performed against the Mus musculus database (sp_incl_isoforms, TaxID = 10090_and_subtaxonomies, v2024-10-02) and a universal protein contaminant database [57], assuming trypsin as the digestion enzyme. Database searches were conducted with a fragment ion mass tolerance of 0.020 Da and a precursor ion tolerance of 10.0 ppm. Carbamidomethylation of cysteine was set as a fixed modification, while methionine oxidation was specified as a variable modification. Precursor ion intensity-based label-free quantification was performed using PEAKS 12.5. The three experimental groups (C1G1-L8-50 & C1G1-L8-100, C5G0-L12-50 & C5G0-L12-100, and C5G0-L12-100 & C5G0-L12-100QAP) were compared using a non-nested study factor. Normalization was performed across all detected peptides. Protein abundances were calculated using summed abundances, where protein abundance was derived by summing the sample abundances of the associated peptide groups. Statistical analysis was conducted using Fisher’s exact test (pairwise ratio-based), incorporating low-intensity resampling value imputation. Adjusted p-values were calculated using the Benjamini-Hochberg method to control the false discovery rate.",
+          "section_path": "Materials and methods > Isolation, characterization, and proteomic analysis of dLNP protein corona > Mass spectrometry, proteomics, bioinformatics, and statistical analysis:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P48",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.992866847613065,
+          "vector_score": 0.020305005707697887,
+          "fused_score": 0.030303030303030304,
+          "entity_types": []
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-940e8f572d58591c2195",
+          "paper_id": "candidate_00002",
+          "text": "A subset of lead dLNP formulations (C1G1-L8-50, C1G1-L8-100, C5G0-L12-100, and C5G0-L12-100QA), together with two clinically approved LNPs (SM-102 and ALC-0315), were prepared as described above with the addition of 0.5% (molar ratio) fluorescent helper lipid TMR-PC (Avanti Polar Lipids) and concentrated to 1 mg/mL. Equal volumes of the concentrated LNPs and mouse plasma (Innovative Research) were incubated for 180 min. Particle size distributions were then measured using fluorescent NTA (ZetaView QUATT) with a 520 nm excitation laser and a 550 nm emission filter.",
+          "section_path": "Materials and methods > Stability of dLNPs in plasma",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P43",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 9.98236407049628,
+          "vector_score": 0.01824253877301975,
+          "fused_score": 0.029910714285714284,
+          "entity_types": [
+            "composition_signal",
+            "lipid_or_material",
+            "lnp",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-6952540dbeeb6922970e",
+          "paper_id": "candidate_00002",
+          "text": "Exposure to plasma proteins, such as apolipoproteins, can compromise LNP integrity and alter protein adsorption. To assess whether differences in protein adsorption were related to the different stability of 50% and 100% series dLNPs, we tracked dLNP size distribution changes in plasma using NTA over a 3-h period, following a previously reported method [45]. A fluorescent helper lipid, TopFluor™ TMR-PC, was incorporated at 0.5% (molar ratio) to label all dLNPs, enabling accurate tracking of dLNPs in plasma with minimal background interference [45] (Supplementary 3, Fig. S5A). Control experiments confirmed that the addition of 0.5% TMR-PC did not significantly affect dLNP size (pre-labeling: 140.2 ± 56.3 nm; post-labeling: 145.5 ± 55.9 nm). In PBS, both C1G1-L8-50 and C1G1-L8-100 remained stable throughout the 3-h incubation period (Supplementary 3, Fig. S6). In plasma, both formulations showed increasing size heterogeneity over time (Fig. 3B; Supplementary 3, Fig. S5B), consistent with previous studies that showed interactions with apolipoproteins and lipoproteins in the plasma can induce LNP destabilization and aggregation [32,34–36]. Similar effects were also seen in clinical formulations based on SM-102 and ALC-0315 (Supplementary 3, Fig. S5B). Since protein corona quantification was done at 15 min after incubation, we further analyzed particle distribution change within the first 15min after plasma exposure. At 0 min, the size of C1G1-L8-50 is smaller than C1G1-L8-100, but both are narrowly distributed. After 15min incubation with plasma, both of C1G1-L8-50 and C1G1-L8-100 showed broadened size distributions (Fig. 3C). However, C1G1-L8-50 became larger and more heterogenous than C1G1-L8-100 (Fig. 3D), indicating the C1G1-L8-50 is less stable in the plasma than C1G1-L8-100. The lower plasma stability of 50% series dLNPs could stem from their lower hydrophobicity, making its lipids more flexible to exchange with lipoproteins and itself more susceptible to apolipoprotein partitioning, both of which could negatively affect the adsorption of other plasma proteins on their surface. To further validate this hypothesis in a non-dendrimer system, we analyzed the total plasma protein abundance associated with the clinically used ionizable lipids SM-102 and ALC-0315. Due to the additional lipid tail, ALC-0315-based LNPs demonstrated higher hydrophobicity than SM-102-based LNPs in our PRODAN assay (Fig. 2L). Protein mass quantification revealed that plasma proteins bound to ALC-0315 were 17.5% higher than those associated with SM-102 (Supplementary 3, Fig. S7). Similar to C1G1-L8-50, SM-102 became more heterogenous than ALC-0315, indicating SM-102 is less stable in the plasma. In conclusion, these results underscore the importance of dLNP hydrophobicity in determining their interactions with plasma proteins (Fig. 3E).",
+          "section_path": "Results > The hydrophobicity of dLNPs affects the quantity of plasma protein adsorption",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P14",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.582625679266386,
+          "vector_score": 0.01888048993829996,
+          "fused_score": 0.029631255487269532,
+          "entity_types": [
+            "composition_signal",
+            "lipid_or_material",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-f41fc940981320539cfd",
+          "paper_id": "candidate_00002",
+          "text": "The surface hydrophobicity of a nanoparticle has significant effects on its stability, biological absorption, transportation, and distribution [24]. Previous studies have shown the hydrophobicity of nanoparticles can impact both the quantity and quality of plasma protein adsorption [25]. For example, polymeric nanoparticles with higher hydrophobicity tend to exhibit enhanced plasma protein adsorption [26–28]. PEGylation of the nanoparticle surface decreases the surface hydrophobicity and consequently reduces protein adsorption [29,30]. Earlier studies of liposomes have demonstrated that the structure of phospholipids significantly influences the liposome’s hydrophobicity and membrane fluidity, which in turn affects the types and amounts of plasma components that bind to their surface in vivo [30–33]. Specifically, compared to saturated, longer-chain phospholipids, unsaturated, shorter-chain phospholipids lead to less rigid and less hydrophobic membranes. These loosely packed membranes are more susceptible to apolipoprotein partitioning and lipid exchange with endogenous lipoproteins like high-density lipoproteins (HDLs), ultimately compromising liposome structural integrity and thereby reducing circulation half-life [32,34–36]. These prior studies offer valuable insights into how LNP hydrophobicity influences cellular uptake and tissue-specific delivery via interactions with plasma proteins.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.189245452151141,
+          "vector_score": 0.018924024345006042,
+          "fused_score": 0.029211087420042643,
+          "entity_types": [
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-01-formulation",
+          "block_id": "candidate_00002-B-43d88ebe87563b3e7d03",
+          "paper_id": "candidate_00002",
+          "text": "Upon systemic administration, lipid nanoparticles (LNPs) rapidly shed their surface-bound polyethylene glycol (PEG) lipids [7]. This is followed by the adsorption of plasma proteins, resulting in the formation of a dynamic “protein corona” around the LNPs [7]. These interactions can compromise the structural integrity of the LNPs, potentially leading to lipid dissociation, particle agglomeration, and premature release of RNA [7,8]. At the same time, protein adsorption plays a critical role in mediating cellular uptake and in vivo biodistribution. For example, in the case of Onpattro, the adsorption of apolipoprotein E (ApoE) onto the LNP surface facilitates recognition by low-density lipoprotein receptors (LDLR) on hepatocytes, thereby promoting receptor-mediated endocytosis and efficient liver delivery of RNA cargos [6,7,9–11]. Building on this endogenous mechanism, engineering approaches have been developed to control the tissue-specific delivery of RNA. Specifically, tuning the apparent pKa of the lipid-based delivery system serves as a simple and effective method for manipulating the endogenous proteins that govern their subsequent tissue-specific delivery towards the liver, spleen, or lung [11–13]. Despite the success of this design principle emerging evidence has shown the apparent pKa might not be the only factor that affects the extrahepatic delivery of LNPs. Engineering the chemical structures of the ionizable lipids, particularly the lipid tails, can also enhance extrahepatic delivery without significantly altering the apparent pKa of LNPs [14–23]. As a result, predicting the biodistribution of LNPs from the chemical structure of ionizable lipids remains elusive. These findings indicate that additional physicochemical properties of LNPs contribute to their interactions with plasma proteins and their subsequent in vivo biodistribution.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.864828835322566,
+          "vector_score": 0.022029991565894868,
+          "fused_score": 0.029083245521601686,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "payload": {
+      "query": {
+        "query_id": "candidate_00002-02-payload",
+        "paper_id": "candidate_00002",
+        "question": "What exact molecular cargo is encapsulated, and what does it encode or target?",
+        "field_group": "payload",
+        "required_entity_types": [
+          "lnp",
+          "payload"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-6a2f6356715d91b63e3d",
+          "paper_id": "candidate_00002",
+          "text": "The mRNA encapsulation efficiency of each dLNP formulation was quantified using the Invitrogen™ Quant-iT™ RiboGreen Reagent and RNA Assay Kit, following the manufacturer’s protocol.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Encapsulation efficiency:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P39",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.0625342974097896,
+          "vector_score": 0.019487547836077927,
+          "fused_score": 0.031754032258064516,
+          "entity_types": [
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-a12fb39b03cec4c1ea93",
+          "paper_id": "candidate_00002",
+          "text": "Ethylenediamine (Core #1, C1), N,N′-Diethylethylenediamine (Core #2, C2), Tris(2-aminoethyl)amine (Core #3, C3), 2,2′-diamino-N-methyldiethylamine (Core #4, C4), 1,4-Bis(3-aminopropyl)piperazine (Core #5, C5), and N,N′-Bis(2-aminoethyl)-1,3-propanediamine (Core #6, C6) were purchased from Sigma-Aldrich. Poly(amidoamine) (PAMAM) Dendrimer G0-NH2 (C1G1) and G1-NH2 (C1G2) were obtained from Dendritech (Midland, MI). Methyl acrylate, methanol (MeOH, anhydrous), ethyl alcohol (EtOH, 200 Proof, anhydrous, for chemical synthesis), dichloromethane (DCM, or CH2Cl2, ACS grade), 2-ethylhexyl glycidyl ether (LB), 1,2-epoxy-9-decene (UNL), and triethylamine (Et3N) were also obtained from Sigma-Aldrich. Additionally, 6-(p-Toluidino)-2-naphthalenesulfonic acid sodium salt (TNS), 1,6-Diphenyl-1,3,5-hexatriene (DPH), iodomethane (methyl iodide, CH3I), and tetrahydrofuran (THF) were acquired from Sigma-Aldrich. 1,2-Epoxyoctane (L8), 1,2-Epoxydodecane (L12), and 2-(Dimethylamino)-6-propionylnaphthalene (PRODAN) were purchased from TCI America. Lipid excipients, including 1,2-distearoyl-sn-glycero-3-phosphocholine (DSPC), cholesterol, and 1,2-dimyristoyl-rac-glycero-3-methoxypoly-ethylene glycol-2000 (DMG-PEG 2000) were obtained from Avanti Polar Lipids. LNP-102 Exploration Kit (SM-102), LNP-MC3 Exploration Kit (DLin-MC3-DMA), LipidLaunch™ LNP-0315 Exploration Kit (ALC-0315), C12-200, and 1,2-Dioleoyl-3-trimethylammoniumpropane (DOTAP) were purchased from Cayman Chemical. mRNA transfection reagent jetMESSENGER® was obtained from Polyplus. Ethanol (200 proof, molecular biology grade) for preparing lipid stock solutions was purchased from Fisher Scientific. Molecular Biology Grade Water and 1× Phosphate Buffered Saline (PBS, pH = 7.4) were obtained from CORNING. CleanCap (FLuc) mRNA (L-7602) and CleanCap Cre mRNA (5moU, L-7211) were purchased from TriLink Biotechnologies (San Diego, CA). Sodium citrate buffer (0.5 M, pH 4.5) was purchased from Teknova. Phosphate buffer solution (0.1 M, pH = 7.5) and Amicron Ultra Centrifugal Filters (MWCO 100 kDa) were purchased from Millipore. Borate buffer solution (0.5 M, pH 8.5) was obtained from Alfa Aesar. IVISbrite D-Luciferin Potassium Salt was purchased from Revvity (previously as PerkinElmer). CellTiter-Blue® Cell Viability Assay was purchased from Promega. Innovative Grade US Origin Mouse C57BL6 Plasma with K2 EDTA as anticoagulant (SKU: IGMSC57PLAK2E10ML) was purchased from Innovative Research. Sodium chloride and D-Sucrose were purchased from Fisher Bioreagent. Additional materials, including Invitrogen™ Quant-it™ RiboGreen Reagent and RNA Assay Kit, Invitrogen™ NuPAGE™ 4-12% Bis-Tris Gels, Invitrogen™ NuPAGE™ MOPS SDS Running Buffer (20×), and Pierce™ Bradford Protein Assay Kit were purchased from Thermo Fisher Scientific.",
+          "section_path": "Materials and methods > Materials",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P32",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.0223885023493464,
+          "vector_score": 0.017489597780244857,
+          "fused_score": 0.029513888888888888,
+          "entity_types": [
+            "formulation_label",
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-0993241d361b4142a951",
+          "paper_id": "candidate_00002",
+          "text": "Clinical applications of mRNA-based therapeutics have a large focus on immunotherapy [2,4], in which the interactions between the delivery vehicle (i.e., LNP) and the immune system are critical for both safety and efficacy. To explore how lipid grafting affects dLNP interactions with immune tissues, we compared two sister formulations, C1G1-L8-50 and C1G1-L8-100, focusing on their targeting behaviors in immune reservoirs like the spleen, blood, and bone marrow. Using transgenic mice with a tdTomato gene flanked by loxP sites (Fig. 4A), we assessed the cell types transfected by dLNPs after delivering mRNA encoding the Cre recombinase enzyme. Total spleen mRNA expression was analyzed by quantifying the percentage of tdTom + splenocytes, showing similar results for both formulations (Fig. 4B), consistent with bioluminescence data (Fig. 3J). Histological analysis revealed that tdTom expression was mainly localized in the marginal zone for C1G1-L8-50, while in C1G1-L8-100, it was distributed across the red pulp (Fig. 4C). Flow cytometry confirmed that both dLNPs were more effective at transfecting myeloid cells in the marginal zone and red pulp than T and B cells in the white pulp (Supplementary 3, Fig.S11 A–C, gating strategy is provided in the same figure). This explained that for 50% series dLNPs, it showed spleen-preferential mRNA expression due to its ability to transfect splenic myeloid cells, while it lacks the ability to transfect hepatocytes in the liver.",
+          "section_path": "Results > The 50% and 100% series dLNPs both induced mRNA expression in spleen but exhibited distinct preferences for myeloid cell subsets",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P18",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.2251259611086556,
+          "vector_score": 0.014858734589108129,
+          "fused_score": 0.029437229437229435,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-87a83cef7b481f91420f",
+          "paper_id": "candidate_00002",
+          "text": "B6.Cg-Gt(ROSA)26Sortm14(CAG-tdTomato)Hze/J mice (Jackson Laboratories, 20-25 g) were intravenously injected with dLNPs (~100 μL for female and ~125 μL for male) via retro-orbital administration at the dose of 0.5 mg/kg Cre-recombinase mRNA on Day 0 and Day 1. After 48 h following the second injection, mice were euthanized and perfused. Following perfusion, the lungs, liver, and spleen were excised and transferred to a 4% w/v paraformaldehyde (PFA) buffered solution for 4 h at 4 °C. Following PFA fixation, samples were transferred to a 30% w/v sucrose solution for 24 h at 4 °C. Samples were then submitted the University of Florida Molecular Pathology Core (Gainesville, FL, USA) for OCT embedding and freezing, sectioning, and scanning. Images were generated using an Olympus VS200 Whole Slide Scanner and processed using OlyVIA software.",
+          "section_path": "Materials and methods > Immunofluorescence study",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P58",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.266118986910911,
+          "vector_score": 0.014265135817404545,
+          "fused_score": 0.029418126757516764,
+          "entity_types": [
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-43d88ebe87563b3e7d03",
+          "paper_id": "candidate_00002",
+          "text": "Upon systemic administration, lipid nanoparticles (LNPs) rapidly shed their surface-bound polyethylene glycol (PEG) lipids [7]. This is followed by the adsorption of plasma proteins, resulting in the formation of a dynamic “protein corona” around the LNPs [7]. These interactions can compromise the structural integrity of the LNPs, potentially leading to lipid dissociation, particle agglomeration, and premature release of RNA [7,8]. At the same time, protein adsorption plays a critical role in mediating cellular uptake and in vivo biodistribution. For example, in the case of Onpattro, the adsorption of apolipoprotein E (ApoE) onto the LNP surface facilitates recognition by low-density lipoprotein receptors (LDLR) on hepatocytes, thereby promoting receptor-mediated endocytosis and efficient liver delivery of RNA cargos [6,7,9–11]. Building on this endogenous mechanism, engineering approaches have been developed to control the tissue-specific delivery of RNA. Specifically, tuning the apparent pKa of the lipid-based delivery system serves as a simple and effective method for manipulating the endogenous proteins that govern their subsequent tissue-specific delivery towards the liver, spleen, or lung [11–13]. Despite the success of this design principle emerging evidence has shown the apparent pKa might not be the only factor that affects the extrahepatic delivery of LNPs. Engineering the chemical structures of the ionizable lipids, particularly the lipid tails, can also enhance extrahepatic delivery without significantly altering the apparent pKa of LNPs [14–23]. As a result, predicting the biodistribution of LNPs from the chemical structure of ionizable lipids remains elusive. These findings indicate that additional physicochemical properties of LNPs contribute to their interactions with plasma proteins and their subsequent in vivo biodistribution.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.037774561797847,
+          "vector_score": 0.006244906589861785,
+          "fused_score": 0.027884615384615386,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-ed46f2a380fa9b18f4d7",
+          "paper_id": "candidate_00002",
+          "text": "Predominant liver accumulation remains a major challenge for the application of lipid nanoparticle (LNP)-based gene therapies. While tuning the apparent pKa is an effective strategy for influencing endogenous proteins that regulate LNP-mediated tissue-specific delivery, recent evidence suggests that alternative mechanisms may exist. Here, we reveal a new mechanism by which LNP surface hydrophobicity influences extrahepatic delivery. Using dendrimers as modular molecules and an in-house developed surface hydrophobicity assay, we show that reducing lipid grafting on the dendrimer decreases the surface hydrophobicity of dendrimer-based LNPs (dLNPs), leading to reduced stability in plasma and decreased plasma protein adsorption. This diminishes the ability of LNPs to target liver hepatocytes through endogenous mechanisms involving interactions between apolipoproteins and their cognate receptors. At the same time, we find that dLNPs with lower surface hydrophobicity exhibit enhanced targeting of granulocytes relative to monocytic cells, potentially due to complement protein interactions. Further modification of dendrimers with quaternary amines increases dLNP surface charge density and improves lung delivery by preferentially targeting lung epithelial cells. While this modification also reduces surface hydrophobicity, the enhanced lung delivery is associated with distinct protein corona compositions rather than reduced protein adsorption. These findings establish modulation of LNP surface hydrophobicity as a novel strategy for achieving extrahepatic delivery.",
+          "section_path": "Abstract",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "abstract",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.7658735639460696,
+          "vector_score": 0.013545823324458429,
+          "fused_score": 0.027272727272727275,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-92a52a59f6dbfb69dab1",
+          "paper_id": "candidate_00002",
+          "text": "By characterizing the plasma proteins associated with dLNPs, we identified a hydrophobicity-driven mechanism that mediates their extrahepatic delivery. Current theory suggests that the spleen tropism of LNPs is primarily driven by β2-GPI, a plasma protein highly enriched in the protein corona of LNPs with a low apparent pKa [11]. However, in our system, the spleen-targeting dLNPs had a higher apparent pKa range (7.5 to 8.4). Additionally, the relative abundance of key plasma proteins (Apoa1, Vtn, and Alb) associated with both the 50% (spleen tropism) and 100% (liver tropism) series dLNPs did not differ significantly. This suggests that spleen-preferential expression in the 50% series dLNPs is not driven by a specific plasma protein. Instead, it is likely caused by reduced total protein adsorption in the less hydrophobic 50% series formulation. This reduction in protein adsorption decreased the number of apolipoproteins bound to the 50% series dLNPs, resulting in significantly reduced transfection towards hepatocytes compared to the 100% series dLNPs. As a result, the 50% series dLNP showed a strong spleen specific mRNA expression through targeting splenic myeloid cells. Further studies are needed to confirm this hypothesis by comparing the affinity of apolipoproteins for the 50% and 100% series dLNPs. The extrahepatic delivery of 100QA series dLNPs was not driven by total protein abundance. Although these dLNPs had significantly lower surface hydrophobicity than the 100% series, their cationic surface properties likely facilitated interactions with different plasma proteins. Consequently, the protein corona composition differed significantly between C5G0-L12-100 and C5G0-L12-100QAP (Tables S3 and S5). We show that lung-selective delivery of C5G0-L12-100QAP was mediated by targeting epithelial cells, which is mediated by one or more endogenous proteins.",
+          "section_path": "Discussion",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P27",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 1.6259067554569417,
+          "vector_score": 0.013814005751702343,
+          "fused_score": 0.02715098147128967,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-2b525ebf608bddac2a1c",
+          "paper_id": "candidate_00002",
+          "text": "SDS-PAGE analysis revealed distinct plasma protein components between C5G0-L12-100 and C5G0-L12-100QAP. Specifically, proteins at 70 kDa, just above 150 kDa, and 25 kDa were enriched in C5G0-L12-100QAP (Fig. 5H, green boxes), while proteins at 20 kDa and between 85 and 100 kDa were enriched in C5G0-L12-100 (Fig. 5H, blue boxes). Proteomic analysis showed that ApoE and ApoB, which are known to mediate liver-preferential expression in LNPs [6,11,34] are more enriched in the C5G0-L12-100 (Fig. 5I). In contrast, only Vtn was uniquely enriched in C5G0-L12-100QAP (Fig. 5I). Vtn has been identified in another study to be associated with lung-selective LNP delivery, as it facilitates binding to its receptor, αvβ3 integrin, highly expressed in the pulmonary endothelium [11]. To determine whether lung epithelial cells were responsible for the lung-targeting of dLNPQA, we conducted an immunofluorescent study based on the lung tissue harvested from the C5G0-L12-100QAP injected Ai14 mice (Fig. 5J). Our results showed high levels of co-localization between tdTomato expression and anti-CD324 antibody, which labels epithelial cells through E-cadherin, indicating lung epithelial cells were responsible for lung-specificity of C5G0-L12-100QAP. We further validated this hypothesis in vitro using a human lung cancer epithelial cell line NCI–H292 that expresses αvβ3 integrin [46]. Here, we preincubated C5G0-L12-100 and C5G0-L12-100QAP formulations encapsulating luciferase mRNA with increasing amounts of Vtn. Interestingly, Vtn enhanced functional mRNA delivery of both sister formulations, suggesting that both formulations can efficiently bind Vtn and enter αvβ3-expressing cells (Fig. 5K). However, when these formulations were incubated with human serum, only the transfection of C5G0-L12-100QAP was significantly enhanced (Fig. 5L). This suggests that in the presence of an ensemble of proteins, C5G0-L12-100 preferentially binds other constituents, limiting its transfection in lung epithelial cells. These findings support that the extrahepatic delivery of 100QA series dLNPs is not driven by reduced protein adsorption, but rather by signature proteins like Vtn that are abundantly adsorbed to C5G0-L12-100QAP, contributing to its lung-selectivity.",
+          "section_path": "Results > dLNPQA target lung epithelial cells through a mechanism independent of total protein abundance",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P24",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.840646518214518,
+          "vector_score": 0.007226484444406096,
+          "fused_score": 0.026334026334026334,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-6d02652edd36c2e7eff2",
+          "paper_id": "candidate_00002",
+          "text": "The hydrodynamic diameter, polydispersity index (PDI), and zeta (ζ) potential were measured using dynamic light scattering (Anton Paar, Litesizer DLS 500) at 25 ° C. dLNPs encapsulating 1 μg of mRNA were prepared as previously described and diluted to 1 mL with 1× PBS to achieve a final lipid concentration of 40 μg/mL. Hydrodynamic diameter and PDI were measured using disposable cuvettes (Sarstedt), while ζ potential was measured using omega cuvettes (Anton Paar). To further characterize particle size distribution and concentration, nanoparticle tracking analysis (NTA) was performed using the ZetaView® QUATT (Particle Metrix). For NTA measurements, dLNPs encapsulating 1 μg of mRNA were prepared as previously described, diluted 10,000-fold in 1× PBS, and injected into the instrument for analysis.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Physicochemical properties:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P38",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.407463357476886,
+          "vector_score": null,
+          "fused_score": 0.020421608159392788,
+          "entity_types": [
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-02-payload",
+          "block_id": "candidate_00002-B-4ae0d4a07a42a3be06ba",
+          "paper_id": "candidate_00002",
+          "text": "For the single-protein incubation experiments, Huh7.5 cells were transfected using dLNPs prepared with or without pre-incubation with ApoE (Human ApoE4 Recombinant Protein, PeproTech) at escalating mRNA doses of 0.025, 0.05, and 0.06 μg. After formulation, dLNPs were incubated with 0.25 g ApoE per g total lipid for 15 min at 37 °C. NCI–H292 cells were transfected using dLNPs prepared with and without incubation with Vtn (Gibco™ Vitronectin Recombinant Human Protein, Truncated). After formulation, dLNPs containing 0.1 μg mRNA were incubated with 0.25, 0.5, or 1.0 g vitronectin per g total lipid for 15 min at 37 °C.",
+          "section_path": "Materials and methods > In vitro transfection efficiency and cell viability assays",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P53",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": null,
+          "vector_score": 0.008285941195418398,
+          "fused_score": 0.01847304392674977,
+          "entity_types": [
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "biological_model": {
+      "query": {
+        "query_id": "candidate_00002-03-biological_model",
+        "paper_id": "candidate_00002",
+        "question": "For each distinct LNP intervention, what species, biological model, disease or physiological context, dose, route, timepoint, and control are reported?",
+        "field_group": "model_context",
+        "required_entity_types": [
+          "lnp",
+          "species"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-55bfbf9dd3a2ea150fbc",
+          "paper_id": "candidate_00002",
+          "text": "B6.Cg-Gt(ROSA)26Sortm14(CAG-tdTomato)Hze/J mice (Jackson Laboratories, 20-25 g) were intravenously injected with dLNPs (~100 μL for female and ~125 μL for male) via retro-orbital administration at the dose of 0.5 mg/kg Cre-recombinase mRNA on Day 0 and Day 1. After 48 h following the second injection, mice were euthanized and perfused. Following perfusion, six organs were collected (lung, liver, spleen, heart, femur, and kidneys). The fluorescent signal of each organ was analyzed using an IVIS imaging system (PerkinElmer IVIS Spectrum) and quantified using LivingImage software (PerkinElmer). The in vivo transfection efficiency of each dLNP formulation in these organs was quantified using average radiance (p/s/cm2/sr) in the tissue.",
+          "section_path": "Materials and methods > Ex vivo imaging > Fluorescence Imaging:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P57",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.2356969024260085,
+          "vector_score": 0.022284292242147754,
+          "fused_score": 0.03751083041958042,
+          "entity_types": [
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-22b8d5c1c26ecccdfc4f",
+          "paper_id": "candidate_00002",
+          "text": "B6(Cg)-Tyrc–2J/J mice (Jackson Laboratories, 20-25 g) were intravenously injected with dLNPs (~100 μL for female and ~125 μL for male) via the tail vein at the dose of 0.5 mg/kg mRNA. After 24 h, mice were administered an intraperitoneal injection of 10 μL/g of D-luciferin (15 mg/ml in DPBS). After 15 min, the mice were euthanized and perfused to remove the blood, and six organs were collected (lung, liver, spleen, heart, femur, and kidneys). The luminescence signal of each organ was analyzed using an IVIS imaging system (PerkinElmer IVIS Spectrum) and quantified using LivingImage software (PerkinElmer). The in vivo transfection efficiency of each dLNP formulation in these organs was quantified using total flux (p/s) in the tissue.",
+          "section_path": "Materials and methods > Ex vivo imaging > Bioluminescence imaging:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P56",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.16060791590784,
+          "vector_score": 0.021963671337376908,
+          "fused_score": 0.03611786130536131,
+          "entity_types": [
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-abd5757de4c1a5940822",
+          "paper_id": "candidate_00002",
+          "text": "Lipid nanoparticles (LNPs) represent the most clinically advanced non-viral system for the delivery of RNAs, including messenger RNA (mRNA) and small interfering RNA (siRNA). To date, the U.S. Food and Drug Administration (FDA) has approved four LNP-based therapeutics: Comirnaty, Spikevax, mRESVIA, and Onpattro. Among these clinical products, Onpattro is the only therapeutic that utilizes systemic administration as the route of delivery [1]. Although LNPs can be a promising tool for the delivery of nucleic acids for protein replacement therapy [2], gene editing [3], and in situ cell therapy [4], these therapeutic applications are limited by LNPs’ predominant liver accumulation, particularly in liver hepatocytes, upon systemic delivery [5,6]. Developing strategies to control the tissue tropism of LNPs therefore remains a central challenge in the field.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 7.615023272176929,
+          "vector_score": 0.03677382418326611,
+          "fused_score": 0.03278688524590164,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-353f2d531c2ce2261b8a",
+          "paper_id": "candidate_00002",
+          "text": "Further machine learning analysis, integrating key dendrimer structural features with in vitro screening data, revealed that the number of lipid tails is a critical predictor of high transfection efficiency and high relative cell viability in dLNPs (see Supplementary Information 2 for details). The evaluation metrics (e.g., balanced accuracy) for relative cell viability and transfection efficiency evaluated from the developed multi-class DNN based on the 5-fold cross-validation and test set are summarized in Supplementary Information 2. AUC-ROC values for all classes in different output targets were above 0.86, indicating that the model possesses strong discriminatory power for each class, and the AUC-ROC curves are shown in Supplementary Information 2, Fig. S2. To assess whether lipid grafting affects dLNP physicochemical properties and in vitro performance, we analyzed the impact of lipid grafting across all dLNP candidates in our library. Compared to the 50%- and 100%-series dLNPs, the 0%-series dLNPs (containing dendrimers with no lipid grafting) exhibited significantly larger size, higher PDI, greater encapsulation efficiency, and improved cell viability but much lower transfection efficiency (Supplementary 3, Fig. S1A–F). No significant differences were observed in size, PDI, or zeta potential between the 50% and 100% series (Supplementary 3, Fig. S1A–C). However, in vitro studies revealed that 50% lipid-grafted dLNPs achieved higher transfection efficiency, both in average efficacy and number of successful hits (Supplementary 3, Fig. S1D). This increase in transfection efficiency was not attributable to differences in encapsulation efficiency, as 50% and 100% series dLNPs showed similar mRNA loading efficiency (Supplementary 3, Fig. S1F). Notably, serum proteins known to influence LNP cellular uptake were excluded from the in vitro experimental setup. Therefore, these findings suggest that the number of lipid tails plays a critical role in facilitating mRNA encapsulation, promoting endosomal escape, and enabling efficient RNA release, which represent three ratelimiting steps for successful transfection.",
+          "section_path": "Results > Construction of structurally diverse dLNPs for in vitro screening",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.9755105471105856,
+          "vector_score": 0.029262044471505128,
+          "fused_score": 0.029709507042253523,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-dee344c69e4512dd7d3b",
+          "paper_id": "candidate_00002",
+          "text": "The apparent pKa is a key determinant of LNP tissue-specific delivery [11]. Given the differences in tissue mRNA expression between the 50% series and 100% series dLNPs, we first characterized the apparent pKa of the lead dLNP formulations using the TNS assay. In general, the apparent pKa for the 50% series dLNPs was slightly higher than that of the 100% series (Fig. 2A), likely due to the presence of secondary amines formed when grafting one lipid tail per terminal primary amine (Fig. 1A). The apparent pKa of the 100% series dLNPs ranges from 6.9 to 7.7 (Fig. 2A), aligning with reported values for liver-targeting formulations [5,11]. In contrast, the 50% series had an apparent pKa of 7.5 to 8.4 (Fig. 2A), which differs from the previously reported range (2 to 6) for spleen-targeting LNPs [11]. This suggests that spleen-preferential expression by dLNPs may be governed by additional mechanisms beyond apparent pKa. Further analysis revealed a correlation between higher apparent pKa and increased splenic mRNA expression, along with reduced hepatic expression. However, this trend was not consistent across the 50% and 100% series (Fig. 2B), indicating that other factors linked to lipid grafting may influence tissue distribution. Since lipid grafting alters both the amine type (secondary vs. tertiary) and the number of lipid tails per dendrimer, we investigated whether a reduced number of lipid tails affects dLNP hydrophobicity, given that ionizable lipids constitute 50% of the total lipid molar ratio and are concentrated on the LNP surface (Fig. 2C).",
+          "section_path": "Results > Lipid grafting modifies dLNP surface properties",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P10",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.331597383240014,
+          "vector_score": 0.021545453893218252,
+          "fused_score": 0.029418126757516764,
+          "entity_types": [
+            "composition_signal",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-f41fc940981320539cfd",
+          "paper_id": "candidate_00002",
+          "text": "The surface hydrophobicity of a nanoparticle has significant effects on its stability, biological absorption, transportation, and distribution [24]. Previous studies have shown the hydrophobicity of nanoparticles can impact both the quantity and quality of plasma protein adsorption [25]. For example, polymeric nanoparticles with higher hydrophobicity tend to exhibit enhanced plasma protein adsorption [26–28]. PEGylation of the nanoparticle surface decreases the surface hydrophobicity and consequently reduces protein adsorption [29,30]. Earlier studies of liposomes have demonstrated that the structure of phospholipids significantly influences the liposome’s hydrophobicity and membrane fluidity, which in turn affects the types and amounts of plasma components that bind to their surface in vivo [30–33]. Specifically, compared to saturated, longer-chain phospholipids, unsaturated, shorter-chain phospholipids lead to less rigid and less hydrophobic membranes. These loosely packed membranes are more susceptible to apolipoprotein partitioning and lipid exchange with endogenous lipoproteins like high-density lipoproteins (HDLs), ultimately compromising liposome structural integrity and thereby reducing circulation half-life [32,34–36]. These prior studies offer valuable insights into how LNP hydrophobicity influences cellular uptake and tissue-specific delivery via interactions with plasma proteins.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.905393893379384,
+          "vector_score": 0.018161964689135793,
+          "fused_score": 0.029411764705882353,
+          "entity_types": [
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-0f009577b0f2189fb1b5",
+          "paper_id": "candidate_00002",
+          "text": "Here, we report a new mechanism through which reduced LNP surface hydrophobicity can mediate extrahepatic delivery. Using dendrimers as modular scaffolds, we constructed a library of dendrimerbased lipid nanoparticles (dLNPs) with tunable lipid grafting densities that systematically modulate nanoparticle hydrophobicity. Structure–function analysis revealed that decreasing lipid grafting reduced dLNP surface hydrophobicity and significantly altered plasma protein adsorption. Reduced hydrophobicity diminished apolipoprotein-mediated hepatocyte uptake, resulting in decreased liver mRNA expression compared to conventional LNPs. Instead, low-hydrophobicity dLNPs preferentially transfected splenic myeloid cells, which correlated with enrichment of complement proteins and immunoglobulins in the protein corona and enhanced targeting of granulocytic populations. Furthermore, conversion of dendrimer amines into permanently cationic quaternary amines further reduced hydrophobicity and altered surface charge, producing a distinct protein corona composition that enabled efficient mRNA delivery to lung epithelial cells. Together, these findings expand the current framework of LNP design beyond apparent pKa and establish hydrophobicity tuning as a rational strategy for engineering extrahepatic RNA delivery.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.89548750578941,
+          "vector_score": 0.014729647074533314,
+          "fused_score": 0.029386529386529386,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-2b525ebf608bddac2a1c",
+          "paper_id": "candidate_00002",
+          "text": "SDS-PAGE analysis revealed distinct plasma protein components between C5G0-L12-100 and C5G0-L12-100QAP. Specifically, proteins at 70 kDa, just above 150 kDa, and 25 kDa were enriched in C5G0-L12-100QAP (Fig. 5H, green boxes), while proteins at 20 kDa and between 85 and 100 kDa were enriched in C5G0-L12-100 (Fig. 5H, blue boxes). Proteomic analysis showed that ApoE and ApoB, which are known to mediate liver-preferential expression in LNPs [6,11,34] are more enriched in the C5G0-L12-100 (Fig. 5I). In contrast, only Vtn was uniquely enriched in C5G0-L12-100QAP (Fig. 5I). Vtn has been identified in another study to be associated with lung-selective LNP delivery, as it facilitates binding to its receptor, αvβ3 integrin, highly expressed in the pulmonary endothelium [11]. To determine whether lung epithelial cells were responsible for the lung-targeting of dLNPQA, we conducted an immunofluorescent study based on the lung tissue harvested from the C5G0-L12-100QAP injected Ai14 mice (Fig. 5J). Our results showed high levels of co-localization between tdTomato expression and anti-CD324 antibody, which labels epithelial cells through E-cadherin, indicating lung epithelial cells were responsible for lung-specificity of C5G0-L12-100QAP. We further validated this hypothesis in vitro using a human lung cancer epithelial cell line NCI–H292 that expresses αvβ3 integrin [46]. Here, we preincubated C5G0-L12-100 and C5G0-L12-100QAP formulations encapsulating luciferase mRNA with increasing amounts of Vtn. Interestingly, Vtn enhanced functional mRNA delivery of both sister formulations, suggesting that both formulations can efficiently bind Vtn and enter αvβ3-expressing cells (Fig. 5K). However, when these formulations were incubated with human serum, only the transfection of C5G0-L12-100QAP was significantly enhanced (Fig. 5L). This suggests that in the presence of an ensemble of proteins, C5G0-L12-100 preferentially binds other constituents, limiting its transfection in lung epithelial cells. These findings support that the extrahepatic delivery of 100QA series dLNPs is not driven by reduced protein adsorption, but rather by signature proteins like Vtn that are abundantly adsorbed to C5G0-L12-100QAP, contributing to its lung-selectivity.",
+          "section_path": "Results > dLNPQA target lung epithelial cells through a mechanism independent of total protein abundance",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P24",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.7673850376910205,
+          "vector_score": 0.01424244434098644,
+          "fused_score": 0.026856524873828405,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-6952540dbeeb6922970e",
+          "paper_id": "candidate_00002",
+          "text": "Exposure to plasma proteins, such as apolipoproteins, can compromise LNP integrity and alter protein adsorption. To assess whether differences in protein adsorption were related to the different stability of 50% and 100% series dLNPs, we tracked dLNP size distribution changes in plasma using NTA over a 3-h period, following a previously reported method [45]. A fluorescent helper lipid, TopFluor™ TMR-PC, was incorporated at 0.5% (molar ratio) to label all dLNPs, enabling accurate tracking of dLNPs in plasma with minimal background interference [45] (Supplementary 3, Fig. S5A). Control experiments confirmed that the addition of 0.5% TMR-PC did not significantly affect dLNP size (pre-labeling: 140.2 ± 56.3 nm; post-labeling: 145.5 ± 55.9 nm). In PBS, both C1G1-L8-50 and C1G1-L8-100 remained stable throughout the 3-h incubation period (Supplementary 3, Fig. S6). In plasma, both formulations showed increasing size heterogeneity over time (Fig. 3B; Supplementary 3, Fig. S5B), consistent with previous studies that showed interactions with apolipoproteins and lipoproteins in the plasma can induce LNP destabilization and aggregation [32,34–36]. Similar effects were also seen in clinical formulations based on SM-102 and ALC-0315 (Supplementary 3, Fig. S5B). Since protein corona quantification was done at 15 min after incubation, we further analyzed particle distribution change within the first 15min after plasma exposure. At 0 min, the size of C1G1-L8-50 is smaller than C1G1-L8-100, but both are narrowly distributed. After 15min incubation with plasma, both of C1G1-L8-50 and C1G1-L8-100 showed broadened size distributions (Fig. 3C). However, C1G1-L8-50 became larger and more heterogenous than C1G1-L8-100 (Fig. 3D), indicating the C1G1-L8-50 is less stable in the plasma than C1G1-L8-100. The lower plasma stability of 50% series dLNPs could stem from their lower hydrophobicity, making its lipids more flexible to exchange with lipoproteins and itself more susceptible to apolipoprotein partitioning, both of which could negatively affect the adsorption of other plasma proteins on their surface. To further validate this hypothesis in a non-dendrimer system, we analyzed the total plasma protein abundance associated with the clinically used ionizable lipids SM-102 and ALC-0315. Due to the additional lipid tail, ALC-0315-based LNPs demonstrated higher hydrophobicity than SM-102-based LNPs in our PRODAN assay (Fig. 2L). Protein mass quantification revealed that plasma proteins bound to ALC-0315 were 17.5% higher than those associated with SM-102 (Supplementary 3, Fig. S7). Similar to C1G1-L8-50, SM-102 became more heterogenous than ALC-0315, indicating SM-102 is less stable in the plasma. In conclusion, these results underscore the importance of dLNP hydrophobicity in determining their interactions with plasma proteins (Fig. 3E).",
+          "section_path": "Results > The hydrophobicity of dLNPs affects the quantity of plasma protein adsorption",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P14",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.444702424667187,
+          "vector_score": 0.013318312228809777,
+          "fused_score": 0.026153846153846153,
+          "entity_types": [
+            "composition_signal",
+            "lipid_or_material",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-03-biological_model",
+          "block_id": "candidate_00002-B-ed46f2a380fa9b18f4d7",
+          "paper_id": "candidate_00002",
+          "text": "Predominant liver accumulation remains a major challenge for the application of lipid nanoparticle (LNP)-based gene therapies. While tuning the apparent pKa is an effective strategy for influencing endogenous proteins that regulate LNP-mediated tissue-specific delivery, recent evidence suggests that alternative mechanisms may exist. Here, we reveal a new mechanism by which LNP surface hydrophobicity influences extrahepatic delivery. Using dendrimers as modular molecules and an in-house developed surface hydrophobicity assay, we show that reducing lipid grafting on the dendrimer decreases the surface hydrophobicity of dendrimer-based LNPs (dLNPs), leading to reduced stability in plasma and decreased plasma protein adsorption. This diminishes the ability of LNPs to target liver hepatocytes through endogenous mechanisms involving interactions between apolipoproteins and their cognate receptors. At the same time, we find that dLNPs with lower surface hydrophobicity exhibit enhanced targeting of granulocytes relative to monocytic cells, potentially due to complement protein interactions. Further modification of dendrimers with quaternary amines increases dLNP surface charge density and improves lung delivery by preferentially targeting lung epithelial cells. While this modification also reduces surface hydrophobicity, the enhanced lung delivery is associated with distinct protein corona compositions rather than reduced protein adsorption. These findings establish modulation of LNP surface hydrophobicity as a novel strategy for achieving extrahepatic delivery.",
+          "section_path": "Abstract",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "abstract",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": null,
+          "vector_score": 0.015061124138224819,
+          "fused_score": 0.019600269481248597,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "recipient_cell": {
+      "query": {
+        "query_id": "candidate_00002-04-recipient_cell",
+        "paper_id": "candidate_00002",
+        "question": "Which cells physically receive the LNP or express its payload in each experiment?",
+        "field_group": "recipient_cell",
+        "required_entity_types": [
+          "lnp",
+          "cell"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-2b525ebf608bddac2a1c",
+          "paper_id": "candidate_00002",
+          "text": "SDS-PAGE analysis revealed distinct plasma protein components between C5G0-L12-100 and C5G0-L12-100QAP. Specifically, proteins at 70 kDa, just above 150 kDa, and 25 kDa were enriched in C5G0-L12-100QAP (Fig. 5H, green boxes), while proteins at 20 kDa and between 85 and 100 kDa were enriched in C5G0-L12-100 (Fig. 5H, blue boxes). Proteomic analysis showed that ApoE and ApoB, which are known to mediate liver-preferential expression in LNPs [6,11,34] are more enriched in the C5G0-L12-100 (Fig. 5I). In contrast, only Vtn was uniquely enriched in C5G0-L12-100QAP (Fig. 5I). Vtn has been identified in another study to be associated with lung-selective LNP delivery, as it facilitates binding to its receptor, αvβ3 integrin, highly expressed in the pulmonary endothelium [11]. To determine whether lung epithelial cells were responsible for the lung-targeting of dLNPQA, we conducted an immunofluorescent study based on the lung tissue harvested from the C5G0-L12-100QAP injected Ai14 mice (Fig. 5J). Our results showed high levels of co-localization between tdTomato expression and anti-CD324 antibody, which labels epithelial cells through E-cadherin, indicating lung epithelial cells were responsible for lung-specificity of C5G0-L12-100QAP. We further validated this hypothesis in vitro using a human lung cancer epithelial cell line NCI–H292 that expresses αvβ3 integrin [46]. Here, we preincubated C5G0-L12-100 and C5G0-L12-100QAP formulations encapsulating luciferase mRNA with increasing amounts of Vtn. Interestingly, Vtn enhanced functional mRNA delivery of both sister formulations, suggesting that both formulations can efficiently bind Vtn and enter αvβ3-expressing cells (Fig. 5K). However, when these formulations were incubated with human serum, only the transfection of C5G0-L12-100QAP was significantly enhanced (Fig. 5L). This suggests that in the presence of an ensemble of proteins, C5G0-L12-100 preferentially binds other constituents, limiting its transfection in lung epithelial cells. These findings support that the extrahepatic delivery of 100QA series dLNPs is not driven by reduced protein adsorption, but rather by signature proteins like Vtn that are abundantly adsorbed to C5G0-L12-100QAP, contributing to its lung-selectivity.",
+          "section_path": "Results > dLNPQA target lung epithelial cells through a mechanism independent of total protein abundance",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P24",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.395890466543351,
+          "vector_score": 0.03155329250870379,
+          "fused_score": 0.031754032258064516,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-0993241d361b4142a951",
+          "paper_id": "candidate_00002",
+          "text": "Clinical applications of mRNA-based therapeutics have a large focus on immunotherapy [2,4], in which the interactions between the delivery vehicle (i.e., LNP) and the immune system are critical for both safety and efficacy. To explore how lipid grafting affects dLNP interactions with immune tissues, we compared two sister formulations, C1G1-L8-50 and C1G1-L8-100, focusing on their targeting behaviors in immune reservoirs like the spleen, blood, and bone marrow. Using transgenic mice with a tdTomato gene flanked by loxP sites (Fig. 4A), we assessed the cell types transfected by dLNPs after delivering mRNA encoding the Cre recombinase enzyme. Total spleen mRNA expression was analyzed by quantifying the percentage of tdTom + splenocytes, showing similar results for both formulations (Fig. 4B), consistent with bioluminescence data (Fig. 3J). Histological analysis revealed that tdTom expression was mainly localized in the marginal zone for C1G1-L8-50, while in C1G1-L8-100, it was distributed across the red pulp (Fig. 4C). Flow cytometry confirmed that both dLNPs were more effective at transfecting myeloid cells in the marginal zone and red pulp than T and B cells in the white pulp (Supplementary 3, Fig.S11 A–C, gating strategy is provided in the same figure). This explained that for 50% series dLNPs, it showed spleen-preferential mRNA expression due to its ability to transfect splenic myeloid cells, while it lacks the ability to transfect hepatocytes in the liver.",
+          "section_path": "Results > The 50% and 100% series dLNPs both induced mRNA expression in spleen but exhibited distinct preferences for myeloid cell subsets",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P18",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.3473348732526,
+          "vector_score": 0.026868699599267975,
+          "fused_score": 0.03057889822595705,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-05eca086380a716fcafb",
+          "paper_id": "candidate_00002",
+          "text": "To evaluate the impact of the protein corona on hepatocyte transfection for both formulations, we first assessed transfection efficiency in the presence or absence of 25% human serum using the Huh7.5 human hepatocyte cell line, which expresses high levels of surface LDLR. Our results demonstrated that the addition of 25% serum significantly enhanced the transfection efficiency of C1G1-L8-100 by 4.2-fold, while it reduced the efficiency of C1G1-L8-50 by 1.9-fold (Fig. 3I, left). For C1G1-L8-100, transfection efficiency was also found to be dependent on the serum concentration (Supplementary 3, Fig. S10). In contrast, when tested on another human hepatocyte cell line, SK-Hep-1 cells with low LDLR expression, the presence of 25% human serum did not significantly affect transfection efficiency (Fig. 3I, right). To further investigate the role of apolipoproteins in mediating hepatocyte transfection, we preincubated C1G1-L8-50 and C1G1-L8-100 dLNPs with recombinant human ApoE (0.25 g ApoE per g total lipid) and transfected Huh7.5 cells using escalating doses of mRNA. Overall, C1G1-L8-100 exhibited higher transfection efficiency in Huh7.5 cells than C1G1-L8-50 (Fig. 3K); more importantly, ApoE pre-incubation significantly enhanced the transfection efficiency of C1G1-L8-100 (p = 0.0007), but not that of its sister formulation, C1G1-L8-50. Taken together, these findings suggest that the enhanced hepatocyte transfection efficiency of C1G1-L8-100 is driven by its greater adsorption of plasma proteins, particularly apolipoproteins, and by an LDLR-mediated mechanism. Conversely, the reduced protein adsorption of C1G1-L8-50 corresponds with lower hepatocyte transfection efficiency and a reduced reliance on serum proteins. This in vitro study provided a mechanistic understanding of our in vivo discovery that C1G1-L8-100 showed robust mRNA expression in the liver, while C1G1-L8-50 did not (Fig. 3J).",
+          "section_path": "Results > The quantity of adsorbed plasma proteins affects dLNP’s efficiency to target liver hepatocytes",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P17",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.6304657507621085,
+          "vector_score": 0.03011846168462171,
+          "fused_score": 0.030309988518943745,
+          "entity_types": [
+            "cell",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-c34b29f050f1ff028b98",
+          "paper_id": "candidate_00002",
+          "text": "In summary, the observed differences in cell and tissue specificity among our dLNP formulations are driven by variations in dendrimer lipid grafting percentage, which modulates LNP surface hydrophobicity and, in turn, the quantity and composition of adsorbed plasma proteins. Although our results demonstrate a strong correlation among dendrimer lipid grafting percentage, dLNP surface hydrophobicity, and tissuespecific mRNA delivery, future studies will be necessary to establish a direct causal relationship between LNP hydrophobicity and cell and tissue tropism. Such efforts could include systematically varying LNP surface hydrophobicity while holding other physicochemical parameters constant to isolate its contribution to in vivo biodistribution.",
+          "section_path": "Discussion",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P30",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.9050803447123847,
+          "vector_score": 0.03155149157883307,
+          "fused_score": 0.030090497737556562,
+          "entity_types": [
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-fb329b49e292d3476e79",
+          "paper_id": "candidate_00002",
+          "text": "Using transgenic mice with a tdTomato (tdTom) gene flanked by loxP sites, we assessed the cell type transfected by dLNPs after delivering mRNA encoding the Cre recombinase enzyme. Immunofluorescence analysis, consistent with bioluminescence-based biodistribution analysis (Fig. 1E), showed that C1G1-L8-100 demonstrated higher liver mRNA expression (indicated by tdTomato) compared to C1G1-L8-50 (Fig. 3G). Higher magnification imaging showed that for C1G1-L8-100, most of liver mRNA expression was associated with hepatocytes (Fig. 3G, insert). Given that apolipoproteins can mediate the LNP’s targeting to hepatocytes through LDLR, we selectively analyzed the relative abundance of apolipoproteins between the sister formulations. Overall, the relative abundance of apolipoproteins was similar in both formulations (27.4% for C1G1-L8-50 and 24.3% for C1G1-L8-100) (Supplementary 3, Fig. S9A, light blue bars). Further analysis of major identified apolipoproteins (e.g., Apoa1, Apob, Apoe, Apc3, Apoa4, and Apoh) found no significant differential expression of each apolipoprotein category (Fig. 3H). However, since the amount of total protein associated with C1G1-L8-100 was twice that of C1G1-L8-50 (Fig. 3A–E), the absolute abundance of apolipoproteins was lower in C1G1-L8-50. This reduced protein abundance in C1G1-L8-50 may impair apolipoproteins’ ability to facilitate dLNP’s targeting to hepatocytes, resulting in significantly lower liver mRNA expression for C1G1-L8-50. To further confirm this hypothesis, we analyzed the protein corona composition of another sister formulation: C5G0-L12-50 and C5G0-L12-100. The total amount of plasma proteins associated with the C5G0-L12-100 was approximately twofold higher than that of the C5G0-L12-50 (Fig. 3A). Proteomics analysis found a higher relative abundance of apolipoproteins in the protein corona of C5G0-L12-100 (28.9%) over C5G0-L12-50 (19.0%), which is mostly driven by Apoa1 (21.9% versus 13.1%) (Tables S3 and S4, Supplementary 3, Fig. S9B and C).",
+          "section_path": "Results > The quantity of adsorbed plasma proteins affects dLNP’s efficiency to target liver hepatocytes",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P16",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.901559683815127,
+          "vector_score": 0.02248389451966847,
+          "fused_score": 0.028577260665441927,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-54c81bcc374a098e8709",
+          "paper_id": "candidate_00002",
+          "text": "We found that reducing the lipid grafting percentage on the dendrimer surface enabled extrahepatic delivery of dLNPs, highlighting the impact of lipid tail structures on LNP biodistribution. We hypothesized that dLNP cell and tissue tropism is mediated by the hydrophobicity of LNPs. Previous studies have shown the importance of hydrophobicity in determining protein adsorption for polymeric and inorganic nanoparticles [26–28]. However, due to the lack of a method to characterize LNP hydrophobicity, its impact on LNPs’ in vivo behavior has remained unclear. Early studies showed that the lipid structure can affect the packing density of liposomal membranes, which has significant impact on liposome stability and half-life in plasma due to the interactions with apolipoproteins and HDLs [48,49]. Here, we extended the study to the LNP system. Specifically, we developed a fluorescent probe-based assay to quantify dLNP surface hydrophobicity. This assay revealed that lower lipid grafting percentage (50% series) significantly reduced hydrophobicity in both dLNPs and conventional LNPs based on clinically approved ionizable lipids. Notably, this reduced surface hydrophobicity caused the 50% series dLNPs to be more unstable than the 100% series in the plasma. This phenomenon was also observed in formulations based on clinical ionizable lipids SM-102 and ALC-0315 (Fig. 3B, Supplementary 3, Fig. S5B–D). SM-102 LNPs exhibited lower surface hydrophobicity (Fig. 2L), reduced total plasma protein adsorption (Supplementary 3, Fig. S7), and increased spleen-preferential mRNA expression compared to ALC-0315 LNPs (Fig. 2K). These findings collectively indicated that the lower surface hydrophobicity makes LNPs less stable in the plasma, leading to reduced adsorption of plasma proteins on the LNP surface, and also suggesting that the relationship among LNP surface hydrophobicity, protein adsorption, and tissue tropism identified in our dLNP system may extend to conventional LNP platforms. Previous studies have shown that LNPs and liposomes with reduced PEG surface coverage exhibit decreased plasma stability and increased uptake by the Mononuclear Phagocyte System (MPS), resulting in accelerated systemic clearance and enhanced splenic accumulation [50,51]. In our study, we demonstrate that altering lipid grafting percentage and surface hydrophobicity similarly modulates the stability of dLNPs. Reduced particle stability was associated with reduced liver mRNA expression while maintaining robust splenic mRNA expression, likely due to interactions with phagocytic cells. Future studies establishing a direct link between decreased LNP stability, accelerated systemic clearance, and reduced liver accumulation will be necessary to further validate this proposed mechanism. Similarly, the 100QA series dLNPs exhibited significantly lower surface hydrophobicity compared to their 100% series counterparts. However, unlike the 50% series, where reduced surface hydrophobicity was due to lower lipid grafting percentage, the 100QA series’ reduced surface hydrophobicity was driven by the permanently cationic dendrimer cores. This demonstrates that both the ionizable head and lipid tail structures influence LNP surface hydrophobicity.",
+          "section_path": "Discussion",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P26",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.0001783598564336,
+          "vector_score": 0.030410101823471106,
+          "fused_score": 0.028484848484848488,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-0f009577b0f2189fb1b5",
+          "paper_id": "candidate_00002",
+          "text": "Here, we report a new mechanism through which reduced LNP surface hydrophobicity can mediate extrahepatic delivery. Using dendrimers as modular scaffolds, we constructed a library of dendrimerbased lipid nanoparticles (dLNPs) with tunable lipid grafting densities that systematically modulate nanoparticle hydrophobicity. Structure–function analysis revealed that decreasing lipid grafting reduced dLNP surface hydrophobicity and significantly altered plasma protein adsorption. Reduced hydrophobicity diminished apolipoprotein-mediated hepatocyte uptake, resulting in decreased liver mRNA expression compared to conventional LNPs. Instead, low-hydrophobicity dLNPs preferentially transfected splenic myeloid cells, which correlated with enrichment of complement proteins and immunoglobulins in the protein corona and enhanced targeting of granulocytic populations. Furthermore, conversion of dendrimer amines into permanently cationic quaternary amines further reduced hydrophobicity and altered surface charge, producing a distinct protein corona composition that enabled efficient mRNA delivery to lung epithelial cells. Together, these findings expand the current framework of LNP design beyond apparent pKa and establish hydrophobicity tuning as a rational strategy for engineering extrahepatic RNA delivery.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.103899750015192,
+          "vector_score": 0.021869365270833926,
+          "fused_score": 0.0273972602739726,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-6911afaee28fb47f73e5",
+          "paper_id": "candidate_00002",
+          "text": "Further analysis showed that the two formulations had different preferences for myeloid cell subsets. Specifically, C1G1-L8-50 predominantly transfected granulocytes (94.9 ± 5.9%), which was 5.4-fold higher than monocytes (17.7 ± 7.9%), 8.7-fold higher than macrophages (10.9 ± 2.0%), and 37.7-fold higher than dendritic cells (2.5 ± 0.3%) (Fig. 4D, red bars; Supplementary 3, Fig. S11D). In contrast, C1G1-L8-100 was more efficient in transfecting monocytes (34.6 ± 27.3%) and dendritic cells (29.5 ± 28.8%) but less effective with granulocytes (41.6 ± 40.4%) compared to C1G1-L8-50 (Fig. 4D, blue bars; Supplementary 3, Fig. S11D), making C1G1-L8-100 less specific to granulocytes than C1G1-L8-50. Since the delivery of mRNA to splenocytes is influenced by tissue barriers that may restrict dLNP access, we next evaluated transfection in the peripheral blood, where access to leukocytes is unrestricted. In the blood, C1G1-L8-50 showed greater specificity for granulocytes (68.0 ± 17.6%), which was 21.1-fold higher than monocytes (3.2 ± 0.5%), 7.8-fold higher than macrophages (8.7 ± 5.9%), and 67.2-fold higher than dendritic cells (1.0 ± 0.2%) (Fig. 4E, red bars). In contrast, C1G1-L8-100 had higher transfection efficiency in monocytes (26.2 ± 12.9%), macrophages (23.0 ± 16.0%), and dendritic cells (4.6 ± 2.2%) but lower efficiency in granulocytes (52.1 ± 18.7%) (Fig. 4E, blue bars), making it less specific to granulocytes than C1G1-L8-50. We further performed an in vitro assay using primary bone marrow cells to validate this in vivo discovery (Supplementary 3, Fig. S14A). A heterogenous population of murine bone marrow cells was transfected with either C1G1-L8-50 or C1G1-L8-100, and the granulocyte-to-monocyte ratio was quantified in transfected cells using flow cytometry (Supplementary 3, Fig. S14C). Notably, the C1G1-L8-50 group exhibited a 3-fold higher granulocyte-to-monocyte ratio compared to C1G1-L8-100, suggesting that the 50% series formulation has higher preferential transfection towards granulocytes than the 100% series formulation (Supplementary 3, Fig. S14C).",
+          "section_path": "Results > The 50% and 100% series dLNPs both induced mRNA expression in spleen but exhibited distinct preferences for myeloid cell subsets",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P19",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.454184813743682,
+          "vector_score": 0.01972434525134866,
+          "fused_score": 0.02690501986276634,
+          "entity_types": [
+            "cell",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-f41fc940981320539cfd",
+          "paper_id": "candidate_00002",
+          "text": "The surface hydrophobicity of a nanoparticle has significant effects on its stability, biological absorption, transportation, and distribution [24]. Previous studies have shown the hydrophobicity of nanoparticles can impact both the quantity and quality of plasma protein adsorption [25]. For example, polymeric nanoparticles with higher hydrophobicity tend to exhibit enhanced plasma protein adsorption [26–28]. PEGylation of the nanoparticle surface decreases the surface hydrophobicity and consequently reduces protein adsorption [29,30]. Earlier studies of liposomes have demonstrated that the structure of phospholipids significantly influences the liposome’s hydrophobicity and membrane fluidity, which in turn affects the types and amounts of plasma components that bind to their surface in vivo [30–33]. Specifically, compared to saturated, longer-chain phospholipids, unsaturated, shorter-chain phospholipids lead to less rigid and less hydrophobic membranes. These loosely packed membranes are more susceptible to apolipoprotein partitioning and lipid exchange with endogenous lipoproteins like high-density lipoproteins (HDLs), ultimately compromising liposome structural integrity and thereby reducing circulation half-life [32,34–36]. These prior studies offer valuable insights into how LNP hydrophobicity influences cellular uptake and tissue-specific delivery via interactions with plasma proteins.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P5",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.9481579929312396,
+          "vector_score": 0.020233825863121082,
+          "fused_score": 0.026144907723855092,
+          "entity_types": [
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-04-recipient_cell",
+          "block_id": "candidate_00002-B-92a52a59f6dbfb69dab1",
+          "paper_id": "candidate_00002",
+          "text": "By characterizing the plasma proteins associated with dLNPs, we identified a hydrophobicity-driven mechanism that mediates their extrahepatic delivery. Current theory suggests that the spleen tropism of LNPs is primarily driven by β2-GPI, a plasma protein highly enriched in the protein corona of LNPs with a low apparent pKa [11]. However, in our system, the spleen-targeting dLNPs had a higher apparent pKa range (7.5 to 8.4). Additionally, the relative abundance of key plasma proteins (Apoa1, Vtn, and Alb) associated with both the 50% (spleen tropism) and 100% (liver tropism) series dLNPs did not differ significantly. This suggests that spleen-preferential expression in the 50% series dLNPs is not driven by a specific plasma protein. Instead, it is likely caused by reduced total protein adsorption in the less hydrophobic 50% series formulation. This reduction in protein adsorption decreased the number of apolipoproteins bound to the 50% series dLNPs, resulting in significantly reduced transfection towards hepatocytes compared to the 100% series dLNPs. As a result, the 50% series dLNP showed a strong spleen specific mRNA expression through targeting splenic myeloid cells. Further studies are needed to confirm this hypothesis by comparing the affinity of apolipoproteins for the 50% and 100% series dLNPs. The extrahepatic delivery of 100QA series dLNPs was not driven by total protein abundance. Although these dLNPs had significantly lower surface hydrophobicity than the 100% series, their cationic surface properties likely facilitated interactions with different plasma proteins. Consequently, the protein corona composition differed significantly between C5G0-L12-100 and C5G0-L12-100QAP (Tables S3 and S5). We show that lung-selective delivery of C5G0-L12-100QAP was mediated by targeting epithelial cells, which is mediated by one or more endogenous proteins.",
+          "section_path": "Discussion",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P27",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.6313878688909518,
+          "vector_score": null,
+          "fused_score": 0.02009367681498829,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "therapeutic_target": {
+      "query": {
+        "query_id": "candidate_00002-05-therapeutic_target",
+        "paper_id": "candidate_00002",
+        "question": "Which cells are acted upon for the therapeutic effect in each experiment, distinguishing them from delivery recipient cells?",
+        "field_group": "therapeutic_target",
+        "required_entity_types": [
+          "cell"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-abd5757de4c1a5940822",
+          "paper_id": "candidate_00002",
+          "text": "Lipid nanoparticles (LNPs) represent the most clinically advanced non-viral system for the delivery of RNAs, including messenger RNA (mRNA) and small interfering RNA (siRNA). To date, the U.S. Food and Drug Administration (FDA) has approved four LNP-based therapeutics: Comirnaty, Spikevax, mRESVIA, and Onpattro. Among these clinical products, Onpattro is the only therapeutic that utilizes systemic administration as the route of delivery [1]. Although LNPs can be a promising tool for the delivery of nucleic acids for protein replacement therapy [2], gene editing [3], and in situ cell therapy [4], these therapeutic applications are limited by LNPs’ predominant liver accumulation, particularly in liver hepatocytes, upon systemic delivery [5,6]. Developing strategies to control the tissue tropism of LNPs therefore remains a central challenge in the field.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P3",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 10.993265084824827,
+          "vector_score": 0.05547004419510732,
+          "fused_score": 0.03947967886159319,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-43d88ebe87563b3e7d03",
+          "paper_id": "candidate_00002",
+          "text": "Upon systemic administration, lipid nanoparticles (LNPs) rapidly shed their surface-bound polyethylene glycol (PEG) lipids [7]. This is followed by the adsorption of plasma proteins, resulting in the formation of a dynamic “protein corona” around the LNPs [7]. These interactions can compromise the structural integrity of the LNPs, potentially leading to lipid dissociation, particle agglomeration, and premature release of RNA [7,8]. At the same time, protein adsorption plays a critical role in mediating cellular uptake and in vivo biodistribution. For example, in the case of Onpattro, the adsorption of apolipoprotein E (ApoE) onto the LNP surface facilitates recognition by low-density lipoprotein receptors (LDLR) on hepatocytes, thereby promoting receptor-mediated endocytosis and efficient liver delivery of RNA cargos [6,7,9–11]. Building on this endogenous mechanism, engineering approaches have been developed to control the tissue-specific delivery of RNA. Specifically, tuning the apparent pKa of the lipid-based delivery system serves as a simple and effective method for manipulating the endogenous proteins that govern their subsequent tissue-specific delivery towards the liver, spleen, or lung [11–13]. Despite the success of this design principle emerging evidence has shown the apparent pKa might not be the only factor that affects the extrahepatic delivery of LNPs. Engineering the chemical structures of the ionizable lipids, particularly the lipid tails, can also enhance extrahepatic delivery without significantly altering the apparent pKa of LNPs [14–23]. As a result, predicting the biodistribution of LNPs from the chemical structure of ionizable lipids remains elusive. These findings indicate that additional physicochemical properties of LNPs contribute to their interactions with plasma proteins and their subsequent in vivo biodistribution.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P4",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.965453490223511,
+          "vector_score": 0.024641187072401552,
+          "fused_score": 0.03718218675384196,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-ed46f2a380fa9b18f4d7",
+          "paper_id": "candidate_00002",
+          "text": "Predominant liver accumulation remains a major challenge for the application of lipid nanoparticle (LNP)-based gene therapies. While tuning the apparent pKa is an effective strategy for influencing endogenous proteins that regulate LNP-mediated tissue-specific delivery, recent evidence suggests that alternative mechanisms may exist. Here, we reveal a new mechanism by which LNP surface hydrophobicity influences extrahepatic delivery. Using dendrimers as modular molecules and an in-house developed surface hydrophobicity assay, we show that reducing lipid grafting on the dendrimer decreases the surface hydrophobicity of dendrimer-based LNPs (dLNPs), leading to reduced stability in plasma and decreased plasma protein adsorption. This diminishes the ability of LNPs to target liver hepatocytes through endogenous mechanisms involving interactions between apolipoproteins and their cognate receptors. At the same time, we find that dLNPs with lower surface hydrophobicity exhibit enhanced targeting of granulocytes relative to monocytic cells, potentially due to complement protein interactions. Further modification of dendrimers with quaternary amines increases dLNP surface charge density and improves lung delivery by preferentially targeting lung epithelial cells. While this modification also reduces surface hydrophobicity, the enhanced lung delivery is associated with distinct protein corona compositions rather than reduced protein adsorption. These findings establish modulation of LNP surface hydrophobicity as a novel strategy for achieving extrahepatic delivery.",
+          "section_path": "Abstract",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "abstract",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.1045453392417395,
+          "vector_score": 0.027018245363956528,
+          "fused_score": 0.035812353629976576,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-0993241d361b4142a951",
+          "paper_id": "candidate_00002",
+          "text": "Clinical applications of mRNA-based therapeutics have a large focus on immunotherapy [2,4], in which the interactions between the delivery vehicle (i.e., LNP) and the immune system are critical for both safety and efficacy. To explore how lipid grafting affects dLNP interactions with immune tissues, we compared two sister formulations, C1G1-L8-50 and C1G1-L8-100, focusing on their targeting behaviors in immune reservoirs like the spleen, blood, and bone marrow. Using transgenic mice with a tdTomato gene flanked by loxP sites (Fig. 4A), we assessed the cell types transfected by dLNPs after delivering mRNA encoding the Cre recombinase enzyme. Total spleen mRNA expression was analyzed by quantifying the percentage of tdTom + splenocytes, showing similar results for both formulations (Fig. 4B), consistent with bioluminescence data (Fig. 3J). Histological analysis revealed that tdTom expression was mainly localized in the marginal zone for C1G1-L8-50, while in C1G1-L8-100, it was distributed across the red pulp (Fig. 4C). Flow cytometry confirmed that both dLNPs were more effective at transfecting myeloid cells in the marginal zone and red pulp than T and B cells in the white pulp (Supplementary 3, Fig.S11 A–C, gating strategy is provided in the same figure). This explained that for 50% series dLNPs, it showed spleen-preferential mRNA expression due to its ability to transfect splenic myeloid cells, while it lacks the ability to transfect hepatocytes in the liver.",
+          "section_path": "Results > The 50% and 100% series dLNPs both induced mRNA expression in spleen but exhibited distinct preferences for myeloid cell subsets",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P18",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.631264533029914,
+          "vector_score": 0.023210996623495572,
+          "fused_score": 0.030330882352941176,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-92a52a59f6dbfb69dab1",
+          "paper_id": "candidate_00002",
+          "text": "By characterizing the plasma proteins associated with dLNPs, we identified a hydrophobicity-driven mechanism that mediates their extrahepatic delivery. Current theory suggests that the spleen tropism of LNPs is primarily driven by β2-GPI, a plasma protein highly enriched in the protein corona of LNPs with a low apparent pKa [11]. However, in our system, the spleen-targeting dLNPs had a higher apparent pKa range (7.5 to 8.4). Additionally, the relative abundance of key plasma proteins (Apoa1, Vtn, and Alb) associated with both the 50% (spleen tropism) and 100% (liver tropism) series dLNPs did not differ significantly. This suggests that spleen-preferential expression in the 50% series dLNPs is not driven by a specific plasma protein. Instead, it is likely caused by reduced total protein adsorption in the less hydrophobic 50% series formulation. This reduction in protein adsorption decreased the number of apolipoproteins bound to the 50% series dLNPs, resulting in significantly reduced transfection towards hepatocytes compared to the 100% series dLNPs. As a result, the 50% series dLNP showed a strong spleen specific mRNA expression through targeting splenic myeloid cells. Further studies are needed to confirm this hypothesis by comparing the affinity of apolipoproteins for the 50% and 100% series dLNPs. The extrahepatic delivery of 100QA series dLNPs was not driven by total protein abundance. Although these dLNPs had significantly lower surface hydrophobicity than the 100% series, their cationic surface properties likely facilitated interactions with different plasma proteins. Consequently, the protein corona composition differed significantly between C5G0-L12-100 and C5G0-L12-100QAP (Tables S3 and S5). We show that lung-selective delivery of C5G0-L12-100QAP was mediated by targeting epithelial cells, which is mediated by one or more endogenous proteins.",
+          "section_path": "Discussion",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P27",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.176925341822429,
+          "vector_score": 0.025589833598163404,
+          "fused_score": 0.028205128205128206,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-0f009577b0f2189fb1b5",
+          "paper_id": "candidate_00002",
+          "text": "Here, we report a new mechanism through which reduced LNP surface hydrophobicity can mediate extrahepatic delivery. Using dendrimers as modular scaffolds, we constructed a library of dendrimerbased lipid nanoparticles (dLNPs) with tunable lipid grafting densities that systematically modulate nanoparticle hydrophobicity. Structure–function analysis revealed that decreasing lipid grafting reduced dLNP surface hydrophobicity and significantly altered plasma protein adsorption. Reduced hydrophobicity diminished apolipoprotein-mediated hepatocyte uptake, resulting in decreased liver mRNA expression compared to conventional LNPs. Instead, low-hydrophobicity dLNPs preferentially transfected splenic myeloid cells, which correlated with enrichment of complement proteins and immunoglobulins in the protein corona and enhanced targeting of granulocytic populations. Furthermore, conversion of dendrimer amines into permanently cationic quaternary amines further reduced hydrophobicity and altered surface charge, producing a distinct protein corona composition that enabled efficient mRNA delivery to lung epithelial cells. Together, these findings expand the current framework of LNP design beyond apparent pKa and establish hydrophobicity tuning as a rational strategy for engineering extrahepatic RNA delivery.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.297839757328838,
+          "vector_score": 0.02439882252056515,
+          "fused_score": 0.027912386121341344,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-6911afaee28fb47f73e5",
+          "paper_id": "candidate_00002",
+          "text": "Further analysis showed that the two formulations had different preferences for myeloid cell subsets. Specifically, C1G1-L8-50 predominantly transfected granulocytes (94.9 ± 5.9%), which was 5.4-fold higher than monocytes (17.7 ± 7.9%), 8.7-fold higher than macrophages (10.9 ± 2.0%), and 37.7-fold higher than dendritic cells (2.5 ± 0.3%) (Fig. 4D, red bars; Supplementary 3, Fig. S11D). In contrast, C1G1-L8-100 was more efficient in transfecting monocytes (34.6 ± 27.3%) and dendritic cells (29.5 ± 28.8%) but less effective with granulocytes (41.6 ± 40.4%) compared to C1G1-L8-50 (Fig. 4D, blue bars; Supplementary 3, Fig. S11D), making C1G1-L8-100 less specific to granulocytes than C1G1-L8-50. Since the delivery of mRNA to splenocytes is influenced by tissue barriers that may restrict dLNP access, we next evaluated transfection in the peripheral blood, where access to leukocytes is unrestricted. In the blood, C1G1-L8-50 showed greater specificity for granulocytes (68.0 ± 17.6%), which was 21.1-fold higher than monocytes (3.2 ± 0.5%), 7.8-fold higher than macrophages (8.7 ± 5.9%), and 67.2-fold higher than dendritic cells (1.0 ± 0.2%) (Fig. 4E, red bars). In contrast, C1G1-L8-100 had higher transfection efficiency in monocytes (26.2 ± 12.9%), macrophages (23.0 ± 16.0%), and dendritic cells (4.6 ± 2.2%) but lower efficiency in granulocytes (52.1 ± 18.7%) (Fig. 4E, blue bars), making it less specific to granulocytes than C1G1-L8-50. We further performed an in vitro assay using primary bone marrow cells to validate this in vivo discovery (Supplementary 3, Fig. S14A). A heterogenous population of murine bone marrow cells was transfected with either C1G1-L8-50 or C1G1-L8-100, and the granulocyte-to-monocyte ratio was quantified in transfected cells using flow cytometry (Supplementary 3, Fig. S14C). Notably, the C1G1-L8-50 group exhibited a 3-fold higher granulocyte-to-monocyte ratio compared to C1G1-L8-100, suggesting that the 50% series formulation has higher preferential transfection towards granulocytes than the 100% series formulation (Supplementary 3, Fig. S14C).",
+          "section_path": "Results > The 50% and 100% series dLNPs both induced mRNA expression in spleen but exhibited distinct preferences for myeloid cell subsets",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P19",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.8447087973984693,
+          "vector_score": 0.020015644075480822,
+          "fused_score": 0.025645240835114255,
+          "entity_types": [
+            "cell",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-92e05698a32cebd46081",
+          "paper_id": "candidate_00002",
+          "text": "The surface hydrophobicity of dLNPs was evaluated using a modified PRODAN fluorescence assay. A 1 mM PRODAN stock solution was freshly prepared in methanol before each experiment. Two complementary assay formats were employed. In the first method, dLNPs were incubated with the previously described series of pH buffers. Specifically, 188 μL of the respective buffer, 12 μL of dLNP, and 1 μL of PRODAN were dispensed into black-bottom 96-well plates. Following a 10-min incubation at room temperature, fluorescence was measured using a plate reader (Molecular Devices, SpectraMax iD3 or Agilent BioTek Cytation) at an excitation wavelength (λEx) of 365 nm and an emission wavelength (λEm) of 435 nm. The dLNP surface hydrophobicity was quantified as the maximum fluorescence intensity at the plateau phase. In the second method, dLNPs were serially diluted in 188 μL of PBS buffer (pH 7.4) and incubated for 10 min. Subsequently, 1 μL of PRODAN was added, and fluorescence was measured using a plate reader (Agilent BioTek Cytation 1). The hydrophobicity index (S0) was calculated as the initial slope obtained from linear regression analysis. Detailed characterization data for each formation are provided in Fig. 2E–G and Supplementary 3, Fig. S3.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Surface hydrophobicity characterization:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P42",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.749772113169107,
+          "vector_score": 0.04698252018590905,
+          "fused_score": 0.03200204813108039,
+          "entity_types": []
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-1610a9b06a232782dba7",
+          "paper_id": "candidate_00002",
+          "text": "In this study, we utilized PAMAM dendrimers as modular building blocks to construct a library of dLNPs with varying structural properties. A systematic structure-function analysis revealed that the percentage of lipid grafting significantly influenced the in vivo tissue-specific delivery of mRNA through a novel mechanism driven primarily by dLNP hydrophobicity. This finding expands current knowledge, which focuses on elucidating the mechanism of LNP’s tissue-specific delivery from the perspective of apparent pKa [11]. Specifically, LNPs with a low apparent pKa (2 to 6) and higher apparent pKa (>9) have been shown to mediate efficient nucleic acid delivery to the spleen [3,11–13,20,47]. However, a recent study reported a weak correlation between apparent pKa and splenic mRNA expression [15]. Emerging evidence suggests that the lipid tail structures also have a significant impact on extrahepatic RNA delivery. For example, dendron-like ionizable lipids with multi-armed tails [21], ionizable lipids with branched biodegradable tails [14,23], and lipids with short tails [17,18,20] have all been shown to increase mRNA delivery to the spleen or lung. Collectively, these findings indicate that apparent pKa may not be the sole determinant of LNP tissue-specific delivery.",
+          "section_path": "Discussion",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P25",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.421096575346687,
+          "vector_score": 0.019444219168262927,
+          "fused_score": 0.0317981149879884,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-05-therapeutic_target",
+          "block_id": "candidate_00002-B-2b525ebf608bddac2a1c",
+          "paper_id": "candidate_00002",
+          "text": "SDS-PAGE analysis revealed distinct plasma protein components between C5G0-L12-100 and C5G0-L12-100QAP. Specifically, proteins at 70 kDa, just above 150 kDa, and 25 kDa were enriched in C5G0-L12-100QAP (Fig. 5H, green boxes), while proteins at 20 kDa and between 85 and 100 kDa were enriched in C5G0-L12-100 (Fig. 5H, blue boxes). Proteomic analysis showed that ApoE and ApoB, which are known to mediate liver-preferential expression in LNPs [6,11,34] are more enriched in the C5G0-L12-100 (Fig. 5I). In contrast, only Vtn was uniquely enriched in C5G0-L12-100QAP (Fig. 5I). Vtn has been identified in another study to be associated with lung-selective LNP delivery, as it facilitates binding to its receptor, αvβ3 integrin, highly expressed in the pulmonary endothelium [11]. To determine whether lung epithelial cells were responsible for the lung-targeting of dLNPQA, we conducted an immunofluorescent study based on the lung tissue harvested from the C5G0-L12-100QAP injected Ai14 mice (Fig. 5J). Our results showed high levels of co-localization between tdTomato expression and anti-CD324 antibody, which labels epithelial cells through E-cadherin, indicating lung epithelial cells were responsible for lung-specificity of C5G0-L12-100QAP. We further validated this hypothesis in vitro using a human lung cancer epithelial cell line NCI–H292 that expresses αvβ3 integrin [46]. Here, we preincubated C5G0-L12-100 and C5G0-L12-100QAP formulations encapsulating luciferase mRNA with increasing amounts of Vtn. Interestingly, Vtn enhanced functional mRNA delivery of both sister formulations, suggesting that both formulations can efficiently bind Vtn and enter αvβ3-expressing cells (Fig. 5K). However, when these formulations were incubated with human serum, only the transfection of C5G0-L12-100QAP was significantly enhanced (Fig. 5L). This suggests that in the presence of an ensemble of proteins, C5G0-L12-100 preferentially binds other constituents, limiting its transfection in lung epithelial cells. These findings support that the extrahepatic delivery of 100QA series dLNPs is not driven by reduced protein adsorption, but rather by signature proteins like Vtn that are abundantly adsorbed to C5G0-L12-100QAP, contributing to its lung-selectivity.",
+          "section_path": "Results > dLNPQA target lung epithelial cells through a mechanism independent of total protein abundance",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P24",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.917172835845011,
+          "vector_score": 0.030783695626929595,
+          "fused_score": 0.03125763125763126,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "assay": {
+      "query": {
+        "query_id": "candidate_00002-06-assay",
+        "paper_id": "candidate_00002",
+        "question": "For each distinct LNP intervention, which assay or measurement method was used, and which experiment does it belong to?",
+        "field_group": "outcome",
+        "required_entity_types": []
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-0d76c4f3d1ba23d881ff",
+          "paper_id": "candidate_00002",
+          "text": "The apparent pKa of dLNP formulations was determined using the TNS fluorescence assay. Briefly, a series of pH buffers (ranging from 2.5 to 12) were prepared with 150 mM sodium chloride and 20 mM citrate, phosphate, or borate buffers. A 0.6 mM TNS stock solution was freshly prepared in deionized water. For the assay, 188 μL of the respective pH buffer, 12 μL of dLNP, and 2 μL of TNS were combined in the wells of black-bottom 96-well plate (Thermo Fisher Scientific, M33089). After a 10-min incubation at room temperature under continuous orbital shaking, fluorescence intensity was measured using a plate reader (Molecular Devices, SpectraMax iD3) at an excitation wavelength (λEx) of 325 nm and an emission wavelength (λEm) of 447 nm. The fluorescence data were normalized to the value at the lowest pH, and a sigmoidal curve fit was applied to the normalized data. The apparent pKa was defined as the pH corresponding to half-maximal (0.5) fluorescence intensity.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Apparent pKa:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P41",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.021812097362519,
+          "vector_score": 0.022385279459508516,
+          "fused_score": 0.0328943929674507,
+          "entity_types": []
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-92e05698a32cebd46081",
+          "paper_id": "candidate_00002",
+          "text": "The surface hydrophobicity of dLNPs was evaluated using a modified PRODAN fluorescence assay. A 1 mM PRODAN stock solution was freshly prepared in methanol before each experiment. Two complementary assay formats were employed. In the first method, dLNPs were incubated with the previously described series of pH buffers. Specifically, 188 μL of the respective buffer, 12 μL of dLNP, and 1 μL of PRODAN were dispensed into black-bottom 96-well plates. Following a 10-min incubation at room temperature, fluorescence was measured using a plate reader (Molecular Devices, SpectraMax iD3 or Agilent BioTek Cytation) at an excitation wavelength (λEx) of 365 nm and an emission wavelength (λEm) of 435 nm. The dLNP surface hydrophobicity was quantified as the maximum fluorescence intensity at the plateau phase. In the second method, dLNPs were serially diluted in 188 μL of PBS buffer (pH 7.4) and incubated for 10 min. Subsequently, 1 μL of PRODAN was added, and fluorescence was measured using a plate reader (Agilent BioTek Cytation 1). The hydrophobicity index (S0) was calculated as the initial slope obtained from linear regression analysis. Detailed characterization data for each formation are provided in Fig. 2E–G and Supplementary 3, Fig. S3.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Surface hydrophobicity characterization:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P42",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 11.705983204443031,
+          "vector_score": 0.06840009810588174,
+          "fused_score": 0.03278688524590164,
+          "entity_types": []
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-6a2f6356715d91b63e3d",
+          "paper_id": "candidate_00002",
+          "text": "The mRNA encapsulation efficiency of each dLNP formulation was quantified using the Invitrogen™ Quant-iT™ RiboGreen Reagent and RNA Assay Kit, following the manufacturer’s protocol.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Encapsulation efficiency:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P39",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 7.173535093779687,
+          "vector_score": 0.057014840834997985,
+          "fused_score": 0.031754032258064516,
+          "entity_types": [
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-2b8a8a17477eb0fbf6d3",
+          "paper_id": "candidate_00002",
+          "text": "To evaluate LNP hydrophobicity, we developed a fluorescence probe-based assay using hydrophobic dye: 6-propionyl-2-(N,N-dimethylamino)naphthalene (PRODAN) (Fig. 2D). PRODAN has been previously used to assess protein surface hydrophobicity and was adapted for this analysis [37–41]. The absence of charged functional groups in PRODAN minimizes electrostatic interactions, while their aromatic rings enhance hydrophobic interactions, causing wavelength of maximum fluorescence emission shifts when binding to hydrophobic environment (Fig. 2E) [42]. Unlike logP, which measures the intrinsic hydrophobicity of a single chemical entity based on its partition coefficient between two solvents, the PRODAN assay reflects the global surface hydrophobicity of multicomponent nanoparticles based on the fluorescent response of PRODAN upon interacting with hydrophobic regions on the LNP surface. Therefore, we calculated the hydrophobicity index (S0) by taking the initial slope of the fluorescence intensity versus dLNP concentration plot following established method (Fig. 2F) [38,42,43]. Using this method, C1G1-L8-100 showed 3.6 times higher hydrophobicity than C1G1-L8-50 (Fig. 2F). Extending this assay to all lead dLNP formulations, we found that the 100% series dLNPs had significantly higher hydrophobicity than the 50% series (Fig. 2G, Supplementary 3, Fig. S3). Cryo-EM analysis further validated these differences, showing that C1G1-L8-100 had a conventional LNP structure with a homogeneous, multi-layered core, while C1G1-L8-50 exhibited bilayer vesicles with an electron-dense surface (Fig. 2H, Supplementary 3, Fig. S4). Additional physicochemical analysis revealed that C1G1-L8-50 had similar size and size distribution (NTA: 167.4 ± 44.3 nm; DLS: 158 ± 4.8 nm, PDI = 0.25) compared to C1G1-L8-100 (NTA: 140.2 ± 56.3 nm; DLS: 166.6 ± 2.9 nm, PDI = 0.15) (Fig. 2I), with both formulations showing similar ζ potentials (−2.4 ± 0.5 mV vs. −0.4 ± 0.4 mV).",
+          "section_path": "Results > Lipid grafting modifies dLNP surface properties",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P11",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 7.625052917665594,
+          "vector_score": 0.03645429824185224,
+          "fused_score": 0.03149801587301587,
+          "entity_types": [
+            "lnp"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-ed46f2a380fa9b18f4d7",
+          "paper_id": "candidate_00002",
+          "text": "Predominant liver accumulation remains a major challenge for the application of lipid nanoparticle (LNP)-based gene therapies. While tuning the apparent pKa is an effective strategy for influencing endogenous proteins that regulate LNP-mediated tissue-specific delivery, recent evidence suggests that alternative mechanisms may exist. Here, we reveal a new mechanism by which LNP surface hydrophobicity influences extrahepatic delivery. Using dendrimers as modular molecules and an in-house developed surface hydrophobicity assay, we show that reducing lipid grafting on the dendrimer decreases the surface hydrophobicity of dendrimer-based LNPs (dLNPs), leading to reduced stability in plasma and decreased plasma protein adsorption. This diminishes the ability of LNPs to target liver hepatocytes through endogenous mechanisms involving interactions between apolipoproteins and their cognate receptors. At the same time, we find that dLNPs with lower surface hydrophobicity exhibit enhanced targeting of granulocytes relative to monocytic cells, potentially due to complement protein interactions. Further modification of dendrimers with quaternary amines increases dLNP surface charge density and improves lung delivery by preferentially targeting lung epithelial cells. While this modification also reduces surface hydrophobicity, the enhanced lung delivery is associated with distinct protein corona compositions rather than reduced protein adsorption. These findings establish modulation of LNP surface hydrophobicity as a novel strategy for achieving extrahepatic delivery.",
+          "section_path": "Abstract",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "abstract",
+          "page_number": null,
+          "xml_element_id": "P2",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 7.088411546097337,
+          "vector_score": 0.03068950305332074,
+          "fused_score": 0.030309988518943745,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-0f009577b0f2189fb1b5",
+          "paper_id": "candidate_00002",
+          "text": "Here, we report a new mechanism through which reduced LNP surface hydrophobicity can mediate extrahepatic delivery. Using dendrimers as modular scaffolds, we constructed a library of dendrimerbased lipid nanoparticles (dLNPs) with tunable lipid grafting densities that systematically modulate nanoparticle hydrophobicity. Structure–function analysis revealed that decreasing lipid grafting reduced dLNP surface hydrophobicity and significantly altered plasma protein adsorption. Reduced hydrophobicity diminished apolipoprotein-mediated hepatocyte uptake, resulting in decreased liver mRNA expression compared to conventional LNPs. Instead, low-hydrophobicity dLNPs preferentially transfected splenic myeloid cells, which correlated with enrichment of complement proteins and immunoglobulins in the protein corona and enhanced targeting of granulocytic populations. Furthermore, conversion of dendrimer amines into permanently cationic quaternary amines further reduced hydrophobicity and altered surface charge, producing a distinct protein corona composition that enabled efficient mRNA delivery to lung epithelial cells. Together, these findings expand the current framework of LNP design beyond apparent pKa and establish hydrophobicity tuning as a rational strategy for engineering extrahepatic RNA delivery.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 7.050101709564761,
+          "vector_score": 0.030169813524958743,
+          "fused_score": 0.029857397504456328,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-bae364efe4b23ffd95a4",
+          "paper_id": "candidate_00002",
+          "text": "RAW 264.7 cells were seeded into 96-well plates at a cell density of 40,000 cells per well in the complete media two days prior to transfection. Before transfection, the complete medium (DMEM supplied with 10% FBS) was replaced with 100 μL basal medium (DMEM without FBS). The dLNPs prepared were pipetted into DMEM medium at 0.2 μg mRNA/well. A 3-h incubation was followed to allow sufficient dLNP uptake. Cells were then washed with DMEM, and 200 μL complete medium was added to each well. A 24-h incubation was followed to allow sufficient mRNA expression. When characterizing luciferase as the reporter, cells were incubated for 10 min in 100 μL luciferin assay solution (150 μg/mL concentration, PerkinElmer) and the bioluminescence was measured by luminometer.",
+          "section_path": "Materials and methods > In vitro transfection efficiency and cell viability assays",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P50",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 8.58863472867652,
+          "vector_score": 0.022799556560413214,
+          "fused_score": 0.02878726010616578,
+          "entity_types": [
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-a1206dcbc9433ce412df",
+          "paper_id": "candidate_00002",
+          "text": "Huh7.5, SK-Hep-1, and NCI–H292 cells were transfected following a similar method, where 25% pooled human complement-preserved serum (Innovative Research, ICSER10ML) was used instead of FBS.",
+          "section_path": "Materials and methods > In vitro transfection efficiency and cell viability assays",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P52",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.426479456863249,
+          "vector_score": 0.05174011681890987,
+          "fused_score": 0.028693528693528692,
+          "entity_types": [
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-a0465efeb3239036b090",
+          "paper_id": "candidate_00002",
+          "text": "Motivated by the unique structural properties of dendrimers, we constructed structurally diverse lipid-grafted poly(amidoamine) (PAMAM) dendrimers for the formulation of mRNAs into dLNPs (Fig. 1A). First, we selected six amine cores (C1–C6), which underwent iterative Michael addition with methyl acrylate and amidation with ethylenediamine to generate dendrimers of different generations (G0, G1, and G2). Next, we functionalized the dendrimers by grafting their terminal amine groups with four lipid epoxides differing in chain length (L8, L12) and structure (branched LB, unsaturated UNL). To modulate lipid grafting, we adjusted the epoxide lipid-to-dendrimer ratio, yielding dendrimers with 0%, 50%, or 100% lipid modification. These variations resulted in dendrimers with distinct surface amine compositions: primary amines (0% grafting), secondary amines (50%), and tertiary amines (100%) (see Supplementary Information 1 for synthesis details). Overall, we synthesized 162 lipid-grafted dendrimers by systematically varying amine core structures, dendrimer generations, lipid types, and grafting percentages. These dendrimers were then co-formulated with helper lipids and mRNAs to generate dLNPs (Fig. 1A). Most formulations exhibited consistent particle sizes between 80 nm and 200 nm, polydispersity index (PDI) between 0.1 and 0.3, and zeta potential between −0.5 mV and 0 mV (Supplementary 3, Fig. S1A–C). To identify optimal dLNP formulations for in vivo biodistribution studies, we screened for transfection efficiency and relative cell viability in RAW264.7 cells. Given that the protein corona significantly affects cell type-specific uptake of LNP, in vitro screening was performed under serum-free conditions to minimize bias induced by cell type-specific uptake. The in vitro screening identified 10 lead dLNP formulations (Fig. 1B), which exhibited comparable potency and toxicity profiles to commercially available transfection reagents, including SM-102, DLin-MC3-DMA, DOTAP, C12-200, and jetMESSENGER.",
+          "section_path": "Results > Construction of structurally diverse dLNPs for in vitro screening",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.542998820100988,
+          "vector_score": 0.026554011579166405,
+          "fused_score": 0.02797339593114241,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-06-assay",
+          "block_id": "candidate_00002-B-6911afaee28fb47f73e5",
+          "paper_id": "candidate_00002",
+          "text": "Further analysis showed that the two formulations had different preferences for myeloid cell subsets. Specifically, C1G1-L8-50 predominantly transfected granulocytes (94.9 ± 5.9%), which was 5.4-fold higher than monocytes (17.7 ± 7.9%), 8.7-fold higher than macrophages (10.9 ± 2.0%), and 37.7-fold higher than dendritic cells (2.5 ± 0.3%) (Fig. 4D, red bars; Supplementary 3, Fig. S11D). In contrast, C1G1-L8-100 was more efficient in transfecting monocytes (34.6 ± 27.3%) and dendritic cells (29.5 ± 28.8%) but less effective with granulocytes (41.6 ± 40.4%) compared to C1G1-L8-50 (Fig. 4D, blue bars; Supplementary 3, Fig. S11D), making C1G1-L8-100 less specific to granulocytes than C1G1-L8-50. Since the delivery of mRNA to splenocytes is influenced by tissue barriers that may restrict dLNP access, we next evaluated transfection in the peripheral blood, where access to leukocytes is unrestricted. In the blood, C1G1-L8-50 showed greater specificity for granulocytes (68.0 ± 17.6%), which was 21.1-fold higher than monocytes (3.2 ± 0.5%), 7.8-fold higher than macrophages (8.7 ± 5.9%), and 67.2-fold higher than dendritic cells (1.0 ± 0.2%) (Fig. 4E, red bars). In contrast, C1G1-L8-100 had higher transfection efficiency in monocytes (26.2 ± 12.9%), macrophages (23.0 ± 16.0%), and dendritic cells (4.6 ± 2.2%) but lower efficiency in granulocytes (52.1 ± 18.7%) (Fig. 4E, blue bars), making it less specific to granulocytes than C1G1-L8-50. We further performed an in vitro assay using primary bone marrow cells to validate this in vivo discovery (Supplementary 3, Fig. S14A). A heterogenous population of murine bone marrow cells was transfected with either C1G1-L8-50 or C1G1-L8-100, and the granulocyte-to-monocyte ratio was quantified in transfected cells using flow cytometry (Supplementary 3, Fig. S14C). Notably, the C1G1-L8-50 group exhibited a 3-fold higher granulocyte-to-monocyte ratio compared to C1G1-L8-100, suggesting that the 50% series formulation has higher preferential transfection towards granulocytes than the 100% series formulation (Supplementary 3, Fig. S14C).",
+          "section_path": "Results > The 50% and 100% series dLNPs both induced mRNA expression in spleen but exhibited distinct preferences for myeloid cell subsets",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P19",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.235609642772666,
+          "vector_score": 0.025577855695287543,
+          "fused_score": 0.02786377708978328,
+          "entity_types": [
+            "cell",
+            "outcome",
+            "payload"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "endpoint": {
+      "query": {
+        "query_id": "candidate_00002-07-endpoint",
+        "paper_id": "candidate_00002",
+        "question": "For each distinct LNP intervention, what endpoint was measured, including negative, qualitative, cell-specific, and comparator endpoints?",
+        "field_group": "outcome",
+        "required_entity_types": [
+          "outcome"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-bae364efe4b23ffd95a4",
+          "paper_id": "candidate_00002",
+          "text": "RAW 264.7 cells were seeded into 96-well plates at a cell density of 40,000 cells per well in the complete media two days prior to transfection. Before transfection, the complete medium (DMEM supplied with 10% FBS) was replaced with 100 μL basal medium (DMEM without FBS). The dLNPs prepared were pipetted into DMEM medium at 0.2 μg mRNA/well. A 3-h incubation was followed to allow sufficient dLNP uptake. Cells were then washed with DMEM, and 200 μL complete medium was added to each well. A 24-h incubation was followed to allow sufficient mRNA expression. When characterizing luciferase as the reporter, cells were incubated for 10 min in 100 μL luciferin assay solution (150 μg/mL concentration, PerkinElmer) and the bioluminescence was measured by luminometer.",
+          "section_path": "Materials and methods > In vitro transfection efficiency and cell viability assays",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P50",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.828497819518926,
+          "vector_score": 0.04810049820824653,
+          "fused_score": 0.03715163934426229,
+          "entity_types": [
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-0f009577b0f2189fb1b5",
+          "paper_id": "candidate_00002",
+          "text": "Here, we report a new mechanism through which reduced LNP surface hydrophobicity can mediate extrahepatic delivery. Using dendrimers as modular scaffolds, we constructed a library of dendrimerbased lipid nanoparticles (dLNPs) with tunable lipid grafting densities that systematically modulate nanoparticle hydrophobicity. Structure–function analysis revealed that decreasing lipid grafting reduced dLNP surface hydrophobicity and significantly altered plasma protein adsorption. Reduced hydrophobicity diminished apolipoprotein-mediated hepatocyte uptake, resulting in decreased liver mRNA expression compared to conventional LNPs. Instead, low-hydrophobicity dLNPs preferentially transfected splenic myeloid cells, which correlated with enrichment of complement proteins and immunoglobulins in the protein corona and enhanced targeting of granulocytic populations. Furthermore, conversion of dendrimer amines into permanently cationic quaternary amines further reduced hydrophobicity and altered surface charge, producing a distinct protein corona composition that enabled efficient mRNA delivery to lung epithelial cells. Together, these findings expand the current framework of LNP design beyond apparent pKa and establish hydrophobicity tuning as a rational strategy for engineering extrahepatic RNA delivery.",
+          "section_path": "Introduction",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P6",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.772894733771373,
+          "vector_score": 0.02003558771404954,
+          "fused_score": 0.034168883747831114,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-a0465efeb3239036b090",
+          "paper_id": "candidate_00002",
+          "text": "Motivated by the unique structural properties of dendrimers, we constructed structurally diverse lipid-grafted poly(amidoamine) (PAMAM) dendrimers for the formulation of mRNAs into dLNPs (Fig. 1A). First, we selected six amine cores (C1–C6), which underwent iterative Michael addition with methyl acrylate and amidation with ethylenediamine to generate dendrimers of different generations (G0, G1, and G2). Next, we functionalized the dendrimers by grafting their terminal amine groups with four lipid epoxides differing in chain length (L8, L12) and structure (branched LB, unsaturated UNL). To modulate lipid grafting, we adjusted the epoxide lipid-to-dendrimer ratio, yielding dendrimers with 0%, 50%, or 100% lipid modification. These variations resulted in dendrimers with distinct surface amine compositions: primary amines (0% grafting), secondary amines (50%), and tertiary amines (100%) (see Supplementary Information 1 for synthesis details). Overall, we synthesized 162 lipid-grafted dendrimers by systematically varying amine core structures, dendrimer generations, lipid types, and grafting percentages. These dendrimers were then co-formulated with helper lipids and mRNAs to generate dLNPs (Fig. 1A). Most formulations exhibited consistent particle sizes between 80 nm and 200 nm, polydispersity index (PDI) between 0.1 and 0.3, and zeta potential between −0.5 mV and 0 mV (Supplementary 3, Fig. S1A–C). To identify optimal dLNP formulations for in vivo biodistribution studies, we screened for transfection efficiency and relative cell viability in RAW264.7 cells. Given that the protein corona significantly affects cell type-specific uptake of LNP, in vitro screening was performed under serum-free conditions to minimize bias induced by cell type-specific uptake. The in vitro screening identified 10 lead dLNP formulations (Fig. 1B), which exhibited comparable potency and toxicity profiles to commercially available transfection reagents, including SM-102, DLin-MC3-DMA, DOTAP, C12-200, and jetMESSENGER.",
+          "section_path": "Results > Construction of structurally diverse dLNPs for in vitro screening",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.985139056428635,
+          "vector_score": 0.034022705680119156,
+          "fused_score": 0.03125763125763126,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-fd806c381b1bd4956ab3",
+          "paper_id": "candidate_00002",
+          "text": "To evaluate the in vivo fate of lead dLNP formulations, we systemically injected luciferase mRNA-loaded dLNPs into C57BL/6 mice and performed bioluminescent imaging across major organs, including the spleen, liver, lungs, bone (femur), heart, and kidneys, 24 h post-injection. Our results showed that 9 out of the 10 injected lead dLNPs showed consistent high in vivo transfections. Interestingly, dLNPs with 100% lipid-grafted dendrimers exhibited strong liver-preferential expression, with 67%–89% of mRNA signal detected in the liver. In contrast, dLNPs with 50% lipid-grafted showed spleen-preferential expression, with 61%–86% of mRNA signal detected in the spleen (Fig. 1C, Supplementary 3, Fig. S2). Notably, the size, PDI, zeta potential, and encapsulation efficiency were not significantly different between the 100% lipid-grafted and the 50% lipid-grafted dLNPs (Fig. 1D), indicating the tissue-specific mRNA expression was not associated with these physiochemical properties. To further investigate the impact of lipid grafting on tissue selectivity, we compared two pairs of “sister formulations”, defined as dendrimers with identical core structure, generation, and lipid tail, but differing in lipid grafting percentage (50% vs. 100%) (Fig. 1E and F). This variation influenced lipid tail numbers and the ratio of secondary to tertiary amines. For example, C1G1-L8-50 and C5G0-L12-50 contained four and two lipid tails, respectively, whereas their 100% lipid-grafted counterparts contained twice as many lipid tails (eight and four). Additionally, the 50% formulations retained secondary amines, whereas their 100% counterparts contained only tertiary amines. These structural differences led to strikingly distinct mRNA distribution patterns. The 50% lipid-grafted formulations (C1G1-L8-50 and C5G0-L12-50) exhibited predominant spleen expression (85.3 ± 2.4% and 61.5 ± 7.9%, respectively). In contrast, their 100% lipid-grafted counterparts (C1G1-L8-100 and C5G0-L12-100) showed strong liver-preferential expression, with 89.2 ± 3.5% and 69.5 ± 27.6% of mRNA expression in the liver (Fig. 1E and F). These findings highlight the critical role of lipid grafting in directing mRNA delivery between the liver and spleen.",
+          "section_path": "Results > Lipid grafting influences tissue-specific mRNA delivery",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P9",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.593563883092905,
+          "vector_score": 0.021814216481634306,
+          "fused_score": 0.028850145288501453,
+          "entity_types": [
+            "outcome",
+            "payload",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-6a2f6356715d91b63e3d",
+          "paper_id": "candidate_00002",
+          "text": "The mRNA encapsulation efficiency of each dLNP formulation was quantified using the Invitrogen™ Quant-iT™ RiboGreen Reagent and RNA Assay Kit, following the manufacturer’s protocol.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Encapsulation efficiency:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P39",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.945462650644147,
+          "vector_score": 0.026888184195708348,
+          "fused_score": 0.02782608695652174,
+          "entity_types": [
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-55bfbf9dd3a2ea150fbc",
+          "paper_id": "candidate_00002",
+          "text": "B6.Cg-Gt(ROSA)26Sortm14(CAG-tdTomato)Hze/J mice (Jackson Laboratories, 20-25 g) were intravenously injected with dLNPs (~100 μL for female and ~125 μL for male) via retro-orbital administration at the dose of 0.5 mg/kg Cre-recombinase mRNA on Day 0 and Day 1. After 48 h following the second injection, mice were euthanized and perfused. Following perfusion, six organs were collected (lung, liver, spleen, heart, femur, and kidneys). The fluorescent signal of each organ was analyzed using an IVIS imaging system (PerkinElmer IVIS Spectrum) and quantified using LivingImage software (PerkinElmer). The in vivo transfection efficiency of each dLNP formulation in these organs was quantified using average radiance (p/s/cm2/sr) in the tissue.",
+          "section_path": "Materials and methods > Ex vivo imaging > Fluorescence Imaging:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P57",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.940568090532247,
+          "vector_score": 0.023715667002687468,
+          "fused_score": 0.027242401779095628,
+          "entity_types": [
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-57af1a46318dfac4ea49",
+          "paper_id": "candidate_00002",
+          "text": "Dendrimer-based ionizable lipids (dILs) were synthesized according to previously published protocols with modifications [55]. G0 (Core), G1, and G2 dendrimers were reacted with epoxides (long-chain alkyl epoxides or glycidyl ethers) of varying chain lengths (8-carbon and 12-carbon) and structural types (branched and unsaturated). When the stoichiometric amount of epoxide equaled the total number of terminal amine reactive sites within the dendrimer (two sites per primary amine), the resulting products were designated as 100-series dILs. Conversely, when the stoichiometric amount of epoxide was set at half the total number of terminal amine reactive sites, the products were classified as 50-series dILs. The reactions were conducted in 20-mL amber vials containing 200-proof anhydrous ethanol as the solvent and heated at 90 °C for 96 h. Crude products were initially concentrated using a rotary evaporator to remove residual ethanol and subsequently redissolved in dichloromethane (DCM) for further purification. For in vitro transfection efficiency and cell viability screening, the crude dILs were purified using preparative thin-layer chromatography (Prep TLC) on silica gel plates (1000 μm thickness, Miles Scientific) with an 88:11:1 DCM/MeOH/Et3N (v/v/v) solvent system. For dILs selected for in vivo animal studies (herein referred to as lead dILs), purification was performed via silica gel column chromatography (high-purity grade, pore size 60 Å, Supelco) using a gradient elution from 98:1:1 to 80:19:1 DCM/MeOH/Et3N (v/v/v). The purity and identity of lead dIL fractions were confirmed by silica gel thin-layer chromatography (Supelco) with the 88:11:1 DCM/MeOH/Et3N solvent system, wherein each dIL series appeared as a distinct band on the TLC plates. Desired fractions were pooled, and concentrated by rotary evaporation, and the final products were lyophilized (Labconco) for 72 h. The chemical structures of the purified lead dILs were characterized by 1H NMR (Bruker, 600 MHz) and 13C NMR (Bruker, 151 MHz) in chloroform-d (CDCl3, Sigma-Aldrich). The purity profile of lead dILs was further evaluated using a Thermo Fisher Scientific Vanquish high-performance liquid chromatography (HPLC) system equipped with a binary pump, dual UV detector, autosampler, and the Chromeleon™ Chromatography Data System (CDS). Chromatograms were recorded simultaneously at 210 nm and 250 nm. The mobile phase consisted of freshly prepared, filtered, and degassed HPLC-grade water (H2O) and acetonitrile (ACN). Separation was performed on a Supelco Discovery® C8 column (5 μm particle size, 25 cm length, 4.6 mm internal diameter) under an isocratic method with 50% H2O and 50% ACN for 30 min at a flow rate of 1 mL/min. Electrospray ionization mass spectrometry (ESI-MS, Advion expression CMS or Waters Xevo TQ-S micro) was also performed to confirm that the desired product was obtained.",
+          "section_path": "Materials and methods > Synthesis of dendrimer-based ionizable lipids (dILs)",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P34",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.9755869374597457,
+          "vector_score": 0.019049662082071706,
+          "fused_score": 0.02668564312399929,
+          "entity_types": [
+            "composition_signal",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-22b8d5c1c26ecccdfc4f",
+          "paper_id": "candidate_00002",
+          "text": "B6(Cg)-Tyrc–2J/J mice (Jackson Laboratories, 20-25 g) were intravenously injected with dLNPs (~100 μL for female and ~125 μL for male) via the tail vein at the dose of 0.5 mg/kg mRNA. After 24 h, mice were administered an intraperitoneal injection of 10 μL/g of D-luciferin (15 mg/ml in DPBS). After 15 min, the mice were euthanized and perfused to remove the blood, and six organs were collected (lung, liver, spleen, heart, femur, and kidneys). The luminescence signal of each organ was analyzed using an IVIS imaging system (PerkinElmer IVIS Spectrum) and quantified using LivingImage software (PerkinElmer). The in vivo transfection efficiency of each dLNP formulation in these organs was quantified using total flux (p/s) in the tissue.",
+          "section_path": "Materials and methods > Ex vivo imaging > Bioluminescence imaging:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P56",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 2.9060404037782726,
+          "vector_score": 0.023374451830627196,
+          "fused_score": 0.026547116736990152,
+          "entity_types": [
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-353f2d531c2ce2261b8a",
+          "paper_id": "candidate_00002",
+          "text": "Further machine learning analysis, integrating key dendrimer structural features with in vitro screening data, revealed that the number of lipid tails is a critical predictor of high transfection efficiency and high relative cell viability in dLNPs (see Supplementary Information 2 for details). The evaluation metrics (e.g., balanced accuracy) for relative cell viability and transfection efficiency evaluated from the developed multi-class DNN based on the 5-fold cross-validation and test set are summarized in Supplementary Information 2. AUC-ROC values for all classes in different output targets were above 0.86, indicating that the model possesses strong discriminatory power for each class, and the AUC-ROC curves are shown in Supplementary Information 2, Fig. S2. To assess whether lipid grafting affects dLNP physicochemical properties and in vitro performance, we analyzed the impact of lipid grafting across all dLNP candidates in our library. Compared to the 50%- and 100%-series dLNPs, the 0%-series dLNPs (containing dendrimers with no lipid grafting) exhibited significantly larger size, higher PDI, greater encapsulation efficiency, and improved cell viability but much lower transfection efficiency (Supplementary 3, Fig. S1A–F). No significant differences were observed in size, PDI, or zeta potential between the 50% and 100% series (Supplementary 3, Fig. S1A–C). However, in vitro studies revealed that 50% lipid-grafted dLNPs achieved higher transfection efficiency, both in average efficacy and number of successful hits (Supplementary 3, Fig. S1D). This increase in transfection efficiency was not attributable to differences in encapsulation efficiency, as 50% and 100% series dLNPs showed similar mRNA loading efficiency (Supplementary 3, Fig. S1F). Notably, serum proteins known to influence LNP cellular uptake were excluded from the in vitro experimental setup. Therefore, these findings suggest that the number of lipid tails plays a critical role in facilitating mRNA encapsulation, promoting endosomal escape, and enabling efficient RNA release, which represent three ratelimiting steps for successful transfection.",
+          "section_path": "Results > Construction of structurally diverse dLNPs for in vitro screening",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": null,
+          "vector_score": 0.03289952044119634,
+          "fused_score": 0.020551746760701983,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-07-endpoint",
+          "block_id": "candidate_00002-B-0993241d361b4142a951",
+          "paper_id": "candidate_00002",
+          "text": "Clinical applications of mRNA-based therapeutics have a large focus on immunotherapy [2,4], in which the interactions between the delivery vehicle (i.e., LNP) and the immune system are critical for both safety and efficacy. To explore how lipid grafting affects dLNP interactions with immune tissues, we compared two sister formulations, C1G1-L8-50 and C1G1-L8-100, focusing on their targeting behaviors in immune reservoirs like the spleen, blood, and bone marrow. Using transgenic mice with a tdTomato gene flanked by loxP sites (Fig. 4A), we assessed the cell types transfected by dLNPs after delivering mRNA encoding the Cre recombinase enzyme. Total spleen mRNA expression was analyzed by quantifying the percentage of tdTom + splenocytes, showing similar results for both formulations (Fig. 4B), consistent with bioluminescence data (Fig. 3J). Histological analysis revealed that tdTom expression was mainly localized in the marginal zone for C1G1-L8-50, while in C1G1-L8-100, it was distributed across the red pulp (Fig. 4C). Flow cytometry confirmed that both dLNPs were more effective at transfecting myeloid cells in the marginal zone and red pulp than T and B cells in the white pulp (Supplementary 3, Fig.S11 A–C, gating strategy is provided in the same figure). This explained that for 50% series dLNPs, it showed spleen-preferential mRNA expression due to its ability to transfect splenic myeloid cells, while it lacks the ability to transfect hepatocytes in the liver.",
+          "section_path": "Results > The 50% and 100% series dLNPs both induced mRNA expression in spleen but exhibited distinct preferences for myeloid cell subsets",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P18",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.8884977560048553,
+          "vector_score": null,
+          "fused_score": 0.014705882352941176,
+          "entity_types": [
+            "cell",
+            "lnp",
+            "outcome",
+            "payload",
+            "species"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    },
+    "outcomes": {
+      "query": {
+        "query_id": "candidate_00002-08-outcomes",
+        "paper_id": "candidate_00002",
+        "question": "For each endpoint in each distinct LNP intervention, what exact quantitative or qualitative outcome was observed, including zero, absent, or below-detection results?",
+        "field_group": "outcome",
+        "required_entity_types": [
+          "outcome"
+        ]
+      },
+      "hits": [
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-22b8d5c1c26ecccdfc4f",
+          "paper_id": "candidate_00002",
+          "text": "B6(Cg)-Tyrc–2J/J mice (Jackson Laboratories, 20-25 g) were intravenously injected with dLNPs (~100 μL for female and ~125 μL for male) via the tail vein at the dose of 0.5 mg/kg mRNA. After 24 h, mice were administered an intraperitoneal injection of 10 μL/g of D-luciferin (15 mg/ml in DPBS). After 15 min, the mice were euthanized and perfused to remove the blood, and six organs were collected (lung, liver, spleen, heart, femur, and kidneys). The luminescence signal of each organ was analyzed using an IVIS imaging system (PerkinElmer IVIS Spectrum) and quantified using LivingImage software (PerkinElmer). The in vivo transfection efficiency of each dLNP formulation in these organs was quantified using total flux (p/s) in the tissue.",
+          "section_path": "Materials and methods > Ex vivo imaging > Bioluminescence imaging:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P56",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.8120740719427335,
+          "vector_score": 0.023950354158085965,
+          "fused_score": 0.035634207758878524,
+          "entity_types": [
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-6a2f6356715d91b63e3d",
+          "paper_id": "candidate_00002",
+          "text": "The mRNA encapsulation efficiency of each dLNP formulation was quantified using the Invitrogen™ Quant-iT™ RiboGreen Reagent and RNA Assay Kit, following the manufacturer’s protocol.",
+          "section_path": "Materials and methods > Characterization of dLNPs > Encapsulation efficiency:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P39",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.890920241792666,
+          "vector_score": 0.027305399399164387,
+          "fused_score": 0.0315136476426799,
+          "entity_types": [
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-af74852dfac88e772b64",
+          "paper_id": "candidate_00002",
+          "text": "Nano-liquid chromatography-tandem mass spectrometry (Nano-LC/MS/MS) was performed using a Thermo Scientific Q Exactive HF Orbitrap mass spectrometer equipped with an EASY-Spray nanospray source (Thermo Scientific) operated in positive ion mode. The liquid chromatography (LC) system consisted of an UltiMate™ 3000 RSLCnano system (Thermo Scientific). Mobile phase A comprised water with 0.1% formic acid, while mobile phase B consisted of acetonitrile with 0.1% formic acid. For the loading pump, mobile phase A contained water with 0.1% trifluoroacetic acid. A 5 μL aliquot of the sample was injected onto a Thermo Scientific μPAC™ C18 trapping column (C18, 5 μm pillar diameter, 10 mm length, 2.5 μm inter-pillar distance) at a flow rate of 10 μL/min. The sample was retained for 3 min and washed with 1% mobile phase B to desalt and concentrate the peptides. The injector port was then switched to the injection mode, transferring the peptides from the trap to the analytical column. Chromatographic separation was performed using a Thermo Scientific 110 cm μPAC™ column (C18, 5 μm pillar diameter, 110 cm length, 2.5 μm inter-pillar distance) maintained at 40 °C. The initial flow rate was set at 750 nL/min for 15 min, after which it was reduced to 250 nL/min. Peptides were eluted directly into the Q Exactive HF Orbitrap mass spectrometer using a gradient of 1% to 20% mobile phase B over 100 min, followed by an increase to 45% B over the next 20 min, with a total run time of 150 min. Mass spectrometry (MS/MS) data acquisition followed standard conditions established in the laboratory. The EASY-Spray source operated at a spray voltage of 1.5 kV and a capillary temperature of 200 °C. The scan sequence was based on the TopTen™ method, where a full MS scan was acquired across a mass range of 375–1575 Da at a resolution of 60,000, followed by MS/MS scans at a resolution of 15,000 to generate product ion spectra for amino acid sequence determination. The fifteen most abundant precursor ions in each spectrum were selected for fragmentation. The automatic gain control (AGC) target was set to 3 × 106 ions for full scans and 2 × 105 ions for MS/MS mode. The maximum ion injection time was set to 50 ms for full scans and 55 ms for MS/MS mode, with a microscan number of 1 for both modes. Higher-energy collisional dissociation (HCD) fragmentation was applied with a normalized collision energy (NCE) of 28 and a stepped NCE, using an isolation window of 4 m/z. Singly charged ions were excluded from MS/MS analysis, and dynamic exclusion was enabled with a repeat count of 1 within a 15-s window, also excluding isotopic peaks. A siloxane background peak at 445.12003 m/z was used as an internal lock mass. To ensure system integrity and performance, a HeLa protein digest standard was analyzed. If the number of identified proteins from the HeLa standard fell below 3,200, the instrument underwent cleaning, and new columns were installed.",
+          "section_path": "Materials and methods > Isolation, characterization, and proteomic analysis of dLNP protein corona > Mass spectrometry:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P47",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 6.811816669715567,
+          "vector_score": 0.023271675775949036,
+          "fused_score": 0.030886196246139225,
+          "entity_types": [
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-55bfbf9dd3a2ea150fbc",
+          "paper_id": "candidate_00002",
+          "text": "B6.Cg-Gt(ROSA)26Sortm14(CAG-tdTomato)Hze/J mice (Jackson Laboratories, 20-25 g) were intravenously injected with dLNPs (~100 μL for female and ~125 μL for male) via retro-orbital administration at the dose of 0.5 mg/kg Cre-recombinase mRNA on Day 0 and Day 1. After 48 h following the second injection, mice were euthanized and perfused. Following perfusion, six organs were collected (lung, liver, spleen, heart, femur, and kidneys). The fluorescent signal of each organ was analyzed using an IVIS imaging system (PerkinElmer IVIS Spectrum) and quantified using LivingImage software (PerkinElmer). The in vivo transfection efficiency of each dLNP formulation in these organs was quantified using average radiance (p/s/cm2/sr) in the tissue.",
+          "section_path": "Materials and methods > Ex vivo imaging > Fluorescence Imaging:",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P57",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 5.881129391306417,
+          "vector_score": 0.02404915305902758,
+          "fused_score": 0.030798389007344232,
+          "entity_types": [
+            "outcome",
+            "payload",
+            "route",
+            "species"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-353f2d531c2ce2261b8a",
+          "paper_id": "candidate_00002",
+          "text": "Further machine learning analysis, integrating key dendrimer structural features with in vitro screening data, revealed that the number of lipid tails is a critical predictor of high transfection efficiency and high relative cell viability in dLNPs (see Supplementary Information 2 for details). The evaluation metrics (e.g., balanced accuracy) for relative cell viability and transfection efficiency evaluated from the developed multi-class DNN based on the 5-fold cross-validation and test set are summarized in Supplementary Information 2. AUC-ROC values for all classes in different output targets were above 0.86, indicating that the model possesses strong discriminatory power for each class, and the AUC-ROC curves are shown in Supplementary Information 2, Fig. S2. To assess whether lipid grafting affects dLNP physicochemical properties and in vitro performance, we analyzed the impact of lipid grafting across all dLNP candidates in our library. Compared to the 50%- and 100%-series dLNPs, the 0%-series dLNPs (containing dendrimers with no lipid grafting) exhibited significantly larger size, higher PDI, greater encapsulation efficiency, and improved cell viability but much lower transfection efficiency (Supplementary 3, Fig. S1A–F). No significant differences were observed in size, PDI, or zeta potential between the 50% and 100% series (Supplementary 3, Fig. S1A–C). However, in vitro studies revealed that 50% lipid-grafted dLNPs achieved higher transfection efficiency, both in average efficacy and number of successful hits (Supplementary 3, Fig. S1D). This increase in transfection efficiency was not attributable to differences in encapsulation efficiency, as 50% and 100% series dLNPs showed similar mRNA loading efficiency (Supplementary 3, Fig. S1F). Notably, serum proteins known to influence LNP cellular uptake were excluded from the in vitro experimental setup. Therefore, these findings suggest that the number of lipid tails plays a critical role in facilitating mRNA encapsulation, promoting endosomal escape, and enabling efficient RNA release, which represent three ratelimiting steps for successful transfection.",
+          "section_path": "Results > Construction of structurally diverse dLNPs for in vitro screening",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P8",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.856691220512089,
+          "vector_score": 0.030070385286560856,
+          "fused_score": 0.0304147465437788,
+          "entity_types": [
+            "lnp",
+            "outcome",
+            "payload"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-c059a8acfe1ba610030f",
+          "paper_id": "candidate_00002",
+          "text": "In summary, this study extends the current framework of LNP-mediated nucleic acid delivery by demonstrating that the structure of lipid tails can drive extrahepatic delivery through modulating LNP surface hydrophobicity. While our findings were primarily derived from dendrimer-based systems, we observed consistent hydrophobicity-driven trends in LNPs formulated with clinically approved ionizable lipids SM-102 and ALC-0315 (Fig. 2J–L), supporting the broader applicability of this mechanism across LNP platforms. Further investigations across additional lipid platforms will be valuable to fully establish the generalizability of this principle. Notably, although 50% series dLNPs exhibited superior transfection efficiency compared to their 100% series counterparts in vitro in the absence of serum proteins, their overall in vivo transfection potency was markedly lower (Supplementary 3, Figs. S1 and S2). Additionally, while in vitro cytotoxicity screening was performed to select lead formulations with high relative cell viability prior to in vivo studies, and no acute toxicity was observed in animals at the administered dose, a comprehensive biosafety evaluation including assessment of liver and kidney function and systemic inflammatory responses was not conducted. As the primary focus of this work was to elucidate the mechanistic role of surface hydrophobicity in modulating the nano-bio interface and tissue-selective delivery, detailed toxicological characterization of the dLNP platform remains an important direction for future investigation. Given that reducing LNP surface hydrophobicity can reduce the total abundance of adsorbed proteins and enable extrahepatic delivery while increasing the complement protein adsorption, future efforts can focus on optimizing dendrimer chemistry to reduce complement recognition while maintaining the low surface hydrophobicity of 50% series dLNPs to enable more efficient extrahepatic delivery.",
+          "section_path": "Conclusions",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P31",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.9226680902587217,
+          "vector_score": 0.029076957602932947,
+          "fused_score": 0.02886002886002886,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-a7a564d9e8b829488e9d",
+          "paper_id": "candidate_00002",
+          "text": "To assess the role of protein corona in mediating the lung-specificity of dLNPQA, we first quantified the plasma protein corona abundance. Interestingly, protein quantification showed no difference in the total plasma protein abundance between C5G0-L12-100 and C5G0-L12-100QAP (Fig. 5G). The PRODAN assay revealed that the hydrophobicity of C5G0-L12-100QAP was approximately 2-fold lower than its 100% series counterparts (Supplementary 3, Fig. S17A). However, the weaker hydrophobic interactions in the 100QA series dLNPs may be compensated by stronger electrostatic interactions due to the cationic QA dendrimers. Although the TNS assay did not successfully determine the apparent pKa of C5G0-L12-100QAP, the TNS curve for the 100QA series showed a gap at higher pH, specifically between pH 9 and 12 (Supplementary 3, Fig. S17B). This gap suggests residual interactions between TNS salts and C5G0-L12-100QAP, likely due to the permanently cationic nature of the QA dendrimers. This was not observed for the 100% series formulations, which lack QA dendrimers. A significant drop in TNS fluorescence was observed at pH above 12, indicating reduced electrostatic interactions due to the neutralization of the cationic QAs. Overall, our results indicated that the cationic properties of 100QA series dLNPs enhance their binding to plasma proteins through electrostatic interactions, leading to similar protein adsorption levels.",
+          "section_path": "Results > dLNPQA target lung epithelial cells through a mechanism independent of total protein abundance",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P23",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 3.1814052130094574,
+          "vector_score": 0.027346597485333052,
+          "fused_score": 0.028125,
+          "entity_types": [
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-57af1a46318dfac4ea49",
+          "paper_id": "candidate_00002",
+          "text": "Dendrimer-based ionizable lipids (dILs) were synthesized according to previously published protocols with modifications [55]. G0 (Core), G1, and G2 dendrimers were reacted with epoxides (long-chain alkyl epoxides or glycidyl ethers) of varying chain lengths (8-carbon and 12-carbon) and structural types (branched and unsaturated). When the stoichiometric amount of epoxide equaled the total number of terminal amine reactive sites within the dendrimer (two sites per primary amine), the resulting products were designated as 100-series dILs. Conversely, when the stoichiometric amount of epoxide was set at half the total number of terminal amine reactive sites, the products were classified as 50-series dILs. The reactions were conducted in 20-mL amber vials containing 200-proof anhydrous ethanol as the solvent and heated at 90 °C for 96 h. Crude products were initially concentrated using a rotary evaporator to remove residual ethanol and subsequently redissolved in dichloromethane (DCM) for further purification. For in vitro transfection efficiency and cell viability screening, the crude dILs were purified using preparative thin-layer chromatography (Prep TLC) on silica gel plates (1000 μm thickness, Miles Scientific) with an 88:11:1 DCM/MeOH/Et3N (v/v/v) solvent system. For dILs selected for in vivo animal studies (herein referred to as lead dILs), purification was performed via silica gel column chromatography (high-purity grade, pore size 60 Å, Supelco) using a gradient elution from 98:1:1 to 80:19:1 DCM/MeOH/Et3N (v/v/v). The purity and identity of lead dIL fractions were confirmed by silica gel thin-layer chromatography (Supelco) with the 88:11:1 DCM/MeOH/Et3N solvent system, wherein each dIL series appeared as a distinct band on the TLC plates. Desired fractions were pooled, and concentrated by rotary evaporation, and the final products were lyophilized (Labconco) for 72 h. The chemical structures of the purified lead dILs were characterized by 1H NMR (Bruker, 600 MHz) and 13C NMR (Bruker, 151 MHz) in chloroform-d (CDCl3, Sigma-Aldrich). The purity profile of lead dILs was further evaluated using a Thermo Fisher Scientific Vanquish high-performance liquid chromatography (HPLC) system equipped with a binary pump, dual UV detector, autosampler, and the Chromeleon™ Chromatography Data System (CDS). Chromatograms were recorded simultaneously at 210 nm and 250 nm. The mobile phase consisted of freshly prepared, filtered, and degassed HPLC-grade water (H2O) and acetonitrile (ACN). Separation was performed on a Supelco Discovery® C8 column (5 μm particle size, 25 cm length, 4.6 mm internal diameter) under an isocratic method with 50% H2O and 50% ACN for 30 min at a flow rate of 1 mL/min. Electrospray ionization mass spectrometry (ESI-MS, Advion expression CMS or Waters Xevo TQ-S micro) was also performed to confirm that the desired product was obtained.",
+          "section_path": "Materials and methods > Synthesis of dendrimer-based ionizable lipids (dILs)",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P34",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.438767926359039,
+          "vector_score": 0.018012468083392498,
+          "fused_score": 0.027242401779095628,
+          "entity_types": [
+            "composition_signal",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-a0465efeb3239036b090",
+          "paper_id": "candidate_00002",
+          "text": "Motivated by the unique structural properties of dendrimers, we constructed structurally diverse lipid-grafted poly(amidoamine) (PAMAM) dendrimers for the formulation of mRNAs into dLNPs (Fig. 1A). First, we selected six amine cores (C1–C6), which underwent iterative Michael addition with methyl acrylate and amidation with ethylenediamine to generate dendrimers of different generations (G0, G1, and G2). Next, we functionalized the dendrimers by grafting their terminal amine groups with four lipid epoxides differing in chain length (L8, L12) and structure (branched LB, unsaturated UNL). To modulate lipid grafting, we adjusted the epoxide lipid-to-dendrimer ratio, yielding dendrimers with 0%, 50%, or 100% lipid modification. These variations resulted in dendrimers with distinct surface amine compositions: primary amines (0% grafting), secondary amines (50%), and tertiary amines (100%) (see Supplementary Information 1 for synthesis details). Overall, we synthesized 162 lipid-grafted dendrimers by systematically varying amine core structures, dendrimer generations, lipid types, and grafting percentages. These dendrimers were then co-formulated with helper lipids and mRNAs to generate dLNPs (Fig. 1A). Most formulations exhibited consistent particle sizes between 80 nm and 200 nm, polydispersity index (PDI) between 0.1 and 0.3, and zeta potential between −0.5 mV and 0 mV (Supplementary 3, Fig. S1A–C). To identify optimal dLNP formulations for in vivo biodistribution studies, we screened for transfection efficiency and relative cell viability in RAW264.7 cells. Given that the protein corona significantly affects cell type-specific uptake of LNP, in vitro screening was performed under serum-free conditions to minimize bias induced by cell type-specific uptake. The in vitro screening identified 10 lead dLNP formulations (Fig. 1B), which exhibited comparable potency and toxicity profiles to commercially available transfection reagents, including SM-102, DLin-MC3-DMA, DOTAP, C12-200, and jetMESSENGER.",
+          "section_path": "Results > Construction of structurally diverse dLNPs for in vitro screening",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P7",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.283926510882786,
+          "vector_score": 0.01850006209175623,
+          "fused_score": 0.02684684684684685,
+          "entity_types": [
+            "lipid_or_material",
+            "lnp",
+            "outcome"
+          ]
+        },
+        {
+          "query_id": "candidate_00002-08-outcomes",
+          "block_id": "candidate_00002-B-bae364efe4b23ffd95a4",
+          "paper_id": "candidate_00002",
+          "text": "RAW 264.7 cells were seeded into 96-well plates at a cell density of 40,000 cells per well in the complete media two days prior to transfection. Before transfection, the complete medium (DMEM supplied with 10% FBS) was replaced with 100 μL basal medium (DMEM without FBS). The dLNPs prepared were pipetted into DMEM medium at 0.2 μg mRNA/well. A 3-h incubation was followed to allow sufficient dLNP uptake. Cells were then washed with DMEM, and 200 μL complete medium was added to each well. A 24-h incubation was followed to allow sufficient mRNA expression. When characterizing luciferase as the reporter, cells were incubated for 10 min in 100 μL luciferin assay solution (150 μg/mL concentration, PerkinElmer) and the bioluminescence was measured by luminometer.",
+          "section_path": "Materials and methods > In vitro transfection efficiency and cell viability assays",
+          "source_path": "data/staging/new_papers/2026-08-07/retrieval/packages/candidate_00002/PMC13245630.nxml",
+          "source_kind": "pmc_xml",
+          "block_type": "paragraph",
+          "page_number": null,
+          "xml_element_id": "P50",
+          "table_number": null,
+          "figure_number": null,
+          "lexical_score": 4.308639082053387,
+          "vector_score": 0.015494920833084298,
+          "fused_score": 0.02651914295749912,
+          "entity_types": [
+            "outcome",
+            "payload"
+          ]
+        }
+      ],
+      "retrieval_methods": [
+        "sqlite_fts5_bm25",
+        "TfidfVectorBackend",
+        "hierarchy_bounded_neighbor_expansion"
+      ],
+      "warnings": []
+    }
+  },
+  "blocked_fields": {},
+  "ready_for_extraction": true,
+  "source": "new-paper-source-blocks"
+}
