@@ -78,10 +78,13 @@ def evidence_browser_database(tmp_path: Path) -> Path:
         arm_one = int(connection.execute(
             """
             INSERT INTO experiment (
-                paper_id,formulation_id,cell_type,tissue_or_organ,species,
+                paper_id,formulation_id,cell_type,tissue_or_organ,
+                intended_target_cell,target_or_recipient_organ,
+                observed_transfected_cell,species,
                 disease_model,in_vitro_in_vivo,payload_type,payload_name,
                 dose,dose_unit,route,timepoint,timepoint_unit,assay
-            ) VALUES (1,1,'hepatocyte','liver','Mus musculus','healthy',
+            ) VALUES (1,1,'hepatocyte','liver',NULL,'liver','hepatocyte',
+                      'Mus musculus','healthy',
                       'in_vivo','mRNA','Luc mRNA',1.5,'mg/kg','intravenous',
                       24,'hours','luminescence')
             """
@@ -275,6 +278,52 @@ def test_default_browser_paper_skips_screening_only_empty_paper() -> None:
     assert service.default_browser_paper_id((empty, rich)) == 2
 
 
+def test_browser_summary_matches_combined_rows_and_deduplicates_formulations(
+    evidence_browser_database: Path,
+) -> None:
+    from src.ui import evidence_browser_service as service
+
+    with sqlite3.connect(evidence_browser_database) as connection:
+        duplicate_id = int(connection.execute(
+            """
+            INSERT INTO formulation (
+                paper_id,formulation_name,chemical_formulation_total,
+                lnp_molar_ratio,composition_basis
+            ) VALUES (1,'LNP-A duplicate','ION-DSPC-CHOL-PEG',
+                      '50:10:38.5:1.5','molar_ratio')
+            """
+        ).lastrowid)
+        connection.execute(
+            """
+            INSERT INTO chemical_component (
+                formulation_id,component_name_reported,component_role,
+                component_review_status,composition_position
+            )
+            SELECT ?,component_name_reported,component_role,
+                   component_review_status,composition_position
+            FROM chemical_component
+            WHERE formulation_id=1
+            """,
+            (duplicate_id,),
+        )
+        connection.commit()
+
+    rows = service.list_combined_arm_rows(
+        database_path=evidence_browser_database
+    )
+    summary = service.summarize_browser_database(evidence_browser_database)
+
+    assert summary.experimental_arms == len(rows)
+    assert summary.general_use_ready_arms == sum(
+        row.general_usable for row in rows
+    )
+    assert summary.nearest_neighbor_ready_arms == sum(
+        row.nearest_neighbor_ready for row in rows
+    )
+    assert summary.comet_ready_arms == sum(row.comet_ready for row in rows)
+    assert summary.unique_chemical_formulations == 2
+
+
 def test_combined_table_has_one_row_per_arm_and_stacked_outcomes(
     monkeypatch: pytest.MonkeyPatch, evidence_browser_database: Path,
 ) -> None:
@@ -301,6 +350,69 @@ def test_combined_table_has_one_row_per_arm_and_stacked_outcomes(
     assert "Tolerability" in arm.outcomes_display
     assert tuple(arm.formulation) == service.FORMULATION_COLUMNS
     assert arm.formulation["lnp_molar_ratio"].display_value == "50:10:38.5:1.5"
+    assert arm.arm_fields["target_or_recipient_organ"].display_value == "liver"
+    assert arm.arm_fields["intended_target_cell"].display_value == "NA"
+    assert arm.arm_fields["observed_transfected_cell"].display_value == "hepatocyte"
+
+
+def test_incomplete_arm_is_not_labeled_general_use_ready(
+    monkeypatch: pytest.MonkeyPatch, evidence_browser_database: Path,
+) -> None:
+    from src.ui import evidence_browser_service as service
+
+    monkeypatch.setattr(service, "browser_database_path", lambda: evidence_browser_database)
+
+    row = next(row for row in service.list_combined_arm_rows() if row.experiment_id == 2)
+
+    assert row.general_usable is False
+
+
+def test_general_use_accepts_valid_evidence_linked_to_arm_fields(
+    monkeypatch: pytest.MonkeyPatch, evidence_browser_database: Path,
+) -> None:
+    from src.ui import evidence_browser_service as service
+
+    with sqlite3.connect(evidence_browser_database) as connection:
+        evidence_id = int(connection.execute(
+            """
+            INSERT INTO evidence (
+                paper_id,field_name,evidence_text,evidence_location_type,
+                section_name,extraction_method,extraction_confidence,
+                evidence_review_status
+            ) VALUES (1,'shared_protocol','Shared protocol evidence','table',
+                      'Table 1','structured_table','high',
+                      'automatically_validated')
+            """
+        ).lastrowid)
+        content = json.dumps({"key": "shared-protocol"}, sort_keys=True)
+        connection.execute(
+            """
+            INSERT INTO import_field_evidence (
+                paper_id,entity_type,entity_id,field_name,evidence_id,
+                verification_status,notes,natural_key,content_sha256,content_json
+            ) VALUES (1,'arm',2,'route',?,'automatically_validated','fixture',
+                      'shared-protocol',?,?)
+            """,
+            (evidence_id, hashlib.sha256(content.encode()).hexdigest(), content),
+        )
+        connection.execute(
+            """
+            UPDATE arm_assessment
+            SET completeness_status='complete',missing_fields_json='[]'
+            WHERE experiment_id=2
+            """
+        )
+        connection.commit()
+    monkeypatch.setattr(
+        service, "browser_database_path", lambda: evidence_browser_database
+    )
+
+    row = next(
+        row for row in service.list_combined_arm_rows()
+        if row.experiment_id == 2
+    )
+
+    assert row.general_usable is True
 
 
 def test_combined_table_keeps_missing_ratio_visible_with_comet_blocker(

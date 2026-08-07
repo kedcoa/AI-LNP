@@ -19,6 +19,10 @@ from src.database.paths import (
     CANONICAL_AUTHORITATIVE_DATABASE,
     COMMON_CHECKOUT_ROOT,
 )
+from src.database.scientific_identity import (
+    CompositionPart,
+    composition_fingerprint,
+)
 
 
 FORMULATION_COLUMNS = (
@@ -33,6 +37,9 @@ FORMULATION_COLUMNS = (
 )
 
 ARM_FIELD_COLUMNS = (
+    "target_or_recipient_organ",
+    "intended_target_cell",
+    "observed_transfected_cell",
     "cell_type",
     "cell_source",
     "tissue_or_organ",
@@ -73,6 +80,15 @@ class BrowserCounts:
     outcomes: int
     evidence_records: int
     automatic_resolution_issues: int
+
+
+@dataclass(frozen=True)
+class BrowserSummary:
+    unique_chemical_formulations: int
+    general_use_ready_arms: int
+    nearest_neighbor_ready_arms: int
+    comet_ready_arms: int
+    experimental_arms: int
 
 
 @dataclass(frozen=True)
@@ -212,12 +228,40 @@ def browser_database_path() -> Path:
     return CANONICAL_AUTHORITATIVE_DATABASE
 
 
-def _connect() -> sqlite3.Connection:
-    path = browser_database_path().resolve()
+def _connect(database_path: Path | None = None) -> sqlite3.Connection:
+    path = (database_path or browser_database_path()).resolve()
     connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA query_only=ON")
     return connection
+
+
+def _arm_has_usable_evidence(
+    connection: sqlite3.Connection, experiment_id: int
+) -> bool:
+    """Recognize direct evidence and canonical field-evidence links."""
+
+    return connection.execute(
+        """
+        SELECT 1
+        FROM evidence
+        WHERE length(trim(coalesce(evidence_text,'')))>0
+          AND evidence_review_status NOT IN ('rejected','conflict','ambiguous')
+          AND (
+            experiment_id=?
+            OR evidence_id IN (
+              SELECT link.evidence_id
+              FROM import_field_evidence AS link
+              WHERE (link.entity_type='arm' AND link.entity_id=?)
+                 OR (link.entity_type='outcome' AND link.entity_id IN (
+                      SELECT outcome_id FROM outcome WHERE experiment_id=?
+                 ))
+            )
+          )
+        LIMIT 1
+        """,
+        (experiment_id, experiment_id, experiment_id),
+    ).fetchone() is not None
 
 
 def _text(value: object) -> str | None:
@@ -248,7 +292,8 @@ def _counts(connection: sqlite3.Connection, paper_id: int) -> BrowserCounts:
           (SELECT count(*) FROM outcome o JOIN experiment x USING(experiment_id)
              WHERE x.paper_id=p.paper_id),
           (SELECT count(*) FROM evidence e WHERE e.paper_id=p.paper_id),
-          (SELECT count(*) FROM import_review r WHERE r.paper_id=p.paper_id)
+          (SELECT count(*) FROM import_review r WHERE r.paper_id=p.paper_id
+             AND r.reason_code!='missing_required_fields')
         FROM paper p WHERE p.paper_id=?
         """,
         (paper_id,),
@@ -393,7 +438,7 @@ def _issues(
     arm_id: int | None = None,
     paper_level_only: bool = False,
 ) -> tuple[BrowserIssue, ...]:
-    conditions = ["paper_id=?"]
+    conditions = ["paper_id=?", "reason_code!='missing_required_fields'"]
     parameters: list[object] = [paper_id]
     if arm_id is not None:
         conditions.append("arm_id=?")
@@ -622,12 +667,14 @@ def load_paper_browser(paper_id: int) -> PaperBrowserView:
 
 def list_combined_arm_rows(
     filters: BrowserFilters | None = None,
+    *,
+    database_path: Path | None = None,
 ) -> tuple[BrowserArmRow, ...]:
     """Return exactly one display row per canonical experimental arm."""
 
     selected = filters or BrowserFilters()
     results: list[BrowserArmRow] = []
-    with _connect() as connection:
+    with _connect(database_path) as connection:
         paper_rows = connection.execute(
             """
             SELECT paper_id,source_paper_id,title,doi,pmid,pmcid,source_url,
@@ -642,19 +689,11 @@ def list_combined_arm_rows(
                 continue
             for formulation in _formulations(connection, paper.paper_id):
                 for arm in formulation.arms:
-                    has_evidence = connection.execute(
-                        """
-                        SELECT 1 FROM evidence
-                        WHERE experiment_id=?
-                          AND length(trim(coalesce(evidence_text,'')))>0
-                          AND evidence_review_status NOT IN
-                              ('rejected','conflict','ambiguous')
-                        LIMIT 1
-                        """,
-                        (arm.experiment_id,),
-                    ).fetchone() is not None
+                    has_evidence = _arm_has_usable_evidence(
+                        connection, arm.experiment_id
+                    )
                     general = (
-                        arm.completeness_status not in {"conflict", "quarantined"}
+                        arm.completeness_status == "complete"
                         and has_evidence
                     )
                     queue = (
@@ -698,6 +737,48 @@ def list_combined_arm_rows(
     return tuple(results)
 
 
+def summarize_browser_database(
+    database_path: Path | None = None,
+) -> BrowserSummary:
+    """Return headline counts from the same canonical rows shown in the UI."""
+
+    rows = list_combined_arm_rows(database_path=database_path)
+    fingerprints: set[str] = set()
+    with _connect(database_path) as connection:
+        formulation_ids = connection.execute(
+            "SELECT formulation_id FROM formulation ORDER BY formulation_id"
+        ).fetchall()
+        for (formulation_id,) in formulation_ids:
+            components = connection.execute(
+                """
+                SELECT component_role,
+                       coalesce(component_name_normalized,
+                                component_name_reported),
+                       coalesce(amount_value,molar_percentage),
+                       coalesce(amount_unit,percentage_unit)
+                FROM chemical_component
+                WHERE formulation_id=?
+                ORDER BY component_id
+                """,
+                (formulation_id,),
+            ).fetchall()
+            fingerprint = composition_fingerprint(
+                CompositionPart(role, name, amount, unit)
+                for role, name, amount, unit in components
+            )
+            if fingerprint:
+                fingerprints.add(fingerprint)
+    return BrowserSummary(
+        unique_chemical_formulations=len(fingerprints),
+        general_use_ready_arms=sum(row.general_usable for row in rows),
+        nearest_neighbor_ready_arms=sum(
+            row.nearest_neighbor_ready for row in rows
+        ),
+        comet_ready_arms=sum(row.comet_ready for row in rows),
+        experimental_arms=len(rows),
+    )
+
+
 __all__ = [
     "ARM_FIELD_COLUMNS",
     "FORMULATION_COLUMNS",
@@ -706,6 +787,7 @@ __all__ = [
     "BrowserArmRow",
     "BrowserFilters",
     "BrowserCounts",
+    "BrowserSummary",
     "BrowserEvidence",
     "BrowserField",
     "BrowserFormulation",
@@ -718,4 +800,5 @@ __all__ = [
     "list_browser_papers",
     "list_combined_arm_rows",
     "load_paper_browser",
+    "summarize_browser_database",
 ]
