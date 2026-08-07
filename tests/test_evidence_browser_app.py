@@ -26,7 +26,10 @@ def test_evidence_browser_app_keeps_sql_behind_service_boundaries() -> None:
     assert ".execute(" not in source
     assert "Submit review decision" not in source
     assert "Needs human verification" not in source
-    assert "review_service.apply_review_decision" in source
+    assert "review_service" not in source
+    assert "apply_review_decision" not in source
+    assert "Save correction" not in source
+    assert "Almost COMET-ready corrections" not in source
 
 
 def test_evidence_browser_app_preserves_approved_columns_and_sections() -> None:
@@ -43,6 +46,13 @@ def test_evidence_browser_app_preserves_approved_columns_and_sections() -> None:
         "Nearest neighbor", "COMET", "NA",
     ):
         assert label in source
+
+
+def test_combined_table_uses_readable_wrapped_row_height() -> None:
+    source = _source()
+
+    assert 'row_height=120' in source
+    assert '"Outcomes": st.column_config.TextColumn' in source
 
 
 def test_evidence_browser_app_renders_fixture_without_writing(
@@ -66,7 +76,15 @@ def test_evidence_browser_app_renders_fixture_without_writing(
     assert any(item.label == "Paper" for item in app.selectbox)
     assert next(item for item in app.selectbox if item.label == "Paper").value == 1
     assert app.dataframe
-    assert any(item.label == "Save correction" for item in app.button)
+    assert not any(
+        item.value == "Almost COMET-ready corrections" for item in app.subheader
+    )
+    assert [metric.label for metric in app.metric[:4]] == [
+        "Unique chemical formulations",
+        "General-use-ready arms",
+        "Nearest-neighbor-ready arms",
+        "COMET-ready arms",
+    ]
     assert before == after
 
 
