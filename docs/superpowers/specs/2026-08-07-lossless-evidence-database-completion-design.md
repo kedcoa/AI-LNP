@@ -115,6 +115,29 @@ A canonical fact identity is based on paper, normalized subject/context, field, 
 
 Repeated NP-002 component rows collapse to one formulation-component row while retaining links to all three source slices. Source-fact occurrences remain available for audit, while final counts use deduplicated canonical facts and evidence.
 
+## 7.1 Approved wide SQLite formulation interface
+
+The SQLite database must expose an application-facing object named `lnp_formulation_wide` with exactly these eight columns in exactly this order:
+
+1. `lnp_name`
+2. `chemical_formulation_total`
+3. `lnp_molar_ratio`
+4. `ionizable_lipid`
+5. `helper_lipid`
+6. `cholesterol`
+7. `peg_lipid`
+8. `others`
+
+It contains one row per deduplicated named LNP formulation. Its approved GP-008 representation is:
+
+| lnp_name | chemical_formulation_total | lnp_molar_ratio | ionizable_lipid | helper_lipid | cholesterol | peg_lipid | others |
+|---|---|---|---|---|---|---|---|
+| alpha-CD163/LNP-FAPCAR | ionizable lipid-DSPC-cholesterol-PEG-lipid | 45:30:23.5:1.5 | heptadecan-9-yl... amino lipid | DSPC | cholesterol | PEG-lipid | DSPE-PEG-maleimide; anti-CD163 antibody; antibody:LNP 1:20 |
+
+`chemical_formulation_total` and `lnp_molar_ratio` use the same explicit source-reported component order. The importer may split the ratio into component amounts only when the source establishes that alignment. `others` contains the real names and reported ratios/details of targeting ligands, targeting anchors, additives, and other non-core composition-defining materials; it must not contain the meaningless label `other` by itself.
+
+The wide object is an actual SQLite view or deterministically rebuilt table and is the default application/export interface. Detailed component rows and evidence links remain the scientific source of truth underneath it. This avoids multiple display rows for the same named LNP while retaining multiple components, ratios, roles, and evidence safely.
+
 ## 8. Existing local evidence closure
 
 Before any rerun, all local artifacts are re-imported and checked. In particular:
@@ -203,6 +226,7 @@ Counts are split by paper and verification status. No count is described as usab
 - Do not rerun a complete paper when a bounded repair is sufficient.
 - Do not present source occurrences, named formulations, chemical compositions, arms, or papers as interchangeable counts.
 - Do not use the CodeRabbit CLI or CodeRabbit review workflow; verification uses repository tests, deterministic audits, and direct human inspection.
+- Do not change the approved eight-column order of `lnp_formulation_wide` or add hidden scientific columns to that interface.
 
 ## 14. Time estimate
 

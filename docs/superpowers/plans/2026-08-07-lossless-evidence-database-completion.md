@@ -21,6 +21,7 @@
 - Never equate paper, named formulation, unique composition, fact, arm, outcome, or evidence counts.
 - Paid calls require exact immutable request hashes and explicit human approval; never retry silently.
 - Do not use the CodeRabbit CLI or CodeRabbit review workflow. Review through repository tests, deterministic audits, and direct human inspection only.
+- Expose `lnp_formulation_wide` with exactly this ordered column contract: `lnp_name`, `chemical_formulation_total`, `lnp_molar_ratio`, `ionizable_lipid`, `helper_lipid`, `cholesterol`, `peg_lipid`, `others`.
 - Build and validate a temporary SQLite database before replacing `data/curated/lnp_evidence.db`.
 - Do not overwrite human review history or an existing supported value without retaining provenance.
 
@@ -181,7 +182,7 @@ git commit -m "feat: register all current-corpus contributors"
 
 **Interfaces:**
 - Consumes: existing migration version 5 and existing normalized scientific tables.
-- Produces: migration version 6 with `source_artifact`, `source_fact`, `source_fact_evidence`, and `fact_projection`.
+- Produces: migration version 6 with `source_artifact`, `source_fact`, `source_fact_evidence`, `fact_projection`, general component amount/order fields, and the exact eight-column `lnp_formulation_wide` SQLite interface.
 
 - [ ] **Step 1: Write failing migration tests**
 
@@ -202,6 +203,21 @@ def test_fact_projection_references_same_paper(connection: sqlite3.Connection) -
     migrate_database(connection)
     with pytest.raises(sqlite3.IntegrityError):
         insert_cross_paper_projection(connection)
+
+
+def test_wide_formulation_column_order_is_exact(connection: sqlite3.Connection) -> None:
+    migrate_database(connection)
+    columns = [row[1] for row in connection.execute("PRAGMA table_info(lnp_formulation_wide)")]
+    assert columns == [
+        "lnp_name",
+        "chemical_formulation_total",
+        "lnp_molar_ratio",
+        "ionizable_lipid",
+        "helper_lipid",
+        "cholesterol",
+        "peg_lipid",
+        "others",
+    ]
 ```
 
 - [ ] **Step 2: Run and confirm failure**
@@ -251,6 +267,28 @@ CREATE TABLE source_fact (
 ```
 
 `source_fact_evidence` stores original evidence identifiers and optional resolved canonical `evidence_id`. `fact_projection` stores canonical entity type, entity ID, field, canonical fact hash, and projection status. Add triggers that reject cross-paper projections and projected facts without a projection row.
+
+Add general component fields `amount_value`, `amount_unit`, `amount_raw`, and `composition_position`. Retain `molar_percentage` for backwards compatibility, but populate it only for actual mol%. Permit explicit roles `targeting_ligand`, `targeting_anchor`, `adjuvant`, and `small_molecule_additive` in addition to the four core composition roles.
+
+Create `lnp_formulation_wide` with exactly the approved eight columns. It must aggregate detailed component rows into one named-formulation row, preserve explicit composition order, join multiple values in the same role with `; `, and place non-core components plus their reported details in `others`.
+
+Add a fixture-backed behavior test for the approved GP-008 row:
+
+```python
+def test_wide_formulation_renders_gp008_as_one_row(connection: sqlite3.Connection) -> None:
+    seed_gp008_formulation(connection)
+    row = connection.execute("SELECT * FROM lnp_formulation_wide").fetchone()
+    assert tuple(row) == (
+        "alpha-CD163/LNP-FAPCAR",
+        "ionizable lipid-DSPC-cholesterol-PEG-lipid",
+        "45:30:23.5:1.5",
+        "heptadecan-9-yl... amino lipid",
+        "DSPC",
+        "cholesterol",
+        "PEG-lipid",
+        "DSPE-PEG-maleimide; anti-CD163 antibody; antibody:LNP 1:20",
+    )
+```
 
 - [ ] **Step 4: Preserve migration idempotence and legacy data**
 
