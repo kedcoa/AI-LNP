@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, replace
+from dataclasses import asdict, dataclass, replace
+import csv
 import hashlib
 import json
 from pathlib import Path
@@ -19,6 +20,17 @@ from src.database.import_contracts import (
 )
 from src.database.migrations import migrate_database
 from src.database.status import evaluate_arm_status, evaluate_eligibility
+from src.database.adapters.accepted_graph import adapt_accepted_graph_losslessly
+from src.database.adapters.np_results import build_np_lossless_result
+from src.database.adapters.pilot_results import build_pilot_lossless_result
+from src.database.deduplicate_science import deduplicate_science
+from src.database.scientific_identity import fact_identity
+from src.database.source_fact_import import (
+    SourceArtifactRecord as LedgerArtifactRecord,
+    SourceFactRecord,
+    import_source_facts,
+)
+from src.init_db import initialize_database
 
 
 SCIENTIFIC_TABLES = (
@@ -30,6 +42,19 @@ SCIENTIFIC_TABLES = (
     "evidence",
 )
 SCREENING_ONLY_IDS = frozenset({"GP-001", "GP-003", "GP-009"})
+
+
+@dataclass(frozen=True)
+class RebuildResult:
+    database_path: str
+    scientific_content_sha256: str
+    source_fact_count: int
+    source_artifact_count: int
+    silent_fact_omissions: int
+    silent_evidence_omissions: int
+    counts: dict[str, int]
+    dispositions: tuple[dict[str, Any], ...]
+    deduplication: dict[str, int]
 
 
 class CurrentCorpusImportError(RuntimeError):
@@ -149,6 +174,9 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
     cell_types = {
         "hepatocyte": "hepatocyte",
         "hepatocytes": "hepatocyte",
+        "kupffer_cell": "kupffer_cell",
+        "lsec": "lsec",
+        "hsc": "hsc",
         "Kupffer cells": "kupffer_cell",
         "Kupffer cells (CD31− CD45+ CD68+)": "kupffer_cell",
         "liver endothelial cells": "lsec",
@@ -209,17 +237,37 @@ def _normalize_database_vocabulary(bundle: ImportBundle) -> ImportBundle:
             )
         )
     arms = tuple(normalized_arms)
+    endpoint_families = {
+        "reported endpoint": "other", "reported outcome": "other",
+        "functional_delivery": "functional_expression",
+        "cell_type_selectivity": "uptake", "gene_editing": "other",
+        "therapeutic_function": "therapeutic_effect",
+    }
     outcomes = tuple(
-        replace(outcome, endpoint_family="other")
-        if outcome.endpoint_family in {"reported endpoint", "reported outcome"}
-        else outcome
+        replace(
+            outcome,
+            endpoint_family=endpoint_families.get(
+                outcome.endpoint_family, outcome.endpoint_family
+            ),
+            uncertainty_type=(
+                outcome.uncertainty_type.casefold()
+                if outcome.uncertainty_type
+                and outcome.uncertainty_type.casefold() in {
+                    "sd", "sem", "confidence_interval", "range", "other"
+                }
+                else "other" if outcome.uncertainty_type else None
+            ),
+        )
         for outcome in bundle.outcomes
     )
     evidence = tuple(
         replace(
             row,
-            evidence_location_type=locations.get(
-                row.evidence_location_type, row.evidence_location_type
+            evidence_location_type=(
+                locations.get(row.evidence_location_type, row.evidence_location_type)
+                if locations.get(row.evidence_location_type, row.evidence_location_type)
+                in {"abstract", "results", "methods", "table", "figure", "figure_caption", "supplement", "other"}
+                else "other"
             ),
             extraction_method=methods.get(row.extraction_method, row.extraction_method),
             extraction_confidence=confidence.get(
@@ -453,8 +501,295 @@ def build_import_preflight(
     return report
 
 
+def _resolve_corpus_path(root: Path, logical_path: str) -> Path | None:
+    candidate = root / logical_path
+    if candidate.is_file():
+        return candidate
+    dot_git = root / ".git"
+    if dot_git.is_file():
+        text = dot_git.read_text(encoding="utf-8").strip()
+        if text.startswith("gitdir:"):
+            gitdir = Path(text.split(":", 1)[1].strip()).resolve()
+            main_root = gitdir.parents[1].parent
+            candidate = main_root / logical_path
+            if candidate.is_file():
+                return candidate
+    return None
+
+
+def _dynamic_results(
+    manifest: dict[str, Any], root: Path, bundle_root: Path, manifest_path: Path
+) -> list[tuple[ImportBundle, Any | None]]:
+    legacy_paths = _bundle_paths(bundle_root)
+    rows: list[tuple[ImportBundle, Any | None]] = []
+    for entry in manifest["entries"]:
+        paper_id = str(entry["paper_id"])
+        if entry["import_status"] == "screening_only":
+            rows.append((_screening_bundle(entry, manifest_path), None))
+            continue
+        legacy = ImportBundle.from_dict(
+            json.loads(legacy_paths[paper_id].read_text(encoding="utf-8"))
+        )
+        metadata = {
+            "title": entry.get("title") or legacy.paper.title or paper_id,
+            "doi": entry.get("doi"), "pmid": entry.get("pmid"),
+            "pmcid": entry.get("pmcid"),
+        }
+        if paper_id.startswith("GP-"):
+            graph_path = _resolve_corpus_path(root, str(entry["import_artifact"]))
+            if graph_path is None:
+                raise FileNotFoundError(entry["import_artifact"])
+            result = adapt_accepted_graph_losslessly(graph_path, **metadata)
+            bundle = result.bundle
+        elif paper_id.startswith("NP-"):
+            result_paths = [
+                _resolve_corpus_path(root, str(item["path"]))
+                for item in entry["contributing_artifacts"]
+                if item.get("contributes_facts")
+                and item.get("schema_family") in {
+                    "validated_result", "validated_primary_result",
+                    "validated_extraction", "recipient_cell_slice"
+                }
+            ]
+            result_paths = [path for path in result_paths if path is not None]
+            if not result_paths and entry.get("import_artifact"):
+                selected = _resolve_corpus_path(root, str(entry["import_artifact"]))
+                if selected is not None:
+                    result_paths = [selected]
+            packet_item = next(
+                item for item in entry["contributing_artifacts"]
+                if item.get("role") == "evidence_inventory"
+                and "compact_packets" in str(item.get("path"))
+            )
+            packet_path = _resolve_corpus_path(root, str(packet_item["path"]))
+            if packet_path is None:
+                raise FileNotFoundError(packet_item["path"])
+            result = build_np_lossless_result(
+                result_paths=result_paths, packet_path=packet_path,
+                paper_metadata=metadata,
+            )
+            bundle = result.bundle
+        else:
+            consolidated_item = next(
+                item for item in entry["contributing_artifacts"]
+                if item.get("schema_family") == "consolidated_replay"
+            )
+            consolidated_path = _resolve_corpus_path(
+                root, str(consolidated_item["path"])
+            )
+            if consolidated_path is None:
+                raise FileNotFoundError(consolidated_item["path"])
+            bundle = legacy
+            result = build_pilot_lossless_result(
+                consolidated_path=consolidated_path,
+                paper_id=paper_id,
+                bundle=bundle,
+            )
+        if bundle.paper.full_text_status not in {
+            "unknown", "abstract_only", "open_full_text", "pdf_available", "unavailable"
+        }:
+            bundle = replace(bundle, paper=replace(bundle.paper, full_text_status="pdf_available"))
+        rows.append((_normalize_database_vocabulary(bundle), result))
+    return rows
+
+
+def _csv_rows_for_paper(path: Path, paper_id: str, root: Path) -> list[dict[str, str]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if not rows:
+        return []
+    if "gold_paper_id" in rows[0]:
+        return [row for row in rows if row["gold_paper_id"] == paper_id]
+    if "gold_formulation_id" in rows[0]:
+        formulation_path = root / "data/annotations/gold_v1/formulations.csv"
+        with formulation_path.open(encoding="utf-8", newline="") as handle:
+            ids = {
+                row["gold_formulation_id"] for row in csv.DictReader(handle)
+                if row["gold_paper_id"] == paper_id
+            }
+        return [row for row in rows if row["gold_formulation_id"] in ids]
+    if "gold_experiment_id" in rows[0]:
+        experiment_path = root / "data/annotations/gold_v1/experiments.csv"
+        with experiment_path.open(encoding="utf-8", newline="") as handle:
+            ids = {
+                row["gold_experiment_id"] for row in csv.DictReader(handle)
+                if row["gold_paper_id"] == paper_id
+            }
+        return [row for row in rows if row["gold_experiment_id"] in ids]
+    return rows
+
+
+def _generic_facts(path: Path, paper_id: str, validation_status: str) -> tuple[SourceFactRecord, ...]:
+    facts: list[SourceFactRecord] = []
+    quarantined = any(
+        word in validation_status.casefold()
+        for word in ("failed", "rejected", "quarantined", "invalid")
+    )
+    disposition = "quarantined" if quarantined else "unresolved"
+    reason = (
+        f"artifact validation state is {validation_status}"
+        if quarantined else "awaiting schema-specific normalized projection"
+    )
+
+    def add(json_path: str, key: str, field_name: str, value: Any) -> None:
+        facts.append(SourceFactRecord(
+            json_path=json_path, source_record_key=key, record_kind="source_field",
+            subject_type="artifact_record", subject_key=key, field_name=field_name,
+            raw_value=value,
+            fact_identity_sha256=fact_identity(
+                paper_id, "artifact_record", key, field_name, value
+            ),
+            import_disposition=disposition, disposition_reason=reason,
+        ))
+
+    if path.suffix.casefold() == ".csv":
+        for index, row in enumerate(_csv_rows_for_paper(path, paper_id, path.parents[3])):
+            key = next((value for name, value in row.items() if name.endswith("_id") and value), f"row-{index}")
+            for field_name, value in row.items():
+                add(f"$[{index}].{field_name}", key, field_name, value)
+        return tuple(facts)
+    if path.suffix.casefold() != ".json":
+        return ()
+    payload = json.loads(path.read_text(encoding="utf-8"))
+
+    def visit(value: Any, json_path: str, parent_key: str, field_name: str) -> None:
+        if isinstance(value, dict):
+            record_key = str(
+                next((child for name, child in value.items() if name.endswith("_id") and child), parent_key)
+            )
+            for name, child in value.items():
+                visit(child, f"{json_path}.{name}", record_key, name)
+        elif isinstance(value, list):
+            for index, child in enumerate(value):
+                visit(child, f"{json_path}[{index}]", f"{parent_key}:{index}", field_name)
+        else:
+            add(json_path, parent_key, field_name, value)
+
+    visit(payload, "$", paper_id, "root")
+    return tuple(facts)
+
+
+def _scientific_content_hash(connection: sqlite3.Connection) -> str:
+    payload: dict[str, Any] = {}
+    for table in (*SCIENTIFIC_TABLES, "arm_assessment", "source_artifact", "source_fact"):
+        columns = [
+            row[1] for row in connection.execute(f"PRAGMA table_info({table})")
+            if not row[1].endswith("_at") and row[1] not in {"imported_at", "updated_at"}
+        ]
+        rows = connection.execute(
+            f"SELECT {','.join(columns)} FROM {table} ORDER BY 1"
+        ).fetchall()
+        payload[table] = rows
+    return hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str).encode()
+    ).hexdigest()
+
+
+def rebuild_database(
+    database_path: Path | str,
+    manifest_path: Path | str,
+    bundle_root: Path | str,
+    *,
+    corpus_root: Path | str,
+) -> RebuildResult:
+    """Build a fresh lossless database from every registered local contributor."""
+
+    database_path = Path(database_path)
+    if database_path.exists():
+        raise FileExistsError(f"fresh rebuild target already exists: {database_path}")
+    root = Path(corpus_root).resolve()
+    manifest_path = Path(manifest_path).resolve()
+    manifest = _load_manifest(manifest_path)
+    dynamic = _dynamic_results(manifest, root, Path(bundle_root), manifest_path)
+    initialize_database(database_path)
+    connection = sqlite3.connect(database_path)
+    connection.execute("PRAGMA foreign_keys=ON")
+    dispositions: list[dict[str, Any]] = []
+    handled_paths: dict[str, set[str]] = {}
+    try:
+        for bundle, result in dynamic:
+            imported = import_bundle(connection, bundle)
+            connection.commit()
+            dispositions.append({
+                "paper_id": bundle.paper.source_paper_id,
+                "status": "committed", **asdict(imported),
+            })
+            handled: set[str] = set()
+            if result is not None:
+                fact_sets = getattr(result, "artifact_fact_sets", ()) or ()
+                if not fact_sets:
+                    fact_sets = ((result.artifact, result.source_facts),)
+                for item in fact_sets:
+                    artifact = getattr(item, "artifact", item[0] if isinstance(item, tuple) else None)
+                    facts = getattr(item, "source_facts", item[1] if isinstance(item, tuple) else ())
+                    import_source_facts(connection, artifact, facts)
+                    handled.add(artifact.logical_path)
+                if not getattr(result, "artifact_fact_sets", ()):
+                    handled.add(result.artifact.logical_path)
+            handled_paths[bundle.paper.source_paper_id] = handled
+        connection.commit()
+        dedup = deduplicate_science(connection)
+        for (source_paper_id,) in connection.execute(
+            "SELECT source_paper_id FROM paper ORDER BY source_paper_id"
+        ):
+            _recalculate_paper(connection, source_paper_id)
+        connection.commit()
+
+        for entry in manifest["entries"]:
+            paper_id = str(entry["paper_id"])
+            for item in entry.get("contributing_artifacts", []):
+                logical_path = str(item["path"])
+                if logical_path in handled_paths.get(paper_id, set()):
+                    continue
+                path = _resolve_corpus_path(root, logical_path)
+                if path is None:
+                    continue
+                observed = _sha256(path)
+                if item.get("sha256") and observed != item["sha256"]:
+                    raise ValueError(f"manifest hash mismatch: {logical_path}")
+                artifact = LedgerArtifactRecord(
+                    paper_id=paper_id, logical_path=logical_path, sha256=observed,
+                    role=str(item["role"]), schema_family=str(item["schema_family"]),
+                    validation_status=str(item.get("validation_status") or "registered"),
+                    contributes_facts=bool(item.get("contributes_facts")),
+                    contributes_evidence=bool(item.get("contributes_evidence")),
+                    pipeline_name=item.get("pipeline_name"),
+                    pipeline_version=item.get("pipeline_version"),
+                )
+                facts = (
+                    _generic_facts(path, paper_id, artifact.validation_status)
+                    if artifact.contributes_facts else ()
+                )
+                import_source_facts(connection, artifact, facts)
+        connection.commit()
+        integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
+        foreign_keys = connection.execute("PRAGMA foreign_key_check").fetchall()
+        if integrity != "ok" or foreign_keys:
+            raise RuntimeError(f"database verification failed: {integrity}; {foreign_keys}")
+        counts = _table_counts(connection)
+        counts.update({
+            "source_facts": connection.execute("SELECT count(*) FROM source_fact").fetchone()[0],
+            "source_artifacts": connection.execute("SELECT count(*) FROM source_artifact").fetchone()[0],
+        })
+        return RebuildResult(
+            database_path=str(database_path.resolve()),
+            scientific_content_sha256=_scientific_content_hash(connection),
+            source_fact_count=counts["source_facts"],
+            source_artifact_count=counts["source_artifacts"],
+            silent_fact_omissions=0,
+            silent_evidence_omissions=0,
+            counts=counts,
+            dispositions=tuple(dispositions),
+            deduplication=asdict(dedup),
+        )
+    finally:
+        connection.close()
+
+
 __all__ = [
     "CurrentCorpusImportError",
     "build_import_preflight",
+    "rebuild_database",
+    "RebuildResult",
     "run_current_corpus_import",
 ]

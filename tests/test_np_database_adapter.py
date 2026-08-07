@@ -145,6 +145,15 @@ def test_real_np002_projects_one_component_set_per_unique_formulation():
     }
     assert len(result.bundle.components) == len(identities) == 8
     assert all(row.amount_raw is not None for row in result.bundle.components)
+    assert {row.lnp_molar_ratio for row in result.bundle.formulations} == {
+        "50:10:38.5:1.5"
+    }
+    assert {
+        row.chemical_formulation_total for row in result.bundle.formulations
+    } == {
+        "MC3-DSPC-cholesterol-C14 PEG 2000",
+        "cKK-E12-DSPC-cholesterol-C14 PEG 2000",
+    }
 
 
 def test_reconciliation_retains_conflicting_formulations():

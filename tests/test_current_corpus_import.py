@@ -152,6 +152,27 @@ def test_import_is_ordered_and_idempotent(tmp_path: Path) -> None:
     assert second_dump == first_dump
 
 
+def test_lossless_rebuild_is_source_complete_and_reproducible(tmp_path: Path) -> None:
+    module = _module()
+    first = module.rebuild_database(
+        tmp_path / "one.db", MANIFEST, BUNDLES, corpus_root=ROOT
+    )
+    second = module.rebuild_database(
+        tmp_path / "two.db", MANIFEST, BUNDLES, corpus_root=ROOT
+    )
+
+    assert first.scientific_content_sha256 == second.scientific_content_sha256
+    assert first.silent_fact_omissions == 0
+    assert first.silent_evidence_omissions == 0
+    assert first.source_fact_count > 0
+    with sqlite3.connect(tmp_path / "one.db") as connection:
+        assert connection.execute("PRAGMA integrity_check").fetchone() == ("ok",)
+        assert connection.execute(
+            "SELECT lnp_molar_ratio FROM lnp_formulation_wide "
+            "WHERE lnp_name='αCD163/LNP-FAPCAR'"
+        ).fetchone() == ("45:30:23.5:1.5",)
+
+
 def test_failed_paper_rolls_back_without_erasing_other_papers(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

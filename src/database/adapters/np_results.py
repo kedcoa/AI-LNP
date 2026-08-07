@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from dataclasses import replace
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -467,6 +468,45 @@ def build_np_bundle(
             status="incomplete", notes=text,
         ))
 
+    role_position = {
+        "ionizable_lipid": 1,
+        "helper_lipid": 2,
+        "cholesterol": 3,
+        "peg_lipid": 4,
+    }
+    components = [
+        replace(
+            component,
+            composition_position=role_position.get(
+                component.component_role,
+                100 + index,
+            ),
+        )
+        for index, component in enumerate(components, start=1)
+    ]
+    enriched_formulations: list[FormulationRecord] = []
+    for formulation in formulations:
+        core = sorted(
+            (
+                component for component in components
+                if component.formulation_id == formulation.record_id
+                and component.component_role in role_position
+            ),
+            key=lambda component: component.composition_position or 999,
+        )
+        total = (
+            "-".join(component.component_name_reported for component in core)
+            if core else None
+        )
+        ratio = None
+        if len(core) == 4 and all(component.molar_percentage is not None for component in core):
+            ratio = ":".join(f"{component.molar_percentage:g}" for component in core)
+        enriched_formulations.append(replace(
+            formulation,
+            chemical_formulation_total=total,
+            lnp_molar_ratio=ratio,
+        ))
+
     return ImportBundle(
         paper=PaperRecord(
             source_paper_id=paper_id, artifact_id=primary_artifact,
@@ -474,7 +514,7 @@ def build_np_bundle(
             retrieval_date="2026-08-06", screening_status="include", import_status="needs_review",
             doi=paper_metadata.get("doi"), pmid=paper_metadata.get("pmid"), pmcid=paper_metadata.get("pmcid"),
             full_text_status="available",
-        ), artifacts=artifacts, formulations=tuple(formulations), components=tuple(components),
+        ), artifacts=artifacts, formulations=tuple(enriched_formulations), components=tuple(components),
         arms=tuple(arms), outcomes=tuple(outcomes), evidence=tuple(evidence_records.values()),
         field_evidence_links=tuple(links), reviews=tuple(reviews),
     )

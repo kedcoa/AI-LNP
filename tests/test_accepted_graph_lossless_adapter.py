@@ -80,3 +80,9 @@ def test_gold_composition_is_combined_with_graph_formulation() -> None:
         }
     ] == [45.0, 30.0, 23.5, 1.5]
     assert any(row.component_name_reported == "antibody:LNP 1:20" for row in gp8_components)
+    assert [(row.dose, row.dose_unit, row.timepoint, row.timepoint_unit) for row in gp2.arms] == [
+        (10.0, "ug_mRNA_per_mouse", 24.0, "hour")
+    ]
+    assert gp2.arms[0].verification_status == "manually_verified"
+    assert len(gp2.outcomes) == 1
+    assert gp2.outcomes[0].endpoint_name == "hepatocyte_eGFP_expression"

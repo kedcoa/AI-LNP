@@ -410,6 +410,9 @@ def _repository_root(path: Path) -> Path | None:
 def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
     formulations_path = root / "data/annotations/gold_v1/formulations.csv"
     components_path = root / "data/annotations/gold_v1/components.csv"
+    experiments_path = root / "data/annotations/gold_v1/experiments.csv"
+    outcomes_path = root / "data/annotations/gold_v1/outcomes.csv"
+    evidence_path = root / "data/annotations/gold_v1/evidence.csv"
     if not formulations_path.is_file() or not components_path.is_file():
         return bundle
     with formulations_path.open(encoding="utf-8", newline="") as handle:
@@ -466,6 +469,30 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             artifact_id=f"{bundle.paper.source_paper_id}:gold-components",
             path="data/annotations/gold_v1/components.csv",
             sha256=_sha256(components_path),
+            source_kind="manual_transcription",
+            pipeline_name="gold_v1_human_annotation",
+            pipeline_version="v1",
+        ),
+        SourceArtifactRecord(
+            artifact_id=f"{bundle.paper.source_paper_id}:gold-experiments",
+            path="data/annotations/gold_v1/experiments.csv",
+            sha256=_sha256(experiments_path),
+            source_kind="manual_transcription",
+            pipeline_name="gold_v1_human_annotation",
+            pipeline_version="v1",
+        ),
+        SourceArtifactRecord(
+            artifact_id=f"{bundle.paper.source_paper_id}:gold-outcomes",
+            path="data/annotations/gold_v1/outcomes.csv",
+            sha256=_sha256(outcomes_path),
+            source_kind="manual_transcription",
+            pipeline_name="gold_v1_human_annotation",
+            pipeline_version="v1",
+        ),
+        SourceArtifactRecord(
+            artifact_id=f"{bundle.paper.source_paper_id}:gold-evidence",
+            path="data/annotations/gold_v1/evidence.csv",
+            sha256=_sha256(evidence_path),
             source_kind="manual_transcription",
             pipeline_name="gold_v1_human_annotation",
             pipeline_version="v1",
@@ -635,6 +662,166 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             and row.entity_id in removed_component_ids
         )
     )
+    with experiments_path.open(encoding="utf-8", newline="") as handle:
+        gold_experiments = [
+            row for row in csv.DictReader(handle)
+            if row["gold_paper_id"] == bundle.paper.source_paper_id
+        ]
+    experiment_source_ids = {row["gold_experiment_id"] for row in gold_experiments}
+    with outcomes_path.open(encoding="utf-8", newline="") as handle:
+        gold_outcomes = [
+            row for row in csv.DictReader(handle)
+            if row["gold_experiment_id"] in experiment_source_ids
+        ]
+    with evidence_path.open(encoding="utf-8", newline="") as handle:
+        evidence_rows = {
+            row["evidence_id"]: row for row in csv.DictReader(handle)
+            if row["gold_paper_id"] == bundle.paper.source_paper_id
+        }
+
+    def numeric(value: str) -> float | None:
+        return float(value) if value.strip() else None
+
+    gold_arms: list[ArmRecord] = []
+    gold_outcome_records: list[OutcomeRecord] = []
+    gold_evidence: list[EvidenceRecord] = []
+    gold_links: list[FieldEvidenceLink] = []
+
+    def attach(
+        entity_type: str,
+        entity_id: str,
+        field_names: tuple[str, ...],
+        source_evidence_id: str,
+        *,
+        arm_id: str | None = None,
+        outcome_id: str | None = None,
+    ) -> None:
+        source = evidence_rows[source_evidence_id]
+        record_id = f"{entity_id}:EV:{source_evidence_id}"
+        gold_evidence.append(EvidenceRecord(
+            record_id=record_id,
+            paper_id=bundle.paper.source_paper_id,
+            artifact_id=annotation_artifacts[4].artifact_id,
+            field_name=source["field_name"] or field_names[0],
+            evidence_location_type=source["evidence_location_type"] or "text",
+            extraction_method="manual",
+            extraction_confidence="high",
+            evidence_text=source["evidence_text"],
+            arm_id=arm_id,
+            outcome_id=outcome_id,
+            section_name=source["section_name"] or None,
+            page_number=source["page_number"] or None,
+            table_number=source["table_number"] or None,
+            figure_number=source["figure_number"] or None,
+            supplement_identifier=source["supplement_identifier"] or None,
+            verification_status="manually_verified",
+            reviewer_notes=source["reviewer_notes"] or None,
+        ))
+        gold_links.extend(
+            FieldEvidenceLink(
+                bundle.paper.source_paper_id,
+                entity_type,
+                entity_id,
+                field_name,
+                (record_id,),
+                "manually_verified",
+            )
+            for field_name in field_names
+        )
+
+    for row in gold_experiments:
+        arm_id = f"{bundle.paper.source_paper_id}:GOLD:{row['gold_experiment_id']}"
+        arm = ArmRecord(
+            record_id=arm_id,
+            paper_id=bundle.paper.source_paper_id,
+            artifact_id=annotation_artifacts[2].artifact_id,
+            formulation_id=target.record_id,
+            cell_type=row["cell_type"],
+            cell_source=row["cell_source"] or row["delivery_recipient_cell"] or None,
+            tissue_or_organ="liver",
+            species=row["species"] or None,
+            in_vitro_in_vivo=row["in_vitro_in_vivo"] or None,
+            payload_type=row["payload_type"] or None,
+            payload_name=row["payload_name"] or None,
+            reporter=row["reporter"] or None,
+            dose=numeric(row["dose"]),
+            dose_unit=row["dose_unit"] or None,
+            route=row["route"] or None,
+            timepoint=numeric(row["timepoint"]),
+            timepoint_unit=row["timepoint_unit"] or None,
+            assay=row["assay"] or None,
+            comparator_type=row["comparator_type"] or None,
+            comparator_description=row["comparator_description"] or None,
+            experiment_notes=row["notes"] or None,
+            completeness_status="complete",
+            verification_status="manually_verified",
+        )
+        gold_arms.append(arm)
+        fields = tuple(
+            name for name in (
+                "cell_type", "cell_source", "tissue_or_organ", "species",
+                "in_vitro_in_vivo", "payload_type", "payload_name", "reporter",
+                "dose", "dose_unit", "route", "timepoint", "timepoint_unit",
+                "assay", "comparator_type", "comparator_description",
+            ) if getattr(arm, name) is not None
+        )
+        attach("arm", arm_id, fields, row["evidence_id"], arm_id=arm_id)
+
+    arm_by_gold = {
+        row["gold_experiment_id"]: arm.record_id
+        for row, arm in zip(gold_experiments, gold_arms, strict=True)
+    }
+    for row in gold_outcomes:
+        outcome_id = f"{bundle.paper.source_paper_id}:GOLD:{row['gold_outcome_id']}"
+        arm_id = arm_by_gold[row["gold_experiment_id"]]
+        value = numeric(row["outcome_value"])
+        qualitative = row["qualitative_outcome"] or None
+        outcome = OutcomeRecord(
+            record_id=outcome_id,
+            paper_id=bundle.paper.source_paper_id,
+            artifact_id=annotation_artifacts[3].artifact_id,
+            arm_id=arm_id,
+            endpoint_family=row["endpoint_family"],
+            endpoint_name=row["endpoint_name"],
+            value_status=(
+                "reported" if value is not None
+                else "qualitative_only" if qualitative else "missing"
+            ),
+            outcome_value=value,
+            outcome_unit=row["outcome_unit"] or None,
+            normalization_basis=row["normalization_basis"] or None,
+            uncertainty_value=numeric(row["uncertainty_value"]),
+            uncertainty_type=row["uncertainty_type"] or None,
+            qualitative_outcome=qualitative,
+            outcome_notes=row["notes"] or None,
+        )
+        gold_outcome_records.append(outcome)
+        fields = tuple(
+            name for name in (
+                "endpoint_family", "endpoint_name", "outcome_value", "outcome_unit",
+                "normalization_basis", "uncertainty_value", "uncertainty_type",
+                "qualitative_outcome",
+            ) if getattr(outcome, name) is not None
+        )
+        attach(
+            "outcome", outcome_id, fields, row["evidence_id"],
+            arm_id=arm_id, outcome_id=outcome_id,
+        )
+
+    removed_arm_ids = {row.record_id for row in bundle.arms}
+    retained_evidence = tuple(
+        row for row in bundle.evidence if row.arm_id not in removed_arm_ids
+    )
+    removed_outcome_ids = {row.record_id for row in bundle.outcomes}
+    retained_reviews = tuple(
+        row for row in bundle.reviews
+        if row.arm_id not in removed_arm_ids
+        and row.outcome_id not in removed_outcome_ids
+    )
+    retained_links = tuple(
+        row for row in retained_links
+        if row.entity_type not in {"arm", "outcome"}
+    )
     return ImportBundle(
         paper=bundle.paper,
         artifacts=(*bundle.artifacts, *annotation_artifacts),
@@ -643,11 +830,11 @@ def _gold_enriched_bundle(bundle: ImportBundle, root: Path) -> ImportBundle:
             for row in bundle.formulations
         ),
         components=(*retained_components, *added_components),
-        arms=bundle.arms,
-        outcomes=bundle.outcomes,
-        evidence=(*bundle.evidence, *added_evidence),
-        field_evidence_links=(*retained_links, *added_links),
-        reviews=bundle.reviews,
+        arms=tuple(gold_arms),
+        outcomes=tuple(gold_outcome_records),
+        evidence=(*retained_evidence, *added_evidence, *gold_evidence),
+        field_evidence_links=(*retained_links, *added_links, *gold_links),
+        reviews=retained_reviews,
     )
 
 
