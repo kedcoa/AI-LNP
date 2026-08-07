@@ -13,7 +13,9 @@ class DocumentBlock(StrictModel):
     block_id: str
     paper_id: str
     source_path: str
-    source_kind: Literal["pmc_xml", "pdf", "grobid_tei"]
+    source_kind: Literal[
+        "pmc_xml", "pdf", "grobid_tei", "spreadsheet", "archive_member"
+    ]
     section_path: str
     block_type: Literal["title", "abstract", "paragraph", "table", "figure_caption", "pdf_page"]
     text: str = Field(min_length=1)

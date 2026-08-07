@@ -171,5 +171,19 @@ def build_corpus() -> dict:
     return manifest
 
 
+def ingest_manifest_entry_assets(entry: dict, *, allow_network: bool = False):
+    """Ingest registered current-corpus supplements through the general router."""
+
+    from .current_corpus_assets import (
+        ingest_current_corpus_assets,
+        resolve_declared_supplements,
+    )
+
+    assets = resolve_declared_supplements(
+        entry, root=ROOT, allow_network=allow_network
+    )
+    return ingest_current_corpus_assets(entry, assets)
+
+
 if __name__ == "__main__":
     print(json.dumps(build_corpus(), indent=2))
