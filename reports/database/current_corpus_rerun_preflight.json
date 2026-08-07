@@ -1,0 +1,77 @@
+{
+  "approval_hash": "9dbfbcb83e6f8f07c9ce7701eb09adde0db8a352229a77ed1c11358bf75812ea",
+  "database_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/day1-current-corpus/data/staging/database/current_corpus_rebuild/lnp_evidence.v4.db",
+  "database_sha256": "06ffe0b14777285d27cb3d5c3849d104d3edd7b73c8c78b78224ff87e1a74325",
+  "human_approval_required": true,
+  "manifest_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/map_gate/manifest.json",
+  "paper_ids": [
+    "PILOT-001",
+    "PILOT-002",
+    "PILOT-003"
+  ],
+  "provider_calls": 0,
+  "requested_fields": [
+    "PILOT-001:experimental_arm",
+    "PILOT-001:formulation",
+    "PILOT-002:experimental_arm",
+    "PILOT-002:formulation",
+    "PILOT-003:experimental_arm",
+    "PILOT-003:formulation"
+  ],
+  "requests": [
+    {
+      "cost_estimate": "not available for the configured internal model rate",
+      "estimated_input_tokens": 21774,
+      "expected_merge_target": "source_fact ledger then validated canonical projection",
+      "fields": [
+        "experimental_arm",
+        "formulation"
+      ],
+      "max_output_tokens": 12000,
+      "model": "gpt-5.6-terra",
+      "paper_id": "PILOT-001",
+      "request_id": "REQ-1",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/map_gate/requests/REQ-1.json",
+      "request_sha256": "cb6785db11d51c303df18a5fe10fc94d65dc8011bc9f76a24497bde896b8dd3b",
+      "source_artifact_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/PILOT-001/inventory.json",
+      "source_artifact_sha256": "766a73a0b3a3826e90440d489b577cdac3f29020965bc50548a8d16ec1da1690"
+    },
+    {
+      "cost_estimate": "not available for the configured internal model rate",
+      "estimated_input_tokens": 21070,
+      "expected_merge_target": "source_fact ledger then validated canonical projection",
+      "fields": [
+        "experimental_arm",
+        "formulation"
+      ],
+      "max_output_tokens": 12000,
+      "model": "gpt-5.6-terra",
+      "paper_id": "PILOT-002",
+      "request_id": "REQ-2",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/map_gate/requests/REQ-2.json",
+      "request_sha256": "634ce959babb85c176d3b9bf4a28605cd4657c21acceaf01ed12e77d8c328010",
+      "source_artifact_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/PILOT-002/inventory.json",
+      "source_artifact_sha256": "37f67b111abfb978b9291fc67fad430f613f94995cfaad3f95de77794c270e5d"
+    },
+    {
+      "cost_estimate": "not available for the configured internal model rate",
+      "estimated_input_tokens": 20368,
+      "expected_merge_target": "source_fact ledger then validated canonical projection",
+      "fields": [
+        "experimental_arm",
+        "formulation"
+      ],
+      "max_output_tokens": 12000,
+      "model": "gpt-5.6-terra",
+      "paper_id": "PILOT-003",
+      "request_id": "REQ-3",
+      "request_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/map_gate/requests/REQ-3.json",
+      "request_sha256": "8aae537495e7a0660e348fa930487d99623be93c89e2d339c05e4b22eea1c092",
+      "source_artifact_path": "/Users/renemilywei/Desktop/AI-LNP/.worktrees/np002-selective-vision/data/staging/extraction/application_pilot/PILOT-003/inventory.json",
+      "source_artifact_sha256": "a32678f5b3c5cb7cef2bcb35541de70013962e74c8e6c857863cc16bb06f2e77"
+    }
+  ],
+  "schema_version": "current-corpus-rerun-preflight/v1",
+  "total_estimated_input_tokens": 63212,
+  "total_max_output_tokens": 36000
+}
