@@ -48,6 +48,8 @@ Three independent answers are shown for each arm:
 - **Nearest-neighbor ready:** the current deterministic nearest-neighbor rules pass.
 - **COMET ready:** the stricter COMET rules pass, including its final evidence-verification requirement.
 
+One versioned readiness profile is shared by the importer, interface, and final report. COMET checks formulation identity, chemical composition and molar ratio, biological model/species/setting, payload identity and any applicable encoded product or molecular target, dose/unit, assay, and a coherent evidence-backed outcome. Evidence may mark a field not applicable; blank and not applicable are not treated as the same thing.
+
 `experiment_link_unclear` and similar labels mean the automatic mapper could not prove which formulation, model, or outcome belongs to which experiment. The user does not need to resolve these for general browsing. They block only the downstream use that needs the uncertain relationship.
 
 Every non-COMET arm is listed in the COMET gap view, sorted by number of blockers. An arm with one to three blockers, no conflict or quarantine, and at least one supported outcome is labeled **almost COMET ready**. This is a queue label, not a scientific claim.
